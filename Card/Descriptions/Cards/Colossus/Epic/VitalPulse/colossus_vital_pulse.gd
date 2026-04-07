@@ -1,12 +1,18 @@
 class_name ColossusVitalPulse
 extends HeroUpgrade
 
+const VITAL_PULSE_VFX: PackedScene = preload("res://VFX/VFX_3D/VFX/Scenes/VFX_Vital_Pulse.tscn")
+
 @export var _period: Array[float]
 @export var _hp_percent: Array[float]
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var hp_pct: float = _hp_percent[card_lvl - 1]
 	var period: float = _period[card_lvl - 1]
+
+	# Spawn the continuous floor VFX under the hero
+	var vfx := VITAL_PULSE_VFX.instantiate() as Node3D
+	ctx.hero.add_child(vfx)
 
 	ctx.periodic_timers.register(&"Vital Pulse", period, func() -> void:
 		var targets: Array[Entity] = ctx.hero.target_module.get_targets(

@@ -5,23 +5,6 @@ const HIT_VFX = preload("res://VFX/VFX_3D/VFX/Scenes/VFX_Hit_dark.tscn")
 const START_HEIGHT: float = 12.0
 const DEPLOY_TIME: float = 0.7
 
-const FRESNEL_SHADER_CODE: String = """
-shader_type spatial;
-render_mode blend_mix, depth_draw_opaque, cull_back;
-
-uniform sampler2D base_texture : source_color;
-uniform vec3 fresnel_color : source_color = vec3(1.0, 0.5, 0.0);
-uniform float fresnel_power : hint_range(0.1, 10.0) = 2.5;
-uniform float fresnel_intensity : hint_range(0.0, 3.0) = 1.5;
-
-void fragment() {
-	vec4 tex = texture(base_texture, UV);
-	float fresnel = pow(1.0 - clamp(dot(NORMAL, VIEW), 0.0, 1.0), fresnel_power);
-	ALBEDO = tex.rgb + fresnel_color * fresnel * fresnel_intensity;
-	EMISSION = fresnel_color * fresnel * fresnel_intensity * 0.6;
-}
-"""
-
 @onready var _axe_mesh: Node3D = $colossal_titan
 
 var _elapsed: float = 0.0
@@ -45,30 +28,6 @@ func _ready() -> void:
 	_axe_mesh.basis = _initial_basis * Basis(_spin_axis, PI)
 
 	_is_falling = true
-
-	_apply_fresnel_shader()
-
-
-func _apply_fresnel_shader() -> void:
-	var mesh_instance: MeshInstance3D = _axe_mesh.get_node_or_null("axe")
-	if mesh_instance == null:
-		return
-
-	var shader := Shader.new()
-	shader.code = FRESNEL_SHADER_CODE
-
-	var shader_mat := ShaderMaterial.new()
-	shader_mat.shader = shader
-	shader_mat.set_shader_parameter("fresnel_color", Color(1.0, 0.45, 0.0))
-	shader_mat.set_shader_parameter("fresnel_power", 2.5)
-	shader_mat.set_shader_parameter("fresnel_intensity", 1.5)
-
-	# Copy base texture from original material
-	var original_mat = mesh_instance.get_active_material(0)
-	if original_mat is StandardMaterial3D:
-		shader_mat.set_shader_parameter("base_texture", original_mat.albedo_texture)
-
-	mesh_instance.material_override = shader_mat
 
 
 func _process(delta: float) -> void:

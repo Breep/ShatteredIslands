@@ -1,6 +1,15 @@
-[gd_scene format=4 uid=""]
+[gd_scene format=4 uid="uid://cmy01s0yuisrk"]
 
-[ext_resource type="Texture2D" uid="uid://1aba2omkns26" path="res://SpellsAndProjectiles/Spells/ColossalTitan/Visual/colossal_titan_BaseColor.png" id="1_iri4b"]
+[ext_resource type="Texture2D" uid="uid://1aba2omkns26" path="res://SpellsAndProjectiles/Spells/TitanAxe/Visual/titan_axe2_axe_axe_mat_BaseColor.png" id="1_iri4b"]
+[ext_resource type="Shader" uid="uid://bsvlut4w5bd7y" path="res://SpellsAndProjectiles/Spells/ColossalTitan/Visual/colossal_titan_fresnel.gdshader" id="2_shader"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fresnel"]
+render_priority = 0
+shader = ExtResource("2_shader")
+shader_parameter/base_texture = ExtResource("1_iri4b")
+shader_parameter/fresnel_color = Color(1, 0.45, 0, 1)
+shader_parameter/fresnel_power = 0.53200002201012
+shader_parameter/fresnel_intensity = 1.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ujv33"]
 resource_name = "axe_mat"
@@ -45,6 +54,7 @@ shadow_mesh = SubResource("ArrayMesh_uf22y")
 [node name="titan_axe" type="Node3D" unique_id=1752327160]
 
 [node name="axe" type="MeshInstance3D" parent="." unique_id=995429035]
+material_override = SubResource("ShaderMaterial_fresnel")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_mno8w")
 skeleton = NodePath("")
