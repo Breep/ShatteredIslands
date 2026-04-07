@@ -44,6 +44,7 @@ func init(battle_data_stats: BattleDataStat) -> void:
 
 #region ============================== Node base functions ==============================
 func _ready() -> void:
+	return
 	_floating_label.hide()
 	if _battle_data_stat != null:
 		_connect_signals()
