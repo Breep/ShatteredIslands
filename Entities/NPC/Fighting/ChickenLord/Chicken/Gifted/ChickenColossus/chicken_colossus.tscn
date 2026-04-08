@@ -92,7 +92,7 @@ bones/11/rotation = Quaternion(0.9932081, 1.7259497e-06, -0.11635134, -1.4468616
 bones/12/rotation = Quaternion(4.817537e-08, -0.60039806, 2.3136849e-07, 0.79970133)
 
 [node name="ChickenColossus" parent="ChickenColossusVisual/Skeleton3D" index="0" unique_id=1839562433]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 
 [node name="AnimationPlayer" parent="ChickenColossusVisual" index="1" unique_id=777400876]
 script = ExtResource("7_uq3l3")

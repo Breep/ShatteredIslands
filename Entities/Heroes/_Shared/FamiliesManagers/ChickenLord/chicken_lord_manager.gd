@@ -10,7 +10,7 @@ const TICKS_PER_SECOND: int = 60
 # --- STATS PASSIVES (Dépendent du Niveau de la famille [0, 1, 2, 3, 4]) ---
 const GIFTED_CHANCES: Array[float] = [0, 25.0, 35.0, 45.0, 55.0]
 
-const P_PERIODIC_SPAWN_PERIODS: Array[float] = [12.0, 6.0, 5.5, 5.0, 4.5]
+const P_PERIODIC_SPAWN_PERIODS: Array[float] = [12.0, 9.0, 8.0, 7.5, 7.0]
 const P_PERIODIC_SPAWN_CHICKEN_NUMBERS: Array[int] = [0, 1, 1, 1, 1]
 const P_START_CHICKENS: Array[int] = [0, 2, 3, 4, 6]
 
@@ -25,19 +25,19 @@ const GIFTED_POISON_RATIO: Array[float] = [0.10, 0.15, 0.20, 0.25]
 const GIFTED_POISON_STACKS: Array[int] = [1, 1, 2, 2]
 
 # Chicken gifted colossus stats
-const GIFTED_COLOSSUS_HPMAX_RATIOS: Array[float] = [0.20, 0.30, 0.40, 0.50]
+const GIFTED_COLOSSUS_HPMAX_RATIOS: Array[float] = [0.35, 0.50, 0.65, 0.80]
 
 # Chicken gifted light stats
 const GIFTED_LIGHT_REGEN_RATIOS: Array[float] = [0.04, 0.06, 0.08, 0.10]
 const GIFTED_LIGHT_INHERITED_HEAL: Array[float] = [0.3, 0.5, 0.7, 1.0]
 
 # Chicken gifted shield stats
-const GIFTED_SHIELD_BONUS_SPAWN: Array[int] = [20, 30, 40, 50]
-const GIFTED_SHIELD_PER_ATTACK: Array[int] = [10, 15, 20, 30]
-const GIFTED_SHIELD_INHERITED_SHIELD: Array[float] = [0.3, 0.5, 0.7, 1.0]
+const GIFTED_SHIELD_BONUS_SPAWN: Array[int] = [35, 50, 65, 80]
+const GIFTED_SHIELD_PER_ATTACK: Array[int] = [15, 25, 35, 50]
+const GIFTED_SHIELD_INHERITED_SHIELD: Array[float] = [0.5, 0.7, 0.9, 1.2]
 
 # Chicken gifted ardent celestial stats
-const GIFTED_ARDENT_CELESTIAL_IGNITE_STACKS: Array[int] = [10, 15, 20, 30]
+const GIFTED_ARDENT_CELESTIAL_IGNITE_STACKS: Array[int] = [15, 25, 35, 50]
 
 # Chicken gifted storm caller stats
 const GIFTED_STORM_CALLER_CRIT_CHANCE_RATIO: Array[float] = [0.30, 0.40, 0.50, 0.60]
@@ -124,8 +124,8 @@ func _start_passive() -> void:
 	if _trex_gauge >= ANCESTRAL_GAUCHE_THRESHOLD:
 		var spawn_loc := SpawnLocationConfig.create_arena_center()
 		_owner.summon_entity(Entity.EntityType.TREX, spawn_loc, {
-			TRex.Modifier.PRIMAL_SHAKE_PERIOD: 5,
-			TRex.Modifier.PRIMAL_SHAKE_NUMBER: 4,
+			TRex.Modifier.PRIMAL_SHAKE_PERIOD: 8,
+			TRex.Modifier.PRIMAL_SHAKE_NUMBER: 2,
 			TRex.Modifier.HP_BONUS: 1000
 		})
 #endregion
@@ -243,8 +243,8 @@ func _battle_start_chicken_spawn() -> void:
 		for i in P_START_CHICKENS[level]:
 			var spawn_loc := SpawnLocationConfig.create_random_arena()
 			_owner.summon_entity(Entity.EntityType.TREX, spawn_loc, {
-				TRex.Modifier.PRIMAL_SHAKE_PERIOD: 5,
-				TRex.Modifier.PRIMAL_SHAKE_NUMBER: 4,
+				TRex.Modifier.PRIMAL_SHAKE_PERIOD: 8,
+				TRex.Modifier.PRIMAL_SHAKE_NUMBER: 2,
 				TRex.Modifier.HP_BONUS: 1000
 		})
 	else:

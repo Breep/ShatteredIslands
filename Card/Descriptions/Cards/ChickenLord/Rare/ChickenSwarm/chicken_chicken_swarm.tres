@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_iy3cm"]
 script = ExtResource("1_w3cpy")
-_spawn_numbers_increase = Array[int]([1, 2, 3, 4, 6])
+_spawn_numbers_increase = Array[int]([1, 1, 2, 2, 3])
 metadata/_custom_type_script = "uid://8pj0fyhgc4cp"
 
 [resource]
