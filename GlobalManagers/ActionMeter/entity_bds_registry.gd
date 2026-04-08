@@ -24,7 +24,6 @@ class BattleDataStatDictionary extends Resource:
 		battle_data_stats[action_id].register_action(action_type, value)
 
 
-
 #region ============================== Node base functions ==============================
 func _init(entity: Entity) -> void:
 	_entity_owner = entity

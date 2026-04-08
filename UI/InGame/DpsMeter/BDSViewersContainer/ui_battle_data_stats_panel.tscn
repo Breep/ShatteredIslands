@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dlnt5nfitss0l"]
 
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_8hycb"]
-[ext_resource type="Script" uid="uid://batlmpclivtk3" path="res://GlobalManagers/ActionMeter/Viewer/ui_battle_data_stats_panel.gd" id="1_ctikr"]
+[ext_resource type="Script" uid="uid://batlmpclivtk3" path="res://UI/InGame/DpsMeter/BDSViewersContainer/ui_battle_data_stats_panel.gd" id="1_ctikr"]
 
 [node name="BattleDataStatsPanel" type="Control" unique_id=149768205]
 layout_mode = 3
