@@ -4,16 +4,19 @@ extends Summon
 enum Modifier {
 	BLOCKED_PROJECTILES,
 	SHIELD_PER_BLOCK,
+	RESPAWN_TIMER
 }
 
 var _blocked_projectiles: int
 var _shield_per_block: float
+var _respawn_timer: float
 
 @onready var _projectile_detector: Area3D = %ProjectileDetector
 
-func init(blocked_projectiles: int, shield_per_block: float) -> Summon:
+func init(blocked_projectiles: int, shield_per_block: float, respawn_timer: float = -1.0) -> Summon:
 	_blocked_projectiles = blocked_projectiles
 	_shield_per_block = shield_per_block
+	_respawn_timer = respawn_timer
 	return self
 
 
@@ -24,6 +27,7 @@ func _ready() -> void:
 	take_status(Status.Type.UNTARGETABLE, -1, "Untargetable")
 	stat_modifiers_registry.recompute_all()
 	_movement_module.orbit_entity(summoner, 2, 2, MovementModule.OrbitFacing.ANTI_CENTER)
+	_despawn_timer = -1 # No despawn
 	super._ready()
 
 
@@ -35,6 +39,25 @@ func process_tick() -> void:
 func _on_died() -> void:
 	super._on_died()
 	_play_fall_anim()
+	if _respawn_timer > 0:
+		periodic_timer_registry.register_oneshot(_respawn_timer, resurrect.bind(100))
+
+
+func _on_resurrected() -> void:
+	super._on_resurrected()
+	base_stats.health_max = _blocked_projectiles
+	stat_modifiers_registry.recompute_all()
+	take_status(Status.Type.INVULNERABLE, -1, "Invulnerable")
+	take_status(Status.Type.UNTARGETABLE, -1, "Untargetable")
+	_health_bar.setup_grid_bar(1, -1)
+	var tween := create_tween().set_parallel()
+	tween.tween_property(_visual_3d, "position:y", 2.8, 0.8) \
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.tween_property(_visual_3d, "rotation:z", 0.0, 0.8) \
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.chain().tween_callback(func() -> void:
+		_movement_module.orbit_entity(summoner, 2, 2, MovementModule.OrbitFacing.ANTI_CENTER)
+	)
 
 
 func _play_fall_anim() -> void:

@@ -35,10 +35,9 @@ func get_description(cardlvl: int) -> String:
 		printerr("Fortification Drone: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	var nb: String = str(_drones_numbers[cardlvl - 1])
 	var time: String = str(_shield_per_seconds[cardlvl - 1])
 	var shield: String = str(_drone_shields[cardlvl - 1])
-	
-	#TODO add tooltip for drone?
-	return "Invoque " + nb + " drones qui suivent l'allié le plus faible et donnent " + shield + " [[SHIELD]] pendant " + time + "s."
+	var respawn: String = str(_respawn_timers[cardlvl - 1])
+
+	return "Invoque un drone qui suit un allié et donne " + shield + " [[SHIELD]] pendant " + time + "s. Se réactive " + respawn + "s après destruction."
 	

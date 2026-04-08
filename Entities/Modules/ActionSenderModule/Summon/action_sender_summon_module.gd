@@ -211,7 +211,8 @@ func _summon_deflection_shield(spawn_position: Vector3, entity_modifier: Diction
 	var deflection_shield: DeflectionShield = DEFLECTION_SHIELD.instantiate()
 	var blocked_projectiles: int = entity_modifier.get(DeflectionShield.Modifier.BLOCKED_PROJECTILES, 1)
 	var shield_per_block: float = entity_modifier.get(DeflectionShield.Modifier.SHIELD_PER_BLOCK, 10)
-	deflection_shield.init(blocked_projectiles, shield_per_block)
+	var respawn_timer: float = entity_modifier.get(DeflectionShield.Modifier.RESPAWN_TIMER, -1.0)
+	deflection_shield.init(blocked_projectiles, shield_per_block, respawn_timer)
 	_spawn_manager.spawn_entity(deflection_shield, spawn_position, _owner.get_context())
 	
 	
@@ -222,5 +223,6 @@ func _summon_gamma_turret(spawn_position: Vector3, entity_modifier: Dictionary) 
 	var attack_speed: float = entity_modifier.get(GammaTurret.Modifier.TURRET_AS, 1.0)
 	var hp: int = entity_modifier.get(GammaTurret.Modifier.TURRET_HP, 1)
 	var master: Entity = entity_modifier.get(GammaTurret.Modifier.MASTER)
-	gamma_turret.init(shield, ad, attack_speed, hp, master)
+	var respawn_timer: float = entity_modifier.get(GammaTurret.Modifier.RESPAWN_TIMER, -1.0)
+	gamma_turret.init(shield, ad, attack_speed, hp, master, respawn_timer)
 	_spawn_manager.spawn_entity(gamma_turret, spawn_position, _owner.get_context())
