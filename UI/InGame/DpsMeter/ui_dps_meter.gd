@@ -25,6 +25,7 @@ func set_heroes(heroes: Array[Hero]) -> void:
 	_heroes = heroes
 	_connect_heroes()
 	_rebuild_global_bds_viewers()
+	_rebuild_hero_bds_viewers(null)
 #endregion
 
 
