@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b27aqdnso2v47" path="res://UI/InGame/DpsMeter/Data/Capture d'écran 2026-04-07 105341.png" id="1_cqlqk"]
 [ext_resource type="PackedScene" uid="uid://cp8df4bxwetqx" path="res://UI/InGame/DpsMeter/ui_dps_meter.tscn" id="2_d36l5"]
-[ext_resource type="PackedScene" uid="uid://duf3kswv8x14b" path="res://UI/InGame/DpsMeter/BattleDataStatViewer/ui_battle_data_stat_viewer.tscn" id="3_7bg23"]
+[ext_resource type="PackedScene" uid="uid://duf3kswv8x14b" path="res://UI/InGame/DpsMeter/BDSViewer/ui_bds_viewer.tscn" id="3_7bg23"]
 
 [node name="PrototypingDpsMeter" type="Control" unique_id=1710469958]
 layout_mode = 3

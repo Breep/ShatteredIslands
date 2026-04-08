@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bsf06q3ts8qyd" path="res://UI/InGame/DpsMeter/Data/heal_received_small.png" id="4_ih4vw"]
 [ext_resource type="Texture2D" uid="uid://c0ypm464lcigy" path="res://UI/InGame/DpsMeter/Data/misc_done_small.png" id="5_0fcnj"]
 [ext_resource type="Texture2D" uid="uid://c03fodswq603s" path="res://UI/InGame/DpsMeter/Data/misc_received_small.png" id="6_u55ms"]
-[ext_resource type="PackedScene" uid="uid://duf3kswv8x14b" path="res://UI/InGame/DpsMeter/BattleDataStatViewer/ui_battle_data_stat_viewer.tscn" id="9_ih4vw"]
+[ext_resource type="PackedScene" uid="uid://duf3kswv8x14b" path="res://UI/InGame/DpsMeter/BDSViewer/ui_bds_viewer.tscn" id="9_ih4vw"]
 [ext_resource type="Script" uid="uid://bbu7ikvo4tmc1" path="res://UI/InGame/DpsMeter/hero_dps_scroll_container.gd" id="10_0fcnj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0fcnj"]

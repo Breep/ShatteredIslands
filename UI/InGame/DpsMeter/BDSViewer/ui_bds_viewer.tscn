@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://duf3kswv8x14b"]
 
-[ext_resource type="Script" uid="uid://cm3wci6x4hsdb" path="res://UI/InGame/DpsMeter/BattleDataStatViewer/ui_battle_data_stat_viewer.gd" id="1_xub2d"]
-[ext_resource type="Texture2D" uid="uid://b78s362n5bu6" path="res://Card/Descriptions/Families/Icons/warrior.png" id="3_l1uag"]
+[ext_resource type="Script" uid="uid://cm3wci6x4hsdb" path="res://UI/InGame/DpsMeter/BDSViewer/ui_bds_viewer.gd" id="1_jf5p1"]
+[ext_resource type="Texture2D" uid="uid://b78s362n5bu6" path="res://Card/Descriptions/Families/Icons/warrior.png" id="2_7uvd5"]
 
 [node name="BattleDataStatViewer" type="Control" unique_id=1443367133]
 custom_minimum_size = Vector2(200, 25)
@@ -18,7 +18,7 @@ offset_bottom = 12.5
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
-script = ExtResource("1_xub2d")
+script = ExtResource("1_jf5p1")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1826561182]
 visible = false
@@ -47,7 +47,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.1
 mouse_filter = 2
-texture = ExtResource("3_l1uag")
+texture = ExtResource("2_7uvd5")
 expand_mode = 1
 stretch_mode = 5
 

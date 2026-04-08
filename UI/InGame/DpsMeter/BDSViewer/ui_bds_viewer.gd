@@ -1,4 +1,4 @@
-class_name UIBattleDataStatViewer
+class_name UIBDSViewer
 extends Control
 
 signal total_value_changed(value: float)
@@ -159,7 +159,7 @@ func _on_battle_data_stat_stat_changed(_action_type: Utils.ActionType, _value: f
 
 
 #region ============================== Static functions ==============================
-static func compare(a: UIBattleDataStatViewer, b: UIBattleDataStatViewer) -> bool:
+static func compare(a: UIBDSViewer, b: UIBDSViewer) -> bool:
 	return a.total_value > b.total_value
 #endregion
 
