@@ -116,16 +116,15 @@ func _reset_layout() -> void:
 func _update_layout() -> void:
 	var action_meters: Dictionary[Utils.ActionType, float] = _battle_data_stat.action_meters
 	_total_value = 0
-	for value: float in action_meters.values():
-		_total_value += value
-	if _total_value <= 0: return
 	for action_type: Utils.ActionType in action_meters.keys():
-		if action_meters[action_type] == 0:
+		var value = action_meters[action_type]
+		_total_value += value
+		if value == 0:
 			_bsd_color_rects[action_type].hide()
 		else:
 			_bsd_color_rects[action_type].show()
-		_bsd_color_rects[action_type].size_flags_stretch_ratio = action_meters[action_type] / _total_value
-		_bsd_value_labels[action_type].text = str(action_meters[action_type]).pad_decimals(0)
+		_bsd_color_rects[action_type].size_flags_stretch_ratio = value / _total_value
+		_bsd_value_labels[action_type].text = str(value).pad_decimals(0)
 	_value_label.text = str(_total_value).pad_decimals(0)
 	total_value_changed.emit(_total_value)
 
