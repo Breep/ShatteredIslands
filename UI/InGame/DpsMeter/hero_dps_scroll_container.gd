@@ -10,6 +10,7 @@ func _ready():
 	
 	vbox.sort_children.connect(_on_vbox_sort_children)
 
+
 func _adjust_height():
 	var items = vbox.get_children()
 	var total_height = 0.0
@@ -20,11 +21,8 @@ func _adjust_height():
 		var last_visible_item = items[count - 1]
 		total_height = last_visible_item.position.y + last_visible_item.size.y
 		var spacing = vbox.get_theme_constant("separation")
-		# On ne rajoute pas de spacing après le tout dernier élément
 		if items.size() > max_items:
 			total_height += spacing / 2.0 
-	
-	# On applique la taille calculée comme taille minimale du ScrollContainer
 	custom_minimum_size.y = total_height
 
 

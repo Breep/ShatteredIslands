@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dlnt5nfitss0l"]
+[gd_scene format=3 uid="uid://dlnt5nfitss0l"]
 
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_8hycb"]
 [ext_resource type="Script" uid="uid://batlmpclivtk3" path="res://GlobalManagers/ActionMeter/Viewer/ui_battle_data_stats_panel.gd" id="1_ctikr"]
 
-[node name="BattleDataStatsPanel" type="Control"]
+[node name="BattleDataStatsPanel" type="Control" unique_id=149768205]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 500.0
@@ -12,7 +12,7 @@ theme = ExtResource("1_8hycb")
 script = ExtResource("1_ctikr")
 metadata/_tab_index = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1667601759]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,10 +20,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=592609095]
 layout_mode = 2
 
-[node name="ActionTypeLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="ActionTypeLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=159422279]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -33,11 +33,11 @@ text = "DAMAGE"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Control" type="Control" parent="MarginContainer/VBoxContainer"]
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer" unique_id=162185108]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Control"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Control" unique_id=1367813881]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -48,11 +48,11 @@ theme_override_constants/margin_left = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/Control/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/Control/MarginContainer" unique_id=1019323798]
 layout_mode = 2
 horizontal_scroll_mode = 0
 
-[node name="BDSViewersContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Control/MarginContainer/ScrollContainer"]
+[node name="BDSViewersContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Control/MarginContainer/ScrollContainer" unique_id=1174151106]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3

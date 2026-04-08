@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b2i740j57q2r8"]
 
 [ext_resource type="Script" uid="uid://deyvipbdvwa3n" path="res://Prototyping/UI/UICharts/UIBattleDataStatViewer/prototyping_battle_data_stat_viewer.gd" id="1_ihhbo"]
-[ext_resource type="PackedScene" uid="uid://duf3kswv8x14b" path="res://GlobalManagers/ActionMeter/Viewer/ui_battle_data_stat_viewer.tscn" id="2_igj26"]
+[ext_resource type="PackedScene" uid="uid://duf3kswv8x14b" path="res://UI/InGame/DpsMeter/BattleDataStatViewer/ui_battle_data_stat_viewer.tscn" id="2_igj26"]
 [ext_resource type="PackedScene" uid="uid://dlnt5nfitss0l" path="res://GlobalManagers/ActionMeter/Viewer/ui_battle_data_stats_panel.tscn" id="3_3g7ey"]
 [ext_resource type="PackedScene" uid="uid://cs66hky7o30da" path="res://GlobalManagers/ActionMeter/Viewer/ui_entity_bds_registry.tscn" id="4_om01a"]
 

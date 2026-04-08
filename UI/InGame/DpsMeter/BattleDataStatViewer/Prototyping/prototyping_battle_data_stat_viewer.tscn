@@ -1,0 +1,180 @@
+[gd_scene format=3 uid="uid://pmewipt2l8fh"]
+
+[ext_resource type="PackedScene" uid="uid://duf3kswv8x14b" path="res://UI/InGame/DpsMeter/BattleDataStatViewer/ui_battle_data_stat_viewer.tscn" id="1_cu3e5"]
+[ext_resource type="Script" uid="uid://ccetb7ypsvdkf" path="res://UI/InGame/DpsMeter/BattleDataStatViewer/Prototyping/prototyping_battle_data_stat_viewer.gd" id="2_proto"]
+
+[node name="PrototypingBattleDataStatViewer" type="Control" unique_id=1212870980 node_paths=PackedStringArray("_bds_viewer", "_bds_type_option", "_ratio_slider", "_ratio_label", "_value_spinbox", "_action_buttons_container", "_show_percent_check", "_show_sub_values_check", "_action_id_line_edit", "_scale_slider", "_scale_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_proto")
+_bds_viewer = NodePath("MarginContainer/HBoxContainer/ViewerPanel/Control/BattleDataStatViewer")
+_bds_type_option = NodePath("MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer/BDSTypeOption")
+_ratio_slider = NodePath("MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer/RatioSection/RatioSlider")
+_ratio_label = NodePath("MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer/RatioSection/RatioLabel")
+_value_spinbox = NodePath("MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer/ValueSection/ValueSpinBox")
+_action_buttons_container = NodePath("MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer/ActionButtonsContainer")
+_show_percent_check = NodePath("MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer/ShowPercentCheck")
+_show_sub_values_check = NodePath("MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer/ShowSubValuesCheck")
+_action_id_line_edit = NodePath("MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer/ActionIdLineEdit")
+_scale_slider = NodePath("MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer/ScaleSection/ScaleSlider")
+_scale_label = NodePath("MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer/ScaleSection/ScaleLabel")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=800641036]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=318787622]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="ControlsPanel" type="PanelContainer" parent="MarginContainer/HBoxContainer" unique_id=1481170286]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/ControlsPanel" unique_id=2067137354]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer" unique_id=356129168]
+layout_mode = 2
+theme_override_font_sizes/font_size = 29
+text = "BattleDataStatViewer Prototyping"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Separator1" type="HSeparator" parent="MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer" unique_id=1707942150]
+layout_mode = 2
+
+[node name="TypeLabel" type="Label" parent="MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer" unique_id=736600490]
+layout_mode = 2
+text = "BDS Type:"
+
+[node name="BDSTypeOption" type="OptionButton" parent="MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer" unique_id=4259299]
+layout_mode = 2
+
+[node name="ActionIdLabel" type="Label" parent="MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer" unique_id=1047650952]
+layout_mode = 2
+text = "Action ID:"
+
+[node name="ActionIdLineEdit" type="LineEdit" parent="MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer" unique_id=1377271185]
+layout_mode = 2
+placeholder_text = "PROTO_TEST"
+
+[node name="CreateConnectButton" type="Button" parent="MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer" unique_id=207029357]
+layout_mode = 2
+text = "Create & Connect BDS"
+
+[node name="Separator2" type="HSeparator" parent="MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer" unique_id=476062491]
+layout_mode = 2
+
+[node name="RatioSectionLabel" type="Label" parent="MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer" unique_id=387012062]
+layout_mode = 2
+text = "Ratio:"
+
+[node name="RatioSection" type="HBoxContainer" parent="MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer" unique_id=1828804114]
+layout_mode = 2
+
+[node name="RatioSlider" type="HSlider" parent="MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer/RatioSection" unique_id=1232786908]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="RatioLabel" type="Label" parent="MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer/RatioSection" unique_id=1473227230]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "100.0 %"
+horizontal_alignment = 2
+
+[node name="ShowPercentCheck" type="CheckButton" parent="MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer" unique_id=886254070]
+layout_mode = 2
+button_pressed = true
+text = "Show Percent"
+
+[node name="ShowSubValuesCheck" type="CheckButton" parent="MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer" unique_id=736218162]
+layout_mode = 2
+text = "Show Sub Values"
+
+[node name="ScaleSectionLabel" type="Label" parent="MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer" unique_id=1975509194]
+layout_mode = 2
+text = "Scale:"
+
+[node name="ScaleSection" type="HBoxContainer" parent="MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer" unique_id=1085996311]
+layout_mode = 2
+
+[node name="ScaleSlider" type="HSlider" parent="MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer/ScaleSection" unique_id=1738998928]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 5.0
+step = 0.1
+value = 1.0
+
+[node name="ScaleLabel" type="Label" parent="MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer/ScaleSection" unique_id=1008122420]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "1.0x"
+horizontal_alignment = 2
+
+[node name="Separator3" type="HSeparator" parent="MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer" unique_id=1473071826]
+layout_mode = 2
+
+[node name="ValueSectionLabel" type="Label" parent="MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer" unique_id=1906332163]
+layout_mode = 2
+text = "Value to add:"
+
+[node name="ValueSection" type="HBoxContainer" parent="MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer" unique_id=219442722]
+layout_mode = 2
+
+[node name="ValueSpinBox" type="SpinBox" parent="MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer/ValueSection" unique_id=239857291]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 1000.0
+value = 10.0
+
+[node name="Separator4" type="HSeparator" parent="MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer" unique_id=379890451]
+layout_mode = 2
+
+[node name="ActionLabel" type="Label" parent="MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer" unique_id=1584207108]
+layout_mode = 2
+text = "Action Types:"
+
+[node name="ActionButtonsContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer" unique_id=489687388]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="ViewerPanel" type="PanelContainer" parent="MarginContainer/HBoxContainer" unique_id=1503392695]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.6
+
+[node name="Control" type="Control" parent="MarginContainer/HBoxContainer/ViewerPanel" unique_id=1434987087]
+layout_mode = 2
+
+[node name="BattleDataStatViewer" parent="MarginContainer/HBoxContainer/ViewerPanel/Control" unique_id=1378953562 instance=ExtResource("1_cu3e5")]
+layout_mode = 1
+offset_left = -100.0
+offset_right = 100.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[connection signal="item_selected" from="MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer/BDSTypeOption" to="." method="_on_bds_type_option_item_selected"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer/CreateConnectButton" to="." method="_on_create_connect_button_pressed"]
+[connection signal="toggled" from="MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer/ShowPercentCheck" to="." method="_on_show_percent_check_toggled"]
+[connection signal="toggled" from="MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer/ShowSubValuesCheck" to="." method="_on_show_sub_values_check_toggled"]
+[connection signal="value_changed" from="MarginContainer/HBoxContainer/ControlsPanel/VBoxContainer/ScaleSection/ScaleSlider" to="." method="_on_scale_slider_value_changed"]
