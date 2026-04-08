@@ -1,6 +1,8 @@
 class_name UIBDSViewersContainer
 extends VBoxContainer
 
+signal viewer_selected(viewer: UIBDSViewer)
+
 const UI_BATTLE_DATA_STAT_VIEWER_SCENE: PackedScene = preload("res://UI/InGame/DpsMeter/BDSViewer/ui_bds_viewer.tscn")
 
 
@@ -9,6 +11,8 @@ var _max_value: float
 var _battle_data_stat_viewers: Array[UIBDSViewer]
 var _show_percent: bool = true
 var _show_sub_values: bool = false
+var _selectable: bool = false
+var _selected_viewer: UIBDSViewer = null
 #endregion
 
 
@@ -21,9 +25,12 @@ func add_battle_data_stat(battle_data_stat: BattleDataStat, name_override: Strin
 		bds_viewer.set_name_override(name_override)
 	bds_viewer.set_show_percent(_show_percent)
 	bds_viewer.set_show_sub_values(_show_sub_values)
+	bds_viewer.set_selectable(_selectable)
 	add_child(bds_viewer)
 	_battle_data_stat_viewers.append(bds_viewer)
 	bds_viewer.total_value_changed.connect(_on_battle_data_stat_viewer_total_value_changed)
+	if _selectable:
+		bds_viewer.selected.connect(_on_viewer_selected.bind(bds_viewer))
 	_sort_bds_viewers.call_deferred()
 	_scale_bds_viewers.call_deferred()
 
@@ -33,6 +40,7 @@ func clear() -> void:
 		viewer.queue_free()
 	_battle_data_stat_viewers.clear()
 	_max_value = 0.0
+	_selected_viewer = null
 
 
 func set_show_percent(value: bool) -> void:
@@ -45,6 +53,10 @@ func set_show_sub_values(value: bool) -> void:
 	_show_sub_values = value
 	for viewer: UIBDSViewer in _battle_data_stat_viewers:
 		viewer.set_show_sub_values(value)
+
+
+func set_selectable(value: bool) -> void:
+	_selectable = value
 #endregion
 
 
@@ -79,4 +91,17 @@ func _scale_bds_viewers() -> void:
 func _on_battle_data_stat_viewer_total_value_changed(_value: float) -> void:
 	_sort_bds_viewers()
 	_scale_bds_viewers()
+
+
+func _on_viewer_selected(viewer: UIBDSViewer) -> void:
+	if _selected_viewer == viewer:
+		_selected_viewer.set_selected(false)
+		_selected_viewer = null
+		viewer_selected.emit(null)
+	else:
+		if _selected_viewer != null:
+			_selected_viewer.set_selected(false)
+		_selected_viewer = viewer
+		_selected_viewer.set_selected(true)
+		viewer_selected.emit(viewer)
 #endregion

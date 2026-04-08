@@ -2,6 +2,7 @@ class_name UIBDSViewer
 extends Control
 
 signal total_value_changed(value: float)
+signal selected()
 
 var _total_value: float
 @export var total_value: float:
@@ -15,6 +16,7 @@ var _total_value: float
 @onready var _name_label: Label = %NameLabel
 @onready var _value_label: Label = %ValueLabel
 @onready var _percent_label: Label = %PercentLabel
+@onready var _background: ColorRect = %Background
 
 var _bsd_color_rects: Dictionary[Utils.ActionType, ColorRect]
 var _bsd_value_labels: Dictionary[Utils.ActionType, Label]
@@ -23,6 +25,8 @@ var _show_percent: bool = true
 var _show_sub_values: bool = false
 var _is_hovered: bool = false
 var _name_override: String = ""
+var _selectable: bool = false
+var _is_selected: bool = false
 
 #region ============================== Public function ==============================
 func set_ratio(ratio: float) -> void:
@@ -50,6 +54,16 @@ func set_show_percent(value: bool) -> void:
 func set_show_sub_values(value: bool) -> void:
 	_show_sub_values = value
 	_update_sub_values_visibility()
+
+
+func set_selectable(value: bool) -> void:
+	_selectable = value
+
+
+func set_selected(value: bool) -> void:
+	_is_selected = value
+	if is_node_ready():
+		_background.visible = _is_selected
 
 
 func set_name_override(override_name: String) -> void:
@@ -161,6 +175,12 @@ func _on_mouse_exited() -> void:
 
 func _on_battle_data_stat_stat_changed(_action_type: Utils.ActionType, _value: float) -> void:
 	_update_layout()
+
+
+func _gui_input(event: InputEvent) -> void:
+	if not _selectable: return
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		selected.emit()
 #endregion
 
 

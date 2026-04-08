@@ -8,6 +8,7 @@ extends Control
 var _heroes: Array[Hero]
 var _selected_hero: Hero
 var _current_bds_type: BattleDataStat.Type = BattleDataStat.Type.DAMAGE_DONE
+var _viewer_to_hero: Dictionary[UIBDSViewer, Hero]
 
 
 #region ============================== Node base functions ==============================
@@ -36,6 +37,8 @@ func _first_clear_all() -> void:
 		child.queue_free()
 	_global_bds_viewers_container.set_show_percent(false)
 	_hero_bds_viewers_container.set_show_percent(false)
+	_global_bds_viewers_container.set_selectable(true)
+	_global_bds_viewers_container.viewer_selected.connect(_on_global_viewer_selected)
 
 
 func _connect_heroes() -> void:
@@ -52,9 +55,12 @@ func _disconnect_heroes() -> void:
 
 func _rebuild_global_bds_viewers() -> void:
 	_global_bds_viewers_container.clear()
+	_viewer_to_hero.clear()
 	for hero: Hero in _heroes:
 		var global_bds: BattleDataStat = hero.bds_registry.get_or_create_global_bds(_current_bds_type)
 		_global_bds_viewers_container.add_battle_data_stat(global_bds, hero.entity_name)
+		var viewer: UIBDSViewer = _global_bds_viewers_container._battle_data_stat_viewers.back()
+		_viewer_to_hero[viewer] = hero
 
 
 func _rebuild_hero_bds_viewers(hero: Hero) -> void:
@@ -73,6 +79,15 @@ func _on_tab_bar_bds_type_changed(new_bds_type: BattleDataStat.Type) -> void:
 	_current_bds_type = new_bds_type
 	_rebuild_global_bds_viewers()
 	_rebuild_hero_bds_viewers(_selected_hero)
+
+
+func _on_global_viewer_selected(viewer: UIBDSViewer) -> void:
+	if viewer == null:
+		_rebuild_hero_bds_viewers(null)
+		return
+	var hero: Hero = _viewer_to_hero.get(viewer)
+	if hero == null: return
+	_rebuild_hero_bds_viewers(hero)
 
 
 func _on_new_bds_added(bds: BattleDataStat) -> void:

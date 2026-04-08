@@ -20,7 +20,8 @@ grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
 script = ExtResource("1_jf5p1")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1826561182]
+[node name="Background" type="ColorRect" parent="." unique_id=1826561182]
+unique_name_in_owner = true
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -71,6 +72,7 @@ offset_right = 60.0
 grow_vertical = 2
 theme_override_font_sizes/font_size = 10
 text = "Action name"
+vertical_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/Control" unique_id=1073927314]
 layout_mode = 1
@@ -96,6 +98,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "(100%)"
 horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="MetersContainer" type="Control" parent="HBoxContainer/VBoxContainer" unique_id=444441891]
 layout_mode = 2
