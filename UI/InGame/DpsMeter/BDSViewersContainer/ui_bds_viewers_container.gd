@@ -1,4 +1,4 @@
-class_name UIBattleDataStatsPanel
+class_name UIBDSViewersContainer
 extends VBoxContainer
 
 const UI_BATTLE_DATA_STAT_VIEWER_SCENE: PackedScene = preload("res://UI/InGame/DpsMeter/BattleDataStatViewer/ui_battle_data_stat_viewer.tscn")
@@ -7,6 +7,8 @@ const UI_BATTLE_DATA_STAT_VIEWER_SCENE: PackedScene = preload("res://UI/InGame/D
 #region ============================== Private variables ==============================
 var _total_value: float
 var _battle_data_stat_viewers: Array[UIBattleDataStatViewer]
+var _show_percent: bool = true
+var _show_sub_values: bool = false
 #endregion
 
 
@@ -15,6 +17,8 @@ var _battle_data_stat_viewers: Array[UIBattleDataStatViewer]
 func add_battle_data_stat(battle_data_stat: BattleDataStat) -> void:
 	var bds_viewer: UIBattleDataStatViewer = UI_BATTLE_DATA_STAT_VIEWER_SCENE.instantiate()
 	bds_viewer.init(battle_data_stat)
+	bds_viewer.set_show_percent(_show_percent)
+	bds_viewer.set_show_sub_values(_show_sub_values)
 	add_child(bds_viewer)
 	_battle_data_stat_viewers.append(bds_viewer)
 	bds_viewer.total_value_changed.connect(_on_battle_data_stat_viewer_total_value_changed)
@@ -27,6 +31,18 @@ func clear() -> void:
 		viewer.queue_free()
 	_battle_data_stat_viewers.clear()
 	_total_value = 0.0
+
+
+func set_show_percent(value: bool) -> void:
+	_show_percent = value
+	for viewer: UIBattleDataStatViewer in _battle_data_stat_viewers:
+		viewer.set_show_percent(value)
+
+
+func set_show_sub_values(value: bool) -> void:
+	_show_sub_values = value
+	for viewer: UIBattleDataStatViewer in _battle_data_stat_viewers:
+		viewer.set_show_sub_values(value)
 #endregion
 
 
