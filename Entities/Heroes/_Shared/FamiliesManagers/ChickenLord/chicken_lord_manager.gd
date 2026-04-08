@@ -25,16 +25,16 @@ const GIFTED_POISON_RATIO: Array[float] = [0.10, 0.15, 0.20, 0.25]
 const GIFTED_POISON_STACKS: Array[int] = [1, 1, 2, 2]
 
 # Chicken gifted colossus stats
-const GIFTED_COLOSSUS_HPMAX_RATIOS: Array[float] = [0.35, 0.50, 0.65, 0.80]
+const GIFTED_COLOSSUS_HPMAX_RATIOS: Array[float] = [1.0, 2.0, 3.0, 4.0]
 
 # Chicken gifted light stats
 const GIFTED_LIGHT_REGEN_RATIOS: Array[float] = [0.04, 0.06, 0.08, 0.10]
 const GIFTED_LIGHT_INHERITED_HEAL: Array[float] = [0.3, 0.5, 0.7, 1.0]
 
 # Chicken gifted shield stats
-const GIFTED_SHIELD_BONUS_SPAWN: Array[int] = [35, 50, 65, 80]
+const GIFTED_SHIELD_BONUS_SPAWN: Array[int] = [50, 70, 90, 110]
 const GIFTED_SHIELD_PER_ATTACK: Array[int] = [15, 25, 35, 50]
-const GIFTED_SHIELD_INHERITED_SHIELD: Array[float] = [0.5, 0.7, 0.9, 1.2]
+const GIFTED_SHIELD_INHERITED_SHIELD: Array[float] = [0.4, 0.6, 0.8, 1.0]
 
 # Chicken gifted ardent celestial stats
 const GIFTED_ARDENT_CELESTIAL_IGNITE_STACKS: Array[int] = [15, 25, 35, 50]
