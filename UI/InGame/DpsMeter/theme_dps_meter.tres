@@ -1,15 +1,15 @@
 [gd_resource type="Theme" format=3 uid="uid://cdxqsjqjpv6q7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_660yy"]
-bg_color = Color(0.21568628, 0.21568628, 0.21568628, 0.47843137)
+bg_color = Color(0.21568628, 0.21568628, 0.21568628, 0.78431374)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pv5gf"]
-bg_color = Color(0.21568628, 0.21568628, 0.21568628, 0.47843137)
+bg_color = Color(0.21568628, 0.21568628, 0.21568628, 0.78431374)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fd7gp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yfhcr"]
-bg_color = Color(0.21568628, 0.21568628, 0.21568628, 0.47843137)
+bg_color = Color(0.21568628, 0.21568628, 0.21568628, 0.78431374)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2nwha"]
 

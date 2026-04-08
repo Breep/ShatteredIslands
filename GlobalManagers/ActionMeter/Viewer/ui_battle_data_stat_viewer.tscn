@@ -19,6 +19,16 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_bg7og")
 
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1826561182]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.47843137, 0.47843137, 0.47843137, 0.47843137)
+
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1427104011]
 layout_mode = 1
 anchors_preset = 15
@@ -29,6 +39,8 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="Icon" type="TextureRect" parent="HBoxContainer" unique_id=849647477]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.1
@@ -47,6 +59,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="NameLabel" type="Label" parent="HBoxContainer/VBoxContainer/Control" unique_id=770360974]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
@@ -135,8 +148,7 @@ size_flags_stretch_ratio = 0.25
 mouse_filter = 2
 color = Color(0.9214067, 0.24567583, 0.3008359, 1)
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/MetersContainer/MarginContainer/HBoxContainer/Meters/BarStatsContainer/Bar1" unique_id=2146205298]
-visible = false
+[node name="Value1" type="Label" parent="HBoxContainer/VBoxContainer/MetersContainer/MarginContainer/HBoxContainer/Meters/BarStatsContainer/Bar1" unique_id=2146205298]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -162,8 +174,7 @@ size_flags_stretch_ratio = 0.25
 mouse_filter = 2
 color = Color(0.85354114, 0.86767477, 0.87372243, 1)
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/MetersContainer/MarginContainer/HBoxContainer/Meters/BarStatsContainer/Bar2" unique_id=2083143899]
-visible = false
+[node name="Value2" type="Label" parent="HBoxContainer/VBoxContainer/MetersContainer/MarginContainer/HBoxContainer/Meters/BarStatsContainer/Bar2" unique_id=2083143899]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -189,8 +200,7 @@ size_flags_stretch_ratio = 0.25
 mouse_filter = 2
 color = Color(0.39227563, 0.5345537, 0.77719, 1)
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/MetersContainer/MarginContainer/HBoxContainer/Meters/BarStatsContainer/Bar3" unique_id=32276937]
-visible = false
+[node name="Value3" type="Label" parent="HBoxContainer/VBoxContainer/MetersContainer/MarginContainer/HBoxContainer/Meters/BarStatsContainer/Bar3" unique_id=32276937]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -216,8 +226,7 @@ size_flags_stretch_ratio = 0.25
 mouse_filter = 2
 color = Color(0.2945542, 0.49413776, 0.25579977, 1)
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/MetersContainer/MarginContainer/HBoxContainer/Meters/BarStatsContainer/Bar4" unique_id=835441042]
-visible = false
+[node name="Value4" type="Label" parent="HBoxContainer/VBoxContainer/MetersContainer/MarginContainer/HBoxContainer/Meters/BarStatsContainer/Bar4" unique_id=835441042]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

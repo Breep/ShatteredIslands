@@ -12,12 +12,17 @@ var _battle_data_stat: BattleDataStat
 @onready var _meters_control: Control = %Meters
 @onready var _empty_control: Control = %Empty
 
-@onready var _value_label: Label = %ValueLabel
-@onready var _percent_label: Label = %PercentLabel
-@onready var _floating_label: Label = %FloatingLabel
-
 @onready var _bar_stats_container: HBoxContainer = %BarStatsContainer
 var _bsd_color_rects: Dictionary[Utils.ActionType, ColorRect]
+
+static var count: int = 0
+
+@onready var _icon: TextureRect = %Icon
+@onready var _name_label: Label = %NameLabel
+@onready var _value_label: Label = %ValueLabel
+@onready var _percent_label: Label = %PercentLabel
+
+
 
 #region ============================== Public function ==============================
 func set_ratio(ratio: float) -> void:
@@ -44,8 +49,9 @@ func init(battle_data_stats: BattleDataStat) -> void:
 
 #region ============================== Node base functions ==============================
 func _ready() -> void:
+	_name_label.text = "Action Name " + str(count)
+	count += 1
 	return
-	_floating_label.hide()
 	if _battle_data_stat != null:
 		_connect_signals()
 		_reset_layout()
@@ -76,7 +82,6 @@ func _reset_layout() -> void:
 		_bsd_color_rects[action_type].size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		_bsd_color_rects[action_type].mouse_filter = Control.MOUSE_FILTER_IGNORE
 		_bar_stats_container.add_child(_bsd_color_rects[action_type])
-	_floating_label.text = _battle_data_stat.id
 
 
 func _update_layout() -> void:
@@ -89,17 +94,19 @@ func _update_layout() -> void:
 		_bsd_color_rects[action_type].size_flags_stretch_ratio = action_meters[action_type] / _total_value
 	_value_label.text = str(_total_value).pad_decimals(0)
 	total_value_changed.emit(_total_value)
+
+
 #endregion
 
 
 
 #region ============================== Callbacks ==============================
 func _on_mouse_entered() -> void:
-	_floating_label.show()
+	return
 
 
 func _on_mouse_exited() -> void:
-	_floating_label.hide()
+	return
 
 
 func _on_battle_data_stat_stat_changed(_action_type: Utils.ActionType, _value: float) -> void:

@@ -2,61 +2,56 @@
 
 [ext_resource type="Texture2D" uid="uid://f0lwwoxrc44a" path="res://UI/InGame/DpsMeter/Data/damage_done_small.png" id="1_b3qs5"]
 [ext_resource type="Theme" uid="uid://cdxqsjqjpv6q7" path="res://UI/InGame/DpsMeter/theme_dps_meter.tres" id="1_dteat"]
-[ext_resource type="Texture2D" uid="uid://b27aqdnso2v47" path="res://UI/InGame/DpsMeter/Data/Capture d'écran 2026-04-07 105341.png" id="1_u0xm7"]
 [ext_resource type="Texture2D" uid="uid://bhjkgf3qulsr1" path="res://UI/InGame/DpsMeter/Data/damage_received_small.png" id="2_dteat"]
 [ext_resource type="Texture2D" uid="uid://c6nkmkwq0r2ub" path="res://UI/InGame/DpsMeter/Data/heal_done_small.png" id="3_u0xm7"]
 [ext_resource type="Texture2D" uid="uid://bsf06q3ts8qyd" path="res://UI/InGame/DpsMeter/Data/heal_received_small.png" id="4_ih4vw"]
 [ext_resource type="Texture2D" uid="uid://c0ypm464lcigy" path="res://UI/InGame/DpsMeter/Data/misc_done_small.png" id="5_0fcnj"]
 [ext_resource type="Texture2D" uid="uid://c03fodswq603s" path="res://UI/InGame/DpsMeter/Data/misc_received_small.png" id="6_u55ms"]
 [ext_resource type="PackedScene" uid="uid://duf3kswv8x14b" path="res://GlobalManagers/ActionMeter/Viewer/ui_battle_data_stat_viewer.tscn" id="9_ih4vw"]
+[ext_resource type="Script" uid="uid://bbu7ikvo4tmc1" path="res://UI/InGame/DpsMeter/hero_dps_scroll_container.gd" id="10_0fcnj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0fcnj"]
 content_margin_left = 5.0
 content_margin_top = 5.0
 content_margin_right = 5.0
+content_margin_bottom = 10.0
+bg_color = Color(0.21568628, 0.21568628, 0.21568628, 0.78431374)
+border_width_bottom = 5
+border_color = Color(0.21950099, 0.21950105, 0.21950087, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ih4vw"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
 content_margin_bottom = 5.0
-bg_color = Color(0.21568628, 0.21568628, 0.21568628, 0.47843137)
+bg_color = Color(0.21568628, 0.21568628, 0.21568628, 0.78431374)
 
 [node name="UiDpsMeter" type="Control" unique_id=1054308253]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
 theme = ExtResource("1_dteat")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1185731787]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_u0xm7")
-expand_mode = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1586629770]
+[node name="MainVBox" type="VBoxContainer" parent="." unique_id=1586629770]
 layout_mode = 0
-offset_left = 1482.0
-offset_top = 255.0
-offset_right = 1674.0
-offset_bottom = 497.0
+offset_right = 192.0
+offset_bottom = 485.0
 theme_override_constants/separation = 0
+metadata/_edit_lock_ = true
 
-[node name="TabBar" type="HBoxContainer" parent="VBoxContainer" unique_id=1750304099]
+[node name="TabBar" type="HBoxContainer" parent="MainVBox" unique_id=1750304099]
 layout_mode = 2
 theme_override_constants/separation = 0
 metadata/_edit_lock_ = true
 
-[node name="DamageDoneButton" type="Button" parent="VBoxContainer/TabBar" unique_id=1111540141]
+[node name="DamageDoneButton" type="Button" parent="MainVBox/TabBar" unique_id=1111540141]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 tooltip_text = "Damage Done"
 toggle_mode = true
 metadata/_edit_lock_ = true
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/TabBar/DamageDoneButton" unique_id=1867783382]
+[node name="TextureRect" type="TextureRect" parent="MainVBox/TabBar/DamageDoneButton" unique_id=1867783382]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -68,14 +63,15 @@ texture = ExtResource("1_b3qs5")
 expand_mode = 1
 metadata/_edit_lock_ = true
 
-[node name="DamageReceivedButton" type="Button" parent="VBoxContainer/TabBar" unique_id=1839191218]
+[node name="DamageReceivedButton" type="Button" parent="MainVBox/TabBar" unique_id=1839191218]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 tooltip_text = "Damage Received"
 toggle_mode = true
 metadata/_edit_lock_ = true
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/TabBar/DamageReceivedButton" unique_id=179945517]
+[node name="TextureRect" type="TextureRect" parent="MainVBox/TabBar/DamageReceivedButton" unique_id=179945517]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -87,14 +83,15 @@ texture = ExtResource("2_dteat")
 expand_mode = 1
 metadata/_edit_lock_ = true
 
-[node name="HealDoneButton" type="Button" parent="VBoxContainer/TabBar" unique_id=1643126099]
+[node name="HealDoneButton" type="Button" parent="MainVBox/TabBar" unique_id=1643126099]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 tooltip_text = "Heal Done"
 toggle_mode = true
 metadata/_edit_lock_ = true
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/TabBar/HealDoneButton" unique_id=1614697080]
+[node name="TextureRect" type="TextureRect" parent="MainVBox/TabBar/HealDoneButton" unique_id=1614697080]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -106,14 +103,15 @@ texture = ExtResource("3_u0xm7")
 expand_mode = 1
 metadata/_edit_lock_ = true
 
-[node name="HealReceivedButton" type="Button" parent="VBoxContainer/TabBar" unique_id=1013864765]
+[node name="HealReceivedButton" type="Button" parent="MainVBox/TabBar" unique_id=1013864765]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 tooltip_text = "Heal Received"
 toggle_mode = true
 metadata/_edit_lock_ = true
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/TabBar/HealReceivedButton" unique_id=739359071]
+[node name="TextureRect" type="TextureRect" parent="MainVBox/TabBar/HealReceivedButton" unique_id=739359071]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -125,14 +123,15 @@ texture = ExtResource("4_ih4vw")
 expand_mode = 1
 metadata/_edit_lock_ = true
 
-[node name="MiscDoneButton" type="Button" parent="VBoxContainer/TabBar" unique_id=1113448823]
+[node name="MiscDoneButton" type="Button" parent="MainVBox/TabBar" unique_id=1113448823]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 tooltip_text = "Misc Done"
 toggle_mode = true
 metadata/_edit_lock_ = true
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/TabBar/MiscDoneButton" unique_id=1589493455]
+[node name="TextureRect" type="TextureRect" parent="MainVBox/TabBar/MiscDoneButton" unique_id=1589493455]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -144,14 +143,15 @@ texture = ExtResource("5_0fcnj")
 expand_mode = 1
 metadata/_edit_lock_ = true
 
-[node name="MiscReceivedButton" type="Button" parent="VBoxContainer/TabBar" unique_id=1445107718]
+[node name="MiscReceivedButton" type="Button" parent="MainVBox/TabBar" unique_id=1445107718]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 tooltip_text = "Misc Received"
 toggle_mode = true
 metadata/_edit_lock_ = true
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/TabBar/MiscReceivedButton" unique_id=1549246706]
+[node name="TextureRect" type="TextureRect" parent="MainVBox/TabBar/MiscReceivedButton" unique_id=1549246706]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -163,36 +163,95 @@ texture = ExtResource("6_u55ms")
 expand_mode = 1
 metadata/_edit_lock_ = true
 
-[node name="Panel" type="PanelContainer" parent="VBoxContainer" unique_id=1628339050]
+[node name="GlobalDpsMeter" type="PanelContainer" parent="MainVBox" unique_id=1628339050]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_0fcnj")
 metadata/_edit_lock_ = true
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/Panel" unique_id=1277957204]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainVBox/GlobalDpsMeter" unique_id=1277957204]
 layout_mode = 2
 theme_override_constants/separation = 0
 metadata/_edit_lock_ = true
 
-[node name="BattleDataStatViewer" parent="VBoxContainer/Panel/VBoxContainer2" unique_id=1443367133 instance=ExtResource("9_ih4vw")]
+[node name="BattleDataStatViewer" parent="MainVBox/GlobalDpsMeter/VBoxContainer" unique_id=1443367133 instance=ExtResource("9_ih4vw")]
 layout_mode = 2
 
-[node name="BattleDataStatViewer2" parent="VBoxContainer/Panel/VBoxContainer2" unique_id=1464647572 instance=ExtResource("9_ih4vw")]
+[node name="BattleDataStatViewer2" parent="MainVBox/GlobalDpsMeter/VBoxContainer" unique_id=1464647572 instance=ExtResource("9_ih4vw")]
 layout_mode = 2
 
-[node name="BattleDataStatViewer3" parent="VBoxContainer/Panel/VBoxContainer2" unique_id=1810280587 instance=ExtResource("9_ih4vw")]
+[node name="BattleDataStatViewer3" parent="MainVBox/GlobalDpsMeter/VBoxContainer" unique_id=1810280587 instance=ExtResource("9_ih4vw")]
 layout_mode = 2
 
-[node name="BattleDataStatViewer4" parent="VBoxContainer/Panel/VBoxContainer2" unique_id=730233385 instance=ExtResource("9_ih4vw")]
+[node name="BattleDataStatViewer4" parent="MainVBox/GlobalDpsMeter/VBoxContainer" unique_id=730233385 instance=ExtResource("9_ih4vw")]
 layout_mode = 2
 
-[node name="BattleDataStatViewer5" parent="VBoxContainer/Panel/VBoxContainer2" unique_id=131238737 instance=ExtResource("9_ih4vw")]
+[node name="BattleDataStatViewer5" parent="MainVBox/GlobalDpsMeter/VBoxContainer" unique_id=131238737 instance=ExtResource("9_ih4vw")]
 layout_mode = 2
 
-[node name="BattleDataStatViewer6" parent="VBoxContainer/Panel/VBoxContainer2" unique_id=555423258 instance=ExtResource("9_ih4vw")]
+[node name="BattleDataStatViewer6" parent="MainVBox/GlobalDpsMeter/VBoxContainer" unique_id=555423258 instance=ExtResource("9_ih4vw")]
 layout_mode = 2
 
-[node name="BattleDataStatViewer7" parent="VBoxContainer/Panel/VBoxContainer2" unique_id=826427867 instance=ExtResource("9_ih4vw")]
+[node name="BattleDataStatViewer7" parent="MainVBox/GlobalDpsMeter/VBoxContainer" unique_id=826427867 instance=ExtResource("9_ih4vw")]
 layout_mode = 2
 
-[node name="BattleDataStatViewer8" parent="VBoxContainer/Panel/VBoxContainer2" unique_id=1018836421 instance=ExtResource("9_ih4vw")]
+[node name="BattleDataStatViewer8" parent="MainVBox/GlobalDpsMeter/VBoxContainer" unique_id=1018836421 instance=ExtResource("9_ih4vw")]
 layout_mode = 2
+
+[node name="HeroDpsMeter" type="PanelContainer" parent="MainVBox" unique_id=176185748]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ih4vw")
+metadata/_edit_lock_ = true
+
+[node name="HeroDpsScrollContainer" type="ScrollContainer" parent="MainVBox/HeroDpsMeter" unique_id=1024299129 node_paths=PackedStringArray("vbox")]
+custom_minimum_size = Vector2(0, 228)
+layout_mode = 2
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+script = ExtResource("10_0fcnj")
+vbox = NodePath("VBoxContainer")
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainVBox/HeroDpsMeter/HeroDpsScrollContainer" unique_id=550420126]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+metadata/_edit_lock_ = true
+
+[node name="BattleDataStatViewer" parent="MainVBox/HeroDpsMeter/HeroDpsScrollContainer/VBoxContainer" unique_id=99241955 instance=ExtResource("9_ih4vw")]
+layout_mode = 2
+
+[node name="BattleDataStatViewer2" parent="MainVBox/HeroDpsMeter/HeroDpsScrollContainer/VBoxContainer" unique_id=933353865 instance=ExtResource("9_ih4vw")]
+layout_mode = 2
+
+[node name="BattleDataStatViewer3" parent="MainVBox/HeroDpsMeter/HeroDpsScrollContainer/VBoxContainer" unique_id=2005608395 instance=ExtResource("9_ih4vw")]
+layout_mode = 2
+
+[node name="BattleDataStatViewer4" parent="MainVBox/HeroDpsMeter/HeroDpsScrollContainer/VBoxContainer" unique_id=1545521557 instance=ExtResource("9_ih4vw")]
+layout_mode = 2
+
+[node name="BattleDataStatViewer5" parent="MainVBox/HeroDpsMeter/HeroDpsScrollContainer/VBoxContainer" unique_id=183369131 instance=ExtResource("9_ih4vw")]
+layout_mode = 2
+
+[node name="OptionalConfiguration" type="VBoxContainer" parent="." unique_id=1450072892]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 32.0
+offset_right = 232.0
+offset_bottom = 100.0
+theme_override_constants/separation = 0
+
+[node name="ShowPercentButton" type="Button" parent="OptionalConfiguration" unique_id=369167270]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+tooltip_text = "Show Percent"
+toggle_mode = true
+text = "%"
+metadata/_edit_lock_ = true
+
+[node name="ShowValuesButton" type="Button" parent="OptionalConfiguration" unique_id=95349503]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+tooltip_text = "Show Values"
+toggle_mode = true
+text = "42"
+metadata/_edit_lock_ = true

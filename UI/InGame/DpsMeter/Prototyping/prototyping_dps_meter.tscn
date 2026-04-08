@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://doypbfvj7sv0o"]
+
+[ext_resource type="Texture2D" uid="uid://b27aqdnso2v47" path="res://UI/InGame/DpsMeter/Data/Capture d'écran 2026-04-07 105341.png" id="1_cqlqk"]
+[ext_resource type="PackedScene" uid="uid://cp8df4bxwetqx" path="res://UI/InGame/DpsMeter/ui_dps_meter.tscn" id="2_d36l5"]
+
+[node name="PrototypingDpsMeter" type="Control" unique_id=1710469958]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1931393093]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_cqlqk")
+expand_mode = 1
+
+[node name="UiDpsMeter" parent="." unique_id=1054308253 instance=ExtResource("2_d36l5")]
+layout_mode = 0
+offset_left = 1492.0
+offset_top = 198.0
+offset_right = 1492.0
+offset_bottom = 198.0
