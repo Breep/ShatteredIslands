@@ -5,7 +5,7 @@ const UI_BATTLE_DATA_STAT_VIEWER_SCENE: PackedScene = preload("res://UI/InGame/D
 
 
 #region ============================== Private variables ==============================
-var _total_value: float
+var _max_value: float
 var _battle_data_stat_viewers: Array[UIBattleDataStatViewer]
 var _show_percent: bool = true
 var _show_sub_values: bool = false
@@ -30,7 +30,7 @@ func clear() -> void:
 	for viewer: UIBattleDataStatViewer in _battle_data_stat_viewers:
 		viewer.queue_free()
 	_battle_data_stat_viewers.clear()
-	_total_value = 0.0
+	_max_value = 0.0
 
 
 func set_show_percent(value: bool) -> void:
@@ -50,19 +50,21 @@ func set_show_sub_values(value: bool) -> void:
 #region ============================== Private functions ==============================
 func _sort_bds_viewers() -> void:
 	if not is_node_ready(): return
-	_total_value = 0
 	_battle_data_stat_viewers.sort_custom(UIBattleDataStatViewer.compare)
+	_max_value = _battle_data_stat_viewers[0].total_value if not _battle_data_stat_viewers.is_empty() else 0.0
 	for i: int in _battle_data_stat_viewers.size():
-		var bdsv: UIBattleDataStatViewer = _battle_data_stat_viewers[i]
-		_total_value += bdsv.total_value
-		move_child.call_deferred(bdsv, i)
+		move_child.call_deferred(_battle_data_stat_viewers[i], i)
 
 
 func _scale_bds_viewers() -> void:
 	if not is_node_ready(): return
-	if _total_value <= 0: return
+	if _max_value <= 0: return
+	var total_value: float = 0.0
 	for bdsv: UIBattleDataStatViewer in _battle_data_stat_viewers:
-		bdsv.set_ratio(bdsv.total_value / _total_value)
+		total_value += bdsv.total_value
+	for bdsv: UIBattleDataStatViewer in _battle_data_stat_viewers:
+		bdsv.set_ratio(bdsv.total_value / _max_value)
+		bdsv.set_percent(bdsv.total_value / total_value * 100.0)
 #endregion
 
 

@@ -33,7 +33,11 @@ func set_ratio(ratio: float) -> void:
 		_empty_control.show()
 	_meters_control.size_flags_stretch_ratio = ratio
 	_empty_control.size_flags_stretch_ratio = 1.0 - ratio
-	_percent_label.text = str(ratio * 100.0).pad_decimals(2) + " %"
+
+
+func set_percent(percent: float) -> void:
+	if not is_node_ready(): return
+	_percent_label.text = str(percent).pad_decimals(2) + " %"
 
 
 func set_show_percent(value: bool) -> void:
