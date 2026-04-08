@@ -13,7 +13,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	
 	ctx.hero.families_stats.ardent_celestial.meteor_on_hit_callbacks.append(func(_cb_vars: Dictionary) -> void:
 		if not Utils.is_randomize_modifier_active(_proc_chance[card_lvl - 1]): return
-		var target: Entity = ctx.hero.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ALLY_INCLUDING_SELF)
+		var target: Entity = ctx.hero.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_HERO_ALLY)
 		ctx.hero.heal(target, heal, "Armagedheal")
 	)
 
