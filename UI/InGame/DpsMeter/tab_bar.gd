@@ -20,8 +20,8 @@ func _ready() -> void:
 		_damage_received_button: BattleDataStat.Type.DAMAGE_RECEIVED,
 		_heal_done_button: BattleDataStat.Type.HEAL_DONE,
 		_heal_received_button: BattleDataStat.Type.HEAL_RECEIVED,
-		_misc_done_button: BattleDataStat.Type.MISC_DONE,
-		_misc_received_button: BattleDataStat.Type.MISC_RECEIVED,
+		_misc_done_button: BattleDataStat.Type.STACK_INFLICTED,
+		_misc_received_button: BattleDataStat.Type.STACK_RECEIVED,
 	}
 	for button: Button in _button_to_type:
 		button.pressed.connect(_on_tab_button_pressed.bind(button))
