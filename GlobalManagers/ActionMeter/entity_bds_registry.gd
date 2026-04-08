@@ -64,6 +64,14 @@ func register_action_received(action_id: StringName, action_type: Utils.ActionTy
 	var bds_type: BattleDataStat.Type = BattleDataStat.action_type_to_battle_data_stat_type(action_type, BattleDataStat.Direction.RECEIVED)
 	data_stat_dictionaries[bds_type].register_action(action_id, action_type, value, is_critical)
 	_register_global_action(bds_type, action_type, value)
+
+
+func get_or_create_global_bds(bds_type: BattleDataStat.Type) -> BattleDataStat:
+	if not global_data_stats.has(bds_type):
+		var global_id: StringName = StringName(BattleDataStat.TYPE_NAMES[bds_type])
+		global_data_stats[bds_type] = BattleDataStat.new(global_id, bds_type)
+		new_global_bds_added.emit(global_data_stats[bds_type])
+	return global_data_stats[bds_type]
 #endregion
 
 

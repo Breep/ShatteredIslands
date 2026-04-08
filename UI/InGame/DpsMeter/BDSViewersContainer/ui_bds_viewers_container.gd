@@ -14,9 +14,11 @@ var _show_sub_values: bool = false
 
 
 #region ============================== Public functions ==============================
-func add_battle_data_stat(battle_data_stat: BattleDataStat) -> void:
+func add_battle_data_stat(battle_data_stat: BattleDataStat, name_override: String = "") -> void:
 	var bds_viewer: UIBDSViewer = UI_BATTLE_DATA_STAT_VIEWER_SCENE.instantiate()
 	bds_viewer.init(battle_data_stat)
+	if not name_override.is_empty():
+		bds_viewer.set_name_override(name_override)
 	bds_viewer.set_show_percent(_show_percent)
 	bds_viewer.set_show_sub_values(_show_sub_values)
 	add_child(bds_viewer)
@@ -58,7 +60,11 @@ func _sort_bds_viewers() -> void:
 
 func _scale_bds_viewers() -> void:
 	if not is_node_ready(): return
-	if _max_value <= 0: return
+	if _max_value <= 0:
+		for bdsv: UIBDSViewer in _battle_data_stat_viewers:
+			bdsv.set_ratio(1.0)
+			bdsv.set_percent(0.0)
+		return
 	var total_value: float = 0.0
 	for bdsv: UIBDSViewer in _battle_data_stat_viewers:
 		total_value += bdsv.total_value

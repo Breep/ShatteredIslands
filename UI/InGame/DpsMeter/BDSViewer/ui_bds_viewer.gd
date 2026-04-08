@@ -22,6 +22,7 @@ var _battle_data_stat: BattleDataStat
 var _show_percent: bool = true
 var _show_sub_values: bool = false
 var _is_hovered: bool = false
+var _name_override: String = ""
 
 #region ============================== Public function ==============================
 func set_ratio(ratio: float) -> void:
@@ -49,6 +50,12 @@ func set_show_percent(value: bool) -> void:
 func set_show_sub_values(value: bool) -> void:
 	_show_sub_values = value
 	_update_sub_values_visibility()
+
+
+func set_name_override(override_name: String) -> void:
+	_name_override = override_name
+	if is_node_ready():
+		_name_label.text = _name_override
 
 
 func connect_battle_data_stat(battle_data_stats: BattleDataStat) -> void:
@@ -94,7 +101,7 @@ func _reset_layout() -> void:
 		child.queue_free()
 	_bsd_color_rects.clear()
 	_bsd_value_labels.clear()
-	_name_label.text = _battle_data_stat.id
+	_name_label.text = _name_override if not _name_override.is_empty() else _battle_data_stat.id
 	for action_type: Utils.ActionType in action_meters.keys():
 		var color_rect := ColorRect.new()
 		color_rect.color = BattleDataStat.ACTION_COLORS[action_type]

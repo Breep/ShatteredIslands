@@ -12,6 +12,7 @@ var _current_bds_type: BattleDataStat.Type = BattleDataStat.Type.DAMAGE_DONE
 
 #region ============================== Node base functions ==============================
 func _ready() -> void:
+	_first_clear_all()
 	_tab_bar.bds_type_changed.connect(_on_tab_bar_bds_type_changed)
 #endregion
 
@@ -28,18 +29,23 @@ func set_heroes(heroes: Array[Hero]) -> void:
 
 
 #region ============================== Private functions ==============================
+func _first_clear_all() -> void:
+	for child in _global_bds_viewers_container.get_children():
+		child.queue_free()
+	for child in _hero_bds_viewers_container.get_children():
+		child.queue_free()
+	_global_bds_viewers_container.set_show_percent(false)
+	_hero_bds_viewers_container.set_show_percent(false)
+
+
 func _connect_heroes() -> void:
 	for hero: Hero in _heroes:
-		if not hero.bds_registry.new_global_bds_added.is_connected(_on_new_global_bds_added):
-			hero.bds_registry.new_global_bds_added.connect(_on_new_global_bds_added)
 		if not hero.bds_registry.new_bds_added.is_connected(_on_new_bds_added):
 			hero.bds_registry.new_bds_added.connect(_on_new_bds_added)
 
 
 func _disconnect_heroes() -> void:
 	for hero: Hero in _heroes:
-		if hero.bds_registry.new_global_bds_added.is_connected(_on_new_global_bds_added):
-			hero.bds_registry.new_global_bds_added.disconnect(_on_new_global_bds_added)
 		if hero.bds_registry.new_bds_added.is_connected(_on_new_bds_added):
 			hero.bds_registry.new_bds_added.disconnect(_on_new_bds_added)
 
@@ -47,9 +53,8 @@ func _disconnect_heroes() -> void:
 func _rebuild_global_bds_viewers() -> void:
 	_global_bds_viewers_container.clear()
 	for hero: Hero in _heroes:
-		var global_bds: BattleDataStat = hero.bds_registry.global_data_stats.get(_current_bds_type)
-		if global_bds != null:
-			_global_bds_viewers_container.add_battle_data_stat(global_bds)
+		var global_bds: BattleDataStat = hero.bds_registry.get_or_create_global_bds(_current_bds_type)
+		_global_bds_viewers_container.add_battle_data_stat(global_bds, hero.entity_name)
 
 
 func _rebuild_hero_bds_viewers(hero: Hero) -> void:
@@ -68,11 +73,6 @@ func _on_tab_bar_bds_type_changed(new_bds_type: BattleDataStat.Type) -> void:
 	_current_bds_type = new_bds_type
 	_rebuild_global_bds_viewers()
 	_rebuild_hero_bds_viewers(_selected_hero)
-
-
-func _on_new_global_bds_added(bds: BattleDataStat) -> void:
-	if bds.type != _current_bds_type: return
-	_global_bds_viewers_container.add_battle_data_stat(bds)
 
 
 func _on_new_bds_added(bds: BattleDataStat) -> void:
