@@ -2,9 +2,11 @@ class_name EntityBDSRegistry
 extends Resource
 
 signal new_bds_added(bds: BattleDataStat)
+signal new_global_bds_added(bds: BattleDataStat)
 
 var _entity_owner: Entity
 var data_stat_dictionaries: Dictionary[BattleDataStat.Type, BattleDataStatDictionary]
+var global_data_stats: Dictionary[BattleDataStat.Type, BattleDataStat]
 var _summon_callables: Dictionary = {}
 
 class BattleDataStatDictionary extends Resource:
@@ -55,12 +57,27 @@ func unregister_summon(summon: Entity) -> void:
 func register_action(action_id: StringName, action_type: Utils.ActionType, value: float, is_critical: bool) -> void:
 	var bds_type: BattleDataStat.Type = BattleDataStat.action_type_to_battle_data_stat_type(action_type, BattleDataStat.Direction.SENT)
 	data_stat_dictionaries[bds_type].register_action(action_id, action_type, value, is_critical)
+	_register_global_action(bds_type, action_type, value)
 
 
 func register_action_received(action_id: StringName, action_type: Utils.ActionType, value: float, is_critical: bool) -> void:
 	var bds_type: BattleDataStat.Type = BattleDataStat.action_type_to_battle_data_stat_type(action_type, BattleDataStat.Direction.RECEIVED)
 	data_stat_dictionaries[bds_type].register_action(action_id, action_type, value, is_critical)
+	_register_global_action(bds_type, action_type, value)
 #endregion
+
+
+#region ============================== Private functions ==============================
+func _register_global_action(bds_type: BattleDataStat.Type, action_type: Utils.ActionType, value: float) -> void:
+	if not _entity_owner is Hero: return
+	if (_entity_owner as Hero).player == null: return
+	if not global_data_stats.has(bds_type):
+		var global_id: StringName = StringName(BattleDataStat.TYPE_NAMES[bds_type])
+		global_data_stats[bds_type] = BattleDataStat.new(global_id, bds_type)
+		new_global_bds_added.emit(global_data_stats[bds_type])
+	global_data_stats[bds_type].register_action(action_type, value)
+#endregion
+
 
 
 #region ============================== Callbacks ==============================

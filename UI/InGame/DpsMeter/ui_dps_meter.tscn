@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://f0lwwoxrc44a" path="res://UI/InGame/DpsMeter/Data/damage_done_small.png" id="1_b3qs5"]
 [ext_resource type="Theme" uid="uid://cdxqsjqjpv6q7" path="res://UI/InGame/DpsMeter/theme_dps_meter.tres" id="1_dteat"]
+[ext_resource type="Script" uid="uid://odw543lao7ch" path="res://UI/InGame/DpsMeter/ui_dps_meter.gd" id="2_dji87"]
 [ext_resource type="Texture2D" uid="uid://bhjkgf3qulsr1" path="res://UI/InGame/DpsMeter/Data/damage_received_small.png" id="2_dteat"]
 [ext_resource type="Script" uid="uid://pkifoyuld74t" path="res://UI/InGame/DpsMeter/tab_bar.gd" id="2_u55ms"]
 [ext_resource type="Texture2D" uid="uid://c6nkmkwq0r2ub" path="res://UI/InGame/DpsMeter/Data/heal_done_small.png" id="3_u0xm7"]
@@ -32,6 +33,7 @@ bg_color = Color(0.21568628, 0.21568628, 0.21568628, 0.78431374)
 layout_mode = 3
 anchors_preset = 0
 theme = ExtResource("1_dteat")
+script = ExtResource("2_dji87")
 
 [node name="MainVBox" type="VBoxContainer" parent="." unique_id=1586629770]
 layout_mode = 0
@@ -178,28 +180,28 @@ theme_override_constants/separation = 0
 script = ExtResource("8_0fcnj")
 metadata/_edit_lock_ = true
 
-[node name="BattleDataStatViewer" parent="MainVBox/GlobalDpsMeter/GlobalBDSViewersContainer" unique_id=1443367133 instance=ExtResource("9_ih4vw")]
+[node name="Hero1BDSViewer" parent="MainVBox/GlobalDpsMeter/GlobalBDSViewersContainer" unique_id=1443367133 instance=ExtResource("9_ih4vw")]
 layout_mode = 2
 
-[node name="BattleDataStatViewer2" parent="MainVBox/GlobalDpsMeter/GlobalBDSViewersContainer" unique_id=1464647572 instance=ExtResource("9_ih4vw")]
+[node name="Hero2BDSViewer" parent="MainVBox/GlobalDpsMeter/GlobalBDSViewersContainer" unique_id=1464647572 instance=ExtResource("9_ih4vw")]
 layout_mode = 2
 
-[node name="BattleDataStatViewer3" parent="MainVBox/GlobalDpsMeter/GlobalBDSViewersContainer" unique_id=1810280587 instance=ExtResource("9_ih4vw")]
+[node name="Hero3BDSViewer" parent="MainVBox/GlobalDpsMeter/GlobalBDSViewersContainer" unique_id=1810280587 instance=ExtResource("9_ih4vw")]
 layout_mode = 2
 
-[node name="BattleDataStatViewer4" parent="MainVBox/GlobalDpsMeter/GlobalBDSViewersContainer" unique_id=730233385 instance=ExtResource("9_ih4vw")]
+[node name="Hero4BDSViewer" parent="MainVBox/GlobalDpsMeter/GlobalBDSViewersContainer" unique_id=730233385 instance=ExtResource("9_ih4vw")]
 layout_mode = 2
 
-[node name="BattleDataStatViewer5" parent="MainVBox/GlobalDpsMeter/GlobalBDSViewersContainer" unique_id=131238737 instance=ExtResource("9_ih4vw")]
+[node name="Hero5BDSViewer" parent="MainVBox/GlobalDpsMeter/GlobalBDSViewersContainer" unique_id=131238737 instance=ExtResource("9_ih4vw")]
 layout_mode = 2
 
-[node name="BattleDataStatViewer6" parent="MainVBox/GlobalDpsMeter/GlobalBDSViewersContainer" unique_id=555423258 instance=ExtResource("9_ih4vw")]
+[node name="Hero6BDSViewer" parent="MainVBox/GlobalDpsMeter/GlobalBDSViewersContainer" unique_id=555423258 instance=ExtResource("9_ih4vw")]
 layout_mode = 2
 
-[node name="BattleDataStatViewer7" parent="MainVBox/GlobalDpsMeter/GlobalBDSViewersContainer" unique_id=826427867 instance=ExtResource("9_ih4vw")]
+[node name="Hero7BDSViewer" parent="MainVBox/GlobalDpsMeter/GlobalBDSViewersContainer" unique_id=826427867 instance=ExtResource("9_ih4vw")]
 layout_mode = 2
 
-[node name="BattleDataStatViewer8" parent="MainVBox/GlobalDpsMeter/GlobalBDSViewersContainer" unique_id=1018836421 instance=ExtResource("9_ih4vw")]
+[node name="Hero8BDSViewer" parent="MainVBox/GlobalDpsMeter/GlobalBDSViewersContainer" unique_id=1018836421 instance=ExtResource("9_ih4vw")]
 layout_mode = 2
 
 [node name="HeroDpsMeter" type="PanelContainer" parent="MainVBox" unique_id=176185748]
