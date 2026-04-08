@@ -3,15 +3,8 @@ extends Control
 
 # ============================== Local nodes ==============================
 
-#region Layout 1v1
-@onready var _layout_1v1: Control = %Layout_1v1
-#endregion
-
-#region Layout 2v2
-@onready var _layout_2v2: Control = %Layout_2v2
-#endregion
-
 @onready var _ui_countdown: UICountdown = %Countdown
+@onready var _ui_dps_meter: UIDPSMeter = %UiDpsMeter
 
 # ============================== Private variables ==============================
 
@@ -28,10 +21,7 @@ func _ready() -> void:
 func update_content(fighting_area: FightingArea) -> void:
 	var battle_type: Battle.BattleType = fighting_area.get_battle_type()
 	var heroes: Array[Hero] = fighting_area.get_fighting_heroes()
-	match battle_type:
-		Battle.BattleType.VS_1: _set_layout_1v1(heroes)
-		Battle.BattleType.VS_2: _set_layout_2v2(heroes)
-		Battle.BattleType.FFA_SOLO_3: _set_layout_2v2(heroes)
+	_ui_dps_meter.set_heroes(heroes)
 
 
 func set_active() -> void:
@@ -46,27 +36,6 @@ func set_inactive() -> void:
 	hide()
 
 # ============================== Private functions ==============================
-
-func _set_layout_1v1(heroes: Array[Hero]) -> void:
-	_layout_1v1.hide()
-	_layout_2v2.hide() # TODO: Remove this
-	return
-	if heroes.is_empty():
-		push_warning("UIFightingArea: There is no heroes in the 1v1 fighting area")
-		return
-	_layout_1v1.show()
-	_layout_2v2.hide()
-
-
-func _set_layout_2v2(heroes: Array[Hero]) -> void:
-	_layout_1v1.hide()
-	_layout_2v2.hide() # TODO: Remove this
-	return
-	if heroes.is_empty():
-		push_warning("UIFightingArea: There is no heroes in the 2v2 fighting area")
-		return
-	_layout_2v2.show()
-	_layout_1v1.hide()
 
 # ============================== Callbacks ==============================
 

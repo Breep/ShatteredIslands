@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bhxhqex1pbh2p"]
 
 [ext_resource type="Script" uid="uid://cl4rtcia6te0m" path="res://UI/InGame/FightingArea/ui_fighting_area.gd" id="1_xkiby"]
+[ext_resource type="PackedScene" uid="uid://cp8df4bxwetqx" path="res://UI/InGame/DpsMeter/ui_dps_meter.tscn" id="3_ejw1r"]
 [ext_resource type="PackedScene" uid="uid://dmfkigo1trjd0" path="res://UI/Tool/Countdown/ui_countdown.tscn" id="3_ie0xi"]
 
 [node name="UIFightingArea" type="Control" unique_id=1289468176]
@@ -65,3 +66,11 @@ grow_vertical = 2
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
+
+[node name="UiDpsMeter" parent="." unique_id=1054308253 instance=ExtResource("3_ejw1r")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 1582.0
+offset_top = 716.0
+offset_right = 1582.0
+offset_bottom = 716.0
