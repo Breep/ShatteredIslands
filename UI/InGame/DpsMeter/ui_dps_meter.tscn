@@ -32,13 +32,23 @@ bg_color = Color(0.21568628, 0.21568628, 0.21568628, 0.78431374)
 [node name="UiDpsMeter" type="Control" unique_id=1054308253]
 layout_mode = 3
 anchors_preset = 0
+pivot_offset_ratio = Vector2(0.5, 0.5)
 theme = ExtResource("1_dteat")
 script = ExtResource("2_dji87")
 
 [node name="MainVBox" type="VBoxContainer" parent="." unique_id=1586629770]
-layout_mode = 0
-offset_right = 192.0
-offset_bottom = 485.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -105.0
+offset_top = -242.5
+offset_right = 105.0
+offset_bottom = 242.5
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/separation = 0
 metadata/_edit_lock_ = true
 
@@ -242,11 +252,18 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="OptionalConfiguration" type="VBoxContainer" parent="." unique_id=1450072892]
-layout_mode = 0
-offset_left = 210.0
-offset_top = 32.0
-offset_right = 250.0
-offset_bottom = 100.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 105.0
+offset_top = -210.0
+offset_right = 145.0
+offset_bottom = -142.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/separation = 0
 
 [node name="ShowPercentButton" type="Button" parent="OptionalConfiguration" unique_id=369167270]
