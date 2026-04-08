@@ -2,7 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://b27aqdnso2v47" path="res://UI/InGame/DpsMeter/Data/Capture d'écran 2026-04-07 105341.png" id="1_cqlqk"]
 [ext_resource type="PackedScene" uid="uid://cp8df4bxwetqx" path="res://UI/InGame/DpsMeter/ui_dps_meter.tscn" id="2_d36l5"]
-[ext_resource type="PackedScene" uid="uid://duf3kswv8x14b" path="res://UI/InGame/DpsMeter/BDSViewer/ui_bds_viewer.tscn" id="3_7bg23"]
 
 [node name="PrototypingDpsMeter" type="Control" unique_id=1710469958]
 layout_mode = 3
@@ -29,10 +28,3 @@ offset_left = 1492.0
 offset_top = 198.0
 offset_right = 1492.0
 offset_bottom = 198.0
-
-[node name="BattleDataStatViewer" parent="." unique_id=1443367133 instance=ExtResource("3_7bg23")]
-layout_mode = 1
-offset_left = -879.0
-offset_top = -485.0
-offset_right = -729.0
-offset_bottom = -460.0
