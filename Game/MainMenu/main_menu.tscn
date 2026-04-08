@@ -206,7 +206,7 @@ visible = false
 [node name="darkknight_bronze" parent="Tavern_Animated/Node3D" unique_id=1415168091 instance=ExtResource("6_h47y2")]
 transform = Transform3D(-0.27560455, 0, -0.41718358, 0, 0.5, 0, 0.41718358, 0, -0.27560455, -0.68145096, 0.56043047, 5.2253733)
 
-[node name="Weapons" parent="Tavern_Animated/Node3D/darkknight_bronze/rig/Skeleton3D" index="10"]
+[node name="Weapons" parent="Tavern_Animated/Node3D/darkknight_bronze/rig/Skeleton3D" parent_id_path=PackedInt32Array(1415168091, 62816829) index="10" unique_id=87550049]
 visible = false
 
 [node name="darkknight_gold" parent="Tavern_Animated/Node3D" unique_id=1860243425 instance=ExtResource("7_aouoj")]
@@ -230,13 +230,13 @@ visible = false
 [node name="darkknight_silver" parent="Tavern_Animated/Node3D" unique_id=1786339248 instance=ExtResource("10_c2tj4")]
 transform = Transform3D(-0.39287448, 0, 0.30927277, 0, 0.5, 0, -0.30927277, 0, -0.39287448, -2.3666592, 0.56033826, -2.4353495)
 
-[node name="Weapons" parent="Tavern_Animated/Node3D/darkknight_silver/rig/Skeleton3D" index="10"]
+[node name="Weapons" parent="Tavern_Animated/Node3D/darkknight_silver/rig/Skeleton3D" parent_id_path=PackedInt32Array(1786339248, 1457080454) index="10" unique_id=155614625]
 visible = false
 
 [node name="darkknight_white" parent="Tavern_Animated/Node3D" unique_id=1926904094 instance=ExtResource("11_thayi")]
 transform = Transform3D(-0.2410833, 0, 0.43803978, 0, 0.5, 0, -0.43803978, 0, -0.2410833, 0.24512899, 0.5571692, 1.6530339)
 
-[node name="Weapons" parent="Tavern_Animated/Node3D/darkknight_white/rig/Skeleton3D" index="10"]
+[node name="Weapons" parent="Tavern_Animated/Node3D/darkknight_white/rig/Skeleton3D" parent_id_path=PackedInt32Array(1926904094, 1322882237) index="10" unique_id=609614211]
 visible = false
 
 [node name="darkknight_black" parent="Tavern_Animated/Node3D" unique_id=901892964 instance=ExtResource("12_fpsp3")]

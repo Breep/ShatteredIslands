@@ -7,7 +7,6 @@
 [ext_resource type="Resource" uid="uid://yu8vfa6x3r0g" path="res://Card/Descriptions/Cards/Colossus/Epic/SeismicSlam/colossus_seismic_slam.tres" id="3_kngc2"]
 [ext_resource type="Resource" uid="uid://50ga6somnl7u" path="res://Card/Descriptions/Cards/Warrior/Common/TitanAxe/attack_titan_axe.tres" id="4_dlg3x"]
 [ext_resource type="PackedScene" uid="uid://drcuyohos0doa" path="res://FloatingIsland/FightingIsland/fighting_island.tscn" id="6_sp80o"]
-[ext_resource type="PackedScene" uid="uid://cs66hky7o30da" path="res://GlobalManagers/ActionMeter/Viewer/ui_entity_bds_registry.tscn" id="10_kngc2"]
 [ext_resource type="PackedScene" uid="uid://ci5cxqmyimurq" path="res://UI/InGame/FightingArea/DebugEntityStats/ui_debug_entity_stats.tscn" id="11_e0xek"]
 
 [sub_resource type="NoiseTexture3D" id="NoiseTexture3D_4fa74"]
@@ -241,25 +240,6 @@ _life_steal_labels = {
 14: NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusSilence/MarginContainer/Titles/LifeSteal"),
 15: NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusInvulnerable/MarginContainer/Titles/LifeSteal"),
 16: NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusUntargetable/MarginContainer/Titles/LifeSteal")
-}
-
-[node name="EntityBDSRegistry" parent="UIProto" unique_id=2072725904 node_paths=PackedStringArray("_ui_battle_data_stats_panels") instance=ExtResource("10_kngc2")]
-unique_name_in_owner = true
-visible = false
-layout_mode = 1
-offset_left = 103.0
-offset_top = -247.0
-offset_right = 503.0
-offset_bottom = 53.0
-_ui_battle_data_stats_panels = {
-0: NodePath("TabContainer/Damage Done"),
-1: NodePath("TabContainer/Damage Taken"),
-2: NodePath("TabContainer/Heal Done"),
-3: NodePath("TabContainer/Heal Received"),
-4: NodePath("TabContainer/Stack Inflicted"),
-5: NodePath("TabContainer/Stack Taken"),
-6: NodePath("TabContainer/Misc Done"),
-7: NodePath("TabContainer/Misc Taken")
 }
 
 [node name="Button" type="Button" parent="UIProto" unique_id=510046465]

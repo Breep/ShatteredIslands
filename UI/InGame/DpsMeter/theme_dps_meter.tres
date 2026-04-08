@@ -1,0 +1,60 @@
+[gd_resource type="Theme" format=3 uid="uid://cdxqsjqjpv6q7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_660yy"]
+bg_color = Color(0.21568628, 0.21568628, 0.21568628, 0.78431374)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pv5gf"]
+bg_color = Color(0.21568628, 0.21568628, 0.21568628, 0.78431374)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fd7gp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yfhcr"]
+bg_color = Color(0.21568628, 0.21568628, 0.21568628, 0.78431374)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2nwha"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4adli"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_todsl"]
+bg_color = Color(0.21960784, 0.21960784, 0.21960784, 0.47843137)
+border_width_bottom = 5
+border_color = Color(0.21950099, 0.21950105, 0.21950087, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fhagy"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ul5ro"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.34407574, 0.34407577, 0.3440756, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fd7gp"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.21960784, 0.21960784, 0.21960784, 0.47843137)
+
+[resource]
+Button/styles/hover = SubResource("StyleBoxFlat_660yy")
+Button/styles/hover_pressed = SubResource("StyleBoxFlat_pv5gf")
+Button/styles/normal = SubResource("StyleBoxEmpty_fd7gp")
+Button/styles/pressed = SubResource("StyleBoxFlat_yfhcr")
+TabBar/constants/icon_max_width = 32
+TabBar/constants/tab_separation = 4
+TabBar/styles/tab_disabled = SubResource("StyleBoxFlat_2nwha")
+TabBar/styles/tab_unselected = SubResource("StyleBoxFlat_4adli")
+TabContainer/constants/icon_max_width = 32
+TabContainer/constants/icon_separation = 0
+TabContainer/constants/outline_size = 0
+TabContainer/constants/side_margin = 0
+TabContainer/constants/tab_separation = 5
+TabContainer/styles/panel = SubResource("StyleBoxFlat_todsl")
+TabContainer/styles/tab_focus = SubResource("StyleBoxFlat_fhagy")
+TabContainer/styles/tab_unselected = SubResource("StyleBoxFlat_ul5ro")
+TabContainer/styles/tabbar_background = SubResource("StyleBoxFlat_fd7gp")
