@@ -38,6 +38,8 @@ func _ready() -> void:
 	_movement_module.orbit_entity(_master, 2, 1, MovementModule.OrbitFacing.NONE)
 	_master.died.connect(_on_master_died)
 	_despawn_timer = -1 # No despawn
+	if _auto_attack_periodic_module != null:
+		_auto_attack_periodic_module._attack_strategy = TargetModule.TargettingStrategy.CLOSEST_ENEMY_SUMMON
 	super._ready()
 	conditions.add_stack(Stack.Type.SHIELD, _shield, _master, &"Gamma Turret")
 	if _auto_attack_sender != null:

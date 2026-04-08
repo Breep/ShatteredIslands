@@ -10,7 +10,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		var chicken: Chicken = cb_vars.get(FamilyChickenLordStats.CbVars.SELF_CHICKEN)
 		if not is_instance_valid(chicken): return
 #		ça devrait être chicken.target_module? mais le target module du chicken est pas encore fonctionnel
-		var target: Entity = ctx.hero.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ALLY_INCLUDING_SELF)
+		var target: Entity = ctx.hero.target_module.get_target(TargetModule.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
 
 		if target == null: return
 		target.take_heal(heal_amount, false, &"Doctor Chicken", chicken) 

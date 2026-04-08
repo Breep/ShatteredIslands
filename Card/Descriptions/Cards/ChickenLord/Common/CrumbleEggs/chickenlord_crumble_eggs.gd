@@ -23,7 +23,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 				ctx.hero.summon_entity(Entity.EntityType.CHICKEN_EGG, SpawnLocationConfig.create_entity_relative(hit_target, 1.5), {})
 	)
 	ctx.periodic_timers.register("Crumble Eggs", period, func() -> void:
-		var target: Entity = ctx.hero.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
+		var target: Entity = ctx.hero.target_module.get_target(TargetModule.TargettingStrategy.LOWEST_HP_ENEMY)
 		if target == null: return
 		ctx.hero.projectile_attack(target, Projectile.Type.SMALL_EGG, ctx.hero, proj_stats)
 		)
@@ -36,4 +36,4 @@ func get_description(cardlvl: int) -> String:
 	var p: String = str(_periods[cardlvl - 1]).pad_decimals(0)
 	var dpc: String = str(_damage_per_chickens[cardlvl - 1]).pad_decimals(0)
 	var cspd: String = str(_chicken_spawned_per_deaths[cardlvl - 1]).pad_decimals(0)
-	return "Toutes les " + p + "s, lance un petit oeuf sur un ennemi. Inflige " + str(_base_damages[cardlvl - 1]) + " + " + dpc + " * <poulets vivants> [[PHYSICAL_DAMAGE]]. Pond " + cspd + " oeuf en cas de kill."
+	return "Toutes les " + p + "s, lance un petit oeuf sur l'ennemi le plus faible. Inflige " + str(_base_damages[cardlvl - 1]) + " + " + dpc + " * <poulets vivants> [[MAGICAL_DAMAGE]]. Pond " + cspd + " oeuf en cas de kill."

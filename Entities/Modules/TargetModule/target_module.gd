@@ -39,6 +39,17 @@ enum TargettingStrategy {
 	RANDOM_ALLY_INCLUDING_SELF, # Random ally
 	RANDOM_HERO_ALLY, # Random Hero ally
 	
+	# ------- LOWEST HP (Absolute) -------
+	LOWEST_HP_ENEMY, # Enemy with lowest current HP (absolute)
+	LOWEST_HP_ALLY, # Ally with lowest current HP (absolute), excluding self
+
+	# ------- LOWEST HP % -------
+	LOWEST_HP_PERCENT_ALLY, # Ally with lowest HP percentage, excluding self
+	LOWEST_HP_PERCENT_HERO_ALLY, # Hero ally with lowest HP percentage
+
+	# ------- PRIORITIZE SUMMONS -------
+	CLOSEST_ENEMY_SUMMON, # Closest enemy summon, falls back to closest enemy if none
+
 	# ------- MISC -------
 	HIGHEST_SHIELD_ENEMIES_HERO, # highest amount of shield among heroes enemies (can be null)
 	HIGHEST_SHIELD_ALLIES_HERO, # highest amount of shield among heroes allies (can be null)
@@ -142,6 +153,17 @@ func get_target(targetting_strategy: TargettingStrategy) -> Entity:
 		TargettingStrategy.HIGHEST_HP_PERCENT_ENEMY: return _get_highest_hp_percent(_enemies, null, true)
 		TargettingStrategy.HIGHEST_HP_PERCENT_HERO_ENEMY: return _get_highest_hp_percent(_enemy_heroes, null, true)
 		
+		# --- LOWEST HP (Absolute) ---
+		TargettingStrategy.LOWEST_HP_ENEMY: return _get_lowest_hp(_enemies, null, true)
+		TargettingStrategy.LOWEST_HP_ALLY: return _get_lowest_hp(_allies, _owner)
+
+		# --- LOWEST HP % (Ally) ---
+		TargettingStrategy.LOWEST_HP_PERCENT_ALLY: return _get_lowest_hp_percent(_allies, _owner)
+		TargettingStrategy.LOWEST_HP_PERCENT_HERO_ALLY: return _get_lowest_hp_percent(_ally_heroes, null)
+
+		# --- PRIORITIZE SUMMONS ---
+		TargettingStrategy.CLOSEST_ENEMY_SUMMON: return _get_closest_enemy_summon()
+
 		# --- SHIELD ---
 		TargettingStrategy.HIGHEST_SHIELD_ENEMIES_HERO: return _get_highest_shield(_enemy_heroes, _owner, true)
 		TargettingStrategy.HIGHEST_SHIELD_ALLIES_HERO: return _get_highest_shield(_ally_heroes, null)
@@ -434,6 +456,33 @@ func _get_taunted_targets(entities: Array[Entity]) -> Array[Entity]:
 		if entity.status_module != null and entity.status_module.has_status(Status.Type.TAUNT):
 			taunted.append(entity)
 	return taunted
+
+
+func _get_closest_enemy_summon() -> Entity:
+	# Try to find enemy summons first
+	var candidates := _filter_candidates(_enemies, null, true)
+	if candidates.is_empty():
+		return null
+
+	var summon_candidates: Array[Entity] = []
+	for entity in candidates:
+		if entity is Summon:
+			summon_candidates.append(entity)
+
+	# If summons exist, target the closest one
+	if not summon_candidates.is_empty():
+		var closest: Entity = summon_candidates[0]
+		for entity in summon_candidates:
+			if (entity.global_position - _owner.global_position).length_squared() < (closest.global_position - _owner.global_position).length_squared():
+				closest = entity
+		return closest
+
+	# Fallback: closest enemy
+	var closest: Entity = candidates[0]
+	for entity in candidates:
+		if (entity.global_position - _owner.global_position).length_squared() < (closest.global_position - _owner.global_position).length_squared():
+			closest = entity
+	return closest
 
 # ============================== "Target from" strategies functions ==============================
 
