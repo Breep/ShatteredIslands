@@ -27,6 +27,8 @@ height = 4.611328
 
 [node name="Trex" type="CharacterBody3D" unique_id=250114565 node_paths=PackedStringArray("_health_bar", "_visual_3d", "_health_bar_marker", "_animation_module")]
 script = ExtResource("1_8gq8b")
+collision_layer = 16
+collision_mask = 16
 _health_bar = NodePath("TRexVisual/SumonSimpleInfoPanel2d")
 entity_name = "TREX"
 custom_base_stats = SubResource("Resource_4nond")

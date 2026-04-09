@@ -14,6 +14,8 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [node name="FortificationDrone" type="CharacterBody3D" unique_id=1381427842 node_paths=PackedStringArray("_health_bar", "_visual_3d", "_health_bar_marker")]
 script = ExtResource("1_gc2y3")
+collision_layer = 16
+collision_mask = 16
 _health_bar = NodePath("HealthBar")
 entity_name = "Fortification Drone"
 custom_base_stats = SubResource("Resource_07yhp")

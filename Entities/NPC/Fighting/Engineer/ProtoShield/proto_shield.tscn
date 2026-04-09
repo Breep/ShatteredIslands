@@ -12,6 +12,8 @@ radius = 0.3
 
 [node name="ProtoShield" type="CharacterBody3D" unique_id=528264494 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_health_bar")]
 script = ExtResource("1_dn3og")
+collision_layer = 16
+collision_mask = 16
 entity_name = "Proto Shield"
 _auto_loaded_modules = Array[int]([1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 0])
 _visual_3d = NodePath("ProtoShieldVisual")
