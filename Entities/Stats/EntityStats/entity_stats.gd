@@ -12,20 +12,25 @@ enum StatType {
 	AS,
 	AP,
 	ATTACK_RANGE,
+	MOVEMENT_SPEED,
 	CRIT_CHANCE,
 	CRIT_CHANCE_GLOBAL,
 	CRIT_MULT,
 	CRIT_MULT_GLOBAL,
-	RESISTANCE,
-	VULNERABILITY,
-	STRENGTH,
-	WEAKNESS,
+	
+	# RESISTANCE / EXPOSURE
+	RESISTANCE, # RESISTANCE / EXPOSURE
+	VULNERABILITY, # Rename en EXPOSURE / Ajouter Vulnerability dans les Debuff (augmente EXPOSURE pour tout type de dégât (sauf PURE))
+	
+	# POWER / FRAGILITY
+	STRENGTH, # Rename en POWER / Ajouter STRENGTH dans les Debuff (augmente POWER pour tout type de dégât (sauf PURE))
+	WEAKNESS, # Rename en FRAGILITY / Ajouter Weakness dans les Debuff (augmente FRAGILITY pour tout type de dégât (sauf PURE))
 	DODGE,
 	CRIT_RESISTANCE,
-	DEFENCE,
-	BLOCK,
+	DEFENCE, # A bouger dans les Buff (augmente RESISTANCE pour tout type de dégât (sauf PURE))
+	BLOCK, # A bouger dans les Buff
 	LIFESTEAL,
-	THORN,
+	THORN, # A bouger dans les Buff
 	SCALE
 	}
 #endregion
@@ -121,6 +126,18 @@ var _attack_speed: float # Attack per second
 		if value == _attack_speed: return
 		_attack_speed = value
 		attack_speed_changed.emit(_attack_speed)
+#endregion
+
+#region ============================== Movement ==============================
+@export_group("Movement")
+signal movement_speed_changed(new_movement_speed: float)
+var _movement_speed: float # Movement speed in meters / second
+@export var movement_speed: float:
+	get: return _movement_speed
+	set(value):
+		if value == _movement_speed: return
+		_movement_speed = value
+		movement_speed_changed.emit(_movement_speed)
 #endregion
 
 #region ============================== Critic ==============================
@@ -245,6 +262,7 @@ func reset_from_hero_desc(hero: HeroDesc, lvl: int) -> EntityStats:
 	attack_power = hero.stats[lvl].attack_power
 	attack_speed = hero.stats[lvl].attack_speed
 	attack_range = hero.stats[lvl].attack_range
+	movement_speed = hero.stats[lvl].movement_speed
 	auto_attack_type = hero.stats[lvl].auto_attack_type
 	defence = hero.stats[lvl].defence
 	block = hero.stats[lvl].block
@@ -284,6 +302,7 @@ func get_stat(stat_type: StatType, action_type: Utils.ActionType = Utils.ActionT
 		EntityStats.StatType.AP: return float(_attack_power)
 		EntityStats.StatType.AS: return _attack_speed
 		EntityStats.StatType.ATTACK_RANGE: return _attack_range
+		EntityStats.StatType.MOVEMENT_SPEED: return _movement_speed
 		EntityStats.StatType.BLOCK: return float(_block)
 		EntityStats.StatType.DEFENCE: return float(_defence)
 		EntityStats.StatType.THORN: return float(_thorn)
@@ -313,6 +332,7 @@ func update_stat(stat_type: StatType, value: float, action_type: Utils.ActionTyp
 		EntityStats.StatType.AP: attack_power = value
 		EntityStats.StatType.AS: attack_speed = value
 		EntityStats.StatType.ATTACK_RANGE: attack_range = value
+		EntityStats.StatType.MOVEMENT_SPEED: movement_speed = value
 		EntityStats.StatType.DEFENCE: defence = value
 		EntityStats.StatType.BLOCK: block = value
 		EntityStats.StatType.THORN: thorn = value
