@@ -225,7 +225,7 @@ func _update_entity_label(entity_name: String) -> void:
 
 func _update_stun_info() -> void:
 	if not _stun_needs_update: return
-	var status: StatusModule = _owner_entity.status_module
+	var status: AlterationsModule = _owner_entity.status_module
 	var duration: float = status.get_remaining_time(Status.Type.STUN)
 	_stun_label.text = str(duration).pad_decimals(1)
 	_stun_progress_bar.value = duration
@@ -233,7 +233,7 @@ func _update_stun_info() -> void:
 
 func _update_taunt_info() -> void:
 	if not _taunt_needs_update: return
-	var status: StatusModule = _owner_entity.status_module
+	var status: AlterationsModule = _owner_entity.status_module
 	var duration: float = status.get_remaining_time(Status.Type.TAUNT)
 	_taunt_label.text = str(duration).pad_decimals(1)
 	_taunt_progress_bar.value = duration
@@ -241,7 +241,7 @@ func _update_taunt_info() -> void:
 
 func _update_silence_info() -> void:
 	if not _silence_needs_update: return
-	var status: StatusModule = _owner_entity.status_module
+	var status: AlterationsModule = _owner_entity.status_module
 	var duration: float = status.get_remaining_time(Status.Type.SILENCE)
 	_silence_label.text = str(duration).pad_decimals(1)
 	_silence_progress_bar.value = duration
@@ -249,7 +249,7 @@ func _update_silence_info() -> void:
 
 func _update_invulnerable_info() -> void:
 	if not _invulnerable_needs_update: return
-	var status: StatusModule = _owner_entity.status_module
+	var status: AlterationsModule = _owner_entity.status_module
 	var duration: float = status.get_remaining_time(Status.Type.INVULNERABLE)
 	_invulnerable_label.text = str(duration).pad_decimals(1)
 	_invulnerable_progress_bar.value = duration
@@ -257,7 +257,7 @@ func _update_invulnerable_info() -> void:
 
 func _update_untargetable_info() -> void:
 	if not _untargetable_needs_update: return
-	var status: StatusModule = _owner_entity.status_module
+	var status: AlterationsModule = _owner_entity.status_module
 	var duration: float = status.get_remaining_time(Status.Type.UNTARGETABLE)
 	_untargetable_label.text = str(duration).pad_decimals(1)
 	_untargetable_progress_bar.value = duration

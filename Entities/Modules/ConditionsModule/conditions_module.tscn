@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" uid="uid://5tgyr0vtwm1b" path="res://Entities/Modules/ConditionsModule/conditions_module.gd" id="1_n2uog"]
 
-[node name="ConditionsModule" type="Node" unique_id=1446375483]
+[node name="AlterationsModule" type="Node" unique_id=1446375483]
 script = ExtResource("1_n2uog")

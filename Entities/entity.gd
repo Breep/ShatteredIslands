@@ -90,7 +90,7 @@ var is_targetable: bool:
 
 # Auto loaded extensions
 var stats: EntityStats
-var conditions: ConditionsModule
+var conditions: AlterationsModule
 var target_module: TargetModule
 var auto_attack_modifier_registry: AutoAttackModifierRegistry
 var action_modifiers_registry: ActionModifiersRegistry
@@ -129,8 +129,11 @@ var _remove_stack_receiver: ActionReceiverRemoveStackModule
 var _status_receiver: ActionReceiverStatusModule
 var _status_sender: ActionSenderStatusModule
 
-# Status module
-var status_module: StatusModule
+# Phase 3b: StatusModule merged into AlterationsModule (conditions). Keep the
+# status_module name as a getter alias so the 17 existing callers keep working
+# unchanged.
+var status_module: AlterationsModule:
+	get: return conditions
 
 var _label_popup_module: LabelPopupModule
 
@@ -153,7 +156,6 @@ var _spawn_ticks_remaining: int = -1
 @export var _auto_loaded_modules: Array[Module.ModuleType] = [
 	Module.ModuleType.TARGET,
 	Module.ModuleType.CONDITIONS,
-	Module.ModuleType.STATUS,
 	Module.ModuleType.ACTION_SENDER_DAMAGE,
 	Module.ModuleType.ACTION_SENDER_HEAL,
 	Module.ModuleType.ACTION_SENDER_ADD_STACK,
@@ -560,6 +562,11 @@ func _complete_spawn() -> void:
 #region ============================== Auto loading ==============================
 func _auto_load_modules() -> void:
 	for module_type in _auto_loaded_modules:
+		# Phase 3b: STATUS was merged into CONDITIONS (AlterationsModule).
+		# Existing Entity .tscn files still reference STATUS by its int value
+		# in their _auto_loaded_modules arrays; skip instead of rewriting them.
+		if module_type == Module.ModuleType.STATUS:
+			continue
 		var module: Module = Shared.ENTITY_MODULE_SCENES[module_type].instantiate().init(self)
 		match module_type:
 			Module.ModuleType.TARGET:
@@ -588,7 +595,6 @@ func _auto_load_modules() -> void:
 			Module.ModuleType.ACTION_RECEIVER_REMOVE_STACK: _remove_stack_receiver = module
 			Module.ModuleType.ACTION_RECEIVER_STATUS: _status_receiver = module
 			Module.ModuleType.ACTION_SENDER_STATUS: _status_sender = module
-			Module.ModuleType.STATUS: status_module = module
 			Module.ModuleType.AUTO_ATTACK_PERIODIC_MODULE: _auto_attack_periodic_module = module
 			Module.ModuleType.LABEL_POPUP_MODULE: _label_popup_module = module
 		

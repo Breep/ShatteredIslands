@@ -25,11 +25,6 @@ enum Type {
 	NECROSIS
 }
 
-## Kept for backwards compatibility; prefer Alteration.ModifierType.
-## Same int values, so mod dicts interoperate transparently.
-enum ModifierType {
-	DURATION,
-}
 
 const COLORS: Dictionary[Type, Color] = {
 	Type.POISON: Color.WEB_GREEN,

@@ -5,7 +5,8 @@ enum ModuleType {
 	MOVEMENT,
 	TARGET,
 	CONDITIONS,
-	STATUS,
+	STATUS, # Phase 3b: merged into CONDITIONS (AlterationsModule). Kept for
+	        # .tscn int-index compat; ignored by Entity._auto_load_modules().
 	AUTO_ATTACK_PERIODIC_MODULE,
 	ACTION_SENDER_DAMAGE,
 	ACTION_SENDER_HEAL,
