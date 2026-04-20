@@ -10,16 +10,9 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		printerr("Crushing Weight: Wrong card_lvl: ", card_lvl)
 		return
 
-	# Stat modifier: increase dodge vs physical damage
-	var mod := StatModifier.new()
-	mod.id = &"Crushing Weight"
-	mod.stat_type = EntityStats.StatType.STRENGTH
-	mod.action_type = Utils.ActionType.STATUS_STUN
-	mod.calc_type = StatModifier.CalcType.ADD
-	mod.value = _stun_increase_percents[card_lvl - 1]
-	print(str(_stun_increase_percents[card_lvl - 1]))
-	mod.tags = [StatModifier.TagType.CARD]
-	ctx.stat_modifiers.register_modifier(mod)
+	# Phase 5 rework: STRENGTH is now a StrengthAlteration stack.
+	if ctx.hero.conditions != null:
+		ctx.hero.conditions.add_strength_stacks(Utils.ActionType.STATUS_STUN, _stun_increase_percents[card_lvl - 1])
 
 
 

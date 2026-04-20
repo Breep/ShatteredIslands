@@ -44,6 +44,12 @@ var _defense_alteration: DefenseAlteration = DefenseAlteration.new()
 var _block_alteration: BlockAlteration = BlockAlteration.new()
 var _thorn_alteration: ThornAlteration = ThornAlteration.new()
 
+# Phase 5 rework: Strength/Weakness/Vulnerability stackable alterations.
+# Stacks are applied per ActionType (typed multi-stat).
+var _strength_alteration: StrengthAlteration = StrengthAlteration.new()
+var _weakness_alteration: WeaknessAlteration = WeaknessAlteration.new()
+var _vulnerability_alteration: VulnerabilityAlteration = VulnerabilityAlteration.new()
+
 # Tick-based timing (deterministic)
 var _poison_interval_ticks: int = int(POISON_TICK_INTERVAL * TICKS_PER_SECOND)
 var _ignite_interval_ticks: int = int(IGNITE_TICK_INTERVAL * TICKS_PER_SECOND)
@@ -100,6 +106,11 @@ func init(entity_owner: Entity) -> ConditionsModule:
 	_defense_alteration.stacks_changed.connect(_on_defense_stacks_changed)
 	_block_alteration.stacks_changed.connect(_on_block_stacks_changed)
 	_thorn_alteration.stacks_changed.connect(_on_thorn_stacks_changed)
+
+	# Phase 5 rework alterations
+	_strength_alteration.bind(entity_owner)
+	_weakness_alteration.bind(entity_owner)
+	_vulnerability_alteration.bind(entity_owner)
 
 	return self
 
@@ -202,6 +213,30 @@ func add_thorn_stacks(amount: float) -> float:
 
 func remove_thorn_stacks(amount: float) -> float:
 	return _thorn_alteration.remove_stack(amount)
+
+
+func add_strength_stacks(action_type: Utils.ActionType, amount: float) -> float:
+	return _strength_alteration.add_stack(action_type, amount)
+
+
+func remove_strength_stacks(action_type: Utils.ActionType, amount: float) -> float:
+	return _strength_alteration.remove_stack(action_type, amount)
+
+
+func add_weakness_stacks(action_type: Utils.ActionType, amount: float) -> float:
+	return _weakness_alteration.add_stack(action_type, amount)
+
+
+func remove_weakness_stacks(action_type: Utils.ActionType, amount: float) -> float:
+	return _weakness_alteration.remove_stack(action_type, amount)
+
+
+func add_vulnerability_stacks(action_type: Utils.ActionType, amount: float) -> float:
+	return _vulnerability_alteration.add_stack(action_type, amount)
+
+
+func remove_vulnerability_stacks(action_type: Utils.ActionType, amount: float) -> float:
+	return _vulnerability_alteration.remove_stack(action_type, amount)
 
 
 ## Add stacks to an entity

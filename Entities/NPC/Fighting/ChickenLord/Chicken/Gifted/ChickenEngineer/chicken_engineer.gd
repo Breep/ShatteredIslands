@@ -13,17 +13,10 @@ func init(bonus_spawn: int, shield_per_attack: int, shield_strength_inherited: f
 
 func _ready() -> void:
 	
-	var mod3 := StatModifier.new()
-	mod3.id = &"Chicken_Light_heal_strength_inherited"
-	mod3.stat_type = EntityStats.StatType.STRENGTH
-	mod3.action_type = Utils.ActionType.STACK_SHIELD
-	mod3.calc_type = StatModifier.CalcType.ADD
-	mod3.value = _shield_strength_inherited
-	mod3.tags = []
-	stat_modifiers_registry.register_modifier(mod3)
-	
-	# Phase 4 rework: DEFENCE is now a DefenseAlteration stack.
+	# Phase 5 rework: STRENGTH is now a StrengthAlteration stack.
 	if conditions != null:
+		conditions.add_strength_stacks(Utils.ActionType.STACK_SHIELD, _shield_strength_inherited)
+		# Phase 4 rework: DEFENCE is now a DefenseAlteration stack.
 		conditions.add_defense_stacks(_bonus_spawn)
 	
 	var mod := AutoAttackModifier.new()

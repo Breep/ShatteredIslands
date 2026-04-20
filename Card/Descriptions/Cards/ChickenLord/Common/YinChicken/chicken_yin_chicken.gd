@@ -12,14 +12,10 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			var chicken: Chicken = cb_vars.get(FamilyChickenLordStats.CbVars.SELF_CHICKEN)
 			if not is_instance_valid(chicken): return
 			for ennemy in ctx.hero.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ENEMIES):
+				if ennemy.conditions == null: continue
+				# Phase 5 rework: VULNERABILITY is now a VulnerabilityAlteration stack.
 				for action_type: Utils.ActionType in Utils.get_all_actions():
-					var mod := StatModifier.new()
-					mod.calc_type = StatModifier.CalcType.ADD
-					mod.id = "ChickenYin_" + str(chicken.uid)
-					mod.stat_type = EntityStats.StatType.VULNERABILITY
-					mod.action_type = action_type
-					mod.value = vulnerable_application
-					ennemy.stat_modifiers_registry.register_modifier(mod)
+					ennemy.conditions.add_vulnerability_stacks(action_type, vulnerable_application)
 		)
 
 

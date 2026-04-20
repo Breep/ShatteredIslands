@@ -13,14 +13,9 @@ func init(regen_stack_ratio: float, heal_strength_inherited: float) -> Summon:
 
 func _ready() -> void:
 	
-	var mod2 := StatModifier.new()
-	mod2.id = &"Chicken_Light_heal_strength_inherited"
-	mod2.stat_type = EntityStats.StatType.STRENGTH
-	mod2.action_type = Utils.ActionType.UTILITY_HEAL
-	mod2.calc_type = StatModifier.CalcType.ADD
-	mod2.value = _heal_strength_inherited
-	mod2.tags = []
-	stat_modifiers_registry.register_modifier(mod2)
+	# Phase 5 rework: STRENGTH is now a StrengthAlteration stack.
+	if conditions != null:
+		conditions.add_strength_stacks(Utils.ActionType.UTILITY_HEAL, _heal_strength_inherited)
 	
 	var mod := AutoAttackModifier.new()
 	mod.id = "Chicken Regen Stack"

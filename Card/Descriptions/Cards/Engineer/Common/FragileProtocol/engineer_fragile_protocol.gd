@@ -9,21 +9,10 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		printerr("Fragile Protocole: Wrong card_lvl: ", card_lvl)
 		return
 	
-	var mod_heal := StatModifier.new()
-	mod_heal.value = _heal_resistance[card_lvl - 1]
-	mod_heal.calc_type = StatModifier.CalcType.ADD
-	mod_heal.stat_type = EntityStats.StatType.WEAKNESS
-	mod_heal.action_type = Utils.ActionType.UTILITY_HEAL
-	mod_heal.id = &"Fragile Protocol"
-	ctx.hero.stat_modifiers_registry.register_modifier(mod_heal)
-	
-	var mod_shield := StatModifier.new()
-	mod_shield.value = _shield_power[card_lvl - 1]
-	mod_shield.calc_type = StatModifier.CalcType.ADD
-	mod_shield.stat_type = EntityStats.StatType.STRENGTH
-	mod_shield.action_type = Utils.ActionType.STACK_SHIELD
-	mod_shield.id = &"Fragile Protocol"
-	ctx.hero.stat_modifiers_registry.register_modifier(mod_shield)
+	# Phase 5 rework: WEAKNESS/STRENGTH are now alteration stacks.
+	if ctx.hero.conditions != null:
+		ctx.hero.conditions.add_weakness_stacks(Utils.ActionType.UTILITY_HEAL, _heal_resistance[card_lvl - 1])
+		ctx.hero.conditions.add_strength_stacks(Utils.ActionType.STACK_SHIELD, _shield_power[card_lvl - 1])
 
 
 func get_description(cardlvl: int) -> String:

@@ -9,15 +9,10 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		return
 
 	var ignite_stacks_multiplier: float = _ignite_stacks_multipliers[card_lvl - 1]
-	
-	var mod := StatModifier.new()
-	mod.id = &"Cosmopolitan"
-	mod.stat_type = EntityStats.StatType.STRENGTH
-	mod.action_type = Utils.ActionType.STACK_IGNITE
-	mod.calc_type = StatModifier.CalcType.ADD
-	mod.value = ignite_stacks_multiplier
-	mod.tags = [StatModifier.TagType.CARD]
-	ctx.stat_modifiers.register_modifier(mod)
+
+	# Phase 5 rework: STRENGTH is now a StrengthAlteration stack.
+	if ctx.hero.conditions != null:
+		ctx.hero.conditions.add_strength_stacks(Utils.ActionType.STACK_IGNITE, ignite_stacks_multiplier)
 	
 
 
