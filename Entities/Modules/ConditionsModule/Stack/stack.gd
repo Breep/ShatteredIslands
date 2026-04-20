@@ -1,8 +1,10 @@
 class_name Stack
-extends Resource
+extends StackableAlteration
 
-## Base class for all stack types
-## Each stack type must implement: add_stack, remove_stack, tick
+## Legacy base class for stack types (Poison, Ignite, Shield, Regen, Necrosis).
+## Kept during rework transition — inherits _total_stacks / stacks_changed /
+## add_stack / remove_stack / tick from StackableAlteration. Holds the legacy
+## Type enum, colors and helpers used by ConditionsModule and UI panels.
 
 class StackInfo extends Resource:
 	var source: Entity
@@ -15,15 +17,6 @@ class StackInfo extends Resource:
 		action_id = p_action_id
 
 
-signal stacks_changed(new_stacks: float)
-var _total_stacks: float = 0:
-	set(value):
-		if value == _total_stacks: return
-		_total_stacks = max(0, value)
-		stacks_changed.emit(_total_stacks)
-var total_stacks: float:
-	get: return _total_stacks
-
 enum Type {
 	POISON,
 	IGNITE,
@@ -32,6 +25,8 @@ enum Type {
 	NECROSIS
 }
 
+## Kept for backwards compatibility; prefer Alteration.ModifierType.
+## Same int values, so mod dicts interoperate transparently.
 enum ModifierType {
 	DURATION,
 }
@@ -57,21 +52,3 @@ static func to_action(stack_type: Type) -> Utils.ActionType:
 		Type.REGEN: return Utils.ActionType.STACK_REGEN
 		Type.NECROSIS: return Utils.ActionType.STACK_NECROSIS
 		_: return Utils.ActionType.STACK_POISON
-
-
-## Add stacks with optional modifiers
-## Returns the new total stack count
-func add_stack(_amount: float, _source: Entity = null, _action_id: StringName = "", _mod: Dictionary = {}) -> float:
-	return _total_stacks
-
-
-## Remove stacks
-## Returns the new total stack count
-func remove_stack(_amount: float) -> float:
-	return _total_stacks
-
-
-## Called periodically to update stack state (decay, expiration, etc.)
-## Returns the new total stack count
-func tick() -> float:
-	return _total_stacks

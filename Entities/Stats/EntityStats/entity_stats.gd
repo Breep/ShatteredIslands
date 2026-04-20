@@ -19,19 +19,27 @@ enum StatType {
 	CRIT_MULT_GLOBAL,
 	
 	# RESISTANCE / EXPOSURE
-	RESISTANCE, # RESISTANCE / EXPOSURE
-	VULNERABILITY, # Rename en EXPOSURE / Ajouter Vulnerability dans les Debuff (augmente EXPOSURE pour tout type de dégât (sauf PURE))
-	
+	RESISTANCE,
+	VULNERABILITY,
+
 	# POWER / FRAGILITY
-	STRENGTH, # Rename en POWER / Ajouter STRENGTH dans les Debuff (augmente POWER pour tout type de dégât (sauf PURE))
-	WEAKNESS, # Rename en FRAGILITY / Ajouter Weakness dans les Debuff (augmente FRAGILITY pour tout type de dégât (sauf PURE))
+	STRENGTH,
+	WEAKNESS,
 	DODGE,
 	CRIT_RESISTANCE,
 	DEFENCE, # A bouger dans les Buff (augmente RESISTANCE pour tout type de dégât (sauf PURE))
 	BLOCK, # A bouger dans les Buff
 	LIFESTEAL,
 	THORN, # A bouger dans les Buff
-	SCALE
+	SCALE,
+
+	# --- Transitional aliases (Phase 1 rework) ---
+	# Nouveaux noms pour STRENGTH/WEAKNESS/VULNERABILITY.
+	# Même valeur int que l'original → même storage, signals, et routage dans get_stat/update_stat.
+	# Les anciens noms seront retirés en Phase 6.
+	POWER = STRENGTH,
+	FRAGILITY = WEAKNESS,
+	EXPOSURE = VULNERABILITY,
 	}
 #endregion
 
