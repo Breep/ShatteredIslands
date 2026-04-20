@@ -6,7 +6,7 @@ extends ActionSenderModule
 func direct_damage(target: Entity, damage: float, damage_type: Utils.ActionType, action_id: StringName) -> float:
 	if not is_instance_valid(target): return 0
 	
-	var base_damage: float = damage * _get_strenght_weakness_multiplier(damage_type)
+	var base_damage: float = damage * _get_power_fragility_multiplier(damage_type)
 	var crit_data: Dictionary = _get_crit_multiplier(damage_type)
 	damage = base_damage * crit_data["multiplier"]
 	var damage_done: float = target.take_damage(damage, damage_type, crit_data["is_critical"], action_id, _owner)

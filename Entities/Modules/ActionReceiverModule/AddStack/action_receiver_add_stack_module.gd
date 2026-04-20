@@ -7,7 +7,7 @@ func take_condition_stacks(stacks_number: float, stack_type: Stack.Type, is_crit
 	if _owner.is_dead(): return 0
 	if _owner.is_invulnerable() and Stack.is_negative(stack_type): return 0
 	if multiplayer.is_server():
-		stacks_number *= _get_resistance_vulnerability_multiplier(Stack.to_action(stack_type))
+		stacks_number *= _get_resistance_exposure_multiplier(Stack.to_action(stack_type))
 		if _is_dodged(Stack.to_action(stack_type), source):
 			_owner.action_dodged.emit(source, Stack.to_action(stack_type), stacks_number, is_critical)
 			return 0

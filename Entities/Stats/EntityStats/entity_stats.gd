@@ -20,23 +20,15 @@ enum StatType {
 	
 	# RESISTANCE / EXPOSURE
 	RESISTANCE,
-	VULNERABILITY,
+	EXPOSURE,
 
 	# POWER / FRAGILITY
-	STRENGTH,
-	WEAKNESS,
+	POWER,
+	FRAGILITY,
 	DODGE,
 	CRIT_RESISTANCE,
 	LIFESTEAL,
 	SCALE,
-
-	# --- Transitional aliases (Phase 1 rework) ---
-	# Nouveaux noms pour STRENGTH/WEAKNESS/VULNERABILITY.
-	# Même valeur int que l'original → même storage, signals, et routage dans get_stat/update_stat.
-	# Les anciens noms seront retirés en Phase 6.
-	POWER = STRENGTH,
-	FRAGILITY = WEAKNESS,
-	EXPOSURE = VULNERABILITY,
 	}
 #endregion
 
@@ -168,22 +160,22 @@ signal dodge_changed(new_dodge: float, action_type: Utils.ActionType)
 @export var _dodges: Dictionary[Utils.ActionType, float]
 #endregion
 
-#region ============================== Vulnerability ==============================
-@export_group("Vulnerability")
-signal vulnerability_changed(new_vulnerability: float, action_type: Utils.ActionType)
-@export var _vulnerabilities: Dictionary[Utils.ActionType, float]
+#region ============================== Exposure ==============================
+@export_group("Exposure")
+signal exposure_changed(new_exposure: float, action_type: Utils.ActionType)
+@export var _exposures: Dictionary[Utils.ActionType, float]
 #endregion
 
-#region ============================== Strength ==============================
-@export_group("Strength")
-signal strength_changed(new_strength: float, action_type: Utils.ActionType)
-@export var _strengths: Dictionary[Utils.ActionType, float]
+#region ============================== Power ==============================
+@export_group("Power")
+signal power_changed(new_power: float, action_type: Utils.ActionType)
+@export var _powers: Dictionary[Utils.ActionType, float]
 #endregion
 
-#region ============================== Weakness ==============================
-@export_group("Weakness")
-signal weakness_changed(new_weakness: float, action_type: Utils.ActionType)
-@export var _weaknesses: Dictionary[Utils.ActionType, float]
+#region ============================== Fragility ==============================
+@export_group("Fragility")
+signal fragility_changed(new_fragility: float, action_type: Utils.ActionType)
+@export var _fragilities: Dictionary[Utils.ActionType, float]
 #endregion
 
 #region ============================== Life steal ==============================
@@ -238,10 +230,10 @@ func reset_from_hero_desc(hero: HeroDesc, lvl: int) -> EntityStats:
 		_critical_chances[action_type] = hero.stats[lvl].critical_chances.get(action_type, 0)
 		_critical_multipliers[action_type] = hero.stats[lvl].critical_multipliers.get(action_type, 100)
 		_resistances[action_type] = hero.stats[lvl].resistances.get(action_type, 0)
-		_vulnerabilities[action_type] = hero.stats[lvl].vulnerabilities.get(action_type, 0)
+		_exposures[action_type] = hero.stats[lvl].exposures.get(action_type, 0)
 		_dodges[action_type] = hero.stats[lvl].dodges.get(action_type, 0)
-		_strengths[action_type] = hero.stats[lvl].strength.get(action_type, 0)
-		_weaknesses[action_type] = hero.stats[lvl].weakness.get(action_type, 0)
+		_powers[action_type] = hero.stats[lvl].power.get(action_type, 0)
+		_fragilities[action_type] = hero.stats[lvl].fragility.get(action_type, 0)
 		_crit_resistances[action_type] = hero.stats[lvl].crit_resistances.get(action_type, 0)
 		_life_steals[action_type] = hero.stats[lvl].life_steals.get(action_type, 0)
 	
@@ -273,10 +265,10 @@ func get_stat(stat_type: StatType, action_type: Utils.ActionType = Utils.ActionT
 		EntityStats.StatType.CRIT_CHANCE: return _critical_chances.get(action_type, 0)
 		EntityStats.StatType.CRIT_MULT: return _critical_multipliers.get(action_type, 100)
 		EntityStats.StatType.RESISTANCE: return _resistances.get(action_type, 0)
-		EntityStats.StatType.VULNERABILITY: return _vulnerabilities.get(action_type, 0)
+		EntityStats.StatType.EXPOSURE: return _exposures.get(action_type, 0)
 		EntityStats.StatType.DODGE: return _dodges.get(action_type, 0)
-		EntityStats.StatType.STRENGTH: return _strengths.get(action_type, 0)
-		EntityStats.StatType.WEAKNESS: return _weaknesses.get(action_type, 0)
+		EntityStats.StatType.POWER: return _powers.get(action_type, 0)
+		EntityStats.StatType.FRAGILITY: return _fragilities.get(action_type, 0)
 		EntityStats.StatType.CRIT_RESISTANCE: return _crit_resistances.get(action_type, 0)
 		EntityStats.StatType.LIFESTEAL: return _life_steals.get(action_type, 0)
 		_:
@@ -306,18 +298,18 @@ func update_stat(stat_type: StatType, value: float, action_type: Utils.ActionTyp
 		EntityStats.StatType.RESISTANCE:
 			_resistances[action_type] = value
 			resistance_changed.emit(value, action_type)
-		EntityStats.StatType.VULNERABILITY:
-			_vulnerabilities[action_type] = value
-			vulnerability_changed.emit(value, action_type)
+		EntityStats.StatType.EXPOSURE:
+			_exposures[action_type] = value
+			exposure_changed.emit(value, action_type)
 		EntityStats.StatType.DODGE:
 			_dodges[action_type] = value
 			dodge_changed.emit(value, action_type)
-		EntityStats.StatType.STRENGTH:
-			_strengths[action_type] = value
-			strength_changed.emit(value, action_type)
-		EntityStats.StatType.WEAKNESS:
-			_weaknesses[action_type] = value
-			weakness_changed.emit(value, action_type)
+		EntityStats.StatType.POWER:
+			_powers[action_type] = value
+			power_changed.emit(value, action_type)
+		EntityStats.StatType.FRAGILITY:
+			_fragilities[action_type] = value
+			fragility_changed.emit(value, action_type)
 		EntityStats.StatType.CRIT_RESISTANCE:
 			_crit_resistances[action_type] = value
 			crit_resistance_changed.emit(value, action_type)

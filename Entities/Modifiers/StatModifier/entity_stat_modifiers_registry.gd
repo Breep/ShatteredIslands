@@ -112,11 +112,11 @@ class StatModifierDictionary extends Resource:
 		return _stat_type == EntityStats.StatType.CRIT_CHANCE \
 				or _stat_type == EntityStats.StatType.CRIT_MULT \
 				or _stat_type == EntityStats.StatType.RESISTANCE \
-				or _stat_type == EntityStats.StatType.VULNERABILITY \
+				or _stat_type == EntityStats.StatType.EXPOSURE \
 				or _stat_type == EntityStats.StatType.DODGE \
 				or _stat_type == EntityStats.StatType.CRIT_RESISTANCE \
-				or _stat_type == EntityStats.StatType.STRENGTH \
-				or _stat_type == EntityStats.StatType.WEAKNESS \
+				or _stat_type == EntityStats.StatType.POWER \
+				or _stat_type == EntityStats.StatType.FRAGILITY \
 				or _stat_type == EntityStats.StatType.LIFESTEAL
 
 # ============================== Export - Entity stats ==============================
@@ -145,10 +145,10 @@ func _init(base_stats: EntityStats, current_stats: EntityStats) -> void:
 	_stats_modifiers_dictionaries[EntityStats.StatType.CRIT_CHANCE] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.CRIT_MULT] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.RESISTANCE] = StatModifierDictionary.new()
-	_stats_modifiers_dictionaries[EntityStats.StatType.VULNERABILITY] = StatModifierDictionary.new()
+	_stats_modifiers_dictionaries[EntityStats.StatType.EXPOSURE] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.DODGE] = StatModifierDictionary.new()
-	_stats_modifiers_dictionaries[EntityStats.StatType.STRENGTH] = StatModifierDictionary.new()
-	_stats_modifiers_dictionaries[EntityStats.StatType.WEAKNESS] = StatModifierDictionary.new()
+	_stats_modifiers_dictionaries[EntityStats.StatType.POWER] = StatModifierDictionary.new()
+	_stats_modifiers_dictionaries[EntityStats.StatType.FRAGILITY] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.CRIT_RESISTANCE] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.LIFESTEAL] = StatModifierDictionary.new()
 	

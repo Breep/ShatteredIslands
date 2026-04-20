@@ -205,11 +205,11 @@ func _register_gifted_chicken_stats_modifier() -> void:
 			Chicken.Type.GIFTED_COLOSSUS:
 				cm["hpmax"] = _owner.stats.health_max * GIFTED_COLOSSUS_HPMAX_RATIOS[_families_level[Family.Type.COLOSSUS] - 1]
 			Chicken.Type.GIFTED_LIGHT:
-				var bonus_heal: float = _owner.stats.get_stat(EntityStats.StatType.STRENGTH, Utils.ActionType.UTILITY_HEAL)
+				var bonus_heal: float = _owner.stats.get_stat(EntityStats.StatType.POWER, Utils.ActionType.UTILITY_HEAL)
 				cm["ratio_regen"] = GIFTED_LIGHT_REGEN_RATIOS[_families_level[Family.Type.LIGHT] - 1]
 				cm["inherited_heal_ratio"] = bonus_heal * GIFTED_LIGHT_INHERITED_HEAL[_families_level[Family.Type.LIGHT] - 1]
 			Chicken.Type.GIFTED_ENGINEER:
-				var bonus_shield: float = _owner.stats.get_stat(EntityStats.StatType.STRENGTH, Utils.ActionType.STACK_SHIELD)
+				var bonus_shield: float = _owner.stats.get_stat(EntityStats.StatType.POWER, Utils.ActionType.STACK_SHIELD)
 				cm["shield_per_attack"] = GIFTED_SHIELD_PER_ATTACK[_families_level[Family.Type.ENGINEER] - 1]
 				cm["bonus_spawn"] = GIFTED_SHIELD_BONUS_SPAWN[_families_level[Family.Type.ENGINEER] - 1]
 				cm["shield_strength_inherited"] = bonus_shield * GIFTED_SHIELD_INHERITED_SHIELD[_families_level[Family.Type.ENGINEER] - 1]

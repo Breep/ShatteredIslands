@@ -27,10 +27,10 @@ func _get_crit_multiplier(action_type: Utils.ActionType) -> Dictionary:
 	return {"multiplier": remap(crit_multiplier_percent, 0, 100, 1, 2), "is_critical": is_critical}
 
 
-func _get_strenght_weakness_multiplier(action_type: Utils.ActionType) -> float:
-	var strength: float = _owner.stats.get_stat(EntityStats.StatType.STRENGTH, action_type)
-	var weakness: float = _owner.stats.get_stat(EntityStats.StatType.WEAKNESS, action_type)
-	return (100.0 + strength) / (100.0 + weakness)
+func _get_power_fragility_multiplier(action_type: Utils.ActionType) -> float:
+	var power: float = _owner.stats.get_stat(EntityStats.StatType.POWER, action_type)
+	var fragility: float = _owner.stats.get_stat(EntityStats.StatType.FRAGILITY, action_type)
+	return (100.0 + power) / (100.0 + fragility)
 
 
 func _consume_before_action_modifiers(action_type: Utils.ActionCategory, modifiers_dict: Dictionary) -> Dictionary:

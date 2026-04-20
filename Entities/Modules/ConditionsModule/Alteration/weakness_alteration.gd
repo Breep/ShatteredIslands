@@ -2,8 +2,8 @@ class_name WeaknessAlteration
 extends Alteration
 
 ## Stackable DEBUFF alteration: per-ActionType stacks that push StatModifier
-## ADD on WEAKNESS (FRAGILITY). Replaces card-driven StatModifier manipulation
-## on WEAKNESS; permanent passives still use the registry path directly.
+## ADD on FRAGILITY. Replaces card-driven StatModifier manipulation on
+## FRAGILITY; permanent passives still use the registry path directly.
 
 signal typed_stacks_changed(action_type: Utils.ActionType, new_value: float)
 
@@ -54,7 +54,7 @@ func _sync_modifier(action_type: Utils.ActionType, new_value: float) -> void:
 	if mod == null:
 		mod = StatModifier.new()
 		mod.id = &"Weakness Alteration"
-		mod.stat_type = EntityStats.StatType.WEAKNESS
+		mod.stat_type = EntityStats.StatType.FRAGILITY
 		mod.action_type = action_type
 		mod.calc_type = StatModifier.CalcType.ADD
 		mod.value = new_value

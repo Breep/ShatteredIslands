@@ -34,10 +34,10 @@ func _is_dodged(action_type: Utils.ActionType, source: Entity) -> bool:
 	return false
 
 
-func _get_resistance_vulnerability_multiplier(action_type: Utils.ActionType) -> float:
+func _get_resistance_exposure_multiplier(action_type: Utils.ActionType) -> float:
 	var res: float = _owner.stats.get_stat(EntityStats.StatType.RESISTANCE, action_type)
-	var vuln: float = _owner.stats.get_stat(EntityStats.StatType.VULNERABILITY, action_type)
-	return (100 + vuln) / (100 + res)
+	var exposure: float = _owner.stats.get_stat(EntityStats.StatType.EXPOSURE, action_type)
+	return (100 + exposure) / (100 + res)
 
 
 func _get_crit_resistance_multiplier(action_type: Utils.ActionType) -> float:

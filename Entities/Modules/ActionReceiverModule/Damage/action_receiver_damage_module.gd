@@ -7,7 +7,7 @@ func take_damage(damage: float, damage_type: Utils.ActionType, is_critical: bool
 	if _owner.is_dead(): return 0
 	if _owner.is_invulnerable(): return 0
 	if damage_type != Utils.ActionType.DAMAGE_PURE and multiplayer.is_server():
-		damage *= _get_resistance_vulnerability_multiplier(damage_type)
+		damage *= _get_resistance_exposure_multiplier(damage_type)
 		if is_critical:
 			damage *= _get_crit_resistance_multiplier(damage_type)
 		damage = _owner.conditions.get_shield_reduced_damage(damage, damage_type)

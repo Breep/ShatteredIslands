@@ -11,7 +11,7 @@ func take_cleanse(value: float, is_critical: bool, action_id: StringName, source
 	var total_to_dispell: float = value
 	
 	if multiplayer.is_server():
-		total_to_dispell *= _get_resistance_vulnerability_multiplier(Utils.ActionType.UTILITY_CLEANSE)
+		total_to_dispell *= _get_resistance_exposure_multiplier(Utils.ActionType.UTILITY_CLEANSE)
 	
 	var remaining: int = int(total_to_dispell)
 	var removed: int = 0
@@ -44,7 +44,7 @@ func take_cleanse(value: float, is_critical: bool, action_id: StringName, source
 func take_dispell(value: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
 	var total_to_dispell: float = value
 	if multiplayer.is_server():
-		total_to_dispell *= value * _get_resistance_vulnerability_multiplier(Utils.ActionType.UTILITY_DISPELL)
+		total_to_dispell *= value * _get_resistance_exposure_multiplier(Utils.ActionType.UTILITY_DISPELL)
 	
 	var remaining: int = int(total_to_dispell)
 	var removed: int = 0

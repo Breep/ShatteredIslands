@@ -52,7 +52,7 @@ extends Resource
 	Utils.ActionType.STACK_NECROSIS: 0,
 }
 
-@export var vulnerabilities: Dictionary[Utils.ActionType, float] = {
+@export var exposures: Dictionary[Utils.ActionType, float] = {
 	Utils.ActionType.DAMAGE_PHYSICAL: 0,
 	Utils.ActionType.DAMAGE_MAGICAL: 0,
 	Utils.ActionType.DAMAGE_POISON: 0,
@@ -80,7 +80,7 @@ extends Resource
 	Utils.ActionType.STACK_NECROSIS: 0,
 }
 
-@export var strength: Dictionary[Utils.ActionType, float] = {
+@export var power: Dictionary[Utils.ActionType, float] = {
 	Utils.ActionType.DAMAGE_PHYSICAL: 0,
 	Utils.ActionType.DAMAGE_MAGICAL: 0,
 	Utils.ActionType.DAMAGE_POISON: 0,
@@ -94,7 +94,7 @@ extends Resource
 	Utils.ActionType.STACK_NECROSIS: 0,
 }
 
-@export var weakness: Dictionary[Utils.ActionType, float] = {
+@export var fragility: Dictionary[Utils.ActionType, float] = {
 	Utils.ActionType.DAMAGE_PHYSICAL: 0,
 	Utils.ActionType.DAMAGE_MAGICAL: 0,
 	Utils.ActionType.DAMAGE_POISON: 0,

@@ -49,7 +49,7 @@ resistances = Dictionary[int, float]({
 11: 0.0,
 12: 0.0
 })
-vulnerabilities = Dictionary[int, float]({
+exposures = Dictionary[int, float]({
 0: 0.0,
 1: 0.0,
 2: 0.0,
@@ -77,7 +77,7 @@ dodges = Dictionary[int, float]({
 11: 0.0,
 12: 0.0
 })
-strength = Dictionary[int, float]({
+power = Dictionary[int, float]({
 0: 0.0,
 1: 0.0,
 2: 0.0,
@@ -91,7 +91,7 @@ strength = Dictionary[int, float]({
 11: 0.0,
 12: 0.0
 })
-weakness = Dictionary[int, float]({
+fragility = Dictionary[int, float]({
 0: 0.0,
 1: 0.0,
 2: 0.0,

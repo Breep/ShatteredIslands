@@ -6,7 +6,7 @@ extends ActionReceiverModule
 func take_heal(heal_amount: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
 	if _owner.is_dead(): return 0
 	if multiplayer.is_server():
-		heal_amount *= _get_resistance_vulnerability_multiplier(Utils.ActionType.UTILITY_HEAL)
+		heal_amount *= _get_resistance_exposure_multiplier(Utils.ActionType.UTILITY_HEAL)
 		if _is_dodged(Utils.ActionType.UTILITY_HEAL, source):
 			_owner.action_dodged.emit(source, Utils.ActionType.UTILITY_HEAL, heal_amount, is_critical)
 			return 0

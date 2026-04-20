@@ -37,7 +37,7 @@ func _passive_spawn_proto_shield() -> void:
 
 func _passive_set_shield_power() -> void:
 	var mod := StatModifier.new()
-	mod.stat_type = EntityStats.StatType.STRENGTH
+	mod.stat_type = EntityStats.StatType.POWER
 	mod.action_type = Utils.ActionType.STACK_SHIELD
 	mod.calc_type = StatModifier.CalcType.ADD
 	mod.value = P_SHIELD_POWER[level]

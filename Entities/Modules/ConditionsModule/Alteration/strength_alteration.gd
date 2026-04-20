@@ -2,8 +2,8 @@ class_name StrengthAlteration
 extends Alteration
 
 ## Stackable BUFF alteration: per-ActionType stacks that push StatModifier ADD
-## on STRENGTH (POWER). Replaces card-driven StatModifier manipulation on
-## STRENGTH; permanent passives still use the registry path directly.
+## on POWER. Replaces card-driven StatModifier manipulation on POWER;
+## permanent passives still use the registry path directly.
 ##
 ## Unlike SimpleStackAlteration, stacks here are keyed by ActionType because
 ## Strength is a multi-stat. PURE is not allowed.
@@ -57,7 +57,7 @@ func _sync_modifier(action_type: Utils.ActionType, new_value: float) -> void:
 	if mod == null:
 		mod = StatModifier.new()
 		mod.id = &"Strength Alteration"
-		mod.stat_type = EntityStats.StatType.STRENGTH
+		mod.stat_type = EntityStats.StatType.POWER
 		mod.action_type = action_type
 		mod.calc_type = StatModifier.CalcType.ADD
 		mod.value = new_value

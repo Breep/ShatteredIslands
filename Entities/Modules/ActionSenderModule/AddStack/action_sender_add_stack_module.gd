@@ -6,7 +6,7 @@ extends ActionSenderModule
 func inflict_condition_stacks(target: Entity, value: float, stack_type: Stack.Type, action_id: StringName, duration: float = 5.0) -> float:
 	if is_instance_valid(target) == null: return 0
 	
-	var base_value: float = value * _get_strenght_weakness_multiplier(Stack.to_action(stack_type))
+	var base_value: float = value * _get_power_fragility_multiplier(Stack.to_action(stack_type))
 	var crit_data: Dictionary = _get_crit_multiplier(Stack.to_action(stack_type))
 	value = base_value * crit_data["multiplier"]
 	

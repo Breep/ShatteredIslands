@@ -12,7 +12,7 @@ func heal(target: Entity, value: float, action_id: StringName) -> float:
 	})
 	value = modifiers_data[ActionModifier.VarType.HEAL_AMOUNT]
 	
-	var base_value: float = value * _get_strenght_weakness_multiplier(Utils.ActionType.UTILITY_HEAL)
+	var base_value: float = value * _get_power_fragility_multiplier(Utils.ActionType.UTILITY_HEAL)
 	var crit_data: Dictionary = _get_crit_multiplier(Utils.ActionType.UTILITY_HEAL)
 	value = base_value * crit_data["multiplier"]
 	var heal_done: float = target.take_heal(value, crit_data["is_critical"], action_id, _owner)
