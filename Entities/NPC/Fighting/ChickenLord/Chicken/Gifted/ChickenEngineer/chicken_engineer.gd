@@ -22,13 +22,9 @@ func _ready() -> void:
 	mod3.tags = []
 	stat_modifiers_registry.register_modifier(mod3)
 	
-	var mod2 := StatModifier.new()
-	mod2.id = &"Chicken_Shield_bonus_spawn"
-	mod2.stat_type = EntityStats.StatType.DEFENCE
-	mod2.calc_type = StatModifier.CalcType.ADD
-	mod2.value = _bonus_spawn
-	mod2.tags = []
-	stat_modifiers_registry.register_modifier(mod2)
+	# Phase 4 rework: DEFENCE is now a DefenseAlteration stack.
+	if conditions != null:
+		conditions.add_defense_stacks(_bonus_spawn)
 	
 	var mod := AutoAttackModifier.new()
 	mod.id = "Chicken Shield Stack"

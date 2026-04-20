@@ -28,6 +28,10 @@ func _ready() -> void:
 	mod.id = "Ancestral Gauge"
 	stat_modifiers_registry.register_modifier(mod)
 
+	# Phase 4 rework: base defence is now a DefenseAlteration stack.
+	if conditions != null:
+		conditions.add_defense_stacks(15.0)
+
 	if _primal_shake_period > 0:
 		periodic_timer_registry.register("Primal Shake", _primal_shake_period, func() -> void:
 			primal_shaked.emit()

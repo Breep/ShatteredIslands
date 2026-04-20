@@ -21,7 +21,9 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			if ally_chicken_distance < closest_ally_chicken_distance:
 				closest_ally_chicken = ally_chicken
 		
-		closest_ally_chicken.stats.block += block_amount
+		# Phase 4 rework: BLOCK is now a BlockAlteration stack.
+		if closest_ally_chicken.conditions != null:
+			closest_ally_chicken.conditions.add_block_stacks(block_amount)
 		)
 
 

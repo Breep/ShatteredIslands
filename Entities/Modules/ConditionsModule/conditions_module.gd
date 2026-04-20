@@ -26,6 +26,9 @@ signal shield_stacks_changed(new_value: float)
 signal regen_stacks_changed(new_value: float)
 signal necrosis_stacks_changed(new_value: float)
 signal shield_stack_broken(amount: float)
+signal defense_stacks_changed(new_value: float)
+signal block_stacks_changed(new_value: float)
+signal thorn_stacks_changed(new_value: float)
 #endregion
 
 #region ============================== Private variables ==============================
@@ -34,6 +37,12 @@ var _ignite_stack: IgniteStack = IgniteStack.new()
 var _shield_stack: ShieldStack = ShieldStack.new()
 var _regen_stack: RegenStack = RegenStack.new()
 var _necrosis_stack: SimpleStack = SimpleStack.new()
+
+# Rework alterations (Phase 4): Defense/Block/Thorn are alterations, not
+# EntityStats entries. They live here next to the legacy stacks.
+var _defense_alteration: DefenseAlteration = DefenseAlteration.new()
+var _block_alteration: BlockAlteration = BlockAlteration.new()
+var _thorn_alteration: ThornAlteration = ThornAlteration.new()
 
 # Tick-based timing (deterministic)
 var _poison_interval_ticks: int = int(POISON_TICK_INTERVAL * TICKS_PER_SECOND)
@@ -63,6 +72,15 @@ var regen_stacks: float:
 
 var necrosis_stacks: float:
 	get: return _necrosis_stack.total_stacks
+
+var defense_stacks: float:
+	get: return _defense_alteration.total_stacks
+
+var block_stacks: float:
+	get: return _block_alteration.total_stacks
+
+var thorn_stacks: float:
+	get: return _thorn_alteration.total_stacks
 #endregion
 
 #region ============================== Public functions ==============================
@@ -76,7 +94,13 @@ func init(entity_owner: Entity) -> ConditionsModule:
 	_regen_stack.stacks_changed.connect(_on_regen_stacks_changed)
 	_necrosis_stack.stacks_changed.connect(_on_necrosis_stacks_changed)
 	_shield_stack.shield_stack_broken.connect(_on_shield_stack_broken)
-	
+
+	# Phase 4 rework alterations
+	_defense_alteration.bind(entity_owner)
+	_defense_alteration.stacks_changed.connect(_on_defense_stacks_changed)
+	_block_alteration.stacks_changed.connect(_on_block_stacks_changed)
+	_thorn_alteration.stacks_changed.connect(_on_thorn_stacks_changed)
+
 	return self
 
 
@@ -143,6 +167,43 @@ func get_shield_stack() -> ShieldStack:
 	return _shield_stack
 
 
+## Alterations accessors (Phase 4 rework)
+func get_block_alteration() -> BlockAlteration:
+	return _block_alteration
+
+
+func get_thorn_alteration() -> ThornAlteration:
+	return _thorn_alteration
+
+
+func get_defense_alteration() -> DefenseAlteration:
+	return _defense_alteration
+
+
+func add_defense_stacks(amount: float) -> float:
+	return _defense_alteration.add_stack(amount)
+
+
+func remove_defense_stacks(amount: float) -> float:
+	return _defense_alteration.remove_stack(amount)
+
+
+func add_block_stacks(amount: float) -> float:
+	return _block_alteration.add_stack(amount)
+
+
+func remove_block_stacks(amount: float) -> float:
+	return _block_alteration.remove_stack(amount)
+
+
+func add_thorn_stacks(amount: float) -> float:
+	return _thorn_alteration.add_stack(amount)
+
+
+func remove_thorn_stacks(amount: float) -> float:
+	return _thorn_alteration.remove_stack(amount)
+
+
 ## Add stacks to an entity
 func add_stack(stack_type: Stack.Type, value: float, source: Entity, action_id: StringName, mod: Dictionary = {}) -> void:
 	var stack = _get_stack(stack_type)
@@ -202,4 +263,16 @@ func _on_necrosis_stacks_changed(new_value: float) -> void:
 
 func _on_shield_stack_broken(amount: float) -> void:
 	shield_stack_broken.emit(amount)
+
+
+func _on_defense_stacks_changed(new_value: float) -> void:
+	defense_stacks_changed.emit(new_value)
+
+
+func _on_block_stacks_changed(new_value: float) -> void:
+	block_stacks_changed.emit(new_value)
+
+
+func _on_thorn_stacks_changed(new_value: float) -> void:
+	thorn_stacks_changed.emit(new_value)
 #endregion

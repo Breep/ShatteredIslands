@@ -21,7 +21,7 @@ const TAUNT_DEFENCE_BONUS: float = 30.0
 # ============================== Public variables ==============================
 
 # ============================== Private variables ==============================
-var _taunt_defence_mod: StatModifier
+var _taunt_defence_active: bool = false
 
 @onready var _timers: Dictionary[Status.Type, Timer] = {
 	Status.Type.STUN: %StunTimer,
@@ -43,13 +43,6 @@ var _taunt_defence_mod: StatModifier
 
 func init(entity_owner: Entity) -> StatusModule:
 	super.init(entity_owner)
-
-	_taunt_defence_mod = StatModifier.new()
-	_taunt_defence_mod.id = &"Taunt Defence Bonus"
-	_taunt_defence_mod.stat_type = EntityStats.StatType.DEFENCE
-	_taunt_defence_mod.calc_type = StatModifier.CalcType.ADD
-	_taunt_defence_mod.value = TAUNT_DEFENCE_BONUS
-	_taunt_defence_mod.tags = []
 
 	taunted_changed.connect(_on_taunt_defence_update)
 
@@ -106,10 +99,14 @@ func _emit_status_changed(status_type: Status.Type, is_active: bool, duration: f
 
 
 func _on_taunt_defence_update(is_active: bool, _duration: float, _infinite: bool) -> void:
-	if is_active:
-		_owner.stat_modifiers_registry.register_modifier(_taunt_defence_mod)
-	else:
-		_owner.stat_modifiers_registry.unregister_modifier(_taunt_defence_mod)
+	# Phase 4 rework: DEFENCE is now a DefenseAlteration stack.
+	if _owner.conditions == null: return
+	if is_active and not _taunt_defence_active:
+		_owner.conditions.add_defense_stacks(TAUNT_DEFENCE_BONUS)
+		_taunt_defence_active = true
+	elif not is_active and _taunt_defence_active:
+		_owner.conditions.remove_defense_stacks(TAUNT_DEFENCE_BONUS)
+		_taunt_defence_active = false
 
 
 func _on_stun_timer_timeout() -> void:

@@ -55,7 +55,7 @@ func _ready() -> void:
 	_update_stack_label(conditions.poison_stacks, _poison_label)
 	_update_stack_label(conditions.necrosis_stacks, _necrosis_label)
 	_update_stack_label(conditions.regen_stacks, _regen_label)
-	_update_block_label(stats.block)
+	_update_block_label(conditions.block_stacks)
 	
 	stats.health_changed.connect(_on_health_changed)
 	stats.health_max_changed.connect(_on_health_max_changed)
@@ -66,7 +66,7 @@ func _ready() -> void:
 	conditions.poison_stacks_changed.connect(_update_stack_label.bind(_poison_label))
 	conditions.necrosis_stacks_changed.connect(_update_stack_label.bind(_necrosis_label))
 	conditions.regen_stacks_changed.connect(_update_stack_label.bind(_regen_label))
-	stats.block_changed.connect(_update_block_label)
+	conditions.block_stacks_changed.connect(_update_block_label)
 	
 	_hero_entity.status_module.taunted_changed.connect(_update_taunt_visual)
 	

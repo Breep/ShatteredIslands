@@ -236,9 +236,12 @@ func _connect_to_signals() -> void:
 	_safe_connect(s.attack_speed_changed, _on_as_changed)
 	_safe_connect(s.attack_range_changed, _on_attack_range_changed)
 	_safe_connect(s.attack_power_changed, _on_ap_changed)
-	_safe_connect(s.defence_changed, _on_defence_changed)
-	_safe_connect(s.block_changed, _on_block_changed)
-	_safe_connect(s.thorn_changed, _on_thorn_changed)
+	# Phase 4 rework: Defence/Block/Thorn are now alterations, not EntityStats.
+	var c: ConditionsModule = _owner_entity.conditions
+	if c != null:
+		_safe_connect(c.defense_stacks_changed, _on_defence_changed)
+		_safe_connect(c.block_stacks_changed, _on_block_changed)
+		_safe_connect(c.thorn_stacks_changed, _on_thorn_changed)
 	# Per-ActionType stats
 	_safe_connect(s.critical_chance_changed, _on_crit_chance_changed)
 	_safe_connect(s.critical_multiplier_changed, _on_crit_mult_changed)
@@ -263,9 +266,12 @@ func _disconnect_from_signals() -> void:
 	_safe_disconnect(s.attack_speed_changed, _on_as_changed)
 	_safe_disconnect(s.attack_range_changed, _on_attack_range_changed)
 	_safe_disconnect(s.attack_power_changed, _on_ap_changed)
-	_safe_disconnect(s.defence_changed, _on_defence_changed)
-	_safe_disconnect(s.block_changed, _on_block_changed)
-	_safe_disconnect(s.thorn_changed, _on_thorn_changed)
+	# Phase 4 rework: Defence/Block/Thorn are now alterations, not EntityStats.
+	var c: ConditionsModule = _owner_entity.conditions
+	if c != null:
+		_safe_disconnect(c.defense_stacks_changed, _on_defence_changed)
+		_safe_disconnect(c.block_stacks_changed, _on_block_changed)
+		_safe_disconnect(c.thorn_stacks_changed, _on_thorn_changed)
 	# Per-ActionType stats
 	_safe_disconnect(s.critical_chance_changed, _on_crit_chance_changed)
 	_safe_disconnect(s.critical_multiplier_changed, _on_crit_mult_changed)
@@ -303,9 +309,10 @@ func _update_layout() -> void:
 	_set_label(_as_label, s.get_stat(EntityStats.StatType.AS), 2)
 	_set_label(_attack_range_label, s.get_stat(EntityStats.StatType.ATTACK_RANGE))
 	_set_label(_ap_label, s.get_stat(EntityStats.StatType.AP))
-	_set_label(_defence_label, s.get_stat(EntityStats.StatType.DEFENCE))
-	_set_label(_block_label, s.get_stat(EntityStats.StatType.BLOCK))
-	_set_label(_thorn_label, s.get_stat(EntityStats.StatType.THORN))
+	var c: ConditionsModule = _owner_entity.conditions
+	_set_label(_defence_label, c.defense_stacks if c != null else 0.0)
+	_set_label(_block_label, c.block_stacks if c != null else 0.0)
+	_set_label(_thorn_label, c.thorn_stacks if c != null else 0.0)
 
 	# Per-ActionType stats
 	for action_type: Utils.ActionType in Utils.get_all_actions():

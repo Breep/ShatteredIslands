@@ -10,10 +10,9 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	ctx.hero.families_stats.chicken_lord.on_chicken_spawned_callbacks.append(func(cb_vars: Dictionary) -> void:
 		var chicken: Chicken = cb_vars.get(FamilyChickenLordStats.CbVars.SELF_CHICKEN)
 		if not is_instance_valid(chicken): return
-		print("Cardlevel: " + str(card_lvl))
-		print("Before: " + str(chicken.uid) + " " + str(chicken.stats.block) )
-		chicken.stats.block += block_stack
-		print("After: " + str(chicken.uid) + " " + str(chicken.stats.block) )
+		# Phase 4 rework: BLOCK is now a BlockAlteration stack.
+		if chicken.conditions != null:
+			chicken.conditions.add_block_stacks(block_stack)
 	)
 
 

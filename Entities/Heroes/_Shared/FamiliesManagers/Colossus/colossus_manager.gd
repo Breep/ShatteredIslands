@@ -35,12 +35,8 @@ func apply_passive() -> void:
 	scale_mod.value = SCALE_INCREASE[level - 1] / 100.0
 	_owner.stat_modifiers_registry.register_modifier(scale_mod)
 
-	# Flat defence bonus
-	var def_mod := StatModifier.new()
-	def_mod.id = &"Colossus Passive Defence"
-	def_mod.stat_type = EntityStats.StatType.DEFENCE
-	def_mod.calc_type = StatModifier.CalcType.ADD
-	def_mod.value = DEFENCE_FLAT[level - 1]
-	_owner.stat_modifiers_registry.register_modifier(def_mod)
+	# Flat defence bonus (Phase 4 rework: DefenseAlteration stacks)
+	if _owner.conditions != null:
+		_owner.conditions.add_defense_stacks(DEFENCE_FLAT[level - 1])
 
 #endregion

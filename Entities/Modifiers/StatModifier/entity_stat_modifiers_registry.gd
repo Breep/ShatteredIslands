@@ -91,13 +91,6 @@ class StatModifierDictionary extends Resource:
 		var base_stat = _entity_base_stats_ref.get_stat(_stat_type)
 		var new_stat = (base_stat + add) * (1.0 + mul)
 		_entity_stats_ref.update_stat(_stat_type, new_stat)
-		if _stat_type == EntityStats.StatType.DEFENCE and new_stat != 0:
-			var phy_res: float = _entity_stats_ref.get_stat(EntityStats.StatType.RESISTANCE, Utils.ActionType.DAMAGE_PHYSICAL)
-			var mag_res: float = _entity_stats_ref.get_stat(EntityStats.StatType.RESISTANCE, Utils.ActionType.DAMAGE_MAGICAL)
-			var poi_res: float = _entity_stats_ref.get_stat(EntityStats.StatType.RESISTANCE, Utils.ActionType.DAMAGE_POISON)
-			_entity_stats_ref.update_stat(EntityStats.StatType.RESISTANCE, phy_res + new_stat, Utils.ActionType.DAMAGE_PHYSICAL)
-			_entity_stats_ref.update_stat(EntityStats.StatType.RESISTANCE, mag_res + new_stat, Utils.ActionType.DAMAGE_MAGICAL)
-			_entity_stats_ref.update_stat(EntityStats.StatType.RESISTANCE, poi_res + new_stat, Utils.ActionType.DAMAGE_POISON)
 
 
 	func _recompute_multiple_stats() -> void:
@@ -112,12 +105,7 @@ class StatModifierDictionary extends Resource:
 					mul += modifier.value
 			var base_stat = _entity_base_stats_ref.get_stat(_stat_type, action_type)
 			var new_stat = (base_stat + add) * (1.0 + mul)
-			if _stat_type == EntityStats.StatType.RESISTANCE:
-				if action_type == Utils.ActionType.DAMAGE_PHYSICAL or action_type == Utils.ActionType.DAMAGE_MAGICAL or action_type == Utils.ActionType.DAMAGE_POISON:
-					var defence: float = _entity_stats_ref.get_stat(EntityStats.StatType.DEFENCE)
-					_entity_stats_ref.update_stat(_stat_type, new_stat + defence, action_type)
-			else:
-				_entity_stats_ref.update_stat(_stat_type, new_stat, action_type)
+			_entity_stats_ref.update_stat(_stat_type, new_stat, action_type)
 
 
 	func _is_multiple_stats() -> bool:
@@ -151,9 +139,6 @@ func _init(base_stats: EntityStats, current_stats: EntityStats) -> void:
 	_stats_modifiers_dictionaries[EntityStats.StatType.AS] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.AP] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.ATTACK_RANGE] = StatModifierDictionary.new()
-	_stats_modifiers_dictionaries[EntityStats.StatType.DEFENCE] = StatModifierDictionary.new()
-	_stats_modifiers_dictionaries[EntityStats.StatType.BLOCK] = StatModifierDictionary.new()
-	_stats_modifiers_dictionaries[EntityStats.StatType.THORN] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.SCALE] = StatModifierDictionary.new()
 	
 	# Multiple stats

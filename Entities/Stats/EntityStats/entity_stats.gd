@@ -27,10 +27,7 @@ enum StatType {
 	WEAKNESS,
 	DODGE,
 	CRIT_RESISTANCE,
-	DEFENCE, # A bouger dans les Buff (augmente RESISTANCE pour tout type de dégât (sauf PURE))
-	BLOCK, # A bouger dans les Buff
 	LIFESTEAL,
-	THORN, # A bouger dans les Buff
 	SCALE,
 
 	# --- Transitional aliases (Phase 1 rework) ---
@@ -195,30 +192,6 @@ signal life_steal_changed(new_life_steal: float, action_type: Utils.ActionType)
 @export var _life_steals: Dictionary[Utils.ActionType, float]
 #endregion
 
-#region ============================== Life steal ==============================
-@export_group("Block")
-signal block_changed(new_life_steal: float)
-var _block: float
-@export var block: float:
-	get: return _block
-	set(value):
-		if value == _block: return
-		_block = value
-		block_changed.emit(_block)
-#endregion
-
-#region ============================== Defence ==============================
-@export_group("Defence")
-signal defence_changed(new_defence: float)
-var _defence: float
-@export var defence: float:
-	get: return _defence
-	set(value):
-		if value == _defence: return
-		_defence = value
-		defence_changed.emit(_defence)
-#endregion
-
 #region ============================== AP ==============================
 @export_group("Attack Power")
 signal attack_power_changed(new_attack_power: float)
@@ -229,18 +202,6 @@ var _attack_power: float
 		if value == _attack_power: return
 		_attack_power = value
 		attack_power_changed.emit(_attack_power)
-#endregion
-
-#region ============================== Thorn ==============================
-@export_group("Thorn")
-signal thorn_changed(new_thorn: float)
-var _thorn: float
-@export var thorn: float:
-	get: return _thorn
-	set(value):
-		if value == _thorn: return
-		_thorn = value
-		thorn_changed.emit(_thorn)
 #endregion
 
 #region ============================== Scale ==============================
@@ -272,9 +233,6 @@ func reset_from_hero_desc(hero: HeroDesc, lvl: int) -> EntityStats:
 	attack_range = hero.stats[lvl].attack_range
 	movement_speed = hero.stats[lvl].movement_speed
 	auto_attack_type = hero.stats[lvl].auto_attack_type
-	defence = hero.stats[lvl].defence
-	block = hero.stats[lvl].block
-	thorn = hero.stats[lvl].thorn
 	
 	for action_type: Utils.ActionType in Utils.get_all_actions():
 		_critical_chances[action_type] = hero.stats[lvl].critical_chances.get(action_type, 0)
@@ -311,9 +269,6 @@ func get_stat(stat_type: StatType, action_type: Utils.ActionType = Utils.ActionT
 		EntityStats.StatType.AS: return _attack_speed
 		EntityStats.StatType.ATTACK_RANGE: return _attack_range
 		EntityStats.StatType.MOVEMENT_SPEED: return _movement_speed
-		EntityStats.StatType.BLOCK: return float(_block)
-		EntityStats.StatType.DEFENCE: return float(_defence)
-		EntityStats.StatType.THORN: return float(_thorn)
 		EntityStats.StatType.SCALE: return float(_scale)
 		EntityStats.StatType.CRIT_CHANCE: return _critical_chances.get(action_type, 0)
 		EntityStats.StatType.CRIT_MULT: return _critical_multipliers.get(action_type, 100)
@@ -341,9 +296,6 @@ func update_stat(stat_type: StatType, value: float, action_type: Utils.ActionTyp
 		EntityStats.StatType.AS: attack_speed = value
 		EntityStats.StatType.ATTACK_RANGE: attack_range = value
 		EntityStats.StatType.MOVEMENT_SPEED: movement_speed = value
-		EntityStats.StatType.DEFENCE: defence = value
-		EntityStats.StatType.BLOCK: block = value
-		EntityStats.StatType.THORN: thorn = value
 		EntityStats.StatType.SCALE: scale = value
 		EntityStats.StatType.CRIT_CHANCE:
 			_critical_chances[action_type] = value
