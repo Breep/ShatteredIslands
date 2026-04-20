@@ -1,5 +1,12 @@
 class_name StatusModule
-extends Module
+extends AlterationsModule
+
+## Manages non-stackable timed alterations (Stun, Silence, Taunt, Invulnerable,
+## Untargetable). Timer children drive expiration.
+##
+## Part of the Alteration rework: inherits from AlterationsModule so that both
+## this module and ConditionsModule share a common type. Logic merge into a
+## single concrete module is a later sub-phase.
 
 # ============================== Signals ==============================
 signal stunned_changed(is_active: bool, duration: float, infinite: bool)

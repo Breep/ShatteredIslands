@@ -445,6 +445,17 @@ func dispell(target: Entity, value: float, action_id: StringName) -> float:
 
 func inflict_status(target: Entity, status_type: Status.Type, duration: float, action_id: StringName) -> float:
 	return _status_sender.inflict_status(target, status_type, duration, action_id) if _status_sender != null else 0.0
+
+## Unified Alteration API (rework): route a stackable alteration inflict.
+## Currently forwards to the legacy stacks pipeline; later phases will migrate
+## per-alteration routing here.
+func inflict_alteration_stacks(target: Entity, stacks_number: float, stack_type: Stack.Type, action_id: StringName, duration: float = 5.0) -> float:
+	return inflict_condition_stacks(target, stacks_number, stack_type, action_id, duration)
+
+## Unified Alteration API (rework): route a timed (non-stackable) alteration.
+## Currently forwards to the legacy status pipeline.
+func inflict_timed_alteration(target: Entity, status_type: Status.Type, duration: float, action_id: StringName) -> float:
+	return inflict_status(target, status_type, duration, action_id)
 #endregion
 
 
@@ -469,6 +480,14 @@ func take_dispell(value: float, is_critical: bool, action_id: StringName, source
 
 func take_status(status_type: Status.Type, duration: float, action_id: StringName, source: Entity = null) -> float:
 	return _status_receiver.take_status(status_type, duration, action_id, source) if _status_receiver != null else 0.0
+
+## Unified Alteration API (rework): receive a stackable alteration.
+func take_alteration_stacks(stacks_number: float, stack_type: Stack.Type, is_critical: bool, action_id: StringName, source: Entity = null, duration: float = 5.0) -> float:
+	return take_condition_stacks(stacks_number, stack_type, is_critical, action_id, source, duration)
+
+## Unified Alteration API (rework): receive a timed (non-stackable) alteration.
+func take_timed_alteration(status_type: Status.Type, duration: float, action_id: StringName, source: Entity = null) -> float:
+	return take_status(status_type, duration, action_id, source)
 #endregion
 
 

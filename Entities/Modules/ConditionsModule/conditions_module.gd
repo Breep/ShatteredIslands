@@ -1,8 +1,13 @@
 class_name ConditionsModule
-extends Module
+extends AlterationsModule
 
-## Manages temporary conditions (stacks) applied to an entity
-## Handles stack instances, periodic ticking via deterministic tick counters
+## Manages stackable alterations (Poison, Ignite, Shield, Regen, Necrosis) applied
+## to an entity. Handles stack instances and periodic ticking via deterministic
+## tick counters.
+##
+## Part of the Alteration rework: inherits from AlterationsModule so that both
+## this module and StatusModule share a common type. Logic merge into a single
+## concrete module is a later sub-phase.
 
 #region ============================== Constants ==============================
 const TICKS_PER_SECOND: int = 60
