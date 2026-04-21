@@ -14,8 +14,8 @@ func init(regen_stack_ratio: float, heal_strength_inherited: float) -> Summon:
 func _ready() -> void:
 	
 	# Phase 5 rework: STRENGTH is now a StrengthAlteration stack.
-	if conditions != null:
-		conditions.add_strength_stacks(Utils.ActionType.UTILITY_HEAL, _heal_strength_inherited)
+	if alterations_module != null:
+		alterations_module.add_strength_stacks(Utils.ActionType.UTILITY_HEAL, _heal_strength_inherited)
 	
 	var mod := AutoAttackModifier.new()
 	mod.id = "Chicken Regen Stack"

@@ -1,9 +1,9 @@
 class_name Alteration
 extends Resource
 
-## Abstract base class for all alterations (buffs, debuffs, and timed binary effects).
+## Abstract base class for all alterations_module (buffs, debuffs, and timed binary effects).
 ## Polarity distinguishes positive effects (dispellable) from negative ones (cleanseable).
-## Concrete alterations inherit from either StackableAlteration or TimedAlteration.
+## Concrete alterations_module inherit from either StackableAlteration or TimedAlteration.
 
 enum Polarity {
 	BUFF,

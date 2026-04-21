@@ -11,7 +11,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var chance: float = _base_chance[card_lvl - 1]
 
 	ctx.battle_callbacks.register_battle_start(&"Absorption Matrix", func() -> void:
-		var shield_stack: ShieldStack = ctx.hero.conditions.get_shield_stack()
+		var shield_stack: ShieldStack = ctx.hero.alterations_module.get_shield_stack()
 		shield_stack.set_free_use_chance(chance)
 	)
 

@@ -9,8 +9,8 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		return
 	
 	# Phase 4 rework: THORN is now a ThornAlteration stack.
-	if ctx.hero.conditions != null:
-		ctx.hero.conditions.add_thorn_stacks(_thorns[card_lvl - 1])
+	if ctx.hero.alterations_module != null:
+		ctx.hero.alterations_module.add_thorn_stacks(_thorns[card_lvl - 1])
 
 
 func get_description(cardlvl: int) -> String:

@@ -10,7 +10,7 @@ func take_damage(damage: float, damage_type: Utils.ActionType, is_critical: bool
 		damage *= _get_resistance_exposure_multiplier(damage_type)
 		if is_critical:
 			damage *= _get_crit_resistance_multiplier(damage_type)
-		damage = _owner.conditions.get_shield_reduced_damage(damage, damage_type)
+		damage = _owner.alterations_module.get_shield_reduced_damage(damage, damage_type)
 		if _is_dodged(damage_type, source):
 			_owner.action_dodged.emit(source, damage_type, damage, is_critical)
 			return 0
@@ -38,13 +38,13 @@ func take_damage_percent(damage_percent: float, percent_modifier: Utils.PercentM
 
 
 func _is_blocked(damage_type: Utils.ActionType) -> bool:
-	if _owner.conditions == null: return false
-	return _owner.conditions.get_block_alteration().try_consume(damage_type)
+	if _owner.alterations_module == null: return false
+	return _owner.alterations_module.get_block_alteration().try_consume(damage_type)
 
 
 func _handle_thorn(source: Entity, action_id: StringName) -> void:
 	if action_id != &"auto_attack": return
-	if _owner.conditions == null: return
-	var thorn: float = _owner.conditions.get_thorn_alteration().get_return_damage()
+	if _owner.alterations_module == null: return
+	var thorn: float = _owner.alterations_module.get_thorn_alteration().get_return_damage()
 	if thorn >= 1 and is_instance_valid(source):
 		_owner.direct_damage(source, thorn, Utils.ActionType.DAMAGE_PHYSICAL, &"Thorn")

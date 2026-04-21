@@ -16,11 +16,11 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if not is_instance_valid(ctx.hero): return
 		var target: Entity = ctx.hero.target_module.get_target(TargetModule.TargettingStrategy.HIGHEST_SHIELD_ENEMIES_HERO)
 		if not is_instance_valid(target): return
-		var highest_shield: float = target.conditions.shield_stacks
+		var highest_shield: float = target.alterations_module.shield_stacks
 		if highest_shield <= 0: return
 		var steal_amount: float = highest_shield * percent / 100.0
 		if steal_amount <= 0: return
-		target.conditions.remove_stack(Stack.Type.SHIELD, steal_amount)
+		target.alterations_module.remove_stack(Stack.Type.SHIELD, steal_amount)
 		ctx.hero.inflict_condition_stacks(ctx.hero, steal_amount, Stack.Type.SHIELD, &"Magnetic Siphon")
 	)
 

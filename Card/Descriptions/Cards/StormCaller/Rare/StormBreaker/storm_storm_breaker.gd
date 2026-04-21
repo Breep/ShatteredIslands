@@ -14,13 +14,13 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	storm_stats.on_lightning_callbacks.append(
 		func(target: Entity, _rank: StormCallerManager.Rank, rank_mult: float) -> void:
 			if target == null or not is_instance_valid(target): return
-			if target.conditions == null: return
+			if target.alterations_module == null: return
 			var added_percent: float = base_percent * rank_mult
 			if added_percent <= 0: return
 
 			# Phase 5 rework: VULNERABILITY is now a VulnerabilityAlteration stack.
 			# The alteration accumulates internally, so no storm_breaker_memory needed.
-			target.conditions.add_vulnerability_stacks(Utils.ActionType.DAMAGE_PHYSICAL, added_percent)
+			target.alterations_module.add_vulnerability_stacks(Utils.ActionType.DAMAGE_PHYSICAL, added_percent)
 	)
 
 

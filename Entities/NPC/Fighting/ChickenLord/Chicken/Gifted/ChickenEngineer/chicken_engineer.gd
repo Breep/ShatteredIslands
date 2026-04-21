@@ -14,10 +14,10 @@ func init(bonus_spawn: int, shield_per_attack: int, shield_strength_inherited: f
 func _ready() -> void:
 	
 	# Phase 5 rework: STRENGTH is now a StrengthAlteration stack.
-	if conditions != null:
-		conditions.add_strength_stacks(Utils.ActionType.STACK_SHIELD, _shield_strength_inherited)
+	if alterations_module != null:
+		alterations_module.add_strength_stacks(Utils.ActionType.STACK_SHIELD, _shield_strength_inherited)
 		# Phase 4 rework: DEFENCE is now a DefenseAlteration stack.
-		conditions.add_defense_stacks(_bonus_spawn)
+		alterations_module.add_defense_stacks(_bonus_spawn)
 	
 	var mod := AutoAttackModifier.new()
 	mod.id = "Chicken Shield Stack"

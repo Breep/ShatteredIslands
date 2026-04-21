@@ -13,8 +13,8 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var base_thorn: float = _base_thorn_values[card_lvl - 1]
 
 	# Phase 4 rework: THORN is now a ThornAlteration stack.
-	if ctx.hero.conditions == null: return
-	ctx.hero.conditions.add_thorn_stacks(base_thorn)
+	if ctx.hero.alterations_module == null: return
+	ctx.hero.alterations_module.add_thorn_stacks(base_thorn)
 
 	# Dynamic thorn tracked via a local delta keeper; re-applied on scale changes.
 	var last_dynamic: Array[float] = [0.0]
@@ -38,12 +38,12 @@ func get_description(cardlvl: int) -> String:
 
 
 func _apply_thorn_scaling(hero: Entity, card_lvl: int, last_dynamic: Array[float]) -> void:
-	if hero.conditions == null: return
+	if hero.alterations_module == null: return
 	var bonus_thorn_factor: float = _bonus_thorn_factors[card_lvl - 1]
 	var new_value: float = bonus_thorn_factor * (hero.stats.scale - 1) * 100
 	var delta: float = new_value - last_dynamic[0]
 	if delta > 0:
-		hero.conditions.add_thorn_stacks(delta)
+		hero.alterations_module.add_thorn_stacks(delta)
 	elif delta < 0:
-		hero.conditions.remove_thorn_stacks(-delta)
+		hero.alterations_module.remove_thorn_stacks(-delta)
 	last_dynamic[0] = new_value

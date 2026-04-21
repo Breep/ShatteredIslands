@@ -19,7 +19,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if not cb_vars.has(ActionModifier.VarType.HEAL_AMOUNT): return
 		var target: Entity = cb_vars[ActionModifier.VarType.TARGET]
 		if target == null or not is_instance_valid(target): return
-		var regen_stacks: float = target.conditions.regen_stacks
+		var regen_stacks: float = target.alterations_module.regen_stacks
 		if regen_stacks <= 0: return
 		cb_vars[ActionModifier.VarType.HEAL_AMOUNT] *= (1.0 + regen_stacks * ratio)
 	ctx.action_modifiers.register_modifier(modifier)

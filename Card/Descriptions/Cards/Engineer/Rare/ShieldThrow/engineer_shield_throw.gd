@@ -54,13 +54,13 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 	ctx.battle_callbacks.register_battle_start(&"Shield Throw", func() -> void:
 		state[ACCUMULATED_LOSS] = 0
-		state[LAST_ARMOR] = ctx.hero.conditions.shield_stacks
-		if not ctx.hero.conditions.shield_stacks_changed.is_connected(_on_shield_changed):
-			ctx.hero.conditions.shield_stacks_changed.connect(_on_shield_changed)
+		state[LAST_ARMOR] = ctx.hero.alterations_module.shield_stacks
+		if not ctx.hero.alterations_module.shield_stacks_changed.is_connected(_on_shield_changed):
+			ctx.hero.alterations_module.shield_stacks_changed.connect(_on_shield_changed)
 	)
 	ctx.battle_callbacks.register_battle_end(&"Shield Throw", func() -> void:
-		if ctx.hero.conditions.shield_stacks_changed.is_connected(_on_shield_changed):
-			ctx.hero.conditions.shield_stacks_changed.disconnect(_on_shield_changed)
+		if ctx.hero.alterations_module.shield_stacks_changed.is_connected(_on_shield_changed):
+			ctx.hero.alterations_module.shield_stacks_changed.disconnect(_on_shield_changed)
 	)
 
 

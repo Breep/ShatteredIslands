@@ -35,8 +35,8 @@ func start() -> void:
 	Verbose.debug("start", Verbose.Category.MOVEMENT_MODULE)
 	_is_stopped = false
 
-	if _owner.status_module != null and not _owner.status_module.stunned_changed.is_connected(_on_owner_stunned_changed):
-		_owner.status_module.stunned_changed.connect(_on_owner_stunned_changed)
+	if _owner.alterations_module != null and not _owner.alterations_module.stunned_changed.is_connected(_on_owner_stunned_changed):
+		_owner.alterations_module.stunned_changed.connect(_on_owner_stunned_changed)
 
 
 func _on_owner_stunned_changed(is_active: bool, _duration: float, _infinite: bool) -> void:

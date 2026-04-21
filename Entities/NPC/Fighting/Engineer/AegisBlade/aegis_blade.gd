@@ -30,8 +30,8 @@ func _ready() -> void:
 	take_condition_stacks(ON_SPAWN_SHIELD, Stack.Type.SHIELD, false, "Initial Shield")
 	_base_stats.reset_from_self()
 	
-	_on_summoner_conditions_shield_stacks_changed(summoner.conditions.shield_stacks)
-	summoner.conditions.shield_stacks_changed.connect(_on_summoner_conditions_shield_stacks_changed)
+	_on_summoner_conditions_shield_stacks_changed(summoner.alterations_module.shield_stacks)
+	summoner.alterations_module.shield_stacks_changed.connect(_on_summoner_conditions_shield_stacks_changed)
 	
 	var aa_mod := AutoAttackModifier.new()
 	aa_mod.is_one_time_effect = false

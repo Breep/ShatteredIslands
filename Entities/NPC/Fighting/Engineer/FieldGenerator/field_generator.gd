@@ -32,7 +32,7 @@ func _ready() -> void:
 	_visual.scale = Vector3.ZERO
 	stats.health_max = _max_health
 	stats.health = stats.health_max
-	conditions.add_stack(Stack.Type.SHIELD, _shield_amount, self, "Field Generator")
+	alterations_module.add_stack(Stack.Type.SHIELD, _shield_amount, self, "Field Generator")
 	
 	# Visual pop
 	var pop := create_tween()

@@ -6,8 +6,8 @@ extends HeroUpgrade
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var defense_val: float = _defense_increase[card_lvl - 1]
 	# Phase 4 rework: DEFENCE is now a DefenseAlteration stack.
-	if ctx.hero.conditions != null:
-		ctx.hero.conditions.add_defense_stacks(defense_val)
+	if ctx.hero.alterations_module != null:
+		ctx.hero.alterations_module.add_defense_stacks(defense_val)
 
 
 func get_description(cardlvl: int) -> String:

@@ -10,11 +10,8 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 	var ignite_stacks_multiplier: float = _ignite_stacks_multipliers[card_lvl - 1]
 
-	# Phase 5 rework: STRENGTH is now a StrengthAlteration stack.
-	if ctx.hero.conditions != null:
-		ctx.hero.conditions.add_strength_stacks(Utils.ActionType.STACK_IGNITE, ignite_stacks_multiplier)
-	
-
+	if ctx.hero.alterations_module != null:
+		ctx.hero.alterations_module.add_strength_stacks(Utils.ActionType.STACK_IGNITE, ignite_stacks_multiplier)
 
 
 func get_description(cardlvl: int) -> String:

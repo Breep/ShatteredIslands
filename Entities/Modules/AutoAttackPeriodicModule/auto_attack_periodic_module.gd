@@ -48,8 +48,8 @@ func _ready() -> void:
 	_owner.stats.attack_speed_changed.connect(_on_owner_stats_attack_speed_changed)
 	_owner.died.connect(_on_owner_died)
 	
-	if _owner.status_module != null:
-		_owner.status_module.stunned_changed.connect(_on_owner_stunned_changed)
+	if _owner.alterations_module != null:
+		_owner.alterations_module.stunned_changed.connect(_on_owner_stunned_changed)
 
 
 func connect_modules(auto_attack_module: ActionSenderAutoAttackModule) -> void:

@@ -63,8 +63,8 @@ func connect_modules(movement_module: MovementModule, animation_module: Animatio
 	_animation_module = animation_module
 	# NOTE: No longer connecting to attack_hit_frame — logic is now tick-driven
 	
-	if _owner.status_module != null:
-		_owner.status_module.stunned_changed.connect(_on_owner_stunned_changed)
+	if _owner.alterations_module != null:
+		_owner.alterations_module.stunned_changed.connect(_on_owner_stunned_changed)
 
 
 func set_auto_attack_spawn(projectile_spawn: Marker3D) -> void:
@@ -99,7 +99,7 @@ func execute_auto_attack(target: Entity) -> bool:
 		attack_completed.emit()
 		return false
 	
-	if _owner.status_module.has_status(Status.Type.STUN):
+	if _owner.alterations_module.has_status(Status.Type.STUN):
 		attack_completed.emit()
 		return false
 	

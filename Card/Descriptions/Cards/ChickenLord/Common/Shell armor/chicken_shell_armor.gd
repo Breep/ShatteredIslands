@@ -11,8 +11,8 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		var chicken: Chicken = cb_vars.get(FamilyChickenLordStats.CbVars.SELF_CHICKEN)
 		if not is_instance_valid(chicken): return
 		# Phase 4 rework: BLOCK is now a BlockAlteration stack.
-		if chicken.conditions != null:
-			chicken.conditions.add_block_stacks(block_stack)
+		if chicken.alterations_module != null:
+			chicken.alterations_module.add_block_stacks(block_stack)
 	)
 
 

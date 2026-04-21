@@ -12,10 +12,10 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			var chicken: Chicken = cb_vars.get(FamilyChickenLordStats.CbVars.SELF_CHICKEN)
 			if not is_instance_valid(chicken): return
 			for ally in ctx.hero.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES):
-				if ally.conditions == null: continue
+				if ally.alterations_module == null: continue
 				# Phase 5 rework: STRENGTH is now a StrengthAlteration stack.
 				for action_type: Utils.ActionType in Utils.get_all_actions():
-					ally.conditions.add_strength_stacks(action_type, strength_increase)
+					ally.alterations_module.add_strength_stacks(action_type, strength_increase)
 		)
 
 

@@ -84,13 +84,13 @@ var uid: int = -1 # Multiplayer ID of the entity
 var _is_targetable: bool = true
 var is_targetable: bool:
 	get:
-		if status_module != null:
-			return not status_module.has_status(Status.Type.UNTARGETABLE)
+		if alterations_module != null:
+			return not alterations_module.has_status(Status.Type.UNTARGETABLE)
 		return _is_targetable
 
 # Auto loaded extensions
 var stats: EntityStats
-var conditions: AlterationsModule
+var alterations_module: AlterationsModule
 var target_module: TargetModule
 var auto_attack_modifier_registry: AutoAttackModifierRegistry
 var action_modifiers_registry: ActionModifiersRegistry
@@ -129,12 +129,6 @@ var _remove_stack_receiver: ActionReceiverRemoveStackModule
 var _status_receiver: ActionReceiverStatusModule
 var _status_sender: ActionSenderStatusModule
 
-# Phase 3b: StatusModule merged into AlterationsModule (conditions). Keep the
-# status_module name as a getter alias so the 17 existing callers keep working
-# unchanged.
-var status_module: AlterationsModule:
-	get: return conditions
-
 var _label_popup_module: LabelPopupModule
 
 # Spawn system
@@ -155,7 +149,7 @@ var _spawn_ticks_remaining: int = -1
 @export_subgroup("Modules")
 @export var _auto_loaded_modules: Array[Module.ModuleType] = [
 	Module.ModuleType.TARGET,
-	Module.ModuleType.CONDITIONS,
+	Module.ModuleType.ALTERATIONS,
 	Module.ModuleType.ACTION_SENDER_DAMAGE,
 	Module.ModuleType.ACTION_SENDER_HEAL,
 	Module.ModuleType.ACTION_SENDER_ADD_STACK,
@@ -269,8 +263,8 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	# Connect to status signals
-	if status_module != null:
-		status_module.stunned_changed.connect(_on_stunned_changed)
+	if alterations_module != null:
+		alterations_module.stunned_changed.connect(_on_stunned_changed)
 	
 	Verbose.trace("Entity [" + entity_name + "_" + str(uid) + "] ready", Verbose.Category.ENTITY)
 
@@ -341,8 +335,8 @@ func process_tick() -> void:
 		_movement_module.process_tick()
 	if _auto_attack_periodic_module != null:
 		_auto_attack_periodic_module.process_tick()
-	if conditions != null:
-		conditions.process_tick()
+	if alterations_module != null:
+		alterations_module.process_tick()
 	if _spawn_ticks_remaining > 0:
 		_spawn_ticks_remaining -= 1
 		if _spawn_ticks_remaining == 0:
@@ -495,16 +489,16 @@ func take_timed_alteration(status_type: Status.Type, duration: float, action_id:
 
 #region ============================== Status Checks ==============================
 func is_stunned() -> bool:
-	return status_module.has_status(Status.Type.STUN) if status_module != null else false
+	return alterations_module.has_status(Status.Type.STUN) if alterations_module != null else false
 
 func is_silenced() -> bool:
-	return status_module.has_status(Status.Type.SILENCE) if status_module != null else false
+	return alterations_module.has_status(Status.Type.SILENCE) if alterations_module != null else false
 
 func is_invulnerable() -> bool:
-	return status_module.has_status(Status.Type.INVULNERABLE) if status_module != null else false
+	return alterations_module.has_status(Status.Type.INVULNERABLE) if alterations_module != null else false
 
 func has_status(status_type: Status.Type) -> bool:
-	return status_module.has_status(status_type) if status_module != null else false
+	return alterations_module.has_status(status_type) if alterations_module != null else false
 #endregion
 
 #region ============================== Context ==============================
@@ -516,7 +510,7 @@ func resurrect(hp_percent: float) -> void:
 	stats.health = stats.health_max * (hp_percent / 100)
 	life_state = LifeState.ALIVE
 	if target_module != null: target_module.start()
-	if conditions != null: conditions.start()
+	if alterations_module != null: alterations_module.start()
 	if _movement_module != null: _movement_module.start()
 	if _auto_attack_periodic_module != null and auto_attack_enabled: _auto_attack_periodic_module.start()
 	resurrected.emit()
@@ -562,17 +556,12 @@ func _complete_spawn() -> void:
 #region ============================== Auto loading ==============================
 func _auto_load_modules() -> void:
 	for module_type in _auto_loaded_modules:
-		# Phase 3b: STATUS was merged into CONDITIONS (AlterationsModule).
-		# Existing Entity .tscn files still reference STATUS by its int value
-		# in their _auto_loaded_modules arrays; skip instead of rewriting them.
-		if module_type == Module.ModuleType.STATUS:
-			continue
 		var module: Module = Shared.ENTITY_MODULE_SCENES[module_type].instantiate().init(self)
 		match module_type:
 			Module.ModuleType.TARGET:
 				target_module = module
 				if _spawn_manager != null: target_module.connect_to_spawn_manager(_spawn_manager)
-			Module.ModuleType.CONDITIONS: conditions = module
+			Module.ModuleType.ALTERATIONS: alterations_module = module
 			Module.ModuleType.MOVEMENT: _movement_module = module
 			Module.ModuleType.ACTION_SENDER_DAMAGE: _damage_sender = module
 			Module.ModuleType.ACTION_SENDER_HEAL: _heal_sender = module
@@ -624,21 +613,21 @@ func _on_fighting_state_changed(new_fighting_state: FightingState) -> void:
 	match new_fighting_state:
 		FightingState.IDLE:
 			if target_module != null: target_module.stop()
-			if conditions != null: conditions.stop()
+			if alterations_module != null: alterations_module.stop()
 			if _movement_module != null: _movement_module.stop()
 			if _auto_attack_periodic_module != null and auto_attack_enabled: _auto_attack_periodic_module.stop()
 			if periodic_timer_registry != null: periodic_timer_registry.stop_all()
 			if battle_callback_registry != null: battle_callback_registry.execute_battle_end()
 		FightingState.FIGHTING:
 			if target_module != null: target_module.start()
-			if conditions != null: conditions.start()
+			if alterations_module != null: alterations_module.start()
 			if _movement_module != null: _movement_module.start()
 			if _auto_attack_periodic_module != null and auto_attack_enabled: _auto_attack_periodic_module.start()
 			if periodic_timer_registry != null: periodic_timer_registry.start_all()
 			if battle_callback_registry != null: battle_callback_registry.execute_battle_start()
 		FightingState.CELEBRATING:
 			if target_module != null: target_module.stop()
-			if conditions != null: conditions.stop()
+			if alterations_module != null: alterations_module.stop()
 			if _movement_module != null: _movement_module.stop()
 			if _auto_attack_periodic_module != null: _auto_attack_periodic_module.stop()
 			if periodic_timer_registry != null: periodic_timer_registry.stop_all()
@@ -663,7 +652,7 @@ func _on_died() -> void:
 	
 	# Visual and module cleanup
 	if target_module != null: target_module.stop()
-	if conditions != null: conditions.stop()
+	if alterations_module != null: alterations_module.stop()
 	if _movement_module != null: _movement_module.stop()
 	if _auto_attack_periodic_module != null and auto_attack_enabled: _auto_attack_periodic_module.stop()
 	if periodic_timer_registry != null: periodic_timer_registry.stop_all()
@@ -699,7 +688,6 @@ func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, n
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			Events.entity_clicked.emit(self)
 			Verbose.debug("L'entité " + entity_name + " a été cliquée !", Verbose.Category.ENTITY)
-			#_play_on_click_animation()
 			_play_click_marker_animation()
 
 

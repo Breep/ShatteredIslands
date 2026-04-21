@@ -11,7 +11,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var efficiency: float = _base_efficiency[card_lvl - 1] / 100.0
 
 	ctx.battle_callbacks.register_battle_start(&"Gas Mask", func() -> void:
-		var shield_stack: ShieldStack = ctx.hero.conditions.get_shield_stack()
+		var shield_stack: ShieldStack = ctx.hero.alterations_module.get_shield_stack()
 		shield_stack.set_efficiency(Utils.ActionType.DAMAGE_POISON, efficiency)
 	)
 

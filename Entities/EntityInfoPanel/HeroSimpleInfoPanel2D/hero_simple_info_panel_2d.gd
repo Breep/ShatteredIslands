@@ -46,29 +46,29 @@ func _ready() -> void:
 		_mana_bar.material = _mana_bar.material.duplicate()
 
 	var stats = _hero_entity.stats
-	var conditions = _hero_entity.conditions
+	var alterations_module = _hero_entity.alterations_module
 	
 	_update_health_bar(stats.health, stats.health_max)
-	_update_shield_bar(conditions.shield_stacks, stats.health_max)
+	_update_shield_bar(alterations_module.shield_stacks, stats.health_max)
 	_update_mana_bar(stats.mana, stats.mana_max)
-	_update_stack_label(conditions.ignite_stacks, _ignite_label)
-	_update_stack_label(conditions.poison_stacks, _poison_label)
-	_update_stack_label(conditions.necrosis_stacks, _necrosis_label)
-	_update_stack_label(conditions.regen_stacks, _regen_label)
-	_update_block_label(conditions.block_stacks)
+	_update_stack_label(alterations_module.ignite_stacks, _ignite_label)
+	_update_stack_label(alterations_module.poison_stacks, _poison_label)
+	_update_stack_label(alterations_module.necrosis_stacks, _necrosis_label)
+	_update_stack_label(alterations_module.regen_stacks, _regen_label)
+	_update_block_label(alterations_module.block_stacks)
 	
 	stats.health_changed.connect(_on_health_changed)
 	stats.health_max_changed.connect(_on_health_max_changed)
-	conditions.shield_stacks_changed.connect(_on_shield_changed)
+	alterations_module.shield_stacks_changed.connect(_on_shield_changed)
 	stats.mana_changed.connect(_on_mana_changed)
 	stats.mana_max_changed.connect(_on_mana_max_changed)
-	conditions.ignite_stacks_changed.connect(_update_stack_label.bind(_ignite_label))
-	conditions.poison_stacks_changed.connect(_update_stack_label.bind(_poison_label))
-	conditions.necrosis_stacks_changed.connect(_update_stack_label.bind(_necrosis_label))
-	conditions.regen_stacks_changed.connect(_update_stack_label.bind(_regen_label))
-	conditions.block_stacks_changed.connect(_update_block_label)
+	alterations_module.ignite_stacks_changed.connect(_update_stack_label.bind(_ignite_label))
+	alterations_module.poison_stacks_changed.connect(_update_stack_label.bind(_poison_label))
+	alterations_module.necrosis_stacks_changed.connect(_update_stack_label.bind(_necrosis_label))
+	alterations_module.regen_stacks_changed.connect(_update_stack_label.bind(_regen_label))
+	alterations_module.block_stacks_changed.connect(_update_block_label)
 	
-	_hero_entity.status_module.taunted_changed.connect(_update_taunt_visual)
+	_hero_entity.alterations_module.taunted_changed.connect(_update_taunt_visual)
 	
 	if _hero_entity.player != null:
 		_player_name_label.text = _hero_entity.player.player_name
@@ -214,7 +214,7 @@ func _on_health_changed(new_health: int) -> void:
 
 func _on_health_max_changed(new_max: int) -> void:
 	_update_health_bar(_hero_entity.stats.health, new_max)
-	_update_shield_bar(_hero_entity.conditions.shield_stacks, new_max)
+	_update_shield_bar(_hero_entity.alterations_module.shield_stacks, new_max)
 
 
 func _on_shield_changed(new_amount: float) -> void:

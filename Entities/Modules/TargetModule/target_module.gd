@@ -277,7 +277,7 @@ func _get_highest_shield(entities: Array[Entity], excluded_entity: Entity, prior
 	var highest_shield_entity = candidates[0]
 	for entity in candidates:
 		if entity != _owner:
-			if entity.conditions.shield_stacks > highest_shield_entity.conditions.shield_stacks:
+			if entity.alterations_module.shield_stacks > highest_shield_entity.alterations_module.shield_stacks:
 				highest_shield_entity = entity
 	
 	return highest_shield_entity
@@ -453,7 +453,7 @@ func _get_array_without_untargetable_targets(entities: Array[Entity]) -> Array[E
 func _get_taunted_targets(entities: Array[Entity]) -> Array[Entity]:
 	var taunted: Array[Entity] = []
 	for entity in entities:
-		if entity.status_module != null and entity.status_module.has_status(Status.Type.TAUNT):
+		if entity.alterations_module != null and entity.alterations_module.has_status(Status.Type.TAUNT):
 			taunted.append(entity)
 	return taunted
 

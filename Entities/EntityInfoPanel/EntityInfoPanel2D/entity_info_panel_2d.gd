@@ -92,9 +92,9 @@ func _ready() -> void:
 		_grid_bar.material = _grid_bar.material.duplicate()
 	
 	var stats = _owner_entity.stats
-	var conditions = _owner_entity.conditions
+	var alterations_module = _owner_entity.alterations_module
 	var entity_name = _owner_entity.name
-	var status = _owner_entity.status_module
+	var status = _owner_entity.alterations_module
 	
 	# Initialize entity name
 	_update_entity_label(entity_name)
@@ -110,18 +110,18 @@ func _ready() -> void:
 	stats.mana_max_changed.connect(_on_mana_max_changed)
 	
 	# Initialize stack displays
-	_update_ignite_label(conditions.ignite_stacks)
-	_update_necrosis_label(conditions.necrosis_stacks)
-	_update_poison_label(conditions.poison_stacks)
-	_update_regen_label(conditions.regen_stacks)
-	_update_shield_bar(conditions.shield_stacks, stats.health_max)
+	_update_ignite_label(alterations_module.ignite_stacks)
+	_update_necrosis_label(alterations_module.necrosis_stacks)
+	_update_poison_label(alterations_module.poison_stacks)
+	_update_regen_label(alterations_module.regen_stacks)
+	_update_shield_bar(alterations_module.shield_stacks, stats.health_max)
 	
 	# Connect condition signals
-	conditions.ignite_stacks_changed.connect(_update_ignite_label)
-	conditions.necrosis_stacks_changed.connect(_update_necrosis_label)
-	conditions.shield_stacks_changed.connect(_on_armor_changed)
-	conditions.poison_stacks_changed.connect(_update_poison_label)
-	conditions.regen_stacks_changed.connect(_update_regen_label)
+	alterations_module.ignite_stacks_changed.connect(_update_ignite_label)
+	alterations_module.necrosis_stacks_changed.connect(_update_necrosis_label)
+	alterations_module.shield_stacks_changed.connect(_on_armor_changed)
+	alterations_module.poison_stacks_changed.connect(_update_poison_label)
+	alterations_module.regen_stacks_changed.connect(_update_regen_label)
 	
 	# Connect status signals
 	status.stunned_changed.connect(_on_status_stunned_changed)
@@ -225,7 +225,7 @@ func _update_entity_label(entity_name: String) -> void:
 
 func _update_stun_info() -> void:
 	if not _stun_needs_update: return
-	var status: AlterationsModule = _owner_entity.status_module
+	var status: AlterationsModule = _owner_entity.alterations_module
 	var duration: float = status.get_remaining_time(Status.Type.STUN)
 	_stun_label.text = str(duration).pad_decimals(1)
 	_stun_progress_bar.value = duration
@@ -233,7 +233,7 @@ func _update_stun_info() -> void:
 
 func _update_taunt_info() -> void:
 	if not _taunt_needs_update: return
-	var status: AlterationsModule = _owner_entity.status_module
+	var status: AlterationsModule = _owner_entity.alterations_module
 	var duration: float = status.get_remaining_time(Status.Type.TAUNT)
 	_taunt_label.text = str(duration).pad_decimals(1)
 	_taunt_progress_bar.value = duration
@@ -241,7 +241,7 @@ func _update_taunt_info() -> void:
 
 func _update_silence_info() -> void:
 	if not _silence_needs_update: return
-	var status: AlterationsModule = _owner_entity.status_module
+	var status: AlterationsModule = _owner_entity.alterations_module
 	var duration: float = status.get_remaining_time(Status.Type.SILENCE)
 	_silence_label.text = str(duration).pad_decimals(1)
 	_silence_progress_bar.value = duration
@@ -249,7 +249,7 @@ func _update_silence_info() -> void:
 
 func _update_invulnerable_info() -> void:
 	if not _invulnerable_needs_update: return
-	var status: AlterationsModule = _owner_entity.status_module
+	var status: AlterationsModule = _owner_entity.alterations_module
 	var duration: float = status.get_remaining_time(Status.Type.INVULNERABLE)
 	_invulnerable_label.text = str(duration).pad_decimals(1)
 	_invulnerable_progress_bar.value = duration
@@ -257,7 +257,7 @@ func _update_invulnerable_info() -> void:
 
 func _update_untargetable_info() -> void:
 	if not _untargetable_needs_update: return
-	var status: AlterationsModule = _owner_entity.status_module
+	var status: AlterationsModule = _owner_entity.alterations_module
 	var duration: float = status.get_remaining_time(Status.Type.UNTARGETABLE)
 	_untargetable_label.text = str(duration).pad_decimals(1)
 	_untargetable_progress_bar.value = duration
@@ -282,7 +282,7 @@ func _on_health_changed(new_health: int) -> void:
 
 func _on_health_max_changed(new_max: int) -> void:
 	_update_health_bar(_owner_entity.stats.health, new_max)
-	_update_shield_bar(_owner_entity.conditions.shield_stacks, new_max)
+	_update_shield_bar(_owner_entity.alterations_module.shield_stacks, new_max)
 
 
 func _on_status_stunned_changed(is_active: bool, duration: float, infinite: bool) -> void:

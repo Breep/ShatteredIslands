@@ -1,7 +1,7 @@
 class_name StackableAlteration
 extends Alteration
 
-## Abstract base for stackable alterations.
+## Abstract base for stackable alterations_module.
 ## Each instance holds a float stack count; subclasses define how stacks are
 ## added, removed, and decayed/expired over time.
 
