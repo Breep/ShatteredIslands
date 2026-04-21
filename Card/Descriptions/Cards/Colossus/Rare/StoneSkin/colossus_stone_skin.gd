@@ -12,7 +12,6 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 	var base_thorn: float = _base_thorn_values[card_lvl - 1]
 
-	# Phase 4 rework: THORN is now a ThornAlteration stack.
 	if ctx.hero.alterations_module == null: return
 	ctx.hero.alterations_module.add_thorn_stacks(base_thorn)
 

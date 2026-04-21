@@ -24,14 +24,11 @@ func update(logic_pos: Vector3, delta: float) -> Vector3:
 	var half_lifetime := lifetime * 0.5
 	
 	if _life < half_lifetime:
-		# Phase 1: Fly forward
 		logic_pos += _direction * speed * delta
 		_projectile.look_at(logic_pos + _direction)
 	else:
-		# Phase 2: Return to source
 		if not _is_returning:
 			_is_returning = true
-			# Note: We could clear hit history here if projectile tracks it
 		
 		if not is_instance_valid(_source):
 			# Source disappeared, just continue forward or self-destruct

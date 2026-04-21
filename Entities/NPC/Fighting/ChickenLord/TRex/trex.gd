@@ -28,7 +28,6 @@ func _ready() -> void:
 	mod.id = "Ancestral Gauge"
 	stat_modifiers_registry.register_modifier(mod)
 
-	# Phase 4 rework: base defence is now a DefenseAlteration stack.
 	if alterations_module != null:
 		alterations_module.add_defense_stacks(15.0)
 

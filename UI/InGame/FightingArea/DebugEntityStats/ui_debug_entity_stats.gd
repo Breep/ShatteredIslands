@@ -236,7 +236,7 @@ func _connect_to_signals() -> void:
 	_safe_connect(s.attack_speed_changed, _on_as_changed)
 	_safe_connect(s.attack_range_changed, _on_attack_range_changed)
 	_safe_connect(s.attack_power_changed, _on_ap_changed)
-	# Phase 4 rework: Defence/Block/Thorn are now alterations_module, not EntityStats.
+	
 	var c: AlterationsModule = _owner_entity.alterations_module
 	if c != null:
 		_safe_connect(c.defense_stacks_changed, _on_defence_changed)
@@ -266,7 +266,7 @@ func _disconnect_from_signals() -> void:
 	_safe_disconnect(s.attack_speed_changed, _on_as_changed)
 	_safe_disconnect(s.attack_range_changed, _on_attack_range_changed)
 	_safe_disconnect(s.attack_power_changed, _on_ap_changed)
-	# Phase 4 rework: Defence/Block/Thorn are now alterations_module, not EntityStats.
+
 	var c: AlterationsModule = _owner_entity.alterations_module
 	if c != null:
 		_safe_disconnect(c.defense_stacks_changed, _on_defence_changed)

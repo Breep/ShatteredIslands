@@ -10,7 +10,6 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		printerr("Crushing Weight: Wrong card_lvl: ", card_lvl)
 		return
 
-	# Phase 5 rework: STRENGTH is now a StrengthAlteration stack.
 	if ctx.hero.alterations_module != null:
 		ctx.hero.alterations_module.add_strength_stacks(Utils.ActionType.STATUS_STUN, _stun_increase_percents[card_lvl - 1])
 

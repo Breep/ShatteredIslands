@@ -5,10 +5,6 @@ extends Module
 ## (Poison, Ignite, Shield, Regen, Necrosis, Defense, Block, Thorn, Strength,
 ## Weakness, Vulnerability) and timed (Stun, Silence, Taunt, Invulnerable,
 ## Untargetable).
-##
-## Phase 3b rework: absorbs the former ConditionsModule + StatusModule into a
-## single concrete Module. Timer nodes for timed alterations_module are created
-## dynamically in init() (the .tscn keeps a bare script node).
 
 #region ============================== Constants ==============================
 const TICKS_PER_SECOND: int = 60
@@ -51,17 +47,14 @@ var _shield_stack: ShieldStack = ShieldStack.new()
 var _regen_stack: RegenStack = RegenStack.new()
 var _necrosis_stack: SimpleStack = SimpleStack.new()
 
-# Phase 7: Necrosis drives RESISTANCE[UTILITY_HEAL] (heal reduction).
 # StatModifier ADD maintained in sync with _necrosis_stack.total_stacks.
 var _necrosis_heal_resistance_mod: StatModifier
 
-# Rework alterations_module (Phase 4): Defense/Block/Thorn are alterations_module, not
 # EntityStats entries.
 var _defense_alteration: DefenseAlteration = DefenseAlteration.new()
 var _block_alteration: BlockAlteration = BlockAlteration.new()
 var _thorn_alteration: ThornAlteration = ThornAlteration.new()
 
-# Phase 5 rework: Strength/Weakness/Vulnerability stackable alterations_module
 # (typed per ActionType).
 var _strength_alteration: StrengthAlteration = StrengthAlteration.new()
 var _weakness_alteration: WeaknessAlteration = WeaknessAlteration.new()
@@ -129,13 +122,11 @@ func init(entity_owner: Entity) -> AlterationsModule:
 	_necrosis_stack.stacks_changed.connect(_on_necrosis_stacks_changed)
 	_shield_stack.shield_stack_broken.connect(_on_shield_stack_broken)
 
-	# Phase 4 alterations_module
 	_defense_alteration.bind(entity_owner)
 	_defense_alteration.stacks_changed.connect(_on_defense_stacks_changed)
 	_block_alteration.stacks_changed.connect(_on_block_stacks_changed)
 	_thorn_alteration.stacks_changed.connect(_on_thorn_stacks_changed)
 
-	# Phase 5 alterations_module
 	_strength_alteration.bind(entity_owner)
 	_weakness_alteration.bind(entity_owner)
 	_vulnerability_alteration.bind(entity_owner)
@@ -210,7 +201,6 @@ func get_shield_stack() -> ShieldStack:
 	return _shield_stack
 
 
-## Alterations accessors (Phase 4 rework)
 func get_block_alteration() -> BlockAlteration:
 	return _block_alteration
 
@@ -361,7 +351,6 @@ func _on_necrosis_stacks_changed(new_value: float) -> void:
 	necrosis_stacks_changed.emit(new_value)
 
 
-## Phase 7: Necrosis pushes a StatModifier ADD on RESISTANCE[UTILITY_HEAL]
 ## so heal receive `(100+EXPOSURE_HEAL)/(100+RESISTANCE_HEAL)` accounts for it.
 func _sync_necrosis_heal_resistance(new_value: float) -> void:
 	if _owner == null or _owner.stat_modifiers_registry == null: return
@@ -418,7 +407,6 @@ func _emit_status_changed(status_type: Status.Type, is_active: bool, duration: f
 
 
 func _on_taunt_defence_update(is_active: bool, _duration: float, _infinite: bool) -> void:
-	# Phase 4 rework: DEFENCE is now a DefenseAlteration stack applied on self.
 	if is_active and not _taunt_defence_active:
 		add_defense_stacks(TAUNT_DEFENCE_BONUS)
 		_taunt_defence_active = true

@@ -13,7 +13,6 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			if not is_instance_valid(chicken): return
 			for ennemy in ctx.hero.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ENEMIES):
 				if ennemy.alterations_module == null: continue
-				# Phase 5 rework: VULNERABILITY is now a VulnerabilityAlteration stack.
 				for action_type: Utils.ActionType in Utils.get_all_actions():
 					ennemy.alterations_module.add_vulnerability_stacks(action_type, vulnerable_application)
 		)

@@ -8,7 +8,6 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		printerr("Barbed Wire: Wrong card_lvl: ", card_lvl)
 		return
 	
-	# Phase 4 rework: THORN is now a ThornAlteration stack.
 	if ctx.hero.alterations_module != null:
 		ctx.hero.alterations_module.add_thorn_stacks(_thorns[card_lvl - 1])
 

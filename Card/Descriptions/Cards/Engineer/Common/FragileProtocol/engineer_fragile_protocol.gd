@@ -9,7 +9,6 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		printerr("Fragile Protocole: Wrong card_lvl: ", card_lvl)
 		return
 	
-	# Phase 5 rework: WEAKNESS/STRENGTH are now alteration stacks.
 	if ctx.hero.alterations_module != null:
 		ctx.hero.alterations_module.add_weakness_stacks(Utils.ActionType.UTILITY_HEAL, _heal_resistance[card_lvl - 1])
 		ctx.hero.alterations_module.add_strength_stacks(Utils.ActionType.STACK_SHIELD, _shield_power[card_lvl - 1])
