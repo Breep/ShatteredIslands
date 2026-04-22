@@ -23,7 +23,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		var current_percent: float = (ctx.hero.stats.health / max_hp) * 100.0
 		if current_percent > threshold: return
 		state[&"triggered"] = true
-		ctx.hero.alterations_module.cancel_timed(Alteration.Type.TAUNT)
+		ctx.hero.alterations_module.cancel_state(Alteration.Type.TAUNT)
 
 	ctx.battle_callbacks.register_battle_start(&"Unbreakable Wall", func() -> void:
 		state[&"triggered"] = false

@@ -1,11 +1,11 @@
 class_name InvulnerableAlteration
-extends TimedAlteration
+extends StateAlteration
 
-## Timed buff: the owner takes no damage while active.
+## State buff: the owner takes no damage while active.
 
 
 func _init() -> void:
-	super._init()
+	stackable = false
 	type = Type.INVULNERABLE
 	polarity = Polarity.BUFF
 	id = &"Invulnerable"

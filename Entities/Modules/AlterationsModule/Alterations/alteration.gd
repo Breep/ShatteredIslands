@@ -23,8 +23,9 @@ enum Type {
 	VULNERABILITY,
 	# TimedAlteration (float time remaining)
 	STUN,
-	TAUNT,
 	SILENCE,
+	# StateAlteration (boolean on/off — no timer)
+	TAUNT,
 	INVULNERABLE,
 	UNTARGETABLE,
 }
@@ -44,13 +45,18 @@ const STACK_TYPES: Array[Type] = [
 ]
 
 const TIMED_TYPES: Array[Type] = [
-	Type.STUN, Type.TAUNT, Type.SILENCE, Type.INVULNERABLE, Type.UNTARGETABLE,
+	Type.STUN, Type.SILENCE,
+]
+
+const STATE_TYPES: Array[Type] = [
+	Type.TAUNT, Type.INVULNERABLE, Type.UNTARGETABLE,
 ]
 
 const NEGATIVE_TYPES: Array[Type] = [
 	Type.POISON, Type.IGNITE, Type.NECROSIS,
 	Type.WEAKNESS, Type.VULNERABILITY,
-	Type.STUN, Type.TAUNT, Type.SILENCE,
+	Type.STUN, Type.SILENCE,
+	Type.TAUNT,
 ]
 
 const TYPE_COLORS: Dictionary[Type, Color] = {
@@ -108,6 +114,10 @@ static func is_stack_type(alteration_type: Type) -> bool:
 
 static func is_timed_type(alteration_type: Type) -> bool:
 	return alteration_type in TIMED_TYPES
+
+
+static func is_state_type(alteration_type: Type) -> bool:
+	return alteration_type in STATE_TYPES
 
 
 static func is_negative(alteration_type: Type) -> bool:

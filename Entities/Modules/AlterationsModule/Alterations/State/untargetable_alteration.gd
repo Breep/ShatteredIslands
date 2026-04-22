@@ -1,12 +1,12 @@
 class_name UntargetableAlteration
-extends TimedAlteration
+extends StateAlteration
 
-## Timed buff: the owner cannot be targeted directly while active (AOE damage
+## State buff: the owner cannot be targeted directly while active (AOE damage
 ## still applies).
 
 
 func _init() -> void:
-	super._init()
+	stackable = false
 	type = Type.UNTARGETABLE
 	polarity = Polarity.BUFF
 	id = &"Untargetable"

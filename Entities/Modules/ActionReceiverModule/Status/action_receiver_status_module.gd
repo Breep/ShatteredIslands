@@ -9,7 +9,7 @@ func take_status(status_type: Alteration.Type, duration: float, action_id: Strin
 		Verbose.error("take_status: No AlterationsModule on owner", Verbose.Category.ENTITY_MODULE)
 		return 0
 
-	_owner.alterations_module.apply_timed(status_type, duration)
+	_owner.alterations_module.apply_status(status_type, duration)
 
 	var action_type: Utils.ActionType = Utils.status_to_action(status_type)
 	_owner.action_received.emit(source, action_type, action_id, duration, false)

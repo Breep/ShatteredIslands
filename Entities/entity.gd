@@ -85,7 +85,7 @@ var _is_targetable: bool = true
 var is_targetable: bool:
 	get:
 		if alterations_module != null:
-			return not alterations_module.has_timed(Alteration.Type.UNTARGETABLE)
+			return not alterations_module.has_state(Alteration.Type.UNTARGETABLE)
 		return _is_targetable
 
 # Auto loaded extensions
@@ -492,10 +492,10 @@ func is_silenced() -> bool:
 	return alterations_module.has_timed(Alteration.Type.SILENCE) if alterations_module != null else false
 
 func is_invulnerable() -> bool:
-	return alterations_module.has_timed(Alteration.Type.INVULNERABLE) if alterations_module != null else false
+	return alterations_module.has_state(Alteration.Type.INVULNERABLE) if alterations_module != null else false
 
 func has_status(status_type: Alteration.Type) -> bool:
-	return alterations_module.has_timed(status_type) if alterations_module != null else false
+	return alterations_module.has_status(status_type) if alterations_module != null else false
 #endregion
 
 #region ============================== Context ==============================

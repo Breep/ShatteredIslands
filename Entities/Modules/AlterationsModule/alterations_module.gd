@@ -88,6 +88,8 @@ func _register(alteration: Alteration) -> void:
 		(alteration as StackAlteration).stacks_changed.connect(_on_stack_changed.bind(alteration.type))
 	elif alteration is TimedAlteration:
 		(alteration as TimedAlteration).time_changed.connect(_on_time_changed.bind(alteration.type))
+	elif alteration is StateAlteration:
+		(alteration as StateAlteration).state_changed.connect(_on_state_changed.bind(alteration.type))
 
 
 ## Wire per-type UI-facing signals (re-emit from the concrete alteration instance).
@@ -105,21 +107,19 @@ func _wire_ui_signals() -> void:
 	stun.activated.connect(func(d: float, inf: bool) -> void: stunned_changed.emit(true, d, inf))
 	stun.deactivated.connect(func() -> void: stunned_changed.emit(false, 0.0, false))
 
-	var taunt: TimedAlteration = _alterations[Alteration.Type.TAUNT] as TimedAlteration
-	taunt.activated.connect(func(d: float, inf: bool) -> void: taunted_changed.emit(true, d, inf))
-	taunt.deactivated.connect(func() -> void: taunted_changed.emit(false, 0.0, false))
-
 	var silence: TimedAlteration = _alterations[Alteration.Type.SILENCE] as TimedAlteration
 	silence.activated.connect(func(d: float, inf: bool) -> void: silenced_changed.emit(true, d, inf))
 	silence.deactivated.connect(func() -> void: silenced_changed.emit(false, 0.0, false))
 
-	var invuln: TimedAlteration = _alterations[Alteration.Type.INVULNERABLE] as TimedAlteration
-	invuln.activated.connect(func(d: float, inf: bool) -> void: invulnerable_changed.emit(true, d, inf))
-	invuln.deactivated.connect(func() -> void: invulnerable_changed.emit(false, 0.0, false))
+	# State alterations — UI emits (is_active, 0, infinite=true) on each transition
+	var taunt: StateAlteration = _alterations[Alteration.Type.TAUNT] as StateAlteration
+	taunt.state_changed.connect(func(active: bool) -> void: taunted_changed.emit(active, 0.0, true))
 
-	var untarg: TimedAlteration = _alterations[Alteration.Type.UNTARGETABLE] as TimedAlteration
-	untarg.activated.connect(func(d: float, inf: bool) -> void: untargetable_changed.emit(true, d, inf))
-	untarg.deactivated.connect(func() -> void: untargetable_changed.emit(false, 0.0, false))
+	var invuln: StateAlteration = _alterations[Alteration.Type.INVULNERABLE] as StateAlteration
+	invuln.state_changed.connect(func(active: bool) -> void: invulnerable_changed.emit(active, 0.0, true))
+
+	var untarg: StateAlteration = _alterations[Alteration.Type.UNTARGETABLE] as StateAlteration
+	untarg.state_changed.connect(func(active: bool) -> void: untargetable_changed.emit(active, 0.0, true))
 
 
 func start() -> void:
@@ -221,6 +221,41 @@ func has_timed(alteration_type: Alteration.Type) -> bool:
 func get_remaining_time(alteration_type: Alteration.Type) -> float:
 	var alteration: TimedAlteration = _alterations.get(alteration_type) as TimedAlteration
 	return alteration.time_left if alteration != null else 0.0
+
+
+## Apply a StateAlteration (on/off, no duration).
+func apply_state(alteration_type: Alteration.Type) -> void:
+	var alteration: StateAlteration = _alterations.get(alteration_type) as StateAlteration
+	if alteration == null:
+		Verbose.error("apply_state: no StateAlteration for type [" + str(alteration_type) + "]", Verbose.Category.ENTITY_MODULE)
+		return
+	alteration.apply()
+
+
+func cancel_state(alteration_type: Alteration.Type) -> void:
+	var alteration: StateAlteration = _alterations.get(alteration_type) as StateAlteration
+	if alteration != null:
+		alteration.cancel()
+
+
+func has_state(alteration_type: Alteration.Type) -> bool:
+	var alteration: StateAlteration = _alterations.get(alteration_type) as StateAlteration
+	return alteration != null and alteration.is_active
+
+
+## Generic status dispatcher — routes to apply_timed or apply_state based on type.
+## Used by ActionReceiverStatusModule so the sender API accepts both flavors.
+func apply_status(alteration_type: Alteration.Type, duration: float) -> void:
+	if Alteration.is_state_type(alteration_type):
+		apply_state(alteration_type)
+	else:
+		apply_timed(alteration_type, duration)
+
+
+func has_status(alteration_type: Alteration.Type) -> bool:
+	if Alteration.is_state_type(alteration_type):
+		return has_state(alteration_type)
+	return has_timed(alteration_type)
 #endregion
 
 
@@ -258,4 +293,8 @@ func _on_stack_changed(new_stacks: float, alteration_type: Alteration.Type) -> v
 
 func _on_time_changed(time_left: float, _infinite: bool, alteration_type: Alteration.Type) -> void:
 	alteration_changed.emit(alteration_type, time_left)
+
+
+func _on_state_changed(is_active: bool, alteration_type: Alteration.Type) -> void:
+	alteration_changed.emit(alteration_type, is_active)
 #endregion

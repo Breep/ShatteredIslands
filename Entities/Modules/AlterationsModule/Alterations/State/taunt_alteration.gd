@@ -1,7 +1,7 @@
 class_name TauntAlteration
-extends TimedAlteration
+extends StateAlteration
 
-## Timed debuff: target is prioritized by enemy targeting. While active, the
+## State debuff: target is prioritized by enemy targeting. While active, the
 ## owner gains DEFENSE_BONUS stacks of DefenseAlteration (auto-applied on
 ## activation, removed on expiry/cancel).
 
@@ -11,7 +11,7 @@ var _bonus_active: bool = false
 
 
 func _init() -> void:
-	super._init()
+	stackable = false
 	type = Type.TAUNT
 	polarity = Polarity.DEBUFF
 	id = &"Taunt"

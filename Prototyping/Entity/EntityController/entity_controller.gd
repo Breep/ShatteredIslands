@@ -129,8 +129,10 @@ func _ready() -> void:
 		_spawn_type_choice.add_item(spawn_type, i)
 		i += 1
 	
-	# Populate inflict status dropdown
+	# Populate inflict status dropdown (both timed and state alterations)
 	for status_type: Alteration.Type in Alteration.TIMED_TYPES:
+		_inflict_status_choice.add_item(Alteration.Type.keys()[status_type], status_type)
+	for status_type: Alteration.Type in Alteration.STATE_TYPES:
 		_inflict_status_choice.add_item(Alteration.Type.keys()[status_type], status_type)
 	
 	# Initialize spell parameters with default (METEOR)
