@@ -20,7 +20,7 @@ func _init() -> void:
 func _on_added() -> void:
 	if _bonus_active: return
 	if _owner == null or _owner.alterations_module == null: return
-	_owner.alterations_module.add_stack(Alteration.Type.DEFENSE, DEFENSE_BONUS)
+	_owner.alterations_module.add_stack(Alteration.Type.DEFENSE, DEFENSE_BONUS, _owner, &"Taunt")
 	_bonus_active = true
 
 
