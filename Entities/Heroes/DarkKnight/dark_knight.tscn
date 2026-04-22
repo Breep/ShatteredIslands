@@ -287,12 +287,12 @@ _animation_tree = NodePath("../AnimationTree")
 _animation_player = NodePath("../DarkKnightVisual/AnimationPlayer")
 _entity_owner = NodePath("..")
 
-[node name="HeroSimpleInfoPanel2d" parent="." unique_id=358992180 node_paths=PackedStringArray("_hero_entity", "_info_panel_spawn", "_info_panel_spawn_tavern") instance=ExtResource("6_3htvw")]
+[node name="HeroSimpleInfoPanel2d" parent="." unique_id=358992180 node_paths=PackedStringArray("_owner_entity", "_info_panel_spawn", "_info_panel_spawn_tavern") instance=ExtResource("6_3htvw")]
 anchors_preset = -1
 anchor_left = 0.042000003
 anchor_right = 0.042000003
 offset_right = -0.640007
-_hero_entity = NodePath("..")
+_owner_entity = NodePath("..")
 _info_panel_spawn = NodePath("../DarkKnightVisual/HealthBarSpawnMarker")
 _info_panel_spawn_tavern = NodePath("../DarkKnightVisual/HealthBarSpawnMarkerTavern")
 

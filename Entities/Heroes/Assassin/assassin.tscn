@@ -277,12 +277,12 @@ _animation_tree = NodePath("../AnimationTree")
 _animation_player = NodePath("../Visual/darkknight_silver/AnimationPlayer")
 _entity_owner = NodePath("..")
 
-[node name="HealthBar" parent="." unique_id=358992180 node_paths=PackedStringArray("_hero_entity", "_info_panel_spawn", "_info_panel_spawn_tavern") instance=ExtResource("5_p4s41")]
+[node name="HealthBar" parent="." unique_id=358992180 node_paths=PackedStringArray("_owner_entity", "_info_panel_spawn", "_info_panel_spawn_tavern") instance=ExtResource("5_p4s41")]
 anchors_preset = -1
 anchor_left = 0.042000003
 anchor_right = 0.042000003
 offset_right = -0.640007
-_hero_entity = NodePath("..")
+_owner_entity = NodePath("..")
 _info_panel_spawn = NodePath("../Visual/HealthBarSpawnMarker")
 _info_panel_spawn_tavern = NodePath("../Visual/HealthBarSpawnMarkerTavern")
 
