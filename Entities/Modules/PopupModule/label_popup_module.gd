@@ -60,7 +60,7 @@ func _on_owner_heal_taken(heal_amount: int, is_critical: bool) -> void:
 	_spawn(popup)
 
 
-func _on_owner_stack_taken(stack_type: Stack.Type, stack_number: float, is_critical: bool) -> void:
+func _on_owner_stack_taken(stack_type: Alteration.Type, stack_number: float, is_critical: bool) -> void:
 	var popup := LabelPopup.stack(stack_number, stack_type)
 	if is_critical:
 		popup.set_crit()
@@ -72,7 +72,7 @@ func _on_owner_shield_stacks_changed(new_value: float) -> void:
 	_last_shield_stacks = new_value
 	if delta >= 0.0:
 		return
-	_spawn(LabelPopup.stack(delta, Stack.Type.SHIELD))
+	_spawn(LabelPopup.stack(delta, Alteration.Type.SHIELD))
 
 
 func _on_owner_action_dodged(_source: Entity, _action_type: Utils.ActionType, value: float, is_critical: bool) -> void:

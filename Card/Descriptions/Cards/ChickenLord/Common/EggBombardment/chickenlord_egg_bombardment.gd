@@ -12,9 +12,9 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	mod.tags = [ActionModifier.TagType.CARD]
 	mod.after_action_logic_callback = func(cb_vars: Dictionary) -> void:
 		if not cb_vars.has(ActionModifier.VarType.STACK_TYPE): return
-		var stack_type: Stack.Type = cb_vars[ActionModifier.VarType.STACK_TYPE]
-		if stack_type == Stack.Type.SHIELD: return
-		var stack_value: Stack.Type = cb_vars.get(ActionModifier.VarType.STACK_VALUE, 0)
+		var stack_type: Alteration.Type = cb_vars[ActionModifier.VarType.STACK_TYPE]
+		if stack_type == Alteration.Type.SHIELD: return
+		var stack_value: Alteration.Type = cb_vars.get(ActionModifier.VarType.STACK_VALUE, 0)
 		var target: Entity = cb_vars.get(ActionModifier.VarType.TARGET, null)
 		if not is_instance_valid(target) or target.is_queued_for_deletion(): return
 		for i in stack_value:

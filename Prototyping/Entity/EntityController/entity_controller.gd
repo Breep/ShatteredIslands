@@ -90,10 +90,8 @@ func _ready() -> void:
 		i += 1
 	
 	# Populate stack type dropdown
-	i = 0
-	for stack_type: String in Stack.Type.keys():
-		_stack_type_choice.add_item(stack_type, i)
-		i += 1
+	for stack_type: Alteration.Type in Alteration.STACK_TYPES:
+		_stack_type_choice.add_item(Alteration.Type.keys()[stack_type], stack_type)
 	
 	# Populate percent modifier dropdown
 	i = 0
@@ -132,10 +130,8 @@ func _ready() -> void:
 		i += 1
 	
 	# Populate inflict status dropdown
-	i = 0
-	for status_type: String in Status.Type.keys():
-		_inflict_status_choice.add_item(status_type, i)
-		i += 1
+	for status_type: Alteration.Type in Alteration.TIMED_TYPES:
+		_inflict_status_choice.add_item(Alteration.Type.keys()[status_type], status_type)
 	
 	# Initialize spell parameters with default (METEOR)
 	_update_spell_parameters(Spell.Type.METEOR)
@@ -274,13 +270,13 @@ func _on_inflict_condition_button_pressed() -> void:
 		printerr("EntityController: Invalid format. Use: stacks_number[,duration]")
 		return
 	
-	var stack_type: Stack.Type = _stack_type_choice.get_selected_id() as Stack.Type
+	var stack_type: Alteration.Type = _stack_type_choice.get_selected_id() as Alteration.Type
 	var stacks_number: float = parts[0].strip_edges().to_float()
 	var duration: float = 5.0 if parts.size() < 2 else parts[1].strip_edges().to_float()
 	var action_id: StringName = &"test_inflict_condition"
-	
+
 	entity_owner.inflict_condition_stacks(_target, stacks_number, stack_type, action_id, duration)
-	print("DEBUG: inflict_condition_stacks called - Target: ", _target.entity_name, " | Type: ", Stack.Type.keys()[stack_type], " | Stacks: ", stacks_number, " | Duration: ", duration)
+	print("DEBUG: inflict_condition_stacks called - Target: ", _target.entity_name, " | Type: ", Alteration.Type.keys()[stack_type], " | Stacks: ", stacks_number, " | Duration: ", duration)
 
 
 func _on_cleanse_button_pressed() -> void:
@@ -804,12 +800,12 @@ func _on_inflict_status_button_pressed() -> void:
 		printerr("EntityController: No status duration provided")
 		return
 	
-	var status_type: Status.Type = _inflict_status_choice.get_selected_id() as Status.Type
+	var status_type: Alteration.Type = _inflict_status_choice.get_selected_id() as Alteration.Type
 	var status_duration: float = status_text.to_float()
 	var action_id: StringName = &"test_inflict_status"
-	
+
 	entity_owner.inflict_status(_target, status_type, status_duration, action_id)
-	print("DEBUG: inflict_status called - Target: ", _target.entity_name, " | Type: ", Status.Type.keys()[status_type], " | Duration: ", status_duration)
+	print("DEBUG: inflict_status called - Target: ", _target.entity_name, " | Type: ", Alteration.Type.keys()[status_type], " | Duration: ", status_duration)
 
 
 func _on_entity_clicked(entity: Entity) -> void:

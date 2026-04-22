@@ -20,8 +20,8 @@ func init(shield_amount: float, hp_max: int) -> Summon:
 
 
 func _ready() -> void:
-	take_condition_stacks(_on_spawn_shield_amount, Stack.Type.SHIELD, false, "Initial shield")
-	take_status(Status.Type.TAUNT, -1, "Initial taunt", self)
+	take_condition_stacks(_on_spawn_shield_amount, Alteration.Type.SHIELD, false, "Initial shield")
+	take_status(Alteration.Type.TAUNT, -1, "Initial taunt", self)
 	_base_stats.health_max = _on_spawn_hp_max
 	stat_modifiers_registry.recompute_all()
 	super._ready()

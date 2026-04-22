@@ -17,5 +17,5 @@ func _ready() -> void:
 	stat_modifiers_registry.register_modifier(mod)
 	
 	
-	inflict_status(self, Status.Type.TAUNT, 60, "Chicken")
+	inflict_status(self, Alteration.Type.TAUNT, 60, "Chicken")
 	super._ready()

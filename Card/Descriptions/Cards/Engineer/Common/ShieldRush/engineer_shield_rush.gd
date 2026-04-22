@@ -16,7 +16,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			var shield_distribution: Array[float] = Utils.get_randf_distribution(amount, allies.size(), ctx.hero.battle_id)
 			for i in allies.size():
 				var shield_gain: float = shield_distribution[i]
-				ctx.hero.inflict_condition_stacks(allies[i], shield_gain, Stack.Type.SHIELD, &"Shield Rush")
+				ctx.hero.inflict_condition_stacks(allies[i], shield_gain, Alteration.Type.SHIELD, &"Shield Rush")
 				ShieldVfxSpawner.spawn_on(allies[i])
 	)
 

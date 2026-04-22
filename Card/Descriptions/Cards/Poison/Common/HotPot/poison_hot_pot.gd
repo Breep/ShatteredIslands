@@ -20,11 +20,11 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	modifier.after_action_logic_callback = func(cb_vars: Dictionary) -> void:
 		if not cb_vars.has(ActionModifier.VarType.STACK_TYPE): return
 		if not cb_vars.has(ActionModifier.VarType.TARGET): return
-		var stack_type: Stack.Type = cb_vars[ActionModifier.VarType.STACK_TYPE]
+		var stack_type: Alteration.Type = cb_vars[ActionModifier.VarType.STACK_TYPE]
 		var target: Entity = cb_vars[ActionModifier.VarType.TARGET]
-		if stack_type != Stack.Type.POISON: return
+		if stack_type != Alteration.Type.POISON: return
 		if Utils.is_randomize_modifier_active(chance, ctx.hero.battle_id):
-			ctx.hero.inflict_condition_stacks(target, ignite_stacks, Stack.Type.IGNITE, &"Hot Pot")
+			ctx.hero.inflict_condition_stacks(target, ignite_stacks, Alteration.Type.IGNITE, &"Hot Pot")
 	ctx.action_modifiers.register_modifier(modifier)
 
 

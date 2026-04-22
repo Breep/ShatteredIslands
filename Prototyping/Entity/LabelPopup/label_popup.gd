@@ -106,28 +106,28 @@ static func heal(value: float) -> LabelPopup:
 
 
 # --- Stack ---
-static func stack(value: float, stack_type: Stack.Type) -> LabelPopup:
-	return _create(value, Stack.COLORS[stack_type])
+static func stack(value: float, stack_type: Alteration.Type) -> LabelPopup:
+	return _create(value, Alteration.get_color(stack_type))
 
 
 static func stack_poison(value: float) -> LabelPopup:
-	return stack(value, Stack.Type.POISON)
+	return stack(value, Alteration.Type.POISON)
 
 
 static func stack_ignite(value: float) -> LabelPopup:
-	return stack(value, Stack.Type.IGNITE)
+	return stack(value, Alteration.Type.IGNITE)
 
 
 static func stack_necrosis(value: float) -> LabelPopup:
-	return stack(value, Stack.Type.NECROSIS)
+	return stack(value, Alteration.Type.NECROSIS)
 
 
 static func stack_regen(value: float) -> LabelPopup:
-	return stack(value, Stack.Type.REGEN)
+	return stack(value, Alteration.Type.REGEN)
 
 
 static func stack_shield(value: float) -> LabelPopup:
-	return stack(value, Stack.Type.SHIELD)
+	return stack(value, Alteration.Type.SHIELD)
 
 
 # --- Combat events ---

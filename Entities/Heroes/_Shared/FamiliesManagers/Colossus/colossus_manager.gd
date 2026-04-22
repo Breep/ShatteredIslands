@@ -36,6 +36,6 @@ func apply_passive() -> void:
 	_owner.stat_modifiers_registry.register_modifier(scale_mod)
 
 	if _owner.alterations_module != null:
-		_owner.alterations_module.add_defense_stacks(DEFENCE_FLAT[level - 1])
+		_owner.alterations_module.add_stack(Alteration.Type.DEFENSE, DEFENCE_FLAT[level - 1])
 
 #endregion

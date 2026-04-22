@@ -43,12 +43,12 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			return
 
 		var is_poison: bool
-		var stack_type: Stack.Type
+		var stack_type: Alteration.Type
 		if Utils.get_randi_range(1, 2, ctx.hero.battle_id) % 2 == 0:
-			stack_type = Stack.Type.POISON
+			stack_type = Alteration.Type.POISON
 			is_poison = true
 		else:
-			stack_type = Stack.Type.IGNITE
+			stack_type = Alteration.Type.IGNITE
 			stacks *= 3
 			is_poison = false
 

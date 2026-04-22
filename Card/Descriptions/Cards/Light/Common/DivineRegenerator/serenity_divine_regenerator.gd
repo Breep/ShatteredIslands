@@ -17,7 +17,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	modifier.before_action_logic_callback = func(cb_vars: Dictionary) -> void:
 		if not cb_vars.has(ActionModifier.VarType.STACK_TYPE): return
 		if not cb_vars.has(ActionModifier.VarType.DURATION): return
-		if cb_vars[ActionModifier.VarType.STACK_TYPE] != Stack.Type.REGEN: return
+		if cb_vars[ActionModifier.VarType.STACK_TYPE] != Alteration.Type.REGEN: return
 		cb_vars[ActionModifier.VarType.DURATION] += bonus
 	ctx.action_modifiers.register_modifier(modifier)
 

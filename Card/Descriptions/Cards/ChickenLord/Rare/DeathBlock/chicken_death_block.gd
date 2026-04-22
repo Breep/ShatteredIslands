@@ -22,7 +22,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 				closest_ally_chicken = ally_chicken
 		
 		if closest_ally_chicken.alterations_module != null:
-			closest_ally_chicken.alterations_module.add_block_stacks(block_amount)
+			closest_ally_chicken.alterations_module.add_stack(Alteration.Type.BLOCK, block_amount)
 		)
 
 

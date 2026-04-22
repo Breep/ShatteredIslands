@@ -55,4 +55,4 @@ func _explosion() -> void:
 		anim_player.play("Init")
 	
 	for ennemy in ennemies:
-		inflict_condition_stacks(ennemy, _ignite_stacks, Stack.Type.IGNITE, "Chicken explosion")
+		inflict_condition_stacks(ennemy, _ignite_stacks, Alteration.Type.IGNITE, "Chicken explosion")

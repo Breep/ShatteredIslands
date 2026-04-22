@@ -19,10 +19,10 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	modifier.is_one_time_effect = false
 	modifier.after_action_logic_callback = func(cb_vars: Dictionary) -> void:
 		if not cb_vars.has(ActionModifier.VarType.STACK_TYPE): return
-		var stack_type: Stack.Type = cb_vars[ActionModifier.VarType.STACK_TYPE]
-		if stack_type != Stack.Type.POISON: return
+		var stack_type: Alteration.Type = cb_vars[ActionModifier.VarType.STACK_TYPE]
+		if stack_type != Alteration.Type.POISON: return
 		if Utils.is_randomize_modifier_active(chance, ctx.hero.battle_id):
-			ctx.hero.inflict_condition_stacks(ctx.hero, regen_stacks, Stack.Type.REGEN, &"Rotting Milk")
+			ctx.hero.inflict_condition_stacks(ctx.hero, regen_stacks, Alteration.Type.REGEN, &"Rotting Milk")
 	ctx.action_modifiers.register_modifier(modifier)
 
 

@@ -43,10 +43,10 @@ func connect_to_arena_zone_manager(arena_zone_manager: ArenaZoneManager) -> void
 
 
 func summon_entity(entity_type: Entity.EntityType, spawn_config: SpawnLocationConfig, entity_modifier: Dictionary) -> void:
-	if _owner.alterations_module.has_status(Status.Type.STUN):
+	if _owner.alterations_module.has_timed(Alteration.Type.STUN):
 		return
 
-	if _owner.alterations_module.has_status(Status.Type.SILENCE):
+	if _owner.alterations_module.has_timed(Alteration.Type.SILENCE):
 		Verbose.debug("Summon blocked by SILENCE on " + _owner.entity_name, Verbose.Category.ENTITY_MODULE)
 		return
 

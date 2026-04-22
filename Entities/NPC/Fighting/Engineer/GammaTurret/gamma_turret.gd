@@ -41,7 +41,7 @@ func _ready() -> void:
 	if _auto_attack_periodic_module != null:
 		_auto_attack_periodic_module._attack_strategy = TargetModule.TargettingStrategy.CLOSEST_ENEMY_SUMMON
 	super._ready()
-	alterations_module.add_stack(Stack.Type.SHIELD, _shield, _master, &"Gamma Turret")
+	alterations_module.add_stack(Alteration.Type.SHIELD, _shield, _master, &"Gamma Turret")
 	if _auto_attack_sender != null:
 		_auto_attack_sender.attack_started.connect(func(_lock_seconds: float) -> void:
 			(_visual_3d as TurretVisual).play_shoot_animation()
@@ -72,7 +72,7 @@ func _on_died() -> void:
 
 func _on_resurrected() -> void:
 	super._on_resurrected()
-	alterations_module.add_stack(Stack.Type.SHIELD, _shield, summoner, &"Gamma Turret")
+	alterations_module.add_stack(Alteration.Type.SHIELD, _shield, summoner, &"Gamma Turret")
 	var tween := create_tween().set_parallel()
 	tween.tween_property(_visual_3d, "position:y", 2.8, 0.8) \
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)

@@ -55,7 +55,7 @@ func _emit_damage(damage_type: Utils.ActionType) -> void:
 		_chicken.damage_taken.emit(_get_damage_value(), damage_type, _is_critical(), _is_blocked_by_armor())
 
 
-func _emit_stacks(stack_type: Stack.Type) -> void:
+func _emit_stacks(stack_type: Alteration.Type) -> void:
 	for i in int(_loop_count_spinbox.value):
 		_chicken.stack_taken.emit(stack_type, _get_damage_value(), _is_critical())
 
@@ -87,23 +87,23 @@ func _on_btn_heal_pressed() -> void:
 # ============================== Stacks ==============================
 
 func _on_btn_stack_poison_pressed() -> void:
-	_emit_stacks(Stack.Type.POISON)
+	_emit_stacks(Alteration.Type.POISON)
 
 
 func _on_btn_stack_ignite_pressed() -> void:
-	_emit_stacks(Stack.Type.IGNITE)
+	_emit_stacks(Alteration.Type.IGNITE)
 
 
 func _on_btn_stack_necrosis_pressed() -> void:
-	_emit_stacks(Stack.Type.NECROSIS)
+	_emit_stacks(Alteration.Type.NECROSIS)
 
 
 func _on_btn_stack_regen_pressed() -> void:
-	_emit_stacks(Stack.Type.REGEN)
+	_emit_stacks(Alteration.Type.REGEN)
 
 
 func _on_btn_stack_shield_pressed() -> void:
-	_emit_stacks(Stack.Type.SHIELD)
+	_emit_stacks(Alteration.Type.SHIELD)
 
 
 # ============================== Évènements combat ==============================

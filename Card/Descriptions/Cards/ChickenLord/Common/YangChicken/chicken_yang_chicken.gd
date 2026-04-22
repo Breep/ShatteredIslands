@@ -14,7 +14,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			for ally in ctx.hero.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES):
 				if ally.alterations_module == null: continue
 				for action_type: Utils.ActionType in Utils.get_all_actions():
-					ally.alterations_module.add_strength_stacks(action_type, strength_increase)
+					ally.alterations_module.add_typed_stack(Alteration.Type.STRENGTH, action_type, strength_increase)
 		)
 
 

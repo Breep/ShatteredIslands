@@ -11,7 +11,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		return
 
 	if ctx.hero.alterations_module != null:
-		ctx.hero.alterations_module.add_strength_stacks(Utils.ActionType.STATUS_STUN, _stun_increase_percents[card_lvl - 1])
+		ctx.hero.alterations_module.add_typed_stack(Alteration.Type.STRENGTH, Utils.ActionType.STATUS_STUN, _stun_increase_percents[card_lvl - 1])
 
 
 

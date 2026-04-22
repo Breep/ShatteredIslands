@@ -13,10 +13,10 @@ func connect_to_spawn_manager(spawn_manager: SpawnManager) -> void:
 
 
 func projectile_attack(target: Entity, projectile_type: Projectile.Type, projectile_spawn: Node3D, projectile_stats: ProjectileStats, is_auto_attack: bool = false) -> void:
-	if _owner.alterations_module.has_status(Status.Type.STUN):
+	if _owner.alterations_module.has_timed(Alteration.Type.STUN):
 		return
 
-	if not is_auto_attack and _owner.alterations_module.has_status(Status.Type.SILENCE):
+	if not is_auto_attack and _owner.alterations_module.has_timed(Alteration.Type.SILENCE):
 		Verbose.debug("Projectile blocked by SILENCE on " + _owner.entity_name, Verbose.Category.ENTITY_MODULE)
 		return
 

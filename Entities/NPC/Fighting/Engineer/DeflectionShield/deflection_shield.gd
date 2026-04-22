@@ -23,8 +23,8 @@ func init(blocked_projectiles: int, shield_per_block: float, respawn_timer: floa
 func _ready() -> void:
 	base_stats.health_max = _blocked_projectiles
 	_health_bar.setup_grid_bar(1, -1)
-	take_status(Status.Type.INVULNERABLE, -1, "Invulnerable")
-	take_status(Status.Type.UNTARGETABLE, -1, "Untargetable")
+	take_status(Alteration.Type.INVULNERABLE, -1, "Invulnerable")
+	take_status(Alteration.Type.UNTARGETABLE, -1, "Untargetable")
 	stat_modifiers_registry.recompute_all()
 	_movement_module.orbit_entity(summoner, 2, 2, MovementModule.OrbitFacing.ANTI_CENTER)
 	_despawn_timer = -1 # No despawn
@@ -47,8 +47,8 @@ func _on_resurrected() -> void:
 	super._on_resurrected()
 	base_stats.health_max = _blocked_projectiles
 	stat_modifiers_registry.recompute_all()
-	take_status(Status.Type.INVULNERABLE, -1, "Invulnerable")
-	take_status(Status.Type.UNTARGETABLE, -1, "Untargetable")
+	take_status(Alteration.Type.INVULNERABLE, -1, "Invulnerable")
+	take_status(Alteration.Type.UNTARGETABLE, -1, "Untargetable")
 	_health_bar.setup_grid_bar(1, -1)
 	var tween := create_tween().set_parallel()
 	tween.tween_property(_visual_3d, "position:y", 2.8, 0.8) \

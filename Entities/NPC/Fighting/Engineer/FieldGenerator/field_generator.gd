@@ -32,7 +32,7 @@ func _ready() -> void:
 	_visual.scale = Vector3.ZERO
 	stats.health_max = _max_health
 	stats.health = stats.health_max
-	alterations_module.add_stack(Stack.Type.SHIELD, _shield_amount, self, "Field Generator")
+	alterations_module.add_stack(Alteration.Type.SHIELD, _shield_amount, self, "Field Generator")
 	
 	# Visual pop
 	var pop := create_tween()
@@ -104,6 +104,6 @@ func _on_shield_timer_timeout() -> void:
 	var count = 0
 	for ally in valid_allies:
 		if count >= _target_count: break
-		inflict_condition_stacks(ally, _shield_amount, Stack.Type.SHIELD, "Field Generator")
+		inflict_condition_stacks(ally, _shield_amount, Alteration.Type.SHIELD, "Field Generator")
 		_current_targets.append(ally)
 		count += 1

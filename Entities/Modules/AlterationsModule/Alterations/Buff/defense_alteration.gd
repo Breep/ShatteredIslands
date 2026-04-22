@@ -1,18 +1,10 @@
 class_name DefenseAlteration
-extends SimpleStackAlteration
+extends StackAlteration
 
-## Stackable BUFF alteration: 1 stack = +1 RESISTANCE on all non-PURE damage
-## types (PHYSICAL, MAGICAL, POISON). Replaces the legacy
-## `EntityStats.StatType.DEFENCE` + hardcoded DEFENCE↔RESISTANCE coupling.
-##
-## Mechanism: maintains a single ADD StatModifier per non-PURE ActionType,
-## with value kept in sync with `total_stacks`. The modifier is registered on
-## first non-zero stack and kept registered while stacks > 0 (the registry
-## recomputes on value changes).
-##
-## The alteration is bound to an owning Entity via `bind()` so it can push
-## StatModifiers onto the entity's registry. Call `bind()` from the module
-## that owns the alteration instance.
+## Buff stack: 1 stack = +1 RESISTANCE on every non-PURE damage type
+## (PHYSICAL, MAGICAL, POISON). Maintains one ADD StatModifier per covered
+## type, value synced with `_stacks`. Requires `bind(owner)` so the modifiers
+## can be pushed to the entity's registry.
 
 const COVERED_TYPES: Array[Utils.ActionType] = [
 	Utils.ActionType.DAMAGE_PHYSICAL,
@@ -20,23 +12,18 @@ const COVERED_TYPES: Array[Utils.ActionType] = [
 	Utils.ActionType.DAMAGE_POISON,
 ]
 
-var _owner: Entity
 var _modifiers: Dictionary[Utils.ActionType, StatModifier] = {}
 
 
 func _init() -> void:
+	type = Type.DEFENSE
 	polarity = Polarity.BUFF
 	id = &"Defense"
 	stacks_changed.connect(_on_stacks_changed)
 
 
-func bind(owner: Entity) -> void:
-	_owner = owner
-
-
 func _on_stacks_changed(new_stacks: float) -> void:
-	if _owner == null: return
-	if _owner.stat_modifiers_registry == null: return
+	if _owner == null or _owner.stat_modifiers_registry == null: return
 
 	for action_type: Utils.ActionType in COVERED_TYPES:
 		var mod: StatModifier = _modifiers.get(action_type)

@@ -18,7 +18,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			var added_percent: float = base_percent * rank_mult
 			if added_percent <= 0: return
 
-			target.alterations_module.add_vulnerability_stacks(Utils.ActionType.DAMAGE_PHYSICAL, added_percent)
+			target.alterations_module.add_typed_stack(Alteration.Type.VULNERABILITY, Utils.ActionType.DAMAGE_PHYSICAL, added_percent)
 	)
 
 

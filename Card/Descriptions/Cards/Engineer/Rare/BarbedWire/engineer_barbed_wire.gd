@@ -9,7 +9,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		return
 	
 	if ctx.hero.alterations_module != null:
-		ctx.hero.alterations_module.add_thorn_stacks(_thorns[card_lvl - 1])
+		ctx.hero.alterations_module.add_stack(Alteration.Type.THORN, _thorns[card_lvl - 1])
 
 
 func get_description(cardlvl: int) -> String:

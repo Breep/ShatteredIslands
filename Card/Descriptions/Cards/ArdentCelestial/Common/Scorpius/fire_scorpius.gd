@@ -15,7 +15,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		var entities_inside: Array = cb_vars.get(Meteor.VarType.ENTITIES_INSIDE, [])
 		for entity in entities_inside:
 			if entity == null or not is_instance_valid(entity): return
-			ctx.hero.inflict_condition_stacks(entity, poison_stack, Stack.Type.POISON, &"Scorpius")
+			ctx.hero.inflict_condition_stacks(entity, poison_stack, Alteration.Type.POISON, &"Scorpius")
 	)
 
 

@@ -25,25 +25,25 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			if target == null or not is_instance_valid(target) or target.is_dead: return
 
 			var final_amount: float = base_amount * rank_mult
-			var stack_type: Stack.Type
+			var stack_type: Alteration.Type
 
 			if target_is_ally:
 				if Utils.get_randf_range(0, 1, ctx.hero.battle_id, "schrodinger_storm_2") < 0.5:
-					stack_type = Stack.Type.SHIELD
+					stack_type = Alteration.Type.SHIELD
 					final_amount *= 2.0
 				else:
-					stack_type = Stack.Type.REGEN
+					stack_type = Alteration.Type.REGEN
 					final_amount *= 1.0
 			else:
 				var roll: float = Utils.get_randf_range(0, 1, ctx.hero.battle_id, "schrodinger_storm_3")
 				if roll < 0.33:
-					stack_type = Stack.Type.IGNITE
+					stack_type = Alteration.Type.IGNITE
 					final_amount *= 2.0
 				elif roll < 0.66:
-					stack_type = Stack.Type.NECROSIS
+					stack_type = Alteration.Type.NECROSIS
 					final_amount *= 2.0
 				else:
-					stack_type = Stack.Type.POISON
+					stack_type = Alteration.Type.POISON
 					final_amount *= 0.5
 
 			if final_amount > 0:

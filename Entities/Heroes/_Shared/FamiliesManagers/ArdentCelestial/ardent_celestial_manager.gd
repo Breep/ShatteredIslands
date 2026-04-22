@@ -70,11 +70,11 @@ func _add_stack_modifiers() -> void:
 
 func _on_inflict_condition_ignite(cb_vars: Dictionary) -> void:
 	if not cb_vars.has(ActionModifier.VarType.STACK_TYPE): return
-	var stack_type: Stack.Type = cb_vars[ActionModifier.VarType.STACK_TYPE]
-	var stack_value: Stack.Type = cb_vars.get(ActionModifier.VarType.STACK_VALUE, 0)
+	var stack_type: Alteration.Type = cb_vars[ActionModifier.VarType.STACK_TYPE]
+	var stack_value: Alteration.Type = cb_vars.get(ActionModifier.VarType.STACK_VALUE, 0)
 	var target: Entity = cb_vars.get(ActionModifier.VarType.TARGET, null)
 	if target == null: return
-	if stack_type != Stack.Type.IGNITE: return
+	if stack_type != Alteration.Type.IGNITE: return
 	var count: int = 0
 	var apocalypse_chance: float = _ardent_celestial_stats.apocalypse_bonus_meteor_chance
 	var end_of_the_world_chance: float = _ardent_celestial_stats.end_of_the_world_bonus_meteor_chance 

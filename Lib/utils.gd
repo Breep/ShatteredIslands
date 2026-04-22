@@ -66,13 +66,13 @@ func _ready() -> void:
 
 # ============================== Public functions ==============================
 #region ===== ACTIONS
-func status_to_action(status_type: Status.Type) -> ActionType:
+func status_to_action(status_type: Alteration.Type) -> ActionType:
 	match status_type:
-		Status.Type.STUN: return ActionType.STATUS_STUN
-		Status.Type.TAUNT: return ActionType.STATUS_TAUNT
-		Status.Type.SILENCE: return ActionType.STATUS_SILENCE
-		Status.Type.INVULNERABLE: return ActionType.STATUS_INVULNERABLE
-		Status.Type.UNTARGETABLE: return ActionType.STATUS_UNTARGETABLE
+		Alteration.Type.STUN: return ActionType.STATUS_STUN
+		Alteration.Type.TAUNT: return ActionType.STATUS_TAUNT
+		Alteration.Type.SILENCE: return ActionType.STATUS_SILENCE
+		Alteration.Type.INVULNERABLE: return ActionType.STATUS_INVULNERABLE
+		Alteration.Type.UNTARGETABLE: return ActionType.STATUS_UNTARGETABLE
 		_: return ActionType.STATUS_STUN
 
 

@@ -10,8 +10,8 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		return
 	
 	if ctx.hero.alterations_module != null:
-		ctx.hero.alterations_module.add_weakness_stacks(Utils.ActionType.UTILITY_HEAL, _heal_resistance[card_lvl - 1])
-		ctx.hero.alterations_module.add_strength_stacks(Utils.ActionType.STACK_SHIELD, _shield_power[card_lvl - 1])
+		ctx.hero.alterations_module.add_typed_stack(Alteration.Type.WEAKNESS, Utils.ActionType.UTILITY_HEAL, _heal_resistance[card_lvl - 1])
+		ctx.hero.alterations_module.add_typed_stack(Alteration.Type.STRENGTH, Utils.ActionType.STACK_SHIELD, _shield_power[card_lvl - 1])
 
 
 func get_description(cardlvl: int) -> String:

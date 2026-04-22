@@ -1,16 +1,12 @@
 class_name BlockAlteration
-extends SimpleStackAlteration
+extends StackAlteration
 
-## Stackable BUFF alteration: each stack absorbs one instance of non-PURE
-## incoming damage (including DoT ticks). Replaces the legacy
-## `EntityStats.StatType.BLOCK` + `stats.block`.
-##
-## Consumption model: `try_consume(damage_type)` returns true if the instance
-## was blocked. Non-PURE damage consumes 1 stack; PURE bypasses block.
-## The damage receiver module drives this from its take_damage pipeline.
+## Buff stack: each stack absorbs one non-PURE damage instance (including DoT
+## ticks). Consumption is driven by the damage receiver via `try_consume`.
 
 
 func _init() -> void:
+	type = Type.BLOCK
 	polarity = Polarity.BUFF
 	id = &"Block"
 
@@ -19,6 +15,6 @@ func _init() -> void:
 ## Returns true if the damage should be fully blocked.
 func try_consume(damage_type: Utils.ActionType) -> bool:
 	if damage_type == Utils.ActionType.DAMAGE_PURE: return false
-	if _total_stacks < 1: return false
-	_total_stacks -= 1
+	if _stacks < 1: return false
+	_stacks -= 1
 	return true

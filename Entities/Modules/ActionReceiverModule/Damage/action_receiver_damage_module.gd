@@ -39,12 +39,12 @@ func take_damage_percent(damage_percent: float, percent_modifier: Utils.PercentM
 
 func _is_blocked(damage_type: Utils.ActionType) -> bool:
 	if _owner.alterations_module == null: return false
-	return _owner.alterations_module.get_block_alteration().try_consume(damage_type)
+	return _owner.alterations_module.block_alteration.try_consume(damage_type)
 
 
 func _handle_thorn(source: Entity, action_id: StringName) -> void:
 	if action_id != &"auto_attack": return
 	if _owner.alterations_module == null: return
-	var thorn: float = _owner.alterations_module.get_thorn_alteration().get_return_damage()
+	var thorn: float = _owner.alterations_module.thorn_alteration.get_return_damage()
 	if thorn >= 1 and is_instance_valid(source):
 		_owner.direct_damage(source, thorn, Utils.ActionType.DAMAGE_PHYSICAL, &"Thorn")

@@ -453,7 +453,7 @@ func _get_array_without_untargetable_targets(entities: Array[Entity]) -> Array[E
 func _get_taunted_targets(entities: Array[Entity]) -> Array[Entity]:
 	var taunted: Array[Entity] = []
 	for entity in entities:
-		if entity.alterations_module != null and entity.alterations_module.has_status(Status.Type.TAUNT):
+		if entity.alterations_module != null and entity.alterations_module.has_timed(Alteration.Type.TAUNT):
 			taunted.append(entity)
 	return taunted
 

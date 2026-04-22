@@ -1,149 +1,130 @@
 class_name AlterationsModule
 extends Module
 
-## Unified module for every Alteration on an entity — both stackable
-## (Poison, Ignite, Shield, Regen, Necrosis, Defense, Block, Thorn, Strength,
-## Weakness, Vulnerability) and timed (Stun, Silence, Taunt, Invulnerable,
-## Untargetable).
+## Unified module for every Alteration on an entity.
+## Alterations are held in a `Alteration.Type → Alteration` dictionary;
+## process_tick is delegated to each instance. Hot-path consumers
+## (damage pipeline) read `shield_alteration`, `block_alteration`,
+## `thorn_alteration` directly — everything else goes through the generic API.
 
-#region ============================== Constants ==============================
-const TICKS_PER_SECOND: int = 60
-const IGNITE_MAXHP_PERCENT: float = 0.03 # IGNITE DAMAGE
+const TICKS_PER_SECOND: int = Alteration.TICKS_PER_SECOND
 
-# Tick intervals for periodic effects (in seconds, converted to ticks)
-const POISON_TICK_INTERVAL: float = 1.0
-const IGNITE_TICK_INTERVAL: float = 1.0
-const REGEN_TICK_INTERVAL: float = 1.0
+## Single aggregate signal. `payload` depends on the alteration type:
+## - StackAlteration: new stack count (float)
+## - TimedAlteration: new time_left (float); is_infinite readable on the instance
+## For finer-grained events (shield_broken, typed_stacks_changed, expired),
+## subscribe to the Alteration instance directly via `get_alteration(type)`.
+signal alteration_changed(type: Alteration.Type, payload: Variant)
 
-# Timed alteration side-effects
-const TAUNT_DEFENCE_BONUS: float = 30.0
-#endregion
+# Stack-count change signals (UI-facing; re-emitted from the underlying alteration)
+signal ignite_stacks_changed(new_stacks: float)
+signal poison_stacks_changed(new_stacks: float)
+signal necrosis_stacks_changed(new_stacks: float)
+signal shield_stacks_changed(new_stacks: float)
+signal regen_stacks_changed(new_stacks: float)
+signal block_stacks_changed(new_stacks: float)
+signal defense_stacks_changed(new_stacks: float)
+signal thorn_stacks_changed(new_stacks: float)
 
-#region ============================== Signals ==============================
-# Stackable alterations_module
-signal poison_stacks_changed(new_value: float)
-signal ignite_stacks_changed(new_value: float)
-signal shield_stacks_changed(new_value: float)
-signal regen_stacks_changed(new_value: float)
-signal necrosis_stacks_changed(new_value: float)
-signal shield_stack_broken(amount: float)
-signal defense_stacks_changed(new_value: float)
-signal block_stacks_changed(new_value: float)
-signal thorn_stacks_changed(new_value: float)
-
-# Timed alterations_module (formerly StatusModule)
+# Timed on/off signals (UI-facing; fire only on transitions, with duration + infinite)
 signal stunned_changed(is_active: bool, duration: float, infinite: bool)
 signal taunted_changed(is_active: bool, duration: float, infinite: bool)
 signal silenced_changed(is_active: bool, duration: float, infinite: bool)
 signal invulnerable_changed(is_active: bool, duration: float, infinite: bool)
 signal untargetable_changed(is_active: bool, duration: float, infinite: bool)
-#endregion
 
-#region ============================== Private variables ==============================
-# ---- Stackable alterations_module ----
-var _poison_stack: SimpleStack = SimpleStack.new()
-var _ignite_stack: IgniteStack = IgniteStack.new()
-var _shield_stack: ShieldStack = ShieldStack.new()
-var _regen_stack: RegenStack = RegenStack.new()
-var _necrosis_stack: SimpleStack = SimpleStack.new()
-
-# StatModifier ADD maintained in sync with _necrosis_stack.total_stacks.
-var _necrosis_heal_resistance_mod: StatModifier
-
-# EntityStats entries.
-var _defense_alteration: DefenseAlteration = DefenseAlteration.new()
-var _block_alteration: BlockAlteration = BlockAlteration.new()
-var _thorn_alteration: ThornAlteration = ThornAlteration.new()
-
-# (typed per ActionType).
-var _strength_alteration: StrengthAlteration = StrengthAlteration.new()
-var _weakness_alteration: WeaknessAlteration = WeaknessAlteration.new()
-var _vulnerability_alteration: VulnerabilityAlteration = VulnerabilityAlteration.new()
-
-# Tick-based timing (deterministic)
-var _poison_interval_ticks: int = int(POISON_TICK_INTERVAL * TICKS_PER_SECOND)
-var _ignite_interval_ticks: int = int(IGNITE_TICK_INTERVAL * TICKS_PER_SECOND)
-var _regen_interval_ticks: int = int(REGEN_TICK_INTERVAL * TICKS_PER_SECOND)
-
-var _poison_ticks_remaining: int = 0
-var _ignite_ticks_remaining: int = 0
-var _regen_ticks_remaining: int = 0
+var _alterations: Dictionary[Alteration.Type, Alteration] = {}
+var _alterations_list: Array[Alteration] = []
 
 var _is_active: bool = false
 
-# ---- Timed alterations_module (formerly StatusModule) ----
-var _taunt_defence_active: bool = false
-var _timers: Dictionary[Status.Type, Timer] = {}
-var _infinite_status: Dictionary[Status.Type, bool] = {
-	Status.Type.STUN: false,
-	Status.Type.TAUNT: false,
-	Status.Type.SILENCE: false,
-	Status.Type.INVULNERABLE: false,
-	Status.Type.UNTARGETABLE: false
-}
-#endregion
+# Hot-path references (avoid dict lookup on every hit)
+var shield_alteration: ShieldAlteration
+var block_alteration: BlockAlteration
+var thorn_alteration: ThornAlteration
 
-#region ============================== Public properties ==============================
-# Read-only stack accessors
-var poison_stacks: float:
-	get: return _poison_stack.total_stacks
 
-var ignite_stacks: float:
-	get: return _ignite_stack.total_stacks
-
-var shield_stacks: float:
-	get: return _shield_stack.total_stacks
-
-var regen_stacks: float:
-	get: return _regen_stack.total_stacks
-
-var necrosis_stacks: float:
-	get: return _necrosis_stack.total_stacks
-
-var defense_stacks: float:
-	get: return _defense_alteration.total_stacks
-
-var block_stacks: float:
-	get: return _block_alteration.total_stacks
-
-var thorn_stacks: float:
-	get: return _thorn_alteration.total_stacks
-#endregion
-
-#region ============================== Public functions ==============================
+#region ============================== Lifecycle ==============================
 func init(entity_owner: Entity) -> AlterationsModule:
 	super.init(entity_owner)
-
-	# Stack signals re-emission
-	_poison_stack.stacks_changed.connect(_on_poison_stacks_changed)
-	_ignite_stack.stacks_changed.connect(_on_ignite_stacks_changed)
-	_shield_stack.stacks_changed.connect(_on_shield_stacks_changed)
-	_regen_stack.stacks_changed.connect(_on_regen_stacks_changed)
-	_necrosis_stack.stacks_changed.connect(_on_necrosis_stacks_changed)
-	_shield_stack.shield_stack_broken.connect(_on_shield_stack_broken)
-
-	_defense_alteration.bind(entity_owner)
-	_defense_alteration.stacks_changed.connect(_on_defense_stacks_changed)
-	_block_alteration.stacks_changed.connect(_on_block_stacks_changed)
-	_thorn_alteration.stacks_changed.connect(_on_thorn_stacks_changed)
-
-	_strength_alteration.bind(entity_owner)
-	_weakness_alteration.bind(entity_owner)
-	_vulnerability_alteration.bind(entity_owner)
-
-	# Timed alterations_module infrastructure (formerly StatusModule)
-	_create_status_timers()
-	taunted_changed.connect(_on_taunt_defence_update)
-
+	_build_alterations()
 	return self
+
+
+func _build_alterations() -> void:
+	# Stack alterations
+	_register(PoisonAlteration.new())
+	_register(IgniteAlteration.new())
+	_register(ShieldAlteration.new())
+	_register(RegenAlteration.new())
+	_register(NecrosisAlteration.new())
+	_register(DefenseAlteration.new())
+	_register(BlockAlteration.new())
+	_register(ThornAlteration.new())
+	_register(StrengthAlteration.new())
+	_register(WeaknessAlteration.new())
+	_register(VulnerabilityAlteration.new())
+
+	# Timed alterations
+	_register(StunAlteration.new())
+	_register(TauntAlteration.new())
+	_register(SilenceAlteration.new())
+	_register(InvulnerableAlteration.new())
+	_register(UntargetableAlteration.new())
+
+	shield_alteration = _alterations[Alteration.Type.SHIELD]
+	block_alteration = _alterations[Alteration.Type.BLOCK]
+	thorn_alteration = _alterations[Alteration.Type.THORN]
+
+	_wire_ui_signals()
+
+
+func _register(alteration: Alteration) -> void:
+	alteration.bind(_owner)
+	_alterations[alteration.type] = alteration
+	_alterations_list.append(alteration)
+
+	if alteration is StackAlteration:
+		(alteration as StackAlteration).stacks_changed.connect(_on_stack_changed.bind(alteration.type))
+	elif alteration is TimedAlteration:
+		(alteration as TimedAlteration).time_changed.connect(_on_time_changed.bind(alteration.type))
+
+
+## Wire per-type UI-facing signals (re-emit from the concrete alteration instance).
+func _wire_ui_signals() -> void:
+	(_alterations[Alteration.Type.IGNITE] as StackAlteration).stacks_changed.connect(func(v: float) -> void: ignite_stacks_changed.emit(v))
+	(_alterations[Alteration.Type.POISON] as StackAlteration).stacks_changed.connect(func(v: float) -> void: poison_stacks_changed.emit(v))
+	(_alterations[Alteration.Type.NECROSIS] as StackAlteration).stacks_changed.connect(func(v: float) -> void: necrosis_stacks_changed.emit(v))
+	(_alterations[Alteration.Type.SHIELD] as StackAlteration).stacks_changed.connect(func(v: float) -> void: shield_stacks_changed.emit(v))
+	(_alterations[Alteration.Type.REGEN] as StackAlteration).stacks_changed.connect(func(v: float) -> void: regen_stacks_changed.emit(v))
+	(_alterations[Alteration.Type.BLOCK] as StackAlteration).stacks_changed.connect(func(v: float) -> void: block_stacks_changed.emit(v))
+	(_alterations[Alteration.Type.DEFENSE] as StackAlteration).stacks_changed.connect(func(v: float) -> void: defense_stacks_changed.emit(v))
+	(_alterations[Alteration.Type.THORN] as StackAlteration).stacks_changed.connect(func(v: float) -> void: thorn_stacks_changed.emit(v))
+
+	var stun: TimedAlteration = _alterations[Alteration.Type.STUN] as TimedAlteration
+	stun.activated.connect(func(d: float, inf: bool) -> void: stunned_changed.emit(true, d, inf))
+	stun.deactivated.connect(func() -> void: stunned_changed.emit(false, 0.0, false))
+
+	var taunt: TimedAlteration = _alterations[Alteration.Type.TAUNT] as TimedAlteration
+	taunt.activated.connect(func(d: float, inf: bool) -> void: taunted_changed.emit(true, d, inf))
+	taunt.deactivated.connect(func() -> void: taunted_changed.emit(false, 0.0, false))
+
+	var silence: TimedAlteration = _alterations[Alteration.Type.SILENCE] as TimedAlteration
+	silence.activated.connect(func(d: float, inf: bool) -> void: silenced_changed.emit(true, d, inf))
+	silence.deactivated.connect(func() -> void: silenced_changed.emit(false, 0.0, false))
+
+	var invuln: TimedAlteration = _alterations[Alteration.Type.INVULNERABLE] as TimedAlteration
+	invuln.activated.connect(func(d: float, inf: bool) -> void: invulnerable_changed.emit(true, d, inf))
+	invuln.deactivated.connect(func() -> void: invulnerable_changed.emit(false, 0.0, false))
+
+	var untarg: TimedAlteration = _alterations[Alteration.Type.UNTARGETABLE] as TimedAlteration
+	untarg.activated.connect(func(d: float, inf: bool) -> void: untargetable_changed.emit(true, d, inf))
+	untarg.deactivated.connect(func() -> void: untargetable_changed.emit(false, 0.0, false))
 
 
 func start() -> void:
 	if _owner == null: return
 	_is_active = true
-	_poison_ticks_remaining = _poison_interval_ticks
-	_ignite_ticks_remaining = _ignite_interval_ticks
-	_regen_ticks_remaining = _regen_interval_ticks
 
 
 func stop() -> void:
@@ -151,270 +132,130 @@ func stop() -> void:
 	_is_active = false
 
 
-## Called every physics tick by Entity.process_tick() (deterministic, fixed 1/60s step).
+## Called every physics tick by Entity.process_tick() (deterministic, 1/60s).
 func process_tick() -> void:
-	if not _is_active:
+	if not _is_active or _owner == null: return
+	for alteration in _alterations_list:
+		alteration.process_tick()
+#endregion
+
+
+#region ============================== Generic API ==============================
+## Get the alteration instance for a type.
+func get_alteration(alteration_type: Alteration.Type) -> Alteration:
+	return _alterations.get(alteration_type)
+
+
+## Add stacks to a StackAlteration. `mod` may carry DURATION (Regen) or
+## ACTION_TYPE (typed stacks: Strength/Weakness/Vulnerability).
+func add_stack(alteration_type: Alteration.Type, amount: float, source: Entity = null, action_id: StringName = &"", mod: Dictionary = {}) -> float:
+	var alteration: StackAlteration = _alterations.get(alteration_type) as StackAlteration
+	if alteration == null:
+		Verbose.error("add_stack: no StackAlteration for type [" + str(alteration_type) + "]", Verbose.Category.ENTITY_MODULE)
+		return 0.0
+	return alteration.add_stack(amount, source, action_id, mod)
+
+
+## Remove stacks from a StackAlteration. `mod` may carry ACTION_TYPE for typed stacks.
+func remove_stack(alteration_type: Alteration.Type, amount: float, mod: Dictionary = {}) -> float:
+	var alteration: StackAlteration = _alterations.get(alteration_type) as StackAlteration
+	if alteration == null:
+		Verbose.error("remove_stack: no StackAlteration for type [" + str(alteration_type) + "]", Verbose.Category.ENTITY_MODULE)
+		return 0.0
+	return alteration.remove_stack(amount, mod)
+
+
+func get_stacks(alteration_type: Alteration.Type) -> float:
+	var alteration: StackAlteration = _alterations.get(alteration_type) as StackAlteration
+	return alteration.stacks if alteration != null else 0.0
+
+
+# UI-facing stack-count read-only properties (thin wrappers around get_stacks).
+var ignite_stacks: float:
+	get: return get_stacks(Alteration.Type.IGNITE)
+var poison_stacks: float:
+	get: return get_stacks(Alteration.Type.POISON)
+var necrosis_stacks: float:
+	get: return get_stacks(Alteration.Type.NECROSIS)
+var shield_stacks: float:
+	get: return get_stacks(Alteration.Type.SHIELD)
+var regen_stacks: float:
+	get: return get_stacks(Alteration.Type.REGEN)
+var block_stacks: float:
+	get: return get_stacks(Alteration.Type.BLOCK)
+var defense_stacks: float:
+	get: return get_stacks(Alteration.Type.DEFENSE)
+var thorn_stacks: float:
+	get: return get_stacks(Alteration.Type.THORN)
+
+
+## Convenience for typed stacks (Strength/Weakness/Vulnerability).
+func add_typed_stack(alteration_type: Alteration.Type, action_type: Utils.ActionType, amount: float) -> float:
+	return add_stack(alteration_type, amount, null, &"", {Alteration.ModifierType.ACTION_TYPE: action_type})
+
+
+func remove_typed_stack(alteration_type: Alteration.Type, action_type: Utils.ActionType, amount: float) -> float:
+	return remove_stack(alteration_type, amount, {Alteration.ModifierType.ACTION_TYPE: action_type})
+
+
+## Apply a TimedAlteration. `duration == -1` → infinite.
+func apply_timed(alteration_type: Alteration.Type, duration: float) -> void:
+	var alteration: TimedAlteration = _alterations.get(alteration_type) as TimedAlteration
+	if alteration == null:
+		Verbose.error("apply_timed: no TimedAlteration for type [" + str(alteration_type) + "]", Verbose.Category.ENTITY_MODULE)
 		return
-	if _owner == null:
-		return
-
-	# Poison tick
-	_poison_ticks_remaining -= 1
-	if _poison_ticks_remaining <= 0:
-		_poison_ticks_remaining = _poison_interval_ticks
-		if _poison_stack.total_stacks > 0:
-			_owner.take_damage(_poison_stack.total_stacks, Utils.ActionType.DAMAGE_POISON, false, "Poison Periodic")
-
-	# Ignite tick
-	_ignite_ticks_remaining -= 1
-	if _ignite_ticks_remaining <= 0:
-		_ignite_ticks_remaining = _ignite_interval_ticks
-		if _ignite_stack.total_stacks > 0:
-			var percent: float = IGNITE_MAXHP_PERCENT * _ignite_stack.total_stacks
-			_owner.take_damage_percent(percent, Utils.PercentModifier.MAX_HP, Utils.ActionType.DAMAGE_MAGICAL, false, "Ignite Periodic")
-		_ignite_stack.tick()
-
-	# Regen tick
-	_regen_ticks_remaining -= 1
-	if _regen_ticks_remaining <= 0:
-		_regen_ticks_remaining = _regen_interval_ticks
-		_regen_stack.tick()
-		if _regen_stack.total_stacks > 0:
-			_owner.heal(_owner, _regen_stack.total_stacks, "Regen")
+	alteration.apply(duration)
 
 
-## Get a stack instance by type
-func _get_stack(type: Stack.Type) -> Stack:
-	match type:
-		Stack.Type.POISON: return _poison_stack
-		Stack.Type.IGNITE: return _ignite_stack
-		Stack.Type.SHIELD: return _shield_stack
-		Stack.Type.REGEN: return _regen_stack
-		Stack.Type.NECROSIS: return _necrosis_stack
-		_:
-			Verbose.error("Unknown stack type [" + str(type) + "]", Verbose.Category.ENTITY_MODULE)
-			return null
+func cancel_timed(alteration_type: Alteration.Type) -> void:
+	var alteration: TimedAlteration = _alterations.get(alteration_type) as TimedAlteration
+	if alteration != null:
+		alteration.cancel()
 
 
-## Get the shield stack instance for configuration (e.g., setting efficiencies)
-func get_shield_stack() -> ShieldStack:
-	return _shield_stack
+func has_timed(alteration_type: Alteration.Type) -> bool:
+	var alteration: TimedAlteration = _alterations.get(alteration_type) as TimedAlteration
+	return alteration != null and alteration.is_active
 
 
-func get_block_alteration() -> BlockAlteration:
-	return _block_alteration
+func get_remaining_time(alteration_type: Alteration.Type) -> float:
+	var alteration: TimedAlteration = _alterations.get(alteration_type) as TimedAlteration
+	return alteration.time_left if alteration != null else 0.0
+#endregion
 
 
-func get_thorn_alteration() -> ThornAlteration:
-	return _thorn_alteration
-
-
-func get_defense_alteration() -> DefenseAlteration:
-	return _defense_alteration
-
-
-func add_defense_stacks(amount: float) -> float:
-	return _defense_alteration.add_stack(amount)
-
-
-func remove_defense_stacks(amount: float) -> float:
-	return _defense_alteration.remove_stack(amount)
-
-
-func add_block_stacks(amount: float) -> float:
-	return _block_alteration.add_stack(amount)
-
-
-func remove_block_stacks(amount: float) -> float:
-	return _block_alteration.remove_stack(amount)
-
-
-func add_thorn_stacks(amount: float) -> float:
-	return _thorn_alteration.add_stack(amount)
-
-
-func remove_thorn_stacks(amount: float) -> float:
-	return _thorn_alteration.remove_stack(amount)
-
-
-func add_strength_stacks(action_type: Utils.ActionType, amount: float) -> float:
-	return _strength_alteration.add_stack(action_type, amount)
-
-
-func remove_strength_stacks(action_type: Utils.ActionType, amount: float) -> float:
-	return _strength_alteration.remove_stack(action_type, amount)
-
-
-func add_weakness_stacks(action_type: Utils.ActionType, amount: float) -> float:
-	return _weakness_alteration.add_stack(action_type, amount)
-
-
-func remove_weakness_stacks(action_type: Utils.ActionType, amount: float) -> float:
-	return _weakness_alteration.remove_stack(action_type, amount)
-
-
-func add_vulnerability_stacks(action_type: Utils.ActionType, amount: float) -> float:
-	return _vulnerability_alteration.add_stack(action_type, amount)
-
-
-func remove_vulnerability_stacks(action_type: Utils.ActionType, amount: float) -> float:
-	return _vulnerability_alteration.remove_stack(action_type, amount)
-
-
-## Add stacks to an entity
-func add_stack(stack_type: Stack.Type, value: float, source: Entity, action_id: StringName, mod: Dictionary = {}) -> void:
-	var stack = _get_stack(stack_type)
-	if stack:
-		stack.add_stack(value, source, action_id, mod)
-
-
-## Remove stacks from an entity
-func remove_stack(stack_type: Stack.Type, value: float) -> void:
-	var stack = _get_stack(stack_type)
-	if stack:
-		stack.remove_stack(value)
-
-
-## Special helper for shield damage reduction
-func get_shield_reduced_damage(damage: float, damage_type: Utils.ActionType) -> float:
-	if _shield_stack:
-		return _shield_stack.get_reduced_damage_taken(damage, damage_type, _owner.battle_id)
-	return damage
-
-
-## Get total number of all stacks
+#region ============================== Aggregation helpers ==============================
 func get_total_stacks() -> float:
-	return poison_stacks + ignite_stacks + shield_stacks + regen_stacks + necrosis_stacks
+	return get_stacks(Alteration.Type.POISON) \
+		+ get_stacks(Alteration.Type.IGNITE) \
+		+ get_stacks(Alteration.Type.SHIELD) \
+		+ get_stacks(Alteration.Type.REGEN) \
+		+ get_stacks(Alteration.Type.NECROSIS)
 
 
-## Get total number of debuff stacks
 func get_debuff_stacks() -> float:
-	return poison_stacks + ignite_stacks + necrosis_stacks
+	return get_stacks(Alteration.Type.POISON) \
+		+ get_stacks(Alteration.Type.IGNITE) \
+		+ get_stacks(Alteration.Type.NECROSIS)
 
 
-## Get total number of buff stacks
 func get_buff_stacks() -> float:
-	return shield_stacks + regen_stacks
+	return get_stacks(Alteration.Type.SHIELD) \
+		+ get_stacks(Alteration.Type.REGEN)
 
 
-# ---- Timed alterations_module (formerly StatusModule) ----
-
-func has_status(status_type: Status.Type) -> bool:
-	return _infinite_status[status_type] or _timers[status_type].time_left > 0
-
-
-func get_remaining_time(status_type: Status.Type) -> float:
-	return _timers[status_type].time_left
-
-
-func add_status(status_type: Status.Type, duration: float) -> void:
-	if duration == -1:
-		_infinite_status[status_type] = true
-		_timers[status_type].stop()
-		_emit_status_changed(status_type, true, 0.0, true)
-		return
-
-	if _infinite_status[status_type] == true or duration <= _timers[status_type].time_left:
-		return
-
-	_timers[status_type].stop()
-	_timers[status_type].wait_time = duration
-	_timers[status_type].start()
-	_emit_status_changed(status_type, true, duration, false)
-
-
-func remove_status(status_type: Status.Type) -> void:
-	_timers[status_type].stop()
-	_infinite_status[status_type] = false
-	_emit_status_changed(status_type, false, 0.0, false)
+## Hot-path helper: damage pipeline applies shield absorption.
+func get_shield_reduced_damage(damage: float, damage_type: Utils.ActionType) -> float:
+	if shield_alteration == null: return damage
+	return shield_alteration.get_reduced_damage_taken(damage, damage_type, _owner.battle_id)
 #endregion
 
-#region ============================== Signal Re-emission Callbacks ==============================
-func _on_poison_stacks_changed(new_value: float) -> void:
-	poison_stacks_changed.emit(new_value)
+
+#region ============================== Signal routing ==============================
+func _on_stack_changed(new_stacks: float, alteration_type: Alteration.Type) -> void:
+	alteration_changed.emit(alteration_type, new_stacks)
 
 
-func _on_ignite_stacks_changed(new_value: float) -> void:
-	ignite_stacks_changed.emit(new_value)
-
-
-func _on_shield_stacks_changed(new_value: float) -> void:
-	shield_stacks_changed.emit(new_value)
-
-
-func _on_regen_stacks_changed(new_value: float) -> void:
-	regen_stacks_changed.emit(new_value)
-
-
-func _on_necrosis_stacks_changed(new_value: float) -> void:
-	_sync_necrosis_heal_resistance(new_value)
-	necrosis_stacks_changed.emit(new_value)
-
-
-## so heal receive `(100+EXPOSURE_HEAL)/(100+RESISTANCE_HEAL)` accounts for it.
-func _sync_necrosis_heal_resistance(new_value: float) -> void:
-	if _owner == null or _owner.stat_modifiers_registry == null: return
-	if new_value <= 0:
-		if _necrosis_heal_resistance_mod != null:
-			_owner.stat_modifiers_registry.unregister_modifier(_necrosis_heal_resistance_mod)
-			_necrosis_heal_resistance_mod = null
-		return
-	if _necrosis_heal_resistance_mod == null:
-		_necrosis_heal_resistance_mod = StatModifier.new()
-		_necrosis_heal_resistance_mod.id = &"Necrosis"
-		_necrosis_heal_resistance_mod.stat_type = EntityStats.StatType.RESISTANCE
-		_necrosis_heal_resistance_mod.action_type = Utils.ActionType.UTILITY_HEAL
-		_necrosis_heal_resistance_mod.calc_type = StatModifier.CalcType.ADD
-		_necrosis_heal_resistance_mod.tags = []
-	_necrosis_heal_resistance_mod.value = new_value
-	_owner.stat_modifiers_registry.register_modifier(_necrosis_heal_resistance_mod)
-
-
-func _on_shield_stack_broken(amount: float) -> void:
-	shield_stack_broken.emit(amount)
-
-
-func _on_defense_stacks_changed(new_value: float) -> void:
-	defense_stacks_changed.emit(new_value)
-
-
-func _on_block_stacks_changed(new_value: float) -> void:
-	block_stacks_changed.emit(new_value)
-
-
-func _on_thorn_stacks_changed(new_value: float) -> void:
-	thorn_stacks_changed.emit(new_value)
-#endregion
-
-#region ============================== Timed alteration internals ==============================
-func _create_status_timers() -> void:
-	for status_type in [Status.Type.STUN, Status.Type.TAUNT, Status.Type.SILENCE,
-			Status.Type.INVULNERABLE, Status.Type.UNTARGETABLE]:
-		var timer := Timer.new()
-		timer.one_shot = true
-		timer.timeout.connect(_on_status_timer_timeout.bind(status_type))
-		add_child(timer)
-		_timers[status_type] = timer
-
-
-func _emit_status_changed(status_type: Status.Type, is_active: bool, duration: float, infinite: bool) -> void:
-	match status_type:
-		Status.Type.STUN: stunned_changed.emit(is_active, duration, infinite)
-		Status.Type.TAUNT: taunted_changed.emit(is_active, duration, infinite)
-		Status.Type.SILENCE: silenced_changed.emit(is_active, duration, infinite)
-		Status.Type.INVULNERABLE: invulnerable_changed.emit(is_active, duration, infinite)
-		Status.Type.UNTARGETABLE: untargetable_changed.emit(is_active, duration, infinite)
-
-
-func _on_taunt_defence_update(is_active: bool, _duration: float, _infinite: bool) -> void:
-	if is_active and not _taunt_defence_active:
-		add_defense_stacks(TAUNT_DEFENCE_BONUS)
-		_taunt_defence_active = true
-	elif not is_active and _taunt_defence_active:
-		remove_defense_stacks(TAUNT_DEFENCE_BONUS)
-		_taunt_defence_active = false
-
-
-func _on_status_timer_timeout(status_type: Status.Type) -> void:
-	remove_status(status_type)
+func _on_time_changed(time_left: float, _infinite: bool, alteration_type: Alteration.Type) -> void:
+	alteration_changed.emit(alteration_type, time_left)
 #endregion

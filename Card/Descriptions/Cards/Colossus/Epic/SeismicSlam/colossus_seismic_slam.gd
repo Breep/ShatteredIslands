@@ -39,7 +39,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		var ennemies: Array[Entity] = ctx.hero.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ENEMIES)
 		for a: Entity in ennemies:
 			if a != null and is_instance_valid(a):
-				ctx.hero.inflict_status(a, Status.Type.STUN, stun_duration, &"Seismic Slam")
+				ctx.hero.inflict_status(a, Alteration.Type.STUN, stun_duration, &"Seismic Slam")
 				
 		state[&"iteration"] += 1
 	)

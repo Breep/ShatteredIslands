@@ -29,7 +29,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	action_mod.after_action_logic_callback = func(_cb_vars: Dictionary) -> void:
 		if not is_instance_valid(ctx.hero):
 			return
-		ctx.hero.inflict_condition_stacks(ctx.hero, shield_amount, Stack.Type.SHIELD, &"Evasive Barrier")
+		ctx.hero.inflict_condition_stacks(ctx.hero, shield_amount, Alteration.Type.SHIELD, &"Evasive Barrier")
 	ctx.action_modifiers.register_modifier(action_mod)
 
 

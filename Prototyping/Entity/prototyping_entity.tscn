@@ -38,36 +38,31 @@ transform = Transform3D(1.0000001, 0, 0, 0, 0.99999994, 0, 0, 0, 1.0000001, 0, 0
 [node name="Entities" type="Node3D" parent="Node3D" unique_id=38016860]
 unique_name_in_owner = true
 
-[node name="DarkKnight1" parent="Node3D/Entities" unique_id=353718081 instance=ExtResource("1_icvx6")]
+[node name="DarkKnight1" parent="Node3D/Entities" unique_id=353718081 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("1_icvx6")]
 transform = Transform3D(0.9946579, 0, 0.10322651, 0, 1, 0, -0.10322651, 0, 0.9946579, 0.07346773, -4.7683716e-07, 7.8182755)
-hero_desc = null
-entity_name = "<entity name>"
-_auto_loaded_modules = Array[int]([1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18])
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
 metadata/_edit_lock_ = true
 
-[node name="DarkKnight2" parent="Node3D/Entities" unique_id=1010378661 instance=ExtResource("1_icvx6")]
+[node name="DarkKnight2" parent="Node3D/Entities" unique_id=1010378661 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("1_icvx6")]
 transform = Transform3D(-0.059724454, 0, 0.9982149, 0, 1, 0, -0.9982149, 0, -0.059724454, 7.5962777, 4.7683716e-07, 2.3270931)
-hero_desc = null
-entity_name = "<entity name>"
-_auto_loaded_modules = Array[int]([1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18])
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
 
-[node name="DarkKnight3" parent="Node3D/Entities" unique_id=775240683 instance=ExtResource("1_icvx6")]
+[node name="DarkKnight3" parent="Node3D/Entities" unique_id=775240683 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("1_icvx6")]
 transform = Transform3D(-0.8359702, 0, 0.54877484, 0, 1, 0, -0.54877484, 0, -0.8359702, 4.387443, 0, -6.40211)
-hero_desc = null
-entity_name = "<entity name>"
-_auto_loaded_modules = Array[int]([1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18])
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
 
-[node name="DarkKnight4" parent="Node3D/Entities" unique_id=1906413560 instance=ExtResource("1_icvx6")]
+[node name="DarkKnight4" parent="Node3D/Entities" unique_id=1906413560 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("1_icvx6")]
 transform = Transform3D(-0.5246547, 0, -0.85131514, 0, 1, 0, 0.85131514, 0, -0.5246547, -4.850088, 0, -6.6217995)
-hero_desc = null
-entity_name = "<entity name>"
-_auto_loaded_modules = Array[int]([1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18])
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
 
-[node name="DarkKnight5" parent="Node3D/Entities" unique_id=829130979 instance=ExtResource("1_icvx6")]
+[node name="DarkKnight5" parent="Node3D/Entities" unique_id=829130979 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("1_icvx6")]
 transform = Transform3D(0.37224275, 0, -0.9281354, 0, 1, 0, 0.9281354, 0, 0.37224275, -7.5075235, -9.536743e-07, 2.2651072)
-hero_desc = null
-entity_name = "<entity name>"
-_auto_loaded_modules = Array[int]([1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18])
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
 
 [node name="Control" type="Control" parent="Node3D" unique_id=1104542732]
 layout_mode = 3

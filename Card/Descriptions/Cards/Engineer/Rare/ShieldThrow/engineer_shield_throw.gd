@@ -36,7 +36,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			if damage > 0:
 				ctx.hero.direct_damage(hit_target, damage, Utils.ActionType.DAMAGE_MAGICAL, &"Shield Throw")
 			if shield_return > 0:
-				ctx.hero.inflict_condition_stacks(ctx.hero, shield_return, Stack.Type.SHIELD, &"Shield Throw")
+				ctx.hero.inflict_condition_stacks(ctx.hero, shield_return, Alteration.Type.SHIELD, &"Shield Throw")
 		)
 		ctx.hero.projectile_attack(target, Projectile.Type.SHIELD_THROW, ctx.hero, proj_stats)
 

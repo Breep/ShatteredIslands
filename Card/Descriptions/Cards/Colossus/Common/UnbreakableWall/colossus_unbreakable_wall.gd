@@ -9,7 +9,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		printerr("Unbreakable Wall: Wrong card_lvl: ", card_lvl)
 		return
 	
-	ctx.hero.inflict_status(ctx.hero, Status.Type.TAUNT, -1, &"UnbreakableWall")
+	ctx.hero.inflict_status(ctx.hero, Alteration.Type.TAUNT, -1, &"UnbreakableWall")
 	var threshold: float = _base_hp_threshold_percent[card_lvl - 1]
 
 	var state := {&"triggered": false}
@@ -23,7 +23,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		var current_percent: float = (ctx.hero.stats.health / max_hp) * 100.0
 		if current_percent > threshold: return
 		state[&"triggered"] = true
-		ctx.hero.alterations_module.remove_status(Status.Type.TAUNT)
+		ctx.hero.alterations_module.cancel_timed(Alteration.Type.TAUNT)
 
 	ctx.battle_callbacks.register_battle_start(&"Unbreakable Wall", func() -> void:
 		state[&"triggered"] = false

@@ -16,7 +16,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if damage <= 0:
 			return
 		if Utils.is_randomize_modifier_active(chance, ctx.hero.battle_id):
-			ctx.hero.inflict_condition_stacks(ctx.hero, shield_amount, Stack.Type.SHIELD, &"Reactive Cover")
+			ctx.hero.inflict_condition_stacks(ctx.hero, shield_amount, Alteration.Type.SHIELD, &"Reactive Cover")
 
 	ctx.battle_callbacks.register_battle_start(&"Reactive Cover", func() -> void:
 		if not ctx.hero.damage_taken.is_connected(_on_damage_taken):

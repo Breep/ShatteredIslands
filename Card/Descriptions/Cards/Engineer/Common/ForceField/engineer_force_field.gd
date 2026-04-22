@@ -20,7 +20,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if lost_hp > 0:
 			var armor_gain: int = int(lost_hp * (percent / 100.0))
 			if armor_gain > 0:
-				ctx.hero.inflict_condition_stacks(ctx.hero, armor_gain, Stack.Type.SHIELD, &"Force Field")
+				ctx.hero.inflict_condition_stacks(ctx.hero, armor_gain, Alteration.Type.SHIELD, &"Force Field")
 	)
 
 

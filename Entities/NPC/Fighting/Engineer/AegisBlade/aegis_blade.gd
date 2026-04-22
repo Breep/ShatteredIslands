@@ -27,7 +27,7 @@ func init(attack_damage: float, attack_speed: float, shield_ad_max: float, shiel
 
 
 func _ready() -> void:
-	take_condition_stacks(ON_SPAWN_SHIELD, Stack.Type.SHIELD, false, "Initial Shield")
+	take_condition_stacks(ON_SPAWN_SHIELD, Alteration.Type.SHIELD, false, "Initial Shield")
 	_base_stats.reset_from_self()
 	
 	_on_summoner_conditions_shield_stacks_changed(summoner.alterations_module.shield_stacks)
@@ -38,7 +38,7 @@ func _ready() -> void:
 	aa_mod.additional_effect_callback = func(cb_vars: Dictionary) -> void:
 		if not is_instance_valid(summoner): return
 		var damage_done: float = cb_vars.get(AutoAttackModifier.VarType.DAMAGE, 0)
-		inflict_condition_stacks(summoner, damage_done * _damage_as_shield_ratio, Stack.Type.SHIELD, "Aegis Blade")
+		inflict_condition_stacks(summoner, damage_done * _damage_as_shield_ratio, Alteration.Type.SHIELD, "Aegis Blade")
 	auto_attack_modifier_registry.register_modifier(aa_mod)
 	
 	_base_stats.attack_damage = _spawn_attack_damage

@@ -20,8 +20,8 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if highest_shield <= 0: return
 		var steal_amount: float = highest_shield * percent / 100.0
 		if steal_amount <= 0: return
-		target.alterations_module.remove_stack(Stack.Type.SHIELD, steal_amount)
-		ctx.hero.inflict_condition_stacks(ctx.hero, steal_amount, Stack.Type.SHIELD, &"Magnetic Siphon")
+		target.alterations_module.remove_stack(Alteration.Type.SHIELD, steal_amount)
+		ctx.hero.inflict_condition_stacks(ctx.hero, steal_amount, Alteration.Type.SHIELD, &"Magnetic Siphon")
 	)
 
 

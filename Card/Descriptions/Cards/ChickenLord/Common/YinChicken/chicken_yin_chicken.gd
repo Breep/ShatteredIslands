@@ -14,7 +14,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			for ennemy in ctx.hero.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ENEMIES):
 				if ennemy.alterations_module == null: continue
 				for action_type: Utils.ActionType in Utils.get_all_actions():
-					ennemy.alterations_module.add_vulnerability_stacks(action_type, vulnerable_application)
+					ennemy.alterations_module.add_typed_stack(Alteration.Type.VULNERABILITY, action_type, vulnerable_application)
 		)
 
 

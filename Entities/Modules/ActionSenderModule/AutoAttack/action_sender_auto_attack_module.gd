@@ -99,7 +99,7 @@ func execute_auto_attack(target: Entity) -> bool:
 		attack_completed.emit()
 		return false
 	
-	if _owner.alterations_module.has_status(Status.Type.STUN):
+	if _owner.alterations_module.has_timed(Alteration.Type.STUN):
 		attack_completed.emit()
 		return false
 	

@@ -21,10 +21,10 @@ func connect_to_spawn_manager(spawn_manager: SpawnManager) -> void:
 
 
 func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary = {}) -> void:
-	if _owner.alterations_module.has_status(Status.Type.STUN):
+	if _owner.alterations_module.has_timed(Alteration.Type.STUN):
 		return
 
-	if _owner.alterations_module.has_status(Status.Type.SILENCE):
+	if _owner.alterations_module.has_timed(Alteration.Type.SILENCE):
 		Verbose.debug("Spell cast blocked by SILENCE on " + _owner.entity_name, Verbose.Category.ENTITY_MODULE)
 		return
 

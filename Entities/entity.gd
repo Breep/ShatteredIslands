@@ -23,7 +23,7 @@ signal damage_taken(damage: float, damage_type: Utils.ActionType, is_critical: b
 signal heal_taken(heal_amount: float, is_critical: bool)
 signal spell_casted(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary)
 @warning_ignore("unused_signal")
-signal stack_taken(stack_type: Stack.Type, stack_number: float, is_critical: bool)
+signal stack_taken(stack_type: Alteration.Type, stack_number: float, is_critical: bool)
 @warning_ignore("unused_signal")
 signal auto_attack_completed()
 signal spawn_completed()
@@ -85,7 +85,7 @@ var _is_targetable: bool = true
 var is_targetable: bool:
 	get:
 		if alterations_module != null:
-			return not alterations_module.has_status(Status.Type.UNTARGETABLE)
+			return not alterations_module.has_timed(Alteration.Type.UNTARGETABLE)
 		return _is_targetable
 
 # Auto loaded extensions
@@ -426,7 +426,7 @@ func heal(target: Entity, heal_amount: float, action_id: StringName) -> float:
 func heal_percent(target: Entity, percent: float, percent_modifier: Utils.PercentModifier, action_id: StringName) -> float:
 	return _heal_sender.heal_percent(target, percent, percent_modifier, action_id) if _heal_sender != null else 0.0
 
-func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: Stack.Type, action_id: StringName, duration: float = 5.0) -> float:
+func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: Alteration.Type, action_id: StringName, duration: float = 5.0) -> float:
 	return _add_stack_sender.inflict_condition_stacks(target, stacks_number, stack_type, action_id, duration) if _add_stack_sender != null else 0.0
 
 func summon_entity(entity_type: EntityType, spawn_config: SpawnLocationConfig, entity_modifier: Dictionary) -> void:
@@ -439,18 +439,15 @@ func cleanse(target: Entity, value: float, action_id: StringName) -> float:
 func dispell(target: Entity, value: float, action_id: StringName) -> float:
 	return _remove_stack_sender.dispell(target, value, action_id) if _remove_stack_sender != null else 0.0
 
-func inflict_status(target: Entity, status_type: Status.Type, duration: float, action_id: StringName) -> float:
+func inflict_status(target: Entity, status_type: Alteration.Type, duration: float, action_id: StringName) -> float:
 	return _status_sender.inflict_status(target, status_type, duration, action_id) if _status_sender != null else 0.0
 
 ## Unified Alteration API (rework): route a stackable alteration inflict.
-## Currently forwards to the legacy stacks pipeline; later phases will migrate
-## per-alteration routing here.
-func inflict_alteration_stacks(target: Entity, stacks_number: float, stack_type: Stack.Type, action_id: StringName, duration: float = 5.0) -> float:
+func inflict_alteration_stacks(target: Entity, stacks_number: float, stack_type: Alteration.Type, action_id: StringName, duration: float = 5.0) -> float:
 	return inflict_condition_stacks(target, stacks_number, stack_type, action_id, duration)
 
 ## Unified Alteration API (rework): route a timed (non-stackable) alteration.
-## Currently forwards to the legacy status pipeline.
-func inflict_timed_alteration(target: Entity, status_type: Status.Type, duration: float, action_id: StringName) -> float:
+func inflict_timed_alteration(target: Entity, status_type: Alteration.Type, duration: float, action_id: StringName) -> float:
 	return inflict_status(target, status_type, duration, action_id)
 #endregion
 
@@ -462,7 +459,7 @@ func take_damage(damage: float, damage_type: Utils.ActionType, is_critical: bool
 func take_damage_percent(percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.ActionType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
 	return _damage_receiver.take_damage_percent(percent, percent_modifier, damage_type, is_critical, action_id, source) if _damage_receiver != null else 0.0
 
-func take_condition_stacks(stacks_number: float, stack_type: Stack.Type, is_critical: bool, action_id: StringName, source: Entity = null, duration: float = 5.0) -> float:
+func take_condition_stacks(stacks_number: float, stack_type: Alteration.Type, is_critical: bool, action_id: StringName, source: Entity = null, duration: float = 5.0) -> float:
 	return _add_stack_receiver.take_condition_stacks(stacks_number, stack_type, is_critical, action_id, source, duration) if _add_stack_receiver != null else 0.0
 
 func take_heal(heal_amount: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
@@ -474,31 +471,31 @@ func take_cleanse(value: float, is_critical: bool, action_id: StringName, source
 func take_dispell(value: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
 	return _remove_stack_receiver.take_dispell(value, is_critical, action_id, source) if _remove_stack_receiver != null else 0.0
 
-func take_status(status_type: Status.Type, duration: float, action_id: StringName, source: Entity = null) -> float:
+func take_status(status_type: Alteration.Type, duration: float, action_id: StringName, source: Entity = null) -> float:
 	return _status_receiver.take_status(status_type, duration, action_id, source) if _status_receiver != null else 0.0
 
 ## Unified Alteration API (rework): receive a stackable alteration.
-func take_alteration_stacks(stacks_number: float, stack_type: Stack.Type, is_critical: bool, action_id: StringName, source: Entity = null, duration: float = 5.0) -> float:
+func take_alteration_stacks(stacks_number: float, stack_type: Alteration.Type, is_critical: bool, action_id: StringName, source: Entity = null, duration: float = 5.0) -> float:
 	return take_condition_stacks(stacks_number, stack_type, is_critical, action_id, source, duration)
 
 ## Unified Alteration API (rework): receive a timed (non-stackable) alteration.
-func take_timed_alteration(status_type: Status.Type, duration: float, action_id: StringName, source: Entity = null) -> float:
+func take_timed_alteration(status_type: Alteration.Type, duration: float, action_id: StringName, source: Entity = null) -> float:
 	return take_status(status_type, duration, action_id, source)
 #endregion
 
 
 #region ============================== Status Checks ==============================
 func is_stunned() -> bool:
-	return alterations_module.has_status(Status.Type.STUN) if alterations_module != null else false
+	return alterations_module.has_timed(Alteration.Type.STUN) if alterations_module != null else false
 
 func is_silenced() -> bool:
-	return alterations_module.has_status(Status.Type.SILENCE) if alterations_module != null else false
+	return alterations_module.has_timed(Alteration.Type.SILENCE) if alterations_module != null else false
 
 func is_invulnerable() -> bool:
-	return alterations_module.has_status(Status.Type.INVULNERABLE) if alterations_module != null else false
+	return alterations_module.has_timed(Alteration.Type.INVULNERABLE) if alterations_module != null else false
 
-func has_status(status_type: Status.Type) -> bool:
-	return alterations_module.has_status(status_type) if alterations_module != null else false
+func has_status(status_type: Alteration.Type) -> bool:
+	return alterations_module.has_timed(status_type) if alterations_module != null else false
 #endregion
 
 #region ============================== Context ==============================
