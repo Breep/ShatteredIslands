@@ -33,6 +33,7 @@ func _init() -> void:
 	polarity = Polarity.BUFF
 	id = &"Regen"
 	display_color = Color.AQUAMARINE
+	icon = preload("res://Entities/Modules/AlterationsModule/AlterationIcon/Icons/regen_icon.png")
 
 
 func add_stack(amount: float, source: Entity = null, action_id: StringName = "", mod: Dictionary = {}) -> float:

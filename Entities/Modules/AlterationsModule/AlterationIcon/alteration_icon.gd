@@ -18,8 +18,8 @@ func bind(alteration: Alteration) -> void:
 		# When no icon asset, tint the (empty) rect with the alteration color so
 		# the widget still reads at a glance.
 		_texture.modulate = alteration.display_color if alteration.icon == null else Color.WHITE
-	if _label != null:
-		_label.modulate = alteration.display_color
+	#if _label != null:
+		#_label.modulate = alteration.display_color
 
 
 func set_value(value: Variant) -> void:

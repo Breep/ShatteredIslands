@@ -8,6 +8,7 @@ func _init() -> void:
 	type = Type.STRENGTH
 	polarity = Polarity.BUFF
 	id = &"Strength"
+	icon = preload("res://Entities/Modules/AlterationsModule/AlterationIcon/Icons/strength_weakness_icon.png")
 	display_color = Color.ORANGE
 	_stat_type = EntityStats.StatType.POWER
 	_modifier_id = &"Strength Alteration"

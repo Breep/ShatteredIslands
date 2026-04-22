@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3cngp3tn4gr2"
-path="res://.godot/imported/block_shield.png-c9e8c434d52d1a8c79036e4ca1ec17c1.ctex"
+uid="uid://nsgq7plfc7o5"
+path="res://.godot/imported/necrose_icon.png-cfec19b5f3cddefc9774bf94a1f3bc53.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Entities/EntityInfoPanel/_Shared/block_shield.png"
-dest_files=["res://.godot/imported/block_shield.png-c9e8c434d52d1a8c79036e4ca1ec17c1.ctex"]
+source_file="res://Entities/Modules/AlterationsModule/AlterationIcon/Icons/necrose_icon.png"
+dest_files=["res://.godot/imported/necrose_icon.png-cfec19b5f3cddefc9774bf94a1f3bc53.ctex"]
 
 [params]
 

@@ -12,6 +12,7 @@ func _init() -> void:
 	polarity = Polarity.DEBUFF
 	id = &"Necrosis"
 	display_color = Color.REBECCA_PURPLE
+	icon = preload("res://Entities/Modules/AlterationsModule/AlterationIcon/Icons/necrose_icon.png")
 	stacks_changed.connect(_on_stacks_changed)
 
 

@@ -4,7 +4,7 @@ extends StackAlteration
 ## Debuff stack. Every TICK_INTERVAL_SEC, deals MAXHP_PERCENT_PER_STACK × stacks
 ## of max-HP MAGICAL damage, then decays by DECAY_PERCENT (clamped).
 
-const TICK_INTERVAL_SEC: float = 1.0
+const TICK_INTERVAL_SEC: float = 0.5
 const MAXHP_PERCENT_PER_STACK: float = 0.03
 const DECAY_PERCENT: float = 15.0
 const DECAY_MIN: int = 1
@@ -19,6 +19,7 @@ func _init() -> void:
 	polarity = Polarity.DEBUFF
 	id = &"Ignite"
 	display_color = Color.ORANGE_RED
+	icon = preload("res://Entities/Modules/AlterationsModule/AlterationIcon/Icons/ignite_icon.png")
 
 
 func process_tick() -> void:

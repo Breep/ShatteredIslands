@@ -20,6 +20,7 @@ func _init() -> void:
 	polarity = Polarity.BUFF
 	id = &"Defense"
 	display_color = Color.STEEL_BLUE
+	icon = preload("res://Entities/Modules/AlterationsModule/AlterationIcon/Icons/defense_vulnerability_icon.png")
 	stacks_changed.connect(_on_stacks_changed)
 
 

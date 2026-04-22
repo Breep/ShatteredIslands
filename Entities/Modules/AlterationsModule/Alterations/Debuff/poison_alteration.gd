@@ -14,6 +14,7 @@ func _init() -> void:
 	polarity = Polarity.DEBUFF
 	id = &"Poison"
 	display_color = Color.WEB_GREEN
+	icon = preload("res://Entities/Modules/AlterationsModule/AlterationIcon/Icons/poison_icon.png")
 
 
 func process_tick() -> void:
