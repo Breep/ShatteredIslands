@@ -11,6 +11,7 @@ func _init() -> void:
 	type = Type.NECROSIS
 	polarity = Polarity.DEBUFF
 	id = &"Necrosis"
+	display_color = Color.REBECCA_PURPLE
 	stacks_changed.connect(_on_stacks_changed)
 
 

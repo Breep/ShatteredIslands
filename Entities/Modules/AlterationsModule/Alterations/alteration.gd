@@ -61,10 +61,21 @@ const NEGATIVE_TYPES: Array[Type] = [
 
 const TYPE_COLORS: Dictionary[Type, Color] = {
 	Type.POISON: Color.WEB_GREEN,
-	Type.IGNITE: Color.DARK_RED,
+	Type.IGNITE: Color.ORANGE_RED,
 	Type.SHIELD: Color.YELLOW,
 	Type.REGEN: Color.AQUAMARINE,
 	Type.NECROSIS: Color.REBECCA_PURPLE,
+	Type.DEFENSE: Color.STEEL_BLUE,
+	Type.BLOCK: Color.WHITE_SMOKE,
+	Type.THORN: Color.SADDLE_BROWN,
+	Type.STRENGTH: Color.ORANGE,
+	Type.WEAKNESS: Color.SLATE_GRAY,
+	Type.VULNERABILITY: Color.MEDIUM_ORCHID,
+	Type.STUN: Color.GOLD,
+	Type.SILENCE: Color.DIM_GRAY,
+	Type.TAUNT: Color.CRIMSON,
+	Type.INVULNERABLE: Color.GOLD,
+	Type.UNTARGETABLE: Color.LAVENDER,
 }
 
 const TYPE_TO_ACTION: Dictionary[Type, int] = {
@@ -85,6 +96,11 @@ const TYPE_TO_ACTION: Dictionary[Type, int] = {
 @export var polarity: Polarity = Polarity.BUFF
 ## If false, re-applying the alteration does not accumulate (semantics defined by subclass).
 @export var stackable: bool = true
+
+## UI presentation — icon shown in the entity info panel; display_color tints
+## the stack count label. Concrete subclasses set these in `_init()`.
+@export var icon: Texture2D
+@export var display_color: Color = Color.WHITE
 
 var _owner: Entity
 

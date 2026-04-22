@@ -17,7 +17,7 @@ var _entities: Array[Entity]
 func _ready() -> void:
 	GameManager.init()
 	GameManager.game_rules.duration_fighting_countdown = 0.05
-	GameManager.game_rules.duration_fighting_normal = 240
+	GameManager.game_rules.duration_fighting_normal = 100000
 	GlobalFightingManager.__prototyping = true
 	
 	_respawn_entites_with_spawn_manager()

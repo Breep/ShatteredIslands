@@ -10,3 +10,4 @@ func _init() -> void:
 	type = Type.SILENCE
 	polarity = Polarity.DEBUFF
 	id = &"Silence"
+	display_color = Color.DIM_GRAY

@@ -1,10 +1,10 @@
 class_name SimpleInfoPanel2D
 extends Control
 
-## Shared Hero/NPC info-panel base class. Manages the health/shield/grid/block
-## bars, stack labels (ignite/poison/necrosis/regen/block), the taunt visual,
-## and the debug overlay toggle. Subclasses extend this with role-specific
-## widgets (mana bar & player name for heroes, nothing extra for summons).
+## Shared Hero/NPC info-panel base class. Drives the health/shield/block/grid
+## bars on the main bar, the taunt 3D visual, and a dynamic container of
+## AlterationIcon widgets (populated from the owner's alterations_module via
+## the aggregate `alteration_changed` signal — no per-type wiring required).
 
 #region ============================== Export ==============================
 @export_group("External Nodes")
@@ -22,17 +22,14 @@ extends Control
 @onready var _health_label: Label = %HealthLabel
 @onready var _shield_label: Label = %ShieldLabel
 
-@onready var _ignite_label: Label = %IgniteLabel
-@onready var _poison_label: Label = %PoisonLabel
-@onready var _necrosis_label: Label = %NecrosisLabel
-@onready var _regen_label: Label = %RegenLabel
-@onready var _block_label: Label = %BlockLabel
-
-@onready var _block_texture: TextureRect = %BlockTextureRect
+@onready var _alterations_container: Container = %AlterationsContainer
 #endregion
 
 const TAUNT_VISUAL_SCENE: PackedScene = preload("res://Entities/EntityInfoPanel/_Shared/taunt_status_visual.tscn")
+const ALTERATION_ICON_SCENE: PackedScene = preload("res://Entities/EntityInfoPanel/_Shared/alteration_icon.tscn")
+
 var _taunt_visual: Node3D
+var _alteration_icons: Dictionary[Alteration.Type, AlterationIcon] = {}
 
 
 #region ============================== Node base functions ==============================
@@ -50,20 +47,14 @@ func _ready() -> void:
 
 	_update_health_bar(stats.health, stats.health_max)
 	_update_shield_bar(am.shield_stacks, stats.health_max)
-	_update_stack_label(am.ignite_stacks, _ignite_label)
-	_update_stack_label(am.poison_stacks, _poison_label)
-	_update_stack_label(am.necrosis_stacks, _necrosis_label)
-	_update_stack_label(am.regen_stacks, _regen_label)
-	_update_block_label(am.block_stacks)
+	_update_block_bar(am.block_stacks)
+
+	for alteration_type: Alteration.Type in Alteration.Type.values():
+		_refresh_icon_for(alteration_type)
 
 	stats.health_changed.connect(_on_health_changed)
 	stats.health_max_changed.connect(_on_health_max_changed)
-	am.shield_stacks_changed.connect(_on_shield_changed)
-	am.ignite_stacks_changed.connect(_update_stack_label.bind(_ignite_label))
-	am.poison_stacks_changed.connect(_update_stack_label.bind(_poison_label))
-	am.necrosis_stacks_changed.connect(_update_stack_label.bind(_necrosis_label))
-	am.regen_stacks_changed.connect(_update_stack_label.bind(_regen_label))
-	am.block_stacks_changed.connect(_update_block_label)
+	am.alteration_changed.connect(_on_alteration_changed)
 	am.taunted_changed.connect(_update_taunt_visual)
 
 	if _debug_values != null:
@@ -149,26 +140,9 @@ func _update_shield_bar(shield: float, max_health: float) -> void:
 			_shield_label.hide()
 
 
-func _update_stack_label(new_value: float, label: Label) -> void:
-	if label == null: return
-	if new_value > 0:
-		label.text = str(new_value).pad_decimals(0)
-		label.show()
-	else:
-		label.hide()
-
-
-func _update_block_label(new_value: float) -> void:
-	if _block_label == null: return
-	if new_value > 0:
-		_block_label.text = str(new_value).pad_decimals(0)
-		_block_label.show()
-		_block_texture.show()
-		_block_bar.show()
-	else:
-		_block_label.hide()
-		_block_texture.hide()
-		_block_bar.hide()
+func _update_block_bar(new_value: float) -> void:
+	if _block_bar == null: return
+	_block_bar.visible = new_value > 0
 
 
 func _update_taunt_visual(is_active: bool, _duration: float, _infinite: bool) -> void:
@@ -189,6 +163,51 @@ func _set_health_bar_color_by_team() -> void:
 	else:
 		health_color = Color.INDIAN_RED
 	_health_bar.material.set_shader_parameter("HealthColor", health_color)
+
+
+## Create, update, or remove the AlterationIcon for `alteration_type` depending
+## on whether the alteration is currently active on the owner.
+func _refresh_icon_for(alteration_type: Alteration.Type) -> void:
+	if _alterations_container == null or _owner_entity == null: return
+	var am := _owner_entity.alterations_module
+	if am == null: return
+
+	var alteration: Alteration = am.get_alteration(alteration_type)
+	if alteration == null: return
+
+	var existing: AlterationIcon = _alteration_icons.get(alteration_type)
+	if _is_alteration_active(alteration):
+		if existing == null:
+			existing = ALTERATION_ICON_SCENE.instantiate() as AlterationIcon
+			_alterations_container.add_child(existing)
+			existing.bind(alteration)
+			_alteration_icons[alteration_type] = existing
+		existing.set_value(_alteration_display_value(alteration))
+	elif existing != null:
+		existing.queue_free()
+		_alteration_icons.erase(alteration_type)
+
+
+static func _is_alteration_active(alteration: Alteration) -> bool:
+	if alteration is StackAlteration:
+		return (alteration as StackAlteration).stacks > 0
+	if alteration is TimedAlteration:
+		return (alteration as TimedAlteration).is_active
+	if alteration is StateAlteration:
+		return (alteration as StateAlteration).is_active
+	return false
+
+
+static func _alteration_display_value(alteration: Alteration) -> Variant:
+	if alteration is StackAlteration:
+		return (alteration as StackAlteration).stacks
+	if alteration is TimedAlteration:
+		var t := alteration as TimedAlteration
+		if t.is_infinite: return true
+		return ceil(t.time_left)
+	if alteration is StateAlteration:
+		return true
+	return null
 #endregion
 
 
@@ -202,8 +221,12 @@ func _on_health_max_changed(new_max: int) -> void:
 	_update_shield_bar(_owner_entity.alterations_module.shield_stacks, new_max)
 
 
-func _on_shield_changed(new_amount: float) -> void:
-	_update_shield_bar(new_amount, _owner_entity.stats.health_max)
+func _on_alteration_changed(alteration_type: Alteration.Type, _payload: Variant) -> void:
+	if alteration_type == Alteration.Type.SHIELD:
+		_update_shield_bar(_owner_entity.alterations_module.shield_stacks, _owner_entity.stats.health_max)
+	elif alteration_type == Alteration.Type.BLOCK:
+		_update_block_bar(_owner_entity.alterations_module.block_stacks)
+	_refresh_icon_for(alteration_type)
 
 
 func _on_debug_overlay_toggled(is_visible: bool) -> void:

@@ -10,3 +10,4 @@ func _init() -> void:
 	type = Type.STUN
 	polarity = Polarity.DEBUFF
 	id = &"Stun"
+	display_color = Color.GOLD

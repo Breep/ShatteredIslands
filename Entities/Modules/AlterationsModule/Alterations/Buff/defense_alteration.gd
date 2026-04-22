@@ -19,6 +19,7 @@ func _init() -> void:
 	type = Type.DEFENSE
 	polarity = Polarity.BUFF
 	id = &"Defense"
+	display_color = Color.STEEL_BLUE
 	stacks_changed.connect(_on_stacks_changed)
 
 

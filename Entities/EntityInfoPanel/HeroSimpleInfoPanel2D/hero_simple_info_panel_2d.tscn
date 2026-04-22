@@ -4,7 +4,6 @@
 [ext_resource type="Shader" uid="uid://cxvdhkkjpr75e" path="res://Entities/EntityInfoPanel/Shaders/character_health_bar.gdshader" id="2_er62k"]
 [ext_resource type="Shader" uid="uid://dncf64el86tmc" path="res://Entities/EntityInfoPanel/Shaders/character_shield_bar.gdshader" id="3_u1xh6"]
 [ext_resource type="LabelSettings" uid="uid://bk10uxsgaj4p5" path="res://Entities/EntityInfoPanel/_Shared/debug_label.tres" id="4_dbglb"]
-[ext_resource type="Texture2D" uid="uid://d3cngp3tn4gr2" path="res://Entities/EntityInfoPanel/_Shared/block_shield.png" id="5_2mu5s"]
 
 [sub_resource type="Shader" id="Shader_er62k"]
 code = "shader_type canvas_item;
@@ -212,30 +211,6 @@ font_color = Color(0.9416784, 0.84232056, 0, 1)
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_u1xh6"]
-font_size = 12
-font_color = Color(0.96561795, 0.35149083, 0, 1)
-outline_size = 8
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_2mu5s"]
-font_size = 12
-font_color = Color(0.19455406, 0.43347576, 3.85046e-07, 1)
-outline_size = 8
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_4khpa"]
-font_size = 12
-font_color = Color(0.76725745, 0.3443281, 1, 1)
-outline_size = 8
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_xw8nt"]
-font_size = 12
-font_color = Color(0.25493348, 0.67117757, 0.47795177, 1)
-outline_size = 8
-outline_color = Color(0, 0, 0, 1)
-
 [node name="HeroSimpleInfoPanel2d" type="Control" unique_id=358992180]
 layout_mode = 3
 anchors_preset = 8
@@ -361,55 +336,13 @@ layout_mode = 2
 text = "42"
 label_settings = SubResource("LabelSettings_shld")
 
-[node name="Control" type="Control" parent="MainVBox/HealthAndMana" unique_id=644744583]
-custom_minimum_size = Vector2(25, 25)
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -13.5
-offset_right = 5.0
-offset_bottom = 11.5
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="BlockTextureRect" type="TextureRect" parent="MainVBox/HealthAndMana/Control" unique_id=584206821]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("5_2mu5s")
-expand_mode = 1
-
-[node name="BlockLabel" type="Label" parent="MainVBox/HealthAndMana/Control" unique_id=1687196450]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -2.5
-offset_top = -4.8854165
-offset_right = 2.5
-offset_bottom = 4.8854165
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 13
-text = "5"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Control" type="Control" parent="MainVBox" unique_id=1726330834]
+custom_minimum_size = Vector2(80, 15)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="StackValues" type="HBoxContainer" parent="MainVBox/Control" unique_id=1870219169]
+[node name="AlterationsContainer" type="HBoxContainer" parent="MainVBox/Control" unique_id=1870219169]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 15)
 layout_mode = 1
 anchors_preset = 5
@@ -420,27 +353,5 @@ offset_right = 40.0
 offset_bottom = 16.0
 grow_horizontal = 2
 mouse_filter = 2
-
-[node name="IgniteLabel" type="Label" parent="MainVBox/Control/StackValues" unique_id=1339182740]
-unique_name_in_owner = true
-layout_mode = 2
-text = "145"
-label_settings = SubResource("LabelSettings_u1xh6")
-
-[node name="PoisonLabel" type="Label" parent="MainVBox/Control/StackValues" unique_id=478267511]
-unique_name_in_owner = true
-layout_mode = 2
-text = "122"
-label_settings = SubResource("LabelSettings_2mu5s")
-
-[node name="NecrosisLabel" type="Label" parent="MainVBox/Control/StackValues" unique_id=39704027]
-unique_name_in_owner = true
-layout_mode = 2
-text = "44"
-label_settings = SubResource("LabelSettings_4khpa")
-
-[node name="RegenLabel" type="Label" parent="MainVBox/Control/StackValues" unique_id=383329774]
-unique_name_in_owner = true
-layout_mode = 2
-text = "111"
-label_settings = SubResource("LabelSettings_xw8nt")
+theme_override_constants/separation = 2
+alignment = 1

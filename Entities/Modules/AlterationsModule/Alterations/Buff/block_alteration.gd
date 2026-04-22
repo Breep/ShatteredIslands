@@ -9,6 +9,7 @@ func _init() -> void:
 	type = Type.BLOCK
 	polarity = Polarity.BUFF
 	id = &"Block"
+	display_color = Color.WHITE_SMOKE
 
 
 ## Attempt to consume 1 block stack against an incoming damage instance.

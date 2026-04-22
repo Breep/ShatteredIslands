@@ -18,6 +18,7 @@ func _init() -> void:
 	type = Type.IGNITE
 	polarity = Polarity.DEBUFF
 	id = &"Ignite"
+	display_color = Color.ORANGE_RED
 
 
 func process_tick() -> void:

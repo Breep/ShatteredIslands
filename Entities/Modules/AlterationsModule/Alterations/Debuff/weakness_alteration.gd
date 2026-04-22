@@ -8,5 +8,6 @@ func _init() -> void:
 	type = Type.WEAKNESS
 	polarity = Polarity.DEBUFF
 	id = &"Weakness"
+	display_color = Color.SLATE_GRAY
 	_stat_type = EntityStats.StatType.FRAGILITY
 	_modifier_id = &"Weakness Alteration"

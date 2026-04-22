@@ -10,3 +10,4 @@ func _init() -> void:
 	type = Type.UNTARGETABLE
 	polarity = Polarity.BUFF
 	id = &"Untargetable"
+	display_color = Color.LAVENDER

@@ -20,6 +20,7 @@ func _init() -> void:
 	type = Type.SHIELD
 	polarity = Polarity.BUFF
 	id = &"Shield"
+	display_color = Color.YELLOW
 
 
 func set_efficiency(damage_type: Utils.ActionType, efficiency: float) -> void:

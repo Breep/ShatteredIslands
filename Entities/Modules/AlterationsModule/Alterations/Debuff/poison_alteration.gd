@@ -13,6 +13,7 @@ func _init() -> void:
 	type = Type.POISON
 	polarity = Polarity.DEBUFF
 	id = &"Poison"
+	display_color = Color.WEB_GREEN
 
 
 func process_tick() -> void:

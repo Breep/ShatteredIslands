@@ -9,3 +9,4 @@ func _init() -> void:
 	type = Type.INVULNERABLE
 	polarity = Polarity.BUFF
 	id = &"Invulnerable"
+	display_color = Color.GOLD

@@ -10,6 +10,7 @@ func _init() -> void:
 	type = Type.THORN
 	polarity = Polarity.BUFF
 	id = &"Thorn"
+	display_color = Color.SADDLE_BROWN
 
 
 func get_return_damage() -> float:

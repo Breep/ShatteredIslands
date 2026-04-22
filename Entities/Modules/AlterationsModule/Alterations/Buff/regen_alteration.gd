@@ -32,6 +32,7 @@ func _init() -> void:
 	type = Type.REGEN
 	polarity = Polarity.BUFF
 	id = &"Regen"
+	display_color = Color.AQUAMARINE
 
 
 func add_stack(amount: float, source: Entity = null, action_id: StringName = "", mod: Dictionary = {}) -> float:
