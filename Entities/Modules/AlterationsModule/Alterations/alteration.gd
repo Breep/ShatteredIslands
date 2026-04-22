@@ -91,16 +91,23 @@ const TYPE_TO_ACTION: Dictionary[Type, int] = {
 	Type.UNTARGETABLE: Utils.ActionType.STATUS_UNTARGETABLE,
 }
 
-@export var type: Type
-@export var id: StringName
-@export var polarity: Polarity = Polarity.BUFF
+enum DisplayMode {
+	DEFAULT,
+	CUSTOM,
+	BOTH
+}
+
+var type: Type
+var id: StringName
+var polarity: Polarity = Polarity.BUFF
 ## If false, re-applying the alteration does not accumulate (semantics defined by subclass).
-@export var stackable: bool = true
+var stackable: bool = true
 
 ## UI presentation — icon shown in the entity info panel; display_color tints
 ## the stack count label. Concrete subclasses set these in `_init()`.
-@export var icon: Texture2D
-@export var display_color: Color = Color.WHITE
+var icon: Texture2D
+var display_color: Color = Color.WHITE
+var display_mode: DisplayMode = DisplayMode.DEFAULT
 
 var _owner: Entity
 

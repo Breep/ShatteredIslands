@@ -174,6 +174,7 @@ func _refresh_icon_for(alteration_type: Alteration.Type) -> void:
 
 	var alteration: Alteration = am.get_alteration(alteration_type)
 	if alteration == null: return
+	if alteration.display_mode == Alteration.DisplayMode.CUSTOM: return
 
 	var existing: AlterationIcon = _alteration_icons.get(alteration_type)
 	if _is_alteration_active(alteration):
