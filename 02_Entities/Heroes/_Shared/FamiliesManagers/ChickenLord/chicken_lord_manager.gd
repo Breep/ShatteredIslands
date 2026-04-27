@@ -87,7 +87,7 @@ func start() -> void:
 
 	_owner.target.new_entity_detected.connect(_on_owner_target_module_new_entity_detected)
 
-	for entity in _owner.target.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES):
+	for entity in _owner.target.get_targets(TargetComponent.MultipleTargettingStrategy.ALLIES):
 		if entity is Chicken and entity.team == _owner.team:
 			_on_chicken_spawned(entity)
 

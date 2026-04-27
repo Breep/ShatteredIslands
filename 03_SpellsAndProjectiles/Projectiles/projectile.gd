@@ -163,7 +163,7 @@ func _handle_bounce(from_target: Entity) -> void:
 
 	var new_target := _source.target.get_target_from(
 		from_target.global_position,
-		TargetModule.TargettingFromStrategy.CLOSEST_ENEMY,
+		TargetComponent.TargettingFromStrategy.CLOSEST_ENEMY,
 		_hit_history
 	)
 

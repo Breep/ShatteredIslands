@@ -120,7 +120,7 @@ func _dequeue_meteor(target: Variant) -> void:
 	# Retarget si nécessaire
 	var final_target: Entity = target
 	if final_target == null:
-		final_target = _owner.target.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
+		final_target = _owner.target.get_target(TargetComponent.TargettingStrategy.RANDOM_ENEMY)
 	if final_target == null:
 		_meteor_queues.erase(target)
 		return

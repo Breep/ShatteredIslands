@@ -23,7 +23,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 				ctx.hero.summon_sender.summon_entity(Entity.EntityType.CHICKEN_EGG, SpawnLocationConfig.create_entity_relative(hit_target, 1.5), {})
 	)
 	ctx.periodic_timers.register("Crumble Eggs", period, func() -> void:
-		var target: Entity = ctx.hero.target.get_target(TargetModule.TargettingStrategy.LOWEST_HP_ENEMY)
+		var target: Entity = ctx.hero.target.get_target(TargetComponent.TargettingStrategy.LOWEST_HP_ENEMY)
 		if target == null: return
 		ctx.hero.projectile_sender.projectile_attack(target, Projectile.Type.SMALL_EGG, ctx.hero, proj_stats)
 		)

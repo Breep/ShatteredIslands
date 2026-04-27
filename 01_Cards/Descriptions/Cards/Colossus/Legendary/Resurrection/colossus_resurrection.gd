@@ -40,7 +40,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		ctx.hero.resurrect(_hp_max_revive[card_lvl - 1])
 
 		var targets: Array[Entity] = ctx.hero.target.get_targets(
-			TargetModule.MultipleTargettingStrategy.ENEMIES
+			TargetComponent.MultipleTargettingStrategy.ENEMIES
 		)
 		if targets.is_empty():
 			return

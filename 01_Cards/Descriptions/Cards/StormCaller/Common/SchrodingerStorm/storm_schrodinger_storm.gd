@@ -18,9 +18,9 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			var target: Entity = null
 
 			if target_is_ally:
-				target = ctx.hero.target.get_target(TargetModule.TargettingStrategy.RANDOM_ALLY_INCLUDING_SELF)
+				target = ctx.hero.target.get_target(TargetComponent.TargettingStrategy.RANDOM_ALLY_INCLUDING_SELF)
 			else:
-				target = ctx.hero.target.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
+				target = ctx.hero.target.get_target(TargetComponent.TargettingStrategy.RANDOM_ENEMY)
 
 			if target == null or not is_instance_valid(target) or target.is_dead: return
 

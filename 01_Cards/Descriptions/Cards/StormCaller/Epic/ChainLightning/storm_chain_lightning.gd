@@ -18,7 +18,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			if not Utils.is_randomize_modifier_active(chance, ctx.hero.battle_id): return
 			if target == null or not is_instance_valid(target): return
 
-			var enemies: Array[Entity] = ctx.hero.target.get_targets(TargetModule.MultipleTargettingStrategy.ENEMIES)
+			var enemies: Array[Entity] = ctx.hero.target.get_targets(TargetComponent.MultipleTargettingStrategy.ENEMIES)
 			if enemies.is_empty(): return
 
 			var furthest_enemy: Entity = null

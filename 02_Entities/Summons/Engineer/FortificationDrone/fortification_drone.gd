@@ -96,9 +96,9 @@ func _link_to_an_ally(ally: Entity) -> void:
 
 
 func _change_linked_ally() -> void:
-	var ally: Entity = target.get_target(TargetModule.TargettingStrategy.LOWEST_HP_PERCENT_HERO_ALLY)
+	var ally: Entity = target.get_target(TargetComponent.TargettingStrategy.LOWEST_HP_PERCENT_HERO_ALLY)
 	if ally == null:
-		ally = target.get_target(TargetModule.TargettingStrategy.RANDOM_ALLY)
+		ally = target.get_target(TargetComponent.TargettingStrategy.RANDOM_ALLY)
 	if ally == null: return
 	_link_to_an_ally(ally)
 	_shield_count = 0
@@ -114,9 +114,9 @@ func _periodic_beam_callback() -> void:
 
 
 func _on_spawn_completed() -> void:
-	var ally: Entity = target.get_target(TargetModule.TargettingStrategy.LOWEST_HP_PERCENT_HERO_ALLY)
+	var ally: Entity = target.get_target(TargetComponent.TargettingStrategy.LOWEST_HP_PERCENT_HERO_ALLY)
 	if ally == null:
-		ally = target.get_target(TargetModule.TargettingStrategy.RANDOM_ALLY)
+		ally = target.get_target(TargetComponent.TargettingStrategy.RANDOM_ALLY)
 	if ally == null: return
 	_link_to_an_ally(ally)
 

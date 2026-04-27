@@ -25,7 +25,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	action_mod.id = &"Graceful Step"
 	action_mod.is_one_time_effect = false
 	action_mod.after_action_logic_callback = func(_cb_vars: Dictionary) -> void:
-		var target: Entity = ctx.hero.target.get_target(TargetModule.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
+		var target: Entity = ctx.hero.target.get_target(TargetComponent.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
 		if target != null:
 			ctx.hero.alterations.inflict_condition_stacks(target, regen_val, Alteration.Type.REGEN, &"Graceful Step")
 	ctx.action_modifiers.register_modifier(action_mod)

@@ -14,7 +14,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	
 	ctx.periodic_timers.register(&"Magnetic Siphon", period, func() -> void:
 		if not is_instance_valid(ctx.hero): return
-		var target: Entity = ctx.hero.target.get_target(TargetModule.TargettingStrategy.HIGHEST_SHIELD_ENEMIES_HERO)
+		var target: Entity = ctx.hero.target.get_target(TargetComponent.TargettingStrategy.HIGHEST_SHIELD_ENEMIES_HERO)
 		if not is_instance_valid(target): return
 		var highest_shield: float = target.alterations.shield_stacks
 		if highest_shield <= 0: return

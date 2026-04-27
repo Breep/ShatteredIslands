@@ -39,7 +39,7 @@ func _ready() -> void:
 	_master.died.connect(_on_master_died)
 	_despawn_timer = -1 # No despawn
 	if _auto_attack_periodic_module != null:
-		_auto_attack_periodic_module._attack_strategy = TargetModule.TargettingStrategy.CLOSEST_ENEMY_SUMMON
+		_auto_attack_periodic_module._attack_strategy = TargetComponent.TargettingStrategy.CLOSEST_ENEMY_SUMMON
 	super._ready()
 	alterations.add_stack(Alteration.Type.SHIELD, _shield, _master, &"Gamma Turret")
 	if _auto_attack_sender != null:
@@ -53,7 +53,7 @@ func _on_master_died() -> void:
 
 
 func _find_new_master() -> void:
-	var ally: Entity = target.get_target(TargetModule.TargettingStrategy.RANDOM_ALLY)
+	var ally: Entity = target.get_target(TargetComponent.TargettingStrategy.RANDOM_ALLY)
 	if ally == null: return
 	if is_instance_valid(_master) and _master.died.is_connected(_on_master_died):
 		_master.died.disconnect(_on_master_died)

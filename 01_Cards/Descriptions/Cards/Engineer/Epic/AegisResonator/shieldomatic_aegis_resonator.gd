@@ -15,7 +15,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	ctx.periodic_timers.register(&"Aegis Resonator", period, func() -> void:
 		if not is_instance_valid(ctx.hero): return
 		
-		var allies: Array[Entity] = ctx.hero.target.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES)
+		var allies: Array[Entity] = ctx.hero.target.get_targets(TargetComponent.MultipleTargettingStrategy.ALLIES)
 		var shield_distribution: Array[float] = Utils.get_randf_distribution(shield, allies.size(), ctx.hero.battle_id)
 		for i in allies.size():
 			var shield_gain: float = shield_distribution[i]

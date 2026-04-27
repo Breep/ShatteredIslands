@@ -78,7 +78,7 @@ func _ready() -> void:
 	
 	# Populate targeting strategy dropdown
 	var i: int = 0
-	for targeting_strategy: String in TargetModule.TargettingStrategy.keys():
+	for targeting_strategy: String in TargetComponent.TargettingStrategy.keys():
 		_targeting_strat_choice.add_item(targeting_strategy, i)
 		i += 1
 	
@@ -163,15 +163,15 @@ func _refresh_target() -> void:
 		_target = null
 		return
 	
-	var targeting_strategy: TargetModule.TargettingStrategy = _targeting_strat_choice.get_selected_id() as TargetModule.TargettingStrategy
+	var targeting_strategy: TargetComponent.TargettingStrategy = _targeting_strat_choice.get_selected_id() as TargetComponent.TargettingStrategy
 	_target = entity_owner.target.get_target(targeting_strategy)
 	
 	if _target != null:
 		_target_label.text = "Target: " + _target.entity_name + " [ID:" + str(_target.uid) + "]"
-		print("DEBUG: Target refreshed - ", _target.entity_name, " using strategy: ", TargetModule.TargettingStrategy.keys()[targeting_strategy])
+		print("DEBUG: Target refreshed - ", _target.entity_name, " using strategy: ", TargetComponent.TargettingStrategy.keys()[targeting_strategy])
 	else:
 		_target_label.text = "[color=red]<undefined>[/color]"
-		print("DEBUG: No target found using strategy: ", TargetModule.TargettingStrategy.keys()[targeting_strategy])
+		print("DEBUG: No target found using strategy: ", TargetComponent.TargettingStrategy.keys()[targeting_strategy])
 
 
 func _on_attack_button_pressed() -> void:
@@ -325,15 +325,15 @@ func _on_targeting_strat_choice_item_selected(index: int) -> void:
 		_target_label.text = "Error: No entity_owner"
 		return
 	
-	var targeting_strategy: TargetModule.TargettingStrategy = index as TargetModule.TargettingStrategy
+	var targeting_strategy: TargetComponent.TargettingStrategy = index as TargetComponent.TargettingStrategy
 	_target = entity_owner.target.get_target(targeting_strategy)
 	
 	if _target != null:
 		_target_label.text = "Target: " + _target.entity_name + " [ID:" + str(_target.uid) + "]"
-		print("DEBUG: Target selected - ", _target.entity_name, " using strategy: ", TargetModule.TargettingStrategy.keys()[targeting_strategy])
+		print("DEBUG: Target selected - ", _target.entity_name, " using strategy: ", TargetComponent.TargettingStrategy.keys()[targeting_strategy])
 	else:
 		_target_label.text = "Target: None (strategy returned null)"
-		print("DEBUG: No target found using strategy: ", TargetModule.TargettingStrategy.keys()[targeting_strategy])
+		print("DEBUG: No target found using strategy: ", TargetComponent.TargettingStrategy.keys()[targeting_strategy])
 
 
 func _on_projectile_attack_button_pressed() -> void:
@@ -649,7 +649,7 @@ func _populate_entity_choices() -> void:
 		return
 	
 	# Get all entities using the target module
-	var all_entities: Array[Entity] = entity_owner.target.get_targets(TargetModule.MultipleTargettingStrategy.ALL)
+	var all_entities: Array[Entity] = entity_owner.target.get_targets(TargetComponent.MultipleTargettingStrategy.ALL)
 	
 	if all_entities.is_empty():
 		print("DEBUG: No entities found for entity choice dropdown")

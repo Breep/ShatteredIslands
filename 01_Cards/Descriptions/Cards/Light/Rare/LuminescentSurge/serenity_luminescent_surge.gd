@@ -19,7 +19,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var hp_threshold: float = _base_hp_threshold[card_lvl - 1]
 
 	ctx.periodic_timers.register(&"Luminescent Surge", period, func() -> void:
-		var allies: Array[Entity] = ctx.hero.target.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES)
+		var allies: Array[Entity] = ctx.hero.target.get_targets(TargetComponent.MultipleTargettingStrategy.ALLIES)
 		var valid_allies: Array[Entity] = []
 		for ally: Entity in allies:
 			if ally != null and is_instance_valid(ally) and not ally.is_dead():

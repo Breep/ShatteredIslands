@@ -19,7 +19,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var respawn_timer: float = _respawn_timers[card_lvl - 1]
 
 	ctx.battle_callbacks.register_battle_start(&"Gamma Turret", func() -> void:
-		var targets: Array[Entity] = ctx.hero.target.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES)
+		var targets: Array[Entity] = ctx.hero.target.get_targets(TargetComponent.MultipleTargettingStrategy.ALLIES)
 		var target: Entity = targets.filter(func(e:Entity) -> bool: return not e is GammaTurret).pick_random()
 
 		ctx.hero.summon_sender.summon_entity(Entity.EntityType.GAMMA_TURRET, SpawnLocationConfig.create_entity_relative(target, 2), {

@@ -19,7 +19,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if ctx.hero == null or not is_instance_valid(ctx.hero):
 			return
 
-		var ennemy: Entity = ctx.hero.target.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
+		var ennemy: Entity = ctx.hero.target.get_target(TargetComponent.TargettingStrategy.RANDOM_ENEMY)
 		if ennemy == null or not is_instance_valid(ennemy):
 			return
 

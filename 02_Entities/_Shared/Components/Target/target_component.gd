@@ -95,7 +95,7 @@ var _spawn_manager: SpawnManager
 
 func _ready() -> void:
 	if _owner == null:
-		printerr("TargetModule: TargetModule need a ref to its owner")
+		printerr("TargetComponent: TargetComponent need a ref to its owner")
 		return
 
 
@@ -105,7 +105,7 @@ func connect_to_spawn_manager(spawn_manager: SpawnManager) -> void:
 # ============================== Public functions ==============================
 
 func start() -> void:
-	Verbose.debug("TargetModule: Starting", Verbose.Category.TARGET_MODULE)
+	Verbose.debug("TargetComponent: Starting", Verbose.Category.TARGET_MODULE)
 	_spawn_manager.entity_spawned.connect(_on_spawn_manager_entity_spawned)
 	var entities: Array[Entity] = _spawn_manager.get_entities().filter(func(e):
 		return not e.invisible
@@ -115,7 +115,7 @@ func start() -> void:
 
 
 func stop() -> void:
-	Verbose.debug("TargetModule: Stopping", Verbose.Category.TARGET_MODULE)
+	Verbose.debug("TargetComponent: Stopping", Verbose.Category.TARGET_MODULE)
 	_clear()
 	if _spawn_manager.entity_spawned.is_connected(_on_spawn_manager_entity_spawned):
 		_spawn_manager.entity_spawned.disconnect(_on_spawn_manager_entity_spawned)
@@ -123,9 +123,9 @@ func stop() -> void:
 
 # Get target of the owned entity from a given strategy
 func get_target(targetting_strategy: TargettingStrategy) -> Entity:
-	Verbose.debug("TargetModule: Getting target from strategy: " + TargettingStrategy.keys()[targetting_strategy], Verbose.Category.ENTITY_MODULE)
+	Verbose.debug("TargetComponent: Getting target from strategy: " + TargettingStrategy.keys()[targetting_strategy], Verbose.Category.ENTITY_MODULE)
 	if _owner == null:
-		Verbose.error("TargetModule need a ref to its owner", Verbose.Category.ENTITY_MODULE)
+		Verbose.error("TargetComponent need a ref to its owner", Verbose.Category.ENTITY_MODULE)
 		return null
 	
 	match targetting_strategy:
@@ -168,7 +168,7 @@ func get_target(targetting_strategy: TargettingStrategy) -> Entity:
 		TargettingStrategy.HIGHEST_SHIELD_ENEMIES_HERO: return _get_highest_shield(_enemy_heroes, _owner, true)
 		TargettingStrategy.HIGHEST_SHIELD_ALLIES_HERO: return _get_highest_shield(_ally_heroes, null)
 		
-	push_error("TargetModule: Undef strategy for the TargetModule")
+	push_error("TargetComponent: Undef strategy for the TargetComponent")
 	return null
 
 
@@ -201,7 +201,7 @@ func get_target_from(from_pos: Vector3, targetting_from_strategy: TargettingFrom
 		TargettingFromStrategy.FARTHEST_ENEMY: return _get_farthest_from(from_pos, _enemies, exclude_list)
 		TargettingFromStrategy.FARTHEST_ALLY: return _get_farthest_from(from_pos, _allies, exclude_list)
 	
-	push_error("TargetModule: Unknown TargettingFromStrategy")
+	push_error("TargetComponent: Unknown TargettingFromStrategy")
 	return null
 
 
@@ -231,7 +231,7 @@ func get_targets(strategy: MultipleTargettingStrategy, radius: float = -1.0) -> 
 						returned_entities.append(entity)
 		return returned_entities
 	
-	printerr("TargetModule: Unknown strategy")
+	printerr("TargetComponent: Unknown strategy")
 	var empty: Array[Entity]
 	return empty
 
@@ -531,7 +531,7 @@ func _get_farthest_from(from_pos: Vector3, entities: Array[Entity], exclude_list
 # ============================== Callback ==============================
 func _on_scanning_area_body_exited(body: Node3D) -> void: # TODO à voir comment on gère les morts / queue_free()
 	if not body is Entity:
-		printerr("TargetModule: A body detected by a TargetModule has a Entity mask but is not an entity: [", body.get_path(), "]")
+		printerr("TargetComponent: A body detected by a TargetComponent has a Entity mask but is not an entity: [", body.get_path(), "]")
 		return
 	
 	var entity: Entity = body

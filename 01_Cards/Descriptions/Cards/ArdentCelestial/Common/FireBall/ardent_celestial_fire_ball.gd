@@ -28,7 +28,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		)
 		
 	ctx.periodic_timers.register("Fire Ball", period, func() -> void:
-		var target: Entity = ctx.hero.target.get_target(TargetModule.TargettingStrategy.HIGHEST_HP_PERCENT_HERO_ENEMY)
+		var target: Entity = ctx.hero.target.get_target(TargetComponent.TargettingStrategy.HIGHEST_HP_PERCENT_HERO_ENEMY)
 		if target == null: return
 		ctx.hero.projectile_sender.projectile_attack(target, Projectile.Type.FIRE_BALL, ctx.hero, proj_stats)
 		)

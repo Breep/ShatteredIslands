@@ -36,7 +36,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		ctx.stat_modifiers.register_modifier(mod3)
 		
 		# Apply stuns
-		var ennemies: Array[Entity] = ctx.hero.target.get_targets(TargetModule.MultipleTargettingStrategy.ENEMIES)
+		var ennemies: Array[Entity] = ctx.hero.target.get_targets(TargetComponent.MultipleTargettingStrategy.ENEMIES)
 		for a: Entity in ennemies:
 			if a != null and is_instance_valid(a):
 				ctx.hero.alterations.inflict_status(a, Alteration.Type.STUN, stun_duration, &"Seismic Slam")

@@ -23,7 +23,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var state := {ACCUMULATED_LOSS: 0, LAST_ARMOR: 0}
 
 	var _trigger_shield_throw := func() -> void:
-		var target: Entity = ctx.hero.target.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
+		var target: Entity = ctx.hero.target.get_target(TargetComponent.TargettingStrategy.CLOSEST_ENEMY)
 		if target == null: return
 		var proj_stats := ProjectileStats.new()
 		proj_stats.bounces_remaining = bounce

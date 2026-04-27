@@ -28,7 +28,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	)
 
 	ctx.periodic_timers.register(&"Tainted Blood", period, func() -> void:
-		var target = ctx.hero.target.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
+		var target = ctx.hero.target.get_target(TargetComponent.TargettingStrategy.RANDOM_ENEMY)
 		if target == null or not is_instance_valid(target):
 			return
 

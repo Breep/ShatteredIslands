@@ -18,7 +18,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		#var total_regen: float = count * regen_amount
 		#if total_regen <= 0: return
 #
-		#var allies: Array[Entity] = ctx.hero.target.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES)
+		#var allies: Array[Entity] = ctx.hero.target.get_targets(TargetComponent.MultipleTargettingStrategy.ALLIES)
 		#for ally: Entity in allies:
 			#if ally != null and is_instance_valid(ally) and not ally.is_dead:
 				#ctx.hero.alterations.inflict_condition_stacks(ally, total_regen, Alteration.Type.REGEN, &"Light Collector")

@@ -13,7 +13,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var period: float = _period[card_lvl - 1]
 	
 	ctx.periodic_timers.register(&"Expanse Universe", period, func() -> void:
-		var target: Entity = ctx.hero.target.get_target(TargetModule.TargettingStrategy.HIGHEST_HP_PERCENT_ENEMY)
+		var target: Entity = ctx.hero.target.get_target(TargetComponent.TargettingStrategy.HIGHEST_HP_PERCENT_ENEMY)
 		if target == null: return
 		ctx.hero.alterations.inflict_condition_stacks(target, stacks, Alteration.Type.IGNITE, &"Expanse Universe")
 	)

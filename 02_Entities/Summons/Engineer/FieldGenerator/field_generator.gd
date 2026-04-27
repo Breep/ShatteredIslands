@@ -88,7 +88,7 @@ func _process(_delta: float) -> void:
 
 func _on_shield_timer_timeout() -> void:
 	# Shield closest allies
-	var allies: Array[Entity] = target.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES)
+	var allies: Array[Entity] = target.get_targets(TargetComponent.MultipleTargettingStrategy.ALLIES)
 	
 	# Filter out self and sort by distance
 	var valid_allies: Array[Entity] = []

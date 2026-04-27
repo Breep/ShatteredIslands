@@ -23,7 +23,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	
 	ctx.periodic_timers.register(&"Venomous Darts", period, func() -> void:
 		for i in darts_number:
-			var target: Entity = ctx.hero.target.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
+			var target: Entity = ctx.hero.target.get_target(TargetComponent.TargettingStrategy.RANDOM_ENEMY)
 			if target == null: return
 			var projectile_stats := ProjectileStats.new()
 			projectile_stats.on_hit_callbacks.append(on_hit_callback)

@@ -30,7 +30,7 @@ var FAMILIES: Dictionary[Family.Type, Family] = {
 
 var ENTITY_COMPONENT_SCENES: Dictionary[EntityComponent.Type, PackedScene] = {
 	EntityComponent.Type.MOVEMENT: load("res://02_Entities/_Shared/Modules//MovementModule/movement_module.tscn"),
-	EntityComponent.Type.TARGET: load("res://02_Entities/_Shared/Modules//TargetModule/target.tscn"),
+	EntityComponent.Type.TARGET: load("res://02_Entities/_Shared/Modules//TargetComponent/target.tscn"),
 	EntityComponent.Type.ALTERATIONS: load("res://02_Entities/_Shared/Modules//AlterationsModule/alterations.tscn"),
 	EntityComponent.Type.AUTO_ATTACK_PERIODIC_MODULE: load("res://02_Entities/_Shared/Modules//AutoAttackPeriodicModule/auto_attack_periodic_module.tscn"),
 	

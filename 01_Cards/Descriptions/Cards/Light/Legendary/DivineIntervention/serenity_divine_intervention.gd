@@ -29,7 +29,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		ally.alterations.inflict_condition_stacks(ally, regen, Alteration.Type.REGEN, &"Divine Intervention")
 
 		# Disconnect all allies to save performance (one-time trigger)
-		var allies: Array[Entity] = ctx.hero.target.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES)
+		var allies: Array[Entity] = ctx.hero.target.get_targets(TargetComponent.MultipleTargettingStrategy.ALLIES)
 		for a: Entity in allies:
 			if a != null and is_instance_valid(a):
 				if a.stats.health_changed.is_connected(_on_health_changed):
@@ -37,14 +37,14 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 	ctx.battle_callbacks.register_battle_start(&"Divine Intervention", func() -> void:
 		state[&"triggered"] = false
-		var allies: Array[Entity] = ctx.hero.target.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES)
+		var allies: Array[Entity] = ctx.hero.target.get_targets(TargetComponent.MultipleTargettingStrategy.ALLIES)
 		for ally: Entity in allies:
 			if ally == null or not is_instance_valid(ally): continue
 			if not ally.stats.health_changed.is_connected(_on_health_changed):
 				ally.stats.health_changed.connect(_on_health_changed.bind(ally))
 	)
 	ctx.battle_callbacks.register_battle_end(&"Divine Intervention", func() -> void:
-		var allies: Array[Entity] = ctx.hero.target.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES)
+		var allies: Array[Entity] = ctx.hero.target.get_targets(TargetComponent.MultipleTargettingStrategy.ALLIES)
 		for ally: Entity in allies:
 			if ally == null or not is_instance_valid(ally): continue
 			if ally.stats.health_changed.is_connected(_on_health_changed):
