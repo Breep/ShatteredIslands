@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://6grv80v23lqk"]
-
-[ext_resource type="Script" uid="uid://dlglkc5kvcvjf" path="res://02_Entities/_Shared/Modules/ActionReceiverModule/AddStack/action_receiver_add_stack_module.gd" id="1_wagtb"]
-
-[node name="ActionReceiverAddStackModule" type="Node" unique_id=1741396646]
-script = ExtResource("1_wagtb")

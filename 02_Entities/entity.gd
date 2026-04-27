@@ -90,7 +90,7 @@ var is_targetable: bool:
 # Auto loaded extensions
 var stats: EntityStats
 var alterations_module: AlterationsModule
-var target_module: TargetModule
+var target_module: TargetComponent
 var auto_attack_modifier_registry: AutoAttackModifierRegistry
 var action_modifiers_registry: ActionModifiersRegistry
 var stat_modifiers_registry: EntityStatModifiersRegistry
@@ -105,8 +105,8 @@ var death_modifiers_registry: DeathModifiersRegistry
 
 # Component-based action modules (publicly accessible — call directly, no facades).
 # Damage and Heal are fused (sender + receiver). Others remain split for now.
-var damage: DamageModule
-var heal: HealModule
+var damage: DamageComponent
+var heal: HealComponent
 var add_stack_sender: ActionSenderAddStackModule
 var remove_stack_sender: ActionSenderRemoveStackModule
 var projectile_sender: ActionSenderProjectileModule

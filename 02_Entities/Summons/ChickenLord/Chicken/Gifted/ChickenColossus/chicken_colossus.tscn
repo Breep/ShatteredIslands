@@ -6,7 +6,7 @@
 [ext_resource type="AnimationNodeBlendTree" uid="uid://cgr3043y4f2ee" path="res://02_Entities/Summons/_Shared/default_blendtree.tres" id="4_8f8sq"]
 [ext_resource type="PackedScene" uid="uid://dithaupylit2x" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenColossus/chicken_colossus_visual.tscn" id="5_5tkf2"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://10_Tool/SpawnPoint/spawn_point.tscn" id="5_fpw7i"]
-[ext_resource type="Script" uid="uid://cnwr3o67xobtt" path="res://02_Entities/_Shared/Modules/AnimationModule/entity_animation_player.gd" id="7_uq3l3"]
+[ext_resource type="Script" uid="uid://cnwr3o67xobtt" path="res://02_Entities/_Shared/Components/Animation/entity_animation_player.gd" id="7_uq3l3"]
 [ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/EntityInfoPanel/SummonSimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="8_ea2ri"]
 
 [sub_resource type="Resource" id="Resource_i6opk"]
