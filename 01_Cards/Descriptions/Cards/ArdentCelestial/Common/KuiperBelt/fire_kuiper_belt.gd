@@ -17,7 +17,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	spell_modifier.after_action_logic_callback = func(cb_vars: Dictionary) -> void:
 		if cb_vars.get(ActionModifier.VarType.SPELL_TYPE) != Spell.Type.METEOR: return
 		if shield > 0:
-			ctx.hero.add_stack_sender.inflict_condition_stacks(ctx.hero, shield, Alteration.Type.SHIELD, &"Kuiper Belt")
+			ctx.hero.alterations.inflict_condition_stacks(ctx.hero, shield, Alteration.Type.SHIELD, &"Kuiper Belt")
 	ctx.action_modifiers.register_modifier(spell_modifier)
 
 func get_description(cardlvl: int) -> String:

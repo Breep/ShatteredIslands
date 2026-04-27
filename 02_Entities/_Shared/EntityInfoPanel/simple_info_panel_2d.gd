@@ -3,7 +3,7 @@ extends Control
 
 ## Shared Hero/NPC info-panel base class. Drives the health/shield/block/grid
 ## bars on the main bar, the taunt 3D visual, and a dynamic container of
-## AlterationIcon widgets (populated from the owner's alterations_module via
+## AlterationIcon widgets (populated from the owner's alterations via
 ## the aggregate `alteration_changed` signal — no per-type wiring required).
 
 #region ============================== Export ==============================
@@ -43,7 +43,7 @@ func _ready() -> void:
 		_grid_bar.material = _grid_bar.material.duplicate()
 
 	var stats := _owner_entity.stats
-	var am := _owner_entity.alterations_module
+	var am := _owner_entity.alterations
 
 	_update_health_bar(stats.health, stats.health_max)
 	_update_shield_bar(am.shield_stacks, stats.health_max)
@@ -169,7 +169,7 @@ func _set_health_bar_color_by_team() -> void:
 ## on whether the alteration is currently active on the owner.
 func _refresh_icon_for(alteration_type: Alteration.Type) -> void:
 	if _alterations_container == null or _owner_entity == null: return
-	var am := _owner_entity.alterations_module
+	var am := _owner_entity.alterations
 	if am == null: return
 
 	var alteration: Alteration = am.get_alteration(alteration_type)
@@ -219,14 +219,14 @@ func _on_health_changed(new_health: int) -> void:
 
 func _on_health_max_changed(new_max: int) -> void:
 	_update_health_bar(_owner_entity.stats.health, new_max)
-	_update_shield_bar(_owner_entity.alterations_module.shield_stacks, new_max)
+	_update_shield_bar(_owner_entity.alterations.shield_stacks, new_max)
 
 
 func _on_alteration_changed(alteration_type: Alteration.Type, _payload: Variant) -> void:
 	if alteration_type == Alteration.Type.SHIELD:
-		_update_shield_bar(_owner_entity.alterations_module.shield_stacks, _owner_entity.stats.health_max)
+		_update_shield_bar(_owner_entity.alterations.shield_stacks, _owner_entity.stats.health_max)
 	elif alteration_type == Alteration.Type.BLOCK:
-		_update_block_bar(_owner_entity.alterations_module.block_stacks)
+		_update_block_bar(_owner_entity.alterations.block_stacks)
 	_refresh_icon_for(alteration_type)
 
 

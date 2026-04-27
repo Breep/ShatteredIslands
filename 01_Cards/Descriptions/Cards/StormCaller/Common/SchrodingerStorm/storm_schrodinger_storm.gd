@@ -18,9 +18,9 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			var target: Entity = null
 
 			if target_is_ally:
-				target = ctx.hero.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ALLY_INCLUDING_SELF)
+				target = ctx.hero.target.get_target(TargetModule.TargettingStrategy.RANDOM_ALLY_INCLUDING_SELF)
 			else:
-				target = ctx.hero.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
+				target = ctx.hero.target.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
 
 			if target == null or not is_instance_valid(target) or target.is_dead: return
 
@@ -47,7 +47,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 					final_amount *= 0.5
 
 			if final_amount > 0:
-				ctx.hero.add_stack_sender.inflict_condition_stacks(target, final_amount, stack_type, &"Schrödinger's Storm")
+				ctx.hero.alterations.inflict_condition_stacks(target, final_amount, stack_type, &"Schrödinger's Storm")
 	)
 
 

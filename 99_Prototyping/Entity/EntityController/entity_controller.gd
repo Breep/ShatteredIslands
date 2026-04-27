@@ -157,14 +157,14 @@ func _ready() -> void:
 
 func _refresh_target() -> void:
 	"""Refreshes the target based on the currently selected targeting strategy."""
-	if entity_owner == null or entity_owner.target_module == null:
-		printerr("EntityController: entity_owner or target_module is null")
+	if entity_owner == null or entity_owner.target == null:
+		printerr("EntityController: entity_owner or target is null")
 		_target_label.text = "Error: No entity_owner"
 		_target = null
 		return
 	
 	var targeting_strategy: TargetModule.TargettingStrategy = _targeting_strat_choice.get_selected_id() as TargetModule.TargettingStrategy
-	_target = entity_owner.target_module.get_target(targeting_strategy)
+	_target = entity_owner.target.get_target(targeting_strategy)
 	
 	if _target != null:
 		_target_label.text = "Target: " + _target.entity_name + " [ID:" + str(_target.uid) + "]"
@@ -277,7 +277,7 @@ func _on_inflict_condition_button_pressed() -> void:
 	var duration: float = 5.0 if parts.size() < 2 else parts[1].strip_edges().to_float()
 	var action_id: StringName = &"test_inflict_condition"
 
-	entity_owner.add_stack_sender.inflict_condition_stacks(_target, stacks_number, stack_type, action_id, duration)
+	entity_owner.alterations.inflict_condition_stacks(_target, stacks_number, stack_type, action_id, duration)
 	print("DEBUG: inflict_condition_stacks called - Target: ", _target.entity_name, " | Type: ", Alteration.Type.keys()[stack_type], " | Stacks: ", stacks_number, " | Duration: ", duration)
 
 
@@ -296,7 +296,7 @@ func _on_cleanse_button_pressed() -> void:
 	var value: float = cleanse_text.to_float()
 	var action_id: StringName = &"test_cleanse"
 	
-	entity_owner.remove_stack_sender.cleanse(_target, value, action_id)
+	entity_owner.alterations.cleanse(_target, value, action_id)
 	print("DEBUG: cleanse called - Target: ", _target.entity_name, " | Value: ", value)
 
 
@@ -315,18 +315,18 @@ func _on_dispell_button_pressed() -> void:
 	var value: float = dispell_text.to_float()
 	var action_id: StringName = &"test_dispell"
 	
-	entity_owner.remove_stack_sender.dispell(_target, value, action_id)
+	entity_owner.alterations.dispell(_target, value, action_id)
 	print("DEBUG: dispell called - Target: ", _target.entity_name, " | Value: ", value)
 
 
 func _on_targeting_strat_choice_item_selected(index: int) -> void:
-	if entity_owner == null or entity_owner.target_module == null:
-		printerr("EntityController: entity_owner or target_module is null")
+	if entity_owner == null or entity_owner.target == null:
+		printerr("EntityController: entity_owner or target is null")
 		_target_label.text = "Error: No entity_owner"
 		return
 	
 	var targeting_strategy: TargetModule.TargettingStrategy = index as TargetModule.TargettingStrategy
-	_target = entity_owner.target_module.get_target(targeting_strategy)
+	_target = entity_owner.target.get_target(targeting_strategy)
 	
 	if _target != null:
 		_target_label.text = "Target: " + _target.entity_name + " [ID:" + str(_target.uid) + "]"
@@ -644,12 +644,12 @@ func _populate_entity_choices() -> void:
 	_entity_choice.clear()
 	_all_entities.clear()
 	
-	if entity_owner == null or entity_owner.target_module == null:
-		printerr("EntityController: Cannot populate entity choices - entity_owner or target_module is null")
+	if entity_owner == null or entity_owner.target == null:
+		printerr("EntityController: Cannot populate entity choices - entity_owner or target is null")
 		return
 	
 	# Get all entities using the target module
-	var all_entities: Array[Entity] = entity_owner.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ALL)
+	var all_entities: Array[Entity] = entity_owner.target.get_targets(TargetModule.MultipleTargettingStrategy.ALL)
 	
 	if all_entities.is_empty():
 		print("DEBUG: No entities found for entity choice dropdown")
@@ -786,7 +786,7 @@ func _on_auto_attack_button_pressed() -> void:
 		return
 	
 	_refresh_target()
-	entity_owner.auto_attack_sender.execute_auto_attack(_target)
+	entity_owner.auto_attack.execute_auto_attack(_target)
 	print("DEBUG: auto_attack called")
 
 
@@ -806,7 +806,7 @@ func _on_inflict_status_button_pressed() -> void:
 	var status_duration: float = status_text.to_float()
 	var action_id: StringName = &"test_inflict_status"
 
-	entity_owner.status_sender.inflict_status(_target, status_type, status_duration, action_id)
+	entity_owner.alterations.inflict_status(_target, status_type, status_duration, action_id)
 	print("DEBUG: inflict_status called - Target: ", _target.entity_name, " | Type: ", Alteration.Type.keys()[status_type], " | Duration: ", status_duration)
 
 

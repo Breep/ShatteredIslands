@@ -83,46 +83,44 @@ var uid: int = -1 # Multiplayer ID of the entity
 var _is_targetable: bool = true
 var is_targetable: bool:
 	get:
-		if alterations_module != null:
-			return not alterations_module.has_state(Alteration.Type.UNTARGETABLE)
+		if alterations != null:
+			return not alterations.has_state(Alteration.Type.UNTARGETABLE)
 		return _is_targetable
+
 
 # Auto loaded extensions
 var stats: EntityStats
-var alterations_module: AlterationsModule
-var target_module: TargetComponent
-var auto_attack_modifier_registry: AutoAttackModifierRegistry
-var action_modifiers_registry: ActionModifiersRegistry
-var stat_modifiers_registry: EntityStatModifiersRegistry
 var base_stats: EntityStats:
 	get: return _base_stats
 var spawn_manager: SpawnManager:
 	get: return _spawn_manager
 
+
+# Modifiers
+var auto_attack_modifier_registry: AutoAttackModifierRegistry
+var action_modifiers_registry: ActionModifiersRegistry
+var stat_modifiers_registry: EntityStatModifiersRegistry
+var death_modifiers_registry: DeathModifiersRegistry
 var periodic_timer_registry: PeriodicTimerRegistry
 var battle_callback_registry: BattleCallbackRegistry
-var death_modifiers_registry: DeathModifiersRegistry
 
-# Component-based action modules (publicly accessible — call directly, no facades).
-# Damage and Heal are fused (sender + receiver). Others remain split for now.
+
+# Components
 var damage: DamageComponent
 var heal: HealComponent
-var add_stack_sender: ActionSenderAddStackModule
-var remove_stack_sender: ActionSenderRemoveStackModule
-var projectile_sender: ActionSenderProjectileModule
-var spell_sender: ActionSenderSpellModule
-var summon_sender: ActionSenderSummonModule
-var auto_attack_sender: ActionSenderAutoAttackModule
-var status_sender: ActionSenderStatusModule
-var add_stack_receiver: ActionReceiverAddStackModule
-var remove_stack_receiver: ActionReceiverRemoveStackModule
-var status_receiver: ActionReceiverStatusModule
+var projectile: ProjectileComponent
+var spell: SpellComponent
+var summon: SummonComponent
+var auto_attack: AutoAttackComponent
+var alterations: AlterationsComponent
+var target: TargetComponent
+var movement: MovementComponent
+var animation: AnimationComponent
 #endregion
 
 #region ============================== Private variables ==============================
 var _base_stats: EntityStats # Private, use base_stats property to access
 
-var _movement_module: MovementModule # Optional, can be null
 var _auto_attack_periodic_module: AutoAttackPeriodicModule # Optional, can be null
 var _label_popup_module: LabelPopupModule
 
@@ -141,25 +139,6 @@ var _spawn_ticks_remaining: int = -1
 @export var invisible: bool = false
 @export var custom_base_stats: EntityStats
 
-@export_subgroup("Modules")
-@export var _auto_loaded_modules: Array[Module.ModuleType] = [
-	Module.ModuleType.TARGET,
-	Module.ModuleType.ALTERATIONS,
-	Module.ModuleType.DAMAGE,
-	Module.ModuleType.HEAL,
-	Module.ModuleType.ACTION_SENDER_ADD_STACK,
-	Module.ModuleType.ACTION_SENDER_REMOVE_STACK,
-	Module.ModuleType.ACTION_SENDER_PROJECTILE,
-	Module.ModuleType.ACTION_SENDER_SPELL,
-	Module.ModuleType.ACTION_SENDER_SUMMON,
-	Module.ModuleType.ACTION_SENDER_AUTO_ATTACK,
-	Module.ModuleType.ACTION_SENDER_STATUS,
-	Module.ModuleType.ACTION_RECEIVER_ADD_STACK,
-	Module.ModuleType.ACTION_RECEIVER_REMOVE_STACK,
-	Module.ModuleType.ACTION_RECEIVER_STATUS,
-	Module.ModuleType.LABEL_POPUP_MODULE
-]
-
 @export_subgroup("Visual")
 @export var _visual_3d: Node3D # Visual node for spawn animation
 @export var _health_bar_marker: Marker3D
@@ -168,7 +147,7 @@ var _spawn_ticks_remaining: int = -1
 @export var _projectile_type: Projectile.Type
 
 @export_subgroup("Visual/Animation")
-@export var _animation_module: AnimationModule
+@export var custom_animation_component: AnimationComponent
 @export var spawn_duration: float = 0.5 # Duration of spawn animation in seconds
 @export var skip_spawn_animation: bool = false # Skip spawn animation for instant spawn
 
@@ -242,8 +221,7 @@ func _enter_tree() -> void:
 		Verbose.debug("Entity [" + entity_name + "] using custom_base_stats", Verbose.Category.ENTITY)
 	stat_modifiers_registry = EntityStatModifiersRegistry.new(_base_stats, stats)
 
-	# Auto-load modules from the _auto_loaded_modules list
-	_auto_load_modules()
+	_auto_load_components()
 
 	periodic_timer_registry = PeriodicTimerRegistry.new()
 	periodic_timer_registry.name = "PeriodicTimerRegistry"
@@ -256,8 +234,8 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	# Connect to status signals
-	if alterations_module != null:
-		alterations_module.stunned_changed.connect(_on_stunned_changed)
+	if alterations != null:
+		alterations.stunned_changed.connect(_on_stunned_changed)
 
 	Verbose.trace("Entity [" + entity_name + "_" + str(uid) + "] ready", Verbose.Category.ENTITY)
 
@@ -324,12 +302,12 @@ func get_collision_center() -> Vector3:
 
 
 func process_tick() -> void:
-	if _movement_module != null:
-		_movement_module.process_tick()
+	if movement != null:
+		movement.process_tick()
 	if _auto_attack_periodic_module != null:
 		_auto_attack_periodic_module.process_tick()
-	if alterations_module != null:
-		alterations_module.process_tick()
+	if alterations != null:
+		alterations.process_tick()
 	if _spawn_ticks_remaining > 0:
 		_spawn_ticks_remaining -= 1
 		if _spawn_ticks_remaining == 0:
@@ -361,9 +339,8 @@ func apply_context(context: EntityContext) -> void:
 	_arena_zone_manager = context.arena_zone_manager
 
 	# Connect all sender modules to managers
-	var senders: Array[ActionSenderModule] = [
-		damage, heal, add_stack_sender, remove_stack_sender,
-		projectile_sender, spell_sender, summon_sender, auto_attack_sender
+	var senders: Array[EntityComponent] = [
+		damage, heal, projectile, spell, summon, auto_attack
 	]
 	for module in senders:
 		if module == null: continue
@@ -378,17 +355,17 @@ func connect_to_fighting_area(fighting_area_ref: FightingArea) -> void:
 	if fighting_area_ref == null:
 		Verbose.error("Trying to connect a null fighting area to an Entity", Verbose.Category.ENTITY)
 		return
-
+	
 	_spawn_manager = fighting_area_ref.spawn_manager
-	if projectile_sender != null:
-		projectile_sender.connect_to_spawn_manager(fighting_area_ref.spawn_manager)
-	if spell_sender != null:
-		spell_sender.connect_to_spawn_manager(fighting_area_ref.spawn_manager)
-	if summon_sender != null:
-		summon_sender.connect_to_spawn_manager(fighting_area_ref.spawn_manager)
-		summon_sender.connect_to_arena_zone_manager(fighting_area_ref.arena_zone_manager)
-	if target_module != null:
-		target_module.connect_to_spawn_manager(fighting_area_ref.spawn_manager)
+	if projectile != null:
+		projectile.connect_to_spawn_manager(fighting_area_ref.spawn_manager)
+	if spell != null:
+		spell.connect_to_spawn_manager(fighting_area_ref.spawn_manager)
+	if summon != null:
+		summon.connect_to_spawn_manager(fighting_area_ref.spawn_manager)
+		summon.connect_to_arena_zone_manager(fighting_area_ref.arena_zone_manager)
+	if target != null:
+		target.connect_to_spawn_manager(fighting_area_ref.spawn_manager)
 #endregion
 
 
@@ -404,9 +381,9 @@ func resurrect(hp_percent: float) -> void:
 
 	stats.health = stats.health_max * (hp_percent / 100)
 	life_state = LifeState.ALIVE
-	if target_module != null: target_module.start()
-	if alterations_module != null: alterations_module.start()
-	if _movement_module != null: _movement_module.start()
+	if target != null: target.start()
+	if alterations != null: alterations.start()
+	if movement != null: movement.start()
 	if _auto_attack_periodic_module != null and auto_attack_enabled: _auto_attack_periodic_module.start()
 	resurrected.emit()
 #endregion
@@ -449,52 +426,49 @@ func _complete_spawn() -> void:
 #endregion
 
 #region ============================== Auto loading ==============================
-func _auto_load_modules() -> void:
-	for module_type in _auto_loaded_modules:
-		var module: Module = Shared.ENTITY_MODULE_SCENES[module_type].instantiate().init(self)
-		match module_type:
-			Module.ModuleType.TARGET:
-				target_module = module
-				if _spawn_manager != null: target_module.connect_to_spawn_manager(_spawn_manager)
-			Module.ModuleType.ALTERATIONS: alterations_module = module
-			Module.ModuleType.MOVEMENT: _movement_module = module
-			Module.ModuleType.DAMAGE: damage = module
-			Module.ModuleType.HEAL: heal = module
-			Module.ModuleType.ACTION_SENDER_ADD_STACK: add_stack_sender = module
-			Module.ModuleType.ACTION_SENDER_REMOVE_STACK: remove_stack_sender = module
-			Module.ModuleType.ACTION_SENDER_PROJECTILE:
-				projectile_sender = module
-				if _spawn_manager != null: projectile_sender.connect_to_spawn_manager(_spawn_manager)
-			Module.ModuleType.ACTION_SENDER_SPELL:
-				spell_sender = module
-				if _spawn_manager != null: spell_sender.connect_to_spawn_manager(_spawn_manager)
-			Module.ModuleType.ACTION_SENDER_SUMMON:
-				summon_sender = module
-				if _spawn_manager != null: summon_sender.connect_to_spawn_manager(_spawn_manager)
-				if _arena_zone_manager != null: summon_sender.connect_to_arena_zone_manager(_arena_zone_manager)
-			Module.ModuleType.ACTION_SENDER_AUTO_ATTACK: auto_attack_sender = module
-			Module.ModuleType.ACTION_RECEIVER_ADD_STACK: add_stack_receiver = module
-			Module.ModuleType.ACTION_RECEIVER_REMOVE_STACK: remove_stack_receiver = module
-			Module.ModuleType.ACTION_RECEIVER_STATUS: status_receiver = module
-			Module.ModuleType.ACTION_SENDER_STATUS: status_sender = module
-			Module.ModuleType.AUTO_ATTACK_PERIODIC_MODULE: _auto_attack_periodic_module = module
-			Module.ModuleType.LABEL_POPUP_MODULE: _label_popup_module = module
-
-		add_child(module)
+func _auto_load_components() -> void:
+	damage =  Shared.ENTITY_MODULE_SCENES[EntityComponent.Type.MOVEMENT].instantiate().init(self)
+	heal =  Shared.ENTITY_MODULE_SCENES[EntityComponent.Type.MOVEMENT].instantiate().init(self)
+	projectile =  Shared.ENTITY_MODULE_SCENES[EntityComponent.Type.MOVEMENT].instantiate().init(self)
+	spell =  Shared.ENTITY_MODULE_SCENES[EntityComponent.Type.MOVEMENT].instantiate().init(self)
+	summon =  Shared.ENTITY_MODULE_SCENES[EntityComponent.Type.MOVEMENT].instantiate().init(self)
+	auto_attack =  Shared.ENTITY_MODULE_SCENES[EntityComponent.Type.MOVEMENT].instantiate().init(self)
+	alterations =  Shared.ENTITY_MODULE_SCENES[EntityComponent.Type.MOVEMENT].instantiate().init(self)
+	target =  Shared.ENTITY_MODULE_SCENES[EntityComponent.Type.MOVEMENT].instantiate().init(self)
+	movement =  Shared.ENTITY_MODULE_SCENES[EntityComponent.Type.MOVEMENT].instantiate().init(self)
+	
+	add_child(damage)
+	add_child(heal)
+	add_child(projectile)
+	add_child(spell)
+	add_child(summon)
+	add_child(auto_attack)
+	add_child(alterations)
+	add_child(target)
+	add_child(movement)
 
 
 func _connect_module_dependencies() -> void:
-	if auto_attack_sender != null:
-		auto_attack_sender.connect_modules(_movement_module, _animation_module)
-		auto_attack_sender.set_auto_attack_spawn(_attack_spawn_marker)
-		auto_attack_sender.set_projectile_type(_projectile_type)
+	if _spawn_manager != null:
+		target.connect_to_spawn_manager(_spawn_manager)
+		projectile.connect_to_spawn_manager(_spawn_manager)
+		spell.connect_to_spawn_manager(_spawn_manager)
+		summon.connect_to_spawn_manager(_spawn_manager)
+	
+	if _arena_zone_manager != null:
+		summon.connect_to_arena_zone_manager(_arena_zone_manager)
+	
+	if auto_attack != null:
+		auto_attack.connect_modules(movement, animation)
+		auto_attack.set_auto_attack_spawn(_attack_spawn_marker)
+		auto_attack.set_projectile_type(_projectile_type)
 
 	# Connect periodic module with auto attack sender
-	if _auto_attack_periodic_module != null and auto_attack_sender != null:
-		_auto_attack_periodic_module.connect_modules(auto_attack_sender)
+	if _auto_attack_periodic_module != null and auto_attack != null:
+		_auto_attack_periodic_module.connect_modules(auto_attack)
 
-	if _animation_module != null:
-		_animation_module.connect_modules(auto_attack_sender)
+	if animation != null:
+		animation.connect_modules(auto_attack)
 
 	if _label_popup_module != null:
 		_label_popup_module.connect_marker(_health_bar_marker)
@@ -505,23 +479,23 @@ func _on_fighting_state_changed(new_fighting_state: FightingState) -> void:
 	Verbose.debug("Entity [" + entity_name + "] fighting state changed to [" + str(FightingState.keys()[new_fighting_state]) + "]", Verbose.Category.ENTITY)
 	match new_fighting_state:
 		FightingState.IDLE:
-			if target_module != null: target_module.stop()
-			if alterations_module != null: alterations_module.stop()
-			if _movement_module != null: _movement_module.stop()
+			if target != null: target.stop()
+			if alterations != null: alterations.stop()
+			if movement != null: movement.stop()
 			if _auto_attack_periodic_module != null and auto_attack_enabled: _auto_attack_periodic_module.stop()
 			if periodic_timer_registry != null: periodic_timer_registry.stop_all()
 			if battle_callback_registry != null: battle_callback_registry.execute_battle_end()
 		FightingState.FIGHTING:
-			if target_module != null: target_module.start()
-			if alterations_module != null: alterations_module.start()
-			if _movement_module != null: _movement_module.start()
+			if target != null: target.start()
+			if alterations != null: alterations.start()
+			if movement != null: movement.start()
 			if _auto_attack_periodic_module != null and auto_attack_enabled: _auto_attack_periodic_module.start()
 			if periodic_timer_registry != null: periodic_timer_registry.start_all()
 			if battle_callback_registry != null: battle_callback_registry.execute_battle_start()
 		FightingState.CELEBRATING:
-			if target_module != null: target_module.stop()
-			if alterations_module != null: alterations_module.stop()
-			if _movement_module != null: _movement_module.stop()
+			if target != null: target.stop()
+			if alterations != null: alterations.stop()
+			if movement != null: movement.stop()
 			if _auto_attack_periodic_module != null: _auto_attack_periodic_module.stop()
 			if periodic_timer_registry != null: periodic_timer_registry.stop_all()
 			if battle_callback_registry != null: battle_callback_registry.execute_battle_end()
@@ -544,9 +518,9 @@ func _on_died() -> void:
 	life_state = LifeState.DEAD # Set life state
 
 	# Visual and module cleanup
-	if target_module != null: target_module.stop()
-	if alterations_module != null: alterations_module.stop()
-	if _movement_module != null: _movement_module.stop()
+	if target != null: target.stop()
+	if alterations != null: alterations.stop()
+	if movement != null: movement.stop()
 	if _auto_attack_periodic_module != null and auto_attack_enabled: _auto_attack_periodic_module.stop()
 	if periodic_timer_registry != null: periodic_timer_registry.stop_all()
 

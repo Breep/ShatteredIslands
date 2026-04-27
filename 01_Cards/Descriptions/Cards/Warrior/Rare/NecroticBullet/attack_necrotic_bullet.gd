@@ -20,7 +20,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if not Utils.is_randomize_modifier_active(chance, ctx.hero.battle_id): return
 		var target = cb_vars.get(AutoAttackModifier.VarType.TARGET)
 		if target == null or not is_instance_valid(target): return
-		ctx.hero.add_stack_sender.inflict_condition_stacks(target, stacks, Alteration.Type.NECROSIS, &"Necrotic Bullet")
+		ctx.hero.alterations.inflict_condition_stacks(target, stacks, Alteration.Type.NECROSIS, &"Necrotic Bullet")
 
 	ctx.battle_callbacks.register_battle_start(&"Necrotic Bullet", func() -> void:
 		ctx.auto_attack_modifiers.register_modifier(aa_mod)

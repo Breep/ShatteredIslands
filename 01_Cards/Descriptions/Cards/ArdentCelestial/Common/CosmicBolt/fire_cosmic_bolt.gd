@@ -15,7 +15,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if not cb_vars.has(AutoAttackModifier.VarType.TARGET): return
 		var target: Entity = cb_vars[AutoAttackModifier.VarType.TARGET]
 		if target == null or target.is_queued_for_deletion(): return
-		ctx.hero.add_stack_sender.inflict_condition_stacks(target, _stacks[card_lvl - 1], Alteration.Type.IGNITE, "CosmicBolt")
+		ctx.hero.alterations.inflict_condition_stacks(target, _stacks[card_lvl - 1], Alteration.Type.IGNITE, "CosmicBolt")
 	ctx.hero.auto_attack_modifier_registry.register_modifier(mod)
 
 

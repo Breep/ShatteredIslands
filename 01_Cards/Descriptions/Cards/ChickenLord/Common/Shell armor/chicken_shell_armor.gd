@@ -10,8 +10,8 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	ctx.hero.families_stats.chicken_lord.on_chicken_spawned_callbacks.append(func(cb_vars: Dictionary) -> void:
 		var chicken: Chicken = cb_vars.get(FamilyChickenLordStats.CbVars.SELF_CHICKEN)
 		if not is_instance_valid(chicken): return
-		if chicken.alterations_module != null:
-			chicken.alterations_module.add_stack(Alteration.Type.BLOCK, block_stack)
+		if chicken.alterations != null:
+			chicken.alterations.add_stack(Alteration.Type.BLOCK, block_stack)
 	)
 
 

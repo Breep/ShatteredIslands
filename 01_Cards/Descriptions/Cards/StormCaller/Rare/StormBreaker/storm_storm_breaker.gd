@@ -14,11 +14,11 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	storm_stats.on_lightning_callbacks.append(
 		func(target: Entity, _rank: StormCallerManager.Rank, rank_mult: float) -> void:
 			if target == null or not is_instance_valid(target): return
-			if target.alterations_module == null: return
+			if target.alterations == null: return
 			var added_percent: float = base_percent * rank_mult
 			if added_percent <= 0: return
 
-			target.alterations_module.add_typed_stack(Alteration.Type.VULNERABILITY, Utils.ActionType.DAMAGE_PHYSICAL, added_percent)
+			target.alterations.add_typed_stack(Alteration.Type.VULNERABILITY, Utils.ActionType.DAMAGE_PHYSICAL, added_percent)
 	)
 
 

@@ -1,5 +1,5 @@
 class_name AutoAttackPeriodicModule
-extends Module
+extends EntityComponent
 
 # ============================== Signals ==============================
 
@@ -19,7 +19,7 @@ var attack_speed: float:
 		_attack_speed = value
 		_recalculate_interval()
 
-var _attack_strategy: TargetModule.TargettingStrategy = TargetModule.TargettingStrategy.RANDOM_ENEMY
+var _attack_strategy: TargetComponent.TargettingStrategy = TargetComponent.TargettingStrategy.RANDOM_ENEMY
 
 var _current_target: Entity
 var current_target: Entity:
@@ -35,7 +35,7 @@ var _ticks_remaining: int = 60 # Countdown to next attack
 var _is_active: bool = false
 
 # Module references
-var _auto_attack_module: ActionSenderAutoAttackModule = null
+var _auto_attack_module: AutoAttackComponent = null
 
 # ============================== Node base function ==============================
 
@@ -48,11 +48,11 @@ func _ready() -> void:
 	_owner.stats.attack_speed_changed.connect(_on_owner_stats_attack_speed_changed)
 	_owner.died.connect(_on_owner_died)
 	
-	if _owner.alterations_module != null:
-		_owner.alterations_module.stunned_changed.connect(_on_owner_stunned_changed)
+	if _owner.alterations != null:
+		_owner.alterations.stunned_changed.connect(_on_owner_stunned_changed)
 
 
-func connect_modules(auto_attack_module: ActionSenderAutoAttackModule) -> void:
+func connect_modules(auto_attack_module: AutoAttackComponent) -> void:
 	_auto_attack_module = auto_attack_module
 	# Listen for attack completion to restart cooldown
 	if _auto_attack_module != null:
@@ -133,7 +133,7 @@ func _try_auto_attack() -> void:
 	if _auto_attack_module == null:
 		return
 	
-	var target: Entity = _owner.target_module.get_target(_attack_strategy)
+	var target: Entity = _owner.target.get_target(_attack_strategy)
 	if target == null:
 		# No target found, retry next tick
 		_ticks_remaining = 1

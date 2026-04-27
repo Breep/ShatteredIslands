@@ -49,12 +49,12 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		state[&"accumulated_loss"] = 0.0
 		state[&"attacks_left"] = 0
 		state[&"is_activated"] = false
-		if not ctx.hero.alterations_module.shield_stack_broken.is_connected(_on_shield_broken):
-			ctx.hero.alterations_module.shield_stack_broken.connect(_on_shield_broken)
+		if not ctx.hero.alterations.shield_stack_broken.is_connected(_on_shield_broken):
+			ctx.hero.alterations.shield_stack_broken.connect(_on_shield_broken)
 	)
 	ctx.battle_callbacks.register_battle_end(&"Reflecto Belt", func() -> void:
-		if ctx.hero.alterations_module.shield_stack_broken.is_connected(_on_shield_broken):
-			ctx.hero.alterations_module.shield_stack_broken.disconnect(_on_shield_broken)
+		if ctx.hero.alterations.shield_stack_broken.is_connected(_on_shield_broken):
+			ctx.hero.alterations.shield_stack_broken.disconnect(_on_shield_broken)
 		if state[&"is_activated"]:
 			ctx.auto_attack_modifiers.unregister_modifier(&"Reflecto Belt")
 			state[&"is_activated"] = false

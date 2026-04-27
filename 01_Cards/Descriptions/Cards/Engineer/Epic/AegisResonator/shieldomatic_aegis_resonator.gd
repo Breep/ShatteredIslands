@@ -15,11 +15,11 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	ctx.periodic_timers.register(&"Aegis Resonator", period, func() -> void:
 		if not is_instance_valid(ctx.hero): return
 		
-		var allies: Array[Entity] = ctx.hero.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES)
+		var allies: Array[Entity] = ctx.hero.target.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES)
 		var shield_distribution: Array[float] = Utils.get_randf_distribution(shield, allies.size(), ctx.hero.battle_id)
 		for i in allies.size():
 			var shield_gain: float = shield_distribution[i]
-			ctx.hero.add_stack_sender.inflict_condition_stacks(allies[i], shield_gain, Alteration.Type.SHIELD, &"Aegis Resonator")
+			ctx.hero.alterations.inflict_condition_stacks(allies[i], shield_gain, Alteration.Type.SHIELD, &"Aegis Resonator")
 			ShieldVfxSpawner.spawn_on(allies[i])
 	)
 

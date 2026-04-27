@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://d3omj3umkgu70"]
+
+[ext_resource type="Script" uid="uid://b7a5kgnri6s5g" path="res://02_Entities/_Shared/Components/Spell/spell_component.gd" id="1_fvf5e"]
+
+[node name="ActionSenderSpellModule" type="Node" unique_id=1756178883]
+script = ExtResource("1_fvf5e")

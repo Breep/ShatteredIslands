@@ -35,7 +35,7 @@ func apply_passive() -> void:
 	scale_mod.value = SCALE_INCREASE[level - 1] / 100.0
 	_owner.stat_modifiers_registry.register_modifier(scale_mod)
 
-	if _owner.alterations_module != null:
-		_owner.alterations_module.add_stack(Alteration.Type.DEFENSE, DEFENCE_FLAT[level - 1])
+	if _owner.alterations != null:
+		_owner.alterations.add_stack(Alteration.Type.DEFENSE, DEFENCE_FLAT[level - 1])
 
 #endregion

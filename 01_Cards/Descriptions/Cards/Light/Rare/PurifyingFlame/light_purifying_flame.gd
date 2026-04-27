@@ -13,9 +13,9 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var period: float = _period[card_lvl - 1]
 
 	ctx.periodic_timers.register(&"Purifying Flame", period, func() -> void:
-		var target: Entity = ctx.hero.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ALLY_INCLUDING_SELF)
+		var target: Entity = ctx.hero.target.get_target(TargetModule.TargettingStrategy.RANDOM_ALLY_INCLUDING_SELF)
 		if target == null: return
-		ctx.hero.remove_stack_sender.cleanse(target, amount, &"Purifying Flame")
+		ctx.hero.alterations.cleanse(target, amount, &"Purifying Flame")
 	)
 
 

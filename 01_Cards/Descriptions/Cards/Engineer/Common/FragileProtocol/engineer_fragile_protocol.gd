@@ -9,9 +9,9 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		printerr("Fragile Protocole: Wrong card_lvl: ", card_lvl)
 		return
 	
-	if ctx.hero.alterations_module != null:
-		ctx.hero.alterations_module.add_typed_stack(Alteration.Type.WEAKNESS, Utils.ActionType.UTILITY_HEAL, _heal_resistance[card_lvl - 1])
-		ctx.hero.alterations_module.add_typed_stack(Alteration.Type.STRENGTH, Utils.ActionType.STACK_SHIELD, _shield_power[card_lvl - 1])
+	if ctx.hero.alterations != null:
+		ctx.hero.alterations.add_typed_stack(Alteration.Type.WEAKNESS, Utils.ActionType.UTILITY_HEAL, _heal_resistance[card_lvl - 1])
+		ctx.hero.alterations.add_typed_stack(Alteration.Type.STRENGTH, Utils.ActionType.STACK_SHIELD, _shield_power[card_lvl - 1])
 
 
 func get_description(cardlvl: int) -> String:

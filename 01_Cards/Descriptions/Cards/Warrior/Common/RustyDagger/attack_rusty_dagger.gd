@@ -20,7 +20,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if not Utils.is_randomize_modifier_active(chance, ctx.hero.battle_id): return
 		var target: Entity = _cb_vars.get(AutoAttackModifier.VarType.TARGET)
 		if target == null: return
-		ctx.hero.add_stack_sender.inflict_condition_stacks(target, stacks, Alteration.Type.POISON, &"Rusty Dagger")
+		ctx.hero.alterations.inflict_condition_stacks(target, stacks, Alteration.Type.POISON, &"Rusty Dagger")
 
 	ctx.battle_callbacks.register_battle_start(&"Rusty Dagger", func() -> void:
 		ctx.auto_attack_modifiers.register_modifier(aa_mod)

@@ -32,7 +32,7 @@ func _ready() -> void:
 	_visual.scale = Vector3.ZERO
 	stats.health_max = _max_health
 	stats.health = stats.health_max
-	alterations_module.add_stack(Alteration.Type.SHIELD, _shield_amount, self, "Field Generator")
+	alterations.add_stack(Alteration.Type.SHIELD, _shield_amount, self, "Field Generator")
 	
 	# Visual pop
 	var pop := create_tween()
@@ -88,7 +88,7 @@ func _process(_delta: float) -> void:
 
 func _on_shield_timer_timeout() -> void:
 	# Shield closest allies
-	var allies: Array[Entity] = target_module.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES)
+	var allies: Array[Entity] = target.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES)
 	
 	# Filter out self and sort by distance
 	var valid_allies: Array[Entity] = []

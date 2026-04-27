@@ -27,7 +27,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			if target == ctx.hero or target.team != ctx.hero.team or target.is_dead():
 				continue
 			projectile.retarget(ctx.hero)
-			ctx.hero.add_stack_sender.inflict_condition_stacks(
+			ctx.hero.alterations.inflict_condition_stacks(
 				ctx.hero, shield_amount, Alteration.Type.SHIELD,
 				&"Aether Redirector"
 			)

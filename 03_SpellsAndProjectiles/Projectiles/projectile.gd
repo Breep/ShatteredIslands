@@ -157,11 +157,11 @@ func retarget(new_target: Entity) -> void:
 func _handle_bounce(from_target: Entity) -> void:
 	_stats.bounces_remaining -= 1
 
-	if not _source or not _source.target_module:
+	if not _source or not _source.target:
 		queue_free()
 		return
 
-	var new_target := _source.target_module.get_target_from(
+	var new_target := _source.target.get_target_from(
 		from_target.global_position,
 		TargetModule.TargettingFromStrategy.CLOSEST_ENEMY,
 		_hit_history

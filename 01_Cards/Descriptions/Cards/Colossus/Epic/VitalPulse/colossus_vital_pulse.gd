@@ -15,7 +15,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	ctx.hero.add_child(vfx)
 
 	ctx.periodic_timers.register(&"Vital Pulse", period, func() -> void:
-		var targets: Array[Entity] = ctx.hero.target_module.get_targets(
+		var targets: Array[Entity] = ctx.hero.target.get_targets(
 			TargetModule.MultipleTargettingStrategy.ENEMIES
 		)
 		if targets.is_empty():

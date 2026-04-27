@@ -67,7 +67,7 @@ func _process_zap(target: Entity) -> void:
 
 func _find_next_target(current_pos_entity: Entity) -> Entity:
 	if _source == null: return null
-	var enemies = _source.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ENEMIES)
+	var enemies = _source.target.get_targets(TargetModule.MultipleTargettingStrategy.ENEMIES)
 	var possible_targets: Array[Entity] = []
 	for enemy in enemies:
 		if is_instance_valid(enemy) and not enemy.is_dead and enemy != current_pos_entity:

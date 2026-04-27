@@ -14,14 +14,14 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	
 	ctx.periodic_timers.register(&"Magnetic Siphon", period, func() -> void:
 		if not is_instance_valid(ctx.hero): return
-		var target: Entity = ctx.hero.target_module.get_target(TargetModule.TargettingStrategy.HIGHEST_SHIELD_ENEMIES_HERO)
+		var target: Entity = ctx.hero.target.get_target(TargetModule.TargettingStrategy.HIGHEST_SHIELD_ENEMIES_HERO)
 		if not is_instance_valid(target): return
-		var highest_shield: float = target.alterations_module.shield_stacks
+		var highest_shield: float = target.alterations.shield_stacks
 		if highest_shield <= 0: return
 		var steal_amount: float = highest_shield * percent / 100.0
 		if steal_amount <= 0: return
-		target.alterations_module.remove_stack(Alteration.Type.SHIELD, steal_amount)
-		ctx.hero.add_stack_sender.inflict_condition_stacks(ctx.hero, steal_amount, Alteration.Type.SHIELD, &"Magnetic Siphon")
+		target.alterations.remove_stack(Alteration.Type.SHIELD, steal_amount)
+		ctx.hero.alterations.inflict_condition_stacks(ctx.hero, steal_amount, Alteration.Type.SHIELD, &"Magnetic Siphon")
 	)
 
 

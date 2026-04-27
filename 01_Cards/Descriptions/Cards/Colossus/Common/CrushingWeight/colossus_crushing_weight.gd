@@ -10,8 +10,8 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		printerr("Crushing Weight: Wrong card_lvl: ", card_lvl)
 		return
 
-	if ctx.hero.alterations_module != null:
-		ctx.hero.alterations_module.add_typed_stack(Alteration.Type.STRENGTH, Utils.ActionType.STATUS_STUN, _stun_increase_percents[card_lvl - 1])
+	if ctx.hero.alterations != null:
+		ctx.hero.alterations.add_typed_stack(Alteration.Type.STRENGTH, Utils.ActionType.STATUS_STUN, _stun_increase_percents[card_lvl - 1])
 
 
 

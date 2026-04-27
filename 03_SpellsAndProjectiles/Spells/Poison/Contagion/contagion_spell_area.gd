@@ -31,9 +31,9 @@ func _on_enemy_died(victim: Entity) -> void:
 		return
 	if victim.team == _entity_owner.team: return
 	
-	var poison_stacks: int = int(float(victim.alterations_module.poison_stacks) * _spread_percent / 100.0)
+	var poison_stacks: int = int(float(victim.alterations.poison_stacks) * _spread_percent / 100.0)
 	if poison_stacks <= 0: return
 	
-	var targets: Array[Entity] = victim.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES, _radius)
+	var targets: Array[Entity] = victim.target.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES, _radius)
 	for target in targets:
-		target.add_stack_receiver.take_condition_stacks(poison_stacks, Alteration.Type.POISON, false, "Contagion")
+		target.alterations.take_condition_stacks(poison_stacks, Alteration.Type.POISON, false, "Contagion")

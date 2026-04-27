@@ -1,5 +1,5 @@
-class_name AnimationModule
-extends Node
+class_name AnimationComponent
+extends EntityComponent
 
 const IDLE_VAR_TIMER_MIN_WAIT_TIME: float = 5.0
 const IDLE_VAR_TIMER_MAX_WAIT_TIME: float = 15.0
@@ -74,7 +74,7 @@ func _ready() -> void:
 	_animation_tree.set(PARAM_TRANSITION_FIGHTING, VALUE_TRANSITION_FIGHTING_IDLE)
 
 
-func connect_modules(auto_attack_module: ActionSenderAutoAttackModule) -> void:
+func connect_modules(auto_attack_module: AutoAttackComponent) -> void:
 	if auto_attack_module != null:
 		auto_attack_module.attack_started.connect(_on_entity_owner_auto_attack_started)
 

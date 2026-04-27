@@ -26,7 +26,7 @@ func _ready() -> void:
 	take_status(Alteration.Type.INVULNERABLE, -1, "Invulnerable")
 	take_status(Alteration.Type.UNTARGETABLE, -1, "Untargetable")
 	stat_modifiers_registry.recompute_all()
-	_movement_module.orbit_entity(summoner, 2, 2, MovementModule.OrbitFacing.ANTI_CENTER)
+	movement.orbit_entity(summoner, 2, 2, MovementModule.OrbitFacing.ANTI_CENTER)
 	_despawn_timer = -1 # No despawn
 	super._ready()
 
@@ -56,7 +56,7 @@ func _on_resurrected() -> void:
 	tween.tween_property(_visual_3d, "rotation:z", 0.0, 0.8) \
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	tween.chain().tween_callback(func() -> void:
-		_movement_module.orbit_entity(summoner, 2, 2, MovementModule.OrbitFacing.ANTI_CENTER)
+		movement.orbit_entity(summoner, 2, 2, MovementModule.OrbitFacing.ANTI_CENTER)
 	)
 
 

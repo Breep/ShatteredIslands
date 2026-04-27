@@ -13,14 +13,14 @@ func init(regen_stack_ratio: float, heal_strength_inherited: float) -> Summon:
 
 func _ready() -> void:
 	
-	if alterations_module != null:
-		alterations_module.add_typed_stack(Alteration.Type.STRENGTH, Utils.ActionType.UTILITY_HEAL, _heal_strength_inherited)
+	if alterations != null:
+		alterations.add_typed_stack(Alteration.Type.STRENGTH, Utils.ActionType.UTILITY_HEAL, _heal_strength_inherited)
 	
 	var mod := AutoAttackModifier.new()
 	mod.id = "Chicken Regen Stack"
 	mod.is_one_time_effect = false
 	mod.additional_effect_callback = func(_cb_vars: Dictionary) -> void:
-		var target: Entity = target_module.get_target(TargetModule.TargettingStrategy.RANDOM_HERO_ALLY)
+		var target: Entity = target.get_target(TargetModule.TargettingStrategy.RANDOM_HERO_ALLY)
 		if target == null or target.is_queued_for_deletion(): return
 		if Utils.is_randomize_modifier_active(_regen_stack_ratio*100, battle_id):
 			inflict_condition_stacks(target, _stacks_number, Alteration.Type.REGEN, "Chicken")

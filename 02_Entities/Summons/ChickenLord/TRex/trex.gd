@@ -28,8 +28,8 @@ func _ready() -> void:
 	mod.id = "Ancestral Gauge"
 	stat_modifiers_registry.register_modifier(mod)
 
-	if alterations_module != null:
-		alterations_module.add_stack(Alteration.Type.DEFENSE, 15.0)
+	if alterations != null:
+		alterations.add_stack(Alteration.Type.DEFENSE, 15.0)
 
 	if _primal_shake_period > 0:
 		periodic_timer_registry.register("Primal Shake", _primal_shake_period, func() -> void:

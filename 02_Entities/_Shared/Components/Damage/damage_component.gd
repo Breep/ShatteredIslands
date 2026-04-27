@@ -2,8 +2,7 @@ class_name DamageComponent
 extends EntityComponent
 
 # Component-based damage module: handles both outgoing (direct/direct_percent)
-# and incoming (take/take_percent) damage. Fused from former
-# ActionSenderDamageModule + ActionReceiverDamageModule.
+# and incoming (take/take_percent) damage.
 
 # ============================== Public functions ==============================
 
@@ -37,12 +36,12 @@ func direct_percent(target: Entity, damage_percent: float, damage_type: Utils.Ac
 
 func take(damage: float, damage_type: Utils.ActionType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
 	if _owner.is_dead(): return 0
-	if _owner.alterations_module != null and _owner.alterations_module.has_state(Alteration.Type.INVULNERABLE): return 0
+	if _owner.alterations != null and _owner.alterations.has_state(Alteration.Type.INVULNERABLE): return 0
 	if damage_type != Utils.ActionType.DAMAGE_PURE and multiplayer.is_server():
 		damage *= _get_resistance_exposure_multiplier(damage_type)
 		if is_critical:
 			damage *= _get_crit_resistance_multiplier(damage_type)
-		damage = _owner.alterations_module.get_shield_reduced_damage(damage, damage_type)
+		damage = _owner.alterations.get_shield_reduced_damage(damage, damage_type)
 		if _is_dodged(damage_type, source):
 			_owner.action_dodged.emit(source, damage_type, damage, is_critical)
 			return 0
@@ -79,45 +78,13 @@ func _handle_life_steal(damage_done: float, damage_type: Utils.ActionType) -> vo
 
 
 func _is_blocked(damage_type: Utils.ActionType) -> bool:
-	if _owner.alterations_module == null: return false
-	return _owner.alterations_module.block_alteration.try_consume(damage_type)
+	if _owner.alterations == null: return false
+	return _owner.alterations.block_alteration.try_consume(damage_type)
 
 
 func _handle_thorn(source: Entity, action_id: StringName) -> void:
 	if action_id != &"auto_attack": return
-	if _owner.alterations_module == null: return
-	var thorn: float = _owner.alterations_module.thorn_alteration.get_return_damage()
+	if _owner.alterations == null: return
+	var thorn: float = _owner.alterations.thorn_alteration.get_return_damage()
 	if thorn >= 1 and is_instance_valid(source):
 		direct(source, thorn, Utils.ActionType.DAMAGE_PHYSICAL, &"Thorn")
-
-
-# ============================== Receiver helpers (inlined from former ActionReceiverModule) ==============================
-
-static var _global_dodge_number: int = 0
-var _dodge_number: int = -1
-
-
-func _is_dodged(action_type: Utils.ActionType, source: Entity) -> bool:
-	var dodge_chance: float = _owner.stats.get_stat(EntityStats.StatType.DODGE, action_type)
-	_dodge_number += 1
-	if Utils.is_randomize_modifier_active(dodge_chance, _owner.battle_id, "dodge_check_" + str(_global_dodge_number)):
-		_global_dodge_number += 1
-		for dodge_modifier: ActionModifier in _owner.action_modifiers_registry.consume_all_modifiers(Utils.ActionCategory.DODGE):
-			if dodge_modifier.after_action_logic_callback.is_valid():
-				dodge_modifier.after_action_logic_callback.call({
-					ActionModifier.VarType.DODGE_NUMBER: _dodge_number,
-					ActionModifier.VarType.TARGET: source
-				})
-		return true
-	return false
-
-
-func _get_resistance_exposure_multiplier(action_type: Utils.ActionType) -> float:
-	var res: float = _owner.stats.get_stat(EntityStats.StatType.RESISTANCE, action_type)
-	var exposure: float = _owner.stats.get_stat(EntityStats.StatType.EXPOSURE, action_type)
-	return (100 + exposure) / (100 + res)
-
-
-func _get_crit_resistance_multiplier(action_type: Utils.ActionType) -> float:
-	var res: float = _owner.stats.get_stat(EntityStats.StatType.CRIT_RESISTANCE, action_type)
-	return 100.0 / (100.0 + res)

@@ -35,13 +35,13 @@ func _ready() -> void:
 	base_stats.attack_speed = _as
 	stat_modifiers_registry.recompute_all()
 	if not is_instance_valid(_master): _master = summoner
-	_movement_module.orbit_entity(_master, 2, 1, MovementModule.OrbitFacing.NONE)
+	movement.orbit_entity(_master, 2, 1, MovementModule.OrbitFacing.NONE)
 	_master.died.connect(_on_master_died)
 	_despawn_timer = -1 # No despawn
 	if _auto_attack_periodic_module != null:
 		_auto_attack_periodic_module._attack_strategy = TargetModule.TargettingStrategy.CLOSEST_ENEMY_SUMMON
 	super._ready()
-	alterations_module.add_stack(Alteration.Type.SHIELD, _shield, _master, &"Gamma Turret")
+	alterations.add_stack(Alteration.Type.SHIELD, _shield, _master, &"Gamma Turret")
 	if _auto_attack_sender != null:
 		_auto_attack_sender.attack_started.connect(func(_lock_seconds: float) -> void:
 			(_visual_3d as TurretVisual).play_shoot_animation()
@@ -53,13 +53,13 @@ func _on_master_died() -> void:
 
 
 func _find_new_master() -> void:
-	var ally: Entity = target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ALLY)
+	var ally: Entity = target.get_target(TargetModule.TargettingStrategy.RANDOM_ALLY)
 	if ally == null: return
 	if is_instance_valid(_master) and _master.died.is_connected(_on_master_died):
 		_master.died.disconnect(_on_master_died)
 	_master = ally
 	_master.died.connect(_on_master_died)
-	_movement_module.orbit_entity(_master, 2, 1, MovementModule.OrbitFacing.NONE)
+	movement.orbit_entity(_master, 2, 1, MovementModule.OrbitFacing.NONE)
 
 
 func _on_died() -> void:
@@ -72,7 +72,7 @@ func _on_died() -> void:
 
 func _on_resurrected() -> void:
 	super._on_resurrected()
-	alterations_module.add_stack(Alteration.Type.SHIELD, _shield, summoner, &"Gamma Turret")
+	alterations.add_stack(Alteration.Type.SHIELD, _shield, summoner, &"Gamma Turret")
 	var tween := create_tween().set_parallel()
 	tween.tween_property(_visual_3d, "position:y", 2.8, 0.8) \
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)

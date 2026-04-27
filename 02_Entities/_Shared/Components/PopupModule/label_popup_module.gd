@@ -1,5 +1,5 @@
 class_name LabelPopupModule
-extends Module
+extends EntityComponent
 
 @export var _popup_marker: Marker3D
 
@@ -26,8 +26,8 @@ func _ready() -> void:
 	_owner.action_dodged.connect(_on_owner_action_dodged)
 	_owner.action_blocked.connect(_on_owner_action_blocked)
 
-	if _owner.alterations_module:
-		_owner.alterations_module.shield_stacks_changed.connect(_on_owner_shield_stacks_changed)
+	if _owner.alterations:
+		_owner.alterations.shield_stacks_changed.connect(_on_owner_shield_stacks_changed)
 
 
 func _spawn(popup: LabelPopup) -> void:

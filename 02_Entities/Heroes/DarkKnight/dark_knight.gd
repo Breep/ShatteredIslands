@@ -103,7 +103,7 @@ func cast_ultimate() -> void:
 # ============================== Private function ==============================
 
 func _cast_ultimate() -> void:
-	var target = target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
+	var target = target.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
 	if target == null:
 		return
 	var spell_modifier: Dictionary = {

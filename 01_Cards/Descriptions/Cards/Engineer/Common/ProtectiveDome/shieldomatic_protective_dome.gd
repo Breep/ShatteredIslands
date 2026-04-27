@@ -35,13 +35,13 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 	ctx.battle_callbacks.register_battle_start(&"Protective Dome", func() -> void:
 		state[&"is_active"] = false
-		if not ctx.hero.alterations_module.shield_stacks_changed.is_connected(_on_shield_changed):
-			ctx.hero.alterations_module.shield_stacks_changed.connect(_on_shield_changed)
-		_update_modifier.call(float(ctx.hero.alterations_module.shield_stacks))
+		if not ctx.hero.alterations.shield_stacks_changed.is_connected(_on_shield_changed):
+			ctx.hero.alterations.shield_stacks_changed.connect(_on_shield_changed)
+		_update_modifier.call(float(ctx.hero.alterations.shield_stacks))
 	)
 	ctx.battle_callbacks.register_battle_end(&"Protective Dome", func() -> void:
-		if ctx.hero.alterations_module.shield_stacks_changed.is_connected(_on_shield_changed):
-			ctx.hero.alterations_module.shield_stacks_changed.disconnect(_on_shield_changed)
+		if ctx.hero.alterations.shield_stacks_changed.is_connected(_on_shield_changed):
+			ctx.hero.alterations.shield_stacks_changed.disconnect(_on_shield_changed)
 		# Force deactivate
 		if state[&"is_active"]:
 			var mod := StatModifier.new()

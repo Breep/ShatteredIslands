@@ -23,7 +23,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var state := {ACCUMULATED_LOSS: 0, LAST_ARMOR: 0}
 
 	var _trigger_shield_throw := func() -> void:
-		var target: Entity = ctx.hero.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
+		var target: Entity = ctx.hero.target.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
 		if target == null: return
 		var proj_stats := ProjectileStats.new()
 		proj_stats.bounces_remaining = bounce
@@ -36,7 +36,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			if damage > 0:
 				ctx.hero.damage.direct(hit_target, damage, Utils.ActionType.DAMAGE_MAGICAL, &"Shield Throw")
 			if shield_return > 0:
-				ctx.hero.add_stack_sender.inflict_condition_stacks(ctx.hero, shield_return, Alteration.Type.SHIELD, &"Shield Throw")
+				ctx.hero.alterations.inflict_condition_stacks(ctx.hero, shield_return, Alteration.Type.SHIELD, &"Shield Throw")
 		)
 		ctx.hero.projectile_sender.projectile_attack(target, Projectile.Type.SHIELD_THROW, ctx.hero, proj_stats)
 
@@ -54,13 +54,13 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 	ctx.battle_callbacks.register_battle_start(&"Shield Throw", func() -> void:
 		state[ACCUMULATED_LOSS] = 0
-		state[LAST_ARMOR] = ctx.hero.alterations_module.shield_stacks
-		if not ctx.hero.alterations_module.shield_stacks_changed.is_connected(_on_shield_changed):
-			ctx.hero.alterations_module.shield_stacks_changed.connect(_on_shield_changed)
+		state[LAST_ARMOR] = ctx.hero.alterations.shield_stacks
+		if not ctx.hero.alterations.shield_stacks_changed.is_connected(_on_shield_changed):
+			ctx.hero.alterations.shield_stacks_changed.connect(_on_shield_changed)
 	)
 	ctx.battle_callbacks.register_battle_end(&"Shield Throw", func() -> void:
-		if ctx.hero.alterations_module.shield_stacks_changed.is_connected(_on_shield_changed):
-			ctx.hero.alterations_module.shield_stacks_changed.disconnect(_on_shield_changed)
+		if ctx.hero.alterations.shield_stacks_changed.is_connected(_on_shield_changed):
+			ctx.hero.alterations.shield_stacks_changed.disconnect(_on_shield_changed)
 	)
 
 

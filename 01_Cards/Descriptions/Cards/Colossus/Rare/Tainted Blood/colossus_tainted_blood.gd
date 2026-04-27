@@ -28,7 +28,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	)
 
 	ctx.periodic_timers.register(&"Tainted Blood", period, func() -> void:
-		var target = ctx.hero.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
+		var target = ctx.hero.target.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
 		if target == null or not is_instance_valid(target):
 			return
 
@@ -56,7 +56,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if is_instance_valid(_orb_visual):
 			_orb_visual.launch_projectile(target, is_poison)
 
-		ctx.hero.add_stack_sender.inflict_condition_stacks(target, stacks, stack_type, &"Tainted Blood")
+		ctx.hero.alterations.inflict_condition_stacks(target, stacks, stack_type, &"Tainted Blood")
 	)
 
 

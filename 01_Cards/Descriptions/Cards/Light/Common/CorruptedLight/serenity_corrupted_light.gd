@@ -15,7 +15,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if value <= 0: return
 		var damage_amount: float = value * (conversion / 100.0)
 		if damage_amount <= 0: return
-		var enemy: Entity = ctx.hero.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
+		var enemy: Entity = ctx.hero.target.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
 		if enemy == null: return
 		ctx.hero.damage.direct(enemy, damage_amount, Utils.ActionType.DAMAGE_MAGICAL, &"Corrupted Light")
 

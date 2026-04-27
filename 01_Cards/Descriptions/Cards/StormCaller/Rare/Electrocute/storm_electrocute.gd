@@ -17,7 +17,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		func(target: Entity, _rank: StormCallerManager.Rank, _rank_mult: float) -> void:
 			if target == null or not is_instance_valid(target): return
 			if Utils.is_randomize_modifier_active(chance, ctx.hero.battle_id):
-				ctx.hero.add_stack_sender.inflict_condition_stacks(target, necrosis_amount, Alteration.Type.NECROSIS, &"Electrocute")
+				ctx.hero.alterations.inflict_condition_stacks(target, necrosis_amount, Alteration.Type.NECROSIS, &"Electrocute")
 	)
 
 

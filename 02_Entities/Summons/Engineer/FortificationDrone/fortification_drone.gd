@@ -91,14 +91,14 @@ func _link_to_an_ally(ally: Entity) -> void:
 	if not _linked_ally.died.is_connected(_on_linked_ally_died):
 		_linked_ally.died.connect(_on_linked_ally_died)
 	
-	if _movement_module != null:
-		_movement_module.orbit_entity(ally, 4.0, -0.3)
+	if movement != null:
+		movement.orbit_entity(ally, 4.0, -0.3)
 
 
 func _change_linked_ally() -> void:
-	var ally: Entity = target_module.get_target(TargetModule.TargettingStrategy.LOWEST_HP_PERCENT_HERO_ALLY)
+	var ally: Entity = target.get_target(TargetModule.TargettingStrategy.LOWEST_HP_PERCENT_HERO_ALLY)
 	if ally == null:
-		ally = target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ALLY)
+		ally = target.get_target(TargetModule.TargettingStrategy.RANDOM_ALLY)
 	if ally == null: return
 	_link_to_an_ally(ally)
 	_shield_count = 0
@@ -114,9 +114,9 @@ func _periodic_beam_callback() -> void:
 
 
 func _on_spawn_completed() -> void:
-	var ally: Entity = target_module.get_target(TargetModule.TargettingStrategy.LOWEST_HP_PERCENT_HERO_ALLY)
+	var ally: Entity = target.get_target(TargetModule.TargettingStrategy.LOWEST_HP_PERCENT_HERO_ALLY)
 	if ally == null:
-		ally = target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ALLY)
+		ally = target.get_target(TargetModule.TargettingStrategy.RANDOM_ALLY)
 	if ally == null: return
 	_link_to_an_ally(ally)
 

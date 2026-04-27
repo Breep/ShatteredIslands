@@ -19,7 +19,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var hp_threshold: float = _base_hp_threshold[card_lvl - 1]
 
 	ctx.periodic_timers.register(&"Luminescent Surge", period, func() -> void:
-		var allies: Array[Entity] = ctx.hero.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES)
+		var allies: Array[Entity] = ctx.hero.target.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES)
 		var valid_allies: Array[Entity] = []
 		for ally: Entity in allies:
 			if ally != null and is_instance_valid(ally) and not ally.is_dead():
@@ -44,7 +44,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			if max_hp > 0:
 				var hp_percent: float = (current_hp / max_hp) * 100.0
 				if hp_percent < hp_threshold and regen_amount > 0:
-					ctx.hero.add_stack_sender.inflict_condition_stacks(ally, regen_amount, Alteration.Type.REGEN, &"Luminescent Surge")
+					ctx.hero.alterations.inflict_condition_stacks(ally, regen_amount, Alteration.Type.REGEN, &"Luminescent Surge")
 	)
 
 
