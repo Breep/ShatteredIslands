@@ -1,0 +1,16 @@
+[gd_resource type="AnimationLibrary" format=3 uid="uid://dtrexanlibr01"]
+
+[ext_resource type="Animation" uid="uid://cyw2dbmbty8is" path="res://Entities/Summons/ChickenLord/TRex/Data/Animations/ATTACK.res" id="1_llc72"]
+[ext_resource type="Animation" uid="uid://c8737bhecne17" path="res://Entities/Summons/ChickenLord/TRex/Data/Animations/DIE.res" id="2_l8hlq"]
+[ext_resource type="Animation" uid="uid://coao3g8fovuhs" path="res://Entities/Summons/ChickenLord/TRex/Data/Animations/IDLE.res" id="3_0tdv4"]
+[ext_resource type="Animation" uid="uid://bem0g2iu0ohwg" path="res://Entities/Summons/ChickenLord/TRex/Data/Animations/SHAKE.res" id="4_e3ph3"]
+[ext_resource type="Animation" uid="uid://65ob2wixoscn" path="res://Entities/Summons/ChickenLord/TRex/Data/Animations/WALK.res" id="5_3ddof"]
+
+[resource]
+_data = {
+&"ATTACK": ExtResource("1_llc72"),
+&"DIE": ExtResource("2_l8hlq"),
+&"IDLE": ExtResource("3_0tdv4"),
+&"SHAKE": ExtResource("4_e3ph3"),
+&"WALK": ExtResource("5_3ddof")
+}

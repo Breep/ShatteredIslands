@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://k6w1gjtwhmq"]
+
+[ext_resource type="PackedScene" uid="uid://d4ncdeoumxhcs" path="res://Entities/Summons/Engineer/DeflectionShield/_shield_10.tscn" id="1_l8uy0"]
+
+[node name="DeflectionShieldVisual" type="Node3D" unique_id=1149126980]
+
+[node name="_shield_10" parent="." unique_id=1826967505 instance=ExtResource("1_l8uy0")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.04640338, -0.36710745, 0)

@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bnlsiihxk2wvm"]
+
+[ext_resource type="Texture2D" uid="uid://d0kk1263s6oo8" path="res://Entities/Summons/ChickenLord/Chicken/Gifted/ChickenEngineer/T_chickenengineer/T_chickenengineer_BC.png" id="1_ephg6"]
+[ext_resource type="Texture2D" uid="uid://ujjerp4sb65v" path="res://Entities/Summons/ChickenLord/Chicken/Gifted/ChickenEngineer/T_chickenengineer/T_chickenengineer_N.png" id="2_e6353"]
+[ext_resource type="Texture2D" uid="uid://b2ommmqunbpur" path="res://Entities/Summons/ChickenLord/Chicken/Gifted/ChickenEngineer/T_chickenengineer/T_chickenengineer_MR.png" id="2_t5e5b"]
+
+[resource]
+albedo_texture = ExtResource("1_ephg6")
+roughness_texture = ExtResource("2_t5e5b")
+normal_enabled = true
+normal_texture = ExtResource("2_e6353")

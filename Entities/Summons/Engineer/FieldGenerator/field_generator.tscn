@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://duktgfjjcgm60"]
+
+[ext_resource type="Script" uid="uid://cl757ua1nwcpr" path="res://Entities/Summons/Engineer/FieldGenerator/field_generator.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://fe7g12v4g3lb" path="res://Entities/Summons/Poison/SnakeBarrel/snake_barrel_visual.tscn" id="2_visual"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_main"]
+height = 0.9581299
+radius = 0.44580078
+
+[node name="FieldGenerator" type="CharacterBody3D" unique_id=288668566]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("1_script")
+entity_name = "Field Generator"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=532825943]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4631958, 0)
+shape = SubResource("CylinderShape3D_main")
+
+[node name="Visual" parent="." unique_id=947504122 instance=ExtResource("2_visual")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
