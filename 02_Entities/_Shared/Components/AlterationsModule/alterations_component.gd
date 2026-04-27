@@ -1,5 +1,5 @@
-class_name AlterationsModule
-extends Module
+class_name AlterationsComponent
+extends EntityComponent
 
 ## Unified module for every Alteration on an entity.
 ## Alterations are held in a `Alteration.Type → Alteration` dictionary;

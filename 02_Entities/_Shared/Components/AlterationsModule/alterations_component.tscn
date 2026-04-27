@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bwqbwmqc0pk6p"]
+
+[ext_resource type="Script" uid="uid://5tgyr0vtwm1b" path="res://02_Entities/_Shared/Components/AlterationsModule/alterations_component.gd" id="1_n2uog"]
+
+[node name="AlterationsModule" type="Node" unique_id=1446375483]
+script = ExtResource("1_n2uog")
