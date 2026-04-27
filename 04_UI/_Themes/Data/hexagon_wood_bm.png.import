@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://b4wqg0i3374xw"
+path="res://.godot/imported/hexagon_wood_bm.png-7e01387da11a2ae274528f13e72795db.res"
+
+[deps]
+
+source_file="res://04_UI/_Themes/Data/hexagon_wood_bm.png"
+dest_files=["res://.godot/imported/hexagon_wood_bm.png-7e01387da11a2ae274528f13e72795db.res"]
+
+[params]
+
+create_from=0
+threshold=0.5

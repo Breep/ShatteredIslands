@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://cdx0b83egtugp"]
+
+[ext_resource type="PackedScene" uid="uid://c1goibqlf12t3" path="res://03_SpellsAndProjectiles/Projectiles/ShieldThrow/shield_throw_visual.tscn" id="1_827r1"]
+[ext_resource type="Script" uid="uid://dky1clxj0r0wo" path="res://03_SpellsAndProjectiles/Projectiles/ShieldThrow/shield_throw_projectile.gd" id="1_x5v4l"]
+[ext_resource type="Script" uid="uid://xr3esthqo6re" path="res://03_SpellsAndProjectiles/Projectiles/Trajectories/straight_trajectory.gd" id="2_h42ot"]
+
+[sub_resource type="Resource" id="Resource_632w7"]
+script = ExtResource("2_h42ot")
+metadata/_custom_type_script = "uid://xr3esthqo6re"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_x5v4l"]
+radius = 0.2
+
+[node name="ShieldThrow" type="Area3D" unique_id=2117542230]
+collision_layer = 2
+collision_mask = 16
+script = ExtResource("1_x5v4l")
+trajectory = SubResource("Resource_632w7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=212256128]
+shape = SubResource("SphereShape3D_x5v4l")
+
+[node name="ShieldThrowVisual" parent="." unique_id=613543317 instance=ExtResource("1_827r1")]

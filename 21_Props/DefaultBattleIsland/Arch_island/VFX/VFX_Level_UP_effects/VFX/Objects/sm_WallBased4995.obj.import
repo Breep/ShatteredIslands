@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://5umfg406hnfw"
+path="res://.godot/imported/sm_WallBased4995.obj-35a880750a61261512c17dce34fc6376.mesh"
+
+[deps]
+
+files=["res://.godot/imported/sm_WallBased4995.obj-35a880750a61261512c17dce34fc6376.mesh"]
+
+source_file="res://21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Objects/sm_WallBased4995.obj"
+dest_files=["res://.godot/imported/sm_WallBased4995.obj-35a880750a61261512c17dce34fc6376.mesh", "res://.godot/imported/sm_WallBased4995.obj-35a880750a61261512c17dce34fc6376.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

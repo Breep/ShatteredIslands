@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://b6lyxftbneqy"]
+
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme.tres" id="1_fftwn"]
+[ext_resource type="Script" uid="uid://d0bm2pkkcp3db" path="res://04_UI/InGame/HeroSelection/ui_hero_portrait_button.gd" id="3_uh3hr"]
+[ext_resource type="Shader" uid="uid://ba1avekvq4s1o" path="res://22_VFX/VFX_2D/UI/vortex_selector_v2.gdshader" id="4_6i4xs"]
+[ext_resource type="Texture2D" uid="uid://251if7lh55vt" path="res://20_Data/Texture/Kenney2/scratch 3.png" id="5_6bbru"]
+[ext_resource type="Texture2D" uid="uid://1bc5vvkoe4ur" path="res://20_Data/Heroes/Portraits/darkknight.png" id="6_kdn62"]
+[ext_resource type="Script" uid="uid://dqqxecxho5t70" path="res://22_VFX/VFX_2D/UI/react_mouse.gd" id="7_1r36m"]
+[ext_resource type="Texture2D" uid="uid://bj57cwjv0ep4w" path="res://20_Data/Heroes/Portraits/unkown.png" id="7_5y33r"]
+
+[sub_resource type="Gradient" id="Gradient_1d3l3"]
+offsets = PackedFloat32Array(0, 0.235294, 0.463235, 0.698529, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.227451, 0, 0, 1, 0.16765, 0.118264, 0.473579, 1, 0, 0, 0, 1, 0.541176, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_20ndy"]
+gradient = SubResource("Gradient_1d3l3")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pbbth"]
+shader = ExtResource("4_6i4xs")
+shader_parameter/speed = 5.0
+shader_parameter/wave_frequency = Vector2(10, 6)
+shader_parameter/wave_amplitude = 0.05
+shader_parameter/noise_texture = ExtResource("5_6bbru")
+shader_parameter/color_gradient = SubResource("GradientTexture1D_20ndy")
+shader_parameter/mouse_pos = Vector2(0, 0)
+shader_parameter/node_size = Vector2(0, 0)
+shader_parameter/effect_radius = 0.25
+shader_parameter/repulsion_force = 0.2
+shader_parameter/glow_intensity = 0.0
+shader_parameter/seal_points = 5.0
+shader_parameter/seal_sharpness = 0.15
+shader_parameter/max_zoom = 4.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_01uy0"]
+
+[node name="HeroPortraitButton" type="Control" node_paths=PackedStringArray("_portrait", "_button")]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 3
+anchor_right = 0.434
+anchor_bottom = 0.772
+offset_right = 0.0319824
+offset_bottom = -0.256012
+size_flags_horizontal = 3
+theme = ExtResource("1_fftwn")
+script = ExtResource("3_uh3hr")
+_portrait = NodePath("MarginContainer/Portrait")
+_button = NodePath("Button")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="shader" type="TextureRect" parent="MarginContainer"]
+material = SubResource("ShaderMaterial_pbbth")
+layout_mode = 2
+texture = ExtResource("6_kdn62")
+expand_mode = 1
+script = ExtResource("7_1r36m")
+
+[node name="Portrait" type="TextureRect" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("7_5y33r")
+expand_mode = 1
+
+[node name="Button" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_01uy0")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

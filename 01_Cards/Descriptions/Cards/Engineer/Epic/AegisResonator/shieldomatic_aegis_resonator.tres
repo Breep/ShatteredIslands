@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://c2fbdsokd2ayt"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_3bkb0"]
+[ext_resource type="Texture2D" uid="uid://2o2rsjtula7w" path="res://01_Cards/Descriptions/Cards/Engineer/Epic/AegisResonator/shieldomatic_aegis_resonator.webp" id="1_kbf8l"]
+[ext_resource type="Script" uid="uid://cmukiiufdo4gw" path="res://01_Cards/Descriptions/Cards/Engineer/Epic/AegisResonator/shieldomatic_aegis_resonator.gd" id="2_g3i55"]
+
+[sub_resource type="Resource" id="Resource_po815"]
+script = ExtResource("2_g3i55")
+_period = Array[float]([8.0, 8.0, 8.0])
+_shared_shields = Array[float]([200.0, 350.0, 500.0])
+_rarity = 2
+metadata/_custom_type_script = "uid://cmukiiufdo4gw"
+
+[resource]
+script = ExtResource("1_3bkb0")
+name = "Aegis Resonator"
+picture = ExtResource("1_kbf8l")
+families = Array[int]([2])
+rarity = 2
+player_upgrade = SubResource("Resource_po815")
+points = Dictionary[int, int]({
+2: 3
+})
+lvl = 2
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

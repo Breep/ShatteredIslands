@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://do44qn4g8pq5j"]
-
-[ext_resource type="Script" uid="uid://dww5vaa16clx8" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/Events/fighting_event_registry.gd" id="1_vecm3"]
-
-[node name="FightingEventRegistry" type="Node"]
-script = ExtResource("1_vecm3")

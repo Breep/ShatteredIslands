@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="Family" format=3 uid="uid://cbmvayb0bb72n"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_4dvmk"]
+[ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://01_Cards/Templates/family.gd" id="2_m6yig"]
+[ext_resource type="Resource" uid="uid://lvbuorya4vkq" path="res://01_Cards/Descriptions/Cards/Warrior/Common/AimAssist/attack_aim_assist.tres" id="2_pxftt"]
+[ext_resource type="Resource" uid="uid://cmri5y5lsw4pe" path="res://01_Cards/Descriptions/Cards/Warrior/Common/ArcaneStaff/attack_arcane_staff.tres" id="3_hfo1r"]
+[ext_resource type="Resource" uid="uid://bhogu6m1synt8" path="res://01_Cards/Descriptions/Cards/Warrior/Common/DiamondSword/attack_diamond_sword.tres" id="4_3gyb5"]
+[ext_resource type="Resource" uid="uid://cj6hexnvedxmb" path="res://01_Cards/Descriptions/Cards/Warrior/Common/FightBack/attack_fight_back.tres" id="5_5yvjh"]
+[ext_resource type="Resource" uid="uid://qm75h7gw2hgn" path="res://01_Cards/Descriptions/Cards/Warrior/Common/HealingCrossbow/attack_healing_crossbow.tres" id="6_o6pym"]
+[ext_resource type="Resource" uid="uid://ceriu6ydblll8" path="res://01_Cards/Descriptions/Cards/Warrior/Rare/NecroticBullet/attack_necrotic_bullet.tres" id="7_4yplm"]
+[ext_resource type="Resource" uid="uid://dm4yi57mem0b4" path="res://01_Cards/Descriptions/Cards/Warrior/Common/ProtectoSpear/attack_protecto_spear.tres" id="8_4xqgf"]
+[ext_resource type="Resource" uid="uid://dxr7p12a3u5s0" path="res://01_Cards/Descriptions/Cards/Warrior/Common/RustyDagger/attack_rusty_dagger.tres" id="9_bh88q"]
+[ext_resource type="Texture2D" uid="uid://b78s362n5bu6" path="res://01_Cards/Descriptions/Families/Icons/warrior.png" id="9_m74lt"]
+[ext_resource type="Resource" uid="uid://dpnpvtk3elac0" path="res://01_Cards/Descriptions/Cards/Warrior/Common/ScorchingBlade/attack_scorching_blade.tres" id="10_aq1hw"]
+[ext_resource type="Resource" uid="uid://ctm6ojtt36a88" path="res://01_Cards/Descriptions/Cards/Warrior/Common/TwinBlade/attack_twin_blade.tres" id="12_m0m1f"]
+[ext_resource type="Resource" uid="uid://c526xnq31ipht" path="res://01_Cards/Descriptions/Cards/Warrior/DoubleEdgeSword/attack_double_edge_sword.tres" id="13_j4n54"]
+[ext_resource type="Resource" uid="uid://3vjmnbpyyjyk" path="res://01_Cards/Descriptions/Cards/Warrior/Epic/GatlingGun/attack_gatling_gun.tres" id="14_d48eo"]
+[ext_resource type="Resource" uid="uid://dq5i43mqjqg38" path="res://01_Cards/Descriptions/Cards/Warrior/Epic/StormHammer/attack_storm_hammer.tres" id="15_53lib"]
+[ext_resource type="Resource" uid="uid://b1hnvijka2dfw" path="res://01_Cards/Descriptions/Cards/Warrior/Legendary/RussianRoulette/attack_russian_roulette.tres" id="16_21jcm"]
+[ext_resource type="Resource" uid="uid://b76twqciou5cu" path="res://01_Cards/Descriptions/Cards/Warrior/Rare/BladeRush/attack_blade_rush.tres" id="17_pgyqe"]
+[ext_resource type="Resource" uid="uid://50ga6somnl7u" path="res://01_Cards/Descriptions/Cards/Warrior/Common/TitanAxe/attack_titan_axe.tres" id="18_pxftt"]
+[ext_resource type="Resource" uid="uid://5vemx42gusi2" path="res://01_Cards/Descriptions/Cards/Warrior/Rare/SurgicalKnife/attack_surgical_knife.tres" id="18_x260t"]
+
+[resource]
+script = ExtResource("2_m6yig")
+cards = Array[ExtResource("1_4dvmk")]([ExtResource("2_pxftt"), ExtResource("3_hfo1r"), ExtResource("4_3gyb5"), ExtResource("5_5yvjh"), ExtResource("6_o6pym"), ExtResource("7_4yplm"), ExtResource("8_4xqgf"), ExtResource("9_bh88q"), ExtResource("10_aq1hw"), ExtResource("12_m0m1f"), ExtResource("13_j4n54"), ExtResource("14_d48eo"), ExtResource("15_53lib"), ExtResource("16_21jcm"), ExtResource("17_pgyqe"), ExtResource("18_x260t"), ExtResource("18_pxftt")])
+icon = ExtResource("9_m74lt")
+family_name = "Warrior"
+family_type = 1
+color = Color(0.299547, 0.299547, 0.299547, 1)
+metadata/_custom_type_script = "uid://d3wk3nm7f672j"

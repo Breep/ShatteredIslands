@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://cgtjgnjuwmx4f"
+path="res://.godot/imported/cercle_mask.png-b5d0bec6a2ad9408c331543216311782.res"
+
+[deps]
+
+source_file="res://99_Prototyping/UI/UIFamiliesPortraits/Data/cercle_mask.png"
+dest_files=["res://.godot/imported/cercle_mask.png-b5d0bec6a2ad9408c331543216311782.res"]
+
+[params]
+
+create_from=0
+threshold=0.5

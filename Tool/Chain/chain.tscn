@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c4iv26adgresi"]
-
-[ext_resource type="Script" uid="uid://d2ld27ubnd8v7" path="res://Tool/Chain/chain.gd" id="1_aelac"]
-
-[node name="Chain" type="Node3D"]
-script = ExtResource("1_aelac")
-_linear_limit_softness = null
-_linear_limit_restitution = null
-_linear_limit_damping = null

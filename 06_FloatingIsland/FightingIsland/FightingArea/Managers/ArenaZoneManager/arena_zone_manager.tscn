@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dvuq5n41nak3u"]
+
+[ext_resource type="Script" uid="uid://dtyhsf68o40l7" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/ArenaZoneManager/arena_zone_manager.gd" id="1_osm8h"]
+
+[node name="ArenaZoneManager" type="Node" unique_id=641704685]
+script = ExtResource("1_osm8h")

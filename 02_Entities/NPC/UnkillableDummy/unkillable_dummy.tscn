@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cgpo42ll6udn0"]
+
+[ext_resource type="Script" uid="uid://dmsd0030ytu4l" path="res://02_Entities/NPC/UnkillableDummy/unkillable_dummy.gd" id="1_t3v77"]
+[ext_resource type="PackedScene" uid="uid://jjd3kidthudx" path="res://02_Entities/NPC/Bartender/sk_chr_bartender_01.tscn" id="2_r11gi"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hbony"]
+radius = 0.31933594
+height = 1.802002
+
+[node name="UnkillableDummy" type="CharacterBody3D"]
+script = ExtResource("1_t3v77")
+metadata/_custom_type_script = "uid://cpih8vqoolap4"
+
+[node name="SK_Chr_Bartender_01" parent="." instance=ExtResource("2_r11gi")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.883667, 0)
+shape = SubResource("CapsuleShape3D_hbony")

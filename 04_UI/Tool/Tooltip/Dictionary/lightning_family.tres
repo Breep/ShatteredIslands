@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TooltipDesc" format=3]
+
+[ext_resource type="Script" uid="uid://cr1qi4s4jv5f7" path="res://04_UI/Tool/Tooltip/Dictionary/tooltip_desc.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+key = &"LIGHTNING"
+title = "{{COLOR:LIGHTNING_COLOR}}LIGHTNING{{/COLOR}}"
+description = "Family specialized in critical effect."
+icon_key = "LIGHTNING_FAMILY_ICON"

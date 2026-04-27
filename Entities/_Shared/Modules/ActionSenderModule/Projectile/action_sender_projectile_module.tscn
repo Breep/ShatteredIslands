@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://bs4s1q2lh701b"]
-
-[ext_resource type="Script" uid="uid://cungme3l8pma5" path="res://Entities/_Shared/Modules/ActionSenderModule/Projectile/action_sender_projectile_module.gd" id="1_tr57w"]
-
-[node name="ActionSenderProjectileModule" type="Node" unique_id=1541550506]
-script = ExtResource("1_tr57w")

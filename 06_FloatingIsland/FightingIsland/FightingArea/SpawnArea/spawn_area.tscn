@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dibux7uwcsatj"]
+
+[ext_resource type="Script" uid="uid://bbt7fd120caj5" path="res://06_FloatingIsland/FightingIsland/FightingArea/SpawnArea/spawn_area.gd" id="1_on7ks"]
+
+[node name="SpawnArea" type="Area3D"]
+script = ExtResource("1_on7ks")
+metadata/Team = 0

@@ -1,0 +1,43 @@
+[gd_scene format=4 uid="uid://dy0jhgh54qp70"]
+
+[ext_resource type="Material" uid="uid://b8113nhomexb6" path="res://21_Props/DefaultBattleIsland/Arch_island/foliage/m_foliage.tres" id="1_4qyn1"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_1k67n"]
+_surfaces = [{
+"aabb": AABB(-88.54932, 0, -35.54681, 88.54932, 1e-05, 35.54681),
+"format": 34359742465,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAAADAAEA"),
+"name": "foliage.008",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("QBmxwgAAAAAAAACAAACAtu8vjijvLw7CAACAtgAAAAAAAACAQBmxwu8vjijvLw7C")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_rf83i"]
+resource_name = "grass1_Mesh_009"
+lightmap_size_hint = Vector2i(6, 6)
+_surfaces = [{
+"aabb": AABB(-88.54932, 0, -35.54681, 88.54932, 1e-05, 35.54681),
+"attribute_data": PackedByteArray("4vIXP/THLj6rqqo9q6qqPXDWRz94GrI9q6pqP6uqaj+Iq0c/7LAwPquqqj2rqmo/yx0YP4hIrj2rqmo/q6qqPQ=="),
+"format": 34359742519,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAAADAAEA"),
+"material": ExtResource("1_4qyn1"),
+"name": "foliage.008",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("QBmxwgAAAAAAAACAAACAtu8vjijvLw7CAACAtgAAAAAAAACAQBmxwu8vjijvLw7C/3//////jcD/f/////+NwP9//////43A/3//////jcA=")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_1k67n")
+
+[node name="grass1" type="Node3D" unique_id=1382120003]
+
+[node name="grass1" type="MeshInstance3D" parent="." unique_id=320553837]
+transform = Transform3D(0.01, 0, 0, 0, 0, -0.01, 0, 0.01, 0, 0, 0, 0)
+mesh = SubResource("ArrayMesh_rf83i")
+skeleton = NodePath("")

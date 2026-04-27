@@ -1,0 +1,135 @@
+[gd_scene format=3 uid="uid://doypbfvj7sv0o"]
+
+[ext_resource type="PackedScene" uid="uid://cp8df4bxwetqx" path="res://04_UI/InGame/DpsMeter/ui_dps_meter.tscn" id="1_dps"]
+[ext_resource type="Script" uid="uid://ds3yv7lvilibh" path="res://04_UI/InGame/DpsMeter/Prototyping/prototyping_dps_meter.gd" id="2_proto"]
+
+[node name="PrototypingDpsMeter" type="Control" unique_id=2118327913 node_paths=PackedStringArray("_dps_meter", "_hero_count_spinbox", "_hero_selector", "_status_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_proto")
+_dps_meter = NodePath("HBoxContainer/PanelContainer/Control/UiDpsMeter")
+_hero_count_spinbox = NodePath("HBoxContainer/ControlsPanel/MarginContainer/ScrollContainer/VBoxContainer/HeroCountSection/HeroCountSpinBox")
+_hero_selector = NodePath("HBoxContainer/ControlsPanel/MarginContainer/ScrollContainer/VBoxContainer/HeroSelector")
+_status_label = NodePath("HBoxContainer/ControlsPanel/MarginContainer/ScrollContainer/VBoxContainer/StatusLabel")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1170110983]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="ControlsPanel" type="PanelContainer" parent="HBoxContainer" unique_id=889144024]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/ControlsPanel" unique_id=1759097830]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/ControlsPanel/MarginContainer" unique_id=1602036414]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/ControlsPanel/MarginContainer/ScrollContainer" unique_id=2050544707]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="TitleLabel" type="Label" parent="HBoxContainer/ControlsPanel/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1501403276]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "DPS Meter Prototyping"
+horizontal_alignment = 1
+
+[node name="Separator1" type="HSeparator" parent="HBoxContainer/ControlsPanel/MarginContainer/ScrollContainer/VBoxContainer" unique_id=469854743]
+layout_mode = 2
+
+[node name="HeroCountLabel" type="Label" parent="HBoxContainer/ControlsPanel/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1404729571]
+layout_mode = 2
+text = "Hero count:"
+
+[node name="HeroCountSection" type="HBoxContainer" parent="HBoxContainer/ControlsPanel/MarginContainer/ScrollContainer/VBoxContainer" unique_id=27387483]
+layout_mode = 2
+
+[node name="HeroCountSpinBox" type="SpinBox" parent="HBoxContainer/ControlsPanel/MarginContainer/ScrollContainer/VBoxContainer/HeroCountSection" unique_id=1008658425]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 8.0
+value = 4.0
+
+[node name="SetupButton" type="Button" parent="HBoxContainer/ControlsPanel/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1274848852]
+layout_mode = 2
+text = "Setup Heroes"
+
+[node name="Separator2" type="HSeparator" parent="HBoxContainer/ControlsPanel/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1782203135]
+layout_mode = 2
+
+[node name="HeroSelectorLabel" type="Label" parent="HBoxContainer/ControlsPanel/MarginContainer/ScrollContainer/VBoxContainer" unique_id=565535088]
+layout_mode = 2
+text = "Select hero (detail view):"
+
+[node name="HeroSelector" type="OptionButton" parent="HBoxContainer/ControlsPanel/MarginContainer/ScrollContainer/VBoxContainer" unique_id=73015306]
+layout_mode = 2
+
+[node name="Separator3" type="HSeparator" parent="HBoxContainer/ControlsPanel/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1008763457]
+layout_mode = 2
+
+[node name="AddRandomActionButton" type="Button" parent="HBoxContainer/ControlsPanel/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1741676222]
+layout_mode = 2
+text = "Random Action (1 hero)"
+
+[node name="AddRandomAllButton" type="Button" parent="HBoxContainer/ControlsPanel/MarginContainer/ScrollContainer/VBoxContainer" unique_id=2040059774]
+layout_mode = 2
+text = "Random Action (all heroes)"
+
+[node name="Separator4" type="HSeparator" parent="HBoxContainer/ControlsPanel/MarginContainer/ScrollContainer/VBoxContainer" unique_id=481557529]
+layout_mode = 2
+
+[node name="ResetButton" type="Button" parent="HBoxContainer/ControlsPanel/MarginContainer/ScrollContainer/VBoxContainer" unique_id=378514705]
+layout_mode = 2
+text = "Reset"
+
+[node name="Separator5" type="HSeparator" parent="HBoxContainer/ControlsPanel/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1091012151]
+layout_mode = 2
+
+[node name="StatusLabel" type="Label" parent="HBoxContainer/ControlsPanel/MarginContainer/ScrollContainer/VBoxContainer" unique_id=2091886232]
+layout_mode = 2
+text = "Ready"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer" unique_id=1628223630]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control" type="Control" parent="HBoxContainer/PanelContainer" unique_id=1133307239]
+layout_mode = 2
+
+[node name="UiDpsMeter" parent="HBoxContainer/PanelContainer/Control" unique_id=243239092 instance=ExtResource("1_dps")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.7
+
+[connection signal="pressed" from="HBoxContainer/ControlsPanel/MarginContainer/ScrollContainer/VBoxContainer/SetupButton" to="." method="_on_setup_button_pressed"]
+[connection signal="item_selected" from="HBoxContainer/ControlsPanel/MarginContainer/ScrollContainer/VBoxContainer/HeroSelector" to="." method="_on_hero_selector_item_selected"]
+[connection signal="pressed" from="HBoxContainer/ControlsPanel/MarginContainer/ScrollContainer/VBoxContainer/AddRandomActionButton" to="." method="_on_add_random_action_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/ControlsPanel/MarginContainer/ScrollContainer/VBoxContainer/AddRandomAllButton" to="." method="_on_add_random_all_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/ControlsPanel/MarginContainer/ScrollContainer/VBoxContainer/ResetButton" to="." method="_on_reset_button_pressed"]

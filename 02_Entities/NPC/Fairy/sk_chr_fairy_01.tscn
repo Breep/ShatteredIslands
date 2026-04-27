@@ -1,0 +1,168 @@
+[gd_scene format=3 uid="uid://cai63yuhuv3a8"]
+
+[ext_resource type="PackedScene" uid="uid://bjbuveewqbpye" path="res://02_Entities/NPC/Fairy/SK_Chr_Fairy_01.fbx" id="1_uqjss"]
+[ext_resource type="Texture2D" uid="uid://cnk860spex0sb" path="res://20_Data/Blender/Map/Map/Tavern/tavern_PolygonFantasyKingdom_Texture_01_A.png" id="2_sk6nu"]
+[ext_resource type="PackedScene" uid="uid://yx4w78dpfunw" path="res://02_Entities/NPC/Fairy/SM_Chr_Fairy_Wing_L_01.fbx" id="3_a4xt6"]
+[ext_resource type="PackedScene" uid="uid://blsio7chc461c" path="res://02_Entities/NPC/Fairy/SM_Chr_Fairy_Wing_R_01.fbx" id="4_m423r"]
+[ext_resource type="AnimationLibrary" uid="uid://lusuqdn4nl3c" path="res://20_Data/Anim/Anim library/1_anim_pack_full.res" id="5_sk6nu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bl8cq"]
+albedo_texture = ExtResource("2_sk6nu")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_quw0w"]
+albedo_texture = ExtResource("2_sk6nu")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nl7pf"]
+albedo_texture = ExtResource("2_sk6nu")
+
+[sub_resource type="Animation" id="Animation_a4xt6"]
+resource_name = "Take 001"
+length = 2.63333
+tracks/0/type = "rotation_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Skeleton:RightUpperLeg")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(1.73847e-09, 1, 2.98023e-08, -1.49012e-08, -1, -1.49012e-08)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("%Skeleton:LeftUpperLeg")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(1.73847e-09, 1, -7.45058e-08, -4.47035e-08, -1, -4.47035e-08)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = true
+tracks/2/enabled = true
+tracks/2/path = NodePath("%Skeleton:Chest")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(1.73847e-09, 1, 1.49012e-08, -1.49012e-08, -1.49012e-08, -1)
+tracks/3/type = "rotation_3d"
+tracks/3/imported = true
+tracks/3/enabled = true
+tracks/3/path = NodePath("%Skeleton:UpperChest")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(1.73847e-09, 1, -2.98023e-08, 0, 0, -1)
+tracks/4/type = "rotation_3d"
+tracks/4/imported = true
+tracks/4/enabled = true
+tracks/4/path = NodePath("%Skeleton:RightFoot")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(1.73847e-09, 1, 2.10734e-08, -0.707107, 0.707107, 0)
+tracks/5/type = "rotation_3d"
+tracks/5/imported = true
+tracks/5/enabled = true
+tracks/5/path = NodePath("%Skeleton:LeftFoot")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = PackedFloat32Array(1.73847e-09, 1, 0, -0.707107, 0.707107, 0)
+tracks/6/type = "rotation_3d"
+tracks/6/imported = true
+tracks/6/enabled = true
+tracks/6/path = NodePath("%Skeleton:RightShoulder")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = PackedFloat32Array(1.73847e-09, 1, -0.5, 0.5, 0.5, 0.5)
+tracks/7/type = "scale_3d"
+tracks/7/imported = true
+tracks/7/enabled = true
+tracks/7/path = NodePath("%Skeleton:LeftThumbProximal")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = PackedFloat32Array(1.73847e-09, 1, 1.00005, 0.999955, 0.999996)
+tracks/8/type = "scale_3d"
+tracks/8/imported = true
+tracks/8/enabled = true
+tracks/8/path = NodePath("%Skeleton:RightThumbProximal")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = PackedFloat32Array(1.73847e-09, 1, 1.00005, 0.999955, 0.999996)
+tracks/9/type = "scale_3d"
+tracks/9/imported = true
+tracks/9/enabled = true
+tracks/9/path = NodePath("%Skeleton:LeftThumbDistal")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = PackedFloat32Array(1.73847e-09, 1, 1.00012, 0.999917, 0.999959)
+tracks/10/type = "scale_3d"
+tracks/10/imported = true
+tracks/10/enabled = true
+tracks/10/path = NodePath("%Skeleton:RightThumbDistal")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = PackedFloat32Array(1.73847e-09, 1, 1.00012, 0.999917, 0.999959)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m423r"]
+_data = {
+&"Take 001": SubResource("Animation_a4xt6")
+}
+
+[node name="SK_Chr_Fairy_01" instance=ExtResource("1_uqjss")]
+
+[node name="Skeleton" parent="Root" index="0"]
+bones/0/position = Vector3(0.00508248, 0.838491, -0.0826802)
+bones/0/rotation = Quaternion(-0.0462803, -0.115888, -0.00540569, 0.992169)
+bones/2/rotation = Quaternion(0.046351, 0.000108603, 0.000130275, 0.998925)
+bones/3/rotation = Quaternion(0.138655, 0.000324855, 0.000389597, 0.990341)
+bones/4/rotation = Quaternion(-0.0926025, -0.00021698, -0.00026025, 0.995703)
+bones/5/rotation = Quaternion(0.0772541, 0.0957206, 0.00796455, 0.992374)
+bones/8/rotation = Quaternion(0.487481, 0.526615, 0.526382, -0.456027)
+bones/9/rotation = Quaternion(-0.0622213, 0.81768, -0.572216, 0.00980106)
+bones/10/rotation = Quaternion(0.189985, -0.651041, 0.183065, 0.711715)
+bones/11/rotation = Quaternion(0.0991302, 0.706866, 0.0629003, 0.697536)
+bones/12/rotation = Quaternion(-0.123819, 0.719523, 0.201835, 0.652853)
+bones/13/rotation = Quaternion(0.181807, 0.110124, 0.0600633, 0.975301)
+bones/14/rotation = Quaternion(0.59943, 0.273966, 0.194632, 0.726461)
+bones/16/rotation = Quaternion(0.629597, -4.09782e-08, -4.61936e-06, 0.776922)
+bones/17/rotation = Quaternion(0.623342, 2.98023e-08, -4.26173e-06, 0.781949)
+bones/18/rotation = Quaternion(0.623341, -2.23517e-07, -4.47035e-06, 0.78195)
+bones/23/rotation = Quaternion(0.539721, -0.47449, -0.474702, -0.508153)
+bones/24/rotation = Quaternion(0.0890775, 0.824661, -0.558488, -0.00956594)
+bones/25/rotation = Quaternion(0.292141, 0.542858, -0.204928, 0.760239)
+bones/26/rotation = Quaternion(0.12025, -0.699031, -0.0568901, 0.702609)
+bones/27/rotation = Quaternion(-0.123819, -0.719523, -0.201836, 0.652853)
+bones/28/rotation = Quaternion(0.181807, -0.110124, -0.0600633, 0.975301)
+bones/29/rotation = Quaternion(0.59943, -0.273965, -0.194632, 0.726461)
+bones/31/rotation = Quaternion(0.629597, 3.72529e-08, 4.17233e-06, 0.776922)
+bones/32/rotation = Quaternion(0.623341, 1.82539e-07, 4.47035e-06, 0.78195)
+bones/33/rotation = Quaternion(0.623342, 1.00583e-07, 4.23193e-06, 0.78195)
+bones/38/rotation = Quaternion(0.000806607, -0.110076, 0.98721, 0.115318)
+bones/39/rotation = Quaternion(-0.0287299, 0.928961, -0.0807151, -0.360126)
+bones/40/rotation = Quaternion(0.171568, 0.646951, -0.742974, -0.00279465)
+bones/42/rotation = Quaternion(-8.19271e-08, 1, 2.98023e-08, -8.60224e-09)
+bones/43/rotation = Quaternion(-0.000777963, 0.122141, 0.986261, -0.111222)
+bones/44/rotation = Quaternion(0.0163443, 0.982245, -0.149014, 0.112792)
+bones/45/rotation = Quaternion(-0.0945521, 0.729235, -0.67767, 0.00625454)
+bones/47/rotation = Quaternion(4.29237e-08, 1, 5.96046e-08, 2.56884e-08)
+
+[node name="SK_Chr_Fairy_01" parent="Root/Skeleton" index="0"]
+material_override = SubResource("StandardMaterial3D_bl8cq")
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Root/Skeleton" index="1"]
+transform = Transform3D(0.973134, -0.000130923, -0.230239, 0.000250086, 1, 0.000488393, 0.230239, -0.000532843, 0.973134, 0.0126698, 1.12071, -0.114716)
+bone_name = "Chest"
+bone_idx = 2
+
+[node name="SM_Chr_Fairy_Wing_R_01" parent="Root/Skeleton/BoneAttachment3D" index="0" instance=ExtResource("4_m423r")]
+
+[node name="SM_Chr_Fairy_Wing_R_01" parent="Root/Skeleton/BoneAttachment3D/SM_Chr_Fairy_Wing_R_01" index="0"]
+material_override = SubResource("StandardMaterial3D_quw0w")
+
+[node name="SM_Chr_Fairy_Wing_L_02" parent="Root/Skeleton/BoneAttachment3D" index="1" instance=ExtResource("3_a4xt6")]
+
+[node name="SM_Chr_Fairy_Wing_L_01" parent="Root/Skeleton/BoneAttachment3D/SM_Chr_Fairy_Wing_L_02" index="0"]
+material_override = SubResource("StandardMaterial3D_nl7pf")
+
+[node name="AnimationPlayer" parent="." index="1"]
+libraries = {
+&"": SubResource("AnimationLibrary_m423r"),
+&"1_anim_pack_full": ExtResource("5_sk6nu")
+}
+autoplay = "1_anim_pack_full/Idle"
+
+[editable path="Root/Skeleton/BoneAttachment3D/SM_Chr_Fairy_Wing_R_01"]
+[editable path="Root/Skeleton/BoneAttachment3D/SM_Chr_Fairy_Wing_L_02"]

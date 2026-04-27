@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://ca3wssxlwj4qk"]
+
+[ext_resource type="PackedScene" uid="uid://3m2v1arprnf7" path="res://06_FloatingIsland/_Maps/tavern.tscn" id="1_pl38q"]
+[ext_resource type="PackedScene" uid="uid://cai63yuhuv3a8" path="res://02_Entities/NPC/Fairy/sk_chr_fairy_01.tscn" id="2_knb8d"]
+[ext_resource type="PackedScene" uid="uid://jjd3kidthudx" path="res://02_Entities/NPC/Bartender/sk_chr_bartender_01.tscn" id="2_yfcib"]
+[ext_resource type="PackedScene" uid="uid://6l0c0aa6rcl7" path="res://02_Entities/NPC/Jester/sk_chr_jester_01.tscn" id="3_2xuv1"]
+[ext_resource type="PackedScene" uid="uid://61bey01gukxt" path="res://02_Entities/NPC/Mage/sk_chr_mage_01.tscn" id="4_knb8d"]
+[ext_resource type="PackedScene" uid="uid://d05soq0vastae" path="res://02_Entities/NPC/FortuneTeller/sk_chr_fortune_teller_01.tscn" id="6_4bl8a"]
+
+[node name="Tavern_Animated" type="Node3D"]
+
+[node name="tavern" parent="." instance=ExtResource("1_pl38q")]
+
+[node name="PNJ" type="Node3D" parent="."]
+
+[node name="SK_Chr_Fairy_01" parent="PNJ" instance=ExtResource("2_knb8d")]
+transform = Transform3D(0.0809657, 0, 0.695302, 0, 0.7, 0, -0.695302, 0, 0.0809657, -8.71288, 2.02679, -6.1605)
+
+[node name="SK_Chr_Bartender_01" parent="PNJ" instance=ExtResource("2_yfcib")]
+transform = Transform3D(0.276711, 0, 0.960953, 0, 1, 0, -0.960953, 0, 0.276711, -8.76813, 0, -1.70718)
+
+[node name="SK_Chr_Bartender_02" parent="PNJ" instance=ExtResource("2_yfcib")]
+transform = Transform3D(-0.453291, 0, 0.891363, 0, 1, 0, -0.891363, 0, -0.453291, -8.77051, 0, 1.86836)
+
+[node name="SK_Chr_Jester_01" parent="PNJ" instance=ExtResource("3_2xuv1")]
+transform = Transform3D(-0.186181, 0, 0.982515, 0, 1, 0, -0.982515, 0, -0.186181, -6.99716, 0, 8.87829)
+
+[node name="SK_Chr_Mage_01" parent="PNJ" instance=ExtResource("4_knb8d")]
+transform = Transform3D(-0.877155, 0, 0.480208, 0, 1, 0, -0.480208, 0, -0.877155, 1.64528, 0, 11.1572)
+
+[node name="SK_Chr_Mage_04" parent="PNJ" instance=ExtResource("4_knb8d")]
+transform = Transform3D(-0.449179, 0, -0.893442, 0, 1, 0, 0.893442, 0, -0.449179, 8.23226, 0, 3.81791)
+
+[node name="SK_Chr_Mage_05" parent="PNJ" instance=ExtResource("4_knb8d")]
+transform = Transform3D(0.101716, 0, -0.994813, 0, 1, 0, 0.994813, 0, 0.101716, 8.4026, 0, 2.49602)
+
+[node name="SK_Chr_Mage_06" parent="PNJ" instance=ExtResource("4_knb8d")]
+transform = Transform3D(0.856808, 0, 0.515637, 0, 1, 0, -0.515637, 0, 0.856808, 5.98735, 0, -1.10375)
+
+[node name="SK_Chr_Mage_07" parent="PNJ" instance=ExtResource("4_knb8d")]
+transform = Transform3D(-0.8045, 0, 0.593953, 0, 1, 0, -0.593953, 0, -0.8045, 2.46296, 0, -9.23378)
+
+[node name="SK_Chr_Mage_03" parent="PNJ" instance=ExtResource("4_knb8d")]
+transform = Transform3D(-0.877155, 0, 0.480208, 0, 1, 0, -0.480208, 0, -0.877155, 5.48965, 0, 12.8967)
+
+[node name="SK_Chr_Mage_08" parent="PNJ" instance=ExtResource("4_knb8d")]
+transform = Transform3D(-0.679134, 0, -0.734014, 0, 1, 0, 0.734014, 0, -0.679134, 8.90719, 0, 15.886)
+
+[node name="SK_Chr_Mage_09" parent="PNJ" instance=ExtResource("4_knb8d")]
+transform = Transform3D(-0.679134, 0, -0.734014, 0, 1, 0, 0.734014, 0, -0.679134, 5.89275, 0, 15.9712)
+
+[node name="SK_Chr_Mage_02" parent="PNJ" instance=ExtResource("4_knb8d")]
+transform = Transform3D(-0.120431, 0, 0.992722, 0, 1, 0, -0.992722, 0, -0.120431, 0.522827, -4.76837e-07, 10.0644)
+
+[node name="SK_Chr_FortuneTeller_01" parent="PNJ" instance=ExtResource("6_4bl8a")]
+transform = Transform3D(0.190586, 0, 0.98167, 0, 1, 0, -0.98167, 0, 0.190586, -8.83945, 0, -9.06974)
+
+[editable path="tavern"]

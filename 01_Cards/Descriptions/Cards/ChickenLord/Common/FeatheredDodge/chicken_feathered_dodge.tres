@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://dpww5lvgbuppf"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_bocm1"]
+[ext_resource type="Script" uid="uid://10q1xen2u8l5" path="res://01_Cards/Descriptions/Cards/ChickenLord/Common/FeatheredDodge/chicken_feathered_dodge.gd" id="1_eqk85"]
+[ext_resource type="Texture2D" uid="uid://cslxv8ffyte5k" path="res://01_Cards/Descriptions/Cards/ChickenLord/Common/AssistantChicken/chicken lord.png" id="2_chkn1"]
+
+[sub_resource type="Resource" id="Resource_rxtne"]
+script = ExtResource("1_eqk85")
+_dodge_increases = Array[float]([1.0, 2.0, 3.0, 4.0, 6.0])
+_chicken_inheritances = Array[float]([50.0, 60.0, 70.0, 80.0, 100.0])
+metadata/_custom_type_script = "uid://10q1xen2u8l5"
+
+[resource]
+script = ExtResource("1_bocm1")
+name = "Feathered Dodge"
+picture = ExtResource("2_chkn1")
+families = Array[int]([8])
+player_upgrade = SubResource("Resource_rxtne")
+points = Dictionary[int, int]({
+8: 1
+})
+lvl = 5
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

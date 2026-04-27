@@ -1,0 +1,43 @@
+[gd_scene format=4 uid="uid://c0bbila76sik8"]
+
+[ext_resource type="Material" uid="uid://b8113nhomexb6" path="res://21_Props/DefaultBattleIsland/Arch_island/foliage/m_foliage.tres" id="1_kgcs3"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_aaejw"]
+_surfaces = [{
+"aabb": AABB(-627.24225, 4.7487316, -9.389593, 101.487854, 100.32248, 36.897587),
+"format": 34359742465,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAAADAAEAAwAEAAEAAwAFAAQABQAGAAQAAAACAAcAAgAIAAcACQAAAAcA"),
+"name": "foliage.017",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 10,
+"vertex_data": PackedByteArray("QvsPxNFNtEKOfNbA05QMxAxCzUHGOxbBZuIGxAmVSkKKZv3A9rkWxCTHikKKKQLB448SxJz1l0AIRBdAH1McxMurO0LzrGBAgc8cxFa6qUBfENxB67sExOVRvEJciNtASHADxNLae0IL0ItA3NELxHYk0kKv7thA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_j5da5"]
+resource_name = "leafage2_Mesh_018"
+lightmap_size_hint = Vector2i(6, 6)
+_surfaces = [{
+"aabb": AABB(-627.24225, 4.7487316, -9.389593, 101.487854, 100.32248, 36.897587),
+"attribute_data": PackedByteArray("DyqiPro03D5YeTM/+DFbP1v70z5gXr4+RRLzPquqqj24sdE+CKbbPoUaMD94Ptk9QTCfPuLOvj6s2/k+q6pqP3Kr0j4SAqE+zNOKPiVH6T3/z58+rn2hPhuQkT6rqmo/o+W4PiLpgz6rqqo9Be8GP7KWuj4wQ/k+q6pqP5hj6D4i3dE+2BvqPrEfTT+Lzb89IF+iPurh7T5rqlY/HWpXPw=="),
+"format": 34359742519,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAAADAAEAAwAEAAEAAwAFAAQABQAGAAQAAAACAAcAAgAIAAcACQAAAAcA"),
+"material": ExtResource("1_kgcs3"),
+"name": "foliage.017",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 10,
+"vertex_data": PackedByteArray("QvsPxNFNtEKOfNbA05QMxAxCzUHGOxbBZuIGxAmVSkKKZv3A9rkWxCTHikKKKQLB448SxJz1l0AIRBdAH1McxMurO0LzrGBAgc8cxFa6qUBfENxB67sExOVRvEJciNtASHADxNLae0IL0ItA3NELxHYk0kKv7thAU9VV1QDA5JypKqsqIcD+n1PVU9X/v3yhqyqrKhjA/5+pKqkqPcD/n6kqqyo5wP6fqSqpKlnA/59T1VXVAMAln1XVVdX/v2mqU9VV1QDAcZY=")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_aaejw")
+
+[node name="leafage2" type="Node3D" unique_id=936393701]
+
+[node name="Leafage2" type="MeshInstance3D" parent="." unique_id=1809970640]
+transform = Transform3D(0.002328805, 0.0036754638, -5.76957e-10, -2.593478e-10, -5.186956e-10, -0.004351134, -0.0036754638, 0.0023288052, -5.854047e-11, 1.4412305, 0.11969096, -2.317758)
+mesh = SubResource("ArrayMesh_j5da5")
+skeleton = NodePath("")

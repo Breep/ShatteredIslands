@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cbd5jq0bp7fef"]
+
+[ext_resource type="Script" uid="uid://cheqkh8k8emb0" path="res://05_Game/HeroSelector/hero_selector.gd" id="1_fiyb4"]
+
+[node name="HeroSelector" type="Node"]
+script = ExtResource("1_fiyb4")

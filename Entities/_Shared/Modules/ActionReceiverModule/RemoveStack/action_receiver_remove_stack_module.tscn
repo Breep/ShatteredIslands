@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://faq15mfg3efv"]
-
-[ext_resource type="Script" uid="uid://d3bg5nxbjnh56" path="res://Entities/_Shared/Modules/ActionReceiverModule/RemoveStack/action_receiver_remove_stack_module.gd" id="1_7eihv"]
-
-[node name="ActionReceiverRemoveStackModule" type="Node" unique_id=1436577943]
-script = ExtResource("1_7eihv")

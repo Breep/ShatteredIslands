@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cywh2kajy8jg3"]
+
+[ext_resource type="Script" uid="uid://dm1x0oi152gfo" path="res://01_Cards/Descriptions/Cards/Colossus/Common/EvasiveGrowth/colossus_evasive_growth.gd" id="1_5686c"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_adgwi"]
+[ext_resource type="Texture2D" uid="uid://d2gplejcac1cm" path="res://01_Cards/Descriptions/Cards/Colossus/Common/EvasiveGrowth/colossus_evasive_growth.png" id="1_ka6c0"]
+
+[sub_resource type="Resource" id="Resource_ka6c0"]
+script = ExtResource("1_5686c")
+_increase_dodge = Array[float]([1.0, 2.0, 3.0, 4.0, 6.0])
+_increase_sizes = Array[float]([5.0, 6.0, 7.0, 8.0, 9.0])
+_dodge_reductions = Array[int]([1, 1, 1, 1, 1])
+metadata/_custom_type_script = "uid://dm1x0oi152gfo"
+
+[resource]
+script = ExtResource("1_adgwi")
+name = "Evasive Growth"
+picture = ExtResource("1_ka6c0")
+families = Array[int]([6])
+player_upgrade = SubResource("Resource_ka6c0")
+points = Dictionary[int, int]({
+6: 1
+})
+lvl = 5
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

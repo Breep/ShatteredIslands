@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://mr4x6u0j5sbf"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_fxxdn"]
+[ext_resource type="Texture2D" uid="uid://cako6w8xbx5bt" path="res://01_Cards/Descriptions/Cards/Engineer/Common/EnergyBarrier/engineer_energy_shield.png" id="1_rfirt"]
+[ext_resource type="Script" uid="uid://ldmia5mvuk4x" path="res://01_Cards/Descriptions/Cards/Engineer/Common/EnergyBarrier/engineer_energy_barrier.gd" id="2_rfirt"]
+
+[sub_resource type="Resource" id="Resource_w1q6s"]
+script = ExtResource("2_rfirt")
+_shield_amount = Array[float]([5.0, 10.0, 15.0, 20.0, 30.0])
+_period = Array[float]([2.0, 2.0, 2.0, 2.0, 2.0])
+metadata/_custom_type_script = "uid://ldmia5mvuk4x"
+
+[resource]
+script = ExtResource("1_fxxdn")
+name = "Energy Barrier"
+picture = ExtResource("1_rfirt")
+families = Array[int]([2])
+player_upgrade = SubResource("Resource_w1q6s")
+points = Dictionary[int, int]({
+2: 1
+})
+lvl = 5
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

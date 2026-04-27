@@ -1,0 +1,45 @@
+[gd_scene format=4 uid="uid://dv8jq3f13an2a"]
+
+[ext_resource type="Material" uid="uid://b8113nhomexb6" path="res://21_Props/DefaultBattleIsland/Arch_island/foliage/m_foliage.tres" id="1_ro2eu"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_wdwwb"]
+_surfaces = [{
+"aabb": AABB(-0.75232124, -0.75232124, 4.484184e-08, 1.5046425, 1.5046425, 1e-05),
+"format": 34359742465,
+"index_count": 72,
+"index_data": PackedByteArray("DQACAAAACwANAAAAAgADAAQAAgABAAMADQABAAIAAwABAA4ADgABAA0AAwAOAAUADgAGAAUADgANAA8ADgAQAAYABgAQAAcABgAHAAgAEQAQAA4AEQAOAA8ABwAQABEADQARAA8ABwARAAoAEQAJAAoADQASABEAEQASAAkACwASAA0ACQASAAsACQALAAwA"),
+"lods": [0.00014741939, PackedByteArray("AAABAAIAAgADAAQAAgABAAMAAwABAAUAAQAGAAUAAQAHAAYAAAAHAAEABgAHAAgAAAAJAAcABwAJAAoACwAJAAAACQALAAwA")],
+"name": "foliage.014",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 19,
+"vertex_data": PackedByteArray("ocomvx6YwL4gmEAzocqmviSYQD4gmEAzIJhAv6DKpjMgmEAzHpjAvqHKJj8gmEAzoMomvyKYwD4gmEAzIJhAMyCYQD8gmEAzIpjAPqDKJj8gmEAzIJhAP/Ev+rMgmEAzocomPx6YwD4gmEAzG5jAPqHKJr8gmEAzoMomPyWYwL4gmEAzJJjAvqDKJr8gmEAzbZsDtCCYQL8gmEAzocqmvhyYQL4gmEAz3aEiMiCYwD4gmEAzY47essOVnaQgmEAzocqmPhyYQD4gmEAznsqmPiWYQL4gmEAz+keGsyCYwL4gmEAz")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_7u406"]
+resource_name = "lotusleaf_Mesh_015"
+lightmap_size_hint = Vector2i(6, 6)
+_surfaces = [{
+"aabb": AABB(-0.75232124, -0.75232124, 4.484184e-08, 1.5046425, 1.5046425, 1e-05),
+"attribute_data": PackedByteArray("CmlWPwDLXT7NlBw/sKqqPdwYXT9uD4Y+IeqxPiDqsT5mV1Q/jK18PmjWxj6rqqo9CRBcPw4WmT6wqqo9ZNbGPgppVj8MyI0+i6hHPoWoRz6uyGM/VjmdPquqqj3LlBw/UIFrPw4WmT6FqEc+3RVOP/M5cz+MrXw+zJQcP6uqaj9PKHE/DMiNPmTWxj6rqmo/UIFrPwQvRz6rqmo/zJQcP08ocT8Ay10+3RVOP98VTj8JEFw/BC9HPt8VTj+FqEc+rMhjP3ToPj6rqmo/aNbGPtwYXT9EPG0+ZUoOP1VVlT6uyGM/DMiNPlVVlT5lSg4/rMhjP4ytfD4AAAA/AAAAP394aj9uD4Y+M2vjPlVVNT9/eGo/RDxtPu8KJz/vCic/rMhjPwDLXT5VVTU/NGvjPg=="),
+"format": 34359742519,
+"index_count": 72,
+"index_data": PackedByteArray("DQACAAAACwANAAAAAgADAAQAAgABAAMADQABAAIAAwABAA4ADgABAA0AAwAOAAUADgAGAAUADgANAA8ADgAQAAYABgAQAAcABgAHAAgAEQAQAA4AEQAOAA8ABwAQABEADQARAA8ABwARAAoAEQAJAAoADQASABEAEQASAAkACwASAA0ACQASAAsACQALAAwA"),
+"lods": [0.00014741939, PackedByteArray("AAABAAIAAgADAAQAAgABAAMAAwABAAUAAQAGAAUAAQAHAAYAAAAHAAEABgAHAAgAAAAJAAcABwAJAAoACwAJAAAACQALAAwA")],
+"material": ExtResource("1_ro2eu"),
+"name": "foliage.014",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 19,
+"vertex_data": PackedByteArray("ocomvx6YwL4gmEAzocqmviSYQD4gmEAzIJhAv6DKpjMgmEAzHpjAvqHKJj8gmEAzoMomvyKYwD4gmEAzIJhAMyCYQD8gmEAzIpjAPqDKJj8gmEAzIJhAP/Ev+rMgmEAzocomPx6YwD4gmEAzG5jAPqHKJr8gmEAzoMomPyWYwL4gmEAzJJjAvqDKJr8gmEAzbZsDtCCYQL8gmEAzocqmvhyYQL4gmEAz3aEiMiCYwD4gmEAzY47essOVnaQgmEAzocqmPhyYQD4gmEAznsqmPiWYQL4gmEAz+keGsyCYwL4gmEAz//////7//7///////v//v//////+//+///////7//7///////v//v//////+//+///////7//7///////v//v//////+//+///////7//7///////v//v//////+//+///////7//7///////v//v//////+//+///////7//7///////v//v//////+//+///////7//78=")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_wdwwb")
+
+[node name="lotusleaf2" type="Node3D" unique_id=301333197]
+
+[node name="lotusleaf" type="MeshInstance3D" parent="." unique_id=2059430389]
+transform = Transform3D(0.28380224, 0, 0, 0, 0, -0.28380224, 0, 0.28380224, 0, 0, 0, 0)
+mesh = SubResource("ArrayMesh_7u406")
+skeleton = NodePath("")

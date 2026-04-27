@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://bpvwmm0qscm0e"]
+
+[ext_resource type="Script" uid="uid://dywv3qds1kclj" path="res://01_Cards/Descriptions/Cards/ArdentCelestial/Common/Quasar/ardent_celestial_quasar.gd" id="1_8xwin"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_au1sn"]
+[ext_resource type="Texture2D" uid="uid://tuwewl8ngbqu" path="res://01_Cards/Descriptions/Cards/ArdentCelestial/Common/DarkForest/fire_dark_forest.png" id="2_ardnt"]
+
+[sub_resource type="Resource" id="Resource_qpldd"]
+script = ExtResource("1_8xwin")
+_hp_amount = Array[float]([10.0, 12.0, 14.0, 15.0, 17.0])
+
+[resource]
+script = ExtResource("1_au1sn")
+name = "Quasar"
+picture = ExtResource("2_ardnt")
+families = Array[int]([3, 6])
+player_upgrade = SubResource("Resource_qpldd")
+points = Dictionary[int, int]({
+3: 1,
+6: 1
+})
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://d1aujx2y6tfiy"]
+
+[ext_resource type="Script" uid="uid://c7uhfnu3rty6t" path="res://01_Cards/3D/Card3D/card_3d.gd" id="1_u48oe"]
+[ext_resource type="PackedScene" uid="uid://dfhrsmc3bnsv5" path="res://01_Cards/3D/Card3D/card_3d_visual.tscn" id="2_qdyvj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gyxyb"]
+size = Vector3(0.452515, 0.0300827, 0.580994)
+
+[node name="Card3d" type="StaticBody3D"]
+script = ExtResource("1_u48oe")
+
+[node name="Card3DVisual" parent="." instance=ExtResource("2_qdyvj")]
+unique_name_in_owner = true
+
+[node name="Card3DCollision" type="CollisionShape3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000793457, 0.00556564, -0.00088504)
+shape = SubResource("BoxShape3D_gyxyb")

@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://i8w0if3y0t4"]
-
-[ext_resource type="Script" uid="uid://dgpyipo3cpno1" path="res://Entities/_Shared/Modules/ActionSenderModule/AutoAttack/action_sender_auto_attack_module.gd" id="1_h0j6g"]
-
-[node name="ActionSenderAutoAttackModule" type="Node" unique_id=1765028855]
-script = ExtResource("1_h0j6g")

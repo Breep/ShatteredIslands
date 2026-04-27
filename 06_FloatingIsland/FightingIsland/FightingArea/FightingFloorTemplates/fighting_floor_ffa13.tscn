@@ -1,0 +1,163 @@
+[gd_scene format=3 uid="uid://dbbpa637es0uf"]
+
+[ext_resource type="Script" uid="uid://bhv0dmum15mp1" path="res://06_FloatingIsland/FightingIsland/FightingArea/FightingFloorTemplates/fighting_floor.gd" id="1_6j5cd"]
+[ext_resource type="PackedScene" uid="uid://dibux7uwcsatj" path="res://06_FloatingIsland/FightingIsland/FightingArea/SpawnArea/spawn_area.tscn" id="3_1158a"]
+[ext_resource type="PackedScene" uid="uid://cc8wss5swf76b" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/HeroSpawner/hero_spawner.tscn" id="4_72v03"]
+[ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://10_Tool/SpawnPoint/spawn_point.tscn" id="4_ch78g"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_72v03"]
+height = 0.1
+radius = 4.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vdql0"]
+albedo_color = Color(0.44567358, 0.439569, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ltt7t"]
+material = SubResource("StandardMaterial3D_vdql0")
+top_radius = 4.0
+bottom_radius = 4.0
+height = 0.1
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_nh6il"]
+height = 0.1
+radius = 4.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_muo2f"]
+albedo_color = Color(1, 0.30920485, 0.27434352, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_tjpvw"]
+material = SubResource("StandardMaterial3D_muo2f")
+top_radius = 4.0
+bottom_radius = 4.0
+height = 0.1
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_b45g0"]
+height = 0.1
+radius = 4.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eruxn"]
+albedo_color = Color(0.28462353, 0.637525, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7twjs"]
+material = SubResource("StandardMaterial3D_eruxn")
+top_radius = 4.0
+bottom_radius = 4.0
+height = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6j5cd"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.392157)
+
+[sub_resource type="BoxMesh" id="BoxMesh_e78ti"]
+material = SubResource("StandardMaterial3D_6j5cd")
+size = Vector3(25, 1, 25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6j5cd"]
+size = Vector3(25, 1, 25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_72v03"]
+size = Vector3(4, 1, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vdql0"]
+size = Vector3(25, 1, 25)
+
+[node name="FightingFloor_ffa13" type="Node3D" unique_id=512388701 node_paths=PackedStringArray("_visual_to_be_destroyed", "_hero_spawner", "team_zones", "center_zone", "full_arena_zone")]
+script = ExtResource("1_6j5cd")
+_visual_to_be_destroyed = NodePath("Floor/FloorMesh3D")
+_hero_spawner = NodePath("HeroSpawner")
+team_zones = {
+1: NodePath("CenterPointMain/CenterPoint1/SpawnArea1"),
+2: NodePath("CenterPointMain/CenterPoint2/SpawnArea2"),
+3: NodePath("CenterPointMain/CenterPoint3/SpawnArea3")
+}
+center_zone = NodePath("CenterArea")
+full_arena_zone = NodePath("FullArea")
+
+[node name="CenterPointMain" type="Node3D" parent="." unique_id=972917085]
+
+[node name="CenterPoint1" type="Node3D" parent="CenterPointMain" unique_id=900754743]
+transform = Transform3D(-0.50000006, 0, 0.8660254, 0, 1, 0, -0.8660254, 0, -0.50000006, 0, 0, 0)
+
+[node name="SpawnArea1" parent="CenterPointMain/CenterPoint1" unique_id=35260394 node_paths=PackedStringArray("_visual_to_be_destroyed") instance=ExtResource("3_1158a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.25, 0, 0)
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+monitorable = false
+team = 1
+_visual_to_be_destroyed = NodePath("MeshInstance3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CenterPointMain/CenterPoint1/SpawnArea1" unique_id=605181048]
+shape = SubResource("CylinderShape3D_72v03")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CenterPointMain/CenterPoint1/SpawnArea1" unique_id=67925101]
+mesh = SubResource("CylinderMesh_ltt7t")
+
+[node name="SpawnPoint" parent="CenterPointMain/CenterPoint1/SpawnArea1" unique_id=1504720276 instance=ExtResource("4_ch78g")]
+team = 1
+
+[node name="CenterPoint2" type="Node3D" parent="CenterPointMain" unique_id=1203097857]
+transform = Transform3D(-0.50000006, 0, -0.8660254, 0, 1, 0, 0.8660254, 0, -0.50000006, 0, 0, 0)
+
+[node name="SpawnArea2" parent="CenterPointMain/CenterPoint2" unique_id=2126963958 node_paths=PackedStringArray("_visual_to_be_destroyed") instance=ExtResource("3_1158a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.25, 0, 0)
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+monitorable = false
+team = 2
+_visual_to_be_destroyed = NodePath("MeshInstance3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CenterPointMain/CenterPoint2/SpawnArea2" unique_id=1986393302]
+shape = SubResource("CylinderShape3D_nh6il")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CenterPointMain/CenterPoint2/SpawnArea2" unique_id=1189229921]
+mesh = SubResource("CylinderMesh_tjpvw")
+
+[node name="SpawnPoint2" parent="CenterPointMain/CenterPoint2/SpawnArea2" unique_id=1539775835 instance=ExtResource("4_ch78g")]
+team = 2
+
+[node name="CenterPoint3" type="Node3D" parent="CenterPointMain" unique_id=83425706]
+
+[node name="SpawnArea3" parent="CenterPointMain/CenterPoint3" unique_id=32669562 node_paths=PackedStringArray("_visual_to_be_destroyed") instance=ExtResource("3_1158a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.25, 0, 0)
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+monitorable = false
+team = 3
+_visual_to_be_destroyed = NodePath("MeshInstance3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CenterPointMain/CenterPoint3/SpawnArea3" unique_id=2124686331]
+shape = SubResource("CylinderShape3D_b45g0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CenterPointMain/CenterPoint3/SpawnArea3" unique_id=932331044]
+mesh = SubResource("CylinderMesh_7twjs")
+
+[node name="SpawnPoint3" parent="CenterPointMain/CenterPoint3/SpawnArea3" unique_id=75756064 instance=ExtResource("4_ch78g")]
+team = 3
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=1780206468]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+collision_layer = 8
+
+[node name="FloorMesh3D" type="MeshInstance3D" parent="Floor" unique_id=681758613]
+mesh = SubResource("BoxMesh_e78ti")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=297447323]
+shape = SubResource("BoxShape3D_6j5cd")
+
+[node name="HeroSpawner" parent="." unique_id=1616323723 node_paths=PackedStringArray("_spawn_points") instance=ExtResource("4_72v03")]
+_spawn_points = [NodePath("../CenterPointMain/CenterPoint1/SpawnArea1/SpawnPoint"), NodePath("../CenterPointMain/CenterPoint2/SpawnArea2/SpawnPoint2"), NodePath("../CenterPointMain/CenterPoint3/SpawnArea3/SpawnPoint3")]
+
+[node name="CenterArea" type="Area3D" parent="." unique_id=19780693]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CenterArea" unique_id=1350276283]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.041809082, 0, -0.0413208)
+shape = SubResource("BoxShape3D_72v03")
+
+[node name="FullArea" type="Area3D" parent="." unique_id=1097774213]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FullArea" unique_id=95110812]
+shape = SubResource("BoxShape3D_vdql0")

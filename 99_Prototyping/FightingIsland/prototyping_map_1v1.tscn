@@ -1,0 +1,257 @@
+[gd_scene format=3 uid="uid://c5ji8s1iic5v8"]
+
+[ext_resource type="Script" uid="uid://bu48b2v401db2" path="res://99_Prototyping/FightingIsland/prototyping_map.gd" id="1_vksg0"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="2_kngc2"]
+[ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://02_Entities/Heroes/_Shared/hero_desc.gd" id="2_vksg0"]
+[ext_resource type="Resource" uid="uid://bkksjgh6p542o" path="res://02_Entities/Heroes/DarkKnight/dark_knight.tres" id="3_dlg3x"]
+[ext_resource type="Resource" uid="uid://yu8vfa6x3r0g" path="res://01_Cards/Descriptions/Cards/Colossus/Epic/SeismicSlam/colossus_seismic_slam.tres" id="3_kngc2"]
+[ext_resource type="Resource" uid="uid://50ga6somnl7u" path="res://01_Cards/Descriptions/Cards/Warrior/Common/TitanAxe/attack_titan_axe.tres" id="4_dlg3x"]
+[ext_resource type="PackedScene" uid="uid://drcuyohos0doa" path="res://06_FloatingIsland/FightingIsland/fighting_island.tscn" id="6_sp80o"]
+[ext_resource type="PackedScene" uid="uid://ci5cxqmyimurq" path="res://04_UI/InGame/FightingArea/DebugEntityStats/ui_debug_entity_stats.tscn" id="11_e0xek"]
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_4fa74"]
+
+[sub_resource type="FogMaterial" id="FogMaterial_7w4nr"]
+albedo = Color(0.299504, 0.876198, 0.915194, 1)
+emission = Color(0.544485, 0.202056, 0.230078, 1)
+height_falloff = 0.678472
+edge_fade = 0.69644
+density_texture = SubResource("NoiseTexture3D_4fa74")
+
+[node name="PrototypingMap" type="Node3D" unique_id=831863063 node_paths=PackedStringArray("_floating_island")]
+script = ExtResource("1_vksg0")
+_player1_cards = Array[ExtResource("2_kngc2")]([ExtResource("3_kngc2")])
+_player2_cards = Array[ExtResource("2_kngc2")]([ExtResource("4_dlg3x")])
+_hero_descs = Array[ExtResource("2_vksg0")]([ExtResource("3_dlg3x"), ExtResource("3_dlg3x")])
+_hero_teams = Array[int]([1, 2, 0, 0, 1, 1, 1, 1])
+_floating_island = NodePath("FightingIsland")
+
+[node name="FightingIsland" parent="." unique_id=1301753607 instance=ExtResource("6_sp80o")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1113167414]
+transform = Transform3D(0.88089, 0.0799744, 0.466517, -0.360914, 0.751164, 0.552716, -0.306227, -0.655254, 0.690556, 0, 52.8971, 0)
+shadow_enabled = true
+
+[node name="FogVolume" type="FogVolume" parent="." unique_id=1785778344]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.26962, 0.223571, 5.01905)
+size = Vector3(4.52728, 4.15, 8.08638)
+material = SubResource("FogMaterial_7w4nr")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=3875107]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0.2, 5.7)
+light_color = Color(0.846952, 0.2959, 0.736692, 1)
+light_volumetric_fog_energy = 6.642
+light_specular = 4.879
+
+[node name="UIProto" type="Control" parent="." unique_id=2000496642]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PlayerStats" parent="UIProto" unique_id=1102733214 node_paths=PackedStringArray("_critical_chance_labels", "_critical_multiplier_labels", "_dodge_labels", "_resistance_labels", "_vulnerability_labels", "_strength_labels", "_weakness_labels", "_crit_resistance_labels", "_life_steal_labels") instance=ExtResource("11_e0xek")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -275.0
+offset_right = 300.0
+offset_bottom = 275.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+pivot_offset = Vector2(300, 225)
+_critical_chance_labels = {
+0: null,
+1: null,
+2: null,
+3: null,
+4: null,
+5: null,
+6: null,
+7: null,
+8: null,
+9: null,
+10: null,
+11: null,
+12: null,
+13: null,
+14: null,
+15: null,
+16: null
+}
+_critical_multiplier_labels = {
+0: null,
+1: null,
+2: null,
+3: null,
+4: null,
+5: null,
+6: null,
+7: null,
+8: null,
+9: null,
+10: null,
+11: null,
+12: null,
+13: null,
+14: null,
+15: null,
+16: null
+}
+_dodge_labels = {
+0: null,
+1: null,
+2: null,
+3: null,
+4: null,
+5: null,
+6: null,
+7: null,
+8: null,
+9: null,
+10: null,
+11: null,
+12: null,
+13: null,
+14: null,
+15: null,
+16: null
+}
+_resistance_labels = {
+0: null,
+1: null,
+2: null,
+3: null,
+4: null,
+5: null,
+6: null,
+7: null,
+8: null,
+9: null,
+10: null,
+11: null,
+12: null,
+13: null,
+14: null,
+15: null,
+16: null
+}
+_vulnerability_labels = {
+0: null,
+1: null,
+2: null,
+3: null,
+4: null,
+5: null,
+6: null,
+7: null,
+8: null,
+9: null,
+10: null,
+11: null,
+12: null,
+13: null,
+14: null,
+15: null,
+16: null
+}
+_strength_labels = {
+0: null,
+1: null,
+2: null,
+3: null,
+4: null,
+5: null,
+6: null,
+7: null,
+8: null,
+9: null,
+10: null,
+11: null,
+12: null,
+13: null,
+14: null,
+15: null,
+16: null
+}
+_weakness_labels = {
+0: null,
+1: null,
+2: null,
+3: null,
+4: null,
+5: null,
+6: null,
+7: null,
+8: null,
+9: null,
+10: null,
+11: null,
+12: null,
+13: null,
+14: null,
+15: null,
+16: null
+}
+_crit_resistance_labels = {
+0: NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePhysical/MarginContainer/Titles/CritResistLabel"),
+1: NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamageMagical/MarginContainer/Titles/CritResistLabel"),
+2: NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePoison/MarginContainer/Titles/CritResistLabel"),
+3: NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePure/MarginContainer/Titles/CritResistLabel"),
+4: NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityHeal/MarginContainer/Titles/CritResistLabel"),
+5: NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityCleanse/MarginContainer/Titles/CritResistLabel"),
+6: NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityDispell/MarginContainer/Titles/CritResistLabel"),
+7: NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackShield/MarginContainer/Titles/CritResistLabel"),
+8: NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackIgnite/MarginContainer/Titles/CritResistLabel"),
+9: NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackPoison/MarginContainer/Titles/CritResistLabel"),
+10: NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackRegen/MarginContainer/Titles/CritResistLabel"),
+11: NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackNecrosis/MarginContainer/Titles/CritResistLabel"),
+12: NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusStun/MarginContainer/Titles/CritResistLabel"),
+13: NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusTaunt/MarginContainer/Titles/CritResistLabel"),
+14: NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusSilence/MarginContainer/Titles/CritResistLabel"),
+15: NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusInvulnerable/MarginContainer/Titles/CritResistLabel"),
+16: NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusUntargetable/MarginContainer/Titles/CritResistLabel")
+}
+_life_steal_labels = {
+0: NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePhysical/MarginContainer/Titles/LifeSteal"),
+1: NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamageMagical/MarginContainer/Titles/LifeSteal"),
+2: NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePoison/MarginContainer/Titles/LifeSteal"),
+3: NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePure/MarginContainer/Titles/LifeSteal"),
+4: NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityHeal/MarginContainer/Titles/LifeSteal"),
+5: NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityCleanse/MarginContainer/Titles/LifeSteal"),
+6: NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityDispell/MarginContainer/Titles/LifeSteal"),
+7: NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackShield/MarginContainer/Titles/LifeSteal"),
+8: NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackIgnite/MarginContainer/Titles/LifeSteal"),
+9: NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackPoison/MarginContainer/Titles/LifeSteal"),
+10: NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackRegen/MarginContainer/Titles/LifeSteal"),
+11: NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackNecrosis/MarginContainer/Titles/LifeSteal"),
+12: NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusStun/MarginContainer/Titles/LifeSteal"),
+13: NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusTaunt/MarginContainer/Titles/LifeSteal"),
+14: NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusSilence/MarginContainer/Titles/LifeSteal"),
+15: NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusInvulnerable/MarginContainer/Titles/LifeSteal"),
+16: NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusUntargetable/MarginContainer/Titles/LifeSteal")
+}
+
+[node name="Button" type="Button" parent="UIProto" unique_id=510046465]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -180.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = 68.0
+grow_horizontal = 0
+text = "RESET"
+
+[connection signal="pressed" from="UIProto/Button" to="." method="_on_button_pressed"]

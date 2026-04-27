@@ -1,0 +1,222 @@
+[gd_scene format=3 uid="uid://dr8xv1vshmvyq"]
+
+[ext_resource type="Script" uid="uid://83sm3r5y5ofy" path="res://06_FloatingIsland/BuyingIsland/BuyingArea/Tavern/TavernCenter/tavern_center.gd" id="1_ha6dk"]
+[ext_resource type="PackedScene" uid="uid://dlqrg6ijwk3i8" path="res://06_FloatingIsland/BuyingIsland/BuyingArea/Tavern/TavernCenter/Tables/table_1v1.tscn" id="2_are6m"]
+[ext_resource type="PackedScene" uid="uid://b4av14wu25x12" path="res://06_FloatingIsland/BuyingIsland/BuyingArea/Tavern/TavernCenter/Tables/table_2v2.tscn" id="3_cjni8"]
+[ext_resource type="PackedScene" uid="uid://cqskpy33r7xoi" path="res://06_FloatingIsland/BuyingIsland/BuyingArea/Tavern/TavernCenter/Tables/table_ffa_solo_3.tscn" id="3_vm0me"]
+[ext_resource type="Script" uid="uid://dac2bii21cgfw" path="res://06_FloatingIsland/BuyingIsland/BuyingArea/Tavern/TavernCenter/Tables/table_layout.gd" id="5_tln4w"]
+[ext_resource type="PackedScene" uid="uid://cdaoacpfji1mu" path="res://06_FloatingIsland/BuyingIsland/BuyingArea/Tavern/TavernCenter/Tables/table_3v3.tscn" id="6_iowfl"]
+[ext_resource type="PackedScene" uid="uid://dvqoltqfbjee8" path="res://06_FloatingIsland/BuyingIsland/BuyingArea/Tavern/TavernCenter/Tables/table_4v4.tscn" id="7_alvxg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6qeal"]
+transparency = 1
+albedo_color = Color(0.787, 0, 0.617, 0.108)
+
+[sub_resource type="BoxMesh" id="BoxMesh_r1qdr"]
+size = Vector3(15, 1, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h5ieb"]
+transparency = 1
+albedo_color = Color(0.364706, 0.505882, 0.309804, 0.196078)
+
+[sub_resource type="BoxMesh" id="BoxMesh_iowfl"]
+size = Vector3(13, 1, 6)
+
+[node name="TavernCenter" type="Node3D" unique_id=1788928042 node_paths=PackedStringArray("_table_layouts")]
+script = ExtResource("1_ha6dk")
+_table_layouts = [NodePath("PlayersLeft_8/4_1v1"), NodePath("PlayersLeft_8/2_2v2"), NodePath("PlayersLeft_8/1_4v4"), NodePath("PlayersLeft_7/2_1v1_1_ffa3"), NodePath("PlayersLeft_7/1_2v2_1_ffa3"), NodePath("PlayersLeft_6/3_1v1"), NodePath("PlayersLeft_6/1_2v2_1_1v1"), NodePath("PlayersLeft_6/1_3v3"), NodePath("PlayersLeft_5/1_1v1_1_ffa3"), NodePath("PlayersLeft_4/2_1v1"), NodePath("PlayersLeft_4/1_2v2"), NodePath("PlayersLeft_3/1_ffa3"), NodePath("PlayersLeft_2/1_1v1"), NodePath("PlayersLeft_6/1_3v3"), NodePath("PlayersLeft_8/1_4v4")]
+
+[node name="DebugVisualPlace" type="MeshInstance3D" parent="." unique_id=931637240]
+visible = false
+material_override = SubResource("StandardMaterial3D_6qeal")
+mesh = SubResource("BoxMesh_r1qdr")
+skeleton = NodePath("")
+
+[node name="DebugVisualPlace" type="MeshInstance3D" parent="DebugVisualPlace" unique_id=2054804628]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+material_override = SubResource("StandardMaterial3D_h5ieb")
+mesh = SubResource("BoxMesh_iowfl")
+skeleton = NodePath("")
+
+[node name="PlayersLeft_2" type="Node3D" parent="." unique_id=681119676]
+unique_name_in_owner = true
+transform = Transform3D(0.627705, 0, -0.778451, 0, 1, 0, 0.778451, 0, 0.627705, -0.0568886, 0, -1.19468)
+visible = false
+
+[node name="1_1v1" type="Node3D" parent="PlayersLeft_2" unique_id=977260541 node_paths=PackedStringArray("_tables")]
+unique_name_in_owner = true
+script = ExtResource("5_tln4w")
+_tables = [NodePath("Table_1v1")]
+
+[node name="Table_1v1" parent="PlayersLeft_2/1_1v1" unique_id=1801569289 instance=ExtResource("2_are6m")]
+transform = Transform3D(0.675693, 0, 0.737183, 0, 1, 0, -0.737183, 0, 0.675693, 0, 0, 0)
+battle_id = 1
+
+[node name="PlayersLeft_3" type="Node3D" parent="." unique_id=1858563274]
+unique_name_in_owner = true
+visible = false
+
+[node name="1_ffa3" type="Node3D" parent="PlayersLeft_3" unique_id=383773252 node_paths=PackedStringArray("_tables")]
+unique_name_in_owner = true
+script = ExtResource("5_tln4w")
+_tables = [NodePath("Table_ffa3")]
+
+[node name="Table_ffa3" parent="PlayersLeft_3/1_ffa3" unique_id=571993943 instance=ExtResource("3_vm0me")]
+transform = Transform3D(0.953654, 0, 0.300906, 0, 1, 0, -0.300906, 0, 0.953654, 0.0284452, 0, -1.13779)
+
+[node name="PlayersLeft_4" type="Node3D" parent="." unique_id=1209681911]
+unique_name_in_owner = true
+visible = false
+
+[node name="2_1v1" type="Node3D" parent="PlayersLeft_4" unique_id=1594958751 node_paths=PackedStringArray("_tables")]
+unique_name_in_owner = true
+visible = false
+script = ExtResource("5_tln4w")
+_tables = [NodePath("Table_1v1_1"), NodePath("Table_1v1_2")]
+
+[node name="Table_1v1_1" parent="PlayersLeft_4/2_1v1" unique_id=1934309218 instance=ExtResource("2_are6m")]
+transform = Transform3D(0.56035, 0, 0.828256, 0, 1, 0, -0.828256, 0, 0.56035, -2.85194, 0, -1.11647)
+
+[node name="Table_1v1_2" parent="PlayersLeft_4/2_1v1" unique_id=643587015 instance=ExtResource("2_are6m")]
+transform = Transform3D(0.301472, 0, 0.953475, 0, 1, 0, -0.953475, 0, 0.301472, 3.88904, 0, -1.05867)
+battle_id = 1
+
+[node name="1_2v2" type="Node3D" parent="PlayersLeft_4" unique_id=1384287229 node_paths=PackedStringArray("_tables")]
+unique_name_in_owner = true
+transform = Transform3D(0.997647, 0, -0.0685551, 0, 1, 0, 0.0685551, 0, 0.997647, 0, 0, -1.10934)
+script = ExtResource("5_tln4w")
+_tables = [NodePath("table_2v2")]
+
+[node name="table_2v2" parent="PlayersLeft_4/1_2v2" unique_id=663138591 instance=ExtResource("3_cjni8")]
+
+[node name="PlayersLeft_5" type="Node3D" parent="." unique_id=1067207417]
+unique_name_in_owner = true
+visible = false
+
+[node name="1_1v1_1_ffa3" type="Node3D" parent="PlayersLeft_5" unique_id=161632521 node_paths=PackedStringArray("_tables")]
+unique_name_in_owner = true
+script = ExtResource("5_tln4w")
+_tables = [NodePath("Table_1v1"), NodePath("Table_ffa3")]
+
+[node name="Table_1v1" parent="PlayersLeft_5/1_1v1_1_ffa3" unique_id=1176166825 instance=ExtResource("2_are6m")]
+transform = Transform3D(0.753793, 0, -0.657112, 0, 1, 0, 0.657112, 0, 0.753793, -3.07336, 0, -0.899284)
+battle_id = 1
+
+[node name="Table_ffa3" parent="PlayersLeft_5/1_1v1_1_ffa3" unique_id=555085954 instance=ExtResource("3_vm0me")]
+transform = Transform3D(0.967705, 0, 0.252086, 0, 1, 0, -0.252086, 0, 0.967705, 3.42667, 0, -1.3369)
+
+[node name="PlayersLeft_6" type="Node3D" parent="." unique_id=1024018563]
+unique_name_in_owner = true
+
+[node name="3_1v1" type="Node3D" parent="PlayersLeft_6" unique_id=1310983628 node_paths=PackedStringArray("_tables")]
+unique_name_in_owner = true
+visible = false
+script = ExtResource("5_tln4w")
+_tables = [NodePath("Table_1v1_1"), NodePath("Table_1v1_2"), NodePath("Table_1v1_3")]
+
+[node name="Table_1v1_1" parent="PlayersLeft_6/3_1v1" unique_id=489581397 instance=ExtResource("2_are6m")]
+transform = Transform3D(-0.399981, 0, 0.916524, 0, 1, 0, -0.916524, 0, -0.399981, -4.38674, 4.76837e-07, -1.03196)
+
+[node name="Table_1v1_2" parent="PlayersLeft_6/3_1v1" unique_id=1698754123 instance=ExtResource("2_are6m")]
+transform = Transform3D(0.41847, 0, 0.908231, 0, 1, 0, -0.908231, 0, 0.41847, 4.59595, -4.76837e-07, -0.369448)
+battle_id = 1
+
+[node name="Table_1v1_3" parent="PlayersLeft_6/3_1v1" unique_id=1049256626 instance=ExtResource("2_are6m")]
+transform = Transform3D(0.759532, 0, 0.65047, 0, 1, 0, -0.65047, 0, 0.759532, 0.342042, 0, -2.19518)
+battle_id = 2
+
+[node name="1_2v2_1_1v1" type="Node3D" parent="PlayersLeft_6" unique_id=86053667 node_paths=PackedStringArray("_tables")]
+unique_name_in_owner = true
+visible = false
+script = ExtResource("5_tln4w")
+_tables = [NodePath("table_2v2"), NodePath("Table_1v1")]
+
+[node name="table_2v2" parent="PlayersLeft_6/1_2v2_1_1v1" unique_id=1486105840 instance=ExtResource("3_cjni8")]
+transform = Transform3D(0.905413, 0, -0.424531, 0, 1, 0, 0.424531, 0, 0.905413, -2.31733, 0, -0.914665)
+
+[node name="Table_1v1" parent="PlayersLeft_6/1_2v2_1_1v1" unique_id=1063739126 instance=ExtResource("2_are6m")]
+transform = Transform3D(-0.249281, 0, 0.968432, 0, 1, 0, -0.968432, 0, -0.249281, 4.28685, 0, -1.07269)
+
+[node name="1_3v3" type="Node3D" parent="PlayersLeft_6" unique_id=732063354 node_paths=PackedStringArray("_tables")]
+unique_name_in_owner = true
+script = ExtResource("5_tln4w")
+_tables = [NodePath("Table_3v3")]
+
+[node name="Table_3v3" parent="PlayersLeft_6/1_3v3" unique_id=198760588 instance=ExtResource("6_iowfl")]
+transform = Transform3D(0.72102296, 0, -0.69291127, 0, 1, 0, 0.69291127, 0, 0.72102296, -0.0028057098, 0, -1.1587825)
+
+[node name="PlayersLeft_7" type="Node3D" parent="." unique_id=595480657]
+unique_name_in_owner = true
+visible = false
+
+[node name="2_1v1_1_ffa3" type="Node3D" parent="PlayersLeft_7" unique_id=1791089661 node_paths=PackedStringArray("_tables")]
+unique_name_in_owner = true
+visible = false
+script = ExtResource("5_tln4w")
+_tables = [NodePath("Table_1v1_1"), NodePath("Table_1v1_2"), NodePath("Table_ffa3")]
+
+[node name="Table_1v1_1" parent="PlayersLeft_7/2_1v1_1_ffa3" unique_id=804468670 instance=ExtResource("2_are6m")]
+transform = Transform3D(-0.249281, 0, 0.968432, 0, 1, 0, -0.968432, 0, -0.249281, -4.8465, 0, -1.13845)
+
+[node name="Table_1v1_2" parent="PlayersLeft_7/2_1v1_1_ffa3" unique_id=1951373815 instance=ExtResource("2_are6m")]
+transform = Transform3D(0.230118, 0, 0.973163, 0, 1, 0, -0.973163, 0, 0.230118, 5.07956, 0, -1.0282)
+battle_id = 1
+
+[node name="Table_ffa3" parent="PlayersLeft_7/2_1v1_1_ffa3" unique_id=1488893605 instance=ExtResource("3_vm0me")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.155533, 0, -1.28888)
+
+[node name="1_2v2_1_ffa3" type="Node3D" parent="PlayersLeft_7" unique_id=965297241 node_paths=PackedStringArray("_tables")]
+unique_name_in_owner = true
+script = ExtResource("5_tln4w")
+_tables = [NodePath("table_2v2_1"), NodePath("Table_ffa3")]
+
+[node name="table_2v2_1" parent="PlayersLeft_7/1_2v2_1_ffa3" unique_id=823850681 instance=ExtResource("3_cjni8")]
+transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -3.11378, 0, -1.11378)
+
+[node name="Table_ffa3" parent="PlayersLeft_7/1_2v2_1_ffa3" unique_id=2080725793 instance=ExtResource("3_vm0me")]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 3.512, 0, -1.16179)
+
+[node name="PlayersLeft_8" type="Node3D" parent="." unique_id=977177599]
+unique_name_in_owner = true
+visible = false
+
+[node name="4_1v1" type="Node3D" parent="PlayersLeft_8" unique_id=576856236 node_paths=PackedStringArray("_tables")]
+unique_name_in_owner = true
+visible = false
+script = ExtResource("5_tln4w")
+_tables = [NodePath("Table_1v1_1"), NodePath("Table_1v1_2"), NodePath("Table_1v1_3"), NodePath("Table_1v1_4")]
+
+[node name="Table_1v1_1" parent="PlayersLeft_8/4_1v1" unique_id=472966861 instance=ExtResource("2_are6m")]
+transform = Transform3D(0.204531, 0, 0.978861, 0, 1, 0, -0.978861, 0, 0.204531, -5.09806, 0, -1.22822)
+
+[node name="Table_1v1_2" parent="PlayersLeft_8/4_1v1" unique_id=1184377253 instance=ExtResource("2_are6m")]
+transform = Transform3D(0.348408, 0, 0.937344, 0, 1, 0, -0.937344, 0, 0.348408, 5.14074, 4.76837e-07, -0.393536)
+battle_id = 1
+
+[node name="Table_1v1_3" parent="PlayersLeft_8/4_1v1" unique_id=634536659 instance=ExtResource("2_are6m")]
+transform = Transform3D(-0.413216, 0, 0.910633, 0, 1, 0, -0.910633, 0, -0.413216, 1.56438, 0, -1.94012)
+battle_id = 2
+
+[node name="Table_1v1_4" parent="PlayersLeft_8/4_1v1" unique_id=1047395560 instance=ExtResource("2_are6m")]
+transform = Transform3D(-0.0726988, 0, 0.997354, 0, 1, 0, -0.997354, 0, -0.0726988, -1.67795, 0, -0.596593)
+battle_id = 3
+
+[node name="2_2v2" type="Node3D" parent="PlayersLeft_8" unique_id=1045430685 node_paths=PackedStringArray("_tables")]
+unique_name_in_owner = true
+visible = false
+script = ExtResource("5_tln4w")
+_tables = [NodePath("table_2v2_1"), NodePath("table_2v2_2")]
+
+[node name="table_2v2_1" parent="PlayersLeft_8/2_2v2" unique_id=679157152 instance=ExtResource("3_cjni8")]
+transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -3.54045, 0, -0.763569)
+
+[node name="table_2v2_2" parent="PlayersLeft_8/2_2v2" unique_id=2113467921 instance=ExtResource("3_cjni8")]
+transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 3.54489, 0, -1.53601)
+
+[node name="1_4v4" type="Node3D" parent="PlayersLeft_8" unique_id=1940908934 node_paths=PackedStringArray("_tables")]
+unique_name_in_owner = true
+script = ExtResource("5_tln4w")
+_tables = [NodePath("Table_4v4")]
+
+[node name="Table_4v4" parent="PlayersLeft_8/1_4v4" unique_id=1198324743 instance=ExtResource("7_alvxg")]
+transform = Transform3D(0.15822697, 0, -0.9874028, 0, 1, 0, 0.9874028, 0, 0.15822697, 0.28854242, 0, -1.419889)

@@ -1,0 +1,47 @@
+[gd_resource type="VisualShader" format=3 uid="uid://dxvrfcjpmkb2q"]
+
+[ext_resource type="Texture2D" uid="uid://chpcaxvlucapx" path="res://20_Data/Texture/Texture_new/masks for  particles 2/12.png" id="1_gnfqj"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_ofejb"]
+input_name = "color"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_i3wak"]
+texture = ExtResource("1_gnfqj")
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_5wtph"]
+default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(0, 0, 0, 0)]
+op_type = 2
+operator = 2
+
+[sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_hr2vr"]
+default_input_values = [0, Quaternion(0, 0, 0, 0)]
+op_type = 2
+
+[sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_qg7nt"]
+default_input_values = [0, Quaternion(0, 0, 0, 0)]
+op_type = 2
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_ikv5d"]
+operator = 2
+
+[sub_resource type="VisualShaderNodeBillboard" id="VisualShaderNodeBillboard_yhvp8"]
+billboard_type = 3
+keep_scale = true
+
+[resource]
+nodes/vertex/2/node = SubResource("VisualShaderNodeBillboard_yhvp8")
+nodes/vertex/2/position = Vector2(20, 160)
+nodes/vertex/connections = PackedInt32Array(2, 0, 0, 10)
+nodes/fragment/2/node = SubResource("VisualShaderNodeInput_ofejb")
+nodes/fragment/2/position = Vector2(-640, 40)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_i3wak")
+nodes/fragment/3/position = Vector2(-920, 500)
+nodes/fragment/4/node = SubResource("VisualShaderNodeVectorOp_5wtph")
+nodes/fragment/4/position = Vector2(140, 260)
+nodes/fragment/5/node = SubResource("VisualShaderNodeVectorDecompose_hr2vr")
+nodes/fragment/5/position = Vector2(-360, 640)
+nodes/fragment/6/node = SubResource("VisualShaderNodeVectorDecompose_qg7nt")
+nodes/fragment/6/position = Vector2(-680, 240)
+nodes/fragment/7/node = SubResource("VisualShaderNodeFloatOp_ikv5d")
+nodes/fragment/7/position = Vector2(60, 580)
+nodes/fragment/connections = PackedInt32Array(2, 0, 4, 0, 3, 0, 4, 1, 4, 0, 0, 0, 3, 0, 5, 0, 2, 0, 6, 0, 6, 3, 7, 0, 5, 0, 7, 1, 7, 0, 0, 1)

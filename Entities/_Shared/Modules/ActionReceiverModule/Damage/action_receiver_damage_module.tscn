@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://bw2sjmtqwsxsg"]
-
-[ext_resource type="Script" uid="uid://cgguvx1d8mxyo" path="res://Entities/_Shared/Modules/ActionReceiverModule/Damage/action_receiver_damage_module.gd" id="1_4uwf8"]
-
-[node name="ActionReceiverDamageModule" type="Node" unique_id=1732125470]
-script = ExtResource("1_4uwf8")

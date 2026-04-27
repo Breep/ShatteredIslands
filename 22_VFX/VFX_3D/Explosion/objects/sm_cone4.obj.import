@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cdq8hlod5aren"
+path="res://.godot/imported/sm_cone4.obj-a368947b2d5768f7d6eaff2df6ea983d.mesh"
+
+[deps]
+
+files=["res://.godot/imported/sm_cone4.obj-a368947b2d5768f7d6eaff2df6ea983d.mesh"]
+
+source_file="res://22_VFX/VFX_3D/Explosion/objects/sm_cone4.obj"
+dest_files=["res://.godot/imported/sm_cone4.obj-a368947b2d5768f7d6eaff2df6ea983d.mesh", "res://.godot/imported/sm_cone4.obj-a368947b2d5768f7d6eaff2df6ea983d.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

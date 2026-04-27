@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://r3rk3cnyponr"]
+
+[ext_resource type="Script" uid="uid://gpbhlq6yi8ty" path="res://01_Cards/Descriptions/Cards/Engineer/Common/ProtectiveDome/shieldomatic_protective_dome.gd" id="1_e60rh"]
+[ext_resource type="Texture2D" uid="uid://d18itcbwexbpl" path="res://01_Cards/Descriptions/Cards/Engineer/Common/ProtectiveDome/shieldomatic_protective_dome.png" id="1_kmq2y"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_m4356"]
+
+[sub_resource type="Resource" id="Resource_kmq2y"]
+script = ExtResource("1_e60rh")
+_armor_percent = Array[float]([4.0, 8.0, 12.0, 16.0, 20.0])
+metadata/_custom_type_script = "uid://gpbhlq6yi8ty"
+
+[resource]
+script = ExtResource("1_m4356")
+name = "Protective Dome"
+picture = ExtResource("1_kmq2y")
+families = Array[int]([2])
+player_upgrade = SubResource("Resource_kmq2y")
+points = Dictionary[int, int]({
+2: 1
+})
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

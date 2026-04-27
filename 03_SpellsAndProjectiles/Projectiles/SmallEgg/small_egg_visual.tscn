@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://brngyuus4jals"]
+
+[ext_resource type="PackedScene" uid="uid://dkgiwc2fcyp3y" path="res://03_SpellsAndProjectiles/Projectiles/SmallEgg/crumble_projectile.tscn" id="1_oomrc"]
+[ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://10_Tool/QuickAnims/anim_rotating_module.tscn" id="2_oomrc"]
+
+[node name="SmallEggVisual" type="Node3D" unique_id=148101033]
+
+[node name="eggfull2" parent="." unique_id=558907305 instance=ExtResource("1_oomrc")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, -0.21802354, 0)
+
+[node name="AnimRotatingModuleX" parent="." unique_id=1513130225 node_paths=PackedStringArray("_owner") instance=ExtResource("2_oomrc")]
+_owner = NodePath("..")
+_rot_period = 1.0
+_rot_max = 360.0
+
+[node name="AnimRotatingModuleY" parent="." unique_id=521133355 node_paths=PackedStringArray("_owner") instance=ExtResource("2_oomrc")]
+_owner = NodePath("..")
+_rot_axis = 1
+_rot_period = 1.2
+_rot_max = 360.0
+
+[node name="AnimRotatingModuleZ" parent="." unique_id=1662915166 node_paths=PackedStringArray("_owner") instance=ExtResource("2_oomrc")]
+_owner = NodePath("..")
+_rot_axis = 2
+_rot_period = 0.7
+_rot_max = 360.0

@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://bwrcib7p2yf2x"]
+
+[ext_resource type="Texture2D" uid="uid://d2mc1kjq6i2rt" path="res://01_Cards/Descriptions/Cards/ArdentCelestial/Common/Scorpius/fire_scorpius.png" id="1_cggfv"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_jg5od"]
+[ext_resource type="Script" uid="uid://bave4wyeys31m" path="res://01_Cards/Descriptions/Cards/ArdentCelestial/Common/Scorpius/fire_scorpius.gd" id="1_q54w8"]
+
+[sub_resource type="Resource" id="Resource_cggfv"]
+script = ExtResource("1_q54w8")
+_poison_stacks = Array[float]([1.0, 2.0, 3.0, 4.0, 5.0])
+metadata/_custom_type_script = "uid://bave4wyeys31m"
+
+[resource]
+script = ExtResource("1_jg5od")
+name = "Scorpius"
+picture = ExtResource("1_cggfv")
+families = Array[int]([3, 7])
+player_upgrade = SubResource("Resource_cggfv")
+points = Dictionary[int, int]({
+3: 1,
+7: 1
+})
+lvl = 5
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

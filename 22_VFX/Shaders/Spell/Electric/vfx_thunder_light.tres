@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bqa4yxqnd8cg6"]
+
+[ext_resource type="Shader" uid="uid://dkanllfjiel2y" path="res://22_VFX/Shaders/3D/Lightning/thunder_3d.tres" id="1_gtaig"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_gtaig")

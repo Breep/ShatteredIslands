@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TooltipDesc" format=3]
+
+[ext_resource type="Script" uid="uid://cr1qi4s4jv5f7" path="res://04_UI/Tool/Tooltip/Dictionary/tooltip_desc.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+key = &"ATTACK"
+title = "{{COLOR:ATTACK_COLOR}}ATTACK{{/COLOR}}"
+description = "Auto-Attack is a standard offensive action. Also called AA"
+icon_key = "ATTACK_ICON"

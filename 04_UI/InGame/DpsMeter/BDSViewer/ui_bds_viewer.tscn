@@ -1,0 +1,266 @@
+[gd_scene format=3 uid="uid://duf3kswv8x14b"]
+
+[ext_resource type="Script" uid="uid://cm3wci6x4hsdb" path="res://04_UI/InGame/DpsMeter/BDSViewer/ui_bds_viewer.gd" id="1_jf5p1"]
+[ext_resource type="Texture2D" uid="uid://b78s362n5bu6" path="res://01_Cards/Descriptions/Families/Icons/warrior.png" id="2_7uvd5"]
+
+[node name="BattleDataStatViewer" type="Control" unique_id=1443367133]
+custom_minimum_size = Vector2(200, 25)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -12.5
+offset_right = 75.0
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+script = ExtResource("1_jf5p1")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1826561182]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.47843137, 0.47843137, 0.47843137, 0.47843137)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1427104011]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer" unique_id=849647477]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+mouse_filter = 2
+texture = ExtResource("2_7uvd5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=679407467]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Control" type="Control" parent="HBoxContainer/VBoxContainer" unique_id=2091323777]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="NameLabel" type="Label" parent="HBoxContainer/VBoxContainer/Control" unique_id=770360974]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 60.0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 10
+text = "Action name"
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/Control" unique_id=1073927314]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+alignment = 2
+
+[node name="ValueLabel" type="Label" parent="HBoxContainer/VBoxContainer/Control/HBoxContainer" unique_id=1971514044]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "4"
+vertical_alignment = 1
+
+[node name="PercentLabel" type="Label" parent="HBoxContainer/VBoxContainer/Control/HBoxContainer" unique_id=259587354]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "(100%)"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="MetersContainer" type="Control" parent="HBoxContainer/VBoxContainer" unique_id=444441891]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Background" type="ColorRect" parent="HBoxContainer/VBoxContainer/MetersContainer" unique_id=382530519]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.19607843, 0.19607843, 0.19607843, 0.78431374)
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/MetersContainer" unique_id=416636240]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/MetersContainer/MarginContainer" unique_id=1231762896]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Meters" type="Control" parent="HBoxContainer/VBoxContainer/MetersContainer/MarginContainer/HBoxContainer" unique_id=1708612059]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="BarStatsContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/MetersContainer/MarginContainer/HBoxContainer/Meters" unique_id=728281802]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Bar1" type="ColorRect" parent="HBoxContainer/VBoxContainer/MetersContainer/MarginContainer/HBoxContainer/Meters/BarStatsContainer" unique_id=297976639]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+mouse_filter = 2
+color = Color(0.9214067, 0.24567583, 0.3008359, 1)
+
+[node name="Value1" type="Label" parent="HBoxContainer/VBoxContainer/MetersContainer/MarginContainer/HBoxContainer/Meters/BarStatsContainer/Bar1" unique_id=2146205298]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 12
+text = "42"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Bar2" type="ColorRect" parent="HBoxContainer/VBoxContainer/MetersContainer/MarginContainer/HBoxContainer/Meters/BarStatsContainer" unique_id=1761575058]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+mouse_filter = 2
+color = Color(0.85354114, 0.86767477, 0.87372243, 1)
+
+[node name="Value2" type="Label" parent="HBoxContainer/VBoxContainer/MetersContainer/MarginContainer/HBoxContainer/Meters/BarStatsContainer/Bar2" unique_id=2083143899]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 12
+text = "42"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Bar3" type="ColorRect" parent="HBoxContainer/VBoxContainer/MetersContainer/MarginContainer/HBoxContainer/Meters/BarStatsContainer" unique_id=1213258953]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+mouse_filter = 2
+color = Color(0.39227563, 0.5345537, 0.77719, 1)
+
+[node name="Value3" type="Label" parent="HBoxContainer/VBoxContainer/MetersContainer/MarginContainer/HBoxContainer/Meters/BarStatsContainer/Bar3" unique_id=32276937]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 12
+text = "42"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Bar4" type="ColorRect" parent="HBoxContainer/VBoxContainer/MetersContainer/MarginContainer/HBoxContainer/Meters/BarStatsContainer" unique_id=1971008432]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+mouse_filter = 2
+color = Color(0.2945542, 0.49413776, 0.25579977, 1)
+
+[node name="Value4" type="Label" parent="HBoxContainer/VBoxContainer/MetersContainer/MarginContainer/HBoxContainer/Meters/BarStatsContainer/Bar4" unique_id=835441042]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 12
+text = "42"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Empty" type="Control" parent="HBoxContainer/VBoxContainer/MetersContainer/MarginContainer/HBoxContainer" unique_id=1761565038]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.0
+mouse_filter = 2
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

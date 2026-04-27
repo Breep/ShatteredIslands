@@ -1,0 +1,863 @@
+[gd_scene format=3 uid="uid://r4rmoi87mwlc"]
+
+[ext_resource type="Script" uid="uid://d4gw8hcwp3x31" path="res://99_Prototyping/Chain/prototyping_chains.gd" id="1_8gv3x"]
+[ext_resource type="PackedScene" uid="uid://c4iv26adgresi" path="res://10_Tool/Chain/chain.tscn" id="2_8gv3x"]
+[ext_resource type="PackedScene" uid="uid://dlicqbvk6hpq6" path="res://10_Tool/Chain/chain_link.tscn" id="3_wv1m3"]
+[ext_resource type="PackedScene" uid="uid://di34xfy5cli15" path="res://10_Tool/Cameras/FreeFly/free_fly_camera.tscn" id="5_8gv3x"]
+[ext_resource type="PackedScene" uid="uid://bdgq2v87slsr3" path="res://10_Tool/Chain/base_link.tscn" id="5_m18q3"]
+[ext_resource type="PackedScene" uid="uid://3m2v1arprnf7" path="res://06_FloatingIsland/_Maps/tavern.tscn" id="5_wv1m3"]
+
+[sub_resource type="Environment" id="Environment_t5hqi"]
+background_mode = 1
+
+[node name="PrototypingChains" type="Node3D" node_paths=PackedStringArray("_free_fly_camera")]
+script = ExtResource("1_8gv3x")
+_free_fly_camera = NodePath("FreeFlyCamera")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_t5hqi")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -7.77555, 0)
+
+[node name="FreeFlyCamera" parent="." instance=ExtResource("5_8gv3x")]
+transform = Transform3D(1, 0, 0, 0, 0.997937, 0.0642014, 0, -0.0642014, 0.997937, -0.635986, 7.33023, 6.09287)
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 15, 25)
+omni_range = 100.0
+omni_attenuation = 0.5
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 15, 25)
+omni_range = 100.0
+omni_attenuation = 0.5
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 15, -25)
+omni_range = 100.0
+omni_attenuation = 0.5
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 15, -25)
+omni_range = 100.0
+omni_attenuation = 0.5
+
+[node name="tavern" parent="." instance=ExtResource("5_wv1m3")]
+visible = false
+
+[node name="Roof" parent="tavern" index="2"]
+visible = false
+
+[node name="Chain" parent="." instance=ExtResource("2_8gv3x")]
+transform = Transform3D(-0.99648, 0.0838344, 0, -0.0838344, -0.99648, 0, 0, 0, 1, 0, 9.48244, 0)
+_link_number = 50
+_linear_limit_softness = 0.7
+_linear_limit_restitution = 0.5
+_linear_limit_damping = 1.0
+
+[node name="BaseLink" parent="Chain" instance=ExtResource("5_m18q3")]
+
+[node name="ChainLink0" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, 0)
+
+[node name="@Generic6DOFJoint3D@291397" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+node_a = NodePath("../BaseLink")
+node_b = NodePath("../ChainLink0")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink1" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 2, 0)
+
+[node name="@Generic6DOFJoint3D@291398" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+node_a = NodePath("../ChainLink0")
+node_b = NodePath("../ChainLink1")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink2" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 3, 0)
+
+[node name="@Generic6DOFJoint3D@291399" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+node_a = NodePath("../ChainLink1")
+node_b = NodePath("../ChainLink2")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink3" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 0, 4, 0)
+
+[node name="@Generic6DOFJoint3D@291400" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+node_a = NodePath("../ChainLink2")
+node_b = NodePath("../ChainLink3")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink4" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(1.39071e-07, 0, 1, 0, 1, 0, -1, 0, 1.39071e-07, 0, 5, 0)
+
+[node name="@Generic6DOFJoint3D@291401" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+node_a = NodePath("../ChainLink3")
+node_b = NodePath("../ChainLink4")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink5" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(-1, 0, -2.38498e-08, 0, 1, 0, 2.38498e-08, 0, -1, 0, 6, 0)
+
+[node name="@Generic6DOFJoint3D@291402" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+node_a = NodePath("../ChainLink4")
+node_b = NodePath("../ChainLink5")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink6" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(-2.90067e-07, 0, -1, 0, 1, 0, 1, 0, -2.90067e-07, 0, 7, 0)
+
+[node name="@Generic6DOFJoint3D@291403" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0)
+node_a = NodePath("../ChainLink5")
+node_b = NodePath("../ChainLink6")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink7" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(1, 0, 3.49691e-07, 0, 1, 0, -3.49691e-07, 0, 1, 0, 8, 0)
+
+[node name="@Generic6DOFJoint3D@291404" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)
+node_a = NodePath("../ChainLink6")
+node_b = NodePath("../ChainLink7")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink8" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(-3.57746e-08, 0, 1, 0, 1, 0, -1, 0, -3.57746e-08, 0, 9, 0)
+
+[node name="@Generic6DOFJoint3D@291405" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+node_a = NodePath("../ChainLink7")
+node_b = NodePath("../ChainLink8")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink9" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(-1, 0, 2.78142e-07, 0, 1, 0, -2.78142e-07, 0, -1, 0, 10, 0)
+
+[node name="@Generic6DOFJoint3D@291406" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+node_a = NodePath("../ChainLink8")
+node_b = NodePath("../ChainLink9")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink10" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(-5.92058e-07, 0, -1, 0, 1, 0, 1, 0, -5.92058e-07, 0, 11, 0)
+
+[node name="@Generic6DOFJoint3D@291407" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, 0)
+node_a = NodePath("../ChainLink9")
+node_b = NodePath("../ChainLink10")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink11" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(1, 0, 4.76995e-08, 0, 1, 0, -4.76995e-08, 0, 1, 0, 12, 0)
+
+[node name="@Generic6DOFJoint3D@291408" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 0)
+node_a = NodePath("../ChainLink10")
+node_b = NodePath("../ChainLink11")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink12" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(-6.87457e-07, 0, 1, 0, 1, 0, -1, 0, -6.87457e-07, 0, 13, 0)
+
+[node name="@Generic6DOFJoint3D@291409" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13, 0)
+node_a = NodePath("../ChainLink11")
+node_b = NodePath("../ChainLink12")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink13" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(-1, 0, 5.80133e-07, 0, 1, 0, -5.80133e-07, 0, -1, 0, 14, 0)
+
+[node name="@Generic6DOFJoint3D@291410" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14, 0)
+node_a = NodePath("../ChainLink12")
+node_b = NodePath("../ChainLink13")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink14" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(5.96244e-08, 0, -1, 0, 1, 0, 1, 0, 5.96244e-08, 0, 15, 0)
+
+[node name="@Generic6DOFJoint3D@291411" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 0)
+node_a = NodePath("../ChainLink13")
+node_b = NodePath("../ChainLink14")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink15" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(1, 0, 6.99382e-07, 0, 1, 0, -6.99382e-07, 0, 1, 0, 16, 0)
+
+[node name="@Generic6DOFJoint3D@291412" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16, 0)
+node_a = NodePath("../ChainLink14")
+node_b = NodePath("../ChainLink15")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink16" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(5.68209e-07, 0, 1, 0, 1, 0, -1, 0, 5.68209e-07, 0, 17, 0)
+
+[node name="@Generic6DOFJoint3D@291413" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17, 0)
+node_a = NodePath("../ChainLink15")
+node_b = NodePath("../ChainLink16")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink17" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(-1, 0, -7.15493e-08, 0, 1, 0, 7.15493e-08, 0, -1, 0, 18, 0)
+
+[node name="@Generic6DOFJoint3D@291414" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18, 0)
+node_a = NodePath("../ChainLink16")
+node_b = NodePath("../ChainLink17")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink18" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(7.11307e-07, 0, -1, 0, 1, 0, 1, 0, 7.11307e-07, 0, 19, 0)
+
+[node name="@Generic6DOFJoint3D@291415" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19, 0)
+node_a = NodePath("../ChainLink17")
+node_b = NodePath("../ChainLink18")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink19" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(1, 0, -5.56284e-07, 0, 1, 0, 5.56284e-07, 0, 1, 0, 20, 0)
+
+[node name="@Generic6DOFJoint3D@291416" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0)
+node_a = NodePath("../ChainLink18")
+node_b = NodePath("../ChainLink19")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink20" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(1.82387e-06, 0, 1, 0, 1, 0, -1, 0, 1.82387e-06, 0, 21, 0)
+
+[node name="@Generic6DOFJoint3D@291417" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 21, 0)
+node_a = NodePath("../ChainLink19")
+node_b = NodePath("../ChainLink20")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink21" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(-1, 0, 1.18412e-06, 0, 1, 0, -1.18412e-06, 0, -1, 0, 22, 0)
+
+[node name="@Generic6DOFJoint3D@291418" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 22, 0)
+node_a = NodePath("../ChainLink20")
+node_b = NodePath("../ChainLink21")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink22" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(-5.44359e-07, 0, -1, 0, 1, 0, 1, 0, -5.44359e-07, 0, 23, 0)
+
+[node name="@Generic6DOFJoint3D@291419" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 23, 0)
+node_a = NodePath("../ChainLink21")
+node_b = NodePath("../ChainLink22")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink23" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(1, 0, 9.5399e-08, 0, 1, 0, -9.5399e-08, 0, 1, 0, 24, 0)
+
+[node name="@Generic6DOFJoint3D@291420" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 24, 0)
+node_a = NodePath("../ChainLink22")
+node_b = NodePath("../ChainLink23")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink24" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(-7.35157e-07, 0, 1, 0, 1, 0, -1, 0, -7.35157e-07, 0, 25, 0)
+
+[node name="@Generic6DOFJoint3D@291421" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25, 0)
+node_a = NodePath("../ChainLink23")
+node_b = NodePath("../ChainLink24")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink25" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(-1, 0, -1.37491e-06, 0, 1, 0, 1.37491e-06, 0, -1, 0, 26, 0)
+
+[node name="@Generic6DOFJoint3D@291422" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 26, 0)
+node_a = NodePath("../ChainLink24")
+node_b = NodePath("../ChainLink25")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink26" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(-1.80002e-06, 0, -1, 0, 1, 0, 1, 0, -1.80002e-06, 0, 27, 0)
+
+[node name="@Generic6DOFJoint3D@291423" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 27, 0)
+node_a = NodePath("../ChainLink25")
+node_b = NodePath("../ChainLink26")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink27" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(1, 0, -1.16027e-06, 0, 1, 0, 1.16027e-06, 0, 1, 0, 28, 0)
+
+[node name="@Generic6DOFJoint3D@291424" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 28, 0)
+node_a = NodePath("../ChainLink26")
+node_b = NodePath("../ChainLink27")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink28" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(5.20509e-07, 0, 1, 0, 1, 0, -1, 0, 5.20509e-07, 0, 29, 0)
+
+[node name="@Generic6DOFJoint3D@291425" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 29, 0)
+node_a = NodePath("../ChainLink27")
+node_b = NodePath("../ChainLink28")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink29" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(-1, 0, -1.19249e-07, 0, 1, 0, 1.19249e-07, 0, -1, 0, 30, 0)
+
+[node name="@Generic6DOFJoint3D@291426" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 0)
+node_a = NodePath("../ChainLink28")
+node_b = NodePath("../ChainLink29")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink30" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(7.59007e-07, 0, -1, 0, 1, 0, 1, 0, 7.59007e-07, 0, 31, 0)
+
+[node name="@Generic6DOFJoint3D@291427" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 31, 0)
+node_a = NodePath("../ChainLink29")
+node_b = NodePath("../ChainLink30")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink31" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(1, 0, 1.39876e-06, 0, 1, 0, -1.39876e-06, 0, 1, 0, 32, 0)
+
+[node name="@Generic6DOFJoint3D@291428" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 32, 0)
+node_a = NodePath("../ChainLink30")
+node_b = NodePath("../ChainLink31")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink32" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(1.77617e-06, 0, 1, 0, 1, 0, -1, 0, 1.77617e-06, 0, 33, 0)
+
+[node name="@Generic6DOFJoint3D@291429" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 33, 0)
+node_a = NodePath("../ChainLink31")
+node_b = NodePath("../ChainLink32")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink33" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(-1, 0, 1.13642e-06, 0, 1, 0, -1.13642e-06, 0, -1, 0, 34, 0)
+
+[node name="@Generic6DOFJoint3D@291430" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 34, 0)
+node_a = NodePath("../ChainLink32")
+node_b = NodePath("../ChainLink33")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink34" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(-4.96659e-07, 0, -1, 0, 1, 0, 1, 0, -4.96659e-07, 0, 35, 0)
+
+[node name="@Generic6DOFJoint3D@291431" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 35, 0)
+node_a = NodePath("../ChainLink33")
+node_b = NodePath("../ChainLink34")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink35" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(1, 0, 1.43099e-07, 0, 1, 0, -1.43099e-07, 0, 1, 0, 36, 0)
+
+[node name="@Generic6DOFJoint3D@291432" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 36, 0)
+node_a = NodePath("../ChainLink34")
+node_b = NodePath("../ChainLink35")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink36" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(-7.82856e-07, 0, 1, 0, 1, 0, -1, 0, -7.82856e-07, 0, 37, 0)
+
+[node name="@Generic6DOFJoint3D@291433" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 37, 0)
+node_a = NodePath("../ChainLink35")
+node_b = NodePath("../ChainLink36")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink37" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(-1, 0, -1.42261e-06, 0, 1, 0, 1.42261e-06, 0, -1, 0, 38, 0)
+
+[node name="@Generic6DOFJoint3D@291434" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 38, 0)
+node_a = NodePath("../ChainLink36")
+node_b = NodePath("../ChainLink37")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink38" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(-1.75233e-06, 0, -1, 0, 1, 0, 1, 0, -1.75233e-06, 0, 39, 0)
+
+[node name="@Generic6DOFJoint3D@291435" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 39, 0)
+node_a = NodePath("../ChainLink37")
+node_b = NodePath("../ChainLink38")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink39" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(1, 0, -1.11257e-06, 0, 1, 0, 1.11257e-06, 0, 1, 0, 40, 0)
+
+[node name="@Generic6DOFJoint3D@291436" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 40, 0)
+node_a = NodePath("../ChainLink38")
+node_b = NodePath("../ChainLink39")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink40" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(4.7281e-07, 0, 1, 0, 1, 0, -1, 0, 4.7281e-07, 0, 41, 0)
+
+[node name="@Generic6DOFJoint3D@291437" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 41, 0)
+node_a = NodePath("../ChainLink39")
+node_b = NodePath("../ChainLink40")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink41" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(-1, 0, 3.64775e-06, 0, 1, 0, -3.64775e-06, 0, -1, 0, 42, 0)
+
+[node name="@Generic6DOFJoint3D@291438" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 42, 0)
+node_a = NodePath("../ChainLink40")
+node_b = NodePath("../ChainLink41")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink42" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(8.06706e-07, 0, -1, 0, 1, 0, 1, 0, 8.06706e-07, 0, 43, 0)
+
+[node name="@Generic6DOFJoint3D@291439" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 43, 0)
+node_a = NodePath("../ChainLink41")
+node_b = NodePath("../ChainLink42")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink43" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(1, 0, -2.36823e-06, 0, 1, 0, 2.36823e-06, 0, 1, 0, 44, 0)
+
+[node name="@Generic6DOFJoint3D@291440" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 44, 0)
+node_a = NodePath("../ChainLink42")
+node_b = NodePath("../ChainLink43")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink44" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(-2.08622e-06, 0, 1, 0, 1, 0, -1, 0, -2.08622e-06, 0, 45, 0)
+
+[node name="@Generic6DOFJoint3D@291441" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 45, 0)
+node_a = NodePath("../ChainLink43")
+node_b = NodePath("../ChainLink44")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink45" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(-1, 0, 1.08872e-06, 0, 1, 0, -1.08872e-06, 0, -1, 0, 46, 0)
+
+[node name="@Generic6DOFJoint3D@291442" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 46, 0)
+node_a = NodePath("../ChainLink44")
+node_b = NodePath("../ChainLink45")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink46" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(3.36574e-06, 0, -1, 0, 1, 0, 1, 0, 3.36574e-06, 0, 47, 0)
+
+[node name="@Generic6DOFJoint3D@291443" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 47, 0)
+node_a = NodePath("../ChainLink45")
+node_b = NodePath("../ChainLink46")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink47" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(1, 0, 1.90798e-07, 0, 1, 0, -1.90798e-07, 0, 1, 0, 48, 0)
+
+[node name="@Generic6DOFJoint3D@291444" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 48, 0)
+node_a = NodePath("../ChainLink46")
+node_b = NodePath("../ChainLink47")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink48" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(2.98414e-06, 0, 1, 0, 1, 0, -1, 0, 2.98414e-06, 0, 49, 0)
+
+[node name="@Generic6DOFJoint3D@291445" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 49, 0)
+node_a = NodePath("../ChainLink47")
+node_b = NodePath("../ChainLink48")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[node name="ChainLink49" parent="Chain" instance=ExtResource("3_wv1m3")]
+transform = Transform3D(-1, 0, -1.47031e-06, 0, 1, 0, 1.47031e-06, 0, -1, 0, 50, 0)
+
+[node name="@Generic6DOFJoint3D@291446" type="Generic6DOFJoint3D" parent="Chain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0)
+node_a = NodePath("../ChainLink48")
+node_b = NodePath("../ChainLink49")
+angular_limit_x/upper_angle = 0.523599
+angular_limit_x/lower_angle = -0.523599
+angular_limit_y/upper_angle = 0.174533
+angular_limit_y/lower_angle = -0.174533
+angular_limit_z/upper_angle = 0.523599
+angular_limit_z/lower_angle = -0.523599
+angular_spring_x/enabled = true
+angular_spring_z/enabled = true
+
+[editable path="tavern"]

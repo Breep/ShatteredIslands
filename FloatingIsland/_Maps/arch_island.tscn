@@ -1,7 +1,0 @@
-[gd_scene format=3 uid="uid://q7gxxkhg5u54"]
-
-[ext_resource type="PackedScene" uid="uid://b0opqsmhxort7" path="res://Props/DefaultBattleIsland/Arch_island/Arch_island.tscn" id="1_cci0s"]
-
-[node name="ArchIsland" type="Node3D" unique_id=1045725859]
-
-[node name="IslandRemake" parent="." unique_id=1888769254 instance=ExtResource("1_cci0s")]

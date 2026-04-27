@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://0ox7s5een5vu"]
+
+[ext_resource type="PackedScene" uid="uid://d1oxnd1g75rqh" path="res://04_UI/InGame/BuyingArea/CardShop/ui_card_shop.tscn" id="1_1jad1"]
+[ext_resource type="Script" uid="uid://blgwnuhx2x0ic" path="res://99_Prototyping/UI/UICardShop/prototyping_card_shop.gd" id="1_b3o3y"]
+
+[node name="PrototypingCardShop" type="Control" node_paths=PackedStringArray("_ui_card_shop")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_b3o3y")
+_ui_card_shop = NodePath("UICardShop2")
+
+[node name="UICardShop2" parent="." instance=ExtResource("1_1jad1")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.161458
+anchor_top = 0.169753
+anchor_right = 0.840278
+anchor_bottom = 0.839506
+
+[connection signal="mouse_entered" from="UICardShop2" to="." method="_on_ui_card_shop_mouse_entered"]
+[connection signal="mouse_exited" from="UICardShop2" to="." method="_on_ui_card_shop_mouse_exited"]

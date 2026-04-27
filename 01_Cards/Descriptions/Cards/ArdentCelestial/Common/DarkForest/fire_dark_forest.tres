@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cx8ghn5qu8ot6"]
+
+[ext_resource type="Texture2D" uid="uid://tuwewl8ngbqu" path="res://01_Cards/Descriptions/Cards/ArdentCelestial/Common/DarkForest/fire_dark_forest.png" id="1_32p1v"]
+[ext_resource type="Script" uid="uid://codt4sirjnqh7" path="res://01_Cards/Descriptions/Cards/ArdentCelestial/Common/DarkForest/fire_dark_forest.gd" id="2_m1x01"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="3_5htay"]
+
+[sub_resource type="Resource" id="Resource_omhxh"]
+script = ExtResource("2_m1x01")
+_increase_dodge = Array[float]([1.0, 2.0, 3.0, 4.0, 6.0])
+_ignite_stacks = Array[float]([10.0, 12.0, 14.0, 16.0, 18.0])
+metadata/_custom_type_script = "uid://codt4sirjnqh7"
+
+[resource]
+script = ExtResource("3_5htay")
+name = "Dark Forest"
+picture = ExtResource("1_32p1v")
+families = Array[int]([3])
+player_upgrade = SubResource("Resource_omhxh")
+points = Dictionary[int, int]({
+3: 2
+})
+lvl = 5
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

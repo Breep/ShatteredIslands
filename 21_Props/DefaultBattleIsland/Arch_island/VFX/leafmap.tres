@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cyh47m01binp"]
+
+[ext_resource type="Texture2D" uid="uid://d2orvubtl3mgh" path="res://21_Props/DefaultBattleIsland/Arch_island/foliage/Models/Trees/Shaders/leafmap.tga" id="1_xyhn5"]
+
+[resource]
+transparency = 1
+albedo_texture = ExtResource("1_xyhn5")

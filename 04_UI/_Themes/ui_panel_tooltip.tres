@@ -1,0 +1,22 @@
+[gd_resource type="Theme" format=3 uid="uid://c3afe8ow3fc6c"]
+
+[ext_resource type="FontFile" uid="uid://bdgqiedfa6ld2" path="res://20_Data/font/Nunito-ExtraBold.ttf" id="1_njaf1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ymp7r"]
+bg_color = Color(0.761, 0.404, 0.224, 0.9)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.910058, 0.555565, 0.386418, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 2
+
+[resource]
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/constants/outline_size = 5
+Label/fonts/font = ExtResource("1_njaf1")
+Panel/styles/panel = SubResource("StyleBoxFlat_ymp7r")

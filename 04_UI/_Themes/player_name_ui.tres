@@ -1,0 +1,10 @@
+[gd_resource type="Theme" format=3 uid="uid://dl2jgqb1voep3"]
+
+[ext_resource type="FontFile" uid="uid://cl0jltnxq5gum" path="res://20_Data/font/GlacialIndifference-Bold.otf" id="1_rx47e"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dovgd"]
+bg_color = Color(0, 0, 0, 1)
+
+[resource]
+RichTextLabel/fonts/normal_font = ExtResource("1_rx47e")
+RichTextLabel/styles/background = SubResource("StyleBoxFlat_dovgd")

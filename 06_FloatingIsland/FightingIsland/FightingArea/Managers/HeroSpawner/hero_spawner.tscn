@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cc8wss5swf76b"]
+
+[ext_resource type="Script" uid="uid://bemiiwkhphhbi" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/HeroSpawner/hero_spawner.gd" id="1_1scsa"]
+
+[node name="HeroSpawner" type="Node"]
+script = ExtResource("1_1scsa")

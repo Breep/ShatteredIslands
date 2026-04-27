@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://c3qf5odp5y6ap"]
+
+[ext_resource type="Texture2D" uid="uid://bv67s0hqdhhnd" path="res://01_Cards/Descriptions/Cards/Light/Common/LifeSpring/light_life_spring.png" id="1_eptq0"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_if6hk"]
+[ext_resource type="Script" uid="uid://x2bc4gpho4jt" path="res://01_Cards/Descriptions/Cards/Light/Common/LifeSpring/light_life_spring.gd" id="1_tpriq"]
+
+[sub_resource type="Resource" id="Resource_eptq0"]
+script = ExtResource("1_tpriq")
+_regen_amount = Array[float]([4.0, 6.0, 8.0, 10.0, 12.0])
+_period = Array[float]([1.5, 1.5, 1.5, 1.5, 1.5])
+metadata/_custom_type_script = "uid://x2bc4gpho4jt"
+
+[resource]
+script = ExtResource("1_if6hk")
+name = "Life Spring"
+picture = ExtResource("1_eptq0")
+families = Array[int]([5])
+player_upgrade = SubResource("Resource_eptq0")
+points = Dictionary[int, int]({
+5: 1
+})
+lvl = 5
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

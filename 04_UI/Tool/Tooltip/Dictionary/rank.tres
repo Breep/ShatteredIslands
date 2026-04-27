@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TooltipDesc" format=3]
+
+[ext_resource type="Script" uid="uid://cr1qi4s4jv5f7" path="res://04_UI/Tool/Tooltip/Dictionary/tooltip_desc.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+key = &"RANK"
+title = "{{COLOR:CHICKEN_COLOR}}RANK{{/COLOR}}"
+description = "Lightning family passiv. Gain power for each tier grinded (S, A, B, C)."
+icon_key = "RANK_ICON"

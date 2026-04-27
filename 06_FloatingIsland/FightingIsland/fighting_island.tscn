@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://drcuyohos0doa"]
+
+[ext_resource type="Script" uid="uid://b6yyjft0aylpr" path="res://06_FloatingIsland/FightingIsland/fighting_island.gd" id="1_hqxtb"]
+[ext_resource type="PackedScene" uid="uid://c66yw4go2ykwa" path="res://06_FloatingIsland/FightingIsland/FightingArea/fighting_area.tscn" id="2_0nkjk"]
+[ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://10_Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="4_0ovsq"]
+[ext_resource type="PackedScene" uid="uid://q7gxxkhg5u54" path="res://06_FloatingIsland/_Maps/arch_island.tscn" id="4_8iwhk"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_622jh"]
+properties/0/path = NodePath(".:_player_owner_id")
+properties/0/spawn = true
+properties/0/replication_mode = 0
+properties/1/path = NodePath(".:position")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath(".:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+
+[node name="FightingIsland" type="Node3D" unique_id=147248741 node_paths=PackedStringArray("_fighting_area", "_center_point_camera")]
+script = ExtResource("1_hqxtb")
+_fighting_area = NodePath("FightingArea")
+_center_point_camera = NodePath("CenterPointCamera")
+
+[node name="CenterPointCamera" parent="." unique_id=201179206 instance=ExtResource("4_0ovsq")]
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=893859613]
+replication_config = SubResource("SceneReplicationConfig_622jh")
+
+[node name="ArchIsland" parent="." unique_id=1045725859 instance=ExtResource("4_8iwhk")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -0.5682397, 0)
+
+[node name="FightingArea" parent="." unique_id=2072382245 node_paths=PackedStringArray("_fighting_floors") instance=ExtResource("2_0nkjk")]
+_fighting_floors = {
+0: NodePath("FightingFloorTemplates/FightingFloor_1v1"),
+1: NodePath("FightingFloorTemplates/FightingFloor_2v2"),
+2: NodePath("FightingFloorTemplates/FightingFloor_3v3"),
+3: NodePath("FightingFloorTemplates/FightingFloor_4v4"),
+4: NodePath("FightingFloorTemplates/FightingFloor_ffa13")
+}
+
+[editable path="CenterPointCamera"]

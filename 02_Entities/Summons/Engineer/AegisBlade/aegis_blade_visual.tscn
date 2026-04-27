@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dc124wncshpne"]
+
+[ext_resource type="PackedScene" uid="uid://do5bslbv5ulo0" path="res://21_Props/DefaultBattleIsland/Arch_island/props_arena_sword.tscn" id="1_355p2"]
+
+[node name="AegisBladeVisual" type="Node3D" unique_id=687254709]
+
+[node name="sword" parent="." unique_id=1966000435 instance=ExtResource("1_355p2")]
+transform = Transform3D(-2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0, 0, 0.5, 0.17724717, 1.7755485, 0)

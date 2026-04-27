@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cy3yjp7gqf50v"
+path="res://.godot/imported/sm_circular_plane1.obj-611c0c58bfff67746412c8a2cbcf6fab.mesh"
+
+[deps]
+
+files=["res://.godot/imported/sm_circular_plane1.obj-611c0c58bfff67746412c8a2cbcf6fab.mesh"]
+
+source_file="res://22_VFX/VFX_3D/Ultimate/Aeron/Objects/sm_circular_plane1.obj"
+dest_files=["res://.godot/imported/sm_circular_plane1.obj-611c0c58bfff67746412c8a2cbcf6fab.mesh", "res://.godot/imported/sm_circular_plane1.obj-611c0c58bfff67746412c8a2cbcf6fab.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

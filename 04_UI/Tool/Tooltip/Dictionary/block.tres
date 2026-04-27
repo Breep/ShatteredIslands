@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TooltipDesc" format=3 uid="uid://bwskt8ivhx6iy"]
+
+[ext_resource type="Script" uid="uid://cr1qi4s4jv5f7" path="res://04_UI/Tool/Tooltip/Dictionary/tooltip_desc.gd" id="1_7s6lk"]
+
+[resource]
+script = ExtResource("1_7s6lk")
+key = &"BLOCK"
+title = "{{COLOR:BLOCK_COLOR}}BLOCK{{/COLOR}}"
+description = "Block is a stack that prevent all incomming damage then get removed."
+metadata/_custom_type_script = "uid://cr1qi4s4jv5f7"

@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://landw8n0pduy"]
-
-[ext_resource type="Script" uid="uid://dylaql0kdobjd" path="res://Card/3D/CardTower/card_tower.gd" id="1_btpib"]
-[ext_resource type="PackedScene" uid="uid://d1aujx2y6tfiy" path="res://Card/3D/Card3D/card_3d.tscn" id="2_iw7rq"]
-
-[node name="CardTower" type="Node3D"]
-script = ExtResource("1_btpib")
-
-[node name="Card3d" parent="." instance=ExtResource("2_iw7rq")]

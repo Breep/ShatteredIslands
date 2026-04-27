@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://dbsddpfwj0xba"]
+
+[ext_resource type="Texture2D" uid="uid://ccfhgxkn06s0e" path="res://02_Entities/Heroes/DarkKnight/Data/ultimate.png" id="1_axcq2"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/Heroes/_Shared/skill.gd" id="2_332ir"]
+
+[resource]
+script = ExtResource("2_332ir")
+skill_id = 7
+name = "Dark Storm"
+description = "Aeron Vantaal crée une tempête du néant sur l'ennemi ciblé, La tempête fait des dommage égal à 50% de son AD toutes les 0,2sec pendant 1sec"
+portrait = ExtResource("1_axcq2")
+metadata/_custom_type_script = "uid://dfby4merlgkep"

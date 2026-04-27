@@ -1,8 +1,0 @@
-[gd_scene format=3 uid="uid://i6mui4bkx4tx"]
-
-[ext_resource type="PackedScene" uid="uid://bclst33x1segi" path="res://Entities/Summons/Engineer/ProtoShield/shield_proto_animated.tscn" id="1_vh1xw"]
-
-[node name="ProtoShieldVisual" type="Node3D" unique_id=1980159794]
-
-[node name="shield_proto" parent="." unique_id=1848716056 instance=ExtResource("1_vh1xw")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)

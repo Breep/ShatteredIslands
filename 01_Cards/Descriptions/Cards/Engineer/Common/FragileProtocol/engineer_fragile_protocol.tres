@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://nhheckrvkmd2"]
+
+[ext_resource type="Script" uid="uid://demnk3ihj3417" path="res://01_Cards/Descriptions/Cards/Engineer/Common/FragileProtocol/engineer_fragile_protocol.gd" id="1_1n077"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_in42e"]
+[ext_resource type="Texture2D" uid="uid://psnthd75twnn" path="res://01_Cards/Descriptions/Cards/Engineer/Common/ForceField/engineer_force_field.png" id="2_engr1"]
+
+[sub_resource type="Resource" id="Resource_rjaxb"]
+script = ExtResource("1_1n077")
+_heal_resistance = Array[float]([10.0, 15.0, 20.0, 25.0, 30.0])
+_shield_power = Array[float]([10.0, 15.0, 20.0, 25.0, 30.0])
+_rarity = 1
+metadata/_custom_type_script = "uid://demnk3ihj3417"
+
+[resource]
+script = ExtResource("1_in42e")
+name = "Fragile Protocol"
+picture = ExtResource("2_engr1")
+families = Array[int]([2])
+player_upgrade = SubResource("Resource_rjaxb")
+points = Dictionary[int, int]({
+2: 1
+})
+lvl = 5
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

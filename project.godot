@@ -47,20 +47,20 @@ config/icon="uid://hl4bi74ds0b0"
 [autoload]
 
 Console="*uid://dinahj02x6npw"
-Verbose="*res://Lib/verbose.gd"
-Utils="*res://Lib/utils.gd"
-GameManager="*res://GlobalManagers/game_manager.gd"
-CardShopManager="*res://GlobalManagers/card_shop_manager.gd"
-ServerOracleShop="*res://GlobalManagers/server_oracle_shop.gd"
-TooltipManager="*res://UI/Tool/Tooltip/Manager/tooltip_manager.gd"
-Events="*res://Lib/events.gd"
-RoundManager="*res://GlobalManagers/round_manager.gd"
-PlayerManager="*res://GlobalManagers/player_manager.gd"
-GlobalFightingManager="*res://GlobalManagers/global_fighting_manager.gd"
-SimpleGrass="*res://addons/simplegrasstextured/singleton.tscn"
-MultiplayerManager="*res://GlobalManagers/multiplayer_manager.gd"
-GlobalGameManager="*res://GlobalManagers/global_game_manager.gd"
-Shared="*res://Lib/shared.gd"
+Verbose="*res://09_Lib/verbose.gd"
+Utils="*res://09_Lib/utils.gd"
+GameManager="*res://08_GlobalManagers/game_manager.gd"
+CardShopManager="*res://08_GlobalManagers/card_shop_manager.gd"
+ServerOracleShop="*res://08_GlobalManagers/server_oracle_shop.gd"
+TooltipManager="*res://04_UI/Tool/Tooltip/Manager/tooltip_manager.gd"
+Events="*res://09_Lib/events.gd"
+RoundManager="*res://08_GlobalManagers/round_manager.gd"
+PlayerManager="*res://08_GlobalManagers/player_manager.gd"
+GlobalFightingManager="*res://08_GlobalManagers/global_fighting_manager.gd"
+SimpleGrass="*res://98_addons/simplegrasstextured/singleton.tscn"
+MultiplayerManager="*res://08_GlobalManagers/multiplayer_manager.gd"
+GlobalGameManager="*res://08_GlobalManagers/global_game_manager.gd"
+Shared="*res://09_Lib/shared.gd"
 Debug="*uid://woc06wbtruty"
 
 [debug]
@@ -82,25 +82,26 @@ enabled=PackedStringArray("res://addons/simplegrasstextured/plugin.cfg")
 [file_customization]
 
 folder_colors={
-"res://Card/": "green",
-"res://Data/": "red",
-"res://Entities/": "orange",
-"res://FloatingIsland/": "blue",
-"res://Game/": "gray",
-"res://GlobalManagers/": "purple",
-"res://Lib/": "purple",
-"res://Modules/": "teal",
-"res://Player/": "yellow",
-"res://Prototyping/": "gray",
-"res://SpellsAndProjectiles/": "blue",
-"res://TestTODO_TOTRASH/": "red",
-"res://Tool/": "green",
-"res://UI/": "pink",
-"res://UI/_Themes/": "red",
-"res://VFX/GPUTrail-main/": "red",
-"res://VFX/Particle/": "red",
-"res://VFX/Shaders/": "red",
-"res://VFX/VFEZ-godot-main/": "gray"
+"res://01_Cards/": "green",
+"res://02_Entities/": "orange",
+"res://03_SpellsAndProjectiles/": "blue",
+"res://04_UI/": "pink",
+"res://04_UI/_Themes/": "red",
+"res://05_Game/": "gray",
+"res://06_FloatingIsland/": "blue",
+"res://07_Players/": "yellow",
+"res://08_GlobalManagers/": "purple",
+"res://09_Lib/": "purple",
+"res://10_Tool/": "green",
+"res://20_Data/": "red",
+"res://22_VFX/GPUTrail-main/": "red",
+"res://22_VFX/Particle/": "red",
+"res://22_VFX/Shaders/": "red",
+"res://22_VFX/VFEZ-godot-main/": "gray",
+"res://90_Modules/": "teal",
+"res://97_TestTODO_TOTRASH/": "gray",
+"res://98_addons/": "gray",
+"res://99_Prototyping/": "gray"
 }
 
 [global_group]

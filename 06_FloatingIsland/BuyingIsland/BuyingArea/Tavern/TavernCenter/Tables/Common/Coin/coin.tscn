@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://dreub5xd6b2kv"]
+
+[ext_resource type="PackedScene" uid="uid://bp03dw7gruma8" path="res://06_FloatingIsland/BuyingIsland/BuyingArea/Tavern/TavernCenter/Tables/Common/Coin/coin_3d_visual.tscn" id="1_7x06n"]
+[ext_resource type="Script" uid="uid://cfpk88fadp255" path="res://06_FloatingIsland/BuyingIsland/BuyingArea/Tavern/TavernCenter/Tables/Common/Coin/coin.gd" id="1_svdj2"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_05qmr"]
+height = 0.125935
+radius = 0.14992
+
+[node name="Coin" type="StaticBody3D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_svdj2")
+
+[node name="CoinVisual" parent="." instance=ExtResource("1_7x06n")]
+
+[node name="CoinCollision" type="CollisionShape3D" parent="."]
+unique_name_in_owner = true
+shape = SubResource("CylinderShape3D_05qmr")
+disabled = true

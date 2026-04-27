@@ -1,0 +1,19 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dxpjm0adafggu"]
+
+[ext_resource type="Shader" uid="uid://cg360ibka81fv" path="res://22_VFX/VFX_3D/Import/Firebolt/fireball_particles.gdshader" id="1_t548c"]
+[ext_resource type="Texture2D" uid="uid://ctsh8mkic2xte" path="res://22_VFX/VFX_3D/Import/Firebolt/fire_particles_gradient.tres" id="2_mdlqx"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_xkkqs"]
+noise_type = 2
+fractal_octaves = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_bsxdd"]
+noise = SubResource("FastNoiseLite_xkkqs")
+seamless = true
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_t548c")
+shader_parameter/voronoi_sampler = SubResource("NoiseTexture2D_bsxdd")
+shader_parameter/gradient_sampler = ExtResource("2_mdlqx")
+shader_parameter/uv_scale = 0.5

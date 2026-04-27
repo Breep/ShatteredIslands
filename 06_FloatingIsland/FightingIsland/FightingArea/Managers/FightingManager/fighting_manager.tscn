@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c0l0roxttdtlp"]
+
+[ext_resource type="Script" uid="uid://rjp0tlkxy8ho" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/FightingManager/fighting_manager.gd" id="1_at0pt"]
+
+[node name="FightingManager" type="Node" unique_id=697778492]
+script = ExtResource("1_at0pt")

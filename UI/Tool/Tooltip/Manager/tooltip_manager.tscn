@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cugis6rnmqdha"]
-
-[ext_resource type="Script" uid="uid://dr1wp5wwrs4fy" path="res://UI/Tool/Tooltip/Manager/tooltip_manager.gd" id="1_5xry7"]
-
-[node name="TooltipManager" type="Node"]
-script = ExtResource("1_5xry7")

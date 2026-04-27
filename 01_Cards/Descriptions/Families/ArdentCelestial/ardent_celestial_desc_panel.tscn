@@ -1,0 +1,326 @@
+[gd_scene format=3 uid="uid://d0y3w6vobf4iy"]
+
+[ext_resource type="StyleBox" uid="uid://c847d75y4mjq6" path="res://04_UI/InGame/FamilyViewer/new_style_box_flat.tres" id="1_wu843"]
+[ext_resource type="Script" uid="uid://bd3srw4twda5w" path="res://04_UI/Tool/SmartTextLabel/ui_smart_text_label.gd" id="2_w0e4n"]
+[ext_resource type="Script" uid="uid://co4qwqn0uq24r" path="res://01_Cards/Descriptions/Families/ArdentCelestial/ardent_celestial_desc_panel.gd" id="3_desc"]
+
+[node name="ArdentCelestialDescPanel" type="Control" unique_id=2092295896]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("3_desc")
+
+[node name="MainPanel" type="Panel" parent="." unique_id=1689546173]
+custom_minimum_size = Vector2(400, 800)
+layout_mode = 0
+theme_override_styles/panel = ExtResource("1_wu843")
+
+[node name="MarginContainer" type="MarginContainer" parent="MainPanel" unique_id=192809208]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/MarginContainer" unique_id=1388927156]
+layout_mode = 2
+
+[node name="Description" type="RichTextLabel" parent="MainPanel/MarginContainer/VBoxContainer" unique_id=691443729]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+bbcode_enabled = true
+text = "Increase your magical abilities by casting [[METEOR]].
+Burn your enemies with [[IGNITE]]."
+vertical_alignment = 1
+script = ExtResource("2_w0e4n")
+text_raw = "Increase your magical abilities by casting [[METEOR]].
+Burn your enemies with [[IGNITE]]."
+metadata/_custom_type_script = "uid://bd3srw4twda5w"
+
+[node name="HSeparator" type="HSeparator" parent="MainPanel/MarginContainer/VBoxContainer" unique_id=487113667]
+layout_mode = 2
+
+[node name="Passive" type="VBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer" unique_id=667815607]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/Passive" unique_id=604972807]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Meteor Passive"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Title" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/Passive" unique_id=590275773]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/Passive/Title" unique_id=1378370349]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="MainPanel/MarginContainer/VBoxContainer/Passive/Title" unique_id=823147318]
+layout_mode = 2
+
+[node name="SpawnChanceLabel" type="RichTextLabel" parent="MainPanel/MarginContainer/VBoxContainer/Passive/Title" unique_id=635706681]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+bbcode_enabled = true
+text = "Spawn chance"
+scroll_active = false
+vertical_alignment = 1
+
+[node name="VSeparator2" type="VSeparator" parent="MainPanel/MarginContainer/VBoxContainer/Passive/Title" unique_id=1273813937]
+layout_mode = 2
+
+[node name="DamageLabel" type="RichTextLabel" parent="MainPanel/MarginContainer/VBoxContainer/Passive/Title" unique_id=1391218522]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[[MAGICAL_DAMAGE]]"
+scroll_active = false
+vertical_alignment = 1
+script = ExtResource("2_w0e4n")
+text_raw = "[[MAGICAL_DAMAGE]]"
+metadata/_custom_type_script = "uid://bd3srw4twda5w"
+
+[node name="Level0" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/Passive" unique_id=675942340]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/Passive/Level0" unique_id=1142738363]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+text = "0"
+
+[node name="VSeparator" type="VSeparator" parent="MainPanel/MarginContainer/VBoxContainer/Passive/Level0" unique_id=520219980]
+layout_mode = 2
+
+[node name="SpawnChanceLabel" type="RichTextLabel" parent="MainPanel/MarginContainer/VBoxContainer/Passive/Level0" unique_id=202029178]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+bbcode_enabled = true
+text = "[color=light_blue]0%[/color] spawn"
+scroll_active = false
+vertical_alignment = 1
+
+[node name="VSeparator2" type="VSeparator" parent="MainPanel/MarginContainer/VBoxContainer/Passive/Level0" unique_id=379873044]
+layout_mode = 2
+
+[node name="DamageLabel" type="RichTextLabel" parent="MainPanel/MarginContainer/VBoxContainer/Passive/Level0" unique_id=697948231]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[color=light_blue]0[/color] + [color=light_blue]0%[/color] MAX HP damage"
+scroll_active = false
+vertical_alignment = 1
+
+[node name="Level1" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/Passive" unique_id=1334872535]
+modulate = Color(1, 1, 1, 0.47843137)
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/Passive/Level1" unique_id=1431440889]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+text = "1"
+
+[node name="VSeparator" type="VSeparator" parent="MainPanel/MarginContainer/VBoxContainer/Passive/Level1" unique_id=814422050]
+layout_mode = 2
+
+[node name="SpawnChanceLabel" type="RichTextLabel" parent="MainPanel/MarginContainer/VBoxContainer/Passive/Level1" unique_id=1006207726]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+bbcode_enabled = true
+text = "[color=light_blue]2%[/color]  spawn"
+scroll_active = false
+vertical_alignment = 1
+
+[node name="VSeparator2" type="VSeparator" parent="MainPanel/MarginContainer/VBoxContainer/Passive/Level1" unique_id=1360255422]
+layout_mode = 2
+
+[node name="DamageLabel" type="RichTextLabel" parent="MainPanel/MarginContainer/VBoxContainer/Passive/Level1" unique_id=678594143]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[color=light_blue]16[/color] + [color=light_blue]0.5%[/color]  MAX HP damage"
+scroll_active = false
+vertical_alignment = 1
+
+[node name="Level2" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/Passive" unique_id=2067539239]
+modulate = Color(1, 1, 1, 0.47843137)
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/Passive/Level2" unique_id=1308485783]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+text = "2"
+
+[node name="VSeparator" type="VSeparator" parent="MainPanel/MarginContainer/VBoxContainer/Passive/Level2" unique_id=1433069557]
+layout_mode = 2
+
+[node name="SpawnChanceLabel" type="RichTextLabel" parent="MainPanel/MarginContainer/VBoxContainer/Passive/Level2" unique_id=1472884218]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+bbcode_enabled = true
+text = "[color=light_blue]4.5%[/color]  spawn"
+scroll_active = false
+vertical_alignment = 1
+
+[node name="VSeparator2" type="VSeparator" parent="MainPanel/MarginContainer/VBoxContainer/Passive/Level2" unique_id=264091544]
+layout_mode = 2
+
+[node name="DamageLabel" type="RichTextLabel" parent="MainPanel/MarginContainer/VBoxContainer/Passive/Level2" unique_id=338780976]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[color=light_blue]32[/color]  + [color=light_blue]0.7%[/color]  MAX HP damage"
+scroll_active = false
+vertical_alignment = 1
+
+[node name="Level3" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/Passive" unique_id=684370433]
+modulate = Color(1, 1, 1, 0.47843137)
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/Passive/Level3" unique_id=1891557510]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+text = "3"
+
+[node name="VSeparator" type="VSeparator" parent="MainPanel/MarginContainer/VBoxContainer/Passive/Level3" unique_id=728472848]
+layout_mode = 2
+
+[node name="SpawnChanceLabel" type="RichTextLabel" parent="MainPanel/MarginContainer/VBoxContainer/Passive/Level3" unique_id=1209415519]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+bbcode_enabled = true
+text = "[color=light_blue]7%[/color]  spawn"
+scroll_active = false
+vertical_alignment = 1
+
+[node name="VSeparator2" type="VSeparator" parent="MainPanel/MarginContainer/VBoxContainer/Passive/Level3" unique_id=931491179]
+layout_mode = 2
+
+[node name="DamageLabel" type="RichTextLabel" parent="MainPanel/MarginContainer/VBoxContainer/Passive/Level3" unique_id=271400296]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[color=light_blue]48[/color]  + [color=light_blue]0.9%[/color]  MAX HP damage"
+scroll_active = false
+vertical_alignment = 1
+
+[node name="Level4" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/Passive" unique_id=796929002]
+modulate = Color(1, 1, 1, 0.47843137)
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/Passive/Level4" unique_id=970628321]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+text = "4"
+
+[node name="VSeparator" type="VSeparator" parent="MainPanel/MarginContainer/VBoxContainer/Passive/Level4" unique_id=1096271650]
+layout_mode = 2
+
+[node name="SpawnChanceLabel" type="RichTextLabel" parent="MainPanel/MarginContainer/VBoxContainer/Passive/Level4" unique_id=1256003052]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+bbcode_enabled = true
+text = "[color=light_blue]10%[/color]  spawn"
+scroll_active = false
+vertical_alignment = 1
+
+[node name="VSeparator2" type="VSeparator" parent="MainPanel/MarginContainer/VBoxContainer/Passive/Level4" unique_id=2114550483]
+layout_mode = 2
+
+[node name="DamageLabel" type="RichTextLabel" parent="MainPanel/MarginContainer/VBoxContainer/Passive/Level4" unique_id=1775281830]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[color=light_blue]64[/color]  + [color=light_blue]1.2%[/color]  MAX HP damage"
+scroll_active = false
+vertical_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="MainPanel/MarginContainer/VBoxContainer" unique_id=1966859146]
+layout_mode = 2
+
+[node name="MeteorStats" type="VBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer" unique_id=863843737]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/MeteorStats" unique_id=48398567]
+layout_mode = 2
+text = "Meteor Stats"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpawnChance" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/MeteorStats" unique_id=1610970849]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/MeteorStats/SpawnChance" unique_id=345125293]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Spawn chance"
+vertical_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="MainPanel/MarginContainer/VBoxContainer/MeteorStats/SpawnChance" unique_id=844203622]
+layout_mode = 2
+
+[node name="SpawnChanceValueLabel" type="RichTextLabel" parent="MainPanel/MarginContainer/VBoxContainer/MeteorStats/SpawnChance" unique_id=1287158990]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[color=light_blue]0%[/color]"
+vertical_alignment = 1
+
+[node name="Damage" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/MeteorStats" unique_id=1824116385]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/MeteorStats/Damage" unique_id=165451508]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Damage"
+vertical_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="MainPanel/MarginContainer/VBoxContainer/MeteorStats/Damage" unique_id=1992263757]
+layout_mode = 2
+
+[node name="DamageValueLabel" type="RichTextLabel" parent="MainPanel/MarginContainer/VBoxContainer/MeteorStats/Damage" unique_id=1533004449]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[color=light_blue]16[/color] + [color=light_blue]0.5%[/color]  MAX HP"
+vertical_alignment = 1
+
+[node name="Radius" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/MeteorStats" unique_id=320227178]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="SpawnChanceLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/MeteorStats/Radius" unique_id=2120782824]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Radius"
+vertical_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="MainPanel/MarginContainer/VBoxContainer/MeteorStats/Radius" unique_id=1651138217]
+layout_mode = 2
+
+[node name="RadiusValueLabel" type="RichTextLabel" parent="MainPanel/MarginContainer/VBoxContainer/MeteorStats/Radius" unique_id=740679649]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[color=light_blue]3m[/color]"
+vertical_alignment = 1

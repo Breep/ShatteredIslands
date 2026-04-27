@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://wtgtwq668eqr"]
+
+[ext_resource type="PackedScene" uid="uid://vlcg232njr8w" path="res://20_Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/table_long.gltf" id="1_2e51i"]
+[ext_resource type="Texture2D" uid="uid://mswbhaabiedm" path="res://20_Data/Assets/Tavern - 3D Asset Low poly/textures/dungeon_texture.png" id="2_ekif1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rkdt7"]
+albedo_texture = ExtResource("2_ekif1")
+
+[node name="TableLongVisual" instance=ExtResource("1_2e51i")]
+
+[node name="table_long" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_rkdt7")

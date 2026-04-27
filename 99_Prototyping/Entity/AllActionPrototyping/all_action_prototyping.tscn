@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://c5jsxp2salews"]
+
+[ext_resource type="PackedScene" uid="uid://blncvfes4f2y7" path="res://99_Prototyping/Entity/AllActionPrototyping/testing_floorffa5.tscn" id="1_a3enp"]
+[ext_resource type="PackedScene" uid="uid://c48aqh8mlb7lc" path="res://02_Entities/Heroes/DarkKnight/dark_knight.tscn" id="2_t1f6q"]
+[ext_resource type="PackedScene" uid="uid://cgpo42ll6udn0" path="res://02_Entities/NPC/UnkillableDummy/unkillable_dummy.tscn" id="3_oradf"]
+
+[node name="AllActionPrototyping" type="Node3D"]
+
+[node name="TestingFloor1v1" parent="." node_paths=PackedStringArray("_team_zones") instance=ExtResource("1_a3enp")]
+_team_zones = {
+1: NodePath("CenterNode3D/Center1/Team1Area"),
+2: NodePath("CenterNode3D/Center2/Team2Area"),
+3: NodePath("CenterNode3D/Center3/Team3Area"),
+4: NodePath("CenterNode3D/Center4/Team4Area"),
+5: NodePath("CenterNode3D/Center5/Team5Area")
+}
+
+[node name="DarkKnight" parent="." instance=ExtResource("2_t1f6q")]
+transform = Transform3D(0.110879205, 0, -0.9938339, 0, 1, 0, 0.9938339, 0, 0.110879205, -7.894082, 9.536743e-07, -0.08400154)
+
+[node name="UnkillableDummy" parent="." instance=ExtResource("3_oradf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3135138, 0, 7.809231)
+
+[node name="UnkillableDummy2" parent="." instance=ExtResource("3_oradf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.4067974, 0, 4.7937164)
+
+[node name="UnkillableDummy3" parent="." instance=ExtResource("3_oradf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5115786, 0, -4.3008156)
+
+[node name="UnkillableDummy4" parent="." instance=ExtResource("3_oradf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3193274, 0, -7.297985)

@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cqpsc1s0ykjx2"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://tuwewl8ngbqu" path="res://01_Cards/Descriptions/Cards/ArdentCelestial/Common/DarkForest/fire_dark_forest.png" id="2_ardnt"]
+[ext_resource type="Script" uid="uid://d2tiokyuvpjjr" path="res://01_Cards/Descriptions/Cards/ArdentCelestial/Legendary/Apocalypse/fire_apocalypse.gd" id="2_sub_resource"]
+
+[sub_resource type="Resource" id="Resource_apocalypse"]
+script = ExtResource("2_sub_resource")
+_meteor_bonus_chance = Array[float]([0.5, 1.0, 5.0])
+_rarity = 3
+
+[resource]
+script = ExtResource("1_script")
+name = "Apocalypse"
+picture = ExtResource("2_ardnt")
+families = Array[int]([3])
+rarity = 3
+player_upgrade = SubResource("Resource_apocalypse")
+points = Dictionary[int, int]({
+3: 5
+})
+lvl = 3

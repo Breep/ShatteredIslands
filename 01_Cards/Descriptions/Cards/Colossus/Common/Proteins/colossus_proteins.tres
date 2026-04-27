@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cj72i47u7d1nu"]
+
+[ext_resource type="Texture2D" uid="uid://djutxmtawlnav" path="res://01_Cards/Descriptions/Cards/Colossus/Common/Proteins/colossus_proteins_.png" id="1_h8ej3"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_iu8p0"]
+[ext_resource type="Script" uid="uid://u8oqkdykpgty" path="res://01_Cards/Descriptions/Cards/Colossus/Common/Proteins/colossus_proteins.gd" id="2_soto3"]
+
+[sub_resource type="Resource" id="Resource_soto3"]
+script = ExtResource("2_soto3")
+_max_hp_increase = Array[float]([150.0, 300.0, 450.0, 600.0, 900.0])
+metadata/_custom_type_script = "uid://u8oqkdykpgty"
+
+[resource]
+script = ExtResource("1_iu8p0")
+name = "Proteins"
+picture = ExtResource("1_h8ej3")
+families = Array[int]([6])
+player_upgrade = SubResource("Resource_soto3")
+points = Dictionary[int, int]({
+6: 1
+})
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

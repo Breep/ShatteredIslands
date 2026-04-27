@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://d0lvjglm03lbs"
+path="res://.godot/imported/hexagon_mask_bm.png-6983de72f6930c41662600755d39a728.res"
+
+[deps]
+
+source_file="res://04_UI/_Themes/Data/HexagonButton/hexagon_mask_bm.png"
+dest_files=["res://.godot/imported/hexagon_mask_bm.png-6983de72f6930c41662600755d39a728.res"]
+
+[params]
+
+create_from=0
+threshold=0.5

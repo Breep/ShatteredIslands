@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TooltipDesc" format=3]
+
+[ext_resource type="Script" uid="uid://cr1qi4s4jv5f7" path="res://04_UI/Tool/Tooltip/Dictionary/tooltip_desc.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+key = &"NECROSIS"
+title = "{{COLOR:NECRO_COLOR}}NECROSIS{{/COLOR}}"
+description = "Reduce the next heal received by 10%/stacks. -1 less stack after each heal reduced."
+icon_key = "MAGIC_ICON"

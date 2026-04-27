@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://dlicqbvk6hpq6"]
+
+[ext_resource type="Script" uid="uid://crx0gwxvxg6yv" path="res://10_Tool/Chain/chain_link.gd" id="1_q674b"]
+[ext_resource type="PackedScene" uid="uid://bd1nrt4n7dpsk" path="res://10_Tool/Chain/metal_chain_link_model.tscn" id="2_iq2jb"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_t1yhs"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_q674b"]
+
+[node name="ChainLink" type="RigidBody3D"]
+axis_lock_angular_y = true
+script = ExtResource("1_q674b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_t1yhs")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_q674b")
+
+[node name="MetalChainLinkModel" parent="." instance=ExtResource("2_iq2jb")]
+transform = Transform3D(12.46, 0, 0, 0, 12.46, 0, 0, 0, 12.46, 0, 0, 0)
+visible = false

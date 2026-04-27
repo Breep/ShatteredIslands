@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://c5cnytoj4ignx"]
+
+[ext_resource type="PackedScene" uid="uid://cp8ob13fokxnp" path="res://03_SpellsAndProjectiles/Projectiles/Poison/Snake/snake_visual.tscn" id="1_47gm0"]
+[ext_resource type="Script" uid="uid://1d1aihiiqel3" path="res://03_SpellsAndProjectiles/Projectiles/Poison/Snake/snake_projectile.gd" id="1_s52sc"]
+[ext_resource type="Script" uid="uid://bfsdl2usla732" path="res://03_SpellsAndProjectiles/Projectiles/Trajectories/zigzag_trajectory.gd" id="2_brmf3"]
+
+[sub_resource type="Resource" id="Resource_5y17h"]
+script = ExtResource("2_brmf3")
+metadata/_custom_type_script = "uid://bfsdl2usla732"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_s52sc"]
+radius = 0.2
+
+[node name="SnakeProjectile" type="Area3D" unique_id=1480338849]
+collision_layer = 2
+collision_mask = 16
+script = ExtResource("1_s52sc")
+trajectory = SubResource("Resource_5y17h")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=271184190]
+shape = SubResource("SphereShape3D_s52sc")
+
+[node name="SnakeVisual" parent="." unique_id=1979627131 instance=ExtResource("1_47gm0")]

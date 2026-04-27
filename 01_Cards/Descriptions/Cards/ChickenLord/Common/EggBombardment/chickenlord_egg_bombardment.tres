@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cu1mmwx5wii2s"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_ehx0o"]
+[ext_resource type="Script" uid="uid://cjbmdgtvkeh84" path="res://01_Cards/Descriptions/Cards/ChickenLord/Common/EggBombardment/chickenlord_egg_bombardment.gd" id="1_i5xq3"]
+[ext_resource type="Texture2D" uid="uid://cslxv8ffyte5k" path="res://01_Cards/Descriptions/Cards/ChickenLord/Common/AssistantChicken/chicken lord.png" id="2_chkn1"]
+
+[sub_resource type="Resource" id="Resource_0wrdt"]
+script = ExtResource("1_i5xq3")
+_spawn_chances = Array[float]([0.5, 0.6, 0.7, 0.8, 1.0])
+metadata/_custom_type_script = "uid://cjbmdgtvkeh84"
+
+[resource]
+script = ExtResource("1_ehx0o")
+name = "Egg Bombardment"
+picture = ExtResource("2_chkn1")
+families = Array[int]([8])
+player_upgrade = SubResource("Resource_0wrdt")
+points = Dictionary[int, int]({
+8: 1
+})
+lvl = 5
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

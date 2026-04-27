@@ -1,0 +1,121 @@
+[gd_scene format=3 uid="uid://di7eyuedvo17p"]
+
+[ext_resource type="Script" uid="uid://uarp5atsjtdt" path="res://04_UI/InGame/PauseMenu/ui_pause_menu.gd" id="1_41y25"]
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme.tres" id="2_e76lw"]
+[ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://04_UI/Tool/Misc/hover_boost_button.gd" id="3_1mefo"]
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_e76lw")
+script = ExtResource("1_41y25")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PausePanel" type="Panel" parent="CenterContainer"]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PausePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PausePanel/MarginContainer"]
+layout_mode = 2
+
+[node name="ResumeButton" type="Button" parent="CenterContainer/PausePanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "RESUME"
+script = ExtResource("3_1mefo")
+
+[node name="OptionButton" type="Button" parent="CenterContainer/PausePanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "OPTION"
+script = ExtResource("3_1mefo")
+
+[node name="MainMenuButton" type="Button" parent="CenterContainer/PausePanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "MAIN MENU"
+script = ExtResource("3_1mefo")
+
+[node name="QuitButton" type="Button" parent="CenterContainer/PausePanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "RAGE QUIT"
+script = ExtResource("3_1mefo")
+
+[node name="ConfirmPanel" type="Panel" parent="CenterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/ConfirmPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.5
+offset_right = 2.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/ConfirmPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="ConfirmLabel" type="Label" parent="CenterContainer/ConfirmPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 6
+text = "Go back to main menu ?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/ConfirmPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="YesButton" type="Button" parent="CenterContainer/ConfirmPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+text = "YES"
+script = ExtResource("3_1mefo")
+
+[node name="NoButton" type="Button" parent="CenterContainer/ConfirmPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+text = "NO"
+script = ExtResource("3_1mefo")
+
+[connection signal="pressed" from="CenterContainer/PausePanel/MarginContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="CenterContainer/PausePanel/MarginContainer/VBoxContainer/OptionButton" to="." method="_on_option_button_pressed"]
+[connection signal="pressed" from="CenterContainer/PausePanel/MarginContainer/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="CenterContainer/PausePanel/MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="CenterContainer/ConfirmPanel/MarginContainer/VBoxContainer/HBoxContainer/YesButton" to="." method="_on_yes_button_pressed"]
+[connection signal="pressed" from="CenterContainer/ConfirmPanel/MarginContainer/VBoxContainer/HBoxContainer/NoButton" to="." method="_on_no_button_pressed"]

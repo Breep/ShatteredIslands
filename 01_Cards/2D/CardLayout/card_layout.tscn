@@ -1,0 +1,438 @@
+[gd_scene format=3 uid="uid://l4hi6dgs8lvg"]
+
+[ext_resource type="Script" uid="uid://dbdgpnlir03dy" path="res://01_Cards/2D/CardLayout/card_layout.gd" id="1_2an10"]
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme.tres" id="1_ru7cc"]
+[ext_resource type="Texture2D" uid="uid://yekknulevsvb" path="res://01_Cards/Descriptions/Cards/Poison/Common/PoisonFlask/portrait_poison_flask.png" id="3_mt3v6"]
+[ext_resource type="Script" uid="uid://dq0ub1oemlk0p" path="res://22_VFX/VFEZ-godot-main/vfez_material_2d.gd" id="5_m3odx"]
+[ext_resource type="Texture2D" uid="uid://0djydjl344rv" path="res://03_SpellsAndProjectiles/Spells/Lightning/Lightning/Visual/Textures/floor_mark_texture.png" id="8_augoc"]
+[ext_resource type="Texture2D" uid="uid://caed4hfn4vvxm" path="res://20_Data/Texture/Kenney2/light_02.png" id="9_6hlmk"]
+[ext_resource type="Texture2D" uid="uid://cwqdngpmbcnck" path="res://01_Cards/Descriptions/Families/Icons/poison.png" id="9_mt3v6"]
+[ext_resource type="Shader" uid="uid://bfo68wf8rrok4" path="res://01_Cards/2D/CardLayout/Data/Shaders/runes/rune_glow.gdshader" id="9_p8v2y"]
+[ext_resource type="Texture2D" uid="uid://dr28dlr3rssnu" path="res://01_Cards/2D/CardLayout/Data/StandardCard/ct_rune_mask.png" id="10_p8v2y"]
+[ext_resource type="Script" uid="uid://dp2f1iwp38m0k" path="res://01_Cards/2D/CardLayout/Data/Shaders/runes/rune_glow tools.gd" id="11_7ajba"]
+[ext_resource type="Script" uid="uid://bd3srw4twda5w" path="res://04_UI/Tool/SmartTextLabel/ui_smart_text_label.gd" id="11_pjbj4"]
+[ext_resource type="Texture2D" uid="uid://hump1edscxip" path="res://01_Cards/2D/CardLayout/Data/StandardCard/ct_frame.png" id="12_k2vus"]
+[ext_resource type="Texture2D" uid="uid://vii43ab2auyg" path="res://01_Cards/2D/CardLayout/Data/StandardCard/ct_bottom.png" id="13_78cks"]
+[ext_resource type="FontFile" uid="uid://bdgqiedfa6ld2" path="res://20_Data/font/Nunito-ExtraBold.ttf" id="13_p31bt"]
+[ext_resource type="Texture2D" uid="uid://dn4cx5jpgh7ae" path="res://01_Cards/2D/CardLayout/Data/StandardCard/Stars/ct_level_star_1.png" id="14_78cks"]
+[ext_resource type="Texture2D" uid="uid://b7ix0d8jwrexg" path="res://01_Cards/2D/CardLayout/Data/StandardCard/ct_illustration_mask.png" id="14_xw5tp"]
+[ext_resource type="Texture2D" uid="uid://bwrwv8bs17m0i" path="res://01_Cards/2D/CardLayout/Data/StandardCard/Stars/ct_level_star_2.png" id="15_xw5tp"]
+[ext_resource type="Texture2D" uid="uid://8bgksnhwv0j" path="res://01_Cards/2D/CardLayout/Data/StandardCard/Stars/ct_level_star_3.png" id="16_ejxcv"]
+[ext_resource type="Texture2D" uid="uid://co7lwsbaa1h8b" path="res://01_Cards/2D/CardLayout/Data/StandardCard/ct_frame_illustration.png" id="16_n6ysl"]
+[ext_resource type="Texture2D" uid="uid://btvd8un55vke6" path="res://01_Cards/2D/CardLayout/Data/StandardCard/ct_title_banner.png" id="17_ejxcv"]
+[ext_resource type="Texture2D" uid="uid://bp5u3lmsc8fm2" path="res://01_Cards/2D/CardLayout/Data/StandardCard/Stars/ct_level_star_4.png" id="17_p8v2y"]
+[ext_resource type="Texture2D" uid="uid://odtrh6khih2s" path="res://01_Cards/2D/CardLayout/Data/StandardCard/Stars/ct_level_star_5.png" id="18_7ajba"]
+[ext_resource type="Texture2D" uid="uid://bp08djuu2g0pr" path="res://01_Cards/2D/CardLayout/Data/StandardCard/ct_level_flag.png" id="18_p8v2y"]
+[ext_resource type="Texture2D" uid="uid://ifaj1br6koel" path="res://01_Cards/2D/CardLayout/Data/StandardCard/ct_family_frame.png" id="19_7ajba"]
+[ext_resource type="Shader" uid="uid://bquiydhxqegb5" path="res://01_Cards/2D/CardLayout/Data/Shaders/curve_text.gdshader" id="21_xw5tp"]
+[ext_resource type="Texture2D" uid="uid://bxktk2p3m3g2" path="res://01_Cards/2D/CardLayout/Data/StandardCard/card_full_mask.png" id="25_7ajba"]
+[ext_resource type="Shader" uid="uid://ces5qqkirl131" path="res://01_Cards/2D/CardLayout/Data/Shaders/card_aura.gdshader" id="30_aura"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aura"]
+shader = ExtResource("30_aura")
+shader_parameter/aura_texture = ExtResource("9_6hlmk")
+shader_parameter/aura_color = Color(1, 0.85, 0.2, 1)
+shader_parameter/intensity = 1.686000080085
+shader_parameter/base_scale = 1.41000006371512
+shader_parameter/pulse_speed = 1.2
+shader_parameter/pulse_amount = 0.08
+shader_parameter/rotation_speed = 0.1510000071725
+shader_parameter/layer2_scale_offset = 0.1
+shader_parameter/layer2_rotation_offset = 2.1
+shader_parameter/edge_fade = 0.15
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_augoc"]
+shader = ExtResource("9_p8v2y")
+shader_parameter/glow_color = Color(0.553, 0.282, 0.957, 1)
+shader_parameter/intensity_multiplier = 1.0
+shader_parameter/glow_mode = 1
+shader_parameter/animation_speed = 1.0
+shader_parameter/time_seed = 12.184306234121324
+shader_parameter/hover_blend = 0.0
+shader_parameter/idle_intensity = 0.73
+shader_parameter/hover_intensity = 1.2
+shader_parameter/residual_intensity = 0.5
+shader_parameter/residual_flash = 0.0
+shader_parameter/inner_radius = 0.006
+shader_parameter/inner_samples = 6
+shader_parameter/inner_falloff = 0.5
+shader_parameter/inner_brightness = 1.5
+shader_parameter/outer_radius = 0.035
+shader_parameter/outer_samples = 8
+shader_parameter/outer_falloff = 0.8
+shader_parameter/outer_brightness = 0.6
+shader_parameter/core_hotspot = 0.5
+shader_parameter/min_tint = 0.0
+shader_parameter/random_zones = 13
+shader_parameter/zone_softness = 0.5
+
+[sub_resource type="Shader" id="Shader_6hlmk"]
+resource_name = "VFEZ2DPreview"
+code = "
+// This shader was dynamically generated by the VFEZ material.
+// **********************************
+// Every change to the VFEZ material Render Options or 
+// Include Options generates a new shader. After every change
+// you can click on the new exported shader in the editor to view
+// the latest changes. Only the definitions (#define) actually change.
+// **********************************
+shader_type canvas_item;
+#define BLEND_MIX
+#define ALPHA_MASK
+#include \"res://VFX/VFEZ-godot-main/Shaders/vfez_2d_template.gdshaderinc\"
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6cxer"]
+shader = SubResource("Shader_6hlmk")
+shader_parameter/texture_scale = Vector2(1, 1)
+shader_parameter/texture_offset = Vector2(0, 0)
+shader_parameter/texture_scroll_speed = Vector2(0, 0)
+shader_parameter/replicate_on_scale = true
+shader_parameter/texture_color = Color(1, 1, 1, 1)
+shader_parameter/texture_alpha = 1.0
+shader_parameter/texture_red_as_alpha = false
+shader_parameter/premultiply_color = false
+shader_parameter/premultiply_alpha = false
+shader_parameter/contrast = 1.0
+shader_parameter/brightness = 0.0
+shader_parameter/rect_size_ratio = 1.0
+shader_parameter/use_uv_polar = false
+shader_parameter/use_uv_distortion = false
+shader_parameter/use_uv_rotation = false
+shader_parameter/use_uv_pixelate = false
+shader_parameter/use_uv_twist = false
+shader_parameter/use_uv_fisheye = false
+shader_parameter/use_uv_pinch = false
+shader_parameter/use_uv_handrawn = false
+shader_parameter/use_uv_shake = false
+shader_parameter/use_uv_wave = false
+shader_parameter/use_uv_round_wave = false
+shader_parameter/use_uv_wind = false
+shader_parameter/use_uv_wrap = false
+shader_parameter/use_uv_zoom = false
+shader_parameter/use_color_single = false
+shader_parameter/use_color_overlay_texture = false
+shader_parameter/use_outline = false
+shader_parameter/use_outline_inner = false
+shader_parameter/use_alpha_disolve = false
+shader_parameter/use_chromatic_aberration = false
+shader_parameter/use_motion_blur = false
+shader_parameter/use_glitch = false
+shader_parameter/use_color_gradient = false
+shader_parameter/use_color_radial_gradient = false
+shader_parameter/use_color_toning = false
+shader_parameter/use_color_ramp = false
+shader_parameter/use_color_change = false
+shader_parameter/use_color_ghost = false
+shader_parameter/use_color_hologram = false
+shader_parameter/use_color_posterize = false
+shader_parameter/use_color_negative = false
+shader_parameter/use_color_glow = false
+shader_parameter/use_color_hsv_shift = false
+shader_parameter/use_color_shadow = false
+shader_parameter/use_color_greyscale = false
+shader_parameter/use_color_shine = false
+shader_parameter/use_alpha_mask = true
+shader_parameter/alpha_mask_texture = ExtResource("14_xw5tp")
+shader_parameter/alpha_mask_scale = Vector2(1, 1)
+shader_parameter/alpha_mask_offset = Vector2(0, 0)
+shader_parameter/alpha_mask_power = 1.0
+shader_parameter/use_alpha_remap = false
+shader_parameter/use_alpha_cutoff = false
+shader_parameter/use_alpha_clip = false
+shader_parameter/use_alpha_radial_clip = false
+shader_parameter/use_alpha_flicker = false
+shader_parameter/use_particle_anim = false
+script = ExtResource("5_m3odx")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n6ysl"]
+shader = ExtResource("21_xw5tp")
+shader_parameter/height = 35.0
+shader_parameter/frequency = 0.006
+shader_parameter/phase_shift = -7.705
+
+[node name="CardLayout" type="Control" unique_id=591018748 node_paths=PackedStringArray("_level_icons")]
+texture_filter = 4
+custom_minimum_size = Vector2(1260, 1760)
+layout_mode = 3
+anchor_right = 0.656
+anchor_bottom = 1.6300001
+offset_right = 0.47998047
+offset_bottom = -0.40014648
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(124, 193)
+mouse_filter = 1
+theme = ExtResource("1_ru7cc")
+script = ExtResource("1_2an10")
+_level_icons = [NodePath("CurrentLevelContainer/CurrentLevelVBox/Level1/Level1Icon"), NodePath("CurrentLevelContainer/CurrentLevelVBox/Level2/Level2Icon"), NodePath("CurrentLevelContainer/CurrentLevelVBox/Level3/Level3Icon"), NodePath("CurrentLevelContainer/CurrentLevelVBox/Level4/Level4Icon"), NodePath("CurrentLevelContainer/CurrentLevelVBox/Level5/Level5Icon")]
+level1_texture = ExtResource("14_78cks")
+level2_texture = ExtResource("15_xw5tp")
+level3_texture = ExtResource("16_ejxcv")
+level4_texture = ExtResource("17_p8v2y")
+level5_texture = ExtResource("18_7ajba")
+
+[node name="Aura" type="TextureRect" parent="." unique_id=1301764167]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_aura")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -53.0
+offset_top = -19.0
+offset_right = 47.0
+offset_bottom = 95.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_augoc")
+expand_mode = 1
+
+[node name="Frame" type="TextureRect" parent="." unique_id=7108817]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("12_k2vus")
+
+[node name="Runes" type="TextureRect" parent="Frame" unique_id=1532157439]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_augoc")
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_p8v2y")
+expand_mode = 1
+script = ExtResource("11_7ajba")
+current_rarity = 2
+current_mode = 1
+speed_override = 1.0
+
+[node name="CardBottom" type="TextureRect" parent="." unique_id=417994522]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("13_78cks")
+
+[node name="CardPortraitTextureRect" type="TextureRect" parent="." unique_id=1308609123]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_6cxer")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_mt3v6")
+expand_mode = 1
+
+[node name="CardIllustrationFrame" type="TextureRect" parent="." unique_id=1387730004]
+layout_mode = 0
+offset_right = 1260.0
+offset_bottom = 1760.0
+texture = ExtResource("16_n6ysl")
+
+[node name="CardLevelFlag" type="TextureRect" parent="." unique_id=1259894765]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("18_p8v2y")
+
+[node name="FamilyBackground" type="TextureRect" parent="." unique_id=328102667]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FamilyIcon" type="TextureRect" parent="FamilyBackground" unique_id=1313891103]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 548.0
+offset_top = 906.0
+offset_right = 714.0
+offset_bottom = 1066.0
+texture = ExtResource("9_mt3v6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CardFamilyFrame" type="TextureRect" parent="." unique_id=485323595]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("19_7ajba")
+metadata/_edit_lock_ = true
+
+[node name="CardTitleBanner" type="TextureRect" parent="." unique_id=1589146951]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("17_ejxcv")
+expand_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="CurrentLevelContainer" type="Control" parent="." unique_id=1699933895]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 0
+offset_left = 103.0
+offset_top = 247.0
+offset_right = 204.0
+offset_bottom = 963.0
+grow_vertical = 2
+
+[node name="CurrentLevelVBox" type="VBoxContainer" parent="CurrentLevelContainer" unique_id=1089726548]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Level1" type="Control" parent="CurrentLevelContainer/CurrentLevelVBox" unique_id=1546294710]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Level1Icon" type="TextureRect" parent="CurrentLevelContainer/CurrentLevelVBox/Level1" unique_id=265363553]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_78cks")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Level2" type="Control" parent="CurrentLevelContainer/CurrentLevelVBox" unique_id=1371926559]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Level2Icon" type="TextureRect" parent="CurrentLevelContainer/CurrentLevelVBox/Level2" unique_id=22106500]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.5
+offset_right = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_xw5tp")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Level3" type="Control" parent="CurrentLevelContainer/CurrentLevelVBox" unique_id=1592768651]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Level3Icon" type="TextureRect" parent="CurrentLevelContainer/CurrentLevelVBox/Level3" unique_id=181611176]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.5
+offset_right = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("16_ejxcv")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Level4" type="Control" parent="CurrentLevelContainer/CurrentLevelVBox" unique_id=1892062269]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Level4Icon" type="TextureRect" parent="CurrentLevelContainer/CurrentLevelVBox/Level4" unique_id=2092200025]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.5
+offset_right = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("17_p8v2y")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Level5" type="Control" parent="CurrentLevelContainer/CurrentLevelVBox" unique_id=1691517261]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Level5Icon" type="TextureRect" parent="CurrentLevelContainer/CurrentLevelVBox/Level5" unique_id=12879536]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.5
+offset_right = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("18_7ajba")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="CardDescSmartTextLabel" type="RichTextLabel" parent="." unique_id=918883956]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 177.0
+offset_top = 1260.0
+offset_right = 1070.0
+offset_bottom = 1607.0
+size_flags_vertical = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("13_p31bt")
+theme_override_font_sizes/normal_font_size = 55
+bbcode_enabled = true
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("11_pjbj4")
+text_raw = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor [[POISON_STACK]] incididunt ut labore et dolore magna aliqua. "
+metadata/_custom_type_script = "uid://bd3srw4twda5w"
+
+[node name="CardNameLabel" type="RichTextLabel" parent="." unique_id=1772418857]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_n6ysl")
+layout_mode = 0
+offset_left = 94.0
+offset_top = 1016.0
+offset_right = 1168.0
+offset_bottom = 1255.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+theme_override_colors/font_outline_color = Color(0.16964537, 0.14858335, 0.19024685, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/normal_font_size = 80
+bbcode_enabled = true
+text = "THIS CARD IS NOT A CARD"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LockedCardOverlay" type="TextureRect" parent="." unique_id=1610531084]
+unique_name_in_owner = true
+visible = false
+modulate = Color(0.16862746, 0.16862746, 0.16862746, 0.87058824)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = -2.0
+offset_right = 6.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("25_7ajba")
+expand_mode = 1

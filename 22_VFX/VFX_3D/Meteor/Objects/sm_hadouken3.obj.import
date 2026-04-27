@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c8uk2ffqyms5v"
+path="res://.godot/imported/sm_hadouken3.obj-5820e550e2dccc61aa5f5c17d5ff8c8f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/sm_hadouken3.obj-5820e550e2dccc61aa5f5c17d5ff8c8f.mesh"]
+
+source_file="res://22_VFX/VFX_3D/Meteor/Objects/sm_hadouken3.obj"
+dest_files=["res://.godot/imported/sm_hadouken3.obj-5820e550e2dccc61aa5f5c17d5ff8c8f.mesh", "res://.godot/imported/sm_hadouken3.obj-5820e550e2dccc61aa5f5c17d5ff8c8f.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

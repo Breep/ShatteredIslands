@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="TooltipDesc" format=3 uid="uid://dpttcyq3fcg5w"]
+
+[ext_resource type="Script" uid="uid://cr1qi4s4jv5f7" path="res://04_UI/Tool/Tooltip/Dictionary/tooltip_desc.gd" id="1_ril5c"]
+
+[resource]
+script = ExtResource("1_ril5c")
+key = &"POISON_STACK"
+title = "{{COLOR:POISON_COLOR}}POISON STACK{{/COLOR}}"
+description = "1 stack deals 1 [[POISON_DAMAGE]] per second
+Don't decay overtime"
+icon_key = "POISON_STACK_ICON"
+metadata/_custom_type_script = "uid://cr1qi4s4jv5f7"

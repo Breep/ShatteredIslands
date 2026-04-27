@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://b6rcxah2x0aqm"]
+
+[ext_resource type="Texture2D" uid="uid://dyigti30af6ys" path="res://01_Cards/Descriptions/Cards/Colossus/Common/BearStrenght/colossus_bear_strength.png" id="1_cisb5"]
+[ext_resource type="Script" uid="uid://6y21jw46g3hf" path="res://01_Cards/Descriptions/Cards/Colossus/Common/BearStrenght/colossus_bear_strength.gd" id="2_jectr"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="3_hl1tk"]
+
+[sub_resource type="Resource" id="Resource_lura4"]
+script = ExtResource("2_jectr")
+_as_reduction = Array[float]([7.0, 14.0, 21.0, 28.0, 40.0])
+_hp_to_ad_percents = Array[float]([0.6, 1.2, 1.8, 2.3, 3.0])
+_scale_to_ad_percents = Array[float]([4.0, 5.0, 6.0, 7.0, 8.0])
+metadata/_custom_type_script = "uid://6y21jw46g3hf"
+
+[resource]
+script = ExtResource("3_hl1tk")
+name = "Bear Strength"
+picture = ExtResource("1_cisb5")
+families = Array[int]([6, 1])
+player_upgrade = SubResource("Resource_lura4")
+points = Dictionary[int, int]({
+1: 1,
+6: 1
+})
+lvl = 5
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

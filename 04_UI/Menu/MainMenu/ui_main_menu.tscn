@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://bn7sfcotfnn7b"]
+
+[ext_resource type="Script" uid="uid://gai0y5rpfigb" path="res://04_UI/Menu/MainMenu/ui_main_menu.gd" id="1_k25tv"]
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme.tres" id="1_ue2ys"]
+[ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://04_UI/Tool/Misc/hover_boost_button.gd" id="3_88yd2"]
+[ext_resource type="PackedScene" uid="uid://c6hrhnld0nlpl" path="res://04_UI/Menu/PlayMenu/ui_play_menu.tscn" id="6_57mrh"]
+
+[node name="UIMainMenu" type="Control" node_paths=PackedStringArray("_play_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ue2ys")
+script = ExtResource("1_k25tv")
+_play_button = NodePath("VBoxContainer/Play")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.436
+anchor_right = 0.3
+anchor_bottom = 0.9
+offset_right = 8.0
+grow_vertical = 2
+
+[node name="Play" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+theme_override_constants/outline_size = 50
+theme_override_font_sizes/font_size = 55
+text = "PLAY"
+script = ExtResource("3_88yd2")
+
+[node name="Store" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+theme_override_constants/outline_size = 50
+theme_override_font_sizes/font_size = 55
+text = "STORE"
+script = ExtResource("3_88yd2")
+
+[node name="Collection" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+theme_override_constants/outline_size = 50
+theme_override_font_sizes/font_size = 55
+text = "COLLECTION"
+script = ExtResource("3_88yd2")
+
+[node name="PlayMenu" parent="." instance=ExtResource("6_57mrh")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
