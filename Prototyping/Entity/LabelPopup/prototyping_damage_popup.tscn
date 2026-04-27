@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://c4gwye7bm8df4" path="res://Prototyping/Entity/LabelPopup/prototyping_damage_popup.gd" id="1_myg6t"]
 [ext_resource type="PackedScene" uid="uid://xup3guwehhoc" path="res://Entities/Summons/ChickenLord/Chicken/Basic/chicken_basic.tscn" id="2_cnl0v"]
-[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/Stats/EntityStats/entity_stats.gd" id="3_505v6"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/_Shared/entity_stats.gd" id="3_505v6"]
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="3_myg6t"]
-[ext_resource type="PackedScene" uid="uid://c1ncf16eblcti" path="res://Entities/Modules/PopupModule/label_popup_module.tscn" id="5_2cic7"]
+[ext_resource type="PackedScene" uid="uid://c1ncf16eblcti" path="res://Entities/_Shared/Modules/PopupModule/label_popup_module.tscn" id="5_2cic7"]
 [ext_resource type="PackedScene" uid="uid://cmushgkek5lf8" path="res://Props/DefaultBattleIsland/Arch_island/arena_02.tscn" id="6_2cic7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_505v6"]

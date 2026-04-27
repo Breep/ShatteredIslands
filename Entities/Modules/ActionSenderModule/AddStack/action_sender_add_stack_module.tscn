@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://b5avt3a2yjjqu"]
-
-[ext_resource type="Script" uid="uid://sfawoy8vbgyl" path="res://Entities/Modules/ActionSenderModule/AddStack/action_sender_add_stack_module.gd" id="1_ahj36"]
-
-[node name="ActionSenderAddStackModule" type="Node" unique_id=641205719]
-script = ExtResource("1_ahj36")

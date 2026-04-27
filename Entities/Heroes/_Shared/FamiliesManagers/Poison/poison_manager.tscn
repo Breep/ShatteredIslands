@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://cvihi4los882b"]
+[gd_scene format=3 uid="uid://cvihi4los882b"]
 
 [ext_resource type="Script" uid="uid://b52v7m3liy1d1" path="res://Entities/Heroes/_Shared/FamiliesManagers/Poison/poison_manager.gd" id="1_ueowk"]
 

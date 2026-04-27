@@ -698,7 +698,7 @@ func _play_on_click_animation() -> void:
 	_click_tween.tween_property(_visual_3d, "scale", Vector3.ONE, 0.1)
 
 
-static var _selection_marker_scene: PackedScene = preload("res://Entities/Misc/selection_marker.tscn")
+static var _selection_marker_scene: PackedScene = preload("res://Entities/_Shared/Misc/selection_marker.tscn")
 var _selection_marker_instance: Node3D = null
 var _is_selected: bool = false
 var _is_hovered: bool = false

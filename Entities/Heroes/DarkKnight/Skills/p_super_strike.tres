@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://dwgxfevvu8dti"]
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://dwgxfevvu8dti"]
 
 [ext_resource type="Texture2D" uid="uid://bs4ekryxkfoof" path="res://Entities/Heroes/DarkKnight/Data/passive.png" id="1_34l7m"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://Entities/Heroes/_Shared/skill.gd" id="2_wshpo"]

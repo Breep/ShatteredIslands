@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://d0g0xkyr876lc"]
-
-[ext_resource type="Script" uid="uid://hbwi3giv3232" path="res://Entities/Modules/MovementModule/movement_module.gd" id="1_p0hjb"]
-
-[node name="MovementModule" type="Node" unique_id=1929250225]
-script = ExtResource("1_p0hjb")

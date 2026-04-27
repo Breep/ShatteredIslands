@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://0takd71o654o"]
+
+[ext_resource type="Script" uid="uid://dp48shao2bbw4" path="res://Entities/_Shared/Modules/ActionReceiverModule/Heal/action_receiver_heal_module.gd" id="1_qhbsf"]
+
+[node name="ActionReceiverHealModule" type="Node" unique_id=1457046745]
+script = ExtResource("1_qhbsf")

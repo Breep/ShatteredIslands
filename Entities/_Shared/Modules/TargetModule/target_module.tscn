@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://n30ifkjad344"]
+
+[ext_resource type="Script" uid="uid://b30yhoxkrlptw" path="res://Entities/_Shared/Modules/TargetModule/target_module.gd" id="1_4id68"]
+
+[node name="TargetModule" type="Node3D" unique_id=265569955]
+script = ExtResource("1_4id68")

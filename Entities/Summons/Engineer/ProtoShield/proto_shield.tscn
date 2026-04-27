@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://i6mui4bkx4tx" path="res://Entities/Summons/Engineer/ProtoShield/proto_shield_visual.tscn" id="2_16yt5"]
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="2_vtwb2"]
 [ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://Tool/QuickAnims/anim_rotating_module.tscn" id="4_uto7c"]
-[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://Entities/EntityInfoPanel/SummonSimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="5_7j5h1"]
+[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://Entities/_Shared/EntityInfoPanel/SummonSimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="5_7j5h1"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_16yt5"]
 height = 0.1

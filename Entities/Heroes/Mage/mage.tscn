@@ -4,8 +4,8 @@
 [ext_resource type="Resource" uid="uid://bsdu7s3o10ouc" path="res://Entities/Heroes/Mage/mage.tres" id="2_omrck"]
 [ext_resource type="PackedScene" uid="uid://b672jaxh77fw" path="res://Entities/Heroes/Mage/darkknight_white.tscn" id="3_omrck"]
 [ext_resource type="PackedScene" uid="uid://cpqtocfge7ott" path="res://Entities/Heroes/_Shared/HeroAnimationModule/hero_animation_module.tscn" id="4_0sv0t"]
-[ext_resource type="Script" uid="uid://cnwr3o67xobtt" path="res://Entities/Modules/AnimationModule/entity_animation_player.gd" id="4_jgesp"]
-[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://Entities/EntityInfoPanel/HeroSimpleInfoPanel2D/hero_simple_info_panel_2d.tscn" id="5_sp1in"]
+[ext_resource type="Script" uid="uid://cnwr3o67xobtt" path="res://Entities/_Shared/Modules/AnimationModule/entity_animation_player.gd" id="4_jgesp"]
+[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://Entities/_Shared/EntityInfoPanel/HeroSimpleInfoPanel2D/hero_simple_info_panel_2d.tscn" id="5_sp1in"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rxegs"]
 height = 2.0229492

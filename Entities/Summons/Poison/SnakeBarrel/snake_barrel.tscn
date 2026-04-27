@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://dlvbvygdkane8"]
 
 [ext_resource type="Script" uid="uid://b3886tqeijjlc" path="res://Entities/Summons/Poison/SnakeBarrel/snake_barrel.gd" id="1_8frj7"]
-[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/Stats/EntityStats/entity_stats.gd" id="2_2nb56"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/_Shared/entity_stats.gd" id="2_2nb56"]
 [ext_resource type="PackedScene" uid="uid://fe7g12v4g3lb" path="res://Entities/Summons/Poison/SnakeBarrel/snake_barrel_visual.tscn" id="2_bdl2m"]
-[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://Entities/EntityInfoPanel/SummonSimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="4_2nb56"]
+[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://Entities/_Shared/EntityInfoPanel/SummonSimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="4_2nb56"]
 
 [sub_resource type="Resource" id="Resource_ge6il"]
 script = ExtResource("2_2nb56")

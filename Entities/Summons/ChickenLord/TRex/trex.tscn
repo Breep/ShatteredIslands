@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://ds0phwn8k1xb6"]
 
 [ext_resource type="Script" uid="uid://cgcrhaeq84p8u" path="res://Entities/Summons/ChickenLord/TRex/trex.gd" id="1_8gq8b"]
-[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/Stats/EntityStats/entity_stats.gd" id="2_pdas5"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/_Shared/entity_stats.gd" id="2_pdas5"]
 [ext_resource type="PackedScene" uid="uid://b3rf30m650nx6" path="res://Entities/Summons/ChickenLord/TRex/trex_visual.tscn" id="2_y4jfh"]
-[ext_resource type="Script" uid="uid://cnwr3o67xobtt" path="res://Entities/Modules/AnimationModule/entity_animation_player.gd" id="4_vpc07"]
-[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://Entities/EntityInfoPanel/SummonSimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="5_qsrpw"]
+[ext_resource type="Script" uid="uid://cnwr3o67xobtt" path="res://Entities/_Shared/Modules/AnimationModule/entity_animation_player.gd" id="4_vpc07"]
+[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://Entities/_Shared/EntityInfoPanel/SummonSimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="5_qsrpw"]
 [ext_resource type="Script" uid="uid://cgpj2rq8aj7p1" path="res://Entities/Summons/ChickenLord/TRex/trex_animation_module.gd" id="6_4nond"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://cx3s7nv5p1v5c" path="res://Entities/Summons/ChickenLord/TRex/trex_blendtree.tres" id="6_qsrpw"]
 

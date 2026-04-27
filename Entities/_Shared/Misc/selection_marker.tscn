@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://q1jir686hdyw"]
+
+[ext_resource type="Shader" uid="uid://ieukoy6vror" path="res://Entities/_Shared/Misc/selection_shader.gdshader" id="1_0g1eg"]
+[ext_resource type="Script" uid="uid://bgqbgh2eno4rl" path="res://Entities/_Shared/Misc/selection_marker.gd" id="1_1v1ur"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7l6hl"]
+render_priority = 0
+shader = ExtResource("1_0g1eg")
+shader_parameter/color = Color(0, 0.8, 1, 1)
+shader_parameter/thickness = 0.05
+shader_parameter/radius = 0.4
+shader_parameter/speed = 3.0
+shader_parameter/glow = 2.0
+shader_parameter/glow_min = 2.0
+shader_parameter/glow_max = 2.0
+shader_parameter/fill = 0.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_t6io8"]
+material = SubResource("ShaderMaterial_7l6hl")
+
+[node name="SelectionMarker" type="Node3D" unique_id=481917397]
+script = ExtResource("1_1v1ur")
+
+[node name="Marker" type="MeshInstance3D" parent="." unique_id=1257605516]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07956648, 0)
+mesh = SubResource("PlaneMesh_t6io8")

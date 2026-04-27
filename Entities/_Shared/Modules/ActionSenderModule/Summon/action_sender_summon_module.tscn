@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://byxahw6e2veeh"]
+
+[ext_resource type="Script" uid="uid://cuvgatsiw4f34" path="res://Entities/_Shared/Modules/ActionSenderModule/Summon/action_sender_summon_module.gd" id="1_w0g2q"]
+
+[node name="ActionSenderSummonModule" type="Node" unique_id=22881057]
+script = ExtResource("1_w0g2q")

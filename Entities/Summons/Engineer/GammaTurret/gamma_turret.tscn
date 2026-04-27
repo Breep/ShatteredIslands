@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://dgdcjemlrm0a7" path="res://Entities/Summons/Engineer/GammaTurret/gamma_turret.gd" id="1_7mgti"]
 [ext_resource type="PackedScene" uid="uid://bfodru53fpiv5" path="res://Entities/Summons/Engineer/GammaTurret/turret_visual.tscn" id="2_jkt3l"]
-[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/Stats/EntityStats/entity_stats.gd" id="2_weyig"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/_Shared/entity_stats.gd" id="2_weyig"]
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="5_lpo57"]
-[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://Entities/EntityInfoPanel/SummonSimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="5_weyig"]
+[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://Entities/_Shared/EntityInfoPanel/SummonSimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="5_weyig"]
 
 [sub_resource type="Resource" id="Resource_lpo57"]
 script = ExtResource("2_weyig")

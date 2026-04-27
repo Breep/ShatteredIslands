@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://cvmjjl48a243"]
 
 [ext_resource type="Script" uid="uid://ywnhty3avnij" path="res://Entities/Summons/ChickenLord/Chicken/Gifted/ChickenStormCaller/chicken_storm_caller.gd" id="1_j8vkg"]
-[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/Stats/EntityStats/entity_stats.gd" id="2_615wm"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/_Shared/entity_stats.gd" id="2_615wm"]
 [ext_resource type="Script" uid="uid://bk603mav6k516" path="res://Entities/Summons/ChickenLord/Chicken/chicken_animator.gd" id="3_i1eui"]
-[ext_resource type="AnimationNodeBlendTree" uid="uid://cgr3043y4f2ee" path="res://Entities/Summons/default_blendtree.tres" id="4_fjqnk"]
+[ext_resource type="AnimationNodeBlendTree" uid="uid://cgr3043y4f2ee" path="res://Entities/Summons/_Shared/default_blendtree.tres" id="4_fjqnk"]
 [ext_resource type="PackedScene" uid="uid://bf367iu0pqq2t" path="res://Entities/Summons/ChickenLord/Chicken/Gifted/ChickenStormCaller/chicken_storm_caller_visual.tscn" id="5_11ltj"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Tool/SpawnPoint/spawn_point.tscn" id="5_sfarb"]
-[ext_resource type="Script" uid="uid://cnwr3o67xobtt" path="res://Entities/Modules/AnimationModule/entity_animation_player.gd" id="7_aolgu"]
-[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://Entities/EntityInfoPanel/SummonSimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="8_84gco"]
+[ext_resource type="Script" uid="uid://cnwr3o67xobtt" path="res://Entities/_Shared/Modules/AnimationModule/entity_animation_player.gd" id="7_aolgu"]
+[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://Entities/_Shared/EntityInfoPanel/SummonSimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="8_84gco"]
 
 [sub_resource type="Resource" id="Resource_84gco"]
 script = ExtResource("2_615wm")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c7jrogdsytaah"]
+[gd_scene format=3 uid="uid://c7jrogdsytaah"]
 
 [ext_resource type="Shader" uid="uid://b6ifujxjephkb" path="res://VFX/Shaders/2D/2d_mask_and_blink.gdshader" id="1_oy7e4"]
 [ext_resource type="Texture2D" uid="uid://cnj88qr8xveyx" path="res://UI/_Themes/Data/HexagonButton/hexagon_mask.png" id="2_7kd84"]

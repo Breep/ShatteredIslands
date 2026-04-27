@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://b1ikl3agr725i"]
-
-[ext_resource type="Script" uid="uid://dxn10cmalu4r7" path="res://Entities/Modules/ActionSenderModule/Heal/action_sender_heal_module.gd" id="1_4bckm"]
-
-[node name="ActionSenderHealModule" type="Node" unique_id=673687383]
-script = ExtResource("1_4bckm")

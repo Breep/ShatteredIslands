@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="HeroDesc" load_steps=4 format=3 uid="uid://cuu51i5mjmufi"]
+[gd_resource type="Resource" script_class="HeroDesc" format=3 uid="uid://cuu51i5mjmufi"]
 
 [ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://Entities/Heroes/_Shared/hero_desc.gd" id="1_q1f2u"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://Entities/Heroes/_Shared/skill.gd" id="2_j17v2"]

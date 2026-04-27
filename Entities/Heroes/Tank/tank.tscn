@@ -4,8 +4,8 @@
 [ext_resource type="Resource" uid="uid://bnf0l5gnqf0y4" path="res://Entities/Heroes/Tank/tank.tres" id="2_82dwb"]
 [ext_resource type="PackedScene" uid="uid://dx38utm3ti878" path="res://Entities/Heroes/Tank/darkknight_bronze.tscn" id="3_2w6wc"]
 [ext_resource type="PackedScene" uid="uid://cpqtocfge7ott" path="res://Entities/Heroes/_Shared/HeroAnimationModule/hero_animation_module.tscn" id="4_4jm5s"]
-[ext_resource type="Script" uid="uid://cnwr3o67xobtt" path="res://Entities/Modules/AnimationModule/entity_animation_player.gd" id="4_82dwb"]
-[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://Entities/EntityInfoPanel/HeroSimpleInfoPanel2D/hero_simple_info_panel_2d.tscn" id="5_ci7aw"]
+[ext_resource type="Script" uid="uid://cnwr3o67xobtt" path="res://Entities/_Shared/Modules/AnimationModule/entity_animation_player.gd" id="4_82dwb"]
+[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://Entities/_Shared/EntityInfoPanel/HeroSimpleInfoPanel2D/hero_simple_info_panel_2d.tscn" id="5_ci7aw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rxegs"]
 height = 2.0229492

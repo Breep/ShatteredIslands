@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cnriey63rdkrg"]
+[gd_scene format=3 uid="uid://cnriey63rdkrg"]
 
 [ext_resource type="Script" uid="uid://c6s2dfe26hy62" path="res://Entities/Heroes/Undef/undef.gd" id="1_krlqi"]
 

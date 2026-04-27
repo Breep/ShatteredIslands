@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://cgujm6jcrfljy"]
+[gd_scene format=3 uid="uid://cgujm6jcrfljy"]
 
 [ext_resource type="Script" uid="uid://cfhv0prvn0rax" path="res://Entities/Heroes/_Shared/FamiliesManagers/Necro/necro_manager.gd" id="1_2g14p"]
 

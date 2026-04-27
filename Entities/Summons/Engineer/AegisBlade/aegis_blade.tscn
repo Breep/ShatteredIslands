@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://bx152wib4t2ld"]
 
 [ext_resource type="Script" uid="uid://dgycyu3vxb2o7" path="res://Entities/Summons/Engineer/AegisBlade/aegis_blade.gd" id="1_5p7k0"]
-[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/Stats/EntityStats/entity_stats.gd" id="2_7piut"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/_Shared/entity_stats.gd" id="2_7piut"]
 [ext_resource type="PackedScene" uid="uid://dc124wncshpne" path="res://Entities/Summons/Engineer/AegisBlade/aegis_blade_visual.tscn" id="2_wshi8"]
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="3_1nowg"]
 [ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://Tool/QuickAnims/anim_rotating_module.tscn" id="4_wkl4h"]
-[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://Entities/EntityInfoPanel/SummonSimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="6_j30e3"]
+[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://Entities/_Shared/EntityInfoPanel/SummonSimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="6_j30e3"]
 
 [sub_resource type="Resource" id="Resource_7piut"]
 script = ExtResource("2_7piut")

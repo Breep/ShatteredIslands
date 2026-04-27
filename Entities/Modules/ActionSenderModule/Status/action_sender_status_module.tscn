@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c3sender_status"]
-
-[ext_resource type="Script" path="res://Entities/Modules/ActionSenderModule/Status/action_sender_status_module.gd" id="1_status"]
-
-[node name="ActionSenderStatusModule" type="Node"]
-script = ExtResource("1_status")

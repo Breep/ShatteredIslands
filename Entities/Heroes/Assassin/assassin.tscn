@@ -4,8 +4,8 @@
 [ext_resource type="Resource" uid="uid://cp742lkmm0ywr" path="res://Entities/Heroes/Assassin/assassin.tres" id="2_72ggn"]
 [ext_resource type="PackedScene" uid="uid://ckpn5uuh2rac6" path="res://Entities/Heroes/Assassin/darkknight_silver.tscn" id="3_fkxs5"]
 [ext_resource type="PackedScene" uid="uid://cpqtocfge7ott" path="res://Entities/Heroes/_Shared/HeroAnimationModule/hero_animation_module.tscn" id="4_16y2o"]
-[ext_resource type="Script" uid="uid://cnwr3o67xobtt" path="res://Entities/Modules/AnimationModule/entity_animation_player.gd" id="4_72ggn"]
-[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://Entities/EntityInfoPanel/HeroSimpleInfoPanel2D/hero_simple_info_panel_2d.tscn" id="5_p4s41"]
+[ext_resource type="Script" uid="uid://cnwr3o67xobtt" path="res://Entities/_Shared/Modules/AnimationModule/entity_animation_player.gd" id="4_72ggn"]
+[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://Entities/_Shared/EntityInfoPanel/HeroSimpleInfoPanel2D/hero_simple_info_panel_2d.tscn" id="5_p4s41"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rxegs"]
 height = 2.0229492

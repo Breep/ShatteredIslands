@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" uid="uid://bjxqcmhxdgkjq" path="res://Entities/_Shared/Modules/ActionSenderModule/Status/action_sender_status_module.gd" id="1_status"]
+
+[node name="ActionSenderStatusModule" type="Node"]
+script = ExtResource("1_status")

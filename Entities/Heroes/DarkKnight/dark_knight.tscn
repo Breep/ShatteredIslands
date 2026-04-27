@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cusafkpxrg6we" path="res://Entities/Heroes/DarkKnight/dark_knight.gd" id="1_ufk4g"]
 [ext_resource type="Resource" uid="uid://bkksjgh6p542o" path="res://Entities/Heroes/DarkKnight/dark_knight.tres" id="2_502n4"]
 [ext_resource type="PackedScene" uid="uid://dv0rauvoaxb0y" path="res://Entities/Heroes/DarkKnight/Skins/Standard/dark_knight_black.tscn" id="3_5c32l"]
-[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://Entities/EntityInfoPanel/HeroSimpleInfoPanel2D/hero_simple_info_panel_2d.tscn" id="6_3htvw"]
+[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://Entities/_Shared/EntityInfoPanel/HeroSimpleInfoPanel2D/hero_simple_info_panel_2d.tscn" id="6_3htvw"]
 [ext_resource type="PackedScene" uid="uid://cpqtocfge7ott" path="res://Entities/Heroes/_Shared/HeroAnimationModule/hero_animation_module.tscn" id="10_3dwlx"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rxegs"]
@@ -164,7 +164,6 @@ _health_bar_marker = NodePath("DarkKnightVisual/HealthBarSpawnMarker")
 _health_bar = NodePath("HeroSimpleInfoPanel2d")
 _attack_spawn_marker = NodePath("DarkKnightVisual/AutoAttackSpawnMarker")
 _animation_module = NodePath("HeroAnimationModule")
-metadata/_custom_type_script = "uid://crybfqxtiik6d"
 
 [node name="DarkKnightVisual" parent="." unique_id=2041897312 instance=ExtResource("3_5c32l")]
 transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0, 0, 0)
@@ -287,13 +286,13 @@ _animation_tree = NodePath("../AnimationTree")
 _animation_player = NodePath("../DarkKnightVisual/AnimationPlayer")
 _entity_owner = NodePath("..")
 
-[node name="HeroSimpleInfoPanel2d" parent="." unique_id=358992180 node_paths=PackedStringArray("_owner_entity", "_info_panel_spawn", "_info_panel_spawn_tavern") instance=ExtResource("6_3htvw")]
+[node name="HeroSimpleInfoPanel2d" parent="." unique_id=358992180 node_paths=PackedStringArray("_info_panel_spawn_tavern", "_owner_entity", "_info_panel_spawn") instance=ExtResource("6_3htvw")]
 anchors_preset = -1
 anchor_left = 0.042000003
 anchor_right = 0.042000003
 offset_right = -0.640007
+_info_panel_spawn_tavern = NodePath("../DarkKnightVisual/HealthBarSpawnMarkerTavern")
 _owner_entity = NodePath("..")
 _info_panel_spawn = NodePath("../DarkKnightVisual/HealthBarSpawnMarker")
-_info_panel_spawn_tavern = NodePath("../DarkKnightVisual/HealthBarSpawnMarkerTavern")
 
 [editable path="DarkKnightVisual"]
