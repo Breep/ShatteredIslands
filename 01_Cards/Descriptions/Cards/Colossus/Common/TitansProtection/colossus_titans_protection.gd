@@ -21,7 +21,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			return
 		var heal_amount: float = lost_hp * (percent / 100.0)
 		if heal_amount > 0:
-			ctx.hero.heal(ctx.hero, heal_amount, &"Titan's Protection")
+			ctx.hero.heal.direct(ctx.hero, heal_amount, &"Titan's Protection")
 	)
 
 

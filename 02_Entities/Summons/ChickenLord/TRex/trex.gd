@@ -35,7 +35,7 @@ func _ready() -> void:
 		periodic_timer_registry.register("Primal Shake", _primal_shake_period, func() -> void:
 			primal_shaked.emit()
 			for i in _primal_shake_number:
-				summoner.summon_entity(EntityType.CHICKEN, SpawnLocationConfig.create_entity_relative(self, 5.0), {})
+				summoner.summon_sender.summon_entity(EntityType.CHICKEN, SpawnLocationConfig.create_entity_relative(self, 5.0), {})
 			)
 	super._ready()
 

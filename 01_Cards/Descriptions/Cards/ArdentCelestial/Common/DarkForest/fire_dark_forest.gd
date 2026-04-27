@@ -27,7 +27,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	action_mod.after_action_logic_callback = func(cb_vars: Dictionary) -> void:
 		var target: Entity = cb_vars.get(ActionModifier.VarType.TARGET)
 		if target != null:
-			ctx.hero.inflict_condition_stacks(target, ignite, Alteration.Type.IGNITE, &"Dark Forest")
+			ctx.hero.add_stack_sender.inflict_condition_stacks(target, ignite, Alteration.Type.IGNITE, &"Dark Forest")
 	ctx.action_modifiers.register_modifier(action_mod)
 
 

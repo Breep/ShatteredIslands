@@ -25,7 +25,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			mod.tags = [StatModifier.TagType.CARD]
 			ctx.stat_modifiers.register_modifier(mod)
 
-			ctx.hero.heal(ctx.hero, max_hp_bonus, &"Eye of the Cyclone")
+			ctx.hero.heal.direct(ctx.hero, max_hp_bonus, &"Eye of the Cyclone")
 	)
 
 	# Reset accumulated bonus each battle

@@ -45,9 +45,9 @@ func _process_zap(target: Entity) -> void:
 	
 	# Dégâts
 	if _source != null:
-		_source.direct_damage(target, _damage, Utils.ActionType.DAMAGE_MAGICAL, "Chain Lightning")
+		_source.damage.direct(target, _damage, Utils.ActionType.DAMAGE_MAGICAL, "Chain Lightning")
 	else:
-		target.take_damage(_damage, Utils.ActionType.DAMAGE_MAGICAL, false, "Chain Lightning")
+		target.damage.take(_damage, Utils.ActionType.DAMAGE_MAGICAL, false, "Chain Lightning")
 	
 	# Rebond
 	if _bounces_remaining > 0:

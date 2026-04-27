@@ -33,7 +33,7 @@ func _init() -> void:
 	polarity = Polarity.BUFF
 	id = &"Regen"
 	display_color = Color.AQUAMARINE
-	icon = preload("res://Entities/_Shared/Modules//AlterationsModule/AlterationIcon/Icons/regen_icon.png")
+	icon = preload("res://02_Entities/_Shared/Modules//AlterationsModule/AlterationIcon/Icons/regen_icon.png")
 
 
 func add_stack(amount: float, source: Entity = null, action_id: StringName = "", mod: Dictionary = {}) -> float:
@@ -59,7 +59,7 @@ func process_tick() -> void:
 	_expire_current_slot()
 
 	if _stacks <= 0 or _owner == null: return
-	_owner.heal(_owner, _stacks, "Regen")
+	_owner.heal.direct(_owner, _stacks, "Regen")
 
 
 func _expire_current_slot() -> void:

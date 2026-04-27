@@ -89,6 +89,7 @@ team_zones = {
 }
 
 [node name="FightingFloor_ffa13" parent="FightingFloorTemplates" unique_id=512388701 node_paths=PackedStringArray("team_zones") instance=ExtResource("14_dt6cg")]
+visible = false
 team_zones = {
 1: NodePath("CenterPointMain/CenterPoint1/SpawnArea1"),
 2: NodePath("CenterPointMain/CenterPoint2/SpawnArea2"),

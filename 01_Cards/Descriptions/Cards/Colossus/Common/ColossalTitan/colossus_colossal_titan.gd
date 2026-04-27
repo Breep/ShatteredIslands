@@ -33,7 +33,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		ctx.periodic_timers.register_oneshot(DEPLOY_TIME, func() -> void:
 			if not is_instance_valid(ennemy): return
 			var damage: float = (ctx.hero.stats.scale - 1) * 100 * damage_factor
-			ctx.hero.direct_damage(ennemy, damage, Utils.ActionType.DAMAGE_PHYSICAL, &"Colossal Titan")
+			ctx.hero.damage.direct(ennemy, damage, Utils.ActionType.DAMAGE_PHYSICAL, &"Colossal Titan")
 		)
 	)
 

@@ -12,7 +12,7 @@ enum Modifier {
 
 
 #region ============================== Signals ==============================
-const BEAM_SCENE: PackedScene = preload("res://Entities/Summons/Engineer/FortificationDrone/Visual/fortification_drone_beam.tscn")
+const BEAM_SCENE: PackedScene = preload("res://02_Entities/Summons/Engineer/FortificationDrone/Visual/fortification_drone_beam.tscn")
 const SHIELD_COUNT_MAX: int = 3
 #endregion
 

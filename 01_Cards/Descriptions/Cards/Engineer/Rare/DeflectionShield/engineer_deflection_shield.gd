@@ -15,7 +15,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var respawn_timer: float = _respawn_timers[card_lvl - 1]
 
 	ctx.battle_callbacks.register_battle_start(&"Deflection Shield", func() -> void:
-		ctx.hero.summon_entity(Entity.EntityType.DEFLECTION_SHIELD, SpawnLocationConfig.create_between_center(ctx.hero, 2), {
+		ctx.hero.summon_sender.summon_entity(Entity.EntityType.DEFLECTION_SHIELD, SpawnLocationConfig.create_between_center(ctx.hero, 2), {
 			DeflectionShield.Modifier.BLOCKED_PROJECTILES: blocked_projectiles,
 			DeflectionShield.Modifier.SHIELD_PER_BLOCK: shield_per_block,
 			DeflectionShield.Modifier.RESPAWN_TIMER: respawn_timer

@@ -14,8 +14,8 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 		if target == null: return
 		print("Chicken shielded " + str(shield_amount) + " to target " + target.name + " " + str(target.uid) )
-		#chicken.inflict_condition_stacks(target, shield_amount, &"Doctor Chicken")
-		target.take_condition_stacks(shield_amount, Alteration.Type.SHIELD, false, &"Assistant Chicken", chicken)
+		#chicken.add_stack_sender.inflict_condition_stacks(target, shield_amount, &"Doctor Chicken")
+		target.add_stack_receiver.take_condition_stacks(shield_amount, Alteration.Type.SHIELD, false, &"Assistant Chicken", chicken)
 		)
 
 

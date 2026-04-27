@@ -65,7 +65,7 @@ func _hatch() -> void:
 	
 	chicken_mods["Type"] = _chicken_type
 	for i in count:
-		summoner.summon_entity(Entity.EntityType.CHICKEN, spawn_cfg, chicken_mods)
+		summoner.summon_sender.summon_entity(Entity.EntityType.CHICKEN, spawn_cfg, chicken_mods)
 
 	# --- After hatch ---
 	for mod in _hatch_modifiers:

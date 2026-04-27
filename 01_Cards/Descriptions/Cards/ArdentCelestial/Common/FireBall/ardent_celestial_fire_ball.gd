@@ -20,8 +20,8 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	proj_stats.on_hit_callbacks.append(func(cb_vars: Dictionary) -> void:
 		var hit_target: Entity = cb_vars.get(ProjectileStats.VarType.TARGET)
 		if not is_instance_valid(hit_target): return
-		ctx.hero.inflict_condition_stacks(hit_target, ignite_stack, Alteration.Type.IGNITE, &"Fire Ball")
-		ctx.hero.direct_damage(hit_target, damage, Utils.ActionType.DAMAGE_MAGICAL, &"Fire Ball")
+		ctx.hero.add_stack_sender.inflict_condition_stacks(hit_target, ignite_stack, Alteration.Type.IGNITE, &"Fire Ball")
+		ctx.hero.damage.direct(hit_target, damage, Utils.ActionType.DAMAGE_MAGICAL, &"Fire Ball")
 		var bounce_bonus: float = (hit_target.alterations_module.ignite_stacks * chance_to_bounce)/100
 		var projectile: Projectile = cb_vars.get(ProjectileStats.VarType.PROJECTILE)
 		projectile.add_bounce(bounce_bonus)
@@ -30,7 +30,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	ctx.periodic_timers.register("Fire Ball", period, func() -> void:
 		var target: Entity = ctx.hero.target_module.get_target(TargetModule.TargettingStrategy.HIGHEST_HP_PERCENT_HERO_ENEMY)
 		if target == null: return
-		ctx.hero.projectile_attack(target, Projectile.Type.FIRE_BALL, ctx.hero, proj_stats)
+		ctx.hero.projectile_sender.projectile_attack(target, Projectile.Type.FIRE_BALL, ctx.hero, proj_stats)
 		)
 	
 

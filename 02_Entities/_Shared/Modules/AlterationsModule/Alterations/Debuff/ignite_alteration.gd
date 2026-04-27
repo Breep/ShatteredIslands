@@ -19,7 +19,7 @@ func _init() -> void:
 	polarity = Polarity.DEBUFF
 	id = &"Ignite"
 	display_color = Color.ORANGE_RED
-	icon = preload("res://Entities/_Shared/Modules//AlterationsModule/AlterationIcon/Icons/ignite_icon.png")
+	icon = preload("res://02_Entities/_Shared/Modules//AlterationsModule/AlterationIcon/Icons/ignite_icon.png")
 
 
 func process_tick() -> void:
@@ -29,7 +29,7 @@ func process_tick() -> void:
 	if _stacks <= 0 or _owner == null: return
 
 	var percent: float = MAXHP_PERCENT_PER_STACK * _stacks
-	_owner.take_damage_percent(percent, Utils.PercentModifier.MAX_HP, Utils.ActionType.DAMAGE_MAGICAL, false, "Ignite Periodic")
+	_owner.damage.take_percent(percent, Utils.PercentModifier.MAX_HP, Utils.ActionType.DAMAGE_MAGICAL, false, "Ignite Periodic")
 	_decay()
 
 

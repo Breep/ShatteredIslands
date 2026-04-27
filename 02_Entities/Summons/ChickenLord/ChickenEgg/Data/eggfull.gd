@@ -1,6 +1,6 @@
 extends Node3D
 
-const ENGINEER_SHADER: ShaderMaterial = preload("res://Entities/Summons/ChickenLord/_Shared/gifted_engineer_shader.tres")
+const ENGINEER_SHADER: ShaderMaterial = preload("res://02_Entities/Summons/ChickenLord/_Shared/gifted_engineer_shader.tres")
 
 @onready var _mesh: MeshInstance3D = %egg_mesh
 

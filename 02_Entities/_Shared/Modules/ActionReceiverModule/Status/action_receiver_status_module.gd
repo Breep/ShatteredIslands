@@ -3,7 +3,7 @@ extends ActionReceiverModule
 
 func take_status(status_type: Alteration.Type, duration: float, action_id: StringName, source: Entity = null) -> float:
 	if _owner.is_dead(): return 0
-	if _owner.is_invulnerable() and Alteration.is_negative(status_type): return 0
+	if _owner.alterations_module.has_state(Alteration.Type.INVULNERABLE) and Alteration.is_negative(status_type): return 0
 
 	if _owner.alterations_module == null:
 		Verbose.error("take_status: No AlterationsModule on owner", Verbose.Category.ENTITY_MODULE)

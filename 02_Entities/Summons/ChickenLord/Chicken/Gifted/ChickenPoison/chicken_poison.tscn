@@ -28,7 +28,7 @@ script = ExtResource("1_mxmvw")
 _health_bar = NodePath("HealthBar")
 entity_name = "Chicken Poison"
 custom_base_stats = SubResource("Resource_u623w")
-_auto_loaded_modules = Array[int]([1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 0, 4])
+_auto_loaded_modules = Array[int]([1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 15, 16, 17, 18, 19, 0, 4])
 _visual_3d = NodePath("ChickenAttackVisual")
 _health_bar_marker = NodePath("ChickenAttackVisual/HealthBarSpawnMarker")
 

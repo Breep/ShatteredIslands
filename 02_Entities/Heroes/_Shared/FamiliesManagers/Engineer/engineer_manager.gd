@@ -29,7 +29,7 @@ func apply_passive() -> void:
 func _passive_spawn_proto_shield() -> void:
 	_owner.battle_callback_registry.register_battle_start("Engineer passive", func() -> void:
 		var spawn_config := SpawnLocationConfig.create_between_center(_owner, 3.0)
-		_owner.summon_entity(Entity.EntityType.PROTO_SHIELD, spawn_config, {
+		_owner.summon_sender.summon_entity(Entity.EntityType.PROTO_SHIELD, spawn_config, {
 			ProtoShield.Modifier.SHIELD: P_PROTO_SHIELD_SHIELD[level],
 			ProtoShield.Modifier.HP_MAX: P_PROTO_SHIELD_HP_MAX[level]
 		})

@@ -19,7 +19,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	aa_mod.additional_effect_callback = func(_cb_vars: Dictionary) -> void:
 		if not Utils.is_randomize_modifier_active(chance, ctx.hero.battle_id):
 			return
-		ctx.hero.cleanse(ctx.hero, amount, &"Surgical Knife")
+		ctx.hero.remove_stack_sender.cleanse(ctx.hero, amount, &"Surgical Knife")
 
 	ctx.battle_callbacks.register_battle_start(&"Surgical Knife", func() -> void:
 		ctx.auto_attack_modifiers.register_modifier(aa_mod)

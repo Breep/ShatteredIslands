@@ -19,7 +19,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			var target: Entity = cb_vars[AutoAttackModifier.VarType.TARGET]
 			if target == null or target.is_queued_for_deletion(): return
 			if Utils.is_randomize_modifier_active(stun_chance, ctx.hero.battle_id):
-				chicken.inflict_status(target,Alteration.Type.STUN, stun_duration, &"Intimidating Cluck")
+				chicken.status_sender.inflict_status(target,Alteration.Type.STUN, stun_duration, &"Intimidating Cluck")
 		
 		chicken.auto_attack_modifier_registry.register_modifier(mod)
 	)

@@ -88,7 +88,7 @@ func _apply_auto_attack(battle_log: Dictionary) -> void:
 	var source: Entity = _entity_manager.get_entity(source_id)
 	var target: Entity = _entity_manager.get_entity(target_id)
 	if source == null or target == null: return
-	source.auto_attack(target)
+	source.auto_attack_sender.execute_auto_attack(target)
 
 
 #{"time":0.1, "type":"spell_casted", "source":1, "target":2, "spell_type":<spell_type>}
@@ -103,7 +103,7 @@ func _apply_spell_casted(battle_log: Dictionary) -> void:
 	var spell_type: Spell.Type = battle_log.get(BattleLog.Main.SPELL_TYPE, -1)
 	var spell_modifier: Dictionary = battle_log.get(BattleLog.Main.SPELL_MODIFIER, {})
 	
-	source.cast_spell(target, spell_type, spell_modifier)
+	source.spell_sender.cast_spell(target, spell_type, spell_modifier)
 
 
 #region ACTION/INTERACTION
@@ -164,20 +164,20 @@ func _apply_interaction_received(battle_log: Dictionary) -> void:
 
 func _map_interaction(receiver: Entity, source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
 	match action_type:
-		Utils.ActionType.DAMAGE_PHYSICAL: receiver.take_damage(value, Utils.ActionType.DAMAGE_PHYSICAL, is_critical, action_id, source)
-		Utils.ActionType.DAMAGE_MAGICAL: receiver.take_damage(value, Utils.ActionType.DAMAGE_MAGICAL, is_critical, action_id, source)
-		Utils.ActionType.DAMAGE_POISON: receiver.take_damage(value, Utils.ActionType.DAMAGE_POISON, is_critical, action_id, source)
-		Utils.ActionType.DAMAGE_PURE: receiver.take_damage(value, Utils.ActionType.DAMAGE_PURE, is_critical, action_id, source)
-		Utils.ActionType.UTILITY_HEAL: receiver.take_heal(value, is_critical, action_id, source)
-		Utils.ActionType.UTILITY_CLEANSE: receiver.take_cleanse(value, is_critical, action_id, source)
-		Utils.ActionType.UTILITY_DISPELL: receiver.take_dispell(value, is_critical, action_id, source)
-		Utils.ActionType.STACK_SHIELD: receiver.take_condition_stacks(value, Alteration.Type.SHIELD, is_critical, action_id, source)
-		Utils.ActionType.STACK_IGNITE: receiver.take_condition_stacks(value, Alteration.Type.IGNITE, is_critical, action_id, source)
-		Utils.ActionType.STACK_POISON: receiver.take_condition_stacks(value, Alteration.Type.POISON, is_critical, action_id, source)
-		Utils.ActionType.STACK_REGEN: receiver.take_condition_stacks(value, Alteration.Type.REGEN, is_critical, action_id, source)
-		Utils.ActionType.STACK_NECROSIS: receiver.take_condition_stacks(value, Alteration.Type.NECROSIS, is_critical, action_id, source)
-		Utils.ActionType.STATUS_STUN: receiver.take_status(Alteration.Type.STUN, value, action_id, source)
-		Utils.ActionType.STATUS_TAUNT: receiver.take_status(Alteration.Type.TAUNT, value, action_id, source)
-		Utils.ActionType.STATUS_SILENCE: receiver.take_status(Alteration.Type.SILENCE, value, action_id, source)
-		Utils.ActionType.STATUS_INVULNERABLE: receiver.take_status(Alteration.Type.INVULNERABLE, value, action_id, source)
-		Utils.ActionType.STATUS_UNTARGETABLE: receiver.take_status(Alteration.Type.UNTARGETABLE, value, action_id, source)
+		Utils.ActionType.DAMAGE_PHYSICAL: receiver.damage.take(value, Utils.ActionType.DAMAGE_PHYSICAL, is_critical, action_id, source)
+		Utils.ActionType.DAMAGE_MAGICAL: receiver.damage.take(value, Utils.ActionType.DAMAGE_MAGICAL, is_critical, action_id, source)
+		Utils.ActionType.DAMAGE_POISON: receiver.damage.take(value, Utils.ActionType.DAMAGE_POISON, is_critical, action_id, source)
+		Utils.ActionType.DAMAGE_PURE: receiver.damage.take(value, Utils.ActionType.DAMAGE_PURE, is_critical, action_id, source)
+		Utils.ActionType.UTILITY_HEAL: receiver.heal.take(value, is_critical, action_id, source)
+		Utils.ActionType.UTILITY_CLEANSE: receiver.remove_stack_receiver.take_cleanse(value, is_critical, action_id, source)
+		Utils.ActionType.UTILITY_DISPELL: receiver.remove_stack_receiver.take_dispell(value, is_critical, action_id, source)
+		Utils.ActionType.STACK_SHIELD: receiver.add_stack_receiver.take_condition_stacks(value, Alteration.Type.SHIELD, is_critical, action_id, source)
+		Utils.ActionType.STACK_IGNITE: receiver.add_stack_receiver.take_condition_stacks(value, Alteration.Type.IGNITE, is_critical, action_id, source)
+		Utils.ActionType.STACK_POISON: receiver.add_stack_receiver.take_condition_stacks(value, Alteration.Type.POISON, is_critical, action_id, source)
+		Utils.ActionType.STACK_REGEN: receiver.add_stack_receiver.take_condition_stacks(value, Alteration.Type.REGEN, is_critical, action_id, source)
+		Utils.ActionType.STACK_NECROSIS: receiver.add_stack_receiver.take_condition_stacks(value, Alteration.Type.NECROSIS, is_critical, action_id, source)
+		Utils.ActionType.STATUS_STUN: receiver.status_receiver.take_status(Alteration.Type.STUN, value, action_id, source)
+		Utils.ActionType.STATUS_TAUNT: receiver.status_receiver.take_status(Alteration.Type.TAUNT, value, action_id, source)
+		Utils.ActionType.STATUS_SILENCE: receiver.status_receiver.take_status(Alteration.Type.SILENCE, value, action_id, source)
+		Utils.ActionType.STATUS_INVULNERABLE: receiver.status_receiver.take_status(Alteration.Type.INVULNERABLE, value, action_id, source)
+		Utils.ActionType.STATUS_UNTARGETABLE: receiver.status_receiver.take_status(Alteration.Type.UNTARGETABLE, value, action_id, source)

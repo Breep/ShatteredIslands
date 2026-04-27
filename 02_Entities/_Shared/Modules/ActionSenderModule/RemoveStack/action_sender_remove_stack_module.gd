@@ -11,7 +11,7 @@ func cleanse(target: Entity, value: float, action_id: StringName) -> float:
 	var base_value: float = value * _get_power_fragility_multiplier(Utils.ActionType.UTILITY_CLEANSE)
 	var crit_data: Dictionary = _get_crit_multiplier(Utils.ActionType.UTILITY_CLEANSE)
 	value = base_value * crit_data["multiplier"]
-	var stack_cleansed: float = target.take_cleanse(value, crit_data["is_critical"], action_id, _owner)
+	var stack_cleansed: float = target.remove_stack_receiver.take_cleanse(value, crit_data["is_critical"], action_id, _owner)
 	
 	if crit_data["is_critical"]:
 		_owner.critical_action_done.emit(target, Utils.ActionType.UTILITY_CLEANSE, base_value, stack_cleansed)
@@ -27,7 +27,7 @@ func dispell(target: Entity, value: float, action_id: StringName) -> float:
 	var base_value: float = value * _get_power_fragility_multiplier(Utils.ActionType.UTILITY_DISPELL)
 	var crit_data: Dictionary = _get_crit_multiplier(Utils.ActionType.UTILITY_DISPELL)
 	value = base_value * crit_data["multiplier"]
-	var stack_removed: float = target.take_dispell(value, crit_data["is_critical"], action_id, _owner)
+	var stack_removed: float = target.remove_stack_receiver.take_dispell(value, crit_data["is_critical"], action_id, _owner)
 	
 	if crit_data["is_critical"]:
 		_owner.critical_action_done.emit(target, Utils.ActionType.UTILITY_CLEANSE, base_value, stack_removed)

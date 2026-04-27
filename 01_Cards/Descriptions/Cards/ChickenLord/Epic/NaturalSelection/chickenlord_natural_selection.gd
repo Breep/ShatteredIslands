@@ -35,7 +35,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 				em[ChickenEgg.Modifier.CHICKEN_TYPE] = chicken_type
 
 			ctx.hero.action_modifiers_registry.register_modifier(evolution_mod)
-			ctx.hero.summon_entity(Entity.EntityType.CHICKEN_EGG, spawn_loc, {
+			ctx.hero.summon_sender.summon_entity(Entity.EntityType.CHICKEN_EGG, spawn_loc, {
 				ChickenEgg.Modifier.HATCH_TIME: 1.5,
 			})
 			ctx.hero.action_modifiers_registry.unregister_modifier(evolution_mod)

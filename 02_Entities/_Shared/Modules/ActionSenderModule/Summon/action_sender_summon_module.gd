@@ -4,27 +4,27 @@ extends ActionSenderModule
 var _spawn_manager: SpawnManager
 var _arena_zone_manager: ArenaZoneManager
 
-const SNAKE_BARREL_SCENE: PackedScene = preload("res://Entities/Summons/Poison/SnakeBarrel/snake_barrel.tscn")
-const SNAKE_SCENE: PackedScene = preload("res://Entities/Summons/Poison/Snake/snake.tscn")
-const FIELD_GENERATOR_SCENE: PackedScene = preload("res://Entities/Summons/Engineer/FieldGenerator/field_generator.tscn")
+const SNAKE_BARREL_SCENE: PackedScene = preload("res://02_Entities/Summons/Poison/SnakeBarrel/snake_barrel.tscn")
+const SNAKE_SCENE: PackedScene = preload("res://02_Entities/Summons/Poison/Snake/snake.tscn")
+const FIELD_GENERATOR_SCENE: PackedScene = preload("res://02_Entities/Summons/Engineer/FieldGenerator/field_generator.tscn")
 
-const CHICKEN_BASIC_SCENE: PackedScene = preload("res://Entities/Summons/ChickenLord/Chicken/Basic/chicken_basic.tscn")
-const CHICKEN_ATTACK_SCENE: PackedScene = preload("res://Entities/Summons/ChickenLord/Chicken/Gifted/ChickenAttack/chicken_attack.tscn")
-const CHICKEN_POISON_SCENE: PackedScene = preload("res://Entities/Summons/ChickenLord/Chicken/Gifted/ChickenPoison/chicken_poison.tscn")
-const CHICKEN_COLOSSUS_SCENE: PackedScene = preload('res://Entities/Summons/ChickenLord/Chicken/Gifted/ChickenColossus/chicken_colossus.tscn')
-const CHICKEN_LIGHT_SCENE: PackedScene = preload('res://Entities/Summons/ChickenLord/Chicken/Gifted/ChickenLight/chicken_light.tscn')
-const CHICKEN_ENGINEER_SCENE: PackedScene = preload('res://Entities/Summons/ChickenLord/Chicken/Gifted/ChickenEngineer/chicken_engineer.tscn')
-const CHICKEN_ARDENT_CELESTIAL_SCENE: PackedScene = preload('res://Entities/Summons/ChickenLord/Chicken/Gifted/ChickenArdentCelestial/chicken_ardent_celestial.tscn')
-const CHICKEN_STORM_CALLER: PackedScene = preload('res://Entities/Summons/ChickenLord/Chicken/Gifted/ChickenStormCaller/chicken_storm_caller.tscn')
+const CHICKEN_BASIC_SCENE: PackedScene = preload("res://02_Entities/Summons/ChickenLord/Chicken/Basic/chicken_basic.tscn")
+const CHICKEN_ATTACK_SCENE: PackedScene = preload("res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenAttack/chicken_attack.tscn")
+const CHICKEN_POISON_SCENE: PackedScene = preload("res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenPoison/chicken_poison.tscn")
+const CHICKEN_COLOSSUS_SCENE: PackedScene = preload('res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenColossus/chicken_colossus.tscn')
+const CHICKEN_LIGHT_SCENE: PackedScene = preload('res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenLight/chicken_light.tscn')
+const CHICKEN_ENGINEER_SCENE: PackedScene = preload('res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenEngineer/chicken_engineer.tscn')
+const CHICKEN_ARDENT_CELESTIAL_SCENE: PackedScene = preload('res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenArdentCelestial/chicken_ardent_celestial.tscn')
+const CHICKEN_STORM_CALLER: PackedScene = preload('res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenStormCaller/chicken_storm_caller.tscn')
 
-const PROTO_SHIELD_SCENE: PackedScene = preload("res://Entities/Summons/Engineer/ProtoShield/proto_shield.tscn")
-const FORTIFICATION_DRONE_SCENE: PackedScene = preload("res://Entities/Summons/Engineer/FortificationDrone/fortification_drone.tscn")
-const AEGIS_BLADE_SCENE: PackedScene = preload("res://Entities/Summons/Engineer/AegisBlade/aegis_blade.tscn")
-const DEFLECTION_SHIELD: PackedScene = preload("res://Entities/Summons/Engineer/DeflectionShield/deflection_shield.tscn")
-const GAMMA_TURRET: PackedScene = preload("res://Entities/Summons/Engineer/GammaTurret/gamma_turret.tscn")
+const PROTO_SHIELD_SCENE: PackedScene = preload("res://02_Entities/Summons/Engineer/ProtoShield/proto_shield.tscn")
+const FORTIFICATION_DRONE_SCENE: PackedScene = preload("res://02_Entities/Summons/Engineer/FortificationDrone/fortification_drone.tscn")
+const AEGIS_BLADE_SCENE: PackedScene = preload("res://02_Entities/Summons/Engineer/AegisBlade/aegis_blade.tscn")
+const DEFLECTION_SHIELD: PackedScene = preload("res://02_Entities/Summons/Engineer/DeflectionShield/deflection_shield.tscn")
+const GAMMA_TURRET: PackedScene = preload("res://02_Entities/Summons/Engineer/GammaTurret/gamma_turret.tscn")
 
-const TREX_SCENE: PackedScene = preload("res://Entities/Summons/ChickenLord/TRex/trex.tscn")
-const CHICKEN_EGG_SCENE: PackedScene = preload("res://Entities/Summons/ChickenLord/ChickenEgg/chicken_egg.tscn")
+const TREX_SCENE: PackedScene = preload("res://02_Entities/Summons/ChickenLord/TRex/trex.tscn")
+const CHICKEN_EGG_SCENE: PackedScene = preload("res://02_Entities/Summons/ChickenLord/ChickenEgg/chicken_egg.tscn")
 
 # ============================== Public functions ==============================
 

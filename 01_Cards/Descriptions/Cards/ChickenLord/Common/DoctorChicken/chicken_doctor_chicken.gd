@@ -13,8 +13,8 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		var target: Entity = ctx.hero.target_module.get_target(TargetModule.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
 
 		if target == null: return
-		target.take_heal(heal_amount, false, &"Doctor Chicken", chicken) 
-		#chicken.heal(target, heal_amount, &"Doctor Chicken")
+		target.heal.take(heal_amount, false, &"Doctor Chicken", chicken) 
+		#chicken.heal.direct(target, heal_amount, &"Doctor Chicken")
 		)
 
 

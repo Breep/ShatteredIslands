@@ -48,7 +48,7 @@ func _ready() -> void:
 		add_child(_shield_timer)
 		_shield_timer.start()
 
-const GENERATOR_BEAM_SCENE: PackedScene = preload("res://Entities/Summons/Engineer/FieldGenerator/field_generator_beam.tscn")
+const GENERATOR_BEAM_SCENE: PackedScene = preload("res://02_Entities/Summons/Engineer/FieldGenerator/field_generator_beam.tscn")
 
 var _current_targets: Array[Entity] = []
 var _beams: Dictionary = {} # { entity_id (int) : FieldGeneratorBeam }

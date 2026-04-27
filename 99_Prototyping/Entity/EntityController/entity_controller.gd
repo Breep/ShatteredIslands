@@ -190,7 +190,7 @@ func _on_attack_button_pressed() -> void:
 	var damage_type: Utils.ActionType = _damage_choice.get_selected_id() as Utils.ActionType
 	var action_id: StringName = &"test_direct_damage"
 	
-	entity_owner.direct_damage(_target, damage, damage_type, action_id)
+	entity_owner.damage.direct(_target, damage, damage_type, action_id)
 	print("DEBUG: direct_damage called - Target: ", _target.entity_name, " | Damage: ", damage, " | Type: ", Utils.ActionType.keys()[damage_type])
 
 
@@ -211,7 +211,7 @@ func _on_attack_percent_button_pressed() -> void:
 	var percent_modifier: Utils.PercentModifier = _percent_modifier_choice.get_selected_id() as Utils.PercentModifier
 	var action_id: StringName = &"test_direct_damage_percent"
 	
-	entity_owner.direct_damage_percent(_target, damage_percent, damage_type, percent_modifier, action_id)
+	entity_owner.damage.direct_percent(_target, damage_percent, damage_type, percent_modifier, action_id)
 	print("DEBUG: direct_damage_percent called - Target: ", _target.entity_name, " | Percent: ", damage_percent, "% | Type: ", Utils.ActionType.keys()[damage_type], " | Modifier: ", Utils.PercentModifier.keys()[percent_modifier])
 
 
@@ -230,7 +230,7 @@ func _on_heal_button_pressed() -> void:
 	var heal_amount: float = heal_text.to_float()
 	var action_id: StringName = &"test_heal"
 	
-	entity_owner.heal(_target, heal_amount, action_id)
+	entity_owner.heal.direct(_target, heal_amount, action_id)
 	print("DEBUG: heal called - Target: ", _target.entity_name, " | Amount: ", heal_amount)
 
 
@@ -250,7 +250,7 @@ func _on_heal_percent_button_pressed() -> void:
 	var percent_modifier: Utils.PercentModifier = _health_percent_modifier_choice.get_selected_id() as Utils.PercentModifier
 	var action_id: StringName = &"test_heal_percent"
 	
-	entity_owner.heal_percent(_target, percent, percent_modifier, action_id)
+	entity_owner.heal.direct_percent(_target, percent, percent_modifier, action_id)
 	print("DEBUG: heal_percent called - Target: ", _target.entity_name, " | Percent: ", percent, "% | Modifier: ", Utils.PercentModifier.keys()[percent_modifier])
 
 
@@ -277,7 +277,7 @@ func _on_inflict_condition_button_pressed() -> void:
 	var duration: float = 5.0 if parts.size() < 2 else parts[1].strip_edges().to_float()
 	var action_id: StringName = &"test_inflict_condition"
 
-	entity_owner.inflict_condition_stacks(_target, stacks_number, stack_type, action_id, duration)
+	entity_owner.add_stack_sender.inflict_condition_stacks(_target, stacks_number, stack_type, action_id, duration)
 	print("DEBUG: inflict_condition_stacks called - Target: ", _target.entity_name, " | Type: ", Alteration.Type.keys()[stack_type], " | Stacks: ", stacks_number, " | Duration: ", duration)
 
 
@@ -296,7 +296,7 @@ func _on_cleanse_button_pressed() -> void:
 	var value: float = cleanse_text.to_float()
 	var action_id: StringName = &"test_cleanse"
 	
-	entity_owner.cleanse(_target, value, action_id)
+	entity_owner.remove_stack_sender.cleanse(_target, value, action_id)
 	print("DEBUG: cleanse called - Target: ", _target.entity_name, " | Value: ", value)
 
 
@@ -315,7 +315,7 @@ func _on_dispell_button_pressed() -> void:
 	var value: float = dispell_text.to_float()
 	var action_id: StringName = &"test_dispell"
 	
-	entity_owner.dispell(_target, value, action_id)
+	entity_owner.remove_stack_sender.dispell(_target, value, action_id)
 	print("DEBUG: dispell called - Target: ", _target.entity_name, " | Value: ", value)
 
 
@@ -360,7 +360,7 @@ func _on_projectile_attack_button_pressed() -> void:
 		var bounce_count: int = bounce_text.to_int() if not bounce_text.is_empty() else 0
 		projectile_stats.bounces_remaining = bounce_count
 		
-		entity_owner.projectile_attack(_target, projectile_type, projectile_spawn, projectile_stats, false)
+		entity_owner.projectile_sender.projectile_attack(_target, projectile_type, projectile_spawn, projectile_stats, false)
 		print("DEBUG: projectile_attack called - Target: ", _target.entity_name, " | Type: ", Projectile.Type.keys()[projectile_type])
 
 
@@ -489,7 +489,7 @@ func _on_cast_spell_button_pressed() -> void:
 			spell_modifier[Spell.ChainLightningModifier.BOUNCE_RANGE] = _spell_param3_edit.text.to_float()
 			spell_modifier[Spell.ChainLightningModifier.DAMAGE_DECAY_PERCENT] = _spell_param4_edit.text.to_float()
 	
-	entity_owner.cast_spell(_target, spell_type, spell_modifier)
+	entity_owner.spell_sender.cast_spell(_target, spell_type, spell_modifier)
 	print("DEBUG: cast_spell called - Target: ", _target.entity_name, " | Spell: ", Spell.Type.keys()[spell_type], " | Modifiers: ", spell_modifier)
 
 
@@ -774,7 +774,7 @@ func _on_summon_entity_button_pressed() -> void:
 				entity_modifier[DeflectionShield.Modifier.BLOCKED_PROJECTILES] = int(edits[0].text.to_float())
 				entity_modifier[DeflectionShield.Modifier.SHIELD_PER_BLOCK] = edits[1].text.to_float()
 
-		entity_owner.summon_entity(entity_type, spawn_config, entity_modifier)
+		entity_owner.summon_sender.summon_entity(entity_type, spawn_config, entity_modifier)
 		print("DEBUG: summon_entity called - Type: ", Entity.EntityType.keys()[entity_type],
 			" | Spawn: ", SpawnLocationConfig.LocationType.keys()[spawn_type],
 			" | Modifiers: ", entity_modifier)
@@ -786,7 +786,7 @@ func _on_auto_attack_button_pressed() -> void:
 		return
 	
 	_refresh_target()
-	entity_owner.auto_attack(_target)
+	entity_owner.auto_attack_sender.execute_auto_attack(_target)
 	print("DEBUG: auto_attack called")
 
 
@@ -806,7 +806,7 @@ func _on_inflict_status_button_pressed() -> void:
 	var status_duration: float = status_text.to_float()
 	var action_id: StringName = &"test_inflict_status"
 
-	entity_owner.inflict_status(_target, status_type, status_duration, action_id)
+	entity_owner.status_sender.inflict_status(_target, status_type, status_duration, action_id)
 	print("DEBUG: inflict_status called - Target: ", _target.entity_name, " | Type: ", Alteration.Type.keys()[status_type], " | Duration: ", status_duration)
 
 

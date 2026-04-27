@@ -16,7 +16,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if action_type != Utils.ActionType.UTILITY_HEAL: return
 		if target == null or not is_instance_valid(target) or target.is_dead(): return
 		if Utils.is_randomize_modifier_active(chance):
-			ctx.hero.cleanse(target, amount, &"Warm Aura")
+			ctx.hero.remove_stack_sender.cleanse(target, amount, &"Warm Aura")
 
 	ctx.battle_callbacks.register_battle_start(&"Warm Aura", func() -> void:
 		if not ctx.hero.action_done.is_connected(_on_action_done):

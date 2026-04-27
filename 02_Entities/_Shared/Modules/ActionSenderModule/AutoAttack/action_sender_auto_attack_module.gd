@@ -258,7 +258,7 @@ func _execute_ranged_impact() -> void:
 	var spawn_node: Node3D = _active_attack_data.get(ActiveAttackVar.SPAWN_NODE)
 	var stats: ProjectileStats = _active_attack_data.get(ActiveAttackVar.STATS)
 
-	_owner.projectile_attack(
+	_owner.projectile_sender.projectile_attack(
 		target,
 		projectile_type,
 		spawn_node,
@@ -321,7 +321,7 @@ func _prepare_projectile_stats() -> ProjectileStats:
 		var damage: float = (_owner.stats.attack_damage + add) * (mul / 100.0)
 		var damage_done: float = 0
 		if hit_source and hit_target:
-			damage_done = hit_source.direct_damage(hit_target, damage, Utils.ActionType.DAMAGE_PHYSICAL, &"auto_attack")
+			damage_done = hit_source.damage.direct(hit_target, damage, Utils.ActionType.DAMAGE_PHYSICAL, &"auto_attack")
 		
 		for additional_callback in additional_callbacks:
 			additional_callback.call({

@@ -24,7 +24,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		var target: Entity = cb_vars[ActionModifier.VarType.TARGET]
 		if stack_type != Alteration.Type.POISON: return
 		if Utils.is_randomize_modifier_active(chance, ctx.hero.battle_id):
-			ctx.hero.inflict_condition_stacks(target, ignite_stacks, Alteration.Type.IGNITE, &"Hot Pot")
+			ctx.hero.add_stack_sender.inflict_condition_stacks(target, ignite_stacks, Alteration.Type.IGNITE, &"Hot Pot")
 	ctx.action_modifiers.register_modifier(modifier)
 
 

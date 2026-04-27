@@ -20,7 +20,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		var damage_dealt: float = cb_vars.get(AutoAttackModifier.VarType.DAMAGE, 0)
 		var ignite_stacks: float = damage_dealt * (percent / 100.0)
 		if ignite_stacks > 0:
-			ctx.hero.inflict_condition_stacks(target, ignite_stacks, Alteration.Type.IGNITE, &"Scorching Blade")
+			ctx.hero.add_stack_sender.inflict_condition_stacks(target, ignite_stacks, Alteration.Type.IGNITE, &"Scorching Blade")
 
 	ctx.battle_callbacks.register_battle_start(&"Scorching Blade", func() -> void:
 		ctx.auto_attack_modifiers.register_modifier(aa_mod)

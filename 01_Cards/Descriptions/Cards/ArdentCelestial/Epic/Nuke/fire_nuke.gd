@@ -13,7 +13,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	ctx.hero.periodic_timer_registry.register_oneshot(0.2, func() -> void:
 		var targets: Array[Entity] = ctx.hero.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ENEMIES)
 		for target: Entity in targets:
-			ctx.hero.inflict_condition_stacks(target, stacks, Alteration.Type.IGNITE, &"Nuke")
+			ctx.hero.add_stack_sender.inflict_condition_stacks(target, stacks, Alteration.Type.IGNITE, &"Nuke")
 	)
 
 

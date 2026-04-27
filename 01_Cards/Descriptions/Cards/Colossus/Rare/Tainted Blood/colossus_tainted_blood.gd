@@ -56,7 +56,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if is_instance_valid(_orb_visual):
 			_orb_visual.launch_projectile(target, is_poison)
 
-		ctx.hero.inflict_condition_stacks(target, stacks, stack_type, &"Tainted Blood")
+		ctx.hero.add_stack_sender.inflict_condition_stacks(target, stacks, stack_type, &"Tainted Blood")
 	)
 
 

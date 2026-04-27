@@ -20,7 +20,7 @@ func inflict_condition_stacks(target: Entity, value: float, stack_type: Alterati
 	value = modifiers_data[ActionModifier.VarType.STACK_VALUE]
 	duration = modifiers_data[ActionModifier.VarType.DURATION]
 
-	var stacks_inflicted: float = target.take_condition_stacks(value, stack_type, crit_data["is_critical"], action_id, _owner, duration)
+	var stacks_inflicted: float = target.add_stack_receiver.take_condition_stacks(value, stack_type, crit_data["is_critical"], action_id, _owner, duration)
 
 	_consume_after_action_modifiers(Utils.ActionCategory.STACK, {
 		ActionModifier.VarType.STACK_VALUE: stacks_inflicted,

@@ -53,7 +53,7 @@ var _corruption_charges: int = 0
 #endregion
 
 #region ============================== Constants ==============================
-const SUPER_STRIKE_ON_ATTACK_SCENE: PackedScene = preload("res://Entities/Heroes/DarkKnight/VFX/super_strike.tscn")
+const SUPER_STRIKE_ON_ATTACK_SCENE: PackedScene = preload("res://02_Entities/Heroes/DarkKnight/VFX/super_strike.tscn")
 #endregion
 
 const ON_HIT_EFFECT_SCENE: PackedScene = preload("res://VFX/VFX_3D/VFX/Scenes/VFX_Hit_dark.tscn")

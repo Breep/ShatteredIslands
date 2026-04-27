@@ -14,7 +14,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if not cb_vars.has(AutoAttackModifier.VarType.TARGET): return
 		var target: Entity = cb_vars[AutoAttackModifier.VarType.TARGET]
 		if not is_instance_valid(target) or target.is_queued_for_deletion(): return
-		ctx.hero.summon_entity(Entity.EntityType.CHICKEN_EGG, SpawnLocationConfig.create_entity_relative(target, 1), {})
+		ctx.hero.summon_sender.summon_entity(Entity.EntityType.CHICKEN_EGG, SpawnLocationConfig.create_entity_relative(target, 1), {})
 	ctx.hero.auto_attack_modifier_registry.register_modifier(aa_mod)
 
 func get_description(cardlvl: int) -> String:

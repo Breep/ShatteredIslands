@@ -123,7 +123,7 @@ func _start_passive() -> void:
 
 	if _trex_gauge >= ANCESTRAL_GAUCHE_THRESHOLD:
 		var spawn_loc := SpawnLocationConfig.create_arena_center()
-		_owner.summon_entity(Entity.EntityType.TREX, spawn_loc, {
+		_owner.summon_sender.summon_entity(Entity.EntityType.TREX, spawn_loc, {
 			TRex.Modifier.PRIMAL_SHAKE_PERIOD: 8,
 			TRex.Modifier.PRIMAL_SHAKE_NUMBER: 2,
 			TRex.Modifier.HP_BONUS: 1000
@@ -233,7 +233,7 @@ func _spawn_n_chickens(chicken_number: int) -> void:
 ## Spawns a minimal egg. The SUMMON ActionModifier injects base stats, hatch_modifiers, and gifted roll.
 func _spawn_chicken() -> void:
 	var spawn_location_config := SpawnLocationConfig.create_random_arena()
-	_owner.summon_entity(Entity.EntityType.CHICKEN_EGG, spawn_location_config, {
+	_owner.summon_sender.summon_entity(Entity.EntityType.CHICKEN_EGG, spawn_location_config, {
 		ChickenEgg.Modifier.HATCH_TIME: EGG_HATCH_TIME,
 	})
 
@@ -242,7 +242,7 @@ func _battle_start_chicken_spawn() -> void:
 	if _chicken_lord_stats.spawn_trex_on_start:
 		for i in P_START_CHICKENS[level]:
 			var spawn_loc := SpawnLocationConfig.create_random_arena()
-			_owner.summon_entity(Entity.EntityType.TREX, spawn_loc, {
+			_owner.summon_sender.summon_entity(Entity.EntityType.TREX, spawn_loc, {
 				TRex.Modifier.PRIMAL_SHAKE_PERIOD: 8,
 				TRex.Modifier.PRIMAL_SHAKE_NUMBER: 2,
 				TRex.Modifier.HP_BONUS: 1000

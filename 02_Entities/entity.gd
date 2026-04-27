@@ -21,7 +21,6 @@ signal action_overhealed(target: Entity, amount: float)
 signal damage_taken(damage: float, damage_type: Utils.ActionType, is_critical: bool, blocked_by_armor: bool)
 @warning_ignore("unused_signal")
 signal heal_taken(heal_amount: float, is_critical: bool)
-signal spell_casted(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary)
 @warning_ignore("unused_signal")
 signal stack_taken(stack_type: Alteration.Type, stack_number: float, is_critical: bool)
 @warning_ignore("unused_signal")
@@ -103,6 +102,21 @@ var spawn_manager: SpawnManager:
 var periodic_timer_registry: PeriodicTimerRegistry
 var battle_callback_registry: BattleCallbackRegistry
 var death_modifiers_registry: DeathModifiersRegistry
+
+# Component-based action modules (publicly accessible — call directly, no facades).
+# Damage and Heal are fused (sender + receiver). Others remain split for now.
+var damage: DamageModule
+var heal: HealModule
+var add_stack_sender: ActionSenderAddStackModule
+var remove_stack_sender: ActionSenderRemoveStackModule
+var projectile_sender: ActionSenderProjectileModule
+var spell_sender: ActionSenderSpellModule
+var summon_sender: ActionSenderSummonModule
+var auto_attack_sender: ActionSenderAutoAttackModule
+var status_sender: ActionSenderStatusModule
+var add_stack_receiver: ActionReceiverAddStackModule
+var remove_stack_receiver: ActionReceiverRemoveStackModule
+var status_receiver: ActionReceiverStatusModule
 #endregion
 
 #region ============================== Private variables ==============================
@@ -110,25 +124,6 @@ var _base_stats: EntityStats # Private, use base_stats property to access
 
 var _movement_module: MovementModule # Optional, can be null
 var _auto_attack_periodic_module: AutoAttackPeriodicModule # Optional, can be null
-
-# Action Senders
-var _damage_sender: ActionSenderDamageModule
-var _heal_sender: ActionSenderHealModule
-var _add_stack_sender: ActionSenderAddStackModule
-var _remove_stack_sender: ActionSenderRemoveStackModule
-var _projectile_sender: ActionSenderProjectileModule
-var _spell_sender: ActionSenderSpellModule
-var _summon_sender: ActionSenderSummonModule
-var _auto_attack_sender: ActionSenderAutoAttackModule
-
-# Action Receivers
-var _damage_receiver: ActionReceiverDamageModule
-var _heal_receiver: ActionReceiverHealModule
-var _add_stack_receiver: ActionReceiverAddStackModule
-var _remove_stack_receiver: ActionReceiverRemoveStackModule
-var _status_receiver: ActionReceiverStatusModule
-var _status_sender: ActionSenderStatusModule
-
 var _label_popup_module: LabelPopupModule
 
 # Spawn system
@@ -150,8 +145,8 @@ var _spawn_ticks_remaining: int = -1
 @export var _auto_loaded_modules: Array[Module.ModuleType] = [
 	Module.ModuleType.TARGET,
 	Module.ModuleType.ALTERATIONS,
-	Module.ModuleType.ACTION_SENDER_DAMAGE,
-	Module.ModuleType.ACTION_SENDER_HEAL,
+	Module.ModuleType.DAMAGE,
+	Module.ModuleType.HEAL,
 	Module.ModuleType.ACTION_SENDER_ADD_STACK,
 	Module.ModuleType.ACTION_SENDER_REMOVE_STACK,
 	Module.ModuleType.ACTION_SENDER_PROJECTILE,
@@ -159,8 +154,6 @@ var _spawn_ticks_remaining: int = -1
 	Module.ModuleType.ACTION_SENDER_SUMMON,
 	Module.ModuleType.ACTION_SENDER_AUTO_ATTACK,
 	Module.ModuleType.ACTION_SENDER_STATUS,
-	Module.ModuleType.ACTION_RECEIVER_DAMAGE,
-	Module.ModuleType.ACTION_RECEIVER_HEAL,
 	Module.ModuleType.ACTION_RECEIVER_ADD_STACK,
 	Module.ModuleType.ACTION_RECEIVER_REMOVE_STACK,
 	Module.ModuleType.ACTION_RECEIVER_STATUS,
@@ -232,7 +225,7 @@ func _init() -> void:
 	# Stats
 	stats = EntityStats.new()
 	_base_stats = EntityStats.new()
-	
+
 	# Default Modifier Registries
 	auto_attack_modifier_registry = AutoAttackModifierRegistry.new()
 	action_modifiers_registry = ActionModifiersRegistry.new()
@@ -248,16 +241,16 @@ func _enter_tree() -> void:
 		_base_stats.reset_from_self()
 		Verbose.debug("Entity [" + entity_name + "] using custom_base_stats", Verbose.Category.ENTITY)
 	stat_modifiers_registry = EntityStatModifiersRegistry.new(_base_stats, stats)
-	
+
 	# Auto-load modules from the _auto_loaded_modules list
 	_auto_load_modules()
-	
+
 	periodic_timer_registry = PeriodicTimerRegistry.new()
 	periodic_timer_registry.name = "PeriodicTimerRegistry"
 	add_child(periodic_timer_registry)
 
 	battle_callback_registry = BattleCallbackRegistry.new()
-	
+
 	_is_targetable = false # Prevent targeting during spawn
 
 
@@ -265,26 +258,26 @@ func _ready() -> void:
 	# Connect to status signals
 	if alterations_module != null:
 		alterations_module.stunned_changed.connect(_on_stunned_changed)
-	
+
 	Verbose.trace("Entity [" + entity_name + "_" + str(uid) + "] ready", Verbose.Category.ENTITY)
 
 	fighting_state_changed.connect(_on_fighting_state_changed)
 	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)
-	
+
 	stats.health_changed.connect(_on_stats_health_changed)
 	_on_stats_health_changed(stats.health)
 	died.connect(_on_died)
 	resurrected.connect(_on_resurrected)
-	
+
 	stats.scale_changed.connect(_on_stats_scale_changed)
 	_on_stats_scale_changed(stats.scale)
-	
+
 	# TODO CHECK THIS ??
 	if _initial_fighting_state_from_context != FightingState.UNDEF:
 		_original_fighting_state = _initial_fighting_state_from_context
 	else:
 		_original_fighting_state = fighting_state if fighting_state != FightingState.UNDEF else FightingState.IDLE
-	
+
 	input_event.connect(_on_input_event)
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
@@ -325,7 +318,7 @@ func get_collision_center() -> Vector3:
 				# Return the global position of the collision shape
 				# This accounts for the shape's offset from the entity's pivot
 				return collision_shape.global_position
-	
+
 	# Fallback to global position if no collision shape found
 	return global_position
 
@@ -366,17 +359,17 @@ func apply_context(context: EntityContext) -> void:
 	_initial_fighting_state_from_context = context.fighting_state
 	_spawn_manager = context.spawn_manager
 	_arena_zone_manager = context.arena_zone_manager
-	
+
 	# Connect all sender modules to managers
 	var senders: Array[ActionSenderModule] = [
-		_damage_sender, _heal_sender, _add_stack_sender, _remove_stack_sender,
-		_projectile_sender, _spell_sender, _summon_sender, _auto_attack_sender
+		damage, heal, add_stack_sender, remove_stack_sender,
+		projectile_sender, spell_sender, summon_sender, auto_attack_sender
 	]
 	for module in senders:
 		if module == null: continue
 		if _spawn_manager != null: module.connect_to_spawn_manager(_spawn_manager)
 		if _arena_zone_manager != null: module.connect_to_arena_zone_manager(_arena_zone_manager)
-	
+
 	Verbose.debug("Entity [" + entity_name + "] received fighting_state [" + str(FightingState.keys()[context.fighting_state]) + "] from context", Verbose.Category.ENTITY)
 
 
@@ -385,125 +378,30 @@ func connect_to_fighting_area(fighting_area_ref: FightingArea) -> void:
 	if fighting_area_ref == null:
 		Verbose.error("Trying to connect a null fighting area to an Entity", Verbose.Category.ENTITY)
 		return
-	
+
 	_spawn_manager = fighting_area_ref.spawn_manager
-	if _projectile_sender != null:
-		_projectile_sender.connect_to_spawn_manager(fighting_area_ref.spawn_manager)
-	if _spell_sender != null:
-		_spell_sender.connect_to_spawn_manager(fighting_area_ref.spawn_manager)
-	if _summon_sender != null:
-		_summon_sender.connect_to_spawn_manager(fighting_area_ref.spawn_manager)
-		_summon_sender.connect_to_arena_zone_manager(fighting_area_ref.arena_zone_manager)
+	if projectile_sender != null:
+		projectile_sender.connect_to_spawn_manager(fighting_area_ref.spawn_manager)
+	if spell_sender != null:
+		spell_sender.connect_to_spawn_manager(fighting_area_ref.spawn_manager)
+	if summon_sender != null:
+		summon_sender.connect_to_spawn_manager(fighting_area_ref.spawn_manager)
+		summon_sender.connect_to_arena_zone_manager(fighting_area_ref.arena_zone_manager)
 	if target_module != null:
 		target_module.connect_to_spawn_manager(fighting_area_ref.spawn_manager)
 #endregion
 
-#region ============================== Action Senders ==============================
-func direct_damage(target: Entity, damage: float, damage_type: Utils.ActionType, action_id: StringName) -> float:
-	return _damage_sender.direct_damage(target, damage, damage_type, action_id) if _damage_sender != null else 0.0
 
-func direct_damage_percent(target: Entity, damage_percent: float, damage_type: Utils.ActionType, percent_modifier: Utils.PercentModifier, action_id: StringName) -> float:
-	return _damage_sender.direct_damage_percent(target, damage_percent, damage_type, percent_modifier, action_id) if _damage_sender != null else 0.0
-
-func auto_attack(target: Entity) -> bool:
-	return _auto_attack_sender.execute_auto_attack(target) if _auto_attack_sender != null else false
-
-func projectile_attack(target: Entity, projectile_type: Projectile.Type, projectile_spawn: Node3D, projectile_stats: ProjectileStats, is_auto_attack: bool = false) -> void:
-	if _projectile_sender == null: return
-	_projectile_sender.projectile_attack(target, projectile_type, projectile_spawn, projectile_stats, is_auto_attack)
-
-func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary = {}) -> void:
-	if _spell_sender == null: return
-	_spell_sender.cast_spell(target, spell_type, spell_modifier)
-	spell_casted.emit(target, spell_type, spell_modifier)
-
+#region ============================== Misc ==============================
 func cast_ultimate() -> void:
 	printerr("Entity: cast_ultimate() called but not implemented [", get_path(), "]")
 
-func heal(target: Entity, heal_amount: float, action_id: StringName) -> float:
-	return _heal_sender.heal(target, heal_amount, action_id) if _heal_sender != null else 0.0
 
-func heal_percent(target: Entity, percent: float, percent_modifier: Utils.PercentModifier, action_id: StringName) -> float:
-	return _heal_sender.heal_percent(target, percent, percent_modifier, action_id) if _heal_sender != null else 0.0
-
-func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: Alteration.Type, action_id: StringName, duration: float = 5.0) -> float:
-	return _add_stack_sender.inflict_condition_stacks(target, stacks_number, stack_type, action_id, duration) if _add_stack_sender != null else 0.0
-
-func summon_entity(entity_type: EntityType, spawn_config: SpawnLocationConfig, entity_modifier: Dictionary) -> void:
-	if _summon_sender == null: return
-	_summon_sender.summon_entity(entity_type, spawn_config, entity_modifier)
-
-func cleanse(target: Entity, value: float, action_id: StringName) -> float:
-	return _remove_stack_sender.cleanse(target, value, action_id) if _remove_stack_sender != null else 0.0
-
-func dispell(target: Entity, value: float, action_id: StringName) -> float:
-	return _remove_stack_sender.dispell(target, value, action_id) if _remove_stack_sender != null else 0.0
-
-func inflict_status(target: Entity, status_type: Alteration.Type, duration: float, action_id: StringName) -> float:
-	return _status_sender.inflict_status(target, status_type, duration, action_id) if _status_sender != null else 0.0
-
-## Unified Alteration API (rework): route a stackable alteration inflict.
-func inflict_alteration_stacks(target: Entity, stacks_number: float, stack_type: Alteration.Type, action_id: StringName, duration: float = 5.0) -> float:
-	return inflict_condition_stacks(target, stacks_number, stack_type, action_id, duration)
-
-## Unified Alteration API (rework): route a timed (non-stackable) alteration.
-func inflict_timed_alteration(target: Entity, status_type: Alteration.Type, duration: float, action_id: StringName) -> float:
-	return inflict_status(target, status_type, duration, action_id)
-#endregion
-
-
-#region ============================== Action Receivers ==============================
-func take_damage(damage: float, damage_type: Utils.ActionType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
-	return _damage_receiver.take_damage(damage, damage_type, is_critical, action_id, source) if _damage_receiver != null else 0.0
-
-func take_damage_percent(percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.ActionType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
-	return _damage_receiver.take_damage_percent(percent, percent_modifier, damage_type, is_critical, action_id, source) if _damage_receiver != null else 0.0
-
-func take_condition_stacks(stacks_number: float, stack_type: Alteration.Type, is_critical: bool, action_id: StringName, source: Entity = null, duration: float = 5.0) -> float:
-	return _add_stack_receiver.take_condition_stacks(stacks_number, stack_type, is_critical, action_id, source, duration) if _add_stack_receiver != null else 0.0
-
-func take_heal(heal_amount: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
-	return _heal_receiver.take_heal(heal_amount, is_critical, action_id, source) if _heal_receiver != null else 0.0
-
-func take_cleanse(value: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
-	return _remove_stack_receiver.take_cleanse(value, is_critical, action_id, source) if _remove_stack_receiver != null else 0.0
-
-func take_dispell(value: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
-	return _remove_stack_receiver.take_dispell(value, is_critical, action_id, source) if _remove_stack_receiver != null else 0.0
-
-func take_status(status_type: Alteration.Type, duration: float, action_id: StringName, source: Entity = null) -> float:
-	return _status_receiver.take_status(status_type, duration, action_id, source) if _status_receiver != null else 0.0
-
-## Unified Alteration API (rework): receive a stackable alteration.
-func take_alteration_stacks(stacks_number: float, stack_type: Alteration.Type, is_critical: bool, action_id: StringName, source: Entity = null, duration: float = 5.0) -> float:
-	return take_condition_stacks(stacks_number, stack_type, is_critical, action_id, source, duration)
-
-## Unified Alteration API (rework): receive a timed (non-stackable) alteration.
-func take_timed_alteration(status_type: Alteration.Type, duration: float, action_id: StringName, source: Entity = null) -> float:
-	return take_status(status_type, duration, action_id, source)
-#endregion
-
-
-#region ============================== Status Checks ==============================
-func is_stunned() -> bool:
-	return alterations_module.has_timed(Alteration.Type.STUN) if alterations_module != null else false
-
-func is_silenced() -> bool:
-	return alterations_module.has_timed(Alteration.Type.SILENCE) if alterations_module != null else false
-
-func is_invulnerable() -> bool:
-	return alterations_module.has_state(Alteration.Type.INVULNERABLE) if alterations_module != null else false
-
-func has_status(status_type: Alteration.Type) -> bool:
-	return alterations_module.has_status(status_type) if alterations_module != null else false
-#endregion
-
-#region ============================== Context ==============================
 func resurrect(hp_percent: float) -> void:
 	if life_state != LifeState.DEAD:
 		Verbose.error("Entity [" + entity_name + "] try to resurrect while not dead.", Verbose.Category.ENTITY)
 		return
-	
+
 	stats.health = stats.health_max * (hp_percent / 100)
 	life_state = LifeState.ALIVE
 	if target_module != null: target_module.start()
@@ -519,11 +417,11 @@ func resurrect(hp_percent: float) -> void:
 func _start_spawn() -> void:
 	fighting_state = FightingState.SPAWNING
 	Verbose.debug("Entity [" + entity_name + "] starting spawn", Verbose.Category.ENTITY)
-	
+
 	if skip_spawn_animation:
 		_complete_spawn()
 		return
-	
+
 	_spawn_ticks_remaining = int(spawn_duration * TICKS_PER_SECOND)
 	_play_spawn_animation()
 
@@ -560,46 +458,44 @@ func _auto_load_modules() -> void:
 				if _spawn_manager != null: target_module.connect_to_spawn_manager(_spawn_manager)
 			Module.ModuleType.ALTERATIONS: alterations_module = module
 			Module.ModuleType.MOVEMENT: _movement_module = module
-			Module.ModuleType.ACTION_SENDER_DAMAGE: _damage_sender = module
-			Module.ModuleType.ACTION_SENDER_HEAL: _heal_sender = module
-			Module.ModuleType.ACTION_SENDER_ADD_STACK: _add_stack_sender = module
-			Module.ModuleType.ACTION_SENDER_REMOVE_STACK: _remove_stack_sender = module
+			Module.ModuleType.DAMAGE: damage = module
+			Module.ModuleType.HEAL: heal = module
+			Module.ModuleType.ACTION_SENDER_ADD_STACK: add_stack_sender = module
+			Module.ModuleType.ACTION_SENDER_REMOVE_STACK: remove_stack_sender = module
 			Module.ModuleType.ACTION_SENDER_PROJECTILE:
-				_projectile_sender = module
-				if _spawn_manager != null: _projectile_sender.connect_to_spawn_manager(_spawn_manager)
+				projectile_sender = module
+				if _spawn_manager != null: projectile_sender.connect_to_spawn_manager(_spawn_manager)
 			Module.ModuleType.ACTION_SENDER_SPELL:
-				_spell_sender = module
-				if _spawn_manager != null: _spell_sender.connect_to_spawn_manager(_spawn_manager)
+				spell_sender = module
+				if _spawn_manager != null: spell_sender.connect_to_spawn_manager(_spawn_manager)
 			Module.ModuleType.ACTION_SENDER_SUMMON:
-				_summon_sender = module
-				if _spawn_manager != null: _summon_sender.connect_to_spawn_manager(_spawn_manager)
-				if _arena_zone_manager != null: _summon_sender.connect_to_arena_zone_manager(_arena_zone_manager)
-			Module.ModuleType.ACTION_SENDER_AUTO_ATTACK: _auto_attack_sender = module
-			Module.ModuleType.ACTION_RECEIVER_DAMAGE: _damage_receiver = module
-			Module.ModuleType.ACTION_RECEIVER_HEAL: _heal_receiver = module
-			Module.ModuleType.ACTION_RECEIVER_ADD_STACK: _add_stack_receiver = module
-			Module.ModuleType.ACTION_RECEIVER_REMOVE_STACK: _remove_stack_receiver = module
-			Module.ModuleType.ACTION_RECEIVER_STATUS: _status_receiver = module
-			Module.ModuleType.ACTION_SENDER_STATUS: _status_sender = module
+				summon_sender = module
+				if _spawn_manager != null: summon_sender.connect_to_spawn_manager(_spawn_manager)
+				if _arena_zone_manager != null: summon_sender.connect_to_arena_zone_manager(_arena_zone_manager)
+			Module.ModuleType.ACTION_SENDER_AUTO_ATTACK: auto_attack_sender = module
+			Module.ModuleType.ACTION_RECEIVER_ADD_STACK: add_stack_receiver = module
+			Module.ModuleType.ACTION_RECEIVER_REMOVE_STACK: remove_stack_receiver = module
+			Module.ModuleType.ACTION_RECEIVER_STATUS: status_receiver = module
+			Module.ModuleType.ACTION_SENDER_STATUS: status_sender = module
 			Module.ModuleType.AUTO_ATTACK_PERIODIC_MODULE: _auto_attack_periodic_module = module
 			Module.ModuleType.LABEL_POPUP_MODULE: _label_popup_module = module
-		
+
 		add_child(module)
 
 
 func _connect_module_dependencies() -> void:
-	if _auto_attack_sender != null:
-		_auto_attack_sender.connect_modules(_movement_module, _animation_module)
-		_auto_attack_sender.set_auto_attack_spawn(_attack_spawn_marker)
-		_auto_attack_sender.set_projectile_type(_projectile_type)
-	
+	if auto_attack_sender != null:
+		auto_attack_sender.connect_modules(_movement_module, _animation_module)
+		auto_attack_sender.set_auto_attack_spawn(_attack_spawn_marker)
+		auto_attack_sender.set_projectile_type(_projectile_type)
+
 	# Connect periodic module with auto attack sender
-	if _auto_attack_periodic_module != null and _auto_attack_sender != null:
-		_auto_attack_periodic_module.connect_modules(_auto_attack_sender)
-	
+	if _auto_attack_periodic_module != null and auto_attack_sender != null:
+		_auto_attack_periodic_module.connect_modules(auto_attack_sender)
+
 	if _animation_module != null:
-		_animation_module.connect_modules(_auto_attack_sender)
-	
+		_animation_module.connect_modules(auto_attack_sender)
+
 	if _label_popup_module != null:
 		_label_popup_module.connect_marker(_health_bar_marker)
 #endregion
@@ -644,16 +540,16 @@ func _on_stats_scale_changed(new_scale: float) -> void:
 
 func _on_died() -> void:
 	Verbose.debug("Entity [" + entity_name + "] died", Verbose.Category.ENTITY)
-	
+
 	life_state = LifeState.DEAD # Set life state
-	
+
 	# Visual and module cleanup
 	if target_module != null: target_module.stop()
 	if alterations_module != null: alterations_module.stop()
 	if _movement_module != null: _movement_module.stop()
 	if _auto_attack_periodic_module != null and auto_attack_enabled: _auto_attack_periodic_module.stop()
 	if periodic_timer_registry != null: periodic_timer_registry.stop_all()
-	
+
 	for action_modifier in death_modifiers_registry.consume_all_modifiers():
 		if action_modifier.after_action_logic_callback.is_valid():
 			action_modifier.after_action_logic_callback.call({})
@@ -698,7 +594,7 @@ func _play_on_click_animation() -> void:
 	_click_tween.tween_property(_visual_3d, "scale", Vector3.ONE, 0.1)
 
 
-static var _selection_marker_scene: PackedScene = preload("res://Entities/_Shared/Misc/selection_marker.tscn")
+static var _selection_marker_scene: PackedScene = preload("res://02_Entities/_Shared/Misc/selection_marker.tscn")
 var _selection_marker_instance: Node3D = null
 var _is_selected: bool = false
 var _is_hovered: bool = false

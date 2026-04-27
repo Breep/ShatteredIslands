@@ -19,7 +19,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if Utils.is_randomize_modifier_active(chance, ctx.hero.battle_id):
 			var regen_amount: float = value * amount
 			if regen_amount > 0:
-				ctx.hero.inflict_condition_stacks(ctx.hero, regen_amount, Alteration.Type.REGEN, &"Rejuvenative Faith")
+				ctx.hero.add_stack_sender.inflict_condition_stacks(ctx.hero, regen_amount, Alteration.Type.REGEN, &"Rejuvenative Faith")
 
 	ctx.battle_callbacks.register_battle_start(&"Rejuvenative Faith", func() -> void:
 		if not ctx.hero.action_received.is_connected(_on_interaction):

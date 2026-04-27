@@ -15,7 +15,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	ctx.periodic_timers.register(&"Energy Barrier", period, func() -> void:
 		if ctx.hero == null or not is_instance_valid(ctx.hero):
 			return
-		ctx.hero.inflict_condition_stacks(ctx.hero, amount, Alteration.Type.SHIELD, &"Energy Barrier")
+		ctx.hero.add_stack_sender.inflict_condition_stacks(ctx.hero, amount, Alteration.Type.SHIELD, &"Energy Barrier")
 	)
 
 

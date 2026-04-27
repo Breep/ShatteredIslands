@@ -18,7 +18,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		var target_number: int = targets.size()
 		var poison_stacks: int = int(multiplier * float(target_number))
 		for target in targets:
-			ctx.hero.inflict_condition_stacks(target, poison_stacks, Alteration.Type.POISON, &"Tide of Corruption")
+			ctx.hero.add_stack_sender.inflict_condition_stacks(target, poison_stacks, Alteration.Type.POISON, &"Tide of Corruption")
 	)
 
 

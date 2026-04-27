@@ -19,7 +19,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if not is_instance_valid(target) or target.is_queued_for_deletion(): return
 		for i in stack_value:
 			if Utils.is_randomize_modifier_active(chance, ctx.hero.battle_id):
-				ctx.hero.summon_entity(Entity.EntityType.CHICKEN_EGG, SpawnLocationConfig.create_entity_relative(target, 2), {})
+				ctx.hero.summon_sender.summon_entity(Entity.EntityType.CHICKEN_EGG, SpawnLocationConfig.create_entity_relative(target, 2), {})
 	ctx.hero.action_modifiers_registry.register_modifier(mod)
 
 

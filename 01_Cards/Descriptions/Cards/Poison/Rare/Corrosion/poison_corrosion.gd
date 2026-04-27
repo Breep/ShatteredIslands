@@ -21,7 +21,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		var stack_type: Alteration.Type = cb_vars[ActionModifier.VarType.STACK_TYPE]
 		var target: Entity = cb_vars[ActionModifier.VarType.TARGET]
 		if stack_type != Alteration.Type.POISON: return
-		ctx.hero.dispell(target, buff_stacks, &"Corrosion")
+		ctx.hero.remove_stack_sender.dispell(target, buff_stacks, &"Corrosion")
 	ctx.action_modifiers.register_modifier(modifier)
 
 

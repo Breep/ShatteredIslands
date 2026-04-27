@@ -15,19 +15,19 @@ extends MarginContainer
 
 const RANK_ASSETS = {
 	StormCallerManager.Rank.D: {
-		"tex": preload("res://Entities/Heroes/_Shared/FamiliesManagers/StormCaller/RankViewer/RankVisual/D.png")
+		"tex": preload("res://02_Entities/Heroes/_Shared/FamiliesManagers/StormCaller/RankViewer/RankVisual/D.png")
 	},
 	StormCallerManager.Rank.C: {
-		"tex": preload("res://Entities/Heroes/_Shared/FamiliesManagers/StormCaller/RankViewer/RankVisual/C.png")
+		"tex": preload("res://02_Entities/Heroes/_Shared/FamiliesManagers/StormCaller/RankViewer/RankVisual/C.png")
 	},
 	StormCallerManager.Rank.B: {
-		"tex": preload("res://Entities/Heroes/_Shared/FamiliesManagers/StormCaller/RankViewer/RankVisual/B.png")
+		"tex": preload("res://02_Entities/Heroes/_Shared/FamiliesManagers/StormCaller/RankViewer/RankVisual/B.png")
 	},
 	StormCallerManager.Rank.A: {
-		"tex": preload("res://Entities/Heroes/_Shared/FamiliesManagers/StormCaller/RankViewer/RankVisual/A.png")
+		"tex": preload("res://02_Entities/Heroes/_Shared/FamiliesManagers/StormCaller/RankViewer/RankVisual/A.png")
 	},
 	StormCallerManager.Rank.S: {
-		"tex": preload("res://Entities/Heroes/_Shared/FamiliesManagers/StormCaller/RankViewer/RankVisual/S.png")
+		"tex": preload("res://02_Entities/Heroes/_Shared/FamiliesManagers/StormCaller/RankViewer/RankVisual/S.png")
 	}
 }
 

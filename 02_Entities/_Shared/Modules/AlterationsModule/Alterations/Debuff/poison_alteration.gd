@@ -14,7 +14,7 @@ func _init() -> void:
 	polarity = Polarity.DEBUFF
 	id = &"Poison"
 	display_color = Color.WEB_GREEN
-	icon = preload("res://Entities/_Shared/Modules//AlterationsModule/AlterationIcon/Icons/poison_icon.png")
+	icon = preload("res://02_Entities/_Shared/Modules//AlterationsModule/AlterationIcon/Icons/poison_icon.png")
 
 
 func process_tick() -> void:
@@ -22,4 +22,4 @@ func process_tick() -> void:
 	if _ticks_remaining > 0: return
 	_ticks_remaining = _INTERVAL_TICKS
 	if _stacks <= 0 or _owner == null: return
-	_owner.take_damage(_stacks, Utils.ActionType.DAMAGE_POISON, false, "Poison Periodic")
+	_owner.damage.take(_stacks, Utils.ActionType.DAMAGE_POISON, false, "Poison Periodic")

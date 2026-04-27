@@ -39,12 +39,12 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			if lost_hp > 0:
 				var heal_amount: float = lost_hp * (heal_percent / 100.0)
 				if heal_amount > 0:
-					ctx.hero.heal(ally, heal_amount, &"Luminescent Surge")
+					ctx.hero.heal.direct(ally, heal_amount, &"Luminescent Surge")
 
 			if max_hp > 0:
 				var hp_percent: float = (current_hp / max_hp) * 100.0
 				if hp_percent < hp_threshold and regen_amount > 0:
-					ctx.hero.inflict_condition_stacks(ally, regen_amount, Alteration.Type.REGEN, &"Luminescent Surge")
+					ctx.hero.add_stack_sender.inflict_condition_stacks(ally, regen_amount, Alteration.Type.REGEN, &"Luminescent Surge")
 	)
 
 

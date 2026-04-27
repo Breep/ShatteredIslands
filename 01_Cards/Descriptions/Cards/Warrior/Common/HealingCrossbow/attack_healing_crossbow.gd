@@ -20,7 +20,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if not Utils.is_randomize_modifier_active(chance, ctx.hero.battle_id): return
 		var target: Entity = ctx.hero.target_module.get_target(TargetModule.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
 		if target == null: return
-		ctx.hero.heal(target, heal, &"Healing Crossbow")
+		ctx.hero.heal.direct(target, heal, &"Healing Crossbow")
 	
 	ctx.battle_callbacks.register_battle_start(&"Healing Crossbow", func() -> void:
 		ctx.auto_attack_modifiers.register_modifier(aa_mod)

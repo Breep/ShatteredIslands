@@ -47,7 +47,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 					final_amount *= 0.5
 
 			if final_amount > 0:
-				ctx.hero.inflict_condition_stacks(target, final_amount, stack_type, &"Schrödinger's Storm")
+				ctx.hero.add_stack_sender.inflict_condition_stacks(target, final_amount, stack_type, &"Schrödinger's Storm")
 	)
 
 

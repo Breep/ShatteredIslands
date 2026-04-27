@@ -31,7 +31,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			FieldGenerator.Modifier.TARGET_COUNT: target_count,
 		}
 		var spawn_config := SpawnLocationConfig.create_entity_relative(ctx.hero, 2.0)
-		ctx.hero.summon_entity(Entity.EntityType.FIELD_GENERATOR, spawn_config, mods)
+		ctx.hero.summon_sender.summon_entity(Entity.EntityType.FIELD_GENERATOR, spawn_config, mods)
 
 	# Summon one at battle start
 	ctx.battle_callbacks.register_battle_start(&"Field Generator", func() -> void:

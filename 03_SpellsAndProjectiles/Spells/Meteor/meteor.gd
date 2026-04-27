@@ -67,9 +67,9 @@ func _on_deploy_timer_timeout() -> void:
 			var meteor_damage: float = _damage_flat #TODO: Add a direct_damage that can have flat and % ?
 			meteor_damage += (entity.stats.health_max * _damage_percent) / 100
 			if _owner != null:
-				_owner.direct_damage(entity, meteor_damage, Utils.ActionType.DAMAGE_MAGICAL, "Meteor")
+				_owner.damage.direct(entity, meteor_damage, Utils.ActionType.DAMAGE_MAGICAL, "Meteor")
 			else:
-				entity.take_damage(meteor_damage, Utils.ActionType.DAMAGE_MAGICAL, false, "Meteor")
+				entity.damage.take(meteor_damage, Utils.ActionType.DAMAGE_MAGICAL, false, "Meteor")
 	
 	# Do optional stuffs
 	for callback in _on_hit_callbacks:

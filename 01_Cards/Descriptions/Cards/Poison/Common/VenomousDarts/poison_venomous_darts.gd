@@ -19,7 +19,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		var target: Entity = cb_vars[ProjectileStats.VarType.TARGET]
 		if target == null or not is_instance_valid(target): return
 		var damage := 5 + float(target.alterations_module.poison_stacks) * multiplier
-		ctx.hero.direct_damage(target, damage, Utils.ActionType.DAMAGE_PHYSICAL, &"Venomous Darts")
+		ctx.hero.damage.direct(target, damage, Utils.ActionType.DAMAGE_PHYSICAL, &"Venomous Darts")
 	
 	ctx.periodic_timers.register(&"Venomous Darts", period, func() -> void:
 		for i in darts_number:
@@ -27,7 +27,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			if target == null: return
 			var projectile_stats := ProjectileStats.new()
 			projectile_stats.on_hit_callbacks.append(on_hit_callback)
-			ctx.hero.projectile_attack(target, Projectile.Type.VENOMOUS_DART, ctx.hero, projectile_stats)
+			ctx.hero.projectile_sender.projectile_attack(target, Projectile.Type.VENOMOUS_DART, ctx.hero, projectile_stats)
 	)
 
 

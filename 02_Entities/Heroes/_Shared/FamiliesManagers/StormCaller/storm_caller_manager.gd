@@ -113,7 +113,7 @@ func _call_the_lightning() -> void:
 	var rank_mult: float = RANK_VALUE_MULTIPLIERS.get(_current_rank, 1.0)
 	var final_percent: float = base_percent * rank_mult
 	var damage: float = _owner.stats.attack_damage * final_percent / 100.0
-	_owner.cast_spell(target, Spell.Type.LIGHTNING, {Spell.LightningModifier.DAMAGE: damage})
+	_owner.spell_sender.cast_spell(target, Spell.Type.LIGHTNING, {Spell.LightningModifier.DAMAGE: damage})
 
 	# Iterate on_lightning_callbacks registered by cards
 	for cb: Callable in _storm_caller_stats.on_lightning_callbacks:

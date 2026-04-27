@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dmo0v6rgolnqc"]
+
+[ext_resource type="Script" uid="uid://4wxnlrnk55fy" path="res://02_Entities/_Shared/Modules/DamageModule/damage_module.gd" id="1_j3v7r"]
+
+[node name="DamageModule" type="Node" unique_id=363642850]
+script = ExtResource("1_j3v7r")

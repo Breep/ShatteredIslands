@@ -22,11 +22,11 @@ func _ready() -> void:
 	global_position = _target.global_position
 	
 	if _source != null:
-		_source.direct_damage(_target, _damage / 2.0, Utils.ActionType.DAMAGE_PHYSICAL, "Lightning")
-		_source.direct_damage(_target, _damage / 2.0, Utils.ActionType.DAMAGE_MAGICAL, "Lightning")
+		_source.damage.direct(_target, _damage / 2.0, Utils.ActionType.DAMAGE_PHYSICAL, "Lightning")
+		_source.damage.direct(_target, _damage / 2.0, Utils.ActionType.DAMAGE_MAGICAL, "Lightning")
 	else:
-		_target.take_damage(_damage / 2.0, Utils.ActionType.DAMAGE_PHYSICAL, false, "Lightning")
-		_target.take_damage(_damage / 2.0, Utils.ActionType.DAMAGE_MAGICAL, false, "Lightning")
+		_target.damage.take(_damage / 2.0, Utils.ActionType.DAMAGE_PHYSICAL, false, "Lightning")
+		_target.damage.take(_damage / 2.0, Utils.ActionType.DAMAGE_MAGICAL, false, "Lightning")
 	
 	var tween := create_tween()
 	tween.tween_interval(LIFETIME)

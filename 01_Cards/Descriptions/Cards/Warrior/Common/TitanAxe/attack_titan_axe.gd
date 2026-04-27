@@ -34,7 +34,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		ctx.periodic_timers.register_oneshot(DEPLOY_TIME, func() -> void:
 			if not is_instance_valid(target): return
 			var bonus: float = target.stats.health_max * (hp_pct + (ctx.hero.stats.scale - 1) * scale_bonus / 100) / 100.0
-			ctx.hero.direct_damage(target, bonus, Utils.ActionType.DAMAGE_PHYSICAL, &"Titan Axe")
+			ctx.hero.damage.direct(target, bonus, Utils.ActionType.DAMAGE_PHYSICAL, &"Titan Axe")
 		)
 
 	ctx.battle_callbacks.register_battle_start(&"Titan Axe", func() -> void:

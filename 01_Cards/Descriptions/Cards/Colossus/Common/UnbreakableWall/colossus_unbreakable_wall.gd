@@ -9,7 +9,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		printerr("Unbreakable Wall: Wrong card_lvl: ", card_lvl)
 		return
 	
-	ctx.hero.inflict_status(ctx.hero, Alteration.Type.TAUNT, -1, &"UnbreakableWall")
+	ctx.hero.status_sender.inflict_status(ctx.hero, Alteration.Type.TAUNT, -1, &"UnbreakableWall")
 	var threshold: float = _base_hp_threshold_percent[card_lvl - 1]
 
 	var state := {&"triggered": false}

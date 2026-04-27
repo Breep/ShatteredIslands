@@ -46,7 +46,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 				Spell.ChainLightningModifier.DAMAGE_DECAY_PERCENT: 10.0,
 				"start_position": victim_pos
 			}
-			ctx.hero.cast_spell(furthest_enemy, Spell.Type.CHAIN_LIGHTNING, spell_modifiers)
+			ctx.hero.spell_sender.cast_spell(furthest_enemy, Spell.Type.CHAIN_LIGHTNING, spell_modifiers)
 	)
 
 

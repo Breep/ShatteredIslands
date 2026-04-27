@@ -54,7 +54,7 @@ func _on_owner_damage_taken(damage: float, damage_type: Utils.ActionType, is_cri
 
 
 func _on_owner_heal_taken(heal_amount: int, is_critical: bool) -> void:
-	var popup := LabelPopup.heal(heal_amount)
+	var popup := LabelPopup.heal.direct(heal_amount)
 	if is_critical:
 		popup.set_crit()
 	_spawn(popup)

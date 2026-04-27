@@ -1,19 +1,19 @@
 extends Node
 
 var HEROES: Dictionary[HeroDesc.HeroId, HeroDesc] = {
-	HeroDesc.HeroId.UNDEF: load("res://Entities/Heroes/Undef/undef.tres"),
-	HeroDesc.HeroId.DARK_KNIGHT: load("res://Entities/Heroes/DarkKnight/dark_knight.tres"),
-	HeroDesc.HeroId.TANK: load("res://Entities/Heroes/Tank/tank.tres"),
-	HeroDesc.HeroId.ASSASSIN: load("res://Entities/Heroes/Assassin/assassin.tres"),
-	HeroDesc.HeroId.MAGE: load("res://Entities/Heroes/Mage/mage.tres"),
+	HeroDesc.HeroId.UNDEF: load("res://02_Entities/Heroes/Undef/undef.tres"),
+	HeroDesc.HeroId.DARK_KNIGHT: load("res://02_Entities/Heroes/DarkKnight/dark_knight.tres"),
+	HeroDesc.HeroId.TANK: load("res://02_Entities/Heroes/Tank/tank.tres"),
+	HeroDesc.HeroId.ASSASSIN: load("res://02_Entities/Heroes/Assassin/assassin.tres"),
+	HeroDesc.HeroId.MAGE: load("res://02_Entities/Heroes/Mage/mage.tres"),
 }
 
 var HERO_SCENES: Dictionary[HeroDesc.HeroId, PackedScene] = {
-	HeroDesc.HeroId.UNDEF: load("res://Entities/Heroes/Undef/undef.tscn"),
-	HeroDesc.HeroId.DARK_KNIGHT: load("res://Entities/Heroes/DarkKnight/dark_knight.tscn"),
-	HeroDesc.HeroId.TANK: load("res://Entities/Heroes/Tank/tank.tscn"),
-	HeroDesc.HeroId.ASSASSIN: load("res://Entities/Heroes/Assassin/assassin.tscn"),
-	HeroDesc.HeroId.MAGE: load("res://Entities/Heroes/Mage/mage.tscn"),
+	HeroDesc.HeroId.UNDEF: load("res://02_Entities/Heroes/Undef/undef.tscn"),
+	HeroDesc.HeroId.DARK_KNIGHT: load("res://02_Entities/Heroes/DarkKnight/dark_knight.tscn"),
+	HeroDesc.HeroId.TANK: load("res://02_Entities/Heroes/Tank/tank.tscn"),
+	HeroDesc.HeroId.ASSASSIN: load("res://02_Entities/Heroes/Assassin/assassin.tscn"),
+	HeroDesc.HeroId.MAGE: load("res://02_Entities/Heroes/Mage/mage.tscn"),
 }
 
 var FAMILIES: Dictionary[Family.Type, Family] = {
@@ -29,40 +29,38 @@ var FAMILIES: Dictionary[Family.Type, Family] = {
 }
 
 var ENTITY_MODULE_SCENES: Dictionary[Module.ModuleType, PackedScene] = {
-	Module.ModuleType.MOVEMENT: load("res://Entities/_Shared/Modules//MovementModule/movement_module.tscn"),
-	Module.ModuleType.TARGET: load("res://Entities/_Shared/Modules//TargetModule/target_module.tscn"),
-	Module.ModuleType.ALTERATIONS: load("res://Entities/_Shared/Modules//AlterationsModule/alterations_module.tscn"),
-	Module.ModuleType.AUTO_ATTACK_PERIODIC_MODULE: load("res://Entities/_Shared/Modules//AutoAttackPeriodicModule/auto_attack_periodic_module.tscn"),
+	Module.ModuleType.MOVEMENT: load("res://02_Entities/_Shared/Modules//MovementModule/movement_module.tscn"),
+	Module.ModuleType.TARGET: load("res://02_Entities/_Shared/Modules//TargetModule/target_module.tscn"),
+	Module.ModuleType.ALTERATIONS: load("res://02_Entities/_Shared/Modules//AlterationsModule/alterations_module.tscn"),
+	Module.ModuleType.AUTO_ATTACK_PERIODIC_MODULE: load("res://02_Entities/_Shared/Modules//AutoAttackPeriodicModule/auto_attack_periodic_module.tscn"),
 	
-	Module.ModuleType.ACTION_SENDER_DAMAGE: load("res://Entities/_Shared/Modules//ActionSenderModule/Damage/action_sender_damage_module.tscn"),
-	Module.ModuleType.ACTION_SENDER_HEAL: load("res://Entities/_Shared/Modules//ActionSenderModule/Heal/action_sender_heal_module.tscn"),
-	Module.ModuleType.ACTION_SENDER_ADD_STACK: load("res://Entities/_Shared/Modules//ActionSenderModule/AddStack/action_sender_add_stack_module.tscn"),
-	Module.ModuleType.ACTION_SENDER_REMOVE_STACK: load("res://Entities/_Shared/Modules//ActionSenderModule/RemoveStack/action_sender_remove_stack_module.tscn"),
-	Module.ModuleType.ACTION_SENDER_PROJECTILE: load("res://Entities/_Shared/Modules//ActionSenderModule/Projectile/action_sender_projectile_module.tscn"),
-	Module.ModuleType.ACTION_SENDER_SPELL: load("res://Entities/_Shared/Modules//ActionSenderModule/Spell/action_sender_spell_module.tscn"),
-	Module.ModuleType.ACTION_SENDER_SUMMON: load("res://Entities/_Shared/Modules//ActionSenderModule/Summon/action_sender_summon_module.tscn"),
-	Module.ModuleType.ACTION_SENDER_AUTO_ATTACK: load("res://Entities/_Shared/Modules//ActionSenderModule/AutoAttack/action_sender_auto_attack_module.tscn"),
-	Module.ModuleType.ACTION_SENDER_STATUS: load("res://Entities/_Shared/Modules//ActionSenderModule/Status/action_sender_status_module.tscn"),
+	Module.ModuleType.DAMAGE: load("res://02_Entities/_Shared/Modules/DamageModule/damage_module.tscn"),
+	Module.ModuleType.HEAL: load("res://02_Entities/_Shared/Modules/HealModule/heal_module.tscn"),
+	Module.ModuleType.ACTION_SENDER_ADD_STACK: load("res://02_Entities/_Shared/Modules//ActionSenderModule/AddStack/action_sender_add_stack_module.tscn"),
+	Module.ModuleType.ACTION_SENDER_REMOVE_STACK: load("res://02_Entities/_Shared/Modules//ActionSenderModule/RemoveStack/action_sender_remove_stack_module.tscn"),
+	Module.ModuleType.ACTION_SENDER_PROJECTILE: load("res://02_Entities/_Shared/Modules//ActionSenderModule/Projectile/action_sender_projectile_module.tscn"),
+	Module.ModuleType.ACTION_SENDER_SPELL: load("res://02_Entities/_Shared/Modules//ActionSenderModule/Spell/action_sender_spell_module.tscn"),
+	Module.ModuleType.ACTION_SENDER_SUMMON: load("res://02_Entities/_Shared/Modules//ActionSenderModule/Summon/action_sender_summon_module.tscn"),
+	Module.ModuleType.ACTION_SENDER_AUTO_ATTACK: load("res://02_Entities/_Shared/Modules//ActionSenderModule/AutoAttack/action_sender_auto_attack_module.tscn"),
+	Module.ModuleType.ACTION_SENDER_STATUS: load("res://02_Entities/_Shared/Modules//ActionSenderModule/Status/action_sender_status_module.tscn"),
+
+	Module.ModuleType.ACTION_RECEIVER_ADD_STACK: load("res://02_Entities/_Shared/Modules//ActionReceiverModule/AddStack/action_receiver_add_stack_module.tscn"),
+	Module.ModuleType.ACTION_RECEIVER_REMOVE_STACK: load("res://02_Entities/_Shared/Modules//ActionReceiverModule/RemoveStack/action_receiver_remove_stack_module.tscn"),
+	Module.ModuleType.ACTION_RECEIVER_STATUS: load("res://02_Entities/_Shared/Modules//ActionReceiverModule/Status/action_receiver_status_module.tscn"),
 	
-	Module.ModuleType.ACTION_RECEIVER_DAMAGE: load("res://Entities/_Shared/Modules//ActionReceiverModule/Damage/action_receiver_damage_module.tscn"),
-	Module.ModuleType.ACTION_RECEIVER_HEAL: load("res://Entities/_Shared/Modules//ActionReceiverModule/Heal/action_receiver_heal_module.tscn"),
-	Module.ModuleType.ACTION_RECEIVER_ADD_STACK: load("res://Entities/_Shared/Modules//ActionReceiverModule/AddStack/action_receiver_add_stack_module.tscn"),
-	Module.ModuleType.ACTION_RECEIVER_REMOVE_STACK: load("res://Entities/_Shared/Modules//ActionReceiverModule/RemoveStack/action_receiver_remove_stack_module.tscn"),
-	Module.ModuleType.ACTION_RECEIVER_STATUS: load("res://Entities/_Shared/Modules//ActionReceiverModule/Status/action_receiver_status_module.tscn"),
-	
-	Module.ModuleType.LABEL_POPUP_MODULE: load("res://Entities/_Shared/Modules//PopupModule/label_popup_module.tscn")
+	Module.ModuleType.LABEL_POPUP_MODULE: load("res://02_Entities/_Shared/Modules//PopupModule/label_popup_module.tscn")
 }
 
 var FAMILY_MANAGER_SCENES: Dictionary[Family.Type, PackedScene] = {
-	Family.Type.ENGINEER: load("res://Entities/Heroes/_Shared/FamiliesManagers/Engineer/engineer_manager.tscn"),
-	Family.Type.ARDENT_CELESTIAL: load("res://Entities/Heroes/_Shared/FamiliesManagers/ArdentCelestial/ardent_celestial_manager.tscn"),
-	Family.Type.COLOSSUS: load("res://Entities/Heroes/_Shared/FamiliesManagers/Colossus/colossus_manager.tscn"),
-	Family.Type.POISON: load("res://Entities/Heroes/_Shared/FamiliesManagers/Poison/poison_manager.tscn"),
-	Family.Type.LIGHT: load("res://Entities/Heroes/_Shared/FamiliesManagers/Light/light_manager.tscn"),
-	Family.Type.STORM_CALLER: load("res://Entities/Heroes/_Shared/FamiliesManagers/StormCaller/storm_caller_manager.tscn"),
-	Family.Type.WARRIOR: load("res://Entities/Heroes/_Shared/FamiliesManagers/Warrior/warrior_manager.tscn"),
-	Family.Type.NECROSIS: load("res://Entities/Heroes/_Shared/FamiliesManagers/Necro/necro_manager.tscn"),
-	Family.Type.CHICKEN_LORD: load("res://Entities/Heroes/_Shared/FamiliesManagers/ChickenLord/chicken_lord_manager.tscn"),
+	Family.Type.ENGINEER: load("res://02_Entities/Heroes/_Shared/FamiliesManagers/Engineer/engineer_manager.tscn"),
+	Family.Type.ARDENT_CELESTIAL: load("res://02_Entities/Heroes/_Shared/FamiliesManagers/ArdentCelestial/ardent_celestial_manager.tscn"),
+	Family.Type.COLOSSUS: load("res://02_Entities/Heroes/_Shared/FamiliesManagers/Colossus/colossus_manager.tscn"),
+	Family.Type.POISON: load("res://02_Entities/Heroes/_Shared/FamiliesManagers/Poison/poison_manager.tscn"),
+	Family.Type.LIGHT: load("res://02_Entities/Heroes/_Shared/FamiliesManagers/Light/light_manager.tscn"),
+	Family.Type.STORM_CALLER: load("res://02_Entities/Heroes/_Shared/FamiliesManagers/StormCaller/storm_caller_manager.tscn"),
+	Family.Type.WARRIOR: load("res://02_Entities/Heroes/_Shared/FamiliesManagers/Warrior/warrior_manager.tscn"),
+	Family.Type.NECROSIS: load("res://02_Entities/Heroes/_Shared/FamiliesManagers/Necro/necro_manager.tscn"),
+	Family.Type.CHICKEN_LORD: load("res://02_Entities/Heroes/_Shared/FamiliesManagers/ChickenLord/chicken_lord_manager.tscn"),
 }
 
 var PROJECTILE_SCENES: Dictionary[Projectile.Type, PackedScene] = {

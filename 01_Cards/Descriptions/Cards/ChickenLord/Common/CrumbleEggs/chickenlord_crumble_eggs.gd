@@ -17,15 +17,15 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		var hit_target: Entity = cb_vars.get(AutoAttackModifier.VarType.TARGET)
 		if not is_instance_valid(hit_target): return
 		var damage: float = base_damage + ctx.hero.families_stats.chicken_lord.alive_chicken_count * damage_per_chicken
-		ctx.hero.direct_damage(hit_target, damage, Utils.ActionType.DAMAGE_MAGICAL, &"Crumble Egg")
+		ctx.hero.damage.direct(hit_target, damage, Utils.ActionType.DAMAGE_MAGICAL, &"Crumble Egg")
 		if hit_target.is_dead():
 			for i in chicken_spawned_per_death:
-				ctx.hero.summon_entity(Entity.EntityType.CHICKEN_EGG, SpawnLocationConfig.create_entity_relative(hit_target, 1.5), {})
+				ctx.hero.summon_sender.summon_entity(Entity.EntityType.CHICKEN_EGG, SpawnLocationConfig.create_entity_relative(hit_target, 1.5), {})
 	)
 	ctx.periodic_timers.register("Crumble Eggs", period, func() -> void:
 		var target: Entity = ctx.hero.target_module.get_target(TargetModule.TargettingStrategy.LOWEST_HP_ENEMY)
 		if target == null: return
-		ctx.hero.projectile_attack(target, Projectile.Type.SMALL_EGG, ctx.hero, proj_stats)
+		ctx.hero.projectile_sender.projectile_attack(target, Projectile.Type.SMALL_EGG, ctx.hero, proj_stats)
 		)
 
 func get_description(cardlvl: int) -> String:

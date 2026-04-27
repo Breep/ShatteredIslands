@@ -15,7 +15,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	ctx.periodic_timers.register(&"Poison Flask", period, func() -> void:
 		var target: Entity = ctx.hero.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
 		if target == null: return
-		ctx.hero.inflict_condition_stacks(target, stacks, Alteration.Type.POISON, &"Poison Flask")
+		ctx.hero.add_stack_sender.inflict_condition_stacks(target, stacks, Alteration.Type.POISON, &"Poison Flask")
 	)
 
 
