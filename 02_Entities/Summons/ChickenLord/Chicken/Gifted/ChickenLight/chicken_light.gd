@@ -23,7 +23,7 @@ func _ready() -> void:
 		var target: Entity = target.get_target(TargetComponent.TargettingStrategy.RANDOM_HERO_ALLY)
 		if target == null or target.is_queued_for_deletion(): return
 		if Utils.is_randomize_modifier_active(_regen_stack_ratio*100, battle_id):
-			inflict_condition_stacks(target, _stacks_number, Alteration.Type.REGEN, "Chicken")
+			alterations.inflict_condition_stacks(target, _stacks_number, Alteration.Type.REGEN, "Chicken")
 		
 	auto_attack_modifier_registry.register_modifier(mod)
 	super._ready()

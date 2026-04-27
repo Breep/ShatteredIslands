@@ -22,35 +22,35 @@ enum {
 const FAMILY_LEVEL_MAP_PROGRESS_BAR_VALUE: Array[float] =[0, 30, 50, 70, 100]
 
 const DEACTIVATED_FRAME_SCENE: Dictionary = {
-	MAIN_FRAME_TEXTURE: preload("res://UI/InGame/FamilyPortrait/Data/0_black/family_cercle_inactive_main.png"),
-	XP_FRAME_TEXTURE: preload("res://UI/InGame/FamilyPortrait/Data/0_black/family_cercle_inactive_xp_container.png"),
+	MAIN_FRAME_TEXTURE: preload("res://04_UI/InGame/FamilyPortrait/Data/0_black/family_cercle_inactive_main.png"),
+	XP_FRAME_TEXTURE: preload("res://04_UI/InGame/FamilyPortrait/Data/0_black/family_cercle_inactive_xp_container.png"),
 }
 
 const FRAME_TEXTURES: Array[Dictionary] = [
 	{
-		MAIN_FRAME_TEXTURE: preload("res://UI/InGame/FamilyPortrait/Data/1_Bronze/family_cercle_bronze_main_frame.png"),
-		XP_FRAME_TEXTURE: preload("res://UI/InGame/FamilyPortrait/Data/1_Bronze/family_cercle_bronze_xp_frame.png"),
-		LVL_TICKS_TEXTURE: preload("res://UI/InGame/FamilyPortrait/Data/1_Bronze/family_cercle_bronze_level_ticks.png"),
+		MAIN_FRAME_TEXTURE: preload("res://04_UI/InGame/FamilyPortrait/Data/1_Bronze/family_cercle_bronze_main_frame.png"),
+		XP_FRAME_TEXTURE: preload("res://04_UI/InGame/FamilyPortrait/Data/1_Bronze/family_cercle_bronze_xp_frame.png"),
+		LVL_TICKS_TEXTURE: preload("res://04_UI/InGame/FamilyPortrait/Data/1_Bronze/family_cercle_bronze_level_ticks.png"),
 	},
 	{
-		MAIN_FRAME_TEXTURE: preload("res://UI/InGame/FamilyPortrait/Data/2_Silver/family_cercle_silver_main_frame.png"),
-		XP_FRAME_TEXTURE: preload("res://UI/InGame/FamilyPortrait/Data/2_Silver/family_cercle_silver_xp_frame.png"),
-		LVL_TICKS_TEXTURE: preload("res://UI/InGame/FamilyPortrait/Data/2_Silver/family_cercle_silver_level_ticks.png"),
+		MAIN_FRAME_TEXTURE: preload("res://04_UI/InGame/FamilyPortrait/Data/2_Silver/family_cercle_silver_main_frame.png"),
+		XP_FRAME_TEXTURE: preload("res://04_UI/InGame/FamilyPortrait/Data/2_Silver/family_cercle_silver_xp_frame.png"),
+		LVL_TICKS_TEXTURE: preload("res://04_UI/InGame/FamilyPortrait/Data/2_Silver/family_cercle_silver_level_ticks.png"),
 	},
 	{
-		MAIN_FRAME_TEXTURE: preload("res://UI/InGame/FamilyPortrait/Data/3_Gold/family_cercle_gold_main_frame.png"),
-		XP_FRAME_TEXTURE: preload("res://UI/InGame/FamilyPortrait/Data/3_Gold/family_cercle_gold_xp_frame.png"),
-		LVL_TICKS_TEXTURE: preload("res://UI/InGame/FamilyPortrait/Data/3_Gold/family_cercle_gold_level_ticks.png"),
+		MAIN_FRAME_TEXTURE: preload("res://04_UI/InGame/FamilyPortrait/Data/3_Gold/family_cercle_gold_main_frame.png"),
+		XP_FRAME_TEXTURE: preload("res://04_UI/InGame/FamilyPortrait/Data/3_Gold/family_cercle_gold_xp_frame.png"),
+		LVL_TICKS_TEXTURE: preload("res://04_UI/InGame/FamilyPortrait/Data/3_Gold/family_cercle_gold_level_ticks.png"),
 	},
 	{
-		MAIN_FRAME_TEXTURE: preload("res://UI/InGame/FamilyPortrait/Data/4_Platinium/family_cercle_platinium_main_frame.png"),
-		XP_FRAME_TEXTURE: preload("res://UI/InGame/FamilyPortrait/Data/4_Platinium/family_cercle_platinium_xp_frame.png"),
-		LVL_TICKS_TEXTURE: preload("res://UI/InGame/FamilyPortrait/Data/4_Platinium/family_cercle_platinium_level_ticks.png"),
+		MAIN_FRAME_TEXTURE: preload("res://04_UI/InGame/FamilyPortrait/Data/4_Platinium/family_cercle_platinium_main_frame.png"),
+		XP_FRAME_TEXTURE: preload("res://04_UI/InGame/FamilyPortrait/Data/4_Platinium/family_cercle_platinium_xp_frame.png"),
+		LVL_TICKS_TEXTURE: preload("res://04_UI/InGame/FamilyPortrait/Data/4_Platinium/family_cercle_platinium_level_ticks.png"),
 	},
 	{
-		MAIN_FRAME_TEXTURE: preload("res://UI/InGame/FamilyPortrait/Data/5_Prismatic/family_cercle_prismatic_main_frame.png"),
-		XP_FRAME_TEXTURE: preload("res://UI/InGame/FamilyPortrait/Data/5_Prismatic/family_cercle_prismatic_xp_frame.png"),
-		LVL_TICKS_TEXTURE: preload("res://UI/InGame/FamilyPortrait/Data/5_Prismatic/family_cercle_prismatic_level_ticks.png"),
+		MAIN_FRAME_TEXTURE: preload("res://04_UI/InGame/FamilyPortrait/Data/5_Prismatic/family_cercle_prismatic_main_frame.png"),
+		XP_FRAME_TEXTURE: preload("res://04_UI/InGame/FamilyPortrait/Data/5_Prismatic/family_cercle_prismatic_xp_frame.png"),
+		LVL_TICKS_TEXTURE: preload("res://04_UI/InGame/FamilyPortrait/Data/5_Prismatic/family_cercle_prismatic_level_ticks.png"),
 	}
 ]
 

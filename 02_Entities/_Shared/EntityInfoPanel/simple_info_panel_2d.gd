@@ -26,7 +26,7 @@ extends Control
 #endregion
 
 const TAUNT_VISUAL_SCENE: PackedScene = preload("res://02_Entities/_Shared/EntityInfoPanel/Data/taunt_status_visual.tscn")
-const ALTERATION_ICON_SCENE: PackedScene = preload("res://02_Entities/_Shared/Modules/AlterationsModule/AlterationIcon/alteration_icon.tscn")
+const ALTERATION_ICON_SCENE: PackedScene = preload("res://02_Entities/_Shared/Components/Alterations/AlterationIcon/alteration_icon.tscn")
 
 var _taunt_visual: Node3D
 var _alteration_icons: Dictionary[Alteration.Type, AlterationIcon] = {}

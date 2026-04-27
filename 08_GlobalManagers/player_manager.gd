@@ -20,7 +20,7 @@ enum JoinGameKeys {
 
 # ============================== Constants ==============================
 
-const PLAYER_SCENE: PackedScene = preload("res://Player/player.tscn")
+const PLAYER_SCENE: PackedScene = preload("res://07_Players/player.tscn")
 
 # Bot names and their fake peer_id
 const BOT_INFOS: Dictionary[int, String] = {

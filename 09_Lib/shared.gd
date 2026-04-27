@@ -17,30 +17,29 @@ var HERO_SCENES: Dictionary[HeroDesc.HeroId, PackedScene] = {
 }
 
 var FAMILIES: Dictionary[Family.Type, Family] = {
-	Family.Type.WARRIOR: load("res://Card/Descriptions/Families/warrior_family.tres"),
-	Family.Type.ENGINEER: load("res://Card/Descriptions/Families/Engineer/engineer_family.tres"),
-	Family.Type.ARDENT_CELESTIAL: load("res://Card/Descriptions/Families/ArdentCelestial/ardent_celestial_family.tres"),
-	Family.Type.STORM_CALLER: load("res://Card/Descriptions/Families/storm_caller_family.tres"),
-	Family.Type.LIGHT: load("res://Card/Descriptions/Families/light_family.tres"),
-	Family.Type.COLOSSUS: load("res://Card/Descriptions/Families/Colossus/colossus_family.tres"),
-	Family.Type.POISON: load("res://Card/Descriptions/Families/poison_family.tres"),
-	Family.Type.CHICKEN_LORD: load("res://Card/Descriptions/Families/ChickenLord/chicken_lord_family.tres"),
-	Family.Type.NECROSIS: load("res://Card/Descriptions/Families/necro_family.tres"),
+	Family.Type.WARRIOR: load("res://01_Card/Descriptions/Families/warrior_family.tres"),
+	Family.Type.ENGINEER: load("res://01_Card/Descriptions/Families/Engineer/engineer_family.tres"),
+	Family.Type.ARDENT_CELESTIAL: load("res://01_Card/Descriptions/Families/ArdentCelestial/ardent_celestial_family.tres"),
+	Family.Type.STORM_CALLER: load("res://01_Card/Descriptions/Families/storm_caller_family.tres"),
+	Family.Type.LIGHT: load("res://01_Card/Descriptions/Families/light_family.tres"),
+	Family.Type.COLOSSUS: load("res://01_Card/Descriptions/Families/Colossus/colossus_family.tres"),
+	Family.Type.POISON: load("res://01_Card/Descriptions/Families/poison_family.tres"),
+	Family.Type.CHICKEN_LORD: load("res://01_Card/Descriptions/Families/ChickenLord/chicken_lord_family.tres"),
+	Family.Type.NECROSIS: load("res://01_Card/Descriptions/Families/necro_family.tres"),
 }
 
 var ENTITY_COMPONENT_SCENES: Dictionary[EntityComponent.Type, PackedScene] = {
-	EntityComponent.Type.MOVEMENT: load("res://02_Entities/_Shared/Modules//MovementModule/movement_module.tscn"),
-	EntityComponent.Type.TARGET: load("res://02_Entities/_Shared/Modules//TargetComponent/target.tscn"),
-	EntityComponent.Type.ALTERATIONS: load("res://02_Entities/_Shared/Modules//AlterationsModule/alterations.tscn"),
-	EntityComponent.Type.AUTO_ATTACK_PERIODIC_MODULE: load("res://02_Entities/_Shared/Modules//AutoAttackPeriodicModule/auto_attack_periodic_module.tscn"),
-	
-	EntityComponent.Type.DAMAGE: load("res://02_Entities/_Shared/Modules/DamageModule/damage_module.tscn"),
-	EntityComponent.Type.HEAL: load("res://02_Entities/_Shared/Modules/HealModule/heal_module.tscn"),
-	EntityComponent.Type.ACTION_SENDER_PROJECTILE: load("res://02_Entities/_Shared/Modules//ActionSenderModule/Projectile/action_sender_projectile_module.tscn"),
-	EntityComponent.Type.ACTION_SENDER_SPELL: load("res://02_Entities/_Shared/Modules//ActionSenderModule/Spell/action_sender_spell_module.tscn"),
-	EntityComponent.Type.ACTION_SENDER_SUMMON: load("res://02_Entities/_Shared/Modules//ActionSenderModule/Summon/action_sender_summon_module.tscn"),
-	EntityComponent.Type.ACTION_SENDER_AUTO_ATTACK: load("res://02_Entities/_Shared/Modules//ActionSenderModule/AutoAttack/action_sender_auto_attack_module.tscn"),
+	EntityComponent.Type.MOVEMENT: load("res://02_Entities/_Shared/Components/Movement/movement_component.tscn"),
+	EntityComponent.Type.TARGET: load("res://02_Entities/_Shared/Components/Target/target_component.tscn"),
+	EntityComponent.Type.ALTERATIONS: load("res://02_Entities/_Shared/Components/Alterations/alterations_component.tscn"),
+	EntityComponent.Type.DAMAGE: load("res://02_Entities/_Shared/Components/Damage/damage_component.tscn"),
+	EntityComponent.Type.HEAL: load("res://02_Entities/_Shared/Components/Heal/heal_component.tscn"),
+	EntityComponent.Type.PROJECTILE: load("res://02_Entities/_Shared/Components/Projectile/projectile_component.tscn"),
+	EntityComponent.Type.SPELL: load("res://02_Entities/_Shared/Components/Spell/spell_component.tscn"),
+	EntityComponent.Type.SUMMON: load("res://02_Entities/_Shared/Components/Summon/summon_component.tscn"),
+	EntityComponent.Type.AUTO_ATTACK: load("res://02_Entities/_Shared/Components/AutoAttack/auto_attack_component.tscn"),
 
+	EntityComponent.Type.AUTO_ATTACK_PERIODIC_MODULE: load("res://02_Entities/_Shared/Components/AutoAttackPeriodicModule/auto_attack_periodic_module.tscn"),
 	EntityComponent.Type.LABEL_POPUP_MODULE: load("res://02_Entities/_Shared/Modules//PopupModule/label_popup_module.tscn")
 }
 
@@ -57,19 +56,19 @@ var FAMILY_MANAGER_SCENES: Dictionary[Family.Type, PackedScene] = {
 }
 
 var PROJECTILE_SCENES: Dictionary[Projectile.Type, PackedScene] = {
-	Projectile.Type.SHADOW_BOLT: load("res://SpellsAndProjectiles/Projectiles/ShadowBolt/shadow_bolt_projectile.tscn"),
-	Projectile.Type.VENOMOUS_DART: load("res://SpellsAndProjectiles/Projectiles/Poison/VenomousDart/venomous_dart_projectile.tscn"),
-	Projectile.Type.SNAKE: load("res://SpellsAndProjectiles/Projectiles/Poison/Snake/snake_projectile.tscn"),
-	Projectile.Type.COSMIC_BOLT: load("res://SpellsAndProjectiles/Projectiles/CosmicBolt/cosmic_bolt_projectile.tscn"),
-	Projectile.Type.SHIELD_THROW: load("res://SpellsAndProjectiles/Projectiles/ShieldThrow/shield_throw_projectile.tscn"),
-	Projectile.Type.POISON_FLASK: load("res://SpellsAndProjectiles/Projectiles/Poison/PoisonFlask/poison_flask_projectile.tscn"),
-	Projectile.Type.SMALL_EGG: load("res://SpellsAndProjectiles/Projectiles/SmallEgg/small_egg_projectile.tscn"),
-	Projectile.Type.FIRE_BALL: load("res://SpellsAndProjectiles/Projectiles/FireBall/fire_ball_projectile.tscn"),
-	Projectile.Type.BULLET: load("res://SpellsAndProjectiles/Projectiles/Bullet/bullet_projectile.tscn"),
-	Projectile.Type.GAMMA_TURRET: load("res://SpellsAndProjectiles/Projectiles/GammaTurret/gamma_turret_projectile.tscn")
+	Projectile.Type.SHADOW_BOLT: load("res://03_SpellsAndProjectiles/Projectiles/ShadowBolt/shadow_bolt_projectile.tscn"),
+	Projectile.Type.VENOMOUS_DART: load("res://03_SpellsAndProjectiles/Projectiles/Poison/VenomousDart/venomous_dart_projectile.tscn"),
+	Projectile.Type.SNAKE: load("res://03_SpellsAndProjectiles/Projectiles/Poison/Snake/snake_projectile.tscn"),
+	Projectile.Type.COSMIC_BOLT: load("res://03_SpellsAndProjectiles/Projectiles/CosmicBolt/cosmic_bolt_projectile.tscn"),
+	Projectile.Type.SHIELD_THROW: load("res://03_SpellsAndProjectiles/Projectiles/ShieldThrow/shield_throw_projectile.tscn"),
+	Projectile.Type.POISON_FLASK: load("res://03_SpellsAndProjectiles/Projectiles/Poison/PoisonFlask/poison_flask_projectile.tscn"),
+	Projectile.Type.SMALL_EGG: load("res://03_SpellsAndProjectiles/Projectiles/SmallEgg/small_egg_projectile.tscn"),
+	Projectile.Type.FIRE_BALL: load("res://03_SpellsAndProjectiles/Projectiles/FireBall/fire_ball_projectile.tscn"),
+	Projectile.Type.BULLET: load("res://03_SpellsAndProjectiles/Projectiles/Bullet/bullet_projectile.tscn"),
+	Projectile.Type.GAMMA_TURRET: load("res://03_SpellsAndProjectiles/Projectiles/GammaTurret/gamma_turret_projectile.tscn")
 }
 
-var DAMAGE_POPUP_SCENE: PackedScene = load("res://UI/3D/DamagePopup/damage_popup.tscn")
+var DAMAGE_POPUP_SCENE: PackedScene = load("res://04_UI/3D/DamagePopup/damage_popup.tscn")
 
 var scene_switcher: SceneSwitcher
 

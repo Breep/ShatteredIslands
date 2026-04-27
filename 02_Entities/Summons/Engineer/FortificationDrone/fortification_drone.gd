@@ -32,7 +32,7 @@ var _shield_count: int # Number of shield done on the linked_ally
 
 #region ============================== Node base functions ==============================
 func _ready() -> void:
-	take_condition_stacks(_on_spawn_shield_amount, Alteration.Type.SHIELD, false, "Initial shield")
+	alterations.take_condition_stacks(_on_spawn_shield_amount, Alteration.Type.SHIELD, false, "Initial shield")
 	_base_stats.health_max = _on_spawn_hp_max
 	stat_modifiers_registry.recompute_all()
 	periodic_timer_registry.register("Periodic Shield", 1.0, _periodic_beam_callback)
@@ -106,7 +106,7 @@ func _change_linked_ally() -> void:
 
 func _periodic_beam_callback() -> void:
 	if not is_instance_valid(_linked_ally): return
-	inflict_condition_stacks(_linked_ally, _shield_per_second, Alteration.Type.SHIELD, "Fortification Drone")
+	alterations.inflict_condition_stacks(_linked_ally, _shield_per_second, Alteration.Type.SHIELD, "Fortification Drone")
 	_beam.blink()
 	_shield_count += 1
 	if _shield_count == SHIELD_COUNT_MAX:
@@ -137,7 +137,7 @@ func _on_died() -> void:
 
 func _on_resurrected() -> void:
 	super._on_resurrected()
-	take_condition_stacks(_on_spawn_shield_amount, Alteration.Type.SHIELD, false, "Initial shield")
+	alterations.take_condition_stacks(_on_spawn_shield_amount, Alteration.Type.SHIELD, false, "Initial shield")
 	var tween := create_tween().set_parallel()
 	tween.tween_property(_visual_3d, "position:y", 2.8, 0.8) \
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)

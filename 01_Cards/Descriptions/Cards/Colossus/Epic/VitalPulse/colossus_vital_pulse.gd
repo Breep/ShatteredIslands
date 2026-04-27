@@ -1,7 +1,7 @@
 class_name ColossusVitalPulse
 extends HeroUpgrade
 
-const VITAL_PULSE_VFX: PackedScene = preload("res://VFX/VFX_3D/VFX/Scenes/VFX_Vital_Pulse.tscn")
+const VITAL_PULSE_VFX: PackedScene = preload("res://22_VFX/VFX_3D/VFX/Scenes/VFX_Vital_Pulse.tscn")
 
 @export var _period: Array[float]
 @export var _hp_percent: Array[float]

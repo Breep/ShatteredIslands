@@ -2,71 +2,71 @@ extends Node
 
 # ============================== Configuration ==============================
 
-@onready var TOOLTIP_SCENE = load("res://UI/Tool/Tooltip/ui_tooltip.tscn")
-@onready var THEME: TooltipTheme = load("res://UI/Tool/Tooltip/Theme/standard_theme.tres")
+@onready var TOOLTIP_SCENE = load("res://04_UI/Tool/Tooltip/ui_tooltip.tscn")
+@onready var THEME: TooltipTheme = load("res://04_UI/Tool/Tooltip/Theme/standard_theme.tres")
 
 @onready var TOOLTIP_DATABASE: Array[TooltipDesc] = [
 	# --- A ---
-	load("res://UI/Tool/Tooltip/Dictionary/armor.tres"),
-	load("res://UI/Tool/Tooltip/Dictionary/attack.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/armor.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/attack.tres"),
 	
 	# --- B ---
-	load("res://UI/Tool/Tooltip/Dictionary/block.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/block.tres"),
 	
 	# --- C ---
-	load("res://UI/Tool/Tooltip/Dictionary/chickenlord_family.tres"),
-	load("res://UI/Tool/Tooltip/Dictionary/cleanse.tres"),
-	load("res://UI/Tool/Tooltip/Dictionary/colossus_family.tres"),
-	load("res://UI/Tool/Tooltip/Dictionary/cooldown.tres"),
-	load("res://UI/Tool/Tooltip/Dictionary/crit_chance.tres"),
-	load("res://UI/Tool/Tooltip/Dictionary/crit_multiplier.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/chickenlord_family.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/cleanse.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/colossus_family.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/cooldown.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/crit_chance.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/crit_multiplier.tres"),
 	
 	# --- D ---
-	load("res://UI/Tool/Tooltip/Dictionary/defence.tres"),
-	load("res://UI/Tool/Tooltip/Dictionary/dispell.tres"),
-	load("res://UI/Tool/Tooltip/Dictionary/dodge.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/defence.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/dispell.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/dodge.tres"),
 	
 	# --- E ---
-	load("res://UI/Tool/Tooltip/Dictionary/execute.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/execute.tres"),
 	
 	# --- I ---
-	load("res://UI/Tool/Tooltip/Dictionary/ignite_stack.tres"), # Attention: Ton fichier s'appelle encore "_stack" ici
+	load("res://04_UI/Tool/Tooltip/Dictionary/ignite_stack.tres"), # Attention: Ton fichier s'appelle encore "_stack" ici
 	
 	# --- L ---
-	load("res://UI/Tool/Tooltip/Dictionary/light_family.tres"),
-	load("res://UI/Tool/Tooltip/Dictionary/lightning_family.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/light_family.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/lightning_family.tres"),
 	
 	# --- M ---
-	load("res://UI/Tool/Tooltip/Dictionary/magical_damage.tres"),
-	load("res://UI/Tool/Tooltip/Dictionary/meteor.tres"),
-	load("res://UI/Tool/Tooltip/Dictionary/mr.tres"),
-	load("res://UI/Tool/Tooltip/Dictionary/mana.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/magical_damage.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/meteor.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/mr.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/mana.tres"),
 	
 	# --- N ---
-	load("res://UI/Tool/Tooltip/Dictionary/necro_family.tres"),
-	load("res://UI/Tool/Tooltip/Dictionary/necrosis.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/necro_family.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/necrosis.tres"),
 	
 	# --- P ---
-	load("res://UI/Tool/Tooltip/Dictionary/physical_damage.tres"),
-	load("res://UI/Tool/Tooltip/Dictionary/poison_damage.tres"),
-	load("res://UI/Tool/Tooltip/Dictionary/poison_resist.tres"),
-	load("res://UI/Tool/Tooltip/Dictionary/poison_stack.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/physical_damage.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/poison_damage.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/poison_resist.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/poison_stack.tres"),
 	
 	# --- R ---
-	load("res://UI/Tool/Tooltip/Dictionary/rank.tres"),
-	load("res://UI/Tool/Tooltip/Dictionary/regen.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/rank.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/regen.tres"),
 	
 	# --- S ---
-	load("res://UI/Tool/Tooltip/Dictionary/shield.tres"),
-	load("res://UI/Tool/Tooltip/Dictionary/strength.tres"),
-	load("res://UI/Tool/Tooltip/Dictionary/stun.tres"),
-	load("res://UI/Tool/Tooltip/Dictionary/summon.tres"),
-	load("res://UI/Tool/Tooltip/Dictionary/scale.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/shield.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/strength.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/stun.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/summon.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/scale.tres"),
 	
 	# --- T / V / W ---
-	load("res://UI/Tool/Tooltip/Dictionary/true_damage.tres"),
-	load("res://UI/Tool/Tooltip/Dictionary/vulnerability.tres"),
-	load("res://UI/Tool/Tooltip/Dictionary/weakness.tres")
+	load("res://04_UI/Tool/Tooltip/Dictionary/true_damage.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/vulnerability.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/weakness.tres")
 ]
 
 @onready var SNIPPET_MAP: Dictionary[String, String] = {

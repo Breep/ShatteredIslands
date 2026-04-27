@@ -1,6 +1,6 @@
 extends Node3D
 
-const HIT_VFX = preload("res://VFX/VFX_3D/VFX/Scenes/VFX_Hit_dark.tscn")
+const HIT_VFX = preload("res://22_VFX/VFX_3D/VFX/Scenes/VFX_Hit_dark.tscn")
 
 const START_HEIGHT: float = 12.0
 const DEPLOY_TIME: float = 0.7

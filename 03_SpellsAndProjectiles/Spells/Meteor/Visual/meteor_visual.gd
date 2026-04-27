@@ -1,6 +1,6 @@
 extends Node3D
 
-const HIT_VFX = preload("res://Props/DefaultBattleIsland/Arch_island/VFX/Scenes/VFX_meteor_hit.tscn")
+const HIT_VFX = preload("res://21_Props/DefaultBattleIsland/Arch_island/VFX/Scenes/VFX_meteor_hit.tscn")
 
 @onready var _meteor_3d: Node3D = %VFX_FireBall
 @onready var _path_3d: Path3D = %Path3D

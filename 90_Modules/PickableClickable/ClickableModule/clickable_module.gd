@@ -16,7 +16,7 @@ var select_locked: bool = false # True if the object can't be interacted
 
 # ============================== Private variables ==============================
 
-var _material_overlay: StandardMaterial3D = preload("res://VFX/Shaders/outline/Outline_3D/simple_outline.tres")
+var _material_overlay: StandardMaterial3D = preload("res://22_VFX/Shaders/outline/Outline_3D/simple_outline.tres")
 var _is_focused: bool = false
 var _is_selected: bool = false
 

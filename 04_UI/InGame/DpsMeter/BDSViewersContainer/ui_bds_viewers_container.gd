@@ -3,7 +3,7 @@ extends VBoxContainer
 
 signal viewer_selected(viewer: UIBDSViewer)
 
-const UI_BATTLE_DATA_STAT_VIEWER_SCENE: PackedScene = preload("res://UI/InGame/DpsMeter/BDSViewer/ui_bds_viewer.tscn")
+const UI_BATTLE_DATA_STAT_VIEWER_SCENE: PackedScene = preload("res://04_UI/InGame/DpsMeter/BDSViewer/ui_bds_viewer.tscn")
 
 
 #region ============================== Private variables ==============================

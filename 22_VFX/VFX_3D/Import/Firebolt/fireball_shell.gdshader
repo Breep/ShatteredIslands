@@ -7,9 +7,9 @@ uniform sampler2D gradient_sampler : filter_linear, source_color;
 uniform float def_x = 0.0;
 uniform float def_z = 0.0;
 
-#include "res://VFX/VFX_3D/Import/Shared/fresnel.gdshaderinc"
-#include "res://VFX/VFX_3D/Import/Shared/rotate_x.gdshaderinc"
-#include "res://VFX/VFX_3D/Import/Shared//rotate_z.gdshaderinc"
+#include "res://22_VFX/VFX_3D/Import/Shared/fresnel.gdshaderinc"
+#include "res://22_VFX/VFX_3D/Import/Shared/rotate_x.gdshaderinc"
+#include "res://22_VFX/VFX_3D/Import/Shared//rotate_z.gdshaderinc"
 
 
 void vertex() {

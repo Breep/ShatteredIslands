@@ -22,7 +22,7 @@ var _rng := RandomNumberGenerator.new()
 
 # ============================== Preload ==============================
 
-@onready var coin_scene: PackedScene = preload("res://FloatingIsland/BuyingIsland/BuyingArea/Tavern/TavernCenter/Tables/Common/Coin/coin.tscn")
+@onready var coin_scene: PackedScene = preload("res://06_FloatingIsland/BuyingIsland/BuyingArea/Tavern/TavernCenter/Tables/Common/Coin/coin.tscn")
 
 # ============================== Node base functions ==============================
 

@@ -4,7 +4,7 @@ extends Control
 # ============================== CONSTANT ==============================
 
 var WAIT_TIME_BEFORE_SKILL_WINDOW: float = 0.5
-const SKILL_WINDOW_SCENE: PackedScene = preload("res://UI/Tool/SkillWindow/ui_skill_window.tscn")
+const SKILL_WINDOW_SCENE: PackedScene = preload("res://04_UI/Tool/SkillWindow/ui_skill_window.tscn")
 
 # ============================== Private variables ==============================
 

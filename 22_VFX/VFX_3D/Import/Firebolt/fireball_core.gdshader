@@ -3,7 +3,7 @@ shader_type spatial;
 uniform vec3 albedo : source_color;
 uniform vec3 emission : source_color;
 
-#include "res://VFX/VFX_3D/Import/Shared/fresnel.gdshaderinc"
+#include "res://22_VFX/VFX_3D/Import/Shared/fresnel.gdshaderinc"
 
 void fragment() {
 	float f = fresnel(1.0, NORMAL, VIEW);

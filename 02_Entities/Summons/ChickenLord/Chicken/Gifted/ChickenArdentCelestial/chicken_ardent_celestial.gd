@@ -6,7 +6,7 @@ var _ignite_stacks: int
 var _hp_threshold_ratio: float
 var _rush_target: Entity
 
-const EXPLOSION_VFX_SCENE = preload("res://VFX/VFX_Explosion_B.tscn")
+const EXPLOSION_VFX_SCENE = preload("res://22_VFX/VFX_Explosion_B.tscn")
 
 @onready var _zone_impact: Area3D = %ImpactArea3D
 
@@ -55,4 +55,4 @@ func _explosion() -> void:
 		anim_player.play("Init")
 	
 	for ennemy in ennemies:
-		inflict_condition_stacks(ennemy, _ignite_stacks, Alteration.Type.IGNITE, "Chicken explosion")
+		alterations.inflict_condition_stacks(ennemy, _ignite_stacks, Alteration.Type.IGNITE, "Chicken explosion")

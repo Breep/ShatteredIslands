@@ -35,15 +35,15 @@ func _ready() -> void:
 	base_stats.attack_speed = _as
 	stat_modifiers_registry.recompute_all()
 	if not is_instance_valid(_master): _master = summoner
-	movement.orbit_entity(_master, 2, 1, MovementModule.OrbitFacing.NONE)
+	movement.orbit_entity(_master, 2, 1, MovementComponent.OrbitFacing.NONE)
 	_master.died.connect(_on_master_died)
 	_despawn_timer = -1 # No despawn
 	if _auto_attack_periodic_module != null:
 		_auto_attack_periodic_module._attack_strategy = TargetComponent.TargettingStrategy.CLOSEST_ENEMY_SUMMON
 	super._ready()
 	alterations.add_stack(Alteration.Type.SHIELD, _shield, _master, &"Gamma Turret")
-	if _auto_attack_sender != null:
-		_auto_attack_sender.attack_started.connect(func(_lock_seconds: float) -> void:
+	if auto_attack != null:
+		auto_attack.attack_started.connect(func(_lock_seconds: float) -> void:
 			(_visual_3d as TurretVisual).play_shoot_animation()
 		)
 
@@ -59,7 +59,7 @@ func _find_new_master() -> void:
 		_master.died.disconnect(_on_master_died)
 	_master = ally
 	_master.died.connect(_on_master_died)
-	movement.orbit_entity(_master, 2, 1, MovementModule.OrbitFacing.NONE)
+	movement.orbit_entity(_master, 2, 1, MovementComponent.OrbitFacing.NONE)
 
 
 func _on_died() -> void:

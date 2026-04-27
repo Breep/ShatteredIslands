@@ -1,6 +1,6 @@
 class_name ShieldVfxSpawner
 
-const SHIELD_VFX_SCENE: PackedScene = preload("res://VFX/VFX_3D/Protection/Scenes/VFX_Protection_4_Shield.tscn")
+const SHIELD_VFX_SCENE: PackedScene = preload("res://22_VFX/VFX_3D/Protection/Scenes/VFX_Protection_4_Shield.tscn")
 
 ## Spawns a protection shield VFX centered on the given entity.
 ## The VFX plays its "Start" animation and auto-destroys after [param duration] seconds.

@@ -10,7 +10,7 @@ uniform float pulse_intensity : hint_range(0.0, 1.0) = 0.3;
 uniform float emission_strength : hint_range(0.0, 5.0) = 1.5;
 uniform float base_brightness : hint_range(0.0, 2.0) = 0.3;
 
-#include "res://VFX/VFX_3D/Import/Shared/fresnel.gdshaderinc"
+#include "res://22_VFX/VFX_3D/Import/Shared/fresnel.gdshaderinc"
 
 void fragment() {
 	vec4 tex = texture(base_texture, UV);

@@ -1,7 +1,7 @@
 class_name ColossusTaintedBlood
 extends HeroUpgrade
 
-const ORB_VISUAL = preload("res://SpellsAndProjectiles/Spells/TaintedBlood/Visual/tainted_blood_orb_visual.tscn")
+const ORB_VISUAL = preload("res://03_SpellsAndProjectiles/Spells/TaintedBlood/Visual/tainted_blood_orb_visual.tscn")
 
 @export var _lost_hp_percent: Array[float]
 @export var _period: Array[float]

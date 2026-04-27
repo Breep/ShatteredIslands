@@ -45,7 +45,7 @@ func _animate_death() -> void:
 func _spawn_snakes(snake_number: int) -> void:
 	var spawn_location_config := SpawnLocationConfig.create_entity_relative(self, 1.5)
 	for i in snake_number:
-		summon_entity(Entity.EntityType.SNAKE, spawn_location_config, {})
+		summon.summon_entity(Entity.EntityType.SNAKE, spawn_location_config, {})
 	_start_cleanup_timer()
 
 

@@ -49,4 +49,4 @@ func hide_hint_tooltip():
 
 
 func _on_mouse_entered() -> void:
-	show_hint_tooltip("res://Data/Assets/Card/Card_IMG/fire/icon flame.png", "Dégâts de feu !")
+	show_hint_tooltip("res://Data/Assets/01_Card/Card_IMG/fire/icon flame.png", "Dégâts de feu !")

@@ -111,7 +111,7 @@ func _spawn_fighting_islands() -> void:
 		var i: int = 0
 		for player in PlayerManager.players.values():
 			var spawn_point: SpawnPoint = _islands_spawn_points[i]
-			var fighting_island: FightingIsland = preload("res://FloatingIsland/FightingIsland/fighting_island.tscn").instantiate()
+			var fighting_island: FightingIsland = preload("res://06_FloatingIsland/FightingIsland/fighting_island.tscn").instantiate()
 			fighting_island.player_owner_id = player.id
 			fighting_island.name = "FightingIsland_" + player.player_name
 			_node_fighting_islands.add_child(fighting_island)

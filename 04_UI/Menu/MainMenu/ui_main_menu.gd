@@ -13,7 +13,7 @@ func _ready() -> void:
 	
 	## Example: check for custom flags
 	#if "server" in args:
-		#get_tree().change_scene_to_file("res://UI/Menu/ServerMenu/ui_server_player_list.tscn")
+		#get_tree().change_scene_to_file("res://04_UI/Menu/ServerMenu/ui_server_player_list.tscn")
 
 
 func _on_play_button_pressed() -> void:

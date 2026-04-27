@@ -1,7 +1,7 @@
 class_name ColossusSeismicSlam
 extends HeroUpgrade
 
-const SEISMIC_DECAL_SCENE: PackedScene = preload("res://VFX/VFX_3D/SeismicSlam/vfx_seismic_slam_decal.tscn")
+const SEISMIC_DECAL_SCENE: PackedScene = preload("res://22_VFX/VFX_3D/SeismicSlam/vfx_seismic_slam_decal.tscn")
 
 @export var _increase_sizes: Array[float]
 @export var _periods: Array[float]

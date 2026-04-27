@@ -1,7 +1,7 @@
 class_name ColossusColossalTitan
 extends HeroUpgrade
 
-const AXE_VISUAL = preload("res://SpellsAndProjectiles/Spells/ColossalTitan/Visual/colossal_titan_visual.tscn")
+const AXE_VISUAL = preload("res://03_SpellsAndProjectiles/Spells/ColossalTitan/Visual/colossal_titan_visual.tscn")
 const DEPLOY_TIME: float = 0.7
 
 @export var _periods: Array[float]

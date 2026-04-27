@@ -23,7 +23,7 @@ func _ready() -> void:
 	mod.additional_effect_callback = func(_cb_vars: Dictionary) -> void:
 		var target: Entity = target.get_target(TargetComponent.TargettingStrategy.RANDOM_HERO_ALLY)
 		if target == null or target.is_queued_for_deletion(): return
-		inflict_condition_stacks(target, _shield_per_attack, Alteration.Type.SHIELD, "Chicken")
+		alterations.inflict_condition_stacks(target, _shield_per_attack, Alteration.Type.SHIELD, "Chicken")
 		
 	auto_attack_modifier_registry.register_modifier(mod)
 	

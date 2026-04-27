@@ -1,5 +1,5 @@
 class_name HeroAnimationModule
-extends AnimationModule
+extends AnimationComponent
 
 # Hero-specific exports
 @export var _weapons_node: Node3D

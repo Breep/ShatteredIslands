@@ -41,10 +41,6 @@ var _card_context: CardContext
 #endregion
 
 #region ============================== Private variables ==============================
-# Typed reference to parent's _animation_module
-var _hero_animation: HeroAnimationModule:
-	get: return _animation_module as HeroAnimationModule
-
 var _skill_manager: SkillManager
 var _family_managers: Dictionary[Family.Type, FamilyManager]
 #endregion
@@ -157,8 +153,8 @@ func _on_fighting_state_changed(new_fighting_state: FightingState) -> void:
 
 #region ============================== Private ==============================
 func _apply_display_mode() -> void:
-	if _hero_animation != null:
-		_hero_animation.apply_display_mode(display_mode)
+	if animation != null:
+		animation.apply_display_mode(display_mode)
 	if _health_bar != null:
 		_health_bar.apply_display_mode(display_mode)
 

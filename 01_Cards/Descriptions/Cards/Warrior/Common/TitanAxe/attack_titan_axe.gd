@@ -1,7 +1,7 @@
 class_name AttackTitanAxe
 extends HeroUpgrade
 
-const AXE_VISUAL = preload("res://SpellsAndProjectiles/Spells/TitanAxe/Visual/titan_axe_visual.tscn")
+const AXE_VISUAL = preload("res://03_SpellsAndProjectiles/Spells/TitanAxe/Visual/titan_axe_visual.tscn")
 const DEPLOY_TIME: float = 0.7
 
 @export var _attack_number: int # Attack number needed to proc the damage buff

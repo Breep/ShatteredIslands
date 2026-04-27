@@ -19,7 +19,7 @@ func _init() -> void:
 	polarity = Polarity.DEBUFF
 	id = &"Ignite"
 	display_color = Color.ORANGE_RED
-	icon = preload("res://02_Entities/_Shared/Modules//AlterationsModule/AlterationIcon/Icons/ignite_icon.png")
+	icon = preload("res://02_Entities/_Shared/Components/Alterations/AlterationIcon/Icons/ignite_icon.png")
 
 
 func process_tick() -> void:

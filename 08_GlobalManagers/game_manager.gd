@@ -61,15 +61,15 @@ var _FAMILIES_REF: Dictionary[Family.Type, Family] = {
 
 func _init() -> void:
 	Verbose.debug("GAME MANAGER INIT", Verbose.Category.DEFAULT)
-	_FAMILIES_REF[Family.Type.WARRIOR] = load("res://Card/Descriptions/Families/warrior_family.tres") as Family
-	_FAMILIES_REF[Family.Type.ENGINEER] = load("res://Card/Descriptions/Families/Engineer/engineer_family.tres") as Family
-	_FAMILIES_REF[Family.Type.ARDENT_CELESTIAL] = load("res://Card/Descriptions/Families/ArdentCelestial/ardent_celestial_family.tres") as Family
-	_FAMILIES_REF[Family.Type.POISON] = load("res://Card/Descriptions/Families/poison_family.tres") as Family
-	_FAMILIES_REF[Family.Type.STORM_CALLER] = load("res://Card/Descriptions/Families/storm_caller_family.tres") as Family
-	_FAMILIES_REF[Family.Type.LIGHT] = load("res://Card/Descriptions/Families/light_family.tres") as Family
-	_FAMILIES_REF[Family.Type.COLOSSUS] = load("res://Card/Descriptions/Families/Colossus/colossus_family.tres") as Family
-	_FAMILIES_REF[Family.Type.CHICKEN_LORD] = load("res://Card/Descriptions/Families/ChickenLord/chicken_lord_family.tres") as Family
-	_FAMILIES_REF[Family.Type.NECROSIS] = load("res://Card/Descriptions/Families/necro_family.tres") as Family
+	_FAMILIES_REF[Family.Type.WARRIOR] = load("res://01_Card/Descriptions/Families/warrior_family.tres") as Family
+	_FAMILIES_REF[Family.Type.ENGINEER] = load("res://01_Card/Descriptions/Families/Engineer/engineer_family.tres") as Family
+	_FAMILIES_REF[Family.Type.ARDENT_CELESTIAL] = load("res://01_Card/Descriptions/Families/ArdentCelestial/ardent_celestial_family.tres") as Family
+	_FAMILIES_REF[Family.Type.POISON] = load("res://01_Card/Descriptions/Families/poison_family.tres") as Family
+	_FAMILIES_REF[Family.Type.STORM_CALLER] = load("res://01_Card/Descriptions/Families/storm_caller_family.tres") as Family
+	_FAMILIES_REF[Family.Type.LIGHT] = load("res://01_Card/Descriptions/Families/light_family.tres") as Family
+	_FAMILIES_REF[Family.Type.COLOSSUS] = load("res://01_Card/Descriptions/Families/Colossus/colossus_family.tres") as Family
+	_FAMILIES_REF[Family.Type.CHICKEN_LORD] = load("res://01_Card/Descriptions/Families/ChickenLord/chicken_lord_family.tres") as Family
+	_FAMILIES_REF[Family.Type.NECROSIS] = load("res://01_Card/Descriptions/Families/necro_family.tres") as Family
 	Verbose.debug("GAME MANAGER INIT", Verbose.Category.DEFAULT)
 
 func _ready() -> void:

@@ -124,14 +124,14 @@ func setup_components() -> void:
 
 	# CardShop: local human player OR bot on server
 	if (is_local and not is_bot) or (is_bot and is_server):
-		var card_shop: PlayerCardShop = preload("res://Game/CardShop/player_card_shop.tscn").instantiate()
+		var card_shop: PlayerCardShop = preload("res://05_Game/CardShop/player_card_shop.tscn").instantiate()
 		card_shop.name = "CardShop"
 		card_shop.player = self
 		add_child(card_shop)
 
 	# Bot AI: only on server for bots
 	if is_bot and is_server:
-		var bot_ai: PlayerBotAI = preload("res://Player/PlayerBotAI/player_bot_ai.tscn").instantiate()
+		var bot_ai: PlayerBotAI = preload("res://07_Players/PlayerBotAI/player_bot_ai.tscn").instantiate()
 		bot_ai.player = self
 		bot_ai.name = "PlayerBotAI"
 		add_child(bot_ai)

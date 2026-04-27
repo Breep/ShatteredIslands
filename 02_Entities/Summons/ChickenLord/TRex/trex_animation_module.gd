@@ -1,4 +1,4 @@
-extends AnimationModule
+extends AnimationComponent
 
 @export var _feather_particles: GPUParticles3D
 

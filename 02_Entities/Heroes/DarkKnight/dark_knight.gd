@@ -56,7 +56,7 @@ var _corruption_charges: int = 0
 const SUPER_STRIKE_ON_ATTACK_SCENE: PackedScene = preload("res://02_Entities/Heroes/DarkKnight/VFX/super_strike.tscn")
 #endregion
 
-const ON_HIT_EFFECT_SCENE: PackedScene = preload("res://VFX/VFX_3D/VFX/Scenes/VFX_Hit_dark.tscn")
+const ON_HIT_EFFECT_SCENE: PackedScene = preload("res://22_VFX/VFX_3D/VFX/Scenes/VFX_Hit_dark.tscn")
 
 # ============================== Node base functions ==============================
 
@@ -112,7 +112,7 @@ func _cast_ultimate() -> void:
 		Spell.DarkStormModifier.LIFESPAN: _dark_storm_duration,
 		Spell.DarkStormModifier.PAIN_STACK_PERCENT: _pain_percent_per_stack if _pain_activated else 0.0
 	}
-	cast_spell(target, Spell.Type.DARK_STORM, spell_modifier)
+	spell.cast_spell(target, Spell.Type.DARK_STORM, spell_modifier)
 
 
 func _is_next_attack_super_strike() -> bool:

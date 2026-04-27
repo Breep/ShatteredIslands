@@ -1,7 +1,7 @@
 class_name LabelPopup
 extends Control
 
-const SCENE: PackedScene = preload("res://Prototyping/Entity/LabelPopup/label_popup.tscn")
+const SCENE: PackedScene = preload("res://02_Entities/_Shared/EntityInfoPanel/LabelPopup/label_popup.tscn")
 
 const COLOR_PHYSICAL: Color = Color(0.934, 0.934, 0.934, 1.0)
 const COLOR_MAGICAL:  Color = Color(0.0, 0.455, 0.952, 1.0)
