@@ -116,6 +116,7 @@ var alterations: AlterationsComponent
 var target: TargetComponent
 var movement: MovementComponent
 var animation: AnimationComponent
+var spawn_animation: SpawnAnimationComponent
 #endregion
 
 #region ============================== Private variables ==============================
@@ -126,8 +127,6 @@ var _label_popup_module: LabelPopupModule
 
 # Spawn system
 var _original_fighting_state: FightingState = FightingState.UNDEF
-var _spawn_tween: Tween = null
-var _spawn_ticks_remaining: int = -1
 #endregion
 
 #region ============================== Export ==============================
@@ -148,8 +147,7 @@ var _spawn_ticks_remaining: int = -1
 
 @export_subgroup("Visual/Animation")
 @export var custom_animation_component: AnimationComponent
-@export var spawn_duration: float = 0.5 # Duration of spawn animation in seconds
-@export var skip_spawn_animation: bool = false # Skip spawn animation for instant spawn
+@export var custom_spawn_animation_component: SpawnAnimationComponent # Overrides the default spawn animation if set
 
 @export_subgroup("Prototyping")
 @export var _spawn_manager: SpawnManager
@@ -223,6 +221,8 @@ func _enter_tree() -> void:
 	stat_modifiers_registry = EntityStatModifiersRegistry.new(_base_stats, stats)
 
 	_auto_load_components()
+	_load_spawn_animation()
+	_load_animation()
 
 	periodic_timer_registry = PeriodicTimerRegistry.new()
 	periodic_timer_registry.name = "PeriodicTimerRegistry"
@@ -260,6 +260,8 @@ func _ready() -> void:
 	input_event.connect(_on_input_event)
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
+
+	spawn_animation.spawn_finished.connect(_on_spawn_finished)
 
 	# Connect module interdependencies
 	_connect_module_dependencies()
@@ -309,10 +311,7 @@ func process_tick() -> void:
 		_auto_attack_periodic_module.process_tick()
 	if alterations != null:
 		alterations.process_tick()
-	if _spawn_ticks_remaining > 0:
-		_spawn_ticks_remaining -= 1
-		if _spawn_ticks_remaining == 0:
-			_complete_spawn()
+	spawn_animation.process_tick()
 	if periodic_timer_registry != null:
 		periodic_timer_registry.process_tick()
 #endregion
@@ -392,48 +391,28 @@ func resurrect(hp_percent: float) -> void:
 func _start_spawn() -> void:
 	fighting_state = FightingState.SPAWNING
 	Verbose.debug("Entity [" + entity_name + "] starting spawn", Verbose.Category.ENTITY)
-
-	if skip_spawn_animation:
-		_complete_spawn()
-		return
-
-	_spawn_ticks_remaining = int(spawn_duration * TICKS_PER_SECOND)
-	_play_spawn_animation()
+	spawn_animation.start_spawn()
 
 
-func _play_spawn_animation() -> void:
-	if _visual_3d != null:
-		_visual_3d.scale = Vector3.ZERO
-		_spawn_tween = create_tween()
-		_spawn_tween.set_ease(Tween.EASE_OUT)
-		_spawn_tween.set_trans(Tween.TRANS_BACK)
-		_spawn_tween.tween_property(_visual_3d, "scale", Vector3(stats.scale, stats.scale, stats.scale), spawn_duration)
-	else:
-		# No visual node, complete immediately
-		Verbose.warn("Entity [" + entity_name + "] has no _visual_3d for spawn animation", Verbose.Category.ENTITY)
-		_complete_spawn()
-
-
-func _complete_spawn() -> void:
+func _on_spawn_finished() -> void:
 	Verbose.debug("Entity [" + entity_name + "] completing spawn", Verbose.Category.ENTITY)
 	_is_targetable = true
 	if _fighting_state != FightingState.FIGHTING:
 		fighting_state = _original_fighting_state
 	spawn_completed.emit()
-	Verbose.debug("Entity [" + entity_name + "] spawn completed", Verbose.Category.ENTITY)
 #endregion
 
 #region ============================== Auto loading ==============================
 func _auto_load_components() -> void:
-	damage =  Shared.ENTITY_MODULE_SCENES[EntityComponent.Type.MOVEMENT].instantiate().init(self)
-	heal =  Shared.ENTITY_MODULE_SCENES[EntityComponent.Type.MOVEMENT].instantiate().init(self)
-	projectile =  Shared.ENTITY_MODULE_SCENES[EntityComponent.Type.MOVEMENT].instantiate().init(self)
-	spell =  Shared.ENTITY_MODULE_SCENES[EntityComponent.Type.MOVEMENT].instantiate().init(self)
-	summon =  Shared.ENTITY_MODULE_SCENES[EntityComponent.Type.MOVEMENT].instantiate().init(self)
-	auto_attack =  Shared.ENTITY_MODULE_SCENES[EntityComponent.Type.MOVEMENT].instantiate().init(self)
-	alterations =  Shared.ENTITY_MODULE_SCENES[EntityComponent.Type.MOVEMENT].instantiate().init(self)
-	target =  Shared.ENTITY_MODULE_SCENES[EntityComponent.Type.MOVEMENT].instantiate().init(self)
-	movement =  Shared.ENTITY_MODULE_SCENES[EntityComponent.Type.MOVEMENT].instantiate().init(self)
+	damage =  Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.DAMAGE].instantiate().init(self)
+	heal =  Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.HEAL].instantiate().init(self)
+	projectile =  Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.PROJECTILE].instantiate().init(self)
+	spell =  Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.SPELL].instantiate().init(self)
+	summon =  Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.SUMMON].instantiate().init(self)
+	auto_attack =  Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.AUTO_ATTACK].instantiate().init(self)
+	alterations =  Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.ALTERATIONS].instantiate().init(self)
+	target =  Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.TARGET].instantiate().init(self)
+	movement =  Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.MOVEMENT].instantiate().init(self)
 	
 	add_child(damage)
 	add_child(heal)
@@ -444,6 +423,22 @@ func _auto_load_components() -> void:
 	add_child(alterations)
 	add_child(target)
 	add_child(movement)
+
+
+func _load_spawn_animation() -> void:
+	if custom_spawn_animation_component != null:
+		spawn_animation = custom_spawn_animation_component
+		return
+	spawn_animation = Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.SPAWN_ANIMATION].instantiate().init(self)
+	add_child(spawn_animation)
+
+
+func _load_animation() -> void:
+	if custom_animation_component != null:
+		animation = custom_animation_component
+		return
+	animation = Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.ANIMATION].instantiate().init(self)
+	add_child(animation)
 
 
 func _connect_module_dependencies() -> void:

@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" uid="uid://cungme3l8pma5" path="res://02_Entities/_Shared/Components/Projectile/projectile_component.gd" id="1_tr57w"]
 
-[node name="ActionSenderProjectileModule" type="Node" unique_id=1541550506]
+[node name="ProjectileComponent" type="Node" unique_id=1541550506]
 script = ExtResource("1_tr57w")

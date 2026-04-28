@@ -102,7 +102,7 @@ func clear() -> void:
 
 
 func init() -> void:
-	_game_rules = load("res://Game/GameRules/normal_game_rules.tres")
+	_game_rules = load("res://05_Game/GameRules/normal_game_rules.tres")
 	_active_families.append(_FAMILIES_REF[Family.Type.ENGINEER])
 	#_active_families.append(_FAMILIES_REF[Family.Type.POISON])
 	_active_families.append(_FAMILIES_REF[Family.Type.ARDENT_CELESTIAL])

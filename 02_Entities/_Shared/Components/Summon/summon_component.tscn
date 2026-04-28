@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" uid="uid://cuvgatsiw4f34" path="res://02_Entities/_Shared/Components/Summon/summon_component.gd" id="1_w0g2q"]
 
-[node name="ActionSenderSummonModule" type="Node" unique_id=22881057]
+[node name="SummonComponent" type="Node" unique_id=22881057]
 script = ExtResource("1_w0g2q")

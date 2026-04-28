@@ -40,7 +40,10 @@ var ENTITY_COMPONENT_SCENES: Dictionary[EntityComponent.Type, PackedScene] = {
 	EntityComponent.Type.AUTO_ATTACK: load("res://02_Entities/_Shared/Components/AutoAttack/auto_attack_component.tscn"),
 
 	EntityComponent.Type.AUTO_ATTACK_PERIODIC_MODULE: load("res://02_Entities/_Shared/Components/AutoAttackPeriodicModule/auto_attack_periodic_module.tscn"),
-	EntityComponent.Type.LABEL_POPUP_MODULE: load("res://02_Entities/_Shared/Modules//PopupModule/label_popup_module.tscn")
+	EntityComponent.Type.LABEL_POPUP_MODULE: load("res://02_Entities/_Shared/Modules//PopupModule/label_popup_module.tscn"),
+	
+	EntityComponent.Type.ANIMATION: load("res://02_Entities/_Shared/Components/Animation/animation_component.tscn"),
+	EntityComponent.Type.SPAWN_ANIMATION: load("res://02_Entities/_Shared/Components/SpawnAnimation/spawn_animation_component.tscn"),
 }
 
 var FAMILY_MANAGER_SCENES: Dictionary[Family.Type, PackedScene] = {

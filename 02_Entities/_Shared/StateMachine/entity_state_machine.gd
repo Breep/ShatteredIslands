@@ -36,10 +36,6 @@ func transition_to(new_state: Entity.FightingState) -> void:
 			pass
 
 
-# Stops modules and periodic timers; does NOT trigger battle_callback end.
-# Asymmetric with start_combat_modules: preserves the exact behavior previously
-# inlined in Entity._on_died (timers stop on death) and Entity._on_fighting_state_changed
-# IDLE/CELEBRATING (timers stop on combat end).
 func stop_combat_modules() -> void:
 	if _entity.target != null: _entity.target.stop()
 	if _entity.alterations != null: _entity.alterations.stop()
@@ -50,9 +46,6 @@ func stop_combat_modules() -> void:
 		_entity.periodic_timer_registry.stop_all()
 
 
-# Starts modules only; does NOT restart periodic timers nor trigger battle_callback start.
-# Asymmetric with stop_combat_modules: preserves the exact behavior previously
-# inlined in Entity.resurrect (timers stay where they are on resurrect).
 func start_combat_modules() -> void:
 	if _entity.target != null: _entity.target.start()
 	if _entity.alterations != null: _entity.alterations.start()

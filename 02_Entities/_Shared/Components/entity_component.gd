@@ -13,6 +13,8 @@ enum Type {
 	AUTO_ATTACK = 8,
 	AUTO_ATTACK_PERIODIC_MODULE = 9,
 	LABEL_POPUP_MODULE = 10,
+	ANIMATION = 11,
+	SPAWN_ANIMATION = 12
 }
 
 static var _global_dodge_number: int = 0
