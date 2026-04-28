@@ -1,0 +1,15 @@
+# LANGUAGE translation for ShatteredIslands for the following files:
+# res://Card/Descriptions/Cards/ArdentCelestial/Common/ConsummingTheStar/fire_consuming_the_star.gd
+#
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ShatteredIslands\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8-bit\n"
+
+msgid "ShatteredIslands"
+msgstr ""
