@@ -158,6 +158,7 @@ var _spawn_ticks_remaining: int = -1
 #endregion
 
 @onready var bds_registry := EntityBDSRegistry.new(self)
+@onready var _state_machine := EntityStateMachine.new(self)
 
 #region ============================== Misc State ==============================
 signal life_state_changed(new_life_state: LifeState)
@@ -381,10 +382,7 @@ func resurrect(hp_percent: float) -> void:
 
 	stats.health = stats.health_max * (hp_percent / 100)
 	life_state = LifeState.ALIVE
-	if target != null: target.start()
-	if alterations != null: alterations.start()
-	if movement != null: movement.start()
-	if _auto_attack_periodic_module != null and auto_attack_enabled: _auto_attack_periodic_module.start()
+	_state_machine.start_combat_modules()
 	resurrected.emit()
 #endregion
 
@@ -449,27 +447,30 @@ func _auto_load_components() -> void:
 
 
 func _connect_module_dependencies() -> void:
-	if _spawn_manager != null:
+	if target != null:
 		target.connect_to_spawn_manager(_spawn_manager)
-		projectile.connect_to_spawn_manager(_spawn_manager)
-		spell.connect_to_spawn_manager(_spawn_manager)
-		summon.connect_to_spawn_manager(_spawn_manager)
 	
-	if _arena_zone_manager != null:
+	if projectile != null:
+		projectile.connect_to_spawn_manager(_spawn_manager)
+	
+	if spell != null:
+		spell.connect_to_spawn_manager(_spawn_manager)
+	
+	if summon != null: 
+		summon.connect_to_spawn_manager(_spawn_manager)
 		summon.connect_to_arena_zone_manager(_arena_zone_manager)
 	
 	if auto_attack != null:
 		auto_attack.connect_modules(movement, animation)
 		auto_attack.set_auto_attack_spawn(_attack_spawn_marker)
 		auto_attack.set_projectile_type(_projectile_type)
-
-	# Connect periodic module with auto attack sender
+	
 	if _auto_attack_periodic_module != null and auto_attack != null:
 		_auto_attack_periodic_module.connect_modules(auto_attack)
-
+	
 	if animation != null:
 		animation.connect_modules(auto_attack)
-
+	
 	if _label_popup_module != null:
 		_label_popup_module.connect_marker(_health_bar_marker)
 #endregion
@@ -477,29 +478,7 @@ func _connect_module_dependencies() -> void:
 #region ============================== Callbacks ==============================
 func _on_fighting_state_changed(new_fighting_state: FightingState) -> void:
 	Verbose.debug("Entity [" + entity_name + "] fighting state changed to [" + str(FightingState.keys()[new_fighting_state]) + "]", Verbose.Category.ENTITY)
-	match new_fighting_state:
-		FightingState.IDLE:
-			if target != null: target.stop()
-			if alterations != null: alterations.stop()
-			if movement != null: movement.stop()
-			if _auto_attack_periodic_module != null and auto_attack_enabled: _auto_attack_periodic_module.stop()
-			if periodic_timer_registry != null: periodic_timer_registry.stop_all()
-			if battle_callback_registry != null: battle_callback_registry.execute_battle_end()
-		FightingState.FIGHTING:
-			if target != null: target.start()
-			if alterations != null: alterations.start()
-			if movement != null: movement.start()
-			if _auto_attack_periodic_module != null and auto_attack_enabled: _auto_attack_periodic_module.start()
-			if periodic_timer_registry != null: periodic_timer_registry.start_all()
-			if battle_callback_registry != null: battle_callback_registry.execute_battle_start()
-		FightingState.CELEBRATING:
-			if target != null: target.stop()
-			if alterations != null: alterations.stop()
-			if movement != null: movement.stop()
-			if _auto_attack_periodic_module != null: _auto_attack_periodic_module.stop()
-			if periodic_timer_registry != null: periodic_timer_registry.stop_all()
-			if battle_callback_registry != null: battle_callback_registry.execute_battle_end()
-		FightingState.UNDEF: pass
+	_state_machine.transition_to(new_fighting_state)
 
 
 func _on_stats_health_changed(new_health: float) -> void:
@@ -515,14 +494,8 @@ func _on_stats_scale_changed(new_scale: float) -> void:
 func _on_died() -> void:
 	Verbose.debug("Entity [" + entity_name + "] died", Verbose.Category.ENTITY)
 
-	life_state = LifeState.DEAD # Set life state
-
-	# Visual and module cleanup
-	if target != null: target.stop()
-	if alterations != null: alterations.stop()
-	if movement != null: movement.stop()
-	if _auto_attack_periodic_module != null and auto_attack_enabled: _auto_attack_periodic_module.stop()
-	if periodic_timer_registry != null: periodic_timer_registry.stop_all()
+	life_state = LifeState.DEAD
+	_state_machine.stop_combat_modules()
 
 	for action_modifier in death_modifiers_registry.consume_all_modifiers():
 		if action_modifier.after_action_logic_callback.is_valid():
