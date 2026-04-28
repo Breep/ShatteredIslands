@@ -22,9 +22,9 @@ func cleanup() -> void:
 	_buying_area.cleanup()
 
 
-# Spawn all heroes on the BuyingArea according to the battle
-func start_buying_phase(battles: Array[Battle]) -> void:
-	_buying_area.start_round(battles)
+# Affiche un encounter (joueurs + masters + slaves) sur la tavern.
+func start_buying_phase(encounter: TavernEncounter) -> void:
+	_buying_area.start_round(encounter)
 
 
 func set_active() -> void:
