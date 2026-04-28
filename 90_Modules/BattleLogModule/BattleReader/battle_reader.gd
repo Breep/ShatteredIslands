@@ -103,7 +103,7 @@ func _apply_spell_casted(battle_log: Dictionary) -> void:
 	var spell_type: Spell.Type = battle_log.get(BattleLog.Main.SPELL_TYPE, -1)
 	var spell_modifier: Dictionary = battle_log.get(BattleLog.Main.SPELL_MODIFIER, {})
 	
-	source.spell_sender.cast_spell(target, spell_type, spell_modifier)
+	source.spell.cast_spell(target, spell_type, spell_modifier)
 
 
 #region ACTION/INTERACTION

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d1vyiv7p774vv"]
 
 [ext_resource type="Script" uid="uid://b813nthf8hk74" path="res://03_SpellsAndProjectiles/Projectiles/Poison/PoisonFlask/poison_flask_projectile.gd" id="1_6a3hp"]
-[ext_resource type="Script" uid="uid://dlww5csbnicq8" path="res://03_SpellsAndProjectiles/Projectiles/Trajectories/arc_trajectory.gd" id="2_gsyg4"]
+[ext_resource type="Script" uid="uid://dlww5csbnicq8" path="res://03_SpellsAndProjectiles/Projectiles/_Shared/Trajectories/arc_trajectory.gd" id="2_gsyg4"]
 [ext_resource type="PackedScene" uid="uid://bo17b2bq5o08r" path="res://03_SpellsAndProjectiles/Projectiles/Poison/PoisonFlask/poison_flask_visual.tscn" id="3_0k7fv"]
 
 [sub_resource type="Resource" id="Resource_0k7fv"]

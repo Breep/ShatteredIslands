@@ -21,7 +21,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	ctx.battle_callbacks.register_battle_start(&"Fortification Drone", func() -> void:
 		for i in drones_number:
 			var spawn_loc := SpawnLocationConfig.create_entity_relative(ctx.hero, 8.0)
-			ctx.hero.summon_sender.summon_entity(Entity.EntityType.FORTIFICATION_DRONE, spawn_loc, {
+			ctx.hero.summon.summon_entity(Entity.EntityType.FORTIFICATION_DRONE, spawn_loc, {
 				FortificationDrone.Modifier.SHIELD: drone_shield,
 				FortificationDrone.Modifier.HP_MAX: drone_hp,
 				FortificationDrone.Modifier.SHIELD_PER_SECOND: shield_per_second,

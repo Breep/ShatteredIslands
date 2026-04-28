@@ -32,7 +32,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	ctx.periodic_timers.register_oneshot(time_before_spawn, func() -> void:
 		ctx.hero.action_modifiers_registry.register_modifier(big_egg_mod)
 		for i in big_egg_number:
-			ctx.hero.summon_sender.summon_entity(Entity.EntityType.CHICKEN_EGG, SpawnLocationConfig.create_arena_center(3), {})
+			ctx.hero.summon.summon_entity(Entity.EntityType.CHICKEN_EGG, SpawnLocationConfig.create_arena_center(3), {})
 		ctx.hero.action_modifiers_registry.unregister_modifier(big_egg_mod)
 		)
 

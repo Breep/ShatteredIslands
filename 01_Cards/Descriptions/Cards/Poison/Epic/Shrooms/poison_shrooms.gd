@@ -24,7 +24,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			Spell.ShroomModifier.DAMAGE: damage,
 			Spell.ShroomModifier.LIFE_TIME: life_time
 		}
-		ctx.hero.spell_sender.cast_spell(target, Spell.Type.SHROOM, spell_modifier)
+		ctx.hero.spell.cast_spell(target, Spell.Type.SHROOM, spell_modifier)
 	)
 
 

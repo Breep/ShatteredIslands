@@ -17,15 +17,15 @@ var HERO_SCENES: Dictionary[HeroDesc.HeroId, PackedScene] = {
 }
 
 var FAMILIES: Dictionary[Family.Type, Family] = {
-	Family.Type.WARRIOR: load("res://01_Card/Descriptions/Families/warrior_family.tres"),
-	Family.Type.ENGINEER: load("res://01_Card/Descriptions/Families/Engineer/engineer_family.tres"),
-	Family.Type.ARDENT_CELESTIAL: load("res://01_Card/Descriptions/Families/ArdentCelestial/ardent_celestial_family.tres"),
-	Family.Type.STORM_CALLER: load("res://01_Card/Descriptions/Families/storm_caller_family.tres"),
-	Family.Type.LIGHT: load("res://01_Card/Descriptions/Families/light_family.tres"),
-	Family.Type.COLOSSUS: load("res://01_Card/Descriptions/Families/Colossus/colossus_family.tres"),
-	Family.Type.POISON: load("res://01_Card/Descriptions/Families/poison_family.tres"),
-	Family.Type.CHICKEN_LORD: load("res://01_Card/Descriptions/Families/ChickenLord/chicken_lord_family.tres"),
-	Family.Type.NECROSIS: load("res://01_Card/Descriptions/Families/necro_family.tres"),
+	Family.Type.WARRIOR: load("res://01_Cards/Descriptions/Families/warrior_family.tres"),
+	Family.Type.ENGINEER: load("res://01_Cards/Descriptions/Families/Engineer/engineer_family.tres"),
+	Family.Type.ARDENT_CELESTIAL: load("res://01_Cards/Descriptions/Families/ArdentCelestial/ardent_celestial_family.tres"),
+	Family.Type.STORM_CALLER: load("res://01_Cards/Descriptions/Families/storm_caller_family.tres"),
+	Family.Type.LIGHT: load("res://01_Cards/Descriptions/Families/light_family.tres"),
+	Family.Type.COLOSSUS: load("res://01_Cards/Descriptions/Families/Colossus/colossus_family.tres"),
+	Family.Type.POISON: load("res://01_Cards/Descriptions/Families/poison_family.tres"),
+	Family.Type.CHICKEN_LORD: load("res://01_Cards/Descriptions/Families/ChickenLord/chicken_lord_family.tres"),
+	Family.Type.NECROSIS: load("res://01_Cards/Descriptions/Families/necro_family.tres"),
 }
 
 var ENTITY_COMPONENT_SCENES: Dictionary[EntityComponent.Type, PackedScene] = {

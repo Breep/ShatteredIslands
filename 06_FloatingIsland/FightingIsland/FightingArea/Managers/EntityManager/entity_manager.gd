@@ -36,8 +36,8 @@ func clear() -> void:
 	Verbose.debug("clear()", Verbose.Category.ENTITY_MANAGER)
 	for entity: Entity in _entities.values():
 		if entity != null:
-			if entity.spell_sender.spell_casted.is_connected(_on_entity_spell_casted):
-				entity.spell_sender.spell_casted.disconnect(_on_entity_spell_casted)
+			if entity.spell_casted.is_connected(_on_entity_spell_casted):
+				entity.spell_casted.disconnect(_on_entity_spell_casted)
 			if entity.died.is_connected(_on_entity_died):
 				entity.died.disconnect(_on_entity_died)
 			if entity.action_done.is_connected(_on_entity_action_done):
@@ -66,7 +66,7 @@ func _register_entity(entity: Entity) -> void:
 	if entity is Hero:
 		_heroes[entity.uid] = entity
 	
-	entity.spell_sender.spell_casted.connect(_on_entity_spell_casted.bind(entity))
+	entity.spell_casted.connect(_on_entity_spell_casted.bind(entity))
 	entity.action_done.connect(_on_entity_action_done.bind(entity))
 	entity.action_received.connect(_on_entity_interaction_received.bind(entity))
 	entity.died.connect(_on_entity_died.bind(entity))
@@ -74,7 +74,7 @@ func _register_entity(entity: Entity) -> void:
 
 
 func _kick_entity(entity: Entity) -> void:
-	if entity.spell_sender.spell_casted.is_connected(_on_entity_spell_casted): entity.spell_sender.spell_casted.disconnect(_on_entity_spell_casted)
+	if entity.spell_casted.is_connected(_on_entity_spell_casted): entity.spell_casted.disconnect(_on_entity_spell_casted)
 	if entity.died.is_connected(_on_entity_died): entity.died.disconnect(_on_entity_died)
 	if entity.action_done.is_connected(_on_entity_action_done): entity.action_done.disconnect(_on_entity_action_done)
 	if entity.action_received.is_connected(_on_entity_interaction_received): entity.action_received.disconnect(_on_entity_interaction_received)

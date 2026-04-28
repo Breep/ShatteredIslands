@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c1goibqlf12t3" path="res://03_SpellsAndProjectiles/Projectiles/ShieldThrow/shield_throw_visual.tscn" id="1_827r1"]
 [ext_resource type="Script" uid="uid://dky1clxj0r0wo" path="res://03_SpellsAndProjectiles/Projectiles/ShieldThrow/shield_throw_projectile.gd" id="1_x5v4l"]
-[ext_resource type="Script" uid="uid://xr3esthqo6re" path="res://03_SpellsAndProjectiles/Projectiles/Trajectories/straight_trajectory.gd" id="2_h42ot"]
+[ext_resource type="Script" uid="uid://xr3esthqo6re" path="res://03_SpellsAndProjectiles/Projectiles/_Shared/Trajectories/straight_trajectory.gd" id="2_h42ot"]
 
 [sub_resource type="Resource" id="Resource_632w7"]
 script = ExtResource("2_h42ot")

@@ -13,7 +13,7 @@ enum DisplayMode {
 	UNLOCKED_ONLY
 }
 
-const CARD_BUTTON_SCENE: PackedScene = preload("res://01_Card/2D/CardButton/card_button.tscn")
+const CARD_BUTTON_SCENE: PackedScene = preload("res://01_Cards/2D/CardButton/card_button.tscn")
 
 @onready var _grid_container: GridContainer = %GridContainer
 @onready var _scroll_container: ScrollContainer = %ScrollContainer

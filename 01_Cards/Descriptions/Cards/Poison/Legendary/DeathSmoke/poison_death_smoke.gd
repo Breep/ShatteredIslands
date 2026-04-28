@@ -18,7 +18,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			Spell.DeathFogModifier.TICK_PERIOD: period,
 			Spell.DeathFogModifier.DAMAGE_MULTIPLIER: multiplier,
 		}
-		ctx.hero.spell_sender.cast_spell(ctx.hero, Spell.Type.DEATH_FOG, spell_modifier)
+		ctx.hero.spell.cast_spell(ctx.hero, Spell.Type.DEATH_FOG, spell_modifier)
 	)
 
 

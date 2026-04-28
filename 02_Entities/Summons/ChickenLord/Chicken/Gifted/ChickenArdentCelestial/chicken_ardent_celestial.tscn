@@ -24,26 +24,27 @@ height = 0.84375
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_asoqs"]
 radius = 50.0
 
-[node name="ChickenArdentCelestial" type="CharacterBody3D" unique_id=2109615854 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_health_bar")]
+[node name="ChickenArdentCelestial" type="CharacterBody3D" unique_id=2109615854 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_health_bar", "custom_animation_component")]
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("1_qvw4t")
 entity_name = "Chicken Ardent"
 custom_base_stats = SubResource("Resource_asoqs")
-_auto_loaded_modules = Array[int]([1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 15, 16, 17, 18, 19, 0, 4])
 _visual_3d = NodePath("ChickenArdentCelestialVisual")
 _health_bar_marker = NodePath("ChickenArdentCelestialVisual/HealthBarSpawnMarker")
 _health_bar = NodePath("HealthBar")
+custom_animation_component = NodePath("AnimationComponent")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1928783995]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41943443, 0)
 shape = SubResource("CapsuleShape3D_x7yny")
 
-[node name="AnimationModule" type="Node" parent="." unique_id=986746104 node_paths=PackedStringArray("_animation_tree", "_animation_player", "_entity_owner")]
+[node name="AnimationComponent" type="Node" parent="." unique_id=986746104 node_paths=PackedStringArray("_animation_tree", "_animation_player", "_entity_owner", "_owner")]
 script = ExtResource("3_pnknb")
 _animation_tree = NodePath("../AnimationTree")
 _animation_player = NodePath("../ChickenArdentCelestialVisual/AnimationPlayer")
 _entity_owner = NodePath("..")
+_owner = NodePath("..")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=2080904651]
 root_node = NodePath("../ChickenArdentCelestialVisual")

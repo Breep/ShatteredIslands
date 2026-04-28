@@ -124,7 +124,7 @@ func _dequeue_meteor(target: Variant) -> void:
 	if final_target == null:
 		_meteor_queues.erase(target)
 		return
-	_owner.spell_sender.cast_spell(final_target, Spell.Type.METEOR)
+	_owner.spell.cast_spell(final_target, Spell.Type.METEOR)
 	# S'il reste des météores pour cette cible, programmer le prochain
 	if _meteor_queues.has(target):
 		_schedule_dequeue_for(target)

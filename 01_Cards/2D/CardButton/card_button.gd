@@ -10,7 +10,7 @@ signal card_selected(self_ref: CardButton, card: Card)
 const LAYER_FRONT = 1
 const LAYER_BACK = 0
 const ROT_SPEED: float = 4
-const CARD_PREVIEW_SCENE: PackedScene = preload("res://01_Card/2D/CardPreview/ui_card_preview.tscn")
+const CARD_PREVIEW_SCENE: PackedScene = preload("res://01_Cards/2D/CardPreview/ui_card_preview.tscn")
 
 # ============================== Public variables ==============================
 

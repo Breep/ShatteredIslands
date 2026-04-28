@@ -20,7 +20,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	
 	ctx.battle_callbacks.register_battle_start(&"Aegis Blade", func() -> void:
 		var spawn_loc := SpawnLocationConfig.create_arena_center(5)
-		ctx.hero.summon_sender.summon_entity(Entity.EntityType.AEGIS_BLADE, spawn_loc, {
+		ctx.hero.summon.summon_entity(Entity.EntityType.AEGIS_BLADE, spawn_loc, {
 			AegisBlade.Modifier.AD: attack_damage,
 			AegisBlade.Modifier.AS: attack_speed,
 			AegisBlade.Modifier.SHIELD_AD_MAX: shield_ad_max,

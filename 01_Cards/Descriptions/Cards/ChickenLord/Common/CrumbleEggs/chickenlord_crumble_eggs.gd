@@ -20,7 +20,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		ctx.hero.damage.direct(hit_target, damage, Utils.ActionType.DAMAGE_MAGICAL, &"Crumble Egg")
 		if hit_target.is_dead():
 			for i in chicken_spawned_per_death:
-				ctx.hero.summon_sender.summon_entity(Entity.EntityType.CHICKEN_EGG, SpawnLocationConfig.create_entity_relative(hit_target, 1.5), {})
+				ctx.hero.summon.summon_entity(Entity.EntityType.CHICKEN_EGG, SpawnLocationConfig.create_entity_relative(hit_target, 1.5), {})
 	)
 	ctx.periodic_timers.register("Crumble Eggs", period, func() -> void:
 		var target: Entity = ctx.hero.target.get_target(TargetComponent.TargettingStrategy.LOWEST_HP_ENEMY)

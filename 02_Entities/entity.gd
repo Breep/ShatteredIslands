@@ -25,6 +25,8 @@ signal heal_taken(heal_amount: float, is_critical: bool)
 signal stack_taken(stack_type: Alteration.Type, stack_number: float, is_critical: bool)
 @warning_ignore("unused_signal")
 signal auto_attack_completed()
+@warning_ignore("unused_signal")
+signal spell_casted(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary)
 signal spawn_completed()
 signal resurrected()
 #endregion

@@ -2,10 +2,10 @@ class_name UIFamilyViewer
 extends Control
 
 const DESC_PANELS: Dictionary = {
-	Family.Type.ARDENT_CELESTIAL: preload("res://01_Card/Descriptions/Families/ArdentCelestial/ardent_celestial_desc_panel.tscn"),
-	Family.Type.CHICKEN_LORD: preload("res://01_Card/Descriptions/Families/ChickenLord/chicken_lord_desc_panel.tscn"),
-	Family.Type.COLOSSUS: preload("res://01_Card/Descriptions/Families/Colossus/colossus_desc_panel.tscn"),
-	Family.Type.ENGINEER: preload("res://01_Card/Descriptions/Families/Engineer/engineer_desc_panel.tscn"),
+	Family.Type.ARDENT_CELESTIAL: preload("res://01_Cards/Descriptions/Families/ArdentCelestial/ardent_celestial_desc_panel.tscn"),
+	Family.Type.CHICKEN_LORD: preload("res://01_Cards/Descriptions/Families/ChickenLord/chicken_lord_desc_panel.tscn"),
+	Family.Type.COLOSSUS: preload("res://01_Cards/Descriptions/Families/Colossus/colossus_desc_panel.tscn"),
+	Family.Type.ENGINEER: preload("res://01_Cards/Descriptions/Families/Engineer/engineer_desc_panel.tscn"),
 }
 
 @onready var _family_name_label: RichTextLabel = %FamilyNameLabel

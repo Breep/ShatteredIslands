@@ -489,7 +489,7 @@ func _on_cast_spell_button_pressed() -> void:
 			spell_modifier[Spell.ChainLightningModifier.BOUNCE_RANGE] = _spell_param3_edit.text.to_float()
 			spell_modifier[Spell.ChainLightningModifier.DAMAGE_DECAY_PERCENT] = _spell_param4_edit.text.to_float()
 	
-	entity_owner.spell_sender.cast_spell(_target, spell_type, spell_modifier)
+	entity_owner.spell.cast_spell(_target, spell_type, spell_modifier)
 	print("DEBUG: cast_spell called - Target: ", _target.entity_name, " | Spell: ", Spell.Type.keys()[spell_type], " | Modifiers: ", spell_modifier)
 
 
@@ -774,7 +774,7 @@ func _on_summon_entity_button_pressed() -> void:
 				entity_modifier[DeflectionShield.Modifier.BLOCKED_PROJECTILES] = int(edits[0].text.to_float())
 				entity_modifier[DeflectionShield.Modifier.SHIELD_PER_BLOCK] = edits[1].text.to_float()
 
-		entity_owner.summon_sender.summon_entity(entity_type, spawn_config, entity_modifier)
+		entity_owner.summon.summon_entity(entity_type, spawn_config, entity_modifier)
 		print("DEBUG: summon_entity called - Type: ", Entity.EntityType.keys()[entity_type],
 			" | Spawn: ", SpawnLocationConfig.LocationType.keys()[spawn_type],
 			" | Modifiers: ", entity_modifier)

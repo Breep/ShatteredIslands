@@ -6,13 +6,13 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_gyxyb"]
 size = Vector3(0.452515, 0.0300827, 0.580994)
 
-[node name="Card3d" type="StaticBody3D"]
+[node name="Card3d" type="StaticBody3D" unique_id=1840733626]
 script = ExtResource("1_u48oe")
 
-[node name="Card3DVisual" parent="." instance=ExtResource("2_qdyvj")]
+[node name="Card3DVisual" parent="." unique_id=900764068 instance=ExtResource("2_qdyvj")]
 unique_name_in_owner = true
 
-[node name="Card3DCollision" type="CollisionShape3D" parent="."]
+[node name="Card3DCollision" type="CollisionShape3D" parent="." unique_id=1036590154]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000793457, 0.00556564, -0.00088504)
 shape = SubResource("BoxShape3D_gyxyb")

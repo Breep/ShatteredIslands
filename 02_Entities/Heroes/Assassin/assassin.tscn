@@ -153,17 +153,16 @@ nodes/one_shot_idle/node = SubResource("AnimationNodeOneShot_5c32l")
 nodes/one_shot_idle/position = Vector2(-700, 380)
 node_connections = [&"output", 0, &"transition_global", &"transition_fighting", 0, &"one_shot_idle", &"transition_fighting", 1, &"scale_dance", &"transition_fighting", 2, &"scale_die", &"scale_dance", 0, &"anim_dance", &"scale_die", 0, &"anim_die", &"scale_idle", 0, &"anim_idle", &"one_shot_attack", 0, &"transition_fighting", &"one_shot_attack", 1, &"blend_attack", &"blend_attack", 0, &"scale_attack_left", &"blend_attack", 1, &"scale_attack_right", &"one_shot_ultimate", 0, &"one_shot_attack", &"one_shot_ultimate", 1, &"scale_ultimate", &"scale_attack_left", 0, &"anim_attack_left", &"scale_attack_right", 0, &"anim_attack_right", &"scale_ultimate", 0, &"anim_ultimate", &"scale_idle_var", 0, &"anim_idle_var", &"one_shot_sitting", 0, &"anim_sitting", &"one_shot_sitting", 1, &"anim_sitting_var", &"transition_global", 0, &"anim_TPOSE", &"transition_global", 1, &"one_shot_sitting", &"transition_global", 2, &"one_shot_ultimate", &"one_shot_idle", 0, &"scale_idle", &"one_shot_idle", 1, &"scale_idle_var"]
 
-[node name="Assassin" type="CharacterBody3D" unique_id=937625230 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_health_bar", "_animation_module")]
+[node name="Assassin" type="CharacterBody3D" unique_id=937625230 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_health_bar", "custom_animation_component")]
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("1_fkxs5")
 hero_desc = ExtResource("2_72ggn")
 entity_name = "Dark Knight"
-_auto_loaded_modules = Array[int]([1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 15, 16, 17, 18, 19, 4])
 _visual_3d = NodePath("Visual")
 _health_bar_marker = NodePath("Visual/HealthBarSpawnMarker")
 _health_bar = NodePath("HealthBar")
-_animation_module = NodePath("HeroAnimationModule")
+custom_animation_component = NodePath("HeroAnimationModule")
 metadata/_custom_type_script = "uid://crybfqxtiik6d"
 
 [node name="Visual" type="Node3D" parent="." unique_id=93855188]
@@ -277,13 +276,13 @@ _animation_tree = NodePath("../AnimationTree")
 _animation_player = NodePath("../Visual/darkknight_silver/AnimationPlayer")
 _entity_owner = NodePath("..")
 
-[node name="HealthBar" parent="." unique_id=358992180 node_paths=PackedStringArray("_owner_entity", "_info_panel_spawn", "_info_panel_spawn_tavern") instance=ExtResource("5_p4s41")]
+[node name="HealthBar" parent="." unique_id=358992180 node_paths=PackedStringArray("_info_panel_spawn_tavern", "_owner_entity", "_info_panel_spawn") instance=ExtResource("5_p4s41")]
 anchors_preset = -1
 anchor_left = 0.042000003
 anchor_right = 0.042000003
 offset_right = -0.640007
+_info_panel_spawn_tavern = NodePath("../Visual/HealthBarSpawnMarkerTavern")
 _owner_entity = NodePath("..")
 _info_panel_spawn = NodePath("../Visual/HealthBarSpawnMarker")
-_info_panel_spawn_tavern = NodePath("../Visual/HealthBarSpawnMarkerTavern")
 
 [editable path="Visual/darkknight_silver"]

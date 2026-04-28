@@ -25,7 +25,7 @@ var _rng := RandomNumberGenerator.new()
 
 # ============================== Preload ==============================
 
-var _card_scene: PackedScene = preload("res://01_Card/3D/Card3D/card_3d.tscn")
+var _card_scene: PackedScene = preload("res://01_Cards/3D/Card3D/card_3d.tscn")
 
 # ============================== Node base functions ==============================
 

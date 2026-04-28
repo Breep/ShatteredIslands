@@ -25,23 +25,23 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 radius = 0.421875
 height = 0.84375
 
-[node name="ChickenShield" type="CharacterBody3D" unique_id=2109615854 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_health_bar")]
+[node name="ChickenShield" type="CharacterBody3D" unique_id=2109615854 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_health_bar", "custom_animation_component")]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("1_427g7")
 entity_name = "Chicken Shield"
 custom_base_stats = SubResource("Resource_tce5d")
-_auto_loaded_modules = Array[int]([1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 15, 16, 17, 18, 19, 0, 4])
 _visual_3d = NodePath("ChickenShieldVisual")
 _health_bar_marker = NodePath("ChickenShieldVisual/HealthBarSpawnMarker")
 _health_bar = NodePath("HealthBar")
+custom_animation_component = NodePath("AnimationComponent")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1928783995]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41943443, 0)
 shape = SubResource("CapsuleShape3D_x7yny")
 
-[node name="AnimationModule" type="Node" parent="." unique_id=986746104 node_paths=PackedStringArray("_animation_tree", "_animation_player", "_entity_owner")]
+[node name="AnimationComponent" type="Node" parent="." unique_id=986746104 node_paths=PackedStringArray("_animation_tree", "_animation_player", "_entity_owner")]
 script = ExtResource("3_86l0h")
 _animation_tree = NodePath("../AnimationTree")
 _animation_player = NodePath("../ChickenShieldVisual/AnimationPlayer")

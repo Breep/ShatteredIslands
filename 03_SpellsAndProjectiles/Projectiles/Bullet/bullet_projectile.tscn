@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://qdaex2quhv2n"]
 
 [ext_resource type="Script" uid="uid://dv8w8kb4xsqp3" path="res://03_SpellsAndProjectiles/Projectiles/projectile.gd" id="1_wv6p7"]
-[ext_resource type="Script" uid="uid://xr3esthqo6re" path="res://03_SpellsAndProjectiles/Projectiles/Trajectories/straight_trajectory.gd" id="2_yiped"]
+[ext_resource type="Script" uid="uid://xr3esthqo6re" path="res://03_SpellsAndProjectiles/Projectiles/_Shared/Trajectories/straight_trajectory.gd" id="2_yiped"]
 [ext_resource type="PackedScene" uid="uid://8xt807s45gq" path="res://03_SpellsAndProjectiles/Projectiles/Bullet/bullet_visual.tscn" id="3_fal7g"]
 
 [sub_resource type="Resource" id="Resource_bqfd1"]

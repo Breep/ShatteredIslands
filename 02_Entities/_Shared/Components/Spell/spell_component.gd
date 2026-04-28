@@ -1,8 +1,6 @@
 class_name SpellComponent
 extends EntityComponent
 
-signal spell_casted(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary)
-
 var _spawn_manager: SpawnManager
 
 const METEOR_SCENE: PackedScene = preload("res://03_SpellsAndProjectiles/Spells/Meteor/meteor.tscn")
@@ -55,7 +53,7 @@ func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictiona
 		ActionModifier.VarType.SPELL_MODIFIER: spell_modifier,
 	})
 
-	spell_casted.emit(target, spell_type, spell_modifier)
+	_owner.spell_casted.emit(target, spell_type, spell_modifier)
 
 
 # ============================== Private functions ==============================

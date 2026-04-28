@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://baad001jt6loo"]
 
 [ext_resource type="Script" uid="uid://d4dah17nf8pch" path="res://03_SpellsAndProjectiles/Projectiles/Poison/VenomousDart/venomous_dart_projectile.gd" id="1_yu3xq"]
-[ext_resource type="Script" uid="uid://dlww5csbnicq8" path="res://03_SpellsAndProjectiles/Projectiles/Trajectories/arc_trajectory.gd" id="2_0gtlb"]
+[ext_resource type="Script" uid="uid://dlww5csbnicq8" path="res://03_SpellsAndProjectiles/Projectiles/_Shared/Trajectories/arc_trajectory.gd" id="2_0gtlb"]
 [ext_resource type="PackedScene" uid="uid://cmmipw18epkmv" path="res://03_SpellsAndProjectiles/Projectiles/Poison/VenomousDart/venomous_dart_visual.tscn" id="2_quueb"]
 
 [sub_resource type="Resource" id="Resource_s7mnt"]

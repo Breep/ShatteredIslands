@@ -17,7 +17,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			Spell.ContagionModifier.RADIUS: radius,
 			Spell.ContagionModifier.SPREAD_PERCENT: percent
 		}
-		ctx.hero.spell_sender.cast_spell(ctx.hero, Spell.Type.CONTAGION, spell_modifier)
+		ctx.hero.spell.cast_spell(ctx.hero, Spell.Type.CONTAGION, spell_modifier)
 	)
 
 
