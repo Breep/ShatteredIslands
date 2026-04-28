@@ -117,6 +117,7 @@ var target: TargetComponent
 var movement: MovementComponent
 var animation: AnimationComponent
 var spawn_animation: SpawnAnimationComponent
+var clickable: ClickableComponent
 #endregion
 
 #region ============================== Private variables ==============================
@@ -148,6 +149,9 @@ var _original_fighting_state: FightingState = FightingState.UNDEF
 @export_subgroup("Visual/Animation")
 @export var custom_animation_component: AnimationComponent
 @export var custom_spawn_animation_component: SpawnAnimationComponent # Overrides the default spawn animation if set
+
+@export_subgroup("Interaction")
+@export var custom_clickable_component: ClickableComponent # Overrides the default click/hover handler if set
 
 @export_subgroup("Prototyping")
 @export var _spawn_manager: SpawnManager
@@ -223,6 +227,7 @@ func _enter_tree() -> void:
 	_auto_load_components()
 	_load_spawn_animation()
 	_load_animation()
+	_load_clickable()
 
 	periodic_timer_registry = PeriodicTimerRegistry.new()
 	periodic_timer_registry.name = "PeriodicTimerRegistry"
@@ -256,10 +261,6 @@ func _ready() -> void:
 		_original_fighting_state = _initial_fighting_state_from_context
 	else:
 		_original_fighting_state = fighting_state if fighting_state != FightingState.UNDEF else FightingState.IDLE
-
-	input_event.connect(_on_input_event)
-	mouse_entered.connect(_on_mouse_entered)
-	mouse_exited.connect(_on_mouse_exited)
 
 	spawn_animation.spawn_finished.connect(_on_spawn_finished)
 
@@ -441,6 +442,14 @@ func _load_animation() -> void:
 	add_child(animation)
 
 
+func _load_clickable() -> void:
+	if custom_clickable_component != null:
+		clickable = custom_clickable_component
+		return
+	clickable = Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.CLICKABLE].instantiate().init(self)
+	add_child(clickable)
+
+
 func _connect_module_dependencies() -> void:
 	if target != null:
 		target.connect_to_spawn_manager(_spawn_manager)
@@ -516,75 +525,3 @@ func _on_stunned_changed(is_active: bool, _duration: float, _infinite: bool) -> 
 
 func _on_stunned(_is_active: bool) -> void:
 	pass
-
-
-func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
-	if event is InputEventMouseButton and event.pressed:
-		if event.button_index == MOUSE_BUTTON_LEFT:
-			Events.entity_clicked.emit(self)
-			Verbose.debug("L'entité " + entity_name + " a été cliquée !", Verbose.Category.ENTITY)
-			_play_click_marker_animation()
-
-
-var _click_tween: Tween
-func _play_on_click_animation() -> void:
-	if _click_tween != null: _click_tween.stop()
-	_click_tween = create_tween()
-	_click_tween.set_ease(Tween.EASE_OUT)
-	_click_tween.set_trans(Tween.TRANS_BACK)
-	_click_tween.tween_property(_visual_3d, "scale", Vector3(1.2, 1.2, 1.2), 0.1)
-	_click_tween.tween_property(_visual_3d, "scale", Vector3.ONE, 0.1)
-
-
-static var _selection_marker_scene: PackedScene = preload("res://02_Entities/_Shared/Misc/selection_marker.tscn")
-var _selection_marker_instance: Node3D = null
-var _is_selected: bool = false
-var _is_hovered: bool = false
-
-
-func _ensure_selection_marker() -> Node3D:
-	if _selection_marker_instance == null:
-		_selection_marker_instance = _selection_marker_scene.instantiate()
-		add_child(_selection_marker_instance)
-	return _selection_marker_instance
-
-
-func _remove_selection_marker() -> void:
-	if _selection_marker_instance != null:
-		_selection_marker_instance.queue_free()
-		_selection_marker_instance = null
-
-
-func _update_selection_marker() -> void:
-	if _is_selected:
-		_ensure_selection_marker().show_selected()
-	elif _is_hovered:
-		_ensure_selection_marker().show_hover()
-	else:
-		_remove_selection_marker()
-
-
-func _play_click_marker_animation() -> void:
-	_ensure_selection_marker().play_click(_update_selection_marker)
-
-
-func select() -> void:
-	_is_selected = true
-	_update_selection_marker()
-
-
-func deselect() -> void:
-	_is_selected = false
-	_update_selection_marker()
-
-
-func _on_mouse_entered() -> void:
-	_is_hovered = true
-	_update_selection_marker()
-	Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
-
-
-func _on_mouse_exited() -> void:
-	_is_hovered = false
-	_update_selection_marker()
-	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
