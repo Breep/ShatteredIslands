@@ -9,7 +9,7 @@
 [ext_resource type="Shader" uid="uid://b28qeeghrupsv" path="res://22_VFX/VFX_3D/VFX/Shaders/s_basic_disolve_p.tres" id="7_d2xpk"]
 [ext_resource type="Texture2D" uid="uid://dgkbv4jad4qii" path="res://22_VFX/VFX_3D/VFX/Textures/T_VFX_smoke_1.PNG" id="8_1bfn0"]
 [ext_resource type="Shader" uid="uid://bxslcncv0mhh1" path="res://22_VFX/VFX_3D/VFX/Shaders/s_Trail_dynamic.tres" id="9_02nb3"]
-[ext_resource type="Script" path="res://VFX/Misc/Trail3D.gd" id="11_d7jlv"]
+[ext_resource type="Script" path="res://22_VFX/VFX_3D/Meteor/Misc/Trail3D.gd" id="11_d7jlv"]
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_oeum1"]
 gradient = ExtResource("3_xfncn")

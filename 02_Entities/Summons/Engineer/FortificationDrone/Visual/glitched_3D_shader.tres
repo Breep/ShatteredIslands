@@ -21,7 +21,7 @@ shader_type spatial;
 #define SPECULAR_SCHLICK_GGX
 #define UNSHADED
 #define UV_SHAKE
-#include \"res://VFX/VFEZ-godot-main/Shaders/vfez_3d_template.gdshaderinc\"
+#include \"res://22_VFX/VFEZ-godot-main/Shaders/vfez_3d_template.gdshaderinc\"
 "
 
 [resource]

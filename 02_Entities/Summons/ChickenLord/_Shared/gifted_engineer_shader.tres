@@ -27,7 +27,7 @@ shader_type spatial;
 #define COLOR_FACE_TINT
 #define COLOR_GLOW
 #define ALPHA_MASK
-#include \"res://VFX/VFEZ-godot-main/Shaders/vfez_3d_template.gdshaderinc\"
+#include \"res://22_VFX/VFEZ-godot-main/Shaders/vfez_3d_template.gdshaderinc\"
 "
 
 [resource]

@@ -29,7 +29,7 @@ shader_type canvas_item;
 #define UV_WRAP
 #define COLOR_GLOW
 #define ALPHA_MASK
-#include \"res://VFX/VFEZ-godot-main/Shaders/vfez_2d_template.gdshaderinc\"
+#include \"res://22_VFX/VFEZ-godot-main/Shaders/vfez_2d_template.gdshaderinc\"
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kxrgs"]

@@ -3992,7 +3992,7 @@ shader_type spatial;
 #define UV_ROUND_WAVE
 #define COLOR_RIM
 #define COLOR_GLOW
-#include \"res://VFX/VFEZ-godot-main/Shaders/vfez_3d_template.gdshaderinc\"
+#include \"res://22_VFX/VFEZ-godot-main/Shaders/vfez_3d_template.gdshaderinc\"
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7l2to"]
