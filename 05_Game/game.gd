@@ -17,6 +17,14 @@ var _current_round_player_id_islands: Array[int] # player_id
 @onready var _island_spawns_to_be_removed: Node3D = %IslandSpawns
 #endregion
 
+#region ============================== Encounters (transitionnel) ==============================
+@export_group("Encounters")
+# EncounterDef utilisé pour la buying phase. Si null, on retombe sur la composition
+# hardcodée (chicken_colossus + 4 slaves) — pratique tant qu'on n'a qu'un seul
+# encounter et pas encore de logique de sélection par round.
+@export var _buying_encounter_def: EncounterDef
+#endregion
+
 #region ============================== Node base functions ==============================
 func _ready() -> void:
 	_hero_selector.all_heroes_picked.connect(_on_hero_selector_all_heroes_picked)
@@ -63,26 +71,51 @@ func _start_buying_phase() -> void:
 	_buying_island.start_buying_phase(encounter)
 
 
-# TODO Transitionnel : RoundManager génère encore des Array[Battle] hérités du mode
-# PvP. Pour tester le mode mono/coop on construit ici un encounter placeholder :
-# 1 hero du joueur local + 1 chicken_colossus comme master + 3 chicken_basic en slaves.
-# À remplacer quand le RoundManager fournira directement un TavernEncounter.
+# Construit l'encounter à afficher pour la buying phase :
+# - Players extraits du game state (héritage Battle, à migrer plus tard)
+# - Masters/slaves décrits par le _buying_encounter_def (.tres) si défini,
+#   sinon fallback sur la composition hardcodée historique (sécurité).
 func _build_buying_encounter_from_battles(battles: Array[Battle]) -> TavernEncounter:
-	const CHICKEN_BASIC_SCENE: PackedScene = preload("res://02_Entities/Summons/ChickenLord/Chicken/Basic/chicken_basic.tscn")
-	const CHICKEN_COLOSSUS_SCENE: PackedScene = preload("res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenColossus/chicken_colossus.tscn")
-	const SLAVES_COUNT: int = 3
+	var players: Array[Hero] = _extract_local_players_from_battles(battles)
+	if _buying_encounter_def != null:
+		return EncounterBuilder.build(_buying_encounter_def, players)
+	return _build_fallback_encounter(players)
 
-	var encounter := TavernEncounter.new()
+
+# Récupère les héros joueurs depuis _current_round_battles. Pour l'instant on
+# n'extrait que le 1er hero (mono-joueur). À étendre pour le coop quand le
+# Battle system sera retiré.
+func _extract_local_players_from_battles(battles: Array[Battle]) -> Array[Hero]:
+	var players: Array[Hero] = []
 	if battles.is_empty() or battles[0].players.is_empty():
-		return encounter
-
+		return players
 	var hero: Hero = battles[0].players[0].hero
 	if hero != null:
-		encounter.players.append(hero)
+		players.append(hero)
+	return players
 
+
+# Fallback hardcodé si _buying_encounter_def est null. Réplique la composition
+# de test précédente. Sera retiré quand on aura plusieurs .tres et la logique
+# de sélection.
+func _build_fallback_encounter(players: Array[Hero]) -> TavernEncounter:
+	const CHICKEN_BASIC_SCENE: PackedScene = preload("res://02_Entities/Summons/ChickenLord/Chicken/Basic/chicken_basic.tscn")
+	const CHICKEN_COLOSSUS_SCENE: PackedScene = preload("res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenColossus/chicken_colossus.tscn")
+	const AUTO_SLAVES_COUNT: int = 2
+
+	var encounter := TavernEncounter.new()
+	encounter.players = players
 	encounter.masters.append(CHICKEN_COLOSSUS_SCENE.instantiate())
 
-	for i in SLAVES_COUNT:
+	var slave_behind: Entity = CHICKEN_BASIC_SCENE.instantiate()
+	encounter.slaves.append(slave_behind)
+	encounter.fixed_placements[slave_behind] = TavernSlots.SLAVE_BEHIND_MASTER
+
+	var slave_corner: Entity = CHICKEN_BASIC_SCENE.instantiate()
+	encounter.slaves.append(slave_corner)
+	encounter.fixed_placements[slave_corner] = TavernSlots.SLAVE_BACK_CORNER_LEFT
+
+	for i in AUTO_SLAVES_COUNT:
 		encounter.slaves.append(CHICKEN_BASIC_SCENE.instantiate())
 
 	return encounter
