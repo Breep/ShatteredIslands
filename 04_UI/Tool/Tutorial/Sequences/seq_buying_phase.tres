@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="TutorialSequence" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://04_UI/Tool/Tutorial/Resource/tutorial_sequence.gd" id="1_seq"]
+[ext_resource type="Script" path="res://04_UI/Tool/Tutorial/Resource/tutorial_step.gd" id="2_step"]
+
+[sub_resource type="Resource" id="step_tavern"]
+script = ExtResource("2_step")
+id = &"buying_intro"
+text = "Voici la taverne. Pendant cette phase, achète des cartes pour te renforcer toi et ton équipe."
+target_unique_name = &"CardShop"
+validation_event = 2
+validation_filter = &""
+auto_advance_delay = 8.0
+
+[sub_resource type="Resource" id="step_reroll"]
+script = ExtResource("2_step")
+id = &"buying_reroll"
+text = "Pas convaincu ? Tu peux reroll le shop contre de l'or."
+target_unique_name = &"RefreshButton"
+validation_event = 0
+validation_filter = &""
+auto_advance_delay = 6.0
+
+[sub_resource type="Resource" id="step_fight"]
+script = ExtResource("2_step")
+id = &"buying_fight"
+text = "Quand tu es prêt, clique sur Fight pour passer au combat."
+target_unique_name = &"EndBuyingPhaseButton"
+validation_event = 5
+validation_filter = &""
+auto_advance_delay = 0.0
+
+[resource]
+script = ExtResource("1_seq")
+id = &"seq_buying_phase"
+trigger_state = 3
+steps = Array[ExtResource("2_step")]([SubResource("step_tavern"), SubResource("step_reroll"), SubResource("step_fight")])

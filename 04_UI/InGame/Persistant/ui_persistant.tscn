@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://t0ycuxntigox" path="res://04_UI/InGame/Persistant/ui_persistant.gd" id="1_oypi2"]
 [ext_resource type="PackedScene" uid="uid://bvqsnkh0s11q2" path="res://04_UI/InGame/FamilyPortrait/ui_all_families_portrait.tscn" id="5_oypi2"]
 [ext_resource type="PackedScene" uid="uid://ci1xegvy2t2jm" path="res://04_UI/InGame/FamilyViewer/ui_family_viewer.tscn" id="9_16n6v"]
+[ext_resource type="PackedScene" path="res://04_UI/Tool/Tutorial/tutorial_overlay.tscn" id="10_tutov"]
 
 [node name="Persistant" type="Control" unique_id=1275150033]
 layout_mode = 3
@@ -86,3 +87,11 @@ offset_left = -667.0
 offset_top = -339.0
 offset_right = 333.0
 offset_bottom = 461.0
+
+[node name="Timer" type="Timer" parent="." unique_id=724028189]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="TutorialOverlay" parent="." groups=["tutorial_overlay"] instance=ExtResource("10_tutov")]
+
+[connection signal="pressed" from="EndBuyingPhaseButton" to="." method="_on_end_buying_phase_button_pressed"]
