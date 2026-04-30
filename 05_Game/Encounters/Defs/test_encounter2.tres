@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="EncounterDef" format=3 uid="uid://bqnuqubkv42id"]
+
+[ext_resource type="Script" uid="uid://qwb02fft0eah" path="res://05_Game/Encounters/entity_placement.gd" id="1_h0a4q"]
+[ext_resource type="PackedScene" uid="uid://d286hj53megm8" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenAttack/chicken_attack.tscn" id="2_5ud7m"]
+[ext_resource type="Script" uid="uid://m50aq6okrf7y" path="res://05_Game/Encounters/encounter_def.gd" id="2_feho3"]
+[ext_resource type="PackedScene" uid="uid://0t4v0p65y6iu" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenPoison/chicken_poison.tscn" id="4_5pmc4"]
+
+[sub_resource type="Resource" id="Resource_hnl3m"]
+script = ExtResource("1_h0a4q")
+scene = ExtResource("2_5ud7m")
+metadata/_custom_type_script = "uid://qwb02fft0eah"
+
+[sub_resource type="Resource" id="Resource_k3hhu"]
+script = ExtResource("1_h0a4q")
+scene = ExtResource("4_5pmc4")
+metadata/_custom_type_script = "uid://qwb02fft0eah"
+
+[sub_resource type="Resource" id="Resource_go2kk"]
+script = ExtResource("1_h0a4q")
+scene = ExtResource("4_5pmc4")
+metadata/_custom_type_script = "uid://qwb02fft0eah"
+
+[resource]
+script = ExtResource("2_feho3")
+encounter_name = &"test_encounter2"
+masters = Array[ExtResource("1_h0a4q")]([SubResource("Resource_hnl3m")])
+slaves = Array[ExtResource("1_h0a4q")]([SubResource("Resource_k3hhu"), SubResource("Resource_go2kk")])
+metadata/_custom_type_script = "uid://m50aq6okrf7y"

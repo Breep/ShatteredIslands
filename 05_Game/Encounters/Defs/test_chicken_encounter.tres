@@ -32,3 +32,4 @@ script = ExtResource("1_def")
 encounter_name = &"test_chicken_encounter"
 masters = Array[ExtResource("2_plc")]([SubResource("Resource_master_colossus")])
 slaves = Array[ExtResource("2_plc")]([SubResource("Resource_slave_behind"), SubResource("Resource_slave_corner"), SubResource("Resource_slave_auto_1"), SubResource("Resource_slave_auto_2")])
+banner_text = "Le Colosse des Plumes vous défie !"
