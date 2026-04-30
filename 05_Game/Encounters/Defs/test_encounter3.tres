@@ -1,0 +1,73 @@
+[gd_resource type="Resource" script_class="EncounterDef" format=3 uid="uid://drh4pyhs773kc"]
+
+[ext_resource type="Script" uid="uid://qwb02fft0eah" path="res://05_Game/Encounters/entity_placement.gd" id="1_75cgu"]
+[ext_resource type="Script" uid="uid://m50aq6okrf7y" path="res://05_Game/Encounters/encounter_def.gd" id="2_gqkpw"]
+[ext_resource type="PackedScene" uid="uid://dr2axaqcdg5x3" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenColossus/chicken_colossus.tscn" id="2_udgxr"]
+[ext_resource type="PackedScene" uid="uid://0t4v0p65y6iu" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenPoison/chicken_poison.tscn" id="4_w8pwl"]
+[ext_resource type="PackedScene" uid="uid://d286hj53megm8" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenAttack/chicken_attack.tscn" id="5_ghpul"]
+
+[sub_resource type="Resource" id="Resource_huu7w"]
+script = ExtResource("1_75cgu")
+scene = ExtResource("2_udgxr")
+metadata/_custom_type_script = "uid://qwb02fft0eah"
+
+[sub_resource type="Resource" id="Resource_6owkv"]
+script = ExtResource("1_75cgu")
+scene = ExtResource("2_udgxr")
+metadata/_custom_type_script = "uid://qwb02fft0eah"
+
+[sub_resource type="Resource" id="Resource_4w43x"]
+script = ExtResource("1_75cgu")
+scene = ExtResource("2_udgxr")
+metadata/_custom_type_script = "uid://qwb02fft0eah"
+
+[sub_resource type="Resource" id="Resource_63hys"]
+script = ExtResource("1_75cgu")
+scene = ExtResource("2_udgxr")
+metadata/_custom_type_script = "uid://qwb02fft0eah"
+
+[sub_resource type="Resource" id="Resource_o8qro"]
+script = ExtResource("1_75cgu")
+scene = ExtResource("4_w8pwl")
+metadata/_custom_type_script = "uid://qwb02fft0eah"
+
+[sub_resource type="Resource" id="Resource_fhhhg"]
+script = ExtResource("1_75cgu")
+scene = ExtResource("4_w8pwl")
+metadata/_custom_type_script = "uid://qwb02fft0eah"
+
+[sub_resource type="Resource" id="Resource_l6y6x"]
+script = ExtResource("1_75cgu")
+scene = ExtResource("4_w8pwl")
+metadata/_custom_type_script = "uid://qwb02fft0eah"
+
+[sub_resource type="Resource" id="Resource_u6sm0"]
+script = ExtResource("1_75cgu")
+scene = ExtResource("4_w8pwl")
+metadata/_custom_type_script = "uid://qwb02fft0eah"
+
+[sub_resource type="Resource" id="Resource_a2cqa"]
+script = ExtResource("1_75cgu")
+scene = ExtResource("5_ghpul")
+metadata/_custom_type_script = "uid://qwb02fft0eah"
+
+[sub_resource type="Resource" id="Resource_34p3t"]
+script = ExtResource("1_75cgu")
+scene = ExtResource("5_ghpul")
+metadata/_custom_type_script = "uid://qwb02fft0eah"
+
+[sub_resource type="Resource" id="Resource_vbndi"]
+script = ExtResource("1_75cgu")
+scene = ExtResource("5_ghpul")
+metadata/_custom_type_script = "uid://qwb02fft0eah"
+
+[sub_resource type="Resource" id="Resource_qtlm8"]
+script = ExtResource("1_75cgu")
+scene = ExtResource("5_ghpul")
+metadata/_custom_type_script = "uid://qwb02fft0eah"
+
+[resource]
+script = ExtResource("2_gqkpw")
+masters = Array[ExtResource("1_75cgu")]([SubResource("Resource_huu7w"), SubResource("Resource_6owkv"), SubResource("Resource_4w43x"), SubResource("Resource_63hys")])
+slaves = Array[ExtResource("1_75cgu")]([SubResource("Resource_o8qro"), SubResource("Resource_fhhhg"), SubResource("Resource_l6y6x"), SubResource("Resource_u6sm0"), SubResource("Resource_a2cqa"), SubResource("Resource_34p3t"), SubResource("Resource_vbndi"), SubResource("Resource_qtlm8")])
+metadata/_custom_type_script = "uid://m50aq6okrf7y"

@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://bjj8qp8ymw1jf"]
+
+[ext_resource type="Script" uid="uid://c70r3843hg23b" path="res://04_UI/InGame/EncounterBanner/encounter_banner.gd" id="1_script"]
+
+[node name="EncounterBanner" type="CanvasLayer" unique_id=480274472]
+script = ExtResource("1_script")
+
+[node name="Label" type="Label" parent="." unique_id=1971879016]
+unique_name_in_owner = true
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 60.0
+offset_bottom = 200.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.83137256, 0.60784316, 0.21568628, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 56
+text = "Aperçu de banner (texte runtime)"
+horizontal_alignment = 1
+vertical_alignment = 1
