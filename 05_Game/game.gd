@@ -1,6 +1,13 @@
 class_name Game
 extends Node3D
 
+#region ============================== Signals ==============================
+# Émis au début de chaque encounter, juste avant son affichage.
+# Point d'accroche pour les futurs systèmes transverses (audio, UI, dialogue,
+# animation d'approche...) sans toucher à game.gd.
+signal encounter_started(def: EncounterDef)
+#endregion
+
 #region ============================== Private variables ==============================
 var _fighting_islands: Dictionary[int, FightingIsland] # [player_id, FightingIslands]
 var _current_round_battles: Array[Battle]
@@ -19,10 +26,12 @@ var _current_round_player_id_islands: Array[int] # player_id
 
 #region ============================== Encounters (transitionnel) ==============================
 @export_group("Encounters")
-# EncounterDef utilisé pour la buying phase. Si null, on retombe sur la composition
-# hardcodée (chicken_colossus + 4 slaves) — pratique tant qu'on n'a qu'un seul
-# encounter et pas encore de logique de sélection par round.
-@export var _buying_encounter_def: EncounterDef
+# Pool d'encounters disponibles pour la buying phase. À chaque round, un est
+# tiré au hasard via _pick_encounter_from_pool(). Si le pool est vide, l'encounter
+# est skipé (erreur loggée).
+# TODO Plus tard : remplacer la pioche aléatoire par un EncounterPicker dédié
+# (poids, conditions, progression de difficulté).
+@export var _encounter_pool: Array[EncounterDef]
 #endregion
 
 #region ============================== Node base functions ==============================
@@ -67,19 +76,31 @@ func _start_buying_phase() -> void:
 	Verbose.debug("Start BUYING !", Verbose.Category.GAME)
 	_scene_switcher.set_island_active_only(_buying_island)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	var encounter: TavernEncounter = _build_buying_encounter_from_battles(_current_round_battles)
+	_run_encounter(_pick_encounter_from_pool())
+
+
+# Lance un encounter complet : construit son TavernEncounter runtime, émet le
+# signal encounter_started, et le passe au display via la chaîne BuyingIsland.
+# Point d'extension futur : sera enrichi par EncounterSession quand on
+# introduira animation d'approche, dialogue, événements de cycle de vie...
+func _run_encounter(def: EncounterDef) -> void:
+	if def == null:
+		Verbose.error("Pool d'encounters vide, encounter skipped", Verbose.Category.GAME)
+		return
+	Verbose.debug("Encounter pioché : '%s'" % def.encounter_name, Verbose.Category.GAME)
+	var players: Array[Hero] = _extract_local_players_from_battles(_current_round_battles)
+	var encounter: TavernEncounter = EncounterBuilder.build(def, players)
+	encounter_started.emit(def)
 	_buying_island.start_buying_phase(encounter)
 
 
-# Construit l'encounter à afficher pour la buying phase :
-# - Players extraits du game state (héritage Battle, à migrer plus tard)
-# - Masters/slaves décrits par le _buying_encounter_def (.tres) si défini,
-#   sinon fallback sur la composition hardcodée historique (sécurité).
-func _build_buying_encounter_from_battles(battles: Array[Battle]) -> TavernEncounter:
-	var players: Array[Hero] = _extract_local_players_from_battles(battles)
-	if _buying_encounter_def != null:
-		return EncounterBuilder.build(_buying_encounter_def, players)
-	return _build_fallback_encounter(players)
+# Pioche aléatoire dans le pool. Sera remplacée par une logique plus riche
+# (poids, conditions, progression de difficulté) dans une future classe
+# EncounterPicker dédiée.
+func _pick_encounter_from_pool() -> EncounterDef:
+	if _encounter_pool.is_empty():
+		return null
+	return _encounter_pool.pick_random()
 
 
 # Récupère les héros joueurs depuis _current_round_battles. Pour l'instant on
@@ -93,32 +114,6 @@ func _extract_local_players_from_battles(battles: Array[Battle]) -> Array[Hero]:
 	if hero != null:
 		players.append(hero)
 	return players
-
-
-# Fallback hardcodé si _buying_encounter_def est null. Réplique la composition
-# de test précédente. Sera retiré quand on aura plusieurs .tres et la logique
-# de sélection.
-func _build_fallback_encounter(players: Array[Hero]) -> TavernEncounter:
-	const CHICKEN_BASIC_SCENE: PackedScene = preload("res://02_Entities/Summons/ChickenLord/Chicken/Basic/chicken_basic.tscn")
-	const CHICKEN_COLOSSUS_SCENE: PackedScene = preload("res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenColossus/chicken_colossus.tscn")
-	const AUTO_SLAVES_COUNT: int = 2
-
-	var encounter := TavernEncounter.new()
-	encounter.players = players
-	encounter.masters.append(CHICKEN_COLOSSUS_SCENE.instantiate())
-
-	var slave_behind: Entity = CHICKEN_BASIC_SCENE.instantiate()
-	encounter.slaves.append(slave_behind)
-	encounter.fixed_placements[slave_behind] = TavernSlots.SLAVE_BEHIND_MASTER
-
-	var slave_corner: Entity = CHICKEN_BASIC_SCENE.instantiate()
-	encounter.slaves.append(slave_corner)
-	encounter.fixed_placements[slave_corner] = TavernSlots.SLAVE_BACK_CORNER_LEFT
-
-	for i in AUTO_SLAVES_COUNT:
-		encounter.slaves.append(CHICKEN_BASIC_SCENE.instantiate())
-
-	return encounter
 
 
 func _start_fighting_phase() -> void:
