@@ -43,9 +43,10 @@ func present_step(step: TutorialStep, is_last: bool = false) -> void:
 	_current_step = step
 	_current_bubble = _BUBBLE_SCENE.instantiate()
 	add_child(_current_bubble)
+	move_child(_current_bubble, get_child_count() - 1) # ensure bubble is rendered above the blocker
 	_current_bubble.closed.connect(_on_bubble_closed)
 	var target: Control = _resolve_target(step.target_unique_name)
-	_apply_popup_mode(step.popup_mode, target)
+	_apply_step_visuals(step, target)
 	_current_bubble.show_bubble(step, target, is_last)
 
 
@@ -80,35 +81,41 @@ func _resolve_target(unique_name: StringName) -> Control:
 	if node == null:
 		node = get_tree().root.find_child(String(unique_name), true, false)
 	if node is Control:
-		return node
+		var ctrl: Control = node
+		Verbose.debug("Resolved target '%s' → %s | rect=%s | visible=%s" % [String(unique_name), ctrl.get_path(), ctrl.get_global_rect(), ctrl.visible], Verbose.Category.TUTORIAL)
+		return ctrl
 	Verbose.warn("Tutorial target not found or not a Control: " + String(unique_name), Verbose.Category.TUTORIAL)
 	return null
 
 
-func _apply_popup_mode(mode: int, target: Control) -> void:
-	match mode:
-		TutorialStep.PopupMode.PASSIVE:
-			_hide_blocker()
-		TutorialStep.PopupMode.BLOCKING:
-			_show_blocker(target, 0.0)
-		TutorialStep.PopupMode.MODAL_DIMMED:
-			_show_blocker(target, _DIM_ALPHA)
+## Decides what the blocker should do for the given step:
+## - dim     : draw the spotlight (4 strips around the target rect)
+## - block   : swallow input outside the target rect
+## MODAL_DIMMED is treated as BLOCKING + highlight_target = true (alias).
+func _apply_step_visuals(step: TutorialStep, target: Control) -> void:
+	var is_modal: bool = step.popup_mode == TutorialStep.PopupMode.MODAL_DIMMED
+	var dim: bool = step.highlight_target or is_modal
+	var block: bool = step.popup_mode == TutorialStep.PopupMode.BLOCKING or is_modal
+	var rect: Rect2 = target.get_global_rect() if target != null and is_instance_valid(target) else Rect2()
 
+	Verbose.debug("Apply step visuals | dim=%s block=%s target_rect=%s | overlay_rect=%s blocker_rect=%s" % [dim, block, rect, get_global_rect(), _blocker.get_global_rect()], Verbose.Category.TUTORIAL)
 
-func _show_blocker(target: Control, target_alpha: float) -> void:
-	_blocker.target_rect = target.get_global_rect() if target != null and is_instance_valid(target) else Rect2()
-	_blocker.visible = true
+	if not dim and not block:
+		_hide_blocker()
+		return
+
+	_blocker.set_state(dim, block, rect)
 	_kill_tween(_dim_tween)
 	_dim_tween = create_tween()
-	_dim_tween.tween_property(_blocker, "color:a", target_alpha, _DIM_FADE_TIME)
+	_dim_tween.tween_property(_blocker, "modulate:a", 1.0, _DIM_FADE_TIME)
 
 
 func _hide_blocker() -> void:
 	if _blocker == null: return
 	_kill_tween(_dim_tween)
-	_blocker.target_rect = Rect2()
-	_blocker.color.a = 0.0
-	_blocker.visible = false
+	_dim_tween = create_tween()
+	_dim_tween.tween_property(_blocker, "modulate:a", 0.0, _DIM_FADE_TIME)
+	_dim_tween.tween_callback(func(): _blocker.set_state(false, false, Rect2()))
 
 
 func _kill_tween(t: Tween) -> void:

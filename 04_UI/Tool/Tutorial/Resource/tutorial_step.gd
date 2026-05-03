@@ -18,7 +18,22 @@ enum ValidationEvent {
 enum PopupMode {
 	PASSIVE, ## Input passes through, no dim. Default — non-intrusive tip.
 	BLOCKING, ## Blocks input outside target rect, no dim. Forces interaction with the highlighted target.
-	MODAL_DIMMED, ## Same blocking + dimmed background. For high-importance steps.
+	MODAL_DIMMED, ## Alias for BLOCKING + highlight_target = true (kept for back-compat).
+}
+
+## Preferred bubble side. AUTO = first side that fits (right, left, top, bottom).
+## Values match UIBraiseBubble.ArrowSide so the int can be passed through directly.
+## Naming follows the arrow's position on the bubble:
+## - LEFT  → arrow on left of bubble  → bubble appears on the RIGHT of the target
+## - RIGHT → arrow on right of bubble → bubble appears on the LEFT of the target
+## - TOP   → arrow on top of bubble   → bubble appears BELOW the target
+## - BOTTOM→ arrow on bottom of bubble→ bubble appears ABOVE the target
+enum PreferredArrowSide {
+	AUTO = 0,
+	LEFT = 1,
+	RIGHT = 2,
+	TOP = 3,
+	BOTTOM = 4,
 }
 #endregion
 
@@ -52,4 +67,16 @@ enum PopupMode {
 ## Optional speaker name shown above the dialogue. Leave empty to fall back
 ## to the default name baked in the bubble scene.
 @export var speaker_name: String = ""
+
+## When true, the rest of the screen darkens around the target (4-strip spotlight)
+## while this step is active. Independent from popup_mode — you can have a
+## passive (non-blocking) tip that still highlights its target. Setting
+## popup_mode = MODAL_DIMMED implies highlight_target = true.
+@export var highlight_target: bool = false
+
+## Forces the bubble to a specific side relative to the target. AUTO uses the
+## first side with enough screen space. When set, the chosen side is honored
+## IF there's room; otherwise it falls back to AUTO. Useful for elements where
+## the auto pick lands awkwardly (e.g. gold display in a corner).
+@export var preferred_arrow_side: PreferredArrowSide = PreferredArrowSide.AUTO
 #endregion

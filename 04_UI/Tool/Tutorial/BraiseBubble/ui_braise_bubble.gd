@@ -14,7 +14,11 @@ signal closed()
 const POP_TIME: float = 0.2
 const POP_SCALE := Vector2(0.85, 0.85)
 const TYPEWRITER_CHARS_PER_SEC: float = 35.0
-const TARGET_OFFSET: float = 24.0
+## Distance (px) between the bubble's panel edge and the target's nearest edge.
+## The arrow TextureRect extends 56px beyond the panel (offset_left = -56), and
+## the actual arrow shape inside the texture might have a few px of padding,
+## so we use a generous 80 to keep the visible tip clearly outside the target.
+const TARGET_OFFSET: float = 80.0
 const SCREEN_MARGIN: float = 16.0
 
 ## Bubble has a fixed width — text wraps inside that width and the bubble grows
@@ -32,6 +36,7 @@ enum ArrowSide { NONE, LEFT, RIGHT, TOP, BOTTOM }
 
 #region ============================== Private variables ==============================
 var _target: Control
+var _step: TutorialStep
 var _pop_tween: Tween
 var _typewriter_tween: Tween
 var _breath_tween: Tween
@@ -71,6 +76,7 @@ func _ready() -> void:
 #region ============================== Public functions ==============================
 func show_bubble(step: TutorialStep, p_target: Control = null, is_last: bool = false) -> void:
 	_target = p_target
+	_step = step
 
 	_portrait.texture = step.portrait_texture if step.portrait_texture != null else _default_portrait
 	_name_label.text = step.speaker_name if step.speaker_name != "" else _default_speaker_name
@@ -191,13 +197,20 @@ func _position_bubble() -> void:
 		return
 
 	var target_rect: Rect2 = _target.get_global_rect()
-	var side: ArrowSide = _pick_side(target_rect, bubble_size, viewport_size)
+	var preferred: int = _step.preferred_arrow_side if _step != null else 0
+	var side: ArrowSide = _pick_side(target_rect, bubble_size, viewport_size, preferred)
 	var pos: Vector2 = _compute_position(side, target_rect, bubble_size, viewport_size)
 	global_position = pos
 	_show_arrow(side)
 
 
-func _pick_side(target_rect: Rect2, bubble_size: Vector2, viewport_size: Vector2) -> ArrowSide:
+func _pick_side(target_rect: Rect2, bubble_size: Vector2, viewport_size: Vector2, preferred: int = 0) -> ArrowSide:
+	# Honor a preferred side if the user set one and it has room.
+	if preferred != 0:
+		var preferred_side: ArrowSide = preferred as ArrowSide
+		if _side_has_room(preferred_side, target_rect, bubble_size, viewport_size):
+			return preferred_side
+
 	var space_right: float = viewport_size.x - target_rect.end.x
 	var space_left: float = target_rect.position.x
 	var space_below: float = viewport_size.y - target_rect.end.y
@@ -212,6 +225,19 @@ func _pick_side(target_rect: Rect2, bubble_size: Vector2, viewport_size: Vector2
 	if space_above >= bubble_size.y + TARGET_OFFSET + SCREEN_MARGIN:
 		return ArrowSide.BOTTOM
 	return ArrowSide.NONE
+
+
+func _side_has_room(side: ArrowSide, target_rect: Rect2, bubble_size: Vector2, viewport_size: Vector2) -> bool:
+	match side:
+		ArrowSide.LEFT:
+			return viewport_size.x - target_rect.end.x >= bubble_size.x + TARGET_OFFSET + SCREEN_MARGIN
+		ArrowSide.RIGHT:
+			return target_rect.position.x >= bubble_size.x + TARGET_OFFSET + SCREEN_MARGIN
+		ArrowSide.TOP:
+			return viewport_size.y - target_rect.end.y >= bubble_size.y + TARGET_OFFSET + SCREEN_MARGIN
+		ArrowSide.BOTTOM:
+			return target_rect.position.y >= bubble_size.y + TARGET_OFFSET + SCREEN_MARGIN
+	return false
 
 
 func _compute_position(side: ArrowSide, target_rect: Rect2, bubble_size: Vector2, viewport_size: Vector2) -> Vector2:

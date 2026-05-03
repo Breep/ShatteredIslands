@@ -11,33 +11,38 @@ target_unique_name = &"CardContainer"
 validation_event = 0
 validation_filter = &""
 auto_advance_delay = 6.0
+highlight_target = true
 
 [sub_resource type="Resource" id="step_gold"]
 script = ExtResource("2_step")
 id = &"buy_gold"
 text = "Les cartes coûtent des golds. Tu peux consulter tes golds à tout moment ici."
-target_unique_name = &"PlayerGoldLabel"
+target_unique_name = &"PlayerGoldHBox"
 validation_event = 0
 validation_filter = &""
 auto_advance_delay = 5.0
+highlight_target = true
+preferred_arrow_side = 3
 
 [sub_resource type="Resource" id="step_card_levels"]
 script = ExtResource("2_step")
 id = &"buy_card_levels"
 text = "Chaque carte a une origine et une rareté. Achète plusieurs fois la même carte pour la monter de niveau."
-target_unique_name = &"CardButton"
+target_unique_name = &"CardContainer"
 validation_event = 0
 validation_filter = &""
 auto_advance_delay = 7.0
+highlight_target = true
 
 [sub_resource type="Resource" id="step_card_origins"]
 script = ExtResource("2_step")
 id = &"buy_card_origins"
 text = "Achète plusieurs cartes de la même origine pour renforcer ses effets."
-target_unique_name = &"CardButton"
+target_unique_name = &"CardContainer"
 validation_event = 0
 validation_filter = &""
 auto_advance_delay = 6.0
+highlight_target = true
 
 [sub_resource type="Resource" id="step_reroll"]
 script = ExtResource("2_step")
@@ -47,6 +52,7 @@ target_unique_name = &"RefreshButton"
 validation_event = 0
 validation_filter = &""
 auto_advance_delay = 5.0
+highlight_target = true
 
 [resource]
 script = ExtResource("1_seq")

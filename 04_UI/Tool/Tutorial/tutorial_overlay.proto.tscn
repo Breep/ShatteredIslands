@@ -76,17 +76,17 @@ grow_horizontal = 2
 modulate = Color(0.95, 0.75, 0.95, 1)
 text = "CardButton (1st)"
 
-[node name="PlayerGoldLabel" type="Button" parent="FakeTargets" unique_id=773919112]
+[node name="PlayerGoldHBox" type="Button" parent="FakeTargets" unique_id=773919112]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(140, 56)
+custom_minimum_size = Vector2(200, 64)
 layout_mode = 1
 anchors_preset = 0
 offset_left = 32.0
 offset_top = 32.0
-offset_right = 172.0
-offset_bottom = 88.0
+offset_right = 232.0
+offset_bottom = 96.0
 modulate = Color(1, 0.95, 0.5, 1)
-text = "300 gold"
+text = "PlayerGoldHBox (300 + icon)"
 
 [node name="RefreshButton" type="Button" parent="FakeTargets" unique_id=175263316]
 unique_name_in_owner = true

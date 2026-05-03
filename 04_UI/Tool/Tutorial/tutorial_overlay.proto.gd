@@ -38,7 +38,7 @@ var _step_index: int = -1
 @onready var _target_card_shop: Button = %CardShop
 @onready var _target_card_container: Button = %CardContainer
 @onready var _target_card_button: Button = %CardButton
-@onready var _target_player_gold: Button = %PlayerGoldLabel
+@onready var _target_player_gold: Button = %PlayerGoldHBox
 @onready var _target_refresh: Button = %RefreshButton
 @onready var _target_end_buying: Button = %EndBuyingPhaseButton
 @onready var _target_generic: Button = %FakeTargetGeneric
@@ -81,7 +81,7 @@ func _ready() -> void:
 	_target_card_shop.pressed.connect(func(): _log_target_click("CardShop"))
 	_target_card_container.pressed.connect(func(): _log_target_click("CardContainer"))
 	_target_card_button.pressed.connect(func(): _log_target_click("CardButton"))
-	_target_player_gold.pressed.connect(func(): _log_target_click("PlayerGoldLabel"))
+	_target_player_gold.pressed.connect(func(): _log_target_click("PlayerGoldHBox"))
 	_target_refresh.pressed.connect(func(): _log_target_click("RefreshButton"))
 	_target_end_buying.pressed.connect(func(): _log_target_click("EndBuyingPhaseButton"))
 	_target_generic.pressed.connect(func(): _log_target_click("Generic"))
