@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://04_UI/Tool/Tutorial/tutorial_overlay.gd" id="1_tutov"]
+[ext_resource type="Script" path="res://04_UI/Tool/Tutorial/tutorial_blocker.gd" id="2_tutblk"]
 
 [node name="TutorialOverlay" type="Control"]
 layout_mode = 3
@@ -9,3 +10,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource("1_tutov")
+
+[node name="Blocker" type="ColorRect" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 0
+color = Color(0, 0, 0, 0)
+script = ExtResource("2_tutblk")

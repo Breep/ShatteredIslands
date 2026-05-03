@@ -3,16 +3,27 @@ extends Node
 # Orchestrates tutorial sequences across the game lifecycle. Listens to game
 # state transitions and gameplay events; drives a TutorialOverlay (resolved
 # from the running UI tree) to show one TutorialStep at a time.
+#
+# Race-condition note: this is an autoload, so it boots before any scene. The
+# TutorialOverlay lives inside UIPersistant which loads later. If a game state
+# change happens before UIPersistant is ready (typical for the very first
+# sequence on STARTING), we queue the sequence in _pending_sequence and retry
+# resolving the overlay each frame until it appears.
 
 #region ============================== Constants ==============================
-const _SEQUENCES_DIR: String = "res://04_UI/Tool/Tutorial/Sequences/"
-
 const _SEQUENCE_PATHS: Array[String] = [
 	"res://04_UI/Tool/Tutorial/Sequences/seq_hero_selection.tres",
 	"res://04_UI/Tool/Tutorial/Sequences/seq_buying_phase.tres",
 	"res://04_UI/Tool/Tutorial/Sequences/seq_fighting_phase.tres",
 	"res://04_UI/Tool/Tutorial/Sequences/seq_end_of_round.tres",
 ]
+
+## The fight prompt is a state-less sequence: we fire it manually when the
+## local player runs out of gold OR when the BUYING phase has been going for
+## _FIGHT_PROMPT_DELAY seconds, whichever comes first. Once-per-session via
+## the standard _played_sequence_ids dedup.
+const _FIGHT_PROMPT_PATH: String = "res://04_UI/Tool/Tutorial/Sequences/seq_fight_prompt.tres"
+const _FIGHT_PROMPT_DELAY: float = 30.0
 #endregion
 
 
@@ -25,24 +36,48 @@ var _step_index: int = -1
 var _auto_advance_timer: Timer
 
 var _overlay: TutorialOverlay
+var _pending_sequence: TutorialSequence
+
+var _fight_prompt_sequence: TutorialSequence
+var _fight_prompt_timer: Timer
+var _local_player_connected: Player
 #endregion
 
 
 #region ============================== Node base functions ==============================
 func _ready() -> void:
 	_load_sequences()
+	_load_fight_prompt()
 
 	_auto_advance_timer = Timer.new()
 	_auto_advance_timer.one_shot = true
 	add_child(_auto_advance_timer)
 	_auto_advance_timer.timeout.connect(_on_auto_advance_timeout)
 
+	_fight_prompt_timer = Timer.new()
+	_fight_prompt_timer.one_shot = true
+	add_child(_fight_prompt_timer)
+	_fight_prompt_timer.timeout.connect(_on_fight_prompt_timer_timeout)
+
 	GameManager.game_state_changed.connect(_on_game_state_changed)
 	Events.entity_clicked.connect(_on_entity_clicked)
 	Events.furniture_clicked.connect(_on_furniture_clicked)
 	Events.ui_skill_picked.connect(_on_ui_skill_picked)
 
+	set_process(false)
+
 	Verbose.debug("TutorialManager ready (" + str(_sequences_by_state.size()) + " sequences loaded)", Verbose.Category.TUTORIAL)
+
+
+func _process(_delta: float) -> void:
+	if _pending_sequence == null:
+		set_process(false)
+		return
+	if _try_resolve_overlay():
+		var seq: TutorialSequence = _pending_sequence
+		_pending_sequence = null
+		set_process(false)
+		_play_sequence(seq)
 #endregion
 
 
@@ -59,6 +94,13 @@ func _load_sequences() -> void:
 		_sequences_by_state[seq.trigger_state] = seq
 
 
+func _load_fight_prompt() -> void:
+	if not ResourceLoader.exists(_FIGHT_PROMPT_PATH):
+		Verbose.warn("Fight prompt sequence not found: " + _FIGHT_PROMPT_PATH, Verbose.Category.TUTORIAL)
+		return
+	_fight_prompt_sequence = load(_FIGHT_PROMPT_PATH)
+
+
 func _try_resolve_overlay() -> bool:
 	if _overlay != null and is_instance_valid(_overlay):
 		return true
@@ -69,7 +111,6 @@ func _try_resolve_overlay() -> bool:
 	if _overlay == null:
 		return false
 	_overlay.step_completed.connect(_on_step_completed)
-	_overlay.step_skipped.connect(_on_step_skipped)
 	return true
 
 
@@ -78,8 +119,14 @@ func _start_sequence(sequence: TutorialSequence) -> void:
 	if _played_sequence_ids.has(sequence.id):
 		return
 	if not _try_resolve_overlay():
-		Verbose.warn("Tutorial overlay not yet available — skipping sequence " + String(sequence.id), Verbose.Category.TUTORIAL)
+		Verbose.debug("Tutorial overlay not yet available — queuing sequence " + String(sequence.id), Verbose.Category.TUTORIAL)
+		_pending_sequence = sequence
+		set_process(true)
 		return
+	_play_sequence(sequence)
+
+
+func _play_sequence(sequence: TutorialSequence) -> void:
 	_played_sequence_ids[sequence.id] = true
 	_active_sequence = sequence
 	_step_index = -1
@@ -94,8 +141,9 @@ func _advance_step() -> void:
 		_finish_sequence()
 		return
 	var step: TutorialStep = _active_sequence.steps[_step_index]
-	Verbose.debug("Step " + str(_step_index) + ": " + String(step.id), Verbose.Category.TUTORIAL)
-	_overlay.present_step(step)
+	var is_last: bool = _step_index == _active_sequence.steps.size() - 1
+	Verbose.debug("Step " + str(_step_index) + ": " + String(step.id) + (" (last)" if is_last else ""), Verbose.Category.TUTORIAL)
+	_overlay.present_step(step, is_last)
 	if step.auto_advance_delay > 0.0:
 		_auto_advance_timer.wait_time = step.auto_advance_delay
 		_auto_advance_timer.start()
@@ -111,6 +159,8 @@ func _finish_sequence() -> void:
 
 
 func _abort_active_sequence() -> void:
+	_pending_sequence = null
+	_stop_fight_prompt_watch()
 	if _active_sequence == null: return
 	Verbose.debug("Aborting active sequence: " + String(_active_sequence.id), Verbose.Category.TUTORIAL)
 	_active_sequence = null
@@ -118,6 +168,38 @@ func _abort_active_sequence() -> void:
 	_auto_advance_timer.stop()
 	if _overlay != null and is_instance_valid(_overlay):
 		_overlay.clear()
+
+
+## Starts watching for the two fight-prompt triggers (gold reaches 0, or 30s
+## elapsed). Called when entering the BUYING state. Bails out if the prompt
+## has already played this session, since it's a once-per-session reminder.
+func _start_fight_prompt_watch() -> void:
+	if _fight_prompt_sequence == null: return
+	if _played_sequence_ids.has(_fight_prompt_sequence.id): return
+
+	_fight_prompt_timer.wait_time = _FIGHT_PROMPT_DELAY
+	_fight_prompt_timer.start()
+
+	var local: Player = PlayerManager.get_local_player()
+	if local == null: return
+	if not local.gold_changed.is_connected(_on_local_gold_changed):
+		local.gold_changed.connect(_on_local_gold_changed)
+	_local_player_connected = local
+
+
+func _stop_fight_prompt_watch() -> void:
+	_fight_prompt_timer.stop()
+	if _local_player_connected != null and is_instance_valid(_local_player_connected):
+		if _local_player_connected.gold_changed.is_connected(_on_local_gold_changed):
+			_local_player_connected.gold_changed.disconnect(_on_local_gold_changed)
+	_local_player_connected = null
+
+
+func _try_fire_fight_prompt() -> void:
+	if _fight_prompt_sequence == null: return
+	if _played_sequence_ids.has(_fight_prompt_sequence.id): return
+	_stop_fight_prompt_watch()
+	_start_sequence(_fight_prompt_sequence)
 
 
 func _current_step() -> TutorialStep:
@@ -142,13 +224,28 @@ func _on_game_state_changed(new_state: int) -> void:
 		_abort_active_sequence()
 		return
 	match new_state:
+		GameManager.GameState.BUYING:
+			_start_fight_prompt_watch()
 		GameManager.GameState.FIGHTING:
+			_stop_fight_prompt_watch()
 			_validate_and_advance(TutorialStep.ValidationEvent.GAME_STATE_FIGHTING)
 		GameManager.GameState.ENDING_ROUND:
+			_stop_fight_prompt_watch()
 			_validate_and_advance(TutorialStep.ValidationEvent.GAME_STATE_ENDING_ROUND)
 
 	if _sequences_by_state.has(new_state):
 		_start_sequence(_sequences_by_state[new_state])
+
+
+func _on_local_gold_changed(_self_ref, new_gold: int) -> void:
+	if not Settings.is_tutorial_enabled(): return
+	if new_gold > 0: return
+	_try_fire_fight_prompt()
+
+
+func _on_fight_prompt_timer_timeout() -> void:
+	if not Settings.is_tutorial_enabled(): return
+	_try_fire_fight_prompt()
 
 
 func _on_entity_clicked(_entity) -> void:
@@ -173,10 +270,6 @@ func _on_ui_skill_picked(_skill_id) -> void:
 
 func _on_step_completed(_step: TutorialStep) -> void:
 	_advance_step()
-
-
-func _on_step_skipped(_step: TutorialStep) -> void:
-	_finish_sequence()
 
 
 func _on_auto_advance_timeout() -> void:

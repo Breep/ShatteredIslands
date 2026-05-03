@@ -1,0 +1,262 @@
+[gd_scene format=3 uid="uid://b54r7autustmd"]
+
+[ext_resource type="Script" uid="uid://cshv6tek88knw" path="res://04_UI/Tool/Tutorial/tutorial_overlay.proto.gd" id="1_proto"]
+[ext_resource type="PackedScene" path="res://04_UI/Tool/Tutorial/tutorial_overlay.tscn" id="2_overlay"]
+
+[node name="TutorialOverlayProto" type="Control" unique_id=1103710981]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_proto")
+
+[node name="Background" type="ColorRect" parent="." unique_id=913514647]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.18, 0.22, 0.28, 1)
+
+[node name="FakeTargets" type="Control" parent="." unique_id=637228079]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CardShop" type="Button" parent="FakeTargets" unique_id=973808883]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(420, 56)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -210.0
+offset_top = 32.0
+offset_right = 210.0
+offset_bottom = 88.0
+grow_horizontal = 2
+modulate = Color(0.65, 0.85, 1, 1)
+text = "CardShop (whole shop frame)"
+
+[node name="CardContainer" type="Button" parent="FakeTargets" unique_id=183774221]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(380, 60)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -190.0
+offset_top = 100.0
+offset_right = 190.0
+offset_bottom = 160.0
+grow_horizontal = 2
+modulate = Color(0.85, 1, 0.65, 1)
+text = "CardContainer (3 cards row)"
+
+[node name="CardButton" type="Button" parent="FakeTargets" unique_id=455991002]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(110, 60)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -195.0
+offset_top = 170.0
+offset_right = -85.0
+offset_bottom = 230.0
+grow_horizontal = 2
+modulate = Color(0.95, 0.75, 0.95, 1)
+text = "CardButton (1st)"
+
+[node name="PlayerGoldLabel" type="Button" parent="FakeTargets" unique_id=773919112]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(140, 56)
+layout_mode = 1
+anchors_preset = 0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 172.0
+offset_bottom = 88.0
+modulate = Color(1, 0.95, 0.5, 1)
+text = "300 gold"
+
+[node name="RefreshButton" type="Button" parent="FakeTargets" unique_id=175263316]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 60)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -212.0
+offset_top = 32.0
+offset_right = -32.0
+offset_bottom = 92.0
+grow_horizontal = 0
+text = "RefreshButton"
+
+[node name="EndBuyingPhaseButton" type="Button" parent="FakeTargets" unique_id=725434511]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(220, 64)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -252.0
+offset_top = -96.0
+offset_right = -32.0
+offset_bottom = -32.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Prochain combat"
+
+[node name="FakeTargetGeneric" type="Button" parent="FakeTargets" unique_id=771038811]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 60)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = -92.0
+offset_right = 192.0
+offset_bottom = -32.0
+grow_vertical = 0
+text = "Generic target"
+
+[node name="DemoTarget" type="Button" parent="FakeTargets" unique_id=329999623]
+unique_name_in_owner = true
+modulate = Color(1, 0.65, 0.2, 1)
+custom_minimum_size = Vector2(160, 64)
+layout_mode = 0
+offset_left = 400.0
+offset_top = 320.0
+offset_right = 560.0
+offset_bottom = 384.0
+theme_override_font_sizes/font_size = 18
+text = "DEMO TARGET"
+
+[node name="TutorialOverlay" parent="." unique_id=2028853083 groups=["tutorial_overlay"] instance=ExtResource("2_overlay")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = -254.0
+offset_top = -52.0
+offset_right = -254.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ControlPanel" type="PanelContainer" parent="." unique_id=1930926329]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -260.0
+offset_right = -16.0
+offset_bottom = 260.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Margin" type="MarginContainer" parent="ControlPanel" unique_id=1711364267]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBox" type="VBoxContainer" parent="ControlPanel/Margin" unique_id=60614570]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="HeaderSeq" type="Label" parent="ControlPanel/Margin/VBox" unique_id=210007283]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Play sequence"
+
+[node name="BtnPlaySeqHero" type="Button" parent="ControlPanel/Margin/VBox" unique_id=1195821990]
+unique_name_in_owner = true
+layout_mode = 2
+text = "seq_hero_selection"
+
+[node name="BtnPlaySeqBuying" type="Button" parent="ControlPanel/Margin/VBox" unique_id=670773815]
+unique_name_in_owner = true
+layout_mode = 2
+text = "seq_buying_phase"
+
+[node name="BtnPlaySeqFighting" type="Button" parent="ControlPanel/Margin/VBox" unique_id=1828066528]
+unique_name_in_owner = true
+layout_mode = 2
+text = "seq_fighting_phase"
+
+[node name="BtnPlaySeqEnd" type="Button" parent="ControlPanel/Margin/VBox" unique_id=1015981167]
+unique_name_in_owner = true
+layout_mode = 2
+text = "seq_end_of_round"
+
+[node name="Sep1" type="HSeparator" parent="ControlPanel/Margin/VBox" unique_id=178417424]
+layout_mode = 2
+
+[node name="HeaderModes" type="Label" parent="ControlPanel/Margin/VBox" unique_id=1768686634]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Test popup modes (random target)"
+
+[node name="BtnShowPassive" type="Button" parent="ControlPanel/Margin/VBox" unique_id=699153342]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Random + PASSIVE"
+
+[node name="BtnShowBlocking" type="Button" parent="ControlPanel/Margin/VBox" unique_id=609521796]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Random + BLOCKING"
+
+[node name="BtnShowModal" type="Button" parent="ControlPanel/Margin/VBox" unique_id=982452258]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Random + MODAL_DIMMED"
+
+[node name="BtnRandomize" type="Button" parent="ControlPanel/Margin/VBox" unique_id=358893709]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Randomize target only"
+
+[node name="Sep2" type="HSeparator" parent="ControlPanel/Margin/VBox" unique_id=1442683485]
+layout_mode = 2
+
+[node name="HeaderActions" type="Label" parent="ControlPanel/Margin/VBox" unique_id=1355851000]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Actions"
+
+[node name="BtnForceAdvance" type="Button" parent="ControlPanel/Margin/VBox" unique_id=2052750138]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Force advance step"
+
+[node name="BtnClear" type="Button" parent="ControlPanel/Margin/VBox" unique_id=237147900]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Clear"
+
+[node name="Sep3" type="HSeparator" parent="ControlPanel/Margin/VBox" unique_id=16813941]
+layout_mode = 2
+
+[node name="StatusLabel" type="Label" parent="ControlPanel/Margin/VBox" unique_id=160540102]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "Idle"
+autowrap_mode = 3

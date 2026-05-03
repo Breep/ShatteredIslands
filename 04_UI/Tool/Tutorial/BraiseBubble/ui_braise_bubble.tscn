@@ -1,16 +1,22 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://nvki5s5cv50m"]
 
-[ext_resource type="Script" path="res://04_UI/Tool/Tutorial/BraiseBubble/ui_braise_bubble.gd" id="1_brbub"]
+[ext_resource type="Script" uid="uid://c7j572pn45gis" path="res://04_UI/Tool/Tutorial/BraiseBubble/ui_braise_bubble.gd" id="1_brbub"]
+[ext_resource type="Texture2D" uid="uid://blyoahth1qe6b" path="res://04_UI/Tool/Tutorial/BraiseBubble/Data/SPR_FantasyWarrior_Frame_Box_Small01fond.png" id="2_1j3bm"]
+[ext_resource type="Texture2D" uid="uid://bio1y4e87wftj" path="res://04_UI/Tool/Tutorial/BraiseBubble/Data/tavernier.png" id="3_i241c"]
+[ext_resource type="FontFile" uid="uid://cvfku6uge3mvi" path="res://20_Data/font/Super Trend.ttf" id="4_i241c"]
+[ext_resource type="Texture2D" uid="uid://cssqr8m5ucf6x" path="res://04_UI/Tool/Tutorial/BraiseBubble/Data/Arrow.png" id="5_arrow"]
+[ext_resource type="Texture2D" uid="uid://dims7iqjpgxvh" path="res://04_UI/Tool/Tutorial/BraiseBubble/Data/skip_button.png" id="6_skip"]
 
-[node name="UIBraiseBubble" type="Control"]
+[node name="UIBraiseBubble" type="Control" unique_id=155577175]
 custom_minimum_size = Vector2(520, 180)
+layout_mode = 3
 anchors_preset = 0
 offset_right = 520.0
 offset_bottom = 180.0
 mouse_filter = 2
 script = ExtResource("1_brbub")
 
-[node name="Panel" type="PanelContainer" parent="."]
+[node name="Panel" type="NinePatchRect" parent="." unique_id=1414279126]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -19,123 +25,171 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+texture = ExtResource("2_1j3bm")
+patch_margin_left = 25
+patch_margin_right = 25
 
-[node name="Margin" type="MarginContainer" parent="Panel"]
-layout_mode = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
+[node name="Margin" type="MarginContainer" parent="Panel" unique_id=102611616]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 28
 
-[node name="HBox" type="HBoxContainer" parent="Panel/Margin"]
+[node name="HBox" type="HBoxContainer" parent="Panel/Margin" unique_id=1476201838]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="Portrait" type="TextureRect" parent="Panel/Margin/HBox"]
+[node name="Portrait" type="TextureRect" parent="Panel/Margin/HBox" unique_id=2133892066]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_vertical = 4
+texture = ExtResource("3_i241c")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Right" type="VBoxContainer" parent="Panel/Margin/HBox"]
+[node name="Right" type="VBoxContainer" parent="Panel/Margin/HBox" unique_id=1114074393]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 8
 
-[node name="NameLabel" type="Label" parent="Panel/Margin/HBox/Right"]
+[node name="NameLabel" type="Label" parent="Panel/Margin/HBox/Right" unique_id=1743489353]
+unique_name_in_owner = true
 layout_mode = 2
-text = "Braise"
-theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.45)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 1
+theme_override_fonts/font = ExtResource("4_i241c")
+theme_override_font_sizes/font_size = 20
+text = "Le Tavernier"
 
-[node name="TextLabel" type="RichTextLabel" parent="Panel/Margin/HBox/Right"]
+[node name="TextLabel" type="RichTextLabel" parent="Panel/Margin/HBox/Right" unique_id=2047801925]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_i241c")
 bbcode_enabled = true
+text = "test text"
 fit_content = true
 scroll_active = false
-autowrap_mode = 3
 
-[node name="ButtonRow" type="HBoxContainer" parent="Panel/Margin/HBox/Right"]
+[node name="ButtonRow" type="HBoxContainer" parent="Panel/Margin/HBox/Right" unique_id=2044570051]
 layout_mode = 2
 alignment = 2
 
-[node name="SkipButton" type="Button" parent="Panel/Margin/HBox/Right/ButtonRow"]
+[node name="SkipButton" type="TextureButton" parent="Panel/Margin/HBox/Right/ButtonRow" unique_id=46961289]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(70, 40)
 layout_mode = 2
 mouse_default_cursor_shape = 2
-text = "Passer"
+texture_normal = ExtResource("6_skip")
+ignore_texture_size = true
+stretch_mode = 4
 
-[node name="ArrowLeft" type="Label" parent="."]
+[node name="SkipLabel" type="Label" parent="Panel/Margin/HBox/Right/ButtonRow/SkipButton" unique_id=2099887766]
 unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_i241c")
+theme_override_font_sizes/font_size = 10
+text = "Continuer"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ArrowLeft" type="TextureRect" parent="." unique_id=1710971834]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 48)
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = -28.0
-offset_top = -20.0
-offset_right = 0.0
-offset_bottom = 20.0
+offset_left = -56.0
+offset_top = -24.0
+offset_right = -8.0
+offset_bottom = 24.0
 grow_vertical = 2
-text = "◀"
-theme_override_font_sizes/font_size = 36
-horizontal_alignment = 1
-vertical_alignment = 1
+rotation = -1.5708
+pivot_offset = Vector2(24, 24)
+texture = ExtResource("5_arrow")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="ArrowRight" type="Label" parent="."]
+[node name="ArrowRight" type="TextureRect" parent="." unique_id=521493481]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 48)
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 0.0
-offset_top = -20.0
-offset_right = 28.0
-offset_bottom = 20.0
+offset_left = 8.0
+offset_top = -24.0
+offset_right = 56.0
+offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "▶"
-theme_override_font_sizes/font_size = 36
-horizontal_alignment = 1
-vertical_alignment = 1
+rotation = 1.5708
+pivot_offset = Vector2(24, 24)
+texture = ExtResource("5_arrow")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="ArrowTop" type="Label" parent="."]
+[node name="ArrowTop" type="TextureRect" parent="." unique_id=1463825750]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 48)
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -20.0
-offset_top = -28.0
-offset_right = 20.0
-offset_bottom = 0.0
+offset_left = -24.0
+offset_top = -56.0
+offset_right = 24.0
+offset_bottom = -8.0
 grow_horizontal = 2
-text = "▲"
-theme_override_font_sizes/font_size = 36
-horizontal_alignment = 1
-vertical_alignment = 1
+pivot_offset = Vector2(24, 24)
+texture = ExtResource("5_arrow")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="ArrowBottom" type="Label" parent="."]
+[node name="ArrowBottom" type="TextureRect" parent="." unique_id=269562446]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 48)
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = 0.0
-offset_right = 20.0
-offset_bottom = 28.0
+offset_left = -24.0
+offset_top = 8.0
+offset_right = 24.0
+offset_bottom = 56.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "▼"
-theme_override_font_sizes/font_size = 36
-horizontal_alignment = 1
-vertical_alignment = 1
+rotation = 3.14159
+pivot_offset = Vector2(24, 24)
+texture = ExtResource("5_arrow")
+expand_mode = 1
+stretch_mode = 5
