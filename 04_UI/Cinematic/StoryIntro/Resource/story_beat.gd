@@ -23,4 +23,10 @@ extends Resource
 ## Optional ambient stream played while this beat is active. Crossfades with
 ## the previous beat's stream over ~0.5s.
 @export var ambiance_stream: AudioStream
+
+## When true, the previous beat's audio keeps playing through this beat —
+## no crossfade, no swap. Use this to prolong a voice or ambience across
+## consecutive beats. If both this flag and `ambiance_stream` are set, the
+## flag wins (a warning is logged).
+@export var continues_previous_audio: bool = false
 #endregion

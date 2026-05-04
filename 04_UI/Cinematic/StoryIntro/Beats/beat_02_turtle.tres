@@ -1,15 +1,15 @@
-[gd_resource type="Resource" script_class="StoryBeat" load_steps=3 format=3]
+[gd_resource type="Resource" script_class="StoryBeat" format=3 uid="uid://cb1lnvg5x2h2p"]
 
-[ext_resource type="Script" path="res://04_UI/Cinematic/StoryIntro/Resource/story_beat.gd" id="1_beat"]
-[ext_resource type="PackedScene" path="res://04_UI/Cinematic/StoryIntro/Beats/beat_02_turtle.tscn" id="2_scene"]
+[ext_resource type="Script" uid="uid://do3c63due4ld" path="res://04_UI/Cinematic/StoryIntro/Resource/story_beat.gd" id="1_beat"]
+[ext_resource type="AudioStream" uid="uid://cw3lv3c5a83ww" path="res://04_UI/Cinematic/StoryIntro/Assets/Ambiance/phatphrogstudio-phatphrogstudiocom-victory-fanfare-1-474658.mp3" id="1_o1pns"]
+[ext_resource type="PackedScene" uid="uid://j8ublcsrgcgk" path="res://04_UI/Cinematic/StoryIntro/Beats/beat_02_turtle.tscn" id="2_scene"]
 
 [resource]
 script = ExtResource("1_beat")
 id = &"beat_02_turtle"
-text = "[i]Le vent siffle. Une voix au loin déchire les nuages :[/i]
+text = "[b]On y est, on y est ! La Tortue Vagabonde ! [/b]
 
-[b]« On y est, on y est ! La Tortue Vagabonde ! »[/b]
-
-[b]« Accroche-toi, ça secoue à l'atterrissage ! »[/b]"
+[b]Accroche-toi, ça secoue à l'atterrissage ! [/b]"
 beat_scene = ExtResource("2_scene")
-hold_after_typewriter = 2.5
+hold_after_typewriter = 8.0
+ambiance_stream = ExtResource("1_o1pns")

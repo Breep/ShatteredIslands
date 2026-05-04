@@ -2,12 +2,13 @@ class_name UIStoryIntro
 extends Control
 
 # Tutorial-only intro cinematic. Plays N StoryBeats one after the other:
-# black background, a per-beat scene instantiated in the stage (each beat owns
-# its visual layout and optional AnimationPlayer "intro"), a typewriter line
-# at the bottom in the tutorial font. Click / Space advance, Skip button or
-# Esc jumps to the end. Emits `finished` when the cinematic terminates. The
-# default top-level behavior is to call GameManager.start_solo_game() on
-# `finished`; the proto scene disables that to test in isolation.
+# black background, a per-beat scene instantiated in the stage. Each beat scene
+# owns its visual layout, optional AnimationPlayer "intro", and a RichTextLabel
+# named "StoryText" that hosts the typewriter line at the position of its
+# choice. Click / Space advance, Skip button or Esc jumps to the end. Emits
+# `finished` when the cinematic terminates. The default top-level behavior is
+# to call GameManager.start_solo_game() on `finished`; the proto scene
+# disables that to test in isolation.
 
 #region ============================== Signals ==============================
 signal finished()
@@ -15,7 +16,7 @@ signal finished()
 
 
 #region ============================== Constants ==============================
-const TYPEWRITER_CHARS_PER_SEC: float = 35.0  # mirrors UIBraiseBubble
+const TYPEWRITER_CHARS_PER_SEC: float = 26.0
 const BEAT_FADE_OUT_TIME: float = 0.4
 const BEAT_FADE_IN_TIME: float = 1.0
 const AUDIO_CROSSFADE_TIME: float = 0.5
@@ -38,6 +39,7 @@ const INTRO_ANIMATION_NAME: StringName = &"intro"
 var _beat_index: int = -1
 var _current_beat: StoryBeat
 var _current_beat_node: Node
+var _story_text: RichTextLabel
 var _typewriter_tween: Tween
 var _stage_tween: Tween
 var _audio_tween: Tween
@@ -50,9 +52,9 @@ var _cinematic_finished: bool = false
 
 #region ============================== Local nodes ==============================
 @onready var _beat_stage: Control = %BeatStage
-@onready var _story_text: RichTextLabel = %StoryText
 @onready var _skip_button: Button = %SkipButton
 @onready var _audio_player: AudioStreamPlayer = %AudioPlayer
+@onready var _fade_overlay: ColorRect = %FadeOverlay
 #endregion
 
 
@@ -60,9 +62,6 @@ var _cinematic_finished: bool = false
 func _ready() -> void:
 	_skip_button.pressed.connect(_on_skip_pressed)
 	finished.connect(_on_finished)
-
-	_story_text.text = ""
-	_story_text.visible_ratio = 0.0
 
 	_hold_timer = Timer.new()
 	_hold_timer.one_shot = true
@@ -118,7 +117,11 @@ func _advance_beat() -> void:
 	_hold_timer.stop()
 
 	_swap_beat_scene(_current_beat.beat_scene)
-	_swap_audio(_current_beat.ambiance_stream)
+	if _current_beat.continues_previous_audio:
+		if _current_beat.ambiance_stream != null:
+			Verbose.warn("Beat " + String(_current_beat.id) + ": continues_previous_audio=true overrides ambiance_stream", Verbose.Category.TUTORIAL)
+	else:
+		_swap_audio(_current_beat.ambiance_stream)
 	_start_typewriter(_current_beat.text)
 
 
@@ -127,6 +130,7 @@ func _swap_beat_scene(new_scene: PackedScene) -> void:
 
 	var old_node: Node = _current_beat_node
 	_current_beat_node = null
+	_story_text = null
 
 	var new_node: Node = null
 	if new_scene != null:
@@ -136,6 +140,14 @@ func _swap_beat_scene(new_scene: PackedScene) -> void:
 			new_canvas.modulate.a = 0.0
 		_beat_stage.add_child(new_node)
 		_current_beat_node = new_node
+		_story_text = new_node.find_child("StoryText", true, false) as RichTextLabel
+		if _story_text != null:
+			_story_text.text = ""
+			_story_text.visible_ratio = 0.0
+		# Start the intro animation immediately (before the fade-in) so the
+		# nodes snap to the animation's first keyframe instead of showing the
+		# scene-default state during the fade.
+		_play_beat_animation(new_node)
 
 	_stage_tween = create_tween()
 	_stage_tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
@@ -150,7 +162,6 @@ func _swap_beat_scene(new_scene: PackedScene) -> void:
 		var new_canvas2: CanvasItem = new_node as CanvasItem
 		if new_canvas2 != null:
 			_stage_tween.tween_property(new_canvas2, "modulate:a", 1.0, BEAT_FADE_IN_TIME)
-		_stage_tween.tween_callback(_play_beat_animation.bind(new_node))
 
 
 func _play_beat_animation(beat_node: Node) -> void:
@@ -196,12 +207,12 @@ func _swap_audio(new_stream: AudioStream) -> void:
 
 func _start_typewriter(text: String) -> void:
 	_kill_tween(_typewriter_tween)
-	_story_text.text = text
-	_story_text.visible_ratio = 0.0
-	if text.is_empty():
+	if _story_text == null or text.is_empty():
 		_typewriter_finished = true
 		_schedule_hold()
 		return
+	_story_text.text = text
+	_story_text.visible_ratio = 0.0
 	var duration: float = max(0.05, text.length() / TYPEWRITER_CHARS_PER_SEC)
 	_typewriter_tween = create_tween()
 	_typewriter_tween.tween_property(_story_text, "visible_ratio", 1.0, duration)
@@ -222,7 +233,8 @@ func _schedule_hold() -> void:
 func _handle_user_advance() -> void:
 	if not _typewriter_finished:
 		_kill_tween(_typewriter_tween)
-		_story_text.visible_ratio = 1.0
+		if _story_text != null:
+			_story_text.visible_ratio = 1.0
 		_typewriter_finished = true
 		_schedule_hold()
 		return
@@ -241,7 +253,7 @@ func _finish() -> void:
 	_kill_tween(_global_tween)
 	_global_tween = create_tween()
 	_global_tween.set_parallel(true)
-	_global_tween.tween_property(self, "modulate:a", 0.0, FINAL_FADE_OUT_TIME)
+	_global_tween.tween_property(_fade_overlay, "modulate:a", 1.0, FINAL_FADE_OUT_TIME)
 	if _audio_player.playing:
 		_global_tween.tween_property(_audio_player, "volume_db", -40.0, FINAL_FADE_OUT_TIME)
 	_global_tween.set_parallel(false)
