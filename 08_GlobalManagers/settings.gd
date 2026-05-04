@@ -13,6 +13,11 @@ const _KEY_TUTORIAL_ENABLED: String = "enabled"
 
 #region ============================== Private variables ==============================
 var _config: ConfigFile
+
+## Session-only flag (not persisted): tracks whether the intro cinematic has
+## already been shown during this run. Resets on restart so the cinematic plays
+## again on every fresh launch — by design while we iterate on it.
+var _intro_cinematic_seen: bool = false
 #endregion
 
 
@@ -33,6 +38,14 @@ func is_tutorial_enabled() -> bool:
 func set_tutorial_enabled(value: bool) -> void:
 	_config.set_value(_SECTION_TUTORIAL, _KEY_TUTORIAL_ENABLED, value)
 	_save()
+
+
+func has_seen_intro_cinematic() -> bool:
+	return _intro_cinematic_seen
+
+
+func mark_intro_cinematic_seen() -> void:
+	_intro_cinematic_seen = true
 #endregion
 
 

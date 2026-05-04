@@ -50,6 +50,10 @@ func _on_close_button_pressed() -> void:
 
 
 func _on_start_solo_button_pressed() -> void:
+	if Settings.is_tutorial_enabled() and not Settings.has_seen_intro_cinematic():
+		Settings.mark_intro_cinematic_seen()
+		get_tree().change_scene_to_file("res://04_UI/Cinematic/StoryIntro/ui_story_intro.tscn")
+		return
 	GameManager.start_solo_game()
 
 
