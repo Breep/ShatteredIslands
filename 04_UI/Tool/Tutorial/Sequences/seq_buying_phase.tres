@@ -1,16 +1,14 @@
-[gd_resource type="Resource" script_class="TutorialSequence" load_steps=8 format=3]
+[gd_resource type="Resource" script_class="TutorialSequence" format=3 uid="uid://ckn4mtnicd4bt"]
 
-[ext_resource type="Script" path="res://04_UI/Tool/Tutorial/Resource/tutorial_sequence.gd" id="1_seq"]
-[ext_resource type="Script" path="res://04_UI/Tool/Tutorial/Resource/tutorial_step.gd" id="2_step"]
+[ext_resource type="Script" uid="uid://djpg3rddxno15" path="res://04_UI/Tool/Tutorial/Resource/tutorial_sequence.gd" id="1_seq"]
+[ext_resource type="Script" uid="uid://jooqjtqqt21" path="res://04_UI/Tool/Tutorial/Resource/tutorial_step.gd" id="2_step"]
 
 [sub_resource type="Resource" id="step_buy_cards"]
 script = ExtResource("2_step")
 id = &"buy_cards"
 text = "Achète des cartes pour te renforcer."
 target_unique_name = &"CardContainer"
-validation_event = 0
-validation_filter = &""
-auto_advance_delay = 6.0
+auto_advance_delay = 10.0
 highlight_target = true
 
 [sub_resource type="Resource" id="step_gold"]
@@ -18,9 +16,7 @@ script = ExtResource("2_step")
 id = &"buy_gold"
 text = "Les cartes coûtent des golds. Tu peux consulter tes golds à tout moment ici."
 target_unique_name = &"PlayerGoldHBox"
-validation_event = 0
-validation_filter = &""
-auto_advance_delay = 5.0
+auto_advance_delay = 10.0
 highlight_target = true
 preferred_arrow_side = 3
 
@@ -29,9 +25,7 @@ script = ExtResource("2_step")
 id = &"buy_card_levels"
 text = "Chaque carte a une origine et une rareté. Achète plusieurs fois la même carte pour la monter de niveau."
 target_unique_name = &"CardContainer"
-validation_event = 0
-validation_filter = &""
-auto_advance_delay = 7.0
+auto_advance_delay = 10.0
 highlight_target = true
 
 [sub_resource type="Resource" id="step_card_origins"]
@@ -39,9 +33,7 @@ script = ExtResource("2_step")
 id = &"buy_card_origins"
 text = "Achète plusieurs cartes de la même origine pour renforcer ses effets."
 target_unique_name = &"CardContainer"
-validation_event = 0
-validation_filter = &""
-auto_advance_delay = 6.0
+auto_advance_delay = 10.0
 highlight_target = true
 
 [sub_resource type="Resource" id="step_reroll"]
@@ -49,9 +41,7 @@ script = ExtResource("2_step")
 id = &"buy_reroll"
 text = "Pas convaincu ? Tu peux reroll le shop contre de l'or."
 target_unique_name = &"RefreshButton"
-validation_event = 0
-validation_filter = &""
-auto_advance_delay = 5.0
+auto_advance_delay = 10.0
 highlight_target = true
 
 [resource]
