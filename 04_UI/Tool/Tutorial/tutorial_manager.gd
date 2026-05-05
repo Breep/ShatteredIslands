@@ -23,7 +23,7 @@ const _SEQUENCE_PATHS: Array[String] = [
 ## _FIGHT_PROMPT_DELAY seconds, whichever comes first. Once-per-session via
 ## the standard _played_sequence_ids dedup.
 const _FIGHT_PROMPT_PATH: String = "res://04_UI/Tool/Tutorial/Sequences/seq_fight_prompt.tres"
-const _FIGHT_PROMPT_DELAY: float = 30.0
+const _FIGHT_PROMPT_DELAY: float = 60.0
 #endregion
 
 

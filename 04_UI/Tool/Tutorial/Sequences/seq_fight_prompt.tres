@@ -6,7 +6,7 @@
 [sub_resource type="Resource" id="step_fight_prompt"]
 script = ExtResource("2_step")
 id = &"fight_prompt"
-text = "C'est l'heure ! Clique sur Prochain combat pour démarrer le combat."
+text = "Clique ici lorsque tu seras prêt à combattre."
 target_unique_name = &"EndBuyingPhaseButton"
 validation_event = 5
 validation_filter = &""

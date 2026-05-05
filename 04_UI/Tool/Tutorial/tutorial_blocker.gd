@@ -16,7 +16,14 @@ extends Control
 # only when input_blocking is true.
 
 #region ============================== Export ==============================
-@export var dim_color: Color = Color(0, 0, 0, 0.55)
+@export var dim_color: Color = Color(0, 0, 0, 0.78)
+@export var border_color: Color = Color(1.0, 0.92, 0.55, 1.0)
+@export var border_width: float = 3.0
+@export var glow_layers: int = 3
+@export var glow_step: float = 5.0
+@export var pulse_speed: float = 1.5 ## Period of the breathing pulse, in seconds.
+@export var pulse_min_alpha: float = 0.55
+@export var pulse_max_alpha: float = 1.0
 #endregion
 
 
@@ -27,10 +34,22 @@ var input_blocking: bool = false
 #endregion
 
 
+#region ============================== Private variables ==============================
+var _pulse_phase: float = 0.0
+#endregion
+
+
 #region ============================== Node base functions ==============================
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	modulate.a = 0.0
+	set_process(false)
+
+
+func _process(delta: float) -> void:
+	if pulse_speed > 0.0:
+		_pulse_phase += delta * (TAU / pulse_speed)
+	queue_redraw()
 
 
 func _draw() -> void:
@@ -50,18 +69,29 @@ func _draw() -> void:
 
 	Verbose.debug("[Blocker] _draw spotlight | full=%s local=%s modulate.a=%.2f" % [full, local, modulate.a], Verbose.Category.TUTORIAL)
 
-	# Top strip
+	# 4 dim strips around the spotlight
 	if local.position.y > 0:
 		draw_rect(Rect2(0, 0, full.size.x, local.position.y), dim_color)
-	# Bottom strip
 	if local.end.y < full.size.y:
 		draw_rect(Rect2(0, local.end.y, full.size.x, full.size.y - local.end.y), dim_color)
-	# Left strip (between top and bottom edges of target)
 	if local.position.x > 0:
 		draw_rect(Rect2(0, local.position.y, local.position.x, local.size.y), dim_color)
-	# Right strip
 	if local.end.x < full.size.x:
 		draw_rect(Rect2(local.end.x, local.position.y, full.size.x - local.end.x, local.size.y), dim_color)
+
+	# External glow halo: concentric outlines fading out as they grow
+	for i in range(1, glow_layers + 1):
+		var grow: float = i * glow_step
+		var halo_rect: Rect2 = Rect2(local.position - Vector2(grow, grow), local.size + Vector2(grow * 2.0, grow * 2.0))
+		var halo_color: Color = border_color
+		halo_color.a = (1.0 - float(i) / float(glow_layers + 1)) * 0.4
+		draw_rect(halo_rect, halo_color, false, max(1.0, glow_step))
+
+	# Pulsed border on the target rect
+	var pulse: float = lerp(pulse_min_alpha, pulse_max_alpha, 0.5 + 0.5 * sin(_pulse_phase))
+	var stroke: Color = border_color
+	stroke.a = pulse
+	draw_rect(local, stroke, false, border_width)
 #endregion
 
 
@@ -72,6 +102,9 @@ func set_state(p_dim: bool, p_block: bool, p_target_rect: Rect2) -> void:
 	target_rect = p_target_rect
 	mouse_filter = Control.MOUSE_FILTER_STOP if p_block else Control.MOUSE_FILTER_IGNORE
 	visible = p_dim or p_block
+	set_process(p_dim and p_target_rect.size != Vector2.ZERO)
+	if not (p_dim and p_target_rect.size != Vector2.ZERO):
+		_pulse_phase = 0.0
 	queue_redraw()
 
 

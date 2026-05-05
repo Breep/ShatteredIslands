@@ -46,6 +46,12 @@ enum PreferredArrowSide {
 ## Unique-name-in-owner of the Control to point at (no `%` prefix). Empty = bubble centered, no arrow.
 @export var target_unique_name: StringName
 
+## Optional descendant name used to drill into the target's subtree (e.g. into an
+## instanced sub-scene whose unique-names aren't reachable from the root). When
+## set, the resolver descends from `target_unique_name` via find_child(owned=false)
+## and returns the first match. Empty = stay on the parent target.
+@export var target_sub_name: StringName
+
 @export var validation_event: ValidationEvent = ValidationEvent.NONE
 
 ## Optional discriminator passed alongside the validation event (e.g. furniture id).

@@ -6,6 +6,18 @@
 [ext_resource type="PackedScene" uid="uid://ci1xegvy2t2jm" path="res://04_UI/InGame/FamilyViewer/ui_family_viewer.tscn" id="9_16n6v"]
 [ext_resource type="PackedScene" uid="uid://bkh2sp5xq82gn" path="res://04_UI/Tool/Tutorial/tutorial_overlay.tscn" id="10_tutov"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_endbuy_frame"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.92, 0.55, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
 [node name="Persistant" type="Control" unique_id=1275150033]
 layout_mode = 3
 anchors_preset = 15
@@ -115,6 +127,17 @@ theme_override_font_sizes/font_size = 22
 text = "Prochain combat"
 script = ExtResource("8_16n6v")
 metadata/_custom_type_script = "uid://dqsbil04m2fyg"
+
+[node name="EndBuyingPhaseFrame" type="Panel" parent="EndBuyingPhaseButton" unique_id=980577285]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_endbuy_frame")
 
 [node name="UiFamilyViewer" parent="." unique_id=452679620 instance=ExtResource("9_16n6v")]
 unique_name_in_owner = true

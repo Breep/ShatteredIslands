@@ -45,7 +45,7 @@ func present_step(step: TutorialStep, is_last: bool = false) -> void:
 	add_child(_current_bubble)
 	move_child(_current_bubble, get_child_count() - 1) # ensure bubble is rendered above the blocker
 	_current_bubble.closed.connect(_on_bubble_closed)
-	var target: Control = _resolve_target(step.target_unique_name)
+	var target: Control = _resolve_target(step.target_unique_name, step.target_sub_name)
 	_apply_step_visuals(step, target)
 	_current_bubble.show_bubble(step, target, is_last)
 
@@ -72,7 +72,7 @@ func has_active_step() -> bool:
 
 
 #region ============================== Private functions ==============================
-func _resolve_target(unique_name: StringName) -> Control:
+func _resolve_target(unique_name: StringName, sub_name: StringName = &"") -> Control:
 	if unique_name == &"":
 		return null
 	var node: Node = null
@@ -80,11 +80,23 @@ func _resolve_target(unique_name: StringName) -> Control:
 		node = get_tree().current_scene.find_child(String(unique_name), true, false)
 	if node == null:
 		node = get_tree().root.find_child(String(unique_name), true, false)
+	if node == null:
+		Verbose.warn("Tutorial target not found: " + String(unique_name), Verbose.Category.TUTORIAL)
+		return null
+
+	if sub_name != &"":
+		var sub: Node = node.find_child(String(sub_name), true, false)
+		if sub is Control:
+			var sub_ctrl: Control = sub
+			Verbose.debug("Resolved sub-target '%s/%s' → %s | rect=%s | visible=%s" % [String(unique_name), String(sub_name), sub_ctrl.get_path(), sub_ctrl.get_global_rect(), sub_ctrl.visible], Verbose.Category.TUTORIAL)
+			return sub_ctrl
+		Verbose.warn("Tutorial sub-target not found or not a Control: %s/%s — falling back to parent" % [String(unique_name), String(sub_name)], Verbose.Category.TUTORIAL)
+
 	if node is Control:
 		var ctrl: Control = node
 		Verbose.debug("Resolved target '%s' → %s | rect=%s | visible=%s" % [String(unique_name), ctrl.get_path(), ctrl.get_global_rect(), ctrl.visible], Verbose.Category.TUTORIAL)
 		return ctrl
-	Verbose.warn("Tutorial target not found or not a Control: " + String(unique_name), Verbose.Category.TUTORIAL)
+	Verbose.warn("Tutorial target not a Control: " + String(unique_name), Verbose.Category.TUTORIAL)
 	return null
 
 

@@ -20,19 +20,30 @@ auto_advance_delay = 10.0
 highlight_target = true
 preferred_arrow_side = 3
 
-[sub_resource type="Resource" id="step_card_levels"]
+[sub_resource type="Resource" id="step_card_level"]
 script = ExtResource("2_step")
-id = &"buy_card_levels"
-text = "Chaque carte a une origine et une rareté. Achète plusieurs fois la même carte pour la monter de niveau."
+id = &"buy_card_level"
+text = "Les étoiles indiquent le niveau de la carte. Achète plusieurs fois la même pour la monter."
 target_unique_name = &"CardContainer"
+target_sub_name = &"CurrentLevelContainer"
 auto_advance_delay = 10.0
 highlight_target = true
 
-[sub_resource type="Resource" id="step_card_origins"]
+[sub_resource type="Resource" id="step_card_rarity"]
 script = ExtResource("2_step")
-id = &"buy_card_origins"
-text = "Achète plusieurs cartes de la même origine pour renforcer ses effets."
+id = &"buy_card_rarity"
+text = "Les runes lumineuses sur le contour indiquent la rareté de la carte."
 target_unique_name = &"CardContainer"
+target_sub_name = &"Runes"
+auto_advance_delay = 10.0
+highlight_target = true
+
+[sub_resource type="Resource" id="step_card_family"]
+script = ExtResource("2_step")
+id = &"buy_card_family"
+text = "L'icône au centre représente la famille. Cumuler des cartes de la même famille renforce ses effets."
+target_unique_name = &"CardContainer"
+target_sub_name = &"FamilyIcon"
 auto_advance_delay = 10.0
 highlight_target = true
 
@@ -48,4 +59,4 @@ highlight_target = true
 script = ExtResource("1_seq")
 id = &"seq_buying_phase"
 trigger_state = 3
-steps = Array[ExtResource("2_step")]([SubResource("step_buy_cards"), SubResource("step_gold"), SubResource("step_card_levels"), SubResource("step_card_origins"), SubResource("step_reroll")])
+steps = Array[ExtResource("2_step")]([SubResource("step_buy_cards"), SubResource("step_gold"), SubResource("step_card_level"), SubResource("step_card_rarity"), SubResource("step_card_family"), SubResource("step_reroll")])
