@@ -80,6 +80,11 @@ enum PreferredArrowSide {
 ## popup_mode = MODAL_DIMMED implies highlight_target = true.
 @export var highlight_target: bool = false
 
+## Extra screen-space padding (in pixels) added around the target rect when
+## drawing the highlight. Useful when the target's visual bounds feel too tight
+## (e.g. small icons). 0 = pixel-perfect on the Control's transformed rect.
+@export var highlight_padding: float = 0.0
+
 ## Forces the bubble to a specific side relative to the target. AUTO uses the
 ## first side with enough screen space. When set, the chosen side is honored
 ## IF there's room; otherwise it falls back to AUTO. Useful for elements where

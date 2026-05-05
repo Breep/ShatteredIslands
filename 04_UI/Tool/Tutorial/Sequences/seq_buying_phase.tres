@@ -46,6 +46,7 @@ target_unique_name = &"CardContainer"
 target_sub_name = &"FamilyIcon"
 auto_advance_delay = 10.0
 highlight_target = true
+highlight_padding = 8.0
 
 [sub_resource type="Resource" id="step_reroll"]
 script = ExtResource("2_step")

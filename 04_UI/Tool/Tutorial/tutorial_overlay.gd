@@ -108,15 +108,14 @@ func _apply_step_visuals(step: TutorialStep, target: Control) -> void:
 	var is_modal: bool = step.popup_mode == TutorialStep.PopupMode.MODAL_DIMMED
 	var dim: bool = step.highlight_target or is_modal
 	var block: bool = step.popup_mode == TutorialStep.PopupMode.BLOCKING or is_modal
-	var rect: Rect2 = target.get_global_rect() if target != null and is_instance_valid(target) else Rect2()
 
-	Verbose.debug("Apply step visuals | dim=%s block=%s target_rect=%s | overlay_rect=%s blocker_rect=%s" % [dim, block, rect, get_global_rect(), _blocker.get_global_rect()], Verbose.Category.TUTORIAL)
+	Verbose.debug("Apply step visuals | dim=%s block=%s target=%s padding=%.1f | overlay_rect=%s blocker_rect=%s" % [dim, block, target.get_path() if target != null and is_instance_valid(target) else "null", step.highlight_padding, get_global_rect(), _blocker.get_global_rect()], Verbose.Category.TUTORIAL)
 
 	if not dim and not block:
 		_hide_blocker()
 		return
 
-	_blocker.set_state(dim, block, rect)
+	_blocker.set_state(dim, block, target, step.highlight_padding)
 	_kill_tween(_dim_tween)
 	_dim_tween = create_tween()
 	_dim_tween.tween_property(_blocker, "modulate:a", 1.0, _DIM_FADE_TIME)
@@ -127,7 +126,7 @@ func _hide_blocker() -> void:
 	_kill_tween(_dim_tween)
 	_dim_tween = create_tween()
 	_dim_tween.tween_property(_blocker, "modulate:a", 0.0, _DIM_FADE_TIME)
-	_dim_tween.tween_callback(func(): _blocker.set_state(false, false, Rect2()))
+	_dim_tween.tween_callback(func(): _blocker.set_state(false, false, null, 0.0))
 
 
 func _kill_tween(t: Tween) -> void:

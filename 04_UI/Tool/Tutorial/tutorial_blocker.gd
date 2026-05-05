@@ -36,6 +36,8 @@ var input_blocking: bool = false
 
 #region ============================== Private variables ==============================
 var _pulse_phase: float = 0.0
+var _target_ctrl: Control
+var _target_padding: float = 0.0
 #endregion
 
 
@@ -47,6 +49,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	_refresh_target_rect()
 	if pulse_speed > 0.0:
 		_pulse_phase += delta * (TAU / pulse_speed)
 	queue_redraw()
@@ -92,20 +95,6 @@ func _draw() -> void:
 	var stroke: Color = border_color
 	stroke.a = pulse
 	draw_rect(local, stroke, false, border_width)
-#endregion
-
-
-#region ============================== Public functions ==============================
-func set_state(p_dim: bool, p_block: bool, p_target_rect: Rect2) -> void:
-	dim_active = p_dim
-	input_blocking = p_block
-	target_rect = p_target_rect
-	mouse_filter = Control.MOUSE_FILTER_STOP if p_block else Control.MOUSE_FILTER_IGNORE
-	visible = p_dim or p_block
-	set_process(p_dim and p_target_rect.size != Vector2.ZERO)
-	if not (p_dim and p_target_rect.size != Vector2.ZERO):
-		_pulse_phase = 0.0
-	queue_redraw()
 
 
 func _has_point(point: Vector2) -> bool:
@@ -115,4 +104,34 @@ func _has_point(point: Vector2) -> bool:
 		return true
 	var global_p: Vector2 = get_global_transform() * point
 	return not target_rect.has_point(global_p)
+#endregion
+
+
+#region ============================== Public functions ==============================
+func set_state(p_dim: bool, p_block: bool, p_target_ctrl: Control, p_padding: float = 0.0) -> void:
+	dim_active = p_dim
+	input_blocking = p_block
+	_target_ctrl = p_target_ctrl
+	_target_padding = p_padding
+	mouse_filter = Control.MOUSE_FILTER_STOP if p_block else Control.MOUSE_FILTER_IGNORE
+	visible = p_dim or p_block
+	_refresh_target_rect()
+	if p_dim:
+		set_process(true)
+	else:
+		set_process(false)
+		_pulse_phase = 0.0
+	queue_redraw()
+#endregion
+
+
+#region ============================== Private functions ==============================
+func _refresh_target_rect() -> void:
+	if _target_ctrl == null or not is_instance_valid(_target_ctrl):
+		target_rect = Rect2()
+		return
+	var xform: Transform2D = _target_ctrl.get_global_transform_with_canvas()
+	target_rect = xform * Rect2(Vector2.ZERO, _target_ctrl.size)
+	if _target_padding != 0.0:
+		target_rect = target_rect.grow(_target_padding)
 #endregion
