@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://ckq4x0f1r7xtm"]
+
+[ext_resource type="Script" uid="uid://bee8v76ojdmd5" path="res://05_Game/Encounters/Builder/builder_container_node.gd" id="1_2oxcc"]
+[ext_resource type="Script" uid="uid://7wyg8nxupn86" path="res://05_Game/Encounters/Builder/encounter_snapshotter.gd" id="1_36pol"]
+
+[node name="EncounterBuilder" type="Node3D" unique_id=1992894760]
+
+[node name="Entities" type="Node3D" parent="." unique_id=1705870396]
+
+[node name="Antagonistes" type="Node3D" parent="Entities" unique_id=745482062]
+script = ExtResource("1_2oxcc")
+
+[node name="Heroes" type="Node3D" parent="Entities" unique_id=476275703]
+script = ExtResource("1_2oxcc")
+
+[node name="Acolytes" type="Node3D" parent="Entities" unique_id=2062068852]
+script = ExtResource("1_2oxcc")
+
+[node name="Buildings" type="Node3D" parent="Entities" unique_id=61386169]
+script = ExtResource("1_2oxcc")
+
+[node name="NPCs" type="Node3D" parent="Entities" unique_id=948336701]
+script = ExtResource("1_2oxcc")
+
+[node name="Props" type="Node3D" parent="." unique_id=1650267315]
+
+[node name="EncounterSnapshotter" type="Node" parent="." unique_id=1077957657]
+script = ExtResource("1_36pol")
+encounter_id = &"00_TestSimpleEncouter"
+display_name = "00_TestSimpleEncouter"
+design_notes = "Test 1 2 3
+bla bla bla"
