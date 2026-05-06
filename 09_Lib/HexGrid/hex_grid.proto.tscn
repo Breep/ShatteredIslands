@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://bl51d0effgtut"]
+
+[ext_resource type="Script" uid="uid://bbt1ibxjvedfp" path="res://09_Lib/HexGrid/hex_grid.gd" id="1_grid"]
+[ext_resource type="Shader" uid="uid://c5rxv6al6470c" path="res://09_Lib/HexGrid/hex_tile.gdshader" id="2_shader"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ground"]
+albedo_color = Color(0.18, 0.2, 0.22, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ground"]
+size = Vector2(40, 40)
+
+[node name="HexGridProto" type="Node3D" unique_id=1916968351]
+
+[node name="Ground" type="MeshInstance3D" parent="." unique_id=608267689]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+material_override = SubResource("StandardMaterial3D_ground")
+mesh = SubResource("PlaneMesh_ground")
+
+[node name="HexGrid" type="Node3D" parent="." unique_id=1720319813]
+script = ExtResource("1_grid")
+shader = ExtResource("2_shader")
+border_thickness = 0.0
+center_falloff = 3.585
+use_hexagonal_shape = false
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1499789262]
+transform = Transform3D(1, 0, 0, 0, 0.42931348, 0.90315557, 0, -0.90315557, 0.42931348, 7.6018543, 11.95068, 13.631138)
+fov = 55.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2084422070]
+transform = Transform3D(1, 0, 0, 0, -0.4340722, -0.9008781, 0, 0.9008781, -0.4340722, 0, 5, 0)
