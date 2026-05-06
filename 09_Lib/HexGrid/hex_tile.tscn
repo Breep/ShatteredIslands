@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bf8r6dpvdikku"]
+
+[ext_resource type="Script" uid="uid://dhy5ywp0ftvpt" path="res://09_Lib/HexGrid/hex_tile.gd" id="1_tile"]
+[ext_resource type="Shader" uid="uid://c5rxv6al6470c" path="res://09_Lib/HexGrid/hex_tile.gdshader" id="2_shader"]
+
+[node name="HexTile" type="Node3D" unique_id=1734582935]
+script = ExtResource("1_tile")
+shader = ExtResource("2_shader")

@@ -1,13 +1,12 @@
 shader_type spatial;
 render_mode unshaded, cull_disabled, blend_mix;
 
+uniform vec4 base_color : source_color = vec4(0.30, 0.40, 0.50, 1.0);
 uniform float border_thickness : hint_range(0.0, 0.5) = 0.1;
 uniform float center_falloff : hint_range(0.1, 5.0) = 2.0;
 uniform float edge_softness : hint_range(0.0, 0.5) = 0.02;
 uniform bool use_hexagonal_shape = false;
 uniform bool is_pointy_top = true;
-
-varying vec4 instance_color;
 
 float hex_distance(vec2 p) {
 	p = abs(p);
@@ -16,10 +15,6 @@ float hex_distance(vec2 p) {
 	} else {
 		return max(p.y, p.y * 0.5 + p.x * 0.866025);
 	}
-}
-
-void vertex() {
-	instance_color = COLOR;
 }
 
 void fragment() {
@@ -37,6 +32,6 @@ void fragment() {
 
 	float final_alpha = max(border, gradient);
 
-	ALBEDO = instance_color.rgb;
-	ALPHA = final_alpha * instance_color.a;
+	ALBEDO = base_color.rgb;
+	ALPHA = final_alpha * base_color.a;
 }
