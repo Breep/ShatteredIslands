@@ -11,6 +11,7 @@ extends Node3D
 signal grid_rebuilt
 signal tile_hover_changed(coord: Vector2i, is_hovered: bool)
 signal tile_state_changed(coord: Vector2i, new_state: int)
+signal tile_clicked(coord: Vector2i, button_index: int)
 #endregion
 
 
@@ -115,6 +116,20 @@ func clear_tile_state(coord: Vector2i) -> void:
 func reset_all_tiles() -> void:
 	_states.clear()
 	_refresh_all_tiles()
+
+
+# Override the displayed color of a tile, bypassing the state system. Useful for ArenaLayout
+# preview, debug visualization, etc. The override is lost on rebuild or on any state change.
+func set_tile_color(coord: Vector2i, c: Color) -> void:
+	var idx: int = _tiles.get(coord, -1)
+	if idx == -1 or _multimesh == null: return
+	_multimesh.set_instance_color(idx, c)
+
+
+func get_all_coords() -> Array[Vector2i]:
+	var result: Array[Vector2i] = []
+	result.assign(_tiles.keys())
+	return result
 
 
 func get_hovered_coord() -> Vector2i:
@@ -300,11 +315,15 @@ func _clear_hover() -> void:
 # ============================== Callbacks ==============================
 #region Callbacks
 func _on_area_input_event(_camera: Node, event: InputEvent, position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
-	if not enable_hover: return
-	if not (event is InputEventMouseMotion): return
 	var local: Vector3 = position - global_position
 	var hex: Vector2i = HexUtils.world_to_axial(local, hex_size, orientation)
-	_set_hover(hex)
+	if event is InputEventMouseMotion:
+		if enable_hover:
+			_set_hover(hex)
+	elif event is InputEventMouseButton:
+		var btn: InputEventMouseButton = event as InputEventMouseButton
+		if btn.pressed and _tiles.has(hex):
+			tile_clicked.emit(hex, btn.button_index)
 
 
 func _on_area_mouse_exited() -> void:

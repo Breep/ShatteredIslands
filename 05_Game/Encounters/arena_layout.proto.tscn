@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://qfqqs2q1sib4"]
+
+[ext_resource type="Script" uid="uid://8xq55dknrmh0" path="res://05_Game/Encounters/arena_layout.proto.gd" id="1_proto"]
+[ext_resource type="Script" uid="uid://bbt1ibxjvedfp" path="res://09_Lib/HexGrid/hex_grid.gd" id="2_grid"]
+[ext_resource type="Shader" uid="uid://c5rxv6al6470c" path="res://09_Lib/HexGrid/hex_tile.gdshader" id="3_shader"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ground"]
+albedo_color = Color(0.18, 0.2, 0.22, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ground"]
+size = Vector2(40, 40)
+
+[node name="ArenaLayoutProto" type="Node3D" unique_id=110612622]
+script = ExtResource("1_proto")
+
+[node name="Ground" type="MeshInstance3D" parent="." unique_id=394653078]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+material_override = SubResource("StandardMaterial3D_ground")
+mesh = SubResource("PlaneMesh_ground")
+
+[node name="HexGrid" type="Node3D" parent="." unique_id=2012854352]
+script = ExtResource("2_grid")
+shader = ExtResource("3_shader")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=745084846]
+transform = Transform3D(1, 0, 0, 0, 0.38868982, 0.9213687, 0, -0.9213687, 0.38868982, 8.379715, 14, 14)
+fov = 55.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1845890526]
+transform = Transform3D(1, 0, 0, 0, 0.5, -0.866, 0, 0.866, 0.5, 0, 5, 0)
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=2016750490]
+
+[node name="Panel" type="VBoxContainer" parent="UI" unique_id=1102774484]
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 360.0
+offset_bottom = 220.0
+
+[node name="TitleLabel" type="Label" parent="UI/Panel" unique_id=1954733948]
+layout_mode = 2
+text = "Arena Layout — creation tool"
+
+[node name="HelpLabel" type="Label" parent="UI/Panel" unique_id=2134519084]
+layout_mode = 2
+text = "L-click: cycle None / Player / Enemy
+R-click: reset to None"
+
+[node name="SaveBtn" type="Button" parent="UI/Panel" unique_id=485458537]
+layout_mode = 2
+text = "Save layout"
+
+[node name="ClearBtn" type="Button" parent="UI/Panel" unique_id=1499601192]
+layout_mode = 2
+text = "Clear all"
+
+[node name="StatusLabel" type="Label" parent="UI/Panel" unique_id=784795788]
+layout_mode = 2
+text = "Ready"
