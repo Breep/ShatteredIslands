@@ -10,8 +10,3 @@ extends Resource
 @export var encounter_name: StringName
 @export var masters: Array[EntityPlacement]
 @export var slaves: Array[EntityPlacement]
-
-@export_group("Présentation")
-# Texte d'introduction affiché par EncounterBanner au début de l'encounter.
-# Si vide, aucun banner n'est affiché.
-@export_multiline var banner_text: String
