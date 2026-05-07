@@ -17,8 +17,8 @@ func _ready() -> void:
 # ============================== Public functions ==============================
 
 # Reload the tavern center
-func start_round(encounter: TavernEncounter) -> void:
-	_tavern.display_encounter(encounter)
+func start_round(battles: Array[Battle]) -> void:
+	_tavern.put_tables_according_to_battles(battles)
 
 
 func cleanup() -> void:
