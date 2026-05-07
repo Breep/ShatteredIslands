@@ -95,9 +95,9 @@ const CATEGORY_PREFIX_TEMPLATES: Dictionary[Category, String] = {
 	Category.TARGET_MODULE: "(TARGET_MOD) ",
 	Category.MOVEMENT_MODULE: "(MOVE_MOD  ) ",
 	Category.PROJECTILE: "(PROJECTILE) ",
-	Category.ACTION_RECEIVER_MODULE: "(ACTION_REC)",
-	Category.NESTED_REGISTRY:  "(NESTED_REG)",
-	Category.ENCOUNTER_RUNNER: "(ENC_RUNNER)",
+	Category.ACTION_RECEIVER_MODULE: "(ACTION_REC) ",
+	Category.NESTED_REGISTRY:  "(NESTED_REG) ",
+	Category.ENCOUNTER_RUNNER: "(ENC_RUNNER) ",
 }
 
 const PREFIX_TEMPLATES: Dictionary[GameType, String] = {

@@ -41,7 +41,7 @@ func init_fight(heroes: Array[Hero], battle_type: Battle.BattleType, battle_id: 
 	_current_heroes = heroes
 	_force_local_player_camera_on_island()
 
-func init_fight_2(player_encounter: FightingPlayerEncounter, mob_encounter: FightingMobEncounter) -> void:
+func init_fight_2(player_encounter: FightingEncounter, mob_encounter: FightingEncounter) -> void:
 	_fighting_area.init_fight_2(player_encounter, mob_encounter)
 	_force_local_player_camera_on_island()
 

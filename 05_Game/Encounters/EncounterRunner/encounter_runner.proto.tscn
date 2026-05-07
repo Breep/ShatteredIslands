@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://d1ebnatvn0vyi"]
+
+[ext_resource type="Script" uid="uid://b4ig14boeibsa" path="res://05_Game/Encounters/EncounterRunner/encounter_runner.proto.gd" id="1_wxt6w"]
+[ext_resource type="Resource" uid="uid://1bbbdd1rtpru" path="res://05_Game/Encounters/Pool/Prototyping/00_TestSimpleEncouter.tres" id="2_6lso8"]
+[ext_resource type="PackedScene" uid="uid://xmv7u7bqrrls" path="res://05_Game/Encounters/EncounterRunner/encounter_runner.tscn" id="2_y346q"]
+
+[node name="EncounterRunner_proto" type="Node" unique_id=1394222367]
+script = ExtResource("1_wxt6w")
+fighting_encounter_2 = ExtResource("2_6lso8")
+
+[node name="EncounterRunner" parent="." unique_id=1930960750 instance=ExtResource("2_y346q")]
+unique_name_in_owner = true
