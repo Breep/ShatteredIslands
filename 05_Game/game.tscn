@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://oimyi4iueoda"]
 
 [ext_resource type="Script" uid="uid://blljr68c4u466" path="res://05_Game/game.gd" id="1_7r6pw"]
-[ext_resource type="Resource" uid="uid://dqdcnd7gg4acc" path="res://05_Game/Encounters/Defs/test_chicken_encounter.tres" id="2_rh5gu"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://10_Tool/SpawnPoint/spawn_point.tscn" id="3_i1e5p"]
 [ext_resource type="PackedScene" uid="uid://di34xfy5cli15" path="res://10_Tool/Cameras/FreeFly/free_fly_camera.tscn" id="3_t03ty"]
 [ext_resource type="PackedScene" uid="uid://bbn7yt4y0lu6q" path="res://05_Game/SceneSwitcher/scene_switcher.tscn" id="3_vifcx"]
@@ -18,7 +17,6 @@ _scene_switcher = NodePath("SceneSwitcher")
 _hero_selector = NodePath("HeroSelector")
 _node_fighting_islands = NodePath("FightingIslands")
 _islands_spawn_points = [NodePath("IslandSpawns/CenterPoint1/SpawnPoint1"), NodePath("IslandSpawns/CenterPoint2/SpawnPoint2"), NodePath("IslandSpawns/CenterPoint3/SpawnPoint3"), NodePath("IslandSpawns/CenterPoint4/SpawnPoint4"), NodePath("IslandSpawns/CenterPoint5/SpawnPoint5"), NodePath("IslandSpawns/CenterPoint6/SpawnPoint6"), NodePath("IslandSpawns/CenterPoint7/SpawnPoint7"), NodePath("IslandSpawns/CenterPoint8/SpawnPoint8")]
-_buying_encounter_def = ExtResource("2_rh5gu")
 
 [node name="Light" type="Node3D" parent="." unique_id=325090423]
 transform = Transform3D(0.471889, 0, 0.881658, -0.0862491, 0.995204, 0.0461631, -0.877429, -0.0978261, 0.469626, 0, 0, 0)
