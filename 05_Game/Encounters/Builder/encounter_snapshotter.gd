@@ -11,12 +11,20 @@ enum EncounterType { FIGHTING, TAVERN }
 @export var output_dir: String = "res://05_Game/Encounters/Pool/Prototyping/"
 
 # Pour Fighting
-@export var arena_layout: ArenaLayout
+@export_group("Fighting Encounter")
 @export var island_scene: PackedScene
+@export_subgroup("Entity Nodes")
+@export var _fighting_antagonists_nodes: Node3D
+@export var _fighting_heroes_nodes: Node3D
+@export var _fighting_acolytes_nodes: Node3D
+@export var _fighting_buildings_nodes: Node3D
+@export var _fighting_npcs_nodes: Node3D
 
 # Pour Tavern
+@export_group("Tavern Encounter")
 @export var tavern_scene: PackedScene
 
+@export_group("SNAPSHOT")
 @warning_ignore("unused_private_class_variable")
 @export_tool_button("📸 Snapshot Encounter") var _snap_btn = _do_snapshot
 @warning_ignore("unused_private_class_variable")
@@ -59,15 +67,12 @@ func _validate() -> Array[String]:
 		errors.append("encounter_id is empty")
 	
 	if encounter_type == EncounterType.FIGHTING:
-		if arena_layout == null:
-			errors.append("arena_layout is null for FIGHTING encounter")
 		if island_scene == null:
 			errors.append("island_scene is null for FIGHTING encounter")
-		# Valide le placement de chaque entité
 		for container in _get_fighting_containers():
 			for child in container.get_children():
 				if child is Entity:
-					_validate_fighting_entity(child, container.camp, errors)
+					_validate_fighting_entity(child, errors)
 	
 	if encounter_type == EncounterType.TAVERN:
 		if tavern_scene == null:
@@ -76,10 +81,7 @@ func _validate() -> Array[String]:
 	return errors
 
 
-func _validate_fighting_entity(entity: Entity, camp: int, errors: Array[String]) -> void:
-	var hex = HexUtils.world_to_axial(entity.global_position, arena_layout.hex_size, HexUtils.Orientation.POINTY_TOP, arena_layout.world_origin)
-	if not arena_layout.is_valid_hex(hex, camp):
-		errors.append("Entity '%s' on invalid hex %s (outside arena)" % [entity.name, hex])
+func _validate_fighting_entity(entity: Entity, errors: Array[String]) -> void:
 	if entity.scene_file_path == "":
 		errors.append("Entity '%s' has no scene_file_path (not a saved scene instance)" % entity.name)
 
@@ -88,7 +90,6 @@ func _validate_fighting_entity(entity: Entity, camp: int, errors: Array[String])
 func _build_fighting() -> FightingEncounter:
 	var enc := FightingEncounter.new()
 	_fill_base_fields(enc)
-	enc.arena_layout = arena_layout
 	enc.island_scene = island_scene
 	
 	for container in _get_fighting_containers():
@@ -122,10 +123,8 @@ func _entity_to_fighting_spec(entity: Entity, role: EntitySpec.Role) -> EntitySp
 	spec.role = role
 	spec.team = entity.team
 	spec.display_label = entity.name
-	
-	spec.hex_coord = HexUtils.world_to_axial(
-		entity.global_position, arena_layout.hex_size, HexUtils.Orientation.POINTY_TOP, arena_layout.world_origin
-	)
+
+	spec.free_position = entity.global_position
 	spec.rotation_y = entity.rotation.y
 	
 	if entity.custom_base_stats != null:
@@ -151,14 +150,8 @@ func _entity_to_tavern_spec(node: Node3D, role: EntitySpec.Role) -> EntitySpec:
 
 
 # === Container resolution ===
-func _get_fighting_containers() -> Array[EditorContainerNode]:
-	var result: Array[EditorContainerNode] = []
-	var root = get_parent().get_node("EntityContainers")
-	for c in [&"Antagonists", &"Acolytes", &"Buildings"]:
-		var n = root.get_node_or_null(c)
-		if n is EditorContainerNode:
-			result.append(n)
-	return result
+func _get_fighting_containers() -> Array[Node3D]:
+	return [_fighting_antagonists_nodes, _fighting_acolytes_nodes, _fighting_buildings_nodes, _fighting_npcs_nodes]
 
 
 func _get_tavern_containers() -> Array[EditorContainerNode]:
