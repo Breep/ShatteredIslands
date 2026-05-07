@@ -258,7 +258,7 @@ func _execute_ranged_impact() -> void:
 	var spawn_node: Node3D = _active_attack_data.get(ActiveAttackVar.SPAWN_NODE)
 	var stats: ProjectileStats = _active_attack_data.get(ActiveAttackVar.STATS)
 
-	_owner.projectile_sender.projectile_attack(
+	_owner.projectile.projectile_attack(
 		target,
 		projectile_type,
 		spawn_node,

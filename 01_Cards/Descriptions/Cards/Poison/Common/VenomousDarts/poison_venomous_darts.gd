@@ -27,7 +27,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			if target == null: return
 			var projectile_stats := ProjectileStats.new()
 			projectile_stats.on_hit_callbacks.append(on_hit_callback)
-			ctx.hero.projectile_sender.projectile_attack(target, Projectile.Type.VENOMOUS_DART, ctx.hero, projectile_stats)
+			ctx.hero.projectile.projectile_attack(target, Projectile.Type.VENOMOUS_DART, ctx.hero, projectile_stats)
 	)
 
 

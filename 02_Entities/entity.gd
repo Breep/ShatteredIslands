@@ -416,6 +416,7 @@ func _auto_load_components() -> void:
 	alterations =  Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.ALTERATIONS].instantiate().init(self)
 	target =  Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.TARGET].instantiate().init(self)
 	movement =  Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.MOVEMENT].instantiate().init(self)
+	_auto_attack_periodic_module = Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.AUTO_ATTACK_PERIODIC_MODULE].instantiate().init(self)
 	
 	add_child(damage)
 	add_child(heal)
@@ -426,6 +427,7 @@ func _auto_load_components() -> void:
 	add_child(alterations)
 	add_child(target)
 	add_child(movement)
+	add_child(_auto_attack_periodic_module)
 
 
 func _load_spawn_animation() -> void:

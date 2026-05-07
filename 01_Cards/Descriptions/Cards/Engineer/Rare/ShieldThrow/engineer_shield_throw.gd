@@ -38,7 +38,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			if shield_return > 0:
 				ctx.hero.alterations.inflict_condition_stacks(ctx.hero, shield_return, Alteration.Type.SHIELD, &"Shield Throw")
 		)
-		ctx.hero.projectile_sender.projectile_attack(target, Projectile.Type.SHIELD_THROW, ctx.hero, proj_stats)
+		ctx.hero.projectile.projectile_attack(target, Projectile.Type.SHIELD_THROW, ctx.hero, proj_stats)
 
 	var _on_shield_changed: Callable
 	_on_shield_changed = func(new_val: int) -> void:
