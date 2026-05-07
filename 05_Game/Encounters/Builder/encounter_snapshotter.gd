@@ -23,24 +23,26 @@ enum EncounterType { FIGHTING, TAVERN }
 @export var _fighting_buildings_nodes: Node3D
 @export var _fighting_npcs_nodes: Node3D
 
-@export_group("Tavern Encounter")
-@export var tavern_scene: PackedScene
-
 @export_group("ACTIONS")
 @export var encounter_to_load: EncounterResource
 @warning_ignore("unused_private_class_variable")
-@export_tool_button("📥 Load Encounter") var _load_btn = _do_load
+@export_tool_button("📥 Load Encounter") var _load_btn = _load_encounter
 @warning_ignore("unused_private_class_variable")
-@export_tool_button("📸 Snapshot Encounter") var _snap_btn = _do_snapshot
+@export_tool_button("📸 Snapshot Encounter") var _snap_btn = _snapshot_encounter
 @warning_ignore("unused_private_class_variable")
-@export_tool_button("✅ Validate (no save)") var _validate_btn = _do_validate
+@export_tool_button("✅ Validate (no save)") var _validate_btn = _validate_encounter
 @export_group("ACTIONS/CLEANUP")
 @warning_ignore("unused_private_class_variable")
-@export_tool_button("🧹 Cleanup Scene") var _cleanup_btn = _do_cleanup
+@export_tool_button("🧹 Cleanup Scene") var _cleanup_btn = _cleanup_builder
+@export_group("ACTIONS/SYNC")
+@warning_ignore("unused_private_class_variable")
+@export_tool_button("🔁 Fighting → Tavern") var _sync_f2t_btn = _sync_fighting_to_tavern
+@warning_ignore("unused_private_class_variable")
+@export_tool_button("🔁 Tavern → Fighting") var _sync_t2f_btn = _sync_tavern_to_fighting
 
 
 # === Tool actions ===
-func _do_validate() -> void:
+func _validate_encounter() -> void:
 	var errors = _validate()
 	if errors.is_empty():
 		print("✅ Encounter is valid, ready to snapshot.")
@@ -49,18 +51,23 @@ func _do_validate() -> void:
 			push_warning(e)
 
 
-func _do_snapshot() -> void:
+func _snapshot_encounter() -> void:
 	var errors = _validate()
 	if not errors.is_empty():
 		push_error("Cannot snapshot: %d validation errors. Run Validate first." % errors.size())
 		return
 
 	var encounter: EncounterResource
+	var suffix: String = ""
 	match encounter_type:
-		EncounterType.FIGHTING: encounter = _build_fighting()
-		EncounterType.TAVERN:   encounter = _build_tavern()
+		EncounterType.FIGHTING:
+			encounter = _build_fighting()
+			suffix = ".fighting"
+		EncounterType.TAVERN:
+			encounter = _build_tavern()
+			suffix = ".tavern"
 
-	var path = output_dir.path_join(str(encounter_id) + ".tres")
+	var path = output_dir.path_join(str(encounter_id) + suffix + ".tres")
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(output_dir))
 	var err = ResourceSaver.save(encounter, path)
 	if err == OK:
@@ -70,7 +77,7 @@ func _do_snapshot() -> void:
 		push_error("❌ ResourceSaver.save failed with code %d" % err)
 
 
-func _do_cleanup() -> void:
+func _cleanup_builder() -> void:
 	var removed := 0
 	for container in _get_all_containers():
 		if container == null: continue
@@ -80,19 +87,27 @@ func _do_cleanup() -> void:
 	print("🧹 Removed %d entities from the scene." % removed)
 
 
-func _do_load() -> void:
+func _load_encounter() -> void:
 	if encounter_to_load == null:
 		push_error("encounter_to_load is null. Drop a .tres into the LOAD group first.")
 		return
 
 	if encounter_to_load is FightingEncounter:
-		_do_cleanup()
+		_cleanup_builder()
 		_load_fighting(encounter_to_load as FightingEncounter)
 	elif encounter_to_load is TavernEncounter:
-		_do_cleanup()
+		_cleanup_builder()
 		_load_tavern(encounter_to_load as TavernEncounter)
 	else:
 		push_error("encounter_to_load is neither a FightingEncounter nor a TavernEncounter")
+
+
+func _sync_fighting_to_tavern() -> void:
+	_sync_containers(_get_fighting_editor_containers(), _get_tavern_containers(), "Fighting → Tavern")
+
+
+func _sync_tavern_to_fighting() -> void:
+	_sync_containers(_get_tavern_containers(), _get_fighting_editor_containers(), "Tavern → Fighting")
 
 
 # === Loaders ===
@@ -124,7 +139,6 @@ func _load_tavern(enc: TavernEncounter) -> void:
 	encounter_id = enc.encounter_id
 	display_name = enc.display_name
 	design_notes = enc.design_notes
-	tavern_scene = enc.tavern_scene
 
 	var by_role: Dictionary[int, EditorContainerNode] = {}
 	for c in _get_tavern_containers():
@@ -166,6 +180,57 @@ func _instantiate_spec_into(spec: EntitySpec, container: Node, edited_root: Node
 	return true
 
 
+func _sync_containers(sources: Array[EditorContainerNode], dests: Array[EditorContainerNode], label: String) -> void:
+	var dest_by_role: Dictionary[int, EditorContainerNode] = {}
+	for d in dests:
+		if not dest_by_role.has(d.role):
+			dest_by_role[d.role] = d
+
+	for d in dests:
+		for child in d.get_children():
+			child.queue_free()
+
+	var edited_root := EditorInterface.get_edited_scene_root()
+	var copied := 0
+	var skipped := 0
+
+	for src in sources:
+		var dest: EditorContainerNode = dest_by_role.get(src.role)
+		for child in src.get_children():
+			if not child is Entity: continue
+			if dest == null:
+				push_warning("[%s] No destination container for role %s, skipping '%s'" % [label, EntitySpec.Role.keys()[src.role], child.name])
+				skipped += 1
+				continue
+			if _copy_entity_to(child as Entity, dest, edited_root):
+				copied += 1
+			else:
+				skipped += 1
+
+	print("🔁 [%s] Synced %d entities (%d skipped)." % [label, copied, skipped])
+
+
+func _copy_entity_to(source_entity: Entity, dest_container: Node, edited_root: Node) -> bool:
+	if source_entity.scene_file_path == "":
+		push_warning("Entity '%s' has no scene_file_path, skipping" % source_entity.name)
+		return false
+	var scene: PackedScene = load(source_entity.scene_file_path)
+	if scene == null: return false
+
+	var node := scene.instantiate()
+	dest_container.add_child(node)
+	if edited_root != null:
+		node.owner = edited_root
+	node.name = source_entity.name
+	if node is Node3D:
+		var n3d := node as Node3D
+		n3d.global_position = source_entity.global_position
+		n3d.rotation = source_entity.rotation
+	if node is Entity and source_entity.custom_base_stats != null:
+		(node as Entity).custom_base_stats = source_entity.custom_base_stats.duplicate(true)
+	return true
+
+
 # === Validation ===
 func _validate() -> Array[String]:
 	var errors: Array[String] = []
@@ -181,8 +246,7 @@ func _validate() -> Array[String]:
 					_validate_fighting_entity(child, errors)
 
 	if encounter_type == EncounterType.TAVERN:
-		if tavern_scene == null:
-			errors.append("tavern_scene is null for TAVERN encounter")
+		pass # TODO
 
 	return errors
 
@@ -208,7 +272,6 @@ func _build_fighting() -> FightingEncounter:
 func _build_tavern() -> TavernEncounter:
 	var enc := TavernEncounter.new()
 	_fill_base_fields(enc)
-	enc.tavern_scene = tavern_scene
 
 	for container in _get_tavern_containers():
 		for child in container.get_children():
@@ -258,6 +321,14 @@ func _entity_to_tavern_spec(node: Node3D, role: EntitySpec.Role) -> EntitySpec:
 # === Container resolution ===
 func _get_fighting_containers() -> Array[Node3D]:
 	return [_fighting_antagonists_nodes, _fighting_acolytes_nodes, _fighting_buildings_nodes, _fighting_npcs_nodes]
+
+
+func _get_fighting_editor_containers() -> Array[EditorContainerNode]:
+	var result: Array[EditorContainerNode] = []
+	for c in _get_fighting_containers():
+		if c is EditorContainerNode:
+			result.append(c as EditorContainerNode)
+	return result
 
 
 func _get_fighting_container_for_role(role: EntitySpec.Role) -> Node3D:

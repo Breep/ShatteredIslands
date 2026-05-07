@@ -3,16 +3,17 @@
 [ext_resource type="Script" uid="uid://bee8v76ojdmd5" path="res://05_Game/Encounters/Builder/builder_container_node.gd" id="1_2oxcc"]
 [ext_resource type="Script" uid="uid://7wyg8nxupn86" path="res://05_Game/Encounters/Builder/encounter_snapshotter.gd" id="1_36pol"]
 [ext_resource type="PackedScene" uid="uid://3m2v1arprnf7" path="res://06_FloatingIsland/_Maps/tavern.tscn" id="3_o602t"]
-[ext_resource type="Resource" uid="uid://1bbbdd1rtpru" path="res://05_Game/Encounters/Pool/Prototyping/00_TestSimpleEncouter.tres" id="3_ohnf1"]
-[ext_resource type="PackedScene" uid="uid://ds0phwn8k1xb6" path="res://02_Entities/Summons/ChickenLord/TRex/trex.tscn" id="4_p6tlf"]
-[ext_resource type="PackedScene" uid="uid://7s8lg5leu3go" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenArdentCelestial/chicken_ardent_celestial.tscn" id="5_17mcu"]
-[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="5_jmy12"]
+[ext_resource type="Script" uid="uid://rj6clcd8f15a" path="res://05_Game/Encounters/entity_spec.gd" id="3_vdros"]
+[ext_resource type="PackedScene" uid="uid://ds0phwn8k1xb6" path="res://02_Entities/Summons/ChickenLord/TRex/trex.tscn" id="5_ohnf1"]
 [ext_resource type="PackedScene" uid="uid://0x5u0h623yxt" path="res://06_FloatingIsland/FightingIsland/Pool/ArchIsland/arch_island.tscn" id="5_p6tlf"]
-[ext_resource type="Script" uid="uid://cgcrhaeq84p8u" path="res://02_Entities/Summons/ChickenLord/TRex/trex.gd" id="6_vdros"]
-[ext_resource type="Script" uid="uid://bmhr7p8uul8cw" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenArdentCelestial/chicken_ardent_celestial.gd" id="9_k27kf"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="7_k27kf"]
+[ext_resource type="Script" uid="uid://dg13tr0kcjyll" path="res://05_Game/Encounters/FightingEncounter/fighting_encounter.gd" id="7_yfmqp"]
+[ext_resource type="PackedScene" uid="uid://7s8lg5leu3go" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenArdentCelestial/chicken_ardent_celestial.tscn" id="8_yfmqp"]
+[ext_resource type="PackedScene" uid="uid://wtgtwq668eqr" path="res://21_Props/Tavern/table_long_visual.tscn" id="11_k27kf"]
+[ext_resource type="PackedScene" uid="uid://c48aqh8mlb7lc" path="res://02_Entities/Heroes/DarkKnight/dark_knight.tscn" id="12_yfmqp"]
 
-[sub_resource type="Resource" id="Resource_ohnf1"]
-script = ExtResource("5_jmy12")
+[sub_resource type="Resource" id="Resource_1u4x8"]
+script = ExtResource("7_k27kf")
 health_max = 1333.0
 auto_attack_type = 1
 attack_range = 2.0
@@ -21,8 +22,145 @@ attack_speed = 1.0
 movement_speed = 1.377
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
+[sub_resource type="Resource" id="Resource_lcspu"]
+script = ExtResource("3_vdros")
+entity_scene = ExtResource("5_ohnf1")
+role = 0
+team = -1
+display_label = "Trex"
+free_position = Vector3(-2.5111403, 0, -0.20590746)
+rotation_y = -1.6088445
+stats_override = SubResource("Resource_1u4x8")
+
+[sub_resource type="Resource" id="Resource_56pa7"]
+script = ExtResource("7_k27kf")
+health_max = 50.0
+attack_range = 10.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_fw0tj"]
+script = ExtResource("3_vdros")
+entity_scene = ExtResource("8_yfmqp")
+team = -1
+display_label = "ChickenArdentCelestial"
+free_position = Vector3(-4.72752, 0, -7.9383974)
+rotation_y = -2.0139704
+stats_override = SubResource("Resource_56pa7")
+
+[sub_resource type="Resource" id="Resource_favmo"]
+script = ExtResource("7_k27kf")
+health_max = 50.0
+attack_range = 10.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_ywcuw"]
+script = ExtResource("3_vdros")
+entity_scene = ExtResource("8_yfmqp")
+team = -1
+display_label = "ChickenArdentCelestial2"
+free_position = Vector3(-4.298396, 0, 5.7580934)
+rotation_y = -2.0139704
+stats_override = SubResource("Resource_favmo")
+
+[sub_resource type="Resource" id="Resource_oujyk"]
+script = ExtResource("7_k27kf")
+health_max = 50.0
+attack_range = 10.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_kvcmt"]
+script = ExtResource("3_vdros")
+entity_scene = ExtResource("8_yfmqp")
+team = -1
+display_label = "ChickenArdentCelestial3"
+free_position = Vector3(-10.113188, 0, 8.013891)
+rotation_y = -2.0139704
+stats_override = SubResource("Resource_oujyk")
+
+[sub_resource type="Resource" id="Resource_utcw7"]
+script = ExtResource("7_k27kf")
+health_max = 50.0
+attack_range = 10.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_o6ad3"]
+script = ExtResource("3_vdros")
+entity_scene = ExtResource("8_yfmqp")
+team = -1
+display_label = "ChickenArdentCelestial4"
+free_position = Vector3(-8.847448, 4.7683716e-07, -2.9886167)
+rotation_y = -2.0139704
+stats_override = SubResource("Resource_utcw7")
+
+[sub_resource type="Resource" id="Resource_yejb1"]
+script = ExtResource("7_yfmqp")
+island_scene = ExtResource("5_p6tlf")
+encounter_id = &"00_TestSimpleEncouter"
+display_name = "00_TestSimpleEncouter"
+design_notes = "Test 1 2 3
+bla bla bla"
+entity_specs = Array[ExtResource("3_vdros")]([SubResource("Resource_lcspu"), SubResource("Resource_fw0tj"), SubResource("Resource_ywcuw"), SubResource("Resource_kvcmt"), SubResource("Resource_o6ad3")])
+
+[sub_resource type="Resource" id="Resource_8gcej"]
+script = ExtResource("7_k27kf")
+health_max = 1333.0
+auto_attack_type = 1
+attack_range = 2.0
+attack_damage = 100.0
+attack_speed = 1.0
+movement_speed = 1.377
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_8bivb"]
+script = ExtResource("7_k27kf")
+health_max = 50.0
+attack_range = 10.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_q325d"]
+script = ExtResource("7_k27kf")
+health_max = 50.0
+attack_range = 10.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_igegp"]
+script = ExtResource("7_k27kf")
+health_max = 50.0
+attack_range = 10.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_csw7f"]
+script = ExtResource("7_k27kf")
+health_max = 50.0
+attack_range = 10.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_ohnf1"]
+script = ExtResource("7_k27kf")
+health_max = 50.0
+attack_range = 10.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
 [sub_resource type="Resource" id="Resource_vdros"]
-script = ExtResource("5_jmy12")
+script = ExtResource("7_k27kf")
 health_max = 50.0
 attack_range = 10.0
 attack_damage = 10.0
@@ -30,7 +168,7 @@ attack_speed = 1.0
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="Resource" id="Resource_k27kf"]
-script = ExtResource("5_jmy12")
+script = ExtResource("7_k27kf")
 health_max = 50.0
 attack_range = 10.0
 attack_damage = 10.0
@@ -38,15 +176,7 @@ attack_speed = 1.0
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="Resource" id="Resource_yfmqp"]
-script = ExtResource("5_jmy12")
-health_max = 50.0
-attack_range = 10.0
-attack_damage = 10.0
-attack_speed = 1.0
-metadata/_custom_type_script = "uid://bf01q5yq3glxi"
-
-[sub_resource type="Resource" id="Resource_yejb1"]
-script = ExtResource("5_jmy12")
+script = ExtResource("7_k27kf")
 health_max = 50.0
 attack_range = 10.0
 attack_damage = 10.0
@@ -57,6 +187,7 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [node name="EncounterSnapshotter" type="Node" parent="." unique_id=1077957657 node_paths=PackedStringArray("_fighting_antagonists_nodes", "_fighting_heroes_nodes", "_fighting_acolytes_nodes", "_fighting_buildings_nodes", "_fighting_npcs_nodes")]
 script = ExtResource("1_36pol")
+encounter_type = 1
 encounter_id = &"00_TestSimpleEncouter"
 display_name = "00_TestSimpleEncouter"
 design_notes = "Test 1 2 3
@@ -67,7 +198,7 @@ _fighting_heroes_nodes = NodePath("../FightingEncounter/Entities/Heroes")
 _fighting_acolytes_nodes = NodePath("../FightingEncounter/Entities/Acolytes")
 _fighting_buildings_nodes = NodePath("../FightingEncounter/Entities/Buildings")
 _fighting_npcs_nodes = NodePath("../FightingEncounter/Entities/NPCs")
-encounter_to_load = ExtResource("3_ohnf1")
+encounter_to_load = SubResource("Resource_yejb1")
 
 [node name="FightingEncounter" type="Node3D" parent="." unique_id=2050880655]
 
@@ -79,18 +210,9 @@ encounter_to_load = ExtResource("3_ohnf1")
 script = ExtResource("1_2oxcc")
 role = 0
 
-[node name="Trex" type="CharacterBody3D" parent="FightingEncounter/Entities/Antagonistes" unique_id=250114565 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_health_bar", "custom_animation_component") instance=ExtResource("4_p6tlf")]
-transform = Transform3D(-0.038039014, 0, -0.9992763, 0, 1, 0, 0.9992763, 0, -0.038039014, -1.7288549, 0, 0)
-collision_layer = 16
-collision_mask = 16
-script = ExtResource("6_vdros")
-entity_name = "TREX"
-custom_base_stats = SubResource("Resource_ohnf1")
-_visual_3d = NodePath("TRexVisual")
-_health_bar_marker = NodePath("TRexVisual/HealthBarSpawnMarker")
-_health_bar = NodePath("TRexVisual/SumonSimpleInfoPanel2d")
-custom_animation_component = NodePath("ChickenAnimationComponent")
-metadata/_custom_type_script = "uid://cjfj1jcbiom2x"
+[node name="Trex" parent="FightingEncounter/Entities/Antagonistes" unique_id=250114565 instance=ExtResource("5_ohnf1")]
+transform = Transform3D(-0.038039014, 0, -0.9992763, 0, 1, 0, 0.9992763, 0, -0.038039014, -2.5111403, 0, -0.20590746)
+custom_base_stats = SubResource("Resource_8gcej")
 
 [node name="Heroes" type="Node3D" parent="FightingEncounter/Entities" unique_id=476275703]
 script = ExtResource("1_2oxcc")
@@ -98,53 +220,21 @@ script = ExtResource("1_2oxcc")
 [node name="Acolytes" type="Node3D" parent="FightingEncounter/Entities" unique_id=2062068852]
 script = ExtResource("1_2oxcc")
 
-[node name="ChickenArdentCelestial" type="CharacterBody3D" parent="FightingEncounter/Entities/Acolytes" unique_id=2109615854 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_health_bar", "custom_animation_component") instance=ExtResource("5_17mcu")]
+[node name="ChickenArdentCelestial" parent="FightingEncounter/Entities/Acolytes" unique_id=2109615854 instance=ExtResource("8_yfmqp")]
 transform = Transform3D(-0.42880905, 0, -0.9033952, 0, 1, 0, 0.9033952, 0, -0.42880905, -4.72752, 0, -7.9383974)
-collision_layer = 16
-collision_mask = 0
-script = ExtResource("9_k27kf")
-entity_name = "Chicken Ardent"
-custom_base_stats = SubResource("Resource_vdros")
-_visual_3d = NodePath("ChickenArdentCelestialVisual")
-_health_bar_marker = NodePath("ChickenArdentCelestialVisual/HealthBarSpawnMarker")
-_health_bar = NodePath("HealthBar")
-custom_animation_component = NodePath("AnimationComponent")
+custom_base_stats = SubResource("Resource_8bivb")
 
-[node name="ChickenArdentCelestial2" type="CharacterBody3D" parent="FightingEncounter/Entities/Acolytes" unique_id=948274602 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_health_bar", "custom_animation_component") instance=ExtResource("5_17mcu")]
+[node name="ChickenArdentCelestial2" parent="FightingEncounter/Entities/Acolytes" unique_id=1826364940 instance=ExtResource("8_yfmqp")]
 transform = Transform3D(-0.42880905, 0, -0.9033952, 0, 1, 0, 0.9033952, 0, -0.42880905, -4.298396, 0, 5.7580934)
-collision_layer = 16
-collision_mask = 0
-script = ExtResource("9_k27kf")
-entity_name = "Chicken Ardent"
-custom_base_stats = SubResource("Resource_k27kf")
-_visual_3d = NodePath("ChickenArdentCelestialVisual")
-_health_bar_marker = NodePath("ChickenArdentCelestialVisual/HealthBarSpawnMarker")
-_health_bar = NodePath("HealthBar")
-custom_animation_component = NodePath("AnimationComponent")
+custom_base_stats = SubResource("Resource_q325d")
 
-[node name="ChickenArdentCelestial3" type="CharacterBody3D" parent="FightingEncounter/Entities/Acolytes" unique_id=222930404 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_health_bar", "custom_animation_component") instance=ExtResource("5_17mcu")]
+[node name="ChickenArdentCelestial3" parent="FightingEncounter/Entities/Acolytes" unique_id=1084784205 instance=ExtResource("8_yfmqp")]
 transform = Transform3D(-0.42880905, 0, -0.9033952, 0, 1, 0, 0.9033952, 0, -0.42880905, -10.113188, 0, 8.013891)
-collision_layer = 16
-collision_mask = 0
-script = ExtResource("9_k27kf")
-entity_name = "Chicken Ardent"
-custom_base_stats = SubResource("Resource_yfmqp")
-_visual_3d = NodePath("ChickenArdentCelestialVisual")
-_health_bar_marker = NodePath("ChickenArdentCelestialVisual/HealthBarSpawnMarker")
-_health_bar = NodePath("HealthBar")
-custom_animation_component = NodePath("AnimationComponent")
+custom_base_stats = SubResource("Resource_igegp")
 
-[node name="ChickenArdentCelestial4" type="CharacterBody3D" parent="FightingEncounter/Entities/Acolytes" unique_id=1237334657 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_health_bar", "custom_animation_component") instance=ExtResource("5_17mcu")]
+[node name="ChickenArdentCelestial4" parent="FightingEncounter/Entities/Acolytes" unique_id=2036694451 instance=ExtResource("8_yfmqp")]
 transform = Transform3D(-0.42880905, 0, -0.9033952, 0, 1, 0, 0.9033952, 0, -0.42880905, -8.847448, 4.7683716e-07, -2.9886167)
-collision_layer = 16
-collision_mask = 0
-script = ExtResource("9_k27kf")
-entity_name = "Chicken Ardent"
-custom_base_stats = SubResource("Resource_yejb1")
-_visual_3d = NodePath("ChickenArdentCelestialVisual")
-_health_bar_marker = NodePath("ChickenArdentCelestialVisual/HealthBarSpawnMarker")
-_health_bar = NodePath("HealthBar")
-custom_animation_component = NodePath("AnimationComponent")
+custom_base_stats = SubResource("Resource_csw7f")
 
 [node name="Buildings" type="Node3D" parent="FightingEncounter/Entities" unique_id=61386169]
 script = ExtResource("1_2oxcc")
@@ -167,11 +257,34 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0
 [node name="Antagonistes" type="Node3D" parent="TavernEncounter/Entities" unique_id=990563684]
 script = ExtResource("1_2oxcc")
 
+[node name="Trex" parent="TavernEncounter/Entities/Antagonistes" unique_id=787057843 instance=ExtResource("5_ohnf1")]
+transform = Transform3D(-0.043968134, 0, -0.9990329, 0, 1, 0, 0.9990329, 0, -0.043968134, -2.8961196, 0.70605564, 0.037612796)
+custom_base_stats = SubResource("Resource_8gcej")
+
 [node name="Heroes" type="Node3D" parent="TavernEncounter/Entities" unique_id=913717724]
 script = ExtResource("1_2oxcc")
 
+[node name="DarkKnight" parent="TavernEncounter/Entities/Heroes" unique_id=937625230 instance=ExtResource("12_yfmqp")]
+transform = Transform3D(-0.07282045, 0, 0.9973451, 0, 1, 0, -0.9973451, 0, -0.07282045, 2.3404973, 0.6088898, 0.29741752)
+
 [node name="Acolytes" type="Node3D" parent="TavernEncounter/Entities" unique_id=754000186]
 script = ExtResource("1_2oxcc")
+
+[node name="ChickenArdentCelestial" parent="TavernEncounter/Entities/Acolytes" unique_id=334026545 instance=ExtResource("8_yfmqp")]
+transform = Transform3D(0.51957875, 0, -0.85442257, 0, 1, 0, 0.85442257, 0, 0.51957875, -0.9923521, 1.3342638, 2.0655978)
+custom_base_stats = SubResource("Resource_ohnf1")
+
+[node name="ChickenArdentCelestial2" parent="TavernEncounter/Entities/Acolytes" unique_id=124365384 instance=ExtResource("8_yfmqp")]
+transform = Transform3D(-0.42880905, 0, -0.9033952, 0, 1, 0, 0.9033952, 0, -0.42880905, -0.91357124, 1.2790282, -1.4390447)
+custom_base_stats = SubResource("Resource_vdros")
+
+[node name="ChickenArdentCelestial3" parent="TavernEncounter/Entities/Acolytes" unique_id=972341369 instance=ExtResource("8_yfmqp")]
+transform = Transform3D(0.46375993, 0, -0.8859609, 0, 1, 0, 0.8859609, 0, 0.46375993, -5.8574224, 0.5313548, 3.1440768)
+custom_base_stats = SubResource("Resource_k27kf")
+
+[node name="ChickenArdentCelestial4" parent="TavernEncounter/Entities/Acolytes" unique_id=292347489 instance=ExtResource("8_yfmqp")]
+transform = Transform3D(-0.42880905, 0, -0.9033952, 0, 1, 0, 0.9033952, 0, -0.42880905, -6.005024, 0.26616788, -3.6114354)
+custom_base_stats = SubResource("Resource_yfmqp")
 
 [node name="Buildings" type="Node3D" parent="TavernEncounter/Entities" unique_id=228829474]
 script = ExtResource("1_2oxcc")
@@ -180,3 +293,6 @@ script = ExtResource("1_2oxcc")
 script = ExtResource("1_2oxcc")
 
 [node name="Props" type="Node3D" parent="TavernEncounter" unique_id=1263254783]
+
+[node name="TableLongVisual" parent="TavernEncounter/Props" unique_id=1193349387 instance=ExtResource("11_k27kf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.34083807, 0.33639812, 0.34404802)

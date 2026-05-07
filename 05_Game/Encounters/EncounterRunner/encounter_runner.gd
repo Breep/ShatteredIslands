@@ -15,3 +15,4 @@ func start(player_encounter: FightingEncounter, mob_encounter: FightingEncounter
 	get_tree().root.add_child.call_deferred(island)
 	await island.ready
 	island.init_fight_2(player_encounter, mob_encounter)
+	island.set_active()

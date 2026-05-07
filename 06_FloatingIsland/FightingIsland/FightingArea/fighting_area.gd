@@ -86,7 +86,11 @@ func init_fight_2(player_encounter: FightingEncounter, mob_encounter: FightingEn
 	for entity_spec: EntitySpec in mob_encounter.entity_specs:
 		var entity: Entity = entity_spec.entity_scene.instantiate()
 		entity.custom_base_stats = entity_spec.stats_override
-		_spawn_manager.spawn_entity(entity, entity_spec.free_position)
+		_spawn_manager.spawn_entity(entity, _spec_to_transform(entity_spec))
+	for entity_spec: EntitySpec in player_encounter.entity_specs:
+		var entity: Entity = entity_spec.entity_scene.instantiate()
+		entity.custom_base_stats = entity_spec.stats_override
+		_spawn_manager.spawn_entity(entity, _spec_to_transform(entity_spec))
 
 
 func get_fighting_heroes() -> Array[Hero]:
@@ -96,6 +100,10 @@ func get_battle_type() -> Battle.BattleType:
 	return _battle_type
 
 # ============================== Private functions ==============================
+
+func _spec_to_transform(spec: EntitySpec) -> Transform3D:
+	return Transform3D(Basis().rotated(Vector3.UP, spec.rotation_y), spec.free_position)
+
 
 func _ready_checks() -> bool:
 	if _fighting_manager == null:

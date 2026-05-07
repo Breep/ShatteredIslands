@@ -5,9 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://c66yw4go2ykwa" path="res://06_FloatingIsland/FightingIsland/FightingArea/fighting_area.tscn" id="3_nh3rf"]
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://10_Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="4_45gxp"]
 
-[node name="ArchIsland" type="Node3D" unique_id=796314808 node_paths=PackedStringArray("_fighting_area")]
+[node name="ArchIsland" type="Node3D" unique_id=796314808 node_paths=PackedStringArray("_fighting_area", "_center_point_camera")]
 script = ExtResource("1_4eaaq")
 _fighting_area = NodePath("FightingArea")
+_center_point_camera = NodePath("CenterPointCamera")
 
 [node name="ArchIslandVisual" parent="." unique_id=1045725859 instance=ExtResource("1_hqc1e")]
 

@@ -1,8 +1,6 @@
 class_name TavernEncounter
 extends EncounterResource
 
-@export var tavern_scene: PackedScene  # la scène taverne (déco fixe + spots interactifs)
-
 func get_npcs() -> Array[EntitySpec]:
 	return entity_specs.filter(func(s): return s.role == EntitySpec.Role.NPC)
 

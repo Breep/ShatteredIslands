@@ -1,0 +1,111 @@
+[gd_resource type="Resource" script_class="TavernEncounter" format=3 uid="uid://tib0ie1kgy20"]
+
+[ext_resource type="Script" uid="uid://rj6clcd8f15a" path="res://05_Game/Encounters/entity_spec.gd" id="1_yoo0t"]
+[ext_resource type="PackedScene" uid="uid://ds0phwn8k1xb6" path="res://02_Entities/Summons/ChickenLord/TRex/trex.tscn" id="2_gnd2o"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_cqs7b"]
+[ext_resource type="PackedScene" uid="uid://c48aqh8mlb7lc" path="res://02_Entities/Heroes/DarkKnight/dark_knight.tscn" id="4_qpuy3"]
+[ext_resource type="PackedScene" uid="uid://7s8lg5leu3go" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenArdentCelestial/chicken_ardent_celestial.tscn" id="5_f3cka"]
+[ext_resource type="Script" uid="uid://b02max168665p" path="res://05_Game/Encounters/tavern_encounter.gd" id="6_pugrw"]
+
+[sub_resource type="Resource" id="Resource_ao6n8"]
+script = ExtResource("3_cqs7b")
+health_max = 1333.0
+auto_attack_type = 1
+attack_range = 2.0
+attack_damage = 100.0
+attack_speed = 1.0
+movement_speed = 1.377
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_sx86e"]
+script = ExtResource("1_yoo0t")
+entity_scene = ExtResource("2_gnd2o")
+team = -1
+display_label = "Trex"
+free_position = Vector3(-2.8961196, 0.70605564, 0.037612796)
+rotation_y = -1.6147786
+stats_override = SubResource("Resource_ao6n8")
+
+[sub_resource type="Resource" id="Resource_lf2c2"]
+script = ExtResource("1_yoo0t")
+entity_scene = ExtResource("4_qpuy3")
+team = -1
+display_label = "DarkKnight"
+free_position = Vector3(2.3404973, 0.6088898, 0.29741752)
+rotation_y = 1.6436813
+
+[sub_resource type="Resource" id="Resource_o18ng"]
+script = ExtResource("3_cqs7b")
+health_max = 50.0
+attack_range = 10.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_ioyrp"]
+script = ExtResource("1_yoo0t")
+entity_scene = ExtResource("5_f3cka")
+team = -1
+display_label = "ChickenArdentCelestial"
+free_position = Vector3(-0.9923521, 1.3342638, 2.0655978)
+rotation_y = -1.0244385
+stats_override = SubResource("Resource_o18ng")
+
+[sub_resource type="Resource" id="Resource_rdj7t"]
+script = ExtResource("3_cqs7b")
+health_max = 50.0
+attack_range = 10.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_c5kpp"]
+script = ExtResource("1_yoo0t")
+entity_scene = ExtResource("5_f3cka")
+team = -1
+display_label = "ChickenArdentCelestial2"
+free_position = Vector3(-0.91357124, 1.2790282, -1.4390447)
+rotation_y = -2.0139704
+stats_override = SubResource("Resource_rdj7t")
+
+[sub_resource type="Resource" id="Resource_ffcbm"]
+script = ExtResource("3_cqs7b")
+health_max = 50.0
+attack_range = 10.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_hekrx"]
+script = ExtResource("1_yoo0t")
+entity_scene = ExtResource("5_f3cka")
+team = -1
+display_label = "ChickenArdentCelestial3"
+free_position = Vector3(-5.8574224, 0.5313548, 3.1440768)
+rotation_y = -1.0885619
+stats_override = SubResource("Resource_ffcbm")
+
+[sub_resource type="Resource" id="Resource_gxrmn"]
+script = ExtResource("3_cqs7b")
+health_max = 50.0
+attack_range = 10.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_525qc"]
+script = ExtResource("1_yoo0t")
+entity_scene = ExtResource("5_f3cka")
+team = -1
+display_label = "ChickenArdentCelestial4"
+free_position = Vector3(-6.005024, 0.26616788, -3.6114354)
+rotation_y = -2.0139704
+stats_override = SubResource("Resource_gxrmn")
+
+[resource]
+script = ExtResource("6_pugrw")
+encounter_id = &"00_TestSimpleEncouter"
+display_name = "00_TestSimpleEncouter"
+design_notes = "Test 1 2 3
+bla bla bla"
+entity_specs = Array[ExtResource("1_yoo0t")]([SubResource("Resource_sx86e"), SubResource("Resource_lf2c2"), SubResource("Resource_ioyrp"), SubResource("Resource_c5kpp"), SubResource("Resource_hekrx"), SubResource("Resource_525qc")])

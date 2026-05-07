@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://di4wldkhwynkj"]
 
-[ext_resource type="PackedScene" uid="uid://wtgtwq668eqr" path="res://06_FloatingIsland/BuyingIsland/BuyingArea/Tavern/TavernCenter/Tables/VisualTODOCHECK/TableLong/table_long_visual.tscn" id="1_q2h0c"]
+[ext_resource type="PackedScene" uid="uid://wtgtwq668eqr" path="res://21_Props/Tavern/table_long_visual.tscn" id="1_q2h0c"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_60xgy"]
 size = Vector3(1.89221, 0.932068, 3.86673)
 
-[node name="TableLong" type="StaticBody3D"]
+[node name="TableLong" type="StaticBody3D" unique_id=244575788]
 
-[node name="TableLongVisual" parent="." instance=ExtResource("1_q2h0c")]
+[node name="TableLongVisual" parent="." unique_id=39442536 instance=ExtResource("1_q2h0c")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=924448758]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000671387, 0.494659, 0.0115509)
 shape = SubResource("BoxShape3D_60xgy")

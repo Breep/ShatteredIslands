@@ -49,7 +49,7 @@ func _spawn_hero(hero: Hero, available_spawn_locations: Array[SpawnPoint]) -> bo
 	
 	for spawn_point: SpawnPoint in available_spawn_locations:
 		if spawn_point.team == hero.team:
-			_spawn_manager.spawn_entity(hero, spawn_point.global_position)
+			_spawn_manager.spawn_entity(hero, spawn_point.global_transform)
 			available_spawn_locations.erase(spawn_point)
 			return true
 	
