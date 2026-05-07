@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://0x5u0h623yxt"]
+
+[ext_resource type="Script" uid="uid://cjj50s3tq2qtt" path="res://06_FloatingIsland/FightingIsland/Pool/ArchIsland/arch_island.gd" id="1_4eaaq"]
+[ext_resource type="PackedScene" uid="uid://q7gxxkhg5u54" path="res://06_FloatingIsland/FightingIsland/Pool/ArchIsland/arch_island_visual.tscn" id="1_hqc1e"]
+[ext_resource type="PackedScene" uid="uid://c66yw4go2ykwa" path="res://06_FloatingIsland/FightingIsland/FightingArea/fighting_area.tscn" id="3_nh3rf"]
+[ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://10_Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="4_45gxp"]
+
+[node name="ArchIsland" type="Node3D" unique_id=796314808 node_paths=PackedStringArray("_fighting_area")]
+script = ExtResource("1_4eaaq")
+_fighting_area = NodePath("FightingArea")
+
+[node name="ArchIslandVisual" parent="." unique_id=1045725859 instance=ExtResource("1_hqc1e")]
+
+[node name="FightingArea" parent="." unique_id=2072382245 node_paths=PackedStringArray("_fighting_floors") instance=ExtResource("3_nh3rf")]
+_fighting_floors = {
+0: NodePath("FightingFloorTemplates/FightingFloor_1v1"),
+1: NodePath("FightingFloorTemplates/FightingFloor_2v2"),
+2: NodePath("FightingFloorTemplates/FightingFloor_3v3"),
+3: NodePath("FightingFloorTemplates/FightingFloor_4v4"),
+4: NodePath("FightingFloorTemplates/FightingFloor_ffa13")
+}
+
+[node name="CenterPointCamera" parent="." unique_id=823970387 instance=ExtResource("4_45gxp")]
+
+[editable path="CenterPointCamera"]

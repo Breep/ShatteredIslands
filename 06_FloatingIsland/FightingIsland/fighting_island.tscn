@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b6yyjft0aylpr" path="res://06_FloatingIsland/FightingIsland/fighting_island.gd" id="1_hqxtb"]
 [ext_resource type="PackedScene" uid="uid://c66yw4go2ykwa" path="res://06_FloatingIsland/FightingIsland/FightingArea/fighting_area.tscn" id="2_0nkjk"]
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://10_Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="4_0ovsq"]
-[ext_resource type="PackedScene" uid="uid://q7gxxkhg5u54" path="res://06_FloatingIsland/_Maps/arch_island.tscn" id="4_8iwhk"]
+[ext_resource type="PackedScene" uid="uid://q7gxxkhg5u54" path="res://06_FloatingIsland/FightingIsland/Pool/ArchIsland/arch_island_visual.tscn" id="4_8iwhk"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_622jh"]
 properties/0/path = NodePath(".:_player_owner_id")

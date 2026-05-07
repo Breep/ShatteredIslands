@@ -14,7 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://b1wyuwomtucwk" path="res://06_FloatingIsland/FightingIsland/FightingArea/FightingFloorTemplates/fighting_floor_3v3.tscn" id="12_dt6cg"]
 [ext_resource type="PackedScene" uid="uid://hk435wu0ry72" path="res://06_FloatingIsland/FightingIsland/FightingArea/FightingFloorTemplates/fighting_floor_4v4.tscn" id="13_vv2qv"]
 [ext_resource type="PackedScene" uid="uid://dbbpa637es0uf" path="res://06_FloatingIsland/FightingIsland/FightingArea/FightingFloorTemplates/fighting_floor_ffa13.tscn" id="14_dt6cg"]
-[ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://10_Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="15_2iep3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8iy5v"]
 size = Vector3(20, 5, 10)
@@ -114,7 +113,3 @@ collision_mask = 16
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ScannerArea3D" unique_id=1351499465]
 shape = SubResource("BoxShape3D_8iy5v")
-
-[node name="CenterPointCamera" parent="." unique_id=823970387 instance=ExtResource("15_2iep3")]
-
-[editable path="CenterPointCamera"]
