@@ -3,9 +3,55 @@
 [ext_resource type="Script" uid="uid://bee8v76ojdmd5" path="res://05_Game/Encounters/Builder/builder_container_node.gd" id="1_2oxcc"]
 [ext_resource type="Script" uid="uid://7wyg8nxupn86" path="res://05_Game/Encounters/Builder/encounter_snapshotter.gd" id="1_36pol"]
 [ext_resource type="PackedScene" uid="uid://3m2v1arprnf7" path="res://06_FloatingIsland/_Maps/tavern.tscn" id="3_o602t"]
+[ext_resource type="Resource" uid="uid://1bbbdd1rtpru" path="res://05_Game/Encounters/Pool/Prototyping/00_TestSimpleEncouter.tres" id="3_ohnf1"]
 [ext_resource type="PackedScene" uid="uid://ds0phwn8k1xb6" path="res://02_Entities/Summons/ChickenLord/TRex/trex.tscn" id="4_p6tlf"]
 [ext_resource type="PackedScene" uid="uid://7s8lg5leu3go" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenArdentCelestial/chicken_ardent_celestial.tscn" id="5_17mcu"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="5_jmy12"]
 [ext_resource type="PackedScene" uid="uid://0x5u0h623yxt" path="res://06_FloatingIsland/FightingIsland/Pool/ArchIsland/arch_island.tscn" id="5_p6tlf"]
+[ext_resource type="Script" uid="uid://cgcrhaeq84p8u" path="res://02_Entities/Summons/ChickenLord/TRex/trex.gd" id="6_vdros"]
+[ext_resource type="Script" uid="uid://bmhr7p8uul8cw" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenArdentCelestial/chicken_ardent_celestial.gd" id="9_k27kf"]
+
+[sub_resource type="Resource" id="Resource_ohnf1"]
+script = ExtResource("5_jmy12")
+health_max = 1333.0
+auto_attack_type = 1
+attack_range = 2.0
+attack_damage = 100.0
+attack_speed = 1.0
+movement_speed = 1.377
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_vdros"]
+script = ExtResource("5_jmy12")
+health_max = 50.0
+attack_range = 10.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_k27kf"]
+script = ExtResource("5_jmy12")
+health_max = 50.0
+attack_range = 10.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_yfmqp"]
+script = ExtResource("5_jmy12")
+health_max = 50.0
+attack_range = 10.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_yejb1"]
+script = ExtResource("5_jmy12")
+health_max = 50.0
+attack_range = 10.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [node name="EncounterBuilder" type="Node3D" unique_id=1992894760]
 
@@ -21,6 +67,7 @@ _fighting_heroes_nodes = NodePath("../FightingEncounter/Entities/Heroes")
 _fighting_acolytes_nodes = NodePath("../FightingEncounter/Entities/Acolytes")
 _fighting_buildings_nodes = NodePath("../FightingEncounter/Entities/Buildings")
 _fighting_npcs_nodes = NodePath("../FightingEncounter/Entities/NPCs")
+encounter_to_load = ExtResource("3_ohnf1")
 
 [node name="FightingEncounter" type="Node3D" parent="." unique_id=2050880655]
 
@@ -32,8 +79,18 @@ _fighting_npcs_nodes = NodePath("../FightingEncounter/Entities/NPCs")
 script = ExtResource("1_2oxcc")
 role = 0
 
-[node name="Trex" parent="FightingEncounter/Entities/Antagonistes" unique_id=250114565 instance=ExtResource("4_p6tlf")]
+[node name="Trex" type="CharacterBody3D" parent="FightingEncounter/Entities/Antagonistes" unique_id=250114565 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_health_bar", "custom_animation_component") instance=ExtResource("4_p6tlf")]
 transform = Transform3D(-0.038039014, 0, -0.9992763, 0, 1, 0, 0.9992763, 0, -0.038039014, -1.7288549, 0, 0)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("6_vdros")
+entity_name = "TREX"
+custom_base_stats = SubResource("Resource_ohnf1")
+_visual_3d = NodePath("TRexVisual")
+_health_bar_marker = NodePath("TRexVisual/HealthBarSpawnMarker")
+_health_bar = NodePath("TRexVisual/SumonSimpleInfoPanel2d")
+custom_animation_component = NodePath("ChickenAnimationComponent")
+metadata/_custom_type_script = "uid://cjfj1jcbiom2x"
 
 [node name="Heroes" type="Node3D" parent="FightingEncounter/Entities" unique_id=476275703]
 script = ExtResource("1_2oxcc")
@@ -41,17 +98,53 @@ script = ExtResource("1_2oxcc")
 [node name="Acolytes" type="Node3D" parent="FightingEncounter/Entities" unique_id=2062068852]
 script = ExtResource("1_2oxcc")
 
-[node name="ChickenArdentCelestial" parent="FightingEncounter/Entities/Acolytes" unique_id=2109615854 instance=ExtResource("5_17mcu")]
+[node name="ChickenArdentCelestial" type="CharacterBody3D" parent="FightingEncounter/Entities/Acolytes" unique_id=2109615854 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_health_bar", "custom_animation_component") instance=ExtResource("5_17mcu")]
 transform = Transform3D(-0.42880905, 0, -0.9033952, 0, 1, 0, 0.9033952, 0, -0.42880905, -4.72752, 0, -7.9383974)
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("9_k27kf")
+entity_name = "Chicken Ardent"
+custom_base_stats = SubResource("Resource_vdros")
+_visual_3d = NodePath("ChickenArdentCelestialVisual")
+_health_bar_marker = NodePath("ChickenArdentCelestialVisual/HealthBarSpawnMarker")
+_health_bar = NodePath("HealthBar")
+custom_animation_component = NodePath("AnimationComponent")
 
-[node name="ChickenArdentCelestial2" parent="FightingEncounter/Entities/Acolytes" unique_id=184575378 instance=ExtResource("5_17mcu")]
+[node name="ChickenArdentCelestial2" type="CharacterBody3D" parent="FightingEncounter/Entities/Acolytes" unique_id=948274602 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_health_bar", "custom_animation_component") instance=ExtResource("5_17mcu")]
 transform = Transform3D(-0.42880905, 0, -0.9033952, 0, 1, 0, 0.9033952, 0, -0.42880905, -4.298396, 0, 5.7580934)
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("9_k27kf")
+entity_name = "Chicken Ardent"
+custom_base_stats = SubResource("Resource_k27kf")
+_visual_3d = NodePath("ChickenArdentCelestialVisual")
+_health_bar_marker = NodePath("ChickenArdentCelestialVisual/HealthBarSpawnMarker")
+_health_bar = NodePath("HealthBar")
+custom_animation_component = NodePath("AnimationComponent")
 
-[node name="ChickenArdentCelestial3" parent="FightingEncounter/Entities/Acolytes" unique_id=1979112390 instance=ExtResource("5_17mcu")]
+[node name="ChickenArdentCelestial3" type="CharacterBody3D" parent="FightingEncounter/Entities/Acolytes" unique_id=222930404 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_health_bar", "custom_animation_component") instance=ExtResource("5_17mcu")]
 transform = Transform3D(-0.42880905, 0, -0.9033952, 0, 1, 0, 0.9033952, 0, -0.42880905, -10.113188, 0, 8.013891)
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("9_k27kf")
+entity_name = "Chicken Ardent"
+custom_base_stats = SubResource("Resource_yfmqp")
+_visual_3d = NodePath("ChickenArdentCelestialVisual")
+_health_bar_marker = NodePath("ChickenArdentCelestialVisual/HealthBarSpawnMarker")
+_health_bar = NodePath("HealthBar")
+custom_animation_component = NodePath("AnimationComponent")
 
-[node name="ChickenArdentCelestial4" parent="FightingEncounter/Entities/Acolytes" unique_id=295857149 instance=ExtResource("5_17mcu")]
+[node name="ChickenArdentCelestial4" type="CharacterBody3D" parent="FightingEncounter/Entities/Acolytes" unique_id=1237334657 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_health_bar", "custom_animation_component") instance=ExtResource("5_17mcu")]
 transform = Transform3D(-0.42880905, 0, -0.9033952, 0, 1, 0, 0.9033952, 0, -0.42880905, -8.847448, 4.7683716e-07, -2.9886167)
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("9_k27kf")
+entity_name = "Chicken Ardent"
+custom_base_stats = SubResource("Resource_yejb1")
+_visual_3d = NodePath("ChickenArdentCelestialVisual")
+_health_bar_marker = NodePath("ChickenArdentCelestialVisual/HealthBarSpawnMarker")
+_health_bar = NodePath("HealthBar")
+custom_animation_component = NodePath("AnimationComponent")
 
 [node name="Buildings" type="Node3D" parent="FightingEncounter/Entities" unique_id=61386169]
 script = ExtResource("1_2oxcc")
@@ -74,26 +167,11 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0
 [node name="Antagonistes" type="Node3D" parent="TavernEncounter/Entities" unique_id=990563684]
 script = ExtResource("1_2oxcc")
 
-[node name="Trex" parent="TavernEncounter/Entities/Antagonistes" unique_id=1126925342 instance=ExtResource("4_p6tlf")]
-transform = Transform3D(-0.024154773, 0, -0.63454044, 0, 0.635, 0, 0.63454044, 0, -0.024154773, -1.8210173, 0.6893914, 0.12828112)
-
 [node name="Heroes" type="Node3D" parent="TavernEncounter/Entities" unique_id=913717724]
 script = ExtResource("1_2oxcc")
 
 [node name="Acolytes" type="Node3D" parent="TavernEncounter/Entities" unique_id=754000186]
 script = ExtResource("1_2oxcc")
-
-[node name="ChickenArdentCelestial" parent="TavernEncounter/Entities/Acolytes" unique_id=1223385648 instance=ExtResource("5_17mcu")]
-transform = Transform3D(-0.42880905, 0, -0.9033952, 0, 1, 0, 0.9033952, 0, -0.42880905, -4.72752, 0, -7.9383974)
-
-[node name="ChickenArdentCelestial2" parent="TavernEncounter/Entities/Acolytes" unique_id=1313756535 instance=ExtResource("5_17mcu")]
-transform = Transform3D(-0.42880905, 0, -0.9033952, 0, 1, 0, 0.9033952, 0, -0.42880905, -4.298396, 0, 5.7580934)
-
-[node name="ChickenArdentCelestial3" parent="TavernEncounter/Entities/Acolytes" unique_id=2041426617 instance=ExtResource("5_17mcu")]
-transform = Transform3D(-0.42880905, 0, -0.9033952, 0, 1, 0, 0.9033952, 0, -0.42880905, -5.9127803, 0.5990932, 2.790875)
-
-[node name="ChickenArdentCelestial4" parent="TavernEncounter/Entities/Acolytes" unique_id=637453568 instance=ExtResource("5_17mcu")]
-transform = Transform3D(-0.42880905, 0, -0.9033952, 0, 1, 0, 0.9033952, 0, -0.42880905, -8.847448, 4.7683716e-07, -2.9886167)
 
 [node name="Buildings" type="Node3D" parent="TavernEncounter/Entities" unique_id=228829474]
 script = ExtResource("1_2oxcc")
