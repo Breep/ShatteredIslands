@@ -1,2 +1,2 @@
-class_name FightingPlayerEncoutner
+class_name FightingPlayerEncounter
 extends FightingEncounter
