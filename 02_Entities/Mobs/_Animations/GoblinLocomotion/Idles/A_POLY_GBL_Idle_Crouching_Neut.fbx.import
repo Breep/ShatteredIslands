@@ -1,15 +1,15 @@
 [remap]
 
-importer="scene"
+importer="animation_library"
 importer_version=1
-type="PackedScene"
+type="AnimationLibrary"
 uid="uid://csbi0y4wrc3p"
-path="res://.godot/imported/A_POLY_GBL_Idle_Crouching_Neut.fbx-cff55aeb10b03b105eb3d8fba91387fe.scn"
+path="res://.godot/imported/A_POLY_GBL_Idle_Crouching_Neut.fbx-cff55aeb10b03b105eb3d8fba91387fe.res"
 
 [deps]
 
 source_file="res://02_Entities/Mobs/_Animations/GoblinLocomotion/Idles/A_POLY_GBL_Idle_Crouching_Neut.fbx"
-dest_files=["res://.godot/imported/A_POLY_GBL_Idle_Crouching_Neut.fbx-cff55aeb10b03b105eb3d8fba91387fe.scn"]
+dest_files=["res://.godot/imported/A_POLY_GBL_Idle_Crouching_Neut.fbx-cff55aeb10b03b105eb3d8fba91387fe.res"]
 
 [params]
 
