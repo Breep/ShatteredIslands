@@ -31,8 +31,8 @@ skins/use_named_skins=true
 animation/import=true
 animation/fps=30
 animation/trimming=true
-animation/remove_immutable_tracks=true
-animation/import_rest_as_RESET=false
+animation/remove_immutable_tracks=false
+animation/import_rest_as_RESET=true
 import_script/path=""
 materials/extract=0
 materials/extract_format=0
@@ -2094,6 +2094,11 @@ _subresources={
 "slice_99/save_to_file/path": "",
 "slice_99/start_frame": 0,
 "slices/amount": 0
+}
+},
+"nodes": {
+"PATH:Skeleton3D": {
+"retarget/bone_map": Resource("uid://dnpr14p1enpld", "res://02_Entities/Mobs/Goblins/goblin_bone_map.tres")
 }
 }
 }

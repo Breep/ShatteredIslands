@@ -31,13 +31,21 @@ skins/use_named_skins=true
 animation/import=true
 animation/fps=30
 animation/trimming=true
-animation/remove_immutable_tracks=true
-animation/import_rest_as_RESET=false
+animation/remove_immutable_tracks=false
+animation/import_rest_as_RESET=true
 import_script/path=""
 materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
-_subresources={}
+_subresources={
+"nodes": {
+"PATH:Skeleton3D": {
+"retarget/bone_map": Resource("uid://dnpr14p1enpld", "res://02_Entities/Mobs/Goblins/goblin_bone_map.tres"),
+"retarget/rest_fixer/reset_all_bone_poses_after_import": false,
+"retarget/rest_fixer/retarget_method": 2
+}
+}
+}
 fbx/importer=0
 fbx/allow_geometry_helper_nodes=false
 fbx/embedded_image_handling=1

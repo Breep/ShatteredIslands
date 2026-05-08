@@ -1,8 +1,8 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene format=3 uid="uid://cemg818sqp5yw"]
 
-[ext_resource type="Script" path="res://02_Entities/Mobs/Goblins/goblin_locomotion.proto.gd" id="1_proto"]
+[ext_resource type="Script" uid="uid://g82acyw2rff5" path="res://02_Entities/Mobs/Goblins/goblin_locomotion.proto.gd" id="1_proto"]
 [ext_resource type="PackedScene" uid="uid://muvntvtbhtuo" path="res://02_Entities/Mobs/Goblins/Characters.fbx" id="2_goblin"]
-[ext_resource type="AnimationLibrary" uid="uid://ge723ytd1ixr" path="res://02_Entities/Mobs/_Animations/GoblinLocomotion/goblin_locomotion_library.tres" id="3_anim_lib"]
+[ext_resource type="AnimationLibrary" uid="uid://benqfwo83lpc6" path="res://02_Entities/Mobs/_Animations/goblin_anim_library.tres" id="3_q5yo7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ground"]
 albedo_color = Color(0.18, 0.2, 0.22, 1)
@@ -10,64 +10,62 @@ albedo_color = Color(0.18, 0.2, 0.22, 1)
 [sub_resource type="PlaneMesh" id="PlaneMesh_ground"]
 size = Vector2(8, 8)
 
-[node name="GoblinLocomotionProto" type="Node3D"]
+[node name="GoblinLocomotionProto" type="Node3D" unique_id=841148863]
 script = ExtResource("1_proto")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=895216535]
 transform = Transform3D(1, 0, 0, 0, 0.5, -0.866, 0, 0.866, 0.5, 0, 5, 0)
 shadow_enabled = true
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.9659, -0.2588, 0, 0.2588, 0.9659, 0, 1.6, 3.2)
+[node name="Camera3D" type="Camera3D" parent="." unique_id=163302238]
+transform = Transform3D(1, 0, 0, 0, 0.95670855, 0.29104733, 0, -0.29104733, 0.95670855, 0, 1.6, 3.2)
 fov = 50.0
 
-[node name="Ground" type="MeshInstance3D" parent="."]
+[node name="Ground" type="MeshInstance3D" parent="." unique_id=1381151593]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.02, 0)
 material_override = SubResource("StandardMaterial3D_ground")
 mesh = SubResource("PlaneMesh_ground")
 
-[node name="Goblin" parent="." instance=ExtResource("2_goblin")]
+[node name="Goblin" parent="." unique_id=1519802978 instance=ExtResource("2_goblin")]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1661992547]
 root_node = NodePath("../Goblin")
-libraries = {
-"goblin_loco": ExtResource("3_anim_lib")
-}
+libraries/goblin_anim_library = ExtResource("3_q5yo7")
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1294849001]
 
-[node name="Panel" type="VBoxContainer" parent="UI"]
+[node name="Panel" type="VBoxContainer" parent="UI" unique_id=694947091]
 offset_left = 12.0
 offset_top = 12.0
 offset_right = 380.0
 offset_bottom = 220.0
 
-[node name="TitleLabel" type="Label" parent="UI/Panel"]
+[node name="TitleLabel" type="Label" parent="UI/Panel" unique_id=616169673]
 layout_mode = 2
 text = "Goblin Locomotion Proto"
 
-[node name="StatusLabel" type="Label" parent="UI/Panel"]
+[node name="StatusLabel" type="Label" parent="UI/Panel" unique_id=1215069115]
 layout_mode = 2
 text = "Ready"
 
-[node name="VariantPicker" type="OptionButton" parent="UI/Panel"]
+[node name="VariantPicker" type="OptionButton" parent="UI/Panel" unique_id=767371194]
 layout_mode = 2
 
-[node name="Buttons" type="HBoxContainer" parent="UI/Panel"]
+[node name="Buttons" type="HBoxContainer" parent="UI/Panel" unique_id=1986229753]
 layout_mode = 2
 
-[node name="BtnIdle" type="Button" parent="UI/Panel/Buttons"]
+[node name="BtnIdle" type="Button" parent="UI/Panel/Buttons" unique_id=2086522650]
 layout_mode = 2
 text = "Idle"
 
-[node name="BtnWalk" type="Button" parent="UI/Panel/Buttons"]
+[node name="BtnWalk" type="Button" parent="UI/Panel/Buttons" unique_id=163802787]
 layout_mode = 2
 text = "Walk"
 
-[node name="BtnRun" type="Button" parent="UI/Panel/Buttons"]
+[node name="BtnRun" type="Button" parent="UI/Panel/Buttons" unique_id=1060963820]
 layout_mode = 2
 text = "Run"
 
-[node name="BtnAttack" type="Button" parent="UI/Panel/Buttons"]
+[node name="BtnAttack" type="Button" parent="UI/Panel/Buttons" unique_id=1379999074]
 layout_mode = 2
 text = "Attack"
