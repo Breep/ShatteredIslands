@@ -17,7 +17,8 @@ var summoner: Entity
 func apply_context(context: EntityContext) -> void:
 	summoner = context.entity_owner
 	super.apply_context(context)
-	summoner.bds_registry.register_summon(self)
+	if summoner != null:
+		summoner.bds_registry.register_summon(self)
 #endregion
 
 #region ============================== Private variables ==============================
