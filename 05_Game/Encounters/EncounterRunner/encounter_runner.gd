@@ -14,5 +14,6 @@ func start(player_encounter: FightingEncounter, mob_encounter: FightingEncounter
 	
 	get_tree().root.add_child.call_deferred(island)
 	await island.ready
-	island.init_fight_2(player_encounter, mob_encounter)
+	island.init_fight_2(player_encounter.force_team(1), mob_encounter.force_team(2))
 	island.set_active()
+	GlobalFightingManager.start()
