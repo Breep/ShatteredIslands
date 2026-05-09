@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://bgtjt180r6vwi"]
-
-[ext_resource type="PackedScene" uid="uid://muvntvtbhtuo" path="res://02_Entities/Mobs/Goblins/Characters.fbx" id="1_qyqqv"]
-
-[node name="Characters" unique_id=434560008 instance=ExtResource("1_qyqqv")]

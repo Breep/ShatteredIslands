@@ -40,9 +40,11 @@ materials/extract_path=""
 _subresources={
 "nodes": {
 "PATH:Skeleton3D": {
+"rest_pose/external_animation_library": null,
 "retarget/bone_map": Resource("uid://dnpr14p1enpld", "res://02_Entities/Mobs/Goblins/goblin_bone_map.tres"),
+"retarget/bone_renamer/rename_bones": false,
 "retarget/rest_fixer/reset_all_bone_poses_after_import": false,
-"retarget/rest_fixer/retarget_method": 2
+"retarget/rest_fixer/retarget_method": 0
 }
 }
 }

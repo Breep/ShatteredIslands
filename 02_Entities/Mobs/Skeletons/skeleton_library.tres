@@ -1,0 +1,14 @@
+[gd_resource type="AnimationLibrary" format=3 uid="uid://dc35h3toilmvd"]
+
+[ext_resource type="Animation" uid="uid://cwf5r7dtnsahk" path="res://02_Entities/Mobs/Skeletons/idle.res" id="1_2pi7m"]
+[ext_resource type="Animation" uid="uid://lmr1tnxxy08m" path="res://02_Entities/Mobs/Skeletons/idle_3.res" id="2_fnrji"]
+[ext_resource type="Animation" uid="uid://k77lg2wljach" path="res://02_Entities/Mobs/Skeletons/run.res" id="2_u4i6u"]
+[ext_resource type="Animation" uid="uid://dnd35dqsnmixh" path="res://02_Entities/Mobs/Skeletons/run_2.res" id="3_fnrji"]
+
+[resource]
+_data = {
+&"idle": ExtResource("1_2pi7m"),
+&"idle_3": ExtResource("2_fnrji"),
+&"run": ExtResource("2_u4i6u"),
+&"run_2": ExtResource("3_fnrji")
+}

@@ -1,12 +1,16 @@
 [gd_scene format=3 uid="uid://y5smwcmbpxrp"]
 
 [ext_resource type="PackedScene" uid="uid://cv1vidctlp3na" path="res://02_Entities/Mobs/Skeletons/SM_Chr_Skeleton_Ranger_01.fbx" id="1_2vr7p"]
-[ext_resource type="Texture2D" uid="uid://bt4qk2p0s8x7o" path="res://02_Entities/Mobs/_Textures/PolygonDarkFantasy/Alts/PolygonDarkFantasy_Texture_01_A.png" id="2_lje4n"]
+[ext_resource type="Texture2D" uid="uid://bt4qk2p0s8x7o" path="res://02_Entities/Mobs/_Textures/PolygonDarkFantasy/Alts/PolygonDarkFantasy_Texture_01_A.png" id="2_toe5c"]
+[ext_resource type="AnimationLibrary" uid="uid://dc35h3toilmvd" path="res://02_Entities/Mobs/Skeletons/skeleton_library.tres" id="4_cawbt"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vyaw5"]
-albedo_texture = ExtResource("2_lje4n")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d7hsv"]
+albedo_texture = ExtResource("2_toe5c")
 
-[node name="SM_Chr_Skeleton_Ranger_01" unique_id=1881164339 instance=ExtResource("1_2vr7p")]
+[node name="SM_Chr_Skeleton_Ranger_01" unique_id=731621636 instance=ExtResource("1_2vr7p")]
 
-[node name="SM_Chr_Skeleton_Ranger_01" parent="Skeleton3D" parent_id_path=PackedInt32Array(250125433) index="0" unique_id=1768101953]
-material_override = SubResource("StandardMaterial3D_vyaw5")
+[node name="SM_Chr_Skeleton_Ranger_01" parent="Skeleton3D" parent_id_path=PackedInt32Array(2062077697) index="0" unique_id=577969278]
+material_override = SubResource("StandardMaterial3D_d7hsv")
+
+[node name="AnimationPlayer" parent="." index="1" unique_id=1893921667]
+libraries/skeleton_library = ExtResource("4_cawbt")
