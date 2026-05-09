@@ -1,0 +1,8 @@
+[gd_resource type="AnimationLibrary" format=3 uid="uid://dc35h3toilmvd"]
+
+[ext_resource type="Animation" uid="uid://cvnmwf0okgg8m" path="res://02_Entities/Mobs/_Animations/Mixamo/Animations/idle.res" id="1_2pi7m"]
+
+[resource]
+_data = {
+&"idle": ExtResource("1_2pi7m")
+}
