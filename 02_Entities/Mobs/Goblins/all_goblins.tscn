@@ -1,0 +1,181 @@
+[gd_scene format=3 uid="uid://5ccditks7xar"]
+
+[ext_resource type="PackedScene" uid="uid://muvntvtbhtuo" path="res://02_Entities/Mobs/Goblins/Characters.fbx" id="1_lebr1"]
+[ext_resource type="Texture2D" uid="uid://rhnfmjmohcia" path="res://02_Entities/Mobs/_Textures/PolygonDarkFantasy/Alts/PolygonDarkFantasy_Texture_01_C.png" id="2_1reyt"]
+[ext_resource type="Texture2D" uid="uid://bt4qk2p0s8x7o" path="res://02_Entities/Mobs/_Textures/PolygonDarkFantasy/Alts/PolygonDarkFantasy_Texture_01_A.png" id="3_i0aue"]
+[ext_resource type="Texture2D" uid="uid://bf6lnm55lwf53" path="res://02_Entities/Mobs/_Textures/PolygonDarkFantasy/Alts/PolygonDarkFantasy_Texture_03_C.png" id="3_imub2"]
+[ext_resource type="AnimationLibrary" uid="uid://dc35h3toilmvd" path="res://02_Entities/Mobs/_Animations/Mixamo/AnimationLibraries/humanoid_locomotion_library.tres" id="4_i0aue"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_imub2"]
+albedo_texture = ExtResource("3_i0aue")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e6ba5"]
+albedo_texture = ExtResource("2_1reyt")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i0aue"]
+albedo_texture = ExtResource("3_i0aue")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_820jd"]
+albedo_texture = ExtResource("3_i0aue")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dx10t"]
+albedo_texture = ExtResource("3_i0aue")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xmv8m"]
+albedo_texture = ExtResource("3_i0aue")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rr8ti"]
+albedo_texture = ExtResource("3_i0aue")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f4agb"]
+albedo_texture = ExtResource("3_i0aue")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xciax"]
+albedo_texture = ExtResource("3_i0aue")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4100p"]
+albedo_texture = ExtResource("3_i0aue")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kwmxl"]
+albedo_texture = ExtResource("3_i0aue")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u1rqs"]
+albedo_texture = ExtResource("3_i0aue")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lt03k"]
+albedo_texture = ExtResource("3_i0aue")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qrxdu"]
+albedo_texture = ExtResource("3_imub2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r3q74"]
+albedo_texture = ExtResource("3_imub2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jqspu"]
+albedo_texture = ExtResource("3_i0aue")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t7fgb"]
+albedo_texture = ExtResource("3_i0aue")
+
+[node name="Characters" unique_id=433263620 instance=ExtResource("1_lebr1")]
+
+[node name="GeneralSkeleton" parent="." index="0" unique_id=901972998]
+bones/1/position = Vector3(-0.0041961093, 0.86933714, 0.013738958)
+bones/1/rotation = Quaternion(0.0009972374, -0.08822939, -0.02827545, 0.99569833)
+bones/2/rotation = Quaternion(0.031348195, 0.019371495, 0.028615901, 0.9989111)
+bones/3/rotation = Quaternion(-0.011488572, 0.0026742439, -0.014507206, 0.99982524)
+bones/4/rotation = Quaternion(-0.011413269, 0.0026504316, -0.014570884, 0.99982524)
+bones/5/rotation = Quaternion(-0.01994535, -0.007392525, 0.031564265, 0.9992754)
+bones/6/rotation = Quaternion(0.0023670383, -0.009335717, 0.082821295, 0.9965179)
+bones/7/position = Vector3(1.4794774e-17, 0.09447605, 0.12272221)
+bones/8/position = Vector3(1.4775591e-17, 0.12766919, 0.12272222)
+bones/9/rotation = Quaternion(2.0185068e-17, 0.52131337, 0.8533654, 1.9993156e-17)
+bones/10/rotation = Quaternion(0.42021757, 0.5655436, 0.4956624, -0.507835)
+bones/11/rotation = Quaternion(0.62301433, 0.78154916, -0.018131105, 0.026558366)
+bones/12/rotation = Quaternion(0.023608075, -0.7067126, 0.023608202, 0.7067126)
+bones/13/rotation = Quaternion(-0.08211236, 0.6959296, 0.12164726, 0.7029521)
+bones/14/rotation = Quaternion(0.28308576, 0.647968, -0.585409, -0.39660603)
+bones/15/rotation = Quaternion(-0.039942034, 0.11784031, -0.14163578, 0.982068)
+bones/16/rotation = Quaternion(-0.036403246, 0.15203467, 0.22999534, 0.9605532)
+bones/17/rotation = Quaternion(0.46374762, 0.533796, -0.5298225, -0.46828198)
+bones/18/rotation = Quaternion(-0.0011539928, 0.010741637, -0.09832995, 0.99509525)
+bones/19/rotation = Quaternion(-0.006912194, 0.025717413, -0.057002395, 0.9980188)
+bones/20/rotation = Quaternion(-0.004519649, 0.028039929, 0.15906805, 0.986859)
+bones/21/rotation = Quaternion(-0.49364036, -0.5062798, 0.4472742, 0.5476731)
+bones/22/rotation = Quaternion(0.0026372708, -0.019492012, -0.021269333, 0.9995803)
+bones/23/rotation = Quaternion(-0.018149225, 0.071478926, -0.0925108, 0.9929769)
+bones/24/rotation = Quaternion(0.016646361, -0.09652533, 0.16913, 0.98071444)
+bones/25/rotation = Quaternion(0.31359503, -0.6014789, -0.6659754, -0.310416)
+bones/26/rotation = Quaternion(-0.39771876, 0.91595197, 0.022596076, 0.048387174)
+bones/27/rotation = Quaternion(0.08274085, 0.7022492, -0.08274064, 0.7022492)
+bones/28/rotation = Quaternion(-0.3630154, -0.7009137, -0.22930181, 0.5695265)
+bones/29/rotation = Quaternion(-0.396704, 0.5853627, 0.64791447, -0.28316668)
+bones/30/rotation = Quaternion(-0.03991851, 0.11798326, -0.14165187, 0.9820495)
+bones/31/rotation = Quaternion(-0.036348324, 0.15220593, 0.22998704, 0.9605301)
+bones/32/rotation = Quaternion(-0.4682821, 0.5298225, 0.53379595, -0.46374765)
+bones/33/rotation = Quaternion(-0.0011539931, 0.010741624, -0.09832995, 0.99509525)
+bones/34/rotation = Quaternion(-0.0069121975, 0.025717424, -0.057002384, 0.99801886)
+bones/35/rotation = Quaternion(-0.0045196447, 0.028039929, 0.15906803, 0.986859)
+bones/37/rotation = Quaternion(0.00263727, -0.019492015, -0.02126933, 0.9995803)
+bones/38/rotation = Quaternion(-0.01814922, 0.07147895, -0.09251084, 0.9929769)
+bones/39/rotation = Quaternion(0.016646367, -0.096525334, 0.16913004, 0.98071444)
+bones/40/rotation = Quaternion(-0.05867869, 0.04817818, 0.996042, 0.04621787)
+bones/41/rotation = Quaternion(0.026368363, 0.996263, -0.038011562, -0.07293729)
+bones/42/rotation = Quaternion(0.11129618, 0.74612814, -0.65441614, -0.051433988)
+bones/43/rotation = Quaternion(-0.00047969824, 5.526506e-06, -1.0341784e-05, 0.9999999)
+bones/44/rotation = Quaternion(-0.00025347344, 0.9994132, 0.02381641, 0.024616867)
+bones/45/rotation = Quaternion(0.12946634, 0.037153587, 0.98551464, -0.10304924)
+bones/46/rotation = Quaternion(0.002175183, 0.9942002, -0.08325511, 0.06804349)
+bones/47/rotation = Quaternion(0.0381434, 0.68516153, -0.71446246, 0.13653645)
+bones/48/rotation = Quaternion(-2.0861629e-07, -1.580507e-08, -2.6341784e-08, 1)
+bones/49/rotation = Quaternion(-1.4639055e-07, 0.9999623, 0.008693994, -8.723625e-09)
+
+[node name="SM_Chr_Archer_Female_01" parent="GeneralSkeleton" index="0" unique_id=284490262]
+visible = false
+material_override = SubResource("StandardMaterial3D_imub2")
+
+[node name="SM_Chr_Archer_Male_01" parent="GeneralSkeleton" index="1" unique_id=1940625314]
+visible = false
+material_override = SubResource("StandardMaterial3D_e6ba5")
+
+[node name="SM_Chr_BeastTamer_01" parent="GeneralSkeleton" index="2" unique_id=837927372]
+visible = false
+material_override = SubResource("StandardMaterial3D_i0aue")
+
+[node name="SM_Chr_Cook_01" parent="GeneralSkeleton" index="3" unique_id=466164142]
+material_override = SubResource("StandardMaterial3D_820jd")
+
+[node name="SM_Chr_King_01" parent="GeneralSkeleton" index="4" unique_id=881440005]
+visible = false
+material_override = SubResource("StandardMaterial3D_dx10t")
+
+[node name="SM_Chr_Knight_01" parent="GeneralSkeleton" index="5" unique_id=1553159336]
+visible = false
+material_override = SubResource("StandardMaterial3D_xmv8m")
+
+[node name="SM_Chr_Prisoner_01" parent="GeneralSkeleton" index="6" unique_id=2061944172]
+visible = false
+material_override = SubResource("StandardMaterial3D_rr8ti")
+
+[node name="SM_Chr_Prisoner_02" parent="GeneralSkeleton" index="7" unique_id=334819566]
+visible = false
+material_override = SubResource("StandardMaterial3D_f4agb")
+
+[node name="SM_Chr_Prisoner_03" parent="GeneralSkeleton" index="8" unique_id=171753897]
+visible = false
+material_override = SubResource("StandardMaterial3D_xciax")
+
+[node name="SM_Chr_Ranger_01" parent="GeneralSkeleton" index="9" unique_id=1756151390]
+visible = false
+material_override = SubResource("StandardMaterial3D_4100p")
+
+[node name="SM_Chr_Shaman_01" parent="GeneralSkeleton" index="10" unique_id=1508674411]
+visible = false
+material_override = SubResource("StandardMaterial3D_kwmxl")
+
+[node name="SM_Chr_Warrior_Male_01" parent="GeneralSkeleton" index="11" unique_id=85823230]
+visible = false
+material_override = SubResource("StandardMaterial3D_u1rqs")
+
+[node name="SM_Chr_Wizard_01" parent="GeneralSkeleton" index="12" unique_id=316292260]
+visible = false
+material_override = SubResource("StandardMaterial3D_lt03k")
+
+[node name="SM_Chr_Attach_Shawl_01" parent="GeneralSkeleton" index="13" unique_id=209672692]
+visible = false
+material_override = SubResource("StandardMaterial3D_qrxdu")
+
+[node name="SM_Chr_Attach_Hood_01" parent="GeneralSkeleton" index="14" unique_id=656146371]
+visible = false
+material_override = SubResource("StandardMaterial3D_r3q74")
+
+[node name="SM_Chr_Attach_Hood_02" parent="GeneralSkeleton" index="15" unique_id=1254993104]
+visible = false
+material_override = SubResource("StandardMaterial3D_jqspu")
+
+[node name="SM_Chr_Attach_Hood_03" parent="GeneralSkeleton" index="16" unique_id=1021947465]
+visible = false
+material_override = SubResource("StandardMaterial3D_t7fgb")
+
+[node name="AnimationPlayer" parent="." index="1" unique_id=2115659582]
+libraries/humanoid_locomotion_library = ExtResource("4_i0aue")
