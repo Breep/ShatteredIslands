@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" format=3 uid="uid://bl8ri2x0dgylc"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://58jichyjf9p44"]
 
 [ext_resource type="Shader" uid="uid://c1660p2rs4lfs" path="res://22_VFX/VFX_3D/Meteor/Shaders/s_ProjectileSoft_B_Disp.tres" id="1_j6gte"]
 [ext_resource type="Texture2D" uid="uid://8fk5k1sbqvwh" path="res://22_VFX/VFX_3D/Meteor/Textures/T_VFX_Noise_019.png" id="2_52ln0"]

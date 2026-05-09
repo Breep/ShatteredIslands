@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" format=3 uid="uid://ceb6m6dh5v0hb"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://72n52lslspuor"]
 
 [ext_resource type="Shader" uid="uid://c44g48gk8odif" path="res://22_VFX/VFX_3D/VFX/Shaders/s_ProjectileSoft_Disp.tres" id="1_1ivve"]
 [ext_resource type="Texture2D" uid="uid://fy14scbokp5b" path="res://22_VFX/VFX_3D/Meteor/Textures/T_VFX_Z70.png" id="2_1rey2"]

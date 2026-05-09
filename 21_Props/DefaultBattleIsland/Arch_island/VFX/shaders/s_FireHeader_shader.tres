@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" format=3 uid="uid://dqd6vb4yowvwv"]
+[gd_resource type="VisualShader" format=3 uid="uid://vjcbblgz2x26f"]
 
 [sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_2nkw1"]
 parameter_name = "Ball_Color"
