@@ -173,7 +173,7 @@ func _instantiate_heroes() -> void:
 
 
 func _init_players() -> void:
-	var player_scene: PackedScene = preload("res://Player/player.tscn")
+	var player_scene: PackedScene = preload("res://07_Players/player.tscn")
 	for i: int in _heroes.size():
 		var player: Player = player_scene.instantiate()
 		player.init_player()

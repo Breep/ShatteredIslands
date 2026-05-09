@@ -12,7 +12,7 @@ func _ready() -> void:
 	_rng.randomize()
 	_ui_all_families_portrait.init_portait_families(_families)
 
-	var player_scene: PackedScene = preload("res://Player/player.tscn")
+	var player_scene: PackedScene = preload("res://07_Players/player.tscn")
 	_player = player_scene.instantiate()
 	_player.init_player()
 	_player.name = "Player_family_proto"
