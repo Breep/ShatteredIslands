@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://dkdaiimf3j4lk" path="res://02_Entities/Mobs/Goblins/Attachments/sm_chr_attach_wolf_01.tscn" id="16_jqspu"]
 [ext_resource type="PackedScene" uid="uid://7girlslsr8uy" path="res://02_Entities/Mobs/Goblins/Attachments/sm_chr_attach_bottle_01.tscn" id="17_lt03k"]
 [ext_resource type="PackedScene" uid="uid://bqjcye1tprkne" path="res://02_Entities/Mobs/Goblins/Attachments/sm_chr_attach_bottle_02.tscn" id="18_jqspu"]
+[ext_resource type="PackedScene" uid="uid://c6wib06sr5c7b" path="res://02_Entities/Mobs/Goblins/Attachments/sm_chr_attach_bags_03.tscn" id="20_t7fgb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_imub2"]
 albedo_texture = ExtResource("3_i0aue")
@@ -188,13 +189,13 @@ material_override = SubResource("StandardMaterial3D_jqspu")
 visible = false
 material_override = SubResource("StandardMaterial3D_t7fgb")
 
-[node name="BowAttachment" type="BoneAttachment3D" parent="GeneralSkeleton" index="17" unique_id=297417579]
+[node name="LeftHandAttachment" type="BoneAttachment3D" parent="GeneralSkeleton" index="17" unique_id=297417579]
 transform = Transform3D(-2.231869e-07, 1, 2.9802326e-08, -3.2782557e-07, 2.980231e-08, -1, -1, -2.231869e-07, 3.2782557e-07, 0.79963243, 1.3609412, -0.034174003)
 visible = false
 bone_name = "LeftHand"
 bone_idx = 13
 
-[node name="Bows" parent="GeneralSkeleton/BowAttachment" index="0" unique_id=526129373 instance=ExtResource("5_i0aue")]
+[node name="Bows" parent="GeneralSkeleton/LeftHandAttachment" index="0" unique_id=526129373 instance=ExtResource("5_i0aue")]
 transform = Transform3D(-0.07530995, 0.9870758, 0.1414556, 0.1703734, -0.12703542, 0.9771563, 0.98249745, 0.09768984, -0.15860453, 0.04765004, 0.109389335, 0.047730446)
 
 [node name="ShieldAttachment" type="BoneAttachment3D" parent="GeneralSkeleton" index="18" unique_id=1828555638]
@@ -275,10 +276,13 @@ bone_name = "Hips"
 bone_idx = 1
 
 [node name="SM_Chr_Attach_Bottle_01" parent="GeneralSkeleton/HipsAttachment" index="0" unique_id=1770084810 instance=ExtResource("17_lt03k")]
+visible = false
 
 [node name="SM_Chr_Attach_Bottle_02" parent="GeneralSkeleton/HipsAttachment" index="1" unique_id=1845518612 instance=ExtResource("18_jqspu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.048395038, 0)
 visible = false
+
+[node name="SM_Chr_Attach_Bags_03" parent="GeneralSkeleton/HipsAttachment" index="2" unique_id=1284670100 instance=ExtResource("20_t7fgb")]
 
 [node name="AnimationPlayer" parent="." index="1" unique_id=2115659582]
 libraries/humanoid_locomotion_library = ExtResource("4_i0aue")

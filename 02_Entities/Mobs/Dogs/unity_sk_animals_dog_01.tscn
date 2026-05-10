@@ -3,9 +3,13 @@
 [ext_resource type="PackedScene" uid="uid://clf6kqsvyslnx" path="res://02_Entities/Mobs/Dogs/Unity_SK_Animals_Dog_01.fbx" id="1_3030f"]
 [ext_resource type="Texture2D" uid="uid://deraq7ab2rgyn" path="res://02_Entities/Mobs/_Textures/Dogs/PolygonDog_Coyote_01.png" id="2_fsgw4"]
 [ext_resource type="AnimationLibrary" uid="uid://ytv58ojnyf6l" path="res://02_Entities/Mobs/_Animations/Synty/Dogs/AnimationLibraries/synty_animals_library.tres" id="3_ir6l5"]
+[ext_resource type="Texture2D" uid="uid://bf5gy4mpl5j56" path="res://02_Entities/Mobs/_Textures/Dogs/PolygonDog_Wolf_01.png" id="3_uaap6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ir6l5"]
 albedo_texture = ExtResource("2_fsgw4")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vvs86"]
+albedo_texture = ExtResource("3_uaap6")
 
 [node name="Unity_SK_Animals_Dog_01" unique_id=33620102 instance=ExtResource("1_3030f")]
 
@@ -141,6 +145,7 @@ bones/80/rotation = Quaternion(0.36390558, 0, 0, 0.93143594)
 bones/81/position = Vector3(0.05529545, 0.04376566, 0.5994285)
 
 [node name="SK_Animal_Dog_Coyote_01" parent="Skeleton3D" index="0" unique_id=1643812159]
+visible = false
 material_override = SubResource("StandardMaterial3D_ir6l5")
 
 [node name="SK_Animal_Dog_Dalmatian_01" parent="Skeleton3D" index="1" unique_id=1687798167]
@@ -216,7 +221,7 @@ visible = false
 visible = false
 
 [node name="SK_Animal_Dog_Wolf_01" parent="Skeleton3D" index="25" unique_id=1163973477]
-visible = false
+material_override = SubResource("StandardMaterial3D_vvs86")
 
 [node name="SK_Animal_Dog_Zombie_Doberman_01" parent="Skeleton3D" index="26" unique_id=482664571]
 visible = false

@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://dvr7815lw1k8b"]
+
+[ext_resource type="Script" uid="uid://d0t00b3te6pnx" path="res://02_Entities/Heroes/Latika/latika.gd" id="1_undos"]
+[ext_resource type="PackedScene" uid="uid://5ccditks7xar" path="res://02_Entities/Mobs/Goblins/all_goblins.tscn" id="2_o3eb1"]
+[ext_resource type="PackedScene" uid="uid://40jvxogaqt0t" path="res://02_Entities/Mobs/Goblins/Attachments/sm_chr_attach_helmet_01.tscn" id="3_o3eb1"]
+
+[node name="Latika" type="CharacterBody3D" unique_id=294337328 node_paths=PackedStringArray("_hawk_eye_goggles_node", "_wild_tracking_wolf_eye_patch_node", "_beast_reflex_node", "_pack_fury_node", "_hair", "_lone_wolf_nodes", "_blood_bond_node", "_bow")]
+script = ExtResource("1_undos")
+_hawk_eye_goggles_node = NodePath("LatikaVisual/GeneralSkeleton/FaceAttachment/SM_Chr_Attach_Goggles_01")
+_wild_tracking_wolf_eye_patch_node = NodePath("LatikaVisual/GeneralSkeleton/FaceAttachment/SM_Chr_Attach_Eye_Patch_01")
+_beast_reflex_node = NodePath("LatikaVisual/GeneralSkeleton/HipsAttachment/SM_Chr_Attach_Bottle_02")
+_pack_fury_node = NodePath("LatikaVisual/GeneralSkeleton/HipsAttachment/SM_Chr_Attach_Bags_03")
+_hair = NodePath("LatikaVisual/GeneralSkeleton/FaceAttachment/SM_Chr_Attach_Hair_07")
+_lone_wolf_nodes = [NodePath("LatikaVisual/GeneralSkeleton/FaceAttachment/SM_Chr_Attach_Helmet_01"), NodePath("LatikaVisual/GeneralSkeleton/SM_Chr_Attach_Shawl_01")]
+_blood_bond_node = NodePath("LatikaVisual/GeneralSkeleton/FaceAttachment/SM_Chr_Attach_Wolf_01")
+_bow = NodePath("LatikaVisual/GeneralSkeleton/LeftHandAttachment/Bows")
+metadata/_custom_type_script = "uid://crybfqxtiik6d"
+
+[node name="LatikaVisual" parent="." unique_id=433263620 instance=ExtResource("2_o3eb1")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="GeneralSkeleton" parent="LatikaVisual" index="0" unique_id=901972998]
+bones/44/rotation = Quaternion(-1.16450636e-07, 0.99997747, 0.0067192614, -4.4620293e-08)
+bones/49/rotation = Quaternion(-1.3580575e-07, 1, 0.00017729402, 6.660844e-06)
+
+[node name="LeftHandAttachment" parent="LatikaVisual/GeneralSkeleton" index="17" unique_id=297417579]
+visible = true
+
+[node name="SM_Wep_Bow_Rigged_02" parent="LatikaVisual/GeneralSkeleton/LeftHandAttachment/Bows/Skeleton3D" parent_id_path=PackedInt32Array(433263620, 526129373, 2143212340) index="1" unique_id=760289904]
+visible = true
+
+[node name="ArrowAttachment" parent="LatikaVisual/GeneralSkeleton/LeftHandAttachment/Bows/Skeleton3D" parent_id_path=PackedInt32Array(433263620, 526129373, 2143212340) index="2" unique_id=1256478748]
+visible = true
+
+[node name="SM_Wep_Arrow_01" parent="LatikaVisual/GeneralSkeleton/LeftHandAttachment/Bows/Skeleton3D/ArrowAttachment" index="0" unique_id=1902731416]
+visible = false
+
+[node name="SM_Chr_Attach_Backpack_01" parent="LatikaVisual/GeneralSkeleton/BackPackAttachment" parent_id_path=PackedInt32Array(433263620, 801280550) index="1" unique_id=251234928]
+visible = false
+
+[node name="SM_Chr_Attach_Hair_07" parent="LatikaVisual/GeneralSkeleton/FaceAttachment" parent_id_path=PackedInt32Array(433263620, 538487173) index="1" unique_id=131978717]
+visible = true
+
+[node name="SM_Chr_Attach_Helmet_01" parent="LatikaVisual/GeneralSkeleton/FaceAttachment" parent_id_path=PackedInt32Array(433263620, 538487173) index="3" unique_id=485078111 instance=ExtResource("3_o3eb1")]
+visible = false
+
+[node name="SM_Chr_Attach_Wolf_01" parent="LatikaVisual/GeneralSkeleton/FaceAttachment" parent_id_path=PackedInt32Array(433263620, 538487173) index="7" unique_id=2053600072]
+visible = false
+
+[node name="LeftFootAttachment" parent="LatikaVisual/GeneralSkeleton" index="22" unique_id=1967920387]
+visible = false
+
+[node name="RightFootAttachment" parent="LatikaVisual/GeneralSkeleton" index="23" unique_id=1806943128]
+visible = false
+
+[node name="HipsAttachment" parent="LatikaVisual/GeneralSkeleton" index="24" unique_id=504179125]
+visible = false
+
+[editable path="LatikaVisual"]
+[editable path="LatikaVisual/GeneralSkeleton/LeftHandAttachment/Bows"]
+[editable path="LatikaVisual/GeneralSkeleton/FaceAttachment/SM_Chr_Attach_Hair_07"]
