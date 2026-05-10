@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://btqn32ai1ivhs"]
+
+[ext_resource type="PackedScene" uid="uid://1xh67jaqa2bg" path="res://02_Entities/Mobs/Goblins/Attachments/SM_Chr_Attach_Crown_05.fbx" id="1_jrs0w"]
+[ext_resource type="Texture2D" uid="uid://8jy0ipyhsv0r" path="res://02_Entities/Mobs/_Textures/PolygonGoblinWarCamp/Alts/PolygonGoblinWarCamp_Texture_04_A.png" id="2_b6fmn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kwkep"]
+albedo_texture = ExtResource("2_b6fmn")
+
+[node name="SM_Chr_Attach_Crown_05" unique_id=1086580828 instance=ExtResource("1_jrs0w")]
+
+[node name="SM_Chr_Attach_Crown_05" parent="." index="0" unique_id=1069290236]
+material_override = SubResource("StandardMaterial3D_kwkep")
