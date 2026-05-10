@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="HeroDesc" format=3 uid="uid://bk82bwfa6jg5a"]
+
+[ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://02_Entities/Heroes/_Shared/hero_desc.gd" id="1_desc"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/Heroes/_Shared/skill.gd" id="2_ahexl"]
+[ext_resource type="Script" uid="uid://2py6kv5aqgem" path="res://02_Entities/Heroes/_Shared/hero_stats.gd" id="2_stats"]
+[ext_resource type="Resource" uid="uid://clatikastat01" path="res://02_Entities/Heroes/Latika/Stats/latika_lvl_1.tres" id="3_l01"]
+[ext_resource type="Resource" uid="uid://clatikastat02" path="res://02_Entities/Heroes/Latika/Stats/latika_lvl_2.tres" id="4_l02"]
+[ext_resource type="Resource" uid="uid://clatikastat03" path="res://02_Entities/Heroes/Latika/Stats/latika_lvl_3.tres" id="5_l03"]
+[ext_resource type="Resource" uid="uid://clatikastat04" path="res://02_Entities/Heroes/Latika/Stats/latika_lvl_4.tres" id="6_l04"]
+[ext_resource type="Resource" uid="uid://clatikastat05" path="res://02_Entities/Heroes/Latika/Stats/latika_lvl_5.tres" id="7_l05"]
+[ext_resource type="Resource" uid="uid://clatikastat06" path="res://02_Entities/Heroes/Latika/Stats/latika_lvl_6.tres" id="8_l06"]
+[ext_resource type="Resource" uid="uid://clatikastat07" path="res://02_Entities/Heroes/Latika/Stats/latika_lvl_7.tres" id="9_l07"]
+[ext_resource type="Resource" uid="uid://clatikastat08" path="res://02_Entities/Heroes/Latika/Stats/latika_lvl_8.tres" id="10_l08"]
+[ext_resource type="Resource" uid="uid://clatikastat1a" path="res://02_Entities/Heroes/Latika/Stats/latika_lvl_9.tres" id="11_l09"]
+[ext_resource type="Resource" uid="uid://clatikastat10" path="res://02_Entities/Heroes/Latika/Stats/latika_lvl_10.tres" id="12_l10"]
+
+[resource]
+script = ExtResource("1_desc")
+name = "Latika"
+id = 5
+description = "L'Enfant des Loups — DPS distance / carry mono-cible. Dualité prédateur solitaire / chef de meute."
+stats = Dictionary[int, ExtResource("2_stats")]({
+1: ExtResource("3_l01"),
+2: ExtResource("4_l02"),
+3: ExtResource("5_l03"),
+4: ExtResource("6_l04"),
+5: ExtResource("7_l05"),
+6: ExtResource("8_l06"),
+7: ExtResource("9_l07"),
+8: ExtResource("10_l08"),
+9: ExtResource("11_l09"),
+10: ExtResource("12_l10")
+})
+metadata/_custom_type_script = "uid://dtcjta70luxvr"

@@ -9,6 +9,7 @@ enum HeroId {
 	TANK,
 	ASSASSIN,
 	MAGE,
+	LATIKA,
 }
 
 # ============================== Export ==============================

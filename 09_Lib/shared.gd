@@ -14,6 +14,7 @@ var HERO_SCENES: Dictionary[HeroDesc.HeroId, PackedScene] = {
 	HeroDesc.HeroId.TANK: load("res://02_Entities/Heroes/Tank/tank.tscn"),
 	HeroDesc.HeroId.ASSASSIN: load("res://02_Entities/Heroes/Assassin/assassin.tscn"),
 	HeroDesc.HeroId.MAGE: load("res://02_Entities/Heroes/Mage/mage.tscn"),
+	HeroDesc.HeroId.LATIKA: load("res://02_Entities/Heroes/Latika/latika.tscn")
 }
 
 var FAMILIES: Dictionary[Family.Type, Family] = {

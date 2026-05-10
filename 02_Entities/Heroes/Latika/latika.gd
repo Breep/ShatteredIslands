@@ -127,6 +127,16 @@ func _ready() -> void:
 
 	super._ready()
 	_refresh_skill_visuals()
+
+
+func _enter_tree() -> void:
+	if Engine.is_editor_hint():
+		return
+
+
+func _init() -> void:
+	if Engine.is_editor_hint():
+		return
 #endregion
 
 #region ============================== Public functions ==============================

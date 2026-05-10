@@ -4,7 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://c48aqh8mlb7lc" path="res://02_Entities/Heroes/DarkKnight/dark_knight.tscn" id="1_icvx6"]
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme.tres" id="2_083cp"]
 [ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://04_UI/Tool/Misc/hover_boost_button.gd" id="3_6kn6i"]
+[ext_resource type="PackedScene" uid="uid://dvr7815lw1k8b" path="res://02_Entities/Heroes/Latika/latika.tscn" id="3_os118"]
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://10_Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="4_egh8k"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="4_jd8sj"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]
 [ext_resource type="PackedScene" uid="uid://dvuq5n41nak3u" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/ArenaZoneManager/arena_zone_manager.tscn" id="8_fl2p6"]
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://90_Modules/PickableClickable/PickableModule/pickable_module.tscn" id="9_614kc"]
@@ -14,6 +16,15 @@
 [ext_resource type="PackedScene" uid="uid://c0l0roxttdtlp" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/FightingManager/fighting_manager.tscn" id="17_m26y3"]
 [ext_resource type="Environment" uid="uid://cghu0yr6lj5i2" path="res://21_Props/DefaultBattleIsland/Arch_island/world_environment.tres" id="18_ko5bb"]
 [ext_resource type="PackedScene" uid="uid://dp4x7wkxd6i2q" path="res://99_Prototyping/Entity/EntityController/entity_controller.tscn" id="19_x0odd"]
+
+[sub_resource type="Resource" id="Resource_rnrfd"]
+script = ExtResource("4_jd8sj")
+health_max = 1000.0
+attack_range = 20.0
+attack_damage = 20.0
+attack_speed = 2.0
+movement_speed = 5.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m73qc"]
 albedo_color = Color(0.97405916, 0, 0.8521372, 1)
@@ -49,6 +60,17 @@ _arena_zone_manager = NodePath("../../ArenaZoneManager")
 transform = Transform3D(-0.009494563, 0, -0.99995494, 0, 1.0000001, 0, 0.99995494, 0, -0.009494563, -7.4728146, -4.768372e-07, -0.8265885)
 team = 2
 battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
+[node name="Latika" parent="Node3D/Entities" unique_id=294337328 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("3_os118")]
+transform = Transform3D(-0.7118912, 0, -0.7022898, 0, 1, 0, 0.7022898, 0, -0.7118912, -2.0162308, 0, -3.7041943)
+_hawk_eye_activated = true
+_pack_fury_activated = true
+_blood_bond_activated = true
+team = 3
+battle_id = 1
+custom_base_stats = SubResource("Resource_rnrfd")
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
 
@@ -243,7 +265,7 @@ visible = false
 unique_name_in_owner = true
 
 [node name="ArchIsland" parent="Node3D" unique_id=1045725859 instance=ExtResource("17_ko5bb")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.44731408, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2134323998]
 environment = ExtResource("18_ko5bb")
