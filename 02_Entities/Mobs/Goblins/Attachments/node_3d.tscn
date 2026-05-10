@@ -5,4 +5,3 @@
 [node name="Node3D" type="Node3D" unique_id=290497842]
 
 [node name="Latika" parent="." unique_id=294337328 instance=ExtResource("1_rgox4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.043487787, 0, 0.031292915)
