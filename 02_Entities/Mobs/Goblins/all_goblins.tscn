@@ -200,6 +200,18 @@ bone_idx = 13
 [node name="Bow" parent="GeneralSkeleton/LeftHandAttachment" index="0" unique_id=526129373 instance=ExtResource("5_t7fgb")]
 transform = Transform3D(-0.010013938, 0.9429446, 0.33279938, 0.19262147, -0.3247638, 0.92597276, 0.9812221, 0.073376946, -0.17837918, -0.0038265483, 0.10111277, 0.0020510152)
 
+[node name="Skeleton3D" parent="GeneralSkeleton/LeftHandAttachment/Bow" index="0" unique_id=2143212340]
+bones/1/position = Vector3(0, 0, -0.12)
+
+[node name="SM_Wep_Bow_Rigged_01" parent="GeneralSkeleton/LeftHandAttachment/Bow/Skeleton3D" index="0" unique_id=111400591]
+transform = Transform3D(0.98985326, 0, -0.14209339, 0, 1, 0, 0.14209339, 0, 0.98985326, 0, 0, 0)
+
+[node name="ArrowAttachment" parent="GeneralSkeleton/LeftHandAttachment/Bow/Skeleton3D" index="2" unique_id=1924204569]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.12)
+
+[node name="SM_Wep_Arrow_01" parent="GeneralSkeleton/LeftHandAttachment/Bow/Skeleton3D/ArrowAttachment" index="0" unique_id=1902731416]
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5319745)
+
 [node name="ShieldAttachment" type="BoneAttachment3D" parent="GeneralSkeleton" index="18" unique_id=1828555638]
 transform = Transform3D(-0.25696623, -0.12911996, -0.95775586, -0.26037344, -0.9451387, 0.19727728, -0.93068475, 0.30006796, 0.20924921, 0.033824667, 1.0178984, 0.23729283)
 visible = false
