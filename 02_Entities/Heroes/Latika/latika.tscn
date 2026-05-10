@@ -4,16 +4,19 @@
 [ext_resource type="PackedScene" uid="uid://5ccditks7xar" path="res://02_Entities/Mobs/Goblins/all_goblins.tscn" id="2_o3eb1"]
 [ext_resource type="PackedScene" uid="uid://40jvxogaqt0t" path="res://02_Entities/Mobs/Goblins/Attachments/sm_chr_attach_helmet_01.tscn" id="3_o3eb1"]
 
-[node name="Latika" type="CharacterBody3D" unique_id=294337328 node_paths=PackedStringArray("_hawk_eye_goggles_node", "_wild_tracking_wolf_eye_patch_node", "_beast_reflex_node", "_pack_fury_node", "_hair", "_lone_wolf_nodes", "_blood_bond_node", "_bow")]
+[node name="Latika" type="CharacterBody3D" unique_id=294337328 node_paths=PackedStringArray("_hawk_eye_goggles_node", "_wild_tracking_wolf_eye_patch_node", "_beast_reflex_node", "_pack_fury_node", "_hair", "_lone_wolf_helmet", "_lone_wolf_shoulder", "_lone_wolf_bow_visual", "_blood_bond_node", "_bow", "_normal_bow_visual")]
 script = ExtResource("1_undos")
 _hawk_eye_goggles_node = NodePath("LatikaVisual/GeneralSkeleton/FaceAttachment/SM_Chr_Attach_Goggles_01")
 _wild_tracking_wolf_eye_patch_node = NodePath("LatikaVisual/GeneralSkeleton/FaceAttachment/SM_Chr_Attach_Eye_Patch_01")
 _beast_reflex_node = NodePath("LatikaVisual/GeneralSkeleton/HipsAttachment/SM_Chr_Attach_Bottle_02")
 _pack_fury_node = NodePath("LatikaVisual/GeneralSkeleton/HipsAttachment/SM_Chr_Attach_Bags_03")
 _hair = NodePath("LatikaVisual/GeneralSkeleton/FaceAttachment/SM_Chr_Attach_Hair_07")
-_lone_wolf_nodes = [NodePath("LatikaVisual/GeneralSkeleton/FaceAttachment/SM_Chr_Attach_Helmet_01"), NodePath("LatikaVisual/GeneralSkeleton/SM_Chr_Attach_Shawl_01")]
+_lone_wolf_helmet = NodePath("LatikaVisual/GeneralSkeleton/FaceAttachment/SM_Chr_Attach_Helmet_01")
+_lone_wolf_shoulder = NodePath("LatikaVisual/GeneralSkeleton/SM_Chr_Attach_Shawl_01")
+_lone_wolf_bow_visual = NodePath("LatikaVisual/GeneralSkeleton/LeftHandAttachment/Bows/Skeleton3D/SM_Wep_Bow_Rigged_01")
 _blood_bond_node = NodePath("LatikaVisual/GeneralSkeleton/FaceAttachment/SM_Chr_Attach_Wolf_01")
 _bow = NodePath("LatikaVisual/GeneralSkeleton/LeftHandAttachment/Bows")
+_normal_bow_visual = NodePath("LatikaVisual/GeneralSkeleton/LeftHandAttachment/Bows/Skeleton3D/SM_Wep_Bow_Rigged_02")
 metadata/_custom_type_script = "uid://crybfqxtiik6d"
 
 [node name="LatikaVisual" parent="." unique_id=433263620 instance=ExtResource("2_o3eb1")]
@@ -35,7 +38,22 @@ visible = true
 [node name="SM_Wep_Arrow_01" parent="LatikaVisual/GeneralSkeleton/LeftHandAttachment/Bows/Skeleton3D/ArrowAttachment" index="0" unique_id=1902731416]
 visible = false
 
-[node name="SM_Chr_Attach_Backpack_01" parent="LatikaVisual/GeneralSkeleton/BackPackAttachment" parent_id_path=PackedInt32Array(433263620, 801280550) index="1" unique_id=251234928]
+[node name="ShieldAttachment" parent="LatikaVisual/GeneralSkeleton" index="18" unique_id=1828555638]
+visible = true
+
+[node name="SM_Wep_Shield_01" parent="LatikaVisual/GeneralSkeleton/ShieldAttachment" index="0" unique_id=1821283942]
+visible = false
+
+[node name="RightHandWeaponAttachment" parent="LatikaVisual/GeneralSkeleton" index="19" unique_id=1743821847]
+visible = true
+
+[node name="SM_Wep_Axe_02" parent="LatikaVisual/GeneralSkeleton/RightHandWeaponAttachment" index="0" unique_id=1050349439]
+visible = false
+
+[node name="BackPackAttachment" parent="LatikaVisual/GeneralSkeleton" index="20" unique_id=801280550]
+visible = true
+
+[node name="SM_Chr_Attach_Backpack_01" parent="LatikaVisual/GeneralSkeleton/BackPackAttachment" index="1" unique_id=251234928]
 visible = false
 
 [node name="SM_Chr_Attach_Hair_07" parent="LatikaVisual/GeneralSkeleton/FaceAttachment" parent_id_path=PackedInt32Array(433263620, 538487173) index="1" unique_id=131978717]
@@ -47,13 +65,13 @@ visible = false
 [node name="SM_Chr_Attach_Wolf_01" parent="LatikaVisual/GeneralSkeleton/FaceAttachment" parent_id_path=PackedInt32Array(433263620, 538487173) index="7" unique_id=2053600072]
 visible = false
 
-[node name="LeftFootAttachment" parent="LatikaVisual/GeneralSkeleton" index="22" unique_id=1967920387]
+[node name="SM_Prop_Shoe_01" parent="LatikaVisual/GeneralSkeleton/LeftFootAttachment" parent_id_path=PackedInt32Array(433263620, 1967920387) index="0" unique_id=995298695]
 visible = false
 
-[node name="RightFootAttachment" parent="LatikaVisual/GeneralSkeleton" index="23" unique_id=1806943128]
+[node name="SM_Prop_Shoe_01" parent="LatikaVisual/GeneralSkeleton/RightFootAttachment" parent_id_path=PackedInt32Array(433263620, 1806943128) index="0" unique_id=731859447]
 visible = false
 
-[node name="HipsAttachment" parent="LatikaVisual/GeneralSkeleton" index="24" unique_id=504179125]
+[node name="SM_Chr_Attach_Bags_03" parent="LatikaVisual/GeneralSkeleton/HipsAttachment" parent_id_path=PackedInt32Array(433263620, 504179125) index="2" unique_id=1284670100]
 visible = false
 
 [editable path="LatikaVisual"]
