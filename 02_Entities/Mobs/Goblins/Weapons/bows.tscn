@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://bwvu21wljlqyy"]
+
+[ext_resource type="PackedScene" uid="uid://dmoi18app6n57" path="res://02_Entities/Mobs/Goblins/Weapons/Bows.fbx" id="1_ohplt"]
+[ext_resource type="Texture2D" uid="uid://cmuirmne5freb" path="res://02_Entities/Mobs/_Textures/PolygonGoblinWarCamp/Alts/PolygonGoblinWarCamp_Texture_01_A.png" id="2_2xbcj"]
+[ext_resource type="PackedScene" uid="uid://b3t2067yh65ip" path="res://02_Entities/Mobs/Goblins/Props/sm_wep_arrow_01.tscn" id="3_jt8a2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jt8a2"]
+albedo_texture = ExtResource("2_2xbcj")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nmbdu"]
+albedo_texture = ExtResource("2_2xbcj")
+
+[node name="Bows" unique_id=526129373 instance=ExtResource("1_ohplt")]
+
+[node name="SM_Wep_Bow_Rigged_01" parent="Skeleton3D" parent_id_path=PackedInt32Array(2143212340) index="0" unique_id=111400591]
+visible = false
+material_override = SubResource("StandardMaterial3D_jt8a2")
+
+[node name="SM_Wep_Bow_Rigged_02" parent="Skeleton3D" parent_id_path=PackedInt32Array(2143212340) index="1" unique_id=760289904]
+material_override = SubResource("StandardMaterial3D_nmbdu")
+
+[node name="ArrowAttachment" type="BoneAttachment3D" parent="Skeleton3D" parent_id_path=PackedInt32Array(2143212340) index="2" unique_id=1256478748]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.11986062)
+bone_name = "Wep_Bow_02"
+bone_idx = 1
+
+[node name="SM_Wep_Arrow_01" parent="Skeleton3D/ArrowAttachment" index="0" unique_id=1902731416 instance=ExtResource("3_jt8a2")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0.5228481)

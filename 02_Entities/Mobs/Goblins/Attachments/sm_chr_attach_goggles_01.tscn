@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://c16m4apuk807i"]
+
+[ext_resource type="PackedScene" uid="uid://cv5mrrv5c304k" path="res://02_Entities/Mobs/Goblins/Attachments/SM_Chr_Attach_Goggles_01.fbx" id="1_4b2qt"]
+[ext_resource type="Texture2D" uid="uid://cmuirmne5freb" path="res://02_Entities/Mobs/_Textures/PolygonGoblinWarCamp/Alts/PolygonGoblinWarCamp_Texture_01_A.png" id="2_oglnf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1j1ca"]
+albedo_texture = ExtResource("2_oglnf")
+
+[node name="SM_Chr_Attach_Goggles_01" unique_id=824777752 instance=ExtResource("1_4b2qt")]
+
+[node name="SM_Chr_Attach_Goggles_01" parent="." index="0" unique_id=1567487008]
+material_override = SubResource("StandardMaterial3D_1j1ca")

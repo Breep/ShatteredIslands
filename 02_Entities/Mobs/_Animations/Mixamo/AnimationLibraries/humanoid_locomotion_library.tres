@@ -11,10 +11,28 @@
 [ext_resource type="Animation" uid="uid://d3ds7mule6edy" path="res://02_Entities/Mobs/_Animations/Mixamo/Animations/bow_standing_idle_var_02.res" id="7_pmf36"]
 [ext_resource type="Animation" uid="uid://beu2ae7uoirt0" path="res://02_Entities/Mobs/_Animations/Mixamo/Animations/dance_ymca.res" id="9_7eemq"]
 [ext_resource type="Animation" uid="uid://dqljm0bn6ue4c" path="res://02_Entities/Mobs/_Animations/Mixamo/Animations/death_01.res" id="10_rx7gj"]
-[ext_resource type="Animation" uid="uid://dvvsxvfkmn84k" path="res://02_Entities/Mobs/_Animations/Mixamo/Animations/death_02.res" id="11_c1hd6"]
-[ext_resource type="Animation" uid="uid://cvuc4yg83rqen" path="res://02_Entities/Mobs/_Animations/Mixamo/Animations/death_03.res" id="12_oeu14"]
-[ext_resource type="Animation" uid="uid://ct5o61g0r5qb4" path="res://02_Entities/Mobs/_Animations/Mixamo/Animations/death_04.res" id="13_pmf36"]
-[ext_resource type="Animation" uid="uid://bfcbcqvcn63i5" path="res://02_Entities/Mobs/_Animations/Mixamo/Animations/death_05.res" id="14_7eemq"]
+[ext_resource type="Animation" uid="uid://c66egurxeok7a" path="res://02_Entities/Mobs/_Animations/Mixamo/Animations/death_02.res" id="11_c1hd6"]
+[ext_resource type="Animation" uid="uid://ckhjab7e51l68" path="res://02_Entities/Mobs/_Animations/Mixamo/Animations/death_03.res" id="12_oeu14"]
+[ext_resource type="Animation" uid="uid://b3eosygrsjmgu" path="res://02_Entities/Mobs/_Animations/Mixamo/Animations/death_04.res" id="13_pmf36"]
+[ext_resource type="Animation" uid="uid://dg7ak5qpjlt2f" path="res://02_Entities/Mobs/_Animations/Mixamo/Animations/death_05.res" id="14_7eemq"]
+[ext_resource type="Animation" uid="uid://djtu5o55x3doi" path="res://02_Entities/Mobs/_Animations/Mixamo/Animations/idle_02.res" id="16_ne5fq"]
+[ext_resource type="Animation" uid="uid://b52wwkfdalny3" path="res://02_Entities/Mobs/_Animations/Mixamo/Animations/idle_03.res" id="17_c1c8h"]
+[ext_resource type="Animation" uid="uid://dp5t1queluhah" path="res://02_Entities/Mobs/_Animations/Mixamo/Animations/idle_var_01_happy.res" id="18_2pg6p"]
+[ext_resource type="Animation" uid="uid://rsvtfbjyxv2j" path="res://02_Entities/Mobs/_Animations/Mixamo/Animations/idle_var_02_sad.res" id="19_24mwo"]
+[ext_resource type="Animation" uid="uid://cg15ib7hxlynd" path="res://02_Entities/Mobs/_Animations/Mixamo/Animations/kneeling_idle.res" id="20_mmb5i"]
+[ext_resource type="Animation" uid="uid://lrco1ifr6sej" path="res://02_Entities/Mobs/_Animations/Mixamo/Animations/run_fast.res" id="21_ktgxc"]
+[ext_resource type="Animation" uid="uid://svhm03jrxecv" path="res://02_Entities/Mobs/_Animations/Mixamo/Animations/run_injured.res" id="22_714lv"]
+[ext_resource type="Animation" uid="uid://blu5uiwesjlud" path="res://02_Entities/Mobs/_Animations/Mixamo/Animations/run_naruto.res" id="23_y6rn7"]
+[ext_resource type="Animation" uid="uid://8oxobxchi5se" path="res://02_Entities/Mobs/_Animations/Mixamo/Animations/run_slow.res" id="24_mpmrn"]
+[ext_resource type="Animation" uid="uid://bonjlqt3ihvww" path="res://02_Entities/Mobs/_Animations/Mixamo/Animations/sitting_idle.res" id="25_42jym"]
+[ext_resource type="Animation" uid="uid://0kr3v4ku0ptd" path="res://02_Entities/Mobs/_Animations/Mixamo/Animations/sitting_idle_var_01.res" id="26_g04sw"]
+[ext_resource type="Animation" uid="uid://cs8r243fi4jtx" path="res://02_Entities/Mobs/_Animations/Mixamo/Animations/sitting_idle_var_02.res" id="27_f2kdt"]
+[ext_resource type="Animation" uid="uid://7lrx38pj1q60" path="res://02_Entities/Mobs/_Animations/Mixamo/Animations/sneak_walk.res" id="28_l0c1q"]
+[ext_resource type="Animation" uid="uid://sywrtoal8bu3" path="res://02_Entities/Mobs/_Animations/Mixamo/Animations/spell_cast_01_right_hand.res" id="29_ibu6c"]
+[ext_resource type="Animation" uid="uid://c0nn1qsxo8gld" path="res://02_Entities/Mobs/_Animations/Mixamo/Animations/spell_cast_02_two_hands.res" id="30_wqhba"]
+[ext_resource type="Animation" uid="uid://csya74bbwwjtk" path="res://02_Entities/Mobs/_Animations/Mixamo/Animations/spell_cast_03.res" id="31_tvp1t"]
+[ext_resource type="Animation" uid="uid://c4wqjhyoklagt" path="res://02_Entities/Mobs/_Animations/Mixamo/Animations/walking.res" id="32_limcn"]
+[ext_resource type="Animation" uid="uid://7bnxrbigu7ha" path="res://02_Entities/Mobs/_Animations/Mixamo/Animations/walking_injured.res" id="33_8w11l"]
 
 [resource]
 _data = {
@@ -32,5 +50,23 @@ _data = {
 &"death_03": ExtResource("12_oeu14"),
 &"death_04": ExtResource("13_pmf36"),
 &"death_05": ExtResource("14_7eemq"),
-&"idle": ExtResource("1_2pi7m")
+&"idle": ExtResource("1_2pi7m"),
+&"idle_02": ExtResource("16_ne5fq"),
+&"idle_03": ExtResource("17_c1c8h"),
+&"idle_var_01_happy": ExtResource("18_2pg6p"),
+&"idle_var_02_sad": ExtResource("19_24mwo"),
+&"kneeling_idle": ExtResource("20_mmb5i"),
+&"run_fast": ExtResource("21_ktgxc"),
+&"run_injured": ExtResource("22_714lv"),
+&"run_naruto": ExtResource("23_y6rn7"),
+&"run_slow": ExtResource("24_mpmrn"),
+&"sitting_idle": ExtResource("25_42jym"),
+&"sitting_idle_var_01": ExtResource("26_g04sw"),
+&"sitting_idle_var_02": ExtResource("27_f2kdt"),
+&"sneak_walk": ExtResource("28_l0c1q"),
+&"spell_cast_01_right_hand": ExtResource("29_ibu6c"),
+&"spell_cast_02_two_hands": ExtResource("30_wqhba"),
+&"spell_cast_03": ExtResource("31_tvp1t"),
+&"walking": ExtResource("32_limcn"),
+&"walking_injured": ExtResource("33_8w11l")
 }
