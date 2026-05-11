@@ -71,7 +71,7 @@ func take_percent(damage_percent: float, percent_modifier: Utils.PercentModifier
 # ============================== Private functions ==============================
 
 func _handle_life_steal(damage_done: float, damage_type: Utils.ActionType) -> void:
-	var life_steal: float = _owner.stats.get_stat(EntityStats.StatType.LIFESTEAL, damage_type)
+	var life_steal: float = _owner.stats.get_effective_stat(EntityStats.StatType.LIFESTEAL, damage_type)
 	var amount: float = damage_done * life_steal / 100.0
 	if amount >= 1:
 		_owner.heal.direct(_owner, amount, &"Life Steal")

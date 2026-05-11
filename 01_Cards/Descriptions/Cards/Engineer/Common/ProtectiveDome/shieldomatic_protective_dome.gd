@@ -14,8 +14,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var _update_modifier := func(current_shield: float) -> void:
 		var mod := StatModifier.new()
 		mod.id = &"Protective Dome"
-		mod.stat_type = EntityStats.StatType.RESISTANCE
-		mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
+		mod.stat_type = EntityStats.StatType.ARMOR
 		mod.tags = [StatModifier.TagType.CARD]
 
 		if current_shield > 0:
@@ -46,8 +45,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if state[&"is_active"]:
 			var mod := StatModifier.new()
 			mod.id = &"Protective Dome"
-			mod.stat_type = EntityStats.StatType.RESISTANCE
-			mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
+			mod.stat_type = EntityStats.StatType.ARMOR
 			ctx.stat_modifiers.unregister_modifier(mod)
 			state[&"is_active"] = false
 	)

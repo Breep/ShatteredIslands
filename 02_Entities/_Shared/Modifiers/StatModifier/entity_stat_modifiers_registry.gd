@@ -1,3 +1,7 @@
+# EntityStatModifiersRegistry — applique l'ensemble des StatModifier à une entité.
+# Maintient un dict de modifiers par StatType (single = flat dict, multi = dict par ActionType),
+# recompute la stat finale (`(base + sum(ADD)) * (1 + sum(MULT))`) et propage vers `stats`.
+# Les Mono alias (ARMOR/MR/PR) sont reroutées en interne vers M_RESISTANCE[action].
 class_name EntityStatModifiersRegistry
 extends Resource
 
@@ -26,9 +30,9 @@ class StatModifierDictionary extends Resource:
 		if stat_type != _stat_type:
 			Verbose.error("Trying to register a modifier for an other stat type |" + str(stat_type) + " | " + str(_stat_type), Verbose.Category.STAT_MODIFIER)
 			return
-		
+
 		var modifier_id: String = stat_modifier.id
-		if _is_multiple_stats():
+		if EntityStats.is_multi_stat(_stat_type):
 			_modifiers_per_action_type[stat_modifier.action_type][modifier_id] = stat_modifier
 		else:
 			_modifiers[modifier_id] = stat_modifier
@@ -41,9 +45,9 @@ class StatModifierDictionary extends Resource:
 		if stat_type != _stat_type:
 			Verbose.error("Trying to unregister a modifier for an other stat type | " + str(stat_type) + str(_stat_type), Verbose.Category.STAT_MODIFIER)
 			return
-		
+
 		var modifier_id: String = stat_modifier.id
-		if _is_multiple_stats():
+		if EntityStats.is_multi_stat(_stat_type):
 			if not _modifiers_per_action_type[stat_modifier.action_type].has(modifier_id):
 				Verbose.error("Unregister - Unknown multiple stats modifier | " + str(modifier_id) + str(_stat_type), Verbose.Category.STAT_MODIFIER)
 				return
@@ -53,12 +57,12 @@ class StatModifierDictionary extends Resource:
 				Verbose.error("Unregister - Unknown stat modifier | " + modifier_id + " | " + str(_stat_type), Verbose.Category.STAT_MODIFIER)
 				return
 			_modifiers.erase(modifier_id)
-		
+
 		_recompute_stats()
 
 
 	func auto_cleanup() -> void:
-		if _is_multiple_stats():
+		if EntityStats.is_multi_stat(_stat_type):
 			for action_type: Utils.ActionType in _modifiers_per_action_type.keys():
 				for modifier: StatModifier in _modifiers_per_action_type[action_type].values().duplicate():
 					if modifier.auto_cleanup:
@@ -74,7 +78,7 @@ class StatModifierDictionary extends Resource:
 
 	func _recompute_stats() -> void:
 		Verbose.trace("_recompute_stats()", Verbose.Category.STAT_MODIFIER)
-		if _is_multiple_stats():
+		if EntityStats.is_multi_stat(_stat_type):
 			_recompute_multiple_stats()
 		else:
 			_recompute_single_stats()
@@ -88,8 +92,8 @@ class StatModifierDictionary extends Resource:
 				add += modifier.value
 			elif modifier.calc_type == StatModifier.CalcType.MULT:
 				mul += modifier.value
-		var base_stat = _entity_base_stats_ref.get_stat(_stat_type)
-		var new_stat = (base_stat + add) * (1.0 + mul)
+		var base_stat: float = _entity_base_stats_ref.get_stat(_stat_type)
+		var new_stat: float = (base_stat + add) * (1.0 + mul)
 		_entity_stats_ref.update_stat(_stat_type, new_stat)
 
 
@@ -103,21 +107,10 @@ class StatModifierDictionary extends Resource:
 					add += modifier.value
 				elif modifier.calc_type == StatModifier.CalcType.MULT:
 					mul += modifier.value
-			var base_stat = _entity_base_stats_ref.get_stat(_stat_type, action_type)
-			var new_stat = (base_stat + add) * (1.0 + mul)
+			var base_stat: float = _entity_base_stats_ref.get_stat(_stat_type, action_type)
+			var new_stat: float = (base_stat + add) * (1.0 + mul)
 			_entity_stats_ref.update_stat(_stat_type, new_stat, action_type)
 
-
-	func _is_multiple_stats() -> bool:
-		return _stat_type == EntityStats.StatType.CRIT_CHANCE \
-				or _stat_type == EntityStats.StatType.CRIT_MULT \
-				or _stat_type == EntityStats.StatType.RESISTANCE \
-				or _stat_type == EntityStats.StatType.EXPOSURE \
-				or _stat_type == EntityStats.StatType.DODGE \
-				or _stat_type == EntityStats.StatType.CRIT_RESISTANCE \
-				or _stat_type == EntityStats.StatType.POWER \
-				or _stat_type == EntityStats.StatType.FRAGILITY \
-				or _stat_type == EntityStats.StatType.LIFESTEAL
 
 # ============================== Export - Entity stats ==============================
 
@@ -131,27 +124,34 @@ var _stats_modifiers_dictionaries: Dictionary[EntityStats.StatType, StatModifier
 # ============================== Node base functions ==============================
 
 func _init(base_stats: EntityStats, current_stats: EntityStats) -> void:
-	# Single stats
+	# Mono pure (single)
 	_stats_modifiers_dictionaries[EntityStats.StatType.HEALTH_MAX] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.MANA_MAX] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.MANA_REGEN] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.AD] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.AS] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.AP] = StatModifierDictionary.new()
-	_stats_modifiers_dictionaries[EntityStats.StatType.ATTACK_RANGE] = StatModifierDictionary.new()
+	_stats_modifiers_dictionaries[EntityStats.StatType.AR] = StatModifierDictionary.new()
+	_stats_modifiers_dictionaries[EntityStats.StatType.MS] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.SCALE] = StatModifierDictionary.new()
-	
-	# Multiple stats
+	_stats_modifiers_dictionaries[EntityStats.StatType.CRIT_RESISTANCE] = StatModifierDictionary.new()
+
+	# Mono avec Multi sœur (single)
 	_stats_modifiers_dictionaries[EntityStats.StatType.CRIT_CHANCE] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.CRIT_MULT] = StatModifierDictionary.new()
-	_stats_modifiers_dictionaries[EntityStats.StatType.RESISTANCE] = StatModifierDictionary.new()
-	_stats_modifiers_dictionaries[EntityStats.StatType.EXPOSURE] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.DODGE] = StatModifierDictionary.new()
-	_stats_modifiers_dictionaries[EntityStats.StatType.POWER] = StatModifierDictionary.new()
-	_stats_modifiers_dictionaries[EntityStats.StatType.FRAGILITY] = StatModifierDictionary.new()
-	_stats_modifiers_dictionaries[EntityStats.StatType.CRIT_RESISTANCE] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.LIFESTEAL] = StatModifierDictionary.new()
-	
+
+	# Multi only (per-action)
+	_stats_modifiers_dictionaries[EntityStats.StatType.M_CRIT_CHANCE] = StatModifierDictionary.new()
+	_stats_modifiers_dictionaries[EntityStats.StatType.M_CRIT_MULT] = StatModifierDictionary.new()
+	_stats_modifiers_dictionaries[EntityStats.StatType.M_DODGE] = StatModifierDictionary.new()
+	_stats_modifiers_dictionaries[EntityStats.StatType.M_LIFESTEAL] = StatModifierDictionary.new()
+	_stats_modifiers_dictionaries[EntityStats.StatType.M_POWER] = StatModifierDictionary.new()
+	_stats_modifiers_dictionaries[EntityStats.StatType.M_FRAGILITY] = StatModifierDictionary.new()
+	_stats_modifiers_dictionaries[EntityStats.StatType.M_RESISTANCE] = StatModifierDictionary.new()
+	_stats_modifiers_dictionaries[EntityStats.StatType.M_EXPOSURE] = StatModifierDictionary.new()
+
 	_entity_base_stats = base_stats
 	_entity_stats = current_stats
 	_entity_stats.auto_attack_type = _entity_base_stats.auto_attack_type
@@ -164,6 +164,7 @@ func _init(base_stats: EntityStats, current_stats: EntityStats) -> void:
 # ============================== Public functions ==============================
 
 func register_modifier(stat_modifier: StatModifier) -> void:
+	_normalize_alias(stat_modifier)
 	var stat_type: EntityStats.StatType = stat_modifier.stat_type
 	if not _stats_modifiers_dictionaries.has(stat_type):
 		Verbose.error("Cannot register modifier for stat type " + str(stat_type) + " because it is not managed by the registry", Verbose.Category.STAT_MODIFIER)
@@ -172,6 +173,7 @@ func register_modifier(stat_modifier: StatModifier) -> void:
 
 
 func unregister_modifier(stat_modifier: StatModifier) -> void:
+	_normalize_alias(stat_modifier)
 	var stat_type: EntityStats.StatType = stat_modifier.stat_type
 	if not _stats_modifiers_dictionaries.has(stat_type):
 		Verbose.error("Cannot unregister modifier for stat type " + str(stat_type) + " because it is not managed by the registry", Verbose.Category.STAT_MODIFIER)
@@ -193,6 +195,14 @@ func recompute_all() -> void:
 		_stats_modifiers_dictionaries[stat_type].recompute_stats()
 
 # ============================== Private functions ==============================
+
+# Si stat_type est un alias (ARMOR/MR/PR), réécrit le modifier vers M_RESISTANCE[action_alias].
+func _normalize_alias(stat_modifier: StatModifier) -> void:
+	var resolved: Dictionary = EntityStats.resolve_alias(stat_modifier.stat_type)
+	if resolved.is_empty(): return
+	stat_modifier.stat_type = resolved["stat_type"]
+	stat_modifier.action_type = resolved["action_type"]
+
 
 func _auto_cleanup_all() -> void:
 	for smd: StatModifierDictionary in _stats_modifiers_dictionaries.values():

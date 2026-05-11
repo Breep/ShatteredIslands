@@ -11,8 +11,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var mod := StatModifier.new()
 	mod.calc_type = StatModifier.CalcType.ADD
 	mod.value = _damage_deacrease[card_lvl - 1]
-	mod.stat_type = EntityStats.StatType.RESISTANCE
-	mod.action_type = Utils.ActionType.DAMAGE_POISON
+	mod.stat_type = EntityStats.StatType.POISON_RESIST
 	mod.id = &"Antidote"
 	ctx.stat_modifiers.register_modifier(mod)
 
