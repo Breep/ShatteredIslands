@@ -132,11 +132,13 @@ func _ready() -> void:
 func _enter_tree() -> void:
 	if Engine.is_editor_hint():
 		return
+	super._enter_tree()
 
 
 func _init() -> void:
 	if Engine.is_editor_hint():
 		return
+	super._init()
 #endregion
 
 #region ============================== Public functions ==============================

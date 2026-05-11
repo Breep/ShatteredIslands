@@ -36,62 +36,88 @@ metadata/_custom_type_script = "uid://crybfqxtiik6d"
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
 [node name="GeneralSkeleton" parent="LatikaVisual" index="0" unique_id=901972998]
-bones/1/position = Vector3(-0.030704876, 0.8373731, -0.009222625)
-bones/1/rotation = Quaternion(-0.016406484, -0.78532594, -0.031041432, 0.6180862)
-bones/2/rotation = Quaternion(0.031056698, 0.006806257, 0.0008753396, 0.9994941)
-bones/3/rotation = Quaternion(0.024654131, 0.01515601, -0.006245199, 0.99956167)
-bones/4/rotation = Quaternion(0.024660574, 0.015725687, -0.0055654873, 0.9995567)
-bones/5/rotation = Quaternion(0.016745517, 0.08064319, -0.04397376, 0.9956318)
-bones/6/rotation = Quaternion(-0.045855884, 0.47695667, -0.07532372, 0.8744919)
-bones/10/rotation = Quaternion(0.47147337, 0.53802234, 0.35651538, -0.60095054)
-bones/11/rotation = Quaternion(-0.007854389, 0.9106635, -0.22841662, 0.34417465)
-bones/12/rotation = Quaternion(0.10487821, -0.6992857, 0.10487821, 0.6992858)
-bones/13/rotation = Quaternion(0.0191689, 0.4395381, 0.100459084, 0.89238274)
-bones/25/rotation = Quaternion(0.44871697, -0.5458691, -0.39878887, -0.5845062)
-bones/26/rotation = Quaternion(-0.30335253, 0.89814866, -0.011578351, -0.31807584)
-bones/27/rotation = Quaternion(0.614152, 0.35045403, -0.6141508, 0.35045403)
-bones/28/rotation = Quaternion(0.15884237, -0.31786123, 0.026013605, 0.934375)
-bones/40/rotation = Quaternion(-0.034693565, 0.07830846, 0.9949589, 0.052163392)
-bones/41/rotation = Quaternion(0.045367353, 0.9650772, -0.23889488, 0.097452596)
-bones/42/rotation = Quaternion(0.08413069, 0.60075533, -0.7945319, -0.027096352)
-bones/44/rotation = Quaternion(-3.951955e-08, 0.99996054, 0.008887529, -1.616821e-08)
-bones/45/rotation = Quaternion(0.1299011, -0.010205424, 0.9860724, -0.1033576)
-bones/46/rotation = Quaternion(-0.019075368, 0.9800667, -0.19397287, 0.03847207)
-bones/47/rotation = Quaternion(-0.07645635, 0.59002084, -0.799255, 0.084978126)
-bones/49/rotation = Quaternion(-1.3580575e-07, 1, 0.00017729402, 6.660844e-06)
+bones/1/position = Vector3(-0.0060303733, 0.81809527, 0.007944259)
+bones/1/rotation = Quaternion(-0.03926548, -0.36622334, -0.016614253, 0.9295497)
+bones/2/rotation = Quaternion(0.04657087, 0.0403616, -0.0058468017, 0.9980821)
+bones/3/rotation = Quaternion(0.09331118, 0.080347404, -0.01661018, 0.9922507)
+bones/4/rotation = Quaternion(0.09241051, 0.08039359, -0.01647393, 0.99233353)
+bones/5/rotation = Quaternion(-0.015548285, -0.010577795, 0.0016112498, 0.99982184)
+bones/6/rotation = Quaternion(-0.06683225, 0.17785266, -0.0012394148, 0.98178434)
+bones/7/position = Vector3(1.4794772e-17, 0.09447605, 0.1227222)
+bones/8/position = Vector3(1.4775588e-17, 0.1276692, 0.12272221)
+bones/9/rotation = Quaternion(0, 0.70710677, 0.70710677, 0)
+bones/10/rotation = Quaternion(0.5186534, 0.46628475, 0.5169399, -0.49633706)
+bones/11/rotation = Quaternion(0.04814497, 0.8341876, -0.5392114, 0.10518622)
+bones/12/rotation = Quaternion(0.29328692, -0.59346604, 0.30087548, 0.68648005)
+bones/13/rotation = Quaternion(-0.06279299, 0.7928582, 0.078266926, 0.6010884)
+bones/14/rotation = Quaternion(0.28308576, 0.6479677, -0.58540934, -0.3966059)
+bones/15/rotation = Quaternion(-0.039942227, 0.11784033, -0.14163585, 0.982068)
+bones/16/rotation = Quaternion(-0.0364033, 0.1520346, 0.22999513, 0.9605532)
+bones/17/rotation = Quaternion(0.4637476, 0.533796, -0.5298225, -0.468282)
+bones/18/rotation = Quaternion(-0.0011539992, 0.010741555, -0.098329805, 0.99509525)
+bones/19/rotation = Quaternion(-0.006912194, 0.025717527, -0.057002537, 0.9980188)
+bones/20/rotation = Quaternion(-0.0045196577, 0.02803993, 0.15906805, 0.986859)
+bones/21/rotation = Quaternion(-0.49364036, -0.5062798, 0.44727433, 0.547673)
+bones/22/rotation = Quaternion(0.0026372757, -0.019491982, -0.021269318, 0.9995803)
+bones/23/rotation = Quaternion(-0.018149137, 0.071478695, -0.0925109, 0.9929769)
+bones/24/rotation = Quaternion(0.016646294, -0.096525095, 0.16913001, 0.98071444)
+bones/25/rotation = Quaternion(0.48507497, -0.49270186, -0.56320995, -0.45248392)
+bones/26/rotation = Quaternion(0.18331036, 0.8311809, -0.51980835, -0.0730418)
+bones/27/rotation = Quaternion(0.3038954, 0.65446174, -0.21243614, 0.6589372)
+bones/28/rotation = Quaternion(0.14615533, -0.7313684, 0.017112581, 0.6659174)
+bones/29/rotation = Quaternion(-0.39660597, 0.5854094, 0.64796764, -0.28308573)
+bones/30/rotation = Quaternion(-0.039942224, 0.11784034, -0.14163586, 0.982068)
+bones/31/rotation = Quaternion(-0.036403313, 0.1520346, 0.22999513, 0.9605532)
+bones/32/rotation = Quaternion(-0.46828213, 0.5298225, 0.53379595, -0.46374762)
+bones/33/rotation = Quaternion(-0.0011539932, 0.010741624, -0.09832994, 0.99509525)
+bones/34/rotation = Quaternion(-0.006912198, 0.025717424, -0.057002377, 0.99801886)
+bones/35/rotation = Quaternion(-0.0045196447, 0.028039927, 0.15906803, 0.986859)
+bones/37/rotation = Quaternion(0.0026372697, -0.01949202, -0.021269329, 0.9995803)
+bones/38/rotation = Quaternion(-0.018149221, 0.07147895, -0.09251084, 0.9929769)
+bones/39/rotation = Quaternion(0.01664637, -0.09652534, 0.16913004, 0.98071444)
+bones/40/rotation = Quaternion(-0.12578791, 0.011916284, 0.98411036, 0.12474871)
+bones/41/rotation = Quaternion(0.024494216, 0.9621741, -0.26002905, -0.07749823)
+bones/42/rotation = Quaternion(0.0986251, 0.57150036, -0.807286, -0.10931542)
+bones/43/rotation = Quaternion(0, 0, 0, 1)
+bones/44/rotation = Quaternion(0.003491377, 0.99986184, 0.015912708, -0.0033315432)
+bones/45/rotation = Quaternion(0.07986934, 0.2032224, 0.97087204, -0.098636106)
+bones/46/rotation = Quaternion(0.037050396, 0.95123595, -0.28240296, -0.11843248)
+bones/47/rotation = Quaternion(-0.0402599, 0.67100346, -0.73902273, 0.04448614)
+bones/48/rotation = Quaternion(0, 0, 0, 1)
+bones/49/rotation = Quaternion(0.02826053, 0.9993639, 0.020267662, -0.007906905)
 
 [node name="LeftHandAttachment" parent="LatikaVisual/GeneralSkeleton" index="17" unique_id=297417579]
-transform = Transform3D(0.11106032, -0.3339646, -0.9360199, -0.94886935, 0.24440318, -0.19978598, 0.2954878, 0.91034883, -0.28974527, -0.16990004, 1.3265308, 0.7561132)
+transform = Transform3D(0.7684756, 0.1453295, -0.62315714, -0.4062069, -0.6416706, -0.6505807, -0.49441, 0.753086, -0.43407452, 0.28444153, 0.811611, 0.2228522)
 
 [node name="Skeleton3D" parent="LatikaVisual/GeneralSkeleton/LeftHandAttachment/Bow" parent_id_path=PackedInt32Array(433263620, 526129373) index="0" unique_id=2143212340]
-bones/1/position = Vector3(0, 0, -0.06381996)
+bones/1/position = Vector3(0, 0, -0.11986062)
 
 [node name="ArrowAttachment" parent="LatikaVisual/GeneralSkeleton/LeftHandAttachment/Bow/Skeleton3D" index="2" unique_id=1924204569]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.06381996)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.11986062)
 
 [node name="ShieldAttachment" parent="LatikaVisual/GeneralSkeleton" index="18" unique_id=1828555638]
-transform = Transform3D(-0.6177294, -0.3558322, -0.7012802, -0.7602843, 0.042364575, 0.64820784, -0.20094374, 0.9335893, -0.29670358, -0.06030498, 1.3027318, 0.50924796)
+transform = Transform3D(-0.8230893, 0.013810247, -0.5677442, -0.37996984, -0.7563768, 0.5324636, -0.4220752, 0.6539907, 0.627813, 0.2915148, 1.0060561, 0.03401096)
 visible = true
 
 [node name="SM_Wep_Shield_01" parent="LatikaVisual/GeneralSkeleton/ShieldAttachment" index="0" unique_id=1821283942]
 visible = false
 
 [node name="RightHandWeaponAttachment" parent="LatikaVisual/GeneralSkeleton" index="19" unique_id=1743821847]
-transform = Transform3D(0.8483537, -0.3258481, 0.4172752, 0.3773443, -0.18069352, -0.90827376, 0.37135828, 0.9279941, -0.03033501, -0.21045959, 1.509057, -0.21513836)
+transform = Transform3D(-0.19810966, -0.18893768, 0.9617978, 0.32966375, -0.9369265, -0.11614822, 0.92307866, 0.29405984, 0.2479004, -0.30246428, 0.8060185, -0.21739447)
 visible = true
 
 [node name="SM_Wep_Axe_02" parent="LatikaVisual/GeneralSkeleton/RightHandWeaponAttachment" index="0" unique_id=1050349439]
 visible = false
 
 [node name="BackPackAttachment" parent="LatikaVisual/GeneralSkeleton" index="20" unique_id=801280550]
-transform = Transform3D(-0.16050845, -0.097083755, -0.9822483, -0.032270595, 0.99513525, -0.09308417, 0.98650694, 0.016756937, -0.16286057, 0.0002622474, 1.2981757, 0.0052501946)
+transform = Transform3D(0.94150144, -0.11246559, -0.31768924, -0.0179037, 0.9246505, -0.38039595, 0.33653307, 0.36383116, 0.8685461, 0.0069840695, 1.2790201, 0.011888963)
 visible = true
 
 [node name="SM_Chr_Attach_Backpack_01" parent="LatikaVisual/GeneralSkeleton/BackPackAttachment" index="1" unique_id=251234928]
 visible = false
 
 [node name="FaceAttachment" parent="LatikaVisual/GeneralSkeleton" index="21" unique_id=538487173]
-transform = Transform3D(0.8486112, 0.016661704, -0.5287547, -0.113365695, 0.98201203, -0.15099898, 0.51672757, 0.18808205, 0.8352353, -0.05450309, 1.5241004, 0.01783564)
+transform = Transform3D(0.9968399, -0.0793512, -0.0036754608, 0.07678859, 0.9744288, -0.2111686, 0.020338029, 0.21021912, 0.97744274, -0.027491245, 1.4845883, 0.11702536)
 
 [node name="SM_Chr_Attach_Hair_07" parent="LatikaVisual/GeneralSkeleton/FaceAttachment" index="1" unique_id=131978717]
 visible = true
@@ -103,19 +129,19 @@ visible = false
 visible = false
 
 [node name="LeftFootAttachment" parent="LatikaVisual/GeneralSkeleton" index="22" unique_id=1967920387]
-transform = Transform3D(-0.15755664, -0.9875098, -0.00052779913, -5.713664e-07, -0.00053447485, 0.99999994, -0.98750985, 0.15755667, 8.358061e-05, 0.074661285, 0.055538535, 0.24102955)
+transform = Transform3D(-0.71298105, -0.7011794, 0.0024259016, 0.0030117268, 0.00039747357, 0.99999547, -0.70117724, 0.7129848, 0.0018284768, 0.09952117, 0.05841446, 0.25829288)
 
 [node name="SM_Prop_Shoe_01" parent="LatikaVisual/GeneralSkeleton/LeftFootAttachment" index="0" unique_id=995298695]
 visible = false
 
 [node name="RightFootAttachment" parent="LatikaVisual/GeneralSkeleton" index="23" unique_id=1806943128]
-transform = Transform3D(0.065446585, -0.99773586, -0.015482679, 0.023731796, -0.013955057, 0.99962115, -0.9975737, -0.065789185, 0.022764795, 0.06874307, 0.0575774, -0.23699164)
+transform = Transform3D(-0.3132894, -0.94965625, 0.0015542507, 0.0007602228, 0.001385659, 0.99999845, -0.9496571, 0.3132904, 0.00028786063, -0.0721925, 0.05614063, -0.27731624)
 
 [node name="SM_Prop_Shoe_01" parent="LatikaVisual/GeneralSkeleton/RightFootAttachment" index="0" unique_id=731859447]
 visible = false
 
 [node name="HipsAttachment" parent="LatikaVisual/GeneralSkeleton" index="24" unique_id=504179125]
-transform = Transform3D(-0.23540068, 0.06414143, -0.96977955, -0.012603687, 0.9975345, 0.06903651, 0.9718167, 0.028474037, -0.23401189, -0.030704876, 0.8373731, -0.009222625)
+transform = Transform3D(0.73120886, 0.059647422, -0.6795409, -0.0021276772, 0.99636436, 0.08516749, 0.68215036, -0.06082938, 0.7286774, -0.0060303733, 0.81809527, 0.007944259)
 
 [node name="SM_Chr_Attach_Bags_03" parent="LatikaVisual/GeneralSkeleton/HipsAttachment" index="2" unique_id=1284670100]
 visible = false
