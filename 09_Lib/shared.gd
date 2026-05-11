@@ -70,7 +70,8 @@ var PROJECTILE_SCENES: Dictionary[Projectile.Type, PackedScene] = {
 	Projectile.Type.SMALL_EGG: load("res://03_SpellsAndProjectiles/Projectiles/SmallEgg/small_egg_projectile.tscn"),
 	Projectile.Type.FIRE_BALL: load("res://03_SpellsAndProjectiles/Projectiles/FireBall/fire_ball_projectile.tscn"),
 	Projectile.Type.BULLET: load("res://03_SpellsAndProjectiles/Projectiles/Bullet/bullet_projectile.tscn"),
-	Projectile.Type.GAMMA_TURRET: load("res://03_SpellsAndProjectiles/Projectiles/GammaTurret/gamma_turret_projectile.tscn")
+	Projectile.Type.GAMMA_TURRET: load("res://03_SpellsAndProjectiles/Projectiles/GammaTurret/gamma_turret_projectile.tscn"),
+	Projectile.Type.ARROW: load("res://03_SpellsAndProjectiles/Projectiles/Arrow/arrow_projectile.tscn")
 }
 
 var DAMAGE_POPUP_SCENE: PackedScene = load("res://04_UI/3D/DamagePopup/damage_popup.tscn")

@@ -1,37 +1,37 @@
-[gd_resource type="AnimationNodeBlendTree" format=3 uid="uid://bpyvojj821juf"]
+[gd_resource type="AnimationNodeBlendTree" format=3 uid="uid://d2v3r7r65ablv"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3dwlx"]
-animation = &"Take 001"
+animation = &"idle fix"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5c32l"]
-animation = &"humanoid_locomotion_library/bow_attack_short_shooting_arrow"
+animation = &"attack"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ds2a6"]
-animation = &"humanoid_locomotion_library/dance_robot_hip_hop"
+animation = &"dance"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_l2r0u"]
-animation = &"humanoid_locomotion_library/death_05"
+animation = &"die"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ufk4g"]
-animation = &"humanoid_locomotion_library/idle"
+animation = &"idle fix"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3htvw"]
-animation = &"humanoid_locomotion_library/idle_var_01_happy"
+animation = &"idle head 2"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xbbbo"]
-animation = &"humanoid_locomotion_library/run_naruto"
+animation = &"idle fix"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6527l"]
-animation = &"humanoid_locomotion_library/sitting_idle"
+animation = &"sitting"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ev6jf"]
-animation = &"humanoid_locomotion_library/sitting_idle_var_01"
+animation = &"sitting 2"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_whq83"]
-animation = &"humanoid_locomotion_library/bow_attack_shooting_arrow"
+animation = &"ultimate"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2l3jv"]
-animation = &"humanoid_locomotion_library/walking"
+animation = &"idle fix"
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_3dwlx"]
 fadein_time = 0.1
@@ -103,7 +103,7 @@ input_2/break_loop_at_end = false
 input_2/reset = true
 
 [resource]
-graph_offset = Vector2(-433.3949, 495.93286)
+graph_offset = Vector2(747.84863, 234.18028)
 nodes/output/position = Vector2(2080, 600)
 nodes/anim_dance/node = SubResource("AnimationNodeAnimation_ds2a6")
 nodes/anim_dance/position = Vector2(-1120, 1120)
@@ -124,11 +124,11 @@ nodes/scale_idle/position = Vector2(-800, 160)
 nodes/one_shot_attack/node = SubResource("AnimationNodeOneShot_3dwlx")
 nodes/one_shot_attack/position = Vector2(580, 940)
 nodes/anim_attack/node = SubResource("AnimationNodeAnimation_5c32l")
-nodes/anim_attack/position = Vector2(-740, 1660)
+nodes/anim_attack/position = Vector2(-360, 1660)
 nodes/anim_sitting/node = SubResource("AnimationNodeAnimation_6527l")
-nodes/anim_sitting/position = Vector2(680, 180)
+nodes/anim_sitting/position = Vector2(780, 180)
 nodes/anim_sitting_var/node = SubResource("AnimationNodeAnimation_ev6jf")
-nodes/anim_sitting_var/position = Vector2(660, 380)
+nodes/anim_sitting_var/position = Vector2(780, 400)
 nodes/one_shot_ultimate/node = SubResource("AnimationNodeOneShot_6527l")
 nodes/one_shot_ultimate/position = Vector2(1260, 940)
 nodes/scale_attack/node = SubResource("AnimationNodeTimeScale_vgqdx")
@@ -136,7 +136,7 @@ nodes/scale_attack/position = Vector2(-100, 1660)
 nodes/one_shot_idle/node = SubResource("AnimationNodeOneShot_5c32l")
 nodes/one_shot_idle/position = Vector2(-520, 220)
 nodes/anim_ultimate/node = SubResource("AnimationNodeAnimation_whq83")
-nodes/anim_ultimate/position = Vector2(460, 1720)
+nodes/anim_ultimate/position = Vector2(800, 1680)
 nodes/scale_ultimate/node = SubResource("AnimationNodeTimeScale_46hic")
 nodes/scale_ultimate/position = Vector2(1040, 1660)
 nodes/anim_idle_var/node = SubResource("AnimationNodeAnimation_3htvw")

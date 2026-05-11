@@ -49,7 +49,7 @@ var _current_movement_state: String = VALUE_TRANSITION_FIGHTING_IDLE
 var _lock_animation: bool = false
 
 # Base attack animation duration (cached on ready)
-var _attack_anim_base_duration: float = 1.6 # Default fallback
+var _attack_anim_base_duration: float = 3.2 # Default fallback
 
 func _ready() -> void:
 	if _entity_owner == null:
@@ -98,11 +98,15 @@ func _on_entity_owner_resurrected() -> void:
 	_lock_animation = false
 	_animation_tree.set(PARAM_TRANSITION_FIGHTING, VALUE_TRANSITION_FIGHTING_IDLE)
 
+
 func _on_entity_owner_auto_attack_started(lock_seconds: float) -> void:
 	Verbose.debug("Auto attack started (lock_seconds=" + str(lock_seconds).pad_decimals(2) + ")", Verbose.Category.ENTITY_ANIMATION)
-	if _lock_animation: return
+	if _lock_animation:
+		Verbose.warn("Auto attack - Animation is locked", Verbose.Category.ENTITY_ANIMATION)
+		return
 	# Calculate speed_scale so animation fits within lock_seconds
 	var speed_scale: float = _attack_anim_base_duration / lock_seconds if lock_seconds > 0.0 else 1.0
+	Verbose.debug("Auto attack started (speed_scale=" + str(speed_scale).pad_decimals(2) + ")", Verbose.Category.ENTITY_ANIMATION)
 	_animation_tree.set(PARAM_SCALE_ATTACK, speed_scale)
 	_animation_tree.set(PARAM_ONE_SHOT_ATTACK, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 

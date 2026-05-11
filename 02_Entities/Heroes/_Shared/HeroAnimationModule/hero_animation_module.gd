@@ -6,10 +6,8 @@ extends AnimationComponent
 
 # Hero-specific constants
 const VALUE_TRANSITION_GLOBAL_SITTING: String = "Sitting"
-const PARAM_SCALE_ATTACK_LEFT: String = "parameters/scale_attack_left/scale"
-const PARAM_SCALE_ATTACK_RIGHT: String = "parameters/scale_attack_right/scale"
-const PARAM_BLEND_ATTACK: String = "parameters/blend_attack/blend_amount"
 const DEFAULT_AA_ANIM_MAX_SPEED_SCALE: float = 4.0
+
 
 # Hero-specific state
 var _is_fighting: bool = false
@@ -23,24 +21,6 @@ func _ready() -> void:
 		hero.fighting_state_changed.connect(_on_hero_fighting_state_changed)
 		hero.fight_is_won.connect(_on_hero_fight_is_won)
 		hero.fight_is_lost.connect(_on_hero_fight_is_lost)
-
-
-# Override auto attack to add blend logic (left/right hand)
-func _on_entity_owner_auto_attack_started(lock_seconds: float) -> void:
-	Verbose.debug("Auto attack started (lock_seconds=" + str(lock_seconds).pad_decimals(2) + ")", Verbose.Category.ENTITY_ANIMATION)
-	if _lock_animation: return
-	var use_right_hand: bool = _rng.randf_range(0.0, 1.0) < 0.5
-	if use_right_hand:
-		_animation_tree.set(PARAM_BLEND_ATTACK, 1.0)
-	else:
-		_animation_tree.set(PARAM_BLEND_ATTACK, 0.0)
-	
-	# Calculate speed_scale so animation fits within lock_seconds, capped to keep visuals readable.
-	var speed_scale: float = _attack_anim_base_duration / lock_seconds if lock_seconds > 0.0 else 1.0
-	speed_scale = minf(speed_scale, _resolve_aa_anim_max_speed_scale())
-	_animation_tree.set(PARAM_SCALE_ATTACK_LEFT, speed_scale)
-	_animation_tree.set(PARAM_SCALE_ATTACK_RIGHT, speed_scale)
-	_animation_tree.set(PARAM_ONE_SHOT_ATTACK, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 
 # Hero-specific display mode handling
