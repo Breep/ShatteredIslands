@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="FightingEncounter" format=3 uid="uid://cgcpx1gfpj2f2"]
 
-[ext_resource type="Script" uid="uid://rj6clcd8f15a" path="res://05_Game/Encounters/entity_spec.gd" id="1_oukjp"]
+[ext_resource type="Script" uid="uid://rj6clcd8f15a" path="res://05_Game/Encounters/SpawnSpecs/entity_spec.gd" id="1_oukjp"]
 [ext_resource type="PackedScene" uid="uid://ds0phwn8k1xb6" path="res://02_Entities/Summons/ChickenLord/TRex/trex.tscn" id="2_ci43b"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_y2qe1"]
 [ext_resource type="PackedScene" uid="uid://7s8lg5leu3go" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenArdentCelestial/chicken_ardent_celestial.tscn" id="4_f1u4f"]

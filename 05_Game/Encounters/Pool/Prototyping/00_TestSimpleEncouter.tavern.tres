@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="TavernEncounter" format=3 uid="uid://tib0ie1kgy20"]
 
-[ext_resource type="Script" uid="uid://rj6clcd8f15a" path="res://05_Game/Encounters/entity_spec.gd" id="1_yoo0t"]
+[ext_resource type="Script" uid="uid://rj6clcd8f15a" path="res://05_Game/Encounters/SpawnSpecs/entity_spec.gd" id="1_yoo0t"]
 [ext_resource type="PackedScene" uid="uid://ds0phwn8k1xb6" path="res://02_Entities/Summons/ChickenLord/TRex/trex.tscn" id="2_gnd2o"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_cqs7b"]
 [ext_resource type="PackedScene" uid="uid://c48aqh8mlb7lc" path="res://02_Entities/Heroes/DarkKnight/dark_knight.tscn" id="4_qpuy3"]
