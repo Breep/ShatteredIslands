@@ -1,60 +1,14 @@
 [gd_scene format=3 uid="uid://cpsrcxqpvi3tv"]
 
-[ext_resource type="Script" uid="uid://b4ers2bn4bw7g" path="res://05_Game/Encounters/Builders/TavernBuilder/tavern_encounter_builder.gd" id="1_gq7r5"]
+[ext_resource type="Script" uid="uid://b4ers2bn4bw7g" path="res://05_Game/Encounters/FormationBuilders/TavernBuilder/tavern_formation_builder.gd" id="1_gq7r5"]
 [ext_resource type="PackedScene" uid="uid://3m2v1arprnf7" path="res://06_FloatingIsland/_Maps/tavern_visual.tscn" id="2_ht4ne"]
+[ext_resource type="Script" uid="uid://ll3d062c2nnk" path="res://05_Game/Encounters/FormationBuilders/container.gd" id="3_5q1af"]
 [ext_resource type="PackedScene" uid="uid://c80sm3cuughbk" path="res://02_Entities/Mobs/Dummies/dummy_04.tscn" id="3_vfpyo"]
 [ext_resource type="PackedScene" uid="uid://ddr727id3kk43" path="res://02_Entities/Mobs/Dummies/dummy_01.tscn" id="4_cladm"]
 [ext_resource type="PackedScene" uid="uid://ds0phwn8k1xb6" path="res://02_Entities/Summons/ChickenLord/TRex/trex.tscn" id="5_uf8bk"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="6_kvp82"]
 [ext_resource type="PackedScene" uid="uid://7s8lg5leu3go" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenArdentCelestial/chicken_ardent_celestial.tscn" id="7_xqwq0"]
 [ext_resource type="PackedScene" uid="uid://wtgtwq668eqr" path="res://21_Props/Tavern/table_long_visual.tscn" id="8_4fcod"]
-
-[sub_resource type="GDScript" id="GDScript_xxtpu"]
-script/source = "@tool
-class_name EditorContainerNode
-extends Node3D
-
-@export var role: EntitySpec.Role = EntitySpec.Role.ACOLYTE
-@export var snap_to_hex: bool = true
-@export var arena_layout: ArenaLayout
-@export var camp: int = 0  # 0 = joueur, 1 = ennemi
-
-func _process(_delta: float) -> void:
-	if not Engine.is_editor_hint(): return
-	if not snap_to_hex or arena_layout == null: return
-	
-	for child in get_children():
-		if child is Entity:
-			_snap_entity(child)
-
-
-func _snap_entity(entity: Entity) -> void:
-	var hex = HexUtils.world_to_axial(
-		entity.global_position, 
-		arena_layout.hex_size,
-		HexUtils.Orientation.POINTY_TOP,
-		arena_layout.world_origin
-	)
-	var snapped_pos = HexUtils.axial_to_world(
-		hex, 
-		arena_layout.hex_size,
-		HexUtils.Orientation.POINTY_TOP,
-		arena_layout.world_origin
-	)
-	snapped_pos.y = entity.global_position.y  # garde la hauteur libre
-	entity.global_position = snapped_pos
-	
-	# Tinte si invalide
-	var is_valid = arena_layout.is_valid_hex(hex, camp)
-	_set_entity_validity_tint(entity, is_valid)
-
-
-func _set_entity_validity_tint(entity: Entity, valid: bool) -> void:
-	# Cherche un MeshInstance3D dans l'entité, override material si invalide
-	if not entity.has_node(\"ValidityIndicator\"):
-		return  # à toi de décider ton mode visuel : decal rouge, contour, etc.
-	entity.get_node(\"ValidityIndicator\").visible = not valid
-"
 
 [sub_resource type="Resource" id="Resource_3uxsp"]
 script = ExtResource("6_kvp82")
@@ -98,19 +52,29 @@ attack_damage = 10.0
 attack_speed = 1.0
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
-[node name="TavernEncounterBuilder" type="Node3D" unique_id=1175562881]
+[node name="TavernEncounterBuilder" type="Node3D" unique_id=1175562881 node_paths=PackedStringArray("_antagonists_node", "_heroes_node", "_acolytes_node", "_buildings_node", "_props_node")]
 script = ExtResource("1_gq7r5")
+_antagonists_node = NodePath("Entities/Antagonists")
+_heroes_node = NodePath("Entities/Heroes")
+_acolytes_node = NodePath("Entities/Acolytes")
+_buildings_node = NodePath("Entities/Buildings")
+_props_node = NodePath("Props")
 
 [node name="Tavern" parent="." unique_id=694546034 instance=ExtResource("2_ht4ne")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 
 [node name="Entities" type="Node3D" parent="." unique_id=1077502273]
 
-[node name="Antagonistes" type="Node3D" parent="Entities" unique_id=1217234401]
-script = SubResource("GDScript_xxtpu")
+[node name="Antagonists" type="Node3D" parent="Entities" unique_id=1217234401]
+script = ExtResource("3_5q1af")
+
+[node name="Trex" parent="Entities/Antagonists" unique_id=250114565 instance=ExtResource("5_uf8bk")]
+transform = Transform3D(-0.043968134, 0, -0.9990329, 0, 1, 0, 0.9990329, 0, -0.043968134, -2.8961196, 0.70605564, 0.037612796)
+custom_base_stats = SubResource("Resource_3uxsp")
 
 [node name="Heroes" type="Node3D" parent="Entities" unique_id=777508257]
-script = SubResource("GDScript_xxtpu")
+script = ExtResource("3_5q1af")
+role = 3
 
 [node name="Hero01" parent="Entities/Heroes" unique_id=1306882236 instance=ExtResource("3_vfpyo")]
 transform = Transform3D(-0.00872653, 0, -0.9999619, 0, 1, 0, 0.9999619, 0, -0.00872653, 1.3582577, 0.5777203, 0.0888598)
@@ -125,7 +89,8 @@ transform = Transform3D(-0.00872653, 0, -0.9999619, 0, 1, 0, 0.9999619, 0, -0.00
 transform = Transform3D(0.15203714, 0, -0.98837477, 0, 1, 0, 0.98837477, 0, 0.15203714, 2.4261053, 0.5777203, -0.38915455)
 
 [node name="Acolytes" type="Node3D" parent="Entities" unique_id=1777238955]
-script = SubResource("GDScript_xxtpu")
+script = ExtResource("3_5q1af")
+role = 1
 
 [node name="Acolyte01" parent="Entities/Acolytes" unique_id=1548381800 instance=ExtResource("4_cladm")]
 transform = Transform3D(-0.087590404, 0, -0.9961566, 0, 1, 0, 0.9961566, 0, -0.087590404, 5.553061, 0.85771143, 2.7327788)
@@ -151,31 +116,29 @@ transform = Transform3D(-0.087590404, 0, -0.9961566, 0, 1, 0, 0.9961566, 0, -0.0
 [node name="Acolyte08" parent="Entities/Acolytes" unique_id=1915395625 instance=ExtResource("4_cladm")]
 transform = Transform3D(0.21935241, 0, -0.97564566, 0, 1, 0, 0.97564566, 0, 0.21935241, 4.061752, 0.85771143, -1.4574869)
 
-[node name="Buildings" type="Node3D" parent="Entities" unique_id=1793348148]
-script = SubResource("GDScript_xxtpu")
-
-[node name="NPCs" type="Node3D" parent="Entities" unique_id=1352200677]
-script = SubResource("GDScript_xxtpu")
-
-[node name="Trex" parent="Entities/NPCs" unique_id=250114565 instance=ExtResource("5_uf8bk")]
-transform = Transform3D(-0.043968134, 0, -0.9990329, 0, 1, 0, 0.9990329, 0, -0.043968134, -2.8961196, 0.70605564, 0.037612796)
-custom_base_stats = SubResource("Resource_3uxsp")
-
-[node name="ChickenArdentCelestial" parent="Entities/NPCs" unique_id=2109615854 instance=ExtResource("7_xqwq0")]
+[node name="ChickenArdentCelestial" parent="Entities/Acolytes" unique_id=2109615854 instance=ExtResource("7_xqwq0")]
 transform = Transform3D(0.51957875, 0, -0.85442257, 0, 1, 0, 0.85442257, 0, 0.51957875, -0.9923521, 1.3342638, 2.0655978)
 custom_base_stats = SubResource("Resource_j57xb")
 
-[node name="ChickenArdentCelestial2" parent="Entities/NPCs" unique_id=997155057 instance=ExtResource("7_xqwq0")]
+[node name="ChickenArdentCelestial2" parent="Entities/Acolytes" unique_id=997155057 instance=ExtResource("7_xqwq0")]
 transform = Transform3D(-0.42880905, 0, -0.9033952, 0, 1, 0, 0.9033952, 0, -0.42880905, -0.91357124, 1.2790282, -1.4390447)
 custom_base_stats = SubResource("Resource_qyyq8")
 
-[node name="ChickenArdentCelestial3" parent="Entities/NPCs" unique_id=533000618 instance=ExtResource("7_xqwq0")]
+[node name="ChickenArdentCelestial3" parent="Entities/Acolytes" unique_id=533000618 instance=ExtResource("7_xqwq0")]
 transform = Transform3D(0.46375996, 0, -0.8859609, 0, 1, 0, 0.8859609, 0, 0.46375996, -5.8574224, 0.5313548, 3.1440768)
 custom_base_stats = SubResource("Resource_px4km")
 
-[node name="ChickenArdentCelestial4" parent="Entities/NPCs" unique_id=803702386 instance=ExtResource("7_xqwq0")]
+[node name="ChickenArdentCelestial4" parent="Entities/Acolytes" unique_id=803702386 instance=ExtResource("7_xqwq0")]
 transform = Transform3D(-0.42880905, 0, -0.9033952, 0, 1, 0, 0.9033952, 0, -0.42880905, -6.005024, 0.26616788, -3.6114354)
 custom_base_stats = SubResource("Resource_apob7")
+
+[node name="Buildings" type="Node3D" parent="Entities" unique_id=1793348148]
+script = ExtResource("3_5q1af")
+role = 2
+
+[node name="NPCs" type="Node3D" parent="Entities" unique_id=1352200677]
+script = ExtResource("3_5q1af")
+role = 4
 
 [node name="Props" type="Node3D" parent="." unique_id=1490119890]
 
