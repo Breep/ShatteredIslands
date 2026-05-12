@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://dlqrg6ijwk3i8"]
+
+[ext_resource type="Script" uid="uid://ccc0vnl2cv7lt" path="res://06_FloatingIsland/BuyingIsland/BuyingArea/Tavern/TavernCenter/Tables/table.gd" id="2_c334w"]
+[ext_resource type="PackedScene" uid="uid://bs8lfftv32dp1" path="res://06_FloatingIsland/BuyingIsland/BuyingArea/Tavern/TavernCenter/Tables/Common/Coin/coin_pile.tscn" id="4_f6syc"]
+[ext_resource type="PackedScene" uid="uid://dumhxpaktew01" path="res://20_Data/Assets/3D/Furnitures/table.tscn" id="4_mlant"]
+[ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://10_Tool/SpawnPoint/spawn_point.tscn" id="4_xhctm"]
+[ext_resource type="PackedScene" uid="uid://dntunh7ry24ql" path="res://20_Data/Assets/3D/Furnitures/torch.tscn" id="5_e4omx"]
+
+[node name="Table_1v1" type="Node3D" unique_id=722507344 node_paths=PackedStringArray("_coin_piles", "_hero_spawns")]
+script = ExtResource("2_c334w")
+_coin_piles = [NodePath("Player1/CoinPile1"), NodePath("Player2/CoinPile2")]
+_hero_spawns = [NodePath("Player1/SpawnPoint1"), NodePath("Player2/SpawnPoint2")]
+
+[node name="Player1" type="Node3D" parent="." unique_id=1856401014]
+transform = Transform3D(0.435325, 0, 0.900273, 0, 1, 0, -0.900273, 0, 0.435325, 1.65438, 2.38419e-07, 0.0346966)
+
+[node name="CoinPile1" parent="Player1" unique_id=600305253 instance=ExtResource("4_f6syc")]
+transform = Transform3D(0.209262, 0, 0.340895, 0, 0.4, 0, -0.340895, 0, 0.209262, -0.84708, 0.988139, -1.04127)
+
+[node name="SpawnPoint1" parent="Player1" unique_id=1801770283 instance=ExtResource("4_xhctm")]
+transform = Transform3D(0.876911, 0, 0.480652, 0, 1, 0, -0.480652, 0, 0.876911, -0.0935045, 0, -0.181571)
+team = 2
+
+[node name="Player2" type="Node3D" parent="." unique_id=1600631941]
+transform = Transform3D(0.570886, 0, 0.82103, 0, 1, 0, -0.82103, 0, 0.570886, -1.71098, 2.38419e-07, -0.0211828)
+
+[node name="CoinPile2" parent="Player2" unique_id=1749541633 instance=ExtResource("4_f6syc")]
+transform = Transform3D(-0.191134, 0, -0.35138, 0, 0.4, 0, 0.35138, 0, -0.191134, 0.882736, 0.988496, 0.964062)
+
+[node name="SpawnPoint2" parent="Player2" unique_id=1966456448 instance=ExtResource("4_xhctm")]
+transform = Transform3D(-0.793799, 0, -0.60818, 0, 1, 0, 0.60818, 0, -0.793799, 0.0709605, 0, 0.221179)
+team = 1
+
+[node name="Entities" type="Node3D" parent="." unique_id=1892945484]
+unique_name_in_owner = true
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1503776016]
+spawn_path = NodePath("../Entities")
+
+[node name="Table" parent="." unique_id=1373051594 instance=ExtResource("4_mlant")]
+
+[node name="SM_Prop_Table_Wood_06_004" parent="Table" index="2" unique_id=968611159]
+visible = true
+
+[node name="SM_Prop_Table_Wood_04_012" parent="Table" index="3" unique_id=1676315498]
+visible = false
+
+[node name="Torch" parent="Table" unique_id=1727248678 instance=ExtResource("5_e4omx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.959944, 0)
+
+[editable path="Table"]

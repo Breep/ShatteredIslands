@@ -59,33 +59,7 @@ func _start_buying_phase() -> void:
 	Verbose.debug("Start BUYING !", Verbose.Category.GAME)
 	_scene_switcher.set_island_active_only(_buying_island)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	var encounter: TavernEncounter = _build_buying_encounter_from_battles(_current_round_battles)
-	_buying_island.start_buying_phase(encounter)
-
-
-# TODO Transitionnel : RoundManager génère encore des Array[Battle] hérités du mode
-# PvP. Pour tester le mode mono/coop on construit ici un encounter placeholder :
-# 1 hero du joueur local + 1 chicken_colossus comme master + 3 chicken_basic en slaves.
-# À remplacer quand le RoundManager fournira directement un TavernEncounter.
-func _build_buying_encounter_from_battles(battles: Array[Battle]) -> TavernEncounter:
-	const CHICKEN_BASIC_SCENE: PackedScene = preload("res://02_Entities/Summons/ChickenLord/Chicken/Basic/chicken_basic.tscn")
-	const CHICKEN_COLOSSUS_SCENE: PackedScene = preload("res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenColossus/chicken_colossus.tscn")
-	const SLAVES_COUNT: int = 3
-
-	var encounter := TavernEncounter.new()
-	if battles.is_empty() or battles[0].players.is_empty():
-		return encounter
-
-	var hero: Hero = battles[0].players[0].hero
-	if hero != null:
-		encounter.players.append(hero)
-
-	encounter.masters.append(CHICKEN_COLOSSUS_SCENE.instantiate())
-
-	for i in SLAVES_COUNT:
-		encounter.slaves.append(CHICKEN_BASIC_SCENE.instantiate())
-
-	return encounter
+	_buying_island.start_buying_phase(_current_round_battles)
 
 
 func _start_fighting_phase() -> void:
