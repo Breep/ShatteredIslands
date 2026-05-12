@@ -41,7 +41,7 @@ _subresources={
 "animations": {
 "mixamo_com": {
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://02_Entities/Mobs/_Animations/Mixamo/Animations/idle.res",
+"save_to_file/fallback_path": "res://02_Entities/Mobs/_Animations/Mixamo/Animations/idle_01.res",
 "save_to_file/keep_custom_tracks": "",
 "save_to_file/path": "uid://cvnmwf0okgg8m",
 "settings/loop_mode": 1,

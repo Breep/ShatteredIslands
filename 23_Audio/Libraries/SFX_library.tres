@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AudioLib" format=3 uid="uid://bynpy7ci6jg6o"]
+
+[ext_resource type="Script" uid="uid://bnohfh6e2eq3" path="res://23_Audio/audio_lib.gd" id="1_8m0u6"]
+[ext_resource type="AudioStream" uid="uid://douc04lqi2qo4" path="res://23_Audio/SFX/Tavern/coin3.wav" id="1_b4e2n"]
+
+[resource]
+script = ExtResource("1_8m0u6")
+audio_database = Dictionary[String, AudioStream]({
+"card_bought": ExtResource("1_b4e2n")
+})
+metadata/_custom_type_script = "uid://bnohfh6e2eq3"

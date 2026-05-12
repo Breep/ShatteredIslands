@@ -1,5 +1,7 @@
 [gd_resource type="AnimationNodeBlendTree" format=3 uid="uid://b8n4k3u6g1igd"]
 
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_wlk1"]
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3dwlx"]
 animation = &"Take 001"
 
@@ -32,6 +34,9 @@ animation = &"humanoid_locomotion_library/bow_attack_shooting_arrow"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2l3jv"]
 animation = &"humanoid_locomotion_library/walking"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_aud0w"]
+animation = &"walk_audio"
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_3dwlx"]
 fadein_time = 0.1
@@ -103,7 +108,7 @@ input_2/break_loop_at_end = false
 input_2/reset = true
 
 [resource]
-graph_offset = Vector2(-357.28763, 885.8918)
+graph_offset = Vector2(-621.7195, 542.1059)
 nodes/output/position = Vector2(2080, 600)
 nodes/anim_dance/node = SubResource("AnimationNodeAnimation_ds2a6")
 nodes/anim_dance/position = Vector2(-1120, 1120)
@@ -149,10 +154,14 @@ nodes/transition_global/node = SubResource("AnimationNodeTransition_502n4")
 nodes/transition_global/position = Vector2(1760, 520)
 nodes/anim_walk/node = SubResource("AnimationNodeAnimation_2l3jv")
 nodes/anim_walk/position = Vector2(-1300, 600)
+nodes/anim_walk_audio/node = SubResource("AnimationNodeAnimation_aud0w")
+nodes/anim_walk_audio/position = Vector2(-1300, 780)
+nodes/add2_walk/node = SubResource("AnimationNodeAdd2_wlk1")
+nodes/add2_walk/position = Vector2(-940, 680)
 nodes/scale_walk/node = SubResource("AnimationNodeTimeScale_ldyvu")
-nodes/scale_walk/position = Vector2(-900, 620)
+nodes/scale_walk/position = Vector2(-680, 580)
 nodes/anim_run/node = SubResource("AnimationNodeAnimation_xbbbo")
-nodes/anim_run/position = Vector2(-1360, 860)
+nodes/anim_run/position = Vector2(-1480, 980)
 nodes/scale_run/node = SubResource("AnimationNodeTimeScale_jvmea")
 nodes/scale_run/position = Vector2(-860.7599, 927.7263)
-node_connections = [&"output", 0, &"transition_global", &"transition_fighting", 0, &"one_shot_idle", &"transition_fighting", 1, &"scale_walk", &"transition_fighting", 2, &"scale_run", &"transition_fighting", 3, &"scale_dance", &"transition_fighting", 4, &"scale_die", &"scale_dance", 0, &"anim_dance", &"scale_die", 0, &"anim_die", &"scale_idle", 0, &"anim_idle", &"one_shot_attack", 0, &"transition_fighting", &"one_shot_attack", 1, &"scale_attack", &"one_shot_ultimate", 0, &"one_shot_attack", &"one_shot_ultimate", 1, &"scale_ultimate", &"scale_attack", 0, &"anim_attack", &"one_shot_idle", 0, &"scale_idle", &"one_shot_idle", 1, &"scale_idle_var", &"scale_ultimate", 0, &"anim_ultimate", &"scale_idle_var", 0, &"anim_idle_var", &"one_shot_sitting", 0, &"anim_sitting", &"one_shot_sitting", 1, &"anim_sitting_var", &"transition_global", 0, &"anim_TPOSE", &"transition_global", 1, &"one_shot_sitting", &"transition_global", 2, &"one_shot_ultimate", &"scale_walk", 0, &"anim_walk", &"scale_run", 0, &"anim_run"]
+node_connections = [&"output", 0, &"transition_global", &"transition_fighting", 0, &"one_shot_idle", &"transition_fighting", 1, &"scale_walk", &"transition_fighting", 2, &"scale_run", &"transition_fighting", 3, &"scale_dance", &"transition_fighting", 4, &"scale_die", &"scale_dance", 0, &"anim_dance", &"scale_die", 0, &"anim_die", &"scale_idle", 0, &"anim_idle", &"one_shot_attack", 0, &"transition_fighting", &"one_shot_attack", 1, &"scale_attack", &"one_shot_ultimate", 0, &"one_shot_attack", &"one_shot_ultimate", 1, &"scale_ultimate", &"scale_attack", 0, &"anim_attack", &"one_shot_idle", 0, &"scale_idle", &"one_shot_idle", 1, &"scale_idle_var", &"scale_ultimate", 0, &"anim_ultimate", &"scale_idle_var", 0, &"anim_idle_var", &"one_shot_sitting", 0, &"anim_sitting", &"one_shot_sitting", 1, &"anim_sitting_var", &"transition_global", 0, &"anim_TPOSE", &"transition_global", 1, &"one_shot_sitting", &"transition_global", 2, &"one_shot_ultimate", &"add2_walk", 0, &"anim_walk", &"add2_walk", 1, &"anim_walk_audio", &"scale_walk", 0, &"add2_walk", &"scale_run", 0, &"anim_run"]

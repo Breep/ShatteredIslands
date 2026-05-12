@@ -1,9 +1,7 @@
 extends Node
 
 # ============================== Signals ==============================
-
 signal _shop_deck_shuffled() # Server only
-
 # ============================== Constants ==============================
 
 const SERVER_ID = 1
@@ -32,7 +30,6 @@ var _families: Array[Family]
 var _cards_in_player_shop: Dictionary[int, Array] # { player_id, Array[Card] }
 
 # ============================== NOde base functions ==============================
-
 func _init() -> void:
 	Verbose.debug("CARD SHOP MANAGER INIT", Verbose.Category.DEFAULT)
 

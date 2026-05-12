@@ -46,7 +46,7 @@ _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
 
 [node name="Latika2" parent="Node3D/Entities" unique_id=1941835210 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("3_os118")]
-transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, 4.2402563, 9.536744e-07, 0.036329266)
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, 8.22479, 9.536744e-07, 0.036329266)
 team = 1
 battle_id = 1
 _spawn_manager = NodePath("../../SpawnManager")

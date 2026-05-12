@@ -102,6 +102,7 @@ func _on_card_shop_shop_refreshed(new_cards: Array[Card]) -> void:
 
 func _on_card_shop_card_bought(card: Card) -> void:
 	card_bought.emit(card)
+	Events.card_bought.emit(card)
 
 
 func _on_local_player_death(_player: Player) -> void:

@@ -5,10 +5,35 @@
 [ext_resource type="PackedScene" uid="uid://5ccditks7xar" path="res://02_Entities/Mobs/Goblins/all_goblins.tscn" id="2_o3eb1"]
 [ext_resource type="PackedScene" uid="uid://40jvxogaqt0t" path="res://02_Entities/Mobs/Goblins/Attachments/sm_chr_attach_helmet_01.tscn" id="3_o3eb1"]
 [ext_resource type="Script" uid="uid://cnwr3o67xobtt" path="res://02_Entities/_Shared/Components/Animation/entity_animation_player.gd" id="4_1nbts"]
+[ext_resource type="AudioStream" uid="uid://cp85ihh46vrsp" path="res://23_Audio/test/random5.wav" id="5_4fgmv"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://b8n4k3u6g1igd" path="res://02_Entities/Heroes/Latika/latika_animation_blend_tree.tres" id="5_n3ceh"]
 [ext_resource type="PackedScene" uid="uid://cpqtocfge7ott" path="res://02_Entities/Heroes/_Shared/HeroAnimationModule/hero_animation_module.tscn" id="6_n3ceh"]
 [ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/EntityInfoPanel/HeroSimpleInfoPanel2D/hero_simple_info_panel_2d.tscn" id="7_n3ceh"]
 [ext_resource type="Script" uid="uid://4sipyh3feaa0" path="res://02_Entities/Heroes/Latika/latika_animation_module.gd" id="8_up7xi"]
+
+[sub_resource type="Animation" id="Animation_up7xi"]
+resource_name = "walk_audio"
+length = 0.39333335
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../AudioStreamPlayer3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_4fgmv")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4fgmv"]
+_data = {
+&"walk_audio": SubResource("Animation_up7xi")
+}
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_undos"]
 radius = 0.21923828
@@ -37,36 +62,59 @@ metadata/_custom_type_script = "uid://crybfqxtiik6d"
 [node name="LatikaVisual" parent="." unique_id=433263620 instance=ExtResource("2_o3eb1")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
-[node name="GeneralSkeleton" parent="LatikaVisual" index="0" unique_id=901972998]
-bones/1/position = Vector3(0, 0.8762761, 0)
-bones/1/rotation = Quaternion(0, 0, 0, 1)
-bones/2/rotation = Quaternion(-8.940697e-08, 0, 0, 1)
-bones/3/rotation = Quaternion(-4.4703484e-08, 1.4901161e-08, 1.4901161e-08, 1)
-bones/4/rotation = Quaternion(8.940695e-08, 0, 0, 1)
-bones/5/rotation = Quaternion(-1.4901161e-07, 0, 0, 1)
-bones/6/rotation = Quaternion(8.940695e-08, 0, 0, 1)
+[node name="GeneralSkeleton" parent="LatikaVisual" index="0" unique_id=1144807034]
+bones/1/position = Vector3(-0.0060079796, 0.8181369, 0.007978335)
+bones/1/rotation = Quaternion(-0.039312843, -0.3662134, -0.016629264, 0.9295514)
+bones/2/rotation = Quaternion(0.046514492, 0.040357422, -0.005831983, 0.998085)
+bones/3/rotation = Quaternion(0.09323938, 0.080339596, -0.01658455, 0.99225855)
+bones/4/rotation = Quaternion(0.09229282, 0.080372475, -0.01643014, 0.9923469)
+bones/5/rotation = Quaternion(-0.015421286, -0.010586848, 0.0015923738, 0.9998238)
+bones/6/rotation = Quaternion(-0.0651582, 0.17771381, -0.0013707608, 0.9819218)
+bones/7/position = Vector3(1.4794772e-17, 0.09447605, 0.1227222)
+bones/8/position = Vector3(1.4775588e-17, 0.1276692, 0.12272221)
 bones/9/rotation = Quaternion(0, 0.70710677, 0.70710677, 0)
-bones/10/rotation = Quaternion(0.5000001, 0.5, 0.49999988, -0.5)
-bones/11/rotation = Quaternion(1.4901161e-08, 1, 0, 0)
-bones/12/rotation = Quaternion(0, -0.70710677, 0, 0.70710677)
-bones/13/rotation = Quaternion(5.3852127e-09, 0.70710677, 5.3852127e-09, 0.70710677)
-bones/25/rotation = Quaternion(0.5000002, -0.49999997, -0.4999999, -0.5000001)
-bones/26/rotation = Quaternion(0, 1, 0, 0)
-bones/27/rotation = Quaternion(-6.3220284e-08, 0.70710677, -8.42937e-08, 0.70710677)
-bones/28/rotation = Quaternion(4.157507e-09, -0.70710677, -4.157507e-09, 0.70710677)
-bones/31/rotation = Quaternion(-0.03640326, 0.15203467, 0.22999533, 0.96055317)
-bones/40/rotation = Quaternion(-2.9802322e-08, 1.4901161e-08, 1, 1.4901161e-08)
-bones/41/rotation = Quaternion(-5.960465e-08, 1, -8.341572e-09, -2.239199e-08)
-bones/42/rotation = Quaternion(6.322027e-08, 0.7071066, -0.70710695, 0)
-bones/43/rotation = Quaternion(-2.384186e-07, -4.214685e-08, -2.1073424e-08, 1)
-bones/44/rotation = Quaternion(0.0036951408, 0.99985754, 0.016081886, -0.0035584443)
-bones/45/rotation = Quaternion(7.4505806e-08, 4.4703484e-08, 1, 4.4703484e-08)
-bones/46/rotation = Quaternion(5.960465e-08, 1, -5.0605518e-08, -5.1616014e-09)
-bones/47/rotation = Quaternion(-1.0536712e-07, 0.70710665, -0.707107, -2.1073422e-08)
-bones/49/rotation = Quaternion(0.028079316, 0.9993683, 0.020360684, -0.007746592)
+bones/10/rotation = Quaternion(0.5184711, 0.4664781, 0.5164726, -0.496832)
+bones/11/rotation = Quaternion(0.048177768, 0.83412486, -0.5393138, 0.105144)
+bones/12/rotation = Quaternion(0.2933575, -0.59340286, 0.30089986, 0.68649375)
+bones/13/rotation = Quaternion(-0.062762916, 0.7928635, 0.07812466, 0.601103)
+bones/14/rotation = Quaternion(0.28308576, 0.6479677, -0.58540934, -0.3966059)
+bones/15/rotation = Quaternion(-0.039942227, 0.11784033, -0.14163585, 0.982068)
+bones/16/rotation = Quaternion(-0.0364033, 0.1520346, 0.22999513, 0.9605532)
+bones/17/rotation = Quaternion(0.4637476, 0.533796, -0.5298225, -0.468282)
+bones/18/rotation = Quaternion(-0.0011539992, 0.010741555, -0.098329805, 0.99509525)
+bones/19/rotation = Quaternion(-0.006912194, 0.025717527, -0.057002537, 0.9980188)
+bones/20/rotation = Quaternion(-0.0045196577, 0.02803993, 0.15906805, 0.986859)
+bones/21/rotation = Quaternion(-0.49364036, -0.5062798, 0.44727433, 0.547673)
+bones/22/rotation = Quaternion(0.0026372757, -0.019491982, -0.021269318, 0.9995803)
+bones/23/rotation = Quaternion(-0.018149137, 0.071478695, -0.0925109, 0.9929769)
+bones/24/rotation = Quaternion(0.016646294, -0.096525095, 0.16913001, 0.98071444)
+bones/25/rotation = Quaternion(0.48494884, -0.49292755, -0.5625264, -0.45322314)
+bones/26/rotation = Quaternion(0.18324283, 0.8311594, -0.5198736, -0.07299105)
+bones/27/rotation = Quaternion(0.30399773, 0.65437764, -0.21245493, 0.65896744)
+bones/28/rotation = Quaternion(0.1459134, -0.73133993, 0.016987428, 0.66600496)
+bones/29/rotation = Quaternion(-0.39660597, 0.5854094, 0.64796764, -0.28308573)
+bones/30/rotation = Quaternion(-0.039942224, 0.11784034, -0.14163586, 0.982068)
+bones/31/rotation = Quaternion(-0.036403313, 0.1520346, 0.22999513, 0.9605532)
+bones/32/rotation = Quaternion(-0.46828213, 0.5298225, 0.53379595, -0.46374762)
+bones/33/rotation = Quaternion(-0.0011539932, 0.010741624, -0.09832994, 0.99509525)
+bones/34/rotation = Quaternion(-0.006912198, 0.025717424, -0.057002377, 0.99801886)
+bones/35/rotation = Quaternion(-0.0045196447, 0.028039927, 0.15906803, 0.986859)
+bones/37/rotation = Quaternion(0.0026372697, -0.01949202, -0.021269329, 0.9995803)
+bones/38/rotation = Quaternion(-0.018149221, 0.07147895, -0.09251084, 0.9929769)
+bones/39/rotation = Quaternion(0.01664637, -0.09652534, 0.16913004, 0.98071444)
+bones/40/rotation = Quaternion(-0.12578551, 0.011811811, 0.984112, 0.124747664)
+bones/41/rotation = Quaternion(0.024519801, 0.96217734, -0.25999928, -0.07754919)
+bones/42/rotation = Quaternion(0.09859953, 0.57140154, -0.8073634, -0.10928344)
+bones/43/rotation = Quaternion(0, 0, 0, 1)
+bones/44/rotation = Quaternion(0.003482806, 0.99986196, 0.01590559, -0.0033219988)
+bones/45/rotation = Quaternion(0.07986546, 0.20310377, 0.9709042, -0.09856827)
+bones/46/rotation = Quaternion(0.037019063, 0.95126283, -0.28230843, -0.118450895)
+bones/47/rotation = Quaternion(-0.04022032, 0.6710085, -0.7390227, 0.04444536)
+bones/48/rotation = Quaternion(0, 0, 0, 1)
+bones/49/rotation = Quaternion(0.028257, 0.99936396, 0.020256948, -0.007929241)
 
 [node name="LeftHandAttachment" parent="LatikaVisual/GeneralSkeleton" index="17" unique_id=297417579]
-transform = Transform3D(-2.231869e-07, 1, 2.9802326e-08, -3.2782557e-07, 2.980231e-08, -1, -1, -2.231869e-07, 3.2782557e-07, 0.79963243, 1.3609412, -0.034174003)
+transform = Transform3D(0.7689378, 0.14564681, -0.6225122, -0.40593106, -0.64102304, -0.65139073, -0.4939178, 0.75357586, -0.4337842, 0.2849405, 0.812075, 0.22325158)
 
 [node name="Skeleton3D" parent="LatikaVisual/GeneralSkeleton/LeftHandAttachment/Bow" parent_id_path=PackedInt32Array(433263620, 526129373) index="0" unique_id=2143212340]
 bones/1/position = Vector3(0, 0, -0.11986062)
@@ -75,28 +123,28 @@ bones/1/position = Vector3(0, 0, -0.11986062)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.11986062)
 
 [node name="ShieldAttachment" parent="LatikaVisual/GeneralSkeleton" index="18" unique_id=1828555638]
-transform = Transform3D(2.9802326e-08, 1, 2.3841858e-07, -1, 2.9802305e-08, 3.2782557e-07, 3.2782557e-07, -2.3841858e-07, 1, 0.5291561, 1.3609412, -0.053211793)
+transform = Transform3D(-0.82264686, 0.014322594, -0.56837225, -0.38111722, -0.7557206, 0.53257525, -0.4219026, 0.6547376, 0.6271498, 0.29188716, 1.0063405, 0.03422094)
 visible = true
 
 [node name="SM_Wep_Shield_01" parent="LatikaVisual/GeneralSkeleton/ShieldAttachment" index="0" unique_id=1821283942]
 visible = false
 
 [node name="RightHandWeaponAttachment" parent="LatikaVisual/GeneralSkeleton" index="19" unique_id=1743821847]
-transform = Transform3D(-2.8626403e-07, -1, -1.7881396e-07, 1.7881396e-07, 1.7881393e-07, -1, 1, -3.4586873e-07, 3.278255e-07, -0.7996322, 1.3609394, -0.0341741)
+transform = Transform3D(-0.19770595, -0.19119833, 0.9614341, 0.33009803, -0.9364969, -0.11835889, 0.92301005, 0.2939672, 0.24826539, -0.30328065, 0.8065396, -0.21745872)
 visible = true
 
 [node name="SM_Wep_Axe_02" parent="LatikaVisual/GeneralSkeleton/RightHandWeaponAttachment" index="0" unique_id=1050349439]
 visible = false
 
 [node name="BackPackAttachment" parent="LatikaVisual/GeneralSkeleton" index="20" unique_id=801280550]
-transform = Transform3D(1, -2.9802317e-08, 2.9802326e-08, 2.9802315e-08, 1, 8.9406996e-08, -2.9802326e-08, -8.9406996e-08, 1, -6.0579333e-09, 1.3374457, -0.032662336)
+transform = Transform3D(0.9414768, -0.11231576, -0.31781545, -0.017885722, 0.9248811, -0.37983584, 0.336603, 0.363291, 0.86874515, 0.0070607876, 1.2790653, 0.011823183)
 visible = true
 
 [node name="SM_Chr_Attach_Backpack_01" parent="LatikaVisual/GeneralSkeleton/BackPackAttachment" index="1" unique_id=251234928]
 visible = false
 
 [node name="FaceAttachment" parent="LatikaVisual/GeneralSkeleton" index="21" unique_id=538487173]
-transform = Transform3D(1, -2.980232e-08, 2.9802322e-08, 2.9802315e-08, 1, 2.0861631e-07, -2.9802326e-08, -2.0861631e-07, 1, -1.2132953e-08, 1.5691123, -0.0048396774)
+transform = Transform3D(0.9968226, -0.079562664, -0.003807336, 0.076904826, 0.9737709, -0.21414056, 0.020745069, 0.21316732, 0.97679543, -0.02738838, 1.4846852, 0.11686542)
 
 [node name="SM_Chr_Attach_Hair_07" parent="LatikaVisual/GeneralSkeleton/FaceAttachment" index="1" unique_id=131978717]
 visible = true
@@ -108,24 +156,25 @@ visible = false
 visible = false
 
 [node name="LeftFootAttachment" parent="LatikaVisual/GeneralSkeleton" index="22" unique_id=1967920387]
-transform = Transform3D(-1, -4.012537e-08, 3.2782555e-07, 3.2782555e-07, 5.8424246e-07, 1, -4.0125542e-08, 1, -4.6503314e-07, 0.11444288, 0.055694014, -0.036873713)
+transform = Transform3D(-0.7129348, -0.7012263, 0.0024200976, 0.0029589543, 0.0004429072, 0.9999955, -0.701224, 0.7129389, 0.0017591789, 0.09950445, 0.058410704, 0.25826252)
 
 [node name="SM_Prop_Shoe_01" parent="LatikaVisual/GeneralSkeleton/LeftFootAttachment" index="0" unique_id=995298695]
 visible = false
 
 [node name="RightFootAttachment" parent="LatikaVisual/GeneralSkeleton" index="23" unique_id=1806943128]
-transform = Transform3D(-1, -1.4981723e-08, -1.788139e-07, -1.7881392e-07, 4.8995634e-07, 0.99999994, -1.4981637e-08, 0.99999994, -5.49561e-07, -0.11444339, 0.055694193, -0.03687372)
+transform = Transform3D(-0.31327224, -0.9496615, 0.0018126965, 0.000900534, 0.0016116202, 0.9999983, -0.94966274, 0.31327337, 0.000350371, -0.072125725, 0.056183547, -0.27731436)
 
 [node name="SM_Prop_Shoe_01" parent="LatikaVisual/GeneralSkeleton/RightFootAttachment" index="0" unique_id=731859447]
 visible = false
 
 [node name="HipsAttachment" parent="LatikaVisual/GeneralSkeleton" index="24" unique_id=504179125]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8762761, 0)
+transform = Transform3D(0.7312224, 0.05970929, -0.67952085, -0.0021217298, 0.99635595, 0.08526633, 0.6821358, -0.060906895, 0.7286845, -0.0060079796, 0.8181369, 0.007978335)
 
 [node name="SM_Chr_Attach_Bags_03" parent="LatikaVisual/GeneralSkeleton/HipsAttachment" index="2" unique_id=1284670100]
 visible = false
 
-[node name="AnimationPlayer" parent="LatikaVisual" index="1" unique_id=2115659582]
+[node name="AnimationPlayer" parent="LatikaVisual" index="1" unique_id=1809723679]
+libraries/ = SubResource("AnimationLibrary_4fgmv")
 script = ExtResource("4_1nbts")
 
 [node name="ProjectileSpawnMarker" type="Marker3D" parent="LatikaVisual" unique_id=607808498]
@@ -169,6 +218,7 @@ parameters/one_shot_sitting/request = 0
 parameters/transition_global/current_state = "Fighting"
 parameters/transition_global/transition_request = ""
 parameters/transition_global/current_index = 2
+parameters/add2_walk/add_amount = 1.0
 parameters/scale_walk/scale = 1.0
 parameters/scale_run/scale = 1.0
 
@@ -184,6 +234,8 @@ _owner = NodePath("..")
 _info_panel_spawn_tavern = NodePath("../LatikaVisual/HealthBarSpawnMarkerTavern")
 _owner_entity = NodePath("..")
 _info_panel_spawn = NodePath("../LatikaVisual/HealthBarSpawnMarker")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=2037339565]
 
 [editable path="LatikaVisual"]
 [editable path="LatikaVisual/GeneralSkeleton/LeftHandAttachment/Bow"]

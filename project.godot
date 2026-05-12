@@ -20,6 +20,10 @@ run/main_scene="uid://gbmiuhc63ji7"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="uid://hl4bi74ds0b0"
 
+[audio]
+
+buses/default_bus_layout="uid://c3slvo4b5haid"
+
 [autoload]
 
 Console="*uid://dinahj02x6npw"
@@ -37,6 +41,7 @@ MultiplayerManager="*res://08_GlobalManagers/multiplayer_manager.gd"
 GlobalGameManager="*res://08_GlobalManagers/global_game_manager.gd"
 Shared="*res://09_Lib/shared.gd"
 Debug="*uid://woc06wbtruty"
+AudioManager="*uid://3r5fwggw305n"
 
 [debug]
 
