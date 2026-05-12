@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cmjqaxabnsph4" path="res://05_Game/MainMenu/main_menu.gd" id="1_ytlrh"]
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://10_Tool/QuickAnims/anim_hovering_module.tscn" id="2_2lp7i"]
 [ext_resource type="PackedScene" uid="uid://bn7sfcotfnn7b" path="res://04_UI/Menu/MainMenu/ui_main_menu.tscn" id="2_8c8b4"]
-[ext_resource type="PackedScene" uid="uid://ca3wssxlwj4qk" path="res://06_FloatingIsland/_Maps/tavern_animated.tscn" id="7_5g5lb"]
+[ext_resource type="PackedScene" uid="uid://3m2v1arprnf7" path="res://06_FloatingIsland/_Maps/tavern_visual.tscn" id="4_njwmn"]
 
 [node name="MainMenu" type="Node3D" unique_id=2130831413]
 script = ExtResource("1_ytlrh")
@@ -19,5 +19,4 @@ _hover_period = 10.0
 
 [node name="UIMainMenu" parent="." unique_id=717803460 instance=ExtResource("2_8c8b4")]
 
-[node name="Tavern_Animated" parent="." unique_id=1020575655 instance=ExtResource("7_5g5lb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5412097, 0.7726619, 0.4266317)
+[node name="tavern" parent="." unique_id=694546034 instance=ExtResource("4_njwmn")]

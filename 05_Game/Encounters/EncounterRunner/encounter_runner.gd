@@ -1,7 +1,6 @@
 class_name EncounterRunner
 extends Node
 
-const TAVERN_SCENE: PackedScene = preload("res://06_FloatingIsland/_Maps/tavern.tscn")
 
 func init_fight(player_encounter: FightingEncounter, mob_encounter: FightingEncounter) -> void:
 	Verbose.debug("Starting encounter Player VS Mob [" + mob_encounter.encounter_id + "]", Verbose.Category.ENCOUNTER_RUNNER)

@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bf52cs7j1rai2"]
+
+[ext_resource type="Script" uid="uid://cykyn5glkuf72" path="res://05_Game/Encounters/Builders/FightingBuilder/fighting_encounter_builder.gd" id="1_axvc8"]
+[ext_resource type="PackedScene" uid="uid://0x5u0h623yxt" path="res://06_FloatingIsland/FightingIsland/Pool/ArchIsland/arch_island.tscn" id="1_hjxwm"]
+
+[node name="FightingEncounterBuilder" type="Node3D" unique_id=1239562922]
+script = ExtResource("1_axvc8")
+
+[node name="ArchIsland" parent="." unique_id=796314808 instance=ExtResource("1_hjxwm")]
+
+[node name="Entities" type="Node3D" parent="." unique_id=622259169]
+
+[node name="Antagonistes" type="Node3D" parent="Entities" unique_id=91770849]
+
+[node name="Heroes" type="Node3D" parent="Entities" unique_id=264475383]
+
+[node name="Acolytes" type="Node3D" parent="Entities" unique_id=1831821954]
+
+[node name="Buildings" type="Node3D" parent="Entities" unique_id=394829784]
+
+[node name="NPCs" type="Node3D" parent="Entities" unique_id=724645531]
+
+[node name="Props" type="Node3D" parent="." unique_id=1731193057]
