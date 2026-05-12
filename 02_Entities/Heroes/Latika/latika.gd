@@ -233,6 +233,11 @@ func _register_blood_bond() -> void:
 	# surviving wolves.
 #endregion
 
+#region ============================== Audio ==============================
+func _play_footstep() -> void:
+	AudioManager.play_3d("latika_walk", global_position)
+#endregion
+
 #region ============================== Callbacks ==============================
 func _on_auto_attack_completed(_entity: Entity) -> void:
 	# TODO: Synergie de focus — mark the current AA target so allies deal

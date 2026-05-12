@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://5ccditks7xar" path="res://02_Entities/Mobs/Goblins/all_goblins.tscn" id="2_o3eb1"]
 [ext_resource type="PackedScene" uid="uid://40jvxogaqt0t" path="res://02_Entities/Mobs/Goblins/Attachments/sm_chr_attach_helmet_01.tscn" id="3_o3eb1"]
 [ext_resource type="Script" uid="uid://cnwr3o67xobtt" path="res://02_Entities/_Shared/Components/Animation/entity_animation_player.gd" id="4_1nbts"]
-[ext_resource type="AudioStream" uid="uid://cp85ihh46vrsp" path="res://23_Audio/test/random5.wav" id="5_4fgmv"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://b8n4k3u6g1igd" path="res://02_Entities/Heroes/Latika/latika_animation_blend_tree.tres" id="5_n3ceh"]
 [ext_resource type="PackedScene" uid="uid://cpqtocfge7ott" path="res://02_Entities/Heroes/_Shared/HeroAnimationModule/hero_animation_module.tscn" id="6_n3ceh"]
 [ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/EntityInfoPanel/HeroSimpleInfoPanel2D/hero_simple_info_panel_2d.tscn" id="7_n3ceh"]
@@ -14,21 +13,17 @@
 [sub_resource type="Animation" id="Animation_up7xi"]
 resource_name = "walk_audio"
 length = 0.39333335
-tracks/0/type = "audio"
+tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../AudioStreamPlayer3D")
+tracks/0/path = NodePath("..")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"clips": [{
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource("5_4fgmv")
-}],
-"times": PackedFloat32Array(0)
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{"args": [], "method": &"_play_footstep"}]
 }
-tracks/0/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4fgmv"]
 _data = {
@@ -234,8 +229,6 @@ _owner = NodePath("..")
 _info_panel_spawn_tavern = NodePath("../LatikaVisual/HealthBarSpawnMarkerTavern")
 _owner_entity = NodePath("..")
 _info_panel_spawn = NodePath("../LatikaVisual/HealthBarSpawnMarker")
-
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=2037339565]
 
 [editable path="LatikaVisual"]
 [editable path="LatikaVisual/GeneralSkeleton/LeftHandAttachment/Bow"]

@@ -1,12 +1,9 @@
 extends Projectile
 
-@onready var _audio_stream = $AudioStreamPlayer3D
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	_audio_stream.play()
+	AudioManager.play_3d("arrow_shoot", global_position, 0.95)
 	super._ready()
-	#pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
