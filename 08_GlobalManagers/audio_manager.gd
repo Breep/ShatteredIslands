@@ -3,16 +3,21 @@ extends Node
 @onready var _sfx_stream_player:= AudioStreamPlayer.new()
 var _sfx_lib: AudioLib = preload("res://23_Audio/Libraries/SFX_library.tres")
 
+const _SOUND_MAP: Array = [
+	# [signal, clé dans SFX_library.tres]
+	[Events.card_bought, "card_bought"],
+]
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	
+
 	# Set audio stream player parameters
 	_sfx_stream_player.max_polyphony = 10 # simultaneous maximum sounds TODO /!\ int number
 	_sfx_stream_player.bus = "SFX"
 	add_child(_sfx_stream_player)
-	
-	
-	Events.card_bought.connect(func(_unused) -> void: _play_sound("card_bought"))
+
+	for entry in _SOUND_MAP:
+		entry[0].connect(func(_unused) -> void: _play_sound(entry[1]))
 	
 	
 	
