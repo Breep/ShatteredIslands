@@ -1,5 +1,5 @@
 class_name TavernFormation
-extends Resource
+extends Formation
 
-var entity_specs: Array[TavernEntitySpec]
-var prop_specs: Array[PropSpec]
+@export var entity_specs: Array[TavernEntitySpec]
+@export var prop_specs: Array[PropSpec]

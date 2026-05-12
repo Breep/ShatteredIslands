@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="TavernFormation" format=3 uid="uid://dml684d3irucy"]
+
+[ext_resource type="Script" uid="uid://d2ixo16r26ppd" path="res://05_Game/Encounters/tavern_formation.gd" id="1_1i8bl"]
+[ext_resource type="Script" uid="uid://cv20vxpyx5cdw" path="res://05_Game/Encounters/SpawnSpecs/tavern_entity_spec.gd" id="1_c6q5g"]
+[ext_resource type="PackedScene" uid="uid://ds0phwn8k1xb6" path="res://02_Entities/Summons/ChickenLord/TRex/trex.tscn" id="2_31xx7"]
+[ext_resource type="Script" uid="uid://b24wp3uvfns8t" path="res://05_Game/Encounters/SpawnSpecs/prop_spec.gd" id="2_awtf4"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_tylh7"]
+
+[sub_resource type="Resource" id="Resource_31xx7"]
+script = ExtResource("3_tylh7")
+health_max = 1200.0
+auto_attack_type = 1
+attack_range = 2.0
+attack_damage = 100.0
+attack_speed = 1.5
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_tylh7"]
+script = ExtResource("1_c6q5g")
+stats_override = SubResource("Resource_31xx7")
+entity_scene = ExtResource("2_31xx7")
+display_label = "Trex"
+transform = Transform3D(0.008307675, 0, -0.9999655, 0, 1, 0, 0.9999655, 0, 0.008307675, -1.7625582, 0.66928077, 0.044199944)
+
+[resource]
+script = ExtResource("1_1i8bl")
+entity_specs = Array[ExtResource("1_c6q5g")]([SubResource("Resource_tylh7")])
+id = "prototype"

@@ -1,3 +1,1 @@
-extends Node
-
-@export var role: EntitySpec.Role
+extends Node3D

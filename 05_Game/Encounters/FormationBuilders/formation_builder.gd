@@ -43,8 +43,7 @@ func _instantiate_spec_into(spec: SpawnSpec, container: Node, edited_root: Node)
 		node.owner = edited_root
 	if node is Node3D:
 		var n3d := node as Node3D
-		n3d.global_position = spec.free_position
-		n3d.rotation.y = spec.rotation_y
+		n3d.transform = spec.transform
 	if spec.display_label != "":
 		node.name = spec.display_label
 	if node is Entity and spec is EntitySpec and spec.stats_override != null:

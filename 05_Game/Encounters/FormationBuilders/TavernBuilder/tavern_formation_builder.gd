@@ -3,10 +3,9 @@ class_name TavernFormationBuilder
 extends FormationBuilder
 
 @export_group("Local Nodes")
-@export var _antagonists_node: Node3D
-@export var _heroes_node: Node3D
-@export var _acolytes_node: Node3D
-@export var _buildings_node: Node3D
+@export var _mobs_node: Node3D
+@export var _hero_spawns_node: Node3D
+@export var _acolyte_spawns_node: Node3D
 @export var _props_node: Node3D
 
 @export_group("Load")
@@ -21,7 +20,7 @@ func _save() -> void:
 
 	var formation: TavernFormation = _build()
 
-	var path = output_dir.path_join(str(formation_id) + ".fighting.tres")
+	var path = output_dir.path_join(str(formation_id) + ".tavern.tres")
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(output_dir))
 	var err = ResourceSaver.save(formation, path)
 	if err == OK:
@@ -33,12 +32,11 @@ func _save() -> void:
 
 func _build() -> TavernFormation:
 	var formation := TavernFormation.new()
-	for container in _get_all_containers():
-		for child in container.get_children():
-			if child is Entity:
-				formation.entity_specs.append(_entity_to_tavern_spec(child, container.role))
-			else:
-				formation.prop_specs.append(_entity_to_tavern_spec(child, container.role))
+	formation.id = formation_id
+	_collect_entities(formation, _mobs_node, TavernEntitySpec.TavernRole.MOB)
+	_collect_entities(formation, _hero_spawns_node, TavernEntitySpec.TavernRole.HERO_SPAWN)
+	_collect_entities(formation, _acolyte_spawns_node, TavernEntitySpec.TavernRole.ACOLYTE_SPAWN)
+	_collect_props(formation, _props_node)
 	return formation
 
 
@@ -46,14 +44,14 @@ func _load() -> void:
 	if formation_to_load == null:
 		print_rich("[color=red]Nothing to load[/color]")
 		return
-	
+
 	var edited_root := EditorInterface.get_edited_scene_root()
 	var loaded := 0
 	var skipped := 0
-	for spec: EntitySpec in formation_to_load.entity_specs:
-		var container := _get_tavern_container_for_role(spec.role)
+	for spec: TavernEntitySpec in formation_to_load.entity_specs:
+		var container := _get_container_for_role(spec.role)
 		if container == null:
-			print_rich("[color=red]No container for role %s, skipping '%s'[/color]" % [EntitySpec.Role.keys()[spec.role], spec.display_label])
+			print_rich("[color=red]No container for role %s, skipping '%s'[/color]" % [TavernEntitySpec.TavernRole.keys()[spec.role], spec.display_label])
 			skipped += 1
 			continue
 		if _instantiate_spec_into(spec, container, edited_root):
@@ -62,7 +60,7 @@ func _load() -> void:
 			skipped += 1
 	for spec: PropSpec in formation_to_load.prop_specs:
 		if _props_node == null:
-			print_rich("[color=red]No props container, skipping '%s'[/color]", spec.display_label)
+			print_rich("[color=red]No props container, skipping '%s'[/color]" % spec.display_label)
 			skipped += 1
 			continue
 		if _instantiate_spec_into(spec, _props_node, edited_root):
@@ -86,28 +84,48 @@ func _validate() -> bool:
 #endregion
 
 #region ============================== Private API ==============================
-func _entity_to_tavern_spec(node: Node3D, role: EntitySpec.Role) -> EntitySpec:
-	var spec := EntitySpec.new()
-	if node is Entity:
-		var entity := node as Entity
-		spec.entity_scene = load(entity.scene_file_path)
-	else:
-		spec.entity_scene = load(node.scene_file_path) if node.scene_file_path != "" else null
+func _collect_entities(formation: TavernFormation, container: Node3D, role: TavernEntitySpec.TavernRole) -> void:
+	if container == null: return
+	print("Container '%s' (path: %s) has %d children" % [container.name, container.get_path(), container.get_child_count()])
+	for child in container.get_children():
+		if child is Entity:
+			formation.entity_specs.append(_entity_to_tavern_spec(child, role))
+
+
+func _collect_props(formation: TavernFormation, container: Node3D) -> void:
+	if container == null: return
+	for child in container.get_children():
+		formation.prop_specs.append(_node_to_prop_spec(child))
+
+
+func _entity_to_tavern_spec(entity: Entity, role: TavernEntitySpec.TavernRole) -> TavernEntitySpec:
+	var spec := TavernEntitySpec.new()
+	spec.entity_scene = load(entity.scene_file_path)
 	spec.role = role
-	spec.transform = node.transform
+	spec.display_label = entity.name
+	spec.free_position = entity.global_position
+	spec.rotation_y = entity.rotation.y
+	if entity.custom_base_stats != null:
+		spec.stats_override = entity.custom_base_stats.duplicate(true)
+	return spec
+
+
+func _node_to_prop_spec(node: Node3D) -> PropSpec:
+	var spec := PropSpec.new()
+	spec.entity_scene = load(node.scene_file_path) if node.scene_file_path != "" else null
 	spec.display_label = node.name
+	spec.transform = node.transform
 	return spec
 
 
 func _get_all_containers() -> Array[Node3D]:
-	return [_antagonists_node, _heroes_node, _acolytes_node, _buildings_node, _props_node]
+	return [_mobs_node, _hero_spawns_node, _acolyte_spawns_node, _props_node]
 
 
-func _get_tavern_container_for_role(role: EntitySpec.Role) -> Node3D:
+func _get_container_for_role(role: TavernEntitySpec.TavernRole) -> Node3D:
 	match role:
-		EntitySpec.Role.ANTAGONIST: return _antagonists_node
-		EntitySpec.Role.ACOLYTE:    return _acolytes_node
-		EntitySpec.Role.BUILDING:   return _buildings_node
-		EntitySpec.Role.HERO:       return _heroes_node
-		_:                          return null
+		TavernEntitySpec.TavernRole.MOB:            return _mobs_node
+		TavernEntitySpec.TavernRole.HERO_SPAWN:     return _hero_spawns_node
+		TavernEntitySpec.TavernRole.ACOLYTE_SPAWN:  return _acolyte_spawns_node
+		_:                                           return null
 #endregion
