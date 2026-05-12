@@ -3,13 +3,13 @@
 [ext_resource type="Script" uid="uid://bnohfh6e2eq3" path="res://23_Audio/audio_lib.gd" id="1_8m0u6"]
 [ext_resource type="AudioStream" uid="uid://douc04lqi2qo4" path="res://23_Audio/SFX/Tavern/coin3.wav" id="1_b4e2n"]
 [ext_resource type="AudioStream" uid="uid://2vso10yojigy" path="res://23_Audio/SFX/Projectile/mixkit-air-in-a-hit-2161.wav" id="2_arrow"]
-[ext_resource type="AudioStream" uid="uid://cp85ihh46vrsp" path="res://23_Audio/test/random5.wav" id="3_walk"]
+[ext_resource type="AudioStream" uid="uid://dpmk6bltw6pso" path="res://23_Audio/SFX/Footsteps/foley_footstep_concrete_4.wav" id="3_walk"]
 
 [resource]
 script = ExtResource("1_8m0u6")
 audio_database = Dictionary[String, AudioStream]({
-"card_bought": ExtResource("1_b4e2n"),
 "arrow_shoot": ExtResource("2_arrow"),
+"card_bought": ExtResource("1_b4e2n"),
 "latika_walk": ExtResource("3_walk")
 })
 metadata/_custom_type_script = "uid://bnohfh6e2eq3"
