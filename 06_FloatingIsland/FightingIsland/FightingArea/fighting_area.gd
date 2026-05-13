@@ -81,13 +81,6 @@ func init_fight(heroes: Array[Hero], battle_type: Battle.BattleType, battle_id: 
 	hero_spawner.spawn_heroes(heroes)
 
 
-func init_fight_2(player_encounter: FightingEncounter, mob_encounter: FightingEncounter) -> void:
-	Verbose.debug("Initiating a fight Player VS Mob [" + mob_encounter.encounter_id + "]", Verbose.Category.FIGHTING_AREA)
-	fighting_manager.init(spawn_manager, 42)
-	_spawn_specs(mob_encounter.entity_specs)
-	_spawn_specs(player_encounter.entity_specs)
-
-
 func init_fight_3(left_formation: FightingFormation, right_formation: FightingFormation) -> void:
 	#Verbose.debug("Initiating a fight Player VS Mob [" + mob_encounter.encounter_id + "]", Verbose.Category.FIGHTING_AREA)
 	fighting_manager.init(spawn_manager, 42)
@@ -102,19 +95,6 @@ func get_battle_type() -> Battle.BattleType:
 	return _battle_type
 
 # ============================== Private functions ==============================
-
-func _spawn_specs(specs: Array[EntitySpec]) -> void:
-	for spec: EntitySpec in specs:
-		var entity: Entity = spec.scene.instantiate()
-		entity.custom_base_stats = spec.stats_override
-		var ctx := EntityContext.new()
-		ctx.team = spec.team
-		ctx.battle_id = _current_battle_id
-		ctx.spawn_manager = _spawn_manager
-		ctx.arena_zone_manager = _arena_zone_manager
-		ctx.fighting_state = Entity.FightingState.IDLE
-		_spawn_manager.spawn_entity(entity, _spec_to_transform(spec), ctx)
-
 
 func _spawn_specs_2(specs: Array[FightingEntitySpec]) -> void:
 	for spec: EntitySpec in specs:
