@@ -46,6 +46,11 @@ func init_fight_2(player_encounter: FightingEncounter, mob_encounter: FightingEn
 	_force_local_player_camera_on_island()
 
 
+func init_fight_3(left_formation: FightingFormation, right_formation: FightingFormation) -> void:
+	_fighting_area.init_fight_3(left_formation, right_formation)
+	_force_local_player_camera_on_island()
+
+
 func set_active() -> void:
 	show()
 	if _is_active: return

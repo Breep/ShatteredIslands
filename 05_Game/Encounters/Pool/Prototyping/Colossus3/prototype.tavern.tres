@@ -1,0 +1,239 @@
+[gd_resource type="Resource" script_class="TavernFormation" format=3 uid="uid://dml684d3irucy"]
+
+[ext_resource type="Script" uid="uid://cv20vxpyx5cdw" path="res://05_Game/Encounters/SpawnSpecs/tavern_entity_spec.gd" id="1_l2pdf"]
+[ext_resource type="PackedScene" uid="uid://7s8lg5leu3go" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenArdentCelestial/chicken_ardent_celestial.tscn" id="2_5udsj"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_0hm24"]
+[ext_resource type="PackedScene" uid="uid://dr2axaqcdg5x3" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenColossus/chicken_colossus.tscn" id="4_bv8ag"]
+[ext_resource type="PackedScene" uid="uid://d1o2vt1qf1fdf" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenEngineer/chicken_engineer.tscn" id="5_lmc21"]
+[ext_resource type="PackedScene" uid="uid://xup3guwehhoc" path="res://02_Entities/Summons/ChickenLord/Chicken/Basic/chicken_basic.tscn" id="6_d2r7h"]
+[ext_resource type="Script" uid="uid://b24wp3uvfns8t" path="res://05_Game/Encounters/SpawnSpecs/prop_spec.gd" id="7_ws84g"]
+[ext_resource type="PackedScene" uid="uid://ufqa68rcl4eb" path="res://21_Props/Tavern/wooden_chair.tscn" id="8_h17jm"]
+[ext_resource type="PackedScene" uid="uid://dghajk42luw8y" path="res://21_Props/Tavern/table_round_large_2.tscn" id="9_pqdyq"]
+[ext_resource type="Script" uid="uid://d2ixo16r26ppd" path="res://05_Game/Encounters/tavern_formation.gd" id="10_6dqhb"]
+[ext_resource type="Script" uid="uid://c78ccxnqy6c16" path="res://05_Game/Encounters/SpawnSpecs/spawn_point_spec.gd" id="11_3g47w"]
+[ext_resource type="PackedScene" uid="uid://c80sm3cuughbk" path="res://02_Entities/Mobs/Dummies/dummy_04.tscn" id="12_udgye"]
+[ext_resource type="PackedScene" uid="uid://ddr727id3kk43" path="res://02_Entities/Mobs/Dummies/dummy_01.tscn" id="13_2udlx"]
+
+[sub_resource type="Resource" id="Resource_uicjt"]
+script = ExtResource("3_0hm24")
+health_max = 50.0
+attack_range = 10.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_57ieo"]
+script = ExtResource("1_l2pdf")
+stats_override = SubResource("Resource_uicjt")
+scene = ExtResource("2_5udsj")
+display_label = "ChickenArdentCelestial"
+transform = Transform3D(-0.23319082, 0, -0.972431, 0, 1, 0, 0.972431, 0, -0.23319082, -2.1851366, 1.5536039, -1.1017914)
+
+[sub_resource type="Resource" id="Resource_nedtw"]
+script = ExtResource("3_0hm24")
+health_max = 80.0
+auto_attack_type = 1
+attack_range = 1.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_w7bdn"]
+script = ExtResource("1_l2pdf")
+stats_override = SubResource("Resource_nedtw")
+scene = ExtResource("4_bv8ag")
+display_label = "ChickenColossus"
+transform = Transform3D(-0.1967504, 0, -0.9804536, 0, 1, 0, 0.9804536, 0, -0.1967504, -5.409581, 0.4085207, -1.2606604)
+
+[sub_resource type="Resource" id="Resource_my2d0"]
+script = ExtResource("3_0hm24")
+health_max = 80.0
+auto_attack_type = 1
+attack_range = 1.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_nwkpu"]
+script = ExtResource("1_l2pdf")
+stats_override = SubResource("Resource_my2d0")
+scene = ExtResource("4_bv8ag")
+display_label = "ChickenColossus2"
+transform = Transform3D(0.46780646, 0, -0.8838309, 0, 1, 0, 0.8838309, 0, 0.46780646, -2.2691154, 0.4085207, 1.0614755)
+
+[sub_resource type="Resource" id="Resource_3fpeb"]
+script = ExtResource("3_0hm24")
+health_max = 80.0
+auto_attack_type = 1
+attack_range = 1.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_udwmy"]
+script = ExtResource("1_l2pdf")
+stats_override = SubResource("Resource_3fpeb")
+scene = ExtResource("4_bv8ag")
+display_label = "ChickenColossus3"
+transform = Transform3D(0.2371434, 0, -0.97147465, 0, 1, 0, 0.97147465, 0, 0.2371434, -4.6980762, 0.4085207, 1.3702538)
+
+[sub_resource type="Resource" id="Resource_ctusr"]
+script = ExtResource("3_0hm24")
+health_max = 80.0
+auto_attack_type = 1
+attack_range = 1.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_bomei"]
+script = ExtResource("1_l2pdf")
+stats_override = SubResource("Resource_ctusr")
+scene = ExtResource("5_lmc21")
+display_label = "ChickenShield"
+transform = Transform3D(-0.019162599, 0, -0.99981636, 0, 1, 0, 0.99981636, 0, -0.019162599, -4.0010357, 0.3259498, -3.0234673)
+
+[sub_resource type="Resource" id="Resource_3ve81"]
+script = ExtResource("3_0hm24")
+health_max = 80.0
+auto_attack_type = 1
+attack_range = 1.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_m37cw"]
+script = ExtResource("1_l2pdf")
+stats_override = SubResource("Resource_3ve81")
+scene = ExtResource("5_lmc21")
+display_label = "ChickenShield2"
+transform = Transform3D(-0.019162599, 0, -0.99981636, 0, 1, 0, 0.99981636, 0, -0.019162599, -5.2492876, 0.3259498, -3.0234673)
+
+[sub_resource type="Resource" id="Resource_8g4ws"]
+script = ExtResource("3_0hm24")
+health_max = 80.0
+auto_attack_type = 1
+attack_range = 1.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_5d1ra"]
+script = ExtResource("1_l2pdf")
+stats_override = SubResource("Resource_8g4ws")
+scene = ExtResource("5_lmc21")
+display_label = "ChickenShield3"
+transform = Transform3D(-0.019162599, 0, -0.99981636, 0, 1, 0, 0.99981636, 0, -0.019162599, -4.0010357, 0.3259498, -3.9559104)
+
+[sub_resource type="Resource" id="Resource_0jg06"]
+script = ExtResource("3_0hm24")
+health_max = 80.0
+auto_attack_type = 1
+attack_range = 1.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_gpqpc"]
+script = ExtResource("1_l2pdf")
+stats_override = SubResource("Resource_0jg06")
+scene = ExtResource("5_lmc21")
+display_label = "ChickenShield4"
+transform = Transform3D(-0.019162599, 0, -0.99981636, 0, 1, 0, 0.99981636, 0, -0.019162599, -5.2692738, 0.3259498, -3.9588368)
+
+[sub_resource type="Resource" id="Resource_nk5tt"]
+script = ExtResource("3_0hm24")
+health_max = 16.0
+auto_attack_type = 1
+attack_range = 1.0
+attack_damage = 16.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_xillt"]
+script = ExtResource("1_l2pdf")
+stats_override = SubResource("Resource_nk5tt")
+scene = ExtResource("6_d2r7h")
+display_label = "Chicken"
+transform = Transform3D(0.84460837, 0, -0.53538465, 0, 1, 0, 0.53538465, 0, 0.84460837, -1.9038478, 1.0921693, -1.0843843)
+
+[sub_resource type="Resource" id="Resource_3hxt8"]
+script = ExtResource("7_ws84g")
+scene = ExtResource("8_h17jm")
+display_label = "WoodenChair"
+transform = Transform3D(0.0022795, 0.00973673, 1.09277e-09, -2.98023e-10, 1.19209e-09, -0.01, -0.00973673, 0.0022795, 5.61915e-10, -2.0386343, 0.578473, -1.07166)
+
+[sub_resource type="Resource" id="Resource_rdvkl"]
+script = ExtResource("7_ws84g")
+scene = ExtResource("9_pqdyq")
+display_label = "table_round_large2"
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17980719, 0.5686108, 0.104300976)
+
+[sub_resource type="Resource" id="Resource_y14xg"]
+script = ExtResource("11_3g47w")
+scene = ExtResource("12_udgye")
+display_label = "Hero01"
+transform = Transform3D(0.034899488, 0, -0.99939084, 0, 1, 0, 0.99939084, 0, 0.034899488, 2.0217764, 0.68813705, -0.12725902)
+
+[sub_resource type="Resource" id="Resource_e1vyq"]
+script = ExtResource("11_3g47w")
+role = 1
+scene = ExtResource("13_2udlx")
+display_label = "Acoloyte01"
+transform = Transform3D(-0.07118403, 0, -0.9974632, 0, 1, 0, 0.9974632, 0, -0.07118403, 3.204748, 0.55585647, 1.0069957)
+
+[sub_resource type="Resource" id="Resource_w7xk4"]
+script = ExtResource("11_3g47w")
+role = 1
+scene = ExtResource("13_2udlx")
+display_label = "Acoloyte02"
+transform = Transform3D(0.24689761, 0, -0.9690416, 0, 1, 0, 0.9690416, 0, 0.24689761, 3.1425335, 0.55585647, -0.3683746)
+
+[sub_resource type="Resource" id="Resource_411wd"]
+script = ExtResource("11_3g47w")
+role = 1
+scene = ExtResource("13_2udlx")
+display_label = "Acoloyte03"
+transform = Transform3D(-0.07118403, 0, -0.9974632, 0, 1, 0, 0.9974632, 0, -0.07118403, 3.1159065, 0.55585647, 2.4392023)
+
+[sub_resource type="Resource" id="Resource_df23u"]
+script = ExtResource("11_3g47w")
+role = 1
+scene = ExtResource("13_2udlx")
+display_label = "Acoloyte04"
+transform = Transform3D(0.30065593, 0, -0.95373267, 0, 1, 0, 0.95373267, 0, 0.30065593, 3.204748, 0.55585647, -1.4543872)
+
+[sub_resource type="Resource" id="Resource_nhioa"]
+script = ExtResource("11_3g47w")
+role = 1
+scene = ExtResource("13_2udlx")
+display_label = "Acoloyte05"
+transform = Transform3D(0.16504768, 0, -0.98628557, 0, 1, 0, 0.98628557, 0, 0.16504768, 4.8996887, 0.55585647, -0.1815927)
+
+[sub_resource type="Resource" id="Resource_f5lgb"]
+script = ExtResource("11_3g47w")
+role = 1
+scene = ExtResource("13_2udlx")
+display_label = "Acoloyte06"
+transform = Transform3D(-0.07118403, 0, -0.9974632, 0, 1, 0, 0.9974632, 0, -0.07118403, 4.832242, 0.55585647, 1.2604268)
+
+[sub_resource type="Resource" id="Resource_xm74d"]
+script = ExtResource("11_3g47w")
+role = 1
+scene = ExtResource("13_2udlx")
+display_label = "Acoloyte07"
+transform = Transform3D(-0.07118403, 0, -0.9974632, 0, 1, 0, 0.9974632, 0, -0.07118403, 5.061364, 0.55585647, 3.1277535)
+
+[sub_resource type="Resource" id="Resource_crrm3"]
+script = ExtResource("11_3g47w")
+role = 1
+scene = ExtResource("13_2udlx")
+display_label = "Acoloyte08"
+transform = Transform3D(0.2980414, 0, -0.95455295, 0, 1, 0, 0.95455295, 0, 0.2980414, 4.857814, 0.55585647, -1.4736702)
+
+[resource]
+script = ExtResource("10_6dqhb")
+entity_specs = Array[ExtResource("1_l2pdf")]([SubResource("Resource_57ieo"), SubResource("Resource_w7bdn"), SubResource("Resource_nwkpu"), SubResource("Resource_udwmy"), SubResource("Resource_bomei"), SubResource("Resource_m37cw"), SubResource("Resource_5d1ra"), SubResource("Resource_gpqpc"), SubResource("Resource_xillt")])
+spawn_point_specs = Array[ExtResource("11_3g47w")]([SubResource("Resource_y14xg"), SubResource("Resource_e1vyq"), SubResource("Resource_w7xk4"), SubResource("Resource_411wd"), SubResource("Resource_df23u"), SubResource("Resource_nhioa"), SubResource("Resource_f5lgb"), SubResource("Resource_xm74d"), SubResource("Resource_crrm3")])
+prop_specs = Array[ExtResource("7_ws84g")]([SubResource("Resource_3hxt8"), SubResource("Resource_rdvkl")])
+id = "prototype"

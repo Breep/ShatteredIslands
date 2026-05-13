@@ -20,12 +20,12 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 [sub_resource type="Resource" id="Resource_sx86e"]
 script = ExtResource("1_yoo0t")
 stats_override = SubResource("Resource_ao6n8")
-entity_scene = ExtResource("2_gnd2o")
+scene = ExtResource("2_gnd2o")
 display_label = "Trex"
 
 [sub_resource type="Resource" id="Resource_lf2c2"]
 script = ExtResource("1_yoo0t")
-entity_scene = ExtResource("4_qpuy3")
+scene = ExtResource("4_qpuy3")
 display_label = "DarkKnight"
 
 [sub_resource type="Resource" id="Resource_o18ng"]
@@ -39,7 +39,7 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 [sub_resource type="Resource" id="Resource_ioyrp"]
 script = ExtResource("1_yoo0t")
 stats_override = SubResource("Resource_o18ng")
-entity_scene = ExtResource("5_f3cka")
+scene = ExtResource("5_f3cka")
 display_label = "ChickenArdentCelestial"
 
 [sub_resource type="Resource" id="Resource_rdj7t"]
@@ -53,7 +53,7 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 [sub_resource type="Resource" id="Resource_c5kpp"]
 script = ExtResource("1_yoo0t")
 stats_override = SubResource("Resource_rdj7t")
-entity_scene = ExtResource("5_f3cka")
+scene = ExtResource("5_f3cka")
 display_label = "ChickenArdentCelestial2"
 
 [sub_resource type="Resource" id="Resource_ffcbm"]
@@ -67,7 +67,7 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 [sub_resource type="Resource" id="Resource_hekrx"]
 script = ExtResource("1_yoo0t")
 stats_override = SubResource("Resource_ffcbm")
-entity_scene = ExtResource("5_f3cka")
+scene = ExtResource("5_f3cka")
 display_label = "ChickenArdentCelestial3"
 
 [sub_resource type="Resource" id="Resource_gxrmn"]
@@ -81,7 +81,7 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 [sub_resource type="Resource" id="Resource_525qc"]
 script = ExtResource("1_yoo0t")
 stats_override = SubResource("Resource_gxrmn")
-entity_scene = ExtResource("5_f3cka")
+scene = ExtResource("5_f3cka")
 display_label = "ChickenArdentCelestial4"
 
 [resource]

@@ -33,17 +33,17 @@ func _validate() -> bool:
 
 
 func _instantiate_spec_into(spec: SpawnSpec, container: Node, edited_root: Node) -> bool:
-	if spec.entity_scene == null:
-		push_warning("Spec '%s' has no entity_scene" % spec.display_label)
-		return false
+	var node: Node
+	if spec.scene == null:
+		node = Node3D.new()
+	else:
+		node = spec.scene.instantiate()
 
-	var node := spec.entity_scene.instantiate()
 	container.add_child(node)
 	if edited_root != null:
 		node.owner = edited_root
 	if node is Node3D:
-		var n3d := node as Node3D
-		n3d.transform = spec.transform
+		(node as Node3D).transform = spec.transform
 	if spec.display_label != "":
 		node.name = spec.display_label
 	if node is Entity and spec is EntitySpec and spec.stats_override != null:

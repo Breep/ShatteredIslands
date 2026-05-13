@@ -19,7 +19,7 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="Resource" id="Resource_ci43b"]
 script = ExtResource("1_oukjp")
-entity_scene = ExtResource("2_ci43b")
+scene = ExtResource("2_ci43b")
 role = 0
 team = -1
 display_label = "Trex5"
@@ -37,7 +37,7 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="Resource" id="Resource_f1u4f"]
 script = ExtResource("1_oukjp")
-entity_scene = ExtResource("4_f1u4f")
+scene = ExtResource("4_f1u4f")
 team = -1
 display_label = "ChickenArdentCelestial9"
 free_position = Vector3(-4.72752, 0, -7.9383974)
@@ -54,7 +54,7 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="Resource" id="Resource_cwsq7"]
 script = ExtResource("1_oukjp")
-entity_scene = ExtResource("4_f1u4f")
+scene = ExtResource("4_f1u4f")
 team = -1
 display_label = "ChickenArdentCelestial10"
 free_position = Vector3(-4.298396, 0, 5.7580934)
@@ -71,7 +71,7 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="Resource" id="Resource_vv1x3"]
 script = ExtResource("1_oukjp")
-entity_scene = ExtResource("4_f1u4f")
+scene = ExtResource("4_f1u4f")
 team = -1
 display_label = "ChickenArdentCelestial11"
 free_position = Vector3(-10.113188, 0, 8.013891)
@@ -88,7 +88,7 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="Resource" id="Resource_5epk7"]
 script = ExtResource("1_oukjp")
-entity_scene = ExtResource("4_f1u4f")
+scene = ExtResource("4_f1u4f")
 team = -1
 display_label = "ChickenArdentCelestial12"
 free_position = Vector3(-8.847448, 4.7683716e-07, -2.9886167)

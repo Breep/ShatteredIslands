@@ -1,7 +1,9 @@
+# Base spec describing what to spawn at a given Transform.
+# `scene` is optional: when null, the spec is a pure marker (no PackedScene to instantiate).
 class_name SpawnSpec
 extends Resource
 
-@export var entity_scene: PackedScene
+@export var scene: PackedScene
 @export var display_label: String = ""
 
 @export var transform: Transform3D = Transform3D()

@@ -78,15 +78,20 @@ func _validate() -> bool:
 
 #region ============================== Private API ==============================
 func _collect_entities(formation: FightingFormation, container: Node3D, role: FightingEntitySpec.FightingRole) -> void:
-	if container == null: return
+	if container == null:
+		printerr("Trying to collect entities from an unknown Node [container=<null>]")
+		return
+	var count: int = 0
 	for child in container.get_children():
 		if child is Entity:
 			formation.entity_specs.append(_entity_to_fighting_spec(child, role))
+			count += 1
+	print("Found ", count, " ", FightingEntitySpec.FightingRole.keys()[role])
 
 
 func _entity_to_fighting_spec(entity: Entity, role: FightingEntitySpec.FightingRole) -> FightingEntitySpec:
 	var spec := FightingEntitySpec.new()
-	spec.entity_scene = load(entity.scene_file_path)
+	spec.scene = load(entity.scene_file_path)
 	spec.role = role
 	spec.team = entity.team
 	spec.display_label = entity.name

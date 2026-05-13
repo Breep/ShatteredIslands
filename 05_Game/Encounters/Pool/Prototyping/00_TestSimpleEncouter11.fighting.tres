@@ -19,7 +19,7 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="Resource" id="Resource_ltu57"]
 script = ExtResource("1_uji5v")
-entity_scene = ExtResource("2_wq8lw")
+scene = ExtResource("2_wq8lw")
 role = 0
 team = -1
 display_label = "Trex2"
@@ -39,7 +39,7 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="Resource" id="Resource_g6jet"]
 script = ExtResource("1_uji5v")
-entity_scene = ExtResource("2_wq8lw")
+scene = ExtResource("2_wq8lw")
 role = 0
 team = -1
 display_label = "Trex3"
@@ -59,7 +59,7 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="Resource" id="Resource_bugdh"]
 script = ExtResource("1_uji5v")
-entity_scene = ExtResource("2_wq8lw")
+scene = ExtResource("2_wq8lw")
 role = 0
 team = -1
 display_label = "Trex4"
@@ -77,7 +77,7 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="Resource" id="Resource_txohk"]
 script = ExtResource("1_uji5v")
-entity_scene = ExtResource("4_87eks")
+scene = ExtResource("4_87eks")
 team = -1
 display_label = "ChickenArdentCelestial5"
 free_position = Vector3(-4.72752, 0, -7.9383974)
@@ -94,7 +94,7 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="Resource" id="Resource_qb8m7"]
 script = ExtResource("1_uji5v")
-entity_scene = ExtResource("4_87eks")
+scene = ExtResource("4_87eks")
 team = -1
 display_label = "ChickenArdentCelestial6"
 free_position = Vector3(-4.298396, 0, 5.7580934)
@@ -111,7 +111,7 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="Resource" id="Resource_kmw26"]
 script = ExtResource("1_uji5v")
-entity_scene = ExtResource("4_87eks")
+scene = ExtResource("4_87eks")
 team = -1
 display_label = "ChickenArdentCelestial7"
 free_position = Vector3(-10.113188, 0, 8.013891)
@@ -128,7 +128,7 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="Resource" id="Resource_yrmjw"]
 script = ExtResource("1_uji5v")
-entity_scene = ExtResource("4_87eks")
+scene = ExtResource("4_87eks")
 team = -1
 display_label = "ChickenArdentCelestial8"
 free_position = Vector3(-8.847448, 4.7683716e-07, -2.9886167)

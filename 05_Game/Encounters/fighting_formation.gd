@@ -1,7 +1,7 @@
 class_name FightingFormation
 extends Formation
 
-var entity_specs: Array[FightingEntitySpec]
+@export var entity_specs: Array[FightingEntitySpec]
 
 func mirrored() -> FightingFormation:
 	var copy: FightingFormation = duplicate(true)
