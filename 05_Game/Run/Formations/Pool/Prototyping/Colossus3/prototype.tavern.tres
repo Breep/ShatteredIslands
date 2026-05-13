@@ -1,16 +1,16 @@
 [gd_resource type="Resource" script_class="TavernFormation" format=3 uid="uid://dml684d3irucy"]
 
-[ext_resource type="Script" uid="uid://cv20vxpyx5cdw" path="res://05_Game/Encounters/SpawnSpecs/tavern_entity_spec.gd" id="1_l2pdf"]
+[ext_resource type="Script" uid="uid://cv20vxpyx5cdw" path="res://05_Game/Run/SpawnSpecs/tavern_entity_spec.gd" id="1_l2pdf"]
 [ext_resource type="PackedScene" uid="uid://7s8lg5leu3go" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenArdentCelestial/chicken_ardent_celestial.tscn" id="2_5udsj"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_0hm24"]
 [ext_resource type="PackedScene" uid="uid://dr2axaqcdg5x3" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenColossus/chicken_colossus.tscn" id="4_bv8ag"]
 [ext_resource type="PackedScene" uid="uid://d1o2vt1qf1fdf" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenEngineer/chicken_engineer.tscn" id="5_lmc21"]
 [ext_resource type="PackedScene" uid="uid://xup3guwehhoc" path="res://02_Entities/Summons/ChickenLord/Chicken/Basic/chicken_basic.tscn" id="6_d2r7h"]
-[ext_resource type="Script" uid="uid://b24wp3uvfns8t" path="res://05_Game/Encounters/SpawnSpecs/prop_spec.gd" id="7_ws84g"]
+[ext_resource type="Script" uid="uid://b24wp3uvfns8t" path="res://05_Game/Run/SpawnSpecs/prop_spec.gd" id="7_ws84g"]
 [ext_resource type="PackedScene" uid="uid://ufqa68rcl4eb" path="res://21_Props/Tavern/wooden_chair.tscn" id="8_h17jm"]
 [ext_resource type="PackedScene" uid="uid://dghajk42luw8y" path="res://21_Props/Tavern/table_round_large_2.tscn" id="9_pqdyq"]
-[ext_resource type="Script" uid="uid://d2ixo16r26ppd" path="res://05_Game/Encounters/tavern_formation.gd" id="10_6dqhb"]
-[ext_resource type="Script" uid="uid://c78ccxnqy6c16" path="res://05_Game/Encounters/SpawnSpecs/spawn_point_spec.gd" id="11_3g47w"]
+[ext_resource type="Script" uid="uid://d2ixo16r26ppd" path="res://05_Game/Run/Formations/tavern_formation.gd" id="10_coe4c"]
+[ext_resource type="Script" uid="uid://c78ccxnqy6c16" path="res://05_Game/Run/SpawnSpecs/spawn_point_spec.gd" id="11_3g47w"]
 [ext_resource type="PackedScene" uid="uid://c80sm3cuughbk" path="res://02_Entities/Mobs/Dummies/dummy_04.tscn" id="12_udgye"]
 [ext_resource type="PackedScene" uid="uid://ddr727id3kk43" path="res://02_Entities/Mobs/Dummies/dummy_01.tscn" id="13_2udlx"]
 
@@ -232,7 +232,7 @@ display_label = "Acoloyte08"
 transform = Transform3D(0.2980414, 0, -0.95455295, 0, 1, 0, 0.95455295, 0, 0.2980414, 4.857814, 0.55585647, -1.4736702)
 
 [resource]
-script = ExtResource("10_6dqhb")
+script = ExtResource("10_coe4c")
 entity_specs = Array[ExtResource("1_l2pdf")]([SubResource("Resource_57ieo"), SubResource("Resource_w7bdn"), SubResource("Resource_nwkpu"), SubResource("Resource_udwmy"), SubResource("Resource_bomei"), SubResource("Resource_m37cw"), SubResource("Resource_5d1ra"), SubResource("Resource_gpqpc"), SubResource("Resource_xillt")])
 spawn_point_specs = Array[ExtResource("11_3g47w")]([SubResource("Resource_y14xg"), SubResource("Resource_e1vyq"), SubResource("Resource_w7xk4"), SubResource("Resource_411wd"), SubResource("Resource_df23u"), SubResource("Resource_nhioa"), SubResource("Resource_f5lgb"), SubResource("Resource_xm74d"), SubResource("Resource_crrm3")])
 prop_specs = Array[ExtResource("7_ws84g")]([SubResource("Resource_3hxt8"), SubResource("Resource_rdvkl")])

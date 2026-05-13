@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://bf52cs7j1rai2"]
+
+[ext_resource type="Script" uid="uid://cykyn5glkuf72" path="res://05_Game/Run/Formations/FormationBuilders/FightingBuilder/fighting_formation_builder.gd" id="1_axvc8"]
+[ext_resource type="PackedScene" uid="uid://0x5u0h623yxt" path="res://06_FloatingIsland/FightingIsland/Pool/ArchIsland/arch_island.tscn" id="1_hjxwm"]
+[ext_resource type="Resource" uid="uid://c845hkwlovjo8" path="res://05_Game/Run/Formations/Pool/Prototyping/Colossus3/prototype.fighting.tres" id="2_2gva4"]
+
+[node name="FightingFormationBuilder" type="Node3D" unique_id=1239562922 node_paths=PackedStringArray("_antagonists_node", "_heroes_node", "_acolytes_node", "_buildings_node")]
+script = ExtResource("1_axvc8")
+_antagonists_node = NodePath("Entities/Antagonists")
+_heroes_node = NodePath("Entities/Heroes")
+_acolytes_node = NodePath("Entities/Acolytes")
+_buildings_node = NodePath("Entities/Buildings")
+formation_to_load = ExtResource("2_2gva4")
+
+[node name="ArchIsland" parent="." unique_id=796314808 instance=ExtResource("1_hjxwm")]
+
+[node name="Entities" type="Node3D" parent="." unique_id=622259169]
+
+[node name="Antagonists" type="Node3D" parent="Entities" unique_id=91770849]
+
+[node name="Heroes" type="Node3D" parent="Entities" unique_id=264475383]
+
+[node name="Acolytes" type="Node3D" parent="Entities" unique_id=1831821954]
+
+[node name="Buildings" type="Node3D" parent="Entities" unique_id=394829784]

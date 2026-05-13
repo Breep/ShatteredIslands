@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://xmv7u7bqrrls"]
 
-[ext_resource type="Script" uid="uid://chijx71hgpigd" path="res://05_Game/Encounters/EncounterRunner/encounter_runner.gd" id="1_4mpy6"]
+[ext_resource type="Script" uid="uid://chijx71hgpigd" path="res://05_Game/Run/EncounterRunner/encounter_runner.gd" id="1_4mpy6"]
 
 [node name="EncounterRunner" type="Node" unique_id=1930960750]
 script = ExtResource("1_4mpy6")

@@ -1,4 +1,4 @@
 class_name TavernEncounter
-extends EncounterResource
+extends Encounter
 
 @export var tavern_formation: TavernFormation
