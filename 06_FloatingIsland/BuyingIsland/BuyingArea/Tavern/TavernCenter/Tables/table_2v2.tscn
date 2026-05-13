@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b4av14wu25x12"]
 
 [ext_resource type="Script" uid="uid://ccc0vnl2cv7lt" path="res://06_FloatingIsland/BuyingIsland/BuyingArea/Tavern/TavernCenter/Tables/table.gd" id="2_8h1bl"]
-[ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://10_Tool/SpawnPoint/spawn_point.tscn" id="3_p1dib"]
+[ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://05_Game/Run/SpawnSpecs/SpawnPoints/SpawnPoint/spawn_point.tscn" id="3_p1dib"]
 [ext_resource type="PackedScene" uid="uid://dumhxpaktew01" path="res://20_Data/Assets/3D/Furnitures/table.tscn" id="5_k7uke"]
 [ext_resource type="PackedScene" uid="uid://bs8lfftv32dp1" path="res://06_FloatingIsland/BuyingIsland/BuyingArea/Tavern/TavernCenter/Tables/Common/Coin/coin_pile.tscn" id="5_lv2wc"]
 [ext_resource type="PackedScene" uid="uid://dntunh7ry24ql" path="res://20_Data/Assets/3D/Furnitures/torch.tscn" id="6_573wq"]

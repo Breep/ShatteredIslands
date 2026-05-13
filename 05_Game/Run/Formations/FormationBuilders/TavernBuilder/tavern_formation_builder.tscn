@@ -5,8 +5,8 @@
 [ext_resource type="Script" uid="uid://ll3d062c2nnk" path="res://05_Game/Run/Formations/FormationBuilders/container.gd" id="3_5q1af"]
 [ext_resource type="Texture2D" uid="uid://dlj66ckdy4m8a" path="res://20_Data/Blender/Map/Map/Tavern/tavern_PolygonFantasyKingdom_Texture_special01.png" id="3_pq62c"]
 [ext_resource type="PackedScene" uid="uid://7s8lg5leu3go" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenArdentCelestial/chicken_ardent_celestial.tscn" id="6_2asrv"]
-[ext_resource type="PackedScene" uid="uid://c80sm3cuughbk" path="res://02_Entities/Mobs/Dummies/dummy_04.tscn" id="6_ttiuf"]
-[ext_resource type="PackedScene" uid="uid://ddr727id3kk43" path="res://02_Entities/Mobs/Dummies/dummy_01.tscn" id="7_2asrv"]
+[ext_resource type="PackedScene" uid="uid://c80sm3cuughbk" path="res://02_Entities/Mobs/Dummies/dummy_visual_04.tscn" id="6_ttiuf"]
+[ext_resource type="PackedScene" uid="uid://ddr727id3kk43" path="res://02_Entities/Mobs/Dummies/dummy_visual_01.tscn" id="7_2asrv"]
 [ext_resource type="PackedScene" uid="uid://ufqa68rcl4eb" path="res://21_Props/Tavern/wooden_chair.tscn" id="7_5q1af"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="7_wk77i"]
 [ext_resource type="PackedScene" uid="uid://dghajk42luw8y" path="res://21_Props/Tavern/table_round_large_2.tscn" id="8_2asrv"]
@@ -190,6 +190,7 @@ _hero_spawns_node = NodePath("Entities/HeroesSpawns")
 _acolyte_spawns_node = NodePath("Entities/AcolytesSpawns")
 _props_node = NodePath("Props")
 formation_to_load = ExtResource("2_fvr43")
+output_dir = "res://05_Game/Encounters/Pool/Prototyping/"
 
 [node name="estrade" type="MeshInstance3D" parent="." unique_id=175131227]
 transform = Transform3D(-0.0258453, -1.967773e-09, 3.821371e-17, 0, -9.838865e-10, -0.01, 2.259468e-09, -0.0225087, 4.3711387e-10, 0.0075469, 0, 0.00827646)

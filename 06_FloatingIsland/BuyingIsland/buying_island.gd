@@ -22,9 +22,15 @@ func cleanup() -> void:
 	_buying_area.cleanup()
 
 
+# === Old API (à supprimer une fois la nouvelle validée) ===
 # Spawn all heroes on the BuyingArea according to the battle
 func start_buying_phase(battles: Array[Battle]) -> void:
 	_buying_area.start_round(battles)
+
+
+# === New API: populate from a TavernEncounter, injecting the player's hero / acolytes ===
+func start_buying_phase_from_encounter(encounter: TavernEncounter, hero_scene: PackedScene, acolyte_scenes: Array[PackedScene]) -> void:
+	_buying_area.start_round_from_encounter(encounter, hero_scene, acolyte_scenes)
 
 
 func set_active() -> void:

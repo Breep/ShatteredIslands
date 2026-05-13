@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="2_f360a"]
 [ext_resource type="Script" uid="uid://bk603mav6k516" path="res://02_Entities/Summons/ChickenLord/Chicken/chicken_animator.gd" id="3_geksc"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://cgr3043y4f2ee" path="res://02_Entities/Summons/_Shared/default_blendtree.tres" id="4_jcwvc"]
-[ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://10_Tool/SpawnPoint/spawn_point.tscn" id="5_kkest"]
+[ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://05_Game/Run/SpawnSpecs/SpawnPoints/SpawnPoint/spawn_point.tscn" id="5_kkest"]
 [ext_resource type="PackedScene" uid="uid://clpy8dl1u5et0" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenPoison/chicken_poison_visual.tscn" id="6_t4rah"]
 [ext_resource type="Script" uid="uid://cnwr3o67xobtt" path="res://02_Entities/_Shared/Components/Animation/entity_animation_player.gd" id="7_rntv6"]
 [ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/EntityInfoPanel/SummonSimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="8_u623w"]

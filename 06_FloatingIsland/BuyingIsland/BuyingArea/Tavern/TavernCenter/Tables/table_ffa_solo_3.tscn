@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ccc0vnl2cv7lt" path="res://06_FloatingIsland/BuyingIsland/BuyingArea/Tavern/TavernCenter/Tables/table.gd" id="2_w5250"]
 [ext_resource type="PackedScene" uid="uid://bs8lfftv32dp1" path="res://06_FloatingIsland/BuyingIsland/BuyingArea/Tavern/TavernCenter/Tables/Common/Coin/coin_pile.tscn" id="4_1tqwg"]
-[ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://10_Tool/SpawnPoint/spawn_point.tscn" id="4_m6y5y"]
+[ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://05_Game/Run/SpawnSpecs/SpawnPoints/SpawnPoint/spawn_point.tscn" id="4_m6y5y"]
 [ext_resource type="PackedScene" uid="uid://dumhxpaktew01" path="res://20_Data/Assets/3D/Furnitures/table.tscn" id="5_mohk4"]
 [ext_resource type="PackedScene" uid="uid://dntunh7ry24ql" path="res://20_Data/Assets/3D/Furnitures/torch.tscn" id="6_det8y"]
 

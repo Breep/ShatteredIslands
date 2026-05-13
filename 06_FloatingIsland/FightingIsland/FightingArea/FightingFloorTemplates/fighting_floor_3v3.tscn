@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bhv0dmum15mp1" path="res://06_FloatingIsland/FightingIsland/FightingArea/FightingFloorTemplates/fighting_floor.gd" id="1_o5bl2"]
 [ext_resource type="PackedScene" uid="uid://dibux7uwcsatj" path="res://06_FloatingIsland/FightingIsland/FightingArea/SpawnArea/spawn_area.tscn" id="2_4snmg"]
-[ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://10_Tool/SpawnPoint/spawn_point.tscn" id="3_g3ro2"]
+[ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://05_Game/Run/SpawnSpecs/SpawnPoints/SpawnPoint/spawn_point.tscn" id="3_g3ro2"]
 [ext_resource type="PackedScene" uid="uid://cc8wss5swf76b" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/HeroSpawner/hero_spawner.tscn" id="4_ooq7s"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2v0uu"]

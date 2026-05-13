@@ -9,7 +9,7 @@ extends Node
 @export_tool_button("Cleanup") var _cleanup_btn = _cleanup
 
 @export_group("Save")
-@export var output_dir: String = "res://05_Game/Encounters/Pool/Prototyping/"
+@export var output_dir: String = "res://05_Game/Run/Formations/Pool/Prototyping/"
 @export var formation_id: String = "prototype"
 @warning_ignore("unused_private_class_variable")
 @export_tool_button("Save") var _snap_btn = _save

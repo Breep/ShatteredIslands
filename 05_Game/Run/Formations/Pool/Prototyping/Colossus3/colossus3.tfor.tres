@@ -11,8 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://dghajk42luw8y" path="res://21_Props/Tavern/table_round_large_2.tscn" id="9_pqdyq"]
 [ext_resource type="Script" uid="uid://d2ixo16r26ppd" path="res://05_Game/Run/Formations/tavern_formation.gd" id="10_coe4c"]
 [ext_resource type="Script" uid="uid://c78ccxnqy6c16" path="res://05_Game/Run/SpawnSpecs/spawn_point_spec.gd" id="11_3g47w"]
-[ext_resource type="PackedScene" uid="uid://c80sm3cuughbk" path="res://02_Entities/Mobs/Dummies/dummy_04.tscn" id="12_udgye"]
-[ext_resource type="PackedScene" uid="uid://ddr727id3kk43" path="res://02_Entities/Mobs/Dummies/dummy_01.tscn" id="13_2udlx"]
+[ext_resource type="PackedScene" uid="uid://c80sm3cuughbk" path="res://02_Entities/Mobs/Dummies/dummy_visual_04.tscn" id="12_udgye"]
+[ext_resource type="PackedScene" uid="uid://ddr727id3kk43" path="res://02_Entities/Mobs/Dummies/dummy_visual_01.tscn" id="13_2udlx"]
 
 [sub_resource type="Resource" id="Resource_uicjt"]
 script = ExtResource("3_0hm24")

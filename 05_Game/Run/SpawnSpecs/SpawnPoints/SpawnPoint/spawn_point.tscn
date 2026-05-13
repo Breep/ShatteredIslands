@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://crhg471fgyaoj"]
 
-[ext_resource type="Script" uid="uid://jxyvxw1hhwmh" path="res://10_Tool/SpawnPoint/spawn_point.gd" id="1_o05wq"]
+[ext_resource type="Script" uid="uid://jxyvxw1hhwmh" path="res://05_Game/Run/SpawnSpecs/SpawnPoints/SpawnPoint/spawn_point.gd" id="1_o05wq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o05wq"]
 albedo_color = Color(1, 0.243479, 0.671723, 1)

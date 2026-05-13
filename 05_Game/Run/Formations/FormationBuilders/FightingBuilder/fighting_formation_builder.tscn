@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://cykyn5glkuf72" path="res://05_Game/Run/Formations/FormationBuilders/FightingBuilder/fighting_formation_builder.gd" id="1_axvc8"]
 [ext_resource type="PackedScene" uid="uid://0x5u0h623yxt" path="res://06_FloatingIsland/FightingIsland/Pool/ArchIsland/arch_island.tscn" id="1_hjxwm"]
 [ext_resource type="Resource" uid="uid://c845hkwlovjo8" path="res://05_Game/Run/Formations/Pool/Prototyping/Colossus3/colossus3.ffor.tres" id="2_2gva4"]
+[ext_resource type="PackedScene" uid="uid://ddr727id3kk43" path="res://02_Entities/Mobs/Dummies/dummy_visual_01.tscn" id="4_obr3a"]
+[ext_resource type="PackedScene" uid="uid://c80sm3cuughbk" path="res://02_Entities/Mobs/Dummies/dummy_visual_04.tscn" id="5_yv51n"]
 
 [node name="FightingFormationBuilder" type="Node3D" unique_id=1239562922 node_paths=PackedStringArray("_antagonists_node", "_heroes_node", "_acolytes_node", "_buildings_node")]
 script = ExtResource("1_axvc8")
@@ -11,6 +13,8 @@ _heroes_node = NodePath("Entities/Heroes")
 _acolytes_node = NodePath("Entities/Acolytes")
 _buildings_node = NodePath("Entities/Buildings")
 formation_to_load = ExtResource("2_2gva4")
+output_dir = "res://05_Game/Encounters/Pool/Prototyping/"
+formation_id = "default_solo"
 
 [node name="ArchIsland" parent="." unique_id=796314808 instance=ExtResource("1_hjxwm")]
 
@@ -18,7 +22,34 @@ formation_to_load = ExtResource("2_2gva4")
 
 [node name="Antagonists" type="Node3D" parent="Entities" unique_id=91770849]
 
+[node name="Acolotye01" parent="Entities/Antagonists" unique_id=1548381800 instance=ExtResource("4_obr3a")]
+transform = Transform3D(0.09466431, 0, 0.99550927, 0, 1, 0, -0.99550927, 0, 0.09466431, -5.087442, 0.32316315, 2.7764053)
+
+[node name="Acolotye02" parent="Entities/Antagonists" unique_id=615426184 instance=ExtResource("4_obr3a")]
+transform = Transform3D(0.09466431, 0, 0.99550927, 0, 1, 0, -0.99550927, 0, 0.09466431, -5.0880885, 0.32316315, -1.5483389)
+
+[node name="Acolotye03" parent="Entities/Antagonists" unique_id=165889423 instance=ExtResource("4_obr3a")]
+transform = Transform3D(0.09466431, 0, 0.99550927, 0, 1, 0, -0.99550927, 0, 0.09466431, -5.1820517, 0.32316315, 7.69308)
+
+[node name="Acolotye04" parent="Entities/Antagonists" unique_id=1502181801 instance=ExtResource("4_obr3a")]
+transform = Transform3D(0.09466431, 0, 0.99550927, 0, 1, 0, -0.99550927, 0, 0.09466431, -5.133453, 0.3231622, -6.51968)
+
+[node name="Acolotye05" parent="Entities/Antagonists" unique_id=1226020524 instance=ExtResource("4_obr3a")]
+transform = Transform3D(0.09466431, 0, 0.99550927, 0, 1, 0, -0.99550927, 0, 0.09466431, -8.820259, 0.32316315, 3.1486452)
+
+[node name="Acolotye06" parent="Entities/Antagonists" unique_id=548547710 instance=ExtResource("4_obr3a")]
+transform = Transform3D(0.09466431, 0, 0.99550927, 0, 1, 0, -0.99550927, 0, 0.09466431, -8.531158, 0.32316315, -1.8248186)
+
+[node name="Acolotye07" parent="Entities/Antagonists" unique_id=223652178 instance=ExtResource("4_obr3a")]
+transform = Transform3D(0.09466431, 0, 0.99550927, 0, 1, 0, -0.99550927, 0, 0.09466431, -8.825742, 0.32316315, 7.969263)
+
+[node name="Acolotye08" parent="Entities/Antagonists" unique_id=273409085 instance=ExtResource("4_obr3a")]
+transform = Transform3D(0.09466431, 0, 0.99550927, 0, 1, 0, -0.99550927, 0, 0.09466431, -8.806751, 0.32316315, -7.578246)
+
 [node name="Heroes" type="Node3D" parent="Entities" unique_id=264475383]
+
+[node name="Hero01" parent="Entities/Heroes" unique_id=1306882236 instance=ExtResource("5_yv51n")]
+transform = Transform3D(-0.036504187, 0, 0.9993335, 0, 1, 0, -0.9993335, 0, -0.036504187, -2.5882707, 0, -0.0077682436)
 
 [node name="Acolytes" type="Node3D" parent="Entities" unique_id=1831821954]
 

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bhv0dmum15mp1" path="res://06_FloatingIsland/FightingIsland/FightingArea/FightingFloorTemplates/fighting_floor.gd" id="1_6j5cd"]
 [ext_resource type="PackedScene" uid="uid://dibux7uwcsatj" path="res://06_FloatingIsland/FightingIsland/FightingArea/SpawnArea/spawn_area.tscn" id="3_1158a"]
 [ext_resource type="PackedScene" uid="uid://cc8wss5swf76b" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/HeroSpawner/hero_spawner.tscn" id="4_72v03"]
-[ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://10_Tool/SpawnPoint/spawn_point.tscn" id="4_ch78g"]
+[ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://05_Game/Run/SpawnSpecs/SpawnPoints/SpawnPoint/spawn_point.tscn" id="4_ch78g"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_72v03"]
 height = 0.1
