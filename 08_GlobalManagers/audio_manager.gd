@@ -57,6 +57,10 @@ func _ready() -> void:
 #endregion
 
 #region ============================== Public functions ==============================
+func play_sfx(sound_name: String) -> void:
+	_play_sound(sound_name)
+
+
 func play_bgm(sound_name: String, fade_duration: float = _BGM_DEFAULT_FADE) -> void:
 	if _bgm_lib.audio_database.get(sound_name) == null:
 		Verbose.error("Couldn't find " + sound_name + " in BGM lib.", Verbose.Category.AUDIO_MANAGER)

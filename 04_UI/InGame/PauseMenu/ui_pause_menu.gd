@@ -1,6 +1,10 @@
 class_name UIPauseMenu
 extends Control
 
+# ============================== Signals ==============================
+
+signal settings_requested
+
 # ============================== Enums ==============================
 
 enum PauseState {
@@ -42,6 +46,7 @@ func _on_resume_button_pressed() -> void:
 
 func _on_option_button_pressed() -> void:
 	_pause_state = PauseState.OPTION
+	settings_requested.emit()
 
 
 func _on_main_menu_button_pressed() -> void:

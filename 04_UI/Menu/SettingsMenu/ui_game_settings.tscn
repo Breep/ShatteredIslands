@@ -1,0 +1,135 @@
+[gd_scene format=3 uid="uid://b3pdqtw0g262b"]
+
+[ext_resource type="Script" uid="uid://c7b7ybvo5mdcv" path="res://04_UI/Menu/SettingsMenu/ui_game_settings.gd" id="1_1xbs5"]
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme.tres" id="2_e76lw"]
+[ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://04_UI/Tool/Misc/hover_boost_button.gd" id="3_1mefo"]
+
+[node name="GameSettings" type="Control" unique_id=580137218]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_e76lw")
+script = ExtResource("1_1xbs5")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=200000001]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SettingsPanel" type="Panel" parent="CenterContainer" unique_id=200000002]
+custom_minimum_size = Vector2(420, 320)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/SettingsPanel" unique_id=200000003]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/SettingsPanel/MarginContainer" unique_id=200000004]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TitleRow" type="HBoxContainer" parent="CenterContainer/SettingsPanel/MarginContainer/VBoxContainer" unique_id=200000005]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/TitleRow" unique_id=200000006]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SETTINGS"
+
+[node name="TabContainer" type="TabContainer" parent="CenterContainer/SettingsPanel/MarginContainer/VBoxContainer" unique_id=200000008]
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 0
+
+[node name="Audio" type="MarginContainer" parent="CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/TabContainer" unique_id=200000009]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+metadata/_tab_index = 0
+
+[node name="Content" type="VBoxContainer" parent="CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/TabContainer/Audio" unique_id=200000010]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="SFXLabel" type="Label" parent="CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/TabContainer/Audio/Content" unique_id=200000011]
+layout_mode = 2
+text = "SFX"
+
+[node name="SFXRow" type="HBoxContainer" parent="CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/TabContainer/Audio/Content" unique_id=200000012]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="SFXSlider" type="HSlider" parent="CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/TabContainer/Audio/Content/SFXRow" unique_id=200000013]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="SFXValueLabel" type="Label" parent="CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/TabContainer/Audio/Content/SFXRow" unique_id=200000014]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+text = "100%"
+horizontal_alignment = 2
+
+[node name="BGMLabel" type="Label" parent="CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/TabContainer/Audio/Content" unique_id=200000015]
+layout_mode = 2
+text = "MUSIC"
+
+[node name="BGMRow" type="HBoxContainer" parent="CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/TabContainer/Audio/Content" unique_id=200000016]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="BGMSlider" type="HSlider" parent="CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/TabContainer/Audio/Content/BGMRow" unique_id=200000017]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="BGMValueLabel" type="Label" parent="CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/TabContainer/Audio/Content/BGMRow" unique_id=200000018]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+text = "100%"
+horizontal_alignment = 2
+
+[node name="Video" type="Control" parent="CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/TabContainer" unique_id=200000019]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/SettingsPanel/MarginContainer/VBoxContainer" unique_id=1323901124]
+layout_mode = 2
+alignment = 2
+
+[node name="CloseButton" type="Button" parent="CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=200000007]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Close"
+script = ExtResource("3_1mefo")
+
+[connection signal="value_changed" from="CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/TabContainer/Audio/Content/SFXRow/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="value_changed" from="CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/TabContainer/Audio/Content/BGMRow/BGMSlider" to="." method="_on_bgm_slider_value_changed"]
+[connection signal="pressed" from="CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]

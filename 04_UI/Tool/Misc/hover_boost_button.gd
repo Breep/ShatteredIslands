@@ -76,6 +76,7 @@ func _on_exit() -> void:
 
 # ===================== Click bump ======================
 func _on_pressed() -> void:
+	AudioManager.play_sfx("button_click")
 	_is_click_bumping = true
 
 	# Stop running tweens safely

@@ -71,3 +71,6 @@ func signal_ui_family_portrait_requested(player: Player, family: Family) -> void
 
 # ============================ Logic ===============================
 signal card_bought(card: Card)
+
+# ============================ Manager =============================
+signal card_shop_init()
