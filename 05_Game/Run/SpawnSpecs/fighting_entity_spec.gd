@@ -1,6 +1,7 @@
 # DEPRECATED — remplacé par HeroSpec/AcolyteSpec/AntagonistSpec/BuildingSpec (Concrete/).
 # Conservé pour permettre le chargement des .tres legacy. Sera supprimé après
 # migration de toutes les ressources via les builders (Load → Save).
+@tool
 class_name FightingEntitySpec
 extends EntitySpec
 

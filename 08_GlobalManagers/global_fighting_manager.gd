@@ -110,8 +110,9 @@ func unregister_fighting_manager(fighting_manager: FightingManager):
 	if not _fighting_managers.has(fighting_manager):
 		Verbose.error("FightingManager[" + str(fighting_manager) + "] is not registered !", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
 		return
-	
+
 	_fighting_managers.erase(fighting_manager)
+	_current_active_fighting_managers.erase(fighting_manager)
 	fighting_manager.fight_is_over.disconnect(_on_fighting_manager_fighting_is_over)
 #endregion
 
@@ -138,6 +139,7 @@ func _on_fighting_phase_state_changed(new_fighting_phase_state: FightingPhaseSta
 			duration = GameManager.game_rules.duration_fighting_normal
 			Verbose.debug("[State=NORMAL] (" + str(duration) + "s)", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
 			for fighting_manager in _current_active_fighting_managers:
+				if not is_instance_valid(fighting_manager): continue
 				fighting_manager.start()
 
 		FightingPhaseState.SPECIAL:

@@ -98,19 +98,13 @@ func get_battle_type() -> Battle.BattleType:
 
 func _spawn_specs_2(specs: Array[EntitySpec], team: int) -> void:
 	for spec: EntitySpec in specs:
-		var entity: Entity = spec.scene.instantiate()
-		entity.custom_base_stats = spec.stats_override
 		var ctx := EntityContext.new()
 		ctx.team = team
 		ctx.battle_id = _current_battle_id
 		ctx.spawn_manager = _spawn_manager
 		ctx.arena_zone_manager = _arena_zone_manager
 		ctx.fighting_state = Entity.FightingState.IDLE
-		_spawn_manager.spawn_entity(entity, _spec_to_transform(spec), ctx)
-
-
-func _spec_to_transform(spec: EntitySpec) -> Transform3D:
-	return Transform3D(Basis().rotated(Vector3.UP, spec.rotation_y), spec.free_position)
+		spec.spawn_into(self, ctx)
 
 
 func _ready_checks() -> bool:

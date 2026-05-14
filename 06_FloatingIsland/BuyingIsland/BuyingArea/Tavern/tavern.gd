@@ -30,10 +30,10 @@ func populate_from_encounter(encounter: TavernEncounter, hero_scene: PackedScene
 	_clear_children(root)
 
 	for spec: PropSpec in formation.prop_specs:
-		_spawn_simple(spec, root)
+		spec.spawn_into(root)
 
 	for spec: EntitySpec in formation.entity_specs:
-		_spawn_entity(spec, root)
+		spec.spawn_into(root)
 
 	if hero_scene != null and not formation.hero_spawn_specs.is_empty():
 		_spawn_at(hero_scene, formation.hero_spawn_specs[0].transform, "Hero", root)
@@ -57,30 +57,6 @@ func _get_or_make_encounter_root() -> Node3D:
 func _clear_children(node: Node) -> void:
 	for child in node.get_children():
 		child.queue_free()
-
-
-func _spawn_simple(spec: SpawnSpec, parent: Node3D) -> void:
-	if spec.scene == null:
-		return
-	var node: Node = spec.scene.instantiate()
-	parent.add_child(node)
-	if node is Node3D:
-		(node as Node3D).transform = spec.transform
-	if spec.display_label != "":
-		node.name = spec.display_label
-
-
-func _spawn_entity(spec: EntitySpec, parent: Node3D) -> void:
-	if spec.scene == null:
-		return
-	var node: Node = spec.scene.instantiate()
-	parent.add_child(node)
-	if node is Node3D:
-		(node as Node3D).transform = spec.transform
-	if spec.display_label != "":
-		node.name = spec.display_label
-	if node is Entity and spec.stats_override != null:
-		(node as Entity).custom_base_stats = spec.stats_override.duplicate(true)
 
 
 func _spawn_at(scene: PackedScene, target_transform: Transform3D, fallback_name: String, parent: Node3D) -> void:

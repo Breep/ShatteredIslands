@@ -1,8 +1,23 @@
 [gd_scene format=4 uid="uid://cpsrcxqpvi3tv"]
 
 [ext_resource type="Script" uid="uid://b4ers2bn4bw7g" path="res://05_Game/Run/Formations/FormationBuilders/TavernBuilder/tavern_formation_builder.gd" id="1_gq7r5"]
+[ext_resource type="Resource" uid="uid://dml684d3irucy" path="res://05_Game/Run/Formations/Pool/Prototyping/Colossus3/colossus3.tavern_formation.tres" id="2_08g0o"]
 [ext_resource type="Script" uid="uid://ll3d062c2nnk" path="res://05_Game/Run/Formations/FormationBuilders/container.gd" id="3_5q1af"]
 [ext_resource type="Texture2D" uid="uid://dlj66ckdy4m8a" path="res://20_Data/Blender/Map/Map/Tavern/tavern_PolygonFantasyKingdom_Texture_special01.png" id="3_pq62c"]
+[ext_resource type="PackedScene" uid="uid://7s8lg5leu3go" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenArdentCelestial/chicken_ardent_celestial.tscn" id="5_frjrp"]
+[ext_resource type="Script" uid="uid://bmhr7p8uul8cw" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenArdentCelestial/chicken_ardent_celestial.gd" id="6_4iu07"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="7_gio37"]
+[ext_resource type="PackedScene" uid="uid://dr2axaqcdg5x3" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenColossus/chicken_colossus.tscn" id="8_c71qw"]
+[ext_resource type="Script" uid="uid://cqd7xjjl82372" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenColossus/chicken_colossus.gd" id="9_s20wv"]
+[ext_resource type="PackedScene" uid="uid://d1o2vt1qf1fdf" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenEngineer/chicken_engineer.tscn" id="10_06n1w"]
+[ext_resource type="Script" uid="uid://2wtyo7uiyo0k" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenEngineer/chicken_engineer.gd" id="11_fkxok"]
+[ext_resource type="PackedScene" uid="uid://xup3guwehhoc" path="res://02_Entities/Summons/ChickenLord/Chicken/Basic/chicken_basic.tscn" id="12_e6i7m"]
+[ext_resource type="Script" uid="uid://l4sahik8i4w1" path="res://02_Entities/Summons/ChickenLord/Chicken/Basic/chicken_basic.gd" id="13_hp8mc"]
+[ext_resource type="PackedScene" uid="uid://c80sm3cuughbk" path="res://02_Entities/Mobs/Dummies/dummy_visual_04.tscn" id="14_dbv2l"]
+[ext_resource type="PackedScene" uid="uid://ddr727id3kk43" path="res://02_Entities/Mobs/Dummies/dummy_visual_01.tscn" id="15_nm4an"]
+[ext_resource type="PackedScene" uid="uid://ufqa68rcl4eb" path="res://21_Props/Tavern/wooden_chair.tscn" id="16_pftyb"]
+[ext_resource type="Texture2D" uid="uid://wbrwetv4d7je" path="res://20_Data/Blender/Map/Map/Tavern/tavern_spec.png" id="17_0d3kp"]
+[ext_resource type="PackedScene" uid="uid://dghajk42luw8y" path="res://21_Props/Tavern/table_round_large_2.tscn" id="18_uqpgr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jt4jx"]
 resource_name = "Wood Floor special"
@@ -48,12 +63,137 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_y8jpk")
 
+[sub_resource type="Resource" id="Resource_h2pkl"]
+script = ExtResource("7_gio37")
+health_max = 50.0
+attack_range = 10.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_3tn85"]
+script = ExtResource("7_gio37")
+health_max = 80.0
+auto_attack_type = 1
+attack_range = 1.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_sp3ou"]
+script = ExtResource("7_gio37")
+health_max = 80.0
+auto_attack_type = 1
+attack_range = 1.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_6nfkn"]
+script = ExtResource("7_gio37")
+health_max = 80.0
+auto_attack_type = 1
+attack_range = 1.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_i60qk"]
+script = ExtResource("7_gio37")
+health_max = 80.0
+auto_attack_type = 1
+attack_range = 1.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_i2rle"]
+script = ExtResource("7_gio37")
+health_max = 80.0
+auto_attack_type = 1
+attack_range = 1.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_aqwcm"]
+script = ExtResource("7_gio37")
+health_max = 80.0
+auto_attack_type = 1
+attack_range = 1.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_4j83y"]
+script = ExtResource("7_gio37")
+health_max = 80.0
+auto_attack_type = 1
+attack_range = 1.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_2820a"]
+script = ExtResource("7_gio37")
+health_max = 16.0
+auto_attack_type = 1
+attack_range = 1.0
+attack_damage = 16.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vhqui"]
+resource_name = "Wood Floor"
+cull_mode = 2
+albedo_texture = ExtResource("17_0d3kp")
+metadata/extras = {
+"yp": {
+"active_ypaint_node": ""
+}
+}
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_li1qj"]
+_surfaces = [{
+"aabb": AABB(-23.3259, -22.063, -100.689, 46.6704, 46.0643, 100.395),
+"format": 34896613377,
+"index_count": 618,
+"index_data": PackedByteArray("AABdAF4AAAABAF0AAQBfAF0AXgBdAF8ABQABAAAAYABeAF8AXgBgAAIAAABeAAMAXgACAAMABQAAAAMABAACAGAABABgAF8AAwACAAQAAQAGAF8ABQAGAAEABgAEAF8ABQADAAcABwAGAAUAAwAEAAcABwAEAAYACAAJAAoACQALAAoACwAIAAoACAAMAAkACwANAAgADQAMAAgACwAJAA4ADAAOAAkADwANAAsACwAOAA8ADQAQAAwADgAMABAADwAQAA0ADgAQABEAEAAPABEADgARAA8AEgATABQAEgAVABMAFgASABQAFgAUABcAFwAYABYAFwAZABgAGgAbABwAGgAdABsAHgAaABwAHgAcAB8AHwAgAB4AHwAhACAAIgAjACQAIgAlACMAJAAjAGEAJwAlACIAYgAiACQAJwAiAGIAYgAkAGMAJABhAGMAJgAjACUAIwAmAGEAJgAlAGQAJQAnAGQAJwAmAGQAJwBlACYAZQBhACYALAAnAGIALABlACcAKQBiAGMALABiACkAYQBmAGMAZQAsAGcALQBlAGcAZwAsAC0AZQBoAGEAaABlAC0AYQBoAGkAYQBpAGYAZgBpAGgALABqAC0AKgBjAGYAKQBjACoAZgBoAGsALQBrAGgAKAAqAGYAKABmAGsALQBsAGsAbAAoAGsAagBsAC0AKgAoAG0AbABtACgAKgBtAG4AbQBsAG4AKQAqAG4AbABvAG4AKwApAG4AKwBuAG8AbAArAG8AbABqACsALAApACsALAArAGoALgAvADAALgAxAC8AMgAuADAAMgAwADMAMwA0ADIAMwA1ADQANgA3ADgANgA5ADcAOgA2ADgAOgA4ADsAOwA8ADoAOwA9ADwAPgBwAEAAPgBAAHEAQAByAHEAcgA+AHEAcABzAEAAQAB0AHIAdABAAHMAcgB0AHUAcwB2AHQAdAB2AHUAcABCAHMAQgB3AHMAeABwAD4AQgBwAD8AeAA/AHAAQwBCAD8AQgBDAHcAQwB4AHcAQwA/AEQAPwB4AEQAQwBEAHgAeQBzAHcAeAB5AHcAcwB5AHYAPgB6AHgAeAB6AHkAPgByAHoAewB2AHkAegB7AHkARgB6AHIAdQBGAHIAdgB8AHUAfQB1AHwAdgB9AHwAdQB9AEYAdgB7AH0AegBGAEgAegB+AHsAegBIAH4AfgBFAHsAewBBAH0AewBFAEEARgB9AH8AQQB/AH0ARgB/AEgAfgBJAEUASQBBAEUASABJAH4ASQBHAEEASABHAEkAfwBBAEcARwBIAIAAfwCAAEgAfwBHAIAASgBLAIEASgCBAEwASwBTAIEATwBMAIEAUwBPAIEASwBUAFMATwBTAFQASwBSAFQATwBUAFIASwBRAFIATQBMAE8ASgBMAE0ATwBSAFAAUQBQAFIATQBPAFAATgBRAEsATgBLAEoAUQBOAFAATgBKAE0ATgBNAFAAVQBWAFcAVQBYAFYAWABZAFYAWgBYAFUAWgBVAFcAWABcAFkAWgBcAFgAVgBZAIIAXACCAFkAVgCCAIMAVwBWAIMAXACEAIIAggCEAIMAXABaAIQAhACFAIMAVwCDAIUAWgCFAIQAVwCFAIYAWgCGAIUAVwCGAFsAWgBbAIYAWgBXAFsA"),
+"lods": [3.3929, PackedByteArray("AAABAAIAAAACAAMAAQAEAAIAAwACAAQABQABAAAABQAAAAMABQAGAAEAAQAGAAQABQADAAcABwAGAAUAAwAEAAcABwAEAAYACAAJAAoACQALAAoACwAIAAoACAAMAAkACwANAAgADQAMAAgACwAJAA4ADAAOAAkADwANAAsACwAOAA8ADQAQAAwADgAMABAADwAQAA0ADgAQABEAEAAPABEADgARAA8AEgATABQAEgAVABMAFgASABQAFgAUABcAFwAYABYAFwAZABgAGgAbABwAGgAdABsAHgAaABwAHgAcAB8AHwAgAB4AHwAhACAAIgAjACQAIgAlACMAJgAjACUAJwAlACIAJgAlACcAIwAmACgAJAAjACgAJwAoACYAKQAiACQAJwAiACkAKQAkACoAKgAkACgAKwApACoAKAArACoALAApACsAKAAsACsALAAnACkAKAAnAC0AJwAsAC0ALAAoAC0ALgAvADAALgAxAC8AMgAuADAAMgAwADMAMwA0ADIAMwA1ADQANgA3ADgANgA5ADcAOgA2ADgAOgA4ADsAOwA8ADoAOwA9ADwAPgA/AEAAQABBAD4APwBCAEAAQQBAAEIAQwBCAD8ARAA/AD4AQwA/AEQARQBCAEMAQgBFAEEARABFAEMAPgBBAEYARgBEAD4ARgBBAEcARABGAEgARgBHAEgARABJAEUASQBBAEUARABIAEkASQBHAEEASABHAEkASgBLAEwASgBMAE0ATgBKAE0ATgBLAEoATQBMAE8ATgBNAFAATQBPAFAAUQBOAFAATgBRAEsAUQBQAFIATwBSAFAASwBRAFIAUwBPAEwASwBTAEwATwBTAFQASwBUAFMATwBUAFIASwBSAFQAVQBWAFcAVQBYAFYAVwBWAFkAWABZAFYAWgBVAFcAWgBYAFUAVwBZAFsAWgBXAFsAWABcAFkAWgBcAFgAXABbAFkAXABaAFsA")],
+"name": "Wood Floor",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 135,
+"vertex_data": PackedByteArray("+zbk8pH/AAAXDYj0Jf8AABcNS/BShAAA+zbZ8kGEAAD4DjPQD4UAAAs2ANHO/gAA+A4u0Dz/AAALNgHRgIUAAAs2jTHk/gAAFw3zInIAAAALNvMicgAAAAs2AADiAAAAFw2NMeT+AAALNpkOVP8AALwPiQ3jAAAA8RxEAggBAAAXDZkOVP8AALwPeQXUNgAAJDPJ7VmTAAC/zMntbIYAAL/Mye1ZkwAAJDPJ7WyGAAAkM0DXWZMAAL/MQNdZkwAAJDNA12yGAAC/zEDXbIYAALQ1Hi9ZkwAAMMoeL2yGAAAwyh4vWZMAALQ1Hi9shgAAtDXQHVmTAAAwytAdWZMAALQ10B1shgAAMMrQHWyGAAADADMn1zgAAC/4VD/xNgAA4f8yJ9k4AAC1B1U/7zYAAMuMeDq3KwAAWgcINjUuAAAv+HU8ygYAAAAAFSR1BQAA4f8iJH0FAACyB2g8wgYAALIEqS4EHAAAy0LWOU0aAADi7MPQWZMAAOLsCClshgAA4uwIKVmTAADi7MPQbIYAAELVw9BZkwAAQtUIKVmTAABC1cPQbIYAAELVCClshgAAoirD0FmTAACiKggpbIYAAKIqCClZkwAAoirD0GyGAAACE8PQWZMAAAITCClZkwAAAhPD0GyGAAACEwgpbIYAAN5CGvkSfwAABQbS+Sd7AAC6QXWmnX4AAN/5lhzhfQAABQaWHOF9AAAOAM4XEYkAAA4A5/8zhgAA1v/OFxGJAADjsdf4+3sAAAf66flQewAAVbhu+TOCAAD/////XYYAAOjI5PKR/wAA6MjZ8kGEAAAd8uPzDvUAAM3yiPQl/wAA2ckA0c7+AABZ8CDqz+QAAOzwLtA8/wAA2ckB0YCFAADs8DPQD4UAAOLxAvPMuAAAzfJ49LWEAADZyY0x5P4AAOzwuiMAAAAADPBVMyn/AADZyfMicgAAAM3yAADiAAAAWMg1Ef//AACR5VwPpP4AAOjIkwFtAAAAug9Y8ZzIAACkHN3u5LQAAGcTOeR7sgAA9w+g71KiAABi9oo8tygAANgBECiaJwAADv4DKDcnAADtB/M9qTAAAJkHRzrNJQAAlfokNR8eAAD0Blc5ACEAALd9sDgPHQAA/veHOy8kAAARCHQ7QRUAAAz4BjuyGAAA7LbbOBIMAABE2+U6EAgAACW50zDpBgAAE3O+OggIAAC/OZ75S3wAAO9KlvlFfAAA33f+9+J7AACPOoEejX4AADpwCR3vfgAA8XvIUpJ/AAB5fPQds4EAADs1nxn9hwAAHz/3/SyFAAANep8Z/YcAAD50+f0vhQAA7b6fGf2HAAC8iRgd+X4AAFi9gR6NfgAAibkK/k6FAAA8uWjNYn0AAJ/E7fQ9fAAAvebN8hrmAADy8E4D/gkAAJDt4QqDKQAAUONJCGIpAADw8KQGR0IAAD3xAxAD8gAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_reqbb"]
+resource_name = "tavern_Mesh_490"
+_surfaces = [{
+"aabb": AABB(-23.3259, -22.063, -100.689, 46.6704, 46.0643, 100.395),
+"attribute_data": PackedByteArray("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"),
+"format": 34896613431,
+"index_count": 618,
+"index_data": PackedByteArray("AADeAN8AAAABAN4ABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0A4ADhAOIA4ADcAOEAEAARABIAEAATABEA4wDkAOUA5gDnAOgAFAAVABYAFAAXABUAGAAZABoAGwAcAB0AHAAbAB4AHAAeAB8AIAAhACIAIAAjACEAJAAlACYAJQAkACcAJQAnACgAKQAqACsAKQAsACoALQAuAC8ALgAtADAALgAwADEAMgAzADQAMgA1ADMANgA3ADgANgA5ADcAOgA7ADwAOgA9ADsAPgA/AEAAPgBBAD8AQgBDAEQAQgBFAEMARgBHAEgARgBJAEcASgBLAEwASgBNAEsA6QDqAOsA7ADtAO4A7ABmAO0ATgDvAFAATgDwAO8AUgDxAPIAZADzAGIAXgD0APUAXgBfAPQA9gD3AFQA9wD2AFUA9wBVAPgAXAD5APoAXABdAPkA+wBXAPwA/QD+AP8AAAFPAAEBAAFRAE8AAgEDAQQBAgEFAQMBVgAGAQcBYwBgAAgBYABjAGEAYABhAAkBWQBYAAoBWABZAFoAWABaAAsBDAENAQ4BDwENAQwBDQEPARABEAEPAREBDQEQARIBEwEUARUBFAETARYBFAEWARcBWwAYARkBGgEbARwBHQEeAR8BagBrAGwAagBtAGsAbgBvAHAAbgBxAG8AcgBzAHQAcgB1AHMAdgB3AHgAdgB5AHcAegB7AHwAegB9AHsAfgB/AIAAfgCBAH8AggAgASEBnwAiASMBnwCgACIBlgAkASUBlgCTACQBiwCMAI0AiwCOAIwAjwCQAJEAjwCSAJAAJgGhACcBJgGeAKEAKAGVACkBKAGUAJUAKgErASwBLQEuAS8BLQEwAS4BMQEtAS8BMQEvATIBMwE0ATUBlwA2ATcBNgGXAJsANgGbADgBnQA5AToBOQGdAJwAOQGcADsBhgA8AT0BPAGGAIkAPAGJAD4BPwFAAUEBQAE/AYgAiAA/AUIBQAGIAEMBQwFEAUABRQFEAUMBRAFFAUYBRQFDAUcBSAFJAUoBSQFIAUsBSQFLAUwBTQFKAUkBSgFNAU4BTQFJAU8BUAFRAVIBUQFQAVMBUQFTAVQBhQBVAYMAVQGFAFYBVQFWAYQAmgBXAZgAVwGaAFgBVwFYAZkAWQFaAYoAhwBbAVwBXQFeAV8BogCjAGABqACpAKoAqACrAKkArACtAK4ArACvAK0AsACxALIAsACzALEAtAC1ALYAtAC3ALUAuwC8AL0AuwC+ALwAwADBAGEBvwBiAWMBwgDDAMQAwgDFAMMAxgDHAMgAxgDJAMcAZAFlAWYBZAFnAWUBygDLAMwAygDNAMsAaAFpAWoBaAHTAGkBzgDPANAAzgDRAM8A0gBrAdQAbAHXAG0BbgFvAXABcQFyAXMBdAF1AXYBdAF3AXUBeAHVAHkBegF7AdgAegF8AXsB1gDZAH0BfgECAAMAfgF/AQIAgAGBAYIB2gCDAYQB2gCFAYMB3QDbAIYBhwGkAKUAhwGIAaQAiQGmAIoBiQGnAKYAiwG5ALgAiwG6ALkAjAGNAY4BZwCPAZABZwCRAY8BaQBoAJIBkwGUAZUBlgFlAJcBlgGYAWUAmQFTAJoBmQGbAVMAnAGdAZ4BnAGfAZ0B"),
+"lods": [3.3929, PackedByteArray("AAABAAIAAAACAAMABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUAGAAZABoAGwAcAB0AHAAbAB4AHAAeAB8AIAAhACIAIAAjACEAJAAlACYAJQAkACcAJQAnACgAKQAqACsAKQAsACoALQAuAC8ALgAtADAALgAwADEAMgAzADQAMgA1ADMANgA3ADgANgA5ADcAOgA7ADwAOgA9ADsAPgA/AEAAPgBBAD8AQgBDAEQAQgBFAEMARgBHAEgARgBJAEcASgBLAEwASgBNAEsATgBPAFAATgBRAE8AUgBTAFQAUwBSAFUAUwBWAFQAVgBXAFQAVgBTAFgAWQBYAFMAWABZAFoAWABaAFsAXABdAF4AXwBcAF4AYABhAGIAYABjAGEAZABgAGIAZABiAGUAZgBnAGgAZwBpAGgAagBrAGwAagBtAGsAbgBvAHAAbgBxAG8AcgBzAHQAcgB1AHMAdgB3AHgAdgB5AHcAegB7AHwAegB9AHsAfgB/AIAAfgCBAH8AggCDAIQAgwCFAIQAhgCEAIUAhACGAIcAhwCGAIgAiACGAIkAiACJAIoAiwCMAI0AiwCOAIwAjwCQAJEAjwCSAJAAkwCUAJUAkwCVAJYAlwCYAJkAmACaAJkAmACXAJsAmACbAJwAmwCdAJwAngCfAKAAnwCeAKEAogCjAKQAogCkAKUAowCmAKQAowCnAKYAqACpAKoAqACrAKkArACtAK4ArACvAK0AsACxALIAsACzALEAtAC1ALYAtAC3ALUAtQC4ALYAtQC5ALgAtQC6ALkAuwC8AL0AuwC+ALwAvwDAAMEAwgDDAMQAwgDFAMMAxgDHAMgAxgDJAMcAygDLAMwAygDNAMsAzgDPANAAzgDRAM8A0gDTANQA0gDVANMA1gDXANgA1gDZANcA2gDbANwA2gDdANsA")],
+"material": SubResource("StandardMaterial3D_vhqui"),
+"name": "Wood Floor",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 416,
+"vertex_data": PackedByteArray("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")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_li1qj")
+
 [node name="TavernEncounterBuilder" type="Node3D" unique_id=1175562881 node_paths=PackedStringArray("_mobs_node", "_hero_spawns_node", "_acolyte_spawns_node", "_props_node")]
 script = ExtResource("1_gq7r5")
 _mobs_node = NodePath("Entities/Mobs")
 _hero_spawns_node = NodePath("Entities/HeroesSpawns")
 _acolyte_spawns_node = NodePath("Entities/AcolytesSpawns")
 _props_node = NodePath("Props")
+formation_to_load = ExtResource("2_08g0o")
 
 [node name="estrade" type="MeshInstance3D" parent="." unique_id=175131227]
 transform = Transform3D(-0.0258453, -1.967773e-09, 3.821371e-17, 0, -9.838865e-10, -0.01, 2.259468e-09, -0.0225087, 4.3711387e-10, 0.0075469, 0, 0.00827646)
@@ -75,10 +215,161 @@ metadata/extras = {
 [node name="Mobs" type="Node3D" parent="Entities" unique_id=1217234401]
 script = ExtResource("3_5q1af")
 
+[node name="ChickenArdentCelestial" type="CharacterBody3D" parent="Entities/Mobs" unique_id=2109615854 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_health_bar", "custom_animation_component") instance=ExtResource("5_frjrp")]
+transform = Transform3D(-0.23319082, 0, -0.972431, 0, 1, 0, 0.972431, 0, -0.23319082, -2.1851366, 1.5536039, -1.1017914)
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("6_4iu07")
+entity_name = "Chicken Ardent"
+custom_base_stats = SubResource("Resource_h2pkl")
+_visual_3d = NodePath("ChickenArdentCelestialVisual")
+_health_bar_marker = NodePath("ChickenArdentCelestialVisual/HealthBarSpawnMarker")
+_health_bar = NodePath("HealthBar")
+custom_animation_component = NodePath("AnimationComponent")
+
+[node name="ChickenColossus" type="CharacterBody3D" parent="Entities/Mobs" unique_id=1695183896 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_health_bar", "custom_animation_component") instance=ExtResource("8_c71qw")]
+transform = Transform3D(-0.1967504, 0, -0.9804536, 0, 1, 0, 0.9804536, 0, -0.1967504, -5.409581, 0.4085207, -1.2606604)
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("9_s20wv")
+entity_name = "Chicken Colossus"
+custom_base_stats = SubResource("Resource_3tn85")
+_visual_3d = NodePath("ChickenColossusVisual")
+_health_bar_marker = NodePath("ChickenColossusVisual/HealthBarSpawnMarker")
+_health_bar = NodePath("HealthBar")
+custom_animation_component = NodePath("AnimationComponent")
+
+[node name="ChickenColossus2" type="CharacterBody3D" parent="Entities/Mobs" unique_id=1426509006 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_health_bar", "custom_animation_component") instance=ExtResource("8_c71qw")]
+transform = Transform3D(0.46780646, 0, -0.8838309, 0, 1, 0, 0.8838309, 0, 0.46780646, -2.2691154, 0.4085207, 1.0614755)
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("9_s20wv")
+entity_name = "Chicken Colossus"
+custom_base_stats = SubResource("Resource_sp3ou")
+_visual_3d = NodePath("ChickenColossusVisual")
+_health_bar_marker = NodePath("ChickenColossusVisual/HealthBarSpawnMarker")
+_health_bar = NodePath("HealthBar")
+custom_animation_component = NodePath("AnimationComponent")
+
+[node name="ChickenColossus3" type="CharacterBody3D" parent="Entities/Mobs" unique_id=460905412 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_health_bar", "custom_animation_component") instance=ExtResource("8_c71qw")]
+transform = Transform3D(0.2371434, 0, -0.97147465, 0, 1, 0, 0.97147465, 0, 0.2371434, -4.6980762, 0.4085207, 1.3702538)
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("9_s20wv")
+entity_name = "Chicken Colossus"
+custom_base_stats = SubResource("Resource_6nfkn")
+_visual_3d = NodePath("ChickenColossusVisual")
+_health_bar_marker = NodePath("ChickenColossusVisual/HealthBarSpawnMarker")
+_health_bar = NodePath("HealthBar")
+custom_animation_component = NodePath("AnimationComponent")
+
+[node name="ChickenShield" type="CharacterBody3D" parent="Entities/Mobs" unique_id=2100407157 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_health_bar", "custom_animation_component") instance=ExtResource("10_06n1w")]
+transform = Transform3D(-0.019162599, 0, -0.99981636, 0, 1, 0, 0.99981636, 0, -0.019162599, -4.0010357, 0.3259498, -3.0234673)
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("11_fkxok")
+entity_name = "Chicken Shield"
+custom_base_stats = SubResource("Resource_i60qk")
+_visual_3d = NodePath("ChickenShieldVisual")
+_health_bar_marker = NodePath("ChickenShieldVisual/HealthBarSpawnMarker")
+_health_bar = NodePath("HealthBar")
+custom_animation_component = NodePath("AnimationComponent")
+
+[node name="ChickenShield2" type="CharacterBody3D" parent="Entities/Mobs" unique_id=1785303133 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_health_bar", "custom_animation_component") instance=ExtResource("10_06n1w")]
+transform = Transform3D(-0.019162599, 0, -0.99981636, 0, 1, 0, 0.99981636, 0, -0.019162599, -5.2492876, 0.3259498, -3.0234673)
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("11_fkxok")
+entity_name = "Chicken Shield"
+custom_base_stats = SubResource("Resource_i2rle")
+_visual_3d = NodePath("ChickenShieldVisual")
+_health_bar_marker = NodePath("ChickenShieldVisual/HealthBarSpawnMarker")
+_health_bar = NodePath("HealthBar")
+custom_animation_component = NodePath("AnimationComponent")
+
+[node name="ChickenShield3" type="CharacterBody3D" parent="Entities/Mobs" unique_id=684715710 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_health_bar", "custom_animation_component") instance=ExtResource("10_06n1w")]
+transform = Transform3D(-0.019162599, 0, -0.99981636, 0, 1, 0, 0.99981636, 0, -0.019162599, -4.0010357, 0.3259498, -3.9559104)
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("11_fkxok")
+entity_name = "Chicken Shield"
+custom_base_stats = SubResource("Resource_aqwcm")
+_visual_3d = NodePath("ChickenShieldVisual")
+_health_bar_marker = NodePath("ChickenShieldVisual/HealthBarSpawnMarker")
+_health_bar = NodePath("HealthBar")
+custom_animation_component = NodePath("AnimationComponent")
+
+[node name="ChickenShield4" type="CharacterBody3D" parent="Entities/Mobs" unique_id=832564929 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_health_bar", "custom_animation_component") instance=ExtResource("10_06n1w")]
+transform = Transform3D(-0.019162599, 0, -0.99981636, 0, 1, 0, 0.99981636, 0, -0.019162599, -5.2692738, 0.3259498, -3.9588368)
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("11_fkxok")
+entity_name = "Chicken Shield"
+custom_base_stats = SubResource("Resource_4j83y")
+_visual_3d = NodePath("ChickenShieldVisual")
+_health_bar_marker = NodePath("ChickenShieldVisual/HealthBarSpawnMarker")
+_health_bar = NodePath("HealthBar")
+custom_animation_component = NodePath("AnimationComponent")
+
+[node name="Chicken" type="CharacterBody3D" parent="Entities/Mobs" unique_id=392337671 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_health_bar", "custom_animation_component") instance=ExtResource("12_e6i7m")]
+transform = Transform3D(0.84460837, 0, -0.53538465, 0, 1, 0, 0.53538465, 0, 0.84460837, -1.9038478, 1.0921693, -1.0843843)
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("13_hp8mc")
+entity_name = "Chicken"
+custom_base_stats = SubResource("Resource_2820a")
+_visual_3d = NodePath("ChickenVisual")
+_health_bar_marker = NodePath("ChickenVisual/HealthBarSpawnPoint")
+_health_bar = NodePath("HealthBar")
+custom_animation_component = NodePath("AnimationComponent")
+
 [node name="HeroesSpawns" type="Node3D" parent="Entities" unique_id=777508257]
 script = ExtResource("3_5q1af")
+
+[node name="Hero01" type="Node3D" parent="Entities/HeroesSpawns" unique_id=1306882236 instance=ExtResource("14_dbv2l")]
+transform = Transform3D(0.034899488, 0, -0.99939084, 0, 1, 0, 0.99939084, 0, 0.034899488, 2.0217764, 0.68813705, -0.12725902)
 
 [node name="AcolytesSpawns" type="Node3D" parent="Entities" unique_id=1777238955]
 script = ExtResource("3_5q1af")
 
+[node name="Acoloyte01" type="Node3D" parent="Entities/AcolytesSpawns" unique_id=1548381800 instance=ExtResource("15_nm4an")]
+transform = Transform3D(-0.07118403, 0, -0.9974632, 0, 1, 0, 0.9974632, 0, -0.07118403, 3.204748, 0.55585647, 1.0069957)
+
+[node name="Acoloyte02" type="Node3D" parent="Entities/AcolytesSpawns" unique_id=1534139291 instance=ExtResource("15_nm4an")]
+transform = Transform3D(0.24689761, 0, -0.9690416, 0, 1, 0, 0.9690416, 0, 0.24689761, 3.1425335, 0.55585647, -0.3683746)
+
+[node name="Acoloyte03" type="Node3D" parent="Entities/AcolytesSpawns" unique_id=615873875 instance=ExtResource("15_nm4an")]
+transform = Transform3D(-0.07118403, 0, -0.9974632, 0, 1, 0, 0.9974632, 0, -0.07118403, 3.1159065, 0.55585647, 2.4392023)
+
+[node name="Acoloyte04" type="Node3D" parent="Entities/AcolytesSpawns" unique_id=466115742 instance=ExtResource("15_nm4an")]
+transform = Transform3D(0.30065593, 0, -0.95373267, 0, 1, 0, 0.95373267, 0, 0.30065593, 3.204748, 0.55585647, -1.4543872)
+
+[node name="Acoloyte05" type="Node3D" parent="Entities/AcolytesSpawns" unique_id=311129656 instance=ExtResource("15_nm4an")]
+transform = Transform3D(0.16504768, 0, -0.98628557, 0, 1, 0, 0.98628557, 0, 0.16504768, 4.8996887, 0.55585647, -0.1815927)
+
+[node name="Acoloyte06" type="Node3D" parent="Entities/AcolytesSpawns" unique_id=1575365014 instance=ExtResource("15_nm4an")]
+transform = Transform3D(-0.07118403, 0, -0.9974632, 0, 1, 0, 0.9974632, 0, -0.07118403, 4.832242, 0.55585647, 1.2604268)
+
+[node name="Acoloyte07" type="Node3D" parent="Entities/AcolytesSpawns" unique_id=1382823216 instance=ExtResource("15_nm4an")]
+transform = Transform3D(-0.07118403, 0, -0.9974632, 0, 1, 0, 0.9974632, 0, -0.07118403, 5.061364, 0.55585647, 3.1277535)
+
+[node name="Acoloyte08" type="Node3D" parent="Entities/AcolytesSpawns" unique_id=2053229323 instance=ExtResource("15_nm4an")]
+transform = Transform3D(0.2980414, 0, -0.95455295, 0, 1, 0, 0.95455295, 0, 0.2980414, 4.857814, 0.55585647, -1.4736702)
+
 [node name="Props" type="Node3D" parent="." unique_id=1490119890]
+
+[node name="WoodenChair" type="MeshInstance3D" parent="Props" unique_id=718774670 instance=ExtResource("16_pftyb")]
+transform = Transform3D(0.0022795, 0.00973673, 1.09277e-09, -2.98023e-10, 1.19209e-09, -0.01, -0.00973673, 0.0022795, 5.61915e-10, -2.0386343, 0.578473, -1.07166)
+mesh = SubResource("ArrayMesh_reqbb")
+skeleton = NodePath("")
+metadata/extras = {
+"currentUVSet": "map1",
+"gflow": {
+"registered": 1.0,
+"textureSet": 0.0,
+"textureSetEnum": 0.0
+}
+}
+
+[node name="table_round_large2" type="Node3D" parent="Props" unique_id=1119513292 instance=ExtResource("18_uqpgr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17980719, 0.5686108, 0.104300976)

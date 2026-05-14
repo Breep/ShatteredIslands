@@ -33,19 +33,14 @@ func _validate() -> bool:
 
 
 func _instantiate_spec_into(spec: SpawnSpec, container: Node, edited_root: Node) -> bool:
-	var node: Node
-	if spec.scene == null:
+	var node: Node = spec.spawn_into(container)
+	if node == null:
+		# Pas de scène attachée au spec : marker vide pour l'éditeur
 		node = Node3D.new()
-	else:
-		node = spec.scene.instantiate()
-
-	container.add_child(node)
+		container.add_child(node)
+		(node as Node3D).transform = spec.transform
+		if spec.display_label != "":
+			node.name = spec.display_label
 	if edited_root != null:
 		node.owner = edited_root
-	if node is Node3D:
-		(node as Node3D).transform = spec.transform
-	if spec.display_label != "":
-		node.name = spec.display_label
-	if node is Entity and spec is EntitySpec and spec.stats_override != null:
-		(node as Entity).custom_base_stats = spec.stats_override.duplicate(true)
 	return true

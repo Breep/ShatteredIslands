@@ -1,0 +1,177 @@
+[gd_resource type="Resource" script_class="TavernFormation" format=3 uid="uid://cfq775i1ac878"]
+
+[ext_resource type="Script" uid="uid://flrydugnyfe7" path="res://05_Game/Run/SpawnSpecs/Concrete/acolyte_spawn_spec.gd" id="1_s1al6"]
+[ext_resource type="Script" uid="uid://rj6clcd8f15a" path="res://05_Game/Run/SpawnSpecs/entity_spec.gd" id="2_3ruwg"]
+[ext_resource type="PackedScene" uid="uid://7s8lg5leu3go" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenArdentCelestial/chicken_ardent_celestial.tscn" id="3_niw6s"]
+[ext_resource type="Script" uid="uid://bcak6iy1jjxko" path="res://05_Game/Run/SpawnSpecs/Concrete/mob_spec.gd" id="4_1poyg"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="5_gsh1y"]
+[ext_resource type="PackedScene" uid="uid://dr2axaqcdg5x3" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenColossus/chicken_colossus.tscn" id="6_voq5i"]
+[ext_resource type="PackedScene" uid="uid://d1o2vt1qf1fdf" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenEngineer/chicken_engineer.tscn" id="7_dw5eo"]
+[ext_resource type="PackedScene" uid="uid://xup3guwehhoc" path="res://02_Entities/Summons/ChickenLord/Chicken/Basic/chicken_basic.tscn" id="8_wcpno"]
+[ext_resource type="Script" uid="uid://bj0ecq2d5vir5" path="res://05_Game/Run/SpawnSpecs/Concrete/hero_spawn_spec.gd" id="9_ci230"]
+[ext_resource type="Script" uid="uid://b24wp3uvfns8t" path="res://05_Game/Run/SpawnSpecs/prop_spec.gd" id="10_jvbv5"]
+[ext_resource type="PackedScene" uid="uid://ufqa68rcl4eb" path="res://21_Props/Tavern/wooden_chair.tscn" id="11_0cx5v"]
+[ext_resource type="PackedScene" uid="uid://dghajk42luw8y" path="res://21_Props/Tavern/table_round_large_2.tscn" id="12_k2cae"]
+[ext_resource type="Script" uid="uid://d2ixo16r26ppd" path="res://05_Game/Run/Formations/tavern_formation.gd" id="13_ynq71"]
+[ext_resource type="Script" uid="uid://c78ccxnqy6c16" path="res://05_Game/Run/SpawnSpecs/spawn_point_spec.gd" id="14_rifui"]
+
+[sub_resource type="Resource" id="Resource_440hy"]
+script = ExtResource("5_gsh1y")
+health_max = 50.0
+attack_range = 10.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_lo0ot"]
+script = ExtResource("4_1poyg")
+stats_override = SubResource("Resource_440hy")
+scene = ExtResource("3_niw6s")
+display_label = "ChickenArdentCelestial"
+transform = Transform3D(-0.23319082, 0, -0.972431, 0, 1, 0, 0.972431, 0, -0.23319082, -2.1851366, 1.5536039, -1.1017914)
+
+[sub_resource type="Resource" id="Resource_0yk6w"]
+script = ExtResource("5_gsh1y")
+health_max = 80.0
+auto_attack_type = 1
+attack_range = 1.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_wsjs6"]
+script = ExtResource("4_1poyg")
+stats_override = SubResource("Resource_0yk6w")
+scene = ExtResource("6_voq5i")
+display_label = "ChickenColossus"
+transform = Transform3D(-0.1967504, 0, -0.9804536, 0, 1, 0, 0.9804536, 0, -0.1967504, -5.409581, 0.4085207, -1.2606604)
+
+[sub_resource type="Resource" id="Resource_ghjty"]
+script = ExtResource("5_gsh1y")
+health_max = 80.0
+auto_attack_type = 1
+attack_range = 1.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_0evxs"]
+script = ExtResource("4_1poyg")
+stats_override = SubResource("Resource_ghjty")
+scene = ExtResource("6_voq5i")
+display_label = "ChickenColossus2"
+transform = Transform3D(0.46780646, 0, -0.8838309, 0, 1, 0, 0.8838309, 0, 0.46780646, -2.2691154, 0.4085207, 1.0614755)
+
+[sub_resource type="Resource" id="Resource_ph781"]
+script = ExtResource("5_gsh1y")
+health_max = 80.0
+auto_attack_type = 1
+attack_range = 1.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_clsen"]
+script = ExtResource("4_1poyg")
+stats_override = SubResource("Resource_ph781")
+scene = ExtResource("6_voq5i")
+display_label = "ChickenColossus3"
+transform = Transform3D(0.2371434, 0, -0.97147465, 0, 1, 0, 0.97147465, 0, 0.2371434, -4.6980762, 0.4085207, 1.3702538)
+
+[sub_resource type="Resource" id="Resource_3gync"]
+script = ExtResource("5_gsh1y")
+health_max = 80.0
+auto_attack_type = 1
+attack_range = 1.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_piy6b"]
+script = ExtResource("4_1poyg")
+stats_override = SubResource("Resource_3gync")
+scene = ExtResource("7_dw5eo")
+display_label = "ChickenShield"
+transform = Transform3D(-0.019162599, 0, -0.99981636, 0, 1, 0, 0.99981636, 0, -0.019162599, -4.0010357, 0.3259498, -3.0234673)
+
+[sub_resource type="Resource" id="Resource_gvkms"]
+script = ExtResource("5_gsh1y")
+health_max = 80.0
+auto_attack_type = 1
+attack_range = 1.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_jtsa6"]
+script = ExtResource("4_1poyg")
+stats_override = SubResource("Resource_gvkms")
+scene = ExtResource("7_dw5eo")
+display_label = "ChickenShield2"
+transform = Transform3D(-0.019162599, 0, -0.99981636, 0, 1, 0, 0.99981636, 0, -0.019162599, -5.2492876, 0.3259498, -3.0234673)
+
+[sub_resource type="Resource" id="Resource_8ra42"]
+script = ExtResource("5_gsh1y")
+health_max = 80.0
+auto_attack_type = 1
+attack_range = 1.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_jb1al"]
+script = ExtResource("4_1poyg")
+stats_override = SubResource("Resource_8ra42")
+scene = ExtResource("7_dw5eo")
+display_label = "ChickenShield3"
+transform = Transform3D(-0.019162599, 0, -0.99981636, 0, 1, 0, 0.99981636, 0, -0.019162599, -4.0010357, 0.3259498, -3.9559104)
+
+[sub_resource type="Resource" id="Resource_ses7e"]
+script = ExtResource("5_gsh1y")
+health_max = 80.0
+auto_attack_type = 1
+attack_range = 1.0
+attack_damage = 10.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_newml"]
+script = ExtResource("4_1poyg")
+stats_override = SubResource("Resource_ses7e")
+scene = ExtResource("7_dw5eo")
+display_label = "ChickenShield4"
+transform = Transform3D(-0.019162599, 0, -0.99981636, 0, 1, 0, 0.99981636, 0, -0.019162599, -5.2692738, 0.3259498, -3.9588368)
+
+[sub_resource type="Resource" id="Resource_qo8ww"]
+script = ExtResource("5_gsh1y")
+health_max = 16.0
+auto_attack_type = 1
+attack_range = 1.0
+attack_damage = 16.0
+attack_speed = 1.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_mrv3l"]
+script = ExtResource("4_1poyg")
+stats_override = SubResource("Resource_qo8ww")
+scene = ExtResource("8_wcpno")
+display_label = "Chicken"
+transform = Transform3D(0.84460837, 0, -0.53538465, 0, 1, 0, 0.53538465, 0, 0.84460837, -1.9038478, 1.0921693, -1.0843843)
+
+[sub_resource type="Resource" id="Resource_prvo3"]
+script = ExtResource("10_jvbv5")
+scene = ExtResource("11_0cx5v")
+display_label = "WoodenChair"
+transform = Transform3D(0.0022795, 0.00973673, 1.09277e-09, -2.98023e-10, 1.19209e-09, -0.01, -0.00973673, 0.0022795, 5.61915e-10, -2.0386343, 0.578473, -1.07166)
+
+[sub_resource type="Resource" id="Resource_yedc3"]
+script = ExtResource("10_jvbv5")
+scene = ExtResource("12_k2cae")
+display_label = "table_round_large2"
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17980719, 0.5686108, 0.104300976)
+
+[resource]
+script = ExtResource("13_ynq71")
+entity_specs = Array[ExtResource("2_3ruwg")]([SubResource("Resource_lo0ot"), SubResource("Resource_wsjs6"), SubResource("Resource_0evxs"), SubResource("Resource_clsen"), SubResource("Resource_piy6b"), SubResource("Resource_jtsa6"), SubResource("Resource_jb1al"), SubResource("Resource_newml"), SubResource("Resource_mrv3l")])
+prop_specs = Array[ExtResource("10_jvbv5")]([SubResource("Resource_prvo3"), SubResource("Resource_yedc3")])
+id = "prototype"
