@@ -121,7 +121,6 @@ func _entity_to_fighting_spec(entity: Entity, role: FightingEntitySpec.FightingR
 	var spec := FightingEntitySpec.new()
 	spec.scene = load(entity.scene_file_path)
 	spec.role = role
-	spec.team = entity.team
 	spec.display_label = entity.name
 
 	spec.free_position = entity.global_position

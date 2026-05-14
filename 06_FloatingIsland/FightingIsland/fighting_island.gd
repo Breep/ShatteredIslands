@@ -41,8 +41,8 @@ func init_fight(heroes: Array[Hero], battle_type: Battle.BattleType, battle_id: 
 	_current_heroes = heroes
 	_force_local_player_camera_on_island()
 
-func init_fight_3(left_formation: FightingFormation, right_formation: FightingFormation) -> void:
-	_fighting_area.init_fight_3(left_formation, right_formation)
+func init_fight_3(left_formation: FightingFormation, right_formation: FightingFormation, left_team: int, right_team: int) -> void:
+	_fighting_area.init_fight_3(left_formation, right_formation, left_team, right_team)
 	_force_local_player_camera_on_island()
 
 

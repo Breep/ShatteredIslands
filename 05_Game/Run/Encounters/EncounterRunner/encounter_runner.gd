@@ -17,9 +17,9 @@ func init_fight(left_encounter: FightingEncounter, right_encounter: FightingEnco
 
 	get_tree().root.add_child.call_deferred(island)
 	await island.ready
-	var left_formation: FightingFormation = left_encounter.team_b_formation.mirrored().force_team(1)
-	var right_formation: FightingFormation = right_encounter.team_b_formation.force_team(2)
-	island.init_fight_3(left_formation, right_formation)
+	var left_formation: FightingFormation = left_encounter.team_b_formation.mirrored()
+	var right_formation: FightingFormation = right_encounter.team_b_formation
+	island.init_fight_3(left_formation, right_formation, 1, 2)
 	island.set_active()
 	GlobalFightingManager.start()
 

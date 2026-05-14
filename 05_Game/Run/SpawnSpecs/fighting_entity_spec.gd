@@ -9,4 +9,3 @@ enum FightingRole {
 }
 
 @export var role: FightingRole
-@export var team: int = 2
