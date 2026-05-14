@@ -6,5 +6,6 @@
 [node name="AcolyteSpawnPoint" type="Node3D" unique_id=228737116]
 script = ExtResource("1_cssyj")
 
-[node name="Dummy01" parent="." unique_id=1548381800 instance=ExtResource("1_xfixs")]
+[node name="VisualToBeDestroyed" parent="." unique_id=1548381800 instance=ExtResource("1_xfixs")]
+unique_name_in_owner = true
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)

@@ -1,2 +1,2 @@
 class_name AcolyteSpawnPoint
-extends Node3D
+extends SpawnPoint

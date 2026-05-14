@@ -1,15 +1,16 @@
-[gd_resource type="Resource" script_class="FightingFormation" format=3 uid="uid://c845hkwlovjo8"]
+[gd_resource type="Resource" script_class="FightingFormation" format=3 uid="uid://db8elmacgb0ag"]
 
-[ext_resource type="Script" uid="uid://ce1cer1au6kbt" path="res://05_Game/Run/SpawnSpecs/fighting_entity_spec.gd" id="1_fnuhq"]
-[ext_resource type="PackedScene" uid="uid://dr2axaqcdg5x3" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenColossus/chicken_colossus.tscn" id="2_626vn"]
-[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_nxx0i"]
-[ext_resource type="PackedScene" uid="uid://7s8lg5leu3go" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenArdentCelestial/chicken_ardent_celestial.tscn" id="4_243oa"]
-[ext_resource type="PackedScene" uid="uid://d1o2vt1qf1fdf" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenEngineer/chicken_engineer.tscn" id="5_kaytq"]
-[ext_resource type="PackedScene" uid="uid://xup3guwehhoc" path="res://02_Entities/Summons/ChickenLord/Chicken/Basic/chicken_basic.tscn" id="6_w635t"]
-[ext_resource type="Script" uid="uid://b3ir321gjcqej" path="res://05_Game/Run/Formations/fighting_formation.gd" id="7_31c18"]
+[ext_resource type="Script" uid="uid://ce1cer1au6kbt" path="res://05_Game/Run/SpawnSpecs/fighting_entity_spec.gd" id="1_50vtl"]
+[ext_resource type="PackedScene" uid="uid://dr2axaqcdg5x3" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenColossus/chicken_colossus.tscn" id="2_hm5vq"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_8v5xn"]
+[ext_resource type="PackedScene" uid="uid://7s8lg5leu3go" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenArdentCelestial/chicken_ardent_celestial.tscn" id="4_aaub3"]
+[ext_resource type="PackedScene" uid="uid://d1o2vt1qf1fdf" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenEngineer/chicken_engineer.tscn" id="5_y1dn5"]
+[ext_resource type="PackedScene" uid="uid://xup3guwehhoc" path="res://02_Entities/Summons/ChickenLord/Chicken/Basic/chicken_basic.tscn" id="6_d2sjs"]
+[ext_resource type="Script" uid="uid://b3ir321gjcqej" path="res://05_Game/Run/Formations/fighting_formation.gd" id="7_5t85i"]
+[ext_resource type="Script" uid="uid://c78ccxnqy6c16" path="res://05_Game/Run/SpawnSpecs/spawn_point_spec.gd" id="8_7ijot"]
 
-[sub_resource type="Resource" id="Resource_wlj3s"]
-script = ExtResource("3_nxx0i")
+[sub_resource type="Resource" id="Resource_22vqy"]
+script = ExtResource("3_8v5xn")
 health_max = 80.0
 auto_attack_type = 1
 attack_range = 1.0
@@ -17,16 +18,16 @@ attack_damage = 10.0
 attack_speed = 1.0
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
-[sub_resource type="Resource" id="Resource_xied2"]
-script = ExtResource("1_fnuhq")
+[sub_resource type="Resource" id="Resource_3owwc"]
+script = ExtResource("1_50vtl")
 team = -1
-stats_override = SubResource("Resource_wlj3s")
-scene = ExtResource("2_626vn")
+stats_override = SubResource("Resource_22vqy")
+scene = ExtResource("2_hm5vq")
 display_label = "ChickenColossus"
-transform = Transform3D(-0.1967504, 0, -0.9804536, 0, 1, 0, 0.9804536, 0, -0.1967504, -1.2878804, -0.4582653, -6.0080833)
+transform = Transform3D(-0.1967504, 0, -0.9804536, 0, 1, 0, 0.9804536, 0, -0.1967504, -2.1455185, 0.051393986, -6.0080833)
 
-[sub_resource type="Resource" id="Resource_5vddf"]
-script = ExtResource("3_nxx0i")
+[sub_resource type="Resource" id="Resource_nipu5"]
+script = ExtResource("3_8v5xn")
 health_max = 80.0
 auto_attack_type = 1
 attack_range = 1.0
@@ -34,16 +35,16 @@ attack_damage = 10.0
 attack_speed = 1.0
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
-[sub_resource type="Resource" id="Resource_hgcnr"]
-script = ExtResource("1_fnuhq")
+[sub_resource type="Resource" id="Resource_o0kh7"]
+script = ExtResource("1_50vtl")
 team = -1
-stats_override = SubResource("Resource_5vddf")
-scene = ExtResource("2_626vn")
+stats_override = SubResource("Resource_nipu5")
+scene = ExtResource("2_hm5vq")
 display_label = "ChickenColossus2"
-transform = Transform3D(0.46780646, 0, -0.8838309, 0, 1, 0, 0.8838309, 0, 0.46780646, -1.3379753, -0.45499945, 6.407922)
+transform = Transform3D(0.46780646, 0, -0.8838309, 0, 1, 0, 0.8838309, 0, 0.46780646, -2.1956134, 0.054659843, 6.407922)
 
-[sub_resource type="Resource" id="Resource_kpfrw"]
-script = ExtResource("3_nxx0i")
+[sub_resource type="Resource" id="Resource_3xmdc"]
+script = ExtResource("3_8v5xn")
 health_max = 80.0
 auto_attack_type = 1
 attack_range = 1.0
@@ -51,33 +52,33 @@ attack_damage = 10.0
 attack_speed = 1.0
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
-[sub_resource type="Resource" id="Resource_8bu2u"]
-script = ExtResource("1_fnuhq")
+[sub_resource type="Resource" id="Resource_dvpow"]
+script = ExtResource("1_50vtl")
 team = -1
-stats_override = SubResource("Resource_kpfrw")
-scene = ExtResource("2_626vn")
+stats_override = SubResource("Resource_3xmdc")
+scene = ExtResource("2_hm5vq")
 display_label = "ChickenColossus3"
-transform = Transform3D(0.2371434, 0, -0.97147465, 0, 1, 0, 0.97147465, 0, 0.2371434, -1.3728833, -0.4498062, -0.07660794)
+transform = Transform3D(0.2371434, 0, -0.97147465, 0, 1, 0, 0.97147465, 0, 0.2371434, -2.2305214, 0.059853077, -0.07660794)
 
-[sub_resource type="Resource" id="Resource_b2ssu"]
-script = ExtResource("3_nxx0i")
+[sub_resource type="Resource" id="Resource_4qap4"]
+script = ExtResource("3_8v5xn")
 health_max = 50.0
 attack_range = 10.0
 attack_damage = 10.0
 attack_speed = 1.0
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
-[sub_resource type="Resource" id="Resource_v7h1q"]
-script = ExtResource("1_fnuhq")
+[sub_resource type="Resource" id="Resource_4qnf5"]
+script = ExtResource("1_50vtl")
 role = 2
 team = -1
-stats_override = SubResource("Resource_b2ssu")
-scene = ExtResource("4_243oa")
+stats_override = SubResource("Resource_4qap4")
+scene = ExtResource("4_aaub3")
 display_label = "ChickenArdentCelestial"
-transform = Transform3D(-0.23319082, 0, -0.972431, 0, 1, 0, 0.972431, 0, -0.23319082, -10.329622, -0.43858385, -0.24994993)
+transform = Transform3D(-0.23319082, 0, -0.972431, 0, 1, 0, 0.972431, 0, -0.23319082, -10.329622, 0.045008183, -0.24994993)
 
-[sub_resource type="Resource" id="Resource_dkyqf"]
-script = ExtResource("3_nxx0i")
+[sub_resource type="Resource" id="Resource_e2erm"]
+script = ExtResource("3_8v5xn")
 health_max = 80.0
 auto_attack_type = 1
 attack_range = 1.0
@@ -85,17 +86,17 @@ attack_damage = 10.0
 attack_speed = 1.0
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
-[sub_resource type="Resource" id="Resource_8s534"]
-script = ExtResource("1_fnuhq")
+[sub_resource type="Resource" id="Resource_ubeav"]
+script = ExtResource("1_50vtl")
 role = 2
 team = -1
-stats_override = SubResource("Resource_dkyqf")
-scene = ExtResource("5_kaytq")
+stats_override = SubResource("Resource_e2erm")
+scene = ExtResource("5_y1dn5")
 display_label = "ChickenShield"
-transform = Transform3D(-0.019162599, 0, -0.99981636, 0, 1, 0, 0.99981636, 0, -0.019162599, -9.549299, -0.44285905, -10.868814)
+transform = Transform3D(-0.019162599, 0, -0.99981636, 0, 1, 0, 0.99981636, 0, -0.019162599, -9.549299, 0.04073298, -10.868814)
 
-[sub_resource type="Resource" id="Resource_4ix8n"]
-script = ExtResource("3_nxx0i")
+[sub_resource type="Resource" id="Resource_efm33"]
+script = ExtResource("3_8v5xn")
 health_max = 80.0
 auto_attack_type = 1
 attack_range = 1.0
@@ -103,17 +104,17 @@ attack_damage = 10.0
 attack_speed = 1.0
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
-[sub_resource type="Resource" id="Resource_n8oil"]
-script = ExtResource("1_fnuhq")
+[sub_resource type="Resource" id="Resource_ue7t6"]
+script = ExtResource("1_50vtl")
 role = 2
 team = -1
-stats_override = SubResource("Resource_4ix8n")
-scene = ExtResource("5_kaytq")
+stats_override = SubResource("Resource_efm33")
+scene = ExtResource("5_y1dn5")
 display_label = "ChickenShield2"
-transform = Transform3D(-0.019162599, 0, -0.99981636, 0, 1, 0, 0.99981636, 0, -0.019162599, -7.8506355, -0.44285905, -9.58469)
+transform = Transform3D(-0.019162599, 0, -0.99981636, 0, 1, 0, 0.99981636, 0, -0.019162599, -7.8506355, 0.04073298, -9.58469)
 
-[sub_resource type="Resource" id="Resource_ngi7l"]
-script = ExtResource("3_nxx0i")
+[sub_resource type="Resource" id="Resource_pfnu4"]
+script = ExtResource("3_8v5xn")
 health_max = 80.0
 auto_attack_type = 1
 attack_range = 1.0
@@ -121,17 +122,17 @@ attack_damage = 10.0
 attack_speed = 1.0
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
-[sub_resource type="Resource" id="Resource_medxn"]
-script = ExtResource("1_fnuhq")
+[sub_resource type="Resource" id="Resource_13uqb"]
+script = ExtResource("1_50vtl")
 role = 2
 team = -1
-stats_override = SubResource("Resource_ngi7l")
-scene = ExtResource("5_kaytq")
+stats_override = SubResource("Resource_pfnu4")
+scene = ExtResource("5_y1dn5")
 display_label = "ChickenShield3"
-transform = Transform3D(-0.019162599, 0, -0.99981636, 0, 1, 0, 0.99981636, 0, -0.019162599, -9.558466, -0.44285905, -9.726166)
+transform = Transform3D(-0.019162599, 0, -0.99981636, 0, 1, 0, 0.99981636, 0, -0.019162599, -9.558466, 0.04073298, -9.726166)
 
-[sub_resource type="Resource" id="Resource_g00sh"]
-script = ExtResource("3_nxx0i")
+[sub_resource type="Resource" id="Resource_iydqb"]
+script = ExtResource("3_8v5xn")
 health_max = 80.0
 auto_attack_type = 1
 attack_range = 1.0
@@ -139,17 +140,17 @@ attack_damage = 10.0
 attack_speed = 1.0
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
-[sub_resource type="Resource" id="Resource_2ve5h"]
-script = ExtResource("1_fnuhq")
+[sub_resource type="Resource" id="Resource_scfro"]
+script = ExtResource("1_50vtl")
 role = 2
 team = -1
-stats_override = SubResource("Resource_g00sh")
-scene = ExtResource("5_kaytq")
+stats_override = SubResource("Resource_iydqb")
+scene = ExtResource("5_y1dn5")
 display_label = "ChickenShield4"
-transform = Transform3D(-0.019162599, 0, -0.99981636, 0, 1, 0, 0.99981636, 0, -0.019162599, -9.452471, -0.44285905, -8.448523)
+transform = Transform3D(-0.019162599, 0, -0.99981636, 0, 1, 0, 0.99981636, 0, -0.019162599, -9.452471, 0.04073298, -8.448523)
 
-[sub_resource type="Resource" id="Resource_87m0y"]
-script = ExtResource("3_nxx0i")
+[sub_resource type="Resource" id="Resource_6b5hv"]
+script = ExtResource("3_8v5xn")
 health_max = 16.0
 auto_attack_type = 1
 attack_range = 1.0
@@ -157,16 +158,16 @@ attack_damage = 16.0
 attack_speed = 1.0
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
-[sub_resource type="Resource" id="Resource_vk8o0"]
-script = ExtResource("1_fnuhq")
+[sub_resource type="Resource" id="Resource_oryxk"]
+script = ExtResource("1_50vtl")
 role = 2
 team = -1
-stats_override = SubResource("Resource_87m0y")
-scene = ExtResource("6_w635t")
+stats_override = SubResource("Resource_6b5hv")
+scene = ExtResource("6_d2sjs")
 display_label = "Chicken"
-transform = Transform3D(0.14193785, 0, -0.98987556, 0, 1, 0, 0.98987556, 0, 0.14193785, -8.44983, -0.43996704, 8.324437)
+transform = Transform3D(0.14193785, 0, -0.98987556, 0, 1, 0, 0.98987556, 0, 0.14193785, -8.44983, 0.043624997, 8.324437)
 
 [resource]
-script = ExtResource("7_31c18")
-entity_specs = Array[ExtResource("1_fnuhq")]([SubResource("Resource_xied2"), SubResource("Resource_hgcnr"), SubResource("Resource_8bu2u"), SubResource("Resource_v7h1q"), SubResource("Resource_8s534"), SubResource("Resource_n8oil"), SubResource("Resource_medxn"), SubResource("Resource_2ve5h"), SubResource("Resource_vk8o0")])
-id = "prototype"
+script = ExtResource("7_5t85i")
+entity_specs = Array[ExtResource("1_50vtl")]([SubResource("Resource_3owwc"), SubResource("Resource_o0kh7"), SubResource("Resource_dvpow"), SubResource("Resource_4qnf5"), SubResource("Resource_ubeav"), SubResource("Resource_ue7t6"), SubResource("Resource_13uqb"), SubResource("Resource_scfro"), SubResource("Resource_oryxk")])
+id = "colossus3"

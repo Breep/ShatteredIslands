@@ -1,2 +1,2 @@
 class_name HeroSpawnPoint
-extends Node3D
+extends SpawnPoint

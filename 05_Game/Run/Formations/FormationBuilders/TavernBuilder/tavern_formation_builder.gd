@@ -34,8 +34,8 @@ func _build() -> TavernFormation:
 	var formation := TavernFormation.new()
 	formation.id = formation_id
 	_collect_entities(formation, _mobs_node)
-	_collect_spawn_points(formation, _hero_spawns_node, SpawnPointSpec.SpawnRole.HERO)
-	_collect_spawn_points(formation, _acolyte_spawns_node, SpawnPointSpec.SpawnRole.ACOLYTE)
+	for container in [_hero_spawns_node, _acolyte_spawns_node]:
+		_collect_spawn_points(formation, container)
 	_collect_props(formation, _props_node)
 	return formation
 
@@ -106,11 +106,12 @@ func _collect_entities(formation: TavernFormation, container: Node3D) -> void:
 			formation.entity_specs.append(_entity_to_tavern_spec(child))
 
 
-func _collect_spawn_points(formation: TavernFormation, container: Node3D, role: SpawnPointSpec.SpawnRole) -> void:
+func _collect_spawn_points(formation: TavernFormation, container: Node3D) -> void:
 	if container == null: return
 	for child in container.get_children():
-		if child is Node3D:
-			formation.spawn_point_specs.append(_node_to_spawn_point_spec(child, role))
+		var spec: SpawnPointSpec = _try_make_spawn_point_spec(child)
+		if spec != null:
+			formation.spawn_point_specs.append(spec)
 
 
 func _collect_props(formation: TavernFormation, container: Node3D) -> void:
@@ -128,15 +129,6 @@ func _entity_to_tavern_spec(entity: Entity) -> TavernEntitySpec:
 	spec.rotation_y = entity.rotation.y
 	if entity.custom_base_stats != null:
 		spec.stats_override = entity.custom_base_stats.duplicate(true)
-	return spec
-
-
-func _node_to_spawn_point_spec(node: Node3D, role: SpawnPointSpec.SpawnRole) -> SpawnPointSpec:
-	var spec := SpawnPointSpec.new()
-	spec.scene = load(node.scene_file_path) if node.scene_file_path != "" else null
-	spec.role = role
-	spec.display_label = node.name
-	spec.transform = node.transform
 	return spec
 
 

@@ -11,7 +11,7 @@ extends Node
 @export var _acolyte_scenes: Array[PackedScene] = []
 
 @export_group("Player formation layout")
-@export var _hero_offset: Vector3 = Vector3(-3.0, 0.0, 0.0)
+@export var _hero_offset: Vector3 = Vector3(5.0, 0.0, 0.0)
 @export var _acolyte_step: Vector3 = Vector3(0.0, 0.0, 1.0)
 @export var _player_team: int = 1
 @export var _mob_team: int = 2

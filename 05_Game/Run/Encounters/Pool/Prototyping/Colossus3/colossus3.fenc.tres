@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dg13tr0kcjyll" path="res://05_Game/Run/Encounters/fighting_encounter.gd" id="1_h4ws4"]
 [ext_resource type="PackedScene" uid="uid://0x5u0h623yxt" path="res://06_FloatingIsland/FightingIsland/Pool/ArchIsland/arch_island.tscn" id="1_hodua"]
-[ext_resource type="Resource" uid="uid://c845hkwlovjo8" path="res://05_Game/Run/Formations/Pool/Prototyping/Colossus3/colossus3.ffor.tres" id="3_aepqv"]
+[ext_resource type="Resource" uid="uid://db8elmacgb0ag" path="res://05_Game/Run/Formations/Pool/Prototyping/Colossus3/colossus3.ffor.tres" id="3_aepqv"]
 
 [resource]
 script = ExtResource("1_h4ws4")
