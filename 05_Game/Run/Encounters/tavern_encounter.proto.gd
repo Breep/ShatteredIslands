@@ -22,7 +22,7 @@ func _ready() -> void:
 	_create_fake_player()
 
 	var buying_island: BuyingIsland = BUYING_ISLAND_SCENE.instantiate()
-	add_child(buying_island)
+	add_child.call_deferred(buying_island)
 	await buying_island.ready
 	buying_island.start_buying_phase_from_encounter(_tavern_encounter, _hero_scene, _acolyte_scenes)
 	buying_island.set_active()

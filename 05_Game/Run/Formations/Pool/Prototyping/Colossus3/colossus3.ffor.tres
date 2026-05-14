@@ -1,13 +1,16 @@
 [gd_resource type="Resource" script_class="FightingFormation" format=3 uid="uid://db8elmacgb0ag"]
 
 [ext_resource type="Script" uid="uid://ce1cer1au6kbt" path="res://05_Game/Run/SpawnSpecs/fighting_entity_spec.gd" id="1_50vtl"]
+[ext_resource type="Script" uid="uid://flrydugnyfe7" path="res://05_Game/Run/SpawnSpecs/Concrete/acolyte_spawn_spec.gd" id="1_ylohd"]
 [ext_resource type="PackedScene" uid="uid://dr2axaqcdg5x3" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenColossus/chicken_colossus.tscn" id="2_hm5vq"]
+[ext_resource type="Script" uid="uid://rj6clcd8f15a" path="res://05_Game/Run/SpawnSpecs/entity_spec.gd" id="2_khapn"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_8v5xn"]
 [ext_resource type="PackedScene" uid="uid://7s8lg5leu3go" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenArdentCelestial/chicken_ardent_celestial.tscn" id="4_aaub3"]
 [ext_resource type="PackedScene" uid="uid://d1o2vt1qf1fdf" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenEngineer/chicken_engineer.tscn" id="5_y1dn5"]
 [ext_resource type="PackedScene" uid="uid://xup3guwehhoc" path="res://02_Entities/Summons/ChickenLord/Chicken/Basic/chicken_basic.tscn" id="6_d2sjs"]
 [ext_resource type="Script" uid="uid://b3ir321gjcqej" path="res://05_Game/Run/Formations/fighting_formation.gd" id="7_5t85i"]
 [ext_resource type="Script" uid="uid://c78ccxnqy6c16" path="res://05_Game/Run/SpawnSpecs/spawn_point_spec.gd" id="8_7ijot"]
+[ext_resource type="Script" uid="uid://bj0ecq2d5vir5" path="res://05_Game/Run/SpawnSpecs/Concrete/hero_spawn_spec.gd" id="9_ycsxn"]
 
 [sub_resource type="Resource" id="Resource_22vqy"]
 script = ExtResource("3_8v5xn")
@@ -20,7 +23,6 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="Resource" id="Resource_3owwc"]
 script = ExtResource("1_50vtl")
-team = -1
 stats_override = SubResource("Resource_22vqy")
 scene = ExtResource("2_hm5vq")
 display_label = "ChickenColossus"
@@ -37,7 +39,6 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="Resource" id="Resource_o0kh7"]
 script = ExtResource("1_50vtl")
-team = -1
 stats_override = SubResource("Resource_nipu5")
 scene = ExtResource("2_hm5vq")
 display_label = "ChickenColossus2"
@@ -54,7 +55,6 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="Resource" id="Resource_dvpow"]
 script = ExtResource("1_50vtl")
-team = -1
 stats_override = SubResource("Resource_3xmdc")
 scene = ExtResource("2_hm5vq")
 display_label = "ChickenColossus3"
@@ -71,7 +71,6 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 [sub_resource type="Resource" id="Resource_4qnf5"]
 script = ExtResource("1_50vtl")
 role = 2
-team = -1
 stats_override = SubResource("Resource_4qap4")
 scene = ExtResource("4_aaub3")
 display_label = "ChickenArdentCelestial"
@@ -89,7 +88,6 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 [sub_resource type="Resource" id="Resource_ubeav"]
 script = ExtResource("1_50vtl")
 role = 2
-team = -1
 stats_override = SubResource("Resource_e2erm")
 scene = ExtResource("5_y1dn5")
 display_label = "ChickenShield"
@@ -107,7 +105,6 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 [sub_resource type="Resource" id="Resource_ue7t6"]
 script = ExtResource("1_50vtl")
 role = 2
-team = -1
 stats_override = SubResource("Resource_efm33")
 scene = ExtResource("5_y1dn5")
 display_label = "ChickenShield2"
@@ -125,7 +122,6 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 [sub_resource type="Resource" id="Resource_13uqb"]
 script = ExtResource("1_50vtl")
 role = 2
-team = -1
 stats_override = SubResource("Resource_pfnu4")
 scene = ExtResource("5_y1dn5")
 display_label = "ChickenShield3"
@@ -143,7 +139,6 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 [sub_resource type="Resource" id="Resource_scfro"]
 script = ExtResource("1_50vtl")
 role = 2
-team = -1
 stats_override = SubResource("Resource_iydqb")
 scene = ExtResource("5_y1dn5")
 display_label = "ChickenShield4"
@@ -161,7 +156,6 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 [sub_resource type="Resource" id="Resource_oryxk"]
 script = ExtResource("1_50vtl")
 role = 2
-team = -1
 stats_override = SubResource("Resource_6b5hv")
 scene = ExtResource("6_d2sjs")
 display_label = "Chicken"
@@ -169,5 +163,5 @@ transform = Transform3D(0.14193785, 0, -0.98987556, 0, 1, 0, 0.98987556, 0, 0.14
 
 [resource]
 script = ExtResource("7_5t85i")
-entity_specs = Array[ExtResource("1_50vtl")]([SubResource("Resource_3owwc"), SubResource("Resource_o0kh7"), SubResource("Resource_dvpow"), SubResource("Resource_4qnf5"), SubResource("Resource_ubeav"), SubResource("Resource_ue7t6"), SubResource("Resource_13uqb"), SubResource("Resource_scfro"), SubResource("Resource_oryxk")])
+entity_specs = Array[ExtResource("2_khapn")]([SubResource("Resource_3owwc"), SubResource("Resource_o0kh7"), SubResource("Resource_dvpow"), SubResource("Resource_4qnf5"), SubResource("Resource_ubeav"), SubResource("Resource_ue7t6"), SubResource("Resource_13uqb"), SubResource("Resource_scfro"), SubResource("Resource_oryxk")])
 id = "colossus3"

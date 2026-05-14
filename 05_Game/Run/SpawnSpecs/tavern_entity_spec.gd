@@ -1,5 +1,6 @@
-# Spec describing an entity present in a tavern formation (mobs, NPCs, ...).
-# Spawn placeholders (hero / acolyte) are NOT TavernEntitySpec — see SpawnPointSpec.
+# DEPRECATED — remplacé par MobSpec (Concrete/).
+# Conservé pour permettre le chargement des .tres legacy. Sera supprimé après
+# migration de toutes les ressources via les builders (Load → Save).
 class_name TavernEntitySpec
 extends EntitySpec
 

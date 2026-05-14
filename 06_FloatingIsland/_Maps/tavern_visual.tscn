@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://3m2v1arprnf7"]
 
 [ext_resource type="Texture2D" uid="uid://wbrwetv4d7je" path="res://20_Data/Blender/Map/Map/Tavern/tavern_spec.png" id="1_1ei56"]
+[ext_resource type="Script" uid="uid://bg27we47t814j" path="res://06_FloatingIsland/BuyingIsland/BuyingArea/Tavern/tavern.gd" id="1_33w7l"]
 [ext_resource type="PackedScene" uid="uid://ce3p3v6y8hed1" path="res://22_VFX/VFX_3D/Fire/vfx_candle_fire_3d.tscn" id="2_33w7l"]
 [ext_resource type="Script" uid="uid://1hqrwl2e0q2r" path="res://05_Game/MainMenu/torch_light.gd" id="3_dc20i"]
 [ext_resource type="Texture2D" uid="uid://b8ghyhoetfbsr" path="res://20_Data/Blender/Map/Map/Tavern/tavern_Dungeons_Texture_01.png" id="4_avl42"]
@@ -37666,6 +37667,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_etadu")
 
 [node name="tavern" type="Node3D" unique_id=694546034]
+script = ExtResource("1_33w7l")
 
 [node name="Light" type="Node3D" parent="." unique_id=2093612268]
 

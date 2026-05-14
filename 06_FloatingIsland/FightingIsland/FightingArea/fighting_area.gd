@@ -96,7 +96,7 @@ func get_battle_type() -> Battle.BattleType:
 
 # ============================== Private functions ==============================
 
-func _spawn_specs_2(specs: Array[FightingEntitySpec], team: int) -> void:
+func _spawn_specs_2(specs: Array[EntitySpec], team: int) -> void:
 	for spec: EntitySpec in specs:
 		var entity: Entity = spec.scene.instantiate()
 		entity.custom_base_stats = spec.stats_override

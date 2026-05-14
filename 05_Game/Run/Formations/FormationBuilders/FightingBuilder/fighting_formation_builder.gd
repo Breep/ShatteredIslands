@@ -35,12 +35,12 @@ func _save() -> void:
 func _build() -> FightingFormation:
 	var formation := FightingFormation.new()
 	formation.id = formation_id
-	_collect_entities(formation, _antagonists_node, FightingEntitySpec.FightingRole.ANTAGONIST)
-	_collect_entities(formation, _heroes_node, FightingEntitySpec.FightingRole.HERO)
-	_collect_entities(formation, _acolytes_node, FightingEntitySpec.FightingRole.ACOLYTE)
-	_collect_entities(formation, _buildings_node, FightingEntitySpec.FightingRole.BUILDING)
-	for container in [_player_hero_spawns_node, _player_acolyte_spawns_node]:
-		_collect_spawn_points(formation, container)
+	_collect_entities_into(formation, _antagonists_node, AntagonistSpec)
+	_collect_entities_into(formation, _heroes_node, HeroSpec)
+	_collect_entities_into(formation, _acolytes_node, AcolyteSpec)
+	_collect_entities_into(formation, _buildings_node, BuildingSpec)
+	_collect_spawns_into(formation.hero_spawn_specs, _player_hero_spawns_node, HeroSpawnSpec, HeroSpawnPoint)
+	_collect_spawns_into(formation.acolyte_spawn_specs, _player_acolyte_spawns_node, AcolyteSpawnSpec, AcolyteSpawnPoint)
 	return formation
 
 
@@ -53,10 +53,10 @@ func _load() -> void:
 	var loaded := 0
 	var skipped := 0
 
-	for spec: FightingEntitySpec in formation_to_load.entity_specs:
-		var container := _get_container_for_role(spec.role)
+	for spec: EntitySpec in formation_to_load.entity_specs:
+		var container: Node3D = _container_for_entity_spec(spec)
 		if container == null:
-			print_rich("[color=red]No container for role %s, skipping '%s'[/color]" % [FightingEntitySpec.FightingRole.keys()[spec.role], spec.display_label])
+			print_rich("[color=red]No container for entity '%s', skipping[/color]" % spec.display_label)
 			skipped += 1
 			continue
 		if _instantiate_spec_into(spec, container, edited_root):
@@ -64,10 +64,19 @@ func _load() -> void:
 		else:
 			skipped += 1
 
+	for spec: HeroSpawnSpec in formation_to_load.hero_spawn_specs:
+		if _instantiate_spec_into(spec, _player_hero_spawns_node, edited_root): loaded += 1
+		else: skipped += 1
+
+	for spec: AcolyteSpawnSpec in formation_to_load.acolyte_spawn_specs:
+		if _instantiate_spec_into(spec, _player_acolyte_spawns_node, edited_root): loaded += 1
+		else: skipped += 1
+
+	# Legacy compat: old .tres still using SpawnPointSpec with SpawnRole enum
 	for spec: SpawnPointSpec in formation_to_load.spawn_point_specs:
-		var container := _get_container_for_spawn_role(spec.role)
+		var container: Node3D = _container_for_legacy_spawn_role(spec.role)
 		if container == null:
-			print_rich("[color=red]No container for spawn role %s, skipping '%s'[/color]" % [SpawnPointSpec.SpawnRole.keys()[spec.role], spec.display_label])
+			print_rich("[color=red]No container for legacy spawn role %s, skipping '%s'[/color]" % [SpawnPointSpec.SpawnRole.keys()[spec.role], spec.display_label])
 			skipped += 1
 			continue
 		if _instantiate_spec_into(spec, container, edited_root):
@@ -94,48 +103,58 @@ func _validate() -> bool:
 #endregion
 
 #region ============================== Private API ==============================
-func _collect_entities(formation: FightingFormation, container: Node3D, role: FightingEntitySpec.FightingRole) -> void:
+func _collect_entities_into(formation: FightingFormation, container: Node3D, spec_type: Variant) -> void:
 	if container == null:
 		printerr("Trying to collect entities from an unknown Node [container=<null>]")
 		return
 	var count: int = 0
 	for child in container.get_children():
 		if child is Entity:
-			formation.entity_specs.append(_entity_to_fighting_spec(child, role))
+			formation.entity_specs.append(_entity_to_spec(child, spec_type))
 			count += 1
-	print("Found ", count, " ", FightingEntitySpec.FightingRole.keys()[role])
+	print("Found ", count, " of ", spec_type)
 
 
-func _collect_spawn_points(formation: FightingFormation, container: Node3D) -> void:
+func _collect_spawns_into(target_array: Array, container: Node3D, spec_type: Variant, node_type: Variant) -> void:
 	if container == null: return
 	var count: int = 0
 	for child in container.get_children():
-		var spec: SpawnPointSpec = _try_make_spawn_point_spec(child)
-		if spec != null:
-			formation.spawn_point_specs.append(spec)
+		if is_instance_of(child, node_type):
+			target_array.append(_node_to_spawn_spec(child, spec_type))
 			count += 1
 	print("Found ", count, " spawn points inside ", container.name)
 
 
-func _entity_to_fighting_spec(entity: Entity, role: FightingEntitySpec.FightingRole) -> FightingEntitySpec:
-	var spec := FightingEntitySpec.new()
+func _entity_to_spec(entity: Entity, spec_type: Variant) -> EntitySpec:
+	var spec: EntitySpec = spec_type.new()
 	spec.scene = load(entity.scene_file_path)
-	spec.role = role
 	spec.display_label = entity.name
-
 	spec.free_position = entity.global_position
 	spec.rotation_y = entity.rotation.y
-
 	if entity.custom_base_stats != null:
 		spec.stats_override = entity.custom_base_stats.duplicate(true)
 	return spec
 
 
-func _get_all_containers() -> Array[Node3D]:
-	return [_antagonists_node, _heroes_node, _acolytes_node, _buildings_node, _player_hero_spawns_node, _player_acolyte_spawns_node]
+func _node_to_spawn_spec(node: Node3D, spec_type: Variant) -> SpawnSpec:
+	var spec: SpawnSpec = spec_type.new()
+	spec.scene = load(node.scene_file_path) if node.scene_file_path != "" else null
+	spec.display_label = node.name
+	spec.transform = node.transform
+	return spec
 
 
-func _get_container_for_role(role: FightingEntitySpec.FightingRole) -> Node3D:
+func _container_for_entity_spec(spec: EntitySpec) -> Node3D:
+	if spec is HeroSpec:        return _heroes_node
+	if spec is AcolyteSpec:     return _acolytes_node
+	if spec is AntagonistSpec:  return _antagonists_node
+	if spec is BuildingSpec:    return _buildings_node
+	if spec is FightingEntitySpec:
+		return _container_for_legacy_fighting_role((spec as FightingEntitySpec).role)
+	return null
+
+
+func _container_for_legacy_fighting_role(role: int) -> Node3D:
 	match role:
 		FightingEntitySpec.FightingRole.ANTAGONIST: return _antagonists_node
 		FightingEntitySpec.FightingRole.HERO:       return _heroes_node
@@ -144,9 +163,13 @@ func _get_container_for_role(role: FightingEntitySpec.FightingRole) -> Node3D:
 		_:                                          return null
 
 
-func _get_container_for_spawn_role(role: SpawnPointSpec.SpawnRole) -> Node3D:
+func _container_for_legacy_spawn_role(role: int) -> Node3D:
 	match role:
 		SpawnPointSpec.SpawnRole.HERO:     return _player_hero_spawns_node
 		SpawnPointSpec.SpawnRole.ACOLYTE:  return _player_acolyte_spawns_node
 		_:                                 return null
+
+
+func _get_all_containers() -> Array[Node3D]:
+	return [_antagonists_node, _heroes_node, _acolytes_node, _buildings_node, _player_hero_spawns_node, _player_acolyte_spawns_node]
 #endregion

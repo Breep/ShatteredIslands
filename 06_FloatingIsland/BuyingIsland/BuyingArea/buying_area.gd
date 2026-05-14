@@ -7,7 +7,7 @@ var _is_active: bool = false
 
 # ============================== Local nodes ==============================
 
-@onready var _tavern: Tavern = %Tavern_Animated
+@onready var _tavern: Tavern = %Tavern
 
 # ============================== Node base functions ==============================
 

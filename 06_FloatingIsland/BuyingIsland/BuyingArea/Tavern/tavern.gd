@@ -19,7 +19,7 @@ func cleanup() -> void:
 
 # === New API: populate from a TavernEncounter ===
 # Instancie tous les éléments d'une TavernFormation et injecte le héros / les
-# acolytes du joueur aux SpawnPointSpec marqués HERO / ACOLYTE.
+# acolytes du joueur aux HeroSpawnSpec / AcolyteSpawnSpec.
 func populate_from_encounter(encounter: TavernEncounter, hero_scene: PackedScene, acolyte_scenes: Array[PackedScene]) -> void:
 	if encounter == null or encounter.tavern_formation == null:
 		Verbose.error("Tavern.populate_from_encounter: encounter or tavern_formation is null", Verbose.Category.ENCOUNTER_RUNNER)
@@ -32,21 +32,16 @@ func populate_from_encounter(encounter: TavernEncounter, hero_scene: PackedScene
 	for spec: PropSpec in formation.prop_specs:
 		_spawn_simple(spec, root)
 
-	for spec: TavernEntitySpec in formation.entity_specs:
+	for spec: EntitySpec in formation.entity_specs:
 		_spawn_entity(spec, root)
 
-	var hero_placed: bool = false
-	var acolyte_idx: int = 0
-	for spec: SpawnPointSpec in formation.spawn_point_specs:
-		match spec.role:
-			SpawnPointSpec.SpawnRole.HERO:
-				if not hero_placed and hero_scene != null:
-					_spawn_at(hero_scene, spec.transform, "Hero", root)
-					hero_placed = true
-			SpawnPointSpec.SpawnRole.ACOLYTE:
-				if acolyte_idx < acolyte_scenes.size() and acolyte_scenes[acolyte_idx] != null:
-					_spawn_at(acolyte_scenes[acolyte_idx], spec.transform, "Acolyte_" + str(acolyte_idx), root)
-					acolyte_idx += 1
+	if hero_scene != null and not formation.hero_spawn_specs.is_empty():
+		_spawn_at(hero_scene, formation.hero_spawn_specs[0].transform, "Hero", root)
+
+	var placed_acolytes: int = mini(acolyte_scenes.size(), formation.acolyte_spawn_specs.size())
+	for i in placed_acolytes:
+		if acolyte_scenes[i] == null: continue
+		_spawn_at(acolyte_scenes[i], formation.acolyte_spawn_specs[i].transform, "Acolyte_" + str(i), root)
 
 
 # === Private helpers ===
@@ -75,7 +70,7 @@ func _spawn_simple(spec: SpawnSpec, parent: Node3D) -> void:
 		node.name = spec.display_label
 
 
-func _spawn_entity(spec: TavernEntitySpec, parent: Node3D) -> void:
+func _spawn_entity(spec: EntitySpec, parent: Node3D) -> void:
 	if spec.scene == null:
 		return
 	var node: Node = spec.scene.instantiate()

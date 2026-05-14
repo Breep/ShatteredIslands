@@ -1,15 +1,13 @@
 [gd_scene format=3 uid="uid://ca8mcplp2va4s"]
 
 [ext_resource type="Script" uid="uid://cvy50on4evfts" path="res://06_FloatingIsland/BuyingIsland/BuyingArea/buying_area.gd" id="1_ed4aq"]
-[ext_resource type="PackedScene" uid="uid://ca3wssxlwj4qk" path="res://06_FloatingIsland/_Maps/tavern_animated.tscn" id="4_4b3p2"]
-[ext_resource type="Script" uid="uid://bg27we47t814j" path="res://06_FloatingIsland/BuyingIsland/BuyingArea/Tavern/tavern.gd" id="4_gi2cy"]
 [ext_resource type="PackedScene" uid="uid://bg5efhnq0erdv" path="res://90_Modules/PickableClickable/ClickableModule/clickable_module.tscn" id="5_4b3p2"]
 [ext_resource type="PackedScene" uid="uid://dr8xv1vshmvyq" path="res://06_FloatingIsland/BuyingIsland/BuyingArea/Tavern/TavernCenter/tavern_center.tscn" id="5_4lvlh"]
+[ext_resource type="PackedScene" uid="uid://3m2v1arprnf7" path="res://06_FloatingIsland/_Maps/tavern_visual.tscn" id="6_aiwy2"]
 [ext_resource type="PackedScene" uid="uid://cdryp1jj4woix" path="res://06_FloatingIsland/BuyingIsland/BuyingArea/ShopDeck3DVisual/shop_deck_3d_visual.tscn" id="6_gi2cy"]
 [ext_resource type="Script" uid="uid://cfmyr6dqjwc8a" path="res://06_FloatingIsland/BuyingIsland/BuyingArea/Tavern/furniture.gd" id="6_q21af"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jhmrm"]
-
 
 [node name="BuyingArea" type="Node3D" unique_id=1844697375]
 script = ExtResource("1_ed4aq")
@@ -18,15 +16,7 @@ script = ExtResource("1_ed4aq")
 replication_config = SubResource("SceneReplicationConfig_jhmrm")
 
 [node name="TavernCenter" parent="." unique_id=907981610 instance=ExtResource("5_4lvlh")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0670199, 0.55223, 0.0844293)
-
-[node name="Tavern_Animated" parent="." unique_id=254549637 node_paths=PackedStringArray("_tarven_center") instance=ExtResource("4_4b3p2")]
-unique_name_in_owner = true
-script = ExtResource("4_gi2cy")
-_tarven_center = NodePath("../TavernCenter")
-
-[node name="DirectionalLight3D" parent="Tavern_Animated/tavern/Light" index="0"]
-visible = true
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.0670199, 0.55223, 0.0844293)
 
 [node name="Furnitures" type="Node3D" parent="." unique_id=798486155]
 
@@ -38,7 +28,7 @@ script = ExtResource("6_q21af")
 furniture_type = 2
 
 [node name="ClickableModule" parent="Furnitures/CardShop" unique_id=1652365469 node_paths=PackedStringArray("_nodes_where_to_find_meshs", "_owner") instance=ExtResource("5_4b3p2")]
-_nodes_where_to_find_meshs = [NodePath("../../../Tavern_Animated/tavern/Bar main")]
+_nodes_where_to_find_meshs = [null]
 _owner = NodePath("..")
 _scale_div_grow = 0.01
 
@@ -50,7 +40,7 @@ script = ExtResource("6_q21af")
 furniture_type = 3
 
 [node name="ClickableModule" parent="Furnitures/Oracle" unique_id=1036491790 node_paths=PackedStringArray("_nodes_where_to_find_meshs", "_owner") instance=ExtResource("5_4b3p2")]
-_nodes_where_to_find_meshs = [NodePath("../../../Tavern_Animated/tavern/Voyante")]
+_nodes_where_to_find_meshs = [null]
 _owner = NodePath("..")
 _scale_div_grow = 0.01
 
@@ -62,7 +52,7 @@ script = ExtResource("6_q21af")
 furniture_type = 1
 
 [node name="ClickableModule" parent="Furnitures/StatisticsBoard" unique_id=248886124 node_paths=PackedStringArray("_nodes_where_to_find_meshs", "_owner") instance=ExtResource("5_4b3p2")]
-_nodes_where_to_find_meshs = [NodePath("../../../Tavern_Animated/tavern/XP")]
+_nodes_where_to_find_meshs = [null]
 _owner = NodePath("..")
 _scale_div_grow = 0.01
 
@@ -71,5 +61,7 @@ _scale_div_grow = 0.01
 [node name="ShopDeck3DVisual" parent="VisualFeedbacks" unique_id=1722908050 instance=ExtResource("6_gi2cy")]
 transform = Transform3D(0.000895275, 0, -0.569999, 0, 0.57, 0, 0.569999, 0, 0.000895275, -7.94129, 1.11738, 0.147098)
 
-[editable path="Tavern_Animated"]
-[editable path="Tavern_Animated/tavern"]
+[node name="Tavern" parent="." unique_id=694546034 node_paths=PackedStringArray("_tarven_center", "_encounter_root") instance=ExtResource("6_aiwy2")]
+unique_name_in_owner = true
+_tarven_center = NodePath("../TavernCenter")
+_encounter_root = NodePath("../TavernCenter")

@@ -4,8 +4,6 @@
 class_name SpawnPoint
 extends Node3D
 
-@export var team: int
-
 
 func _ready() -> void:
 	var visual: Node = get_node_or_null(^"%VisualToBeDestroyed")
