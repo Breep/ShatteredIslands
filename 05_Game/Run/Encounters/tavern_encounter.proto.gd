@@ -1,31 +1,37 @@
-# Proto scene pour valider l'injection d'un TavernEncounter dans la BuyingIsland.
-# Instancie un faux Player (pour la plomberie shop de cartes), une BuyingIsland
-# complète, puis appelle la nouvelle API start_buying_phase_from_encounter().
+# Proto scene pour valider un TavernEncounter via l'EncounterRunner.
+# Construit une Party locale (template de formation par défaut + héros/acolytes
+# exportés), instancie un faux Player pour la plomberie shop, puis utilise
+# EncounterRunner.setup_tavern() pour peupler la BuyingIsland.
 extends Node
 
 @export_group("Proto Inputs")
 @export var _tavern_encounter: TavernEncounter
-@export var _hero_scene: PackedScene
+@export var _default_player_formation: FightingFormation
+@export var _hero_scenes: Array[PackedScene] = []
 @export var _acolyte_scenes: Array[PackedScene] = []
 
-const BUYING_ISLAND_SCENE: PackedScene = preload("res://06_FloatingIsland/BuyingIsland/buying_island.tscn")
+var _encounter_runner: EncounterRunner
 
 
 func _ready() -> void:
 	if _tavern_encounter == null:
 		Verbose.error("TavernEncounter proto: no _tavern_encounter assigned", Verbose.Category.ENCOUNTER_RUNNER)
 		return
+	if _default_player_formation == null:
+		Verbose.error("TavernEncounter proto: no _default_player_formation assigned", Verbose.Category.ENCOUNTER_RUNNER)
+		return
 
 	GameManager.init()
 	CardShopManager.init(GameManager.active_families, GameManager.game_rules)
-
 	_create_fake_player()
 
-	var buying_island: BuyingIsland = BUYING_ISLAND_SCENE.instantiate()
-	add_child.call_deferred(buying_island)
-	await buying_island.ready
-	buying_island.start_buying_phase_from_encounter(_tavern_encounter, _hero_scene, _acolyte_scenes)
-	buying_island.set_active()
+	_encounter_runner = EncounterRunner.new()
+	add_child(_encounter_runner)
+
+	var party: Party = Party.new()
+	party.formation = _default_player_formation.populate_with(_hero_scenes, _acolyte_scenes)
+
+	await _encounter_runner.setup_tavern(_tavern_encounter, party)
 
 
 func _create_fake_player() -> void:

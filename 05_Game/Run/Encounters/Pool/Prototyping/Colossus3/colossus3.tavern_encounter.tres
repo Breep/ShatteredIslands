@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="TavernEncounter" format=3 uid="uid://dlsm1uf1vi7uw"]
 
 [ext_resource type="Script" uid="uid://b02max168665p" path="res://05_Game/Run/Encounters/tavern_encounter.gd" id="1_bfo5s"]
-[ext_resource type="Resource" uid="uid://dml684d3irucy" path="res://05_Game/Run/Formations/Pool/Prototyping/Colossus3/colossus3.tavern_formation.tres" id="2_fmhwi"]
+[ext_resource type="Resource" uid="uid://cfq775i1ac878" path="res://05_Game/Run/Formations/Pool/Prototyping/Colossus3/colossus3.tavern_formation.tres" id="2_fmhwi"]
 
 [resource]
 script = ExtResource("1_bfo5s")
