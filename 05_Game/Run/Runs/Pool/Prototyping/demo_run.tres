@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Run" format=3]
+
+[ext_resource type="Script" uid="uid://nilxedp6gjq2" path="res://05_Game/Run/run.gd" id="1_run"]
+[ext_resource type="Script" uid="uid://cp06s2eytdhsh" path="res://05_Game/Run/Confrontations/confrontation.gd" id="2_conf"]
+[ext_resource type="Resource" uid="uid://85dbxj88x4wo" path="res://05_Game/Run/Confrontations/Pool/Colossus3/colossus3.confrontation.tres" id="3_colos"]
+
+[resource]
+script = ExtResource("1_run")
+id = &"demo_run"
+display_name = "Démo Run"
+confrontations = Array[ExtResource("2_conf")]([ExtResource("3_colos"), ExtResource("3_colos"), ExtResource("3_colos"), ExtResource("3_colos"), ExtResource("3_colos")])
+current_index = 0
