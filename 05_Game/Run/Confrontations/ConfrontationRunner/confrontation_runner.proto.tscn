@@ -35,15 +35,15 @@ layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 8
 
-[node name="TavernButton" type="Button" parent="UI/MarginContainer/VBox" unique_id=412938201]
+[node name="EndTavernButton" type="Button" parent="UI/MarginContainer/VBox" unique_id=412938201]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Start tavern"
+text = "End tavern phase"
 
-[node name="FightButton" type="Button" parent="UI/MarginContainer/VBox" unique_id=412938202]
+[node name="EndFightButton" type="Button" parent="UI/MarginContainer/VBox" unique_id=412938202]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Start fight"
+text = "End fighting phase"
 
 [node name="ReloadButton" type="Button" parent="UI/MarginContainer/VBox" unique_id=1953661377]
 unique_name_in_owner = true

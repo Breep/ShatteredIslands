@@ -11,6 +11,9 @@
 class_name EncounterRunner
 extends Node
 
+signal tavern_phase_ended
+signal fighting_phase_ended
+
 const BUYING_ISLAND_SCENE: PackedScene = preload("res://06_FloatingIsland/BuyingIsland/buying_island.tscn")
 
 
@@ -42,6 +45,8 @@ func run_fighting(encounter: FightingEncounter, party_formation: FightingFormati
 	if island == null: return
 	GlobalFightingManager.start()
 	await GlobalFightingManager.all_fights_are_over
+	island.queue_free()
+	fighting_phase_ended.emit()
 #endregion
 
 
@@ -71,5 +76,8 @@ func setup_tavern(encounter: TavernEncounter, party: Party = null) -> BuyingIsla
 func run_tavern(encounter: TavernEncounter, party: Party = null) -> void:
 	var island: BuyingIsland = await setup_tavern(encounter, party)
 	if island == null: return
-	# TODO: await fin de phase taverne via un signal (à créer côté BuyingIsland)
+	# Manuel pour le moment : le caller (proto) émet tavern_phase_ended.
+	# TODO: brancher sur un vrai signal de fin de phase côté BuyingIsland.
+	await tavern_phase_ended
+	island.queue_free()
 #endregion

@@ -1,8 +1,7 @@
-# Proto scene pour tester une Confrontation hors d'un Run.
-# Trois boutons : lancer la phase taverne, lancer la phase combat, recharger.
-# Chaque phase est déclenchable indépendamment — la Confrontation vit en isolation.
-# (Un Encounter peut aussi vivre seul via encounter_runner.proto.
-#  Une Formation peut vivre seule via fighting_formation.proto.)
+# Proto scene pour tester une Confrontation via le ConfrontationRunner.
+# La Confrontation s'auto-exécute (tavern → fight → done). Les phases qui n'ont
+# pas encore de signal de fin naturel (taverne) sont terminées manuellement via
+# des boutons qui émettent eux-mêmes les signaux d'EncounterRunner.
 extends Node
 
 @export_group("Proto Inputs")
@@ -11,12 +10,12 @@ extends Node
 @export var _hero_scenes: Array[PackedScene] = []
 @export var _acolyte_scenes: Array[PackedScene] = []
 
-@onready var _tavern_button: Button = %TavernButton
-@onready var _fight_button: Button = %FightButton
+@onready var _end_tavern_button: Button = %EndTavernButton
+@onready var _end_fight_button: Button = %EndFightButton
 @onready var _reload_button: Button = %ReloadButton
 
 var _encounter_runner: EncounterRunner
-var _party: Party
+var _confrontation_runner: ConfrontationRunner
 
 
 func _ready() -> void:
@@ -34,30 +33,33 @@ func _ready() -> void:
 
 	_encounter_runner = EncounterRunner.new()
 	add_child(_encounter_runner)
+	_confrontation_runner = ConfrontationRunner.new()
+	_confrontation_runner._encounter_runner = _encounter_runner
+	add_child(_confrontation_runner)
+	_confrontation_runner.confrontation_ended.connect(_on_confrontation_ended)
 
-	_party = Party.new()
-	_party.formation = _default_player_formation.populate_with(_hero_scenes, _acolyte_scenes)
+	var party: Party = Party.new()
+	party.formation = _default_player_formation.populate_with(_hero_scenes, _acolyte_scenes)
 
-	_tavern_button.pressed.connect(_on_tavern_pressed)
-	_fight_button.pressed.connect(_on_fight_pressed)
+	_end_tavern_button.pressed.connect(_on_end_tavern_pressed)
+	_end_fight_button.pressed.connect(_on_end_fight_pressed)
 	_reload_button.pressed.connect(_on_reload_pressed)
 
-
-func _on_tavern_pressed() -> void:
-	if _confrontation.tavern_encounter == null:
-		Verbose.warn("Confrontation has no tavern_encounter", Verbose.Category.ENCOUNTER_RUNNER)
-		return
-	_tavern_button.disabled = true
-	await _encounter_runner.setup_tavern(_confrontation.tavern_encounter, _party)
+	_confrontation_runner.run(_confrontation, party)
 
 
-func _on_fight_pressed() -> void:
-	if _confrontation.fighting_encounter == null:
-		Verbose.warn("Confrontation has no fighting_encounter", Verbose.Category.ENCOUNTER_RUNNER)
-		return
-	_fight_button.disabled = true
-	await _encounter_runner.setup_fighting(_confrontation.fighting_encounter, _party.formation)
-	GlobalFightingManager.start()
+func _on_end_tavern_pressed() -> void:
+	_end_tavern_button.disabled = true
+	_encounter_runner.tavern_phase_ended.emit()
+
+
+func _on_end_fight_pressed() -> void:
+	_end_fight_button.disabled = true
+	_encounter_runner.fighting_phase_ended.emit()
+
+
+func _on_confrontation_ended() -> void:
+	Verbose.debug("Confrontation ended", Verbose.Category.ENCOUNTER_RUNNER)
 
 
 func _on_reload_pressed() -> void:
