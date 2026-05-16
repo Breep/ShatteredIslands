@@ -1,6 +1,10 @@
 class_name BuyingIsland
 extends FloatingIsland
 
+# ============================== Signals ==============================
+
+signal phase_ended
+
 # ============================== Local nodes ==============================
 
 @export var _buying_area: BuyingArea
@@ -14,12 +18,16 @@ var _is_active: bool = false
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	pass
+	Events.tavern_continue_pressed.connect(_on_tavern_continue_pressed)
 
 # ============================== Public functions ==============================
 
 func cleanup() -> void:
 	_buying_area.cleanup()
+
+
+func end_phase() -> void:
+	phase_ended.emit()
 
 
 # === Old API (à supprimer une fois la nouvelle validée) ===
@@ -46,3 +54,9 @@ func set_inactive() -> void:
 	_is_active = false
 	_buying_area.set_inactive()
 	_clicker_module.set_inactive()
+
+# ============================== Callbacks ==============================
+
+func _on_tavern_continue_pressed() -> void:
+	if not _is_active: return
+	end_phase()

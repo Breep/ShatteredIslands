@@ -55,3 +55,7 @@ func _on_events_furniture_clicked(furniture: Furniture) -> void:
 
 func _on_events_nothing_clicked() -> void:
 	pass
+
+
+func _on_continue_button_pressed() -> void:
+	Events.signal_tavern_continue_pressed()

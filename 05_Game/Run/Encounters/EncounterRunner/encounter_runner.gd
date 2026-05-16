@@ -70,14 +70,19 @@ func setup_tavern(encounter: TavernEncounter, party: Party = null) -> BuyingIsla
 
 	buying_island.start_buying_phase_from_encounter(encounter, hero_scene, acolyte_scenes)
 	buying_island.set_active()
+	# Relay du signal naturel de l'île vers tavern_phase_ended pour que run_tavern
+	# (et toute proto qui émet directement tavern_phase_ended) partage le même await.
+	buying_island.phase_ended.connect(_on_buying_island_phase_ended, CONNECT_ONE_SHOT)
 	return buying_island
 
 
 func run_tavern(encounter: TavernEncounter, party: Party = null) -> void:
 	var island: BuyingIsland = await setup_tavern(encounter, party)
 	if island == null: return
-	# Manuel pour le moment : le caller (proto) émet tavern_phase_ended.
-	# TODO: brancher sur un vrai signal de fin de phase côté BuyingIsland.
 	await tavern_phase_ended
 	island.queue_free()
+
+
+func _on_buying_island_phase_ended() -> void:
+	tavern_phase_ended.emit()
 #endregion
