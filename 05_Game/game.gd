@@ -1,6 +1,10 @@
 class_name Game
 extends Node3D
 
+#region ============================== Public variables ==============================
+var run_context: RunContext
+#endregion
+
 #region ============================== Private variables ==============================
 var _fighting_islands: Dictionary[int, FightingIsland] # [player_id, FightingIslands]
 var _current_round_battles: Array[Battle]
@@ -19,6 +23,7 @@ var _current_round_player_id_islands: Array[int] # player_id
 
 #region ============================== Node base functions ==============================
 func _ready() -> void:
+	run_context = GameManager.pending_run_context
 	_hero_selector.all_heroes_picked.connect(_on_hero_selector_all_heroes_picked)
 	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 	Shared.scene_switcher = _scene_switcher

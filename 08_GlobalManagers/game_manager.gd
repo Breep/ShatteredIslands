@@ -34,6 +34,14 @@ var _active_families: Array[Family] # Array of all families activated for this g
 var active_families: Array[Family]:
 	get: return _active_families
 
+# RunContext construit avant le change_scene, lu par Game._ready().
+# Pattern de queue : Godot ne permet pas d'injecter des paramètres au _ready
+# d'une scène chargée via change_scene_to_packed, donc on passe par cet état.
+# En multi (post-démo), il faudra propager le RunContext via RPC.
+var _pending_run_context: RunContext
+var pending_run_context: RunContext:
+	get: return _pending_run_context
+
 var _game_state_timer: Timer
 var game_state_timer: Timer:
 	get: return _game_state_timer
@@ -93,6 +101,7 @@ func request_state_transition(new_state: GameState) -> void:
 func clear() -> void:
 	_game_type = GameType.UNDEF
 	_active_families.clear()
+	_pending_run_context = null
 	CardShopManager.clear()
 
 	# Reset complete du state
@@ -125,7 +134,21 @@ func start_solo_game() -> void:
 	for i in 7: # TODO Avoir un nombre max de joueur qui dépend du mode ?
 		PlayerManager.add_bot()
 	PlayerManager.join_game(1, "Breepsolo")
+	_pending_run_context = _build_new_run_context()
 	start_game()
+
+
+func _build_new_run_context() -> RunContext:
+	var ctx := RunContext.new()
+	ctx.game_rules = _game_rules
+	ctx.active_families = _active_families.duplicate()
+	ctx.rng_seed = randi()
+	ctx.started_at = int(Time.get_unix_time_from_system())
+	ctx.run_id = str(ctx.started_at) + "_" + str(ctx.rng_seed)
+	for player: Player in PlayerManager.players.values():
+		if player.state != null:
+			ctx.party.players.append(player.state)
+	return ctx
 
 
 func get_active_families() -> Array[Family]:
