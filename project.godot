@@ -35,7 +35,6 @@ PlayerManager="*res://08_GlobalManagers/player_manager.gd"
 GlobalFightingManager="*res://08_GlobalManagers/global_fighting_manager.gd"
 MultiplayerManager="*res://08_GlobalManagers/multiplayer_manager.gd"
 GlobalGameManager="*res://08_GlobalManagers/global_game_manager.gd"
-PartyManager="*res://05_Game/Run/Party/party_manager.gd"
 Shared="*res://09_Lib/shared.gd"
 Debug="*uid://woc06wbtruty"
 

@@ -1,3 +1,6 @@
+# Représente un joueur dans une session : identité réseau (id, name, team) et
+# mécanique runtime (signals, clamps, level-up, death). Les données de run
+# sauvegardables vivent dans `state: PlayerState`.
 class_name Player
 extends Node
 
