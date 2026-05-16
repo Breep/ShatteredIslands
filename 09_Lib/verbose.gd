@@ -54,7 +54,8 @@ enum Category {
 	PROJECTILE,
 	ACTION_RECEIVER_MODULE,
 	NESTED_REGISTRY,
-	ENCOUNTER_RUNNER
+	ENCOUNTER_RUNNER,
+	SAVE
 }
 
 const CATEGORY_PREFIX_TEMPLATES: Dictionary[Category, String] = {
@@ -98,6 +99,7 @@ const CATEGORY_PREFIX_TEMPLATES: Dictionary[Category, String] = {
 	Category.ACTION_RECEIVER_MODULE: "(ACTION_REC) ",
 	Category.NESTED_REGISTRY:  "(NESTED_REG) ",
 	Category.ENCOUNTER_RUNNER: "(ENC_RUNNER) ",
+	Category.SAVE: "(SAVE      ) ",
 }
 
 const PREFIX_TEMPLATES: Dictionary[GameType, String] = {
@@ -162,6 +164,7 @@ var current_categories_level: Dictionary[Category, Level] = {
 	Category.ACTION_RECEIVER_MODULE: Level.WARN,
 	Category.NESTED_REGISTRY: Level.WARN,
 	Category.ENCOUNTER_RUNNER: Level.TRACE,
+	Category.SAVE: Level.DEBUG,
 }
 #endregion
 

@@ -25,3 +25,12 @@ func _init() -> void:
 		party = Party.new()
 	if run == null:
 		run = Run.new()
+
+
+func save_to(path: String) -> Error:
+	var dir_path: String = path.get_base_dir()
+	if dir_path != "" and not DirAccess.dir_exists_absolute(dir_path):
+		var dir_err: Error = DirAccess.make_dir_recursive_absolute(dir_path)
+		if dir_err != OK:
+			return dir_err
+	return ResourceSaver.save(self, path)

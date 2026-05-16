@@ -23,7 +23,7 @@ var _current_round_player_id_islands: Array[int] # player_id
 
 #region ============================== Node base functions ==============================
 func _ready() -> void:
-	run_context = GameManager.pending_run_context
+	run_context = GameManager.run_context
 	_hero_selector.all_heroes_picked.connect(_on_hero_selector_all_heroes_picked)
 	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 	Shared.scene_switcher = _scene_switcher

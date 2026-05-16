@@ -34,13 +34,13 @@ var _active_families: Array[Family] # Array of all families activated for this g
 var active_families: Array[Family]:
 	get: return _active_families
 
-# RunContext construit avant le change_scene, lu par Game._ready().
-# Pattern de queue : Godot ne permet pas d'injecter des paramètres au _ready
-# d'une scène chargée via change_scene_to_packed, donc on passe par cet état.
-# En multi (post-démo), il faudra propager le RunContext via RPC.
-var _pending_run_context: RunContext
-var pending_run_context: RunContext:
-	get: return _pending_run_context
+# RunContext de la session courante : construit au start_solo_game (puis lu par
+# Game._ready au moment du change_scene), reste accessible pendant toute la
+# durée de la run pour les triggers de save inter-confrontation.
+# En multi (post-démo), il faudra propager ce RunContext via RPC.
+var _run_context: RunContext
+var run_context: RunContext:
+	get: return _run_context
 
 var _game_state_timer: Timer
 var game_state_timer: Timer:
@@ -61,6 +61,8 @@ var game_state: GameState:
 # ============================== Private variables ==============================
 
 var _game_scene: PackedScene = load("res://05_Game/game.tscn")
+
+const RUN_SAVE_PATH := "user://saves/run.tres"
 
 var _FAMILIES_REF: Dictionary[Family.Type, Family] = {
 }
@@ -101,7 +103,7 @@ func request_state_transition(new_state: GameState) -> void:
 func clear() -> void:
 	_game_type = GameType.UNDEF
 	_active_families.clear()
-	_pending_run_context = null
+	_run_context = null
 	CardShopManager.clear()
 
 	# Reset complete du state
@@ -134,7 +136,7 @@ func start_solo_game() -> void:
 	for i in 7: # TODO Avoir un nombre max de joueur qui dépend du mode ?
 		PlayerManager.add_bot()
 	PlayerManager.join_game(1, "Breepsolo")
-	_pending_run_context = _build_new_run_context()
+	_run_context = _build_new_run_context()
 	start_game()
 
 
@@ -190,6 +192,7 @@ func _on_game_state_changed(new_state) -> void:
 			Verbose.debug("[State=STARTING]", Verbose.Category.GLOBAL_MANAGER)
 		GameState.INIT_ROUND:
 			Verbose.debug("[State=INIT_ROUND]", Verbose.Category.GLOBAL_MANAGER)
+			_autosave_run_context()
 		GameState.BUYING:
 			Verbose.debug("[State=BUYING] (" + str(_game_rules.duration_buying_phase) + "s)", Verbose.Category.GLOBAL_MANAGER)
 			_game_state_timer.wait_time = _game_rules.duration_buying_phase
@@ -210,6 +213,16 @@ func _on_game_state_changed(new_state) -> void:
 			_game_state_timer.start()
 		GameState.FINISHED:
 			Verbose.debug("[State=FINISHED]", Verbose.Category.GLOBAL_MANAGER)
+
+
+func _autosave_run_context() -> void:
+	if not multiplayer.is_server(): return # autorité hôte
+	if _run_context == null: return
+	var err: Error = _run_context.save_to(RUN_SAVE_PATH)
+	if err == OK:
+		Verbose.debug("RunContext saved to " + RUN_SAVE_PATH, Verbose.Category.SAVE)
+	else:
+		Verbose.error("Failed to save RunContext (err=" + str(err) + ") to " + RUN_SAVE_PATH, Verbose.Category.SAVE)
 
 
 func _on_gfm_all_fights_are_over() -> void:
