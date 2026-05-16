@@ -1,7 +1,7 @@
 class_name NestedRegistry
-extends RefCounted
+extends Resource
 
-var _data: Dictionary = {}
+@export var _data: Dictionary = {}
 # {
 # main_key_1: {
 #     secondary_key_1: value,

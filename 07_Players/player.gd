@@ -7,20 +7,13 @@ var id: int # Multiplayer id
 
 var is_bot: bool # If the player is a fake player (a bot controlled by the server)
 
-var deck: PlayerDeck
+var state: PlayerState
+
 var hero: Hero
 var fighting_island: FightingIsland
 
-var win_streak: int
 var health_lost_since_last_round: int
-var total_win_number: int
-var total_lose_number: int
-var current_damage_win_lose_diff: int # <win>-<lose> but can't go over what the rules indicate (used for damage modifier)
 var battle_history: Array[Battle.BattleResolution]
-var data_memory: NestedRegistry
-
-var is_dead: bool = false # True if the player is dead and signaled it
-var round_of_death: int = -1 # The round when the player died (if dead)
 
 var skill_manager: SkillManager
 
@@ -31,91 +24,123 @@ var team: int:
 		_team = value
 		if hero != null: hero.team = _team
 
+var deck: PlayerDeck:
+	get: return state.deck
+	set(value): state.deck = value
+
+var data_memory: NestedRegistry:
+	get: return state.data_memory
+	set(value): state.data_memory = value
+
+var win_streak: int:
+	get: return state.win_streak
+	set(value): state.win_streak = value
+
+var total_win_number: int:
+	get: return state.total_win_number
+	set(value): state.total_win_number = value
+
+var total_lose_number: int:
+	get: return state.total_lose_number
+	set(value): state.total_lose_number = value
+
+var current_damage_win_lose_diff: int:
+	get: return state.current_damage_win_lose_diff
+	set(value): state.current_damage_win_lose_diff = value
+
+var is_dead: bool:
+	get: return state.is_dead
+	set(value): state.is_dead = value
+
+var round_of_death: int:
+	get: return state.round_of_death
+	set(value): state.round_of_death = value
+
 signal lvl_changed(self_ref: Player, new_lvl: int)
-var _lvl: int = 1
 var lvl: int:
-	get: return _lvl
+	get: return state.lvl
 	set(value):
-		if _lvl == value: return
-		_lvl = clampi(value, 1, 10)
-		lvl_changed.emit(self, _lvl)
+		var clamped := clampi(value, 1, 10)
+		if state.lvl == clamped: return
+		state.lvl = clamped
+		lvl_changed.emit(self, state.lvl)
 
 signal xp_changed(self_ref: Player, new_xp: int)
-var _xp: int
 var xp: int:
-	get: return _xp
+	get: return state.xp
 	set(value):
-		if _xp == value: return
-		_xp = value
+		if state.xp == value: return
+		state.xp = value
 		_check_lvl_up()
-		xp_changed.emit(self, _xp)
+		xp_changed.emit(self, state.xp)
 
 signal hero_changed(self_ref: Player, new_hero: HeroDesc)
-var _hero_desc: HeroDesc
 var hero_desc: HeroDesc:
-	get: return _hero_desc
+	get:
+		if state.hero_desc_id != 0 and Shared.HEROES.has(state.hero_desc_id):
+			return Shared.HEROES[state.hero_desc_id]
+		return null
 	set(value):
-		if _hero_desc == value: return
-		_hero_desc = value
-		if _hero_desc != null:
-			_hero_desc_id = _hero_desc.id
-		hero_changed.emit(self, _hero_desc)
+		var new_id: int = value.id if value != null else 0
+		if state.hero_desc_id == new_id: return
+		state.hero_desc_id = new_id
+		hero_changed.emit(self, value)
 
 # Synced integer representation of hero_desc for MultiplayerSynchronizer
-var _hero_desc_id: int = 0
 var hero_desc_id: int:
-	get: return _hero_desc_id
+	get: return state.hero_desc_id
 	set(value):
-		if _hero_desc_id == value: return
-		_hero_desc_id = value
-		if _hero_desc_id != 0 and Shared.HEROES.has(_hero_desc_id):
-			hero_desc = Shared.HEROES[_hero_desc_id]
+		if state.hero_desc_id == value: return
+		state.hero_desc_id = value
+		var new_hero: HeroDesc = null
+		if value != 0 and Shared.HEROES.has(value):
+			new_hero = Shared.HEROES[value]
+		hero_changed.emit(self, new_hero)
 
 signal max_health_changed(self_ref: Player, new_max_health: int)
-var _max_health: int
 var max_health: int:
-	get: return _max_health
+	get: return state.max_health
 	set(value):
-		if _max_health == value: return
-		_max_health = clampi(value, 0, 100) # TODO la valeur de 100 est purement arbitraire
-		max_health_changed.emit(self, _max_health)
+		var clamped := clampi(value, 0, 100) # TODO la valeur de 100 est purement arbitraire
+		if state.max_health == clamped: return
+		state.max_health = clamped
+		max_health_changed.emit(self, state.max_health)
 
 signal death(self_ref: Player)
 signal health_changed(self_ref: Player, new_health: int)
-var _health: int
 var health: int:
-	get: return _health
+	get: return state.health
 	set(value):
-		if _health == value: return
-		_health = clampi(value, -100, 100)
-		health_changed.emit(self, _health)
-		if _health <= 0: # TODO Change this by a pile of corpse is funnier
+		var clamped := clampi(value, -100, 100)
+		if state.health == clamped: return
+		state.health = clamped
+		health_changed.emit(self, state.health)
+		if state.health <= 0: # TODO Change this by a pile of corpse is funnier
 			death.emit(self)
 			# Hero cleanup is now handled by global lifecycle management
 
 signal gold_changed(self_ref: Player, new_gold: int)
-var _gold: int
 var gold: int:
-	get: return _gold
+	get: return state.gold
 	set(value):
-		if _gold == value: return
-		_gold = clampi(value, 0, 10000)
-		gold_changed.emit(self, _gold)
+		var clamped := clampi(value, 0, 10000)
+		if state.gold == clamped: return
+		state.gold = clamped
+		gold_changed.emit(self, state.gold)
 
 signal damage_changed(self_ref: Player, new_damage: int)
-var _damage: int
 var damage: int:
-	get: return _damage
+	get: return state.damage
 	set(value):
-		if _damage == value: return
-		_damage = value
-		damage_changed.emit(self, _damage)
+		if state.damage == value: return
+		state.damage = value
+		damage_changed.emit(self, state.damage)
 #endregion
 
 #region ============================== Public functions ==============================
 func init_player() -> void:
-	deck = PlayerDeck.new().init(self)
-	deck.has_changed.connect(_on_deck_has_changed)
+	state.deck = PlayerDeck.new().init(self)
+	state.deck.has_changed.connect(_on_deck_has_changed)
 
 
 func setup_components() -> void:
@@ -139,9 +164,9 @@ func setup_components() -> void:
 
 # ============================== Private functions ==============================
 func _init() -> void:
+	state = PlayerState.new()
 	skill_manager = SkillManager.new()
 	skill_manager.init(self)
-	data_memory = NestedRegistry.new()
 
 
 func _apply_all_cards_upgrades() -> void:
@@ -157,10 +182,10 @@ func _apply_all_cards_upgrades() -> void:
 
 
 func _check_lvl_up() -> void:
-	while xp >= GameManager.game_rules.xp_per_levels[_lvl]:
-		xp -= GameManager.game_rules.xp_per_levels[_lvl]
+	while xp >= GameManager.game_rules.xp_per_levels[lvl]:
+		xp -= GameManager.game_rules.xp_per_levels[lvl]
 		lvl += 1
-		if _lvl == GameManager.game_rules.xp_max_player_level:
+		if lvl == GameManager.game_rules.xp_max_player_level:
 			return
 
 # ============================== Callbacks ==============================
