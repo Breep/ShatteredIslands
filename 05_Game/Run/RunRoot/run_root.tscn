@@ -1,0 +1,21 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://05_Game/Run/RunRoot/run_root.gd" id="1_root"]
+[ext_resource type="Script" uid="uid://b0joddhahwxgd" path="res://05_Game/Run/GameRunner/game_runner.gd" id="2_grun"]
+[ext_resource type="Script" uid="uid://ceb7u4pmkdyvm" path="res://05_Game/Run/Confrontations/ConfrontationRunner/confrontation_runner.gd" id="3_crun"]
+[ext_resource type="Script" uid="uid://chijx71hgpigd" path="res://05_Game/Run/Encounters/EncounterRunner/encounter_runner.gd" id="4_erun"]
+
+[node name="RunRoot" type="Node3D" node_paths=PackedStringArray("_game_runner")]
+script = ExtResource("1_root")
+_game_runner = NodePath("GameRunner")
+
+[node name="GameRunner" type="Node" parent="." node_paths=PackedStringArray("_confrontation_runner")]
+script = ExtResource("2_grun")
+_confrontation_runner = NodePath("../ConfrontationRunner")
+
+[node name="ConfrontationRunner" type="Node" parent="." node_paths=PackedStringArray("_encounter_runner")]
+script = ExtResource("3_crun")
+_encounter_runner = NodePath("../EncounterRunner")
+
+[node name="EncounterRunner" type="Node" parent="."]
+script = ExtResource("4_erun")
