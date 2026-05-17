@@ -230,7 +230,6 @@ func _on_game_state_changed(new_state) -> void:
 			Verbose.debug("[State=STARTING]", Verbose.Category.GLOBAL_MANAGER)
 		GameState.INIT_ROUND:
 			Verbose.debug("[State=INIT_ROUND]", Verbose.Category.GLOBAL_MANAGER)
-			_autosave_run_context()
 		GameState.BUYING:
 			Verbose.debug("[State=BUYING] (" + str(_game_rules.duration_buying_phase) + "s)", Verbose.Category.GLOBAL_MANAGER)
 			_game_state_timer.wait_time = _game_rules.duration_buying_phase
@@ -253,7 +252,7 @@ func _on_game_state_changed(new_state) -> void:
 			Verbose.debug("[State=FINISHED]", Verbose.Category.GLOBAL_MANAGER)
 
 
-func _autosave_run_context() -> void:
+func save_run_context() -> void:
 	if not multiplayer.is_server(): return # autorité hôte
 	if _run_context == null: return
 	var err: Error = _run_context.save_to(RUN_SAVE_PATH)
@@ -261,6 +260,16 @@ func _autosave_run_context() -> void:
 		Verbose.debug("RunContext saved to " + RUN_SAVE_PATH, Verbose.Category.SAVE)
 	else:
 		Verbose.error("Failed to save RunContext (err=" + str(err) + ") to " + RUN_SAVE_PATH, Verbose.Category.SAVE)
+
+
+func clear_save() -> void:
+	if not multiplayer.is_server(): return
+	if not FileAccess.file_exists(RUN_SAVE_PATH): return
+	var err: Error = DirAccess.remove_absolute(RUN_SAVE_PATH)
+	if err == OK:
+		Verbose.debug("RunContext save cleared: " + RUN_SAVE_PATH, Verbose.Category.SAVE)
+	else:
+		Verbose.warn("Failed to clear save (err=" + str(err) + ") at " + RUN_SAVE_PATH, Verbose.Category.SAVE)
 
 
 func _on_gfm_all_fights_are_over() -> void:

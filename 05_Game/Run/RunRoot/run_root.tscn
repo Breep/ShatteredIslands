@@ -5,9 +5,13 @@
 [ext_resource type="Script" uid="uid://ceb7u4pmkdyvm" path="res://05_Game/Run/Confrontations/ConfrontationRunner/confrontation_runner.gd" id="3_crun"]
 [ext_resource type="Script" uid="uid://chijx71hgpigd" path="res://05_Game/Run/Encounters/EncounterRunner/encounter_runner.gd" id="4_erun"]
 
-[node name="RunRoot" type="Node3D" node_paths=PackedStringArray("_game_runner")]
+[node name="RunRoot" type="Node3D" node_paths=PackedStringArray("_game_runner", "_confrontation_runner", "_end_screen", "_end_screen_label", "_return_menu_button")]
 script = ExtResource("1_root")
 _game_runner = NodePath("GameRunner")
+_confrontation_runner = NodePath("ConfrontationRunner")
+_end_screen = NodePath("EndScreenLayer/EndScreen")
+_end_screen_label = NodePath("EndScreenLayer/EndScreen/CenterContainer/VBox/Label")
+_return_menu_button = NodePath("EndScreenLayer/EndScreen/CenterContainer/VBox/ReturnMenuButton")
 
 [node name="GameRunner" type="Node" parent="." node_paths=PackedStringArray("_confrontation_runner")]
 script = ExtResource("2_grun")
@@ -19,3 +23,49 @@ _encounter_runner = NodePath("../EncounterRunner")
 
 [node name="EncounterRunner" type="Node" parent="."]
 script = ExtResource("4_erun")
+
+[node name="EndScreenLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="EndScreen" type="Control" parent="EndScreenLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="EndScreenLayer/EndScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.75)
+
+[node name="CenterContainer" type="CenterContainer" parent="EndScreenLayer/EndScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="EndScreenLayer/EndScreen/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Label" type="Label" parent="EndScreenLayer/EndScreen/CenterContainer/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Run terminée !"
+horizontal_alignment = 1
+
+[node name="ReturnMenuButton" type="Button" parent="EndScreenLayer/EndScreen/CenterContainer/VBox"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 28
+text = "Retour menu"
