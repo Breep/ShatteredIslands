@@ -51,3 +51,7 @@ func _on_close_button_pressed() -> void:
 
 func _on_start_solo_button_pressed() -> void:
 	GameManager.start_solo_game()
+
+
+func _on_start_run_button_pressed() -> void:
+	GameManager.start_solo_run()

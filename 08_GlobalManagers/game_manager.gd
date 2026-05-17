@@ -61,8 +61,13 @@ var game_state: GameState:
 # ============================== Private variables ==============================
 
 var _game_scene: PackedScene = load("res://05_Game/game.tscn")
+var _run_scene: PackedScene = load("res://05_Game/Run/RunRoot/run_root.tscn")
 
 const RUN_SAVE_PATH := "user://saves/run.tres"
+const DEMO_RUN_PATH := "res://05_Game/Run/Runs/Pool/Prototyping/demo_run.tres"
+const DEMO_PLAYER_FORMATION_PATH := "res://05_Game/Run/Formations/Pool/Prototyping/default_solo.fighting.tres"
+const DEMO_HERO_SCENE_PATH := "res://02_Entities/Heroes/Latika/latika.tscn"
+const DEMO_ACOLYTE_SCENE_PATH := "res://02_Entities/Summons/ChickenLord/Chicken/Basic/chicken_basic.tscn"
 
 var _FAMILIES_REF: Dictionary[Family.Type, Family] = {
 }
@@ -140,8 +145,25 @@ func start_solo_game() -> void:
 	start_game()
 
 
-func _build_new_run_context() -> RunContext:
+# Flow B (roguelite démo) : 1 humain, pas de bots, Run chargée depuis le .tres
+# de démo, formation joueur hardcodée (sera remplacée par un HeroSelector
+# pré-run plus tard).
+func start_solo_run() -> void:
+	_game_type = GameType.SOLO
+	PlayerManager.join_game(1, "Breepsolo")
+	var demo_run: Run = load(DEMO_RUN_PATH) as Run
+	if demo_run == null:
+		Verbose.error("start_solo_run: demo_run.tres introuvable", Verbose.Category.GLOBAL_MANAGER)
+		return
+	_run_context = _build_new_run_context(demo_run)
+	_populate_demo_party_formation(_run_context.party)
+	start_run()
+
+
+func _build_new_run_context(run: Run = null) -> RunContext:
 	var ctx := RunContext.new()
+	if run != null:
+		ctx.run = run
 	ctx.game_rules = _game_rules
 	ctx.active_families = _active_families.duplicate()
 	ctx.rng_seed = randi()
@@ -153,6 +175,16 @@ func _build_new_run_context() -> RunContext:
 	return ctx
 
 
+func _populate_demo_party_formation(party: Party) -> void:
+	var default_formation: FightingFormation = load(DEMO_PLAYER_FORMATION_PATH) as FightingFormation
+	if default_formation == null:
+		Verbose.error("start_solo_run: default_solo formation introuvable", Verbose.Category.GLOBAL_MANAGER)
+		return
+	var hero_scenes: Array[PackedScene] = [load(DEMO_HERO_SCENE_PATH) as PackedScene]
+	var acolyte_scenes: Array[PackedScene] = [load(DEMO_ACOLYTE_SCENE_PATH) as PackedScene]
+	party.formation = default_formation.populate_with(hero_scenes, acolyte_scenes)
+
+
 func get_active_families() -> Array[Family]:
 	return _active_families
 
@@ -161,6 +193,12 @@ func get_active_families() -> Array[Family]:
 func start_game() -> void:
 	CardShopManager.init(_active_families, _game_rules)
 	get_tree().change_scene_to_packed(_game_scene)
+
+
+@rpc("any_peer", "call_local")
+func start_run() -> void:
+	CardShopManager.init(_active_families, _game_rules)
+	get_tree().change_scene_to_packed(_run_scene)
 
 # ============================== Private functions ==============================
 
