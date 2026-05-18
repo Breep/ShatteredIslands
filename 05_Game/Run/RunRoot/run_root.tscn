@@ -6,10 +6,11 @@
 [ext_resource type="Script" uid="uid://chijx71hgpigd" path="res://05_Game/Run/Encounters/EncounterRunner/encounter_runner.gd" id="4_erun"]
 [ext_resource type="PackedScene" uid="uid://dv3kwc5eeyuk2" path="res://04_UI/InGame/Game/ui_game.tscn" id="5_uigm"]
 
-[node name="RunRoot" type="Node3D" node_paths=PackedStringArray("_game_runner", "_confrontation_runner", "_ui_game")]
+[node name="RunRoot" type="Node3D" node_paths=PackedStringArray("_game_runner", "_confrontation_runner", "_encounter_runner", "_ui_game")]
 script = ExtResource("1_root")
 _game_runner = NodePath("GameRunner")
 _confrontation_runner = NodePath("ConfrontationRunner")
+_encounter_runner = NodePath("EncounterRunner")
 _ui_game = NodePath("UILayer/UIGame")
 
 [node name="GameRunner" type="Node" parent="." node_paths=PackedStringArray("_confrontation_runner")]

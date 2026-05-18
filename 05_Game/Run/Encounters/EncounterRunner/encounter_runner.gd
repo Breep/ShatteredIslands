@@ -11,7 +11,9 @@
 class_name EncounterRunner
 extends Node
 
+signal tavern_started(island: BuyingIsland)
 signal tavern_phase_ended
+signal fighting_started(island: FightingIsland)
 signal fighting_phase_ended
 
 const BUYING_ISLAND_SCENE: PackedScene = preload("res://06_FloatingIsland/BuyingIsland/buying_island.tscn")
@@ -37,6 +39,7 @@ func setup_fighting(encounter: FightingEncounter, party_formation: FightingForma
 	await island.ready
 	island.set_active()
 	island.init_fight_3(fa.mirrored(), fb, 1, 2)
+	fighting_started.emit(island)
 	return island
 
 
@@ -73,6 +76,7 @@ func setup_tavern(encounter: TavernEncounter, party: Party = null) -> BuyingIsla
 	# Relay du signal naturel de l'île vers tavern_phase_ended pour que run_tavern
 	# (et toute proto qui émet directement tavern_phase_ended) partage le même await.
 	buying_island.phase_ended.connect(_on_buying_island_phase_ended, CONNECT_ONE_SHOT)
+	tavern_started.emit(buying_island)
 	return buying_island
 
 

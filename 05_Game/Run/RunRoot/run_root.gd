@@ -12,6 +12,7 @@ signal run_finished
 
 @export var _game_runner: GameRunner
 @export var _confrontation_runner: ConfrontationRunner
+@export var _encounter_runner: EncounterRunner
 @export var _ui_game: UIGame
 
 var _run_context: RunContext
@@ -31,12 +32,25 @@ func _ready() -> void:
 	if _confrontation_runner == null:
 		Verbose.error("RunRoot: _confrontation_runner non assigné", Verbose.Category.GAME)
 		return
+	if _encounter_runner == null:
+		Verbose.error("RunRoot: _encounter_runner non assigné", Verbose.Category.GAME)
+		return
 	if _ui_game == null:
 		Verbose.error("RunRoot: _ui_game non assigné", Verbose.Category.GAME)
 		return
 
+	var local_player: Player = PlayerManager.get_local_player()
+	if local_player != null:
+		_ui_game.bind_to_local_player(local_player)
+	else:
+		Verbose.warn("RunRoot: pas de local player au _ready, HUD persistant non lié", Verbose.Category.GAME)
+
 	_ui_game.result_leave_requested.connect(_on_result_leave_requested)
 	_confrontation_runner.confrontation_ended.connect(_on_confrontation_ended)
+	_encounter_runner.tavern_started.connect(_on_tavern_started)
+	_encounter_runner.tavern_phase_ended.connect(_on_tavern_phase_ended)
+	_encounter_runner.fighting_started.connect(_on_fighting_started)
+	_encounter_runner.fighting_phase_ended.connect(_on_fighting_phase_ended)
 
 	Verbose.debug("RunRoot: démarrage Run id=" + _run_context.run_id + " (" + str(_run_context.run.confrontations.size()) + " confrontations)", Verbose.Category.GAME)
 	await _game_runner.run(_run_context.run, _run_context.party)
@@ -47,6 +61,22 @@ func _ready() -> void:
 
 func _on_confrontation_ended() -> void:
 	GameManager.save_run_context()
+
+
+func _on_tavern_started(_island: BuyingIsland) -> void:
+	_ui_game.start_tavern_phase()
+
+
+func _on_tavern_phase_ended() -> void:
+	_ui_game.end_tavern_phase()
+
+
+func _on_fighting_started(island: FightingIsland) -> void:
+	_ui_game.start_fighting_phase(island.get_fighting_area())
+
+
+func _on_fighting_phase_ended() -> void:
+	_ui_game.end_fighting_phase()
 
 
 func _on_result_leave_requested() -> void:
