@@ -1,6 +1,10 @@
 class_name UIResult
 extends Control
 
+# ============================== Signals ==============================
+
+signal leave_requested
+
 # ============================== Constants ==============================
 
 const RESULT_LABELS: Dictionary[int, String] = {
@@ -56,7 +60,7 @@ func _on_close_button_pressed() -> void:
 
 
 func _on_yes_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://Game/MainMenu/main_menu.tscn")
+	leave_requested.emit()
 
 
 func _on_no_button_pressed() -> void:

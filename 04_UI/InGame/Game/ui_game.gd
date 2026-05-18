@@ -4,6 +4,10 @@
 class_name UIGame
 extends Control
 
+# ============================== Signals ==============================
+
+signal result_leave_requested
+
 # ============================== Local nodes ==============================
 
 @onready var _ui_buying_area: UIBuyingArea = %BuyingArea
@@ -17,6 +21,7 @@ extends Control
 func _ready() -> void:
 	_ui_buying_area.hide()
 	_ui_persistant.hide()
+	_ui_result.leave_requested.connect(func(): result_leave_requested.emit())
 
 # ============================== Public functions ==============================
 
