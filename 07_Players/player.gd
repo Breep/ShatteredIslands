@@ -142,7 +142,7 @@ var damage: int:
 
 #region ============================== Public functions ==============================
 func init_player() -> void:
-	state.deck = PlayerDeck.new().init(self)
+	state.deck = PlayerDeck.new().init(player_name)
 	state.deck.has_changed.connect(_on_deck_has_changed)
 
 

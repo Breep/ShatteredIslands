@@ -183,6 +183,21 @@ func _populate_demo_party_formation(party: Party) -> void:
 	var hero_scenes: Array[PackedScene] = [load(DEMO_HERO_SCENE_PATH) as PackedScene]
 	var acolyte_scenes: Array[PackedScene] = [load(DEMO_ACOLYTE_SCENE_PATH) as PackedScene]
 	party.formation = default_formation.populate_with(hero_scenes, acolyte_scenes)
+	_init_hero_specs_runtime_data(party)
+
+
+# Garantit que chaque HeroSpec de la formation a des Resources non-null pour deck
+# et data_memory (truth canonique des données hero-level, lues à chaque spawn).
+func _init_hero_specs_runtime_data(party: Party) -> void:
+	if party == null or party.formation == null: return
+	var local_player_name: String = PlayerManager.get_local_player().player_name if PlayerManager.get_local_player() != null else ""
+	for spec: EntitySpec in party.formation.entity_specs:
+		if spec is HeroSpec:
+			var hero_spec: HeroSpec = spec
+			if hero_spec.deck == null:
+				hero_spec.deck = PlayerDeck.new().init(local_player_name)
+			if hero_spec.data_memory == null:
+				hero_spec.data_memory = NestedRegistry.new()
 
 
 func get_active_families() -> Array[Family]:
