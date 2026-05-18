@@ -63,15 +63,15 @@ func setup_tavern(encounter: TavernEncounter, party: Party = null) -> BuyingIsla
 	get_tree().root.add_child.call_deferred(buying_island)
 	await buying_island.ready
 
-	var hero_scene: PackedScene = null
-	var acolyte_scenes: Array[PackedScene] = []
+	var hero_spec: HeroSpec = null
+	var acolyte_specs: Array[AcolyteSpec] = []
 	if party != null:
-		var heroes: Array[PackedScene] = party.get_hero_scenes()
+		var heroes: Array[HeroSpec] = party.get_hero_specs()
 		if not heroes.is_empty():
-			hero_scene = heroes[0]
-		acolyte_scenes = party.get_acolyte_scenes()
+			hero_spec = heroes[0]
+		acolyte_specs = party.get_acolyte_specs()
 
-	buying_island.start_buying_phase_from_encounter(encounter, hero_scene, acolyte_scenes)
+	buying_island.start_buying_phase_from_encounter(encounter, hero_spec, acolyte_specs)
 	buying_island.set_active()
 	# Relay du signal naturel de l'île vers tavern_phase_ended pour que run_tavern
 	# (et toute proto qui émet directement tavern_phase_ended) partage le même await.

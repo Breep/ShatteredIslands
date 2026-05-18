@@ -37,8 +37,8 @@ func start_buying_phase(battles: Array[Battle]) -> void:
 
 
 # === New API: populate from a TavernEncounter, injecting the player's hero / acolytes ===
-func start_buying_phase_from_encounter(encounter: TavernEncounter, hero_scene: PackedScene, acolyte_scenes: Array[PackedScene]) -> void:
-	_buying_area.start_round_from_encounter(encounter, hero_scene, acolyte_scenes)
+func start_buying_phase_from_encounter(encounter: TavernEncounter, hero_spec: HeroSpec, acolyte_specs: Array[AcolyteSpec]) -> void:
+	_buying_area.start_round_from_encounter(encounter, hero_spec, acolyte_specs)
 
 
 func set_active() -> void:

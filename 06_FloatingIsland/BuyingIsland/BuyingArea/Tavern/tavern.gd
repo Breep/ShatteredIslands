@@ -18,9 +18,12 @@ func cleanup() -> void:
 
 
 # === New API: populate from a TavernEncounter ===
-# Instancie tous les éléments d'une TavernFormation et injecte le héros / les
-# acolytes du joueur aux HeroSpawnSpec / AcolyteSpawnSpec.
-func populate_from_encounter(encounter: TavernEncounter, hero_scene: PackedScene, acolyte_scenes: Array[PackedScene]) -> void:
+# Instancie les props/entités statiques du TavernEncounter, puis pose le héros
+# et les acolytes du joueur via leurs specs (HeroSpec porte deck/level/data_memory,
+# AcolyteSpec idem une fois codés). Les spawn points viennent du tavern_formation
+# de l'encounter, pas du spec — la position en tavern est encounter-driven, pas
+# formation-driven.
+func populate_from_encounter(encounter: TavernEncounter, hero_spec: HeroSpec, acolyte_specs: Array[AcolyteSpec]) -> void:
 	if encounter == null or encounter.tavern_formation == null:
 		Verbose.error("Tavern.populate_from_encounter: encounter or tavern_formation is null", Verbose.Category.ENCOUNTER_RUNNER)
 		return
@@ -35,13 +38,15 @@ func populate_from_encounter(encounter: TavernEncounter, hero_scene: PackedScene
 	for spec: EntitySpec in formation.entity_specs:
 		spec.spawn_into(root)
 
-	if hero_scene != null and not formation.hero_spawn_specs.is_empty():
-		_spawn_at(hero_scene, formation.hero_spawn_specs[0].transform, "Hero", root)
+	var ctx: EntityContext = _build_tavern_ctx()
 
-	var placed_acolytes: int = mini(acolyte_scenes.size(), formation.acolyte_spawn_specs.size())
+	if hero_spec != null and not formation.hero_spawn_specs.is_empty():
+		_spawn_player_unit_at(hero_spec, formation.hero_spawn_specs[0].transform, "Hero", root, ctx)
+
+	var placed_acolytes: int = mini(acolyte_specs.size(), formation.acolyte_spawn_specs.size())
 	for i in placed_acolytes:
-		if acolyte_scenes[i] == null: continue
-		_spawn_at(acolyte_scenes[i], formation.acolyte_spawn_specs[i].transform, "Acolyte_" + str(i), root)
+		if acolyte_specs[i] == null: continue
+		_spawn_player_unit_at(acolyte_specs[i], formation.acolyte_spawn_specs[i].transform, "Acolyte_" + str(i), root, ctx)
 
 
 # === Private helpers ===
@@ -59,9 +64,19 @@ func _clear_children(node: Node) -> void:
 		child.queue_free()
 
 
-func _spawn_at(scene: PackedScene, target_transform: Transform3D, fallback_name: String, parent: Node3D) -> void:
-	var node: Node = scene.instantiate()
-	parent.add_child(node)
+func _build_tavern_ctx() -> EntityContext:
+	var ctx := EntityContext.new()
+	ctx.display_mode = Hero.DisplayMode.BUYING_PHASE
+	ctx.runtime_owner_player = PlayerManager.get_local_player()
+	# pas de spawn_manager : la tavern n'a pas de tick system, le fallback
+	# add_child d'EntitySpec.spawn_into / HeroSpec.spawn_into est utilisé.
+	return ctx
+
+
+func _spawn_player_unit_at(spec: EntitySpec, target_transform: Transform3D, fallback_name: String, parent: Node3D, ctx: EntityContext) -> void:
+	var node: Node = spec.spawn_into(parent, ctx)
+	if node == null: return
 	if node is Node3D:
-		(node as Node3D).transform = target_transform
-	node.name = fallback_name
+		(node as Node3D).global_transform = target_transform
+	if spec.display_label == "":
+		node.name = fallback_name

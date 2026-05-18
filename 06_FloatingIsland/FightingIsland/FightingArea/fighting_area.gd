@@ -97,6 +97,7 @@ func get_battle_type() -> Battle.BattleType:
 # ============================== Private functions ==============================
 
 func _spawn_specs_2(specs: Array[EntitySpec], team: int) -> void:
+	var local_player: Player = PlayerManager.get_local_player()
 	for spec: EntitySpec in specs:
 		var ctx := EntityContext.new()
 		ctx.team = team
@@ -104,6 +105,11 @@ func _spawn_specs_2(specs: Array[EntitySpec], team: int) -> void:
 		ctx.spawn_manager = _spawn_manager
 		ctx.arena_zone_manager = _arena_zone_manager
 		ctx.fighting_state = Entity.FightingState.IDLE
+		ctx.display_mode = Hero.DisplayMode.FIGHTING_PHASE
+		# En solo : local player possède toutes les unités côté joueur.
+		# En multi (futur) : faudra une convention via team ou un mapping explicite.
+		if spec is HeroSpec or spec is AcolyteSpec:
+			ctx.runtime_owner_player = local_player
 		spec.spawn_into(self, ctx)
 
 

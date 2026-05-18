@@ -26,8 +26,8 @@ func cleanup() -> void:
 
 
 # === New API: relay to Tavern.populate_from_encounter ===
-func start_round_from_encounter(encounter: TavernEncounter, hero_scene: PackedScene, acolyte_scenes: Array[PackedScene]) -> void:
-	_tavern.populate_from_encounter(encounter, hero_scene, acolyte_scenes)
+func start_round_from_encounter(encounter: TavernEncounter, hero_spec: HeroSpec, acolyte_specs: Array[AcolyteSpec]) -> void:
+	_tavern.populate_from_encounter(encounter, hero_spec, acolyte_specs)
 
 
 func set_active() -> void:

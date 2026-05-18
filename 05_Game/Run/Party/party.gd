@@ -12,22 +12,23 @@ extends Resource
 @export var formation: FightingFormation
 
 
-# Helpers : extraire les scènes par rôle depuis formation.entity_specs.
-# Utilisé par les Runners pour alimenter la taverne (qui ne consomme pas
-# une FightingFormation entière, juste les scènes des unités joueur).
-func get_hero_scenes() -> Array[PackedScene]:
-	var result: Array[PackedScene] = []
+# Helpers : extraire les specs par rôle depuis formation.entity_specs.
+# Utilisés par les Runners pour alimenter la taverne ET le combat — les specs
+# portent la donnée canonique (deck, level, etc. sur HeroSpec) que les deux
+# phases ont besoin d'injecter sur l'instance Hero éphémère.
+func get_hero_specs() -> Array[HeroSpec]:
+	var result: Array[HeroSpec] = []
 	if formation == null: return result
 	for spec: EntitySpec in formation.entity_specs:
 		if spec is HeroSpec:
-			result.append(spec.scene)
+			result.append(spec)
 	return result
 
 
-func get_acolyte_scenes() -> Array[PackedScene]:
-	var result: Array[PackedScene] = []
+func get_acolyte_specs() -> Array[AcolyteSpec]:
+	var result: Array[AcolyteSpec] = []
 	if formation == null: return result
 	for spec: EntitySpec in formation.entity_specs:
 		if spec is AcolyteSpec:
-			result.append(spec.scene)
+			result.append(spec)
 	return result
