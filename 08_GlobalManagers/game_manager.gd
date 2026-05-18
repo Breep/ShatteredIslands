@@ -129,10 +129,9 @@ func init() -> void:
 	#_active_families.append(_FAMILIES_REF[Family.Type.NECROSIS])
 
 
-#TODO Move into round manager ?
+# Hérité du modèle PvP (last man standing). En roguelite la fin de run est
+# pilotée par RunRoot via la complétion des confrontations, pas ici.
 func is_end_of_game() -> bool:
-	if PlayerManager.get_local_player() in PlayerManager.dead_players.values():
-		Events.signal_local_player_is_dead()
 	return PlayerManager.get_alive_players().size() == 1
 
 

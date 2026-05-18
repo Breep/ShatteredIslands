@@ -37,7 +37,6 @@ func _ready() -> void:
 		return
 	Verbose.trace("UICardShop._ready(): local_player=" + _local_player.player_name, Verbose.Category.CARD_SHOP)
 
-	_local_player.death.connect(_on_local_player_death)
 	_card_shop = _local_player.get_node("CardShop") as PlayerCardShop
 	if _card_shop == null:
 		Verbose.error("UICardShop._ready(): no PlayerCardShop child node on local player '" + _local_player.player_name + "'", Verbose.Category.CARD_SHOP)
@@ -128,12 +127,6 @@ func _on_card_shop_shop_refreshed(new_cards: Array[Card]) -> void:
 func _on_card_shop_card_bought(card: Card) -> void:
 	Verbose.trace("UICardShop._on_card_shop_card_bought() | card=" + (card.name if card != null else "<null>"), Verbose.Category.CARD_SHOP)
 	card_bought.emit(card)
-
-
-func _on_local_player_death(_player: Player) -> void:
-	Verbose.debug("Lock card shop for " + _local_player.player_name, Verbose.Category.CARD_SHOP)
-	set_inactive()
-	_is_locked = true
 
 
 func _on_card_shop_shop_tried_to_refresh() -> void:

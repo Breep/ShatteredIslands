@@ -53,8 +53,6 @@ func _start_new_round() -> void:
 	
 	await _init_current_round_player_id_islands(_current_round_battles.size())
 	await PlayerManager.sync_point(PlayerManager.SyncID.ROUND_SETUP)
-
-	PlayerManager.create_all_heroes(Hero.DisplayMode.BUYING_PHASE)
 	GameManager.request_state_transition(GameManager.GameState.BUYING)
 
 
@@ -68,9 +66,6 @@ func _start_buying_phase() -> void:
 func _start_fighting_phase() -> void:
 	Verbose.debug("Start fights !", Verbose.Category.GAME)
 	_buying_island.cleanup()
-
-	# Create heroes for fighting phase (UI visible)
-	PlayerManager.create_all_heroes(Hero.DisplayMode.FIGHTING_PHASE)
 
 	var battles: Array[Battle] = _current_round_battles
 	for i in battles.size():
