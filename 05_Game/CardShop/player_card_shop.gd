@@ -114,8 +114,6 @@ func _refresh_shop_cards(is_free: bool) -> void:
 func _on_game_manager_game_state_changed(state: GameManager.GameState) -> void:
 	if state == GameManager.GameState.BUYING:
 		_is_enabled = true
-		if RoundManager.current_round == 1:
-			_refresh_shop_cards(true)
 	else:
 		_is_enabled = false
 

@@ -51,9 +51,7 @@ func _start_new_round() -> void:
 		Verbose.debug("Looks like we have a winner ! Congrats " + PlayerManager.get_alive_players().values()[0].player_name, Verbose.Category.GAME)
 		return
 	
-	_current_round_battles = await RoundManager.get_current_round_battles()
 	await _init_current_round_player_id_islands(_current_round_battles.size())
-	RoundManager.starting_round_player_changes()
 	await PlayerManager.sync_point(PlayerManager.SyncID.ROUND_SETUP)
 
 	PlayerManager.create_all_heroes(Hero.DisplayMode.BUYING_PHASE)

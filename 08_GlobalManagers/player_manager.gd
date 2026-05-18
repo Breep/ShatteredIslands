@@ -354,6 +354,5 @@ func _compare_player(player1: Player, player2: Player) -> bool:
 # ============================== Callbacks ==============================
 
 func _on_player_death(player: Player) -> void:
-	player.round_of_death = RoundManager.current_round
 	player.is_dead = true
 	dead_players[player.id] = player

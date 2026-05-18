@@ -138,7 +138,6 @@ func _set_fighting_floor(battle_type: Battle.BattleType) -> HeroSpawner:
 
 # ============================== Callbacks ==============================
 
-func _on_fighting_manager_fight_is_over(_unused: FightingManager, winner_teams_order: Array[int]) -> void:
+func _on_fighting_manager_fight_is_over(_unused: FightingManager, _winner_teams_order: Array[int]) -> void:
 	if _current_battle_id < 0: return
 	_heroes.clear()
-	RoundManager.register_battle_result(_current_battle_id, winner_teams_order)
