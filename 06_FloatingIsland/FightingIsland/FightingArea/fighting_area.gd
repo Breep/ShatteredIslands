@@ -74,7 +74,7 @@ func init_fight(left_formation: FightingFormation, right_formation: FightingForm
 	_spawn_specs(left_formation.entity_specs, left_team)
 	_spawn_specs(right_formation.entity_specs, right_team)
 
-	_fighting_manager.fight_is_over.connect(_on_fighting_manager_fight_is_over, CONNECT_ONE_SHOT)
+	_fighting_manager.fight_done.connect(_on_fighting_manager_fight_done, CONNECT_ONE_SHOT)
 	fighting_manager.init(spawn_manager, _current_battle_id)
 
 
@@ -136,6 +136,6 @@ func _ready_checks() -> bool:
 
 # ============================== Callbacks ==============================
 
-func _on_fighting_manager_fight_is_over(_unused: FightingManager, _winner_teams_order: Array[int]) -> void:
+func _on_fighting_manager_fight_done(_unused: FightingManager, _winner_teams_order: Array[int]) -> void:
 	if _current_battle_id < 0: return
 	_heroes.clear()

@@ -3,10 +3,10 @@ extends Node
 
 # ============================== Description ==============================
 #
-# Local FightingManager : registered to the GlobalFightingManager, owns the per-FightingArea
-# fight lifecycle. Source the roster from the SpawnManager (initial spawns + late summons),
-# and ends the fight as soon as one team is eliminated under the active EliminationMode.
-# `_physics_process` runs the deterministic per-tick entity / projectile update.
+# Local FightingManager : possède sa propre machine d'états (LocalPhase) pilotée
+# par le GlobalFightingManager. Tracke le roster vivant par équipe/rôle pour
+# détecter la fin du combat local sous l'EliminationMode actif. `_physics_process`
+# tick le combat tant que `_is_active` (uniquement en LocalPhase.FIGHTING).
 
 
 enum EliminationMode {
@@ -15,9 +15,21 @@ enum EliminationMode {
 	KILL_SECONDARY,   # Team out when every MAIN + every Acolyte (FightRole.SECONDARY) is dead
 }
 
+# Machine d'états locale du FM. Pilotée par GFM via start_positioning/fighting/celebration.
+# L'UI déclenche les transitions sortantes des phases bloquantes via request_phase_advance.
+enum LocalPhase {
+	UNDEF,
+	POSITIONING,   # Bloquant : attend request_phase_advance() pour signaler positioning_done
+	FIGHTING,      # Combat actif : _physics_process tick
+	CELEBRATION,   # Bloquant : attend request_phase_advance() pour signaler celebration_done
+}
+
 #region ============================== Signals ==============================
-signal fight_is_over(self_ref: FightingManager, winner_teams_order: Array[int]) # [loser, winner]
 signal fight_is_ready_to_be_started(self_ref: FightingManager)
+signal phase_changed(self_ref: FightingManager, new_phase: LocalPhase)
+signal positioning_done(self_ref: FightingManager)
+signal fight_done(self_ref: FightingManager, winner_teams_order: Array[int]) # [loser, winner]
+signal celebration_done(self_ref: FightingManager)
 #endregion
 
 #region ============================== Constants ==============================
@@ -37,6 +49,8 @@ var _alive_by_team: Dictionary[int, Dictionary]
 var _registered_entities: Array[Entity]
 var _is_active: bool = false
 var _fight_ended: bool = false # Guard against late entity_spawned callbacks after stop
+var _local_phase: LocalPhase = LocalPhase.UNDEF
+var _pending_winner_teams_order: Array[int]
 
 var _spawn_manager: SpawnManager
 #endregion
@@ -44,7 +58,6 @@ var _spawn_manager: SpawnManager
 #region ============================== Node base functions ==============================
 func _enter_tree() -> void:
 	GlobalFightingManager.register_fighting_manager(self)
-	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)
 
 
 func _exit_tree() -> void:
@@ -72,6 +85,8 @@ func init(spawn_manager: SpawnManager, battle_id: int) -> void:
 	_spawn_manager = spawn_manager
 	_battle_id = battle_id
 	_fight_ended = false
+	_local_phase = LocalPhase.UNDEF
+	_pending_winner_teams_order.clear()
 	Utils.register_battle_rng(_battle_id, hash(str(_battle_id))) # TODO Make the server generate seeds and send it to clients
 
 	# Snapshot the initial roster (spawns already done by FightingArea.init_fight)
@@ -84,9 +99,64 @@ func init(spawn_manager: SpawnManager, battle_id: int) -> void:
 	fight_is_ready_to_be_started.emit(self)
 
 
-func start() -> void:
+# Entrée en phase POSITIONING. Appelée par GFM. Bloquante : attend request_phase_advance().
+func start_positioning() -> void:
+	if _local_phase != LocalPhase.UNDEF:
+		Verbose.warn("FightingManager.start_positioning: illegal transition from " + str(LocalPhase.keys()[_local_phase]), Verbose.Category.FIGHTING_AREA)
+		return
+	_local_phase = LocalPhase.POSITIONING
+	phase_changed.emit(self, _local_phase)
+
+
+# Entrée en phase FIGHTING (combat actif). Appelée par GFM.
+func start_fighting() -> void:
+	if _local_phase != LocalPhase.POSITIONING:
+		Verbose.warn("FightingManager.start_fighting: illegal transition from " + str(LocalPhase.keys()[_local_phase]), Verbose.Category.FIGHTING_AREA)
+		return
+	_local_phase = LocalPhase.FIGHTING
 	current_tick = 0
 	_is_active = true
+	phase_changed.emit(self, _local_phase)
+
+
+# Entrée en phase CELEBRATION. Appelée par GFM (sur fight_done de tous les FMs ou
+# forçage via SPECIAL timeout). Bloquante : attend request_phase_advance().
+func start_celebration() -> void:
+	if _local_phase != LocalPhase.FIGHTING:
+		Verbose.warn("FightingManager.start_celebration: illegal transition from " + str(LocalPhase.keys()[_local_phase]), Verbose.Category.FIGHTING_AREA)
+		return
+	_local_phase = LocalPhase.CELEBRATION
+	_is_active = false
+	_fight_ended = true
+
+	# Si fight_done n'a pas encore été émis (cas SPECIAL timeout forcé sans élimination),
+	# on calcule maintenant le winner order via le fallback HP-eligible-count.
+	if _pending_winner_teams_order.is_empty():
+		_pending_winner_teams_order = _build_winner_teams_order()
+
+	var winner_team: int = _pending_winner_teams_order[_pending_winner_teams_order.size() - 1]
+	for team_id in _alive_by_team.keys():
+		var is_winner: bool = team_id == winner_team
+		for role in _alive_by_team[team_id].keys():
+			for entity in _alive_by_team[team_id][role]:
+				if not is_instance_valid(entity): continue
+				entity.handle_end_of_fight(is_winner)
+
+	_disconnect_all()
+	_cleanup()
+	phase_changed.emit(self, _local_phase)
+
+
+# Avance la phase bloquante courante. Appelée par l'UI sur clic READY (POSITIONING)
+# ou NEXT (CELEBRATION).
+func request_phase_advance() -> void:
+	match _local_phase:
+		LocalPhase.POSITIONING:
+			positioning_done.emit(self)
+		LocalPhase.CELEBRATION:
+			celebration_done.emit(self)
+		_:
+			Verbose.warn("FightingManager.request_phase_advance: no-op in phase " + str(LocalPhase.keys()[_local_phase]), Verbose.Category.FIGHTING_AREA)
 #endregion
 
 #region ============================== Private functions ==============================
@@ -140,16 +210,27 @@ func _alive_eligible_count(team_id: int) -> int:
 
 
 func _check_fight_over() -> void:
+	if _fight_ended: return
 	var surviving_teams: int = 0
 	for team_id in _alive_by_team.keys():
 		if not _is_team_eliminated(team_id):
 			surviving_teams += 1
 	if surviving_teams <= 1:
-		_stop_fighting_manager()
+		_signal_local_fight_done()
+
+
+# Élimination locale : on stoppe le tick, calcule le résultat, émet fight_done.
+# La phase CELEBRATION sera entrée plus tard via start_celebration() (pilotée par GFM).
+func _signal_local_fight_done() -> void:
+	if _fight_ended: return
+	_fight_ended = true
+	_is_active = false
+	_pending_winner_teams_order = _build_winner_teams_order()
+	fight_done.emit(self, _pending_winner_teams_order)
 
 
 # Build the winner order : [loser, winner]. Assumes 2 teams.
-# If no team is fully eliminated (CELEBRATION timeout), pick the loser by smaller
+# If no team is fully eliminated (SPECIAL timeout), pick the loser by smaller
 # eligible-alive count; tiebreak on lowest team_id for determinism.
 func _build_winner_teams_order() -> Array[int]:
 	var team_ids: Array[int] = []
@@ -167,7 +248,7 @@ func _build_winner_teams_order() -> Array[int]:
 		var winner: int = team_ids[0] if team_ids[1] == loser else team_ids[1]
 		return [loser, winner]
 
-	# Fallback: CELEBRATION fired without any team eliminated.
+	# Fallback: timeout fired without any team eliminated.
 	var counts: Dictionary[int, int] = {}
 	for team_id in team_ids:
 		counts[team_id] = _alive_eligible_count(team_id)
@@ -177,29 +258,6 @@ func _build_winner_teams_order() -> Array[int]:
 			return a < b
 	)
 	return team_ids
-
-
-func _stop_fighting_manager() -> void:
-	if _fight_ended: return
-	_fight_ended = true
-	_is_active = false
-
-	var winner_teams_order: Array[int] = _build_winner_teams_order()
-	var winner_team: int = winner_teams_order[winner_teams_order.size() - 1]
-
-	# Propagate end-of-fight to every alive entity in the roster.
-	# Loop var is untyped to tolerate freed references in the bucket
-	# (e.g. summons queue_freed via master death without firing `died`).
-	for team_id in _alive_by_team.keys():
-		var is_winner: bool = team_id == winner_team
-		for role in _alive_by_team[team_id].keys():
-			for entity in _alive_by_team[team_id][role]:
-				if not is_instance_valid(entity): continue
-				entity.handle_end_of_fight(is_winner)
-
-	_disconnect_all()
-	fight_is_over.emit(self, winner_teams_order)
-	_cleanup()
 
 
 func _disconnect_all() -> void:
@@ -239,11 +297,4 @@ func _on_entity_resurrected(entity: Entity) -> void:
 	var bucket: Array = _alive_by_team[entity.team][entity.fight_role]
 	if not entity in bucket:
 		bucket.append(entity)
-
-
-func _on_gfm_fighting_phase_state_changed(new_state: GlobalFightingManager.FightingPhaseState) -> void:
-	if not _is_active: return
-	match new_state:
-		GlobalFightingManager.FightingPhaseState.CELEBRATION:
-			_stop_fighting_manager()
 #endregion

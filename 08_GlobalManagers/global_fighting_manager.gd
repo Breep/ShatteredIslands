@@ -3,7 +3,10 @@ extends Node
 # ============================== Description ==============================
 #
 # -- GlobalFightingManager --
-# Handle the differents fighting phases (COUNTDOWN/NORMAL/SPECIAL/CELEBRATION/FINISHED) for every other FightingManager
+# Orchestre les phases globales pour N FightingManager(s) :
+# UNDEF → POSITIONING → COUNTDOWN → NORMAL → SPECIAL → CELEBRATION → UNDEF.
+# Avance globalement quand TOUS les FMs ont signalé la fin de la phase courante
+# (POSITIONING/CELEBRATION) ou via timer (COUNTDOWN/NORMAL/SPECIAL).
 
 #region ============================== Signals ==============================
 signal all_fights_are_over()
@@ -13,6 +16,7 @@ signal fighting_phase_state_changed(new_fighting_phase_state: FightingPhaseState
 #region ============================== Enum ==============================
 enum FightingPhaseState {
 	UNDEF,
+	POSITIONING,
 	COUNTDOWN,
 	NORMAL,
 	SPECIAL,
@@ -27,6 +31,11 @@ const TICKS_PER_SECOND: int = 60
 #region ============================== Private variables ==============================
 var _fighting_managers: Array[FightingManager]
 var _current_active_fighting_managers: Array[FightingManager]
+
+# Trackers de fin de phase par FM. Reset à chaque entrée dans la phase concernée.
+var _fms_positioning_done: Array[FightingManager]
+var _fms_fight_done: Array[FightingManager]
+var _fms_celebration_done: Array[FightingManager]
 
 # Tick at which NORMAL phase started (t=0 reference)
 var fight_start_tick: int = 0
@@ -72,12 +81,12 @@ func _physics_process(_delta: float) -> void:
 #region ============================== Public functions ==============================
 func clear() -> void:
 	for fm in _fighting_managers:
-		if fm.fight_is_ready_to_be_started.is_connected(_on_fighting_manager_fight_is_ready_to_be_started):
-			fm.fight_is_ready_to_be_started.disconnect(_on_fighting_manager_fight_is_ready_to_be_started)
-		if fm.fight_is_over.is_connected(_on_fighting_manager_fighting_is_over):
-			fm.fight_is_over.disconnect(_on_fighting_manager_fighting_is_over)
+		_disconnect_fm_signals(fm)
 	_fighting_managers.clear()
 	_current_active_fighting_managers.clear()
+	_fms_positioning_done.clear()
+	_fms_fight_done.clear()
+	_fms_celebration_done.clear()
 	_players_running_playback.clear()
 	_is_active = false
 	_phase_ticks_remaining = 0
@@ -90,7 +99,7 @@ func start() -> void:
 	_current_tick = 0
 	if multiplayer.is_server():
 		_players_running_playback = PlayerManager.get_human_players().values().duplicate()
-	_fighting_phase_state = FightingPhaseState.COUNTDOWN
+	_fighting_phase_state = FightingPhaseState.POSITIONING
 
 
 # === Register/Unregister FightingManager
@@ -99,10 +108,12 @@ func register_fighting_manager(fighting_manager: FightingManager):
 	if _fighting_managers.has(fighting_manager):
 		Verbose.error("FightingManager[" + str(fighting_manager) + "] already registered !", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
 		return
-	
+
 	_fighting_managers.append(fighting_manager)
 	fighting_manager.fight_is_ready_to_be_started.connect(_on_fighting_manager_fight_is_ready_to_be_started)
-	fighting_manager.fight_is_over.connect(_on_fighting_manager_fighting_is_over)
+	fighting_manager.positioning_done.connect(_on_fm_positioning_done)
+	fighting_manager.fight_done.connect(_on_fm_fight_done)
+	fighting_manager.celebration_done.connect(_on_fm_celebration_done)
 
 
 func unregister_fighting_manager(fighting_manager: FightingManager):
@@ -113,10 +124,12 @@ func unregister_fighting_manager(fighting_manager: FightingManager):
 
 	_fighting_managers.erase(fighting_manager)
 	_current_active_fighting_managers.erase(fighting_manager)
-	fighting_manager.fight_is_over.disconnect(_on_fighting_manager_fighting_is_over)
+	_disconnect_fm_signals(fighting_manager)
 #endregion
 
 #region ============================== State machine ==============================
+# Timer-driven transitions only. POSITIONING → COUNTDOWN et CELEBRATION → UNDEF
+# sont signal-driven (voir _on_fm_*_done).
 func _advance_phase() -> void:
 	match __fighting_phase_state:
 		FightingPhaseState.COUNTDOWN: _fighting_phase_state = FightingPhaseState.NORMAL
@@ -124,13 +137,24 @@ func _advance_phase() -> void:
 		FightingPhaseState.SPECIAL:
 			Verbose.debug("Fights are taking too long => Forcing CELEBRATION phase", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
 			_fighting_phase_state = FightingPhaseState.CELEBRATION
-		FightingPhaseState.CELEBRATION: _fighting_phase_state = FightingPhaseState.UNDEF
 		_: pass
 
 
 func _on_fighting_phase_state_changed(new_fighting_phase_state: FightingPhaseState) -> void:
 	var duration: float = 0.0
+	var use_timer: bool = true
+
 	match new_fighting_phase_state:
+		FightingPhaseState.POSITIONING:
+			Verbose.debug("[State=POSITIONING] (waiting for all FMs)", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
+			_fms_positioning_done.clear()
+			_fms_fight_done.clear()
+			_fms_celebration_done.clear()
+			for fighting_manager in _current_active_fighting_managers:
+				if not is_instance_valid(fighting_manager): continue
+				fighting_manager.start_positioning()
+			use_timer = false  # avance via _on_fm_positioning_done
+
 		FightingPhaseState.COUNTDOWN:
 			duration = GameManager.game_rules.duration_fighting_countdown
 			Verbose.debug("[State=COUNTDOWN] (" + str(duration) + "s)", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
@@ -140,17 +164,18 @@ func _on_fighting_phase_state_changed(new_fighting_phase_state: FightingPhaseSta
 			Verbose.debug("[State=NORMAL] (" + str(duration) + "s)", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
 			for fighting_manager in _current_active_fighting_managers:
 				if not is_instance_valid(fighting_manager): continue
-				fighting_manager.start()
+				fighting_manager.start_fighting()
 
 		FightingPhaseState.SPECIAL:
 			duration = GameManager.game_rules.duration_fighting_special
 			Verbose.debug("[State=SPECIAL] (" + str(duration) + "s)", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
 
 		FightingPhaseState.CELEBRATION:
-			duration = GameManager.game_rules.duration_fighting_celebration
-			Verbose.debug("[State=CELEBRATION] (" + str(duration) + "s)", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
-			if multiplayer.is_server(): _wait_for_all_players_to_finish_playback()
-			else: _notice_playback_is_over.rpc_id(1)
+			Verbose.debug("[State=CELEBRATION] (waiting for all FMs)", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
+			for fighting_manager in _current_active_fighting_managers:
+				if not is_instance_valid(fighting_manager): continue
+				fighting_manager.start_celebration()
+			use_timer = false  # avance via _on_fm_celebration_done
 
 		_:
 			Verbose.trace("[State=UNDEF]", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
@@ -158,11 +183,15 @@ func _on_fighting_phase_state_changed(new_fighting_phase_state: FightingPhaseSta
 			set_physics_process(false)
 			return
 
-	_phase_ticks_remaining = int(duration * TICKS_PER_SECOND)
-	_is_active = true
-	set_physics_process(true)
-	if _phase_ticks_remaining == 0:
-		_advance_phase()
+	if use_timer:
+		_phase_ticks_remaining = int(duration * TICKS_PER_SECOND)
+		_is_active = true
+		set_physics_process(true)
+		if _phase_ticks_remaining == 0:
+			_advance_phase()
+	else:
+		_is_active = false
+		set_physics_process(false)
 #endregion
 
 func _on_game_manager_game_state_changed(new_game_state: GameManager.GameState) -> void:
@@ -171,53 +200,61 @@ func _on_game_manager_game_state_changed(new_game_state: GameManager.GameState) 
 			pass # TODO handle the GameManager watchdog
 		_: pass
 
-#region ============================== Net sync ==============================
-signal _all_players_playback_finished()
-func _wait_for_all_players_to_finish_playback() -> void:
-	if not multiplayer.is_server(): return
-	if GameManager.game_type != GameManager.GameType.SOLO and not _players_running_playback.is_empty():
-		Verbose.debug("Waiting for clients to finish their playback", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
-		await _all_players_playback_finished
-	_finish_all_fights.rpc()
-
-
-@rpc("authority", "call_local")
-func _finish_all_fights() -> void:
-	all_fights_are_over.emit()
-	Verbose.debug("Finishing GFM", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
-	_players_running_playback.clear()
-	_is_active = false
-	_phase_ticks_remaining = 0
-	set_physics_process(false)
-
-
-@rpc("any_peer", "call_remote")
-func _notice_playback_is_over() -> void:
-	var peer_id: int = multiplayer.get_remote_sender_id()
-	Verbose.debug("Player(" + str(peer_id) + ") finished its playback", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
-	if _players_running_playback.has(PlayerManager.players[peer_id]):
-		_players_running_playback.erase(PlayerManager.players[peer_id])
-	else:
-		Verbose.error("Player(" + str(peer_id) + ") notice playback is finished but is not listed", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
-	
-	if _players_running_playback.is_empty():
-		_all_players_playback_finished.emit()
-#endregion
-
 #region ============================== FightingManager callbacks ==============================
-func _on_fighting_manager_fighting_is_over(fighting_manager: FightingManager, _winner_teams_order: Array[int]) -> void:
-	if not _current_active_fighting_managers.has(fighting_manager):
-		Verbose.error("An unexpected FightingArea signals a fight is over [" + str(fighting_manager.get_path()) + "]", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
-		return
-	_current_active_fighting_managers.erase(fighting_manager)
-	if _current_active_fighting_managers.is_empty() and _fighting_phase_state < FightingPhaseState.CELEBRATION:
-		Verbose.debug("All fights are over => Going to CELEBRATION phase", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
-		_fighting_phase_state = FightingPhaseState.CELEBRATION
-
-
 func _on_fighting_manager_fight_is_ready_to_be_started(fighting_manager: FightingManager) -> void:
 	if _current_active_fighting_managers.has(fighting_manager):
 		Verbose.error("A fight is starting more than once at the same time on the same FightingArea [" + str(fighting_manager.get_path()) + "]", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
 		return
 	_current_active_fighting_managers.append(fighting_manager)
+
+
+func _on_fm_positioning_done(fm: FightingManager) -> void:
+	if not _current_active_fighting_managers.has(fm): return
+	if fm in _fms_positioning_done: return
+	_fms_positioning_done.append(fm)
+	if _all_active_fms_in(_fms_positioning_done):
+		Verbose.debug("All FMs positioning done => COUNTDOWN", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
+		_fighting_phase_state = FightingPhaseState.COUNTDOWN
+
+
+func _on_fm_fight_done(fm: FightingManager, _winner_teams_order: Array[int]) -> void:
+	if not _current_active_fighting_managers.has(fm): return
+	if fm in _fms_fight_done: return
+	_fms_fight_done.append(fm)
+	# Si tous les FMs ont fini le combat avant le timer SPECIAL, on force le passage
+	# direct à CELEBRATION (skip SPECIAL).
+	if _all_active_fms_in(_fms_fight_done) and __fighting_phase_state < FightingPhaseState.CELEBRATION:
+		Verbose.debug("All FMs fight done => CELEBRATION", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
+		_fighting_phase_state = FightingPhaseState.CELEBRATION
+
+
+func _on_fm_celebration_done(fm: FightingManager) -> void:
+	if not _current_active_fighting_managers.has(fm): return
+	if fm in _fms_celebration_done: return
+	_fms_celebration_done.append(fm)
+	if _all_active_fms_in(_fms_celebration_done):
+		Verbose.debug("All FMs celebration done => UNDEF + all_fights_are_over", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
+		_current_active_fighting_managers.clear()
+		_fighting_phase_state = FightingPhaseState.UNDEF
+		all_fights_are_over.emit()
+#endregion
+
+#region ============================== Private helpers ==============================
+func _all_active_fms_in(tracker: Array[FightingManager]) -> bool:
+	if _current_active_fighting_managers.is_empty(): return false
+	for fm in _current_active_fighting_managers:
+		if not fm in tracker:
+			return false
+	return true
+
+
+func _disconnect_fm_signals(fm: FightingManager) -> void:
+	if fm.fight_is_ready_to_be_started.is_connected(_on_fighting_manager_fight_is_ready_to_be_started):
+		fm.fight_is_ready_to_be_started.disconnect(_on_fighting_manager_fight_is_ready_to_be_started)
+	if fm.positioning_done.is_connected(_on_fm_positioning_done):
+		fm.positioning_done.disconnect(_on_fm_positioning_done)
+	if fm.fight_done.is_connected(_on_fm_fight_done):
+		fm.fight_done.disconnect(_on_fm_fight_done)
+	if fm.celebration_done.is_connected(_on_fm_celebration_done):
+		fm.celebration_done.disconnect(_on_fm_celebration_done)
 #endregion
