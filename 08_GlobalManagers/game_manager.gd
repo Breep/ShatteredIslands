@@ -180,7 +180,10 @@ func _populate_demo_party_formation(party: Party) -> void:
 		Verbose.error("start_solo_run: default_solo formation introuvable", Verbose.Category.GLOBAL_MANAGER)
 		return
 	var hero_scenes: Array[PackedScene] = [load(DEMO_HERO_SCENE_PATH) as PackedScene]
-	var acolyte_scenes: Array[PackedScene] = [load(DEMO_ACOLYTE_SCENE_PATH) as PackedScene]
+	var acolyte_scenes: Array[PackedScene] = [load(DEMO_ACOLYTE_SCENE_PATH) as PackedScene,
+			load(DEMO_ACOLYTE_SCENE_PATH) as PackedScene,
+			load(DEMO_ACOLYTE_SCENE_PATH) as PackedScene,
+			load(DEMO_ACOLYTE_SCENE_PATH) as PackedScene]
 	party.formation = default_formation.populate_with(hero_scenes, acolyte_scenes)
 	_init_hero_specs_runtime_data(party)
 

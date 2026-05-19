@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Run" format=3]
+[gd_resource type="Resource" script_class="Run" format=3 uid="uid://bhwfptpod2c4l"]
 
 [ext_resource type="Script" uid="uid://nilxedp6gjq2" path="res://05_Game/Run/run.gd" id="1_run"]
 [ext_resource type="Script" uid="uid://cp06s2eytdhsh" path="res://05_Game/Run/Confrontations/confrontation.gd" id="2_conf"]
@@ -9,4 +9,3 @@ script = ExtResource("1_run")
 id = &"demo_run"
 display_name = "Démo Run"
 confrontations = Array[ExtResource("2_conf")]([ExtResource("3_colos"), ExtResource("3_colos"), ExtResource("3_colos"), ExtResource("3_colos"), ExtResource("3_colos")])
-current_index = 0

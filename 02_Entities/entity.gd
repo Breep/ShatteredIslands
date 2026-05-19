@@ -60,6 +60,14 @@ enum EntityType {
 	CHICKEN_EGG
 }
 
+# Role of an entity in the fight victory conditions.
+# MAIN = Hero / Antagonist, SECONDARY = Acolyte, EXTRA = mobs / summons / anything else.
+enum FightRole {
+	MAIN,
+	SECONDARY,
+	EXTRA
+}
+
 enum SnakeBarrelModifier {
 	SNAKE_NUMBER,
 	SNAKE_POISON_STACKS,
@@ -136,6 +144,10 @@ var _original_fighting_state: FightingState = FightingState.UNDEF
 @export var team: int = -1 # Team number of the entity
 @export var battle_id: int = -1 # The id of the battle the entity is in
 @export var entity_name: String = "<entity name>"
+
+# Tagué au spawn par FightingArea selon le type de spec. Consommé par FightingManager
+# pour les conditions d'élimination (KILL_MAIN / KILL_SECONDARY / KILL_ALL).
+var fight_role: FightRole = FightRole.EXTRA
 
 @export_group("Optional configuration")
 @export var invisible: bool = false
@@ -375,6 +387,12 @@ func connect_to_fighting_area(fighting_area_ref: FightingArea) -> void:
 #region ============================== Misc ==============================
 func cast_ultimate() -> void:
 	printerr("Entity: cast_ultimate() called but not implemented [", get_path(), "]")
+
+
+# Hook appelé par FightingManager sur chaque entité vivante quand le combat se termine.
+# Override par Hero pour gérer son state post-combat. No-op pour les autres entités.
+func handle_end_of_fight(_is_winner: bool) -> void:
+	pass
 
 
 func resurrect(hp_percent: float) -> void:

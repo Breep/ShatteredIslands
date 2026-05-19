@@ -75,7 +75,7 @@ func init_fight(left_formation: FightingFormation, right_formation: FightingForm
 	_spawn_specs(right_formation.entity_specs, right_team)
 
 	_fighting_manager.fight_is_over.connect(_on_fighting_manager_fight_is_over, CONNECT_ONE_SHOT)
-	fighting_manager.init(spawn_manager, _current_battle_id, _heroes)
+	fighting_manager.init(spawn_manager, _current_battle_id)
 
 
 func get_fighting_heroes() -> Array[Hero]:
@@ -98,8 +98,29 @@ func _spawn_specs(specs: Array[EntitySpec], team: int) -> void:
 		if spec is HeroSpec or spec is AcolyteSpec:
 			ctx.runtime_owner_player = local_player
 		var node: Node = spec.spawn_into(self, ctx)
+		var entity := node as Entity
+		if entity != null:
+			entity.fight_role = _fight_role_for_spec(spec)
 		if node is Hero:
 			_heroes.append(node as Hero)
+
+
+# Map a spec type to its fight role. Handles both the new typed specs
+# (HeroSpec/AntagonistSpec/AcolyteSpec) and the legacy FightingEntitySpec
+# with its internal `role` enum — to be removed once all .tres are migrated.
+static func _fight_role_for_spec(spec: EntitySpec) -> Entity.FightRole:
+	if spec is HeroSpec or spec is AntagonistSpec:
+		return Entity.FightRole.MAIN
+	if spec is AcolyteSpec:
+		return Entity.FightRole.SECONDARY
+	if spec is FightingEntitySpec:
+		var legacy: FightingEntitySpec = spec
+		match legacy.role:
+			FightingEntitySpec.FightingRole.ANTAGONIST, FightingEntitySpec.FightingRole.HERO:
+				return Entity.FightRole.MAIN
+			FightingEntitySpec.FightingRole.ACOLYTE:
+				return Entity.FightRole.SECONDARY
+	return Entity.FightRole.EXTRA
 
 
 func _ready_checks() -> bool:

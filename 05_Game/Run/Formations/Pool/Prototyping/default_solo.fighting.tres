@@ -8,62 +8,62 @@
 [ext_resource type="Script" uid="uid://b3ir321gjcqej" path="res://05_Game/Run/Formations/fighting_formation.gd" id="6_eqbx8"]
 [ext_resource type="Script" uid="uid://c78ccxnqy6c16" path="res://05_Game/Run/SpawnSpecs/spawn_point_spec.gd" id="7_mi8k7"]
 
-[sub_resource type="Resource" id="Resource_ythwc"]
+[sub_resource type="Resource" id="Resource_kechs"]
 script = ExtResource("1_kechs")
 scene = ExtResource("2_5jv22")
 display_label = "AcolyteSpawnPoint01"
-transform = Transform3D(0.034480844, 0, -0.9994054, 0, 1, 0, 0.9994054, 0, 0.034480844, -5.109944, 0.32316315, 2.2213988)
+transform = Transform3D(0.034480844, 0, -0.9994054, 0, 1, 0, 0.9994054, 0, 0.034480844, -3.4476347, 0.32316315, 2.2213988)
 
-[sub_resource type="Resource" id="Resource_4nd0l"]
+[sub_resource type="Resource" id="Resource_5jv22"]
 script = ExtResource("1_kechs")
 scene = ExtResource("2_5jv22")
 display_label = "AcolyteSpawnPoint02"
-transform = Transform3D(0.034480844, 0, -0.9994054, 0, 1, 0, 0.9994054, 0, 0.034480844, -4.991344, 0.32316315, -3.355472)
+transform = Transform3D(0.034480844, 0, -0.9994054, 0, 1, 0, 0.9994054, 0, 0.034480844, -3.3290348, 0.32316315, -3.355472)
 
-[sub_resource type="Resource" id="Resource_ahjl4"]
+[sub_resource type="Resource" id="Resource_xh53r"]
 script = ExtResource("1_kechs")
 scene = ExtResource("2_5jv22")
 display_label = "AcolyteSpawnPoint03"
-transform = Transform3D(0.034480844, 0, -0.9994054, 0, 1, 0, 0.9994054, 0, 0.034480844, -5.4005523, 0.32316315, 6.837671)
+transform = Transform3D(0.034480844, 0, -0.9994054, 0, 1, 0, 0.9994054, 0, 0.034480844, -3.738243, 0.32316315, 6.837671)
 
-[sub_resource type="Resource" id="Resource_e23tb"]
+[sub_resource type="Resource" id="Resource_6rby7"]
 script = ExtResource("1_kechs")
 scene = ExtResource("2_5jv22")
 display_label = "AcolyteSpawnPoint04"
-transform = Transform3D(0.034480844, 0, -0.9994054, 0, 1, 0, 0.9994054, 0, 0.034480844, -5.2578998, 0.32316315, -7.5267854)
+transform = Transform3D(0.034480844, 0, -0.9994054, 0, 1, 0, 0.9994054, 0, 0.034480844, -3.5955906, 0.32316315, -7.5267854)
 
-[sub_resource type="Resource" id="Resource_4kosx"]
+[sub_resource type="Resource" id="Resource_svcfh"]
 script = ExtResource("1_kechs")
 scene = ExtResource("2_5jv22")
 display_label = "AcolyteSpawnPoint05"
-transform = Transform3D(0.034480844, 0, -0.9994054, 0, 1, 0, 0.9994054, 0, 0.034480844, -9.211851, 0.32316315, 2.7626152)
+transform = Transform3D(0.034480844, 0, -0.9994054, 0, 1, 0, 0.9994054, 0, 0.034480844, -7.7084656, 0.32316315, 2.7626152)
 
-[sub_resource type="Resource" id="Resource_r0vd7"]
+[sub_resource type="Resource" id="Resource_eqbx8"]
 script = ExtResource("1_kechs")
 scene = ExtResource("2_5jv22")
 display_label = "AcolyteSpawnPoint06"
-transform = Transform3D(0.034480844, 0, -0.9994054, 0, 1, 0, 0.9994054, 0, 0.034480844, -9.121179, 0.32316315, -3.3991032)
+transform = Transform3D(0.034480844, 0, -0.9994054, 0, 1, 0, 0.9994054, 0, 0.034480844, -7.617793, 0.32316315, -3.3991032)
 
-[sub_resource type="Resource" id="Resource_ujmts"]
+[sub_resource type="Resource" id="Resource_mi8k7"]
 script = ExtResource("1_kechs")
 scene = ExtResource("2_5jv22")
 display_label = "AcolyteSpawnPoint07"
-transform = Transform3D(0.034480844, 0, -0.9994054, 0, 1, 0, 0.9994054, 0, 0.034480844, -9.213902, 0.32316315, 7.241932)
+transform = Transform3D(0.034480844, 0, -0.9994054, 0, 1, 0, 0.9994054, 0, 0.034480844, -7.710517, 0.32316315, 7.241932)
 
-[sub_resource type="Resource" id="Resource_ysdfb"]
+[sub_resource type="Resource" id="Resource_ythwc"]
 script = ExtResource("1_kechs")
 scene = ExtResource("2_5jv22")
 display_label = "AcolyteSpawnPoint08"
-transform = Transform3D(0.034480844, 0, -0.9994054, 0, 1, 0, 0.9994054, 0, 0.034480844, -9.06715, 0.32316315, -8.1456585)
+transform = Transform3D(0.034480844, 0, -0.9994054, 0, 1, 0, 0.9994054, 0, 0.034480844, -7.5637646, 0.32316315, -8.1456585)
 
-[sub_resource type="Resource" id="Resource_6gijn"]
+[sub_resource type="Resource" id="Resource_4nd0l"]
 script = ExtResource("4_6rby7")
 scene = ExtResource("5_svcfh")
 display_label = "HeroSpawnPoint"
-transform = Transform3D(0.06353954, 0, -0.99797934, 0, 1, 0, 0.99797934, 0, 0.06353954, -2.8852665, 0.013692005, -0.049312532)
+transform = Transform3D(0.06353954, 0, -0.99797934, 0, 1, 0, 0.99797934, 0, 0.06353954, -9.234675, 0.013692005, -0.049312532)
 
 [resource]
 script = ExtResource("6_eqbx8")
-hero_spawn_specs = Array[ExtResource("4_6rby7")]([SubResource("Resource_6gijn")])
-acolyte_spawn_specs = Array[ExtResource("1_kechs")]([SubResource("Resource_ythwc"), SubResource("Resource_4nd0l"), SubResource("Resource_ahjl4"), SubResource("Resource_e23tb"), SubResource("Resource_4kosx"), SubResource("Resource_r0vd7"), SubResource("Resource_ujmts"), SubResource("Resource_ysdfb")])
+hero_spawn_specs = Array[ExtResource("4_6rby7")]([SubResource("Resource_4nd0l")])
+acolyte_spawn_specs = Array[ExtResource("1_kechs")]([SubResource("Resource_kechs"), SubResource("Resource_5jv22"), SubResource("Resource_xh53r"), SubResource("Resource_6rby7"), SubResource("Resource_svcfh"), SubResource("Resource_eqbx8"), SubResource("Resource_mi8k7"), SubResource("Resource_ythwc")])
 id = "default_solo"

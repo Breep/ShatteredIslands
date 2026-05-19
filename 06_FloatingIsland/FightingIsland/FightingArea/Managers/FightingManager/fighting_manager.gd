@@ -3,13 +3,25 @@ extends Node
 
 # ============================== Description ==============================
 #
-# Local FightingManager, register itself to the GlobalFightingManager
-# On Start() call, will connect to all heroes on the local FightingArea death signals
-# Will notify that the fight is over (either one team is alive or the GameManager says it's over)
+# Local FightingManager : registered to the GlobalFightingManager, owns the per-FightingArea
+# fight lifecycle. Source the roster from the SpawnManager (initial spawns + late summons),
+# and ends the fight as soon as one team is eliminated under the active EliminationMode.
+# `_physics_process` runs the deterministic per-tick entity / projectile update.
+
+
+enum EliminationMode {
+	KILL_ALL,         # Team out when every entity (Hero + Antagonist + Acolyte + Mobs + Summons) is dead
+	KILL_MAIN,        # Team out when every Hero/Antagonist (FightRole.MAIN) is dead
+	KILL_SECONDARY,   # Team out when every MAIN + every Acolyte (FightRole.SECONDARY) is dead
+}
 
 #region ============================== Signals ==============================
-signal fight_is_over(self_ref: FightingManager, winner_teams_order: Array[int]) # The Array is from Looser to Winner [4th, 3rd, 2nd, 1st]
+signal fight_is_over(self_ref: FightingManager, winner_teams_order: Array[int]) # [loser, winner]
 signal fight_is_ready_to_be_started(self_ref: FightingManager)
+#endregion
+
+#region ============================== Constants ==============================
+const _ELIMINATION_MODE := EliminationMode.KILL_ALL
 #endregion
 
 #region ============================== Public variables ==============================
@@ -18,11 +30,13 @@ var current_tick: int = 0 # Fight tick counter
 #endregion
 
 #region ============================== Private variables ==============================
-# All fighting heroes sorted by team
-var _heroes_dictionary: Dictionary[int, Array] # [int, Array[Hero]] Key=team_id, value=team members
-var _alive_heroes_dictionary: Dictionary[int, Array] # [int, Array[Hero]] Key=team_id, value=team members
-var _lowest_hp_teams_order: Array[int] # Array of teams in order of death [2, 3, 4] means team 2 died first, then 3 and then 4
+# Alive roster bucketed by team then by fight role for O(1) elimination checks.
+# Dictionary[team_id, Dictionary[Entity.FightRole, Array[Entity]]]
+var _alive_by_team: Dictionary[int, Dictionary]
+# Flat tracker of every entity we registered, used for signal cleanup.
+var _registered_entities: Array[Entity]
 var _is_active: bool = false
+var _fight_ended: bool = false # Guard against late entity_spawned callbacks after stop
 
 var _spawn_manager: SpawnManager
 #endregion
@@ -52,12 +66,21 @@ func _physics_process(_delta: float) -> void:
 #endregion
 
 #region ============================== Public functions ==============================
-func init(spawn_manager: SpawnManager, battle_id: int, heroes: Array[Hero] = []) -> void:
+# Caller responsibility: spawn all initial entities into the SpawnManager BEFORE calling init().
+# Tagging of fight_role on each entity is done by FightingArea._spawn_specs based on spec type.
+func init(spawn_manager: SpawnManager, battle_id: int) -> void:
 	_spawn_manager = spawn_manager
 	_battle_id = battle_id
+	_fight_ended = false
 	Utils.register_battle_rng(_battle_id, hash(str(_battle_id))) # TODO Make the server generate seeds and send it to clients
-	_setup_heroes_dictionary(heroes)
-	_connect_to_heroes_signals()
+
+	# Snapshot the initial roster (spawns already done by FightingArea.init_fight)
+	for entity: Entity in _spawn_manager.get_entities():
+		_register_entity(entity)
+
+	# Subscribe to late spawns (summons happening during the fight)
+	_spawn_manager.entity_spawned.connect(_register_entity)
+
 	fight_is_ready_to_be_started.emit(self)
 
 
@@ -67,97 +90,155 @@ func start() -> void:
 #endregion
 
 #region ============================== Private functions ==============================
-func _setup_heroes_dictionary(heroes: Array[Hero]) -> void:
-	for hero: Hero in heroes:
-		if _heroes_dictionary.has(hero.team):
-			_heroes_dictionary[hero.team].append(hero)
-			_alive_heroes_dictionary[hero.team].append(hero)
-		else:
-			_heroes_dictionary[hero.team] = [hero]
-			_alive_heroes_dictionary[hero.team] = [hero]
+func _register_entity(entity: Entity) -> void:
+	if _fight_ended: return  # Guard against synchronous death→summon chains after stop
+	if entity == null or entity.team < 0: return
+	if entity in _registered_entities: return  # Idempotent
+
+	if not _alive_by_team.has(entity.team):
+		_alive_by_team[entity.team] = {
+			Entity.FightRole.MAIN: [],
+			Entity.FightRole.SECONDARY: [],
+			Entity.FightRole.EXTRA: [],
+		}
+	_alive_by_team[entity.team][entity.fight_role].append(entity)
+	_registered_entities.append(entity)
+
+	# Not CONNECT_ONE_SHOT — must survive resurrect → re-death cycles.
+	# .bind(entity) compense le `died.emit()` qui n'envoie pas de payload (à fixer un jour).
+	entity.died.connect(_on_entity_died.bind(entity))
+	entity.resurrected.connect(_on_entity_resurrected.bind(entity))
 
 
-func _connect_to_heroes_signals() -> void:
-	for team_members in _heroes_dictionary.values():
-		for hero: Hero in team_members:
-			hero.died.connect(_on_hero_died.bind(hero), CONNECT_ONE_SHOT)
+func _is_team_eliminated(team_id: int) -> bool:
+	var team: Dictionary = _alive_by_team[team_id]
+	match _ELIMINATION_MODE:
+		EliminationMode.KILL_MAIN:
+			return team[Entity.FightRole.MAIN].is_empty()
+		EliminationMode.KILL_SECONDARY:
+			return team[Entity.FightRole.MAIN].is_empty() \
+				and team[Entity.FightRole.SECONDARY].is_empty()
+		EliminationMode.KILL_ALL:
+			return team[Entity.FightRole.MAIN].is_empty() \
+				and team[Entity.FightRole.SECONDARY].is_empty() \
+				and team[Entity.FightRole.EXTRA].is_empty()
+	return false
 
 
-func _disconnect_from_heroes_signals() -> void:
-	for team_members in _heroes_dictionary.values():
-		for hero: Hero in team_members:
-			if hero.died.is_connected(_on_hero_died):
-				hero.died.disconnect(_on_hero_died)
+func _alive_eligible_count(team_id: int) -> int:
+	var team: Dictionary = _alive_by_team[team_id]
+	match _ELIMINATION_MODE:
+		EliminationMode.KILL_MAIN:
+			return team[Entity.FightRole.MAIN].size()
+		EliminationMode.KILL_SECONDARY:
+			return team[Entity.FightRole.MAIN].size() + team[Entity.FightRole.SECONDARY].size()
+		EliminationMode.KILL_ALL:
+			return team[Entity.FightRole.MAIN].size() \
+				+ team[Entity.FightRole.SECONDARY].size() \
+				+ team[Entity.FightRole.EXTRA].size()
+	return 0
 
 
-# Check if there is only one team alive, also add into the _lowest_hp_teams_order the team_id of a newly dead team
-func _is_only_one_team_alive() -> bool:
-	var teams_alived_counter: int = 0
-	for team_id in _alive_heroes_dictionary.keys():
-		if _alive_heroes_dictionary[team_id].size() > 0:
-			teams_alived_counter += 1
-		elif not _lowest_hp_teams_order.has(team_id):
-			_lowest_hp_teams_order.append(team_id)
-	
-	return teams_alived_counter == 1
+func _check_fight_over() -> void:
+	var surviving_teams: int = 0
+	for team_id in _alive_by_team.keys():
+		if not _is_team_eliminated(team_id):
+			surviving_teams += 1
+	if surviving_teams <= 1:
+		_stop_fighting_manager()
 
 
-# return Dictionary[team_id, total_hp_percent]
-func _get_teams_total_hp() -> Dictionary[int, float]:
-	var teams_total_hp: Dictionary[int, float]
-	for team_id in _heroes_dictionary.keys():
-		teams_total_hp[team_id] = 0
-		for member in _heroes_dictionary[team_id]:
-			var hero: Hero = member
-			if hero.stats.health_max > 0:
-				teams_total_hp[team_id] += hero.stats.health / hero.stats.health_max
-	return teams_total_hp
+# Build the winner order : [loser, winner]. Assumes 2 teams.
+# If no team is fully eliminated (CELEBRATION timeout), pick the loser by smaller
+# eligible-alive count; tiebreak on lowest team_id for determinism.
+func _build_winner_teams_order() -> Array[int]:
+	var team_ids: Array[int] = []
+	for k in _alive_by_team.keys():
+		team_ids.append(k)
+	assert(team_ids.size() == 2, "FightingManager: design assumes exactly 2 teams")
 
+	var eliminated: Array[int] = []
+	for team_id in team_ids:
+		if _is_team_eliminated(team_id):
+			eliminated.append(team_id)
 
-# Return the teams order sorted by hp (lowest to highest) [[Loosers], [], [], [], [Winners]]
-# If several teams are already at 0, they should be already sorted in the array by _is_only_one_team_alive()
-func _get_winner_teams_order() -> Array[int]:
-	var teams_total_hp: Dictionary[int, float] = _get_teams_total_hp()
-	var teams_total_hp_sorted: Array[float] = teams_total_hp.values().duplicate()
-	teams_total_hp_sorted.sort()
-	for team_hp in teams_total_hp_sorted:
-		for team_id in teams_total_hp.keys():
-			if team_hp == teams_total_hp[team_id] and not _lowest_hp_teams_order.has(team_id):
-				_lowest_hp_teams_order.append(team_id)
-	
-	return _lowest_hp_teams_order
+	if eliminated.size() >= 1:
+		var loser: int = eliminated[0]
+		var winner: int = team_ids[0] if team_ids[1] == loser else team_ids[1]
+		return [loser, winner]
+
+	# Fallback: CELEBRATION fired without any team eliminated.
+	var counts: Dictionary[int, int] = {}
+	for team_id in team_ids:
+		counts[team_id] = _alive_eligible_count(team_id)
+	team_ids.sort_custom(
+		func(a: int, b: int) -> bool:
+			if counts[a] != counts[b]: return counts[a] < counts[b]
+			return a < b
+	)
+	return team_ids
 
 
 func _stop_fighting_manager() -> void:
+	if _fight_ended: return
+	_fight_ended = true
 	_is_active = false
-	_disconnect_from_heroes_signals()
-	var winner_teams_order: Array[int] = _get_winner_teams_order()
-	for member in _heroes_dictionary[winner_teams_order[winner_teams_order.size() - 1]]:
-		var hero: Hero = member
-		hero.handle_end_of_fight(true)
-	for member in _heroes_dictionary[winner_teams_order[0]]:
-		var hero: Hero = member
-		hero.handle_end_of_fight(false)
+
+	var winner_teams_order: Array[int] = _build_winner_teams_order()
+	var winner_team: int = winner_teams_order[winner_teams_order.size() - 1]
+
+	# Propagate end-of-fight to every alive entity in the roster.
+	# Loop var is untyped to tolerate freed references in the bucket
+	# (e.g. summons queue_freed via master death without firing `died`).
+	for team_id in _alive_by_team.keys():
+		var is_winner: bool = team_id == winner_team
+		for role in _alive_by_team[team_id].keys():
+			for entity in _alive_by_team[team_id][role]:
+				if not is_instance_valid(entity): continue
+				entity.handle_end_of_fight(is_winner)
+
+	_disconnect_all()
 	fight_is_over.emit(self, winner_teams_order)
 	_cleanup()
+
+
+func _disconnect_all() -> void:
+	if _spawn_manager != null and _spawn_manager.entity_spawned.is_connected(_register_entity):
+		_spawn_manager.entity_spawned.disconnect(_register_entity)
+	for entity in _registered_entities:
+		if not is_instance_valid(entity): continue
+		# died and resurrected are both connected via .bind(entity) — match by method name.
+		for cb in entity.died.get_connections():
+			if cb.callable.get_method() == "_on_entity_died":
+				entity.died.disconnect(cb.callable)
+		for cb in entity.resurrected.get_connections():
+			if cb.callable.get_method() == "_on_entity_resurrected":
+				entity.resurrected.disconnect(cb.callable)
 
 
 func _cleanup() -> void:
 	Utils.unregister_battle_rng(_battle_id)
 	_battle_id = -1
-	_is_active = false
-	_heroes_dictionary.clear()
-	_alive_heroes_dictionary.clear()
-	_lowest_hp_teams_order.clear()
+	_alive_by_team.clear()
+	_registered_entities.clear()
 #endregion
 
 #region ============================== Callbacks ==============================
-func _on_hero_died(who: Hero) -> void:
-	for team_members in _alive_heroes_dictionary.values():
-		team_members.erase(who)
-	
-	if _is_only_one_team_alive():
-		_stop_fighting_manager()
+func _on_entity_died(entity: Entity) -> void:
+	if _fight_ended: return
+	if entity == null: return
+	if not _alive_by_team.has(entity.team): return
+	_alive_by_team[entity.team][entity.fight_role].erase(entity)  # erase is idempotent
+	_check_fight_over()
+
+
+func _on_entity_resurrected(entity: Entity) -> void:
+	if _fight_ended: return
+	if entity == null: return
+	if not _alive_by_team.has(entity.team): return
+	var bucket: Array = _alive_by_team[entity.team][entity.fight_role]
+	if not entity in bucket:
+		bucket.append(entity)
 
 
 func _on_gfm_fighting_phase_state_changed(new_state: GlobalFightingManager.FightingPhaseState) -> void:
