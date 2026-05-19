@@ -54,6 +54,17 @@ var _attack_anim_base_duration: float = 3.2 # Default fallback
 func _ready() -> void:
 	if _entity_owner == null:
 		Verbose.error("AnimationModule: No entity owner", Verbose.Category.ENTITY)
+		queue_free()
+		return
+	
+	if _animation_tree == null:
+		Verbose.error("AnimationModule: No animation tree", Verbose.Category.ENTITY)
+		queue_free()
+		return
+	
+	if _animation_player == null:
+		Verbose.error("AnimationModule: No animation player", Verbose.Category.ENTITY)
+		queue_free()
 		return
 	
 	_rng.randomize()

@@ -142,7 +142,7 @@ var _original_fighting_state: FightingState = FightingState.UNDEF
 @export var custom_base_stats: EntityStats
 
 @export_subgroup("Visual")
-@export var _visual_3d: Node3D # Visual node for spawn animation
+@export var _visual_3d: Node3D
 @export var _health_bar_marker: Marker3D
 @export var _health_bar: SimpleInfoPanel2D
 @export var _attack_spawn_marker: Marker3D

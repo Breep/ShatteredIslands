@@ -4,7 +4,10 @@
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme.tres" id="2_083cp"]
 [ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://04_UI/Tool/Misc/hover_boost_button.gd" id="3_6kn6i"]
 [ext_resource type="PackedScene" uid="uid://dvr7815lw1k8b" path="res://02_Entities/Heroes/Latika/latika.tscn" id="3_os118"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="3_rnrfd"]
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://10_Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="4_egh8k"]
+[ext_resource type="Resource" uid="uid://5d3si44q6tkg" path="res://01_Cards/Descriptions/Cards/Engineer/Common/GammaTurret/engineer_gamma_turret.tres" id="4_kq8si"]
+[ext_resource type="Script" uid="uid://nkraydv4mdse" path="res://01_Cards/Templates/player_deck.gd" id="5_5qocs"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]
 [ext_resource type="PackedScene" uid="uid://dvuq5n41nak3u" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/ArenaZoneManager/arena_zone_manager.tscn" id="8_fl2p6"]
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://90_Modules/PickableClickable/PickableModule/pickable_module.tscn" id="9_614kc"]
@@ -14,6 +17,11 @@
 [ext_resource type="PackedScene" uid="uid://c0l0roxttdtlp" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/FightingManager/fighting_manager.tscn" id="17_m26y3"]
 [ext_resource type="Environment" uid="uid://cghu0yr6lj5i2" path="res://21_Props/DefaultBattleIsland/Arch_island/world_environment.tres" id="18_ko5bb"]
 [ext_resource type="PackedScene" uid="uid://dp4x7wkxd6i2q" path="res://99_Prototyping/Entity/EntityController/entity_controller.tscn" id="19_x0odd"]
+
+[sub_resource type="Resource" id="Resource_ia2qg"]
+script = ExtResource("5_5qocs")
+_active_cards = Array[ExtResource("3_rnrfd")]([ExtResource("4_kq8si")])
+metadata/_custom_type_script = "uid://nkraydv4mdse"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m73qc"]
 albedo_color = Color(0.97405916, 0, 0.8521372, 1)
@@ -47,6 +55,7 @@ _arena_zone_manager = NodePath("../../ArenaZoneManager")
 
 [node name="Latika2" parent="Node3D/Entities" unique_id=1941835210 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("3_os118")]
 transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, 4.2402563, 9.536744e-07, 0.036329266)
+_custom_deck = SubResource("Resource_ia2qg")
 team = 1
 battle_id = 1
 _spawn_manager = NodePath("../../SpawnManager")
