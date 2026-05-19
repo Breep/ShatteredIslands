@@ -26,7 +26,7 @@ enum ZoneType {
 
 # ============================== Public functions ==============================
 
-## Initialize the arena zones from a FightingFloor
+## Initialize the arena zones from the FightingArea configuration.
 ## team_zones: Dictionary mapping team number to Area3D zone
 ## center_zone: Area3D for the center zone (optional)
 ## full_arena_zone: Area3D for the full arena (optional)

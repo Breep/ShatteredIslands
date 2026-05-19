@@ -12,7 +12,7 @@ func _ready() -> void:
 		printerr("No island set")
 		return
 	
-	island.init_fight_3(left_formation.mirrored(), right_formation, 1, 2)
+	island.init_fight(left_formation.mirrored(), right_formation, 1, 2)
 	island.set_active()
 	GlobalFightingManager.start()
 	

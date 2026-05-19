@@ -130,7 +130,6 @@ func _rpc_start_fight() -> void:
 
 func _start_fight() -> void:
 	GameManager.request_state_transition(GameManager.GameState.FIGHTING)
-	_floating_island.init_fight(_heroes, _battle_type, 1)
 	_floating_island.set_active()
 	GlobalFightingManager.start()
 

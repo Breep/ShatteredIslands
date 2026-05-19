@@ -66,17 +66,6 @@ func _start_buying_phase() -> void:
 func _start_fighting_phase() -> void:
 	Verbose.debug("Start fights !", Verbose.Category.GAME)
 	_buying_island.cleanup()
-
-	var battles: Array[Battle] = _current_round_battles
-	for i in battles.size():
-		var heroes: Array[Hero]
-		for player: Player in battles[i].players:
-			player.hero.battle_id = battles[i].id
-			heroes.append(player.hero)
-		var player_id: int = _current_round_player_id_islands[i]
-		var fighting_island: FightingIsland = PlayerManager.players[player_id].fighting_island
-		fighting_island.init_fight(heroes, battles[i].battle_type, battles[i].id)
-	# Start fight on each island
 	GlobalFightingManager.start()
 #endregion
 

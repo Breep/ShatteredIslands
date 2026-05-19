@@ -19,7 +19,6 @@ func _ready() -> void:
 # ============================== Public functions ==============================
 
 func update_content(fighting_area: FightingArea) -> void:
-	var battle_type: Battle.BattleType = fighting_area.get_battle_type()
 	var heroes: Array[Hero] = fighting_area.get_fighting_heroes()
 	_ui_dps_meter.set_heroes(heroes)
 

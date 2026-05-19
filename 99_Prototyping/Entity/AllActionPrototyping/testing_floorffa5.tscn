@@ -1,7 +1,5 @@
 [gd_scene format=3 uid="uid://blncvfes4f2y7"]
 
-[ext_resource type="Script" uid="uid://bhv0dmum15mp1" path="res://06_FloatingIsland/FightingIsland/FightingArea/FightingFloorTemplates/fighting_floor.gd" id="1_2rxxx"]
-[ext_resource type="PackedScene" uid="uid://cc8wss5swf76b" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/HeroSpawner/hero_spawner.tscn" id="2_ycx5f"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://05_Game/Run/SpawnSpecs/SpawnPoints/SpawnPoint/spawn_point.tscn" id="3_6fhtx"]
 [ext_resource type="Texture2D" uid="uid://saklno6cx0ej" path="res://99_Prototyping/Entity/AllActionPrototyping/Data/1.png" id="4_ir0yt"]
 [ext_resource type="Texture2D" uid="uid://cj5spe0fskygg" path="res://99_Prototyping/Entity/AllActionPrototyping/Data/2.png" id="5_b3oap"]
@@ -72,9 +70,7 @@ material = SubResource("StandardMaterial3D_ys4o5")
 top_radius = 3.0
 bottom_radius = 3.0
 
-[node name="TestingFloorFFA5" type="Node3D" unique_id=283551194 node_paths=PackedStringArray("_hero_spawner")]
-script = ExtResource("1_2rxxx")
-_hero_spawner = NodePath("CharacterSpawner")
+[node name="TestingFloorFFA5" type="Node3D" unique_id=283551194]
 
 [node name="FloorArea" type="Area3D" parent="." unique_id=2121644269]
 
@@ -84,9 +80,6 @@ shape = SubResource("BoxShape3D_g4xe2")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="FloorArea" unique_id=1440029104]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 mesh = SubResource("BoxMesh_ptbj1")
-
-[node name="CharacterSpawner" parent="." unique_id=872212538 node_paths=PackedStringArray("_spawn_points") instance=ExtResource("2_ycx5f")]
-_spawn_points = [NodePath("../CenterNode3D/Center1/Team1Area/SpawnPoint1"), NodePath("../CenterNode3D/Center2/Team2Area/SpawnPoint2"), NodePath("../CenterNode3D/Center3/Team3Area/SpawnPoint3"), NodePath("../CenterNode3D/Center4/Team4Area/SpawnPoint4"), NodePath("../CenterNode3D/Center5/Team5Area/SpawnPoint5")]
 
 [node name="CenterArea" type="Area3D" parent="." unique_id=987179195]
 

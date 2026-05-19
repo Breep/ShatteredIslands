@@ -43,7 +43,6 @@ func _ready() -> void:
 	_init_players()
 	
 	_add_player_cards()
-	_floating_island.init_fight(_heroes, _battle_type, 42)
 	GameManager.game_rules.duration_fighting_countdown = 1
 	GameManager.game_rules.duration_fighting_normal = 240.0
 	GameManager.request_state_transition(GameManager.GameState.FIGHTING)

@@ -38,7 +38,7 @@ func setup_fighting(encounter: FightingEncounter, party_formation: FightingForma
 	get_tree().root.add_child.call_deferred(island)
 	await island.ready
 	island.set_active()
-	island.init_fight_3(fa.mirrored(), fb, 1, 2)
+	island.init_fight(fa.mirrored(), fb, 1, 2)
 	fighting_started.emit(island)
 	return island
 
