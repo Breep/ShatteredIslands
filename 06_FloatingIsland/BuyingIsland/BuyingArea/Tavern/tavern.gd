@@ -77,6 +77,6 @@ func _spawn_player_unit_at(spec: EntitySpec, target_transform: Transform3D, fall
 	var node: Node = spec.spawn_into(parent, ctx)
 	if node == null: return
 	if node is Node3D:
-		(node as Node3D).global_transform = target_transform
+		(node as Node3D).transform = target_transform
 	if spec.display_label == "":
 		node.name = fallback_name
