@@ -23,6 +23,9 @@ var _bgm_tween: Tween
 var _SOUND_MAP: Array = [
 	# [signal, clé dans SFX_library.tres]
 	[Events.card_bought, "card_bought"],
+	[Events.hero_locked, "hero_locked"],
+	[Events.ui_family_portrait_requested, "ui_family_portrait_requested"],
+	[Events.tavern_continue_pressed, "start_fight"]
 ]
 
 var _BGM_MAP: Array = [
@@ -49,11 +52,15 @@ func _ready() -> void:
 
 	for entry in _SOUND_MAP:
 		var key: String = entry[1]
-		entry[0].connect((func(): _play_sound(key)).unbind(_signal_arg_count(entry[0])))
+		var sfx_callable := func(): _play_sound(key)
+		var sfx_count := _signal_arg_count(entry[0])
+		entry[0].connect(sfx_callable.unbind(sfx_count) if sfx_count > 0 else sfx_callable)
 
 	for entry in _BGM_MAP:
 		var key: String = entry[1]
-		entry[0].connect((func(): play_bgm(key)).unbind(_signal_arg_count(entry[0])))
+		var bgm_callable := func(): play_bgm(key)
+		var bgm_count := _signal_arg_count(entry[0])
+		entry[0].connect(bgm_callable.unbind(bgm_count) if bgm_count > 0 else bgm_callable)
 #endregion
 
 #region ============================== Public functions ==============================

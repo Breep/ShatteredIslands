@@ -84,6 +84,7 @@ func _on_lock_hero_button_pressed() -> void:
 		if hero_portrait_button.hero == _selected_hero && hero_portrait_button.disabled:
 			return
 	hero_locked.emit(_selected_hero)
+	Events.hero_locked.emit()
 
 
 

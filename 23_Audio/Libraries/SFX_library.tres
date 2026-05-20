@@ -6,6 +6,10 @@
 [ext_resource type="AudioStream" uid="uid://xbh5awxpsrdm" path="res://23_Audio/SFX/Projectile/Bow Attack 2.wav" id="2_gptj1"]
 [ext_resource type="AudioStream" uid="uid://dpmk6bltw6pso" path="res://23_Audio/SFX/Footsteps/foley_footstep_concrete_4.wav" id="3_walk"]
 [ext_resource type="AudioStream" uid="uid://bme5q2m4vhyaj" path="res://23_Audio/SFX/UI/Minimalist6.wav" id="5_gptj1"]
+[ext_resource type="AudioStream" uid="uid://b41ejuq8ct0ap" path="res://23_Audio/SFX/UI/80,TheGong.wav" id="6_2l36p"]
+[ext_resource type="AudioStream" uid="uid://cc5k70xa30157" path="res://23_Audio/SFX/UI/metal-small1.wav" id="7_ro30m"]
+[ext_resource type="AudioStream" uid="uid://p5k3478unqdg" path="res://23_Audio/SFX/UI/start_fight2.wav" id="8_ulois"]
+[ext_resource type="AudioStream" uid="uid://ci3e76j1ajsmo" path="res://23_Audio/SFX/Projectile/Healing Spell Impact 1.wav" id="9_ulois"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2l36p"]
 playback_mode = 1
@@ -19,6 +23,10 @@ audio_database = Dictionary[String, AudioStream]({
 "arrow_shoot": SubResource("AudioStreamRandomizer_2l36p"),
 "button_click": ExtResource("5_gptj1"),
 "card_bought": ExtResource("1_b4e2n"),
-"latika_walk": ExtResource("3_walk")
+"hero_locked": ExtResource("6_2l36p"),
+"latika_walk": ExtResource("3_walk"),
+"meteor": ExtResource("9_ulois"),
+"start_fight": ExtResource("8_ulois"),
+"ui_family_portrait_requested": ExtResource("7_ro30m")
 })
 metadata/_custom_type_script = "uid://bnohfh6e2eq3"

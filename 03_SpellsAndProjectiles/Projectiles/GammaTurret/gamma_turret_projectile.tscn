@@ -1,4 +1,4 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://d17cim5i2dxi7"]
 
 [ext_resource type="Script" uid="uid://dv8w8kb4xsqp3" path="res://03_SpellsAndProjectiles/Projectiles/projectile.gd" id="1_wbga5"]
 [ext_resource type="Script" uid="uid://xr3esthqo6re" path="res://03_SpellsAndProjectiles/Projectiles/_Shared/Trajectories/straight_trajectory.gd" id="2_nltp6"]
@@ -11,13 +11,13 @@ metadata/_custom_type_script = "uid://xr3esthqo6re"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_2a06m"]
 
-[node name="GammaTurretProjectile" type="Area3D"]
+[node name="GammaTurretProjectile" type="Area3D" unique_id=930339034]
 script = ExtResource("1_wbga5")
 trajectory = SubResource("Resource_3j240")
 metadata/_custom_type_script = "uid://dv8w8kb4xsqp3"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1076739753]
 shape = SubResource("SphereShape3D_2a06m")
 
-[node name="MeteorVisual3D" parent="." instance=ExtResource("3_o1kwr")]
+[node name="MeteorVisual3D" parent="." unique_id=933775457 instance=ExtResource("3_o1kwr")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.02045536, -1.1920929e-07, -0.4676051)

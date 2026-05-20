@@ -49,6 +49,7 @@ func _ready() -> void:
 	_deploy_timer.start()
 	global_position = _target.global_position
 	_meteor_visual.spells_node = spells_node
+	AudioManager.play_3d("meteor", global_position, 0.95)
 
 
 func _on_deploy_timer_timeout() -> void:
