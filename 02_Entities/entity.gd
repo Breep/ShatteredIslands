@@ -139,6 +139,7 @@ var _base_stats: EntityStats # Private, use base_stats property to access
 var _auto_attack_periodic_module: AutoAttackPeriodicModule # Optional, can be null
 var _label_popup_module: LabelPopupModule
 var _despawn_module: DespawnModule
+var _display_mode_module: DisplayModeModule
 
 # Spawn system
 var _original_fighting_state: FightingState = FightingState.UNDEF
@@ -487,6 +488,7 @@ func _auto_load_components() -> void:
 	_auto_attack_periodic_module = Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.AUTO_ATTACK_PERIODIC_MODULE].instantiate().init(self)
 	_label_popup_module = Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.LABEL_POPUP_MODULE].instantiate().init(self)
 	_despawn_module = Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.DESPAWN].instantiate().init(self)
+	_display_mode_module = Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.DISPLAY_MODE].instantiate().init(self)
 
 	add_child(damage)
 	add_child(heal)
@@ -500,6 +502,7 @@ func _auto_load_components() -> void:
 	add_child(_auto_attack_periodic_module)
 	add_child(_label_popup_module)
 	add_child(_despawn_module)
+	add_child(_display_mode_module)
 
 
 func _load_spawn_animation() -> void:

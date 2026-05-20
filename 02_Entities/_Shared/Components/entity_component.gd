@@ -16,7 +16,8 @@ enum Type {
 	ANIMATION = 11,
 	SPAWN_ANIMATION = 12,
 	CLICKABLE = 13,
-	DESPAWN = 14
+	DESPAWN = 14,
+	DISPLAY_MODE = 15
 }
 
 static var _global_dodge_number: int = 0

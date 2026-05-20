@@ -157,11 +157,8 @@ func _on_fighting_state_changed(new_fighting_state: FightingState) -> void:
 
 #region ============================== Private ==============================
 func _apply_display_mode() -> void:
-	var _animation = animation as HeroAnimationModule
-	if _animation != null:
-		_animation.apply_display_mode(display_mode)
-	if _health_bar != null:
-		_health_bar.apply_display_mode(display_mode)
+	if _display_mode_module != null:
+		_display_mode_module.apply(display_mode)
 
 
 func _compute_family_levels() -> void:
