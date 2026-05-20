@@ -63,7 +63,7 @@ func _register_entity(entity: Entity) -> void:
 		return
 	
 	_entities[entity.uid] = entity
-	if entity is Hero:
+	if entity.is_hero_like():
 		_heroes[entity.uid] = entity
 	
 	entity.spell_casted.connect(_on_entity_spell_casted.bind(entity))

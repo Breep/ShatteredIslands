@@ -302,7 +302,7 @@ func _add_entity(entity: Entity) -> void:
 
 	new_entity_detected.emit(entity)
 
-	if entity is Hero:
+	if entity.is_hero_like():
 		if entity.team == _owner.team: _ally_heroes.append(entity)
 		else: _enemy_heroes.append(entity)
 		_heroes.append(entity)

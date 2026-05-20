@@ -47,7 +47,7 @@ func _ready() -> void:
 	_rank_icon.pivot_offset = _rank_icon.size / 2
 
 func connect_entity(entity: Entity) -> void:
-	if entity == null or not (entity is Hero):
+	if entity == null or not entity.is_hero_like():
 		hide()
 		return
 	

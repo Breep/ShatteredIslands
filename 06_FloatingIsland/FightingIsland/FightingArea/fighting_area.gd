@@ -101,8 +101,8 @@ func _spawn_specs(specs: Array[EntitySpec], team: int) -> void:
 		var entity := node as Entity
 		if entity != null:
 			entity.fight_role = _fight_role_for_spec(spec)
-		if node is Hero:
-			_heroes.append(node as Hero)
+			if entity.is_hero_like():
+				_heroes.append(entity as Hero)
 
 
 # Map a spec type to its fight role. Handles both the new typed specs
