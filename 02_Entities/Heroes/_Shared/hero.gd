@@ -20,7 +20,6 @@ signal fight_is_lost()
 #region ============================== Export ==============================
 @export_group("Configuration")
 @export var hero_desc: HeroDesc
-@export_range(1, 10, 1) var level: int = 1
 
 @export_group("Optional configuration")
 @export var player: Player
@@ -99,10 +98,15 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	Verbose.debug("Hero [" + entity_name + "] ready", Verbose.Category.HERO)
-	
+
 	# CUSTOM CONF
 	if _custom_deck != null: deck = _custom_deck
 	if not _custom_data_memory.is_empty(): data_memory.override(_custom_data_memory)
+
+	# Sync entity_desc ← hero_desc pendant la transition (Hero garde son export
+	# hero_desc, mais le code générique lit via Entity.entity_desc).
+	if entity_desc == null and hero_desc != null:
+		entity_desc = hero_desc
 
 	# Validate hero configuration
 	if hero_desc == null and custom_base_stats == null:

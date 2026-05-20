@@ -149,6 +149,13 @@ var _original_fighting_state: FightingState = FightingState.UNDEF
 @export var battle_id: int = -1 # The id of the battle the entity is in
 @export var entity_name: String = "<entity name>"
 
+# Configuration per-archétype (stats par niveau, timings AA, projectile type, ...).
+# Pour les heroes, automatiquement renseigné depuis hero_desc dans Hero._ready
+# pendant la transition. À terme, tous les archétypes (summons, antagonists) auront
+# leur propre EntityDesc.
+@export var entity_desc: EntityDesc
+@export_range(1, 10, 1) var level: int = 1
+
 # Tagué au spawn par FightingArea selon le type de spec. Consommé par FightingManager
 # pour les conditions d'élimination (KILL_MAIN / KILL_SECONDARY / KILL_ALL).
 var fight_role: FightRole = FightRole.EXTRA
