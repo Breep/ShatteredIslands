@@ -15,7 +15,8 @@ enum Type {
 	LABEL_POPUP_MODULE = 10,
 	ANIMATION = 11,
 	SPAWN_ANIMATION = 12,
-	CLICKABLE = 13
+	CLICKABLE = 13,
+	DESPAWN = 14
 }
 
 static var _global_dodge_number: int = 0

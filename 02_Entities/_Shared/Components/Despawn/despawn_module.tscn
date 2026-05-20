@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://02_Entities/_Shared/Components/Despawn/despawn_module.gd" id="1_despawn"]
+
+[node name="DespawnModule" type="Node"]
+script = ExtResource("1_despawn")

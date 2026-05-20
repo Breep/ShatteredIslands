@@ -76,7 +76,7 @@ func _hatch() -> void:
 	_hatch_modifiers = _hatch_modifiers.filter(func(m: HatchModifier) -> bool: return not m.is_one_time_effect)
 
 	# --- Despawn egg ---
-	_default_despawn()
+	play_despawn_animation()
 
 
 # ============================== Invincibility ==============================

@@ -128,6 +128,9 @@ var movement: MovementComponent
 var animation: AnimationComponent
 var spawn_animation: SpawnAnimationComponent
 var clickable: ClickableComponent
+
+# Origine / cycle de vie
+var summoner: Entity # Set via apply_context si l'entité a été invoquée par une autre
 #endregion
 
 #region ============================== Private variables ==============================
@@ -135,6 +138,7 @@ var _base_stats: EntityStats # Private, use base_stats property to access
 
 var _auto_attack_periodic_module: AutoAttackPeriodicModule # Optional, can be null
 var _label_popup_module: LabelPopupModule
+var _despawn_module: DespawnModule
 
 # Spawn system
 var _original_fighting_state: FightingState = FightingState.UNDEF
@@ -171,6 +175,11 @@ var fight_role: FightRole = FightRole.EXTRA
 @export var _spawn_manager: SpawnManager
 @export var _arena_zone_manager: ArenaZoneManager
 @export var auto_attack_enabled: bool = true
+
+# Despawn (0 = pas de despawn, > 0 = délai en secondes avant queue_free post-died)
+# Summons héritent 5.0 par défaut via Summon._init(). Héros et bâtiments persistants
+# restent à 0.
+@export var _despawn_timer: float = 0.0
 #endregion
 
 @onready var bds_registry := EntityBDSRegistry.new(self)
@@ -353,6 +362,13 @@ func apply_context(context: EntityContext) -> void:
 	_spawn_manager = context.spawn_manager
 	_arena_zone_manager = context.arena_zone_manager
 
+	# Si le contexte porte un entity_owner (cas summon-via-summon_component), il devient
+	# notre summoner et nous enregistre dans son BDS registry pour l'action meter.
+	# Pour les heroes/specs, entity_owner est null → on reste sans summoner.
+	if context.entity_owner != null:
+		summoner = context.entity_owner
+		summoner.bds_registry.register_summon(self)
+
 	# Connect all sender modules to managers
 	var senders: Array[EntityComponent] = [
 		damage, heal, projectile, spell, summon, auto_attack
@@ -404,6 +420,15 @@ func resurrect(hp_percent: float) -> void:
 	life_state = LifeState.ALIVE
 	_state_machine.start_combat_modules()
 	resurrected.emit()
+
+
+# Despawn immédiat sans passer par le signal `died` (cas ChickenEgg post-hatch).
+# Délègue à DespawnModule pour l'animation + queue_free.
+func play_despawn_animation() -> void:
+	if _despawn_module == null:
+		queue_free()
+		return
+	_despawn_module.play_despawn_animation()
 #endregion
 
 # ============================== Private functions ==============================
@@ -436,7 +461,8 @@ func _auto_load_components() -> void:
 	movement =  Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.MOVEMENT].instantiate().init(self)
 	_auto_attack_periodic_module = Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.AUTO_ATTACK_PERIODIC_MODULE].instantiate().init(self)
 	_label_popup_module = Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.LABEL_POPUP_MODULE].instantiate().init(self)
-	
+	_despawn_module = Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.DESPAWN].instantiate().init(self)
+
 	add_child(damage)
 	add_child(heal)
 	add_child(projectile)
@@ -448,6 +474,7 @@ func _auto_load_components() -> void:
 	add_child(movement)
 	add_child(_auto_attack_periodic_module)
 	add_child(_label_popup_module)
+	add_child(_despawn_module)
 
 
 func _load_spawn_animation() -> void:
@@ -525,13 +552,17 @@ func _on_died() -> void:
 	life_state = LifeState.DEAD
 	_state_machine.stop_combat_modules()
 
+	if _health_bar != null:
+		_health_bar.hide()
+
 	for action_modifier in death_modifiers_registry.consume_all_modifiers():
 		if action_modifier.after_action_logic_callback.is_valid():
 			action_modifier.after_action_logic_callback.call({})
 
 
 func _on_resurrected() -> void:
-	pass
+	if _health_bar != null:
+		_health_bar.show()
 
 
 func _on_gfm_fighting_phase_state_changed(fighting_phase_state: GlobalFightingManager.FightingPhaseState) -> void:
