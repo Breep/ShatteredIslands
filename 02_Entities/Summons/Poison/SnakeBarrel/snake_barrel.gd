@@ -1,5 +1,11 @@
 class_name SnakeBarrel
-extends Summon
+extends Entity
+
+
+func _init() -> void:
+	super._init()
+	_despawn_timer = 5.0
+	category = Category.SUMMON
 
 enum Modifier {
 	SNAKE_NUMBER,
@@ -17,7 +23,7 @@ var _snake_poison_stacks: int = 10
 
 var _ticks_before_cleanup: int = 0
 
-func init(snake_number: int, snake_poison_stacks: int, max_health: int) -> Summon:
+func init(snake_number: int, snake_poison_stacks: int, max_health: int) -> Entity:
 	_max_health = max_health
 	_snake_number = snake_number
 	_snake_poison_stacks = snake_poison_stacks

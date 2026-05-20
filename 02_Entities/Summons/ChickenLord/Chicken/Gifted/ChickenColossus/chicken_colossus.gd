@@ -3,7 +3,7 @@ extends ChickenGifted
 
 var _health_max: float
 
-func init(health_max: float) -> Summon:
+func init(health_max: float) -> Entity:
 	_health_max = health_max
 	return self
 

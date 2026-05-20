@@ -4,7 +4,7 @@ extends ChickenGifted
 var _attack_damage: float
 var _attack_speed: float
 
-func init(attack_damage: float, attack_speed: float) -> Summon:
+func init(attack_damage: float, attack_speed: float) -> Entity:
 	_attack_damage = attack_damage
 	_attack_speed = attack_speed
 	return self

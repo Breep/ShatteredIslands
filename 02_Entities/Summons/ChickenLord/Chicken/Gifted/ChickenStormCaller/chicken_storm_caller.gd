@@ -4,7 +4,7 @@ extends ChickenGifted
 var _crit_chance: float
 var _crit_mult: float
 
-func init(crit_chance: float, crit_mult: float) -> Summon:
+func init(crit_chance: float, crit_mult: float) -> Entity:
 	_crit_chance = crit_chance
 	_crit_mult = crit_mult
 	return self

@@ -1,5 +1,11 @@
 class_name DeflectionShield
-extends Summon
+extends Entity
+
+
+func _init() -> void:
+	super._init()
+	_despawn_timer = 5.0
+	category = Category.SUMMON
 
 enum Modifier {
 	BLOCKED_PROJECTILES,
@@ -13,7 +19,7 @@ var _respawn_timer: float
 
 @onready var _projectile_detector: Area3D = %ProjectileDetector
 
-func init(blocked_projectiles: int, shield_per_block: float, respawn_timer: float = -1.0) -> Summon:
+func init(blocked_projectiles: int, shield_per_block: float, respawn_timer: float = -1.0) -> Entity:
 	_blocked_projectiles = blocked_projectiles
 	_shield_per_block = shield_per_block
 	_respawn_timer = respawn_timer

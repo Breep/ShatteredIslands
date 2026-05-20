@@ -4,7 +4,7 @@ extends ChickenGifted
 var _poison_stack_ratio: float
 var _stacks_number: int
 
-func init(poison_stack_ratio: float, stacks_number: int) -> Summon:
+func init(poison_stack_ratio: float, stacks_number: int) -> Entity:
 	_poison_stack_ratio = poison_stack_ratio
 	_stacks_number = stacks_number
 	return self

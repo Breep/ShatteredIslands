@@ -10,7 +10,7 @@ const EXPLOSION_VFX_SCENE = preload("res://22_VFX/VFX_Explosion_B.tscn")
 
 @onready var _zone_impact: Area3D = %ImpactArea3D
 
-func init(ignite_stacks: int) -> Summon:
+func init(ignite_stacks: int) -> Entity:
 	_bonus_ms_ratio = 0.25
 	_hp_threshold_ratio = 0.5
 	_ignite_stacks = ignite_stacks

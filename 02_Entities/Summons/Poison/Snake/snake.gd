@@ -1,5 +1,11 @@
 class_name Snake
-extends Summon
+extends Entity
+
+
+func _init() -> void:
+	super._init()
+	_despawn_timer = 5.0
+	category = Category.SUMMON
 
 func _ready() -> void:
 	var mod := AutoAttackModifier.new()

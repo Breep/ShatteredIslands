@@ -164,7 +164,7 @@ var _original_fighting_state: FightingState = FightingState.UNDEF
 @export var entity_name: String = "<entity name>"
 
 # Catégorie de l'entité. Défaut éditeur surclassé au spawn par les SpawnSpec
-# (et par Hero._init / Summon._init pendant la transition de hiérarchie).
+# (et posé par le `_init` des archétypes : Hero → HERO, summons → SUMMON).
 @export var category: Category = Category.MOB
 
 # Configuration per-archétype (stats par niveau, timings AA, projectile type, ...).
@@ -202,7 +202,7 @@ var fight_role: FightRole = FightRole.EXTRA
 @export var auto_attack_enabled: bool = true
 
 # Despawn (0 = pas de despawn, > 0 = délai en secondes avant queue_free post-died)
-# Summons héritent 5.0 par défaut via Summon._init(). Héros et bâtiments persistants
+# Les archétypes summon posent 5.0 dans leur `_init`. Héros et bâtiments persistants
 # restent à 0.
 @export var _despawn_timer: float = 0.0
 #endregion

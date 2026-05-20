@@ -1,5 +1,11 @@
 class_name ProtoShield
-extends Summon
+extends Entity
+
+
+func _init() -> void:
+	super._init()
+	_despawn_timer = 5.0
+	category = Category.SUMMON
 
 enum Modifier {
 	SHIELD,
@@ -13,7 +19,7 @@ enum Modifier {
 var _on_spawn_shield_amount: float
 var _on_spawn_hp_max: float
 
-func init(shield_amount: float, hp_max: int) -> Summon:
+func init(shield_amount: float, hp_max: int) -> Entity:
 	_on_spawn_shield_amount = shield_amount
 	_on_spawn_hp_max = hp_max
 	return self

@@ -5,7 +5,7 @@ var _shield_strength_inherited: float
 var _bonus_spawn: int
 var _shield_per_attack: int
 
-func init(bonus_spawn: int, shield_per_attack: int, shield_strength_inherited: float) -> Summon:
+func init(bonus_spawn: int, shield_per_attack: int, shield_strength_inherited: float) -> Entity:
 	_bonus_spawn = bonus_spawn
 	_shield_per_attack = shield_per_attack
 	_shield_strength_inherited = shield_strength_inherited

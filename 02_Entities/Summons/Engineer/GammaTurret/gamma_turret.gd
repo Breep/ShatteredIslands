@@ -1,5 +1,11 @@
 class_name GammaTurret
-extends Summon
+extends Entity
+
+
+func _init() -> void:
+	super._init()
+	_despawn_timer = 5.0
+	category = Category.SUMMON
 
 enum Modifier {
 	TURRET_AD,
@@ -19,7 +25,7 @@ var _hp: int
 var _master: Entity
 var _respawn_timer: float
 
-func init(shield: int, ad: float, attack_speed: float, hp: int, master: Entity, respawn_timer: float = -1.0) -> Summon:
+func init(shield: int, ad: float, attack_speed: float, hp: int, master: Entity, respawn_timer: float = -1.0) -> Entity:
 	_shield = shield
 	_ad = ad
 	_as = attack_speed

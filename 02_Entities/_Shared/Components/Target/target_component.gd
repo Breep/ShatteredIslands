@@ -466,7 +466,7 @@ func _get_closest_enemy_summon() -> Entity:
 
 	var summon_candidates: Array[Entity] = []
 	for entity in candidates:
-		if entity is Summon:
+		if entity.category == Entity.Category.SUMMON:
 			summon_candidates.append(entity)
 
 	# If summons exist, target the closest one

@@ -5,7 +5,7 @@ var _regen_stack_ratio: float
 var _stacks_number: int
 var _heal_strength_inherited
 
-func init(regen_stack_ratio: float, heal_strength_inherited: float) -> Summon:
+func init(regen_stack_ratio: float, heal_strength_inherited: float) -> Entity:
 	_regen_stack_ratio = regen_stack_ratio
 	_stacks_number = 10
 	_heal_strength_inherited = heal_strength_inherited

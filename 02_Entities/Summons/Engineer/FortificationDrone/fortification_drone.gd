@@ -1,5 +1,11 @@
 class_name FortificationDrone
-extends Summon
+extends Entity
+
+
+func _init() -> void:
+	super._init()
+	_despawn_timer = 5.0
+	category = Category.SUMMON
 
 #region ============================== Enum ==============================
 enum Modifier {
@@ -48,7 +54,7 @@ func process_tick() -> void:
 	_update_beam()
 
 
-func init(shield_amount: float, hp_max: int, shield_per_second: float, respawn_timer: float) -> Summon:
+func init(shield_amount: float, hp_max: int, shield_per_second: float, respawn_timer: float) -> Entity:
 	_on_spawn_shield_amount = shield_amount
 	_on_spawn_hp_max = hp_max
 	_shield_per_second = shield_per_second
