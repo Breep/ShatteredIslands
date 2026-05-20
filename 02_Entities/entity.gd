@@ -141,6 +141,7 @@ var _label_popup_module: LabelPopupModule
 var _despawn_module: DespawnModule
 var _display_mode_module: DisplayModeModule
 var _deck_holder: DeckHolder
+var _family_module: FamilyModule
 
 # Spawn system
 var _original_fighting_state: FightingState = FightingState.UNDEF
@@ -491,6 +492,7 @@ func _auto_load_components() -> void:
 	_despawn_module = Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.DESPAWN].instantiate().init(self)
 	_display_mode_module = Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.DISPLAY_MODE].instantiate().init(self)
 	_deck_holder = Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.DECK_HOLDER].instantiate().init(self)
+	_family_module = Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.FAMILY].instantiate().init(self)
 
 	add_child(damage)
 	add_child(heal)
@@ -506,6 +508,7 @@ func _auto_load_components() -> void:
 	add_child(_despawn_module)
 	add_child(_display_mode_module)
 	add_child(_deck_holder)
+	add_child(_family_module)
 
 
 func _load_spawn_animation() -> void:

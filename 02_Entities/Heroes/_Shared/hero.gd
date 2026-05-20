@@ -32,14 +32,20 @@ signal fight_is_lost()
 
 #region ============================== Public variables ==============================
 var display_mode: DisplayMode = DisplayMode.PREVIEW
-var families_stats: FamiliesStats
 var deck: PlayerDeck
 var data_memory: NestedRegistry
+
+# Delegate vers FamilyModule.families_stats (lecture seule via Hero pour back-compat
+# avec les nombreux call sites `hero.families_stats.X` côté cards/UI).
+var families_stats: FamiliesStats:
+	get:
+		if _family_module == null:
+			return null
+		return _family_module.families_stats
 #endregion
 
 #region ============================== Private variables ==============================
 var _skill_manager: SkillManager
-var _family_managers: Dictionary[Family.Type, FamilyManager]
 #endregion
 
 #region ============================== Public functions ==============================
@@ -58,11 +64,11 @@ func set_display_mode(mode: DisplayMode) -> void:
 
 
 func get_families_level() -> Dictionary[Family.Type, int]:
-	var families_level: Dictionary[Family.Type, int]
-	for family_type in _family_managers.keys():
-		families_level[family_type] = _family_managers[family_type].level
-	return families_level
-	
+	if _family_module == null:
+		return {}
+	return _family_module.get_families_level()
+
+
 
 func get_card_context() -> CardContext:
 	if _deck_holder == null:
@@ -85,14 +91,9 @@ func process_tick() -> void:
 
 #region ============================== Node base functions ==============================
 func _enter_tree() -> void:
-	# Add Family Managers and Family stats
-	families_stats = FamiliesStats.new()
-	for family_type: Family.Type in Shared.FAMILY_MANAGER_SCENES.keys():
-		var family_manager: FamilyManager = Shared.FAMILY_MANAGER_SCENES[family_type].instantiate() as FamilyManager
-		_family_managers[family_type] = family_manager.init(self)
-		add_child(_family_managers[family_type])
-	
 	if data_memory == null: data_memory = NestedRegistry.new()
+	# super._enter_tree() charge les modules (dont FamilyModule, qui crée les
+	# FamilyManagers comme ses enfants).
 	super._enter_tree()
 
 
@@ -118,7 +119,7 @@ func _ready() -> void:
 		base_stats.reset_from_hero_desc(hero_desc, level)
 
 	# Compute family levels from deck (or use overrides for prototyping)
-	_compute_family_levels()
+	_family_module.compute_levels(deck, _override_family_levels)
 
 	# Build card context via DeckHolder module (création indépendante du deck)
 	_deck_holder.setup()
@@ -128,8 +129,7 @@ func _ready() -> void:
 		deck.has_changed.connect(_on_deck_has_changed)
 
 	_apply_display_mode()
-	for family_manager: FamilyManager in _family_managers.values():
-		family_manager.apply_passive()
+	_family_module.apply_passive_all()
 
 	super._ready()
 	
@@ -143,15 +143,12 @@ func _on_fighting_state_changed(new_fighting_state: FightingState) -> void:
 	super._on_fighting_state_changed(new_fighting_state)
 	match new_fighting_state:
 		FightingState.IDLE:
-			for family_manager: FamilyManager in _family_managers.values():
-				family_manager.stop()
+			_family_module.stop_all()
 		FightingState.FIGHTING:
 			if family_managers_enabled:
-				for family_manager: FamilyManager in _family_managers.values():
-					family_manager.start()
+				_family_module.start_all()
 		FightingState.CELEBRATING:
-			for family_manager: FamilyManager in _family_managers.values():
-				family_manager.stop()
+			_family_module.stop_all()
 		FightingState.UNDEF: pass
 #endregion
 
@@ -159,22 +156,9 @@ func _on_fighting_state_changed(new_fighting_state: FightingState) -> void:
 func _apply_display_mode() -> void:
 	if _display_mode_module != null:
 		_display_mode_module.apply(display_mode)
-
-
-func _compute_family_levels() -> void:
-	for family_type: Family.Type in _family_managers:
-		if _override_family_levels.has(family_type):
-			_family_managers[family_type].level = _override_family_levels[family_type]
-		elif deck != null:
-			var points: int = deck.get_family_points(family_type)
-			if GameManager.game_rules != null:
-				_family_managers[family_type].level = GameManager.game_rules.get_family_level(points)
-		Verbose.trace("<" + name + "> [ " + Family.Type.keys()[family_type] + " - " + str(_family_managers[family_type].level), Verbose.Category.HERO)
-
-
 #endregion
 
 #region ============================== Other callbacks ==============================
 func _on_deck_has_changed() -> void:
-	_compute_family_levels()
+	_family_module.compute_levels(deck, _override_family_levels)
 #endregion
