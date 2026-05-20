@@ -9,7 +9,6 @@ func reset_all_managers() -> void:
 func _clear_all_managers() -> void:
 	GlobalFightingManager.clear()
 	PlayerManager.clear()
-	RoundManager.clear()
 	GameManager.clear()
 
 

@@ -22,7 +22,7 @@ var _projectile_counter: int = 0
 func _ready() -> void:
 	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 	if _fighting_area != null and _fighting_area.fighting_manager != null:
-		_fighting_area.fighting_manager.fight_is_over.connect(_on_fight_is_over)
+		_fighting_area.fighting_manager.fight_done.connect(_on_fight_is_over)
 
 # ============================== Public functions (Tick) ==============================
 
@@ -41,16 +41,16 @@ func get_projectiles() -> Array[Projectile]:
 
 # ============================== Public functions (Spawning) ==============================
 
-func spawn_entity(entity: Entity, global_pos: Vector3, context: EntityContext = null, type := Entity.EntityType.HERO) -> void:
+func spawn_entity(entity: Entity, global_transform: Transform3D, context: EntityContext = null, type := Entity.EntityType.HERO) -> void:
 	if entity == null: return
-	
+
 	entity.uid = _entity_counter
 	_entity_counter += 1
-	
+
 	if context != null:
 		entity.apply_context(context)
 	_entities_node.add_child(entity)
-	entity.global_position = global_pos
+	entity.global_transform = global_transform
 	_active_entities.append(entity)
 	
 	entity_spawned.emit(entity)

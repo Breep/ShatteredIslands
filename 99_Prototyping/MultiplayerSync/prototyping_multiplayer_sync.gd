@@ -130,7 +130,6 @@ func _rpc_start_fight() -> void:
 
 func _start_fight() -> void:
 	GameManager.request_state_transition(GameManager.GameState.FIGHTING)
-	_floating_island.init_fight(_heroes, _battle_type, 1)
 	_floating_island.set_active()
 	GlobalFightingManager.start()
 
@@ -173,14 +172,14 @@ func _instantiate_heroes() -> void:
 
 
 func _init_players() -> void:
-	var player_scene: PackedScene = preload("res://Player/player.tscn")
+	var player_scene: PackedScene = preload("res://07_Players/player.tscn")
 	for i: int in _heroes.size():
 		var player: Player = player_scene.instantiate()
 		player.init_player()
 		player.player_name = "Player" + str(i + 1)
 		player.name = "Player_" + str(i + 1)
 		player.id = 1
-		player.hero_desc = _hero_descs[i]
+		# player.hero_desc supprimé en Phase 3 (vit sur HeroSpec maintenant) — proto à reworker
 		player.hero = _heroes[i]
 		player.hero.entity_name = player.player_name
 		player.skill_manager = SkillManager.new()

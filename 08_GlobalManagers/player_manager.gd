@@ -42,7 +42,6 @@ const MAX_PLAYERS: int = 8
 # ============================== Public variables ==============================
 
 var players: Dictionary[int, Player]
-var dead_players: Dictionary[int, Player]
 
 # ============================== Private variables ==============================
 
@@ -62,51 +61,10 @@ func _ready() -> void:
 # ============================== Public functions ==============================
 
 func clear() -> void:
-	# Destroy all hero instances before clearing
-	destroy_all_heroes()
-
-	# Free all Player nodes (they are children of PlayerManager)
 	for player in players.values():
 		if is_instance_valid(player):
 			player.queue_free()
-	for player in dead_players.values():
-		if is_instance_valid(player) and not players.has(player.id):
-			player.queue_free()
-
 	players.clear()
-	dead_players.clear()
-
-
-func create_all_heroes(display_mode: Hero.DisplayMode = Hero.DisplayMode.PREVIEW) -> void:
-	Verbose.debug("Creating hero instances for all players with display_mode: " + str(Hero.DisplayMode.keys()[display_mode]), Verbose.Category.PLAYER_MANAGER)
-	for player: Player in players.values():
-		if player.hero_desc == null:
-			Verbose.error("Player " + player.player_name + " has no hero_desc", Verbose.Category.PLAYER_MANAGER)
-			continue
-		
-		# Si le hero existe déjà, le détruire d'abord
-		if player.hero != null and is_instance_valid(player.hero):
-			player.hero.queue_free()
-		
-		# Créer nouveau hero avec le display_mode spécifié
-		player.hero = Shared.HERO_SCENES[player.hero_desc.id].instantiate().init(display_mode)
-		player.hero.level = player.lvl
-		player.hero.team = player.team
-		player.hero.entity_name = player.player_name
-		player.hero.battle_id = -1
-		player.hero.deck = player.deck
-		player.hero.data_memory = player.data_memory
-		player.hero.player = player
-	
-		Verbose.debug("Created hero " + player.hero.entity_name + " (id=" + str(player.hero.uid) + ") for player " + player.player_name, Verbose.Category.PLAYER_MANAGER)
-
-
-func destroy_all_heroes() -> void:
-	Verbose.debug("Destroying all hero instances", Verbose.Category.PLAYER_MANAGER)
-	for player in players.values():
-		if player.hero != null and is_instance_valid(player.hero):
-			player.hero.queue_free()
-			player.hero = null
 
 # ============================== Public getter ==============================
 
@@ -116,23 +74,10 @@ func get_local_player() -> Player:
 	return players[multiplayer.get_unique_id()]
 
 
+# En roguelite il n'y a plus de notion "mort/vivant via health PvP" : tout
+# joueur dans la map est considéré actif tant que la run n'est pas finished.
 func get_alive_players() -> Dictionary[int, Player]:
-	var alive_players: Dictionary[int, Player]
-	for player in players.values():
-		if player.health > 0:
-			alive_players[player.id] = player
-	return alive_players
-
-
-func get_players_ordered() -> Array[Player]:
-	var players_ordered: Array[Player] = players.values().duplicate()
-	players_ordered.sort_custom(_compare_player)
-	return players_ordered
-
-
-func get_player_current_place(player: Player) -> int:
-	var player_ordered: Array[Player] = get_players_ordered()
-	return player_ordered.find(player) + 1
+	return players
 
 
 # Get all non bot players
@@ -309,12 +254,7 @@ func _add_player(player_name: String, id: int, is_bot: bool) -> void:
 	new_player.is_bot = is_bot
 
 	if multiplayer.is_server():
-		new_player.damage = 1
-		new_player.lvl = 1
 		new_player.gold = GameManager.game_rules.gold_starting_game
-		new_player.max_health = GameManager.game_rules.player_starting_health
-		new_player.health = GameManager.game_rules.player_starting_health
-		new_player.death.connect(_on_player_death)
 
 	players[id] = new_player
 	add_child(new_player)
@@ -338,22 +278,3 @@ func _remove_player(peer_id: int) -> void:
 	player_removed.emit(peer_id)
 
 
-# Return true if player1 is better than player2
-func _compare_player(player1: Player, player2: Player) -> bool:
-	if player1.is_dead != player2.is_dead:
-		return player2.is_dead
-	else:
-		if player1.is_dead: # Both player are dead
-			if player1.round_of_death != player2.round_of_death:
-				return player1.round_of_death > player2.round_of_death
-			else:
-				return player1.health > player2.health
-		else: # Both player are alive
-			return player1.health > player2.health
-
-# ============================== Callbacks ==============================
-
-func _on_player_death(player: Player) -> void:
-	player.round_of_death = RoundManager.current_round
-	player.is_dead = true
-	dead_players[player.id] = player

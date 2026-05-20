@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="2_ptbxe"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://brnwae0xxk00f" path="res://02_Entities/Summons/Poison/Snake/snake_blendtree.tres" id="5_duvd4"]
 [ext_resource type="Script" uid="uid://cnwr3o67xobtt" path="res://02_Entities/_Shared/Components/Animation/entity_animation_player.gd" id="6_obplm"]
-[ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://10_Tool/SpawnPoint/spawn_point.tscn" id="7_jendl"]
+[ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://05_Game/Run/SpawnSpecs/SpawnPoints/SpawnPoint/spawn_point.tscn" id="7_jendl"]
 [ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/EntityInfoPanel/SummonSimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="8_nh8ax"]
 [ext_resource type="Script" uid="uid://dbu0yi2foobod" path="res://02_Entities/_Shared/Components/Animation/animation_component.gd" id="9_ptbxe"]
 

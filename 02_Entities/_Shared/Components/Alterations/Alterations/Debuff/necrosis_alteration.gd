@@ -26,7 +26,7 @@ func _on_stacks_changed(new_value: float) -> void:
 	if _heal_resistance_mod == null:
 		_heal_resistance_mod = StatModifier.new()
 		_heal_resistance_mod.id = &"Necrosis"
-		_heal_resistance_mod.stat_type = EntityStats.StatType.RESISTANCE
+		_heal_resistance_mod.stat_type = EntityStats.StatType.M_RESISTANCE
 		_heal_resistance_mod.action_type = Utils.ActionType.UTILITY_HEAL
 		_heal_resistance_mod.calc_type = StatModifier.CalcType.ADD
 		_heal_resistance_mod.tags = []

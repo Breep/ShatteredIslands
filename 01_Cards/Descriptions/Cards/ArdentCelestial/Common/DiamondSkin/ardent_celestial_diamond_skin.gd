@@ -12,7 +12,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 	var mod := StatModifier.new()
 	mod.id = &"Diamond Skin"
-	mod.stat_type = EntityStats.StatType.RESISTANCE
+	mod.stat_type = EntityStats.StatType.M_RESISTANCE
 	mod.action_type = Utils.ActionType.DAMAGE_MAGICAL
 	mod.calc_type = StatModifier.CalcType.ADD
 	mod.tags = [StatModifier.TagType.CARD]

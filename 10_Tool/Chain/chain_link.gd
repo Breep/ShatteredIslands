@@ -1,2 +1,0 @@
-class_name ChainLink
-extends RigidBody3D

@@ -37,20 +37,20 @@ func _ready() -> void:
 #region ============================== Private API ==============================
 func _get_crit_multiplier(action_type: Utils.ActionType) -> Dictionary:
 	var is_critical: bool = false
-	var crit_chance: float = _owner.stats.get_stat(EntityStats.StatType.CRIT_CHANCE, action_type)
+	var crit_chance: float = _owner.stats.get_effective_stat(EntityStats.StatType.CRIT_CHANCE, action_type)
 	var crit_multiplier_percent: float = 0.0
-	
+
 	_crit_check_number += 1
 	if Utils.is_randomize_modifier_active(crit_chance, _owner.battle_id, "crit_check_" + str(_crit_check_number)):
 		is_critical = true
-		crit_multiplier_percent = _owner.stats.get_stat(EntityStats.StatType.CRIT_MULT, action_type)
-	
+		crit_multiplier_percent = _owner.stats.get_effective_stat(EntityStats.StatType.CRIT_MULT, action_type)
+
 	return {"multiplier": remap(crit_multiplier_percent, 0, 100, 1, 2), "is_critical": is_critical}
 
 
 func _get_power_fragility_multiplier(action_type: Utils.ActionType) -> float:
-	var power: float = _owner.stats.get_stat(EntityStats.StatType.POWER, action_type)
-	var fragility: float = _owner.stats.get_stat(EntityStats.StatType.FRAGILITY, action_type)
+	var power: float = _owner.stats.get_effective_stat(EntityStats.StatType.M_POWER, action_type)
+	var fragility: float = _owner.stats.get_effective_stat(EntityStats.StatType.M_FRAGILITY, action_type)
 	return (100.0 + power) / (100.0 + fragility)
 
 
@@ -71,7 +71,7 @@ func _consume_after_action_modifiers(action_type: Utils.ActionCategory, modifier
 
 
 func _is_dodged(action_type: Utils.ActionType, source: Entity) -> bool:
-	var dodge_chance: float = _owner.stats.get_stat(EntityStats.StatType.DODGE, action_type)
+	var dodge_chance: float = _owner.stats.get_effective_stat(EntityStats.StatType.DODGE, action_type)
 	_dodge_number += 1
 	if Utils.is_randomize_modifier_active(dodge_chance, _owner.battle_id, "dodge_check_" + str(_global_dodge_number)):
 		_global_dodge_number += 1
@@ -86,13 +86,13 @@ func _is_dodged(action_type: Utils.ActionType, source: Entity) -> bool:
 
 
 func _get_resistance_exposure_multiplier(action_type: Utils.ActionType) -> float:
-	var res: float = _owner.stats.get_stat(EntityStats.StatType.RESISTANCE, action_type)
-	var exposure: float = _owner.stats.get_stat(EntityStats.StatType.EXPOSURE, action_type)
+	var res: float = _owner.stats.get_effective_stat(EntityStats.StatType.M_RESISTANCE, action_type)
+	var exposure: float = _owner.stats.get_effective_stat(EntityStats.StatType.M_EXPOSURE, action_type)
 	return (100 + exposure) / (100 + res)
 
 
-func _get_crit_resistance_multiplier(action_type: Utils.ActionType) -> float:
-	var res: float = _owner.stats.get_stat(EntityStats.StatType.CRIT_RESISTANCE, action_type)
+func _get_crit_resistance_multiplier(_action_type: Utils.ActionType) -> float:
+	var res: float = _owner.stats.get_stat(EntityStats.StatType.CRIT_RESISTANCE)
 	return 100.0 / (100.0 + res)
 
 

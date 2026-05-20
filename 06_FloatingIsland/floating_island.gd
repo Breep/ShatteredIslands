@@ -14,12 +14,6 @@ func _ready() -> void:
 
 # ============================== Public functions ==============================
 
-# Spawn all Heroes on the FightingArea according to the battle
-# Connect all heroes to the FightingArea of the FloatingIsland
-func start_fight(_heroes: Array[Hero], _battle_type: Battle.BattleType) -> void: # VIRTUAL
-	pass
-
-
 func set_active() -> void:
 	show()
 	pass

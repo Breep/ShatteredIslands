@@ -33,12 +33,9 @@ func _ready() -> void:
 
 # ============================== Public functions ==============================
 
-# Spawn all heroes on the FightingArea according to the battle
-# Connect all heroes to the FightingArea of the FloatingIsland
-func init_fight(heroes: Array[Hero], battle_type: Battle.BattleType, battle_id: int = -1) -> void:
-	Verbose.debug("Starting a fight | " + str(battle_id), Verbose.Category.FIGHTING_ISLAND)
-	_fighting_area.init_fight(heroes, battle_type, battle_id)
-	_current_heroes = heroes
+func init_fight(left_formation: FightingFormation, right_formation: FightingFormation, left_team: int, right_team: int) -> void:
+	_fighting_area.init_fight(left_formation, right_formation, left_team, right_team)
+	_current_heroes = _fighting_area.get_fighting_heroes()
 	_force_local_player_camera_on_island()
 
 

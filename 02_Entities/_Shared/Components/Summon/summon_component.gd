@@ -89,12 +89,12 @@ func _summon_snake_barrel(spawn_position: Vector3, entity_modifier: Dictionary) 
 	var snake_poison_stacks: int = entity_modifier[SnakeBarrel.Modifier.SNAKE_POISON_STACKS]
 	var max_health: int = entity_modifier[SnakeBarrel.Modifier.MAX_HEALTH]
 	snake_barrel.init(snake_number, snake_poison_stacks, max_health)
-	_spawn_manager.spawn_entity(snake_barrel, spawn_position, _owner.get_context(), Entity.EntityType.SNAKE_BARREL)
+	_spawn_manager.spawn_entity(snake_barrel, Transform3D(Basis(), spawn_position), _owner.get_context(), Entity.EntityType.SNAKE_BARREL)
 
 
 func _summon_snake(spawn_position: Vector3, _entity_modifier: Dictionary) -> void:
 	var snake: Snake = SNAKE_SCENE.instantiate()
-	_spawn_manager.spawn_entity(snake, spawn_position, _owner.get_context(), Entity.EntityType.SNAKE)
+	_spawn_manager.spawn_entity(snake, Transform3D(Basis(), spawn_position), _owner.get_context(), Entity.EntityType.SNAKE)
 
 
 func _summon_field_generator(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
@@ -105,7 +105,7 @@ func _summon_field_generator(spawn_position: Vector3, entity_modifier: Dictionar
 	var initial_shield: int = entity_modifier.get(FieldGenerator.Modifier.INITIAL_SHIELD, 150)
 	var target_count: int = entity_modifier.get(FieldGenerator.Modifier.TARGET_COUNT, 2)
 	field_generator.init(max_health, shield_amount, shield_interval, initial_shield, target_count)
-	_spawn_manager.spawn_entity(field_generator, spawn_position, _owner.get_context(), Entity.EntityType.FIELD_GENERATOR)
+	_spawn_manager.spawn_entity(field_generator, Transform3D(Basis(), spawn_position), _owner.get_context(), Entity.EntityType.FIELD_GENERATOR)
 
 
 func _summon_chicken(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
@@ -155,7 +155,7 @@ func _summon_chicken(spawn_position: Vector3, entity_modifier: Dictionary) -> vo
 			(chicken as ChickenStormCaller).init(crit_chance, crit_mult)
 			
 	chicken.set_base_stats(base_hp, base_ad, base_armor, base_crit_chance, base_crit_multi)
-	_spawn_manager.spawn_entity(chicken, spawn_position, _owner.get_context(), Entity.EntityType.CHICKEN)
+	_spawn_manager.spawn_entity(chicken, Transform3D(Basis(), spawn_position), _owner.get_context(), Entity.EntityType.CHICKEN)
 
 
 func _summon_proto_shield(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
@@ -163,7 +163,7 @@ func _summon_proto_shield(spawn_position: Vector3, entity_modifier: Dictionary) 
 	var shield_amount: float = entity_modifier.get(ProtoShield.Modifier.SHIELD, 0)
 	var hp_max: int = entity_modifier.get(ProtoShield.Modifier.HP_MAX, 1)
 	proto_shield.init(shield_amount, hp_max)
-	_spawn_manager.spawn_entity(proto_shield, spawn_position, _owner.get_context())
+	_spawn_manager.spawn_entity(proto_shield, Transform3D(Basis(), spawn_position), _owner.get_context())
 
 
 func _summon_fortification_drone(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
@@ -173,7 +173,7 @@ func _summon_fortification_drone(spawn_position: Vector3, entity_modifier: Dicti
 	var shield_per_second: float = entity_modifier.get(FortificationDrone.Modifier.SHIELD_PER_SECOND, 1)
 	var respawn_timer: float = entity_modifier.get(FortificationDrone.Modifier.RESPAWN_TIMER, 10.0)
 	fortification_drone.init(shield_amount, hp_max, shield_per_second, respawn_timer)
-	_spawn_manager.spawn_entity(fortification_drone, spawn_position, _owner.get_context())
+	_spawn_manager.spawn_entity(fortification_drone, Transform3D(Basis(), spawn_position), _owner.get_context())
 
 
 func _summon_aegis_blade(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
@@ -184,7 +184,7 @@ func _summon_aegis_blade(spawn_position: Vector3, entity_modifier: Dictionary) -
 	var shield_ad_tau: float = entity_modifier.get(AegisBlade.Modifier.SHIELD_AD_TAU, 1)
 	var damage_as_shield_ratio: float = entity_modifier.get(AegisBlade.Modifier.DAMAGE_AS_SHIELD, 0)
 	aegis_blade.init(attack_damage, attack_speed, shield_ad_max, shield_ad_tau, damage_as_shield_ratio)
-	_spawn_manager.spawn_entity(aegis_blade, spawn_position, _owner.get_context())
+	_spawn_manager.spawn_entity(aegis_blade, Transform3D(Basis(), spawn_position), _owner.get_context())
 
 
 func _summon_trex(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
@@ -193,7 +193,7 @@ func _summon_trex(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
 	var gifted_spawn_number: int = entity_modifier.get(TRex.Modifier.PRIMAL_SHAKE_NUMBER, 0)
 	var hp_bonus: float = entity_modifier.get(TRex.Modifier.HP_BONUS, 0)
 	trex.init(gifted_spawn_period, gifted_spawn_number, hp_bonus)
-	_spawn_manager.spawn_entity(trex, spawn_position, _owner.get_context())
+	_spawn_manager.spawn_entity(trex, Transform3D(Basis(), spawn_position), _owner.get_context())
 
  
 func _summon_chicken_egg(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
@@ -204,7 +204,7 @@ func _summon_chicken_egg(spawn_position: Vector3, entity_modifier: Dictionary) -
 	var hatch_modifiers: Array[HatchModifier] = entity_modifier.get(ChickenEgg.Modifier.HATCH_MODIFIERS, [] as Array[HatchModifier])
 	var opt_scale: float = entity_modifier.get(ChickenEgg.Modifier.SCALE, 1)
 	egg.init(hatch_time, chicken_type, chicken_modifiers, hatch_modifiers, opt_scale)
-	_spawn_manager.spawn_entity(egg, spawn_position, _owner.get_context(), Entity.EntityType.CHICKEN_EGG)
+	_spawn_manager.spawn_entity(egg, Transform3D(Basis(), spawn_position), _owner.get_context(), Entity.EntityType.CHICKEN_EGG)
 
 
 func _summon_deflection_shield(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
@@ -213,7 +213,7 @@ func _summon_deflection_shield(spawn_position: Vector3, entity_modifier: Diction
 	var shield_per_block: float = entity_modifier.get(DeflectionShield.Modifier.SHIELD_PER_BLOCK, 10)
 	var respawn_timer: float = entity_modifier.get(DeflectionShield.Modifier.RESPAWN_TIMER, -1.0)
 	deflection_shield.init(blocked_projectiles, shield_per_block, respawn_timer)
-	_spawn_manager.spawn_entity(deflection_shield, spawn_position, _owner.get_context())
+	_spawn_manager.spawn_entity(deflection_shield, Transform3D(Basis(), spawn_position), _owner.get_context())
 	
 	
 func _summon_gamma_turret(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
@@ -225,4 +225,4 @@ func _summon_gamma_turret(spawn_position: Vector3, entity_modifier: Dictionary) 
 	var master: Entity = entity_modifier.get(GammaTurret.Modifier.MASTER)
 	var respawn_timer: float = entity_modifier.get(GammaTurret.Modifier.RESPAWN_TIMER, -1.0)
 	gamma_turret.init(shield, ad, attack_speed, hp, master, respawn_timer)
-	_spawn_manager.spawn_entity(gamma_turret, spawn_position, _owner.get_context())
+	_spawn_manager.spawn_entity(gamma_turret, Transform3D(Basis(), spawn_position), _owner.get_context())

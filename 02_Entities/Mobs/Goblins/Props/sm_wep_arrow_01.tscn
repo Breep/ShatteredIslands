@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://b3t2067yh65ip"]
+
+[ext_resource type="PackedScene" uid="uid://by1y605lnohkt" path="res://02_Entities/Mobs/Goblins/Props/SM_Wep_Arrow_01.fbx" id="1_r6rte"]
+[ext_resource type="Texture2D" uid="uid://cmuirmne5freb" path="res://02_Entities/Mobs/_Textures/PolygonGoblinWarCamp/Alts/PolygonGoblinWarCamp_Texture_01_A.png" id="2_astsn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wbggr"]
+albedo_texture = ExtResource("2_astsn")
+
+[node name="SM_Wep_Arrow_01" unique_id=1902731416 instance=ExtResource("1_r6rte")]
+
+[node name="SM_Wep_Arrow_01" parent="." index="0" unique_id=153419555]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_wbggr")

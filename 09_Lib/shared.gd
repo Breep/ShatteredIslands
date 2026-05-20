@@ -14,6 +14,7 @@ var HERO_SCENES: Dictionary[HeroDesc.HeroId, PackedScene] = {
 	HeroDesc.HeroId.TANK: load("res://02_Entities/Heroes/Tank/tank.tscn"),
 	HeroDesc.HeroId.ASSASSIN: load("res://02_Entities/Heroes/Assassin/assassin.tscn"),
 	HeroDesc.HeroId.MAGE: load("res://02_Entities/Heroes/Mage/mage.tscn"),
+	HeroDesc.HeroId.LATIKA: load("res://02_Entities/Heroes/Latika/latika.tscn")
 }
 
 var FAMILIES: Dictionary[Family.Type, Family] = {
@@ -40,7 +41,7 @@ var ENTITY_COMPONENT_SCENES: Dictionary[EntityComponent.Type, PackedScene] = {
 	EntityComponent.Type.AUTO_ATTACK: load("res://02_Entities/_Shared/Components/AutoAttack/auto_attack_component.tscn"),
 
 	EntityComponent.Type.AUTO_ATTACK_PERIODIC_MODULE: load("res://02_Entities/_Shared/Components/AutoAttackPeriodicModule/auto_attack_periodic_module.tscn"),
-	EntityComponent.Type.LABEL_POPUP_MODULE: load("res://02_Entities/_Shared/Modules//PopupModule/label_popup_module.tscn"),
+	EntityComponent.Type.LABEL_POPUP_MODULE: load("res://02_Entities/_Shared/Components/PopupModule/label_popup_module.tscn"),
 	
 	EntityComponent.Type.ANIMATION: load("res://02_Entities/_Shared/Components/Animation/animation_component.tscn"),
 	EntityComponent.Type.SPAWN_ANIMATION: load("res://02_Entities/_Shared/Components/SpawnAnimation/spawn_animation_component.tscn"),
@@ -69,7 +70,8 @@ var PROJECTILE_SCENES: Dictionary[Projectile.Type, PackedScene] = {
 	Projectile.Type.SMALL_EGG: load("res://03_SpellsAndProjectiles/Projectiles/SmallEgg/small_egg_projectile.tscn"),
 	Projectile.Type.FIRE_BALL: load("res://03_SpellsAndProjectiles/Projectiles/FireBall/fire_ball_projectile.tscn"),
 	Projectile.Type.BULLET: load("res://03_SpellsAndProjectiles/Projectiles/Bullet/bullet_projectile.tscn"),
-	Projectile.Type.GAMMA_TURRET: load("res://03_SpellsAndProjectiles/Projectiles/GammaTurret/gamma_turret_projectile.tscn")
+	Projectile.Type.GAMMA_TURRET: load("res://03_SpellsAndProjectiles/Projectiles/GammaTurret/gamma_turret_projectile.tscn"),
+	Projectile.Type.ARROW: load("res://03_SpellsAndProjectiles/Projectiles/Arrow/arrow_projectile.tscn")
 }
 
 var DAMAGE_POPUP_SCENE: PackedScene = load("res://04_UI/3D/DamagePopup/damage_popup.tscn")

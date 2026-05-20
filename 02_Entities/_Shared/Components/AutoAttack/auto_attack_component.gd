@@ -26,8 +26,10 @@ signal attack_completed() # Attack cycle complete, ready for next attack
 # ============================== Constants ==============================
 
 const TICKS_PER_SECOND: int = 60
-const IMPACT_RATIO: float = 0.4 # 40% of interval — tick where damage/projectile fires
-const LOCK_RATIO: float = 0.8 # 80% of interval — tick where animation ends
+# Defaults used when the owner is not a Hero (or has no hero_desc).
+# Hero owners override via HeroDesc.aa_anim_ratio / aa_release_normalized.
+const DEFAULT_AA_ANIM_RATIO: float = 0.8        # % of cycle occupied by anim → tick where animation ends
+const DEFAULT_AA_RELEASE_NORMALIZED: float = 0.5 # position of hit within anim (0..1)
 
 # ============================== Export variables ==============================
 
@@ -154,8 +156,27 @@ func stop_approaching() -> void:
 # ============================== Private functions ==============================
 
 func _calculate_attack_timings(interval_ticks: int) -> void:
-	_impact_tick = maxi(1, int(interval_ticks * IMPACT_RATIO))
-	_lock_ticks = maxi(_impact_tick + 1, int(interval_ticks * LOCK_RATIO))
+	var anim_ratio: float = _resolve_aa_anim_ratio()
+	var release_normalized: float = _resolve_aa_release_normalized()
+	# Impact happens at release_normalized within the animation, which itself
+	# spans anim_ratio of the cycle → impact lands at (anim_ratio * release) of the cycle.
+	var impact_ratio: float = anim_ratio * release_normalized
+	_impact_tick = maxi(1, int(interval_ticks * impact_ratio))
+	_lock_ticks = maxi(_impact_tick + 1, int(interval_ticks * anim_ratio))
+
+
+func _resolve_aa_anim_ratio() -> float:
+	var hero := _owner as Hero
+	if hero != null and hero.hero_desc != null:
+		return hero.hero_desc.aa_anim_ratio
+	return DEFAULT_AA_ANIM_RATIO
+
+
+func _resolve_aa_release_normalized() -> float:
+	var hero := _owner as Hero
+	if hero != null and hero.hero_desc != null:
+		return hero.hero_desc.aa_release_normalized
+	return DEFAULT_AA_RELEASE_NORMALIZED
 
 
 func _start_attack_tick_counter(interval_ticks: int) -> void:

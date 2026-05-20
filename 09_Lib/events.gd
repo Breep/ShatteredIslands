@@ -68,3 +68,7 @@ func signal_ui_family_portrait_unselected() -> void:
 signal ui_family_portrait_requested(player: Player, family: Family)
 func signal_ui_family_portrait_requested(player: Player, family: Family) -> void:
 	ui_family_portrait_requested.emit(player, family)
+
+signal tavern_continue_pressed
+func signal_tavern_continue_pressed() -> void:
+	tavern_continue_pressed.emit()

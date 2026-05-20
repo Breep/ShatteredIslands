@@ -25,7 +25,6 @@ signal projectile_target_hit(target: Entity, gpos: Vector3, projectile_uid: int)
 # ============================== Private variables ==============================
 
 var _heroes: Array[Hero]
-var _battle_type: Battle.BattleType
 
 # ============================== Public variables ==============================
 
@@ -51,7 +50,10 @@ var fighting_event_registry: FightingEventRegistry:
 var arena_zone_manager: ArenaZoneManager:
 	get: return _arena_zone_manager
 
-@export var _fighting_floors: Dictionary[Battle.BattleType, FightingFloor]
+@export_group("Arena Zones")
+@export var _team_zones: Dictionary[int, Area3D] = {}
+@export var _center_zone: Area3D = null
+@export var _full_arena_zone: Area3D = null
 
 # ============================== Node base functions ==============================
 
@@ -61,66 +63,79 @@ func _ready() -> void:
 
 # ============================== Public functions ==============================
 
-# Spawn all heroes on the FightingArea according to the battle
-# Connect all heroes to this FightingArea
-func init_fight(heroes: Array[Hero], battle_type: Battle.BattleType, battle_id: int = -1) -> void:
-	Verbose.debug("Initiating a fight | " + str(Battle.BattleType.keys()[battle_type]) + " | " + str(heroes.size()) + " | " + str(battle_id), Verbose.Category.FIGHTING_AREA)
-	_current_battle_id = battle_id
-	_heroes = heroes
-	_battle_type = battle_type
-	
-	var hero_spawner: HeroSpawner = _set_fighting_floor(battle_type).init(spawn_manager, battle_id)
-	if hero_spawner == null:
-		Verbose.error("FightingArea: No HeroSpawner for this battle type: " + str(Battle.BattleType.keys()[battle_type]), Verbose.Category.FIGHTING_AREA)
-		return
-	
-	_fighting_manager.fight_is_over.connect(_on_fighting_manager_fight_is_over, CONNECT_ONE_SHOT)
-	fighting_manager.init(spawn_manager, battle_id, heroes)
-	
+func init_fight(left_formation: FightingFormation, right_formation: FightingFormation, left_team: int, right_team: int) -> void:
+	_current_battle_id = 42
+	_heroes.clear()
 	_entity_manager.clear()
-	hero_spawner.spawn_heroes(heroes)
+
+	if _arena_zone_manager != null:
+		_arena_zone_manager.init(_team_zones, _current_battle_id, _center_zone, _full_arena_zone)
+
+	_spawn_specs(left_formation.entity_specs, left_team)
+	_spawn_specs(right_formation.entity_specs, right_team)
+
+	_fighting_manager.fight_done.connect(_on_fighting_manager_fight_done, CONNECT_ONE_SHOT)
+	fighting_manager.init(spawn_manager, _current_battle_id)
 
 
 func get_fighting_heroes() -> Array[Hero]:
 	return _heroes
 
-func get_battle_type() -> Battle.BattleType:
-	return _battle_type
-
 # ============================== Private functions ==============================
+
+func _spawn_specs(specs: Array[EntitySpec], team: int) -> void:
+	var local_player: Player = PlayerManager.get_local_player()
+	for spec: EntitySpec in specs:
+		var ctx := EntityContext.new()
+		ctx.team = team
+		ctx.battle_id = _current_battle_id
+		ctx.spawn_manager = _spawn_manager
+		ctx.arena_zone_manager = _arena_zone_manager
+		ctx.fighting_state = Entity.FightingState.IDLE
+		ctx.display_mode = Hero.DisplayMode.FIGHTING_PHASE
+		# En solo : local player possède toutes les unités côté joueur.
+		# En multi (futur) : faudra une convention via team ou un mapping explicite.
+		if spec is HeroSpec or spec is AcolyteSpec:
+			ctx.runtime_owner_player = local_player
+		var node: Node = spec.spawn_into(self, ctx)
+		var entity := node as Entity
+		if entity != null:
+			entity.fight_role = _fight_role_for_spec(spec)
+		if node is Hero:
+			_heroes.append(node as Hero)
+
+
+# Map a spec type to its fight role. Handles both the new typed specs
+# (HeroSpec/AntagonistSpec/AcolyteSpec) and the legacy FightingEntitySpec
+# with its internal `role` enum — to be removed once all .tres are migrated.
+static func _fight_role_for_spec(spec: EntitySpec) -> Entity.FightRole:
+	if spec is HeroSpec or spec is AntagonistSpec:
+		return Entity.FightRole.MAIN
+	if spec is AcolyteSpec:
+		return Entity.FightRole.SECONDARY
+	if spec is FightingEntitySpec:
+		var legacy: FightingEntitySpec = spec
+		match legacy.role:
+			FightingEntitySpec.FightingRole.ANTAGONIST, FightingEntitySpec.FightingRole.HERO:
+				return Entity.FightRole.MAIN
+			FightingEntitySpec.FightingRole.ACOLYTE:
+				return Entity.FightRole.SECONDARY
+	return Entity.FightRole.EXTRA
+
 
 func _ready_checks() -> bool:
 	if _fighting_manager == null:
 		printerr("FightingArea: No FightingManager")
 		return false
-	
+
 	if _entity_manager == null:
 		printerr("FightingArea: No EntityManager")
 		return false
-	
+
 	return true
-
-
-func _set_fighting_floor(battle_type: Battle.BattleType) -> HeroSpawner:
-	for fighting_floor in _fighting_floors.values():
-		fighting_floor.set_inactive()
-	var fighting_floor := _fighting_floors[battle_type]
-	var hero_spawner := fighting_floor.set_active()
-	
-	# Initialize arena zone manager with zones from fighting floor
-	if _arena_zone_manager != null:
-		_arena_zone_manager.init(
-			fighting_floor.team_zones,
-			_current_battle_id,
-			fighting_floor.center_zone,
-			fighting_floor.full_arena_zone
-		)
-	
-	return hero_spawner
 
 # ============================== Callbacks ==============================
 
-func _on_fighting_manager_fight_is_over(_unused: FightingManager, winner_teams_order: Array[int]) -> void:
+func _on_fighting_manager_fight_done(_unused: FightingManager, _winner_teams_order: Array[int]) -> void:
 	if _current_battle_id < 0: return
 	_heroes.clear()
-	RoundManager.register_battle_result(_current_battle_id, winner_teams_order)

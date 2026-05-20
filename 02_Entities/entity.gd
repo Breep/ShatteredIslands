@@ -60,6 +60,14 @@ enum EntityType {
 	CHICKEN_EGG
 }
 
+# Role of an entity in the fight victory conditions.
+# MAIN = Hero / Antagonist, SECONDARY = Acolyte, EXTRA = mobs / summons / anything else.
+enum FightRole {
+	MAIN,
+	SECONDARY,
+	EXTRA
+}
+
 enum SnakeBarrelModifier {
 	SNAKE_NUMBER,
 	SNAKE_POISON_STACKS,
@@ -137,12 +145,16 @@ var _original_fighting_state: FightingState = FightingState.UNDEF
 @export var battle_id: int = -1 # The id of the battle the entity is in
 @export var entity_name: String = "<entity name>"
 
+# Tagué au spawn par FightingArea selon le type de spec. Consommé par FightingManager
+# pour les conditions d'élimination (KILL_MAIN / KILL_SECONDARY / KILL_ALL).
+var fight_role: FightRole = FightRole.EXTRA
+
 @export_group("Optional configuration")
 @export var invisible: bool = false
 @export var custom_base_stats: EntityStats
 
 @export_subgroup("Visual")
-@export var _visual_3d: Node3D # Visual node for spawn animation
+@export var _visual_3d: Node3D
 @export var _health_bar_marker: Marker3D
 @export var _health_bar: SimpleInfoPanel2D
 @export var _attack_spawn_marker: Marker3D
@@ -377,6 +389,12 @@ func cast_ultimate() -> void:
 	printerr("Entity: cast_ultimate() called but not implemented [", get_path(), "]")
 
 
+# Hook appelé par FightingManager sur chaque entité vivante quand le combat se termine.
+# Override par Hero pour gérer son state post-combat. No-op pour les autres entités.
+func handle_end_of_fight(_is_winner: bool) -> void:
+	pass
+
+
 func resurrect(hp_percent: float) -> void:
 	if life_state != LifeState.DEAD:
 		Verbose.error("Entity [" + entity_name + "] try to resurrect while not dead.", Verbose.Category.ENTITY)
@@ -416,6 +434,8 @@ func _auto_load_components() -> void:
 	alterations =  Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.ALTERATIONS].instantiate().init(self)
 	target =  Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.TARGET].instantiate().init(self)
 	movement =  Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.MOVEMENT].instantiate().init(self)
+	_auto_attack_periodic_module = Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.AUTO_ATTACK_PERIODIC_MODULE].instantiate().init(self)
+	_label_popup_module = Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.LABEL_POPUP_MODULE].instantiate().init(self)
 	
 	add_child(damage)
 	add_child(heal)
@@ -426,6 +446,8 @@ func _auto_load_components() -> void:
 	add_child(alterations)
 	add_child(target)
 	add_child(movement)
+	add_child(_auto_attack_periodic_module)
+	add_child(_label_popup_module)
 
 
 func _load_spawn_animation() -> void:

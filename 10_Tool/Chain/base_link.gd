@@ -1,2 +1,0 @@
-class_name BaseLink
-extends RigidBody3D

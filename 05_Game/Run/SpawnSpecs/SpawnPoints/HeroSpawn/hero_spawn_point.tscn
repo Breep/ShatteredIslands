@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://mcgg11jy8uh1"]
+
+[ext_resource type="PackedScene" uid="uid://c80sm3cuughbk" path="res://02_Entities/Mobs/Dummies/dummy_visual_04.tscn" id="1_6e8db"]
+[ext_resource type="Script" uid="uid://c27qheq1cumt0" path="res://05_Game/Run/SpawnSpecs/SpawnPoints/HeroSpawn/hero_spawn_point.gd" id="1_87jur"]
+
+[node name="HeroSpawnPoint" type="Node3D" unique_id=582901657]
+script = ExtResource("1_87jur")
+
+[node name="VisualToBeDestroyed" parent="." unique_id=1306882236 instance=ExtResource("1_6e8db")]
+unique_name_in_owner = true
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)

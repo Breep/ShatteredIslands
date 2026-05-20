@@ -38,7 +38,7 @@ func _on_stacks_changed(new_stacks: float) -> void:
 		if mod == null:
 			mod = StatModifier.new()
 			mod.id = &"Defense Alteration"
-			mod.stat_type = EntityStats.StatType.RESISTANCE
+			mod.stat_type = EntityStats.StatType.M_RESISTANCE
 			mod.action_type = action_type
 			mod.calc_type = StatModifier.CalcType.ADD
 			mod.value = new_stacks

@@ -19,7 +19,7 @@ var attack_speed: float:
 		_attack_speed = value
 		_recalculate_interval()
 
-var _attack_strategy: TargetComponent.TargettingStrategy = TargetComponent.TargettingStrategy.RANDOM_ENEMY
+var _attack_strategy: TargetComponent.TargettingStrategy = TargetComponent.TargettingStrategy.CLOSEST_ENEMY
 
 var _current_target: Entity
 var current_target: Entity:

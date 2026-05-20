@@ -1,6 +1,10 @@
 class_name Game
 extends Node3D
 
+#region ============================== Public variables ==============================
+var run_context: RunContext
+#endregion
+
 #region ============================== Private variables ==============================
 var _fighting_islands: Dictionary[int, FightingIsland] # [player_id, FightingIslands]
 var _current_round_battles: Array[Battle]
@@ -19,6 +23,7 @@ var _current_round_player_id_islands: Array[int] # player_id
 
 #region ============================== Node base functions ==============================
 func _ready() -> void:
+	run_context = GameManager.run_context
 	_hero_selector.all_heroes_picked.connect(_on_hero_selector_all_heroes_picked)
 	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 	Shared.scene_switcher = _scene_switcher
@@ -46,12 +51,8 @@ func _start_new_round() -> void:
 		Verbose.debug("Looks like we have a winner ! Congrats " + PlayerManager.get_alive_players().values()[0].player_name, Verbose.Category.GAME)
 		return
 	
-	_current_round_battles = await RoundManager.get_current_round_battles()
 	await _init_current_round_player_id_islands(_current_round_battles.size())
-	RoundManager.starting_round_player_changes()
 	await PlayerManager.sync_point(PlayerManager.SyncID.ROUND_SETUP)
-
-	PlayerManager.create_all_heroes(Hero.DisplayMode.BUYING_PHASE)
 	GameManager.request_state_transition(GameManager.GameState.BUYING)
 
 
@@ -65,20 +66,6 @@ func _start_buying_phase() -> void:
 func _start_fighting_phase() -> void:
 	Verbose.debug("Start fights !", Verbose.Category.GAME)
 	_buying_island.cleanup()
-
-	# Create heroes for fighting phase (UI visible)
-	PlayerManager.create_all_heroes(Hero.DisplayMode.FIGHTING_PHASE)
-
-	var battles: Array[Battle] = _current_round_battles
-	for i in battles.size():
-		var heroes: Array[Hero]
-		for player: Player in battles[i].players:
-			player.hero.battle_id = battles[i].id
-			heroes.append(player.hero)
-		var player_id: int = _current_round_player_id_islands[i]
-		var fighting_island: FightingIsland = PlayerManager.players[player_id].fighting_island
-		fighting_island.init_fight(heroes, battles[i].battle_type, battles[i].id)
-	# Start fight on each island
 	GlobalFightingManager.start()
 #endregion
 

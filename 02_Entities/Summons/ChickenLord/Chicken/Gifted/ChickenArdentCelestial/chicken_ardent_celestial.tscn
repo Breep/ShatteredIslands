@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="2_bh56c"]
 [ext_resource type="Script" uid="uid://bk603mav6k516" path="res://02_Entities/Summons/ChickenLord/Chicken/chicken_animator.gd" id="3_pnknb"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://cgr3043y4f2ee" path="res://02_Entities/Summons/_Shared/default_blendtree.tres" id="4_18d2a"]
-[ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://10_Tool/SpawnPoint/spawn_point.tscn" id="5_1sg7w"]
+[ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://05_Game/Run/SpawnSpecs/SpawnPoints/SpawnPoint/spawn_point.tscn" id="5_1sg7w"]
 [ext_resource type="PackedScene" uid="uid://b3oqyj5b00c" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenArdentCelestial/chicken_ardent_celestial_visual.tscn" id="5_kooec"]
 [ext_resource type="Script" uid="uid://cnwr3o67xobtt" path="res://02_Entities/_Shared/Components/Animation/entity_animation_player.gd" id="7_t5xk3"]
 [ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/EntityInfoPanel/SummonSimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="8_kravp"]
@@ -67,9 +67,9 @@ parameters/scale_attack/scale = 1.0
 parameters/scale_walk/scale = 1.0
 parameters/scale_ultimate/scale = 1.0
 parameters/scale_idle_var/scale = -1.0
-parameters/transition_global/current_state = "TPOSE"
+parameters/transition_global/current_state = "Fighting"
 parameters/transition_global/transition_request = ""
-parameters/transition_global/current_index = 0
+parameters/transition_global/current_index = 1
 parameters/one_shot_idle/active = false
 parameters/one_shot_idle/internal_active = false
 parameters/one_shot_idle/request = 0
@@ -81,18 +81,17 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.00037944317, 0.382874
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="ChickenArdentCelestialVisual" index="0" unique_id=416118163]
-bones/1/position = Vector3(0, 0.047381032, -0.004717756)
-bones/2/rotation = Quaternion(0.83199865, 0.04164722, -0.5494833, -0.064124875)
-bones/3/rotation = Quaternion(0.96720886, 9.047426e-08, 0.2539824, -3.064464e-07)
-bones/4/rotation = Quaternion(-5.5819182e-08, 0.007207892, -2.9695197e-09, 0.999974)
-bones/7/position = Vector3(0.06718646, -0.0814189, 0.026344841)
-bones/7/rotation = Quaternion(3.626069e-06, -0.38353658, 9.600184e-06, 0.9235257)
-bones/8/rotation = Quaternion(0.9932081, -1.5955072e-06, -0.11635131, 1.4483898e-05)
-bones/9/rotation = Quaternion(4.0781128e-08, -0.60039806, -2.2802024e-07, 0.79970133)
-bones/10/position = Vector3(0.06718645, 0.08142003, 0.026341427)
-bones/10/rotation = Quaternion(-7.0842357e-06, -0.9583842, -3.7334617e-06, 0.28548184)
-bones/11/rotation = Quaternion(0.9932081, 1.7259497e-06, -0.11635134, -1.4468616e-05)
-bones/12/rotation = Quaternion(4.817537e-08, -0.60039806, 2.3136849e-07, 0.79970133)
+bones/1/position = Vector3(0, 0.05001341, 0.025282245)
+bones/1/rotation = Quaternion(-0.7071025, 0.70710254, -0.0024811202, -0.0024662456)
+bones/4/rotation = Quaternion(-0.28071657, 0.006914267, -0.035062663, 0.9591252)
+bones/7/position = Vector3(0.06718646, -0.0814189, 0.02682318)
+bones/7/rotation = Quaternion(2.456009e-06, -0.7315755, 1.8024717e-05, 0.68176043)
+bones/8/rotation = Quaternion(0.99228764, -1.4785061e-06, -0.12395699, 1.4444552e-05)
+bones/9/rotation = Quaternion(4.963403e-08, -0.592977, -2.3661875e-07, 0.8052194)
+bones/10/position = Vector3(0.06718645, 0.08142003, 0.026819764)
+bones/10/rotation = Quaternion(-1.7211834e-05, -0.7315755, -3.080219e-06, 0.68176043)
+bones/11/rotation = Quaternion(0.99228764, 1.6088267e-06, -0.123956986, -1.4428272e-05)
+bones/12/rotation = Quaternion(4.203856e-08, -0.59297705, 2.371251e-07, 0.8052195)
 
 [node name="AnimationPlayer" parent="ChickenArdentCelestialVisual" index="1" unique_id=777400876]
 script = ExtResource("7_t5xk3")

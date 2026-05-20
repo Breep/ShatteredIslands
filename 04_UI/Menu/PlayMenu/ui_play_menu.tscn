@@ -4,7 +4,7 @@
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme.tres" id="2_0s0ho"]
 [ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://04_UI/Tool/Misc/hover_boost_button.gd" id="3_0s0ho"]
 
-[node name="PlayMenu" type="Control"]
+[node name="PlayMenu" type="Control" unique_id=1396296226]
 custom_minimum_size = Vector2(700, 500)
 layout_mode = 3
 anchors_preset = 8
@@ -17,7 +17,7 @@ grow_vertical = 2
 theme = ExtResource("2_0s0ho")
 script = ExtResource("1_ae5as")
 
-[node name="MainPanel" type="Control" parent="."]
+[node name="MainPanel" type="Control" parent="." unique_id=726283793]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,7 +26,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_type_variation = &"card"
 
-[node name="SubPlayMenu" type="MarginContainer" parent="MainPanel"]
+[node name="SubPlayMenu" type="MarginContainer" parent="MainPanel" unique_id=646255655]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -39,24 +39,24 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/SubPlayMenu"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/SubPlayMenu" unique_id=502769073]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainPanel/SubPlayMenu/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainPanel/SubPlayMenu/VBoxContainer" unique_id=1813948327]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer" unique_id=678042555]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 10
 
-[node name="InfoPanel" type="Control" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="InfoPanel" type="Control" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1598515333]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/InfoPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/InfoPanel" unique_id=336473358]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -68,21 +68,21 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/InfoPanel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/InfoPanel/MarginContainer" unique_id=1239946731]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/InfoPanel/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/InfoPanel/MarginContainer/VBoxContainer" unique_id=288518842]
 layout_mode = 2
 size_flags_vertical = 6
 text = "Hello there !
 Welcome in the tournament
 of the Shattered Islands !"
 
-[node name="SoloPanel" type="Control" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="SoloPanel" type="Control" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=34166357]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/SoloPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/SoloPanel" unique_id=1299256464]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -94,10 +94,10 @@ theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/SoloPanel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/SoloPanel/MarginContainer" unique_id=2024946246]
 layout_mode = 2
 
-[node name="SoloLabel" type="Label" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/SoloPanel/MarginContainer/VBoxContainer"]
+[node name="SoloLabel" type="Label" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/SoloPanel/MarginContainer/VBoxContainer" unique_id=1138525412]
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 50
@@ -106,8 +106,9 @@ text = "SOLO"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="StartSoloButton" type="Button" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/SoloPanel/MarginContainer/VBoxContainer"]
+[node name="StartSoloButton" type="Button" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/SoloPanel/MarginContainer/VBoxContainer" unique_id=125985091]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 mouse_default_cursor_shape = 2
@@ -116,12 +117,23 @@ theme_override_font_sizes/font_size = 30
 text = "START GAME"
 script = ExtResource("3_0s0ho")
 
-[node name="OnlinePanel" type="Control" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer"]
+[node name="StartRunButton" type="Button" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/SoloPanel/MarginContainer/VBoxContainer" unique_id=1221310038]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+theme_override_constants/outline_size = 100
+theme_override_font_sizes/font_size = 30
+text = "RUN DÉMO"
+script = ExtResource("3_0s0ho")
+
+[node name="OnlinePanel" type="Control" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer" unique_id=552877892]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_0s0ho")
 
-[node name="MarginContainer" type="MarginContainer" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel"]
+[node name="MarginContainer" type="MarginContainer" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel" unique_id=42737431]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -133,61 +145,61 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer" unique_id=1150329242]
 layout_mode = 2
 
-[node name="OnlineLabel" type="Label" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer"]
+[node name="OnlineLabel" type="Label" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer" unique_id=1538961073]
 layout_mode = 2
 text = "ONLINE"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer" unique_id=1518034259]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlayerNameLabel" type="Label" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="PlayerNameLabel" type="Label" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1206115445]
 layout_mode = 2
 text = "Player Name"
 
-[node name="PlayerNameEdit" type="LineEdit" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="PlayerNameEdit" type="LineEdit" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1226268213]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Breep"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer" unique_id=1866512396]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ServerIPLabel" type="Label" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="ServerIPLabel" type="Label" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1685944076]
 layout_mode = 2
 text = "Server IP"
 
-[node name="ServerIPEdit" type="LineEdit" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="ServerIPEdit" type="LineEdit" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=814406470]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "127.0.0.1"
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer" unique_id=1902186309]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ServerPortLabel" type="Label" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer/HBoxContainer3"]
+[node name="ServerPortLabel" type="Label" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=288600755]
 layout_mode = 2
 text = "Server Port"
 
-[node name="ServerPortEdit" type="LineEdit" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer/HBoxContainer3"]
+[node name="ServerPortEdit" type="LineEdit" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=2091829698]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "4242"
 
-[node name="JoinButton" type="Button" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer"]
+[node name="JoinButton" type="Button" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer" unique_id=443489972]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
@@ -197,7 +209,7 @@ theme_override_font_sizes/font_size = 50
 text = "JOIN"
 script = ExtResource("3_0s0ho")
 
-[node name="ClientMessage" type="Label" parent="MainPanel"]
+[node name="ClientMessage" type="Label" parent="MainPanel" unique_id=109646222]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
@@ -213,4 +225,5 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [connection signal="pressed" from="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/SoloPanel/MarginContainer/VBoxContainer/StartSoloButton" to="." method="_on_start_solo_button_pressed"]
+[connection signal="pressed" from="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/SoloPanel/MarginContainer/VBoxContainer/StartRunButton" to="." method="_on_start_run_button_pressed"]
 [connection signal="pressed" from="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]

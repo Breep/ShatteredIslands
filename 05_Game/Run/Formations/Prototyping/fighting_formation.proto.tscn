@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://c523db1fo7gf4"]
+
+[ext_resource type="Script" uid="uid://c6veegc12g7o3" path="res://05_Game/Run/Formations/Prototyping/fighting_formation.proto.gd" id="1_4o5do"]
+[ext_resource type="Resource" uid="uid://db8elmacgb0ag" path="res://05_Game/Run/Formations/Pool/Prototyping/Colossus3/colossus3.fighting_formation.tres" id="2_i6fy5"]
+[ext_resource type="PackedScene" uid="uid://0x5u0h623yxt" path="res://06_FloatingIsland/FightingIsland/Pool/ArchIsland/arch_island.tscn" id="2_kfgvf"]
+
+[sub_resource type="Environment" id="Environment_i6fy5"]
+background_mode = 1
+
+[node name="FightingFormation_proto" type="Node3D" unique_id=1657071607 node_paths=PackedStringArray("island")]
+script = ExtResource("1_4o5do")
+island = NodePath("ArchIsland")
+left_formation = ExtResource("2_i6fy5")
+right_formation = ExtResource("2_i6fy5")
+
+[node name="ArchIsland" parent="." unique_id=796314808 instance=ExtResource("2_kfgvf")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=362288074]
+environment = SubResource("Environment_i6fy5")

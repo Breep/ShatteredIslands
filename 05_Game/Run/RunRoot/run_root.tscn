@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://cf0r2gbnsiyvb"]
+
+[ext_resource type="Script" uid="uid://bm7qdvjcsq12u" path="res://05_Game/Run/RunRoot/run_root.gd" id="1_root"]
+[ext_resource type="Script" uid="uid://b0joddhahwxgd" path="res://05_Game/Run/GameRunner/game_runner.gd" id="2_grun"]
+[ext_resource type="Script" uid="uid://ceb7u4pmkdyvm" path="res://05_Game/Run/Confrontations/ConfrontationRunner/confrontation_runner.gd" id="3_crun"]
+[ext_resource type="Script" uid="uid://chijx71hgpigd" path="res://05_Game/Run/Encounters/EncounterRunner/encounter_runner.gd" id="4_erun"]
+[ext_resource type="PackedScene" uid="uid://dv3kwc5eeyuk2" path="res://04_UI/InGame/Game/ui_game.tscn" id="5_uigm"]
+
+[node name="RunRoot" type="Node3D" unique_id=250019016 node_paths=PackedStringArray("_game_runner", "_confrontation_runner", "_encounter_runner", "_ui_game")]
+script = ExtResource("1_root")
+_game_runner = NodePath("GameRunner")
+_confrontation_runner = NodePath("ConfrontationRunner")
+_encounter_runner = NodePath("EncounterRunner")
+_ui_game = NodePath("UILayer/UIGame")
+
+[node name="GameRunner" type="Node" parent="." unique_id=1714543975 node_paths=PackedStringArray("_confrontation_runner")]
+script = ExtResource("2_grun")
+_confrontation_runner = NodePath("../ConfrontationRunner")
+
+[node name="ConfrontationRunner" type="Node" parent="." unique_id=1895173043 node_paths=PackedStringArray("_encounter_runner")]
+script = ExtResource("3_crun")
+_encounter_runner = NodePath("../EncounterRunner")
+
+[node name="EncounterRunner" type="Node" parent="." unique_id=1906303900]
+script = ExtResource("4_erun")
+
+[node name="UILayer" type="CanvasLayer" parent="." unique_id=1849777567]
+
+[node name="UIGame" parent="UILayer" unique_id=853472496 instance=ExtResource("5_uigm")]

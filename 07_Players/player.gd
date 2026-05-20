@@ -1,3 +1,9 @@
+# Représente un joueur dans une session : identité réseau (id, name, team),
+# porte-monnaie et progression (gold sur PlayerState ; level/xp proxiés vers
+# le HeroSpec de la formation). Les données hero-level (deck, level, xp,
+# data_memory) vivent canoniquement dans HeroSpec ; Player expose des getters/
+# setters qui pointent dessus pour préserver l'API existante des call sites
+# et pour porter les signaux runtime (lvl_changed, xp_changed).
 class_name Player
 extends Node
 
@@ -7,20 +13,10 @@ var id: int # Multiplayer id
 
 var is_bot: bool # If the player is a fake player (a bot controlled by the server)
 
-var deck: PlayerDeck
+var state: PlayerState
+
 var hero: Hero
 var fighting_island: FightingIsland
-
-var win_streak: int
-var health_lost_since_last_round: int
-var total_win_number: int
-var total_lose_number: int
-var current_damage_win_lose_diff: int # <win>-<lose> but can't go over what the rules indicate (used for damage modifier)
-var battle_history: Array[Battle.BattleResolution]
-var data_memory: NestedRegistry
-
-var is_dead: bool = false # True if the player is dead and signaled it
-var round_of_death: int = -1 # The round when the player died (if dead)
 
 var skill_manager: SkillManager
 
@@ -31,91 +27,65 @@ var team: int:
 		_team = value
 		if hero != null: hero.team = _team
 
-signal lvl_changed(self_ref: Player, new_lvl: int)
-var _lvl: int = 1
-var lvl: int:
-	get: return _lvl
+# === Proxies vers HeroSpec (truth canonique des données hero-level) ===
+
+var deck: PlayerDeck:
+	get:
+		var spec: HeroSpec = _get_my_hero_spec()
+		return spec.deck if spec != null else null
 	set(value):
-		if _lvl == value: return
-		_lvl = clampi(value, 1, 10)
-		lvl_changed.emit(self, _lvl)
+		var spec: HeroSpec = _get_my_hero_spec()
+		if spec != null: spec.deck = value
+
+var data_memory: NestedRegistry:
+	get:
+		var spec: HeroSpec = _get_my_hero_spec()
+		return spec.data_memory if spec != null else null
+	set(value):
+		var spec: HeroSpec = _get_my_hero_spec()
+		if spec != null: spec.data_memory = value
+
+signal lvl_changed(self_ref: Player, new_lvl: int)
+var lvl: int:
+	get:
+		var spec: HeroSpec = _get_my_hero_spec()
+		return spec.level if spec != null else 1
+	set(value):
+		var spec: HeroSpec = _get_my_hero_spec()
+		if spec == null: return
+		var clamped := clampi(value, 1, 10)
+		if spec.level == clamped: return
+		spec.level = clamped
+		lvl_changed.emit(self, spec.level)
 
 signal xp_changed(self_ref: Player, new_xp: int)
-var _xp: int
 var xp: int:
-	get: return _xp
+	get:
+		var spec: HeroSpec = _get_my_hero_spec()
+		return spec.xp if spec != null else 0
 	set(value):
-		if _xp == value: return
-		_xp = value
+		var spec: HeroSpec = _get_my_hero_spec()
+		if spec == null: return
+		if spec.xp == value: return
+		spec.xp = value
 		_check_lvl_up()
-		xp_changed.emit(self, _xp)
+		xp_changed.emit(self, spec.xp)
 
-signal hero_changed(self_ref: Player, new_hero: HeroDesc)
-var _hero_desc: HeroDesc
-var hero_desc: HeroDesc:
-	get: return _hero_desc
-	set(value):
-		if _hero_desc == value: return
-		_hero_desc = value
-		if _hero_desc != null:
-			_hero_desc_id = _hero_desc.id
-		hero_changed.emit(self, _hero_desc)
-
-# Synced integer representation of hero_desc for MultiplayerSynchronizer
-var _hero_desc_id: int = 0
-var hero_desc_id: int:
-	get: return _hero_desc_id
-	set(value):
-		if _hero_desc_id == value: return
-		_hero_desc_id = value
-		if _hero_desc_id != 0 and Shared.HEROES.has(_hero_desc_id):
-			hero_desc = Shared.HEROES[_hero_desc_id]
-
-signal max_health_changed(self_ref: Player, new_max_health: int)
-var _max_health: int
-var max_health: int:
-	get: return _max_health
-	set(value):
-		if _max_health == value: return
-		_max_health = clampi(value, 0, 100) # TODO la valeur de 100 est purement arbitraire
-		max_health_changed.emit(self, _max_health)
-
-signal death(self_ref: Player)
-signal health_changed(self_ref: Player, new_health: int)
-var _health: int
-var health: int:
-	get: return _health
-	set(value):
-		if _health == value: return
-		_health = clampi(value, -100, 100)
-		health_changed.emit(self, _health)
-		if _health <= 0: # TODO Change this by a pile of corpse is funnier
-			death.emit(self)
-			# Hero cleanup is now handled by global lifecycle management
+# === Porte-monnaie (reste sur PlayerState) ===
 
 signal gold_changed(self_ref: Player, new_gold: int)
-var _gold: int
 var gold: int:
-	get: return _gold
+	get: return state.gold
 	set(value):
-		if _gold == value: return
-		_gold = clampi(value, 0, 10000)
-		gold_changed.emit(self, _gold)
-
-signal damage_changed(self_ref: Player, new_damage: int)
-var _damage: int
-var damage: int:
-	get: return _damage
-	set(value):
-		if _damage == value: return
-		_damage = value
-		damage_changed.emit(self, _damage)
+		var clamped := clampi(value, 0, 10000)
+		if state.gold == clamped: return
+		state.gold = clamped
+		gold_changed.emit(self, state.gold)
 #endregion
 
 #region ============================== Public functions ==============================
 func init_player() -> void:
-	deck = PlayerDeck.new().init(self)
-	deck.has_changed.connect(_on_deck_has_changed)
+	pass
 
 
 func setup_components() -> void:
@@ -139,31 +109,27 @@ func setup_components() -> void:
 
 # ============================== Private functions ==============================
 func _init() -> void:
+	state = PlayerState.new()
 	skill_manager = SkillManager.new()
 	skill_manager.init(self)
-	data_memory = NestedRegistry.new()
 
 
-func _apply_all_cards_upgrades() -> void:
-	if deck == null or hero == null:
-		printerr("Player: Can't apply cards upgrades")
-		return
-	if hero.is_node_ready():
-		var ctx: CardContext = hero.get_card_context()
-		for card in deck.get_active_deck():
-			card.player_upgrade.apply_card(ctx, card.lvl)
-	else:
-		hero.deck = deck
+# Résout la HeroSpec du joueur dans la formation active. En solo : 1ère HeroSpec
+# de party.formation. En multi (futur) : convention via slot index / mapping.
+func _get_my_hero_spec() -> HeroSpec:
+	if GameManager.run_context == null: return null
+	if GameManager.run_context.party == null: return null
+	var formation: FightingFormation = GameManager.run_context.party.formation
+	if formation == null: return null
+	for spec: EntitySpec in formation.entity_specs:
+		if spec is HeroSpec:
+			return spec
+	return null
 
 
 func _check_lvl_up() -> void:
-	while xp >= GameManager.game_rules.xp_per_levels[_lvl]:
-		xp -= GameManager.game_rules.xp_per_levels[_lvl]
+	while xp >= GameManager.game_rules.xp_per_levels[lvl]:
+		xp -= GameManager.game_rules.xp_per_levels[lvl]
 		lvl += 1
-		if _lvl == GameManager.game_rules.xp_max_player_level:
+		if lvl == GameManager.game_rules.xp_max_player_level:
 			return
-
-# ============================== Callbacks ==============================
-
-func _on_deck_has_changed() -> void:
-	_apply_all_cards_upgrades()

@@ -80,6 +80,8 @@ func _init_meshs() -> void:
 
 
 func _recursive_find_all_meshs(node: Node3D) -> void:
+	if node == null:
+		return
 	for child in node.get_children(true):
 		if child is Node3D:
 			_recursive_find_all_meshs(child)

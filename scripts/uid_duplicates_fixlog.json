@@ -1,0 +1,1042 @@
+﻿[
+    {
+        "uid":  "uid://1q6lsrjyrqr1",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/shaders/s_simple_pfc.tres",
+        "kind":  "resource",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://xrklqqr9jkf89"
+    },
+    {
+        "uid":  "uid://1q6lsrjyrqr1",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Shaders/s_simple_pfc.tres",
+        "kind":  "resource",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://v2b95rrkhrnww"
+    },
+    {
+        "uid":  "uid://1q6lsrjyrqr1",
+        "file":  "22_VFX/VFX_3D/Protection/shaders/s_simple_pfc.tres",
+        "kind":  "resource",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://fpbxddtz5298g"
+    },
+    {
+        "uid":  "uid://1q6lsrjyrqr1",
+        "file":  "22_VFX/VFX_3D/Ultimate/Aeron/Shaders/s_simple_pfc.tres",
+        "kind":  "resource",
+        "ref_count":  2,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://2uc18118c5g0",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Shaders/s_dual_master_dis_fres_ds.tres",
+        "kind":  "resource",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://vqtgc4fdgbwrc"
+    },
+    {
+        "uid":  "uid://2uc18118c5g0",
+        "file":  "22_VFX/VFX_3D/Ultimate/Aeron/Shaders/s_dual_master_dis_fres_ds.tres",
+        "kind":  "resource",
+        "ref_count":  1,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://3qsqjj5denl7",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/textures/T_NJO1.png.import",
+        "kind":  "import",
+        "ref_count":  3,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://3qsqjj5denl7",
+        "file":  "22_VFX/VFX_3D/Ultimate/Aeron/Textures/T_NJO1.png.import",
+        "kind":  "import",
+        "ref_count":  1,
+        "role":  "regenerate",
+        "new_uid":  "uid://2qsgbpxrvy9ny"
+    },
+    {
+        "uid":  "uid://77mhlm0fiphk",
+        "file":  "22_VFX/VFX_3D/Explosion/textures/generated/n_explosionB.tres",
+        "kind":  "resource",
+        "ref_count":  0,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://77mhlm0fiphk",
+        "file":  "22_VFX/VFX_3D/Ultimate/Aeron/Textures/generated/n_explosionB.tres",
+        "kind":  "resource",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://tp325zznudrwl"
+    },
+    {
+        "uid":  "uid://7qxbf5xhof0h",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/objects/sm_sphere_A1.obj.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://9g2zi4c6hviyv"
+    },
+    {
+        "uid":  "uid://7qxbf5xhof0h",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Objects/sm_sphere_A1.obj.import",
+        "kind":  "import",
+        "ref_count":  2,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://8fh3gk5o1dby",
+        "file":  "22_VFX/VFX_3D/Meteor/Textures/T_VFX_Noise21d_tiled.png.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://c266gjd8kzsyh"
+    },
+    {
+        "uid":  "uid://8fh3gk5o1dby",
+        "file":  "22_VFX/VFX_3D/Ultimate/Aeron/Textures/T_VFX_Noise21d_tiled.png.import",
+        "kind":  "import",
+        "ref_count":  2,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://bitbte7ryrc5l",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/textures/T_Cracks411a.jpg.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://bitbte7ryrc5l",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Textures/T_Cracks411a.jpg.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://pzp6fly2s35n6"
+    },
+    {
+        "uid":  "uid://bjoly6p7083m2",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/objects/sm_cyclinderTopped42.obj.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://bjoly6p7083m2",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Objects/sm_cyclinderTopped42.obj.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://25mr97h7hty7f"
+    },
+    {
+        "uid":  "uid://bl8ri2x0dgylc",
+        "file":  "22_VFX/VFX_3D/Meteor/Objects/m_fireStrikeHead.tres",
+        "kind":  "resource",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://58jichyjf9p44"
+    },
+    {
+        "uid":  "uid://bl8ri2x0dgylc",
+        "file":  "22_VFX/VFX_3D/VFX/Objects/m_fireStrikeHead.tres",
+        "kind":  "resource",
+        "ref_count":  1,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://blb7a2rnt06sr",
+        "file":  "22_VFX/VFX_3D/Meteor/Shaders/s_Trail_Fire_shader.tres",
+        "kind":  "resource",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://ql5i3stosccql"
+    },
+    {
+        "uid":  "uid://blb7a2rnt06sr",
+        "file":  "22_VFX/VFX_3D/VFX/Shaders/s_Trail_Fire_shader.tres",
+        "kind":  "resource",
+        "ref_count":  2,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://bpf8re2if2yu3",
+        "file":  "03_SpellsAndProjectiles/Projectiles/ShadowBolt/utils/s_FireHeader.tres",
+        "kind":  "resource",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://2lhgh8zk5n3hz"
+    },
+    {
+        "uid":  "uid://bpf8re2if2yu3",
+        "file":  "22_VFX/VFX_3D/Meteor/Shaders/s_FireHeader.tres",
+        "kind":  "resource",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://6zcq95j87rtyk"
+    },
+    {
+        "uid":  "uid://bpf8re2if2yu3",
+        "file":  "22_VFX/VFX_3D/VFX/Shaders/s_FireHeader.tres",
+        "kind":  "resource",
+        "ref_count":  5,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://bqjld35nq5lrl",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Textures/T_VFX_Noise_531.png.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://bqjld35nq5lrl",
+        "file":  "22_VFX/VFX_3D/Meteor/Textures/T_VFX_Noise_531.png.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://xcnm8ltqyvjy9"
+    },
+    {
+        "uid":  "uid://brnp67jnwwro6",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/textures/T_smoke_K97.png.import",
+        "kind":  "import",
+        "ref_count":  3,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://brnp67jnwwro6",
+        "file":  "22_VFX/VFX_3D/Ultimate/Aeron/Textures/T_smoke_K97.png.import",
+        "kind":  "import",
+        "ref_count":  1,
+        "role":  "regenerate",
+        "new_uid":  "uid://3ftviismb6lm4"
+    },
+    {
+        "uid":  "uid://btx1eos8uuvop",
+        "file":  "03_SpellsAndProjectiles/Projectiles/ShadowBolt/utils/s_FireHead_TypeK.tres",
+        "kind":  "resource",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://lqb6hrpoi5i3p"
+    },
+    {
+        "uid":  "uid://btx1eos8uuvop",
+        "file":  "22_VFX/VFX_3D/Meteor/Shaders/s_FireHead_TypeK.tres",
+        "kind":  "resource",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://cglljpv4yd3dn"
+    },
+    {
+        "uid":  "uid://btx1eos8uuvop",
+        "file":  "22_VFX/VFX_3D/VFX/Shaders/s_FireHead_TypeK.tres",
+        "kind":  "resource",
+        "ref_count":  3,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://bweor6vqcu0t2",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/textures/T_VFX_StarSt51.png.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://bweor6vqcu0t2",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Textures/T_VFX_StarSt51.png.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://ff76vdpm4yncs"
+    },
+    {
+        "uid":  "uid://bxqb2r5cdt3gw",
+        "file":  "03_SpellsAndProjectiles/Projectiles/ShadowBolt/shadow_bolt_visual.tscn",
+        "kind":  "resource",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://25v4uk4g9dsxy"
+    },
+    {
+        "uid":  "uid://bxqb2r5cdt3gw",
+        "file":  "22_VFX/VFX_3D/VFX/Scenes/VFX_Darkness_projectile.tscn",
+        "kind":  "resource",
+        "ref_count":  1,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://bxslcncv0mhh1",
+        "file":  "22_VFX/VFX_3D/Meteor/Shaders/s_Trail_dynamic.tres",
+        "kind":  "resource",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://4nwuflqn4ps5o"
+    },
+    {
+        "uid":  "uid://bxslcncv0mhh1",
+        "file":  "22_VFX/VFX_3D/VFX/Shaders/s_Trail_dynamic.tres",
+        "kind":  "resource",
+        "ref_count":  5,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://bymsang3xqpwc",
+        "file":  "22_VFX/VFX_3D/Meteor/Objects/m_FireBall_std.tres",
+        "kind":  "resource",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://9fgvvc825jtsq"
+    },
+    {
+        "uid":  "uid://bymsang3xqpwc",
+        "file":  "22_VFX/VFX_3D/VFX/Objects/m_FireBall_std.tres",
+        "kind":  "resource",
+        "ref_count":  2,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://c0j6r3drrpr3x",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/textures/T_cracks35_emisivex.png.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://c0j6r3drrpr3x",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Textures/T_cracks35_emisivex.png.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://4hovgff8wcy8w"
+    },
+    {
+        "uid":  "uid://c1t3ptjn34muf",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/textures/T_VFX_Trail_211.png.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://7755xx9lvvu6u"
+    },
+    {
+        "uid":  "uid://c1t3ptjn34muf",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Textures/T_VFX_Trail_211.png.import",
+        "kind":  "import",
+        "ref_count":  1,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://c2po8q8oho5y6",
+        "file":  "22_VFX/VFX_3D/Meteor/Objects/m_fireTrail1.tres",
+        "kind":  "resource",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://2xhhhvtxwtp5f"
+    },
+    {
+        "uid":  "uid://c2po8q8oho5y6",
+        "file":  "22_VFX/VFX_3D/VFX/Objects/m_fireTrail1.tres",
+        "kind":  "resource",
+        "ref_count":  1,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://c44g48gk8odif",
+        "file":  "22_VFX/VFX_3D/Meteor/Shaders/s_ProjectileSoft_Disp.tres",
+        "kind":  "resource",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://86klzqlwghccg"
+    },
+    {
+        "uid":  "uid://c44g48gk8odif",
+        "file":  "22_VFX/VFX_3D/VFX/Shaders/s_ProjectileSoft_Disp.tres",
+        "kind":  "resource",
+        "ref_count":  2,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://c6v1yetmqgcge",
+        "file":  "22_VFX/VFX_3D/Meteor/Shaders/s_Disolver.tres",
+        "kind":  "resource",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://tutwm84powwzz"
+    },
+    {
+        "uid":  "uid://c6v1yetmqgcge",
+        "file":  "22_VFX/VFX_3D/VFX/Shaders/s_Disolver.tres",
+        "kind":  "resource",
+        "ref_count":  4,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://c7tmvatlueuuv",
+        "file":  "22_VFX/VFX_3D/Meteor/Objects/m_Trail_lightening_1.tres",
+        "kind":  "resource",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://jrnmpnk24n9fn"
+    },
+    {
+        "uid":  "uid://c7tmvatlueuuv",
+        "file":  "22_VFX/VFX_3D/VFX/Objects/m_Trail_lightening_1.tres",
+        "kind":  "resource",
+        "ref_count":  1,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://camqh6l2rp0qc",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Shaders/s_master_disolver_fc.tres",
+        "kind":  "resource",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://ub5qoo64r5pht"
+    },
+    {
+        "uid":  "uid://camqh6l2rp0qc",
+        "file":  "22_VFX/VFX_3D/Explosion/shaders/s_master_disolver_fc.tres",
+        "kind":  "resource",
+        "ref_count":  1,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://cbs6u7qd6xpp0",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/objects/sm_smoke1.obj.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://fis4ys2mu3v4i"
+    },
+    {
+        "uid":  "uid://cbs6u7qd6xpp0",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Objects/sm_smoke1.obj.import",
+        "kind":  "import",
+        "ref_count":  3,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://ceb6m6dh5v0hb",
+        "file":  "22_VFX/VFX_3D/Meteor/Objects/m_lightening_std.tres",
+        "kind":  "resource",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://72n52lslspuor"
+    },
+    {
+        "uid":  "uid://ceb6m6dh5v0hb",
+        "file":  "22_VFX/VFX_3D/VFX/Objects/m_lightening_std.tres",
+        "kind":  "resource",
+        "ref_count":  1,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://ceq0q2hrh3ppu",
+        "file":  "22_VFX/VFX_3D/Meteor/Textures/gradients/g2d_typeA.tres",
+        "kind":  "resource",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://qohncgrhy56z3"
+    },
+    {
+        "uid":  "uid://ceq0q2hrh3ppu",
+        "file":  "22_VFX/VFX_3D/VFX/Textures/gradients/g2d_typeA.tres",
+        "kind":  "resource",
+        "ref_count":  2,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://ch53yvmy4g8v3",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/textures/T_cracks35.png.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://5shqovgdk5vmq"
+    },
+    {
+        "uid":  "uid://ch53yvmy4g8v3",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Textures/T_cracks35.png.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://vmpj8gm9tuwi6"
+    },
+    {
+        "uid":  "uid://ch53yvmy4g8v3",
+        "file":  "22_VFX/VFX_3D/Explosion/textures/T_cracks35.png.import",
+        "kind":  "import",
+        "ref_count":  2,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://citnc32hcv51f",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/textures/T_VFX_Glow_1.PNG.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://gxyi4vy9cjbs4"
+    },
+    {
+        "uid":  "uid://citnc32hcv51f",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Textures/T_VFX_Glow_1.PNG.import",
+        "kind":  "import",
+        "ref_count":  1,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://citnc32hcv51f",
+        "file":  "22_VFX/VFX_3D/Explosion/textures/T_VFX_Glow_1.PNG.import",
+        "kind":  "import",
+        "ref_count":  1,
+        "role":  "regenerate",
+        "new_uid":  "uid://hijm4wopmln8i"
+    },
+    {
+        "uid":  "uid://cqn0iqbcvqk0u",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Shaders/s_Disolver_advanced.tres",
+        "kind":  "resource",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://k9db783xlritv"
+    },
+    {
+        "uid":  "uid://cqn0iqbcvqk0u",
+        "file":  "22_VFX/VFX_3D/Meteor/Shaders/s_Disolver_advanced.tres",
+        "kind":  "resource",
+        "ref_count":  2,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://ct4uygs7cju6p",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/textures/T_NKQ443.png.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://cdp45457gsccz"
+    },
+    {
+        "uid":  "uid://ct4uygs7cju6p",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Textures/T_NKQ443.png.import",
+        "kind":  "import",
+        "ref_count":  1,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://cxs8yy4k6k3uw",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/shaders/s_stylized_smoke_t1_p.tres",
+        "kind":  "resource",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://x9nfbnku4f65h"
+    },
+    {
+        "uid":  "uid://cxs8yy4k6k3uw",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Shaders/s_stylized_smoke_t1_p.tres",
+        "kind":  "resource",
+        "ref_count":  3,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://cxsmx407d722t",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Textures/T_NP41.PNG.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://xgc7t7hqvqk34"
+    },
+    {
+        "uid":  "uid://cxsmx407d722t",
+        "file":  "22_VFX/VFX_3D/Ultimate/Aeron/Textures/T_NP41.PNG.import",
+        "kind":  "import",
+        "ref_count":  3,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://cysmp3e3kel3y",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/textures/T_VFX_N35.png.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://r564nnvphcryq"
+    },
+    {
+        "uid":  "uid://cysmp3e3kel3y",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Textures/T_VFX_N35.png.import",
+        "kind":  "import",
+        "ref_count":  1,
+        "role":  "regenerate",
+        "new_uid":  "uid://bwldtb6fmf55z"
+    },
+    {
+        "uid":  "uid://cysmp3e3kel3y",
+        "file":  "22_VFX/VFX_3D/Ultimate/Aeron/Textures/T_VFX_N35.png.import",
+        "kind":  "import",
+        "ref_count":  3,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://cyvjn3wruj6o2",
+        "file":  "22_VFX/VFX_3D/Meteor/Shaders/s_Trail_TypeB.tres",
+        "kind":  "resource",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://uo93fmkx7y9vs"
+    },
+    {
+        "uid":  "uid://cyvjn3wruj6o2",
+        "file":  "22_VFX/VFX_3D/VFX/Shaders/s_Trail_TypeB.tres",
+        "kind":  "resource",
+        "ref_count":  3,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://d0ilo60b4vudy",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/textures/T_FireTrail_Desat.PNG.import",
+        "kind":  "import",
+        "ref_count":  2,
+        "role":  "regenerate",
+        "new_uid":  "uid://xrl72w4o7h5lt"
+    },
+    {
+        "uid":  "uid://d0ilo60b4vudy",
+        "file":  "22_VFX/VFX_3D/Meteor/Textures/T_FireTrail_Desat.PNG.import",
+        "kind":  "import",
+        "ref_count":  5,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://d0wnxm0dha821",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Textures/T_big_sparks.jpg.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://l8m3t9tw7sf2z"
+    },
+    {
+        "uid":  "uid://d0wnxm0dha821",
+        "file":  "22_VFX/VFX_3D/Explosion/textures/T_big_sparks.jpg.import",
+        "kind":  "import",
+        "ref_count":  1,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://d2v6ytf52lvyo",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/objects/sm_sphere_A1_diagonal.obj.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://7s48hwfy22xtt"
+    },
+    {
+        "uid":  "uid://d2v6ytf52lvyo",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Objects/sm_sphere_A1_diagonal.obj.import",
+        "kind":  "import",
+        "ref_count":  2,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://d4i83bqlqpy0a",
+        "file":  "22_VFX/VFX_3D/Meteor/Scenes/VFX_Electric_strike_1.tscn",
+        "kind":  "resource",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://i9528ooiql3vp"
+    },
+    {
+        "uid":  "uid://d4i83bqlqpy0a",
+        "file":  "22_VFX/VFX_3D/VFX/Scenes/VFX_Electric_strike.tscn",
+        "kind":  "resource",
+        "ref_count":  1,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://dai884pwf0uti",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/objects/sm_cloud5cp.obj.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://rxbf723buhfbr"
+    },
+    {
+        "uid":  "uid://dai884pwf0uti",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Objects/sm_cloud5cp.obj.import",
+        "kind":  "import",
+        "ref_count":  1,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://dgptdu8p2bg27",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/Misc/textures/T_checker21.jpg.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://dgptdu8p2bg27",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Misc/textures/T_checker21.jpg.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://jjzcb92q4pdqz"
+    },
+    {
+        "uid":  "uid://dgt06oi35wq30",
+        "file":  "22_VFX/VFX_3D/Meteor/Textures/gradients/g_traild.tres",
+        "kind":  "resource",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://xdcf6vh7rqc6g"
+    },
+    {
+        "uid":  "uid://dgt06oi35wq30",
+        "file":  "22_VFX/VFX_3D/VFX/Textures/gradients/g_traild.tres",
+        "kind":  "resource",
+        "ref_count":  2,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://dkujiwg37cnsk",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/textures/T_NHU85.png.import",
+        "kind":  "import",
+        "ref_count":  4,
+        "role":  "regenerate",
+        "new_uid":  "uid://wkngs992qfdi4"
+    },
+    {
+        "uid":  "uid://dkujiwg37cnsk",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Textures/T_NHU85.png.import",
+        "kind":  "import",
+        "ref_count":  5,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://dma3eg07dotv7",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Shaders/s_PolarPanning_manualD.tres",
+        "kind":  "resource",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://32dlodn89puof"
+    },
+    {
+        "uid":  "uid://dma3eg07dotv7",
+        "file":  "22_VFX/VFX_3D/Protection/shaders/s_PolarPanning_manualD.tres",
+        "kind":  "resource",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://rmbolbqhchgxm"
+    },
+    {
+        "uid":  "uid://dma3eg07dotv7",
+        "file":  "22_VFX/VFX_3D/Ultimate/Aeron/Shaders/s_PolarPanning_manualD.tres",
+        "kind":  "resource",
+        "ref_count":  3,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://dqd6vb4yowvwv",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/shaders/s_FireHeader_shader.tres",
+        "kind":  "resource",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://vjcbblgz2x26f"
+    },
+    {
+        "uid":  "uid://dqd6vb4yowvwv",
+        "file":  "22_VFX/VFX_3D/Meteor/Shaders/s_FireHeader_shader.tres",
+        "kind":  "resource",
+        "ref_count":  2,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://dsi0gdw8k65c1",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/textures/T_VFX_WindNoise1.png.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://dsi0gdw8k65c1",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Textures/T_VFX_WindNoise1.png.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://5n8bzddg7nmbk"
+    },
+    {
+        "uid":  "uid://duvytfaft2817",
+        "file":  "22_VFX/VFX_3D/Meteor/Shaders/s_fireball_shader.tres",
+        "kind":  "resource",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://zux5ixpvsf6hj"
+    },
+    {
+        "uid":  "uid://duvytfaft2817",
+        "file":  "22_VFX/VFX_3D/VFX/Shaders/s_fireball_shader.tres",
+        "kind":  "resource",
+        "ref_count":  2,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://dwcusyt04617u",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/objects/sm_debris_1.obj.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://gnrgfitq2xufl"
+    },
+    {
+        "uid":  "uid://dwcusyt04617u",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Objects/sm_debris_1.obj.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://d9js3x2q2nwsf"
+    },
+    {
+        "uid":  "uid://dwcusyt04617u",
+        "file":  "22_VFX/VFX_3D/Explosion/objects/sm_debris_1.obj.import",
+        "kind":  "import",
+        "ref_count":  1,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://egg2rvkxhhhp",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/textures/curves/c_fireringed1.tres",
+        "kind":  "resource",
+        "ref_count":  0,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://egg2rvkxhhhp",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Textures/curves/c_fireringed1.tres",
+        "kind":  "resource",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://7c86zbx4rrkmw"
+    },
+    {
+        "uid":  "uid://fp0tqfa1tfb",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Textures/T_VFX_Noise_a13.PNG.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://ntv8jd84kfc29"
+    },
+    {
+        "uid":  "uid://fp0tqfa1tfb",
+        "file":  "22_VFX/VFX_3D/Meteor/Textures/T_VFX_Noise_a13.PNG.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://blk4vpgzy56yx"
+    },
+    {
+        "uid":  "uid://fp0tqfa1tfb",
+        "file":  "22_VFX/VFX_3D/Ultimate/Aeron/Textures/T_VFX_Noise_a13.PNG.import",
+        "kind":  "import",
+        "ref_count":  2,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://nyyc5vq2e8a8",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/textures/T_VFX_Noise_44xainv.png.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://jopc2vgjv75uf"
+    },
+    {
+        "uid":  "uid://nyyc5vq2e8a8",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Textures/T_VFX_Noise_44xainv.png.import",
+        "kind":  "import",
+        "ref_count":  17,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://p2lb8wpdkavu",
+        "file":  "22_VFX/VFX_3D/Meteor/Shaders/s_FireTrail.tres",
+        "kind":  "resource",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://bpyj8hczowqz6"
+    },
+    {
+        "uid":  "uid://p2lb8wpdkavu",
+        "file":  "22_VFX/VFX_3D/VFX/Shaders/s_FireTrail.tres",
+        "kind":  "resource",
+        "ref_count":  3,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://p882hvpsbqve",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Textures/T_VFX_spark44.jpg.import",
+        "kind":  "import",
+        "ref_count":  2,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://p882hvpsbqve",
+        "file":  "22_VFX/VFX_3D/VFX/Textures/T_VFX_spark44.jpg.import",
+        "kind":  "import",
+        "ref_count":  1,
+        "role":  "regenerate",
+        "new_uid":  "uid://wwg7vxhw5c9n6"
+    },
+    {
+        "uid":  "uid://reunn547okbt",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/textures/T_Cracks142.png.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://reunn547okbt",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Textures/T_Cracks142.png.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://byxxvfy6u79ng"
+    },
+    {
+        "uid":  "uid://sfqnk8pph4px",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/textures/T_VFX_Noise_075.png.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://4tzz36rt896lw"
+    },
+    {
+        "uid":  "uid://sfqnk8pph4px",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Textures/T_VFX_Noise_075.png.import",
+        "kind":  "import",
+        "ref_count":  8,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://sfqnk8pph4px",
+        "file":  "22_VFX/VFX_3D/Meteor/Textures/T_VFX_Noise_075.png.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://4mydijhhtdt3q"
+    },
+    {
+        "uid":  "uid://sfqnk8pph4px",
+        "file":  "22_VFX/VFX_3D/Ultimate/Aeron/Textures/T_VFX_Noise_075.png.import",
+        "kind":  "import",
+        "ref_count":  8,
+        "role":  "regenerate",
+        "new_uid":  "uid://fcgdjgfgktq7o"
+    },
+    {
+        "uid":  "uid://vgiyxw3yneoh",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Objects/sm_cylinder_based.obj.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://xy76k7dkmucdh"
+    },
+    {
+        "uid":  "uid://vgiyxw3yneoh",
+        "file":  "22_VFX/VFX_3D/Ultimate/Aeron/Objects/sm_cylinder_based.obj.import",
+        "kind":  "import",
+        "ref_count":  1,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://weruu5m2fm8b",
+        "file":  "22_VFX/VFX_3D/Meteor/Shaders/s_FireHead_B.tres",
+        "kind":  "resource",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://c3tkc8965r4b5"
+    },
+    {
+        "uid":  "uid://weruu5m2fm8b",
+        "file":  "22_VFX/VFX_3D/VFX/Shaders/s_FireHead_B.tres",
+        "kind":  "resource",
+        "ref_count":  2,
+        "role":  "keep",
+        "new_uid":  null
+    },
+    {
+        "uid":  "uid://x204srgh33o",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/textures/T_circle_transparent1.png.import",
+        "kind":  "import",
+        "ref_count":  0,
+        "role":  "regenerate",
+        "new_uid":  "uid://p7ckj9dyw7sju"
+    },
+    {
+        "uid":  "uid://x204srgh33o",
+        "file":  "21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Textures/T_circle_transparent1.png.import",
+        "kind":  "import",
+        "ref_count":  3,
+        "role":  "keep",
+        "new_uid":  null
+    }
+]

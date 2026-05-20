@@ -30,9 +30,9 @@ enum BaseStatsModifier {
 func _ready() -> void:
 	_register_base_stat_modifier(&"Chicken_base_hp", EntityStats.StatType.HEALTH_MAX, _base_health_max)
 	_register_base_stat_modifier(&"Chicken_base_ad", EntityStats.StatType.AD, _base_ad)
-	_register_base_stat_modifier(&"Chicken_base_armor", EntityStats.StatType.RESISTANCE, _base_armor, Utils.ActionType.DAMAGE_PHYSICAL)
-	_register_base_stat_modifier(&"Chicken_base_crit_chance", EntityStats.StatType.CRIT_CHANCE, _base_crit_chance, Utils.ActionType.DAMAGE_PHYSICAL)
-	_register_base_stat_modifier(&"Chicken_base_crit_multi", EntityStats.StatType.CRIT_MULT, _base_crit_multi, Utils.ActionType.DAMAGE_PHYSICAL)
+	_register_base_stat_modifier(&"Chicken_base_armor", EntityStats.StatType.ARMOR, _base_armor)
+	_register_base_stat_modifier(&"Chicken_base_crit_chance", EntityStats.StatType.CRIT_CHANCE, _base_crit_chance)
+	_register_base_stat_modifier(&"Chicken_base_crit_multi", EntityStats.StatType.CRIT_MULT, _base_crit_multi)
 
 	super._ready()
 	

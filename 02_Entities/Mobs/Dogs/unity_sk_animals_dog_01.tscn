@@ -1,0 +1,590 @@
+[gd_scene format=3 uid="uid://b45qfxbc5mg27"]
+
+[ext_resource type="PackedScene" uid="uid://clf6kqsvyslnx" path="res://02_Entities/Mobs/Dogs/Unity_SK_Animals_Dog_01.fbx" id="1_3030f"]
+[ext_resource type="Texture2D" uid="uid://deraq7ab2rgyn" path="res://02_Entities/Mobs/_Textures/Dogs/PolygonDog_Coyote_01.png" id="2_fsgw4"]
+[ext_resource type="AnimationLibrary" uid="uid://ytv58ojnyf6l" path="res://02_Entities/Mobs/_Animations/Synty/Dogs/AnimationLibraries/synty_animals_library.tres" id="3_ir6l5"]
+[ext_resource type="Texture2D" uid="uid://bf5gy4mpl5j56" path="res://02_Entities/Mobs/_Textures/Dogs/PolygonDog_Wolf_01.png" id="3_uaap6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ir6l5"]
+albedo_texture = ExtResource("2_fsgw4")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vvs86"]
+albedo_texture = ExtResource("3_uaap6")
+
+[node name="Unity_SK_Animals_Dog_01" unique_id=33620102 instance=ExtResource("1_3030f")]
+
+[node name="mesh" parent="." index="0" unique_id=2019237376]
+visible = false
+
+[node name="Skeleton3D" parent="." index="1" unique_id=176233432]
+bones/2/position = Vector3(0.01177961, 0.6588467, -0.24832399)
+bones/2/rotation = Quaternion(0.010022936, 0.00017081977, -0.017039558, 0.99980456)
+bones/3/position = Vector3(0.0001919559, -0.00069152546, 0.01313272)
+bones/4/position = Vector3(0.003136634, -0.01231315, 0.1175266)
+bones/4/rotation = Quaternion(0.7608324, 0.012765769, -0.01395437, 0.6486727)
+bones/5/position = Vector3(0.0001591253, 0.1312963, 0.005179798)
+bones/5/rotation = Quaternion(0.032404598, 8.144397e-05, 0.0018852764, 0.9994731)
+bones/6/position = Vector3(-0.002259713, 0.1313913, 0.0005259329)
+bones/6/rotation = Quaternion(-0.0015290175, -0.0025997928, 0.02131455, 0.99976826)
+bones/7/position = Vector3(-0.004883055, 0.131245, -0.0034821918)
+bones/7/rotation = Quaternion(-0.7319591, -0.03843718, 0.031609334, 0.6795287)
+bones/8/rotation = Quaternion(0.34420922, 0.0020603398, -0.004231289, 0.93888116)
+bones/9/position = Vector3(0.0006975403, 0.089122385, 0.001131706)
+bones/9/rotation = Quaternion(0.01081189, 0.025643863, -0.0071772677, 0.999587)
+bones/10/position = Vector3(0.0002390448, 0.089137055, -0.00036498893)
+bones/10/rotation = Quaternion(-0.005871633, 0.023146892, -0.0024402277, 0.99971193)
+bones/11/position = Vector3(0.0001524862, 0.08912411, -0.0013016048)
+bones/11/rotation = Quaternion(-0.3482657, 0.022880832, -0.0033194115, 0.9371107)
+bones/13/rotation = Quaternion(-0.021281376, 0, 0, 0.9997736)
+bones/14/position = Vector3(0, -0.038005102, 0.050080284)
+bones/14/rotation = Quaternion(0.7007895, -0.09430845, 0.7007895, -0.09430846)
+bones/15/position = Vector3(0.05028197, 1.110223e-16, -8.1393885e-19)
+bones/15/rotation = Quaternion(0.049205452, -0.03806066, -0.102694064, 0.9927659)
+bones/16/position = Vector3(0.0397894, 0, -6.440905e-19)
+bones/16/rotation = Quaternion(0, 0, -0.06145229, 0.9981101)
+bones/17/position = Vector3(0.02078808, -0.08013276, 0.1597447)
+bones/18/position = Vector3(0.03398634, -0.065212, 0.1171398)
+bones/18/rotation = Quaternion(0.14555314, -0.10758763, -0.114542216, 0.9767903)
+bones/19/position = Vector3(-0.033947572, -0.06540412, 0.117076054)
+bones/19/rotation = Quaternion(-0.114542186, 0.97679025, 0.14555329, -0.10758776)
+bones/19/scale = Vector3(1, 1, -1)
+bones/20/position = Vector3(-0.020933103, -0.079239495, 0.16007932)
+bones/20/rotation = Quaternion(0.12547795, -0.93586206, -0.1458834, 0.2951872)
+bones/20/scale = Vector3(1, 0.99999994, -1)
+bones/21/rotation = Quaternion(-0.19416627, -0.18629247, 0.5613188, 0.78263396)
+bones/22/rotation = Quaternion(1.7763568e-15, 9.769963e-15, 0.007147504, 0.9999745)
+bones/23/rotation = Quaternion(-1.0200174e-14, 0, 0.001490159, 0.9999989)
+bones/24/rotation = Quaternion(0.78190815, -0.56064194, -0.1897836, 0.19565922)
+bones/25/rotation = Quaternion(1.7763568e-15, 9.769963e-15, 0.007147504, 0.9999745)
+bones/26/rotation = Quaternion(-1.0200174e-14, 0, 0.001490159, 0.9999989)
+bones/27/scale = Vector3(1, 0.32458353, 1)
+bones/28/rotation = Quaternion(-0.0148012275, 0.93565917, -0.12906411, 0.32812423)
+bones/28/scale = Vector3(1, 1, -1)
+bones/29/position = Vector3(0.0433989, -0.05746172, 0.1619084)
+bones/30/position = Vector3(0.023833, -0.0830106, 0.2171824)
+bones/31/position = Vector3(0.05126381, -0.07961587, 0.09366391)
+bones/32/rotation = Quaternion(0.04090656, 0, 0, 0.99916303)
+bones/33/position = Vector3(-0.045442782, -0.087569706, 0.114467435)
+bones/33/rotation = Quaternion(0.07471611, -0.98181057, -0.13306832, 0.11295337)
+bones/33/scale = Vector3(0.9999999, 1, -1)
+bones/34/position = Vector3(-0.03965329, -0.085632, 0.1551093)
+bones/34/rotation = Quaternion(-0.077412456, 0.9847282, 0.10940464, -0.11112278)
+bones/34/scale = Vector3(0.9999999, 1, -1)
+bones/35/rotation = Quaternion(0.95997816, 0.19449839, 0.14843866, 0.13630185)
+bones/36/rotation = Quaternion(0, -1.7938288e-15, 0.7253167, 0.68841535)
+bones/37/rotation = Quaternion(0, -4.4408926e-16, 0.26822913, 0.9633552)
+bones/38/rotation = Quaternion(6.938894e-17, -6.5276396e-17, -0.16568431, 0.9861789)
+bones/39/rotation = Quaternion(-0.13630185, 0.14843866, -0.19449839, 0.95997816)
+bones/40/rotation = Quaternion(0, -1.7938292e-15, 0.7253167, 0.68841535)
+bones/41/rotation = Quaternion(0, -4.4408926e-16, 0.26822913, 0.9633552)
+bones/42/rotation = Quaternion(8.326673e-17, -6.5276396e-17, -0.16568431, 0.9861789)
+bones/43/position = Vector3(-0.025863467, -0.093686245, 0.20639288)
+bones/43/rotation = Quaternion(-0.094974786, 0.9687712, 0.02182536, -0.22800367)
+bones/43/scale = Vector3(1, 1, -1)
+bones/44/rotation = Quaternion(-0.07720445, -0.33440253, 0.4192697, 0.8404924)
+bones/45/rotation = Quaternion(-1.323489e-23, 5.1078403e-23, 0.03183586, 0.9994931)
+bones/46/rotation = Quaternion(6.617446e-24, -1.3648482e-23, 0.02474805, 0.9996938)
+bones/47/rotation = Quaternion(0.8404923, -0.4192697, -0.33440253, 0.07720444)
+bones/48/rotation = Quaternion(1.6543612e-23, -2.646978e-23, 0.03183586, 0.9994931)
+bones/49/rotation = Quaternion(-1.3234891e-23, -1.9852338e-23, 0.02474805, 0.9996938)
+bones/50/position = Vector3(0.05016537, 0.0635363, 0.0013467349)
+bones/50/rotation = Quaternion(-0.07635918, 0, 0, 0.9970804)
+bones/51/position = Vector3(0.050987776, -0.1219226, 0.07868337)
+bones/51/rotation = Quaternion(-0.53611773, 0.48296097, -0.5216787, 0.4551681)
+bones/52/position = Vector3(0.2057478, -0.0001402302, 7.907703e-06)
+bones/52/rotation = Quaternion(-0.027456215, -0.006264878, -0.22237132, 0.9745553)
+bones/53/position = Vector3(0.22226481, -0.00017084081, -1.9255921e-09)
+bones/53/rotation = Quaternion(1.302109e-05, 9.423311e-06, -0.25993523, 0.96562606)
+bones/54/position = Vector3(0.109883405, -0.00020676799, 2.74969e-06)
+bones/54/rotation = Quaternion(0.02545036, -0.05138975, 0.24431199, 0.9679995)
+bones/55/rotation = Quaternion(0.94796443, -0.3177617, -0.01780127, -0.008609695)
+bones/56/position = Vector3(-0.05016537, 0.09211631, -0.01272428)
+bones/56/rotation = Quaternion(-3.326027e-18, 0.9985236, 0.054319896, 6.113992e-17)
+bones/57/position = Vector3(0.0509313, -0.1218281, -0.07827982)
+bones/57/rotation = Quaternion(0.33053768, -0.65520453, -0.34898236, 0.58280635)
+bones/58/position = Vector3(0.20572871, -0.0001758533, 6.138627e-06)
+bones/58/rotation = Quaternion(-0.0167322, -0.004939065, -0.28306648, 0.95894164)
+bones/59/position = Vector3(0.2222752, -0.0001535741, -2.405471e-07)
+bones/59/rotation = Quaternion(-0.00028758583, 0.0013465344, 0.036505997, 0.99933255)
+bones/60/position = Vector3(0.10988361, 2.6760521e-05, -2.43929e-06)
+bones/60/rotation = Quaternion(-0.06773877, 0.031430744, -0.08461974, 0.99361116)
+bones/61/rotation = Quaternion(0.49791747, 0.866999, -0.0049422137, 0.019146448)
+bones/62/position = Vector3(-4.65537e-05, -0.0058643725, -0.1078533)
+bones/62/rotation = Quaternion(0.6628562, -0.2677186, -0.6961925, 0.065303035)
+bones/63/position = Vector3(0.1358617, -0.004028881, 7.616141e-05)
+bones/63/rotation = Quaternion(-0.0056689414, 0.02609159, -0.13502002, 0.99048305)
+bones/64/position = Vector3(0.1501957, -0.01351294, 0.00020203629)
+bones/64/rotation = Quaternion(-0.0047942856, 0.02549271, -0.19010428, 0.9814212)
+bones/65/position = Vector3(0.1498546, -0.01623138, 0.0004714391)
+bones/65/rotation = Quaternion(-0.005464683, -0.004260471, -0.23011842, 0.97313803)
+bones/66/position = Vector3(0.1495522, -0.01888239, 0.00074802135)
+bones/66/rotation = Quaternion(-0.0067320196, -0.0035093105, -0.1060222, 0.9943348)
+bones/67/position = Vector3(0.08098678, -0.06656886, -0.038516007)
+bones/67/rotation = Quaternion(0.46207118, -0.5318287, -0.49616194, 0.5074168)
+bones/68/position = Vector3(0.22651489, -0.0001717056, 3.1394e-06)
+bones/68/rotation = Quaternion(-0.008754645, -0.0026282978, -0.28752697, 0.9577289)
+bones/69/position = Vector3(0.2134958, -1.8837804e-05, 2.565983e-09)
+bones/69/rotation = Quaternion(9.786366e-06, -4.6536625e-06, 0.61687547, 0.7870608)
+bones/70/position = Vector3(0.18808821, 0.0006468607, -3.657609e-06)
+bones/70/rotation = Quaternion(0.037522826, 0.066115335, -0.30541378, 0.94918036)
+bones/71/rotation = Quaternion(0.0026582014, 0.013535953, 0.39954296, 0.9166107)
+bones/72/position = Vector3(-0.08098053, -0.066543296, -0.03838027)
+bones/72/rotation = Quaternion(0.44147488, -0.54907274, -0.40608138, 0.581994)
+bones/73/position = Vector3(0.22629249, -0.0003140195, -1.891852e-05)
+bones/73/rotation = Quaternion(0.022208024, 0.020291528, -0.67422944, 0.737909)
+bones/74/position = Vector3(0.2135011, -0.00023860642, -1.4031727e-09)
+bones/74/rotation = Quaternion(-8.170225e-05, -5.442667e-05, 0.5985637, 0.8010753)
+bones/75/position = Vector3(0.1880883, 0.0006189645, 2.118051e-06)
+bones/75/rotation = Quaternion(-0.11163482, 0.028188631, -0.5684598, 0.8146143)
+bones/76/rotation = Quaternion(-0.013535952, 0.002658201, 0.9166107, -0.39954293)
+bones/78/position = Vector3(-0.040945314, 0.116741, -0.4158934)
+bones/78/rotation = Quaternion(0.61324954, 0.10098882, 0.07946368, 0.7793663)
+bones/79/position = Vector3(0.0409453, 0.05190548, -0.24462539)
+bones/80/position = Vector3(-0.05498796, 0.05951859, 0.060002178)
+bones/80/rotation = Quaternion(0.36390558, 0, 0, 0.93143594)
+bones/81/position = Vector3(0.05529545, 0.04376566, 0.5994285)
+
+[node name="SK_Animal_Dog_Coyote_01" parent="Skeleton3D" index="0" unique_id=1643812159]
+visible = false
+material_override = SubResource("StandardMaterial3D_ir6l5")
+
+[node name="SK_Animal_Dog_Dalmatian_01" parent="Skeleton3D" index="1" unique_id=1687798167]
+visible = false
+
+[node name="SK_Animal_Dog_Dalmatian_Collar_01" parent="Skeleton3D" index="2" unique_id=389708678]
+visible = false
+
+[node name="SK_Animal_Dog_Doberman_01" parent="Skeleton3D" index="3" unique_id=2105735134]
+visible = false
+
+[node name="SK_Animal_Dog_Doberman_Collar_01" parent="Skeleton3D" index="4" unique_id=629347224]
+visible = false
+
+[node name="SK_Animal_Dog_Fox_01" parent="Skeleton3D" index="5" unique_id=2112371067]
+visible = false
+
+[node name="SK_Animal_Dog_GermanShepherd_01" parent="Skeleton3D" index="6" unique_id=667215159]
+visible = false
+
+[node name="SK_Animal_Dog_GermanShepherd_Collar_01" parent="Skeleton3D" index="7" unique_id=81018776]
+visible = false
+
+[node name="SK_Animal_Dog_GoldenRetriever_01" parent="Skeleton3D" index="8" unique_id=1734702406]
+visible = false
+
+[node name="SK_Animal_Dog_GoldenRetriever_Collar_01" parent="Skeleton3D" index="9" unique_id=365350542]
+visible = false
+
+[node name="SK_Animal_Dog_Greyhound_01" parent="Skeleton3D" index="10" unique_id=267433944]
+visible = false
+
+[node name="SK_Animal_Dog_Greyhound_Collar_01" parent="Skeleton3D" index="11" unique_id=2145065364]
+visible = false
+
+[node name="SK_Animal_Dog_HellHound_01" parent="Skeleton3D" index="12" unique_id=190963764]
+visible = false
+
+[node name="SK_Animal_Dog_Husky_01" parent="Skeleton3D" index="13" unique_id=481554261]
+visible = false
+
+[node name="SK_Animal_Dog_Husky_Collar_01" parent="Skeleton3D" index="14" unique_id=2140854501]
+visible = false
+
+[node name="SK_Animal_Dog_Labrador_01" parent="Skeleton3D" index="15" unique_id=730531562]
+visible = false
+
+[node name="SK_Animal_Dog_Labrador_Collar_01" parent="Skeleton3D" index="16" unique_id=722020199]
+visible = false
+
+[node name="SK_Animal_Dog_Pointer_01" parent="Skeleton3D" index="17" unique_id=218971342]
+visible = false
+
+[node name="SK_Animal_Dog_Pointer_Collar_01" parent="Skeleton3D" index="18" unique_id=1789629236]
+visible = false
+
+[node name="SK_Animal_Dog_Ridgeback_01" parent="Skeleton3D" index="19" unique_id=2062781158]
+visible = false
+
+[node name="SK_Animal_Dog_Ridgeback_Collar_01" parent="Skeleton3D" index="20" unique_id=1380116481]
+visible = false
+
+[node name="SK_Animal_Dog_Robot_01" parent="Skeleton3D" index="21" unique_id=325773666]
+visible = false
+
+[node name="SK_Animal_Dog_Scifi_01" parent="Skeleton3D" index="22" unique_id=2117365139]
+visible = false
+
+[node name="SK_Animal_Dog_Shiba_01" parent="Skeleton3D" index="23" unique_id=1692937814]
+visible = false
+
+[node name="SK_Animal_Dog_Shiba_Collar_01" parent="Skeleton3D" index="24" unique_id=1930736406]
+visible = false
+
+[node name="SK_Animal_Dog_Wolf_01" parent="Skeleton3D" index="25" unique_id=1163973477]
+material_override = SubResource("StandardMaterial3D_vvs86")
+
+[node name="SK_Animal_Dog_Zombie_Doberman_01" parent="Skeleton3D" index="26" unique_id=482664571]
+visible = false
+
+[node name="SK_Animal_Dog_Zombie_GermanShepherd_01" parent="Skeleton3D" index="27" unique_id=2026910360]
+visible = false
+
+[node name="SK_Chr_Attach_Head_GasMask_Large_01" parent="Skeleton3D" index="28" unique_id=744844347]
+visible = false
+
+[node name="SK_Chr_Attach_Head_Goggles_Large_01" parent="Skeleton3D" index="29" unique_id=321020825]
+visible = false
+
+[node name="SK_Chr_Attach_Head_Straps_Large_01" parent="Skeleton3D" index="30" unique_id=539883973]
+visible = false
+
+[node name="SK_Chr_Attach_Head_Muzzle_Large_01" parent="Skeleton3D" index="31" unique_id=324201447]
+visible = false
+
+[node name="SM_Chr_Attach_Helmet_Skull_Wolf_01" parent="Skeleton3D" index="32" unique_id=720165786]
+visible = false
+
+[node name="SM_Chr_Attach_Helmet_Skull_Large_01" parent="Skeleton3D" index="33" unique_id=578770472]
+visible = false
+
+[node name="SM_Chr_Attach_Helmet_Light_Wolf_01" parent="Skeleton3D" index="34" unique_id=294916803]
+visible = false
+
+[node name="SM_Chr_Attach_Helmet_Light_Large_01" parent="Skeleton3D" index="35" unique_id=1513348804]
+visible = false
+
+[node name="SM_Chr_Attach_Helmet_Dark_Wolf_01" parent="Skeleton3D" index="36" unique_id=31585081]
+visible = false
+
+[node name="SM_Chr_Attach_Helmet_Dark_Large_01" parent="Skeleton3D" index="37" unique_id=1462452795]
+visible = false
+
+[node name="SM_Chr_Attach_HeadCone_Large_01" parent="Skeleton3D" index="38" unique_id=1647132990]
+visible = false
+
+[node name="SK_Chr_Attach_Head_GasMask_Medium_01" parent="Skeleton3D" index="39" unique_id=1414167856]
+visible = false
+
+[node name="SK_Chr_Attach_Head_Goggles_Medium_01" parent="Skeleton3D" index="40" unique_id=737515548]
+visible = false
+
+[node name="SK_Chr_Attach_Head_Straps_Medium_01" parent="Skeleton3D" index="41" unique_id=509344325]
+visible = false
+
+[node name="SK_Chr_Attach_Head_Muzzle_Medium_01" parent="Skeleton3D" index="42" unique_id=1967909646]
+visible = false
+
+[node name="SK_Chr_Attach_Head_GasMask_Small_01" parent="Skeleton3D" index="43" unique_id=747686784]
+visible = false
+
+[node name="SK_Chr_Attach_Head_Goggles_Small_01" parent="Skeleton3D" index="44" unique_id=1894007779]
+visible = false
+
+[node name="SK_Chr_Attach_Head_Straps_Small_01" parent="Skeleton3D" index="45" unique_id=1563189635]
+visible = false
+
+[node name="SK_Chr_Attach_Head_Muzzle_Small_01" parent="Skeleton3D" index="46" unique_id=15523026]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_HighVis_Coyote_01" parent="Skeleton3D" index="47" unique_id=1870638268]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Military_Coyote_01" parent="Skeleton3D" index="48" unique_id=1728014100]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Police_Coyote_01" parent="Skeleton3D" index="49" unique_id=886221936]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Rescue_Coyote_01" parent="Skeleton3D" index="50" unique_id=1925849790]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Saddle_Coyote_01" parent="Skeleton3D" index="51" unique_id=309848327]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_War_Coyote_01" parent="Skeleton3D" index="52" unique_id=389100999]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_HighVis_Dalmatian_01" parent="Skeleton3D" index="53" unique_id=983690826]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Military_Dalmatian_01" parent="Skeleton3D" index="54" unique_id=1814651137]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Police_Dalmatian_01" parent="Skeleton3D" index="55" unique_id=410606076]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Rescue_Dalmatian_01" parent="Skeleton3D" index="56" unique_id=620711961]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Saddle_Dalmatian_01" parent="Skeleton3D" index="57" unique_id=1055178546]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_War_Dalmatian_01" parent="Skeleton3D" index="58" unique_id=1981091475]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_HighVis_Doberman_01" parent="Skeleton3D" index="59" unique_id=2042128557]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Military_Doberman_01" parent="Skeleton3D" index="60" unique_id=1968740681]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Police_Doberman_01" parent="Skeleton3D" index="61" unique_id=1767920347]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Rescue_Doberman_01" parent="Skeleton3D" index="62" unique_id=116056482]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Saddle_Doberman_01" parent="Skeleton3D" index="63" unique_id=1837686922]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_War_Doberman_01" parent="Skeleton3D" index="64" unique_id=1288410202]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_HighVis_Fox_01" parent="Skeleton3D" index="65" unique_id=985994446]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Military_Fox_01" parent="Skeleton3D" index="66" unique_id=1330379933]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Police_Fox_01" parent="Skeleton3D" index="67" unique_id=1134141368]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Rescue_Fox_01" parent="Skeleton3D" index="68" unique_id=1688564437]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Saddle_Fox_01" parent="Skeleton3D" index="69" unique_id=1542534626]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_War_Fox_01" parent="Skeleton3D" index="70" unique_id=1750489226]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_HighVis_GoldenRetriever_01" parent="Skeleton3D" index="71" unique_id=1864707046]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Military_GoldenRetriever_01" parent="Skeleton3D" index="72" unique_id=1744307198]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Police_GoldenRetriever_01" parent="Skeleton3D" index="73" unique_id=82912999]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Rescue_GoldenRetriever_01" parent="Skeleton3D" index="74" unique_id=55476408]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Saddle_GoldenRetriever_01" parent="Skeleton3D" index="75" unique_id=1332551944]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_War_GoldenRetriever_01" parent="Skeleton3D" index="76" unique_id=991883394]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_HighVis_Greyhound_01" parent="Skeleton3D" index="77" unique_id=1225853751]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Military_Greyhound_01" parent="Skeleton3D" index="78" unique_id=2040079717]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Police_Greyhound_01" parent="Skeleton3D" index="79" unique_id=1045729637]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Rescue_Greyhound_01" parent="Skeleton3D" index="80" unique_id=1686732897]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Saddle_Greyhound_01" parent="Skeleton3D" index="81" unique_id=1688870576]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_War_Greyhound_01" parent="Skeleton3D" index="82" unique_id=698129115]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_HighVis_Husky_01" parent="Skeleton3D" index="83" unique_id=408673699]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Military_Husky_01" parent="Skeleton3D" index="84" unique_id=1058754993]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Police_Husky_01" parent="Skeleton3D" index="85" unique_id=330986724]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Rescue_Husky_01" parent="Skeleton3D" index="86" unique_id=737466877]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Saddle_Husky_01" parent="Skeleton3D" index="87" unique_id=1635494027]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_War_Husky_01" parent="Skeleton3D" index="88" unique_id=741047713]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_HighVis_Labrador_01" parent="Skeleton3D" index="89" unique_id=9192396]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Military_Labrador_01" parent="Skeleton3D" index="90" unique_id=1027715057]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Police_Labrador_01" parent="Skeleton3D" index="91" unique_id=157734023]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Rescue_Labrador_01" parent="Skeleton3D" index="92" unique_id=808831795]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Saddle_Labrador_01" parent="Skeleton3D" index="93" unique_id=292421112]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_War_Labrador_01" parent="Skeleton3D" index="94" unique_id=1589077965]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_HighVis_Pointer_01" parent="Skeleton3D" index="95" unique_id=1684371402]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Military_Pointer_01" parent="Skeleton3D" index="96" unique_id=561647455]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Police_Pointer_01" parent="Skeleton3D" index="97" unique_id=254287456]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Rescue_Pointer_01" parent="Skeleton3D" index="98" unique_id=445008594]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Saddle_Pointer_01" parent="Skeleton3D" index="99" unique_id=1503464614]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_War_Pointer_01" parent="Skeleton3D" index="100" unique_id=2009179215]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_HighVis_Ridgeback_01" parent="Skeleton3D" index="101" unique_id=839377242]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Military_Ridgeback_01" parent="Skeleton3D" index="102" unique_id=124674641]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Police_Ridgeback_01" parent="Skeleton3D" index="103" unique_id=966724130]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Rescue_Ridgeback_01" parent="Skeleton3D" index="104" unique_id=1719611205]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Saddle_Ridgeback_01" parent="Skeleton3D" index="105" unique_id=2026297318]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_War_Ridgeback_01" parent="Skeleton3D" index="106" unique_id=1126120826]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_HighVis_Shepherd_02" parent="Skeleton3D" index="107" unique_id=526418088]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Military_Shepherd_02" parent="Skeleton3D" index="108" unique_id=491130709]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Police_Shepherd_02" parent="Skeleton3D" index="109" unique_id=1681230049]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Rescue_Shepherd_02" parent="Skeleton3D" index="110" unique_id=435786424]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Saddle_Shepherd_02" parent="Skeleton3D" index="111" unique_id=1921013772]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_War_Shepherd_02" parent="Skeleton3D" index="112" unique_id=1557209139]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_HighVis_Shiba_01" parent="Skeleton3D" index="113" unique_id=2099230402]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Police_Shiba_01" parent="Skeleton3D" index="114" unique_id=123441584]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Rescue_Shiba_01" parent="Skeleton3D" index="115" unique_id=71551755]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Saddle_Shiba_01" parent="Skeleton3D" index="116" unique_id=447333138]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_War_Shiba_01" parent="Skeleton3D" index="117" unique_id=1477220376]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Military_Shiba_01" parent="Skeleton3D" index="118" unique_id=1987430729]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_HighVis_Wolf_01" parent="Skeleton3D" index="119" unique_id=649204744]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_War_Wolf_01" parent="Skeleton3D" index="120" unique_id=1427976810]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Saddle_Wolf_01" parent="Skeleton3D" index="121" unique_id=2112772000]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Rescue_Wolf_01" parent="Skeleton3D" index="122" unique_id=2046059529]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Police_Wolf_01" parent="Skeleton3D" index="123" unique_id=750852265]
+visible = false
+
+[node name="SK_Chr_Attach_Vest_Military_Wolf_01" parent="Skeleton3D" index="124" unique_id=36990246]
+visible = false
+
+[node name="SM_Chr_Attach_Saddle_Seat_Wolf_02" parent="Skeleton3D" index="125" unique_id=765334897]
+visible = false
+
+[node name="SM_Chr_Attach_Saddle_Seat_Wolf_01" parent="Skeleton3D" index="126" unique_id=117799466]
+visible = false
+
+[node name="SM_Chr_Attach_Armour_Dark_Large_01" parent="Skeleton3D" index="127" unique_id=1939676465]
+visible = false
+
+[node name="SM_Chr_Attach_Armour_Dark_Medium_01" parent="Skeleton3D" index="128" unique_id=1270551219]
+visible = false
+
+[node name="SM_Chr_Attach_Armour_Dark_Small_01" parent="Skeleton3D" index="129" unique_id=1508135516]
+visible = false
+
+[node name="SM_Chr_Attach_Armour_Dark_Wolf_01" parent="Skeleton3D" index="130" unique_id=624289178]
+visible = false
+
+[node name="SM_Chr_Attach_Armour_Light_Large_01" parent="Skeleton3D" index="131" unique_id=1170987138]
+visible = false
+
+[node name="SM_Chr_Attach_Armour_Light_Medium_01" parent="Skeleton3D" index="132" unique_id=684042995]
+visible = false
+
+[node name="SM_Chr_Attach_Armour_Light_Small_01" parent="Skeleton3D" index="133" unique_id=992033408]
+visible = false
+
+[node name="SM_Chr_Attach_Armour_Light_Wolf_01" parent="Skeleton3D" index="134" unique_id=1536983500]
+visible = false
+
+[node name="SM_Chr_Attach_HeadCone_Medium_01" parent="Skeleton3D" index="135" unique_id=369829634]
+visible = false
+
+[node name="SM_Chr_Attach_HeadCone_Small_01" parent="Skeleton3D" index="136" unique_id=1688872828]
+visible = false
+
+[node name="SM_Chr_Attach_Helmet_Dark_Medium_01" parent="Skeleton3D" index="137" unique_id=1645906680]
+visible = false
+
+[node name="SM_Chr_Attach_Helmet_Dark_Small_01" parent="Skeleton3D" index="138" unique_id=1262973979]
+visible = false
+
+[node name="SM_Chr_Attach_Helmet_Light_EarsDown_01" parent="Skeleton3D" index="139" unique_id=819470681]
+visible = false
+
+[node name="SM_Chr_Attach_Helmet_Light_Medium_01" parent="Skeleton3D" index="140" unique_id=483647943]
+visible = false
+
+[node name="SM_Chr_Attach_Helmet_Light_Small_01" parent="Skeleton3D" index="141" unique_id=286163387]
+visible = false
+
+[node name="SM_Chr_Attach_Helmet_Skull_Medium_01" parent="Skeleton3D" index="142" unique_id=1421266789]
+visible = false
+
+[node name="SM_Chr_Attach_Helmet_Skull_Small_01" parent="Skeleton3D" index="143" unique_id=1178867761]
+visible = false
+
+[node name="SM_Chr_Attach_Saddle_Roll_Universal_01" parent="Skeleton3D" index="144" unique_id=1502723863]
+visible = false
+
+[node name="SM_Chr_Attach_Saddle_Seat_Universal_01" parent="Skeleton3D" index="145" unique_id=1902432267]
+visible = false
+
+[node name="SM_Chr_Attach_Saddle_Seat_Universal_02" parent="Skeleton3D" index="146" unique_id=373883098]
+visible = false
+
+[node name="AnimationPlayer" parent="." index="2" unique_id=833706156]
+libraries/synty_animals_library = ExtResource("3_ir6l5")

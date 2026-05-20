@@ -20,6 +20,7 @@ enum Type {
 	FIRE_BALL,
 	BULLET,
 	GAMMA_TURRET,
+	ARROW,
 }
 
 # === EXPORTS ===

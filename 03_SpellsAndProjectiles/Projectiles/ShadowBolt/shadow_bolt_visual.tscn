@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://bxqb2r5cdt3gw"]
+[gd_scene format=3 uid="uid://25v4uk4g9dsxy"]
 
 [ext_resource type="Shader" uid="uid://btx1eos8uuvop" path="res://22_VFX/VFX_3D/VFX/Shaders/s_FireHead_TypeK.tres" id="1_btcsk"]
 [ext_resource type="ArrayMesh" uid="uid://djrkf0hipcltl" path="res://03_SpellsAndProjectiles/Projectiles/ShadowBolt/utils/m_fireb_blast.obj" id="2_frwai"]
