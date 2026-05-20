@@ -168,9 +168,8 @@ var _original_fighting_state: FightingState = FightingState.UNDEF
 @export var category: Category = Category.MOB
 
 # Configuration per-archétype (stats par niveau, timings AA, projectile type, ...).
-# Pour les heroes, automatiquement renseigné depuis hero_desc dans Hero._ready
-# pendant la transition. À terme, tous les archétypes (summons, antagonists) auront
-# leur propre EntityDesc.
+# Pour les heroes, renseigné depuis hero_desc dans Hero._ready. Les autres archétypes
+# (summons, antagonists) peuvent fournir leur propre EntityDesc.
 @export var entity_desc: EntityDesc
 @export_range(1, 10, 1) var level: int = 1
 

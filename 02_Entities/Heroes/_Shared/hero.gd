@@ -105,8 +105,8 @@ func _ready() -> void:
 	if _custom_deck != null: deck = _custom_deck
 	if not _custom_data_memory.is_empty(): data_memory.override(_custom_data_memory)
 
-	# Sync entity_desc ← hero_desc pendant la transition (Hero garde son export
-	# hero_desc, mais le code générique lit via Entity.entity_desc).
+	# Sync entity_desc ← hero_desc : Hero expose l'export typé hero_desc, le code
+	# générique lit via Entity.entity_desc.
 	if entity_desc == null and hero_desc != null:
 		entity_desc = hero_desc
 
