@@ -223,6 +223,24 @@ func is_dead() -> bool:
 	return life_state == LifeState.DEAD
 #endregion
 
+#region ============================== Category helpers ==============================
+# Vues calculées sur les axes (team, fight_role, summoner, capacités). Remplacent
+# les `is Hero` à terme par des queries sémantiques côté call sites.
+
+func is_summoned() -> bool:
+	return summoner != null
+
+
+# Placeholder : check le type Hero pour l'instant, sera remplacé par "a un
+# DeckHolder enfant" une fois DeckHolder extrait (étape 5).
+func is_hero_like() -> bool:
+	return self is Hero
+
+
+func is_acolyte() -> bool:
+	return fight_role == FightRole.SECONDARY and summoner == null
+#endregion
+
 # ============================== Node base functions ==============================
 
 #region ============================== Init ==============================
@@ -578,5 +596,10 @@ func _on_stunned_changed(is_active: bool, _duration: float, _infinite: bool) -> 
 	_on_stunned(is_active)
 
 
-func _on_stunned(_is_active: bool) -> void:
-	pass
+func _on_stunned(is_active: bool) -> void:
+	if periodic_timer_registry == null:
+		return
+	if is_active:
+		periodic_timer_registry.pause_all()
+	else:
+		periodic_timer_registry.resume_all()
