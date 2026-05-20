@@ -20,7 +20,7 @@ func run(the_run: Run, party: Party) -> void:
 	if rules == null:
 		Verbose.warn("GameRunner.run: the_run.rules null — payout désactivé", Verbose.Category.ENCOUNTER_RUNNER)
 	else:
-		_apply_starting_gold(party, rules)
+		_apply_starting_gold(rules)
 
 	the_run.current_index = 0
 	while not the_run.is_finished():
@@ -29,23 +29,25 @@ func run(the_run: Run, party: Party) -> void:
 			break
 		var result: ConfrontationResult = await _confrontation_runner.run(confrontation, party)
 		if rules != null and result != null:
-			_apply_confrontation_payout(party, rules, confrontation, result)
+			_apply_confrontation_payout(rules, confrontation, result)
 		the_run.advance()
 
 
-func _apply_starting_gold(party: Party, rules: RunRules) -> void:
-	if party == null: return
-	for player_state: PlayerState in party.players:
-		player_state.gold = rules.gold_starting_run
+# Écriture via Player.gold setter (et non PlayerState.gold) pour émettre
+# gold_changed et garder l'UI synchro. Le PlayerState référencé par chaque
+# Player est le même objet que celui de Party.players (cf. GameManager
+# _build_new_run_context), donc la sérialisation reste correcte.
+func _apply_starting_gold(rules: RunRules) -> void:
+	for player: Player in PlayerManager.players.values():
+		player.gold = rules.gold_starting_run
 
 
 # Intérêts calculés sur le gold détenu AVANT le gain de la confrontation
 # (convention autobattler classique : économiser entre les rounds est valorisé).
-func _apply_confrontation_payout(party: Party, rules: RunRules, confrontation: Confrontation, result: ConfrontationResult) -> void:
-	if party == null: return
-	for player_state: PlayerState in party.players:
-		var interest: int = mini(player_state.gold / rules.interest_gold_threshold, rules.interest_max)
+func _apply_confrontation_payout(rules: RunRules, confrontation: Confrontation, result: ConfrontationResult) -> void:
+	for player: Player in PlayerManager.players.values():
+		var interest: int = mini(player.gold / rules.interest_gold_threshold, rules.interest_max)
 		var gain: int = rules.gold_per_confrontation + interest
 		if result.outcome == ConfrontationResult.Outcome.WIN:
 			gain += confrontation.gold_on_win
-		player_state.gold += gain
+		player.gold += gain
