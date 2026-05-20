@@ -120,8 +120,8 @@ func _ready() -> void:
 
 	auto_attack_completed.connect(_on_auto_attack_completed)
 
-	if _skill_manager != null:
-		_skill_manager.skill_picked.connect(_on_skill_manager_skill_picked)
+	if player != null and player.skill_manager != null:
+		player.skill_manager.skill_picked.connect(_on_skill_manager_skill_picked)
 
 	# TODO: spawn initial wolf companion (Chef de Meute) — requires Wolf summon
 

@@ -44,10 +44,6 @@ var families_stats: FamiliesStats:
 		return _family_module.families_stats
 #endregion
 
-#region ============================== Private variables ==============================
-var _skill_manager: SkillManager
-#endregion
-
 #region ============================== Public functions ==============================
 func init(hero_display_mode: DisplayMode = DisplayMode.PREVIEW, fighting_area_ref: FightingArea = null) -> Hero:
 	display_mode = hero_display_mode
