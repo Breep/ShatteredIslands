@@ -62,9 +62,11 @@ func _on_start_fight_button_pressed() -> void:
 		# Disable auto-attack for manual control during prototyping
 		entity.auto_attack_enabled = _auto_attack_enabled
 		entity.family_managers_enabled = _family_managers_enabled
-		GlobalFightingManager.start()
+		#_fighting_manager.start_fighting()
 		_auto_attack_check_button.hide()
 		_family_managers_check_button.hide()
+	GlobalFightingManager.start()
+	_fighting_manager.request_phase_advance()
 
 
 func _on_stop_fight_button_pressed() -> void:
