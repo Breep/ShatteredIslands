@@ -35,7 +35,7 @@ func spawn_into(parent: Node, ctx: EntityContext = null) -> Node:
 	# Injection données portables (spec) AVANT add_child
 	hero.level = level
 	if deck != null:
-		hero._custom_deck = deck
+		hero.deck = deck
 	if data_memory != null:
 		hero.data_memory = data_memory
 	if stats_override != null:

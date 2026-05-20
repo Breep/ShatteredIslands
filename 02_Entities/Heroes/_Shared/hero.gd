@@ -168,6 +168,7 @@ func _compute_family_levels() -> void:
 			var points: int = deck.get_family_points(family_type)
 			if GameManager.game_rules != null:
 				_family_managers[family_type].level = GameManager.game_rules.get_family_level(points)
+		Verbose.trace("<" + name + "> [ " + Family.Type.keys()[family_type] + " - " + str(_family_managers[family_type].level), Verbose.Category.HERO)
 
 
 func _apply_all_cards_upgrades() -> void:

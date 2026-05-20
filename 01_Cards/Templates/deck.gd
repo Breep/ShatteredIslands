@@ -3,9 +3,9 @@ extends Resource
 
 # ============================== Public variables ==============================
 
-var _card_pile: Dictionary[int, Card]
+@export var _card_pile: Dictionary[int, Card]
 
-var _families_count: Dictionary[Family.Type, int]
+@export var _families_count: Dictionary[Family.Type, int]
 var families_count: Dictionary[Family.Type, int]:
 	get: return _families_count
 

@@ -1,13 +1,13 @@
 class_name PlayerDeck
 extends Deck
 
-var _owner_name: String
+@export var _owner_name: String
 
 @export var _active_cards: Array[Card]
-var _cards_dictionary: Dictionary[Family.Type, Array] # Type:Array[Cards]
+@export var _cards_dictionary: Dictionary[Family.Type, Array] # Type:Array[Cards]
 
-var _family_levels: Dictionary[Family.Type, int]
-var _family_points: Dictionary[Family.Type, int]
+@export var _family_levels: Dictionary[Family.Type, int]
+@export var _family_points: Dictionary[Family.Type, int]
 
 #var _max_level_cards: Array[Card] # TODO Fill this
 
