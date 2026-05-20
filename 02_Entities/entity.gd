@@ -140,6 +140,7 @@ var _auto_attack_periodic_module: AutoAttackPeriodicModule # Optional, can be nu
 var _label_popup_module: LabelPopupModule
 var _despawn_module: DespawnModule
 var _display_mode_module: DisplayModeModule
+var _deck_holder: DeckHolder
 
 # Spawn system
 var _original_fighting_state: FightingState = FightingState.UNDEF
@@ -489,6 +490,7 @@ func _auto_load_components() -> void:
 	_label_popup_module = Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.LABEL_POPUP_MODULE].instantiate().init(self)
 	_despawn_module = Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.DESPAWN].instantiate().init(self)
 	_display_mode_module = Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.DISPLAY_MODE].instantiate().init(self)
+	_deck_holder = Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.DECK_HOLDER].instantiate().init(self)
 
 	add_child(damage)
 	add_child(heal)
@@ -503,6 +505,7 @@ func _auto_load_components() -> void:
 	add_child(_label_popup_module)
 	add_child(_despawn_module)
 	add_child(_display_mode_module)
+	add_child(_deck_holder)
 
 
 func _load_spawn_animation() -> void:

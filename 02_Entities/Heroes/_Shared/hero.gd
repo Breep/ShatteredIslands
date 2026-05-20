@@ -35,8 +35,6 @@ var display_mode: DisplayMode = DisplayMode.PREVIEW
 var families_stats: FamiliesStats
 var deck: PlayerDeck
 var data_memory: NestedRegistry
-
-var _card_context: CardContext
 #endregion
 
 #region ============================== Private variables ==============================
@@ -67,7 +65,9 @@ func get_families_level() -> Dictionary[Family.Type, int]:
 	
 
 func get_card_context() -> CardContext:
-	return _card_context
+	if _deck_holder == null:
+		return null
+	return _deck_holder.get_card_context()
 
 
 func handle_end_of_fight(is_winner: bool) -> void:
@@ -120,11 +120,11 @@ func _ready() -> void:
 	# Compute family levels from deck (or use overrides for prototyping)
 	_compute_family_levels()
 
-	# Build card context for the new card system
-	_card_context = CardContext.create(self, stat_modifiers_registry, action_modifiers_registry, auto_attack_modifier_registry, periodic_timer_registry, battle_callback_registry)
+	# Build card context via DeckHolder module (création indépendante du deck)
+	_deck_holder.setup()
 
 	if deck != null:
-		_apply_all_cards_upgrades()
+		_deck_holder.apply_all_cards_upgrades(deck)
 		deck.has_changed.connect(_on_deck_has_changed)
 
 	_apply_display_mode()
@@ -172,14 +172,6 @@ func _compute_family_levels() -> void:
 		Verbose.trace("<" + name + "> [ " + Family.Type.keys()[family_type] + " - " + str(_family_managers[family_type].level), Verbose.Category.HERO)
 
 
-func _apply_all_cards_upgrades() -> void:
-	Verbose.debug("Applying all cards upgrades", Verbose.Category.HERO)
-	if deck == null:
-		Verbose.error("Can't apply card upgrade, the deck is null", Verbose.Category.HERO)
-		return
-
-	for card: Card in deck.get_active_deck():
-		card.player_upgrade.apply_card(_card_context, card.lvl)
 #endregion
 
 #region ============================== Other callbacks ==============================

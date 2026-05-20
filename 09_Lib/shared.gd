@@ -48,6 +48,7 @@ var ENTITY_COMPONENT_SCENES: Dictionary[EntityComponent.Type, PackedScene] = {
 	EntityComponent.Type.CLICKABLE: load("res://02_Entities/_Shared/Components/Clickable/clickable_component.tscn"),
 	EntityComponent.Type.DESPAWN: load("res://02_Entities/_Shared/Components/Despawn/despawn_module.tscn"),
 	EntityComponent.Type.DISPLAY_MODE: load("res://02_Entities/_Shared/Components/DisplayMode/display_mode_module.tscn"),
+	EntityComponent.Type.DECK_HOLDER: load("res://02_Entities/_Shared/Components/DeckHolder/deck_holder.tscn"),
 }
 
 var FAMILY_MANAGER_SCENES: Dictionary[Family.Type, PackedScene] = {
