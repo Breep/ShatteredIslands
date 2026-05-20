@@ -77,7 +77,7 @@ func get_or_create_global_bds(bds_type: BattleDataStat.Type) -> BattleDataStat:
 
 #region ============================== Private functions ==============================
 func _register_global_action(bds_type: BattleDataStat.Type, action_type: Utils.ActionType, value: float) -> void:
-	if not _entity_owner.is_hero_like(): return
+	if not _entity_owner.is_hero(): return
 	if (_entity_owner as Hero).player == null: return
 	if not global_data_stats.has(bds_type):
 		var global_id: StringName = StringName(BattleDataStat.TYPE_NAMES[bds_type])

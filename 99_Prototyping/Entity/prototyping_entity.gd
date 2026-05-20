@@ -30,7 +30,7 @@ func _ready() -> void:
 
 func _respawn_entites_with_spawn_manager() -> void:
 	for child in _entities_node.get_children():
-		if child is Entity and (child as Entity).is_hero_like():
+		if child is Entity and (child as Entity).is_hero():
 			var entity_data = {
 				"team": child.team,
 				"custom_base_stats": child.custom_base_stats,

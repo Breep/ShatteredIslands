@@ -86,6 +86,11 @@ func process_tick() -> void:
 	super.process_tick()
 
 #region ============================== Node base functions ==============================
+func _init() -> void:
+	super._init()
+	category = Category.HERO
+
+
 func _enter_tree() -> void:
 	if data_memory == null: data_memory = NestedRegistry.new()
 	# super._enter_tree() charge les modules (dont FamilyModule, qui crée les

@@ -27,6 +27,8 @@ func spawn_into(parent: Node, ctx: EntityContext = null) -> Node:
 	if stats_override != null:
 		entity.custom_base_stats = stats_override.duplicate(true)
 
+	entity.category = get_entity_category()
+
 	if ctx != null and ctx.spawn_manager != null:
 		ctx.spawn_manager.spawn_entity(entity, transform, ctx)
 	else:
@@ -34,3 +36,9 @@ func spawn_into(parent: Node, ctx: EntityContext = null) -> Node:
 		entity.transform = transform
 
 	return entity
+
+
+# Catégorie posée sur l'entité au spawn. Override par les specs concrètes typées
+# (AcolyteSpec, AntagonistSpec, BuildingSpec). MOB par défaut.
+func get_entity_category() -> Entity.Category:
+	return Entity.Category.MOB

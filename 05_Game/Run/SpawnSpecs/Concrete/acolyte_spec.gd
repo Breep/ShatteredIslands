@@ -3,3 +3,7 @@
 @tool
 class_name AcolyteSpec
 extends EntitySpec
+
+
+func get_entity_category() -> Entity.Category:
+	return Entity.Category.ACOLYTE

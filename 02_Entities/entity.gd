@@ -68,6 +68,17 @@ enum FightRole {
 	EXTRA
 }
 
+# Catégorie de l'entité — tag explicite posé dans l'éditeur (export `category`) et
+# surclassable au spawn par les SpawnSpec. Distinct de EntityType (espèce/spawn-kind).
+enum Category {
+	HERO,
+	SUMMON,
+	ACOLYTE,
+	ANTAGONIST,
+	BUILDING,
+	MOB
+}
+
 enum SnakeBarrelModifier {
 	SNAKE_NUMBER,
 	SNAKE_POISON_STACKS,
@@ -152,6 +163,10 @@ var _original_fighting_state: FightingState = FightingState.UNDEF
 @export var battle_id: int = -1 # The id of the battle the entity is in
 @export var entity_name: String = "<entity name>"
 
+# Catégorie de l'entité. Défaut éditeur surclassé au spawn par les SpawnSpec
+# (et par Hero._init / Summon._init pendant la transition de hiérarchie).
+@export var category: Category = Category.MOB
+
 # Configuration per-archétype (stats par niveau, timings AA, projectile type, ...).
 # Pour les heroes, automatiquement renseigné depuis hero_desc dans Hero._ready
 # pendant la transition. À terme, tous les archétypes (summons, antagonists) auront
@@ -234,21 +249,15 @@ func is_dead() -> bool:
 #endregion
 
 #region ============================== Category helpers ==============================
-# Vues calculées sur les axes (team, fight_role, summoner, capacités). Remplacent
-# les `is Hero` à terme par des queries sémantiques côté call sites.
+# `category` est le tag de discrimination (HERO/SUMMON/ACOLYTE/...). `is_summoned`
+# est un axe distinct (origine runtime : ai-je un summoner).
 
 func is_summoned() -> bool:
 	return summoner != null
 
 
-# Placeholder : check le type Hero pour l'instant, sera remplacé par "a un
-# DeckHolder enfant" une fois DeckHolder extrait (étape 5).
-func is_hero_like() -> bool:
-	return self is Hero
-
-
-func is_acolyte() -> bool:
-	return fight_role == FightRole.SECONDARY and summoner == null
+func is_hero() -> bool:
+	return category == Category.HERO
 #endregion
 
 # ============================== Node base functions ==============================

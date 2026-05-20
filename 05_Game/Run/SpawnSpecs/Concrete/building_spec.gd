@@ -3,3 +3,7 @@
 @tool
 class_name BuildingSpec
 extends EntitySpec
+
+
+func get_entity_category() -> Entity.Category:
+	return Entity.Category.BUILDING
