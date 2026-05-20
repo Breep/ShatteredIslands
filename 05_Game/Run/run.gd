@@ -7,6 +7,7 @@ extends Resource
 @export var id: StringName = &""
 @export var display_name: String = ""
 @export var confrontations: Array[Confrontation] = []
+@export var rules: RunRules
 
 @export var current_index: int = 0
 

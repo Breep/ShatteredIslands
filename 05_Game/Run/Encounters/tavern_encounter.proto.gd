@@ -31,7 +31,7 @@ func _ready() -> void:
 	var party: Party = Party.new()
 	party.formation = _default_player_formation.populate_with(_hero_scenes, _acolyte_scenes)
 
-	await _encounter_runner.setup_tavern(_tavern_encounter, party)
+	await _encounter_runner._setup_tavern(_tavern_encounter, party)
 
 
 func _create_fake_player() -> void:

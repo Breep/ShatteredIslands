@@ -45,7 +45,7 @@ func _on_run_pressed() -> void:
 		await _encounter_runner.setup_fighting(_encounter, _party.formation)
 		GlobalFightingManager.start()
 	elif _encounter is TavernEncounter:
-		await _encounter_runner.setup_tavern(_encounter, _party)
+		await _encounter_runner._setup_tavern(_encounter, _party)
 	else:
 		Verbose.warn("EncounterRunner proto: unknown encounter type", Verbose.Category.ENCOUNTER_RUNNER)
 
