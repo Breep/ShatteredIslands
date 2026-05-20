@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://b6qmvr2dk8n5c"]
+
+[ext_resource type="Script" uid="uid://3r5fwggw305n" path="res://08_GlobalManagers/audio_manager.gd" id="1_amgr"]
+
+[node name="AudioManager" type="Node" unique_id=1026105209]
+script = ExtResource("1_amgr")
+
+[node name="SFX3DTemplate" type="AudioStreamPlayer3D" parent="." unique_id=100000001]
+unique_name_in_owner = true
+attenuation_model = 3
+unit_size = 50.0
+max_distance = 150.0
+panning_strength = 0.5
+bus = &"SFX"

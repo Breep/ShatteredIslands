@@ -10,6 +10,7 @@ const _BGM_DEFAULT_FADE: float = 1.0
 
 #region ============================== Private vars ==============================
 @onready var _sfx_stream_player := AudioStreamPlayer.new()
+@onready var _sfx_3d_template: AudioStreamPlayer3D = %SFX3DTemplate
 var _sfx_lib: AudioLib = preload("res://23_Audio/Libraries/SFX_library.tres")
 var _bgm_lib: AudioLib = preload("res://23_Audio/Libraries/BGM_library.tres")
 
@@ -25,7 +26,7 @@ var _SOUND_MAP: Array = [
 	[Events.card_bought, "card_bought"],
 	[Events.hero_locked, "hero_locked"],
 	[Events.ui_family_portrait_requested, "ui_family_portrait_requested"],
-	[Events.tavern_continue_pressed, "start_fight"]
+	[Events.tavern_continue_pressed, "start_fight"],
 ]
 
 var _BGM_MAP: Array = [
@@ -116,9 +117,8 @@ func play_3d(sound_name: String, position: Vector3, pitch: float = 1.0) -> void:
 	if _sfx_lib.audio_database.get(sound_name) == null:
 		Verbose.error("Couldn't find " + sound_name + " in audiolib.", Verbose.Category.AUDIO_MANAGER)
 		return
-	var player := AudioStreamPlayer3D.new()
+	var player := _sfx_3d_template.duplicate() as AudioStreamPlayer3D
 	player.stream = _sfx_lib.audio_database.get(sound_name)
-	player.bus = "SFX"
 	player.pitch_scale = pitch * randf_range(1.0 - _PITCH_VARIATION, 1.0 + _PITCH_VARIATION)
 	add_child(player)
 	player.global_position = position

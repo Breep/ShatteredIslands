@@ -60,7 +60,7 @@ func _on_deploy_timer_timeout() -> void:
 	for body in _impact_area.get_overlapping_bodies():
 		if body is Entity:
 			_entities_inside.append(body)
-
+	AudioManager.play_3d("meteor_impact", global_position, 0.95)
 	# Deal damage
 	for entity in _entities_inside:
 		if entity == null or entity.is_queued_for_deletion(): pass
