@@ -22,7 +22,7 @@ var _projectile_counter: int = 0
 func _ready() -> void:
 	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 	if _fighting_area != null and _fighting_area.fighting_manager != null:
-		_fighting_area.fighting_manager.fight_is_over.connect(_on_fight_is_over)
+		_fighting_area.fighting_manager.fight_done.connect(_on_fight_is_over)
 
 # ============================== Public functions (Tick) ==============================
 

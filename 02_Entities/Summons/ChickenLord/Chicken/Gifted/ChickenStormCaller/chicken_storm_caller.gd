@@ -14,23 +14,26 @@ func _ready() -> void:
 	
 	var mod := StatModifier.new()
 	mod.id = &"Chicken_Storm_caller_crit_multi"
-	mod.stat_type = EntityStats.StatType.CRIT_MULT
+	mod.stat_type = EntityStats.StatType.M_CRIT_MULT
+	mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
 	mod.calc_type = StatModifier.CalcType.ADD
 	mod.value = _crit_mult
 	mod.tags = []
 	stat_modifiers_registry.register_modifier(mod)
-	
+
 	var mod2 := StatModifier.new()
 	mod2.id = &"Chicken_Storm_caller_crit_chance"
-	mod2.stat_type = EntityStats.StatType.CRIT_CHANCE
+	mod2.stat_type = EntityStats.StatType.M_CRIT_CHANCE
+	mod2.action_type = Utils.ActionType.DAMAGE_PHYSICAL
 	mod2.calc_type = StatModifier.CalcType.ADD
 	mod2.value = _crit_chance
 	mod2.tags = []
 	stat_modifiers_registry.register_modifier(mod2)
-	
+
 	var mod3 := StatModifier.new()
 	mod3.id = &"Chicken_Storm_caller_first_hit_crit"
-	mod3.stat_type = EntityStats.StatType.CRIT_CHANCE
+	mod3.stat_type = EntityStats.StatType.M_CRIT_CHANCE
+	mod3.action_type = Utils.ActionType.DAMAGE_PHYSICAL
 	mod3.calc_type = StatModifier.CalcType.ADD
 	mod3.value = 100
 	mod3.tags = []

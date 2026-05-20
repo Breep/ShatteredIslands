@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Run" format=3 uid="uid://bhwfptpod2c4l"]
+
+[ext_resource type="Script" uid="uid://nilxedp6gjq2" path="res://05_Game/Run/run.gd" id="1_run"]
+[ext_resource type="Script" uid="uid://cp06s2eytdhsh" path="res://05_Game/Run/Confrontations/confrontation.gd" id="2_conf"]
+[ext_resource type="Resource" uid="uid://85dbxj88x4wo" path="res://05_Game/Run/Confrontations/Pool/Colossus3/colossus3.confrontation.tres" id="3_colos"]
+[ext_resource type="Script" uid="uid://ui2ybnvv0okd" path="res://05_Game/Run/RunRules/run_rules.gd" id="3_errrn"]
+
+[sub_resource type="Resource" id="Resource_tnro0"]
+script = ExtResource("3_errrn")
+gold_starting_run = 500
+gold_per_confrontation = 300
+interest_max = 100
+metadata/_custom_type_script = "uid://ui2ybnvv0okd"
+
+[resource]
+script = ExtResource("1_run")
+id = &"demo_run"
+display_name = "Démo Run"
+confrontations = Array[ExtResource("2_conf")]([ExtResource("3_colos"), ExtResource("3_colos"), ExtResource("3_colos"), ExtResource("3_colos"), ExtResource("3_colos")])
+rules = SubResource("Resource_tnro0")

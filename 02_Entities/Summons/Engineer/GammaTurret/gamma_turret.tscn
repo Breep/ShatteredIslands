@@ -16,16 +16,15 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 [sub_resource type="SphereShape3D" id="SphereShape3D_jkt3l"]
 radius = 0.2780993
 
-[node name="Turret" type="CharacterBody3D" unique_id=1412979628 node_paths=PackedStringArray("_health_bar", "_visual_3d", "_health_bar_marker", "_attack_spawn_marker")]
-script = ExtResource("1_7mgti")
+[node name="Turret" type="CharacterBody3D" unique_id=1412979628 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_health_bar", "_attack_spawn_marker")]
 collision_layer = 16
 collision_mask = 16
-_health_bar = NodePath("SumonSimpleInfoPanel2d")
+script = ExtResource("1_7mgti")
 entity_name = "Gamma Turret"
 custom_base_stats = SubResource("Resource_lpo57")
-_auto_loaded_modules = Array[int]([1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 15, 16, 17, 18, 19, 4, 0])
 _visual_3d = NodePath("TurretVisual")
 _health_bar_marker = NodePath("TurretVisual/Marker3D")
+_health_bar = NodePath("SumonSimpleInfoPanel2d")
 _attack_spawn_marker = NodePath("TurretVisual/AutoAttackSpawn")
 _projectile_type = 9
 metadata/_custom_type_script = "uid://cjfj1jcbiom2x"

@@ -1,6 +1,9 @@
+# HeroStats — Bloc de stats d'un héros à un niveau donné. Suit la distinction Mono / Multi
+# de EntityStats : Mono = champs single, Multi (m_*) = dicts par Utils.ActionType.
 class_name HeroStats
 extends Resource
 
+# --- Mono ---
 @export var health_max: int = 2000
 @export var mana_max: int = 100
 @export var mana_regen: float = 2.0
@@ -10,131 +13,23 @@ extends Resource
 @export var attack_range: float = -1.0
 @export var movement_speed: float = 4.0
 @export var auto_attack_type: EntityStats.AutoAttackType = EntityStats.AutoAttackType.RANGED
-@export var critical_chances: Dictionary[Utils.ActionType, float] = {
-	Utils.ActionType.DAMAGE_PHYSICAL: 10,
-	Utils.ActionType.DAMAGE_MAGICAL: 0,
-	Utils.ActionType.DAMAGE_POISON: 0,
-	Utils.ActionType.UTILITY_HEAL: 0,
-	Utils.ActionType.UTILITY_CLEANSE: 0,
-	Utils.ActionType.UTILITY_DISPELL: 0,
-	Utils.ActionType.STACK_SHIELD: 0,
-	Utils.ActionType.STACK_IGNITE: 0,
-	Utils.ActionType.STACK_POISON: 0,
-	Utils.ActionType.STACK_REGEN: 0,
-	Utils.ActionType.STACK_NECROSIS: 0,
-}
 
-@export var critical_multipliers: Dictionary[Utils.ActionType, float] = {
-	Utils.ActionType.DAMAGE_PHYSICAL: 100,
-	Utils.ActionType.DAMAGE_MAGICAL: 100,
-	Utils.ActionType.DAMAGE_POISON: 100,
-	Utils.ActionType.UTILITY_HEAL: 100,
-	Utils.ActionType.UTILITY_CLEANSE: 100,
-	Utils.ActionType.UTILITY_DISPELL: 100,
-	Utils.ActionType.STACK_SHIELD: 100,
-	Utils.ActionType.STACK_IGNITE: 100,
-	Utils.ActionType.STACK_POISON: 100,
-	Utils.ActionType.STACK_REGEN: 100,
-	Utils.ActionType.STACK_NECROSIS: 100,
-}
+@export var crit_chance: float = 10.0
+@export var crit_mult: float = 100.0
+@export var dodge: float = 0.0
+@export var lifesteal: float = 0.0
+@export var crit_resistance: float = 0.0
 
-@export var resistances: Dictionary[Utils.ActionType, float] = {
-	Utils.ActionType.DAMAGE_PHYSICAL: 0,
-	Utils.ActionType.DAMAGE_MAGICAL: 0,
-	Utils.ActionType.DAMAGE_POISON: 0,
-	Utils.ActionType.UTILITY_HEAL: 0,
-	Utils.ActionType.UTILITY_CLEANSE: 0,
-	Utils.ActionType.UTILITY_DISPELL: 0,
-	Utils.ActionType.STACK_SHIELD: 0,
-	Utils.ActionType.STACK_IGNITE: 0,
-	Utils.ActionType.STACK_POISON: 0,
-	Utils.ActionType.STACK_REGEN: 0,
-	Utils.ActionType.STACK_NECROSIS: 0,
-}
+# --- Multi (per ActionType) ---
+@export var m_crit_chances: Dictionary[Utils.ActionType, float] = {}
+@export var m_crit_mults: Dictionary[Utils.ActionType, float] = {}
+@export var m_dodges: Dictionary[Utils.ActionType, float] = {}
+@export var m_lifesteals: Dictionary[Utils.ActionType, float] = {}
+@export var m_powers: Dictionary[Utils.ActionType, float] = {}
+@export var m_fragilities: Dictionary[Utils.ActionType, float] = {}
+@export var m_resistances: Dictionary[Utils.ActionType, float] = {}
+@export var m_exposures: Dictionary[Utils.ActionType, float] = {}
 
-@export var exposures: Dictionary[Utils.ActionType, float] = {
-	Utils.ActionType.DAMAGE_PHYSICAL: 0,
-	Utils.ActionType.DAMAGE_MAGICAL: 0,
-	Utils.ActionType.DAMAGE_POISON: 0,
-	Utils.ActionType.UTILITY_HEAL: 0,
-	Utils.ActionType.UTILITY_CLEANSE: 0,
-	Utils.ActionType.UTILITY_DISPELL: 0,
-	Utils.ActionType.STACK_SHIELD: 0,
-	Utils.ActionType.STACK_IGNITE: 0,
-	Utils.ActionType.STACK_POISON: 0,
-	Utils.ActionType.STACK_REGEN: 0,
-	Utils.ActionType.STACK_NECROSIS: 0,
-}
-
-@export var dodges: Dictionary[Utils.ActionType, float] = {
-	Utils.ActionType.DAMAGE_PHYSICAL: 0,
-	Utils.ActionType.DAMAGE_MAGICAL: 0,
-	Utils.ActionType.DAMAGE_POISON: 0,
-	Utils.ActionType.UTILITY_HEAL: 0,
-	Utils.ActionType.UTILITY_CLEANSE: 0,
-	Utils.ActionType.UTILITY_DISPELL: 0,
-	Utils.ActionType.STACK_SHIELD: 0,
-	Utils.ActionType.STACK_IGNITE: 0,
-	Utils.ActionType.STACK_POISON: 0,
-	Utils.ActionType.STACK_REGEN: 0,
-	Utils.ActionType.STACK_NECROSIS: 0,
-}
-
-@export var power: Dictionary[Utils.ActionType, float] = {
-	Utils.ActionType.DAMAGE_PHYSICAL: 0,
-	Utils.ActionType.DAMAGE_MAGICAL: 0,
-	Utils.ActionType.DAMAGE_POISON: 0,
-	Utils.ActionType.UTILITY_HEAL: 0,
-	Utils.ActionType.UTILITY_CLEANSE: 0,
-	Utils.ActionType.UTILITY_DISPELL: 0,
-	Utils.ActionType.STACK_SHIELD: 0,
-	Utils.ActionType.STACK_IGNITE: 0,
-	Utils.ActionType.STACK_POISON: 0,
-	Utils.ActionType.STACK_REGEN: 0,
-	Utils.ActionType.STACK_NECROSIS: 0,
-}
-
-@export var fragility: Dictionary[Utils.ActionType, float] = {
-	Utils.ActionType.DAMAGE_PHYSICAL: 0,
-	Utils.ActionType.DAMAGE_MAGICAL: 0,
-	Utils.ActionType.DAMAGE_POISON: 0,
-	Utils.ActionType.UTILITY_HEAL: 0,
-	Utils.ActionType.UTILITY_CLEANSE: 0,
-	Utils.ActionType.UTILITY_DISPELL: 0,
-	Utils.ActionType.STACK_SHIELD: 0,
-	Utils.ActionType.STACK_IGNITE: 0,
-	Utils.ActionType.STACK_POISON: 0,
-	Utils.ActionType.STACK_REGEN: 0,
-	Utils.ActionType.STACK_NECROSIS: 0,
-}
-
-@export var crit_resistances: Dictionary[Utils.ActionType, float] = {
-	Utils.ActionType.DAMAGE_PHYSICAL: 0,
-	Utils.ActionType.DAMAGE_MAGICAL: 0,
-	Utils.ActionType.DAMAGE_POISON: 0,
-	Utils.ActionType.UTILITY_HEAL: 0,
-	Utils.ActionType.UTILITY_CLEANSE: 0,
-	Utils.ActionType.UTILITY_DISPELL: 0,
-	Utils.ActionType.STACK_SHIELD: 0,
-	Utils.ActionType.STACK_IGNITE: 0,
-	Utils.ActionType.STACK_POISON: 0,
-	Utils.ActionType.STACK_REGEN: 0,
-	Utils.ActionType.STACK_NECROSIS: 0,
-}
-
-@export var life_steals: Dictionary[Utils.ActionType, float] = {
-	Utils.ActionType.DAMAGE_PHYSICAL: 0,
-	Utils.ActionType.DAMAGE_MAGICAL: 0,
-	Utils.ActionType.DAMAGE_POISON: 0,
-	Utils.ActionType.UTILITY_HEAL: 0,
-	Utils.ActionType.UTILITY_CLEANSE: 0,
-	Utils.ActionType.UTILITY_DISPELL: 0,
-	Utils.ActionType.STACK_SHIELD: 0,
-	Utils.ActionType.STACK_IGNITE: 0,
-	Utils.ActionType.STACK_POISON: 0,
-	Utils.ActionType.STACK_REGEN: 0,
-	Utils.ActionType.STACK_NECROSIS: 0,
-}
 
 func apply_json_data(data: Dictionary) -> void:
 	for key in data:

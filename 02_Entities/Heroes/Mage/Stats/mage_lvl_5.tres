@@ -7,35 +7,9 @@ script = ExtResource("1_turtm")
 health_max = 1170
 mana_regen = 3.1
 attack_speed = 1.6705902957765162
-critical_chances = Dictionary[int, float]({
-0: 22.0,
-1: 22.0,
-2: 22.0,
-4: 22.0,
-5: 0.0,
-6: 0.0,
-7: 0.0,
-8: 23.799999999999997,
-9: 0.0,
-10: 0.0,
-11: 0.0,
-12: 0.0
-})
-critical_multipliers = Dictionary[int, float]({
-0: 140.0,
-1: 100.0,
-2: 100.0,
-4: 100.0,
-5: 100.0,
-6: 100.0,
-7: 100.0,
-8: 100.0,
-9: 100.0,
-10: 100.0,
-11: 100.0,
-12: 100.0
-})
-resistances = Dictionary[int, float]({
+crit_chance = 22.0
+crit_mult = 140.0
+m_resistances = Dictionary[int, float]({
 0: 11.506426154815482,
 1: 18.0471895621705,
 2: 5.0,
@@ -49,7 +23,7 @@ resistances = Dictionary[int, float]({
 11: 0.0,
 12: 0.0
 })
-exposures = Dictionary[int, float]({
+m_exposures = Dictionary[int, float]({
 0: 0.0,
 1: 0.0,
 2: 0.0,
@@ -63,21 +37,8 @@ exposures = Dictionary[int, float]({
 11: 0.0,
 12: 0.0
 })
-dodges = Dictionary[int, float]({
-0: 7.0,
-1: 0.0,
-2: 0.0,
-4: 0.0,
-5: 0.0,
-6: 0.0,
-7: 0.0,
-8: 0.0,
-9: 0.0,
-10: 0.0,
-11: 0.0,
-12: 0.0
-})
-power = Dictionary[int, float]({
+dodge = 7.0
+m_powers = Dictionary[int, float]({
 0: 0.0,
 1: 0.0,
 2: 0.0,
@@ -91,7 +52,7 @@ power = Dictionary[int, float]({
 11: 0.0,
 12: 0.0
 })
-fragility = Dictionary[int, float]({
+m_fragilities = Dictionary[int, float]({
 0: 0.0,
 1: 0.0,
 2: 0.0,
@@ -105,31 +66,5 @@ fragility = Dictionary[int, float]({
 11: 0.0,
 12: 0.0
 })
-crit_resistances = Dictionary[int, float]({
-0: 0.0,
-1: 25.0,
-2: 0.0,
-4: 0.0,
-5: 0.0,
-6: 0.0,
-7: 0.0,
-8: 0.0,
-9: 0.0,
-10: 0.0,
-11: 0.0,
-12: 0.0
-})
-life_steals = Dictionary[int, float]({
-0: 0.0,
-1: 0.0,
-2: 0.0,
-4: 0.0,
-5: 0.0,
-6: 0.0,
-7: 0.0,
-8: 0.0,
-9: 0.0,
-10: 0.0,
-11: 0.0,
-12: 0.0
-})
+crit_resistance = 0.0
+lifesteal = 0.0

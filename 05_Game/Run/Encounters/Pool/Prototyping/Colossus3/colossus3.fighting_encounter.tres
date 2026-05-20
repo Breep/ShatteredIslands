@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="FightingEncounter" format=3 uid="uid://dfcg4hv5vlf0k"]
+
+[ext_resource type="Script" uid="uid://dg13tr0kcjyll" path="res://05_Game/Run/Encounters/fighting_encounter.gd" id="1_h4ws4"]
+[ext_resource type="Resource" uid="uid://db8elmacgb0ag" path="res://05_Game/Run/Formations/Pool/Prototyping/Colossus3/colossus3.fighting_formation.tres" id="1_hia2w"]
+[ext_resource type="PackedScene" uid="uid://0x5u0h623yxt" path="res://06_FloatingIsland/FightingIsland/Pool/ArchIsland/arch_island.tscn" id="1_hodua"]
+
+[resource]
+script = ExtResource("1_h4ws4")
+island_scene = ExtResource("1_hodua")
+formation_b = ExtResource("1_hia2w")
+encounter_id = &"Colossus3"
+display_name = "Colossus 3"
+design_notes = "3 poulets colossus et leur acolytes"
+metadata/_custom_type_script = "uid://dg13tr0kcjyll"

@@ -34,6 +34,14 @@ var _active_families: Array[Family] # Array of all families activated for this g
 var active_families: Array[Family]:
 	get: return _active_families
 
+# RunContext de la session courante : construit au start_solo_game (puis lu par
+# Game._ready au moment du change_scene), reste accessible pendant toute la
+# durée de la run pour les triggers de save inter-confrontation.
+# En multi (post-démo), il faudra propager ce RunContext via RPC.
+var _run_context: RunContext
+var run_context: RunContext:
+	get: return _run_context
+
 var _game_state_timer: Timer
 var game_state_timer: Timer:
 	get: return _game_state_timer
@@ -53,6 +61,13 @@ var game_state: GameState:
 # ============================== Private variables ==============================
 
 var _game_scene: PackedScene = load("res://05_Game/game.tscn")
+var _run_scene: PackedScene = load("res://05_Game/Run/RunRoot/run_root.tscn")
+
+const RUN_SAVE_PATH := "user://saves/run.tres"
+const DEMO_RUN_PATH := "res://05_Game/Run/Runs/Pool/Prototyping/demo_run.tres"
+const DEMO_PLAYER_FORMATION_PATH := "res://05_Game/Run/Formations/Pool/Prototyping/default_solo.fighting.tres"
+const DEMO_HERO_SCENE_PATH := "res://02_Entities/Heroes/Latika/latika.tscn"
+const DEMO_ACOLYTE_SCENE_PATH := "res://02_Entities/Summons/ChickenLord/Chicken/Basic/chicken_basic.tscn"
 
 var _FAMILIES_REF: Dictionary[Family.Type, Family] = {
 }
@@ -93,6 +108,7 @@ func request_state_transition(new_state: GameState) -> void:
 func clear() -> void:
 	_game_type = GameType.UNDEF
 	_active_families.clear()
+	_run_context = null
 	CardShopManager.clear()
 
 	# Reset complete du state
@@ -113,10 +129,9 @@ func init() -> void:
 	#_active_families.append(_FAMILIES_REF[Family.Type.NECROSIS])
 
 
-#TODO Move into round manager ?
+# Hérité du modèle PvP (last man standing). En roguelite la fin de run est
+# pilotée par RunRoot via la complétion des confrontations, pas ici.
 func is_end_of_game() -> bool:
-	if PlayerManager.get_local_player() in PlayerManager.dead_players.values():
-		Events.signal_local_player_is_dead()
 	return PlayerManager.get_alive_players().size() == 1
 
 
@@ -125,7 +140,66 @@ func start_solo_game() -> void:
 	for i in 7: # TODO Avoir un nombre max de joueur qui dépend du mode ?
 		PlayerManager.add_bot()
 	PlayerManager.join_game(1, "Breepsolo")
+	_run_context = _build_new_run_context()
 	start_game()
+
+
+# Flow B (roguelite démo) : 1 humain, pas de bots, Run chargée depuis le .tres
+# de démo, formation joueur hardcodée (sera remplacée par un HeroSelector
+# pré-run plus tard).
+func start_solo_run() -> void:
+	_game_type = GameType.SOLO
+	PlayerManager.join_game(1, "Breepsolo")
+	var demo_run: Run = load(DEMO_RUN_PATH) as Run
+	if demo_run == null:
+		Verbose.error("start_solo_run: demo_run.tres introuvable", Verbose.Category.GLOBAL_MANAGER)
+		return
+	_run_context = _build_new_run_context(demo_run)
+	_populate_demo_party_formation(_run_context.party)
+	start_run()
+
+
+func _build_new_run_context(run: Run = null) -> RunContext:
+	var ctx := RunContext.new()
+	if run != null:
+		ctx.run = run
+	ctx.game_rules = _game_rules
+	ctx.active_families = _active_families.duplicate()
+	ctx.rng_seed = randi()
+	ctx.started_at = int(Time.get_unix_time_from_system())
+	ctx.run_id = str(ctx.started_at) + "_" + str(ctx.rng_seed)
+	for player: Player in PlayerManager.players.values():
+		if player.state != null:
+			ctx.party.players.append(player.state)
+	return ctx
+
+
+func _populate_demo_party_formation(party: Party) -> void:
+	var default_formation: FightingFormation = load(DEMO_PLAYER_FORMATION_PATH) as FightingFormation
+	if default_formation == null:
+		Verbose.error("start_solo_run: default_solo formation introuvable", Verbose.Category.GLOBAL_MANAGER)
+		return
+	var hero_scenes: Array[PackedScene] = [load(DEMO_HERO_SCENE_PATH) as PackedScene]
+	var acolyte_scenes: Array[PackedScene] = [load(DEMO_ACOLYTE_SCENE_PATH) as PackedScene,
+			load(DEMO_ACOLYTE_SCENE_PATH) as PackedScene,
+			load(DEMO_ACOLYTE_SCENE_PATH) as PackedScene,
+			load(DEMO_ACOLYTE_SCENE_PATH) as PackedScene]
+	party.formation = default_formation.populate_with(hero_scenes, acolyte_scenes)
+	_init_hero_specs_runtime_data(party)
+
+
+# Garantit que chaque HeroSpec de la formation a des Resources non-null pour deck
+# et data_memory (truth canonique des données hero-level, lues à chaque spawn).
+func _init_hero_specs_runtime_data(party: Party) -> void:
+	if party == null or party.formation == null: return
+	var local_player_name: String = PlayerManager.get_local_player().player_name if PlayerManager.get_local_player() != null else ""
+	for spec: EntitySpec in party.formation.entity_specs:
+		if spec is HeroSpec:
+			var hero_spec: HeroSpec = spec
+			if hero_spec.deck == null:
+				hero_spec.deck = PlayerDeck.new().init(local_player_name)
+			if hero_spec.data_memory == null:
+				hero_spec.data_memory = NestedRegistry.new()
 
 
 func get_active_families() -> Array[Family]:
@@ -136,6 +210,12 @@ func get_active_families() -> Array[Family]:
 func start_game() -> void:
 	CardShopManager.init(_active_families, _game_rules)
 	get_tree().change_scene_to_packed(_game_scene)
+
+
+@rpc("any_peer", "call_local")
+func start_run() -> void:
+	CardShopManager.init(_active_families, _game_rules)
+	get_tree().change_scene_to_packed(_run_scene)
 
 # ============================== Private functions ==============================
 
@@ -182,11 +262,30 @@ func _on_game_state_changed(new_state) -> void:
 			Verbose.debug("[State=ENDING_ROUND]", Verbose.Category.GLOBAL_MANAGER)
 			await get_tree().create_timer(0.1).timeout # Quick fix to avoid recursive signals
 			await PlayerManager.sync_point(PlayerManager.SyncID.FIGHTING_PHASE)
-			await RoundManager.ending_round_player_changes()
 			_game_state_timer.wait_time = _game_rules.duration_fighting_finished
 			_game_state_timer.start()
 		GameState.FINISHED:
 			Verbose.debug("[State=FINISHED]", Verbose.Category.GLOBAL_MANAGER)
+
+
+func save_run_context() -> void:
+	if not multiplayer.is_server(): return # autorité hôte
+	if _run_context == null: return
+	var err: Error = _run_context.save_to(RUN_SAVE_PATH)
+	if err == OK:
+		Verbose.debug("RunContext saved to " + RUN_SAVE_PATH, Verbose.Category.SAVE)
+	else:
+		Verbose.error("Failed to save RunContext (err=" + str(err) + ") to " + RUN_SAVE_PATH, Verbose.Category.SAVE)
+
+
+func clear_save() -> void:
+	if not multiplayer.is_server(): return
+	if not FileAccess.file_exists(RUN_SAVE_PATH): return
+	var err: Error = DirAccess.remove_absolute(RUN_SAVE_PATH)
+	if err == OK:
+		Verbose.debug("RunContext save cleared: " + RUN_SAVE_PATH, Verbose.Category.SAVE)
+	else:
+		Verbose.warn("Failed to clear save (err=" + str(err) + ") at " + RUN_SAVE_PATH, Verbose.Category.SAVE)
 
 
 func _on_gfm_all_fights_are_over() -> void:

@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://2jkqbtilprup"]
+
+[ext_resource type="Script" uid="uid://b82xgxqadmpv3" path="res://05_Game/Run/Encounters/fighting_encounter.proto.gd" id="1_proto"]
+[ext_resource type="Resource" uid="uid://dfcg4hv5vlf0k" path="res://05_Game/Run/Encounters/Pool/Prototyping/Colossus3/colossus3.fighting_encounter.tres" id="2_nle48"]
+[ext_resource type="Resource" uid="uid://tkrmggge2pc" path="res://05_Game/Run/Formations/Pool/Prototyping/default_solo.fighting.tres" id="3_5dxsx"]
+[ext_resource type="PackedScene" uid="uid://dvr7815lw1k8b" path="res://02_Entities/Heroes/Latika/latika.tscn" id="3_85ebn"]
+[ext_resource type="PackedScene" uid="uid://xup3guwehhoc" path="res://02_Entities/Summons/ChickenLord/Chicken/Basic/chicken_basic.tscn" id="5_5dxsx"]
+
+[node name="FightingEncounter_proto" type="Node" unique_id=442090378]
+script = ExtResource("1_proto")
+_fighting_encounter = ExtResource("2_nle48")
+_default_player_formation = ExtResource("3_5dxsx")
+_hero_scenes = Array[PackedScene]([ExtResource("3_85ebn")])
+_acolyte_scenes = Array[PackedScene]([ExtResource("5_5dxsx"), ExtResource("5_5dxsx"), ExtResource("5_5dxsx"), ExtResource("5_5dxsx")])
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=2047337451]
+
+[node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=240190596]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 120.0
+grow_horizontal = 0
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBox" type="VBoxContainer" parent="UI/MarginContainer" unique_id=1774223051]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="StartButton" type="Button" parent="UI/MarginContainer/VBox" unique_id=757372223]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Start fight"
+
+[node name="ReloadButton" type="Button" parent="UI/MarginContainer/VBox" unique_id=1953661377]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Reload scene"

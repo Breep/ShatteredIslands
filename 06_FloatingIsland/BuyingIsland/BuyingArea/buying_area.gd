@@ -7,7 +7,7 @@ var _is_active: bool = false
 
 # ============================== Local nodes ==============================
 
-@onready var _tavern: Tavern = %Tavern_Animated
+@onready var _tavern: Tavern = %Tavern
 
 # ============================== Node base functions ==============================
 
@@ -16,13 +16,18 @@ func _ready() -> void:
 
 # ============================== Public functions ==============================
 
-# Reload the tavern center
+# === Old API (à supprimer une fois la nouvelle validée) ===
 func start_round(battles: Array[Battle]) -> void:
 	_tavern.put_tables_according_to_battles(battles)
 
 
 func cleanup() -> void:
 	_tavern.cleanup()
+
+
+# === New API: relay to Tavern.populate_from_encounter ===
+func start_round_from_encounter(encounter: TavernEncounter, hero_spec: HeroSpec, acolyte_specs: Array[AcolyteSpec]) -> void:
+	_tavern.populate_from_encounter(encounter, hero_spec, acolyte_specs)
 
 
 func set_active() -> void:

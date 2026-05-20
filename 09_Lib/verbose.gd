@@ -18,7 +18,6 @@ enum Category {
 	DEFAULT,
 	NET,
 	GLOBAL_MANAGER,
-	ROUND_MANAGER,
 	PLAYER_MANAGER,
 	GLOBAL_FIGHTING_MANAGER,
 	FAMILY_MANAGER,
@@ -55,14 +54,14 @@ enum Category {
 	PROJECTILE,
 	ACTION_RECEIVER_MODULE,
 	NESTED_REGISTRY,
-	ENCOUNTER_RUNNER
+	ENCOUNTER_RUNNER,
+	SAVE
 }
 
 const CATEGORY_PREFIX_TEMPLATES: Dictionary[Category, String] = {
 	Category.DEFAULT: "(          ) ",
 	Category.NET: "(NET       ) ",
 	Category.GLOBAL_MANAGER: "(GAME_MAN  ) ",
-	Category.ROUND_MANAGER: "(ROUND_MAN ) ",
 	Category.CARD_SHOP: "(CARD_SHOP ) ",
 	Category.CARD: "(CARD      ) ",
 	Category.SHOP_DECK: "(SHOP_DECK ) ",
@@ -99,6 +98,7 @@ const CATEGORY_PREFIX_TEMPLATES: Dictionary[Category, String] = {
 	Category.ACTION_RECEIVER_MODULE: "(ACTION_REC) ",
 	Category.NESTED_REGISTRY:  "(NESTED_REG) ",
 	Category.ENCOUNTER_RUNNER: "(ENC_RUNNER) ",
+	Category.SAVE: "(SAVE      ) ",
 }
 
 const PREFIX_TEMPLATES: Dictionary[GameType, String] = {
@@ -126,9 +126,8 @@ var current_categories_level: Dictionary[Category, Level] = {
 	Category.DEFAULT: Level.DEBUG,
 	Category.NET: Level.WARN,
 	Category.GLOBAL_MANAGER: Level.DEBUG,
-	Category.ROUND_MANAGER: Level.WARN,
-	Category.CARD_SHOP: Level.WARN,
-	Category.CARD: Level.TRACE,
+	Category.CARD_SHOP: Level.TRACE,
+	Category.CARD: Level.DEBUG,
 	Category.SHOP_DECK: Level.WARN,
 	Category.CARD_LAYOUT: Level.WARN,
 	Category.AI: Level.DEBUG,
@@ -142,7 +141,7 @@ var current_categories_level: Dictionary[Category, Level] = {
 	Category.STAT_MODIFIER: Level.WARN,
 	Category.STACK_MODIFIER: Level.WARN,
 	Category.GLOBAL_FIGHTING_MANAGER: Level.WARN,
-	Category.ENTITY_ANIMATION: Level.TRACE,
+	Category.ENTITY_ANIMATION: Level.WARN,
 	Category.ENTITY_MODULE: Level.WARN,
 	Category.ENTITY: Level.WARN,
 	Category.HERO: Level.WARN,
@@ -163,6 +162,7 @@ var current_categories_level: Dictionary[Category, Level] = {
 	Category.ACTION_RECEIVER_MODULE: Level.WARN,
 	Category.NESTED_REGISTRY: Level.WARN,
 	Category.ENCOUNTER_RUNNER: Level.TRACE,
+	Category.SAVE: Level.DEBUG,
 }
 #endregion
 

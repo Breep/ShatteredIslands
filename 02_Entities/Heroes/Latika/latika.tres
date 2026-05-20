@@ -31,7 +31,5 @@ stats = Dictionary[int, ExtResource("2_stats")]({
 9: ExtResource("11_l09"),
 10: ExtResource("12_l10")
 })
-aa_projectile_type = 2
-aa_anim_ratio = 1.0
-aa_anim_max_speed_scale = 20.0
+aa_anim_max_speed_scale = 10.0
 metadata/_custom_type_script = "uid://dtcjta70luxvr"

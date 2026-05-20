@@ -29,13 +29,6 @@ replication_config = SubResource("SceneReplicationConfig_622jh")
 [node name="ArchIsland" parent="." unique_id=1045725859 instance=ExtResource("4_8iwhk")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -0.5682397, 0)
 
-[node name="FightingArea" parent="." unique_id=2072382245 node_paths=PackedStringArray("_fighting_floors") instance=ExtResource("2_0nkjk")]
-_fighting_floors = {
-0: NodePath("FightingFloorTemplates/FightingFloor_1v1"),
-1: NodePath("FightingFloorTemplates/FightingFloor_2v2"),
-2: NodePath("FightingFloorTemplates/FightingFloor_3v3"),
-3: NodePath("FightingFloorTemplates/FightingFloor_4v4"),
-4: NodePath("FightingFloorTemplates/FightingFloor_ffa13")
-}
+[node name="FightingArea" parent="." unique_id=2072382245 instance=ExtResource("2_0nkjk")]
 
 [editable path="CenterPointCamera"]

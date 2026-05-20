@@ -1,0 +1,2 @@
+class_name HeroSpawnPoint
+extends SpawnPoint

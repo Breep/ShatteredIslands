@@ -43,7 +43,6 @@ func _ready() -> void:
 	_init_players()
 	
 	_add_player_cards()
-	_floating_island.init_fight(_heroes, _battle_type, 42)
 	GameManager.game_rules.duration_fighting_countdown = 1
 	GameManager.game_rules.duration_fighting_normal = 240.0
 	GameManager.request_state_transition(GameManager.GameState.FIGHTING)
@@ -105,7 +104,7 @@ func _init_players() -> void:
 		player.player_name = "Player" + str(i + 1)
 		player.name = "Player_" + str(i + 1)
 		player.id = 1
-		player.hero_desc = _hero_descs[i]
+		# player.hero_desc supprimé en Phase 3 (vit sur HeroSpec maintenant) — proto à reworker
 		player.hero = _heroes[i]
 		player.hero.entity_name = player.player_name
 		player.skill_manager = SkillManager.new()

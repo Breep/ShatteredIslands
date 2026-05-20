@@ -1,7 +1,6 @@
 class_name PlayerDeck
 extends Deck
 
-var _player_owner: Player
 var _owner_name: String
 
 @export var _active_cards: Array[Card]
@@ -18,9 +17,8 @@ signal card_maxed(card: Card)
 
 # ============================== Node base functions ==============================
 
-func init(player_owner: Player) -> PlayerDeck:
-	_player_owner = player_owner
-	_owner_name = player_owner.name
+func init(owner_name: String = "") -> PlayerDeck:
+	_owner_name = owner_name
 	return self
 
 # ============================== Public function ==============================

@@ -69,8 +69,6 @@ signal ui_family_portrait_requested(player: Player, family: Family)
 func signal_ui_family_portrait_requested(player: Player, family: Family) -> void:
 	ui_family_portrait_requested.emit(player, family)
 
-# ============================ Logic ===============================
-signal card_bought(card: Card)
-
-# ============================ Manager =============================
-signal card_shop_init()
+signal tavern_continue_pressed
+func signal_tavern_continue_pressed() -> void:
+	tavern_continue_pressed.emit()

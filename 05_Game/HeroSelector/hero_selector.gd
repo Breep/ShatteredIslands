@@ -122,10 +122,11 @@ func _start_hero_selection() -> void:
 		_ui_hero_picking_screen.open_hero_selection()
 
 
-# TODO check if the client is taking an available hero in the server
+# Hérité de Flow A (PvP) : la sélection de héros côté roguelite passe par la
+# Party.formation pré-construite, plus par ce HeroSelector. Conservé en stub
+# le temps que Flow A soit supprimé.
 @rpc("any_peer", "call_local", "reliable")
-func _pick_hero_multiple(player_id: int, hero_id: HeroDesc.HeroId) -> void:
-	PlayerManager.players[player_id].hero_desc = Shared.HEROES[hero_id]
+func _pick_hero_multiple(_player_id: int, _hero_id: HeroDesc.HeroId) -> void:
 	_player_hero_picked.emit()
 
 

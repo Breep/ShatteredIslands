@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://bf52cs7j1rai2"]
+
+[ext_resource type="Script" uid="uid://cykyn5glkuf72" path="res://05_Game/Run/Formations/FormationBuilders/FightingBuilder/fighting_formation_builder.gd" id="1_axvc8"]
+[ext_resource type="PackedScene" uid="uid://0x5u0h623yxt" path="res://06_FloatingIsland/FightingIsland/Pool/ArchIsland/arch_island.tscn" id="1_hjxwm"]
+[ext_resource type="Resource" uid="uid://tkrmggge2pc" path="res://05_Game/Run/Formations/Pool/Prototyping/default_solo.fighting.tres" id="2_6wol0"]
+[ext_resource type="PackedScene" uid="uid://mcgg11jy8uh1" path="res://05_Game/Run/SpawnSpecs/SpawnPoints/HeroSpawn/hero_spawn_point.tscn" id="4_rgpw3"]
+[ext_resource type="Script" uid="uid://c27qheq1cumt0" path="res://05_Game/Run/SpawnSpecs/SpawnPoints/HeroSpawn/hero_spawn_point.gd" id="5_3d7vb"]
+[ext_resource type="PackedScene" uid="uid://v8f1a76nj0ui" path="res://05_Game/Run/SpawnSpecs/SpawnPoints/AcolyteSpawn/acolyte_spawn_point.tscn" id="6_2txeh"]
+[ext_resource type="Script" uid="uid://bh3myanctf5tj" path="res://05_Game/Run/SpawnSpecs/SpawnPoints/AcolyteSpawn/acolyte_spawn_point.gd" id="7_et5km"]
+
+[node name="FightingFormationBuilder" type="Node3D" unique_id=1239562922 node_paths=PackedStringArray("_antagonists_node", "_heroes_node", "_acolytes_node", "_buildings_node", "_player_hero_spawns_node", "_player_acolyte_spawns_node")]
+script = ExtResource("1_axvc8")
+_antagonists_node = NodePath("Entities/Antagonists")
+_heroes_node = NodePath("Entities/Heroes")
+_acolytes_node = NodePath("Entities/Acolytes")
+_buildings_node = NodePath("Entities/Buildings")
+_player_hero_spawns_node = NodePath("PlayerSpawns/HeroSpawns")
+_player_acolyte_spawns_node = NodePath("PlayerSpawns/AcolyteSpawns")
+formation_to_load = ExtResource("2_6wol0")
+formation_id = "default_solo"
+
+[node name="ArchIsland" parent="." unique_id=796314808 instance=ExtResource("1_hjxwm")]
+
+[node name="Entities" type="Node3D" parent="." unique_id=622259169]
+
+[node name="Antagonists" type="Node3D" parent="Entities" unique_id=91770849]
+
+[node name="Heroes" type="Node3D" parent="Entities" unique_id=264475383]
+
+[node name="Acolytes" type="Node3D" parent="Entities" unique_id=1831821954]
+
+[node name="Buildings" type="Node3D" parent="Entities" unique_id=394829784]
+
+[node name="PlayerSpawns" type="Node3D" parent="." unique_id=1894573214]
+
+[node name="HeroSpawns" type="Node3D" parent="PlayerSpawns" unique_id=1894573215]
+
+[node name="HeroSpawnPoint" type="Node3D" parent="PlayerSpawns/HeroSpawns" unique_id=582901657 instance=ExtResource("4_rgpw3")]
+transform = Transform3D(0.06353954, 0, -0.99797934, 0, 1, 0, 0.99797934, 0, 0.06353954, -9.234675, 0.013692005, -0.049312532)
+script = ExtResource("5_3d7vb")
+
+[node name="AcolyteSpawns" type="Node3D" parent="PlayerSpawns" unique_id=1894573216]
+
+[node name="AcolyteSpawnPoint01" type="Node3D" parent="PlayerSpawns/AcolyteSpawns" unique_id=228737116 instance=ExtResource("6_2txeh")]
+transform = Transform3D(0.034480844, 0, -0.9994054, 0, 1, 0, 0.9994054, 0, 0.034480844, -3.4476347, 0.32316315, 2.2213988)
+script = ExtResource("7_et5km")
+
+[node name="AcolyteSpawnPoint02" type="Node3D" parent="PlayerSpawns/AcolyteSpawns" unique_id=1277935017 instance=ExtResource("6_2txeh")]
+transform = Transform3D(0.034480844, 0, -0.9994054, 0, 1, 0, 0.9994054, 0, 0.034480844, -3.3290348, 0.32316315, -3.355472)
+script = ExtResource("7_et5km")
+
+[node name="AcolyteSpawnPoint03" type="Node3D" parent="PlayerSpawns/AcolyteSpawns" unique_id=1200413859 instance=ExtResource("6_2txeh")]
+transform = Transform3D(0.034480844, 0, -0.9994054, 0, 1, 0, 0.9994054, 0, 0.034480844, -3.738243, 0.32316315, 6.837671)
+script = ExtResource("7_et5km")
+
+[node name="AcolyteSpawnPoint04" type="Node3D" parent="PlayerSpawns/AcolyteSpawns" unique_id=1593812171 instance=ExtResource("6_2txeh")]
+transform = Transform3D(0.034480844, 0, -0.9994054, 0, 1, 0, 0.9994054, 0, 0.034480844, -3.5955906, 0.32316315, -7.5267854)
+script = ExtResource("7_et5km")
+
+[node name="AcolyteSpawnPoint05" type="Node3D" parent="PlayerSpawns/AcolyteSpawns" unique_id=566036325 instance=ExtResource("6_2txeh")]
+transform = Transform3D(0.034480844, 0, -0.9994054, 0, 1, 0, 0.9994054, 0, 0.034480844, -7.7084656, 0.32316315, 2.7626152)
+script = ExtResource("7_et5km")
+
+[node name="AcolyteSpawnPoint06" type="Node3D" parent="PlayerSpawns/AcolyteSpawns" unique_id=962278465 instance=ExtResource("6_2txeh")]
+transform = Transform3D(0.034480844, 0, -0.9994054, 0, 1, 0, 0.9994054, 0, 0.034480844, -7.617793, 0.32316315, -3.3991032)
+script = ExtResource("7_et5km")
+
+[node name="AcolyteSpawnPoint07" type="Node3D" parent="PlayerSpawns/AcolyteSpawns" unique_id=1286221479 instance=ExtResource("6_2txeh")]
+transform = Transform3D(0.034480844, 0, -0.9994054, 0, 1, 0, 0.9994054, 0, 0.034480844, -7.710517, 0.32316315, 7.241932)
+script = ExtResource("7_et5km")
+
+[node name="AcolyteSpawnPoint08" type="Node3D" parent="PlayerSpawns/AcolyteSpawns" unique_id=1420239559 instance=ExtResource("6_2txeh")]
+transform = Transform3D(0.034480844, 0, -0.9994054, 0, 1, 0, 0.9994054, 0, 0.034480844, -7.5637646, 0.32316315, -8.1456585)
+script = ExtResource("7_et5km")

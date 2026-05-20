@@ -12,14 +12,7 @@ _center_point_camera = NodePath("CenterPointCamera")
 
 [node name="ArchIslandVisual" parent="." unique_id=1045725859 instance=ExtResource("1_hqc1e")]
 
-[node name="FightingArea" parent="." unique_id=2072382245 node_paths=PackedStringArray("_fighting_floors") instance=ExtResource("3_nh3rf")]
-_fighting_floors = {
-0: NodePath("FightingFloorTemplates/FightingFloor_1v1"),
-1: NodePath("FightingFloorTemplates/FightingFloor_2v2"),
-2: NodePath("FightingFloorTemplates/FightingFloor_3v3"),
-3: NodePath("FightingFloorTemplates/FightingFloor_4v4"),
-4: NodePath("FightingFloorTemplates/FightingFloor_ffa13")
-}
+[node name="FightingArea" parent="." unique_id=2072382245 instance=ExtResource("3_nh3rf")]
 
 [node name="CenterPointCamera" parent="." unique_id=823970387 instance=ExtResource("4_45gxp")]
 
