@@ -49,10 +49,6 @@ window/size/mode=3
 window/size/initial_screen=1
 window/stretch/mode="canvas_items"
 
-[editor_plugins]
-
-enabled=PackedStringArray()
-
 [file_customization]
 
 folder_colors={
