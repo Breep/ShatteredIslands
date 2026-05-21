@@ -5,37 +5,22 @@ extends CharacterBody3D
 
 #region ============================== Signals ==============================
 signal died(self_ref: Entity)
-@warning_ignore("unused_signal")
 signal action_received(source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool)
-@warning_ignore("unused_signal")
 signal action_done(target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool)
-@warning_ignore("unused_signal")
 signal action_dodged(source: Entity, action_type: Utils.ActionType, value: float, is_critical: bool)
-@warning_ignore("unused_signal")
 signal action_blocked(source: Entity, action_type: Utils.ActionType, value: float)
-@warning_ignore("unused_signal")
 signal critical_action_done(target: Entity, action_type: Utils.ActionType, value_before_crit: float, value_after_crit: float)
-@warning_ignore("unused_signal")
 signal action_overhealed(target: Entity, amount: float)
-@warning_ignore("unused_signal")
 signal damage_taken(damage: float, damage_type: Utils.ActionType, is_critical: bool, blocked_by_armor: bool)
-@warning_ignore("unused_signal")
 signal heal_taken(heal_amount: float, is_critical: bool)
-@warning_ignore("unused_signal")
 signal stack_taken(stack_type: Alteration.Type, stack_number: float, is_critical: bool)
-@warning_ignore("unused_signal")
 signal auto_attack_completed()
-@warning_ignore("unused_signal")
 signal spell_casted(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary)
 signal spawn_completed()
 signal resurrected()
 
-# Émis par les archétypes hero (category == HERO).
-@warning_ignore("unused_signal")
 signal ultimate_casted()
-@warning_ignore("unused_signal")
 signal fight_is_won()
-@warning_ignore("unused_signal")
 signal fight_is_lost()
 #endregion
 
@@ -84,19 +69,48 @@ enum Category {
 	MOB
 }
 
-# Mode d'affichage des entités à interface (heroes) : bench tavern / combat / preview.
-enum DisplayMode {
-	BUYING_PHASE,
-	FIGHTING_PHASE,
-	PREVIEW
-}
+enum DisplayMode { BUYING_PHASE, FIGHTING_PHASE, PREVIEW }
+#endregion
 
-enum SnakeBarrelModifier {
-	SNAKE_NUMBER,
-	SNAKE_POISON_STACKS,
-	MAX_HEALTH
-}
+#region ============================== Export ==============================
+@export var entity_name: String = "<entity name>"
+@export var category: Category = Category.MOB
+@export var entity_desc: EntityDesc
 
+@export_group("Visual")
+@export var _visual_3d: Node3D
+@export var _health_bar_marker: Marker3D
+@export var _health_bar: SimpleInfoPanel2D
+@export_subgroup("Auto Attack")
+@export var _attack_spawn_marker: Marker3D
+@export var _projectile_type: Projectile.Type
+@export_subgroup("Animation")
+@export var custom_animation_component: AnimationComponent
+@export var custom_spawn_animation_component: SpawnAnimationComponent # Overrides the default spawn animation if set
+
+@export_range(1, 20, 1) var level: int = 1
+@export var fight_role: FightRole = FightRole.EXTRA
+
+@export_group("Optional configuration")
+@export var invisible: bool = false
+@export var custom_clickable_component: ClickableComponent # Overrides the default click/hover handler if set
+# TODO A bouger dans le despawn component
+@export var _despawn_timer: float = 0.0
+
+@export_group("Prototyping")
+@export_subgroup("Context")
+@export var team: int = -1 # Team number of the entity
+@export var battle_id: int = -1 # The id of the battle the entity is in
+@export var _spawn_manager: SpawnManager
+@export var _arena_zone_manager: ArenaZoneManager
+@export_subgroup("Overrides")
+@export var _override_base_stats: EntityStats
+@export var _override_custom_deck: PlayerDeck
+@export var _override_data_memory: Dictionary
+@export var _override_family_levels: Dictionary[Family.Type, int] = {}
+@export_subgroup("Behaviour")
+@export var auto_attack_enabled: bool = true
+@export var family_managers_enabled: bool = true
 #endregion
 
 #region ============================== Constants ==============================
@@ -148,7 +162,6 @@ var clickable: ClickableComponent
 # Origine / cycle de vie
 var summoner: Entity # Set via apply_context si l'entité a été invoquée par une autre
 
-# State d'archétype hero — significatif seulement pour category == HERO.
 var display_mode: DisplayMode = DisplayMode.PREVIEW
 var deck: PlayerDeck
 var data_memory: NestedRegistry
@@ -173,63 +186,7 @@ var _family_module: FamilyModule
 var _original_fighting_state: FightingState = FightingState.UNDEF
 #endregion
 
-#region ============================== Export ==============================
-@export var team: int = -1 # Team number of the entity
-@export var battle_id: int = -1 # The id of the battle the entity is in
-@export var entity_name: String = "<entity name>"
 
-# Catégorie de l'entité. Défaut éditeur surclassé au spawn par les SpawnSpec
-# (et posé par le `_init` des archétypes : Hero → HERO, summons → SUMMON).
-@export var category: Category = Category.MOB
-
-# Configuration per-archétype (stats par niveau, timings AA, projectile type, ...).
-# Pour les heroes, renseigné depuis hero_desc dans Hero._ready. Les autres archétypes
-# (summons, antagonists) peuvent fournir leur propre EntityDesc.
-@export var entity_desc: EntityDesc
-@export_range(1, 10, 1) var level: int = 1
-
-# Tagué au spawn par FightingArea selon le type de spec. Consommé par FightingManager
-# pour les conditions d'élimination (KILL_MAIN / KILL_SECONDARY / KILL_ALL).
-var fight_role: FightRole = FightRole.EXTRA
-
-@export_group("Optional configuration")
-@export var invisible: bool = false
-@export var custom_base_stats: EntityStats
-
-@export_subgroup("Visual")
-@export var _visual_3d: Node3D
-@export var _health_bar_marker: Marker3D
-@export var _health_bar: SimpleInfoPanel2D
-@export var _attack_spawn_marker: Marker3D
-@export var _projectile_type: Projectile.Type
-
-@export_subgroup("Visual/Animation")
-@export var custom_animation_component: AnimationComponent
-@export var custom_spawn_animation_component: SpawnAnimationComponent # Overrides the default spawn animation if set
-
-@export_subgroup("Interaction")
-@export var custom_clickable_component: ClickableComponent # Overrides the default click/hover handler if set
-
-@export_subgroup("Prototyping")
-@export var _spawn_manager: SpawnManager
-@export var _arena_zone_manager: ArenaZoneManager
-@export var auto_attack_enabled: bool = true
-
-# Despawn (0 = pas de despawn, > 0 = délai en secondes avant queue_free post-died)
-# Les archétypes summon posent 5.0 dans leur `_init`. Héros et bâtiments persistants
-# restent à 0.
-@export var _despawn_timer: float = 0.0
-
-@export_group("Hero archetype")
-@export var hero_desc: HeroDesc
-@export var player: Player
-@export var family_managers_enabled: bool = true
-
-@export_subgroup("Prototyping")
-@export var _custom_deck: PlayerDeck
-@export var _override_family_levels: Dictionary[Family.Type, int] = {}
-@export var _custom_data_memory: Dictionary
-#endregion
 
 @onready var bds_registry := EntityBDSRegistry.new(self)
 @onready var _state_machine := EntityStateMachine.new(self)
@@ -302,8 +259,8 @@ func _init() -> void:
 func _enter_tree() -> void:
 	Verbose.trace("Entity [" + entity_name + "_" + str(uid) + "] enter_tree", Verbose.Category.ENTITY)
 	# Stats registry needs to be created after _init() because custom_base_stats is not available in _init()
-	if custom_base_stats != null:
-		_base_stats = custom_base_stats
+	if _override_base_stats != null:
+		_base_stats = _override_base_stats
 		_base_stats.reset_from_self()
 		Verbose.debug("Entity [" + entity_name + "] using custom_base_stats", Verbose.Category.ENTITY)
 	stat_modifiers_registry = EntityStatModifiersRegistry.new(_base_stats, stats)
@@ -359,10 +316,6 @@ func _ready() -> void:
 	_connect_module_dependencies()
 
 	_start_spawn()
-
-	# Hero archetype : auto-sélection du héros local au spawn.
-	if is_hero() and player == PlayerManager.get_local_player():
-		Events.entity_clicked.emit(self)
 
 
 
@@ -709,30 +662,24 @@ func _on_stunned(is_active: bool) -> void:
 #region ============================== Hero archetype setup ==============================
 # Orchestration de spawn des archétypes hero — appelé depuis _ready() si is_hero().
 func _hero_setup() -> void:
-	Verbose.debug("Hero [" + entity_name + "] setup", Verbose.Category.HERO)
-
-	if _custom_deck != null: deck = _custom_deck
-	if not _custom_data_memory.is_empty(): data_memory.override(_custom_data_memory)
-
-	if entity_desc == null and hero_desc != null:
-		entity_desc = hero_desc
-
-	if hero_desc == null and custom_base_stats == null:
-		Verbose.error("Hero archetype without hero_desc AND without custom_base_stats!", Verbose.Category.HERO)
-		return
-
-	if custom_base_stats == null and hero_desc != null and base_stats != null:
-		base_stats.reset_from_hero_desc(hero_desc, level)
-
-	_family_module.compute_levels(deck, _override_family_levels)
-	_deck_holder.setup()
-
-	if deck != null:
-		_deck_holder.apply_all_cards_upgrades(deck)
-		deck.has_changed.connect(_on_deck_has_changed)
-
-	_apply_display_mode()
-	_family_module.apply_passive_all()
+	pass
+	#Verbose.debug("Hero [" + entity_name + "] setup", Verbose.Category.HERO)
+#
+	#if _custom_deck != null: deck = _custom_deck
+	#if not _custom_data_memory.is_empty(): data_memory.override(_custom_data_memory)
+#
+	#if custom_base_stats == null and hero_desc != null and base_stats != null:
+		#base_stats.reset_from_hero_desc(hero_desc, level)
+#
+	#_family_module.compute_levels(deck, _override_family_levels)
+	#_deck_holder.setup()
+#
+	#if deck != null:
+		#_deck_holder.apply_all_cards_upgrades(deck)
+		#deck.has_changed.connect(_on_deck_has_changed)
+#
+	#_apply_display_mode()
+	#_family_module.apply_passive_all()
 
 
 func _apply_display_mode() -> void:

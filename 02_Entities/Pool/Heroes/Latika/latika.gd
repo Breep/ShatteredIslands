@@ -1,7 +1,6 @@
 # Latika — DPS distance / carry mono-cible élevée par une meute de loups.
 # Dualité de build : prédateur solitaire (sniper mobile) ou chef de meute
 # (pression coordonnée via loups acolytes et marquage de cible).
-@tool
 class_name Latika
 extends Entity
 
@@ -119,9 +118,6 @@ func _ready() -> void:
 		return
 
 	auto_attack_completed.connect(_on_auto_attack_completed)
-
-	if player != null and player.skill_manager != null:
-		player.skill_manager.skill_picked.connect(_on_skill_manager_skill_picked)
 
 	# TODO: spawn initial wolf companion (Chef de Meute) — requires Wolf summon
 

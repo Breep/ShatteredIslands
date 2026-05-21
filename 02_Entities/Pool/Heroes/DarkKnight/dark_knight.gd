@@ -79,9 +79,6 @@ func _ready() -> void:
 	if _cataclysm_activated:
 		_on_cataclysm_activation()
 	
-	if player != null and player.skill_manager != null:
-		player.skill_manager.skill_picked.connect(_on_skill_manager_skill_picked)
-	
 	# Initial emit
 	var max_charge: int = _mega_strike_max_charge if _mega_strike_activated else _super_strike_max_charge
 	super_strike_charges_changed.emit(_super_strike_charges, max_charge)

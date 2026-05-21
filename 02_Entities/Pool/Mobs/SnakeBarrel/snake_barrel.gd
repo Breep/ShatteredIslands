@@ -1,17 +1,16 @@
 class_name SnakeBarrel
 extends Entity
 
-
-func _init() -> void:
-	super._init()
-	_despawn_timer = 5.0
-	category = Category.SUMMON
-
 enum Modifier {
 	SNAKE_NUMBER,
 	SNAKE_POISON_STACKS,
 	MAX_HEALTH
 }
+
+func _init() -> void:
+	super._init()
+	_despawn_timer = 5.0
+	category = Category.SUMMON
 
 const CLEANUP_TIME: int = 5
 
