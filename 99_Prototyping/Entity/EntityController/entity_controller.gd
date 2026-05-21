@@ -738,13 +738,6 @@ func _on_summon_entity_button_pressed() -> void:
 			Entity.EntityType.SNAKE:
 				pass
 
-			Entity.EntityType.FIELD_GENERATOR:
-				entity_modifier[FieldGenerator.Modifier.MAX_HEALTH] = edits[0].text.to_float()
-				entity_modifier[FieldGenerator.Modifier.SHIELD_AMOUNT] = edits[1].text.to_float()
-				entity_modifier[FieldGenerator.Modifier.SHIELD_INTERVAL] = edits[2].text.to_float()
-				entity_modifier[FieldGenerator.Modifier.INITIAL_SHIELD] = int(edits[3].text.to_float())
-				entity_modifier[FieldGenerator.Modifier.TARGET_COUNT] = int(edits[4].text.to_float())
-
 			Entity.EntityType.CHICKEN:
 				pass
 

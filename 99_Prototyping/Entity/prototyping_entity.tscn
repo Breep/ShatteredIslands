@@ -48,22 +48,22 @@ unique_name_in_owner = true
 
 [node name="Latika" parent="Node3D/Entities" unique_id=294337328 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("3_os118")]
 transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, -4.15008, 9.536744e-07, 0.070720665)
-_override_family_levels = Dictionary[int, int]({
-2: 1,
-3: 4
-})
 team = 3
 battle_id = 1
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
+_override_family_levels = Dictionary[int, int]({
+2: 1,
+3: 4
+})
 
 [node name="Latika2" parent="Node3D/Entities" unique_id=1941835210 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("3_os118")]
 transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, 4.2402563, 9.536744e-07, 0.036329266)
-_custom_deck = SubResource("Resource_ia2qg")
 team = 1
 battle_id = 1
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
+_custom_deck = SubResource("Resource_ia2qg")
 
 [node name="Control" type="Control" parent="Node3D" unique_id=1104542732]
 layout_mode = 3
