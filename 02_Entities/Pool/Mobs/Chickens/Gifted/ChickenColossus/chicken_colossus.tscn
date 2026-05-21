@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cqd7xjjl82372" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/chicken_colossus.gd" id="1_kf5j7"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="2_3q8ci"]
 [ext_resource type="Script" uid="uid://bk603mav6k516" path="res://02_Entities/Pool/Mobs/Chickens/chicken_animator.gd" id="3_3j8br"]
-[ext_resource type="AnimationNodeBlendTree" uid="uid://cgr3043y4f2ee" path="res://02_Entities/default_blendtree.tres" id="4_8f8sq"]
+[ext_resource type="AnimationNodeBlendTree" uid="uid://cgr3043y4f2ee" path="res://02_Entities/_Shared/Animations/default_blendtree.tres" id="4_8f8sq"]
 [ext_resource type="PackedScene" uid="uid://dithaupylit2x" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/chicken_colossus_visual.tscn" id="5_5tkf2"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://05_Game/Run/SpawnSpecs/SpawnPoints/SpawnPoint/spawn_point.tscn" id="5_fpw7i"]
 [ext_resource type="Script" uid="uid://cnwr3o67xobtt" path="res://02_Entities/_Shared/Components/Animation/entity_animation_player.gd" id="7_uq3l3"]

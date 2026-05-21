@@ -32,10 +32,7 @@ signal resurrected()
 #endregion
 
 #region ============================== Enums ==============================
-enum LifeState {
-	ALIVE,
-	DEAD
-}
+enum LifeState { ALIVE, DEAD }
 
 enum FightingState {
 	SPAWNING,
@@ -85,13 +82,6 @@ enum SnakeBarrelModifier {
 	MAX_HEALTH
 }
 
-enum FieldGeneratorModifier {
-	MAX_HEALTH,
-	SHIELD_AMOUNT,
-	SHIELD_INTERVAL,
-	INITIAL_SHIELD,
-	TARGET_COUNT
-}
 #endregion
 
 #region ============================== Constants ==============================
