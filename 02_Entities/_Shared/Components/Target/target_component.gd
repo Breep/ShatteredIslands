@@ -445,7 +445,7 @@ func _get_random(entities: Array[Entity], excluded_entity: Entity, prioritize_ta
 func _get_array_without_untargetable_targets(entities: Array[Entity]) -> Array[Entity]:
 	var targetable_entities: Array[Entity] = []
 	for entity in entities:
-		if entity.is_targetable:
+		if not entity.alterations.has_state(Alteration.Type.UNTARGETABLE):
 			targetable_entities.append(entity)
 	return targetable_entities
 

@@ -14,7 +14,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var storm_stats: FamilyStormCallerStats = ctx.hero.families_stats.storm_caller
 	storm_stats.on_rank_s_callbacks.append(
 		func(_rank_mult: float) -> void:
-			var max_hp_bonus: float = ctx.hero.base_stats.health_max * (hp_percent / 100.0)
+			var max_hp_bonus: float = ctx.hero.stats.health_max * (hp_percent / 100.0)
 			state[&"accumulated"] += max_hp_bonus
 
 			var mod := StatModifier.new()

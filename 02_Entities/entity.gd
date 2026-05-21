@@ -18,7 +18,6 @@ signal auto_attack_completed()
 signal spell_casted(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary)
 signal spawn_completed()
 signal resurrected()
-
 signal ultimate_casted()
 signal fight_is_won()
 signal fight_is_lost()
@@ -26,17 +25,13 @@ signal fight_is_lost()
 
 #region ============================== Enums ==============================
 enum LifeState { ALIVE, DEAD }
-
-enum FightingState {
-	SPAWNING,
-	IDLE,
-	FIGHTING,
-	CELEBRATING,
-	UNDEF
-}
-
+enum FightRole { MAIN, SECONDARY, EXTRA }
+enum Category { HERO, SUMMON, ACOLYTE, ANTAGONIST, BUILDING, MOB }
+enum DisplayMode { BUYING_PHASE, FIGHTING_PHASE, PREVIEW }
+enum FightingState { SPAWNING, IDLE, FIGHTING, CELEBRATING, UNDEF }
+#TODO Bouger ça ailleurs => ça va devenir très gros
 enum EntityType {
-	HERO,
+	HERO, # TODO remove this
 	SNAKE_BARREL,
 	SNAKE,
 	FIELD_GENERATOR,
@@ -49,27 +44,6 @@ enum EntityType {
 	TREX,
 	CHICKEN_EGG
 }
-
-# Role of an entity in the fight victory conditions.
-# MAIN = Hero / Antagonist, SECONDARY = Acolyte, EXTRA = mobs / summons / anything else.
-enum FightRole {
-	MAIN,
-	SECONDARY,
-	EXTRA
-}
-
-# Catégorie de l'entité — tag explicite posé dans l'éditeur (export `category`) et
-# surclassable au spawn par les SpawnSpec. Distinct de EntityType (espèce/spawn-kind).
-enum Category {
-	HERO,
-	SUMMON,
-	ACOLYTE,
-	ANTAGONIST,
-	BUILDING,
-	MOB
-}
-
-enum DisplayMode { BUYING_PHASE, FIGHTING_PHASE, PREVIEW }
 #endregion
 
 #region ============================== Export ==============================
@@ -88,6 +62,7 @@ enum DisplayMode { BUYING_PHASE, FIGHTING_PHASE, PREVIEW }
 @export var custom_animation_component: AnimationComponent
 @export var custom_spawn_animation_component: SpawnAnimationComponent # Overrides the default spawn animation if set
 
+@export_group("Formation")
 @export_range(1, 20, 1) var level: int = 1
 @export var fight_role: FightRole = FightRole.EXTRA
 
@@ -119,22 +94,7 @@ const TICKS_PER_SECOND: int = 60
 
 #region ============================== Public variables ==============================
 var uid: int = -1 # Multiplayer ID of the entity
-
-var _is_targetable: bool = true
-var is_targetable: bool:
-	get:
-		if alterations != null:
-			return not alterations.has_state(Alteration.Type.UNTARGETABLE)
-		return _is_targetable
-
-
-# Auto loaded extensions
 var stats: EntityStats
-var base_stats: EntityStats:
-	get: return _base_stats
-var spawn_manager: SpawnManager:
-	get: return _spawn_manager
-
 
 # Modifiers
 var auto_attack_modifier_registry: AutoAttackModifierRegistry
@@ -143,7 +103,6 @@ var stat_modifiers_registry: EntityStatModifiersRegistry
 var death_modifiers_registry: DeathModifiersRegistry
 var periodic_timer_registry: PeriodicTimerRegistry
 var battle_callback_registry: BattleCallbackRegistry
-
 
 # Components
 var damage: DamageComponent
@@ -154,12 +113,12 @@ var summon: SummonComponent
 var auto_attack: AutoAttackComponent
 var alterations: AlterationsComponent
 var target: TargetComponent
+
 var movement: MovementComponent
 var animation: AnimationComponent
 var spawn_animation: SpawnAnimationComponent
 var clickable: ClickableComponent
 
-# Origine / cycle de vie
 var summoner: Entity # Set via apply_context si l'entité a été invoquée par une autre
 
 var display_mode: DisplayMode = DisplayMode.PREVIEW
@@ -170,10 +129,13 @@ var families_stats: FamiliesStats:
 		if _family_module == null:
 			return null
 		return _family_module.families_stats
+
+var spawn_manager: SpawnManager:
+	get: return _spawn_manager
 #endregion
 
 #region ============================== Private variables ==============================
-var _base_stats: EntityStats # Private, use base_stats property to access
+var _base_stats: EntityStats # Private, use _base_stats property to access
 
 var _auto_attack_periodic_module: AutoAttackPeriodicModule # Optional, can be null
 var _label_popup_module: LabelPopupModule
@@ -275,8 +237,6 @@ func _enter_tree() -> void:
 	add_child(periodic_timer_registry)
 
 	battle_callback_registry = BattleCallbackRegistry.new()
-
-	_is_targetable = false # Prevent targeting during spawn
 
 	if is_hero() and data_memory == null:
 		data_memory = NestedRegistry.new()
@@ -496,7 +456,6 @@ func _start_spawn() -> void:
 
 func _on_spawn_finished() -> void:
 	Verbose.debug("Entity [" + entity_name + "] completing spawn", Verbose.Category.ENTITY)
-	_is_targetable = true
 	if _fighting_state != FightingState.FIGHTING:
 		fighting_state = _original_fighting_state
 	spawn_completed.emit()
@@ -668,8 +627,8 @@ func _hero_setup() -> void:
 	#if _custom_deck != null: deck = _custom_deck
 	#if not _custom_data_memory.is_empty(): data_memory.override(_custom_data_memory)
 #
-	#if custom_base_stats == null and hero_desc != null and base_stats != null:
-		#base_stats.reset_from_hero_desc(hero_desc, level)
+	#if custom_base_stats == null and hero_desc != null and _base_stats != null:
+		#_base_stats.reset_from_hero_desc(hero_desc, level)
 #
 	#_family_module.compute_levels(deck, _override_family_levels)
 	#_deck_holder.setup()

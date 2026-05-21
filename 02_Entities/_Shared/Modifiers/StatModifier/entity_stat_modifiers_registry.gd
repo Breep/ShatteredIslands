@@ -123,7 +123,7 @@ var _stats_modifiers_dictionaries: Dictionary[EntityStats.StatType, StatModifier
 
 # ============================== Node base functions ==============================
 
-func _init(base_stats: EntityStats, current_stats: EntityStats) -> void:
+func _init(_base_stats: EntityStats, current_stats: EntityStats) -> void:
 	# Mono pure (single)
 	_stats_modifiers_dictionaries[EntityStats.StatType.HEALTH_MAX] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.MANA_MAX] = StatModifierDictionary.new()
@@ -152,7 +152,7 @@ func _init(base_stats: EntityStats, current_stats: EntityStats) -> void:
 	_stats_modifiers_dictionaries[EntityStats.StatType.M_RESISTANCE] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.M_EXPOSURE] = StatModifierDictionary.new()
 
-	_entity_base_stats = base_stats
+	_entity_base_stats = _base_stats
 	_entity_stats = current_stats
 	_entity_stats.auto_attack_type = _entity_base_stats.auto_attack_type
 	_entity_base_stats.has_been_reset.connect(_on_entity_base_stats_has_been_reset)
