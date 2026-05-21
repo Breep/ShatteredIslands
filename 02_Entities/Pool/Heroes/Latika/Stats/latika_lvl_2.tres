@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="HeroStats" format=3 uid="uid://clatikastat02"]
 
-[ext_resource type="Script" uid="uid://2py6kv5aqgem" path="res://02_Entities/Heroes/_Shared/hero_stats.gd" id="1_lat02"]
+[ext_resource type="Script" uid="uid://2py6kv5aqgem" path="res://02_Entities/_Shared/hero_stats.gd" id="1_lat02"]
 
 [resource]
 script = ExtResource("1_lat02")

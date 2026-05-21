@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://bdl1xxjdbeugn"]
-
-[ext_resource type="Script" uid="uid://cv1otgcauuycd" path="res://02_Entities/Heroes/_Shared/FamiliesManagers/Light/light_manager.gd" id="1_mwu4l"]
-
-[node name="LightManager" type="Node" unique_id=2039587781]
-script = ExtResource("1_mwu4l")

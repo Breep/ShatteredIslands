@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://bffuy78iqihm"]
-
-[ext_resource type="Script" uid="uid://bp6ns4ceo0rk2" path="res://02_Entities/Heroes/_Shared/FamiliesManagers/ChickenLord/chicken_lord_manager.gd" id="1_ynw40"]
-
-[node name="ChickenLordManager" type="Node" unique_id=1386102873]
-script = ExtResource("1_ynw40")

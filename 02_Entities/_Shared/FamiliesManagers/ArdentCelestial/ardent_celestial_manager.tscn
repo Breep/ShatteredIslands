@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cl10r3idwllx"]
+
+[ext_resource type="Script" uid="uid://dbfgvogc3l74u" path="res://02_Entities/_Shared/FamiliesManagers/ArdentCelestial/ardent_celestial_manager.gd" id="1_vkse5"]
+
+[node name="ArdentCelestialManager" type="Node" unique_id=1110398989]
+script = ExtResource("1_vkse5")

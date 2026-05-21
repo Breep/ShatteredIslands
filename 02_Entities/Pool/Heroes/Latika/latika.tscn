@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://40jvxogaqt0t" path="res://02_Entities/_Data/Goblins/Attachments/sm_chr_attach_helmet_01.tscn" id="3_o3eb1"]
 [ext_resource type="Script" uid="uid://cnwr3o67xobtt" path="res://02_Entities/_Shared/Components/Animation/entity_animation_player.gd" id="4_1nbts"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://b8n4k3u6g1igd" path="res://02_Entities/Pool/Heroes/Latika/latika_animation_blend_tree.tres" id="5_n3ceh"]
-[ext_resource type="PackedScene" uid="uid://cpqtocfge7ott" path="res://02_Entities/Heroes/_Shared/HeroAnimationModule/hero_animation_module.tscn" id="6_n3ceh"]
+[ext_resource type="PackedScene" uid="uid://cpqtocfge7ott" path="res://02_Entities/_Shared/HeroAnimationModule/hero_animation_module.tscn" id="6_n3ceh"]
 [ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/EntityInfoPanel/HeroSimpleInfoPanel2D/hero_simple_info_panel_2d.tscn" id="7_n3ceh"]
 [ext_resource type="Script" uid="uid://4sipyh3feaa0" path="res://02_Entities/Pool/Heroes/Latika/latika_animation_module.gd" id="8_up7xi"]
 

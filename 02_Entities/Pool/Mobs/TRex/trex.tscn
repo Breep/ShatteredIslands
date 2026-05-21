@@ -1,0 +1,118 @@
+[gd_scene format=3 uid="uid://ds0phwn8k1xb6"]
+
+[ext_resource type="Script" uid="uid://cgcrhaeq84p8u" path="res://02_Entities/Pool/Mobs/TRex/trex.gd" id="1_8gq8b"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="2_pdas5"]
+[ext_resource type="PackedScene" uid="uid://b3rf30m650nx6" path="res://02_Entities/Pool/Mobs/TRex/trex_visual.tscn" id="2_y4jfh"]
+[ext_resource type="Script" uid="uid://cnwr3o67xobtt" path="res://02_Entities/_Shared/Components/Animation/entity_animation_player.gd" id="4_vpc07"]
+[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/EntityInfoPanel/SummonSimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="5_qsrpw"]
+[ext_resource type="Script" uid="uid://cgpj2rq8aj7p1" path="res://02_Entities/Pool/Mobs/TRex/trex_animation_module.gd" id="6_4nond"]
+[ext_resource type="AnimationNodeBlendTree" uid="uid://cx3s7nv5p1v5c" path="res://02_Entities/Pool/Mobs/TRex/trex_blendtree.tres" id="6_qsrpw"]
+
+[sub_resource type="Resource" id="Resource_4nond"]
+script = ExtResource("2_pdas5")
+health_max = 1200.0
+auto_attack_type = 1
+attack_range = 2.0
+attack_damage = 100.0
+attack_speed = 1.5
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_y4jfh"]
+radius = 0.82714844
+height = 4.611328
+
+[node name="Trex" type="CharacterBody3D" unique_id=250114565 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_health_bar", "custom_animation_component")]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("1_8gq8b")
+entity_name = "TREX"
+custom_base_stats = SubResource("Resource_4nond")
+_visual_3d = NodePath("TRexVisual")
+_health_bar_marker = NodePath("TRexVisual/HealthBarSpawnMarker")
+_health_bar = NodePath("TRexVisual/SumonSimpleInfoPanel2d")
+custom_animation_component = NodePath("ChickenAnimationComponent")
+metadata/_custom_type_script = "uid://cjfj1jcbiom2x"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1512307782]
+transform = Transform3D(1, 0, 0, 0, -0.013229267, 0.9999125, 0, -0.9999125, -0.013229267, 0, 1.6971246, 0.3173551)
+shape = SubResource("CapsuleShape3D_y4jfh")
+
+[node name="TRexVisual" parent="." unique_id=467940093 instance=ExtResource("2_y4jfh")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="Skeleton3D" parent="TRexVisual/metarig" parent_id_path=PackedInt32Array(467940093, 1771969824) index="7" unique_id=646574223]
+bones/1/rotation = Quaternion(0.9787774, 0.01899442, -0.0025808725, 0.20402777)
+bones/2/rotation = Quaternion(0.029988045, -0.0007815821, 0.019199084, 0.99936557)
+bones/3/rotation = Quaternion(0.058581077, -0.0025822148, 0.006943459, 0.99825525)
+bones/5/rotation = Quaternion(0.32239878, -0.014112125, 0.00979885, 0.946448)
+bones/7/rotation = Quaternion(0.19305545, 4.6788503e-07, 2.3014329e-07, 0.9811878)
+bones/8/rotation = Quaternion(-0.15416177, 0.0005644378, 0.0022337993, 0.98804295)
+bones/9/rotation = Quaternion(0.08724849, -0.0008367978, -0.0025781393, 0.9961829)
+bones/10/rotation = Quaternion(-0.062986135, 0.00039972525, 0.00026630083, 0.9980144)
+bones/13/rotation = Quaternion(0.20554751, 4.8003512e-05, 1.0473917e-05, 0.9786471)
+bones/15/rotation = Quaternion(-0.07719126, -2.4157203e-09, -7.719477e-06, 0.9970163)
+bones/18/rotation = Quaternion(0.1626906, 0.035676345, -0.42937467, 0.8876353)
+bones/19/rotation = Quaternion(0.24501586, 0.05231873, 0.37218413, 0.8937052)
+bones/20/rotation = Quaternion(0.21360324, 0.676629, 0.5181087, -0.47760883)
+bones/30/rotation = Quaternion(-0.093217805, -0.06871181, 0.23295248, 0.96556836)
+bones/31/rotation = Quaternion(0.2014374, 0.050759953, -0.14452294, 0.96745)
+bones/34/rotation = Quaternion(-0.03256818, -0.043242592, 0.198757, 0.9785525)
+bones/37/rotation = Quaternion(-0.058772806, 0.01199567, -0.0063456236, 0.99817914)
+bones/47/rotation = Quaternion(0.20143737, -0.05075983, 0.14452286, 0.96745)
+bones/50/rotation = Quaternion(-0.032568064, 0.04324253, -0.19875696, 0.9785525)
+bones/53/rotation = Quaternion(-0.058772814, -0.011995777, 0.00634561, 0.99817914)
+bones/57/position = Vector3(0.40365696, 0.88167924, 0.97321147)
+bones/58/rotation = Quaternion(-0.65376234, -0.020482048, 0.0894803, 0.75111157)
+bones/61/rotation = Quaternion(-0.050440576, 0.9750435, -0.21434158, -0.028349215)
+bones/72/position = Vector3(-0.40825206, 0.874959, 0.97739357)
+bones/73/rotation = Quaternion(-0.65376234, 0.020482285, -0.089480124, 0.75111157)
+bones/74/rotation = Quaternion(-0.44354424, -0.09051922, -0.0685958, 0.88902724)
+bones/88/position = Vector3(0.4224894, -0.035649896, -0.15583143)
+
+[node name="AnimationPlayer" parent="TRexVisual" index="1" unique_id=1777708886]
+script = ExtResource("4_vpc07")
+
+[node name="HealthBarSpawnMarker" type="Marker3D" parent="TRexVisual" unique_id=669509855]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.3348916, 0)
+
+[node name="SumonSimpleInfoPanel2d" parent="TRexVisual" unique_id=1628734826 node_paths=PackedStringArray("_owner_entity", "_info_panel_spawn") instance=ExtResource("5_qsrpw")]
+_owner_entity = NodePath("../..")
+_info_panel_spawn = NodePath("../HealthBarSpawnMarker")
+
+[node name="ChickenAnimationComponent" type="Node" parent="." unique_id=1419274931 node_paths=PackedStringArray("_feather_particles", "_animation_tree", "_animation_player", "_entity_owner")]
+script = ExtResource("6_4nond")
+_feather_particles = NodePath("../TRexVisual/GPUParticles3D")
+_animation_tree = NodePath("../AnimationTree")
+_animation_player = NodePath("../TRexVisual/AnimationPlayer")
+_entity_owner = NodePath("..")
+metadata/_custom_type_script = "uid://dbu0yi2foobod"
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1842593852]
+root_node = NodePath("../TRexVisual")
+tree_root = ExtResource("6_qsrpw")
+anim_player = NodePath("../TRexVisual/AnimationPlayer")
+parameters/transition_fighting/current_state = "Idle"
+parameters/transition_fighting/transition_request = ""
+parameters/transition_fighting/current_index = 0
+parameters/scale_dance/scale = 1.0
+parameters/scale_die/scale = 1.0
+parameters/scale_idle/scale = 1.0
+parameters/one_shot_attack/active = false
+parameters/one_shot_attack/internal_active = false
+parameters/one_shot_attack/request = 0
+parameters/scale_run/scale = 1.5
+parameters/one_shot_ultimate/active = false
+parameters/one_shot_ultimate/internal_active = false
+parameters/one_shot_ultimate/request = 0
+parameters/scale_attack/scale = 1.5
+parameters/scale_walk/scale = 1.5
+parameters/scale_ultimate/scale = 2.5
+parameters/scale_idle_var/scale = 1.0
+parameters/transition_global/current_state = "Fighting"
+parameters/transition_global/transition_request = ""
+parameters/transition_global/current_index = 1
+parameters/one_shot_idle/active = false
+parameters/one_shot_idle/internal_active = false
+parameters/one_shot_idle/request = 0
+
+[editable path="TRexVisual"]

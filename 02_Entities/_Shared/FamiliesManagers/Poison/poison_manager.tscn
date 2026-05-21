@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cvihi4los882b"]
+
+[ext_resource type="Script" uid="uid://b52v7m3liy1d1" path="res://02_Entities/_Shared/FamiliesManagers/Poison/poison_manager.gd" id="1_ueowk"]
+
+[node name="PoisonManager" type="Node"]
+script = ExtResource("1_ueowk")

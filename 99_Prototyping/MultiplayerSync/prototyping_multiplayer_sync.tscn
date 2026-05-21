@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bbao0icvwulgm" path="res://99_Prototyping/MultiplayerSync/prototyping_multiplayer_sync.gd" id="1_proto"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="2_ppaad"]
-[ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://02_Entities/Heroes/_Shared/hero_desc.gd" id="3_hdesc"]
+[ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://02_Entities/_Shared/hero_desc.gd" id="3_hdesc"]
 [ext_resource type="Resource" uid="uid://dvpdubk0btegx" path="res://01_Cards/Descriptions/Cards/Poison/Common/PoisonFlask/poison_poison_flask.tres" id="3_yt7r3"]
 [ext_resource type="Resource" uid="uid://bkksjgh6p542o" path="res://02_Entities/Pool/Heroes/DarkKnight/dark_knight.tres" id="4_dk"]
 [ext_resource type="PackedScene" uid="uid://drcuyohos0doa" path="res://06_FloatingIsland/FightingIsland/fighting_island.tscn" id="6_island"]

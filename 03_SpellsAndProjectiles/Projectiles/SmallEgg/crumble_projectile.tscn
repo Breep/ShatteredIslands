@@ -1,9 +1,9 @@
 [gd_scene format=4 uid="uid://dkgiwc2fcyp3y"]
 
-[ext_resource type="Script" uid="uid://d160hb7nabwgw" path="res://02_Entities/Summons/ChickenLord/ChickenEgg/Data/eggfull.gd" id="1_r7ui6"]
-[ext_resource type="Texture2D" uid="uid://cu4bpb7iwo1ed" path="res://02_Entities/Summons/ChickenLord/ChickenEgg/Data/eggfull_0.png" id="2_7efrt"]
-[ext_resource type="Texture2D" uid="uid://bbtcmf6p3nai1" path="res://02_Entities/Summons/ChickenLord/ChickenEgg/Data/eggfull_1.png" id="3_lshgb"]
-[ext_resource type="Texture2D" uid="uid://nt1swv7ep7rx" path="res://02_Entities/Summons/ChickenLord/ChickenEgg/Data/eggfull_2.png" id="4_pqukj"]
+[ext_resource type="Script" uid="uid://d160hb7nabwgw" path="res://02_Entities/Pool/Mobs/ChickenEgg/Data/eggfull.gd" id="1_r7ui6"]
+[ext_resource type="Texture2D" uid="uid://cu4bpb7iwo1ed" path="res://02_Entities/Pool/Mobs/ChickenEgg/Data/eggfull_0.png" id="2_7efrt"]
+[ext_resource type="Texture2D" uid="uid://bbtcmf6p3nai1" path="res://02_Entities/Pool/Mobs/ChickenEgg/Data/eggfull_1.png" id="3_lshgb"]
+[ext_resource type="Texture2D" uid="uid://nt1swv7ep7rx" path="res://02_Entities/Pool/Mobs/ChickenEgg/Data/eggfull_2.png" id="4_pqukj"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fcxqv"]
 resource_name = "Material.001"

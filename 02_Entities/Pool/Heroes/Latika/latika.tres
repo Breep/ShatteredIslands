@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="HeroDesc" format=3 uid="uid://bk82bwfa6jg5a"]
 
-[ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://02_Entities/Heroes/_Shared/hero_desc.gd" id="1_desc"]
-[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/Heroes/_Shared/skill.gd" id="2_ahexl"]
-[ext_resource type="Script" uid="uid://2py6kv5aqgem" path="res://02_Entities/Heroes/_Shared/hero_stats.gd" id="2_stats"]
+[ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://02_Entities/_Shared/hero_desc.gd" id="1_desc"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/skill.gd" id="2_ahexl"]
+[ext_resource type="Script" uid="uid://2py6kv5aqgem" path="res://02_Entities/_Shared/hero_stats.gd" id="2_stats"]
 [ext_resource type="Resource" uid="uid://clatikastat01" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_1.tres" id="3_l01"]
 [ext_resource type="Resource" uid="uid://clatikastat02" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_2.tres" id="4_l02"]
 [ext_resource type="Resource" uid="uid://clatikastat03" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_3.tres" id="5_l03"]
