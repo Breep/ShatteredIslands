@@ -13,8 +13,8 @@ var _entities: Dictionary[int, Entity] # Key=Entity id, Value=Entity ref
 var entities: Dictionary[int, Entity]:
 	get: return _entities
 
-var _heroes: Dictionary[int, Hero] # Key=Entity id, Value=Hero ref
-var heroes: Dictionary[int, Hero]:
+var _heroes: Dictionary[int, Entity] # Key=Entity id, Value=hero Entity ref
+var heroes: Dictionary[int, Entity]:
 	get: return _heroes
 
 var _is_active: bool = false

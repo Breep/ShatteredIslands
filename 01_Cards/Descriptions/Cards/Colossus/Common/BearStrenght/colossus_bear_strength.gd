@@ -33,7 +33,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		_update_ad_modifier(ctx.hero.stats.scale, hp_max, ctx.hero)
 	)
 
-func _update_ad_modifier(scale: float, hp_max: float, hero: Hero) -> void:
+func _update_ad_modifier(scale: float, hp_max: float, hero: Entity) -> void:
 	var ad_mod := StatModifier.new()
 	ad_mod.id = &"Bear Strength"
 	ad_mod.stat_type = EntityStats.StatType.AD

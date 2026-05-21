@@ -14,13 +14,8 @@ var _card_context: CardContext
 #region ============================== Public functions ==============================
 # Crée le CardContext (indépendant du deck — peut être appelé sans deck dispo).
 func setup() -> void:
-	var hero := _owner as Hero
-	if hero == null:
-		Verbose.error("DeckHolder: _owner is not a Hero, can't create CardContext", Verbose.Category.HERO)
-		return
-
 	_card_context = CardContext.create(
-		hero,
+		_owner,
 		_owner.stat_modifiers_registry,
 		_owner.action_modifiers_registry,
 		_owner.auto_attack_modifier_registry,

@@ -9,7 +9,7 @@ func _ready() -> void:
 
 func _on_events_entity_clicked(entity: Entity) -> void:
 	if not entity.is_hero(): return
-	var hero: Hero = entity
+	var hero: Entity = entity
 	if hero.player != null:
 		_player_name_label.text = hero.player.player_name
 	else:

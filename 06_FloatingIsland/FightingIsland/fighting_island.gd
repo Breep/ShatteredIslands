@@ -20,7 +20,7 @@ var _player_owner_id: int = -1
 
 # ============================== private variables ==============================
 
-var _current_heroes: Array[Hero]
+var _current_heroes: Array[Entity]
 var _is_active: bool = false
 
 # ============================== Node base functions ==============================
@@ -64,7 +64,7 @@ func _force_local_player_camera_on_island() -> void:
 	var local_player: Player = PlayerManager.get_local_player()
 	if local_player == null: return
 
-	for hero: Hero in _current_heroes:
+	for hero: Entity in _current_heroes:
 		if hero.entity_name == local_player.player_name: # TODO rework cette mosntruosité
 			Shared.scene_switcher.set_island_active_only(self)
 			break

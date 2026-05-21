@@ -26,9 +26,9 @@ func spawn_into(parent: Node, ctx: EntityContext = null) -> Node:
 	if display_label != "":
 		node.name = display_label
 
-	var hero: Hero = node as Hero
+	var hero: Entity = node as Entity
 	if hero == null:
-		Verbose.error("HeroSpec.spawn_into: scene n'est pas un Hero, abort", Verbose.Category.ENCOUNTER_RUNNER)
+		Verbose.error("HeroSpec.spawn_into: scene n'est pas une Entity, abort", Verbose.Category.ENCOUNTER_RUNNER)
 		node.queue_free()
 		return null
 

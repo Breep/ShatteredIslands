@@ -3,7 +3,7 @@
 # (pression coordonnée via loups acolytes et marquage de cible).
 @tool
 class_name Latika
-extends Hero
+extends Entity
 
 #region ============================== Signals ==============================
 signal mark_target_changed(new_target: Entity)

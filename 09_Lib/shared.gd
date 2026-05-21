@@ -1,20 +1,13 @@
 extends Node
 
 var HEROES: Dictionary[HeroDesc.HeroId, HeroDesc] = {
-	HeroDesc.HeroId.UNDEF: load("res://02_Entities/Heroes/Undef/undef.tres"),
-	HeroDesc.HeroId.DARK_KNIGHT: load("res://02_Entities/Heroes/DarkKnight/dark_knight.tres"),
-	HeroDesc.HeroId.TANK: load("res://02_Entities/Heroes/Tank/tank.tres"),
-	HeroDesc.HeroId.ASSASSIN: load("res://02_Entities/Heroes/Assassin/assassin.tres"),
-	HeroDesc.HeroId.MAGE: load("res://02_Entities/Heroes/Mage/mage.tres"),
+	HeroDesc.HeroId.DARK_KNIGHT: load("res://02_Entities/Pool/Heroes/DarkKnight/dark_knight.tres"),
+	HeroDesc.HeroId.LATIKA: load("res://02_Entities/Pool/Heroes/Latika/latika.tres"),
 }
 
 var HERO_SCENES: Dictionary[HeroDesc.HeroId, PackedScene] = {
-	HeroDesc.HeroId.UNDEF: load("res://02_Entities/Heroes/Undef/undef.tscn"),
-	HeroDesc.HeroId.DARK_KNIGHT: load("res://02_Entities/Heroes/DarkKnight/dark_knight.tscn"),
-	HeroDesc.HeroId.TANK: load("res://02_Entities/Heroes/Tank/tank.tscn"),
-	HeroDesc.HeroId.ASSASSIN: load("res://02_Entities/Heroes/Assassin/assassin.tscn"),
-	HeroDesc.HeroId.MAGE: load("res://02_Entities/Heroes/Mage/mage.tscn"),
-	HeroDesc.HeroId.LATIKA: load("res://02_Entities/Heroes/Latika/latika.tscn")
+	HeroDesc.HeroId.DARK_KNIGHT: load("res://02_Entities/Pool/Heroes/DarkKnight/dark_knight.tscn"),
+	HeroDesc.HeroId.LATIKA: load("res://02_Entities/Pool/Heroes/Latika/latika.tscn")
 }
 
 var FAMILIES: Dictionary[Family.Type, Family] = {

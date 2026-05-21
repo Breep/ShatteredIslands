@@ -24,7 +24,7 @@ const INACTIVE_MODULATE := Color(1, 1, 1, 0.478)
 
 
 #region ============================== Public API ==============================
-func set_hero(hero: Hero) -> void:
+func set_hero(hero: Entity) -> void:
 	var families_level := hero.get_families_level()
 	var level: int = families_level.get(Family.Type.COLOSSUS, 0)
 
@@ -62,7 +62,7 @@ func _update_values() -> void:
 
 #region ============================== Defense ==============================
 ## Met à jour le bonus de défense actuel basé sur le scale du héro.
-func _update_defense(hero: Hero) -> void:
+func _update_defense(hero: Entity) -> void:
 	var current_scale: float = hero.stats.scale if hero.stats else 1.0
 	var defense_bonus: float = (current_scale - 1.0) * 100.0
 	_defense_value.text = _val(defense_bonus)

@@ -15,7 +15,7 @@ const DESC_PANELS: Dictionary = {
 var _current_display_mode: UICardsViewer.DisplayMode = UICardsViewer.DisplayMode.UNLOCKED_ONLY
 var _player: Player
 var _family: Family
-var _hero: Hero
+var _hero: Entity
 var _current_desc_panel: Control = null
 
 #region ============================== Public API ==============================

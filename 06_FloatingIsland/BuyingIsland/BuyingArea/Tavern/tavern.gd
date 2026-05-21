@@ -66,7 +66,7 @@ func _clear_children(node: Node) -> void:
 
 func _build_tavern_ctx() -> EntityContext:
 	var ctx := EntityContext.new()
-	ctx.display_mode = Hero.DisplayMode.BUYING_PHASE
+	ctx.display_mode = Entity.DisplayMode.BUYING_PHASE
 	ctx.runtime_owner_player = PlayerManager.get_local_player()
 	# pas de spawn_manager : la tavern n'a pas de tick system, le fallback
 	# add_child d'EntitySpec.spawn_into / HeroSpec.spawn_into est utilisé.

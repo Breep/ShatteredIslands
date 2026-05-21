@@ -1,7 +1,7 @@
 class_name FamilyManager
 extends Node
 
-var _owner: Hero # Ref to Hero owner
+var _owner: Entity # Ref to owner entity
 var level: int = 0 # Family level (0-4), computed from deck or overridden via prototyping
 
 func _ready() -> void:
@@ -10,8 +10,8 @@ func _ready() -> void:
 		queue_free()
 
 
-func init(hero_owner: Hero) -> FamilyManager:
-	_owner = hero_owner
+func init(entity_owner: Entity) -> FamilyManager:
+	_owner = entity_owner
 	return self
 
 

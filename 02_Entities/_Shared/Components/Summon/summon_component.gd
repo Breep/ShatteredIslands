@@ -4,27 +4,26 @@ extends EntityComponent
 var _spawn_manager: SpawnManager
 var _arena_zone_manager: ArenaZoneManager
 
-const SNAKE_BARREL_SCENE: PackedScene = preload("res://02_Entities/Summons/Poison/SnakeBarrel/snake_barrel.tscn")
-const SNAKE_SCENE: PackedScene = preload("res://02_Entities/Summons/Poison/Snake/snake.tscn")
-const FIELD_GENERATOR_SCENE: PackedScene = preload("res://02_Entities/Summons/Engineer/FieldGenerator/field_generator.tscn")
+const SNAKE_BARREL_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/SnakeBarrel/snake_barrel.tscn")
+const SNAKE_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/Snake/snake.tscn")
 
-const CHICKEN_BASIC_SCENE: PackedScene = preload("res://02_Entities/Summons/ChickenLord/Chicken/Basic/chicken_basic.tscn")
-const CHICKEN_ATTACK_SCENE: PackedScene = preload("res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenAttack/chicken_attack.tscn")
-const CHICKEN_POISON_SCENE: PackedScene = preload("res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenPoison/chicken_poison.tscn")
-const CHICKEN_COLOSSUS_SCENE: PackedScene = preload('res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenColossus/chicken_colossus.tscn')
-const CHICKEN_LIGHT_SCENE: PackedScene = preload('res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenLight/chicken_light.tscn')
-const CHICKEN_ENGINEER_SCENE: PackedScene = preload('res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenEngineer/chicken_engineer.tscn')
-const CHICKEN_ARDENT_CELESTIAL_SCENE: PackedScene = preload('res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenArdentCelestial/chicken_ardent_celestial.tscn')
-const CHICKEN_STORM_CALLER: PackedScene = preload('res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenStormCaller/chicken_storm_caller.tscn')
+const CHICKEN_BASIC_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/Chickens/Basic/chicken_basic.tscn")
+const CHICKEN_ATTACK_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/Chickens/Gifted//ChickenAttack/chicken_attack.tscn")
+const CHICKEN_POISON_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/Chickens/Gifted//ChickenPoison/chicken_poison.tscn")
+const CHICKEN_COLOSSUS_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/Chickens/Gifted//ChickenColossus/chicken_colossus.tscn")
+const CHICKEN_LIGHT_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/Chickens/Gifted//ChickenLight/chicken_light.tscn")
+const CHICKEN_ENGINEER_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/Chickens/Gifted//ChickenEngineer/chicken_engineer.tscn")
+const CHICKEN_ARDENT_CELESTIAL_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/chicken_ardent_celestial.tscn")
+const CHICKEN_STORM_CALLER: PackedScene = preload("res://02_Entities/Pool/Mobs/Chickens/Gifted//ChickenStormCaller/chicken_storm_caller.tscn")
 
-const PROTO_SHIELD_SCENE: PackedScene = preload("res://02_Entities/Summons/Engineer/ProtoShield/proto_shield.tscn")
-const FORTIFICATION_DRONE_SCENE: PackedScene = preload("res://02_Entities/Summons/Engineer/FortificationDrone/fortification_drone.tscn")
-const AEGIS_BLADE_SCENE: PackedScene = preload("res://02_Entities/Summons/Engineer/AegisBlade/aegis_blade.tscn")
-const DEFLECTION_SHIELD: PackedScene = preload("res://02_Entities/Summons/Engineer/DeflectionShield/deflection_shield.tscn")
-const GAMMA_TURRET: PackedScene = preload("res://02_Entities/Summons/Engineer/GammaTurret/gamma_turret.tscn")
+const PROTO_SHIELD_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/ProtoShield/proto_shield.tscn")
+const FORTIFICATION_DRONE_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/FortificationDrone/fortification_drone.tscn")
+const AEGIS_BLADE_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/AegisBlade/aegis_blade.tscn")
+const DEFLECTION_SHIELD: PackedScene = preload("res://02_Entities/Pool/Mobs/DeflectionShield/deflection_shield.tscn")
+const GAMMA_TURRET: PackedScene = preload("res://02_Entities/Pool/Mobs/GammaTurret/gamma_turret.tscn")
 
-const TREX_SCENE: PackedScene = preload("res://02_Entities/Summons/ChickenLord/TRex/trex.tscn")
-const CHICKEN_EGG_SCENE: PackedScene = preload("res://02_Entities/Summons/ChickenLord/ChickenEgg/chicken_egg.tscn")
+const TREX_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/TRex/trex.tscn")
+const CHICKEN_EGG_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/ChickenEgg/chicken_egg.tscn")
 
 # ============================== Public functions ==============================
 
@@ -66,7 +65,6 @@ func summon_entity(entity_type: Entity.EntityType, spawn_config: SpawnLocationCo
 	match entity_type:
 		Entity.EntityType.SNAKE_BARREL: _summon_snake_barrel(spawn_position, entity_modifier)
 		Entity.EntityType.SNAKE: _summon_snake(spawn_position, entity_modifier)
-		Entity.EntityType.FIELD_GENERATOR: _summon_field_generator(spawn_position, entity_modifier)
 		Entity.EntityType.CHICKEN: _summon_chicken(spawn_position, entity_modifier)
 		Entity.EntityType.PROTO_SHIELD: _summon_proto_shield(spawn_position, entity_modifier)
 		Entity.EntityType.FORTIFICATION_DRONE: _summon_fortification_drone(spawn_position, entity_modifier)
@@ -95,17 +93,6 @@ func _summon_snake_barrel(spawn_position: Vector3, entity_modifier: Dictionary) 
 func _summon_snake(spawn_position: Vector3, _entity_modifier: Dictionary) -> void:
 	var snake: Snake = SNAKE_SCENE.instantiate()
 	_spawn_manager.spawn_entity(snake, Transform3D(Basis(), spawn_position), _owner.get_context(), Entity.EntityType.SNAKE)
-
-
-func _summon_field_generator(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
-	var field_generator: FieldGenerator = FIELD_GENERATOR_SCENE.instantiate()
-	var max_health: int = entity_modifier.get(FieldGenerator.Modifier.MAX_HEALTH, 1)
-	var shield_amount: int = entity_modifier.get(FieldGenerator.Modifier.SHIELD_AMOUNT, 100)
-	var shield_interval: float = entity_modifier.get(FieldGenerator.Modifier.SHIELD_INTERVAL, 1.0)
-	var initial_shield: int = entity_modifier.get(FieldGenerator.Modifier.INITIAL_SHIELD, 150)
-	var target_count: int = entity_modifier.get(FieldGenerator.Modifier.TARGET_COUNT, 2)
-	field_generator.init(max_health, shield_amount, shield_interval, initial_shield, target_count)
-	_spawn_manager.spawn_entity(field_generator, Transform3D(Basis(), spawn_position), _owner.get_context(), Entity.EntityType.FIELD_GENERATOR)
 
 
 func _summon_chicken(spawn_position: Vector3, entity_modifier: Dictionary) -> void:

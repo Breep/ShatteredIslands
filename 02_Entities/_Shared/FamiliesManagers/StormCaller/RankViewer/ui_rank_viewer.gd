@@ -31,7 +31,7 @@ const RANK_ASSETS = {
 	}
 }
 
-var _owner_hero: Hero
+var _owner_hero: Entity
 var _pulse_tween: Tween
 var _rank_gradients: Dictionary = {}
 
@@ -51,7 +51,7 @@ func connect_entity(entity: Entity) -> void:
 		hide()
 		return
 	
-	var new_hero: Hero = entity as Hero
+	var new_hero: Entity = entity
 	if _owner_hero != null and _owner_hero.get_rank_changed_signal().is_connected(_on_rank_changed):
 		_owner_hero.get_rank_changed_signal().disconnect(_on_rank_changed)
 	

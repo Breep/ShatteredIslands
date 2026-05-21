@@ -64,18 +64,18 @@ func _build_alterations() -> void:
 	_register(StrengthAlteration.new())
 	_register(WeaknessAlteration.new())
 	_register(VulnerabilityAlteration.new())
-
+	
 	# Timed alterations
 	_register(StunAlteration.new())
 	_register(TauntAlteration.new())
 	_register(SilenceAlteration.new())
 	_register(InvulnerableAlteration.new())
 	_register(UntargetableAlteration.new())
-
+	
 	shield_alteration = _alterations[Alteration.Type.SHIELD]
 	block_alteration = _alterations[Alteration.Type.BLOCK]
 	thorn_alteration = _alterations[Alteration.Type.THORN]
-
+	
 	_wire_ui_signals()
 
 

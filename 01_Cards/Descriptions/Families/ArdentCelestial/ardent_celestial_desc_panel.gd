@@ -29,7 +29,7 @@ var _additional_effect_nodes: Array[Node] = []
 
 #region ============================== Public API ==============================
 ## Point d'entrée principal : passe un Hero pour adapter tout le panneau.
-func set_hero(hero: Hero) -> void:
+func set_hero(hero: Entity) -> void:
 	var families_level := hero.get_families_level()
 	var level: int = families_level.get(Family.Type.ARDENT_CELESTIAL, 0)
 	var stats: FamilyArdentCelestialStats = hero.families_stats.ardent_celestial
@@ -47,7 +47,7 @@ func _update_passive(level: int) -> void:
 
 
 #region ============================== Meteor Stats ==============================
-func _update_meteor_stats(hero: Hero, level: int, stats: FamilyArdentCelestialStats) -> void:
+func _update_meteor_stats(hero: Entity, level: int, stats: FamilyArdentCelestialStats) -> void:
 	_update_spawn_chance(level, stats)
 	_update_damage(level, stats)
 	_update_radius(stats)
@@ -79,7 +79,7 @@ func _clear_additional_effects() -> void:
 	_additional_effect_nodes.clear()
 
 
-func _populate_additional_effects(hero: Hero) -> void:
+func _populate_additional_effects(hero: Entity) -> void:
 	if hero.deck == null:
 		return
 	var cards := hero.deck.get_cards_by_type(Family.Type.ARDENT_CELESTIAL)

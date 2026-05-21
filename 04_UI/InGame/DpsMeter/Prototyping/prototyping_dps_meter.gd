@@ -8,7 +8,7 @@ const ACTION_NAMES: Array[String] = ["Auto Attack", "Spell 1", "Spell 2", "Ultim
 @export var _hero_selector: OptionButton
 @export var _status_label: Label
 
-var _heroes: Array[Hero]
+var _heroes: Array[Entity]
 var _players: Array[Player]
 
 
@@ -29,7 +29,7 @@ func _on_setup_button_pressed() -> void:
 		player.player_name = HERO_NAMES[i]
 		_players.append(player)
 
-		var hero := Hero.new()
+		var hero := Entity.new()
 		hero.entity_name = HERO_NAMES[i]
 		hero.player = player
 		hero.bds_registry = EntityBDSRegistry.new(hero)
@@ -46,7 +46,7 @@ func _on_setup_button_pressed() -> void:
 func _update_hero_selector() -> void:
 	_hero_selector.clear()
 	_hero_selector.add_item("-- None --")
-	for hero: Hero in _heroes:
+	for hero: Entity in _heroes:
 		_hero_selector.add_item(hero.entity_name)
 
 
@@ -62,16 +62,16 @@ func _on_hero_selector_item_selected(index: int) -> void:
 #region ============================== Random Actions ==============================
 func _on_add_random_action_button_pressed() -> void:
 	if _heroes.is_empty(): return
-	var hero: Hero = _heroes.pick_random()
+	var hero: Entity = _heroes.pick_random()
 	_register_random_action_on(hero)
 
 
 func _on_add_random_all_button_pressed() -> void:
-	for hero: Hero in _heroes:
+	for hero: Entity in _heroes:
 		_register_random_action_on(hero)
 
 
-func _register_random_action_on(hero: Hero) -> void:
+func _register_random_action_on(hero: Entity) -> void:
 	var action_id: StringName = StringName(ACTION_NAMES.pick_random())
 	var all_action_types: Array[Utils.ActionType] = [
 		Utils.ActionType.DAMAGE_PHYSICAL, Utils.ActionType.DAMAGE_MAGICAL,
@@ -97,7 +97,7 @@ func _on_reset_button_pressed() -> void:
 
 
 func _cleanup() -> void:
-	for hero: Hero in _heroes:
+	for hero: Entity in _heroes:
 		hero.free()
 	for player: Player in _players:
 		player.free()

@@ -1,5 +1,5 @@
 class_name DarkKnight
-extends Hero
+extends Entity
 
 #region ============================== Signals ==============================
 signal super_strike_charges_changed(current: int, max: int)

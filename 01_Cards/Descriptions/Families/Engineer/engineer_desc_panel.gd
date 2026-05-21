@@ -21,7 +21,7 @@ const INACTIVE_MODULATE := Color(1, 1, 1, 0.478)
 
 
 #region ============================== Public API ==============================
-func set_hero(hero: Hero) -> void:
+func set_hero(hero: Entity) -> void:
 	var families_level := hero.get_families_level()
 	var level: int = families_level.get(Family.Type.ENGINEER, 0)
 

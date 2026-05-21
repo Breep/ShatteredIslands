@@ -8,7 +8,7 @@ extends EntityComponent
 
 
 #region ============================== Public functions ==============================
-func apply(mode: Hero.DisplayMode) -> void:
+func apply(mode: Entity.DisplayMode) -> void:
 	if _owner == null:
 		return
 

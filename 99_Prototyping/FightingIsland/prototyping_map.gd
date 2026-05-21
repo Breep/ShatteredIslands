@@ -14,7 +14,7 @@ extends Node3D
 @export var _hero_descs: Array[HeroDesc]
 @export var _hero_teams: Array[int] = [0, 0, 0, 0, 1, 1, 1, 1] # Team assignment for each hero
 
-var _heroes: Array[Hero] = [] # Dynamically instantiated heroes
+var _heroes: Array[Entity] = [] # Dynamically instantiated heroes
 
 @export_group("Battle")
 @export var _floating_island: FightingIsland
@@ -71,7 +71,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event.is_action_pressed("hide_ui"):
 			_ui_proto.visible = not _ui_proto.visible
 		if event.is_action_pressed("hide_3d_ui"):
-			for hero: Hero in _heroes:
+			for hero: Entity in _heroes:
 				hero._entity_info_panel_3d.visible = not hero._entity_info_panel_3d.visible
 
 
@@ -83,7 +83,7 @@ func _instantiate_heroes() -> void:
 			continue
 		
 		# Instantiate hero with FIGHTING_PHASE display mode for prototyping
-		var hero: Hero = Shared.HERO_SCENES[hero_desc.id].instantiate().init(Hero.DisplayMode.FIGHTING_PHASE)
+		var hero: Entity = Shared.HERO_SCENES[hero_desc.id].instantiate().init_display(Entity.DisplayMode.FIGHTING_PHASE)
 		hero.entity_name = "Player" + str(i + 1)
 		
 		# Assign team (default to index-based if array is too small)

@@ -44,7 +44,7 @@ func _respawn_entites_with_spawn_manager() -> void:
 			child.queue_free()
 
 			# On passe par le SpawnManager pour obtenir un UID et l'ajouter aux listes de tick
-			var hero: Hero = Shared.HERO_SCENES[entity_data["hero_id"]].instantiate()
+			var hero: Entity = Shared.HERO_SCENES[entity_data["hero_id"]].instantiate()
 			hero.custom_base_stats = entity_data["custom_base_stats"]
 			hero._custom_deck = entity_data["custom_deck"]
 			hero.team = entity_data["team"]
@@ -53,7 +53,7 @@ func _respawn_entites_with_spawn_manager() -> void:
 			hero._override_family_levels = entity_data["family_level"]
 			_spawn_manager.spawn_entity(hero, entity_data["global_transform"], entity_data["context"])
 			_entities.append(hero)
-			hero.set_display_mode(Hero.DisplayMode.FIGHTING_PHASE)
+			hero.set_display_mode(Entity.DisplayMode.FIGHTING_PHASE)
 
 # ===== UI =====
 #region Global Commands

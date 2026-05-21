@@ -25,6 +25,7 @@ _lone_wolf_helmet = NodePath("LatikaVisual/GeneralSkeleton/FaceAttachment/SM_Chr
 _lone_wolf_shoulder = NodePath("LatikaVisual/GeneralSkeleton/SM_Chr_Attach_Shawl_01")
 _blood_bond_node = NodePath("LatikaVisual/GeneralSkeleton/FaceAttachment/SM_Chr_Attach_Wolf_01")
 hero_desc = ExtResource("2_3cb1a")
+category = 0
 entity_name = "Latika"
 _visual_3d = NodePath("LatikaVisual")
 _health_bar_marker = NodePath("LatikaVisual/HealthBarSpawnMarker")

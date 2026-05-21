@@ -20,15 +20,14 @@ var _family_managers: Dictionary[Family.Type, FamilyManager]
 
 #region ============================== Node base functions ==============================
 func _enter_tree() -> void:
-	var hero := _owner as Hero
-	if hero == null:
-		# Module chargé universellement mais dormant pour les non-Hero entities.
+	if not _owner.is_hero():
+		# Module chargé universellement mais dormant pour les non-hero entities.
 		return
 
 	families_stats = FamiliesStats.new()
 	for family_type: Family.Type in Shared.FAMILY_MANAGER_SCENES.keys():
 		var fm: FamilyManager = Shared.FAMILY_MANAGER_SCENES[family_type].instantiate() as FamilyManager
-		_family_managers[family_type] = fm.init(hero)
+		_family_managers[family_type] = fm.init(_owner)
 		add_child(fm)
 #endregion
 

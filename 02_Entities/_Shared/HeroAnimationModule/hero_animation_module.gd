@@ -16,34 +16,33 @@ func _ready() -> void:
 	super._ready() # Initialize parent first
 	
 	# Hero-specific connections
-	var hero := _entity_owner as Hero
-	if hero:
-		hero.fighting_state_changed.connect(_on_hero_fighting_state_changed)
-		hero.fight_is_won.connect(_on_hero_fight_is_won)
-		hero.fight_is_lost.connect(_on_hero_fight_is_lost)
+	if _entity_owner != null:
+		_entity_owner.fighting_state_changed.connect(_on_hero_fighting_state_changed)
+		_entity_owner.fight_is_won.connect(_on_hero_fight_is_won)
+		_entity_owner.fight_is_lost.connect(_on_hero_fight_is_lost)
 
 
 # Hero-specific display mode handling
-func apply_display_mode(display_mode: Hero.DisplayMode) -> void:
+func apply_display_mode(display_mode: Entity.DisplayMode) -> void:
 	match display_mode:
-		Hero.DisplayMode.BUYING_PHASE:
+		Entity.DisplayMode.BUYING_PHASE:
 			_animation_tree.set(PARAM_TRANSITION_GLOBAL, VALUE_TRANSITION_GLOBAL_SITTING)
 			_start_buying_area_animation()
 			_weapons_node.hide()
-		Hero.DisplayMode.FIGHTING_PHASE:
+		Entity.DisplayMode.FIGHTING_PHASE:
 			_animation_tree.set(PARAM_TRANSITION_GLOBAL, VALUE_TRANSITION_GLOBAL_FIGHTING)
 			_animation_tree.set(PARAM_TRANSITION_FIGHTING, VALUE_TRANSITION_FIGHTING_IDLE)
 			_weapons_node.show()
-		Hero.DisplayMode.PREVIEW:
+		Entity.DisplayMode.PREVIEW:
 			_animation_tree.set(PARAM_TRANSITION_GLOBAL, VALUE_TRANSITION_GLOBAL_TPOSE)
 			_weapons_node.hide()
 
 
-func _on_hero_fighting_state_changed(new_state: Hero.FightingState) -> void:
+func _on_hero_fighting_state_changed(new_state: Entity.FightingState) -> void:
 	match new_state:
-		Hero.FightingState.FIGHTING:
+		Entity.FightingState.FIGHTING:
 			_is_fighting = true
-		Hero.FightingState.CELEBRATING:
+		Entity.FightingState.CELEBRATING:
 			_is_fighting = false
 
 
@@ -53,9 +52,8 @@ func _start_buying_area_animation() -> void:
 
 
 func _resolve_aa_anim_max_speed_scale() -> float:
-	var hero := _entity_owner as Hero
-	if hero != null and hero.hero_desc != null:
-		return hero.hero_desc.aa_anim_max_speed_scale
+	if _entity_owner != null and _entity_owner.entity_desc != null:
+		return _entity_owner.entity_desc.aa_anim_max_speed_scale
 	return DEFAULT_AA_ANIM_MAX_SPEED_SCALE
 
 

@@ -22,29 +22,28 @@ func _ready() -> void:
 	if _mana_bar and _mana_bar.material:
 		_mana_bar.material = _mana_bar.material.duplicate()
 
-	var hero: Hero = _owner_entity as Hero
-	if hero == null:
+	if _owner_entity == null or not _owner_entity.is_hero():
 		return
 
-	var stats := hero.stats
+	var stats := _owner_entity.stats
 	_update_mana_bar(stats.mana, stats.mana_max)
 	stats.mana_changed.connect(_on_mana_changed)
 	stats.mana_max_changed.connect(_on_mana_max_changed)
 
-	if hero.player != null:
-		_player_name_label.text = hero.player.player_name
+	if _owner_entity.player != null:
+		_player_name_label.text = _owner_entity.player.player_name
 	else:
-		_player_name_label.text = hero.entity_name
+		_player_name_label.text = _owner_entity.entity_name
 #endregion
 
 
 #region ============================== Public API ==============================
-func apply_display_mode(display_mode: Hero.DisplayMode) -> void:
+func apply_display_mode(display_mode: Entity.DisplayMode) -> void:
 	match display_mode:
-		Hero.DisplayMode.BUYING_PHASE:
+		Entity.DisplayMode.BUYING_PHASE:
 			_current_spawn = _info_panel_spawn_tavern
 			_mana_bar.hide()
-		Hero.DisplayMode.FIGHTING_PHASE:
+		Entity.DisplayMode.FIGHTING_PHASE:
 			_current_spawn = _info_panel_spawn
 #endregion
 
@@ -68,9 +67,9 @@ func _update_mana_bar(mana: float, mana_max: float) -> void:
 
 #region ============================== Callbacks ==============================
 func _on_mana_changed(new_mana: float) -> void:
-	_update_mana_bar(new_mana, (_owner_entity as Hero).stats.mana_max)
+	_update_mana_bar(new_mana, _owner_entity.stats.mana_max)
 
 
 func _on_mana_max_changed(new_mana_max: float) -> void:
-	_update_mana_bar((_owner_entity as Hero).stats.mana, new_mana_max)
+	_update_mana_bar(_owner_entity.stats.mana, new_mana_max)
 #endregion

@@ -4,7 +4,7 @@ extends RefCounted
 ## Context object passed to HeroUpgrade.apply_card() — gives cards access to
 ## all registries they need without coupling directly to Hero internals.
 
-var hero: Hero
+var hero: Entity
 var stat_modifiers: EntityStatModifiersRegistry
 var action_modifiers: ActionModifiersRegistry
 var auto_attack_modifiers: AutoAttackModifierRegistry
@@ -13,7 +13,7 @@ var battle_callbacks: BattleCallbackRegistry
 
 
 static func create(
-		p_hero: Hero,
+		p_hero: Entity,
 		p_stat_modifiers: EntityStatModifiersRegistry,
 		p_action_modifiers: ActionModifiersRegistry,
 		p_auto_attack_modifiers: AutoAttackModifierRegistry,

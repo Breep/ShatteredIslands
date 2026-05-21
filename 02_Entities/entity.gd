@@ -29,6 +29,14 @@ signal auto_attack_completed()
 signal spell_casted(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary)
 signal spawn_completed()
 signal resurrected()
+
+# Émis par les archétypes hero (category == HERO).
+@warning_ignore("unused_signal")
+signal ultimate_casted()
+@warning_ignore("unused_signal")
+signal fight_is_won()
+@warning_ignore("unused_signal")
+signal fight_is_lost()
 #endregion
 
 #region ============================== Enums ==============================
@@ -74,6 +82,13 @@ enum Category {
 	ANTAGONIST,
 	BUILDING,
 	MOB
+}
+
+# Mode d'affichage des entités à interface (heroes) : bench tavern / combat / preview.
+enum DisplayMode {
+	BUYING_PHASE,
+	FIGHTING_PHASE,
+	PREVIEW
 }
 
 enum SnakeBarrelModifier {
@@ -132,6 +147,16 @@ var clickable: ClickableComponent
 
 # Origine / cycle de vie
 var summoner: Entity # Set via apply_context si l'entité a été invoquée par une autre
+
+# State d'archétype hero — significatif seulement pour category == HERO.
+var display_mode: DisplayMode = DisplayMode.PREVIEW
+var deck: PlayerDeck
+var data_memory: NestedRegistry
+var families_stats: FamiliesStats:
+	get:
+		if _family_module == null:
+			return null
+		return _family_module.families_stats
 #endregion
 
 #region ============================== Private variables ==============================
@@ -194,6 +219,16 @@ var fight_role: FightRole = FightRole.EXTRA
 # Les archétypes summon posent 5.0 dans leur `_init`. Héros et bâtiments persistants
 # restent à 0.
 @export var _despawn_timer: float = 0.0
+
+@export_group("Hero archetype")
+@export var hero_desc: HeroDesc
+@export var player: Player
+@export var family_managers_enabled: bool = true
+
+@export_subgroup("Prototyping")
+@export var _custom_deck: PlayerDeck
+@export var _override_family_levels: Dictionary[Family.Type, int] = {}
+@export var _custom_data_memory: Dictionary
 #endregion
 
 @onready var bds_registry := EntityBDSRegistry.new(self)
@@ -286,8 +321,15 @@ func _enter_tree() -> void:
 
 	_is_targetable = false # Prevent targeting during spawn
 
+	if is_hero() and data_memory == null:
+		data_memory = NestedRegistry.new()
+
 
 func _ready() -> void:
+	# Hero archetype setup — avant la connexion des signaux / le spawn.
+	if is_hero():
+		_hero_setup()
+
 	# Connect to status signals
 	if alterations != null:
 		alterations.stunned_changed.connect(_on_stunned_changed)
@@ -317,6 +359,10 @@ func _ready() -> void:
 	_connect_module_dependencies()
 
 	_start_spawn()
+
+	# Hero archetype : auto-sélection du héros local au spawn.
+	if is_hero() and player == PlayerManager.get_local_player():
+		Events.entity_clicked.emit(self)
 
 
 
@@ -427,14 +473,16 @@ func connect_to_fighting_area(fighting_area_ref: FightingArea) -> void:
 
 
 #region ============================== Misc ==============================
+# Défaut : émet le signal. Les archétypes hero (Latika, DarkKnight) overrident
+# pour leur logique d'ultime spécifique.
 func cast_ultimate() -> void:
-	printerr("Entity: cast_ultimate() called but not implemented [", get_path(), "]")
+	ultimate_casted.emit()
 
 
 # Hook appelé par FightingManager sur chaque entité vivante quand le combat se termine.
-# Override par Hero pour gérer son state post-combat. No-op pour les autres entités.
-func handle_end_of_fight(_is_winner: bool) -> void:
-	pass
+func handle_end_of_fight(is_winner: bool) -> void:
+	if is_winner: fight_is_won.emit()
+	else: fight_is_lost.emit()
 
 
 func resurrect(hp_percent: float) -> void:
@@ -455,6 +503,33 @@ func play_despawn_animation() -> void:
 		queue_free()
 		return
 	_despawn_module.play_despawn_animation()
+#endregion
+
+#region ============================== Hero archetype API ==============================
+# Set le display_mode et connecte la fighting area. Appelé en chaîne après
+# instantiate() par les call sites de prototyping.
+func init_display(hero_display_mode: DisplayMode = DisplayMode.PREVIEW, fighting_area_ref: FightingArea = null) -> Entity:
+	display_mode = hero_display_mode
+	if fighting_area_ref != null:
+		connect_to_fighting_area(fighting_area_ref)
+	return self
+
+
+func set_display_mode(mode: DisplayMode) -> void:
+	display_mode = mode
+	_apply_display_mode()
+
+
+func get_families_level() -> Dictionary[Family.Type, int]:
+	if _family_module == null:
+		return {}
+	return _family_module.get_families_level()
+
+
+func get_card_context() -> CardContext:
+	if _deck_holder == null:
+		return null
+	return _deck_holder.get_card_context()
 #endregion
 
 # ============================== Private functions ==============================
@@ -567,6 +642,18 @@ func _on_fighting_state_changed(new_fighting_state: FightingState) -> void:
 	Verbose.debug("Entity [" + entity_name + "] fighting state changed to [" + str(FightingState.keys()[new_fighting_state]) + "]", Verbose.Category.ENTITY)
 	_state_machine.transition_to(new_fighting_state)
 
+	# Family managers lifecycle (no-op si pas de managers — non-hero entities).
+	match new_fighting_state:
+		FightingState.IDLE:
+			_family_module.stop_all()
+		FightingState.FIGHTING:
+			if family_managers_enabled:
+				_family_module.start_all()
+		FightingState.CELEBRATING:
+			_family_module.stop_all()
+		FightingState.UNDEF:
+			pass
+
 
 func _on_stats_health_changed(new_health: float) -> void:
 	if new_health < 1:
@@ -617,3 +704,42 @@ func _on_stunned(is_active: bool) -> void:
 		periodic_timer_registry.pause_all()
 	else:
 		periodic_timer_registry.resume_all()
+
+
+#region ============================== Hero archetype setup ==============================
+# Orchestration de spawn des archétypes hero — appelé depuis _ready() si is_hero().
+func _hero_setup() -> void:
+	Verbose.debug("Hero [" + entity_name + "] setup", Verbose.Category.HERO)
+
+	if _custom_deck != null: deck = _custom_deck
+	if not _custom_data_memory.is_empty(): data_memory.override(_custom_data_memory)
+
+	if entity_desc == null and hero_desc != null:
+		entity_desc = hero_desc
+
+	if hero_desc == null and custom_base_stats == null:
+		Verbose.error("Hero archetype without hero_desc AND without custom_base_stats!", Verbose.Category.HERO)
+		return
+
+	if custom_base_stats == null and hero_desc != null and base_stats != null:
+		base_stats.reset_from_hero_desc(hero_desc, level)
+
+	_family_module.compute_levels(deck, _override_family_levels)
+	_deck_holder.setup()
+
+	if deck != null:
+		_deck_holder.apply_all_cards_upgrades(deck)
+		deck.has_changed.connect(_on_deck_has_changed)
+
+	_apply_display_mode()
+	_family_module.apply_passive_all()
+
+
+func _apply_display_mode() -> void:
+	if _display_mode_module != null:
+		_display_mode_module.apply(display_mode)
+
+
+func _on_deck_has_changed() -> void:
+	_family_module.compute_levels(deck, _override_family_levels)
+#endregion

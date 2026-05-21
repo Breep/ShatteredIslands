@@ -64,7 +64,7 @@ const GIFTED_COLORS: Dictionary[Family.Type, String] = {
 
 
 #region ============================== Public API ==============================
-func set_hero(hero: Hero) -> void:
+func set_hero(hero: Entity) -> void:
 	var families_level := hero.get_families_level()
 	var level: int = families_level.get(Family.Type.CHICKEN_LORD, 0)
 	var stats: FamilyChickenLordStats = hero.families_stats.chicken_lord
@@ -147,7 +147,7 @@ func _update_gifted_unlocks(families_level: Dictionary[Family.Type, int]) -> voi
 
 
 #region ============================== Ancestral Gauge ==============================
-func _update_ancestral_gauge(hero: Hero) -> void:
+func _update_ancestral_gauge(hero: Entity) -> void:
 	var gauge_value: float = hero.data_memory.get_data(
 		ChickenLordManager.FAMILY_NAME,
 		ChickenLordManager.ANCESTRAL_GAUGE_NAME,

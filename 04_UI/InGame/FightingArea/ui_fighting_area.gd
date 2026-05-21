@@ -24,7 +24,7 @@ func _ready() -> void:
 
 func update_content(fighting_area: FightingArea) -> void:
 	_fighting_area = fighting_area
-	var heroes: Array[Hero] = fighting_area.get_fighting_heroes()
+	var heroes: Array[Entity] = fighting_area.get_fighting_heroes()
 	_ui_dps_meter.set_heroes(heroes)
 
 

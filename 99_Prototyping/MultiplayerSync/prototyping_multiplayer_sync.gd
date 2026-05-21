@@ -32,7 +32,7 @@ extends Node3D
 
 # ============================== Private variables ==============================
 
-var _heroes: Array[Hero] = []
+var _heroes: Array[Entity] = []
 var _players: Array[Player] = []
 var _floating_island: FightingIsland
 
@@ -146,7 +146,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			_ui_fighting_area.visible = not _ui_fighting_area.visible
 			_ui_proto.visible = not _ui_proto.visible
 		if event.is_action_pressed("hide_3d_ui"):
-			for hero: Hero in _heroes:
+			for hero: Entity in _heroes:
 				hero._entity_info_panel_3d.visible = not hero._entity_info_panel_3d.visible
 
 # ============================== Private functions ==============================
@@ -158,7 +158,7 @@ func _instantiate_heroes() -> void:
 			Verbose.warn("HeroDesc at index " + str(i) + " is null, skipping", Verbose.Category.DEFAULT)
 			continue
 
-		var hero: Hero = Shared.HERO_SCENES[hero_desc.id].instantiate().init(Hero.DisplayMode.FIGHTING_PHASE)
+		var hero: Entity = Shared.HERO_SCENES[hero_desc.id].instantiate().init_display(Entity.DisplayMode.FIGHTING_PHASE)
 		hero.level = 1
 		hero.entity_name = "Player" + str(i + 1)
 

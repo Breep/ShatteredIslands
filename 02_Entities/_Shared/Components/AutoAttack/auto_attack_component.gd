@@ -166,16 +166,14 @@ func _calculate_attack_timings(interval_ticks: int) -> void:
 
 
 func _resolve_aa_anim_ratio() -> float:
-	var hero := _owner as Hero
-	if hero != null and hero.hero_desc != null:
-		return hero.hero_desc.aa_anim_ratio
+	if _owner.entity_desc != null:
+		return _owner.entity_desc.aa_anim_ratio
 	return DEFAULT_AA_ANIM_RATIO
 
 
 func _resolve_aa_release_normalized() -> float:
-	var hero := _owner as Hero
-	if hero != null and hero.hero_desc != null:
-		return hero.hero_desc.aa_release_normalized
+	if _owner.entity_desc != null:
+		return _owner.entity_desc.aa_release_normalized
 	return DEFAULT_AA_RELEASE_NORMALIZED
 
 

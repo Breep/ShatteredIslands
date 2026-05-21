@@ -24,7 +24,7 @@ signal projectile_target_hit(target: Entity, gpos: Vector3, projectile_uid: int)
 
 # ============================== Private variables ==============================
 
-var _heroes: Array[Hero]
+var _heroes: Array[Entity]
 
 # ============================== Public variables ==============================
 
@@ -78,7 +78,7 @@ func init_fight(left_formation: FightingFormation, right_formation: FightingForm
 	fighting_manager.init(spawn_manager, _current_battle_id)
 
 
-func get_fighting_heroes() -> Array[Hero]:
+func get_fighting_heroes() -> Array[Entity]:
 	return _heroes
 
 # ============================== Private functions ==============================
@@ -92,7 +92,7 @@ func _spawn_specs(specs: Array[EntitySpec], team: int) -> void:
 		ctx.spawn_manager = _spawn_manager
 		ctx.arena_zone_manager = _arena_zone_manager
 		ctx.fighting_state = Entity.FightingState.IDLE
-		ctx.display_mode = Hero.DisplayMode.FIGHTING_PHASE
+		ctx.display_mode = Entity.DisplayMode.FIGHTING_PHASE
 		# En solo : local player possède toutes les unités côté joueur.
 		# En multi (futur) : faudra une convention via team ou un mapping explicite.
 		if spec is HeroSpec or spec is AcolyteSpec:
@@ -102,7 +102,7 @@ func _spawn_specs(specs: Array[EntitySpec], team: int) -> void:
 		if entity != null:
 			entity.fight_role = _fight_role_for_spec(spec)
 			if entity.is_hero():
-				_heroes.append(entity as Hero)
+				_heroes.append(entity)
 
 
 # Map a spec type to its fight role. Handles both the new typed specs

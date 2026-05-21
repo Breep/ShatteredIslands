@@ -2,9 +2,9 @@ extends Node3D
 
 @onready var _egg_full: Node3D = %eggfull
 
-const GIFTED_ENGINEER_EGG: PackedScene = preload("res://02_Entities/Summons/ChickenLord/ChickenEgg/Visuals/gifted_egg_engineer.tscn")
-const GIFTED_ARDENT_CELESTIAL_EGG: PackedScene = preload("res://02_Entities/Summons/ChickenLord/ChickenEgg/Visuals/gifted_egg_ardent_celestial.tscn")
-const GIFTED_COLOSSUS_EGG: PackedScene = preload("res://02_Entities/Summons/ChickenLord/ChickenEgg/Visuals/gifted_egg_colossus.tscn")
+const GIFTED_ENGINEER_EGG: PackedScene = preload("res://02_Entities/Pool/Mobs/ChickenEgg/Visuals/gifted_egg_engineer.tscn")
+const GIFTED_ARDENT_CELESTIAL_EGG: PackedScene = preload("res://02_Entities/Pool/Mobs/ChickenEgg/Visuals/gifted_egg_ardent_celestial.tscn")
+const GIFTED_COLOSSUS_EGG: PackedScene = preload("res://02_Entities/Pool/Mobs/ChickenEgg/Visuals/gifted_egg_colossus.tscn")
 
 func set_visual(chicken_type: Chicken.Type) -> void:
 	match chicken_type:

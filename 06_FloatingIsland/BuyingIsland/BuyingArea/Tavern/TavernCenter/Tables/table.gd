@@ -46,7 +46,7 @@ func cleanup() -> void:
 # ============================== Private functions ==============================
 
 func _spawn_player_hero(player: Player, avaible_spawns: Array[SpawnPoint]) -> void:
-	var hero: Hero = player.hero
+	var hero: Entity = player.hero
 	if hero == null:
 		Verbose.error("Player " + player.player_name + " has no hero instance", Verbose.Category.TABLE)
 		return

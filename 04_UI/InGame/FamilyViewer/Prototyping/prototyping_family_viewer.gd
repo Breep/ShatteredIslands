@@ -7,7 +7,7 @@ extends Control
 @onready var _add_random_card_button: Button = $Button
 
 var _player: Player
-var _hero: Hero
+var _hero: Entity
 var _next_uid: int = 0
 
 
@@ -37,7 +37,7 @@ func _build_hero() -> void:
 		_hero.queue_free()
 		_hero = null
 
-	_hero = Shared.HERO_SCENES[_hero_id].instantiate() as Hero
+	_hero = Shared.HERO_SCENES[_hero_id].instantiate() as Entity
 	_hero.hero_desc = Shared.HEROES[_hero_id]
 	_hero._custom_deck = _player.deck
 	_hero.visible = false

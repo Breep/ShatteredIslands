@@ -15,7 +15,7 @@ var is_bot: bool # If the player is a fake player (a bot controlled by the serve
 
 var state: PlayerState
 
-var hero: Hero
+var hero: Entity
 var fighting_island: FightingIsland
 
 var skill_manager: SkillManager
