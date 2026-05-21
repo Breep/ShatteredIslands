@@ -1,0 +1,304 @@
+[gd_scene format=3 uid="uid://5ccditks7xar"]
+
+[ext_resource type="PackedScene" uid="uid://muvntvtbhtuo" path="res://02_Entities/_Data/Goblins/Characters.fbx" id="1_lebr1"]
+[ext_resource type="Texture2D" uid="uid://rhnfmjmohcia" path="res://02_Entities/_Data/_Textures/PolygonDarkFantasy/Alts/PolygonDarkFantasy_Texture_01_C.png" id="2_1reyt"]
+[ext_resource type="Texture2D" uid="uid://bt4qk2p0s8x7o" path="res://02_Entities/_Data/_Textures/PolygonDarkFantasy/Alts/PolygonDarkFantasy_Texture_01_A.png" id="3_i0aue"]
+[ext_resource type="Texture2D" uid="uid://bf6lnm55lwf53" path="res://02_Entities/_Data/_Textures/PolygonDarkFantasy/Alts/PolygonDarkFantasy_Texture_03_C.png" id="3_imub2"]
+[ext_resource type="AnimationLibrary" uid="uid://dc35h3toilmvd" path="res://02_Entities/_Data/_Animations/Mixamo/AnimationLibraries/humanoid_locomotion_library.tres" id="4_i0aue"]
+[ext_resource type="PackedScene" uid="uid://ci6lxb04g647m" path="res://02_Entities/_Data/Goblins/Weapons/bow.tscn" id="5_t7fgb"]
+[ext_resource type="PackedScene" uid="uid://b6xlprls8tunu" path="res://02_Entities/_Data/Goblins/Weapons/sm_wep_shield_01.tscn" id="6_e6ba5"]
+[ext_resource type="PackedScene" uid="uid://fjxn0kbpnqf2" path="res://02_Entities/_Data/Goblins/Weapons/sm_wep_axe_02.tscn" id="7_qrxdu"]
+[ext_resource type="PackedScene" uid="uid://7h2cf0sjkiho" path="res://02_Entities/_Data/Goblins/Attachments/sm_chr_attach_backpack_02.tscn" id="8_r3q74"]
+[ext_resource type="PackedScene" uid="uid://boh8kfys80wjr" path="res://02_Entities/_Data/Goblins/Attachments/sm_chr_attach_backpack_01.tscn" id="9_820jd"]
+[ext_resource type="PackedScene" uid="uid://c16m4apuk807i" path="res://02_Entities/_Data/Goblins/Attachments/sm_chr_attach_goggles_01.tscn" id="10_rr8ti"]
+[ext_resource type="PackedScene" uid="uid://bsu32f3pg0d3s" path="res://02_Entities/_Data/Goblins/Attachments/sm_chr_attach_hair_07.tscn" id="11_f4agb"]
+[ext_resource type="PackedScene" uid="uid://rhlpp460khk5" path="res://02_Entities/_Data/Goblins/Attachments/sm_chr_attach_mask_01.tscn" id="12_xciax"]
+[ext_resource type="PackedScene" uid="uid://ufpkmn16lls7" path="res://02_Entities/_Data/Goblins/Attachments/sm_prop_shoe_01.tscn" id="13_f4agb"]
+[ext_resource type="PackedScene" uid="uid://dxpih5h8aib3f" path="res://02_Entities/_Data/Goblins/Attachments/sm_chr_attach_eye_patch_01.tscn" id="13_xciax"]
+[ext_resource type="PackedScene" uid="uid://btqn32ai1ivhs" path="res://02_Entities/_Data/Goblins/Attachments/sm_chr_attach_crown_05.tscn" id="14_kwmxl"]
+[ext_resource type="PackedScene" uid="uid://821ttecu4yqe" path="res://02_Entities/_Data/Goblins/Attachments/sm_chr_attach_crown_03.tscn" id="15_u1rqs"]
+[ext_resource type="PackedScene" uid="uid://dkdaiimf3j4lk" path="res://02_Entities/_Data/Goblins/Attachments/sm_chr_attach_wolf_01.tscn" id="16_jqspu"]
+[ext_resource type="PackedScene" uid="uid://7girlslsr8uy" path="res://02_Entities/_Data/Goblins/Attachments/sm_chr_attach_bottle_01.tscn" id="17_lt03k"]
+[ext_resource type="PackedScene" uid="uid://bqjcye1tprkne" path="res://02_Entities/_Data/Goblins/Attachments/sm_chr_attach_bottle_02.tscn" id="18_jqspu"]
+[ext_resource type="PackedScene" uid="uid://c6wib06sr5c7b" path="res://02_Entities/_Data/Goblins/Attachments/sm_chr_attach_bags_03.tscn" id="20_t7fgb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_imub2"]
+albedo_texture = ExtResource("3_i0aue")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e6ba5"]
+albedo_texture = ExtResource("2_1reyt")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i0aue"]
+albedo_texture = ExtResource("3_i0aue")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_820jd"]
+albedo_texture = ExtResource("3_i0aue")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dx10t"]
+albedo_texture = ExtResource("3_i0aue")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xmv8m"]
+albedo_texture = ExtResource("3_i0aue")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rr8ti"]
+albedo_texture = ExtResource("3_i0aue")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f4agb"]
+albedo_texture = ExtResource("3_i0aue")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xciax"]
+albedo_texture = ExtResource("3_i0aue")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4100p"]
+albedo_texture = ExtResource("3_i0aue")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kwmxl"]
+albedo_texture = ExtResource("3_i0aue")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u1rqs"]
+albedo_texture = ExtResource("3_i0aue")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lt03k"]
+albedo_texture = ExtResource("3_i0aue")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qrxdu"]
+albedo_texture = ExtResource("3_imub2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r3q74"]
+albedo_texture = ExtResource("3_imub2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jqspu"]
+albedo_texture = ExtResource("3_i0aue")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t7fgb"]
+albedo_texture = ExtResource("3_i0aue")
+
+[node name="AllGoblinVisual" unique_id=433263620 instance=ExtResource("1_lebr1")]
+
+[node name="GeneralSkeleton" parent="." index="0" unique_id=901972998]
+bones/1/position = Vector3(-0.020335024, 0.843782, -0.0014138181)
+bones/1/rotation = Quaternion(-0.006441257, -0.71860415, -0.022380047, 0.6950294)
+bones/2/rotation = Quaternion(0.0030674897, 0.005800871, 0.022196516, 0.9997322)
+bones/3/rotation = Quaternion(0.010404341, 0.01292352, 0.018630736, 0.99968874)
+bones/4/rotation = Quaternion(0.009991281, 0.013272703, 0.018563244, 0.9996897)
+bones/5/rotation = Quaternion(0.026146945, 0.0748521, -0.03692041, 0.99616796)
+bones/6/rotation = Quaternion(0.04527486, 0.32246664, -0.016531672, 0.9453529)
+bones/7/position = Vector3(1.4794774e-17, 0.09447605, 0.12272221)
+bones/8/position = Vector3(1.4775591e-17, 0.12766919, 0.12272222)
+bones/10/rotation = Quaternion(0.536402, 0.45058236, 0.5623914, -0.4392772)
+bones/11/rotation = Quaternion(-0.060236774, 0.8224409, -0.5526259, 0.120694414)
+bones/12/rotation = Quaternion(0.040366646, -0.70595354, 0.04036707, 0.70595366)
+bones/13/rotation = Quaternion(0.14467897, 0.71243757, -0.12613617, 0.6749744)
+bones/14/rotation = Quaternion(0.28308576, 0.647968, -0.585409, -0.39660603)
+bones/15/rotation = Quaternion(-0.039942034, 0.11784031, -0.14163578, 0.982068)
+bones/16/rotation = Quaternion(-0.036403246, 0.15203467, 0.22999534, 0.9605532)
+bones/17/rotation = Quaternion(0.46374762, 0.533796, -0.5298225, -0.46828198)
+bones/18/rotation = Quaternion(-0.0011539928, 0.010741637, -0.09832995, 0.99509525)
+bones/19/rotation = Quaternion(-0.006912194, 0.025717413, -0.057002395, 0.9980188)
+bones/20/rotation = Quaternion(-0.004519649, 0.028039929, 0.15906805, 0.986859)
+bones/21/rotation = Quaternion(-0.49364036, -0.5062798, 0.4472742, 0.5476731)
+bones/22/rotation = Quaternion(0.0026372708, -0.019492012, -0.021269333, 0.9995803)
+bones/23/rotation = Quaternion(-0.018149225, 0.071478926, -0.0925108, 0.9929769)
+bones/24/rotation = Quaternion(0.016646361, -0.09652533, 0.16913, 0.98071444)
+bones/25/rotation = Quaternion(0.50490713, -0.45552874, -0.58966494, -0.4357265)
+bones/26/rotation = Quaternion(-0.060164154, 0.8868364, -0.441678, 0.121745825)
+bones/27/rotation = Quaternion(0.24430712, 0.66356176, -0.2443069, 0.6635615)
+bones/28/rotation = Quaternion(-0.09579483, -0.76793027, 0.19255696, 0.6033475)
+bones/29/rotation = Quaternion(-0.396606, 0.5854091, 0.64796793, -0.28308576)
+bones/30/rotation = Quaternion(-0.039942034, 0.11784035, -0.14163579, 0.982068)
+bones/31/rotation = Quaternion(-0.03640326, 0.15203467, 0.22999533, 0.96055317)
+bones/32/rotation = Quaternion(-0.4682821, 0.5298225, 0.53379595, -0.46374765)
+bones/33/rotation = Quaternion(-0.0011539931, 0.010741624, -0.09832995, 0.99509525)
+bones/34/rotation = Quaternion(-0.0069121975, 0.025717424, -0.057002384, 0.99801886)
+bones/35/rotation = Quaternion(-0.0045196447, 0.028039929, 0.15906803, 0.986859)
+bones/37/rotation = Quaternion(0.00263727, -0.019492015, -0.02126933, 0.9995803)
+bones/38/rotation = Quaternion(-0.01814922, 0.07147895, -0.09251084, 0.9929769)
+bones/39/rotation = Quaternion(0.016646367, -0.096525334, 0.16913004, 0.98071444)
+bones/40/rotation = Quaternion(-0.078117944, 0.052574344, 0.9931124, 0.06972286)
+bones/41/rotation = Quaternion(0.014016876, 0.9775859, -0.18996748, 0.08967602)
+bones/42/rotation = Quaternion(0.054322008, 0.61187965, -0.7872469, -0.053804424)
+bones/43/rotation = Quaternion(-2.384186e-07, -4.214685e-08, -2.1073424e-08, 1)
+bones/44/rotation = Quaternion(-1.15369815e-07, 0.99997747, 0.0067192027, -2.9313686e-08)
+bones/45/rotation = Quaternion(0.116735496, 0.036016393, 0.9869995, -0.10443994)
+bones/46/rotation = Quaternion(-0.011600333, 0.9806434, -0.18840766, -0.052026123)
+bones/47/rotation = Quaternion(-0.06266974, 0.6059297, -0.790014, 0.069280356)
+bones/48/rotation = Quaternion(-2.0861629e-07, -1.580507e-08, -2.6341784e-08, 1)
+bones/49/rotation = Quaternion(4.1098932e-08, 1, 0.00017625095, 6.5565046e-06)
+
+[node name="SM_Chr_Archer_Female_01" parent="GeneralSkeleton" index="0" unique_id=284490262]
+visible = false
+material_override = SubResource("StandardMaterial3D_imub2")
+
+[node name="SM_Chr_Archer_Male_01" parent="GeneralSkeleton" index="1" unique_id=1940625314]
+visible = false
+material_override = SubResource("StandardMaterial3D_e6ba5")
+
+[node name="SM_Chr_BeastTamer_01" parent="GeneralSkeleton" index="2" unique_id=837927372]
+visible = false
+material_override = SubResource("StandardMaterial3D_i0aue")
+
+[node name="SM_Chr_Cook_01" parent="GeneralSkeleton" index="3" unique_id=466164142]
+visible = false
+material_override = SubResource("StandardMaterial3D_820jd")
+
+[node name="SM_Chr_King_01" parent="GeneralSkeleton" index="4" unique_id=881440005]
+visible = false
+material_override = SubResource("StandardMaterial3D_dx10t")
+
+[node name="SM_Chr_Knight_01" parent="GeneralSkeleton" index="5" unique_id=1553159336]
+visible = false
+material_override = SubResource("StandardMaterial3D_xmv8m")
+
+[node name="SM_Chr_Prisoner_01" parent="GeneralSkeleton" index="6" unique_id=2061944172]
+visible = false
+material_override = SubResource("StandardMaterial3D_rr8ti")
+
+[node name="SM_Chr_Prisoner_02" parent="GeneralSkeleton" index="7" unique_id=334819566]
+visible = false
+material_override = SubResource("StandardMaterial3D_f4agb")
+
+[node name="SM_Chr_Prisoner_03" parent="GeneralSkeleton" index="8" unique_id=171753897]
+visible = false
+material_override = SubResource("StandardMaterial3D_xciax")
+
+[node name="SM_Chr_Ranger_01" parent="GeneralSkeleton" index="9" unique_id=1756151390]
+material_override = SubResource("StandardMaterial3D_4100p")
+
+[node name="SM_Chr_Shaman_01" parent="GeneralSkeleton" index="10" unique_id=1508674411]
+visible = false
+material_override = SubResource("StandardMaterial3D_kwmxl")
+
+[node name="SM_Chr_Warrior_Male_01" parent="GeneralSkeleton" index="11" unique_id=85823230]
+visible = false
+material_override = SubResource("StandardMaterial3D_u1rqs")
+
+[node name="SM_Chr_Wizard_01" parent="GeneralSkeleton" index="12" unique_id=316292260]
+visible = false
+material_override = SubResource("StandardMaterial3D_lt03k")
+
+[node name="SM_Chr_Attach_Shawl_01" parent="GeneralSkeleton" index="13" unique_id=209672692]
+visible = false
+material_override = SubResource("StandardMaterial3D_qrxdu")
+
+[node name="SM_Chr_Attach_Hood_01" parent="GeneralSkeleton" index="14" unique_id=656146371]
+visible = false
+material_override = SubResource("StandardMaterial3D_r3q74")
+
+[node name="SM_Chr_Attach_Hood_02" parent="GeneralSkeleton" index="15" unique_id=1254993104]
+visible = false
+material_override = SubResource("StandardMaterial3D_jqspu")
+
+[node name="SM_Chr_Attach_Hood_03" parent="GeneralSkeleton" index="16" unique_id=1021947465]
+visible = false
+material_override = SubResource("StandardMaterial3D_t7fgb")
+
+[node name="LeftHandAttachment" type="BoneAttachment3D" parent="GeneralSkeleton" index="17" unique_id=297417579]
+transform = Transform3D(0.9635165, -0.23125748, -0.1347439, -0.21861078, -0.97043425, 0.1023059, -0.154419, -0.06911685, -0.985585, -0.019332848, 0.7660165, 0.32243776)
+bone_name = "LeftHand"
+bone_idx = 13
+
+[node name="Bow" parent="GeneralSkeleton/LeftHandAttachment" index="0" unique_id=526129373 instance=ExtResource("5_t7fgb")]
+transform = Transform3D(-0.010013938, 0.9429446, 0.33279938, 0.19262147, -0.3247638, 0.92597276, 0.9812221, 0.073376946, -0.17837918, -0.0038265483, 0.10111277, 0.0020510152)
+
+[node name="Skeleton3D" parent="GeneralSkeleton/LeftHandAttachment/Bow" index="0" unique_id=2143212340]
+bones/1/position = Vector3(0, 0, -0.12)
+
+[node name="SM_Wep_Bow_Rigged_01" parent="GeneralSkeleton/LeftHandAttachment/Bow/Skeleton3D" index="0" unique_id=111400591]
+transform = Transform3D(0.98985326, 0, -0.14209339, 0, 1, 0, 0.14209339, 0, 0.98985326, 0, 0, 0)
+
+[node name="ArrowAttachment" parent="GeneralSkeleton/LeftHandAttachment/Bow/Skeleton3D" index="2" unique_id=1924204569]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.12)
+
+[node name="SM_Wep_Arrow_01" parent="GeneralSkeleton/LeftHandAttachment/Bow/Skeleton3D/ArrowAttachment" index="0" unique_id=1902731416]
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5319745)
+
+[node name="ShieldAttachment" type="BoneAttachment3D" parent="GeneralSkeleton" index="18" unique_id=1828555638]
+transform = Transform3D(-0.25696623, -0.12911996, -0.95775586, -0.26037344, -0.9451387, 0.19727728, -0.93068475, 0.30006796, 0.20924921, 0.033824667, 1.0178984, 0.23729283)
+visible = false
+bone_name = "LeftLowerArm"
+bone_idx = 12
+
+[node name="SM_Wep_Shield_01" parent="GeneralSkeleton/ShieldAttachment" index="0" unique_id=1821283942 instance=ExtResource("6_e6ba5")]
+transform = Transform3D(0.12827629, 0.11188962, -0.9854065, 0, 0.99361527, 0.112821706, 0.9917385, -0.014472349, 0.12745728, 0.028342519, 0.16907181, -0.003665952)
+
+[node name="RightHandWeaponAttachment" type="BoneAttachment3D" parent="GeneralSkeleton" index="19" unique_id=1743821847]
+transform = Transform3D(-0.7329855, -0.22154227, 0.643157, 0.06660628, -0.9643108, -0.25625792, 0.67697525, -0.14499511, 0.72158206, -0.13672774, 0.7830833, -0.29295433)
+visible = false
+bone_name = "RightHand"
+bone_idx = 28
+
+[node name="SM_Wep_Axe_02" parent="GeneralSkeleton/RightHandWeaponAttachment" index="0" unique_id=1050349439 instance=ExtResource("7_qrxdu")]
+transform = Transform3D(0.14563411, 0.9893386, 0, -0.17196691, 0.025314137, 0.9847775, 0.9742783, -0.14341721, 0.1738201, -1.01630576e-07, 0.1348771, 0.047968864)
+
+[node name="BackPackAttachment" type="BoneAttachment3D" parent="GeneralSkeleton" index="20" unique_id=801280550]
+transform = Transform3D(0.032983813, -0.0058077453, -0.99943906, 0.09549307, 0.9954266, -0.0026329365, 0.9948835, -0.095352665, 0.03338756, 0.025523085, 1.3036379, -0.013120029)
+visible = false
+bone_name = "UpperChest"
+bone_idx = 4
+
+[node name="SM_Chr_Attach_Backpack_02" parent="GeneralSkeleton/BackPackAttachment" index="0" unique_id=2004544827 instance=ExtResource("8_r3q74")]
+visible = false
+
+[node name="SM_Chr_Attach_Backpack_01" parent="GeneralSkeleton/BackPackAttachment" index="1" unique_id=251234928 instance=ExtResource("9_820jd")]
+
+[node name="FaceAttachment" type="BoneAttachment3D" parent="GeneralSkeleton" index="21" unique_id=538487173]
+transform = Transform3D(0.7456519, -0.11198646, -0.6568579, 0.04597263, 0.99207324, -0.116949484, 0.66474783, 0.057006106, 0.7448896, -0.008566137, 1.53372, -0.021862872)
+bone_name = "Head"
+bone_idx = 6
+
+[node name="SM_Chr_Attach_Goggles_01" parent="GeneralSkeleton/FaceAttachment" index="0" unique_id=824777752 instance=ExtResource("10_rr8ti")]
+visible = false
+
+[node name="SM_Chr_Attach_Hair_07" parent="GeneralSkeleton/FaceAttachment" index="1" unique_id=131978717 instance=ExtResource("11_f4agb")]
+visible = false
+
+[node name="SM_Chr_Attach_Mask_01" parent="GeneralSkeleton/FaceAttachment" index="2" unique_id=1196135152 instance=ExtResource("12_xciax")]
+visible = false
+
+[node name="SM_Chr_Attach_Eye_Patch_01" parent="GeneralSkeleton/FaceAttachment" index="3" unique_id=1046000516 instance=ExtResource("13_xciax")]
+visible = false
+
+[node name="SM_Chr_Attach_Crown_05" parent="GeneralSkeleton/FaceAttachment" index="4" unique_id=1086580828 instance=ExtResource("14_kwmxl")]
+visible = false
+
+[node name="SM_Chr_Attach_Crown_03" parent="GeneralSkeleton/FaceAttachment" index="5" unique_id=723908416 instance=ExtResource("15_u1rqs")]
+transform = Transform3D(1, -8.8817503e-16, 0, -8.881759e-16, 1, 0, 0, 0, 1, 3.6190618e-15, -0.029216407, -0.065205075)
+visible = false
+
+[node name="SM_Chr_Attach_Wolf_01" parent="GeneralSkeleton/FaceAttachment" index="6" unique_id=2053600072 instance=ExtResource("16_jqspu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6173884e-18, 0.036456943, 0)
+
+[node name="LeftFootAttachment" type="BoneAttachment3D" parent="GeneralSkeleton" index="22" unique_id=1967920387]
+transform = Transform3D(-0.14484088, -0.98945487, -0.00035488605, -1.3308832e-05, -0.0003566146, 0.9999999, -0.9894549, 0.14484084, 3.8467348e-05, 0.082097575, 0.05553046, 0.2405529)
+bone_name = "LeftFoot"
+bone_idx = 47
+
+[node name="SM_Prop_Shoe_01" parent="GeneralSkeleton/LeftFootAttachment" index="0" unique_id=995298695 instance=ExtResource("13_f4agb")]
+transform = Transform3D(-0.9993013, 3.2782552e-07, -0.037376285, -0.037376285, 4.6503314e-07, 0.9993013, 3.5884463e-07, 1, -5.7085543e-07, -0.0029933068, 0.026223041, -0.074549794)
+
+[node name="RightFootAttachment" type="BoneAttachment3D" parent="GeneralSkeleton" index="23" unique_id=1806943128]
+transform = Transform3D(0.039713524, -0.99921095, -0.0005328059, 0.013413317, -7.4505806e-08, 0.99991006, -0.99912107, -0.039717082, 0.013402737, 0.063797094, 0.057001054, -0.24162737)
+bone_name = "RightFoot"
+bone_idx = 42
+
+[node name="SM_Prop_Shoe_01" parent="GeneralSkeleton/RightFootAttachment" index="0" unique_id=731859447 instance=ExtResource("13_f4agb")]
+transform = Transform3D(-0.9993013, 3.2782552e-07, -0.037376285, -0.037376285, 4.6503314e-07, 0.9993013, 3.5884463e-07, 1, -5.7085543e-07, -0.0029933022, 0.026223049, -0.060075603)
+
+[node name="HipsAttachment" type="BoneAttachment3D" parent="GeneralSkeleton" index="24" unique_id=504179125]
+transform = Transform3D(-0.033785462, 0.040367004, -0.9986136, -0.02185215, 0.9989153, 0.04111851, 0.9991902, 0.023211062, -0.032866716, -0.020335024, 0.843782, -0.0014138181)
+bone_name = "Hips"
+bone_idx = 1
+
+[node name="SM_Chr_Attach_Bottle_01" parent="GeneralSkeleton/HipsAttachment" index="0" unique_id=1770084810 instance=ExtResource("17_lt03k")]
+visible = false
+
+[node name="SM_Chr_Attach_Bottle_02" parent="GeneralSkeleton/HipsAttachment" index="1" unique_id=1845518612 instance=ExtResource("18_jqspu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.048395038, 0)
+visible = false
+
+[node name="SM_Chr_Attach_Bags_03" parent="GeneralSkeleton/HipsAttachment" index="2" unique_id=1284670100 instance=ExtResource("20_t7fgb")]
+
+[node name="AnimationPlayer" parent="." index="1" unique_id=2115659582]
+libraries/humanoid_locomotion_library = ExtResource("4_i0aue")
+
+[editable path="GeneralSkeleton/LeftHandAttachment/Bow"]

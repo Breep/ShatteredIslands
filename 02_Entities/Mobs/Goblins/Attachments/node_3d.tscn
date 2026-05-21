@@ -1,7 +1,0 @@
-[gd_scene format=3 uid="uid://bln6ilrhk3pwe"]
-
-[ext_resource type="PackedScene" uid="uid://dvr7815lw1k8b" path="res://02_Entities/Heroes/Latika/latika.tscn" id="1_rgox4"]
-
-[node name="Node3D" type="Node3D" unique_id=290497842]
-
-[node name="Latika" parent="." unique_id=294337328 instance=ExtResource("1_rgox4")]

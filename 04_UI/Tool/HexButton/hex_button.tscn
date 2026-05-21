@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://q4yxpa41ngwe" path="res://04_UI/Tool/HexButton/hex_button.gd" id="4_7kd84"]
 [ext_resource type="BitMap" uid="uid://d0lvjglm03lbs" path="res://04_UI/_Themes/Data/HexagonButton/hexagon_mask_bm.png" id="4_nxora"]
 [ext_resource type="Texture2D" uid="uid://c765h1dqan50x" path="res://04_UI/_Themes/Data/HexagonButton/hexagon_pressed.png" id="5_0bsuy"]
-[ext_resource type="Texture2D" uid="uid://dnpy1x6ryvstv" path="res://02_Entities/Heroes/DarkKnight/Data/b1_corruption.jpeg" id="6_7j7hk"]
+[ext_resource type="Texture2D" uid="uid://dnpy1x6ryvstv" path="res://02_Entities/Pool/Heroes/DarkKnight/Data/b1_corruption.jpeg" id="6_7j7hk"]
 [ext_resource type="Shader" uid="uid://bv6hpsis17qbh" path="res://22_VFX/Shaders/2D/2d_highlight.gdshader" id="7_7j7hk"]
 [ext_resource type="Texture2D" uid="uid://bhkhq1mu0dbha" path="res://04_UI/_Themes/Data/HexagonButton/ui_hexagon_white.png" id="9_0bsuy"]
 

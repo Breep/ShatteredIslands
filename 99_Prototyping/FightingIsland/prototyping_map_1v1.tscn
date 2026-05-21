@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bu48b2v401db2" path="res://99_Prototyping/FightingIsland/prototyping_map.gd" id="1_vksg0"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="2_kngc2"]
 [ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://02_Entities/Heroes/_Shared/hero_desc.gd" id="2_vksg0"]
-[ext_resource type="Resource" uid="uid://bkksjgh6p542o" path="res://02_Entities/Heroes/DarkKnight/dark_knight.tres" id="3_dlg3x"]
+[ext_resource type="Resource" uid="uid://bkksjgh6p542o" path="res://02_Entities/Pool/Heroes/DarkKnight/dark_knight.tres" id="3_dlg3x"]
 [ext_resource type="Resource" uid="uid://yu8vfa6x3r0g" path="res://01_Cards/Descriptions/Cards/Colossus/Epic/SeismicSlam/colossus_seismic_slam.tres" id="3_kngc2"]
 [ext_resource type="Resource" uid="uid://50ga6somnl7u" path="res://01_Cards/Descriptions/Cards/Warrior/Common/TitanAxe/attack_titan_axe.tres" id="4_dlg3x"]
 [ext_resource type="PackedScene" uid="uid://drcuyohos0doa" path="res://06_FloatingIsland/FightingIsland/fighting_island.tscn" id="6_sp80o"]

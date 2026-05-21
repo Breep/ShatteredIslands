@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://vkyl862t2h5d"]
+
+[ext_resource type="Texture2D" uid="uid://cljgrwgbsbfa2" path="res://02_Entities/Pool/Heroes/DarkKnight/Data/g2_mega_strike.jpeg" id="1_4n7wf"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/Heroes/_Shared/skill.gd" id="1_4n501"]
+
+[resource]
+script = ExtResource("1_4n501")
+skill_id = 5
+name = "Mega Strike"
+description = "Aeron Vantaal peut maintenant cumuler 10 charges pour effectuer 500% des dégâts. [[POISON_DAMAGE]]"
+portrait = ExtResource("1_4n7wf")
+metadata/_custom_type_script = "uid://dfby4merlgkep"

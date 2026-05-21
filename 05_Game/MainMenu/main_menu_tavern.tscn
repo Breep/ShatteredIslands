@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://qqn2mm2lbqvu"]
 
-[ext_resource type="PackedScene" uid="uid://ca3wssxlwj4qk" path="res://06_FloatingIsland/_Maps/tavern_animated.tscn" id="1_hnepe"]
+[ext_resource type="PackedScene" path="res://06_FloatingIsland/_Maps/tavern_animated.tscn" id="1_hnepe"]
 [ext_resource type="PackedScene" uid="uid://dr8xv1vshmvyq" path="res://06_FloatingIsland/BuyingIsland/BuyingArea/Tavern/TavernCenter/tavern_center.tscn" id="2_eqak0"]
 [ext_resource type="PackedScene" uid="uid://ufqa68rcl4eb" path="res://21_Props/Tavern/wooden_chair.tscn" id="3_ypluq"]
-[ext_resource type="PackedScene" uid="uid://redxowoopg23" path="res://02_Entities/Heroes/DarkKnight/Skins/Standard/darkknight_blue.tscn" id="4_ig0nh"]
+[ext_resource type="PackedScene" uid="uid://redxowoopg23" path="res://02_Entities/Pool/Heroes/DarkKnight/Skins/Standard/darkknight_blue.tscn" id="4_ig0nh"]
 
 [node name="MainMenuTavern" type="Node3D"]
 

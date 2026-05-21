@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bsu32f3pg0d3s"]
+
+[ext_resource type="PackedScene" uid="uid://dgji7j624j66f" path="res://02_Entities/_Data/Goblins/Attachments/SM_Chr_Attach_Hair_07.fbx" id="1_h3uqt"]
+[ext_resource type="Texture2D" uid="uid://cmuirmne5freb" path="res://02_Entities/_Data/_Textures/PolygonGoblinWarCamp/Alts/PolygonGoblinWarCamp_Texture_01_A.png" id="2_1u5aj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rduau"]
+albedo_texture = ExtResource("2_1u5aj")
+
+[node name="SM_Chr_Attach_Hair_07" unique_id=131978717 instance=ExtResource("1_h3uqt")]
+
+[node name="SM_Chr_Attach_Hair_07" parent="." index="0" unique_id=996360937]
+material_override = SubResource("StandardMaterial3D_rduau")

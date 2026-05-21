@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://embfxxyxwn4m" path="res://05_Game/Run/Encounters/tavern_encounter.proto.gd" id="1_proto"]
 [ext_resource type="Resource" uid="uid://dlsm1uf1vi7uw" path="res://05_Game/Run/Encounters/Pool/Prototyping/Colossus3/colossus3.tavern_encounter.tres" id="2_2ktcd"]
-[ext_resource type="PackedScene" uid="uid://dvr7815lw1k8b" path="res://02_Entities/Heroes/Latika/latika.tscn" id="3_rrp3o"]
+[ext_resource type="PackedScene" uid="uid://dvr7815lw1k8b" path="res://02_Entities/Pool/Heroes/Latika/latika.tscn" id="3_rrp3o"]
 [ext_resource type="Resource" uid="uid://tkrmggge2pc" path="res://05_Game/Run/Formations/Pool/Prototyping/default_solo.fighting.tres" id="3_vtr74"]
 [ext_resource type="PackedScene" uid="uid://7s8lg5leu3go" path="res://02_Entities/Summons/ChickenLord/Chicken/Gifted/ChickenArdentCelestial/chicken_ardent_celestial.tscn" id="4_vtr74"]
 [ext_resource type="PackedScene" uid="uid://xup3guwehhoc" path="res://02_Entities/Summons/ChickenLord/Chicken/Basic/chicken_basic.tscn" id="5_gmm5j"]

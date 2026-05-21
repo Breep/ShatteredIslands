@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://jcw72p0l2p5c"]
+
+[ext_resource type="PackedScene" uid="uid://bhyuqckg8hchu" path="res://02_Entities/_Data/Dummies/SM_Prop_Dummy_Archery_02.fbx" id="1_e48op"]
+[ext_resource type="Texture2D" uid="uid://41xxgc21spyd" path="res://02_Entities/_Data/_Textures/PolygonFantasyKingdom/PolygonFantasyKingdom_Texture_01_A.png" id="2_g1cm6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fyjr6"]
+albedo_texture = ExtResource("2_g1cm6")
+
+[node name="Dummy02" unique_id=1836749617 instance=ExtResource("1_e48op")]
+
+[node name="SM_Prop_Dummy_Archery_02" parent="." index="0" unique_id=1157636901]
+material_override = SubResource("StandardMaterial3D_fyjr6")

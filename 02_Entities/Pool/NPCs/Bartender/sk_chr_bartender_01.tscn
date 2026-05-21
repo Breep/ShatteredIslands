@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://jjd3kidthudx"]
+
+[ext_resource type="PackedScene" uid="uid://b6r1exa3cp7ln" path="res://02_Entities/Pool/NPCs/Bartender/SK_Chr_Bartender_01.fbx" id="1_cs64x"]
+[ext_resource type="Texture2D" uid="uid://cnk860spex0sb" path="res://20_Data/Blender/Map/Map/Tavern/tavern_PolygonFantasyKingdom_Texture_01_A.png" id="2_a73kq"]
+[ext_resource type="Animation" uid="uid://83wnojrrvug4" path="res://20_Data/Anim/Anim library/bartender.res" id="3_a73kq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yts8i"]
+albedo_texture = ExtResource("2_a73kq")
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wremo"]
+_data = {
+&"bartender": ExtResource("3_a73kq")
+}
+
+[node name="SK_Chr_Bartender_01" instance=ExtResource("1_cs64x")]
+
+[node name="Skeleton" parent="Root" index="0"]
+bones/0/position = Vector3(0.11016, 0.84021, -0.371847)
+bones/0/rotation = Quaternion(0.00872411, -0.0131644, -0.000893131, 0.999875)
+bones/1/rotation = Quaternion(0.051228, 0.004021, -0.0143678, 0.998576)
+bones/2/rotation = Quaternion(0.0212537, 0.00285761, -0.00889214, 0.999731)
+bones/3/rotation = Quaternion(0.0212424, 0.00253976, -0.00898983, 0.999731)
+bones/4/rotation = Quaternion(0.0508699, -0.00791446, -0.00748364, 0.998646)
+bones/5/rotation = Quaternion(-0.00258006, -0.0637969, 0.0405133, 0.997137)
+bones/8/rotation = Quaternion(0.546671, 0.447289, 0.525865, -0.473867)
+bones/9/rotation = Quaternion(0.377277, 0.831155, -0.403805, -0.0615132)
+bones/10/rotation = Quaternion(0.304839, -0.637996, 0.304839, 0.63805)
+bones/11/rotation = Quaternion(-0.224124, 0.795799, 0.148273, 0.542668)
+bones/12/rotation = Quaternion(-0.182748, 0.743413, 0.10785, 0.634278)
+bones/13/rotation = Quaternion(0.170219, 0.0357087, 0.0894602, 0.980687)
+bones/13/scale = Vector3(1.00005, 0.999955, 0.999996)
+bones/14/rotation = Quaternion(0.133316, 0.0324664, 0.0204448, 0.990331)
+bones/14/scale = Vector3(1.00012, 0.999917, 0.999959)
+bones/16/rotation = Quaternion(0.344853, -0.0130934, -0.00552478, 0.938549)
+bones/17/rotation = Quaternion(0.122801, -1.69873e-06, -0.0148197, 0.992321)
+bones/18/rotation = Quaternion(0.0575116, -8.49366e-07, -0.00694042, 0.998321)
+bones/23/rotation = Quaternion(0.580554, -0.409744, -0.526909, -0.466297)
+bones/24/rotation = Quaternion(-0.385135, 0.876613, -0.28444, 0.0481139)
+bones/25/rotation = Quaternion(0.167545, 0.686985, -0.167545, 0.686956)
+bones/26/rotation = Quaternion(-0.122505, -0.784525, -0.16905, 0.583897)
+bones/27/rotation = Quaternion(-0.205713, -0.684608, -0.0909775, 0.693337)
+bones/28/rotation = Quaternion(0.167906, -0.0784782, -0.0544645, 0.981164)
+bones/28/scale = Vector3(1.00005, 0.999955, 0.999996)
+bones/29/rotation = Quaternion(0.0503663, -0.0495753, -0.0289059, 0.997081)
+bones/29/scale = Vector3(1.00012, 0.999917, 0.999959)
+bones/31/rotation = Quaternion(-0.0300912, -0.000516117, -0.0198303, 0.99935)
+bones/32/rotation = Quaternion(0.249779, -3.05474e-06, 0.0304399, 0.967824)
+bones/33/rotation = Quaternion(0.121413, -1.44541e-06, 0.0147963, 0.992492)
+bones/38/rotation = Quaternion(-0.130499, 0.21586, 0.962824, 0.096672)
+bones/39/rotation = Quaternion(0.0251248, 0.975686, -0.200438, -0.0850314)
+bones/40/rotation = Quaternion(-0.103198, 0.717303, -0.661663, -0.192429)
+bones/42/rotation = Quaternion(1.28581e-07, 0.999586, -0.0287704, 6.50313e-08)
+bones/43/rotation = Quaternion(0.0224784, 0.184969, 0.981642, 0.0407359)
+bones/44/rotation = Quaternion(-0.0210213, 0.951284, -0.300468, 0.0658413)
+bones/45/rotation = Quaternion(0.157291, 0.596415, -0.779801, 0.107046)
+bones/47/rotation = Quaternion(-3.11162e-08, 1, 0.000307769, 5.81166e-08)
+
+[node name="SK_Chr_Bartender_01" parent="Root/Skeleton" index="0"]
+material_override = SubResource("StandardMaterial3D_yts8i")
+
+[node name="AnimationPlayer" parent="." index="1"]
+libraries = {
+&"": SubResource("AnimationLibrary_wremo")
+}
+autoplay = "bartender"

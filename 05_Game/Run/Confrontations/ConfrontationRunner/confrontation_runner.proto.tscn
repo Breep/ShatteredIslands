@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bx5xv7gd8wemq" path="res://05_Game/Run/Confrontations/ConfrontationRunner/confrontation_runner.proto.gd" id="1_0qt4w"]
 [ext_resource type="Resource" uid="uid://85dbxj88x4wo" path="res://05_Game/Run/Confrontations/Pool/Colossus3/colossus3.confrontation.tres" id="2_qaqq0"]
 [ext_resource type="Resource" uid="uid://tkrmggge2pc" path="res://05_Game/Run/Formations/Pool/Prototyping/default_solo.fighting.tres" id="3_tdflf"]
-[ext_resource type="PackedScene" uid="uid://dvr7815lw1k8b" path="res://02_Entities/Heroes/Latika/latika.tscn" id="4_usodo"]
+[ext_resource type="PackedScene" uid="uid://dvr7815lw1k8b" path="res://02_Entities/Pool/Heroes/Latika/latika.tscn" id="4_usodo"]
 [ext_resource type="PackedScene" uid="uid://xup3guwehhoc" path="res://02_Entities/Summons/ChickenLord/Chicken/Basic/chicken_basic.tscn" id="5_3ib71"]
 
 [node name="ConfrontationRunnerProto" type="Node" unique_id=1933938655]

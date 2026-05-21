@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://v8f1a76nj0ui"]
 
 [ext_resource type="Script" uid="uid://bh3myanctf5tj" path="res://05_Game/Run/SpawnSpecs/SpawnPoints/AcolyteSpawn/acolyte_spawn_point.gd" id="1_cssyj"]
-[ext_resource type="PackedScene" uid="uid://ddr727id3kk43" path="res://02_Entities/Mobs/Dummies/dummy_visual_01.tscn" id="1_xfixs"]
+[ext_resource type="PackedScene" uid="uid://ddr727id3kk43" path="res://02_Entities/_Data/Dummies/dummy_visual_01.tscn" id="1_xfixs"]
 
 [node name="AcolyteSpawnPoint" type="Node3D" unique_id=228737116]
 script = ExtResource("1_cssyj")

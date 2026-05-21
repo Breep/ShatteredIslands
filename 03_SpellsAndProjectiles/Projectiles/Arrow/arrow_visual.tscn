@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b47o5rwev3ebj"]
 
-[ext_resource type="PackedScene" uid="uid://b3t2067yh65ip" path="res://02_Entities/Mobs/Goblins/Props/sm_wep_arrow_01.tscn" id="1_h5ft1"]
+[ext_resource type="PackedScene" uid="uid://b3t2067yh65ip" path="res://02_Entities/_Data/Goblins/Props/sm_wep_arrow_01.tscn" id="1_h5ft1"]
 
 [node name="ArrowVisual" type="Node3D" unique_id=377869126]
 

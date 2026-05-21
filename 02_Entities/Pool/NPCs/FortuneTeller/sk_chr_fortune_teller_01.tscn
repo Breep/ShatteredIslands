@@ -1,0 +1,142 @@
+[gd_scene format=3 uid="uid://d05soq0vastae"]
+
+[ext_resource type="PackedScene" uid="uid://b3flnc0ctccgt" path="res://02_Entities/Pool/NPCs/FortuneTeller/SK_Chr_FortuneTeller_01.fbx" id="1_12pkq"]
+[ext_resource type="Texture2D" uid="uid://cnk860spex0sb" path="res://20_Data/Blender/Map/Map/Tavern/tavern_PolygonFantasyKingdom_Texture_01_A.png" id="2_w3lw8"]
+[ext_resource type="AnimationLibrary" uid="uid://lusuqdn4nl3c" path="res://20_Data/Anim/Anim library/1_anim_pack_full.res" id="3_w3lw8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ba2pm"]
+albedo_texture = ExtResource("2_w3lw8")
+
+[sub_resource type="Animation" id="Animation_ba2pm"]
+resource_name = "Take 001"
+length = 2.63333
+tracks/0/type = "rotation_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Skeleton:RightUpperLeg")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(1.73847e-09, 1, 2.98023e-08, -1.49012e-08, -1, -1.49012e-08)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("%Skeleton:LeftUpperLeg")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(1.73847e-09, 1, -7.45058e-08, -4.47035e-08, -1, -4.47035e-08)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = true
+tracks/2/enabled = true
+tracks/2/path = NodePath("%Skeleton:Chest")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(1.73847e-09, 1, 1.49012e-08, -1.49012e-08, -1.49012e-08, -1)
+tracks/3/type = "rotation_3d"
+tracks/3/imported = true
+tracks/3/enabled = true
+tracks/3/path = NodePath("%Skeleton:UpperChest")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(1.73847e-09, 1, -2.98023e-08, 0, 0, -1)
+tracks/4/type = "rotation_3d"
+tracks/4/imported = true
+tracks/4/enabled = true
+tracks/4/path = NodePath("%Skeleton:RightFoot")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(1.73847e-09, 1, 2.10734e-08, -0.707107, 0.707107, 0)
+tracks/5/type = "rotation_3d"
+tracks/5/imported = true
+tracks/5/enabled = true
+tracks/5/path = NodePath("%Skeleton:LeftFoot")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = PackedFloat32Array(1.73847e-09, 1, 0, -0.707107, 0.707107, 0)
+tracks/6/type = "rotation_3d"
+tracks/6/imported = true
+tracks/6/enabled = true
+tracks/6/path = NodePath("%Skeleton:RightShoulder")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = PackedFloat32Array(1.73847e-09, 1, -0.5, 0.5, 0.5, 0.5)
+tracks/7/type = "scale_3d"
+tracks/7/imported = true
+tracks/7/enabled = true
+tracks/7/path = NodePath("%Skeleton:LeftThumbProximal")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = PackedFloat32Array(1.73847e-09, 1, 1.00005, 0.999955, 0.999996)
+tracks/8/type = "scale_3d"
+tracks/8/imported = true
+tracks/8/enabled = true
+tracks/8/path = NodePath("%Skeleton:RightThumbProximal")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = PackedFloat32Array(1.73847e-09, 1, 1.00005, 0.999955, 0.999996)
+tracks/9/type = "scale_3d"
+tracks/9/imported = true
+tracks/9/enabled = true
+tracks/9/path = NodePath("%Skeleton:LeftThumbDistal")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = PackedFloat32Array(1.73847e-09, 1, 1.00012, 0.999917, 0.999959)
+tracks/10/type = "scale_3d"
+tracks/10/imported = true
+tracks/10/enabled = true
+tracks/10/path = NodePath("%Skeleton:RightThumbDistal")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = PackedFloat32Array(1.73847e-09, 1, 1.00012, 0.999917, 0.999959)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lenfh"]
+_data = {
+&"Take 001": SubResource("Animation_ba2pm")
+}
+
+[node name="SK_Chr_FortuneTeller_01" instance=ExtResource("1_12pkq")]
+
+[node name="Skeleton" parent="Root" index="0"]
+bones/0/position = Vector3(0.0267309, 0.838522, -0.0807632)
+bones/0/rotation = Quaternion(-0.040445, -0.348389, -0.0214256, 0.936232)
+bones/2/rotation = Quaternion(0.0434255, -0.0342193, -0.00615198, 0.998452)
+bones/3/rotation = Quaternion(0.129739, -0.102234, -0.0183797, 0.986092)
+bones/4/rotation = Quaternion(-0.0867164, 0.0683325, 0.0122849, 0.993811)
+bones/5/rotation = Quaternion(0.128277, 0.37437, -0.018915, 0.918169)
+bones/8/rotation = Quaternion(0.445251, 0.539486, 0.512438, -0.49811)
+bones/9/rotation = Quaternion(0.134292, 0.990445, 0.0313591, -0.000537068)
+bones/10/rotation = Quaternion(0.0514072, -0.921598, 0.152124, 0.353374)
+bones/11/rotation = Quaternion(-0.0694891, 0.761299, 0.198336, 0.613398)
+bones/12/rotation = Quaternion(-0.184239, 0.667146, 0.27353, 0.667947)
+bones/13/rotation = Quaternion(0.132688, -0.096893, 0.125355, 0.978413)
+bones/14/rotation = Quaternion(-0.217952, -0.0996134, -0.0707677, 0.96828)
+bones/16/rotation = Quaternion(0.00817728, -1.3411e-07, 0.11685, 0.993116)
+bones/17/rotation = Quaternion(0.160297, -0.00641888, 0.00104111, 0.987047)
+bones/18/rotation = Quaternion(-0.182511, 5.96046e-08, 1.49012e-06, 0.983204)
+bones/23/rotation = Quaternion(0.545396, -0.486789, -0.510893, -0.452293)
+bones/24/rotation = Quaternion(0.056325, 0.870532, -0.488807, -0.0083723)
+bones/25/rotation = Quaternion(0.170698, 0.664213, -0.151314, 0.71189)
+bones/26/rotation = Quaternion(0.124755, -0.825265, -0.112536, 0.539175)
+bones/27/rotation = Quaternion(-0.123819, -0.719523, -0.201836, 0.652853)
+bones/28/rotation = Quaternion(0.181807, -0.110124, -0.0600633, 0.975301)
+bones/29/rotation = Quaternion(-0.0667563, 0.0305105, 0.0216753, 0.997067)
+bones/31/rotation = Quaternion(0.0191673, -7.45058e-08, 2.08616e-07, 0.999816)
+bones/32/rotation = Quaternion(0.0918119, 1.3411e-07, 5.36442e-07, 0.995776)
+bones/33/rotation = Quaternion(0.0191676, -5.96046e-08, 1.78814e-07, 0.999816)
+bones/38/rotation = Quaternion(0.00116079, -0.0102553, 0.986079, 0.165959)
+bones/39/rotation = Quaternion(-0.0496914, 0.923481, -0.135842, -0.355331)
+bones/40/rotation = Quaternion(0.319593, 0.630069, -0.684004, 0.181691)
+bones/42/rotation = Quaternion(7.51152e-09, 1, 5.96046e-08, 2.0456e-08)
+bones/43/rotation = Quaternion(-0.00129298, 0.0401211, 0.981945, -0.184859)
+bones/44/rotation = Quaternion(0.0566202, 0.92354, -0.158204, 0.34473)
+bones/45/rotation = Quaternion(-0.107117, 0.709935, -0.696046, 0.00618387)
+bones/47/rotation = Quaternion(7.64323e-08, 1, 5.96046e-08, 3.5191e-09)
+
+[node name="SK_Chr_FortuneTeller_01" parent="Root/Skeleton" index="0"]
+material_override = SubResource("StandardMaterial3D_ba2pm")
+
+[node name="AnimationPlayer" parent="." index="1"]
+libraries = {
+&"": SubResource("AnimationLibrary_lenfh"),
+&"1_anim_pack_full": ExtResource("3_w3lw8")
+}
+autoplay = "1_anim_pack_full/Spell_Simple_Idle"

@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://tysrs0yr7k64"]
+
+[ext_resource type="PackedScene" uid="uid://cix3mv6f2mw3d" path="res://02_Entities/_Data/Skeletons/SM_Chr_Demon_Male_01.fbx" id="1_8eepn"]
+[ext_resource type="Texture2D" uid="uid://bt4qk2p0s8x7o" path="res://02_Entities/_Data/_Textures/PolygonDarkFantasy/Alts/PolygonDarkFantasy_Texture_01_A.png" id="2_c4ooa"]
+[ext_resource type="AnimationLibrary" uid="uid://dc35h3toilmvd" path="res://02_Entities/_Data/_Animations/Mixamo/AnimationLibraries/humanoid_locomotion_library.tres" id="3_6njl3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6njl3"]
+albedo_texture = ExtResource("2_c4ooa")
+
+[node name="SM_Chr_Demon_Male_01" unique_id=1582815041 instance=ExtResource("1_8eepn")]
+
+[node name="GeneralSkeleton" parent="." index="0" unique_id=1013255131]
+bones/1/position = Vector3(-0.0068562645, 0.8144049, 0.00073500833)
+bones/1/rotation = Quaternion(-0.035969317, -0.3676325, -0.014582739, 0.9291609)
+bones/2/rotation = Quaternion(0.050338376, 0.04084707, -0.0072053988, 0.9978706)
+bones/3/rotation = Quaternion(0.10063455, 0.081017315, -0.018551866, 0.99144584)
+bones/4/rotation = Quaternion(0.1006345, 0.081017226, -0.018551795, 0.99144584)
+bones/5/rotation = Quaternion(-0.037560258, -0.011099021, 0.0021804017, 0.9992304)
+bones/6/rotation = Quaternion(-0.05446887, 0.17692322, -0.012970582, 0.98263067)
+bones/10/rotation = Quaternion(0.52425253, 0.4607283, 0.54204917, -0.46805072)
+bones/11/rotation = Quaternion(0.047475062, 0.8432412, -0.5225902, 0.11657563)
+bones/12/rotation = Quaternion(0.27756038, -0.6042514, 0.29516664, 0.6860883)
+bones/13/rotation = Quaternion(-0.10439255, 0.789573, 0.12579532, 0.59148306)
+bones/17/rotation = Quaternion(0.03268015, -0.0059072813, 0.061057456, 0.9975816)
+bones/21/rotation = Quaternion(-0.13270508, 0.72609717, 0.22481574, 0.6361055)
+bones/25/rotation = Quaternion(0.48919433, -0.48421025, -0.5896893, -0.42248762)
+bones/26/rotation = Quaternion(0.18680674, 0.84547126, -0.49079698, -0.09695357)
+bones/27/rotation = Quaternion(0.28583914, 0.67933065, -0.22262454, 0.63815695)
+bones/28/rotation = Quaternion(0.14698996, -0.74360675, 0.0039833267, 0.6522477)
+bones/32/rotation = Quaternion(0.039577886, 0.009802803, 0.010379255, 0.9991146)
+bones/36/rotation = Quaternion(-0.19670895, -0.63172126, -0.16352661, 0.73177385)
+bones/40/rotation = Quaternion(-0.124856465, 0.031108893, 0.9840786, 0.122606814)
+bones/41/rotation = Quaternion(0.026335526, 0.95511127, -0.28529528, -0.07533765)
+bones/42/rotation = Quaternion(0.0967575, 0.56215423, -0.8143163, -0.10728347)
+bones/44/rotation = Quaternion(0.0031296024, 0.999869, 0.015612334, -0.00292869)
+bones/45/rotation = Quaternion(0.07854979, 0.21473736, 0.9681361, -0.10212964)
+bones/46/rotation = Quaternion(0.03746535, 0.9494685, -0.2888311, -0.11697257)
+bones/47/rotation = Quaternion(-0.0428202, 0.6708698, -0.73882174, 0.04735595)
+bones/49/rotation = Quaternion(0.027917888, 0.99937284, 0.020424634, -0.0075709196)
+
+[node name="SM_Chr_Demon_Male_01" parent="GeneralSkeleton" index="0" unique_id=212600628]
+material_override = SubResource("StandardMaterial3D_6njl3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1" unique_id=2062892604]
+libraries/humanoid_locomotion_library = ExtResource("3_6njl3")
