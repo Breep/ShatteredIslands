@@ -39,6 +39,7 @@ Debug="*uid://woc06wbtruty"
 
 [debug]
 
+gdscript/warnings/unused_signal=0
 shapes/collision/shape_color=Color(0, 0.588235, 0.686275, 1)
 
 [display]
