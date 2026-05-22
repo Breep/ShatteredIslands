@@ -24,7 +24,7 @@ func _ready() -> void:
 
 func _on_health_changed(current_health: float) -> void:
 	if current_health < _hp_threshold_ratio * stats.health_max:
-		_auto_attack_periodic_module.stop()
+		auto_attack_periodic.stop()
 		_rush_target = target.get_target(TargetComponent.TargettingStrategy.FARTHEST_ENEMY)
 		if is_instance_valid(_rush_target):
 			movement.rush(10, _rush_target.global_position)	

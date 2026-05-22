@@ -103,7 +103,6 @@ input_2/break_loop_at_end = false
 input_2/reset = true
 
 [resource]
-graph_offset = Vector2(-352.1738, -8.266724)
 nodes/output/position = Vector2(2080, 600)
 nodes/anim_dance/node = SubResource("AnimationNodeAnimation_ds2a6")
 nodes/anim_dance/position = Vector2(-1120, 1120)

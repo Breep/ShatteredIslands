@@ -5,6 +5,10 @@
 class_name DeckHolderComponent
 extends EntityComponent
 
+#region ============================== Public variables ==============================
+var deck: PlayerDeck
+#endregion
+
 
 #region ============================== Private variables ==============================
 var _card_context: CardContext

@@ -4,7 +4,6 @@ extends Entity
 
 func _init() -> void:
 	super._init()
-	_despawn_timer = 5.0
 	category = Category.SUMMON
 
 enum Modifier {
@@ -43,9 +42,7 @@ func _ready() -> void:
 	if not is_instance_valid(_master): _master = summoner
 	movement.orbit_entity(_master, 2, 1, MovementComponent.OrbitFacing.NONE)
 	_master.died.connect(_on_master_died)
-	_despawn_timer = -1 # No despawn
-	if _auto_attack_periodic_module != null:
-		_auto_attack_periodic_module._attack_strategy = TargetComponent.TargettingStrategy.CLOSEST_ENEMY_SUMMON
+	auto_attack_periodic._attack_strategy = TargetComponent.TargettingStrategy.CLOSEST_ENEMY_SUMMON
 	super._ready()
 	alterations.add_stack(Alteration.Type.SHIELD, _shield, _master, &"Gamma Turret")
 	if auto_attack != null:

@@ -4,7 +4,6 @@ extends Entity
 
 func _init() -> void:
 	super._init()
-	_despawn_timer = 5.0
 	category = Category.SUMMON
 
 #region ============================== Enum ==============================
@@ -43,7 +42,6 @@ func _ready() -> void:
 	stat_modifiers_registry.recompute_all()
 	battle_callback_registry.register_periodic("Periodic Shield", 1.0, _periodic_beam_callback)
 	spawn_completed.connect(_on_spawn_completed)
-	_despawn_timer = -1 # No despawn
 	super._ready()
 #endregion
 

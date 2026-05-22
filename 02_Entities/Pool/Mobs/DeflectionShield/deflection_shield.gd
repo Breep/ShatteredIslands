@@ -4,7 +4,6 @@ extends Entity
 
 func _init() -> void:
 	super._init()
-	_despawn_timer = 5.0
 	category = Category.SUMMON
 
 enum Modifier {
@@ -33,7 +32,6 @@ func _ready() -> void:
 	alterations.take_status(Alteration.Type.UNTARGETABLE, -1, "Untargetable")
 	stat_modifiers_registry.recompute_all()
 	movement.orbit_entity(summoner, 2, 2, MovementComponent.OrbitFacing.ANTI_CENTER)
-	_despawn_timer = -1 # No despawn
 	super._ready()
 
 
