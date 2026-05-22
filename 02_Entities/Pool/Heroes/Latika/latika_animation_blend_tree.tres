@@ -1,10 +1,18 @@
 [gd_resource type="AnimationNodeBlendTree" format=3 uid="uid://b8n4k3u6g1igd"]
 
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_2ekbh"]
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3dwlx"]
 animation = &"Take 001"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5c32l"]
 animation = &"humanoid_locomotion_library/bow_attack_short_shooting_arrow"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mf7m8"]
+animation = &"humanoid_locomotion_library/attack_melee_01"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wvrsd"]
+animation = &"humanoid_locomotion_library/attack_melee_03_kick"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ds2a6"]
 animation = &"humanoid_locomotion_library/dance_robot_hip_hop"
@@ -12,20 +20,53 @@ animation = &"humanoid_locomotion_library/dance_robot_hip_hop"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_l2r0u"]
 animation = &"humanoid_locomotion_library/death_05"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_51cgn"]
+animation = &"humanoid_locomotion_library/flying"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_or6ag"]
+animation = &"humanoid_locomotion_library/landing"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yuwbv"]
+animation = &"humanoid_locomotion_library/hit_01"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v45io"]
+animation = &"humanoid_locomotion_library/hit_02"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6fr5i"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mdypd"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_optel"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_iufc3"]
+animation = &"humanoid_locomotion_library/sitting_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m4shc"]
+animation = &"humanoid_locomotion_library/sitting_idle_var_01"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mkm4c"]
+animation = &"humanoid_locomotion_library/sitting_idle_var_02"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6527l"]
+animation = &"humanoid_locomotion_library/kneeling_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ev6jf"]
+animation = &"humanoid_locomotion_library/sitting_idle_var_01"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_47r8h"]
+animation = &"humanoid_locomotion_library/bow_standing_idle_var_01"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ufk4g"]
 animation = &"humanoid_locomotion_library/idle"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3htvw"]
 animation = &"humanoid_locomotion_library/idle_var_01_happy"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8j7x3"]
+animation = &"humanoid_locomotion_library/bow_standing_idle_var_02"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xbbbo"]
 animation = &"humanoid_locomotion_library/run_naruto"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6527l"]
-animation = &"humanoid_locomotion_library/sitting_idle"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ev6jf"]
-animation = &"humanoid_locomotion_library/sitting_idle_var_01"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_whq83"]
 animation = &"humanoid_locomotion_library/bow_attack_shooting_arrow"
@@ -33,13 +74,34 @@ animation = &"humanoid_locomotion_library/bow_attack_shooting_arrow"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2l3jv"]
 animation = &"humanoid_locomotion_library/walking"
 
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_8j7x3"]
+fadein_time = 0.2
+fadeout_time = 0.2
+
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_3dwlx"]
 fadein_time = 0.1
 fadeout_time = 0.1
 
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_v45io"]
+filter_enabled = true
+filters = ["%GeneralSkeleton:Chest", "%GeneralSkeleton:Eyebrows", "%GeneralSkeleton:Eyes", "%GeneralSkeleton:Head", "%GeneralSkeleton:Jaw", "%GeneralSkeleton:Neck", "%GeneralSkeleton:UpperChest"]
+mix_mode = 1
+fadein_time = 0.1
+fadeout_time = 0.1
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_mf7m8"]
+fadein_time = 0.2
+fadeout_time = 0.2
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_wvrsd"]
+filter_enabled = true
+filters = ["", "%GeneralSkeleton:Ball_L", "%GeneralSkeleton:Ball_R", "%GeneralSkeleton:Chest", "%GeneralSkeleton:Eyebrows", "%GeneralSkeleton:Eyes", "%GeneralSkeleton:Finger_01_L", "%GeneralSkeleton:Finger_01_R", "%GeneralSkeleton:Finger_02_L", "%GeneralSkeleton:Finger_02_R", "%GeneralSkeleton:Finger_03_L", "%GeneralSkeleton:Finger_03_R", "%GeneralSkeleton:Finger_04_L", "%GeneralSkeleton:Finger_04_R", "%GeneralSkeleton:Head", "%GeneralSkeleton:IndexFinger_01_L", "%GeneralSkeleton:IndexFinger_01_R", "%GeneralSkeleton:IndexFinger_02_L", "%GeneralSkeleton:IndexFinger_02_R", "%GeneralSkeleton:IndexFinger_03_L", "%GeneralSkeleton:IndexFinger_03_R", "%GeneralSkeleton:IndexFinger_04_L", "%GeneralSkeleton:IndexFinger_04_R", "%GeneralSkeleton:Jaw", "%GeneralSkeleton:LeftFoot", "%GeneralSkeleton:LeftHand", "%GeneralSkeleton:LeftIndexDistal", "%GeneralSkeleton:LeftIndexIntermediate", "%GeneralSkeleton:LeftIndexProximal", "%GeneralSkeleton:LeftLittleDistal", "%GeneralSkeleton:LeftLittleIntermediate", "%GeneralSkeleton:LeftLittleProximal", "%GeneralSkeleton:LeftLowerArm", "%GeneralSkeleton:LeftLowerLeg", "%GeneralSkeleton:LeftMiddleDistal", "%GeneralSkeleton:LeftMiddleIntermediate", "%GeneralSkeleton:LeftMiddleProximal", "%GeneralSkeleton:LeftRingDistal", "%GeneralSkeleton:LeftRingIntermediate", "%GeneralSkeleton:LeftRingProximal", "%GeneralSkeleton:LeftShoulder", "%GeneralSkeleton:LeftThumbDistal", "%GeneralSkeleton:LeftThumbMetacarpal", "%GeneralSkeleton:LeftThumbProximal", "%GeneralSkeleton:LeftToes", "%GeneralSkeleton:LeftUpperArm", "%GeneralSkeleton:LeftUpperLeg", "%GeneralSkeleton:Neck", "%GeneralSkeleton:RightFoot", "%GeneralSkeleton:RightHand", "%GeneralSkeleton:RightIndexDistal", "%GeneralSkeleton:RightIndexIntermediate", "%GeneralSkeleton:RightIndexProximal", "%GeneralSkeleton:RightLittleDistal", "%GeneralSkeleton:RightLittleIntermediate", "%GeneralSkeleton:RightLittleProximal", "%GeneralSkeleton:RightLowerArm", "%GeneralSkeleton:RightLowerLeg", "%GeneralSkeleton:RightMiddleDistal", "%GeneralSkeleton:RightMiddleIntermediate", "%GeneralSkeleton:RightMiddleProximal", "%GeneralSkeleton:RightRingDistal", "%GeneralSkeleton:RightRingIntermediate", "%GeneralSkeleton:RightRingProximal", "%GeneralSkeleton:RightShoulder", "%GeneralSkeleton:RightThumbDistal", "%GeneralSkeleton:RightThumbMetacarpal", "%GeneralSkeleton:RightThumbProximal", "%GeneralSkeleton:RightToes", "%GeneralSkeleton:RightUpperArm", "%GeneralSkeleton:RightUpperLeg", "%GeneralSkeleton:Spine", "%GeneralSkeleton:Thumb_01_L", "%GeneralSkeleton:Thumb_01_R", "%GeneralSkeleton:Thumb_02_L", "%GeneralSkeleton:Thumb_02_R", "%GeneralSkeleton:Thumb_03_L", "%GeneralSkeleton:Thumb_03_R", "%GeneralSkeleton:UpperChest", "GeneralSkeleton/LeftHandAttachment/Bow/Skeleton3D/ArrowAttachment/SM_Wep_Arrow_01:rotation", "GeneralSkeleton/LeftHandAttachment/Bow/Skeleton3D/ArrowAttachment/SM_Wep_Arrow_01:scale", "GeneralSkeleton/LeftHandAttachment/Bow/Skeleton3D:Wep_Bow_02"]
+fadein_time = 0.2
+fadeout_time = 0.2
+
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_5c32l"]
-fadein_time = 0.5
-fadeout_time = 0.5
+fadein_time = 0.2
+fadeout_time = 0.2
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_vgqdx"]
 fadein_time = 0.2
@@ -51,13 +113,45 @@ fadeout_time = 0.1
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_vgqdx"]
 
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_sxfwo"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_or6ag"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_v45io"]
+
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_v2uq4"]
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_6527l"]
 
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_47r8h"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_yuwbv"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_ro0ov"]
+
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_x0r43"]
 
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_m4shc"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_optel"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_mkm4c"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_8j7x3"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_mf7m8"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_wvrsd"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_51cgn"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_6fr5i"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_iufc3"]
+
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_xsepk"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_mdypd"]
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_jvmea"]
 
@@ -65,93 +159,295 @@ fadeout_time = 0.1
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_ldyvu"]
 
-[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_5qtoa"]
-xfade_time = 0.5
+[sub_resource type="AnimationNodeTimeSeek" id="AnimationNodeTimeSeek_mf7m8"]
+
+[sub_resource type="AnimationNodeTimeSeek" id="AnimationNodeTimeSeek_mdypd"]
+
+[sub_resource type="AnimationNodeTimeSeek" id="AnimationNodeTimeSeek_8j7x3"]
+
+[sub_resource type="AnimationNodeTimeSeek" id="AnimationNodeTimeSeek_wvrsd"]
+
+[sub_resource type="AnimationNodeTimeSeek" id="AnimationNodeTimeSeek_6fr5i"]
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_or6ag"]
+xfade_time = 0.2
+input_0/name = "Var1"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "Var2"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_mf7m8"]
+xfade_time = 0.1
+input_0/name = "Attack1"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "Attack2"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+input_2/name = "Attack3"
+input_2/auto_advance = false
+input_2/break_loop_at_end = false
+input_2/reset = true
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_sxfwo"]
+xfade_time = 0.1
+input_0/name = "Var1"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "Var2"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_wvrsd"]
+input_0/name = "Standing"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "Fighting"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+input_2/name = "SittingChair"
+input_2/auto_advance = false
+input_2/break_loop_at_end = false
+input_2/reset = true
+input_3/name = "SittingFloor"
+input_3/auto_advance = false
+input_3/break_loop_at_end = false
+input_3/reset = true
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_mkm4c"]
+xfade_time = 0.2
+input_0/name = "Var1"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "Var2"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_8j7x3"]
+xfade_time = 0.2
+input_0/name = "Var1"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "Var2"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_mdypd"]
+xfade_time = 0.2
 input_0/name = "Idle"
 input_0/auto_advance = false
 input_0/break_loop_at_end = false
 input_0/reset = true
-input_1/name = "Walk"
+input_1/name = "Moving"
 input_1/auto_advance = false
 input_1/break_loop_at_end = false
 input_1/reset = true
-input_2/name = "Run"
+input_2/name = "Positioning"
 input_2/auto_advance = false
 input_2/break_loop_at_end = false
 input_2/reset = true
-input_3/name = "Dance"
+input_3/name = "Celebrating"
 input_3/auto_advance = false
 input_3/break_loop_at_end = false
 input_3/reset = true
-input_4/name = "Die"
-input_4/auto_advance = false
-input_4/break_loop_at_end = false
-input_4/reset = true
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_5qtoa"]
+xfade_time = 0.2
+input_0/name = "Walk"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "Run"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_6fr5i"]
+input_0/name = "Var1"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "Var2"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
 
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_502n4"]
+xfade_time = 0.2
 input_0/name = "TPOSE"
 input_0/auto_advance = false
 input_0/break_loop_at_end = false
 input_0/reset = true
-input_1/name = "Sitting"
+input_1/name = "Dead"
 input_1/auto_advance = false
 input_1/break_loop_at_end = false
 input_1/reset = true
-input_2/name = "Fighting"
+input_2/name = "Alive"
 input_2/auto_advance = false
 input_2/break_loop_at_end = false
 input_2/reset = true
 
 [resource]
-nodes/output/position = Vector2(2080, 600)
+graph_offset = Vector2(301.80817, -35.658936)
+nodes/output/position = Vector2(4900, 740)
 nodes/anim_dance/node = SubResource("AnimationNodeAnimation_ds2a6")
-nodes/anim_dance/position = Vector2(-1120, 1120)
+nodes/anim_dance/position = Vector2(-820, 1360)
 nodes/anim_die/node = SubResource("AnimationNodeAnimation_l2r0u")
-nodes/anim_die/position = Vector2(-1120, 1340)
-nodes/anim_idle/node = SubResource("AnimationNodeAnimation_ufk4g")
-nodes/anim_idle/position = Vector2(-1340, -20)
+nodes/anim_die/position = Vector2(3100, 580)
+nodes/anim_idle_standing/node = SubResource("AnimationNodeAnimation_ufk4g")
+nodes/anim_idle_standing/position = Vector2(-2560, -1740)
 nodes/anim_TPOSE/node = SubResource("AnimationNodeAnimation_3dwlx")
-nodes/anim_TPOSE/position = Vector2(1360, -40)
-nodes/transition_fighting/node = SubResource("AnimationNodeTransition_5qtoa")
-nodes/transition_fighting/position = Vector2(-140, 700)
+nodes/anim_TPOSE/position = Vector2(3460, 160)
+nodes/switch_moving/node = SubResource("AnimationNodeTransition_5qtoa")
+nodes/switch_moving/position = Vector2(-820, 780)
 nodes/scale_dance/node = SubResource("AnimationNodeTimeScale_v2uq4")
-nodes/scale_dance/position = Vector2(-600, 1120)
+nodes/scale_dance/position = Vector2(-140, 1360)
 nodes/scale_die/node = SubResource("AnimationNodeTimeScale_6527l")
-nodes/scale_die/position = Vector2(-600, 1340)
+nodes/scale_die/position = Vector2(3480, 580)
 nodes/scale_idle/node = SubResource("AnimationNodeTimeScale_x0r43")
-nodes/scale_idle/position = Vector2(-940, -20)
+nodes/scale_idle/position = Vector2(-1920, -1720)
 nodes/one_shot_attack/node = SubResource("AnimationNodeOneShot_3dwlx")
-nodes/one_shot_attack/position = Vector2(580, 940)
-nodes/anim_attack/node = SubResource("AnimationNodeAnimation_5c32l")
-nodes/anim_attack/position = Vector2(-420, 1560)
-nodes/anim_sitting/node = SubResource("AnimationNodeAnimation_6527l")
-nodes/anim_sitting/position = Vector2(680, 180)
-nodes/anim_sitting_var/node = SubResource("AnimationNodeAnimation_ev6jf")
-nodes/anim_sitting_var/position = Vector2(660, 380)
+nodes/one_shot_attack/position = Vector2(2440, 1120)
+nodes/anim_attack_1/node = SubResource("AnimationNodeAnimation_5c32l")
+nodes/anim_attack_1/position = Vector2(900, 1680)
+nodes/anim_idle_sitting_floor/node = SubResource("AnimationNodeAnimation_6527l")
+nodes/anim_idle_sitting_floor/position = Vector2(-2740, 340)
+nodes/anim_idle_sitting_floor_var_1/node = SubResource("AnimationNodeAnimation_ev6jf")
+nodes/anim_idle_sitting_floor_var_1/position = Vector2(-2780, 600)
 nodes/one_shot_ultimate/node = SubResource("AnimationNodeOneShot_6527l")
-nodes/one_shot_ultimate/position = Vector2(1260, 940)
+nodes/one_shot_ultimate/position = Vector2(2780, 1200)
 nodes/scale_attack/node = SubResource("AnimationNodeTimeScale_vgqdx")
-nodes/scale_attack/position = Vector2(120, 1560)
-nodes/one_shot_idle/node = SubResource("AnimationNodeOneShot_5c32l")
-nodes/one_shot_idle/position = Vector2(-660, 40)
+nodes/scale_attack/position = Vector2(2140, 1720)
+nodes/one_shot_idle_standing/node = SubResource("AnimationNodeOneShot_5c32l")
+nodes/one_shot_idle_standing/position = Vector2(-1640, -1660)
 nodes/anim_ultimate/node = SubResource("AnimationNodeAnimation_whq83")
-nodes/anim_ultimate/position = Vector2(460, 1720)
+nodes/anim_ultimate/position = Vector2(2140, 1980)
 nodes/scale_ultimate/node = SubResource("AnimationNodeTimeScale_46hic")
-nodes/scale_ultimate/position = Vector2(1040, 1660)
-nodes/anim_idle_var/node = SubResource("AnimationNodeAnimation_3htvw")
-nodes/anim_idle_var/position = Vector2(-1440, 160)
-nodes/scale_idle_var/node = SubResource("AnimationNodeTimeScale_xsepk")
-nodes/scale_idle_var/position = Vector2(-940, 160)
+nodes/scale_ultimate/position = Vector2(2600, 1980)
+nodes/anim_idle_standing_var_1/node = SubResource("AnimationNodeAnimation_3htvw")
+nodes/anim_idle_standing_var_1/position = Vector2(-2600, -1520)
+nodes/scale_idle_standing_var_1/node = SubResource("AnimationNodeTimeScale_xsepk")
+nodes/scale_idle_standing_var_1/position = Vector2(-2180, -1520)
 nodes/one_shot_sitting/node = SubResource("AnimationNodeOneShot_vgqdx")
-nodes/one_shot_sitting/position = Vector2(1120, 300)
+nodes/one_shot_sitting/position = Vector2(-1760, 480)
 nodes/transition_global/node = SubResource("AnimationNodeTransition_502n4")
-nodes/transition_global/position = Vector2(1760, 520)
+nodes/transition_global/position = Vector2(4620, 640)
 nodes/anim_walk/node = SubResource("AnimationNodeAnimation_2l3jv")
-nodes/anim_walk/position = Vector2(-1300, 600)
+nodes/anim_walk/position = Vector2(-1760, 1140)
 nodes/scale_walk/node = SubResource("AnimationNodeTimeScale_ldyvu")
-nodes/scale_walk/position = Vector2(-900, 620)
+nodes/scale_walk/position = Vector2(-1380, 1140)
 nodes/anim_run/node = SubResource("AnimationNodeAnimation_xbbbo")
-nodes/anim_run/position = Vector2(-1360, 860)
+nodes/anim_run/position = Vector2(-1800, 1420)
 nodes/scale_run/node = SubResource("AnimationNodeTimeScale_jvmea")
-nodes/scale_run/position = Vector2(-860.7599, 927.7263)
-node_connections = [&"output", 0, &"transition_global", &"transition_fighting", 0, &"one_shot_idle", &"transition_fighting", 1, &"scale_walk", &"transition_fighting", 2, &"scale_run", &"transition_fighting", 3, &"scale_dance", &"transition_fighting", 4, &"scale_die", &"scale_dance", 0, &"anim_dance", &"scale_die", 0, &"anim_die", &"scale_idle", 0, &"anim_idle", &"one_shot_attack", 0, &"transition_fighting", &"one_shot_attack", 1, &"scale_attack", &"one_shot_ultimate", 0, &"one_shot_attack", &"one_shot_ultimate", 1, &"scale_ultimate", &"scale_attack", 0, &"anim_attack", &"one_shot_idle", 0, &"scale_idle", &"one_shot_idle", 1, &"scale_idle_var", &"scale_ultimate", 0, &"anim_ultimate", &"scale_idle_var", 0, &"anim_idle_var", &"one_shot_sitting", 0, &"anim_sitting", &"one_shot_sitting", 1, &"anim_sitting_var", &"transition_global", 0, &"anim_TPOSE", &"transition_global", 1, &"one_shot_sitting", &"transition_global", 2, &"one_shot_ultimate", &"scale_walk", 0, &"anim_walk", &"scale_run", 0, &"anim_run"]
+nodes/scale_run/position = Vector2(-1380, 1420)
+nodes/anim_attack_3/node = SubResource("AnimationNodeAnimation_wvrsd")
+nodes/anim_attack_3/position = Vector2(1000, 2060)
+nodes/anim_attack_2/node = SubResource("AnimationNodeAnimation_mf7m8")
+nodes/anim_attack_2/position = Vector2(1020, 1860)
+nodes/switch_attack/node = SubResource("AnimationNodeTransition_mf7m8")
+nodes/switch_attack/position = Vector2(1840, 1820)
+nodes/anim_idle_standing_var_2/node = SubResource("AnimationNodeAnimation_8j7x3")
+nodes/anim_idle_standing_var_2/position = Vector2(-2660, -1340)
+nodes/scale_idle_standing_var_2/node = SubResource("AnimationNodeTimeScale_mdypd")
+nodes/scale_idle_standing_var_2/position = Vector2(-2180, -1340)
+nodes/switch_standing_idle_var/node = SubResource("AnimationNodeTransition_6fr5i")
+nodes/switch_standing_idle_var/position = Vector2(-1920, -1480)
+nodes/anim_idle_fighting/node = SubResource("AnimationNodeAnimation_6fr5i")
+nodes/anim_idle_fighting/position = Vector2(-2640, -1080)
+nodes/scale_idle_fighting/node = SubResource("AnimationNodeTimeScale_m4shc")
+nodes/scale_idle_fighting/position = Vector2(-2180, -1080)
+nodes/anim_idle_fighting_var_1/node = SubResource("AnimationNodeAnimation_mdypd")
+nodes/anim_idle_fighting_var_1/position = Vector2(-2660, -880)
+nodes/scale_idle_fighting_var_1/node = SubResource("AnimationNodeTimeScale_optel")
+nodes/scale_idle_fighting_var_1/position = Vector2(-2380, -880)
+nodes/switch_idle_fighting_var/node = SubResource("AnimationNodeTransition_mkm4c")
+nodes/switch_idle_fighting_var/position = Vector2(-2080, -780)
+nodes/anim_idle_fighting_var_2/node = SubResource("AnimationNodeAnimation_optel")
+nodes/anim_idle_fighting_var_2/position = Vector2(-2660, -680)
+nodes/scale_idle_fighting_var_2/node = SubResource("AnimationNodeTimeScale_mkm4c")
+nodes/scale_idle_fighting_var_2/position = Vector2(-2380, -680)
+nodes/one_shot_idle_fighting/node = SubResource("AnimationNodeOneShot_mf7m8")
+nodes/one_shot_idle_fighting/position = Vector2(-1800, -980)
+nodes/anim_idle_sitting_chair/node = SubResource("AnimationNodeAnimation_iufc3")
+nodes/anim_idle_sitting_chair/position = Vector2(-2760, -380)
+nodes/anim_idle_sitting_chair_var_1/node = SubResource("AnimationNodeAnimation_m4shc")
+nodes/anim_idle_sitting_chair_var_1/position = Vector2(-2860, -140)
+nodes/anim_idle_sitting_chair_var_2/node = SubResource("AnimationNodeAnimation_mkm4c")
+nodes/anim_idle_sitting_chair_var_2/position = Vector2(-2860, 60)
+nodes/scale_idle_sitting_chair/node = SubResource("AnimationNodeTimeScale_8j7x3")
+nodes/scale_idle_sitting_chair/position = Vector2(-2120, -380)
+nodes/scale_idle_sitting_chair_var_1/node = SubResource("AnimationNodeTimeScale_mf7m8")
+nodes/scale_idle_sitting_chair_var_1/position = Vector2(-2440, -140)
+nodes/scale_idle_sitting_chair_var_2/node = SubResource("AnimationNodeTimeScale_wvrsd")
+nodes/scale_idle_sitting_chair_var_2/position = Vector2(-2440, 60)
+nodes/switch_idle_sitting_chair_var/node = SubResource("AnimationNodeTransition_8j7x3")
+nodes/switch_idle_sitting_chair_var/position = Vector2(-2140, -80)
+nodes/one_shot_idle_sitting_chair/node = SubResource("AnimationNodeOneShot_wvrsd")
+nodes/one_shot_idle_sitting_chair/position = Vector2(-1820, -340)
+nodes/scale_idle_sitting_floor/node = SubResource("AnimationNodeTimeScale_51cgn")
+nodes/scale_idle_sitting_floor/position = Vector2(-2000, 340)
+nodes/scale_idle_sitting_floor_var_1/node = SubResource("AnimationNodeTimeScale_6fr5i")
+nodes/scale_idle_sitting_floor_var_1/position = Vector2(-2380, 600)
+nodes/anim_idle_sitting_floor_var_2/node = SubResource("AnimationNodeAnimation_47r8h")
+nodes/anim_idle_sitting_floor_var_2/position = Vector2(-2820, 820)
+nodes/scale_idle_sitting_floor_var_2/node = SubResource("AnimationNodeTimeScale_iufc3")
+nodes/scale_idle_sitting_floor_var_2/position = Vector2(-2360, 820)
+nodes/switch_anim_idle_sitting_floor/node = SubResource("AnimationNodeTransition_or6ag")
+nodes/switch_anim_idle_sitting_floor/position = Vector2(-2060, 740)
+nodes/switch_main/node = SubResource("AnimationNodeTransition_mdypd")
+nodes/switch_main/position = Vector2(280, 640)
+nodes/switch_idle/node = SubResource("AnimationNodeTransition_wvrsd")
+nodes/switch_idle/position = Vector2(-820, -760)
+nodes/anim_drag/node = SubResource("AnimationNodeAnimation_51cgn")
+nodes/anim_drag/position = Vector2(-620, 1000)
+nodes/anim_drop/node = SubResource("AnimationNodeAnimation_or6ag")
+nodes/anim_drop/position = Vector2(1440, 1320)
+nodes/scale_drag/node = SubResource("AnimationNodeTimeScale_47r8h")
+nodes/scale_drag/position = Vector2(-240, 1000)
+nodes/scale_drop/node = SubResource("AnimationNodeTimeScale_yuwbv")
+nodes/scale_drop/position = Vector2(1820, 1320)
+nodes/one_shop_drop/node = SubResource("AnimationNodeOneShot_8j7x3")
+nodes/one_shop_drop/position = Vector2(2060, 1060)
+nodes/anim_hit_1/node = SubResource("AnimationNodeAnimation_yuwbv")
+nodes/anim_hit_1/position = Vector2(3080, 1500)
+nodes/one_shot_hit/node = SubResource("AnimationNodeOneShot_v45io")
+nodes/one_shot_hit/position = Vector2(3860, 1240)
+nodes/scale_attack_1/node = SubResource("AnimationNodeTimeScale_sxfwo")
+nodes/scale_attack_1/position = Vector2(1540, 1680)
+nodes/scale_attack_2/node = SubResource("AnimationNodeTimeScale_or6ag")
+nodes/scale_attack_2/position = Vector2(1540, 1860)
+nodes/scale_attack_3/node = SubResource("AnimationNodeTimeScale_v45io")
+nodes/scale_attack_3/position = Vector2(1540, 2060)
+nodes/switch_hit/node = SubResource("AnimationNodeTransition_sxfwo")
+nodes/switch_hit/position = Vector2(3660, 1540)
+nodes/anim_hit_2/node = SubResource("AnimationNodeAnimation_v45io")
+nodes/anim_hit_2/position = Vector2(3080, 1700)
+nodes/scale_hit_1/node = SubResource("AnimationNodeTimeScale_ro0ov")
+nodes/scale_hit_1/position = Vector2(3420, 1480)
+"nodes/TimeScale 2/node" = SubResource("AnimationNodeTimeScale_2ekbh")
+"nodes/TimeScale 2/position" = Vector2(3420, 1700)
+nodes/seek_dance/node = SubResource("AnimationNodeTimeSeek_mf7m8")
+nodes/seek_dance/position = Vector2(-320, 1360)
+nodes/seek_idle_sitting_floor/node = SubResource("AnimationNodeTimeSeek_wvrsd")
+nodes/seek_idle_sitting_floor/position = Vector2(-2320, 340)
+nodes/seek_idle_sitting_chair/node = SubResource("AnimationNodeTimeSeek_8j7x3")
+nodes/seek_idle_sitting_chair/position = Vector2(-2380, -380)
+nodes/seek_idle_fighting/node = SubResource("AnimationNodeTimeSeek_mdypd")
+nodes/seek_idle_fighting/position = Vector2(-2400, -1100)
+nodes/seek_idle_standing/node = SubResource("AnimationNodeTimeSeek_6fr5i")
+nodes/seek_idle_standing/position = Vector2(-2200, -1740)
+node_connections = [&"output", 0, &"transition_global", &"switch_moving", 0, &"scale_walk", &"switch_moving", 1, &"scale_run", &"scale_dance", 0, &"seek_dance", &"scale_die", 0, &"anim_die", &"scale_idle", 0, &"seek_idle_standing", &"one_shot_attack", 0, &"one_shop_drop", &"one_shot_attack", 1, &"scale_attack", &"one_shot_ultimate", 0, &"one_shot_attack", &"one_shot_ultimate", 1, &"scale_ultimate", &"scale_attack", 0, &"switch_attack", &"one_shot_idle_standing", 0, &"scale_idle", &"one_shot_idle_standing", 1, &"switch_standing_idle_var", &"scale_ultimate", 0, &"anim_ultimate", &"scale_idle_standing_var_1", 0, &"anim_idle_standing_var_1", &"one_shot_sitting", 0, &"scale_idle_sitting_floor", &"one_shot_sitting", 1, &"switch_anim_idle_sitting_floor", &"transition_global", 0, &"anim_TPOSE", &"transition_global", 1, &"scale_die", &"transition_global", 2, &"one_shot_hit", &"scale_walk", 0, &"anim_walk", &"scale_run", 0, &"anim_run", &"switch_attack", 0, &"scale_attack_1", &"switch_attack", 1, &"scale_attack_2", &"switch_attack", 2, &"scale_attack_3", &"scale_idle_standing_var_2", 0, &"anim_idle_standing_var_2", &"switch_standing_idle_var", 0, &"scale_idle_standing_var_1", &"switch_standing_idle_var", 1, &"scale_idle_standing_var_2", &"scale_idle_fighting", 0, &"seek_idle_fighting", &"scale_idle_fighting_var_1", 0, &"anim_idle_fighting_var_1", &"switch_idle_fighting_var", 0, &"scale_idle_fighting_var_1", &"switch_idle_fighting_var", 1, &"scale_idle_fighting_var_2", &"scale_idle_fighting_var_2", 0, &"anim_idle_fighting_var_2", &"one_shot_idle_fighting", 0, &"scale_idle_fighting", &"one_shot_idle_fighting", 1, &"switch_idle_fighting_var", &"scale_idle_sitting_chair", 0, &"seek_idle_sitting_chair", &"scale_idle_sitting_chair_var_1", 0, &"anim_idle_sitting_chair_var_1", &"scale_idle_sitting_chair_var_2", 0, &"anim_idle_sitting_chair_var_2", &"switch_idle_sitting_chair_var", 0, &"scale_idle_sitting_chair_var_1", &"switch_idle_sitting_chair_var", 1, &"scale_idle_sitting_chair_var_2", &"one_shot_idle_sitting_chair", 0, &"scale_idle_sitting_chair", &"one_shot_idle_sitting_chair", 1, &"switch_idle_sitting_chair_var", &"scale_idle_sitting_floor", 0, &"seek_idle_sitting_floor", &"scale_idle_sitting_floor_var_1", 0, &"anim_idle_sitting_floor_var_1", &"scale_idle_sitting_floor_var_2", 0, &"anim_idle_sitting_floor_var_2", &"switch_anim_idle_sitting_floor", 0, &"scale_idle_sitting_floor_var_1", &"switch_anim_idle_sitting_floor", 1, &"scale_idle_sitting_floor_var_2", &"switch_main", 0, &"switch_idle", &"switch_main", 1, &"switch_moving", &"switch_main", 2, &"scale_drag", &"switch_main", 3, &"scale_dance", &"switch_idle", 0, &"one_shot_idle_standing", &"switch_idle", 1, &"one_shot_idle_fighting", &"switch_idle", 2, &"one_shot_idle_sitting_chair", &"switch_idle", 3, &"one_shot_sitting", &"scale_drag", 0, &"anim_drag", &"scale_drop", 0, &"anim_drop", &"one_shop_drop", 0, &"switch_main", &"one_shop_drop", 1, &"scale_drop", &"one_shot_hit", 0, &"one_shot_ultimate", &"one_shot_hit", 1, &"switch_hit", &"scale_attack_1", 0, &"anim_attack_1", &"scale_attack_2", 0, &"anim_attack_2", &"scale_attack_3", 0, &"anim_attack_3", &"switch_hit", 0, &"scale_hit_1", &"switch_hit", 1, &"TimeScale 2", &"scale_hit_1", 0, &"anim_hit_1", &"TimeScale 2", 0, &"anim_hit_2", &"seek_dance", 0, &"anim_dance", &"seek_idle_sitting_floor", 0, &"anim_idle_sitting_floor", &"seek_idle_sitting_chair", 0, &"anim_idle_sitting_chair", &"seek_idle_fighting", 0, &"anim_idle_fighting", &"seek_idle_standing", 0, &"anim_idle_standing"]
