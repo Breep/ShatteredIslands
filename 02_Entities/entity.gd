@@ -56,11 +56,12 @@ enum EntityType {
 @export var _health_bar_marker: Marker3D
 @export var _health_bar: SimpleInfoPanel2D
 @export_subgroup("Auto Attack")
-@export var _attack_spawn_marker: Marker3D
+@export var _attack_spawn_marker: Marker3D # TODO A bouger dans le projectile component ? Ou attack component ?
 @export var _projectile_type: Projectile.Type
 @export_subgroup("Animation")
-@export var custom_animation_component: AnimationComponent
-@export var custom_spawn_animation_component: SpawnAnimationComponent # Overrides the default spawn animation if set
+@export var _animation_component: AnimationComponent # Mandatory
+@export var _override_spawn_animation_component: SpawnAnimationComponent # Overrides the default spawn animation if set
+@export var _override_despawn_animation_component: DespawnAnimationComponent # Overrides the default despawn animation if set
 
 @export_group("Formation")
 @export_range(1, 20, 1) var level: int = 1
@@ -92,19 +93,12 @@ enum EntityType {
 const TICKS_PER_SECOND: int = 60
 #endregion
 
-#region ============================== Public variables ==============================
 var uid: int = -1 # Multiplayer ID of the entity
 var stats: EntityStats
+var summoner: Entity # Set via apply_context si l'entité a été invoquée par une autre
 
-# Modifiers
-var auto_attack_modifier_registry: AutoAttackModifierRegistry
-var action_modifiers_registry: ActionModifiersRegistry
-var stat_modifiers_registry: EntityStatModifiersRegistry
-var death_modifiers_registry: DeathModifiersRegistry
-var periodic_timer_registry: PeriodicTimerRegistry
-var battle_callback_registry: BattleCallbackRegistry
-
-# Components
+#region ============================== Components ==============================
+# Auto loaded Components
 var damage: DamageComponent
 var heal: HealComponent
 var projectile: ProjectileComponent
@@ -113,13 +107,12 @@ var summon: SummonComponent
 var auto_attack: AutoAttackComponent
 var alterations: AlterationsComponent
 var target: TargetComponent
-
 var movement: MovementComponent
+
+# Mandatory components
 var animation: AnimationComponent
 var spawn_animation: SpawnAnimationComponent
 var clickable: ClickableComponent
-
-var summoner: Entity # Set via apply_context si l'entité a été invoquée par une autre
 
 var display_mode: DisplayMode = DisplayMode.PREVIEW
 var deck: PlayerDeck
@@ -132,6 +125,15 @@ var families_stats: FamiliesStats:
 
 var spawn_manager: SpawnManager:
 	get: return _spawn_manager
+#endregion
+
+#region ============================== Modifiers ==============================
+var auto_attack_modifier_registry: AutoAttackModifierRegistry
+var action_modifiers_registry: ActionModifiersRegistry
+var stat_modifiers_registry: EntityStatModifiersRegistry
+var death_modifiers_registry: DeathModifiersRegistry
+var periodic_timer_registry: PeriodicTimerRegistry
+var battle_callback_registry: BattleCallbackRegistry
 #endregion
 
 #region ============================== Private variables ==============================
@@ -147,8 +149,6 @@ var _family_module: FamilyModule
 # Spawn system
 var _original_fighting_state: FightingState = FightingState.UNDEF
 #endregion
-
-
 
 @onready var bds_registry := EntityBDSRegistry.new(self)
 @onready var _state_machine := EntityStateMachine.new(self)
@@ -497,16 +497,16 @@ func _auto_load_components() -> void:
 
 
 func _load_spawn_animation() -> void:
-	if custom_spawn_animation_component != null:
-		spawn_animation = custom_spawn_animation_component
+	if _override_spawn_animation_component != null:
+		spawn_animation = _override_spawn_animation_component
 		return
 	spawn_animation = Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.SPAWN_ANIMATION].instantiate().init(self)
 	add_child(spawn_animation)
 
 
 func _load_animation() -> void:
-	if custom_animation_component != null:
-		animation = custom_animation_component
+	if _animation_component != null:
+		animation = _animation_component
 		return
 	animation = Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.ANIMATION].instantiate().init(self)
 	add_child(animation)
