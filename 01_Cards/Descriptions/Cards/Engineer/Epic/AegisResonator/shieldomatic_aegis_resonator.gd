@@ -12,7 +12,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var period: float = _period[card_lvl - 1]
 	var shield: float = _shared_shields[card_lvl - 1]
 	
-	ctx.periodic_timers.register(&"Aegis Resonator", period, func() -> void:
+	ctx.battle_callbacks.register_periodic(&"Aegis Resonator", period, func() -> void:
 		if not is_instance_valid(ctx.hero): return
 		
 		var allies: Array[Entity] = ctx.hero.target.get_targets(TargetComponent.MultipleTargettingStrategy.ALLIES)

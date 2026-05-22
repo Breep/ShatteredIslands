@@ -137,20 +137,19 @@ var auto_attack_modifier_registry: AutoAttackModifierRegistry
 var action_modifiers_registry: ActionModifiersRegistry
 var stat_modifiers_registry: EntityStatModifiersRegistry
 var death_modifiers_registry: DeathModifiersRegistry
-var periodic_timer_registry: PeriodicTimerRegistry
 var battle_callback_registry: BattleCallbackRegistry
 #endregion
 
-# TODO Checker si c'est normal d'exposer ça public
 #region ============================== Context ============================== 
+# TODO Checker si c'est normal d'exposer ça public
 var spawn_manager: SpawnManager:
 	get: return _spawn_manager
 #endregion
 
 #region ============================== Private variables ==============================
-var _base_stats: EntityStats # Private, use _base_stats property to access
+var _base_stats: EntityStats
 
-# Spawn system
+# Spawn system # TODO Checker que'est-ce que ça fait ici plutôt que dans le spawn component ?
 var _original_fighting_state: FightingState = FightingState.UNDEF
 #endregion
 
@@ -217,10 +216,6 @@ func _enter_tree() -> void:
 	stat_modifiers_registry = EntityStatModifiersRegistry.new(_base_stats, stats)
 
 	_auto_load_components()
-
-	periodic_timer_registry = PeriodicTimerRegistry.new()
-	periodic_timer_registry.name = "PeriodicTimerRegistry"
-	add_child(periodic_timer_registry)
 
 	battle_callback_registry = BattleCallbackRegistry.new()
 
@@ -303,8 +298,8 @@ func process_tick() -> void:
 	if alterations != null:
 		alterations.process_tick()
 	spawn.process_tick()
-	if periodic_timer_registry != null:
-		periodic_timer_registry.process_tick()
+	if battle_callback_registry != null:
+		battle_callback_registry.process_tick()
 #endregion
 
 #region ============================== Context ==============================
@@ -536,11 +531,11 @@ func _on_stunned_changed(is_active: bool, _duration: float, _infinite: bool) -> 
 
 
 func _on_stunned(is_active: bool) -> void:
-	if periodic_timer_registry == null:
+	if battle_callback_registry == null:
 		return
 	if is_active:
-		periodic_timer_registry.pause_all()
+		battle_callback_registry.pause_timers()
 	else:
-		periodic_timer_registry.resume_all()
+		battle_callback_registry.resume_timers()
 
 #endregion

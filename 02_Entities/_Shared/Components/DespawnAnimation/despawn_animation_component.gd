@@ -1,6 +1,6 @@
 # Ferme la boucle de vie des entités éphémères.
 # Sur signal `died` de l'owner, planifie l'animation de despawn (shrink + queue_free)
-# après `_owner._despawn_timer` secondes via le periodic_timer_registry.
+# après `_owner._despawn_timer` secondes via le battle_callback_registry.
 # No-op si `_despawn_timer <= 0` (entités persistantes : héros, bâtiments fixes).
 class_name DespawnAnimationComponent
 extends EntityComponent
@@ -39,7 +39,7 @@ func play_despawn_animation() -> void:
 func _on_owner_died() -> void:
 	if _despawn_timer <= 0.0:
 		return
-	if _owner.periodic_timer_registry == null:
+	if _owner.battle_callback_registry == null:
 		return
-	_owner.periodic_timer_registry.register_oneshot(_despawn_timer, play_despawn_animation)
+	_owner.battle_callback_registry.register_oneshot(_despawn_timer, play_despawn_animation)
 #endregion

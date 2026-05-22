@@ -38,7 +38,7 @@ func _ready() -> void:
 		alterations.add_stack(Alteration.Type.DEFENSE, 15.0)
 
 	if _primal_shake_period > 0:
-		periodic_timer_registry.register("Primal Shake", _primal_shake_period, func() -> void:
+		battle_callback_registry.register_periodic("Primal Shake", _primal_shake_period, func() -> void:
 			primal_shaked.emit()
 			for i in _primal_shake_number:
 				summoner.summon.summon_entity(EntityType.CHICKEN, SpawnLocationConfig.create_entity_relative(self, 5.0), {})
@@ -48,7 +48,7 @@ func _ready() -> void:
 
 func _on_died() -> void:
 	super._on_died()
-	periodic_timer_registry.unregister("Primal Shake")
+	battle_callback_registry.unregister("Primal Shake")
 
 
 

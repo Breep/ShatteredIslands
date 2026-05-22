@@ -22,7 +22,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			for i in chicken_spawned_per_death:
 				ctx.hero.summon.summon_entity(Entity.EntityType.CHICKEN_EGG, SpawnLocationConfig.create_entity_relative(hit_target, 1.5), {})
 	)
-	ctx.periodic_timers.register("Crumble Eggs", period, func() -> void:
+	ctx.battle_callbacks.register_periodic("Crumble Eggs", period, func() -> void:
 		var target: Entity = ctx.hero.target.get_target(TargetComponent.TargettingStrategy.LOWEST_HP_ENEMY)
 		if target == null: return
 		ctx.hero.projectile.projectile_attack(target, Projectile.Type.SMALL_EGG, ctx.hero, proj_stats)

@@ -27,7 +27,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		ctx.hero.get_tree().root.add_child(_orb_visual)
 	)
 
-	ctx.periodic_timers.register(&"Tainted Blood", period, func() -> void:
+	ctx.battle_callbacks.register_periodic(&"Tainted Blood", period, func() -> void:
 		var target = ctx.hero.target.get_target(TargetComponent.TargettingStrategy.RANDOM_ENEMY)
 		if target == null or not is_instance_valid(target):
 			return

@@ -41,7 +41,7 @@ func _ready() -> void:
 	alterations.take_condition_stacks(_on_spawn_shield_amount, Alteration.Type.SHIELD, false, "Initial shield")
 	_base_stats.health_max = _on_spawn_hp_max
 	stat_modifiers_registry.recompute_all()
-	periodic_timer_registry.register("Periodic Shield", 1.0, _periodic_beam_callback)
+	battle_callback_registry.register_periodic("Periodic Shield", 1.0, _periodic_beam_callback)
 	spawn_completed.connect(_on_spawn_completed)
 	_despawn_timer = -1 # No despawn
 	super._ready()
@@ -138,7 +138,7 @@ func _on_died() -> void:
 	_unlink_from_current_ally()
 	_anim_hovering_module.stop_hover()
 	_play_fall_anim()
-	periodic_timer_registry.register_oneshot(_respawn_timer, resurrect.bind(100))
+	battle_callback_registry.register_oneshot(_respawn_timer, resurrect.bind(100))
 
 
 func _on_resurrected() -> void:

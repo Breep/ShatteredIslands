@@ -29,7 +29,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			vars[HatchModifier.VarType.SPAWN_COUNT] += chicken_per_egg
 		hm.append(mod)
 	
-	ctx.periodic_timers.register_oneshot(time_before_spawn, func() -> void:
+	ctx.battle_callbacks.register_oneshot(time_before_spawn, func() -> void:
 		ctx.hero.action_modifiers_registry.register_modifier(big_egg_mod)
 		for i in big_egg_number:
 			ctx.hero.summon.summon_entity(Entity.EntityType.CHICKEN_EGG, SpawnLocationConfig.create_arena_center(3), {})

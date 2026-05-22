@@ -119,7 +119,7 @@ func _start_passive() -> void:
 	_battle_start_chicken_spawn()
 	var spawn_period: float = P_PERIODIC_SPAWN_PERIODS[level] - _chicken_lord_stats.spawn_period_decrease
 	var chicken_number: int = P_PERIODIC_SPAWN_CHICKEN_NUMBERS[level]
-	_owner.periodic_timer_registry.register(&"Chicken passive", spawn_period, _spawn_n_chickens.bind(chicken_number), true)
+	_owner.battle_callback_registry.register_periodic(&"Chicken passive", spawn_period, _spawn_n_chickens.bind(chicken_number), true)
 
 	if _trex_gauge >= ANCESTRAL_GAUCHE_THRESHOLD:
 		var spawn_loc := SpawnLocationConfig.create_arena_center()

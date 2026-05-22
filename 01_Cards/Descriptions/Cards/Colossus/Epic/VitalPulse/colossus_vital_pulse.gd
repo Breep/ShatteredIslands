@@ -14,7 +14,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var vfx := VITAL_PULSE_VFX.instantiate() as Node3D
 	ctx.hero.add_child(vfx)
 
-	ctx.periodic_timers.register(&"Vital Pulse", period, func() -> void:
+	ctx.battle_callbacks.register_periodic(&"Vital Pulse", period, func() -> void:
 		var targets: Array[Entity] = ctx.hero.target.get_targets(
 			TargetComponent.MultipleTargettingStrategy.ENEMIES
 		)

@@ -11,7 +11,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 	var meteor_bonus_chance: float = _meteor_bonus_chance[card_lvl - 1]
 	
-	ctx.hero.periodic_timer_registry.register(&"Apocalypse", 1, func() -> void:
+	ctx.hero.battle_callback_registry.register_periodic(&"Apocalypse", 1, func() -> void:
 		ctx.hero.families_stats.ardent_celestial.apocalypse_bonus_meteor_chance += meteor_bonus_chance
 	)
 	

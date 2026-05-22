@@ -15,7 +15,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if not is_instance_valid(chicken): return
 		if chicken is ChickenGifted: return
 
-		chicken.periodic_timer_registry.register_oneshot(evolution_time, func() -> void:
+		chicken.battle_callback_registry.register_oneshot(evolution_time, func() -> void:
 			if not is_instance_valid(chicken) or chicken.is_dead(): return
 
 			var chicken_type = Utils.pick_random(ctx.hero.families_stats.chicken_lord.gifted_types, ctx.hero.battle_id)

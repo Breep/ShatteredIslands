@@ -15,7 +15,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 	var period: float = _periods[card_lvl - 1]
 
-	ctx.periodic_timers.register(&"Colossal Titan", period, func() -> void:
+	ctx.battle_callbacks.register_periodic(&"Colossal Titan", period, func() -> void:
 		if ctx.hero == null or not is_instance_valid(ctx.hero):
 			return
 
@@ -30,7 +30,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 		# Delay damage to sync with axe impact
 		var damage_factor: float = _damage_factors[card_lvl - 1]
-		ctx.periodic_timers.register_oneshot(DEPLOY_TIME, func() -> void:
+		ctx.battle_callbacks.register_oneshot(DEPLOY_TIME, func() -> void:
 			if not is_instance_valid(ennemy): return
 			var damage: float = (ctx.hero.stats.scale - 1) * 100 * damage_factor
 			ctx.hero.damage.direct(ennemy, damage, Utils.ActionType.DAMAGE_PHYSICAL, &"Colossal Titan")

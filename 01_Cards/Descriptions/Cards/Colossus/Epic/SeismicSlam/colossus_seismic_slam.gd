@@ -18,7 +18,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var stun_duration: float = _stun_durations[card_lvl - 1]
 	
 	var state := {&"iteration": 1}
-	ctx.periodic_timers.register(&"Seismic Slam", period, func() -> void:
+	ctx.battle_callbacks.register_periodic(&"Seismic Slam", period, func() -> void:
 		if ctx.hero == null or not is_instance_valid(ctx.hero):
 			return
 

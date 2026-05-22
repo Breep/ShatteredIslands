@@ -73,7 +73,7 @@ func _on_died() -> void:
 	super._on_died()
 	_play_fall_anim()
 	if _respawn_timer > 0:
-		periodic_timer_registry.register_oneshot(_respawn_timer, resurrect.bind(100))
+		battle_callback_registry.register_oneshot(_respawn_timer, resurrect.bind(100))
 
 
 func _on_resurrected() -> void:

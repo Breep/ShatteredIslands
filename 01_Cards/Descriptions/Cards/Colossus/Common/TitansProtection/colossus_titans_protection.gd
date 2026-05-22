@@ -13,7 +13,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var percent: float = _lost_hp_percent[card_lvl - 1]
 	var period: float = _period[card_lvl - 1]
 
-	ctx.periodic_timers.register(&"Titan's Protection", period, func() -> void:
+	ctx.battle_callbacks.register_periodic(&"Titan's Protection", period, func() -> void:
 		var max_hp: float = ctx.hero.stats.health_max
 		var current_hp: float = ctx.hero.stats.health
 		var lost_hp: float = max_hp - current_hp

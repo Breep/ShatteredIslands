@@ -12,7 +12,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var regen: float = _regen_amount[card_lvl - 1]
 	var period: float = _period[card_lvl - 1]
 
-	ctx.periodic_timers.register(&"Life Spring", period, func() -> void:
+	ctx.battle_callbacks.register_periodic(&"Life Spring", period, func() -> void:
 		var target: Entity = ctx.hero.target.get_target(TargetComponent.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
 		if target == null: return
 		ctx.hero.alterations.inflict_condition_stacks(target, regen, Alteration.Type.REGEN, &"Life Spring")

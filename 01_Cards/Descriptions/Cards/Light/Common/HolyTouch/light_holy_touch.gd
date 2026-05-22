@@ -12,7 +12,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var amount: int = _heal_amount[card_lvl - 1]
 	var period: float = _period[card_lvl - 1]
 
-	ctx.periodic_timers.register(&"Holy Touch", period, func() -> void:
+	ctx.battle_callbacks.register_periodic(&"Holy Touch", period, func() -> void:
 		var target: Entity = ctx.hero.target.get_target(TargetComponent.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
 		if target == null: return
 		ctx.hero.heal.direct(target, amount, &"Holy Touch")

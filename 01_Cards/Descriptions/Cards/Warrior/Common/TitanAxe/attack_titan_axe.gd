@@ -31,7 +31,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		var axe_vfx := AXE_VISUAL.instantiate() as Node3D
 		ctx.hero.get_tree().root.add_child(axe_vfx)
 		axe_vfx.global_position = target.global_position
-		ctx.periodic_timers.register_oneshot(DEPLOY_TIME, func() -> void:
+		ctx.battle_callbacks.register_oneshot(DEPLOY_TIME, func() -> void:
 			if not is_instance_valid(target): return
 			var bonus: float = target.stats.health_max * (hp_pct + (ctx.hero.stats.scale - 1) * scale_bonus / 100) / 100.0
 			ctx.hero.damage.direct(target, bonus, Utils.ActionType.DAMAGE_PHYSICAL, &"Titan Axe")

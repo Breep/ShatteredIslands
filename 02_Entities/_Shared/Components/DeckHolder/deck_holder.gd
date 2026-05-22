@@ -19,7 +19,6 @@ func setup() -> void:
 		_owner.stat_modifiers_registry,
 		_owner.action_modifiers_registry,
 		_owner.auto_attack_modifier_registry,
-		_owner.periodic_timer_registry,
 		_owner.battle_callback_registry
 	)
 

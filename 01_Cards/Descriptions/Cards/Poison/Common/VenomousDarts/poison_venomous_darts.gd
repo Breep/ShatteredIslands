@@ -21,7 +21,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		var damage := 5 + float(target.alterations.poison_stacks) * multiplier
 		ctx.hero.damage.direct(target, damage, Utils.ActionType.DAMAGE_PHYSICAL, &"Venomous Darts")
 	
-	ctx.periodic_timers.register(&"Venomous Darts", period, func() -> void:
+	ctx.battle_callbacks.register_periodic(&"Venomous Darts", period, func() -> void:
 		for i in darts_number:
 			var target: Entity = ctx.hero.target.get_target(TargetComponent.TargettingStrategy.RANDOM_ENEMY)
 			if target == null: return

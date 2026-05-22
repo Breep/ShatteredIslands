@@ -33,7 +33,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			)
 			return
 	
-	ctx.periodic_timers.register(&"Aether Redirector", period, _scan_and_redirect)
+	ctx.battle_callbacks.register_periodic(&"Aether Redirector", period, _scan_and_redirect)
 
 
 func get_description(cardlvl: int) -> String:

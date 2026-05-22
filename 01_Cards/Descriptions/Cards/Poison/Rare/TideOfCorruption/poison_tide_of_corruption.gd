@@ -12,7 +12,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var multiplier: float = _multiplier[card_lvl - 1]
 	var period: float = _period[card_lvl - 1]
 
-	ctx.periodic_timers.register(&"Tide of Corruption", period, func() -> void:
+	ctx.battle_callbacks.register_periodic(&"Tide of Corruption", period, func() -> void:
 		var targets: Array[Entity] = ctx.hero.target.get_targets(TargetComponent.MultipleTargettingStrategy.ENEMIES)
 		if targets.is_empty(): return
 		var target_number: int = targets.size()

@@ -15,7 +15,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	mod3.calc_type = StatModifier.CalcType.ADD
 	mod3.value = 0.0
 
-	ctx.periodic_timers.register(&"Ancient Growth", period, func() -> void:
+	ctx.battle_callbacks.register_periodic(&"Ancient Growth", period, func() -> void:
 		state[&"stacks"] += 1
 		mod3.value = state[&"stacks"] * (size_increase / 100)
 		ctx.stat_modifiers.register_modifier(mod3)

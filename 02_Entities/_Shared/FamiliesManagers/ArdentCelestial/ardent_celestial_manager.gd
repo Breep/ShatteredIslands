@@ -98,7 +98,7 @@ func _on_inflict_condition_ignite(cb_vars: Dictionary) -> void:
 func _schedule_dequeue_for(target: Entity) -> void:
 	var noise: float = Utils.get_randf_range(-METEOR_NOISE_PERIOD, METEOR_NOISE_PERIOD, _owner.battle_id, "meteor_queue_noise")
 	var delay: float = METEOR_DEFAULT_PERIOD + noise
-	_owner.periodic_timer_registry.register_oneshot(delay, _dequeue_meteor.bind(target))
+	_owner.battle_callback_registry.register_oneshot(delay, _dequeue_meteor.bind(target))
 	_meteor_scheduled[target] = true
 
 

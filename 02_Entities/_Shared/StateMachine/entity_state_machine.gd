@@ -24,9 +24,8 @@ func transition_to(new_state: Entity.FightingState) -> void:
 				_entity.battle_callback_registry.execute_battle_end()
 		Entity.FightingState.FIGHTING:
 			start_combat_modules()
-			if _entity.periodic_timer_registry != null:
-				_entity.periodic_timer_registry.start_all()
 			if _entity.battle_callback_registry != null:
+				_entity.battle_callback_registry.start_timers()
 				_entity.battle_callback_registry.execute_battle_start()
 		Entity.FightingState.CELEBRATING:
 			stop_combat_modules()
@@ -42,8 +41,8 @@ func stop_combat_modules() -> void:
 	if _entity.movement != null: _entity.movement.stop()
 	if _entity._auto_attack_periodic_module != null and _entity.auto_attack_enabled:
 		_entity._auto_attack_periodic_module.stop()
-	if _entity.periodic_timer_registry != null:
-		_entity.periodic_timer_registry.stop_all()
+	if _entity.battle_callback_registry != null:
+		_entity.battle_callback_registry.stop_timers()
 
 
 func start_combat_modules() -> void:

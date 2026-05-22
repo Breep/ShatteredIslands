@@ -12,7 +12,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var amount: float = _cleanse_amount[card_lvl - 1]
 	var period: float = _period[card_lvl - 1]
 
-	ctx.periodic_timers.register(&"Purifying Flame", period, func() -> void:
+	ctx.battle_callbacks.register_periodic(&"Purifying Flame", period, func() -> void:
 		var target: Entity = ctx.hero.target.get_target(TargetComponent.TargettingStrategy.RANDOM_ALLY_INCLUDING_SELF)
 		if target == null: return
 		ctx.hero.alterations.cleanse(target, amount, &"Purifying Flame")

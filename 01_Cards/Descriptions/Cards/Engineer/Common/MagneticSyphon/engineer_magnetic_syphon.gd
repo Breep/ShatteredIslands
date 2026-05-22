@@ -12,7 +12,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var period: float = _period[card_lvl - 1]
 	var percent: float = _steal_percent[card_lvl - 1]
 	
-	ctx.periodic_timers.register(&"Magnetic Siphon", period, func() -> void:
+	ctx.battle_callbacks.register_periodic(&"Magnetic Siphon", period, func() -> void:
 		if not is_instance_valid(ctx.hero): return
 		var target: Entity = ctx.hero.target.get_target(TargetComponent.TargettingStrategy.HIGHEST_SHIELD_ENEMIES_HERO)
 		if not is_instance_valid(target): return

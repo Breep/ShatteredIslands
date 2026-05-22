@@ -22,7 +22,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 	var state: Dictionary = { GATLING_TICKS: 0 }
 
-	ctx.periodic_timers.register(&"Gatling Gun", GATLING_TICK_PERIOD, func() -> void:
+	ctx.battle_callbacks.register_periodic(&"Gatling Gun", GATLING_TICK_PERIOD, func() -> void:
 		state[GATLING_TICKS] += 1
 		var time_elapsed: float = GATLING_TICK_PERIOD * state[GATLING_TICKS]
 		Verbose.debug("Time Elapsed " + str(time_elapsed), Verbose.Category.CARD)

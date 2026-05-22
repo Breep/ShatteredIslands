@@ -18,7 +18,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var regen_amount: float = _base_regen_amount[card_lvl - 1]
 	var hp_threshold: float = _base_hp_threshold[card_lvl - 1]
 
-	ctx.periodic_timers.register(&"Luminescent Surge", period, func() -> void:
+	ctx.battle_callbacks.register_periodic(&"Luminescent Surge", period, func() -> void:
 		var allies: Array[Entity] = ctx.hero.target.get_targets(TargetComponent.MultipleTargettingStrategy.ALLIES)
 		var valid_allies: Array[Entity] = []
 		for ally: Entity in allies:

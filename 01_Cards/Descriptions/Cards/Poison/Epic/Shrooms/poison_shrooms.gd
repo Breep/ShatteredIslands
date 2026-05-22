@@ -16,7 +16,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var period: float = _period[card_lvl - 1]
 	var radius: float = _radius[card_lvl - 1]
 
-	ctx.periodic_timers.register(&"Shrooms", period, func() -> void:
+	ctx.battle_callbacks.register_periodic(&"Shrooms", period, func() -> void:
 		var target: Entity = ctx.hero.target.get_target(TargetComponent.TargettingStrategy.RANDOM_ENEMY)
 		if target == null: return
 		var spell_modifier: Dictionary = {
