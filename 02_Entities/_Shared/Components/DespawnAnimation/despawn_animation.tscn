@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://745nxxrywodf"]
-
-[ext_resource type="Script" uid="uid://ch8pi24qvqm7t" path="res://02_Entities/_Shared/Components/DespawnAnimation/despawn_animation.gd" id="1_kem0y"]
-
-[node name="DespawnAnimation" type="Node" unique_id=1578558908]
-script = ExtResource("1_kem0y")

@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://c1ncf16eblcti"]
-
-[ext_resource type="Script" uid="uid://cfs5rnyogjtkf" path="res://02_Entities/_Shared/Components/PopupModule/label_popup_module.gd" id="1_tkh7u"]
-
-[node name="DamagePopupModule" type="Node" unique_id=560239285]
-script = ExtResource("1_tkh7u")

@@ -1,4 +1,4 @@
-class_name LabelPopupModule
+class_name LabelPopupComponent
 extends EntityComponent
 
 @export var _popup_marker: Marker3D
@@ -15,9 +15,11 @@ func connect_marker(popup_marker: Marker3D) -> void:
 
 
 func _ready() -> void:
-	if not _owner:
-		Verbose.error("EntityInfoPanel3D: _owner is null! This node is misconfigured.", Verbose.Category.ENTITY)
-		return
+	super._ready()
+	if _owner.label_popup == null:
+		_owner.label_popup = self
+	else:
+		queue_free()
 
 	random.randomize()
 	_owner.damage_taken.connect(_on_owner_damage_taken)

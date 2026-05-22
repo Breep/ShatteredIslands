@@ -25,6 +25,13 @@ const GAMMA_TURRET: PackedScene = preload("res://02_Entities/Pool/Mobs/GammaTurr
 const TREX_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/TRex/trex.tscn")
 const CHICKEN_EGG_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/ChickenEgg/chicken_egg.tscn")
 
+func _ready() -> void:
+	super._ready()
+	if _owner.summon == null:
+		_owner.summon = self
+	else:
+		queue_free()
+
 # ============================== Public functions ==============================
 
 func connect_to_spawn_manager(spawn_manager: SpawnManager) -> void:

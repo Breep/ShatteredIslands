@@ -58,10 +58,6 @@ enum EntityType {
 @export_subgroup("Auto Attack")
 @export var _attack_spawn_marker: Marker3D # TODO A bouger dans le projectile component ? Ou attack component ?
 @export var _projectile_type: Projectile.Type
-@export_subgroup("Animation")
-@export var _animation_component: AnimationComponent # Mandatory
-@export var _override_spawn_animation_component: SpawnAnimationComponent # Overrides the default spawn animation if set
-@export var _override_despawn_animation_component: DespawnAnimationComponent # Overrides the default despawn animation if set
 
 @export_group("Formation")
 @export_range(1, 20, 1) var level: int = 1
@@ -69,9 +65,6 @@ enum EntityType {
 
 @export_group("Optional configuration")
 @export var invisible: bool = false
-@export var custom_clickable_component: ClickableComponent # Overrides the default click/hover handler if set
-# TODO A bouger dans le despawn component
-@export var _despawn_timer: float = 0.0
 
 @export_group("Prototyping")
 @export_subgroup("Context")
@@ -98,7 +91,6 @@ var stats: EntityStats
 var summoner: Entity # Set via apply_context si l'entité a été invoquée par une autre
 
 #region ============================== Components ==============================
-# Auto loaded Components
 var damage: DamageComponent
 var heal: HealComponent
 var projectile: ProjectileComponent
@@ -108,23 +100,36 @@ var auto_attack: AutoAttackComponent
 var alterations: AlterationsComponent
 var target: TargetComponent
 var movement: MovementComponent
-
-# Mandatory components
+var label_popup: LabelPopupComponent
 var animation: AnimationComponent
-var spawn_animation: SpawnAnimationComponent
+var spawn: SpawnAnimationComponent
+var despawn: DespawnAnimationComponent
 var clickable: ClickableComponent
+var auto_attack_periodic: AutoAttackPeriodicComponent # Can be null
+var display_mode_module: DisplayModeModule # TODO ça à l'air inutil ça à virer je pense
+var deck_holder: DeckHolderComponent
+var family: FamilyComponent
+
+var _auto_loaded_components: Array[EntityComponent.Type] = [
+	EntityComponent.Type.DAMAGE,
+	EntityComponent.Type.HEAL,
+	EntityComponent.Type.PROJECTILE,
+	EntityComponent.Type.SPELL,
+	EntityComponent.Type.SUMMON,
+	EntityComponent.Type.AUTO_ATTACK,
+	EntityComponent.Type.ALTERATIONS,
+	EntityComponent.Type.TARGET,
+	EntityComponent.Type.MOVEMENT,
+	EntityComponent.Type.LABEL_POPUP,
+	EntityComponent.Type.ANIMATION,
+	EntityComponent.Type.SPAWN_ANIMATION,
+	EntityComponent.Type.DESPAWN_ANIMATION,
+	EntityComponent.Type.CLICKABLE,
+	EntityComponent.Type.AUTO_ATTACK_PERIODIC,
+]
 
 var display_mode: DisplayMode = DisplayMode.PREVIEW
-var deck: PlayerDeck
 var data_memory: NestedRegistry
-var families_stats: FamiliesStats:
-	get:
-		if _family_module == null:
-			return null
-		return _family_module.families_stats
-
-var spawn_manager: SpawnManager:
-	get: return _spawn_manager
 #endregion
 
 #region ============================== Modifiers ==============================
@@ -136,15 +141,14 @@ var periodic_timer_registry: PeriodicTimerRegistry
 var battle_callback_registry: BattleCallbackRegistry
 #endregion
 
+# TODO Checker si c'est normal d'exposer ça public
+#region ============================== Context ============================== 
+var spawn_manager: SpawnManager:
+	get: return _spawn_manager
+#endregion
+
 #region ============================== Private variables ==============================
 var _base_stats: EntityStats # Private, use _base_stats property to access
-
-var _auto_attack_periodic_module: AutoAttackPeriodicModule # Optional, can be null
-var _label_popup_module: LabelPopupModule
-var _despawn_module: DespawnModule
-var _display_mode_module: DisplayModeModule
-var _deck_holder: DeckHolder
-var _family_module: FamilyModule
 
 # Spawn system
 var _original_fighting_state: FightingState = FightingState.UNDEF
@@ -183,27 +187,12 @@ var is_moving: bool:
 			is_moving_changed.emit(_is_moving)
 #endregion
 
-#region ============================== Status States ==============================
-func is_alive() -> bool:
-	return life_state == LifeState.ALIVE
-
-func is_dead() -> bool:
-	return life_state == LifeState.DEAD
+#region ============================== Helpers ==============================
+func is_alive() -> bool: return life_state == LifeState.ALIVE
+func is_dead() -> bool: return life_state == LifeState.DEAD
+func is_summoned() -> bool: return category == Category.SUMMON
+func is_hero() -> bool: return category == Category.HERO
 #endregion
-
-#region ============================== Category helpers ==============================
-# `category` est le tag de discrimination (HERO/SUMMON/ACOLYTE/...). `is_summoned`
-# est un axe distinct (origine runtime : ai-je un summoner).
-
-func is_summoned() -> bool:
-	return summoner != null
-
-
-func is_hero() -> bool:
-	return category == Category.HERO
-#endregion
-
-# ============================== Node base functions ==============================
 
 #region ============================== Init ==============================
 func _init() -> void:
@@ -228,9 +217,6 @@ func _enter_tree() -> void:
 	stat_modifiers_registry = EntityStatModifiersRegistry.new(_base_stats, stats)
 
 	_auto_load_components()
-	_load_spawn_animation()
-	_load_animation()
-	_load_clickable()
 
 	periodic_timer_registry = PeriodicTimerRegistry.new()
 	periodic_timer_registry.name = "PeriodicTimerRegistry"
@@ -243,10 +229,6 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
-	# Hero archetype setup — avant la connexion des signaux / le spawn.
-	if is_hero():
-		_hero_setup()
-
 	# Connect to status signals
 	if alterations != null:
 		alterations.stunned_changed.connect(_on_stunned_changed)
@@ -270,7 +252,7 @@ func _ready() -> void:
 	else:
 		_original_fighting_state = fighting_state if fighting_state != FightingState.UNDEF else FightingState.IDLE
 
-	spawn_animation.spawn_finished.connect(_on_spawn_finished)
+	spawn.spawn_finished.connect(_on_spawn_finished)
 
 	# Connect module interdependencies
 	_connect_module_dependencies()
@@ -316,11 +298,11 @@ func get_collision_center() -> Vector3:
 func process_tick() -> void:
 	if movement != null:
 		movement.process_tick()
-	if _auto_attack_periodic_module != null:
-		_auto_attack_periodic_module.process_tick()
+	if auto_attack_periodic != null:
+		auto_attack_periodic.process_tick()
 	if alterations != null:
 		alterations.process_tick()
-	spawn_animation.process_tick()
+	spawn.process_tick()
 	if periodic_timer_registry != null:
 		periodic_timer_registry.process_tick()
 #endregion
@@ -412,10 +394,10 @@ func resurrect(hp_percent: float) -> void:
 # Despawn immédiat sans passer par le signal `died` (cas ChickenEgg post-hatch).
 # Délègue à DespawnModule pour l'animation + queue_free.
 func play_despawn_animation() -> void:
-	if _despawn_module == null:
+	if despawn == null:
 		queue_free()
 		return
-	_despawn_module.play_despawn_animation()
+	despawn.play_despawn_animation()
 #endregion
 
 #region ============================== Hero archetype API ==============================
@@ -430,19 +412,18 @@ func init_display(hero_display_mode: DisplayMode = DisplayMode.PREVIEW, fighting
 
 func set_display_mode(mode: DisplayMode) -> void:
 	display_mode = mode
-	_apply_display_mode()
 
 
 func get_families_level() -> Dictionary[Family.Type, int]:
-	if _family_module == null:
+	if family == null:
 		return {}
-	return _family_module.get_families_level()
+	return family.get_families_level()
 
 
 func get_card_context() -> CardContext:
-	if _deck_holder == null:
+	if deck_holder == null:
 		return null
-	return _deck_holder.get_card_context()
+	return deck_holder.get_card_context()
 #endregion
 
 # ============================== Private functions ==============================
@@ -451,7 +432,7 @@ func get_card_context() -> CardContext:
 func _start_spawn() -> void:
 	fighting_state = FightingState.SPAWNING
 	Verbose.debug("Entity [" + entity_name + "] starting spawn", Verbose.Category.ENTITY)
-	spawn_animation.start_spawn()
+	spawn.start_spawn()
 
 
 func _on_spawn_finished() -> void:
@@ -463,62 +444,8 @@ func _on_spawn_finished() -> void:
 
 #region ============================== Auto loading ==============================
 func _auto_load_components() -> void:
-	damage =  Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.DAMAGE].instantiate().init(self)
-	heal =  Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.HEAL].instantiate().init(self)
-	projectile =  Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.PROJECTILE].instantiate().init(self)
-	spell =  Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.SPELL].instantiate().init(self)
-	summon =  Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.SUMMON].instantiate().init(self)
-	auto_attack =  Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.AUTO_ATTACK].instantiate().init(self)
-	alterations =  Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.ALTERATIONS].instantiate().init(self)
-	target =  Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.TARGET].instantiate().init(self)
-	movement =  Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.MOVEMENT].instantiate().init(self)
-	_auto_attack_periodic_module = Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.AUTO_ATTACK_PERIODIC_MODULE].instantiate().init(self)
-	_label_popup_module = Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.LABEL_POPUP_MODULE].instantiate().init(self)
-	_despawn_module = Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.DESPAWN].instantiate().init(self)
-	_display_mode_module = Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.DISPLAY_MODE].instantiate().init(self)
-	_deck_holder = Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.DECK_HOLDER].instantiate().init(self)
-	_family_module = Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.FAMILY].instantiate().init(self)
-
-	add_child(damage)
-	add_child(heal)
-	add_child(projectile)
-	add_child(spell)
-	add_child(summon)
-	add_child(auto_attack)
-	add_child(alterations)
-	add_child(target)
-	add_child(movement)
-	add_child(_auto_attack_periodic_module)
-	add_child(_label_popup_module)
-	add_child(_despawn_module)
-	add_child(_display_mode_module)
-	add_child(_deck_holder)
-	add_child(_family_module)
-
-
-func _load_spawn_animation() -> void:
-	if _override_spawn_animation_component != null:
-		spawn_animation = _override_spawn_animation_component
-		return
-	spawn_animation = Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.SPAWN_ANIMATION].instantiate().init(self)
-	add_child(spawn_animation)
-
-
-func _load_animation() -> void:
-	if _animation_component != null:
-		animation = _animation_component
-		return
-	animation = Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.ANIMATION].instantiate().init(self)
-	add_child(animation)
-
-
-func _load_clickable() -> void:
-	if custom_clickable_component != null:
-		clickable = custom_clickable_component
-		return
-	clickable = Shared.ENTITY_COMPONENT_SCENES[EntityComponent.Type.CLICKABLE].instantiate().init(self)
-	add_child(clickable)
-
+	for ect: EntityComponent.Type in _auto_loaded_components:
+		EntityComponent.add(ect, self)
 
 func _connect_module_dependencies() -> void:
 	if target != null:
@@ -539,14 +466,14 @@ func _connect_module_dependencies() -> void:
 		auto_attack.set_auto_attack_spawn(_attack_spawn_marker)
 		auto_attack.set_projectile_type(_projectile_type)
 	
-	if _auto_attack_periodic_module != null and auto_attack != null:
-		_auto_attack_periodic_module.connect_modules(auto_attack)
+	if auto_attack_periodic != null and auto_attack != null:
+		auto_attack_periodic.connect_modules(auto_attack)
 	
 	if animation != null:
 		animation.connect_modules(auto_attack)
 	
-	if _label_popup_module != null:
-		_label_popup_module.connect_marker(_health_bar_marker)
+	if label_popup != null:
+		label_popup.connect_marker(_health_bar_marker)
 #endregion
 
 #region ============================== Callbacks ==============================
@@ -554,15 +481,14 @@ func _on_fighting_state_changed(new_fighting_state: FightingState) -> void:
 	Verbose.debug("Entity [" + entity_name + "] fighting state changed to [" + str(FightingState.keys()[new_fighting_state]) + "]", Verbose.Category.ENTITY)
 	_state_machine.transition_to(new_fighting_state)
 
-	# Family managers lifecycle (no-op si pas de managers — non-hero entities).
 	match new_fighting_state:
 		FightingState.IDLE:
-			_family_module.stop_all()
+			family.stop_all()
 		FightingState.FIGHTING:
 			if family_managers_enabled:
-				_family_module.start_all()
+				family.start_all()
 		FightingState.CELEBRATING:
-			_family_module.stop_all()
+			family.stop_all()
 		FightingState.UNDEF:
 			pass
 
@@ -617,35 +543,4 @@ func _on_stunned(is_active: bool) -> void:
 	else:
 		periodic_timer_registry.resume_all()
 
-
-#region ============================== Hero archetype setup ==============================
-# Orchestration de spawn des archétypes hero — appelé depuis _ready() si is_hero().
-func _hero_setup() -> void:
-	pass
-	#Verbose.debug("Hero [" + entity_name + "] setup", Verbose.Category.HERO)
-#
-	#if _custom_deck != null: deck = _custom_deck
-	#if not _custom_data_memory.is_empty(): data_memory.override(_custom_data_memory)
-#
-	#if custom_base_stats == null and hero_desc != null and _base_stats != null:
-		#_base_stats.reset_from_hero_desc(hero_desc, level)
-#
-	#_family_module.compute_levels(deck, _override_family_levels)
-	#_deck_holder.setup()
-#
-	#if deck != null:
-		#_deck_holder.apply_all_cards_upgrades(deck)
-		#deck.has_changed.connect(_on_deck_has_changed)
-#
-	#_apply_display_mode()
-	#_family_module.apply_passive_all()
-
-
-func _apply_display_mode() -> void:
-	if _display_mode_module != null:
-		_display_mode_module.apply(display_mode)
-
-
-func _on_deck_has_changed() -> void:
-	_family_module.compute_levels(deck, _override_family_levels)
 #endregion

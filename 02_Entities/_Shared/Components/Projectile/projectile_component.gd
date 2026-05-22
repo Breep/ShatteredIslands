@@ -3,6 +3,13 @@ extends EntityComponent
 
 var _spawn_manager: SpawnManager
 
+func _ready() -> void:
+	super._ready()
+	if _owner.heal == null:
+		_owner.projectile = self
+	else:
+		queue_free()
+
 # ============================== Public functions ==============================
 
 func connect_to_spawn_manager(spawn_manager: SpawnManager) -> void:

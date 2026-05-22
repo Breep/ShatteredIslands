@@ -30,6 +30,12 @@ var _orbit_angular_speed: float = 0.0
 var _orbit_current_angle: float = 0.0
 var _orbit_facing: OrbitFacing = OrbitFacing.TANGENT
 
+func _ready() -> void:
+	super._ready()
+	if _owner.movement == null:
+		_owner.movement = self
+	else:
+		queue_free()
 
 func start() -> void:
 	Verbose.debug("start", Verbose.Category.MOVEMENT_MODULE)

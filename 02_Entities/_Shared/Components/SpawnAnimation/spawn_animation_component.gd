@@ -23,6 +23,13 @@ var _ticks_remaining: int = -1
 var _tween: Tween
 #endregion
 
+func _ready() -> void:
+	super._ready()
+	if _owner.spawn == null:
+		_owner.spawn = self
+	else:
+		queue_free()
+
 #region ============================== Public functions ==============================
 func start_spawn() -> void:
 	if skip_animation:

@@ -1,6 +1,8 @@
 class_name AnimationComponent
 extends EntityComponent
 
+#TODO Refactorer complétement l'Animation Component
+
 const IDLE_VAR_TIMER_MIN_WAIT_TIME: float = 5.0
 const IDLE_VAR_TIMER_MAX_WAIT_TIME: float = 15.0
 
@@ -52,10 +54,11 @@ var _lock_animation: bool = false
 var _attack_anim_base_duration: float = 3.2 # Default fallback
 
 func _ready() -> void:
-	if _entity_owner == null:
-		Verbose.error("AnimationModule: No entity owner", Verbose.Category.ENTITY)
+	super._ready()
+	if _owner.animation == null:
+		_owner.animation = self
+	else:
 		queue_free()
-		return
 	
 	if _animation_tree == null:
 		Verbose.error("AnimationModule: No animation tree", Verbose.Category.ENTITY)

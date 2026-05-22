@@ -22,29 +22,6 @@ var FAMILIES: Dictionary[Family.Type, Family] = {
 	Family.Type.NECROSIS: load("res://01_Cards/Descriptions/Families/necro_family.tres"),
 }
 
-var ENTITY_COMPONENT_SCENES: Dictionary[EntityComponent.Type, PackedScene] = {
-	EntityComponent.Type.MOVEMENT: load("res://02_Entities/_Shared/Components/Movement/movement_component.tscn"),
-	EntityComponent.Type.TARGET: load("res://02_Entities/_Shared/Components/Target/target_component.tscn"),
-	EntityComponent.Type.ALTERATIONS: load("res://02_Entities/_Shared/Components/Alterations/alterations_component.tscn"),
-	EntityComponent.Type.DAMAGE: load("res://02_Entities/_Shared/Components/Damage/damage_component.tscn"),
-	EntityComponent.Type.HEAL: load("res://02_Entities/_Shared/Components/Heal/heal_component.tscn"),
-	EntityComponent.Type.PROJECTILE: load("res://02_Entities/_Shared/Components/Projectile/projectile_component.tscn"),
-	EntityComponent.Type.SPELL: load("res://02_Entities/_Shared/Components/Spell/spell_component.tscn"),
-	EntityComponent.Type.SUMMON: load("res://02_Entities/_Shared/Components/Summon/summon_component.tscn"),
-	EntityComponent.Type.AUTO_ATTACK: load("res://02_Entities/_Shared/Components/AutoAttack/auto_attack_component.tscn"),
-
-	EntityComponent.Type.AUTO_ATTACK_PERIODIC_MODULE: load("res://02_Entities/_Shared/Components/AutoAttackPeriodicModule/auto_attack_periodic_module.tscn"),
-	EntityComponent.Type.LABEL_POPUP_MODULE: load("res://02_Entities/_Shared/Components/PopupModule/label_popup_module.tscn"),
-	
-	EntityComponent.Type.ANIMATION: load("res://02_Entities/_Shared/Components/Animation/animation_component.tscn"),
-	EntityComponent.Type.SPAWN_ANIMATION: load("res://02_Entities/_Shared/Components/SpawnAnimation/spawn_animation_component.tscn"),
-	EntityComponent.Type.CLICKABLE: load("res://02_Entities/_Shared/Components/Clickable/clickable_component.tscn"),
-	EntityComponent.Type.DESPAWN: load("res://02_Entities/_Shared/Components/Despawn/despawn_module.tscn"),
-	EntityComponent.Type.DISPLAY_MODE: load("res://02_Entities/_Shared/Components/DisplayMode/display_mode_module.tscn"),
-	EntityComponent.Type.DECK_HOLDER: load("res://02_Entities/_Shared/Components/DeckHolder/deck_holder.tscn"),
-	EntityComponent.Type.FAMILY: load("res://02_Entities/_Shared/Components/Family/family_module.tscn"),
-}
-
 var FAMILY_MANAGER_SCENES: Dictionary[Family.Type, PackedScene] = {
 	Family.Type.ENGINEER: load("res://02_Entities/Heroes/_Shared/FamiliesManagers/Engineer/engineer_manager.tscn"),
 	Family.Type.ARDENT_CELESTIAL: load("res://02_Entities/Heroes/_Shared/FamiliesManagers/ArdentCelestial/ardent_celestial_manager.tscn"),

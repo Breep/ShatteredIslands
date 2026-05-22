@@ -94,9 +94,11 @@ var _spawn_manager: SpawnManager
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	if _owner == null:
-		printerr("TargetComponent: TargetComponent need a ref to its owner")
-		return
+	super._ready()
+	if _owner.target == null:
+		_owner.target = self
+	else:
+		queue_free()
 
 
 func connect_to_spawn_manager(spawn_manager: SpawnManager) -> void:

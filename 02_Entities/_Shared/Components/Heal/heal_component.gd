@@ -1,6 +1,13 @@
 class_name HealComponent
 extends EntityComponent
 
+func _ready() -> void:
+	super._ready()
+	if _owner.heal == null:
+		_owner.heal = self
+	else:
+		queue_free()
+
 # ============================== Public functions ==============================
 
 func direct(target: Entity, value: float, action_id: StringName) -> float:

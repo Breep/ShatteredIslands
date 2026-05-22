@@ -1,4 +1,4 @@
-class_name AutoAttackPeriodicModule
+class_name AutoAttackPeriodicComponent
 extends EntityComponent
 
 # ============================== Signals ==============================

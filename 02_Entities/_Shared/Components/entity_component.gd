@@ -1,3 +1,8 @@
+# Extensions de Entity
+# Chaque EntityComponent s'attache seul à la variable correspondante sur Entity
+# En pratique, il suffit de drag and drop un component dans l'arborescence d'une entité et de
+# set _owner pour qu'il vienne s'attacher à Entity
+
 class_name EntityComponent
 extends Node
 
@@ -11,15 +16,36 @@ enum Type {
 	SPELL = 6,
 	SUMMON = 7,
 	AUTO_ATTACK = 8,
-	AUTO_ATTACK_PERIODIC_MODULE = 9,
-	LABEL_POPUP_MODULE = 10,
+	AUTO_ATTACK_PERIODIC = 9,
+	LABEL_POPUP = 10,
 	ANIMATION = 11,
 	SPAWN_ANIMATION = 12,
 	CLICKABLE = 13,
-	DESPAWN = 14,
+	DESPAWN_ANIMATION = 14,
 	DISPLAY_MODE = 15,
 	DECK_HOLDER = 16,
 	FAMILY = 17
+}
+
+static var ENTITY_COMPONENT_SCENES: Dictionary[EntityComponent.Type, PackedScene] = {
+	Type.MOVEMENT:             load("res://02_Entities/_Shared/Components/Movement/movement_component.tscn"),
+	Type.TARGET:               load("res://02_Entities/_Shared/Components/Target/target_component.tscn"),
+	Type.ALTERATIONS:          load("res://02_Entities/_Shared/Components/Alterations/alterations_component.tscn"),
+	Type.DAMAGE:               load("res://02_Entities/_Shared/Components/Damage/damage_component.tscn"),
+	Type.HEAL:                 load("res://02_Entities/_Shared/Components/Heal/heal_component.tscn"),
+	Type.PROJECTILE:           load("res://02_Entities/_Shared/Components/Projectile/projectile_component.tscn"),
+	Type.SPELL:                load("res://02_Entities/_Shared/Components/Spell/spell_component.tscn"),
+	Type.SUMMON:               load("res://02_Entities/_Shared/Components/Summon/summon_component.tscn"),
+	Type.AUTO_ATTACK:          load("res://02_Entities/_Shared/Components/AutoAttack/auto_attack_component.tscn"),
+	Type.AUTO_ATTACK_PERIODIC: load("res://02_Entities/_Shared/Components/AutoAttackPeriodicModule/auto_attack_periodic_module.tscn"),
+	Type.LABEL_POPUP:          load("res://02_Entities/_Shared/Components/PopupModule/label_popup_module.tscn"),
+	Type.ANIMATION:            load("res://02_Entities/_Shared/Components/Animation/animation_component.tscn"),
+	Type.SPAWN_ANIMATION:      load("res://02_Entities/_Shared/Components/SpawnAnimation/spawn_animation_component.tscn"),
+	Type.CLICKABLE:            load("res://02_Entities/_Shared/Components/Clickable/clickable_component.tscn"),
+	Type.DESPAWN_ANIMATION:    load("res://02_Entities/_Shared/Components/Despawn/despawn_module.tscn"),
+	Type.DISPLAY_MODE:         load("res://02_Entities/_Shared/Components/DisplayMode/display_mode_module.tscn"),
+	Type.DECK_HOLDER:          load("res://02_Entities/_Shared/Components/DeckHolder/deck_holder.tscn"),
+	Type.FAMILY:               load("res://02_Entities/_Shared/Components/Family/family_module.tscn"),
 }
 
 static var _global_dodge_number: int = 0
@@ -29,13 +55,23 @@ static var _crit_check_number: int = -1
 
 var _dodge_number: int = -1
 
+static func add(component_type: Type, entity_owner: Entity) -> void:
+	Verbose.trace("Instantiating '" + str(Type.keys()[component_type]) + "' on '" + entity_owner.name + "'", Verbose.Category.ENTITY_MODULE)
+	var component: EntityComponent = ENTITY_COMPONENT_SCENES[component_type].instantiate().init(entity_owner)
+	if component == null:
+		Verbose.error("Can't instantiate '" + str(Type.keys()[component_type]) + "'", Verbose.Category.ENTITY_MODULE)
+		return
+	entity_owner.add_child(component)
+
 func init(entity_owner: Entity) -> EntityComponent:
 	_owner = entity_owner
 	return self
 
 func _ready() -> void:
 	if _owner == null:
-		printerr("Module: undef source [", get_path(), "]")
+		Verbose.error("Module: undef source [" + str(get_path()) + "]", Verbose.Category.ENTITY_MODULE)
+		queue_free()
+		return
 
 
 #region ============================== Private API ==============================

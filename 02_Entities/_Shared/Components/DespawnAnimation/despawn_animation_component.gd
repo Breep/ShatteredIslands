@@ -1,16 +1,19 @@
-# Ferme la boucle de vie des entités éphémères (summons par défaut).
+# Ferme la boucle de vie des entités éphémères.
 # Sur signal `died` de l'owner, planifie l'animation de despawn (shrink + queue_free)
 # après `_owner._despawn_timer` secondes via le periodic_timer_registry.
 # No-op si `_despawn_timer <= 0` (entités persistantes : héros, bâtiments fixes).
-class_name DespawnModule
+class_name DespawnAnimationComponent
 extends EntityComponent
 
+@export var _despawn_timer: float = 5.0
 
 #region ============================== Node base functions ==============================
 func _ready() -> void:
-	if _owner == null:
-		Verbose.error("DespawnModule: _owner is null! Misconfigured.", Verbose.Category.ENTITY_MODULE)
-		return
+	super._ready()
+	if _owner.despawn == null:
+		_owner.despawn = self
+	else:
+		queue_free()
 	_owner.died.connect(_on_owner_died)
 #endregion
 
@@ -34,9 +37,9 @@ func play_despawn_animation() -> void:
 
 #region ============================== Callbacks ==============================
 func _on_owner_died() -> void:
-	if _owner._despawn_timer <= 0.0:
+	if _despawn_timer <= 0.0:
 		return
 	if _owner.periodic_timer_registry == null:
 		return
-	_owner.periodic_timer_registry.register_oneshot(_owner._despawn_timer, play_despawn_animation)
+	_owner.periodic_timer_registry.register_oneshot(_despawn_timer, play_despawn_animation)
 #endregion

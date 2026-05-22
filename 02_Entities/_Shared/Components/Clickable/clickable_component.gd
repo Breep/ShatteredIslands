@@ -19,8 +19,10 @@ var _is_hovered: bool = false
 #region ============================== Node base functions ==============================
 func _ready() -> void:
 	super._ready()
-	if _owner == null:
-		return
+	if _owner.clickable == null:
+		_owner.clickable = self
+	else:
+		queue_free()
 	_owner.input_event.connect(_on_owner_input_event)
 	_owner.mouse_entered.connect(_on_owner_mouse_entered)
 	_owner.mouse_exited.connect(_on_owner_mouse_exited)

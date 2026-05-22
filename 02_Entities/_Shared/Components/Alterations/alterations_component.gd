@@ -43,6 +43,12 @@ var shield_alteration: ShieldAlteration
 var block_alteration: BlockAlteration
 var thorn_alteration: ThornAlteration
 
+func _ready() -> void:
+	super._ready()
+	if _owner.alterations == null:
+		_owner.alterations = self
+	else:
+		queue_free()
 
 #region ============================== Lifecycle ==============================
 func init(entity_owner: Entity) -> AlterationsComponent:

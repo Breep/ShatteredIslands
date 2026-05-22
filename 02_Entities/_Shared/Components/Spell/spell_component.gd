@@ -11,6 +11,13 @@ const DEATH_FOG_SCENE: PackedScene = preload("res://03_SpellsAndProjectiles/Spel
 const LIGHTNING_SCENE: PackedScene = preload("res://03_SpellsAndProjectiles/Spells/Lightning/Lightning/spell_lightning.tscn")
 const CHAIN_LIGHTNING_SCENE: PackedScene = preload("res://03_SpellsAndProjectiles/Spells/ChainLightning/spell_chain_lightning.tscn")
 
+func _ready() -> void:
+	super._ready()
+	if _owner.spell == null:
+		_owner.spell = self
+	else:
+		queue_free()
+
 # ============================== Public functions ==============================
 
 func connect_to_spawn_manager(spawn_manager: SpawnManager) -> void:

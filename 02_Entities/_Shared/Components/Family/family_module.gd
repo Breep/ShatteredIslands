@@ -1,12 +1,8 @@
-# Container des FamilyManager d'une entité Hero. Crée les managers comme enfants
-# de lui-même (vs enfants de Hero avant). Pilote leur level (depuis le deck +
+# Container des FamilyManager d'une entité. Crée les managers comme enfants
+# de lui-même. Pilote leur level (depuis le deck +
 # overrides) et leur lifecycle (start/stop sur fighting_state).
-# Hero garde les exports `family_managers_enabled` et `_override_family_levels`
-# pour préserver les .tscn ; le module les lit via cast `_owner as Hero` au moment
-# de compute_levels / start_all.
-class_name FamilyModule
+class_name FamilyComponent
 extends EntityComponent
-
 
 #region ============================== Public variables ==============================
 var families_stats: FamiliesStats

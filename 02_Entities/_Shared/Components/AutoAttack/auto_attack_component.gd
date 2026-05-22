@@ -58,6 +58,13 @@ var _active_attack_data: Dictionary = {}
 
 var _projectile_type: Projectile.Type = Projectile.Type.SHADOW_BOLT
 
+func _ready() -> void:
+	super._ready()
+	if _owner.auto_attack == null:
+		_owner.auto_attack = self
+	else:
+		queue_free()
+
 # ============================== Public functions ==============================
 
 func connect_modules(movement_module: MovementComponent, animation_module: AnimationComponent) -> void:

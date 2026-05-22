@@ -2,7 +2,7 @@
 # deck. Le state externe (deck, _custom_deck, data_memory, _custom_data_memory)
 # vit sur Hero (timing hero_spec.spawn_into qui set les valeurs AVANT add_child).
 # Le module agit, Hero conserve les fields.
-class_name DeckHolder
+class_name DeckHolderComponent
 extends EntityComponent
 
 

@@ -4,6 +4,13 @@ extends EntityComponent
 # Component-based damage module: handles both outgoing (direct/direct_percent)
 # and incoming (take/take_percent) damage.
 
+func _ready() -> void:
+	super._ready()
+	if _owner.damage == null:
+		_owner.damage = self
+	else:
+		queue_free()
+
 # ============================== Public functions ==============================
 
 func direct(target: Entity, damage: float, damage_type: Utils.ActionType, action_id: StringName) -> float:
