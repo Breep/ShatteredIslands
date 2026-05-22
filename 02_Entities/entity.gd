@@ -44,28 +44,28 @@ enum EntityType {
 	TREX,
 	CHICKEN_EGG
 }
-##endregion
-#
-##region ============================== Export ==============================
-#@export var entity_name: String = "<entity name>"
-#@export var category: Category = Category.MOB
-#@export var entity_desc: EntityDesc
-#
-#@export_group("Visual")
-#@export var _visual_3d: Node3D
-#@export var _health_bar_marker: Marker3D
-#@export var _health_bar: SimpleInfoPanel2D
-#@export_subgroup("Auto Attack")
-#@export var _attack_spawn_marker: Marker3D # TODO A bouger dans le projectile component ? Ou attack component ?
-#@export var _projectile_type: Projectile.Type
-#
-#@export_group("Formation")
-#@export_range(1, 20, 1) var level: int = 1
-#@export var fight_role: FightRole = FightRole.EXTRA
-#
-#@export_group("Optional configuration")
-#@export var invisible: bool = false
-#
+#endregion
+
+#region ============================== Export ==============================
+@export var entity_name: String = "<entity name>"
+@export var category: Category = Category.MOB
+@export var entity_desc: EntityDesc
+
+@export_group("Visual")
+@export var _visual_3d: Node3D
+@export var _health_bar_marker: Marker3D
+@export var _health_bar: SimpleInfoPanel2D
+@export_subgroup("Auto Attack")
+@export var _attack_spawn_marker: Marker3D # TODO A bouger dans le projectile component ? Ou attack component ?
+@export var _projectile_type: Projectile.Type
+
+@export_group("Formation")
+@export_range(1, 20, 1) var level: int = 1
+@export var fight_role: FightRole = FightRole.EXTRA
+
+@export_group("Optional configuration")
+@export var invisible: bool = false
+
 #@export_group("Prototyping")
 #@export_subgroup("Context")
 #@export var team: int = -1 # Team number of the entity
