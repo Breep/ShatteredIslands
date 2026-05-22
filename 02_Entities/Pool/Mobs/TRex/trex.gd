@@ -4,7 +4,6 @@ extends Entity
 
 func _init() -> void:
 	super._init()
-	_despawn_timer = 5.0
 	category = Category.SUMMON
 
 enum Modifier {

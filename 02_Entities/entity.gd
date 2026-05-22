@@ -105,7 +105,7 @@ var animation: AnimationComponent
 var spawn: SpawnAnimationComponent
 var despawn: DespawnAnimationComponent
 var clickable: ClickableComponent
-var auto_attack_periodic: AutoAttackPeriodicComponent # Can be null
+var auto_attack_periodic: AutoAttackPeriodicComponent
 var display_mode_module: DisplayModeModule # TODO ça à l'air inutil ça à virer je pense
 var deck_holder: DeckHolderComponent
 var family: FamilyComponent
@@ -208,11 +208,10 @@ func _init() -> void:
 
 func _enter_tree() -> void:
 	Verbose.trace("Entity [" + entity_name + "_" + str(uid) + "] enter_tree", Verbose.Category.ENTITY)
-	# Stats registry needs to be created after _init() because custom_base_stats is not available in _init()
 	if _override_base_stats != null:
+		Verbose.debug("Entity [" + entity_name + "] using custom_base_stats", Verbose.Category.ENTITY)
 		_base_stats = _override_base_stats
 		_base_stats.reset_from_self()
-		Verbose.debug("Entity [" + entity_name + "] using custom_base_stats", Verbose.Category.ENTITY)
 	stat_modifiers_registry = EntityStatModifiersRegistry.new(_base_stats, stats)
 
 	_auto_load_components()
@@ -269,10 +268,6 @@ func look_at_target_y_only(target_position: Vector3):
 	direction.y = 0
 	if direction.length() > 0.1:
 		look_at(global_position + direction, Vector3.UP)
-
-
-func get_auto_attack_spawn() -> Node3D:
-	return self
 
 
 func get_collision_center() -> Vector3:
@@ -363,8 +358,6 @@ func connect_to_fighting_area(fighting_area_ref: FightingArea) -> void:
 
 
 #region ============================== Misc ==============================
-# Défaut : émet le signal. Les archétypes hero (Latika, DarkKnight) overrident
-# pour leur logique d'ultime spécifique.
 func cast_ultimate() -> void:
 	ultimate_casted.emit()
 
@@ -384,15 +377,6 @@ func resurrect(hp_percent: float) -> void:
 	life_state = LifeState.ALIVE
 	_state_machine.start_combat_modules()
 	resurrected.emit()
-
-
-# Despawn immédiat sans passer par le signal `died` (cas ChickenEgg post-hatch).
-# Délègue à DespawnModule pour l'animation + queue_free.
-func play_despawn_animation() -> void:
-	if despawn == null:
-		queue_free()
-		return
-	despawn.play_despawn_animation()
 #endregion
 
 #region ============================== Hero archetype API ==============================
@@ -531,11 +515,11 @@ func _on_stunned_changed(is_active: bool, _duration: float, _infinite: bool) -> 
 
 
 func _on_stunned(is_active: bool) -> void:
-	if battle_callback_registry == null:
-		return
 	if is_active:
 		battle_callback_registry.pause_timers()
+		auto_attack_periodic.stop()
 	else:
 		battle_callback_registry.resume_timers()
+		auto_attack_periodic.start()
 
 #endregion

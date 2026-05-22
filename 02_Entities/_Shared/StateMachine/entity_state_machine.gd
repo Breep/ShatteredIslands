@@ -39,16 +39,14 @@ func stop_combat_modules() -> void:
 	if _entity.target != null: _entity.target.stop()
 	if _entity.alterations != null: _entity.alterations.stop()
 	if _entity.movement != null: _entity.movement.stop()
-	if _entity._auto_attack_periodic_module != null and _entity.auto_attack_enabled:
-		_entity._auto_attack_periodic_module.stop()
-	if _entity.battle_callback_registry != null:
-		_entity.battle_callback_registry.stop_timers()
+	if _entity.auto_attack_periodic != null: _entity.auto_attack_periodic.stop()
+	if _entity.battle_callback_registry != null: _entity.battle_callback_registry.stop_timers()
 
 
 func start_combat_modules() -> void:
 	if _entity.target != null: _entity.target.start()
 	if _entity.alterations != null: _entity.alterations.start()
 	if _entity.movement != null: _entity.movement.start()
-	if _entity._auto_attack_periodic_module != null and _entity.auto_attack_enabled:
+	if _entity.auto_attack_periodic != null and _entity.auto_attack_enabled:
 		_entity._auto_attack_periodic_module.start()
 #endregion

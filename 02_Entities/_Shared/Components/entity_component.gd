@@ -37,14 +37,14 @@ static var ENTITY_COMPONENT_SCENES: Dictionary[EntityComponent.Type, PackedScene
 	Type.SPELL:                load("res://02_Entities/_Shared/Components/Spell/spell_component.tscn"),
 	Type.SUMMON:               load("res://02_Entities/_Shared/Components/Summon/summon_component.tscn"),
 	Type.AUTO_ATTACK:          load("res://02_Entities/_Shared/Components/AutoAttack/auto_attack_component.tscn"),
-	Type.AUTO_ATTACK_PERIODIC: load("res://02_Entities/_Shared/Components/AutoAttackPeriodicModule/auto_attack_periodic_module.tscn"),
-	Type.LABEL_POPUP:          load("res://02_Entities/_Shared/Components/PopupModule/label_popup_module.tscn"),
+	Type.AUTO_ATTACK_PERIODIC: load("res://02_Entities/_Shared/Components/AutoAttackPeriodic/auto_attack_periodic.tscn"),
+	Type.LABEL_POPUP:          load("res://02_Entities/_Shared/Components/Popup/label_popup_component.tscn"),
 	Type.ANIMATION:            load("res://02_Entities/_Shared/Components/Animation/animation_component.tscn"),
 	Type.SPAWN_ANIMATION:      load("res://02_Entities/_Shared/Components/SpawnAnimation/spawn_animation_component.tscn"),
 	Type.CLICKABLE:            load("res://02_Entities/_Shared/Components/Clickable/clickable_component.tscn"),
-	Type.DESPAWN_ANIMATION:    load("res://02_Entities/_Shared/Components/Despawn/despawn_module.tscn"),
+	Type.DESPAWN_ANIMATION:    load("res://02_Entities/_Shared/Components/DespawnAnimation/despawn_animation_component.tscn"),
 	Type.DISPLAY_MODE:         load("res://02_Entities/_Shared/Components/DisplayMode/display_mode_module.tscn"),
-	Type.DECK_HOLDER:          load("res://02_Entities/_Shared/Components/DeckHolder/deck_holder.tscn"),
+	Type.DECK_HOLDER:          load("res://02_Entities/_Shared/Components/DeckHolder/deck_holder_component.tscn"),
 	Type.FAMILY:               load("res://02_Entities/_Shared/Components/Family/family_module.tscn"),
 }
 

@@ -349,7 +349,7 @@ func _on_projectile_attack_button_pressed() -> void:
 			return
 		
 		var projectile_type: Projectile.Type = _projectile_type_choice.get_selected_id() as Projectile.Type
-		var projectile_spawn: Node3D = entity_owner.get_auto_attack_spawn()
+		var projectile_spawn: Node3D = entity_owner
 		var projectile_stats: ProjectileStats = ProjectileStats.new()
 		
 		# Build stats from UI inputs

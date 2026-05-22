@@ -1,6 +1,0 @@
-[gd_scene format=3]
-
-[ext_resource type="Script" path="res://02_Entities/_Shared/Components/DeckHolder/deck_holder.gd" id="1_deck"]
-
-[node name="DeckHolder" type="Node"]
-script = ExtResource("1_deck")
