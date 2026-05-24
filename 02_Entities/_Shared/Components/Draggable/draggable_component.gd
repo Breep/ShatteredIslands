@@ -89,6 +89,7 @@ func _start_drag() -> void:
 
 	set_process(true)
 	dragged.emit()
+	AudioManager.play_3d("whoosh", _owner.position)
 
 
 func _stop_drag() -> void:
@@ -106,6 +107,7 @@ func _stop_drag() -> void:
 		_owner.movement.start()
 
 	dropped.emit()
+	AudioManager.play_3d("thud", _owner.position)
 
 
 func _kill_y_tween() -> void:
