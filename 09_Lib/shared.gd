@@ -23,15 +23,15 @@ var FAMILIES: Dictionary[Family.Type, Family] = {
 }
 
 var FAMILY_MANAGER_SCENES: Dictionary[Family.Type, PackedScene] = {
-	Family.Type.ENGINEER: load("res://02_Entities/Heroes/_Shared/FamiliesManagers/Engineer/engineer_manager.tscn"),
-	Family.Type.ARDENT_CELESTIAL: load("res://02_Entities/Heroes/_Shared/FamiliesManagers/ArdentCelestial/ardent_celestial_manager.tscn"),
-	Family.Type.COLOSSUS: load("res://02_Entities/Heroes/_Shared/FamiliesManagers/Colossus/colossus_manager.tscn"),
-	Family.Type.POISON: load("res://02_Entities/Heroes/_Shared/FamiliesManagers/Poison/poison_manager.tscn"),
-	Family.Type.LIGHT: load("res://02_Entities/Heroes/_Shared/FamiliesManagers/Light/light_manager.tscn"),
-	Family.Type.STORM_CALLER: load("res://02_Entities/Heroes/_Shared/FamiliesManagers/StormCaller/storm_caller_manager.tscn"),
-	Family.Type.WARRIOR: load("res://02_Entities/Heroes/_Shared/FamiliesManagers/Warrior/warrior_manager.tscn"),
-	Family.Type.NECROSIS: load("res://02_Entities/Heroes/_Shared/FamiliesManagers/Necro/necro_manager.tscn"),
-	Family.Type.CHICKEN_LORD: load("res://02_Entities/Heroes/_Shared/FamiliesManagers/ChickenLord/chicken_lord_manager.tscn"),
+	Family.Type.ENGINEER: load("res://02_Entities/_Shared/FamiliesManagers/Engineer/engineer_manager.tscn"),
+	Family.Type.ARDENT_CELESTIAL: load("res://02_Entities/_Shared/FamiliesManagers/ArdentCelestial/ardent_celestial_manager.tscn"),
+	Family.Type.COLOSSUS: load("res://02_Entities/_Shared/FamiliesManagers/Colossus/colossus_manager.tscn"),
+	Family.Type.POISON: load("res://02_Entities/_Shared/FamiliesManagers/Poison/poison_manager.tscn"),
+	Family.Type.LIGHT: load("res://02_Entities/_Shared/FamiliesManagers/Light/light_manager.tscn"),
+	Family.Type.STORM_CALLER: load("res://02_Entities/_Shared/FamiliesManagers/StormCaller/storm_caller_manager.tscn"),
+	Family.Type.WARRIOR: load("res://02_Entities/_Shared/FamiliesManagers/Warrior/warrior_manager.tscn"),
+	Family.Type.NECROSIS: load("res://02_Entities/_Shared/FamiliesManagers/Necro/necro_manager.tscn"),
+	Family.Type.CHICKEN_LORD: load("res://02_Entities/_Shared/FamiliesManagers/ChickenLord/chicken_lord_manager.tscn"),
 }
 
 var PROJECTILE_SCENES: Dictionary[Projectile.Type, PackedScene] = {

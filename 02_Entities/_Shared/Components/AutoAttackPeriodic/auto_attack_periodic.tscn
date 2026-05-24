@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" uid="uid://bfjx3fu1i5o50" path="res://02_Entities/_Shared/Components/AutoAttackPeriodic/auto_attack_periodic.gd" id="1_13rab"]
 
-[node name="AutoAttackPeriodicModule" type="Node" unique_id=1342760017]
+[node name="AutoAttackPeriodicComponent" type="Node" unique_id=1342760017]
 script = ExtResource("1_13rab")

@@ -50,8 +50,16 @@ transform = Transform3D(1.0000001, 0, 0, 0, 0.99999994, 0, 0, 0, 1.0000001, 0, 0
 unique_name_in_owner = true
 
 [node name="Latika2" parent="Node3D/Entities" unique_id=1941835210 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("3_os118")]
-transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, 1.1381696, 9.536744e-07, -0.25927112)
+transform = Transform3D(-0.2632837, 0, 0.96471834, 0, 1.0000001, 0, -0.96471834, 0, -0.2632837, 3.662788, 9.536744e-07, 0.110419974)
 team = 1
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+_override_base_stats = SubResource("Resource_rnrfd")
+
+[node name="Latika3" parent="Node3D/Entities" unique_id=294337328 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("3_os118")]
+transform = Transform3D(-0.2568966, 0, -0.9664388, 0, 1.0000001, 0, 0.9664388, 0, -0.2568966, -4.759769, 9.536744e-07, 0.13317703)
+team = 2
 battle_id = 1
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
