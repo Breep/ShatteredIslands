@@ -4,8 +4,9 @@
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme.tres" id="1_ue2ys"]
 [ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://04_UI/Tool/Misc/hover_boost_button.gd" id="3_88yd2"]
 [ext_resource type="PackedScene" uid="uid://c6hrhnld0nlpl" path="res://04_UI/Menu/PlayMenu/ui_play_menu.tscn" id="6_57mrh"]
+[ext_resource type="PackedScene" uid="uid://b3pdqtw0g262b" path="res://04_UI/Menu/SettingsMenu/ui_game_settings.tscn" id="9_stngs"]
 
-[node name="UIMainMenu" type="Control" node_paths=PackedStringArray("_play_button")]
+[node name="UIMainMenu" type="Control" unique_id=1258681436 node_paths=PackedStringArray("_play_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,7 +17,7 @@ theme = ExtResource("1_ue2ys")
 script = ExtResource("1_k25tv")
 _play_button = NodePath("VBoxContainer/Play")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=672228765]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1
@@ -26,7 +27,7 @@ anchor_bottom = 0.9
 offset_right = 8.0
 grow_vertical = 2
 
-[node name="Play" type="Button" parent="VBoxContainer"]
+[node name="Play" type="Button" parent="VBoxContainer" unique_id=1235963514]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_default_cursor_shape = 2
@@ -35,7 +36,16 @@ theme_override_font_sizes/font_size = 55
 text = "PLAY"
 script = ExtResource("3_88yd2")
 
-[node name="Store" type="Button" parent="VBoxContainer"]
+[node name="Settings" type="Button" parent="VBoxContainer" unique_id=132068414]
+layout_mode = 2
+theme_override_constants/outline_size = 50
+theme_override_font_sizes/font_size = 55
+text = "SETTINGS
+"
+script = ExtResource("3_88yd2")
+metadata/_custom_type_script = "uid://dbg5i1sglgh5g"
+
+[node name="Store" type="Button" parent="VBoxContainer" unique_id=613976659]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_default_cursor_shape = 2
@@ -44,7 +54,7 @@ theme_override_font_sizes/font_size = 55
 text = "STORE"
 script = ExtResource("3_88yd2")
 
-[node name="Collection" type="Button" parent="VBoxContainer"]
+[node name="Collection" type="Button" parent="VBoxContainer" unique_id=1785243420]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_default_cursor_shape = 2
@@ -53,7 +63,14 @@ theme_override_font_sizes/font_size = 55
 text = "COLLECTION"
 script = ExtResource("3_88yd2")
 
-[node name="PlayMenu" parent="." instance=ExtResource("6_57mrh")]
+[node name="PlayMenu" parent="." unique_id=428971334 instance=ExtResource("6_57mrh")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
+
+[node name="GameSettings" parent="." unique_id=428971335 instance=ExtResource("9_stngs")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[connection signal="pressed" from="VBoxContainer/Settings" to="." method="_on_settings_button_pressed"]

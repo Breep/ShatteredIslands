@@ -379,6 +379,7 @@ func resurrect(hp_percent: float) -> void:
 	life_state = LifeState.ALIVE
 	_state_machine.start_combat_modules()
 	resurrected.emit()
+	AudioManager.play_3d("resurrection", global_position, 0.95)
 #endregion
 
 #region ============================== Hero archetype API ==============================

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://deccqccmvj2x"]
 
-[ext_resource type="Script" uid="uid://dv8w8kb4xsqp3" path="res://03_SpellsAndProjectiles/Projectiles/projectile.gd" id="1_dnhuw"]
+[ext_resource type="Script" uid="uid://b0xstywdfg2hc" path="res://03_SpellsAndProjectiles/Projectiles/SmallEgg/small_egg_projectile.gd" id="1_i52ky"]
 [ext_resource type="Script" uid="uid://xr3esthqo6re" path="res://03_SpellsAndProjectiles/Projectiles/_Shared/Trajectories/straight_trajectory.gd" id="2_fp2cg"]
 [ext_resource type="PackedScene" uid="uid://brngyuus4jals" path="res://03_SpellsAndProjectiles/Projectiles/SmallEgg/small_egg_visual.tscn" id="3_fp2cg"]
 
@@ -14,7 +14,7 @@ radius = 0.28020203
 
 [node name="SmallEggProjectile" type="Area3D" unique_id=1470520974]
 monitoring = false
-script = ExtResource("1_dnhuw")
+script = ExtResource("1_i52ky")
 trajectory = SubResource("Resource_0hces")
 metadata/_custom_type_script = "uid://dv8w8kb4xsqp3"
 

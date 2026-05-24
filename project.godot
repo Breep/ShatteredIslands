@@ -20,6 +20,10 @@ run/main_scene="uid://gbmiuhc63ji7"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="uid://hl4bi74ds0b0"
 
+[audio]
+
+buses/default_bus_layout="uid://c3slvo4b5haid"
+
 [autoload]
 
 Console="*uid://dinahj02x6npw"
@@ -34,6 +38,7 @@ PlayerManager="*res://08_GlobalManagers/player_manager.gd"
 GlobalFightingManager="*res://08_GlobalManagers/global_fighting_manager.gd"
 MultiplayerManager="*res://08_GlobalManagers/multiplayer_manager.gd"
 GlobalGameManager="*res://08_GlobalManagers/global_game_manager.gd"
+AudioManager="*res://08_GlobalManagers/audio_manager.tscn"
 Shared="*res://09_Lib/shared.gd"
 Debug="*uid://woc06wbtruty"
 
@@ -225,6 +230,11 @@ trigger_health_bar_value={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194334,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
+
+[internationalization]
+
+locale/translations_pot_files=PackedStringArray("res://Card/Descriptions/Cards/ArdentCelestial/Common/ConsummingTheStar/fire_consuming_the_star.gd")
+locale/translation_add_builtin_strings_to_pot=true
 
 [layer_names]
 
