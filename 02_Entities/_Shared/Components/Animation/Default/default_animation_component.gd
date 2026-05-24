@@ -91,8 +91,10 @@ func _ready() -> void:
 	_owner.life_state_changed.connect(_on_owner_life_state_changed)
 	_owner.is_moving_changed.connect(_on_owner_is_moving_changed)
 	
-	_owner.draggable.dragged.connect(_on_dragged)
-	_owner.draggable.dropped.connect(_on_dropped)
+	_owner.draggable.dragged.connect(_on_owner_dragged)
+	_owner.draggable.dropped.connect(_on_owner_dropped)
+	
+	_owner.alterations.stunned_changed.connect(_on_owner_stunned_changed)
 
 	_on_owner_life_state_changed(Entity.LifeState.ALIVE)
 
@@ -101,8 +103,8 @@ func connect_modules(auto_attack_module: AutoAttackComponent, draggable_module: 
 	if auto_attack_module != null:
 		auto_attack_module.attack_started.connect(_on_owner_auto_attack_started)
 	if draggable_module != null:
-		draggable_module.dragged.connect(_on_dragged)
-		draggable_module.dropped.connect(_on_dropped)
+		draggable_module.dragged.connect(_on_owner_dragged)
+		draggable_module.dropped.connect(_on_owner_dropped)
 
 
 func stop_attack_animation() -> void:
@@ -146,13 +148,20 @@ func _on_owner_is_moving_changed(is_moving: bool) -> void:
 		_animation_tree.set(PARAM_SWITCH_MAIN, VALUE_SWITCH_MAIN_IDLE)
 
 
-func _on_dragged() -> void:
+func _on_owner_dragged() -> void:
 	_animation_tree.set(PARAM_SWITCH_POSITIONING, VALUE_SWITCH_POSITIONIN_ON)
 	_animation_tree.set(PARAM_ONE_SHOT_LAND, AnimationNodeOneShot.ONE_SHOT_REQUEST_FADE_OUT)
 
 
-func _on_dropped() -> void:
+func _on_owner_dropped() -> void:
 	_animation_tree.set(PARAM_SWITCH_POSITIONING, VALUE_SWITCH_POSITIONIN_OFF)
 	_animation_tree.set(PARAM_ONE_SHOT_LAND, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+
+
+func _on_owner_stunned_changed(is_active: bool, _duration: float, _infinite: bool) -> void:
+	if is_active:
+		_animation_tree.set(PARAM_SWITCH_STUNNED_STATE, VALUE_SWITCH_STUNNED_STATE_STUNNED)
+	else:
+		_animation_tree.set(PARAM_SWITCH_STUNNED_STATE, VALUE_SWITCH_STUNNED_STATE_NOT_STUNNED)
 
 #endregion
