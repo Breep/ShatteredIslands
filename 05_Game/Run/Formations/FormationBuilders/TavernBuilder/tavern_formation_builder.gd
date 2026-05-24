@@ -134,8 +134,8 @@ func _entity_to_mob_spec(entity: Entity) -> MobSpec:
 	spec.display_label = entity.name
 	spec.free_position = entity.global_position
 	spec.rotation_y = entity.rotation.y
-	if entity.custom_base_stats != null:
-		spec.stats_override = entity.custom_base_stats.duplicate(true)
+	if entity._override_base_stats != null:
+		spec.stats_override = entity._override_base_stats.duplicate(true)
 	return spec
 
 

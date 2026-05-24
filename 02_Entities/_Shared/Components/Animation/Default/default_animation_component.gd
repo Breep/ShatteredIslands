@@ -90,6 +90,9 @@ func _ready() -> void:
 
 	_owner.life_state_changed.connect(_on_owner_life_state_changed)
 	_owner.is_moving_changed.connect(_on_owner_is_moving_changed)
+	
+	_owner.draggable.dragged.connect(_on_dragged)
+	_owner.draggable.dropped.connect(_on_dropped)
 
 	_on_owner_life_state_changed(Entity.LifeState.ALIVE)
 
@@ -145,6 +148,7 @@ func _on_owner_is_moving_changed(is_moving: bool) -> void:
 
 func _on_dragged() -> void:
 	_animation_tree.set(PARAM_SWITCH_POSITIONING, VALUE_SWITCH_POSITIONIN_ON)
+	_animation_tree.set(PARAM_ONE_SHOT_LAND, AnimationNodeOneShot.ONE_SHOT_REQUEST_FADE_OUT)
 
 
 func _on_dropped() -> void:

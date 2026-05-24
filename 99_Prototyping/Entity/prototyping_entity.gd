@@ -20,7 +20,7 @@ func _ready() -> void:
 	GameManager.game_rules.duration_fighting_normal = 100000
 	GlobalFightingManager.__prototyping = true
 	
-	_respawn_entites_with_spawn_manager()
+	#_respawn_entites_with_spawn_manager()
 	
 	_center_point_camera.set_active()
 	_fighting_manager.init(_spawn_manager, 42)
@@ -33,22 +33,22 @@ func _respawn_entites_with_spawn_manager() -> void:
 		if child is Entity and (child as Entity).is_hero():
 			var entity_data = {
 				"team": child.team,
-				"custom_base_stats": child.custom_base_stats,
-				"custom_deck": child._custom_deck,
-				"hero_id": child.hero_desc.id,
+				"override_base_stats": child._override_base_stats,
+				"override_custom_deck": child._override_custom_deck,
+				"hero_id": (child.entity_desc as HeroDesc).id,
 				"global_transform": child.global_transform,
 				"context": child.get_context(),
 				"family_level": child._override_family_levels.duplicate(true),
-				"custom_data_memory": child._custom_data_memory
+				"override_data_memory": child._override_data_memory
 			}
 			child.queue_free()
 
 			# On passe par le SpawnManager pour obtenir un UID et l'ajouter aux listes de tick
 			var hero: Entity = Shared.HERO_SCENES[entity_data["hero_id"]].instantiate()
-			hero.custom_base_stats = entity_data["custom_base_stats"]
-			hero._custom_deck = entity_data["custom_deck"]
+			hero._override_base_stats = entity_data["override_base_stats"]
+			hero._override_custom_deck = entity_data["override_custom_deck"]
 			hero.team = entity_data["team"]
-			hero._custom_data_memory = entity_data["custom_data_memory"]
+			hero._override_data_memory = entity_data["override_data_memory"]
 
 			hero._override_family_levels = entity_data["family_level"]
 			_spawn_manager.spawn_entity(hero, entity_data["global_transform"], entity_data["context"])

@@ -25,7 +25,7 @@ func spawn_into(parent: Node, ctx: EntityContext = null) -> Node:
 		return node
 
 	if stats_override != null:
-		entity.custom_base_stats = stats_override.duplicate(true)
+		entity._override_base_stats = stats_override.duplicate(true)
 
 	entity.category = get_entity_category()
 

@@ -13,7 +13,7 @@ signal dropped()
 #endregion
 
 #region ============================== Export ==============================
-@export var _drag_height: float = 1.5
+@export var _drag_height: float = 0.75
 @export var _drag_tween_duration: float = 0.15
 @export var _drop_tween_duration: float = 0.2
 #endregion

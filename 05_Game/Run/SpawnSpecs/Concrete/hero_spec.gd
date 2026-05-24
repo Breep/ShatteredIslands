@@ -39,7 +39,7 @@ func spawn_into(parent: Node, ctx: EntityContext = null) -> Node:
 	if data_memory != null:
 		hero.data_memory = data_memory
 	if stats_override != null:
-		hero.custom_base_stats = stats_override.duplicate(true)
+		hero._override_base_stats = stats_override.duplicate(true)
 
 	# Injection données runtime (ctx) AVANT add_child
 	if ctx != null and ctx.runtime_owner_player != null:

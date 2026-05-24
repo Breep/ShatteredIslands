@@ -38,8 +38,8 @@ func _build_hero() -> void:
 		_hero = null
 
 	_hero = Shared.HERO_SCENES[_hero_id].instantiate() as Entity
-	_hero.hero_desc = Shared.HEROES[_hero_id]
-	_hero._custom_deck = _player.deck
+	_hero.entity_desc = Shared.HEROES[_hero_id]
+	_hero._override_custom_deck = _player.deck
 	_hero.visible = false
 	_hero._health_bar.hide()
 	add_child(_hero)
