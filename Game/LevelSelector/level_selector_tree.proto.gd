@@ -7,6 +7,7 @@ const ISLAND_SCENE: PackedScene = preload("res://Game/LevelSelector/island.tscn"
 const INVALID_NODE_TINT: Color = Color(1.0, 0.35, 0.35, 1.0)
 const PANEL_WIDTH: float = 290.0
 const ZOOM_STEP: float = 0.1
+const DEFAULT_TARGETS_10: Array = [3, 11, 12, 11, 10, 9, 9, 8, 6, 3]
 #endregion
 
 
@@ -62,7 +63,7 @@ func _ready() -> void:
 	_on_decay_exponent_changed(_decay_exponent.value)
 	_on_zoom_changed(_zoom_slider.value)
 	_rebuild_targets_grid(int(_level_count.value))
-	_on_auto_fill_targets_pressed()
+	_initialize_targets()
 	_recenter_world()
 	_regenerate()
 #endregion
@@ -98,6 +99,17 @@ func _read_targets_override() -> PackedInt32Array:
 	for sb in _level_target_spinboxes:
 		out.append(int(sb.value))
 	return out
+
+
+func _initialize_targets() -> void:
+	# Pour le cas standard 10 niveaux, on impose une distribution hand-tuned
+	# qui donne un bel équilibre. Sinon on retombe sur la formule via auto-fill.
+	if int(_level_count.value) == DEFAULT_TARGETS_10.size():
+		for i in range(_level_target_spinboxes.size()):
+			if i < DEFAULT_TARGETS_10.size():
+				_level_target_spinboxes[i].value = DEFAULT_TARGETS_10[i]
+	else:
+		_on_auto_fill_targets_pressed()
 
 
 func _rebuild_targets_grid(count: int) -> void:

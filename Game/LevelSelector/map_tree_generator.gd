@@ -299,18 +299,29 @@ func _add_leaf_rescues(graph: Graph) -> void:
 		if e.kind == EdgeKind.PARENT:
 			children_count[e.from_id] = int(children_count[e.from_id]) + 1
 
-	var max_rescue_dist: float = ring_spacing * 1.5
-	for L in range(1, level_count):
-		var ring_a: Array = graph.by_level[L]
-		var ring_b: Array = graph.by_level[L + 1]
-		if ring_a.is_empty() or ring_b.is_empty():
+	var max_rescue_dist: float = ring_spacing * 2.0
+	# Couvre tous les niveaux 1..level_count (le dernier inclus pour rescue entre feuilles).
+	for L in range(1, level_count + 1):
+		var ring_curr: Array = graph.by_level[L]
+		if ring_curr.is_empty():
 			continue
-		for n in ring_a:
+		var ring_next: Array = []
+		if L + 1 <= level_count:
+			ring_next = graph.by_level[L + 1]
+		for n in ring_curr:
 			if int(children_count[n.id]) != 0:
 				continue
-			# Choix par distance euclidienne : pertinent avec le radial jitter qui peut
-			# rendre l'angle trompeur.
-			var rescue: NodeDesc = _closest_by_position(n, ring_b)
+			# Candidats : tous les nodes N+1 + les autres feuilles du même niveau N.
+			var candidates: Array = []
+			candidates.append_array(ring_next)
+			for sibling in ring_curr:
+				if sibling == n:
+					continue
+				if int(children_count[sibling.id]) == 0:
+					candidates.append(sibling)
+			if candidates.is_empty():
+				continue
+			var rescue: NodeDesc = _closest_by_position(n, candidates)
 			if rescue == null:
 				continue
 			if n.position.distance_to(rescue.position) > max_rescue_dist:

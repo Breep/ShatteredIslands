@@ -3,7 +3,8 @@
 [ext_resource type="Script" path="res://Game/LevelSelector/level_selector.gd" id="1_root"]
 [ext_resource type="PackedScene" path="res://Game/LevelSelector/island.tscn" id="2_island"]
 [ext_resource type="PackedScene" path="res://Game/LevelSelector/turtle.tscn" id="3_turtle"]
-[ext_resource type="Script" path="res://Game/LevelSelector/paths_layer.gd" id="4_paths"]
+[ext_resource type="Script" uid="uid://br3yh3bu1oj75" path="res://Game/LevelSelector/paths_layer.gd" id="4_paths"]
+[ext_resource type="Script" uid="uid://duibtnclassbase" path="res://04_UI/UIButton/ui_button.gd" id="ui_btn"]
 
 [node name="LevelSelector" type="Control"]
 layout_mode = 3
@@ -147,6 +148,7 @@ offset_bottom = -35.0
 grow_vertical = 0
 theme_override_font_sizes/font_size = 28
 text = "RETOUR"
+script = ExtResource("ui_btn")
 
 [node name="StartButton" type="Button" parent="."]
 unique_name_in_owner = true
@@ -164,4 +166,4 @@ grow_horizontal = 0
 grow_vertical = 0
 theme_override_font_sizes/font_size = 28
 text = "COMMENCER"
-disabled = true
+script = ExtResource("ui_btn")
