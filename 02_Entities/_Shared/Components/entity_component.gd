@@ -24,7 +24,8 @@ enum Type {
 	DESPAWN_ANIMATION = 14,
 	DISPLAY_MODE = 15,
 	DECK_HOLDER = 16,
-	FAMILY = 17
+	FAMILY = 17,
+	DRAGGABLE = 18
 }
 
 static var ENTITY_COMPONENT_SCENES: Dictionary[EntityComponent.Type, PackedScene] = {
@@ -46,6 +47,7 @@ static var ENTITY_COMPONENT_SCENES: Dictionary[EntityComponent.Type, PackedScene
 	Type.DISPLAY_MODE:         load("res://02_Entities/_Shared/Components/DisplayMode/display_mode_module.tscn"),
 	Type.DECK_HOLDER:          load("res://02_Entities/_Shared/Components/DeckHolder/deck_holder_component.tscn"),
 	Type.FAMILY:               load("res://02_Entities/_Shared/Components/Family/family_module.tscn"),
+	Type.DRAGGABLE:            load("res://02_Entities/_Shared/Components/Draggable/draggable_component.tscn"),
 }
 
 static var _global_dodge_number: int = 0

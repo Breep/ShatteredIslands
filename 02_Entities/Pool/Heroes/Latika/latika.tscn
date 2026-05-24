@@ -26,20 +26,20 @@ script = ExtResource("1_undos")
 [node name="LatikaVisual" parent="." unique_id=433263620 instance=ExtResource("2_o3eb1")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
-[node name="GeneralSkeleton" parent="LatikaVisual" index="0" unique_id=501144810]
-bones/1/position = Vector3(-0.006972547, 0.8148904, 0.0014235781)
-bones/1/rotation = Quaternion(-0.036757357, -0.36743852, -0.014957219, 0.9292009)
-bones/2/rotation = Quaternion(0.049931794, 0.0408335, -0.0070024566, 0.9978931)
-bones/3/rotation = Quaternion(0.09983853, 0.08097859, -0.01827897, 0.9915346)
-bones/4/rotation = Quaternion(0.09987647, 0.08101845, -0.018262058, 0.9915278)
-bones/5/rotation = Quaternion(-0.034876704, -0.010783719, 0.0015311815, 0.9993323)
-bones/6/rotation = Quaternion(-0.057857055, 0.17665935, -0.011287888, 0.9825053)
+[node name="GeneralSkeleton" parent="LatikaVisual" index="0" unique_id=194436225]
+bones/1/position = Vector3(-0.0059867175, 0.81817645, 0.008010688)
+bones/1/rotation = Quaternion(-0.03935782, -0.36620396, -0.016643517, 0.92955303)
+bones/2/rotation = Quaternion(0.046460964, 0.040353447, -0.005817913, 0.9980878)
+bones/3/rotation = Quaternion(0.0931712, 0.080332175, -0.016560214, 0.992266)
+bones/4/rotation = Quaternion(0.092181094, 0.08035243, -0.016388562, 0.9923597)
+bones/5/rotation = Quaternion(-0.015355617, -0.010599016, 0.0015879895, 0.9998247)
+bones/6/rotation = Quaternion(-0.06348433, 0.1775553, -0.0015093371, 0.98205984)
 bones/7/position = Vector3(1.4794772e-17, 0.09447605, 0.1227222)
 bones/8/position = Vector3(1.4775588e-17, 0.1276692, 0.12272221)
-bones/10/rotation = Quaternion(0.52377564, 0.46125066, 0.5397922, -0.47067115)
-bones/11/rotation = Quaternion(0.047749776, 0.84230036, -0.5244415, 0.11494045)
-bones/12/rotation = Quaternion(0.28052425, -0.60241896, 0.29725462, 0.68559265)
-bones/13/rotation = Quaternion(-0.09506445, 0.7906875, 0.11520049, 0.5937213)
+bones/10/rotation = Quaternion(0.5183008, 0.46666345, 0.516117, -0.49720505)
+bones/11/rotation = Quaternion(0.048208907, 0.83406526, -0.53941107, 0.10510392)
+bones/12/rotation = Quaternion(0.29342452, -0.59334296, 0.30092302, 0.68650687)
+bones/13/rotation = Quaternion(-0.06273437, 0.79286855, 0.077989586, 0.6011169)
 bones/14/rotation = Quaternion(0.28308576, 0.6479677, -0.58540934, -0.3966059)
 bones/15/rotation = Quaternion(-0.039942227, 0.11784033, -0.14163585, 0.982068)
 bones/16/rotation = Quaternion(-0.0364033, 0.1520346, 0.22999513, 0.9605532)
@@ -51,10 +51,10 @@ bones/21/rotation = Quaternion(-0.49364036, -0.5062798, 0.44727433, 0.547673)
 bones/22/rotation = Quaternion(0.0026372757, -0.019491982, -0.021269318, 0.9995803)
 bones/23/rotation = Quaternion(-0.018149137, 0.071478695, -0.0925109, 0.9929769)
 bones/24/rotation = Quaternion(0.016646294, -0.096525095, 0.16913001, 0.98071444)
-bones/25/rotation = Quaternion(0.4886024, -0.48532623, -0.5872532, -0.42527616)
-bones/26/rotation = Quaternion(0.18677032, 0.84400636, -0.49398884, -0.09351653)
-bones/27/rotation = Quaternion(0.28821152, 0.6751207, -0.22184391, 0.6418189)
-bones/28/rotation = Quaternion(0.15233572, -0.7423518, 0.0038644914, 0.65245146)
+bones/25/rotation = Quaternion(0.48484036, -0.49312574, -0.5619027, -0.45389676)
+bones/26/rotation = Quaternion(0.1831787, 0.8311389, -0.5199355, -0.07294285)
+bones/27/rotation = Quaternion(0.30409488, 0.6542979, -0.21247281, 0.6589963)
+bones/28/rotation = Quaternion(0.14568369, -0.7313128, 0.016868614, 0.666088)
 bones/29/rotation = Quaternion(-0.39660597, 0.5854094, 0.64796764, -0.28308573)
 bones/30/rotation = Quaternion(-0.039942224, 0.11784034, -0.14163586, 0.982068)
 bones/31/rotation = Quaternion(-0.036403313, 0.1520346, 0.22999513, 0.9605532)
@@ -65,19 +65,19 @@ bones/35/rotation = Quaternion(-0.0045196447, 0.028039927, 0.15906803, 0.986859)
 bones/37/rotation = Quaternion(0.0026372697, -0.01949202, -0.021269329, 0.9995803)
 bones/38/rotation = Quaternion(-0.018149221, 0.07147895, -0.09251084, 0.9929769)
 bones/39/rotation = Quaternion(0.01664637, -0.09652534, 0.16913004, 0.98071444)
-bones/40/rotation = Quaternion(-0.1250097, 0.028686386, 0.98409295, 0.122926086)
-bones/41/rotation = Quaternion(0.025919985, 0.95580095, -0.28296092, -0.07553708)
-bones/42/rotation = Quaternion(0.0968374, 0.5629786, -0.81372464, -0.10737772)
+bones/40/rotation = Quaternion(-0.12578326, 0.011712618, 0.9841137, 0.124746695)
+bones/41/rotation = Quaternion(0.024542889, 0.962162, -0.2600396, -0.077597566)
+bones/42/rotation = Quaternion(0.09857524, 0.5713077, -0.8074368, -0.10925306)
 bones/43/rotation = Quaternion(0, 0, 0, 1)
-bones/44/rotation = Quaternion(0.0033730792, 0.99986386, 0.015827585, -0.0032516208)
-bones/45/rotation = Quaternion(0.07864636, 0.21305755, 0.9685382, -0.101759255)
-bones/46/rotation = Quaternion(0.03720555, 0.9496991, -0.28799778, -0.117238045)
-bones/47/rotation = Quaternion(-0.042601485, 0.67078006, -0.73894227, 0.04694125)
+bones/44/rotation = Quaternion(0.0034746677, 0.9998621, 0.015898833, -0.0033129365)
+bones/45/rotation = Quaternion(0.07985318, 0.20303656, 0.9709233, -0.09852795)
+bones/46/rotation = Quaternion(0.03698932, 0.95128846, -0.28221866, -0.118468404)
+bones/47/rotation = Quaternion(-0.040182736, 0.6710134, -0.7390227, 0.04440664)
 bones/48/rotation = Quaternion(0, 0, 0, 1)
-bones/49/rotation = Quaternion(0.027959606, 0.99937123, 0.020422135, -0.0076406896)
+bones/49/rotation = Quaternion(0.02825056, 0.9993642, 0.020244895, -0.007954771)
 
 [node name="LeftHandAttachment" parent="LatikaVisual/GeneralSkeleton" index="17" unique_id=297417579]
-transform = Transform3D(0.7628824, 0.2202179, -0.6078767, -0.37745258, -0.61164474, -0.6952842, -0.52491874, 0.7598648, -0.38349134, 0.27551568, 0.79129404, 0.20779283)
+transform = Transform3D(0.76932704, 0.14572479, -0.6220131, -0.40582126, -0.64048654, -0.65198624, -0.4934016, 0.75401664, -0.4336055, 0.28528377, 0.8124546, 0.22362274)
 
 [node name="Skeleton3D" parent="LatikaVisual/GeneralSkeleton/LeftHandAttachment/Bow" parent_id_path=PackedInt32Array(433263620, 526129373) index="0" unique_id=2143212340]
 bones/1/position = Vector3(0, 0, -0.11986062)
@@ -86,28 +86,28 @@ bones/1/position = Vector3(0, 0, -0.11986062)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.11986062)
 
 [node name="ShieldAttachment" parent="LatikaVisual/GeneralSkeleton" index="18" unique_id=1828555638]
-transform = Transform3D(-0.8319032, 0.020704828, -0.55453426, -0.35742888, -0.7843947, 0.50692177, -0.42447802, 0.61991626, 0.659941, 0.28047264, 0.99380356, 0.027556289)
+transform = Transform3D(-0.82227653, 0.014567617, -0.56890154, -0.38198644, -0.7551386, 0.53277767, -0.42183822, 0.65540314, 0.62649745, 0.29217425, 1.0065588, 0.034424502)
 visible = true
 
 [node name="SM_Wep_Shield_01" parent="LatikaVisual/GeneralSkeleton/ShieldAttachment" index="0" unique_id=1821283942]
 visible = false
 
 [node name="RightHandWeaponAttachment" parent="LatikaVisual/GeneralSkeleton" index="19" unique_id=1743821847]
-transform = Transform3D(-0.17687556, -0.23796605, 0.9550326, 0.32770413, -0.9292062, -0.17083877, 0.92807585, 0.28275084, 0.24233638, -0.31659216, 0.79793704, -0.22853443)
+transform = Transform3D(-0.19735676, -0.19326985, 0.9610916, 0.3305148, -0.9360931, -0.12037261, 0.92293566, 0.29389864, 0.24862292, -0.30401117, 0.80701184, -0.2175101)
 visible = true
 
 [node name="SM_Wep_Axe_02" parent="LatikaVisual/GeneralSkeleton/RightHandWeaponAttachment" index="0" unique_id=1050349439]
 visible = false
 
 [node name="BackPackAttachment" parent="LatikaVisual/GeneralSkeleton" index="20" unique_id=801280550]
-transform = Transform3D(0.94228965, -0.1263181, -0.31005457, -0.015707813, 0.9083929, -0.41782242, 0.33443007, 0.39858004, 0.8539851, 0.0019770004, 1.2754976, 0.011614193)
+transform = Transform3D(0.9414534, -0.11217336, -0.317935, -0.0178686, 0.9250996, -0.37930393, 0.33666927, 0.362778, 0.8689338, 0.0071336385, 1.2791082, 0.011760722)
 visible = true
 
 [node name="SM_Chr_Attach_Backpack_01" parent="LatikaVisual/GeneralSkeleton/BackPackAttachment" index="1" unique_id=251234928]
 visible = false
 
 [node name="FaceAttachment" parent="LatikaVisual/GeneralSkeleton" index="21" unique_id=538487173]
-transform = Transform3D(0.99792564, -0.06436886, -0.00096678734, 0.062364995, 0.9703659, -0.2334533, 0.015965372, 0.23290876, 0.97236747, -0.034088984, 1.478806, 0.12070252)
+transform = Transform3D(0.99680686, -0.0797507, -0.0039889216, 0.07698764, 0.9731258, -0.2170231, 0.021189421, 0.21602295, 0.9761584, -0.027289698, 1.4847838, 0.11670152)
 
 [node name="SM_Chr_Attach_Hair_07" parent="LatikaVisual/GeneralSkeleton/FaceAttachment" index="1" unique_id=131978717]
 visible = true
@@ -119,24 +119,24 @@ visible = false
 visible = false
 
 [node name="LeftFootAttachment" parent="LatikaVisual/GeneralSkeleton" index="22" unique_id=1967920387]
-transform = Transform3D(-0.7128935, -0.7012661, 0.0029086024, 0.0013863773, 0.0027381852, 0.99999535, -0.70127094, 0.71289426, -0.0009797662, 0.0988504, 0.059203833, 0.26009566)
+transform = Transform3D(-0.7128848, -0.7012766, 0.0024295896, 0.0028457271, 0.00057177246, 0.9999956, -0.7012748, 0.71288896, 0.001588136, 0.09947612, 0.058427423, 0.25830895)
 
 [node name="SM_Prop_Shoe_01" parent="LatikaVisual/GeneralSkeleton/LeftFootAttachment" index="0" unique_id=995298695]
 visible = false
 
 [node name="RightFootAttachment" parent="LatikaVisual/GeneralSkeleton" index="23" unique_id=1806943128]
-transform = Transform3D(-0.3128753, -0.94979405, 0.00047260523, 0.0011123959, 0.00013127923, 0.99999934, -0.9497936, 0.31287572, 0.0010154396, -0.07178369, 0.056433886, -0.27666754)
+transform = Transform3D(-0.31322154, -0.949678, 0.0019340813, 0.0010511391, 0.0016900301, 0.9999981, -0.94967943, 0.31322306, 0.00046902895, -0.072015636, 0.05624503, -0.27732885)
 
 [node name="SM_Prop_Shoe_01" parent="LatikaVisual/GeneralSkeleton/RightFootAttachment" index="0" unique_id=731859447]
 visible = false
 
 [node name="HipsAttachment" parent="LatikaVisual/GeneralSkeleton" index="24" unique_id=504179125]
-transform = Transform3D(0.7295305, 0.054808646, -0.6817486, -0.0007843841, 0.9968504, 0.07930164, 0.6839478, -0.05731821, 0.7272757, -0.006972547, 0.8148904, 0.0014235781)
+transform = Transform3D(0.7312354, 0.05976803, -0.6795017, -0.002116084, 0.9963479, 0.085360184, 0.68212193, -0.0609805, 0.72869134, -0.0059867175, 0.81817645, 0.008010688)
 
 [node name="SM_Chr_Attach_Bags_03" parent="LatikaVisual/GeneralSkeleton/HipsAttachment" index="2" unique_id=1284670100]
 visible = false
 
-[node name="AnimationPlayer" parent="LatikaVisual" index="1" unique_id=183526171]
+[node name="AnimationPlayer" parent="LatikaVisual" index="1" unique_id=258929934]
 libraries/default_humanoid_library = SubResource("AnimationLibrary_44wrm")
 
 [node name="ProjectileSpawnMarker" type="Marker3D" parent="LatikaVisual" unique_id=607808498]
@@ -161,7 +161,7 @@ parameters/switch_moving/transition_request = ""
 parameters/switch_moving/current_index = 0
 parameters/scale_dance/scale = 1.0
 parameters/scale_die/scale = 1.0
-parameters/scale_idle/scale = 1.0
+parameters/scale_idle_standing_neutral/scale = 1.0
 parameters/one_shot_attack/active = false
 parameters/one_shot_attack/internal_active = false
 parameters/one_shot_attack/request = 0
@@ -169,82 +169,68 @@ parameters/one_shot_ultimate/active = false
 parameters/one_shot_ultimate/internal_active = false
 parameters/one_shot_ultimate/request = 0
 parameters/scale_attack/scale = 1.0
-parameters/one_shot_idle_standing/active = false
-parameters/one_shot_idle_standing/internal_active = false
-parameters/one_shot_idle_standing/request = 0
+parameters/one_shot_idle_standing_neutral/active = false
+parameters/one_shot_idle_standing_neutral/internal_active = false
+parameters/one_shot_idle_standing_neutral/request = 0
 parameters/scale_ultimate/scale = 1.0
-parameters/scale_idle_standing_var_1/scale = 1.0
-parameters/one_shot_sitting/active = false
-parameters/one_shot_sitting/internal_active = false
+parameters/scale_idle_standing_neutral_var/scale = 1.0
+parameters/one_shot_sitting/active = true
+parameters/one_shot_sitting/internal_active = true
 parameters/one_shot_sitting/request = 0
-parameters/switch_entity_state/current_state = "Alive"
-parameters/switch_entity_state/transition_request = ""
-parameters/switch_entity_state/current_index = 2
+parameters/switch_entity_life_state/current_state = "Alive"
+parameters/switch_entity_life_state/transition_request = ""
+parameters/switch_entity_life_state/current_index = 1
 parameters/scale_walk/scale = 1.0
 parameters/scale_run/scale = 1.0
-parameters/switch_attack/current_state = "Attack2"
+parameters/switch_attack/current_state = "Attack1"
 parameters/switch_attack/transition_request = ""
-parameters/switch_attack/current_index = 1
-parameters/scale_idle_standing_var_2/scale = 1.0
-parameters/switch_standing_idle_var/current_state = "Var2"
-parameters/switch_standing_idle_var/transition_request = ""
-parameters/switch_standing_idle_var/current_index = 1
-parameters/scale_idle_fighting/scale = 1.0
-parameters/scale_idle_fighting_var_1/scale = 1.0
-parameters/switch_idle_fighting_var/current_state = ""
-parameters/switch_idle_fighting_var/transition_request = ""
-parameters/switch_idle_fighting_var/current_index = -1
-parameters/scale_idle_fighting_var_2/scale = 1.0
-parameters/one_shot_idle_fighting/active = false
-parameters/one_shot_idle_fighting/internal_active = false
-parameters/one_shot_idle_fighting/request = 0
+parameters/switch_attack/current_index = 0
+parameters/scale_stunned/scale = 1.0
+parameters/seek_stunned/seek_request = -1.0
+parameters/scale_idle_standing_aggresive/scale = 1.0
+parameters/scale_idle_standing_aggresive_var/scale = 1.0
+parameters/seek_idle_standing_aggresive/seek_request = -1.0
+parameters/switch_entity_mode/current_state = "InGame"
+parameters/switch_entity_mode/transition_request = ""
+parameters/switch_entity_mode/current_index = 1
+parameters/seek_idle_standing_neutral/seek_request = -1.0
+parameters/one_shot_idle_standing_aggresive/active = false
+parameters/one_shot_idle_standing_aggresive/internal_active = false
+parameters/one_shot_idle_standing_aggresive/request = 0
+parameters/seek_idle_sitting_chair/seek_request = -1.0
 parameters/scale_idle_sitting_chair/scale = 1.0
-parameters/scale_idle_sitting_chair_var_1/scale = 1.0
-parameters/scale_idle_sitting_chair_var_2/scale = 1.0
-parameters/switch_idle_sitting_chair_var/current_state = "Var1"
-parameters/switch_idle_sitting_chair_var/transition_request = ""
-parameters/switch_idle_sitting_chair_var/current_index = 0
-parameters/one_shot_idle_sitting_chair/active = false
-parameters/one_shot_idle_sitting_chair/internal_active = false
+parameters/scale_idle_sitting_chair_var/scale = 1.0
+parameters/seek_idle_sitting_floor/seek_request = -1.0
+parameters/seek_dance/seek_request = -1.0
+parameters/one_shot_idle_sitting_chair/active = true
+parameters/one_shot_idle_sitting_chair/internal_active = true
 parameters/one_shot_idle_sitting_chair/request = 0
 parameters/scale_idle_sitting_floor/scale = 1.0
-parameters/scale_idle_sitting_floor_var_1/scale = 1.0
-parameters/scale_idle_sitting_floor_var_2/scale = 1.0
-parameters/switch_anim_idle_sitting_floor/current_state = "Var1"
-parameters/switch_anim_idle_sitting_floor/transition_request = ""
-parameters/switch_anim_idle_sitting_floor/current_index = 0
+parameters/scale_idle_sitting_floor_var/scale = 1.0
+parameters/scale_attack_2/scale = 2.0
+parameters/scale_hit_1/scale = 1.0
+parameters/scale_attack_3/scale = 2.0
 parameters/switch_main/current_state = "Idle"
 parameters/switch_main/transition_request = ""
 parameters/switch_main/current_index = 0
-parameters/switch_idle/current_state = "Standing"
+parameters/switch_idle/current_state = "StandingNeutral"
 parameters/switch_idle/transition_request = ""
 parameters/switch_idle/current_index = 0
 parameters/scale_drag/scale = 1.0
-parameters/scale_drop/scale = 1.0
-parameters/one_shop_drop/active = false
-parameters/one_shop_drop/internal_active = false
-parameters/one_shop_drop/request = 0
+parameters/scale_land/scale = 1.0
+parameters/one_shot_land/active = false
+parameters/one_shot_land/internal_active = false
+parameters/one_shot_land/request = 0
 parameters/one_shot_hit/active = false
 parameters/one_shot_hit/internal_active = false
 parameters/one_shot_hit/request = 0
-parameters/scale_attack_1/scale = 1.0
-parameters/scale_attack_2/scale = 1.0
-parameters/scale_attack_3/scale = 0.5
-parameters/switch_hit/current_state = "Var2"
-parameters/switch_hit/transition_request = ""
-parameters/switch_hit/current_index = 1
-parameters/scale_hit_1/scale = 1.0
-"parameters/TimeScale 2/scale" = 1.0
-parameters/seek_dance/seek_request = -1.0
-parameters/seek_idle_sitting_floor/seek_request = -1.0
-parameters/seek_idle_sitting_chair/seek_request = -1.0
-parameters/seek_idle_fighting/seek_request = -1.0
-parameters/seek_idle_standing/seek_request = -1.0
-parameters/one_shot_stunned/active = false
-parameters/one_shot_stunned/internal_active = false
-parameters/one_shot_stunned/request = 0
-parameters/seek_stunned/seek_request = -1.0
-parameters/scale_stunned/scale = 1.0
+parameters/scale_attack_1/scale = 2.0
+parameters/switch_positioning/current_state = "Off"
+parameters/switch_positioning/transition_request = ""
+parameters/switch_positioning/current_index = 0
+parameters/switch_stunned_state/current_state = "NotStunned"
+parameters/switch_stunned_state/transition_request = ""
+parameters/switch_stunned_state/current_index = 0
 
 [node name="AnimationModule" parent="." unique_id=2001784186 node_paths=PackedStringArray("_weapons_node", "_owner") instance=ExtResource("6_n3ceh")]
 script = ExtResource("8_up7xi")

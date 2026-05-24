@@ -1,11 +1,6 @@
 class_name DefaultAnimationComponent
 extends AnimationComponent
 
-#TODO Refactorer complétement l'Animation Component
-
-const IDLE_VAR_TIMER_MIN_WAIT_TIME: float = 5.0
-const IDLE_VAR_TIMER_MAX_WAIT_TIME: float = 15.0
-
 # Speed thresholds for animation transitions
 const WALK_SPEED_THRESHOLD: float = 0.1
 const RUN_SPEED_THRESHOLD: float = 5.0
@@ -14,42 +9,59 @@ const RUN_SPEED_THRESHOLD: float = 5.0
 @export var _animation_player: AnimationPlayer
 
 #region AnimatorTree parameters
-const PARAM_SWITCH_ENTITY_STATE: String = "parameters/transition_global/transition_request"
-const VALUE_SWITCH_ENTITY_STATE_TPOSE: String = "TPOSE"
-const VALUE_SWITCH_ENTITY_STATE_DEAD: String = "Dead"
-const VALUE_SWITCH_ENTITY_STATE_ALIVE: String = "Fighting"
+const PARAM_SWITCH_ENTITY_MODE: String = "parameters/switch_entity_mode/transition_request"
+const VALUE_SWITCH_ENTITY_MODE_EDITOR: String = "Editor"
+const VALUE_SWITCH_ENTITY_MODE_INGAME: String = "Ingame"
 
-const PARAM_ONE_SHOT_HIT: String = "param"
+const PARAM_SWITCH_ENTITY_LIFE_STATE: String = "parameters/switch_entity_life_state/transition_request"
+const VALUE_SWITCH_ENTITY_LIFE_STATE_DEAD: String = "Dead"
+const VALUE_SWITCH_ENTITY_LIFE_STATE_ALIVE: String = "Fighting"
 
-const PARAM_TRANSITION_FIGHTING: String = "parameters/transition_fighting/transition_request"
-const VALUE_TRANSITION_FIGHTING_IDLE: String = "Idle"
-const VALUE_TRANSITION_FIGHTING_WALK: String = "Walk"
-const VALUE_TRANSITION_FIGHTING_RUN: String = "Run"
-const VALUE_TRANSITION_FIGHTING_DANCE: String = "Dance"
-const VALUE_TRANSITION_FIGHTING_DIE: String = "Die"
+const PARAM_ONE_SHOT_HIT: String = "parameters/one_shot_hit/request"
 
-const PARAM_SCALE_IDLE: String = "parameters/scale_idle/scale"
-const PARAM_SCALE_IDLE_VAR: String = "parameters/scale_idle_var/scale"
-const PARAM_ONE_SHOT_IDLE: String = "parameters/one_shot_idle/request"
+const PARAM_SWITCH_STUNNED_STATE: String = "parameters/switch_stunned_state/transition_request"
+const VALUE_SWITCH_STUNNED_STATE_NOT_STUNNED: String = "NotStunned"
+const VALUE_SWITCH_STUNNED_STATE_STUNNED: String = "Stunned"
 
-const PARAM_SCALE_DANCE: String = "parameters/scale_dance/scale"
-const PARAM_SCALE_DIE: String = "parameters/scale_die/scale"
-const PARAM_SCALE_WALK: String = "parameters/scale_walk/scale"
-const PARAM_SCALE_RUN: String = "parameters/scale_run/scale"
+const PARAM_ONE_SHOT_ULTIMATE: String = "parameters/one_shot_ultimate/request"
+const PARAM_SCALE_ULTIMATE: String = "parameters/scale_ultimate/scale"
 
 const PARAM_SCALE_ATTACK: String = "parameters/scale_attack/scale"
 const PARAM_ONE_SHOT_ATTACK: String = "parameters/one_shot_attack/request"
+const PARAM_SWITCH_ATTACK: String = "parameters/switch_attack/transition_request"
+const VALUE_SWITCH_ATTACK_1: String = "Attack1"
+const VALUE_SWITCH_ATTACK_2: String = "Attack2"
+const VALUE_SWITCH_ATTACK_3: String = "Attack3"
 
-const PARAM_SCALE_ULTIMATE: String = "parameters/scale_ultimate/scale"
-const PARAM_ONE_SHOT_ULTIMATE: String = "parameters/one_shot_ultimate/request"
+const PARAM_ONE_SHOT_LAND: String = "parameters/one_shot_land/request"
 
-const PARAM_ONE_SHOT_SITTING: String = "parameters/one_shot_sitting/request"
+const PARAM_SWITCH_POSITIONING: String = "parameters/switch_positioning/transition_request"
+const VALUE_SWITCH_POSITIONIN_OFF: String = "Off"
+const VALUE_SWITCH_POSITIONIN_ON: String = "On"
+
+
+const PARAM_SWITCH_MAIN: String = "parameters/switch_main/transition_request"
+const VALUE_SWITCH_MAIN_IDLE: String = "Idle"
+const VALUE_SWITCH_MAIN_MOVING: String = "Moving"
+const VALUE_SWITCH_MAIN_CELEBRATING: String = "Celebrating"
+
+const PARAM_SWITCH_MOVING: String = "parameters/switch_moving/transition_request"
+const VALUE_SWITCH_MOVING_WALK: String = "Walk"
+const VALUE_SWITCH_MOVING_RUN: String = "Run"
+
+const PARAM_SWITCH_IDLE: String = "parameters/switch_moving/transition_request"
+const VALUE_SWITCH_IDLE_STANDING_NEUTRAL: String = "StandingNeutral"
+const VALUE_SWITCH_IDLE_STANDING_AGGRESIVE: String = "StandingAggresive"
+const VALUE_SWITCH_IDLE_SITTING_CHAIR: String = "SittingChair"
+const VALUE_SWITCH_IDLE_SITTING_FLOOR: String = "SittingFloor"
+const PARAM_SEEK_IDLE_STANDING_NEUTRAL: String = "parameters/seek_idle_standing_neutral/seek_request"
+const PARAM_SEEK_IDLE_STANDING_AGGRESIVE: String = "parameters/seek_idle_standing_aggresive/seek_request"
+const PARAM_SEEK_IDLE_SITTING_CHAIR: String = "parameters/seek_idle_sitting_chair/seek_request"
+const PARAM_SEEK_IDLE_SITTING_FLOOR: String = "parameters/seek_idle_sitting_floor/seek_request"
 #endregion
 
 @onready var _rng := RandomNumberGenerator.new()
 
-var _idle_variation_timer: Timer
-var _current_movement_state: String = VALUE_TRANSITION_FIGHTING_IDLE
 var _lock_animation: bool = false
 
 # Base attack animation duration (cached on ready)
@@ -73,26 +85,21 @@ func _ready() -> void:
 		return
 	
 	_rng.randomize()
-	_idle_variation_timer = Timer.new()
-	add_child(_idle_variation_timer)
-	_idle_variation_timer.wait_time = _rng.randf_range(IDLE_VAR_TIMER_MIN_WAIT_TIME, IDLE_VAR_TIMER_MAX_WAIT_TIME)
-	_idle_variation_timer.timeout.connect(_on_idle_variation_timer_timeout)
-	_idle_variation_timer.start()
 	
-	_entity_owner.died.connect(_on_entity_owner_died)
-	_entity_owner.resurrected.connect(_on_entity_owner_resurrected)
-	_entity_owner.fighting_state_changed.connect(_on_entity_owner_fighting_state_changed)
-	_entity_owner.is_moving_changed.connect(_on_entity_owner_is_moving_changed)
+	_animation_tree.set(PARAM_SWITCH_ENTITY_MODE, VALUE_SWITCH_ENTITY_MODE_INGAME)
 	
-	# NOTE: No longer connecting to _animation_player.attack_done — logic is tick-driven
+	_owner.life_state_changed.connect(_on_owner_life_state_changed)
+	_owner.is_moving_changed.connect(_on_owner_is_moving_changed)
 	
-	_animation_tree.set(PARAM_TRANSITION_GLOBAL, VALUE_TRANSITION_GLOBAL_FIGHTING)
-	_animation_tree.set(PARAM_TRANSITION_FIGHTING, VALUE_TRANSITION_FIGHTING_IDLE)
+	_on_owner_life_state_changed(Entity.LifeState.ALIVE)
 
 
-func connect_modules(auto_attack_module: AutoAttackComponent) -> void:
+func connect_modules(auto_attack_module: AutoAttackComponent, draggable_module: DraggableComponent = null) -> void:
 	if auto_attack_module != null:
-		auto_attack_module.attack_started.connect(_on_entity_owner_auto_attack_started)
+		auto_attack_module.attack_started.connect(_on_owner_auto_attack_started)
+	if draggable_module != null:
+		draggable_module.dragged.connect(_on_dragged)
+		draggable_module.dropped.connect(_on_dropped)
 
 
 func stop_attack_animation() -> void:
@@ -100,22 +107,15 @@ func stop_attack_animation() -> void:
 
 
 #region signals
-func _on_entity_owner_fighting_state_changed(new_state: Entity.FightingState) -> void:
-	match new_state:
-		Entity.FightingState.FIGHTING: pass
-		Entity.FightingState.CELEBRATING: pass
+func _on_owner_life_state_changed(life_state: Entity.LifeState) -> void:
+	match life_state:
+		Entity.LifeState.ALIVE:
+			_animation_tree.set(PARAM_SWITCH_ENTITY_LIFE_STATE, VALUE_SWITCH_ENTITY_LIFE_STATE_ALIVE)
+		Entity.LifeState.DEAD:
+			_animation_tree.set(PARAM_SWITCH_ENTITY_LIFE_STATE, VALUE_SWITCH_ENTITY_LIFE_STATE_DEAD)
 
 
-func _on_entity_owner_died() -> void:
-	_lock_animation = true # Lock animation when dead
-	_animation_tree.set(PARAM_TRANSITION_FIGHTING, VALUE_TRANSITION_FIGHTING_DIE)
-
-func _on_entity_owner_resurrected() -> void:
-	_lock_animation = false
-	_animation_tree.set(PARAM_TRANSITION_FIGHTING, VALUE_TRANSITION_FIGHTING_IDLE)
-
-
-func _on_entity_owner_auto_attack_started(lock_seconds: float) -> void:
+func _on_owner_auto_attack_started(lock_seconds: float) -> void:
 	Verbose.debug("Auto attack started (lock_seconds=" + str(lock_seconds).pad_decimals(2) + ")", Verbose.Category.ENTITY_ANIMATION)
 	if _lock_animation:
 		Verbose.warn("Auto attack - Animation is locked", Verbose.Category.ENTITY_ANIMATION)
@@ -127,24 +127,28 @@ func _on_entity_owner_auto_attack_started(lock_seconds: float) -> void:
 	_animation_tree.set(PARAM_ONE_SHOT_ATTACK, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 
-func _on_entity_owner_ultimate_casted() -> void:
+func _on_owner_ultimate_casted() -> void:
 	if _lock_animation: return
 	_animation_tree.set(PARAM_ONE_SHOT_ULTIMATE, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 
-func _on_idle_variation_timer_timeout() -> void:
+func _on_owner_is_moving_changed(is_moving: bool) -> void:
 	if _lock_animation: return
-	_animation_tree.set(PARAM_ONE_SHOT_SITTING, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-	_restart_idle_variation_animation()
+	if is_moving:
+		var speed: float = _owner.stats.movement_speed if _owner.stats != null else 0.0
+		var moving_state: String = VALUE_SWITCH_MOVING_RUN if speed >= RUN_SPEED_THRESHOLD else VALUE_SWITCH_MOVING_WALK
+		_animation_tree.set(PARAM_SWITCH_MOVING, moving_state)
+		_animation_tree.set(PARAM_SWITCH_MAIN, VALUE_SWITCH_MAIN_MOVING)
+	else:
+		_animation_tree.set(PARAM_SWITCH_MAIN, VALUE_SWITCH_MAIN_IDLE)
 
-func _on_entity_owner_is_moving_changed(is_moving: bool) -> void:
-	if _lock_animation: return
-	_animation_tree.set(PARAM_TRANSITION_FIGHTING, VALUE_TRANSITION_FIGHTING_IDLE if not is_moving else VALUE_TRANSITION_FIGHTING_WALK)
-#endregion
 
-#region private methods
-func _restart_idle_variation_animation() -> void:
-	if _lock_animation: return
-	_idle_variation_timer.wait_time = _rng.randf_range(IDLE_VAR_TIMER_MIN_WAIT_TIME, IDLE_VAR_TIMER_MAX_WAIT_TIME)
-	_idle_variation_timer.start()
+func _on_dragged() -> void:
+	_animation_tree.set(PARAM_SWITCH_POSITIONING, VALUE_SWITCH_POSITIONIN_ON)
+
+
+func _on_dropped() -> void:
+	_animation_tree.set(PARAM_SWITCH_POSITIONING, VALUE_SWITCH_POSITIONIN_OFF)
+	_animation_tree.set(PARAM_ONE_SHOT_LAND, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+
 #endregion
