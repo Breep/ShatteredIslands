@@ -19,41 +19,27 @@ func _ready() -> void:
 	GameManager.game_rules.duration_fighting_countdown = 0.05
 	GameManager.game_rules.duration_fighting_normal = 100000
 	GlobalFightingManager.__prototyping = true
-	
-	#_respawn_entites_with_spawn_manager()
-	
+
+	_adopt_pre_placed_entities()
+
 	_center_point_camera.set_active()
 	_fighting_manager.init(_spawn_manager, 42)
 	_auto_attack_check_button.button_pressed = _auto_attack_enabled
 	_family_managers_check_button.button_pressed = _family_managers_enabled
 
 
-func _respawn_entites_with_spawn_manager() -> void:
+# Les entités posées en éditeur (enfants statiques de _entities_node) sont
+# adoptées par le SpawnManager : elles gardent leur position, leurs overrides
+# (@export _override_base_stats, _override_custom_deck, etc.) et leur state
+# d'éditeur. Le SpawnManager leur attribue juste un UID et les enregistre.
+func _adopt_pre_placed_entities() -> void:
 	for child in _entities_node.get_children():
-		if child is Entity and (child as Entity).is_hero():
-			var entity_data = {
-				"team": child.team,
-				"override_base_stats": child._override_base_stats,
-				"override_custom_deck": child._override_custom_deck,
-				"hero_id": (child.entity_desc as HeroDesc).id,
-				"global_transform": child.global_transform,
-				"context": child.get_context(),
-				"family_level": child._override_family_levels.duplicate(true),
-				"override_data_memory": child._override_data_memory
-			}
-			child.queue_free()
-
-			# On passe par le SpawnManager pour obtenir un UID et l'ajouter aux listes de tick
-			var hero: Entity = Shared.HERO_SCENES[entity_data["hero_id"]].instantiate()
-			hero._override_base_stats = entity_data["override_base_stats"]
-			hero._override_custom_deck = entity_data["override_custom_deck"]
-			hero.team = entity_data["team"]
-			hero._override_data_memory = entity_data["override_data_memory"]
-
-			hero._override_family_levels = entity_data["family_level"]
-			_spawn_manager.spawn_entity(hero, entity_data["global_transform"], entity_data["context"])
-			_entities.append(hero)
-			hero.set_display_mode(Entity.DisplayMode.FIGHTING_PHASE)
+		if not (child is Entity): continue
+		var entity: Entity = child
+		var ctx: EntityContext = entity.get_context()
+		ctx.spawn_manager = _spawn_manager
+		_spawn_manager.adopt_entity(entity, ctx)
+		_entities.append(entity)
 
 # ===== UI =====
 #region Global Commands

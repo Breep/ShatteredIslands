@@ -52,7 +52,46 @@ func spawn_entity(entity: Entity, global_transform: Transform3D, context: Entity
 	_entities_node.add_child(entity)
 	entity.global_transform = global_transform
 	_active_entities.append(entity)
-	
+
+	entity_spawned.emit(entity)
+	if _fighting_area != null:
+		_fighting_area.entity_spawned.emit(entity, type, entity.global_position)
+
+
+## Adopte une entité déjà présente dans la scène (posée en éditeur pour le proto).
+## Lui attribue un UID, applique le contexte, et l'enregistre auprès du SpawnManager,
+## sans la détruire/recréer ni la déplacer. La position et tous les @export déjà setés
+## en éditeur sont préservés tels quels.
+##
+## L'entité a déjà eu son _ready (puisqu'elle est déjà dans l'arbre), donc on
+## re-câble explicitement ce qui dépend du spawn_manager après l'apply_context.
+func adopt_entity(entity: Entity, context: EntityContext = null, type := Entity.EntityType.HERO) -> void:
+	if entity == null: return
+	if entity in _active_entities:
+		Verbose.warn("SpawnManager: entity [" + entity.entity_name + "] already adopted, skipping", Verbose.Category.ENTITY)
+		return
+
+	entity.uid = _entity_counter
+	_entity_counter += 1
+
+	# Par défaut, si le contexte ne précise pas de spawn_manager, on utilise self.
+	# Évite que l'appelant ait à se rappeler de le seter à chaque fois.
+	if context != null and context.spawn_manager == null:
+		context.spawn_manager = self
+
+	if context != null:
+		entity.apply_context(context)
+		# apply_context re-connecte les "senders" (damage, heal, projectile, spell,
+		# summon, auto_attack) mais pas target — on le fait ici.
+		if entity.target != null:
+			entity.target.connect_to_spawn_manager(self)
+		# _ready de l'entité a déjà tourné, donc _initial_fighting_state_from_context
+		# ne sera pas relu. On set l'état explicitement.
+		if context.fighting_state != Entity.FightingState.UNDEF:
+			entity.fighting_state = context.fighting_state
+
+	_active_entities.append(entity)
+
 	entity_spawned.emit(entity)
 	if _fighting_area != null:
 		_fighting_area.entity_spawned.emit(entity, type, entity.global_position)

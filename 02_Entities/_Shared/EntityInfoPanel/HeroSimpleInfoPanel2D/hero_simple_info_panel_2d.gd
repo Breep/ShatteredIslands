@@ -19,6 +19,10 @@ var _current_spawn: Marker3D
 func _ready() -> void:
 	super._ready()
 
+	# Défaut : suit le marker fighting. apply_display_mode() peut réécrire vers
+	# le marker tavern quand la chaîne display_mode sera réactivée ailleurs.
+	_current_spawn = _info_panel_spawn
+
 	if _mana_bar and _mana_bar.material:
 		_mana_bar.material = _mana_bar.material.duplicate()
 

@@ -328,14 +328,12 @@ func apply_context(context: EntityContext) -> void:
 		summoner = context.entity_owner
 		summoner.bds_registry.register_summon(self)
 
-	# Connect all sender modules to managers
-	var senders: Array[EntityComponent] = [
-		damage, heal, projectile, spell, summon, auto_attack
-	]
-	for module in senders:
-		if module == null: continue
-		if _spawn_manager != null: module.connect_to_spawn_manager(_spawn_manager)
-		if _arena_zone_manager != null: module.connect_to_arena_zone_manager(_arena_zone_manager)
+	projectile.connect_to_spawn_manager(_spawn_manager)
+	spell.connect_to_spawn_manager(_spawn_manager)
+	summon.connect_to_spawn_manager(_spawn_manager)
+	target.connect_to_spawn_manager(_spawn_manager)
+	
+	summon.connect_to_arena_zone_manager(_arena_zone_manager)
 
 	Verbose.debug("Entity [" + entity_name + "] received fighting_state [" + str(FightingState.keys()[context.fighting_state]) + "] from context", Verbose.Category.ENTITY)
 
