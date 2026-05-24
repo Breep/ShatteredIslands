@@ -106,7 +106,6 @@ var spawn: SpawnAnimationComponent
 var despawn: DespawnAnimationComponent
 var clickable: ClickableComponent
 var draggable: DraggableComponent
-var auto_attack_periodic: AutoAttackPeriodicComponent
 var display_mode_module: DisplayModeModule # TODO ça à l'air inutil ça à virer je pense
 var deck_holder: DeckHolderComponent
 var family: FamilyComponent
@@ -127,7 +126,6 @@ var _auto_loaded_components: Array[EntityComponent.Type] = [
 	EntityComponent.Type.DESPAWN_ANIMATION,
 	EntityComponent.Type.CLICKABLE,
 	EntityComponent.Type.DRAGGABLE,
-	EntityComponent.Type.AUTO_ATTACK_PERIODIC,
 ]
 
 #var display_mode: DisplayMode = DisplayMode.PREVIEW
@@ -290,8 +288,8 @@ func get_collision_center() -> Vector3:
 func process_tick() -> void:
 	if movement != null:
 		movement.process_tick()
-	if auto_attack_periodic != null:
-		auto_attack_periodic.process_tick()
+	if auto_attack != null:
+		auto_attack.process_tick()
 	if alterations != null:
 		alterations.process_tick()
 	spawn.process_tick()
@@ -445,10 +443,7 @@ func _connect_module_dependencies() -> void:
 		auto_attack.connect_modules(movement, animation)
 		auto_attack.set_auto_attack_spawn(_attack_spawn_marker)
 		auto_attack.set_projectile_type(_projectile_type)
-	
-	if auto_attack_periodic != null and auto_attack != null:
-		auto_attack_periodic.connect_modules(auto_attack)
-	
+
 	if animation != null:
 		animation.connect_modules(auto_attack)
 	
@@ -516,11 +511,11 @@ func _on_stunned_changed(is_active: bool, _duration: float, _infinite: bool) -> 
 
 
 func _on_stunned(is_active: bool) -> void:
+	# AutoAttackComponent gère lui-même son pause/resume via stunned_changed.
+	# Ici on s'occupe juste du registry de callbacks.
 	if is_active:
 		battle_callback_registry.pause_timers()
-		auto_attack_periodic.stop()
 	else:
 		battle_callback_registry.resume_timers()
-		auto_attack_periodic.start()
 
 #endregion

@@ -24,7 +24,8 @@ func _ready() -> void:
 
 func _on_health_changed(current_health: float) -> void:
 	if current_health < _hp_threshold_ratio * stats.health_max:
-		auto_attack_periodic.stop()
+		# Stoppe la boucle d'AA en libérant la cible standing.
+		if auto_attack != null: auto_attack.clear_target()
 		_rush_target = target.get_target(TargetComponent.TargettingStrategy.FARTHEST_ENEMY)
 		if is_instance_valid(_rush_target):
 			movement.rush(10, _rush_target.global_position)	

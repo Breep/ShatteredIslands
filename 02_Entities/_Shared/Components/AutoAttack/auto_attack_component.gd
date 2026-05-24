@@ -1,6 +1,11 @@
 class_name AutoAttackComponent
 extends EntityComponent
 
+# Mécanique d'auto-attaque complète : prend une cible standing (set_target/clear_target),
+# l'approche via MovementComponent si hors-portée, l'attaque à cadence fixe selon attack_speed.
+# Émet target_dropped quand la cible devient invalide — le controller décide de la suite.
+# La sélection de cible est externe (AIController, PlayerController...).
+
 # ============================== Enums ==============================
 
 enum AttackPhase {
@@ -22,11 +27,13 @@ enum ActiveAttackVar {
 
 signal attack_started(lock_seconds: float) # Notify animation (visual only)
 signal attack_completed() # Attack cycle complete, ready for next attack
+signal target_changed(new_target: Entity) # Standing target changed (incl. set to null)
+signal target_dropped(reason: String) # Target became invalid mid-loop (death, despawn...)
 
 # ============================== Constants ==============================
 
 const TICKS_PER_SECOND: int = 60
-# Defaults used when the owner is not a Hero (or has no hero_desc).
+# Defaults used when the owner is not a Hero (or has no entity_desc).
 # Hero owners override via HeroDesc.aa_anim_ratio / aa_release_normalized.
 const DEFAULT_AA_ANIM_RATIO: float = 0.8        # % of cycle occupied by anim → tick where animation ends
 const DEFAULT_AA_RELEASE_NORMALIZED: float = 0.5 # position of hit within anim (0..1)
@@ -41,7 +48,7 @@ var _current_phase: AttackPhase = AttackPhase.COOLDOWN
 
 # Module references (set via connect_modules)
 var movement: MovementComponent = null
-var _animation_module = null # AnimationModule, but no typing to avoid circular dependency
+var _animation_module = null # AnimationComponent, but no typing to avoid circular dependency
 
 # Approach management
 var _is_approaching: bool = false
@@ -58,6 +65,14 @@ var _active_attack_data: Dictionary = {}
 
 var _projectile_type: Projectile.Type = Projectile.Type.SHADOW_BOLT
 
+# Standing target + cooldown loop (fusionné depuis l'ex-AutoAttackPeriodicComponent)
+var _current_target: Entity = null
+var _attack_interval_ticks: int = TICKS_PER_SECOND # base cooldown in ticks
+var _ticks_remaining: int = 0 # countdown to next attack
+var _is_stunned: bool = false # loop paused while stunned
+
+# ============================== Node base functions ==============================
+
 func _enter_tree() -> void:
 	if _owner == null: return
 	if _owner.auto_attack != null and _owner.auto_attack != self:
@@ -71,79 +86,82 @@ func _ready() -> void:
 	if _owner == null or _owner.auto_attack != self:
 		return
 
+	# Wire up signals indépendants des autres composants. Les wirings qui
+	# dépendent de movement/animation sont dans connect_modules().
+	_owner.stats.attack_speed_changed.connect(_on_owner_attack_speed_changed)
+	_owner.died.connect(_on_owner_died)
+	_recalculate_interval()
+
+
 # ============================== Public functions ==============================
 
 func connect_modules(movement_module: MovementComponent, animation_module: AnimationComponent) -> void:
 	movement = movement_module
 	_animation_module = animation_module
-	# NOTE: No longer connecting to attack_hit_frame — logic is now tick-driven
-	
+
 	if _owner.alterations != null:
 		_owner.alterations.stunned_changed.connect(_on_owner_stunned_changed)
 
 
 func set_auto_attack_spawn(projectile_spawn: Marker3D) -> void:
 	_projectile_spawn = projectile_spawn
-	
+
 
 func set_projectile_type(projectile_type: Projectile.Type) -> void:
 	_projectile_type = projectile_type
 
-## Called every tick by AutoAttackPeriodicModule.process_tick() — advances attack counters.
+
+## Définit la cible standing. La boucle s'occupe d'approcher + attaquer à cadence.
+## Passer null pour clear (équivalent à clear_target()).
+func set_target(target: Entity) -> void:
+	if target == _current_target: return
+	_current_target = target
+	# Si on était en approche d'une cible différente, on stoppe le follow_entity.
+	# La nouvelle approche redémarrera au prochain tick si besoin.
+	if _is_approaching:
+		stop_approaching()
+	target_changed.emit(target)
+
+
+func clear_target() -> void:
+	set_target(null)
+
+
+func get_current_target() -> Entity:
+	return _current_target
+
+
+## Called every tick by Entity.process_tick() (deterministic, fixed 1/60s step).
+## Drives both the in-flight attack counters and the periodic cooldown loop.
 func process_tick() -> void:
-	if _current_phase != AttackPhase.ATTACKING:
+	if _is_stunned: return
+	if not _owner.is_alive(): return
+
+	# Phase 1 : avancer le cycle d'attaque en cours (impact + lock_ticks)
+	if _current_phase == AttackPhase.ATTACKING:
+		_advance_active_attack()
+		return # On ne countdown pas pendant qu'on attaque
+
+	# Phase 2 : boucle périodique. Sans cible standing → idle.
+	if _current_target == null: return
+
+	# Valider la cible
+	if not _is_target_valid(_current_target):
+		_drop_target("target invalid")
 		return
-	
-	_ticks_since_attack_start += 1
-	
-	# Impact tick — apply damage / spawn projectile
-	if not _impact_applied and _ticks_since_attack_start >= _impact_tick:
-		_impact_applied = true
-		_execute_attack_impact()
-	
-	# Lock tick — attack phase complete
-	if _ticks_since_attack_start >= _lock_ticks:
-		_current_phase = AttackPhase.COOLDOWN
-		_active_attack_data.clear()
-		_owner.auto_attack_completed.emit(_owner)
-		attack_completed.emit()
 
+	# En approche : check arrivée
+	if _is_approaching:
+		var distance: float = _owner.global_position.distance_to(_current_target.global_position)
+		if _owner.stats.attack_range <= 0 or distance <= _owner.stats.attack_range:
+			stop_approaching()
+			_trigger_attack(_current_target)
+		return
 
-func execute_auto_attack(target: Entity) -> bool:
-	if not is_instance_valid(target):
-		attack_completed.emit()
-		return false
-	
-	if _owner.alterations.has_timed(Alteration.Type.STUN):
-		attack_completed.emit()
-		return false
-	
-	if not _check_range_and_approach(target):
-		return false # Out of range, approach started or failed
-	
-	if _owner != null:
-		_owner.look_at_target_y_only(target.global_position)
-	
-	_current_phase = AttackPhase.ATTACKING
-	
-	match _owner.stats.auto_attack_type:
-		EntityStats.AutoAttackType.RANGED: _start_ranged_attack(target)
-		EntityStats.AutoAttackType.MELEE: _start_melee_attack(target)
-	
-	return true
-
-
-func _cancel_attack() -> void:
-	stop_approaching()
-	_active_attack_data.clear()
-	_ticks_since_attack_start = 0
-	_impact_applied = false
-	_current_phase = AttackPhase.COOLDOWN
-	
-	if _animation_module != null:
-		_animation_module.stop_attack_animation()
-	
-	attack_completed.emit()
+	# COOLDOWN : décompte vers la prochaine attaque
+	_ticks_remaining -= 1
+	if _ticks_remaining <= 0:
+		_trigger_attack(_current_target)
 
 
 func is_attacking() -> bool:
@@ -167,6 +185,67 @@ func stop_approaching() -> void:
 
 
 # ============================== Private functions ==============================
+
+func _advance_active_attack() -> void:
+	_ticks_since_attack_start += 1
+
+	# Impact tick — apply damage / spawn projectile
+	if not _impact_applied and _ticks_since_attack_start >= _impact_tick:
+		_impact_applied = true
+		_execute_attack_impact()
+
+	# Lock tick — attack phase complete
+	if _ticks_since_attack_start >= _lock_ticks:
+		_current_phase = AttackPhase.COOLDOWN
+		_active_attack_data.clear()
+		_ticks_remaining = _attack_interval_ticks
+		_owner.auto_attack_completed.emit(_owner)
+		attack_completed.emit()
+
+
+func _trigger_attack(target: Entity) -> bool:
+	if not _check_range_and_approach(target):
+		return false # Out of range, approach started or failed
+
+	if _owner != null:
+		_owner.look_at_target_y_only(target.global_position)
+
+	_current_phase = AttackPhase.ATTACKING
+
+	match _owner.stats.auto_attack_type:
+		EntityStats.AutoAttackType.RANGED: _start_ranged_attack(target)
+		EntityStats.AutoAttackType.MELEE: _start_melee_attack(target)
+
+	return true
+
+
+func _is_target_valid(target: Entity) -> bool:
+	if not is_instance_valid(target): return false
+	if target.is_queued_for_deletion(): return false
+	if target.is_dead(): return false
+	return true
+
+
+func _drop_target(reason: String) -> void:
+	_current_target = null
+	if _is_approaching:
+		stop_approaching()
+	target_changed.emit(null)
+	target_dropped.emit(reason)
+
+
+func _cancel_attack() -> void:
+	stop_approaching()
+	_active_attack_data.clear()
+	_ticks_since_attack_start = 0
+	_impact_applied = false
+	_current_phase = AttackPhase.COOLDOWN
+
+	if _animation_module != null:
+		_animation_module.stop_attack_animation()
+
+	attack_completed.emit()
+
 
 func _calculate_attack_timings(interval_ticks: int) -> void:
 	var anim_ratio: float = _resolve_aa_anim_ratio()
@@ -194,7 +273,7 @@ func _start_attack_tick_counter(interval_ticks: int) -> void:
 	_ticks_since_attack_start = 0
 	_impact_applied = false
 	_calculate_attack_timings(interval_ticks)
-	
+
 	# Calculate lock duration in seconds for animation sync
 	var lock_seconds: float = float(_lock_ticks) / float(TICKS_PER_SECOND)
 	attack_started.emit(lock_seconds)
@@ -202,15 +281,15 @@ func _start_attack_tick_counter(interval_ticks: int) -> void:
 
 func _check_range_and_approach(target: Entity) -> bool:
 	var distance: float = _owner.global_position.distance_to(target.global_position)
-	
+
 	# Infinite range (attack_range <= 0) - always in range
 	if _owner.stats.attack_range <= 0:
 		return true
-	
+
 	# In range - can attack
 	if distance <= _owner.stats.attack_range:
 		return true
-	
+
 	# Out of range - try to approach
 	if movement != null:
 		_is_approaching = true
@@ -219,29 +298,30 @@ func _check_range_and_approach(target: Entity) -> bool:
 		movement.follow_entity(target)
 		Verbose.debug("AutoAttackModule: Starting approach to target", Verbose.Category.ENTITY_MODULE)
 		return false
-	
+
 	# No movement module (fixed turret) - fail attack
 	Verbose.debug("AutoAttackModule: Target out of range, no movement module", Verbose.Category.ENTITY_MODULE)
-	attack_completed.emit()
 	return false
 
 
 func _start_ranged_attack(target: Entity) -> void:
 	var projectile_spawn: Node3D = _projectile_spawn if _projectile_spawn != null else _owner
 	var projectile_stats: ProjectileStats = _prepare_projectile_stats()
-	
+
 	var attack_cmd = AttackCommand.new().setup(
 		target,
 		_projectile_type,
 		projectile_spawn,
 		projectile_stats
 	)
-	
+
 	if attack_cmd == null:
 		Verbose.error("Can't create AttackCommand for ranged attack", Verbose.Category.ENTITY_MODULE)
+		_current_phase = AttackPhase.COOLDOWN
+		_ticks_remaining = _attack_interval_ticks
 		attack_completed.emit()
 		return
-	
+
 	# Store active attack data
 	_active_attack_data = {
 		ActiveAttackVar.TARGET: attack_cmd.target,
@@ -249,24 +329,20 @@ func _start_ranged_attack(target: Entity) -> void:
 		ActiveAttackVar.SPAWN_NODE: attack_cmd.spawn_node,
 		ActiveAttackVar.STATS: attack_cmd.stats,
 	}
-	
-	# Calculate interval from current attack speed
-	var interval_ticks: int = _get_attack_interval_ticks()
-	_start_attack_tick_counter(interval_ticks)
+
+	_start_attack_tick_counter(_attack_interval_ticks)
 
 
 func _start_melee_attack(target: Entity) -> void:
 	var attack_stats: ProjectileStats = _prepare_projectile_stats()
-	
+
 	# Store active attack data
 	_active_attack_data = {
 		ActiveAttackVar.TARGET: target,
 		ActiveAttackVar.STATS: attack_stats,
 	}
-	
-	# Calculate interval from current attack speed
-	var interval_ticks: int = _get_attack_interval_ticks()
-	_start_attack_tick_counter(interval_ticks)
+
+	_start_attack_tick_counter(_attack_interval_ticks)
 
 
 func _execute_attack_impact() -> void:
@@ -309,7 +385,7 @@ func _execute_melee_impact() -> void:
 
 	var target: Entity = target_ref
 	var stats: ProjectileStats = _active_attack_data.get(ActiveAttackVar.STATS)
-	
+
 	# Execute all on-hit callbacks
 	for cb: Callable in stats.on_hit_callbacks:
 		if cb.is_valid():
@@ -321,16 +397,18 @@ func _execute_melee_impact() -> void:
 			})
 
 
-func _get_attack_interval_ticks() -> int:
+func _recalculate_interval() -> void:
 	var attack_speed: float = _owner.stats.attack_speed
 	if attack_speed <= 0:
-		return TICKS_PER_SECOND # fallback 1 attack/sec
-	return maxi(1, int(TICKS_PER_SECOND / attack_speed))
+		Verbose.error("Attack speed is <= 0 on [" + _owner.entity_name + "]", Verbose.Category.ENTITY_MODULE)
+		_attack_interval_ticks = TICKS_PER_SECOND
+	else:
+		_attack_interval_ticks = maxi(1, int(TICKS_PER_SECOND / attack_speed))
 
 
 func _prepare_projectile_stats() -> ProjectileStats:
 	var projectile_stats := ProjectileStats.new()
-	
+
 	# Create damage callback
 	var damage_modifiers_callbacks: Array[Callable]
 	var additional_callbacks: Array[Callable]
@@ -338,7 +416,7 @@ func _prepare_projectile_stats() -> ProjectileStats:
 	projectile_stats.on_hit_callbacks.append(func(data: Dictionary):
 		var hit_target = data[ProjectileStats.VarType.TARGET]
 		var hit_source = data[ProjectileStats.VarType.SOURCE]
-		
+
 		var mod = {
 			AutoAttackModifier.VarType.SOURCE: hit_source,
 			AutoAttackModifier.VarType.TARGET: hit_target,
@@ -347,14 +425,14 @@ func _prepare_projectile_stats() -> ProjectileStats:
 		}
 		for damage_modifiers_callback in damage_modifiers_callbacks:
 			damage_modifiers_callback.call(mod)
-		
+
 		var add: float = mod[AutoAttackModifier.VarType.DAMAGE_ADD]
 		var mul: float = mod[AutoAttackModifier.VarType.DAMAGE_MUL]
 		var damage: float = (_owner.stats.attack_damage + add) * (mul / 100.0)
 		var damage_done: float = 0
 		if hit_source and hit_target:
 			damage_done = hit_source.damage.direct(hit_target, damage, Utils.ActionType.DAMAGE_PHYSICAL, &"auto_attack")
-		
+
 		for additional_callback in additional_callbacks:
 			additional_callback.call({
 				AutoAttackModifier.VarType.SOURCE: hit_source,
@@ -364,7 +442,7 @@ func _prepare_projectile_stats() -> ProjectileStats:
 				AutoAttackModifier.VarType.PROJECTILE: data[ProjectileStats.VarType.PROJECTILE],
 			})
 	)
-	
+
 	return projectile_stats
 
 
@@ -379,5 +457,17 @@ func _consume_modifiers(damage_modifier_callbacks: Array[Callable], additional_c
 # ============================== Callbacks ==============================
 
 func _on_owner_stunned_changed(is_active: bool, _duration: float, _infinite: bool) -> void:
+	_is_stunned = is_active
 	if is_active:
 		_cancel_attack()
+	else:
+		_ticks_remaining = _attack_interval_ticks
+
+
+func _on_owner_attack_speed_changed(_new_attack_speed: float) -> void:
+	_recalculate_interval()
+
+
+func _on_owner_died() -> void:
+	_drop_target("owner died")
+	_cancel_attack()

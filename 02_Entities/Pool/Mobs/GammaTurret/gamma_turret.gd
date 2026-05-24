@@ -42,7 +42,8 @@ func _ready() -> void:
 	if not is_instance_valid(_master): _master = summoner
 	movement.orbit_entity(_master, 2, 1, MovementComponent.OrbitFacing.NONE)
 	_master.died.connect(_on_master_died)
-	auto_attack_periodic._attack_strategy = TargetComponent.TargettingStrategy.CLOSEST_ENEMY_SUMMON
+	# TODO Phase 2 controller refacto : migrer la strategy vers AIController._strategy
+	# auto_attack_periodic._attack_strategy = TargetComponent.TargettingStrategy.CLOSEST_ENEMY_SUMMON
 	super._ready()
 	alterations.add_stack(Alteration.Type.SHIELD, _shield, _master, &"Gamma Turret")
 	if auto_attack != null:
