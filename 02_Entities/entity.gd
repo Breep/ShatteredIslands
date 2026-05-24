@@ -106,6 +106,7 @@ var spawn: SpawnAnimationComponent
 var despawn: DespawnAnimationComponent
 var clickable: ClickableComponent
 var draggable: DraggableComponent
+var controller: EntityController
 var display_mode_module: DisplayModeModule # TODO ça à l'air inutil ça à virer je pense
 var deck_holder: DeckHolderComponent
 var family: FamilyComponent
@@ -126,6 +127,7 @@ var _auto_loaded_components: Array[EntityComponent.Type] = [
 	EntityComponent.Type.DESPAWN_ANIMATION,
 	EntityComponent.Type.CLICKABLE,
 	EntityComponent.Type.DRAGGABLE,
+	EntityComponent.Type.CONTROLLER,
 ]
 
 #var display_mode: DisplayMode = DisplayMode.PREVIEW
@@ -449,6 +451,11 @@ func _connect_module_dependencies() -> void:
 	
 	if label_popup != null:
 		label_popup.connect_marker(_health_bar_marker)
+
+	# Controller en dernier — il a besoin que les autres modules (auto_attack, target,
+	# battle_callback_registry) soient prêts avant de commencer à prendre des décisions.
+	if controller != null:
+		controller.enable()
 #endregion
 
 #region ============================== Callbacks ==============================
