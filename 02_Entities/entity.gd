@@ -80,6 +80,7 @@ enum EntityType {
 @export_subgroup("Behaviour")
 @export var auto_attack_enabled: bool = true
 @export var family_managers_enabled: bool = true
+@export var initial_controller_mode: EntityController.Mode = EntityController.Mode.AUTO
 #endregion
 
 #region ============================== Constants ==============================
@@ -454,8 +455,9 @@ func _connect_module_dependencies() -> void:
 
 	# Controller en dernier — il a besoin que les autres modules (auto_attack, target,
 	# battle_callback_registry) soient prêts avant de commencer à prendre des décisions.
+	# set_mode active aussi l'enfant correspondant (AIController ou PlayerController).
 	if controller != null:
-		controller.enable()
+		controller.set_mode(initial_controller_mode)
 #endregion
 
 #region ============================== Callbacks ==============================

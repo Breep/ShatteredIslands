@@ -12,6 +12,13 @@ var _entities: Array[Entity]
 
 @onready var _auto_attack_check_button: CheckButton = %AutoAttackCheckButton
 @onready var _family_managers_check_button: CheckButton = %FamilyManagersCheckButton
+@onready var _manual_mode_check_button: CheckButton = %ManualModeCheckButton
+
+# Manual mode : quand actif, un clic gauche court sur une entité la passe en
+# contrôle joueur (PlayerController). Les autres entités restent ou repassent
+# en AUTO. Une seule entité à la fois est contrôlée.
+var _manual_mode_enabled: bool = false
+var _currently_controlled: Entity = null
 
 
 func _ready() -> void:
@@ -26,6 +33,9 @@ func _ready() -> void:
 	_fighting_manager.init(_spawn_manager, 42)
 	_auto_attack_check_button.button_pressed = _auto_attack_enabled
 	_family_managers_check_button.button_pressed = _family_managers_enabled
+	_manual_mode_check_button.button_pressed = _manual_mode_enabled
+
+	Events.entity_clicked.connect(_on_entity_clicked)
 
 
 # Les entités posées en éditeur (enfants statiques de _entities_node) sont
@@ -74,6 +84,48 @@ func _on_auto_attack_check_button_toggled(toggled_on: bool) -> void:
 
 func _on_family_managers_check_button_toggled(toggled_on: bool) -> void:
 	_family_managers_enabled = toggled_on
+
+
+func _on_manual_mode_check_button_toggled(toggled_on: bool) -> void:
+	_manual_mode_enabled = toggled_on
+	# Si on désactive le mode manual, on rebascule tout en AUTO et on libère la sélection.
+	if not _manual_mode_enabled:
+		_release_manual_control()
+
+
+# Quand on clique sur une entité en mode manual : elle passe en contrôle joueur
+# (MANUAL + selected), toutes les autres reviennent en AUTO + non sélectionnées.
+# PlayerController ne fire que sur l'entité MANUAL+selected.
+func _on_entity_clicked(entity: Entity) -> void:
+	if not _manual_mode_enabled: return
+	if entity == null or entity.controller == null: return
+	if entity == _currently_controlled: return
+
+	# Remettre l'ancienne sélection en AUTO + déselectionner + retirer le marker visuel
+	if _currently_controlled != null:
+		if _currently_controlled.controller != null:
+			_currently_controlled.controller.set_selected(false)
+			_currently_controlled.controller.set_mode(EntityController.Mode.AUTO)
+		if _currently_controlled.clickable != null:
+			_currently_controlled.clickable.deselect()
+
+	# Activer le contrôle joueur sur la nouvelle entité + sélectionner + marker visuel
+	entity.controller.set_mode(EntityController.Mode.MANUAL)
+	entity.controller.set_selected(true)
+	if entity.clickable != null:
+		entity.clickable.select()
+	_currently_controlled = entity
+	Verbose.debug("Manual control: now piloting " + entity.entity_name, Verbose.Category.ENTITY)
+
+
+func _release_manual_control() -> void:
+	if _currently_controlled != null:
+		if _currently_controlled.controller != null:
+			_currently_controlled.controller.set_selected(false)
+			_currently_controlled.controller.set_mode(EntityController.Mode.AUTO)
+		if _currently_controlled.clickable != null:
+			_currently_controlled.clickable.deselect()
+	_currently_controlled = null
 
 
 

@@ -1,10 +1,10 @@
 class_name AIController
-extends EntityController
+extends ControllerStrategy
 
-# Controller autonome. Pour l'instant son unique décision : choisir la cible
-# d'auto-attack courante via TargetComponent et la passer à AutoAttack.
-# Tick périodique via battle_callback_registry (donc auto-pause sur stun et
-# auto-stop hors combat — délégué au state machine de l'entité).
+# Mode AUTO du EntityController. Décision actuelle : choisir la cible AA
+# courante via TargetComponent et la passer à AutoAttack. Tick périodique via
+# battle_callback_registry (auto-pause sur stun, auto-stop hors combat via
+# le state machine de l'entité).
 
 #region ============================== Constants ==============================
 const DECISION_CALLBACK_ID: StringName = &"ai_controller_decision"
@@ -19,16 +19,14 @@ const DECISION_CALLBACK_ID: StringName = &"ai_controller_decision"
 
 #region ============================== Node base functions ==============================
 func _ready() -> void:
-	super._ready()
-	if _owner == null or _owner.controller != self:
-		return
-	# Réagir immédiatement quand la cible courante meurt, sans attendre le prochain tick périodique.
+	if _owner == null: return
+	# Réagir immédiatement quand la cible courante meurt, sans attendre le prochain tick.
 	if _owner.auto_attack != null:
 		_owner.auto_attack.target_dropped.connect(_on_target_dropped)
 
 
 func _exit_tree() -> void:
-	# Si évincé (par PlayerController par ex.), on nettoie notre callback.
+	# Cleanup au cas où l'EntityController est détruit
 	if _active:
 		disable()
 #endregion

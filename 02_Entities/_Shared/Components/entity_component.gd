@@ -47,7 +47,7 @@ static var ENTITY_COMPONENT_SCENES: Dictionary[EntityComponent.Type, PackedScene
 	Type.DECK_HOLDER:          load("res://02_Entities/_Shared/Components/DeckHolder/deck_holder_component.tscn"),
 	Type.FAMILY:               load("res://02_Entities/_Shared/Components/Family/family_module.tscn"),
 	Type.DRAGGABLE:            load("res://02_Entities/_Shared/Components/Draggable/draggable_component.tscn"),
-	Type.CONTROLLER:           load("res://02_Entities/_Shared/Components/Controller/AI/ai_controller.tscn"),
+	Type.CONTROLLER:           load("res://02_Entities/_Shared/Components/Controller/entity_controller.tscn"),
 }
 
 static var _global_dodge_number: int = 0

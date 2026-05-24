@@ -116,10 +116,14 @@ func set_projectile_type(projectile_type: Projectile.Type) -> void:
 func set_target(target: Entity) -> void:
 	if target == _current_target: return
 	_current_target = target
-	# Si on était en approche d'une cible différente, on stoppe le follow_entity.
-	# La nouvelle approche redémarrera au prochain tick si besoin.
+	# Couper toute trajectoire en cours : approche AA précédente OU déplacement
+	# manuel issu du PlayerController. Si la nouvelle cible est hors-portée, l'AA
+	# relancera une approche au prochain tick via _check_range_and_approach().
+	# Si elle est à portée, l'entité reste statique pendant l'attaque.
 	if _is_approaching:
 		stop_approaching()
+	elif movement != null:
+		movement.stop_following()
 	target_changed.emit(target)
 
 

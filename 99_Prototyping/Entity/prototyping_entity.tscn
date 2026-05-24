@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://90_Modules/PickableClickable/PickableModule/pickable_module.tscn" id="9_614kc"]
 [ext_resource type="PackedScene" uid="uid://bg5efhnq0erdv" path="res://90_Modules/PickableClickable/ClickableModule/clickable_module.tscn" id="10_m73qc"]
 [ext_resource type="PackedScene" uid="uid://blncvfes4f2y7" path="res://99_Prototyping/Entity/AllActionPrototyping/testing_floorffa5.tscn" id="11_5hdqt"]
+[ext_resource type="Script" uid="uid://b0otuknba6ddv" path="res://99_Prototyping/Entity/floor_area.gd" id="13_jd8sj"]
 [ext_resource type="PackedScene" uid="uid://q7gxxkhg5u54" path="res://06_FloatingIsland/FightingIsland/Pool/ArchIsland/arch_island_visual.tscn" id="17_ko5bb"]
 [ext_resource type="PackedScene" uid="uid://c0l0roxttdtlp" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/FightingManager/fighting_manager.tscn" id="17_m26y3"]
 [ext_resource type="Environment" uid="uid://cghu0yr6lj5i2" path="res://21_Props/DefaultBattleIsland/Arch_island/world_environment.tres" id="18_ko5bb"]
@@ -25,17 +26,6 @@ attack_damage = 2.0
 attack_speed = 3.0
 movement_speed = 5.0
 _crit_chance = 20.0
-metadata/_custom_type_script = "uid://bf01q5yq3glxi"
-
-[sub_resource type="Resource" id="Resource_rnrfd"]
-script = ExtResource("3_jd8sj")
-health_max = 1000.0
-mana_max = 100.0
-attack_range = 10.0
-attack_damage = 10.0
-attack_speed = 1.0
-movement_speed = 5.0
-_crit_chance = 50.0
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m73qc"]
@@ -68,14 +58,16 @@ battle_id = 1
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
 _override_base_stats = SubResource("Resource_os118")
+initial_controller_mode = 1
 
 [node name="Latika3" parent="Node3D/Entities" unique_id=294337328 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("3_os118")]
-transform = Transform3D(-0.2568966, 0, -0.9664388, 0, 1.0000001, 0, 0.9664388, 0, -0.2568966, -4.759769, 9.536744e-07, 0.13317703)
+transform = Transform3D(0.022006778, 0, -0.99975777, 0, 1.0000001, 0, 0.99975777, 0, 0.022006778, -5.361015, 9.536744e-07, 0.110419974)
 team = 2
 battle_id = 1
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
-_override_base_stats = SubResource("Resource_rnrfd")
+_override_base_stats = SubResource("Resource_os118")
+initial_controller_mode = 1
 
 [node name="Control" type="Control" parent="Node3D" unique_id=1104542732]
 layout_mode = 3
@@ -163,6 +155,11 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Family Managers"
 
+[node name="ManualModeCheckButton" type="CheckButton" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=2102497393]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Manual Mode"
+
 [node name="CenterPointCamera" parent="Node3D" unique_id=842815466 instance=ExtResource("4_egh8k")]
 unique_name_in_owner = true
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
@@ -218,12 +215,18 @@ _owner = NodePath("..")
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 
 [node name="FloorArea" parent="Node3D/TestingFloorFFA5" index="0" unique_id=2121644269]
-input_ray_pickable = false
+collision_layer = 8
+script = ExtResource("13_jd8sj")
 
 [node name="MeshInstance3D" parent="Node3D/TestingFloorFFA5/FloorArea" index="1" unique_id=1440029104]
 visible = false
 
-[node name="MeshInstance3D" parent="Node3D/TestingFloorFFA5/CenterArea" parent_id_path=PackedInt32Array(283551194, 987179195) index="1" unique_id=409198330]
+[node name="CenterArea" parent="Node3D/TestingFloorFFA5" index="1" unique_id=987179195]
+input_ray_pickable = false
+monitoring = false
+monitorable = false
+
+[node name="MeshInstance3D" parent="Node3D/TestingFloorFFA5/CenterArea" index="1" unique_id=409198330]
 visible = false
 
 [node name="Team1Area" parent="Node3D/TestingFloorFFA5/CenterNode3D/Center1" parent_id_path=PackedInt32Array(283551194, 337183783) index="0" unique_id=155190666]
@@ -277,5 +280,6 @@ environment = ExtResource("18_ko5bb")
 [connection signal="pressed" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/ResetFightButton" to="." method="_on_reset_fight_button_pressed"]
 [connection signal="toggled" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/AutoAttackCheckButton" to="." method="_on_auto_attack_check_button_toggled"]
 [connection signal="toggled" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/FamilyManagersCheckButton" to="." method="_on_family_managers_check_button_toggled"]
+[connection signal="toggled" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/ManualModeCheckButton" to="." method="_on_manual_mode_check_button_toggled"]
 
 [editable path="Node3D/TestingFloorFFA5"]
