@@ -8,12 +8,18 @@ extends EntityComponent
 @export var _despawn_timer: float = 5.0
 
 #region ============================== Node base functions ==============================
+func _enter_tree() -> void:
+	if _owner == null: return
+	if _owner.despawn != null and _owner.despawn != self:
+		Verbose.trace("Override: DespawnAnimationComponent on [" + _owner.entity_name + "]", Verbose.Category.ENTITY_MODULE)
+		_owner.despawn.queue_free()
+	_owner.despawn = self
+
+
 func _ready() -> void:
 	super._ready()
-	if _owner.despawn == null:
-		_owner.despawn = self
-	else:
-		queue_free()
+	if _owner == null or _owner.despawn != self:
+		return
 	_owner.died.connect(_on_owner_died)
 #endregion
 

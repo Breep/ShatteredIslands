@@ -58,12 +58,18 @@ var _active_attack_data: Dictionary = {}
 
 var _projectile_type: Projectile.Type = Projectile.Type.SHADOW_BOLT
 
+func _enter_tree() -> void:
+	if _owner == null: return
+	if _owner.auto_attack != null and _owner.auto_attack != self:
+		Verbose.trace("Override: AutoAttackComponent on [" + _owner.entity_name + "]", Verbose.Category.ENTITY_MODULE)
+		_owner.auto_attack.queue_free()
+	_owner.auto_attack = self
+
+
 func _ready() -> void:
 	super._ready()
-	if _owner.auto_attack == null:
-		_owner.auto_attack = self
-	else:
-		queue_free()
+	if _owner == null or _owner.auto_attack != self:
+		return
 
 # ============================== Public functions ==============================
 

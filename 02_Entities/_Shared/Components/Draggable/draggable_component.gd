@@ -25,12 +25,17 @@ var _y_tween: Tween
 #endregion
 
 #region ============================== Node base functions ==============================
+func _enter_tree() -> void:
+	if _owner == null: return
+	if _owner.draggable != null and _owner.draggable != self:
+		Verbose.trace("Override: DraggableComponent on [" + _owner.entity_name + "]", Verbose.Category.ENTITY_MODULE)
+		_owner.draggable.queue_free()
+	_owner.draggable = self
+
+
 func _ready() -> void:
 	super._ready()
-	if _owner.draggable == null:
-		_owner.draggable = self
-	else:
-		queue_free()
+	if _owner == null or _owner.draggable != self:
 		return
 	_owner.input_event.connect(_on_owner_input_event)
 	set_process(false)

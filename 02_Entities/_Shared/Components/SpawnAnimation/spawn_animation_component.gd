@@ -23,12 +23,18 @@ var _ticks_remaining: int = -1
 var _tween: Tween
 #endregion
 
+func _enter_tree() -> void:
+	if _owner == null: return
+	if _owner.spawn != null and _owner.spawn != self:
+		Verbose.trace("Override: SpawnAnimationComponent on [" + _owner.entity_name + "]", Verbose.Category.ENTITY_MODULE)
+		_owner.spawn.queue_free()
+	_owner.spawn = self
+
+
 func _ready() -> void:
 	super._ready()
-	if _owner.spawn == null:
-		_owner.spawn = self
-	else:
-		queue_free()
+	if _owner == null or _owner.spawn != self:
+		return
 
 #region ============================== Public functions ==============================
 func start_spawn() -> void:

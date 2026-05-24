@@ -30,12 +30,18 @@ var _orbit_angular_speed: float = 0.0
 var _orbit_current_angle: float = 0.0
 var _orbit_facing: OrbitFacing = OrbitFacing.TANGENT
 
+func _enter_tree() -> void:
+	if _owner == null: return
+	if _owner.movement != null and _owner.movement != self:
+		Verbose.trace("Override: MovementComponent on [" + _owner.entity_name + "]", Verbose.Category.ENTITY_MODULE)
+		_owner.movement.queue_free()
+	_owner.movement = self
+
+
 func _ready() -> void:
 	super._ready()
-	if _owner.movement == null:
-		_owner.movement = self
-	else:
-		queue_free()
+	if _owner == null or _owner.movement != self:
+		return
 
 func start() -> void:
 	Verbose.debug("start", Verbose.Category.MOVEMENT_MODULE)

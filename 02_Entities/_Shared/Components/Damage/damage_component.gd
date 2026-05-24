@@ -4,12 +4,18 @@ extends EntityComponent
 # Component-based damage module: handles both outgoing (direct/direct_percent)
 # and incoming (take/take_percent) damage.
 
+func _enter_tree() -> void:
+	if _owner == null: return
+	if _owner.damage != null and _owner.damage != self:
+		Verbose.trace("Override: DamageComponent on [" + _owner.entity_name + "]", Verbose.Category.ENTITY_MODULE)
+		_owner.damage.queue_free()
+	_owner.damage = self
+
+
 func _ready() -> void:
 	super._ready()
-	if _owner.damage == null:
-		_owner.damage = self
-	else:
-		queue_free()
+	if _owner == null or _owner.damage != self:
+		return
 
 # ============================== Public functions ==============================
 

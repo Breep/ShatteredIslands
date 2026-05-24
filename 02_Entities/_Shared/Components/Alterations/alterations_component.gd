@@ -43,18 +43,21 @@ var shield_alteration: ShieldAlteration
 var block_alteration: BlockAlteration
 var thorn_alteration: ThornAlteration
 
+func _enter_tree() -> void:
+	if _owner == null: return
+	if _owner.alterations != null and _owner.alterations != self:
+		Verbose.trace("Override: AlterationsComponent on [" + _owner.entity_name + "]", Verbose.Category.ENTITY_MODULE)
+		_owner.alterations.queue_free()
+	_owner.alterations = self
+	_build_alterations()
+
+
 func _ready() -> void:
 	super._ready()
-	if _owner.alterations == null:
-		_owner.alterations = self
-	else:
-		queue_free()
+	if _owner == null or _owner.alterations != self:
+		return
 
 #region ============================== Lifecycle ==============================
-func init(entity_owner: Entity) -> AlterationsComponent:
-	super.init(entity_owner)
-	_build_alterations()
-	return self
 
 
 func _build_alterations() -> void:

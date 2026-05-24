@@ -6,7 +6,6 @@ const WALK_SPEED_THRESHOLD: float = 0.1
 const RUN_SPEED_THRESHOLD: float = 5.0
 
 @export var _animation_tree: AnimationTree
-@export var _animation_player: AnimationPlayer
 
 #region AnimatorTree parameters
 const PARAM_SWITCH_ENTITY_MODE: String = "parameters/switch_entity_mode/transition_request"
@@ -67,30 +66,31 @@ var _lock_animation: bool = false
 # Base attack animation duration (cached on ready)
 var _attack_anim_base_duration: float = 3.2 # Default fallback
 
+func _enter_tree() -> void:
+	if _owner == null: return
+	if _owner.animation != null and _owner.animation != self:
+		Verbose.trace("Override: DefaultAnimationComponent on [" + _owner.entity_name + "]", Verbose.Category.ENTITY_MODULE)
+		_owner.animation.queue_free()
+	_owner.animation = self
+
+
 func _ready() -> void:
 	super._ready()
-	if _owner.animation == null:
-		_owner.animation = self
-	else:
-		queue_free()
-	
+	if _owner == null or _owner.animation != self:
+		return
+
 	if _animation_tree == null:
 		Verbose.error("AnimationModule: No animation tree", Verbose.Category.ENTITY)
 		queue_free()
 		return
-	
-	if _animation_player == null:
-		Verbose.error("AnimationModule: No animation player", Verbose.Category.ENTITY)
-		queue_free()
-		return
-	
+
 	_rng.randomize()
-	
+
 	_animation_tree.set(PARAM_SWITCH_ENTITY_MODE, VALUE_SWITCH_ENTITY_MODE_INGAME)
-	
+
 	_owner.life_state_changed.connect(_on_owner_life_state_changed)
 	_owner.is_moving_changed.connect(_on_owner_is_moving_changed)
-	
+
 	_on_owner_life_state_changed(Entity.LifeState.ALIVE)
 
 

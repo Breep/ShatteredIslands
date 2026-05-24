@@ -30,10 +30,7 @@ func _ready() -> void:
 	stats.mana_changed.connect(_on_mana_changed)
 	stats.mana_max_changed.connect(_on_mana_max_changed)
 
-	if _owner_entity.player != null:
-		_player_name_label.text = _owner_entity.player.player_name
-	else:
-		_player_name_label.text = _owner_entity.entity_name
+	_player_name_label.text = _owner_entity.entity_name
 #endregion
 
 

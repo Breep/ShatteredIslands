@@ -17,12 +17,18 @@ var _is_hovered: bool = false
 #endregion
 
 #region ============================== Node base functions ==============================
+func _enter_tree() -> void:
+	if _owner == null: return
+	if _owner.clickable != null and _owner.clickable != self:
+		Verbose.trace("Override: ClickableComponent on [" + _owner.entity_name + "]", Verbose.Category.ENTITY_MODULE)
+		_owner.clickable.queue_free()
+	_owner.clickable = self
+
+
 func _ready() -> void:
 	super._ready()
-	if _owner.clickable == null:
-		_owner.clickable = self
-	else:
-		queue_free()
+	if _owner == null or _owner.clickable != self:
+		return
 	_owner.input_event.connect(_on_owner_input_event)
 	_owner.mouse_entered.connect(_on_owner_mouse_entered)
 	_owner.mouse_exited.connect(_on_owner_mouse_exited)

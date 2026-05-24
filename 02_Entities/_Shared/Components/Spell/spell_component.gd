@@ -11,12 +11,18 @@ const DEATH_FOG_SCENE: PackedScene = preload("res://03_SpellsAndProjectiles/Spel
 const LIGHTNING_SCENE: PackedScene = preload("res://03_SpellsAndProjectiles/Spells/Lightning/Lightning/spell_lightning.tscn")
 const CHAIN_LIGHTNING_SCENE: PackedScene = preload("res://03_SpellsAndProjectiles/Spells/ChainLightning/spell_chain_lightning.tscn")
 
+func _enter_tree() -> void:
+	if _owner == null: return
+	if _owner.spell != null and _owner.spell != self:
+		Verbose.trace("Override: SpellComponent on [" + _owner.entity_name + "]", Verbose.Category.ENTITY_MODULE)
+		_owner.spell.queue_free()
+	_owner.spell = self
+
+
 func _ready() -> void:
 	super._ready()
-	if _owner.spell == null:
-		_owner.spell = self
-	else:
-		queue_free()
+	if _owner == null or _owner.spell != self:
+		return
 
 # ============================== Public functions ==============================
 

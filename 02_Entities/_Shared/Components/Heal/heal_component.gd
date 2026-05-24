@@ -1,12 +1,18 @@
 class_name HealComponent
 extends EntityComponent
 
+func _enter_tree() -> void:
+	if _owner == null: return
+	if _owner.heal != null and _owner.heal != self:
+		Verbose.trace("Override: HealComponent on [" + _owner.entity_name + "]", Verbose.Category.ENTITY_MODULE)
+		_owner.heal.queue_free()
+	_owner.heal = self
+
+
 func _ready() -> void:
 	super._ready()
-	if _owner.heal == null:
-		_owner.heal = self
-	else:
-		queue_free()
+	if _owner == null or _owner.heal != self:
+		return
 
 # ============================== Public functions ==============================
 

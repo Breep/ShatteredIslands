@@ -14,12 +14,18 @@ func connect_marker(popup_marker: Marker3D) -> void:
 	_popup_marker = popup_marker
 
 
+func _enter_tree() -> void:
+	if _owner == null: return
+	if _owner.label_popup != null and _owner.label_popup != self:
+		Verbose.trace("Override: LabelPopupComponent on [" + _owner.entity_name + "]", Verbose.Category.ENTITY_MODULE)
+		_owner.label_popup.queue_free()
+	_owner.label_popup = self
+
+
 func _ready() -> void:
 	super._ready()
-	if _owner.label_popup == null:
-		_owner.label_popup = self
-	else:
-		queue_free()
+	if _owner == null or _owner.label_popup != self:
+		return
 
 	random.randomize()
 	_owner.damage_taken.connect(_on_owner_damage_taken)

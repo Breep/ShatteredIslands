@@ -25,12 +25,18 @@ const GAMMA_TURRET: PackedScene = preload("res://02_Entities/Pool/Mobs/GammaTurr
 const TREX_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/TRex/trex.tscn")
 const CHICKEN_EGG_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/ChickenEgg/chicken_egg.tscn")
 
+func _enter_tree() -> void:
+	if _owner == null: return
+	if _owner.summon != null and _owner.summon != self:
+		Verbose.trace("Override: SummonComponent on [" + _owner.entity_name + "]", Verbose.Category.ENTITY_MODULE)
+		_owner.summon.queue_free()
+	_owner.summon = self
+
+
 func _ready() -> void:
 	super._ready()
-	if _owner.summon == null:
-		_owner.summon = self
-	else:
-		queue_free()
+	if _owner == null or _owner.summon != self:
+		return
 
 # ============================== Public functions ==============================
 

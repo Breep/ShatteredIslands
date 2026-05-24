@@ -59,10 +59,11 @@ var _dodge_number: int = -1
 
 static func add(component_type: Type, entity_owner: Entity) -> void:
 	Verbose.trace("Instantiating '" + str(Type.keys()[component_type]) + "' on '" + entity_owner.name + "'", Verbose.Category.ENTITY_MODULE)
-	var component: EntityComponent = ENTITY_COMPONENT_SCENES[component_type].instantiate().init(entity_owner)
+	var component: EntityComponent = ENTITY_COMPONENT_SCENES[component_type].instantiate()
 	if component == null:
 		Verbose.error("Can't instantiate '" + str(Type.keys()[component_type]) + "'", Verbose.Category.ENTITY_MODULE)
 		return
+	component.init(entity_owner)
 	entity_owner.add_child(component)
 
 func init(entity_owner: Entity) -> EntityComponent:

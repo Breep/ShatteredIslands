@@ -3,12 +3,18 @@ extends EntityComponent
 
 var _spawn_manager: SpawnManager
 
+func _enter_tree() -> void:
+	if _owner == null: return
+	if _owner.projectile != null and _owner.projectile != self:
+		Verbose.trace("Override: ProjectileComponent on [" + _owner.entity_name + "]", Verbose.Category.ENTITY_MODULE)
+		_owner.projectile.queue_free()
+	_owner.projectile = self
+
+
 func _ready() -> void:
 	super._ready()
-	if _owner.heal == null:
-		_owner.projectile = self
-	else:
-		queue_free()
+	if _owner == null or _owner.projectile != self:
+		return
 
 # ============================== Public functions ==============================
 

@@ -93,12 +93,18 @@ var _spawn_manager: SpawnManager
 
 # ============================== Node base functions ==============================
 
+func _enter_tree() -> void:
+	if _owner == null: return
+	if _owner.target != null and _owner.target != self:
+		Verbose.trace("Override: TargetComponent on [" + _owner.entity_name + "]", Verbose.Category.ENTITY_MODULE)
+		_owner.target.queue_free()
+	_owner.target = self
+
+
 func _ready() -> void:
 	super._ready()
-	if _owner.target == null:
-		_owner.target = self
-	else:
-		queue_free()
+	if _owner == null or _owner.target != self:
+		return
 
 
 func connect_to_spawn_manager(spawn_manager: SpawnManager) -> void:
