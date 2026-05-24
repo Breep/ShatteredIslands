@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://ddugcksbtixea"]
 
-[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme.tres" id="1_vyxcd"]
 [ext_resource type="Script" uid="uid://72f2hpoywkt6" path="res://04_UI/InGame/HeroSelection/HeroOverviewPanel/ui_hero_overview_panel.gd" id="1_w3h7f"]
+[ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/Menu/MainMenu/panel_main_menu.tres" id="2_s1bc7"]
+[ext_resource type="Theme" uid="uid://d0qobfi4rit8a" path="res://04_UI/Menu/MainMenu/label_main_menu_white.tres" id="3_ee7lt"]
 [ext_resource type="Texture2D" uid="uid://dagqv7cd1gdn1" path="res://04_UI/_Themes/Data/Separator/plant.png" id="3_rp41f"]
 [ext_resource type="Texture2D" uid="uid://bg6pifa7ua0v0" path="res://20_Data/Heroes/Portraits/dummy_default.png" id="5_5cpim"]
 [ext_resource type="Texture2D" uid="uid://cia42t0jcdkfg" path="res://20_Data/Assets/Card/ICONS/HP color.png" id="5_rp41f"]
@@ -15,7 +16,7 @@
 [ext_resource type="Script" uid="uid://ddn8p84mlkyr0" path="res://04_UI/Tool/HexGridContainer/hex_grid_container.gd" id="14_q0qm1"]
 [ext_resource type="PackedScene" uid="uid://c7jrogdsytaah" path="res://04_UI/Tool/HexButton/hex_button.tscn" id="19_kt0us"]
 
-[node name="UiHeroOverviewPanel" type="Control"]
+[node name="UiHeroOverviewPanel" type="Control" unique_id=1696511393]
 layout_mode = 3
 anchor_right = 0.423
 anchor_bottom = 4.582
@@ -25,7 +26,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_w3h7f")
 
-[node name="HeroOverViewPanel" type="Panel" parent="."]
+[node name="HeroOverViewPanel" type="Panel" parent="." unique_id=1295740656]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -33,9 +34,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
-theme = ExtResource("1_vyxcd")
+theme = ExtResource("2_s1bc7")
 
-[node name="MarginContainer" type="MarginContainer" parent="HeroOverViewPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="HeroOverViewPanel" unique_id=1950482746]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -48,40 +49,41 @@ theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
 
-[node name="ScrollContainer" type="ScrollContainer" parent="HeroOverViewPanel/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="HeroOverViewPanel/MarginContainer" unique_id=655006858]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer" unique_id=477323775]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/margin_top = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer" unique_id=1016999055]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 
-[node name="HeroNameLabel" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+[node name="HeroNameLabel" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" unique_id=955870059]
 unique_name_in_owner = true
 layout_mode = 2
+theme = ExtResource("3_ee7lt")
 theme_override_font_sizes/font_size = 45
 text = "[Hero's name]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Separator" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+[node name="Separator" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" unique_id=464510366]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 texture = ExtResource("3_rp41f")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="PortraitCenterContainer" type="CenterContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+[node name="PortraitCenterContainer" type="CenterContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" unique_id=1970576248]
 layout_mode = 2
 
-[node name="HeroPortrait" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/PortraitCenterContainer"]
+[node name="HeroPortrait" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/PortraitCenterContainer" unique_id=357284297]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
@@ -89,7 +91,7 @@ texture = ExtResource("5_5cpim")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="MarginContainer" type="MarginContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/PortraitCenterContainer/HeroPortrait"]
+[node name="MarginContainer" type="MarginContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/PortraitCenterContainer/HeroPortrait" unique_id=1162500865]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -101,11 +103,11 @@ theme_override_constants/margin_top = -3
 theme_override_constants/margin_right = -3
 theme_override_constants/margin_bottom = -3
 
-[node name="SkinChoice" type="HBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+[node name="SkinChoice" type="HBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" unique_id=1763488763]
 layout_mode = 2
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkinChoice"]
+[node name="TextureRect" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkinChoice" unique_id=1965057575]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -113,7 +115,7 @@ texture = ExtResource("5_5cpim")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="TextureRect2" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkinChoice"]
+[node name="TextureRect2" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkinChoice" unique_id=824032361]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -121,7 +123,7 @@ texture = ExtResource("5_5cpim")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="TextureRect3" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkinChoice"]
+[node name="TextureRect3" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkinChoice" unique_id=976331005]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -129,14 +131,14 @@ texture = ExtResource("5_5cpim")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Separator2" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+[node name="Separator2" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" unique_id=633709580]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 texture = ExtResource("3_rp41f")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="StatsContainer" type="Control" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" node_paths=PackedStringArray("_max_health_label", "_mana_regen_label", "_dodge_label", "_ad_label", "_attack_speed_label", "_crit_chance_label")]
+[node name="StatsContainer" type="Control" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" unique_id=262652530 node_paths=PackedStringArray("_max_health_label", "_mana_regen_label", "_dodge_label", "_ad_label", "_attack_speed_label", "_crit_chance_label")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
@@ -150,7 +152,7 @@ _ad_label = NodePath("MarginContainer/HeroStatsContainer/AttackPanel/HBoxContain
 _attack_speed_label = NodePath("MarginContainer/HeroStatsContainer/AttackSpeedPanel/HBoxContainer/AttackSpeedLabel")
 _crit_chance_label = NodePath("MarginContainer/HeroStatsContainer/CriticPanel/HBoxContainer/CriticLabel")
 
-[node name="MarginContainer" type="MarginContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer" unique_id=278642658]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -162,7 +164,7 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="HeroStatsContainer" type="GridContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer"]
+[node name="HeroStatsContainer" type="GridContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer" unique_id=234110527]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -170,12 +172,12 @@ theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 3
 
-[node name="HealthPanel" type="Control" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer"]
+[node name="HealthPanel" type="Control" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer" unique_id=1869316547]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/HealthPanel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/HealthPanel" unique_id=1689777743]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -183,12 +185,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/HealthPanel/HBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/HealthPanel/HBoxContainer" unique_id=580071413]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 
-[node name="Icon" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/HealthPanel/HBoxContainer/CenterContainer"]
+[node name="Icon" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/HealthPanel/HBoxContainer/CenterContainer" unique_id=244970269]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -196,22 +198,23 @@ texture = ExtResource("5_rp41f")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="MaxHealthLabel" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/HealthPanel/HBoxContainer"]
+[node name="MaxHealthLabel" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/HealthPanel/HBoxContainer" unique_id=1479403516]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+theme = ExtResource("3_ee7lt")
 theme_override_font_sizes/font_size = 30
 text = "1000"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ManaPanel" type="Control" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer"]
+[node name="ManaPanel" type="Control" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer" unique_id=607032357]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/ManaPanel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/ManaPanel" unique_id=1283048135]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -219,12 +222,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/ManaPanel/HBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/ManaPanel/HBoxContainer" unique_id=794145066]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 
-[node name="Icon" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/ManaPanel/HBoxContainer/CenterContainer"]
+[node name="Icon" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/ManaPanel/HBoxContainer/CenterContainer" unique_id=1509168209]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -232,22 +235,23 @@ texture = ExtResource("7_wvgek")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="ManaRegenLabel" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/ManaPanel/HBoxContainer"]
+[node name="ManaRegenLabel" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/ManaPanel/HBoxContainer" unique_id=183510439]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+theme = ExtResource("3_ee7lt")
 theme_override_font_sizes/font_size = 30
 text = "3.7"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DodgePanel" type="Control" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer"]
+[node name="DodgePanel" type="Control" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer" unique_id=1478814593]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/DodgePanel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/DodgePanel" unique_id=340941076]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -255,12 +259,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/DodgePanel/HBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/DodgePanel/HBoxContainer" unique_id=1024860857]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 
-[node name="Icon" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/DodgePanel/HBoxContainer/CenterContainer"]
+[node name="Icon" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/DodgePanel/HBoxContainer/CenterContainer" unique_id=203550076]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -268,22 +272,23 @@ texture = ExtResource("8_5cpim")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="DodgeLabel" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/DodgePanel/HBoxContainer"]
+[node name="DodgeLabel" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/DodgePanel/HBoxContainer" unique_id=2131652821]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+theme = ExtResource("3_ee7lt")
 theme_override_font_sizes/font_size = 30
 text = "20"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AttackPanel" type="Control" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer"]
+[node name="AttackPanel" type="Control" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer" unique_id=567277465]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/AttackPanel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/AttackPanel" unique_id=731925458]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -291,12 +296,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/AttackPanel/HBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/AttackPanel/HBoxContainer" unique_id=1814275407]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 
-[node name="Icon" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/AttackPanel/HBoxContainer/CenterContainer"]
+[node name="Icon" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/AttackPanel/HBoxContainer/CenterContainer" unique_id=665727131]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -304,22 +309,23 @@ texture = ExtResource("9_0noyl")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="AttackLabel" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/AttackPanel/HBoxContainer"]
+[node name="AttackLabel" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/AttackPanel/HBoxContainer" unique_id=1172000630]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+theme = ExtResource("3_ee7lt")
 theme_override_font_sizes/font_size = 30
 text = "22"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AttackSpeedPanel" type="Control" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer"]
+[node name="AttackSpeedPanel" type="Control" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer" unique_id=271660370]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/AttackSpeedPanel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/AttackSpeedPanel" unique_id=806145807]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -327,12 +333,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/AttackSpeedPanel/HBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/AttackSpeedPanel/HBoxContainer" unique_id=86439958]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 
-[node name="Icon" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/AttackSpeedPanel/HBoxContainer/CenterContainer"]
+[node name="Icon" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/AttackSpeedPanel/HBoxContainer/CenterContainer" unique_id=1099143444]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -340,22 +346,23 @@ texture = ExtResource("10_71p6x")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="AttackSpeedLabel" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/AttackSpeedPanel/HBoxContainer"]
+[node name="AttackSpeedLabel" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/AttackSpeedPanel/HBoxContainer" unique_id=1690549319]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+theme = ExtResource("3_ee7lt")
 theme_override_font_sizes/font_size = 30
 text = "0.5"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CriticPanel" type="Control" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer"]
+[node name="CriticPanel" type="Control" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer" unique_id=1500612996]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/CriticPanel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/CriticPanel" unique_id=401168971]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -363,12 +370,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/CriticPanel/HBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/CriticPanel/HBoxContainer" unique_id=442909941]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 
-[node name="Icon" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/CriticPanel/HBoxContainer/CenterContainer"]
+[node name="Icon" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/CriticPanel/HBoxContainer/CenterContainer" unique_id=46852541]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -376,24 +383,25 @@ texture = ExtResource("11_nhrae")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="CriticLabel" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/CriticPanel/HBoxContainer"]
+[node name="CriticLabel" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/CriticPanel/HBoxContainer" unique_id=407789837]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+theme = ExtResource("3_ee7lt")
 theme_override_font_sizes/font_size = 30
 text = "15"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Separator5" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+[node name="Separator5" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" unique_id=265848666]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 texture = ExtResource("3_rp41f")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="HeroSkillsContainer" type="Control" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" node_paths=PackedStringArray("_skill_buttons")]
+[node name="HeroSkillsContainer" type="Control" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" unique_id=1296549165 node_paths=PackedStringArray("_skill_buttons")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
@@ -409,7 +417,7 @@ _skill_buttons = {
 7: NodePath("HexGridContainer/UltimateButton")
 }
 
-[node name="HexGridContainer" type="Container" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/HeroSkillsContainer"]
+[node name="HexGridContainer" type="Container" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/HeroSkillsContainer" unique_id=1396445561]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -422,41 +430,43 @@ cell_size = Vector2(175, 175)
 gap = Vector2(8, 0)
 metadata/_custom_type_script = "uid://ddn8p84mlkyr0"
 
-[node name="PassiveButton" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/HeroSkillsContainer/HexGridContainer" instance=ExtResource("19_kt0us")]
+[node name="PassiveButton" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/HeroSkillsContainer/HexGridContainer" unique_id=969233741 instance=ExtResource("19_kt0us")]
 layout_mode = 2
 
-[node name="Bronze1Button" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/HeroSkillsContainer/HexGridContainer" instance=ExtResource("19_kt0us")]
+[node name="Bronze1Button" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/HeroSkillsContainer/HexGridContainer" unique_id=1526916687 instance=ExtResource("19_kt0us")]
 layout_mode = 2
 
-[node name="Silver1Button" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/HeroSkillsContainer/HexGridContainer" instance=ExtResource("19_kt0us")]
+[node name="Silver1Button" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/HeroSkillsContainer/HexGridContainer" unique_id=591058962 instance=ExtResource("19_kt0us")]
 layout_mode = 2
 
-[node name="Gold1Button" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/HeroSkillsContainer/HexGridContainer" instance=ExtResource("19_kt0us")]
+[node name="Gold1Button" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/HeroSkillsContainer/HexGridContainer" unique_id=427206767 instance=ExtResource("19_kt0us")]
 layout_mode = 2
 
-[node name="UltimateButton" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/HeroSkillsContainer/HexGridContainer" instance=ExtResource("19_kt0us")]
+[node name="UltimateButton" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/HeroSkillsContainer/HexGridContainer" unique_id=842813303 instance=ExtResource("19_kt0us")]
 layout_mode = 2
 
-[node name="Bronze2Button" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/HeroSkillsContainer/HexGridContainer" instance=ExtResource("19_kt0us")]
+[node name="Bronze2Button" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/HeroSkillsContainer/HexGridContainer" unique_id=1121349548 instance=ExtResource("19_kt0us")]
 layout_mode = 2
 
-[node name="Silver2Button" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/HeroSkillsContainer/HexGridContainer" instance=ExtResource("19_kt0us")]
+[node name="Silver2Button" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/HeroSkillsContainer/HexGridContainer" unique_id=21210922 instance=ExtResource("19_kt0us")]
 layout_mode = 2
 
-[node name="Gold2Button" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/HeroSkillsContainer/HexGridContainer" instance=ExtResource("19_kt0us")]
+[node name="Gold2Button" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/HeroSkillsContainer/HexGridContainer" unique_id=1397217358 instance=ExtResource("19_kt0us")]
 layout_mode = 2
 
-[node name="Separator6" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+[node name="Separator6" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" unique_id=384309520]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 texture = ExtResource("3_rp41f")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="LoreLabel" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+[node name="LoreLabel" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" unique_id=743652924]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+theme = ExtResource("3_ee7lt")
+theme_override_font_sizes/font_size = 24
 text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas leo in pede. Praesent blandit odio eu enim. Pellentesque sed dui ut augue blandit sodales. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam nibh. Mauris ac mauris sed pede pellentesque fermentum. Maecenas adipiscing ante non diam sodales hendrerit.
 Ut velit mauris, egestas sed, gravida nec, ornare ut, mi. Aenean ut orci vel massa suscipit pulvinar. Nulla sollicitudin. Fusce varius, ligula non tempus aliquam, nunc turpis ullamcorper nibh, in tempus sapien eros vitae ligula. Pellentesque rhoncus nunc et augue. Integer id felis. Curabitur aliquet pellentesque diam. Integer quis metus vitae elit lobortis egestas. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi vel erat non mauris convallis vehicula. Nulla et sapien. Integer tortor tellus, aliquam faucibus, convallis id, congue eu, quam. Mauris ullamcorper felis vitae erat. Proin feugiat, augue non elementum posuere, metus purus iaculis lectus, et tristique ligula justo vitae magna.
 

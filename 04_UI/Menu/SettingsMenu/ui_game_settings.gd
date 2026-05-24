@@ -12,10 +12,16 @@ extends Control
 
 #region ============================== Node base functions ==============================
 func _ready() -> void:
+	visibility_changed.connect(_emit_window_opened_if_visible)
 	hide()
 	_sfx_slider.value = db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("SFX")))
 	_bgm_slider.value = db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music")))
 	_refresh_labels()
+
+
+func _emit_window_opened_if_visible() -> void:
+	if visible:
+		Events.ui_window_opened.emit()
 #endregion
 
 #region ============================== Private functions ==============================

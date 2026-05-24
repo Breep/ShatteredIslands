@@ -26,7 +26,13 @@ var _pause_state: PauseState
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
+	visibility_changed.connect(_emit_window_opened_if_visible)
 	hide()
+
+
+func _emit_window_opened_if_visible() -> void:
+	if visible:
+		Events.ui_window_opened.emit()
 
 # ============================== Private functions ==============================
 

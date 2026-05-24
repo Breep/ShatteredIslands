@@ -10,10 +10,16 @@ extends Control
 @onready var _sub_play_menu: MarginContainer = %SubPlayMenu
 
 func _ready() -> void:
+	visibility_changed.connect(_emit_window_opened_if_visible)
 	hide()
 
 	multiplayer.connected_to_server.connect(_on_connected_to_server)
 	multiplayer.connection_failed.connect(_on_connection_failed)
+
+
+func _emit_window_opened_if_visible() -> void:
+	if visible:
+		Events.ui_window_opened.emit()
 
 
 func _on_join_button_pressed() -> void:

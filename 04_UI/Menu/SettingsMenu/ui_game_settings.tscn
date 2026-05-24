@@ -2,7 +2,58 @@
 
 [ext_resource type="Script" uid="uid://c7b7ybvo5mdcv" path="res://04_UI/Menu/SettingsMenu/ui_game_settings.gd" id="1_1xbs5"]
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme.tres" id="2_e76lw"]
-[ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://04_UI/Tool/Misc/hover_boost_button.gd" id="3_1mefo"]
+[ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/Menu/MainMenu/panel_main_menu.tres" id="3_jfqgi"]
+[ext_resource type="Theme" uid="uid://d0qobfi4rit8a" path="res://04_UI/Menu/MainMenu/label_main_menu_white.tres" id="4_pfo6j"]
+[ext_resource type="FontFile" uid="uid://cvfku6uge3mvi" path="res://20_Data/font/Super Trend.ttf" id="5_arcu4"]
+[ext_resource type="StyleBox" uid="uid://dr88rw2wgw2id" path="res://04_UI/Menu/MainMenu/panel_ui_menu_box.tres" id="6_arcu4"]
+[ext_resource type="Theme" uid="uid://djwauvkpnr27d" path="res://04_UI/Menu/MainMenu/normal_button2.tres" id="6_qvvvp"]
+[ext_resource type="Theme" uid="uid://dj8h7y2ulsel8" path="res://04_UI/Menu/MainMenu/slider_main_ui.tres" id="7_qvvvp"]
+[ext_resource type="Script" uid="uid://bq2jprj2y5yr6" path="res://04_UI/Menu/MainMenu/button_main_ui.gd" id="9_arcu4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i7sn6"]
+bg_color = Color(0.0627451, 0.09411765, 0.13333334, 1)
+skew = Vector2(0.01, 0.01)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 5
+shadow_offset = Vector2(5, 7)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0iwpx"]
+bg_color = Color(0.8677722, 0.75752974, 0.5988473, 1)
+skew = Vector2(0.01, 0.01)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 5
+shadow_offset = Vector2(5, 7)
+
+[sub_resource type="Theme" id="Theme_i7sn6"]
+TabContainer/colors/font_outline_color = Color(0, 0, 0, 1)
+TabContainer/colors/font_selected_color = Color(1, 1, 1, 1)
+TabContainer/constants/outline_size = 5
+TabContainer/constants/tab_separation = 1
+TabContainer/font_sizes/font_size = 20
+TabContainer/fonts/font = ExtResource("5_arcu4")
+TabContainer/styles/panel = ExtResource("6_arcu4")
+TabContainer/styles/tab_focus = ExtResource("6_arcu4")
+TabContainer/styles/tab_hovered = SubResource("StyleBoxFlat_i7sn6")
+TabContainer/styles/tab_selected = SubResource("StyleBoxFlat_0iwpx")
+TabContainer/styles/tab_unselected = SubResource("StyleBoxFlat_0iwpx")
 
 [node name="GameSettings" type="Control" unique_id=580137218]
 layout_mode = 3
@@ -25,6 +76,7 @@ grow_vertical = 2
 [node name="SettingsPanel" type="Panel" parent="CenterContainer" unique_id=200000002]
 custom_minimum_size = Vector2(420, 320)
 layout_mode = 2
+theme = ExtResource("3_jfqgi")
 
 [node name="MarginContainer" type="MarginContainer" parent="CenterContainer/SettingsPanel" unique_id=200000003]
 layout_mode = 1
@@ -44,15 +96,18 @@ theme_override_constants/separation = 8
 
 [node name="TitleRow" type="HBoxContainer" parent="CenterContainer/SettingsPanel/MarginContainer/VBoxContainer" unique_id=200000005]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="TitleLabel" type="Label" parent="CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/TitleRow" unique_id=200000006]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("4_pfo6j")
 text = "SETTINGS"
 
 [node name="TabContainer" type="TabContainer" parent="CenterContainer/SettingsPanel/MarginContainer/VBoxContainer" unique_id=200000008]
 layout_mode = 2
 size_flags_vertical = 3
+theme = SubResource("Theme_i7sn6")
 current_tab = 0
 
 [node name="Audio" type="MarginContainer" parent="CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/TabContainer" unique_id=200000009]
@@ -69,6 +124,8 @@ theme_override_constants/separation = 6
 
 [node name="SFXLabel" type="Label" parent="CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/TabContainer/Audio/Content" unique_id=200000011]
 layout_mode = 2
+theme = ExtResource("4_pfo6j")
+theme_override_font_sizes/font_size = 24
 text = "SFX"
 
 [node name="SFXRow" type="HBoxContainer" parent="CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/TabContainer/Audio/Content" unique_id=200000012]
@@ -80,6 +137,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+theme = ExtResource("7_qvvvp")
 max_value = 1.0
 step = 0.01
 value = 1.0
@@ -88,11 +146,15 @@ value = 1.0
 unique_name_in_owner = true
 custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
+theme = ExtResource("4_pfo6j")
+theme_override_font_sizes/font_size = 24
 text = "100%"
 horizontal_alignment = 2
 
 [node name="BGMLabel" type="Label" parent="CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/TabContainer/Audio/Content" unique_id=200000015]
 layout_mode = 2
+theme = ExtResource("4_pfo6j")
+theme_override_font_sizes/font_size = 24
 text = "MUSIC"
 
 [node name="BGMRow" type="HBoxContainer" parent="CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/TabContainer/Audio/Content" unique_id=200000016]
@@ -104,6 +166,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+theme = ExtResource("7_qvvvp")
 max_value = 1.0
 step = 0.01
 value = 1.0
@@ -112,6 +175,8 @@ value = 1.0
 unique_name_in_owner = true
 custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
+theme = ExtResource("4_pfo6j")
+theme_override_font_sizes/font_size = 24
 text = "100%"
 horizontal_alignment = 2
 
@@ -125,10 +190,12 @@ layout_mode = 2
 alignment = 2
 
 [node name="CloseButton" type="Button" parent="CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=200000007]
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme = ExtResource("6_qvvvp")
+theme_override_font_sizes/font_size = 24
 text = "Close"
-script = ExtResource("3_1mefo")
+script = ExtResource("9_arcu4")
 
 [connection signal="value_changed" from="CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/TabContainer/Audio/Content/SFXRow/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
 [connection signal="value_changed" from="CenterContainer/SettingsPanel/MarginContainer/VBoxContainer/TabContainer/Audio/Content/BGMRow/BGMSlider" to="." method="_on_bgm_slider_value_changed"]

@@ -1,5 +1,7 @@
+# Bouton avec animation hover (boost font/children/modulate) — étend UIButton
+# pour bénéficier des sons UI standards (hover, click, disabled-click).
 class_name HoverBoostButton
-extends Button
+extends UIButton
 
 # ===================== Configuration =====================
 @export_group("Configuration") 
@@ -29,6 +31,7 @@ var _is_click_bumping := false
 
 # ===================== Node lifecycle =====================
 func _ready() -> void:
+	super._ready()
 	mouse_entered.connect(_on_enter)
 	mouse_exited.connect(_on_exit)
 	pressed.connect(_on_pressed)
@@ -76,7 +79,7 @@ func _on_exit() -> void:
 
 # ===================== Click bump ======================
 func _on_pressed() -> void:
-	AudioManager.play_sfx("button_click")
+	# Note : son click joué par UIButton (parent), pas besoin de l'appeler ici.
 	_is_click_bumping = true
 
 	# Stop running tweens safely
