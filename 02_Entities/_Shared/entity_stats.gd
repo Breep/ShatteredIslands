@@ -224,7 +224,6 @@ signal poison_resistance_changed(new_poison_resistance: float)
 #endregion
 
 #region ============================== Mono Crit Chance / Crit Mult / Dodge / Lifesteal ==============================
-@export_group("Critic / Dodge / Lifesteal (Mono)")
 signal crit_chance_changed(new_crit_chance: float)
 ## Chance de crit globale (%). S'ajoute à m_crit_chances[action] pour les actions linked (PHYS/MAG/POISON).
 @export var _crit_chance: float = 0.0

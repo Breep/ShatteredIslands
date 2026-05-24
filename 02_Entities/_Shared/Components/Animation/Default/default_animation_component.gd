@@ -95,6 +95,8 @@ func _ready() -> void:
 	_owner.draggable.dropped.connect(_on_owner_dropped)
 	
 	_owner.alterations.stunned_changed.connect(_on_owner_stunned_changed)
+	
+	_owner.action_received.connect(_on_owner_action_received)
 
 	_on_owner_life_state_changed(Entity.LifeState.ALIVE)
 
@@ -163,5 +165,11 @@ func _on_owner_stunned_changed(is_active: bool, _duration: float, _infinite: boo
 		_animation_tree.set(PARAM_SWITCH_STUNNED_STATE, VALUE_SWITCH_STUNNED_STATE_STUNNED)
 	else:
 		_animation_tree.set(PARAM_SWITCH_STUNNED_STATE, VALUE_SWITCH_STUNNED_STATE_NOT_STUNNED)
+
+
+func _on_owner_action_received(source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
+	if not is_critical: return
+	if not Utils.get_action_category(action_type) == Utils.ActionCategory.DAMAGE: return
+	_animation_tree.set(PARAM_ONE_SHOT_HIT, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 #endregion
