@@ -6,6 +6,9 @@ extends Node
 const _PITCH_VARIATION: float = 0.05
 const _BGM_SILENT_DB: float = -80.0
 const _BGM_DEFAULT_FADE: float = 1.0
+const _GOLD_PER_SOUND: int = 10
+const _GOLD_SOUNDS_MAX: int = 8
+const _GOLD_SOUND_SPACING: float = 0.08
 #endregion
 
 #region ============================== Private vars ==============================
@@ -27,6 +30,9 @@ var _SOUND_MAP: Array = [
 	[Events.hero_locked, "hero_locked"],
 	[Events.ui_family_portrait_requested, "ui_family_portrait_requested"],
 	[Events.tavern_continue_pressed, "start_fight"],
+	[Events.card_drawn, "card_drawn"],
+	[Events.insufficient_gold, "insufficient_gold"],
+	[Events.ui_window_opened, "window_appear"],
 ]
 
 var _BGM_MAP: Array = [
@@ -56,6 +62,8 @@ func _ready() -> void:
 		var sfx_callable := func(): _play_sound(key)
 		var sfx_count := _signal_arg_count(entry[0])
 		entry[0].connect(sfx_callable.unbind(sfx_count) if sfx_count > 0 else sfx_callable)
+
+	Events.gold_gained.connect(_on_gold_gained)
 
 	for entry in _BGM_MAP:
 		var key: String = entry[1]
@@ -141,6 +149,19 @@ func _play_sound(sound_name: String) -> void:
 
 func _bgm_inactive_player() -> AudioStreamPlayer:
 	return _bgm_player_b if _bgm_active_player == _bgm_player_a else _bgm_player_a
+
+
+# Plays gold_gained 1 fois par tranche de _GOLD_PER_SOUND, capé à _GOLD_SOUNDS_MAX,
+# espacé de _GOLD_SOUND_SPACING. Un gain < 10 joue quand même 1 son.
+func _on_gold_gained(amount: int) -> void:
+	if amount <= 0:
+		return
+	var count: int = clampi(maxi(1, int(amount / float(_GOLD_PER_SOUND))), 1, _GOLD_SOUNDS_MAX)
+	for i in count:
+		if i == 0:
+			_play_sound("gold_gained")
+		else:
+			get_tree().create_timer(i * _GOLD_SOUND_SPACING).timeout.connect(func(): _play_sound("gold_gained"))
 
 
 func _signal_arg_count(sig: Signal) -> int:

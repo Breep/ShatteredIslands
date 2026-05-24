@@ -78,8 +78,13 @@ func signal_tavern_continue_pressed() -> void:
 
 signal hero_locked()
 
+signal ui_window_opened()
+
 # ============================ Logic ===============================
 signal card_bought(card: Card)
+signal card_drawn()
+signal insufficient_gold()
+signal gold_gained(amount: int)
 
 # ============================ Manager =============================
 signal card_shop_init()

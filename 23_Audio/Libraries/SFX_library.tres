@@ -16,6 +16,14 @@
 [ext_resource type="AudioStream" uid="uid://bovsx5stuyy1s" path="res://23_Audio/SFX/Spell/dragon-studio-holy-spell-cast-450460.mp3" id="13_lhb5h"]
 [ext_resource type="AudioStream" uid="uid://c2b7glvdirfnr" path="res://23_Audio/SFX/Misc/whoosh_01.mp3" id="14_5spcc"]
 [ext_resource type="AudioStream" uid="uid://ojv3r3bksr6c" path="res://23_Audio/SFX/Misc/thud_01.mp3" id="15_18ki5"]
+[ext_resource type="AudioStream" uid="uid://dmxkee6mcrww0" path="res://23_Audio/SFX/UI/Menu_SFX/radio_button_select_01.wav" id="14_hover"]
+[ext_resource type="AudioStream" uid="uid://dc8epodd50eaf" path="res://23_Audio/SFX/UI/Menu_SFX/button_click_08.wav" id="15_clk08"]
+[ext_resource type="AudioStream" uid="uid://5xrv1im6mlag" path="res://23_Audio/SFX/UI/Menu_SFX/button_click_12.wav" id="16_clk12"]
+[ext_resource type="AudioStream" uid="uid://l1ew7tm23vse" path="res://23_Audio/SFX/UI/Menu_SFX/button_click_rejection_20.wav" id="17_rejct"]
+[ext_resource type="AudioStream" uid="uid://bnh2s2bw0lurh" path="res://23_Audio/SFX/UI/Menu_SFX/soft-bubbly_button_click_in_05.wav" id="18_wndw"]
+[ext_resource type="AudioStream" uid="uid://fsnsrrwlyut6" path="res://23_Audio/SFX/UI/Menu_SFX/item_sold_02.wav" id="19_gold"]
+[ext_resource type="AudioStream" uid="uid://bf35na3k3s5ry" path="res://23_Audio/SFX/UI/Menu_SFX/shop_category_select_01.wav" id="20_carddr"]
+[ext_resource type="AudioStream" uid="uid://bon6amnnoxslb" path="res://23_Audio/SFX/UI/Menu_SFX/insufficient_currency_02.wav" id="21_nogold"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2l36p"]
 playback_mode = 1
@@ -23,15 +31,27 @@ streams_count = 2
 stream_0/stream = ExtResource("1_tm56c")
 stream_1/stream = ExtResource("2_gptj1")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_btnclk"]
+playback_mode = 1
+streams_count = 2
+stream_0/stream = ExtResource("15_clk08")
+stream_1/stream = ExtResource("16_clk12")
+
 [resource]
 script = ExtResource("1_8m0u6")
 audio_database = Dictionary[String, AudioStream]({
 "arrow_shoot": SubResource("AudioStreamRandomizer_2l36p"),
-"button_click": ExtResource("5_gptj1"),
+"button_click": SubResource("AudioStreamRandomizer_btnclk"),
+"button_click_disabled": ExtResource("17_rejct"),
+"button_click_legacy": ExtResource("5_gptj1"),
+"button_hover": ExtResource("14_hover"),
 "card_bought": ExtResource("1_b4e2n"),
+"card_drawn": ExtResource("20_carddr"),
 "egg_hit": ExtResource("11_2p1kq"),
 "fire_ball_projectile": ExtResource("10_cqn3a"),
+"gold_gained": ExtResource("19_gold"),
 "hero_locked": ExtResource("6_2l36p"),
+"insufficient_gold": ExtResource("21_nogold"),
 "latika_walk": ExtResource("3_walk"),
 "meteor": ExtResource("9_ulois"),
 "meteor_impact": ExtResource("12_gb7ch"),
@@ -40,5 +60,7 @@ audio_database = Dictionary[String, AudioStream]({
 "thud": ExtResource("15_18ki5"),
 "ui_family_portrait_requested": ExtResource("7_ro30m"),
 "whoosh": ExtResource("14_5spcc")
+"ui_family_portrait_requested": ExtResource("7_ro30m"),
+"window_appear": ExtResource("18_wndw")
 })
 metadata/_custom_type_script = "uid://bnohfh6e2eq3"

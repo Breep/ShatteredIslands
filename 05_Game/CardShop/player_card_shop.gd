@@ -50,6 +50,8 @@ func try_buy_card(card: Card) -> bool:
 	var card_price: int = 100
 	if player.gold < card_price:
 		Verbose.warn("Not enought gold to buy this card | " + card.name + "(" + str(player.gold) + "<" + str(card_price) + ")", Verbose.Category.CARD_SHOP)
+		if player == PlayerManager.get_local_player():
+			Events.insufficient_gold.emit()
 		shop_tried_to_buy_card.emit()
 		return false
 	if not cards_displayed.has(card):
@@ -78,6 +80,8 @@ func try_refresh_shop_cards() -> void:
 	var refresh_price: int = 20
 	if player.gold < refresh_price:
 		Verbose.warn("Not enought gold to refesh the shop"+ "(" + str(player.gold) + "<" + str(refresh_price) + ")", Verbose.Category.CARD_SHOP)
+		if player == PlayerManager.get_local_player():
+			Events.insufficient_gold.emit()
 		shop_tried_to_refresh.emit()
 		return
 
@@ -94,6 +98,8 @@ func try_buy_random_card() -> bool:
 		return false
 	if player.gold < 90:
 		Verbose.warn("Not enought gold to buy a random card", Verbose.Category.CARD_SHOP)
+		if player == PlayerManager.get_local_player():
+			Events.insufficient_gold.emit()
 		shop_tried_to_buy_random_card.emit()
 		return false
 	var card: Card = await CardShopManager.try_buy_random_card_for_player(player)
