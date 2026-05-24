@@ -58,10 +58,13 @@ static var _crit_check_number: int = -1
 var _dodge_number: int = -1
 
 static func add(component_type: Type, entity_owner: Entity) -> void:
-	Verbose.trace("Instantiating '" + str(Type.keys()[component_type]) + "' on '" + entity_owner.name + "'", Verbose.Category.ENTITY_MODULE)
+	# Type.find_key() résout par valeur enum (robuste aux trous dans la séquence).
+	# Type.keys()[i] indexerait par position dans l'array, ce qui casse dès qu'on retire un membre.
+	var type_name: String = str(Type.find_key(component_type))
+	Verbose.trace("Instantiating '" + type_name + "' on '" + entity_owner.name + "'", Verbose.Category.ENTITY_MODULE)
 	var component: EntityComponent = ENTITY_COMPONENT_SCENES[component_type].instantiate()
 	if component == null:
-		Verbose.error("Can't instantiate '" + str(Type.keys()[component_type]) + "'", Verbose.Category.ENTITY_MODULE)
+		Verbose.error("Can't instantiate '" + type_name + "'", Verbose.Category.ENTITY_MODULE)
 		return
 	component.init(entity_owner)
 	entity_owner.add_child(component)
