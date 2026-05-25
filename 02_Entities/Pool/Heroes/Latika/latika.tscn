@@ -34,7 +34,7 @@ _projectile_type = 10
 [node name="LatikaVisual" parent="." unique_id=433263620 instance=ExtResource("2_o3eb1")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
-[node name="GeneralSkeleton" parent="LatikaVisual" index="0" unique_id=194436225]
+[node name="GeneralSkeleton" parent="LatikaVisual" index="0" unique_id=758051454]
 bones/9/rotation = Quaternion(2.0185068e-17, 0.52131337, 0.8533654, 1.9993156e-17)
 bones/31/rotation = Quaternion(-0.036348324, 0.15220593, 0.22998704, 0.9605301)
 bones/43/rotation = Quaternion(-0.00047969824, 5.526506e-06, -1.0341784e-05, 0.9999999)
@@ -83,14 +83,14 @@ visible = false
 [node name="SM_Chr_Attach_Bags_03" parent="LatikaVisual/GeneralSkeleton/HipsAttachment" parent_id_path=PackedInt32Array(433263620, 504179125) index="2" unique_id=1284670100]
 visible = false
 
-[node name="AnimationPlayer" parent="LatikaVisual" index="1" unique_id=258929934]
+[node name="AnimationPlayer" parent="LatikaVisual" index="1" unique_id=1642206184]
 libraries/default_humanoid_library = SubResource("AnimationLibrary_44wrm")
 
 [node name="ProjectileSpawnMarker" type="Marker3D" parent="LatikaVisual" unique_id=607808498]
 transform = Transform3D(-0.9950919, 0, -0.098955125, 0, 1, 0, 0.098955125, 0, -0.9950919, -0.21317631, 1.4468175, 0.8725844)
 
 [node name="HealthBarSpawnMarker" type="Marker3D" parent="LatikaVisual" unique_id=749687975]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8689946, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4, 0)
 
 [node name="HealthBarSpawnMarkerTavern" type="Marker3D" parent="LatikaVisual" unique_id=26076487]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5209526, 0)

@@ -3,6 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://c25ls8pp84qld" path="res://04_UI/InGame/BuyingArea/PlayerInfo/ui_player_info.tscn" id="1_lw8yd"]
 [ext_resource type="Script" uid="uid://t0ycuxntigox" path="res://04_UI/InGame/Persistant/ui_persistant.gd" id="1_oypi2"]
 [ext_resource type="PackedScene" uid="uid://bvqsnkh0s11q2" path="res://04_UI/InGame/FamilyPortrait/ui_all_families_portrait.tscn" id="5_oypi2"]
+[ext_resource type="PackedScene" uid="uid://cxlyl8wdndq08" path="res://04_UI/InGame/HeroPortrait/ui_hero_portrait.tscn" id="6_kt7rx"]
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme.tres" id="7_sm0s7"]
+[ext_resource type="Script" uid="uid://dqsbil04m2fyg" path="res://04_UI/Menu/MainMenu/text_button.gd" id="8_16n6v"]
 [ext_resource type="PackedScene" uid="uid://ci1xegvy2t2jm" path="res://04_UI/InGame/FamilyViewer/ui_family_viewer.tscn" id="9_16n6v"]
 [ext_resource type="PackedScene" uid="uid://bkh2sp5xq82gn" path="res://04_UI/Tool/Tutorial/tutorial_overlay.tscn" id="10_tutov"]
 
@@ -145,7 +148,8 @@ one_shot = true
 [node name="TutorialOverlay" parent="." unique_id=1461656292 groups=["tutorial_overlay"] instance=ExtResource("10_tutov")]
 layout_mode = 1
 
-[connection signal="pressed" from="EndBuyingPhaseButton" to="." method="_on_end_buying_phase_button_pressed"]
 [node name="UIPlayerInfo" parent="." unique_id=1134887515 instance=ExtResource("1_lw8yd")]
 unique_name_in_owner = true
 layout_mode = 1
+
+[connection signal="pressed" from="EndBuyingPhaseButton" to="." method="_on_end_buying_phase_button_pressed"]

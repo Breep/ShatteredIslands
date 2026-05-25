@@ -15,7 +15,6 @@
 [ext_resource type="AudioStream" uid="uid://bovsx5stuyy1s" path="res://23_Audio/SFX/Spell/dragon-studio-holy-spell-cast-450460.mp3" id="13_lhb5h"]
 [ext_resource type="AudioStream" uid="uid://c2b7glvdirfnr" path="res://23_Audio/SFX/Misc/whoosh_01.mp3" id="14_5spcc"]
 [ext_resource type="AudioStream" uid="uid://ojv3r3bksr6c" path="res://23_Audio/SFX/Misc/thud_01.mp3" id="15_18ki5"]
-[ext_resource type="AudioStream" uid="uid://dmxkee6mcrww0" path="res://23_Audio/SFX/UI/Menu_SFX/radio_button_select_01.wav" id="14_hover"]
 [ext_resource type="AudioStream" uid="uid://dc8epodd50eaf" path="res://23_Audio/SFX/UI/Menu_SFX/button_click_08.wav" id="15_clk08"]
 [ext_resource type="AudioStream" uid="uid://5xrv1im6mlag" path="res://23_Audio/SFX/UI/Menu_SFX/button_click_12.wav" id="16_clk12"]
 [ext_resource type="AudioStream" uid="uid://l1ew7tm23vse" path="res://23_Audio/SFX/UI/Menu_SFX/button_click_rejection_20.wav" id="17_rejct"]
@@ -63,8 +62,7 @@ audio_database = Dictionary[String, AudioStream]({
 "start_fight": ExtResource("8_ulois"),
 "thud": ExtResource("15_18ki5"),
 "ui_family_portrait_requested": ExtResource("7_ro30m"),
-"whoosh": ExtResource("14_5spcc")
-"ui_family_portrait_requested": ExtResource("7_ro30m"),
+"whoosh": ExtResource("14_5spcc"),
 "window_appear": ExtResource("18_wndw")
 })
 metadata/_custom_type_script = "uid://bnohfh6e2eq3"
