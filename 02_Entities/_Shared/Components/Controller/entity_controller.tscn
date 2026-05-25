@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene format=3 uid="uid://deosulo5kg1h2"]
 
-[ext_resource type="Script" path="res://02_Entities/_Shared/Components/Controller/entity_controller.gd" id="1"]
-[ext_resource type="PackedScene" path="res://02_Entities/_Shared/Components/Controller/AI/ai_controller.tscn" id="2"]
+[ext_resource type="Script" uid="uid://ceb4ingjfuu1h" path="res://02_Entities/_Shared/Components/Controller/entity_controller.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://dyf63rk4mderq" path="res://02_Entities/_Shared/Components/Controller/AI/ai_controller.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://02_Entities/_Shared/Components/Controller/Player/player_controller.tscn" id="3"]
 
-[node name="EntityController" type="Node"]
+[node name="EntityController" type="Node" unique_id=1319324395 node_paths=PackedStringArray("_ai", "_player")]
 script = ExtResource("1")
+_ai = NodePath("AIController")
+_player = NodePath("PlayerController")
 
-[node name="AIController" parent="." instance=ExtResource("2")]
+[node name="AIController" parent="." unique_id=758616705 instance=ExtResource("2")]
 
-[node name="PlayerController" parent="." instance=ExtResource("3")]
+[node name="PlayerController" parent="." unique_id=1158077740 instance=ExtResource("3")]

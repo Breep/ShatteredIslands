@@ -8,10 +8,12 @@ extends ControllerStrategy
 # Les sources sont décentralisées (ClickableComponent côté entités, FloorArea
 # côté sol) ; le controller se contente de réagir.
 
+var _owner_selected: bool = false
 
 #region ============================== Node base functions ==============================
 func _ready() -> void:
 	if _owner == null: return
+	Events.entity_clicked.connect(_on_entity_clicked)
 	Events.entity_right_clicked.connect(_on_entity_right_clicked)
 	Events.floor_clicked.connect(_on_floor_clicked)
 
@@ -23,8 +25,12 @@ func _exit_tree() -> void:
 
 
 #region ============================== Callbacks ==============================
+func _on_entity_clicked(entity: Entity) -> void:
+	_owner_selected = true if entity == _owner else false
+
+
 func _on_entity_right_clicked(target: Entity) -> void:
-	if not _active: return
+	if not (_active and _owner_selected): return
 	if target == null or target == _owner: return
 	if _owner.auto_attack == null: return
 	_owner.auto_attack.set_target(target)
@@ -32,7 +38,7 @@ func _on_entity_right_clicked(target: Entity) -> void:
 
 
 func _on_floor_clicked(world_position: Vector3) -> void:
-	if not _active: return
+	if not (_active and _owner_selected): return
 	if _owner.auto_attack != null:
 		_owner.auto_attack.clear_target()
 	if _owner.movement != null:

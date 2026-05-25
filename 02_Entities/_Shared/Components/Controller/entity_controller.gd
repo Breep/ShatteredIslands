@@ -19,9 +19,9 @@ enum Mode { AUTO, MANUAL }
 
 #region ============================== Private variables ==============================
 var _mode: Mode = Mode.AUTO
-var _is_selected: bool = false
-var _ai: ControllerStrategy = null
-var _player: ControllerStrategy = null
+
+@export var _ai: AIController = null
+@export var _player: PlayerController = null
 #endregion
 
 
@@ -32,23 +32,16 @@ func _enter_tree() -> void:
 		Verbose.trace("Override: EntityController on [" + _owner.entity_name + "]", Verbose.Category.ENTITY_MODULE)
 		_owner.controller.queue_free()
 	_owner.controller = self
-
-	# Propager _owner aux enfants AVANT que leur propre _enter_tree fire.
-	# get_children() retourne les enfants statiques de la scène (déjà instanciés
-	# au moment où le parent entre dans l'arbre).
-	for child in get_children():
-		if child is AIController:
-			_ai = child as ControllerStrategy
-			_ai.init(_owner)
-			Verbose.debug("EntityController on [" + _owner.entity_name + "] bound AIController child", Verbose.Category.ENTITY_MODULE)
-		elif child is PlayerController:
-			_player = child as ControllerStrategy
-			_player.init(_owner)
-			Verbose.debug("EntityController on [" + _owner.entity_name + "] bound PlayerController child", Verbose.Category.ENTITY_MODULE)
+	
 	if _ai == null:
-		Verbose.warn("EntityController on [" + _owner.entity_name + "] has no AIController child", Verbose.Category.ENTITY_MODULE)
+		Verbose.error("EntityController on [" + _owner.entity_name + "] has no AIController", Verbose.Category.ENTITY_MODULE)
+		return
 	if _player == null:
-		Verbose.warn("EntityController on [" + _owner.entity_name + "] has no PlayerController child", Verbose.Category.ENTITY_MODULE)
+		Verbose.error("EntityController on [" + _owner.entity_name + "] has no PlayerController", Verbose.Category.ENTITY_MODULE)
+		return
+	
+	_ai.init(_owner)
+	_player.init(_owner)
 
 
 func _ready() -> void:
@@ -65,20 +58,6 @@ func set_mode(new_mode: Mode) -> void:
 	_apply_state()
 
 
-func set_selected(selected: bool) -> void:
-	_is_selected = selected
-	Verbose.debug("EntityController on [" + _owner.entity_name + "] set_selected " + str(selected), Verbose.Category.ENTITY_MODULE)
-	_apply_state()
-
-
-func get_mode() -> Mode:
-	return _mode
-
-
-func is_selected() -> bool:
-	return _is_selected
-
-
 ## Coupe les deux enfants. Le mode/selected restent mémorisés pour un futur set.
 func disable() -> void:
 	if _ai != null: _ai.disable()
@@ -88,13 +67,11 @@ func disable() -> void:
 
 #region ============================== Private functions ==============================
 func _apply_state() -> void:
-	var player_should_run: bool = (_mode == Mode.MANUAL and _is_selected)
-	var ai_should_run: bool = (_mode == Mode.AUTO)
-
-	if _ai != null:
-		if ai_should_run: _ai.enable()
-		else: _ai.disable()
-	if _player != null:
-		if player_should_run: _player.enable()
-		else: _player.disable()
+	match _mode:
+		Mode.AUTO:
+			if _ai: _ai.enable()
+			if _player: _player.disable()
+		Mode.MANUAL:
+			if _ai: _ai.disable()
+			if _player: _player.enable()
 #endregion

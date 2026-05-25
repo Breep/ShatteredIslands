@@ -465,16 +465,16 @@ func _on_fighting_state_changed(new_fighting_state: FightingState) -> void:
 	Verbose.debug("Entity [" + entity_name + "] fighting state changed to [" + str(FightingState.keys()[new_fighting_state]) + "]", Verbose.Category.ENTITY)
 	_state_machine.transition_to(new_fighting_state)
 
-	match new_fighting_state:
-		FightingState.IDLE:
-			family.stop_all()
-		FightingState.FIGHTING:
-			if family_managers_enabled:
-				family.start_all()
-		FightingState.CELEBRATING:
-			family.stop_all()
-		FightingState.UNDEF:
-			pass
+	#match new_fighting_state:
+		#FightingState.IDLE:
+			#family.stop_all()
+		#FightingState.FIGHTING:
+			#if family_managers_enabled:
+				#family.start_all()
+		#FightingState.CELEBRATING:
+			#family.stop_all()
+		#FightingState.UNDEF:
+			#pass
 
 
 func _on_stats_health_changed(new_health: float) -> void:

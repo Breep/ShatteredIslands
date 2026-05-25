@@ -6,8 +6,8 @@ extends Area3D
 # Le PlayerController écoute ce signal pour déclencher un move_to sur l'entité contrôlée.
 
 #region ============================== Constants ==============================
-const CLICK_INDICATOR_DURATION_S: float = 1.0
-const CLICK_INDICATOR_RADIUS: float = 0.25
+const CLICK_INDICATOR_DURATION_S: float = 0.5
+const CLICK_INDICATOR_RADIUS: float = 0.15
 const CLICK_INDICATOR_HEIGHT: float = 0.05
 const CLICK_INDICATOR_COLOR: Color = Color(1.0, 0.85, 0.2, 1.0)
 #endregion

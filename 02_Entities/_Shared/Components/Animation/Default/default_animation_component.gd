@@ -10,11 +10,11 @@ const RUN_SPEED_THRESHOLD: float = 5.0
 #region AnimatorTree parameters
 const PARAM_SWITCH_ENTITY_MODE: String = "parameters/switch_entity_mode/transition_request"
 const VALUE_SWITCH_ENTITY_MODE_EDITOR: String = "Editor"
-const VALUE_SWITCH_ENTITY_MODE_INGAME: String = "Ingame"
+const VALUE_SWITCH_ENTITY_MODE_INGAME: String = "InGame"
 
 const PARAM_SWITCH_ENTITY_LIFE_STATE: String = "parameters/switch_entity_life_state/transition_request"
 const VALUE_SWITCH_ENTITY_LIFE_STATE_DEAD: String = "Dead"
-const VALUE_SWITCH_ENTITY_LIFE_STATE_ALIVE: String = "Fighting"
+const VALUE_SWITCH_ENTITY_LIFE_STATE_ALIVE: String = "Alive"
 
 const PARAM_ONE_SHOT_HIT: String = "parameters/one_shot_hit/request"
 
