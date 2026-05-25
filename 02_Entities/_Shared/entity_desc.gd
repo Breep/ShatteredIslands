@@ -22,3 +22,7 @@ extends Resource
 @export_range(0.0, 1.0, 0.01) var aa_1_release_normalized: float = 0.5
 @export_range(0.0, 1.0, 0.01) var aa_2_release_normalized: float = 0.5
 @export_range(0.0, 1.0, 0.01) var aa_3_release_normalized: float = 0.5
+
+@export var aa_1_anim_base_duration: float = 3.26
+@export var aa_2_anim_base_duration: float = 3.26
+@export var aa_3_anim_base_duration: float = 3.26

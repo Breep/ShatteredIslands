@@ -31,6 +31,9 @@ const PARAM_SWITCH_ATTACK: String = "parameters/switch_attack/transition_request
 const VALUE_SWITCH_ATTACK_1: String = "Attack1"
 const VALUE_SWITCH_ATTACK_2: String = "Attack2"
 const VALUE_SWITCH_ATTACK_3: String = "Attack3"
+const PARAM_SCALE_ATTACK_1: String = "parameters/scale_attack_1/scale"
+const PARAM_SCALE_ATTACK_2: String = "parameters/scale_attack_2/scale"
+const PARAM_SCALE_ATTACK_3: String = "parameters/scale_attack_3/scale"
 
 const PARAM_ONE_SHOT_LAND: String = "parameters/one_shot_land/request"
 
@@ -63,8 +66,10 @@ const PARAM_SEEK_IDLE_SITTING_FLOOR: String = "parameters/seek_idle_sitting_floo
 
 var _lock_animation: bool = false
 
-# Base attack animation duration (cached on ready)
-var _attack_anim_base_duration: float = 3.2 # Default fallback
+# Base attack animation duration (cached on ready) (premultiplied by default by scale_attack_<x>)
+var _aa_1_anim_base_duration: float = 3.2
+var _aa_2_anim_base_duration: float = 3.2
+var _aa_3_anim_base_duration: float = 3.2
 
 func _enter_tree() -> void:
 	if _owner == null: return
@@ -87,6 +92,7 @@ func _ready() -> void:
 	_rng.randomize()
 
 	_animation_tree.set(PARAM_SWITCH_ENTITY_MODE, VALUE_SWITCH_ENTITY_MODE_INGAME)
+	_init_aa_durations()
 
 	_owner.life_state_changed.connect(_on_owner_life_state_changed)
 	_owner.is_moving_changed.connect(_on_owner_is_moving_changed)
@@ -127,9 +133,21 @@ func _on_owner_auto_attack_started(lock_seconds: float) -> void:
 	if _lock_animation:
 		Verbose.warn("Auto attack - Animation is locked", Verbose.Category.ENTITY_ANIMATION)
 		return
-	# Calculate speed_scale so animation fits within lock_seconds
-	var speed_scale: float = _attack_anim_base_duration / lock_seconds if lock_seconds > 0.0 else 1.0
-	Verbose.debug("Auto attack started (speed_scale=" + str(speed_scale).pad_decimals(2) + ")", Verbose.Category.ENTITY_ANIMATION)
+
+	var attack_index: int = _rng.randi_range(1, 3)
+	var switch_value: String = VALUE_SWITCH_ATTACK_1
+	var base_duration: float = _aa_1_anim_base_duration
+	match attack_index:
+		2:
+			switch_value = VALUE_SWITCH_ATTACK_2
+			base_duration = _aa_2_anim_base_duration
+		3:
+			switch_value = VALUE_SWITCH_ATTACK_3
+			base_duration = _aa_3_anim_base_duration
+
+	var speed_scale: float = base_duration / lock_seconds if lock_seconds > 0.0 else 1.0
+	Verbose.debug("Auto attack started (attack=" + str(attack_index) + ", speed_scale=" + str(speed_scale).pad_decimals(2) + ")", Verbose.Category.ENTITY_ANIMATION)
+	_animation_tree.set(PARAM_SWITCH_ATTACK, switch_value)
 	_animation_tree.set(PARAM_SCALE_ATTACK, speed_scale)
 	_animation_tree.set(PARAM_ONE_SHOT_ATTACK, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
@@ -171,5 +189,17 @@ func _on_owner_action_received(source: Entity, action_type: Utils.ActionType, ac
 	if not is_critical: return
 	if not Utils.get_action_category(action_type) == Utils.ActionCategory.DAMAGE: return
 	_animation_tree.set(PARAM_ONE_SHOT_HIT, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-
 #endregion
+
+
+#region Private API
+func _init_aa_durations() -> void:
+	if _owner.entity_desc == null: return
+	var scale_1: float = _animation_tree.get(PARAM_SCALE_ATTACK_1)
+	var scale_2: float = _animation_tree.get(PARAM_SCALE_ATTACK_2)
+	var scale_3: float = _animation_tree.get(PARAM_SCALE_ATTACK_3)
+
+	_aa_1_anim_base_duration = _owner.entity_desc.aa_1_anim_base_duration / scale_1
+	_aa_2_anim_base_duration = _owner.entity_desc.aa_2_anim_base_duration / scale_2
+	_aa_3_anim_base_duration = _owner.entity_desc.aa_3_anim_base_duration / scale_3
+	

@@ -202,7 +202,9 @@ func _advance_active_attack() -> void:
 	if _ticks_since_attack_start >= _lock_ticks:
 		_current_phase = AttackPhase.COOLDOWN
 		_active_attack_data.clear()
-		_ticks_remaining = _attack_interval_ticks
+		# attack_speed est la seule source de vérité : le cycle total (anim + idle)
+		# doit durer _attack_interval_ticks. L'anim en a déjà consommé _lock_ticks.
+		_ticks_remaining = maxi(0, _attack_interval_ticks - _lock_ticks)
 		_owner.auto_attack_completed.emit(_owner)
 		attack_completed.emit()
 
