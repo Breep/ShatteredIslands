@@ -7,7 +7,7 @@ const ISLAND_SCENE: PackedScene = preload("res://Game/LevelSelector/island.tscn"
 const INVALID_NODE_TINT: Color = Color(1.0, 0.35, 0.35, 1.0)
 const PANEL_WIDTH: float = 290.0
 const ZOOM_STEP: float = 0.1
-const DEFAULT_TARGETS_10: Array = [3, 11, 12, 11, 10, 9, 9, 8, 6, 3]
+const DEFAULT_TARGETS_10: Array = [6, 11, 12, 11, 10, 9, 9, 8, 6, 3]
 #endregion
 
 
@@ -40,6 +40,9 @@ var _is_panning: bool = false
 @onready var _radial_jitter: SpinBox = %RadialJitter
 @onready var _min_angular_gap: SpinBox = %MinAngularGap
 @onready var _min_node_distance: SpinBox = %MinNodeDistance
+@onready var _inter_branch_cross: HSlider = %InterBranchCross
+@onready var _inter_branch_cross_label: Label = %InterBranchCrossLabel
+@onready var _inter_branch_max_dist: SpinBox = %InterBranchMaxDist
 @onready var _zoom_slider: HSlider = %ZoomSlider
 @onready var _zoom_label: Label = %ZoomLabel
 @onready var _regenerate_btn: Button = %RegenerateBtn
@@ -56,11 +59,13 @@ func _ready() -> void:
 	_level_count.value_changed.connect(_on_level_count_changed)
 	_angular_jitter.value_changed.connect(_on_angular_jitter_changed)
 	_decay_exponent.value_changed.connect(_on_decay_exponent_changed)
+	_inter_branch_cross.value_changed.connect(_on_inter_branch_cross_changed)
 	_zoom_slider.value_changed.connect(_on_zoom_changed)
 	_world_viewport.gui_input.connect(_on_world_viewport_input)
 	resized.connect(_recenter_world)
 	_on_angular_jitter_changed(_angular_jitter.value)
 	_on_decay_exponent_changed(_decay_exponent.value)
+	_on_inter_branch_cross_changed(_inter_branch_cross.value)
 	_on_zoom_changed(_zoom_slider.value)
 	_rebuild_targets_grid(int(_level_count.value))
 	_initialize_targets()
@@ -92,6 +97,8 @@ func _apply_generator_params(gen: MapTreeGenerator) -> void:
 	gen.radial_jitter_px = _radial_jitter.value
 	gen.min_angular_gap_px = _min_angular_gap.value
 	gen.min_node_distance_px = _min_node_distance.value
+	gen.inter_branch_cross_probability = _inter_branch_cross.value
+	gen.inter_branch_max_dist_px = _inter_branch_max_dist.value
 
 
 func _read_targets_override() -> PackedInt32Array:
@@ -228,6 +235,10 @@ func _on_angular_jitter_changed(value: float) -> void:
 
 func _on_decay_exponent_changed(value: float) -> void:
 	_decay_exponent_label.text = "Décroissance par niveau : %.2f" % value
+
+
+func _on_inter_branch_cross_changed(value: float) -> void:
+	_inter_branch_cross_label.text = "Cross inter-branches : %.2f" % value
 
 
 func _on_zoom_changed(value: float) -> void:

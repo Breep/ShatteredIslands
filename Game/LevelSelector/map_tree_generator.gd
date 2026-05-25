@@ -47,6 +47,8 @@ var max_children: int = 4
 var ring_spacing: float = 220.0
 var min_angular_gap_px: float = 180.0
 var min_node_distance_px: float = 180.0
+var inter_branch_cross_probability: float = 0.40
+var inter_branch_max_dist_px: float = 520.0
 var angular_jitter_factor: float = 0.20
 var radial_jitter_px: float = 25.0
 var decay_exponent: float = 0.6
@@ -299,36 +301,35 @@ func _add_leaf_rescues(graph: Graph) -> void:
 		if e.kind == EdgeKind.PARENT:
 			children_count[e.from_id] = int(children_count[e.from_id]) + 1
 
-	var max_rescue_dist: float = ring_spacing * 2.0
-	# Couvre tous les niveaux 1..level_count (le dernier inclus pour rescue entre feuilles).
-	for L in range(1, level_count + 1):
-		var ring_curr: Array = graph.by_level[L]
-		if ring_curr.is_empty():
+	var max_rescue_dist: float = ring_spacing * 1.8
+	var max_inter_dist: float = inter_branch_max_dist_px
+	for L in range(1, level_count):
+		var ring_a: Array = graph.by_level[L]
+		var ring_b: Array = graph.by_level[L + 1]
+		if ring_a.is_empty() or ring_b.is_empty():
 			continue
-		var ring_next: Array = []
-		if L + 1 <= level_count:
-			ring_next = graph.by_level[L + 1]
-		for n in ring_curr:
-			if int(children_count[n.id]) != 0:
-				continue
-			# Candidats : tous les nodes N+1 + les autres feuilles du même niveau N.
-			var candidates: Array = []
-			candidates.append_array(ring_next)
-			for sibling in ring_curr:
-				if sibling == n:
-					continue
-				if int(children_count[sibling.id]) == 0:
-					candidates.append(sibling)
-			if candidates.is_empty():
-				continue
-			var rescue: NodeDesc = _closest_by_position(n, candidates)
-			if rescue == null:
-				continue
-			if n.position.distance_to(rescue.position) > max_rescue_dist:
-				continue
-			if _edge_exists(graph, n.id, rescue.id):
-				continue
-			graph.edges.append(_make_edge(n.id, rescue.id, EdgeKind.CROSS))
+		for n in ring_a:
+			# 1. Leaf rescue : une feuille intermédiaire force une connexion vers
+			# le N+1 le plus proche euclidien (jamais N↔N pour préserver le sens du chiffre).
+			if int(children_count[n.id]) == 0:
+				var rescue: NodeDesc = _closest_by_position(n, ring_b)
+				if rescue != null \
+						and n.position.distance_to(rescue.position) <= max_rescue_dist \
+						and not _edge_exists(graph, n.id, rescue.id):
+					graph.edges.append(_make_edge(n.id, rescue.id, EdgeKind.CROSS))
+			# 2. Cross-connexions inter-branches : entre N et N+1 de branches racines
+			# différentes, si suffisamment proches, avec probabilité configurable.
+			# Crée les ponts entre constellations de branches voisines.
+			if inter_branch_cross_probability > 0.0:
+				for candidate in ring_b:
+					if candidate.root_branch_id == n.root_branch_id:
+						continue
+					if _edge_exists(graph, n.id, candidate.id):
+						continue
+					if n.position.distance_to(candidate.position) > max_inter_dist:
+						continue
+					if _rng.randf() < inter_branch_cross_probability:
+						graph.edges.append(_make_edge(n.id, candidate.id, EdgeKind.CROSS))
 
 
 func _closest_by_angle(node: NodeDesc, candidates: Array) -> NodeDesc:
