@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://1h20y2oaj3fm" path="res://90_Modules/BattleLogModule/BattleWriter/battle_writer.tscn" id="8_7oplh"]
 [ext_resource type="PackedScene" uid="uid://dvuq5n41nak3u" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/ArenaZoneManager/arena_zone_manager.tscn" id="9_8iy5v"]
 [ext_resource type="PackedScene" uid="uid://dibux7uwcsatj" path="res://06_FloatingIsland/FightingIsland/FightingArea/SpawnArea/spawn_area.tscn" id="10_zones"]
+[ext_resource type="Script" uid="uid://b0otuknba6ddv" path="res://06_FloatingIsland/FightingIsland/FightingArea/floor_area.gd" id="11_8hv54"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_team"]
 size = Vector3(12.5, 0.1, 25)
@@ -132,6 +133,7 @@ shape = SubResource("BoxShape3D_full")
 [node name="Floor" type="StaticBody3D" parent="." unique_id=989301573]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 collision_layer = 8
+script = ExtResource("11_8hv54")
 
 [node name="FloorMesh3D" type="MeshInstance3D" parent="Floor" unique_id=2031629375]
 visible = false

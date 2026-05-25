@@ -29,13 +29,13 @@ class PlayerPool extends CardPool:
 		_families = families
 		_game_rules = game_rules
 		_shop_deck = shop_deck
-		_player.deck.family_leveled_up.connect(_on_family_leveled_up)
-		_player.deck.card_maxed.connect(_on_card_maxed)
+		#_player.deck.family_leveled_up.connect(_on_family_leveled_up) # TODO a rework complètement
+		#_player.deck.card_maxed.connect(_on_card_maxed)
 		
 	func build() -> PlayerPool:
 		for family in _families:
 			var family_type: Family.Type = family.family_type
-			var family_points: int = _player.deck.get_family_points(family_type)
+			var family_points: int = 40#_player.deck.get_family_points(family_type) # TODO a rework complètement
 			var family_level: int = _game_rules.get_family_level(family_points)
 			var locked_rarities: Array[Card.Rarity] = _game_rules.get_locked_rarities(family_level)
 			for rarity in _shop_deck.get_rarities_for_family(family_type):

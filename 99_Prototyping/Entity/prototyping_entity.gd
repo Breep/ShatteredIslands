@@ -4,6 +4,7 @@ var _entities: Array[Entity]
 
 @export var _auto_attack_enabled: bool = false
 @export var _family_managers_enabled: bool = false
+@export var _manual_mode_enabled: bool = false
 
 @onready var _entities_node: Node3D = %Entities
 @onready var _center_point_camera: CenterPointCamera = %CenterPointCamera
@@ -17,7 +18,6 @@ var _entities: Array[Entity]
 # Manual mode : quand actif, un clic gauche court sur une entité la passe en
 # contrôle joueur (PlayerController). Les autres entités restent ou repassent
 # en AUTO. Une seule entité à la fois est contrôlée.
-var _manual_mode_enabled: bool = false
 var _currently_controlled: Entity = null
 
 
@@ -31,11 +31,22 @@ func _ready() -> void:
 
 	_center_point_camera.set_active()
 	_fighting_manager.init(_spawn_manager, 42)
+
 	_auto_attack_check_button.button_pressed = _auto_attack_enabled
 	_family_managers_check_button.button_pressed = _family_managers_enabled
 	_manual_mode_check_button.button_pressed = _manual_mode_enabled
+	_apply_settings_to_entities()
 
 	Events.entity_clicked.connect(_on_entity_clicked)
+
+
+func _apply_settings_to_entities() -> void:
+	var target_mode := EntityController.Mode.MANUAL if _manual_mode_enabled else EntityController.Mode.AUTO
+	for entity: Entity in _entities:
+		entity.auto_attack_enabled = _auto_attack_enabled
+		entity.family_managers_enabled = _family_managers_enabled
+		if entity.controller != null:
+			entity.controller.set_mode(target_mode)
 
 
 # Les entités posées en éditeur (enfants statiques de _entities_node) sont
@@ -54,22 +65,13 @@ func _adopt_pre_placed_entities() -> void:
 # ===== UI =====
 #region Global Commands
 func _on_start_fight_button_pressed() -> void:
-	for entity: Entity in _entities:
-		# Disable auto-attack for manual control during prototyping
-		entity.auto_attack_enabled = _auto_attack_enabled
-		entity.family_managers_enabled = _family_managers_enabled
-		#_fighting_manager.start_fighting()
-		_auto_attack_check_button.hide()
-		_family_managers_check_button.hide()
+	_apply_settings_to_entities()
 	GlobalFightingManager.start()
 	_fighting_manager.request_phase_advance()
 
 
 func _on_stop_fight_button_pressed() -> void:
-	for entity: Entity in _entities:
-		entity.fighting_state = Entity.FightingState.IDLE
-	_auto_attack_check_button.show()
-	_family_managers_check_button.show()
+	pass
 
 
 func _on_reset_fight_button_pressed() -> void:
@@ -87,10 +89,9 @@ func _on_family_managers_check_button_toggled(toggled_on: bool) -> void:
 
 
 func _on_manual_mode_check_button_toggled(toggled_on: bool) -> void:
-	_manual_mode_enabled = toggled_on
-	# Si on désactive le mode manual, on rebascule tout en AUTO et on libère la sélection.
-	if not _manual_mode_enabled:
-		_release_manual_control()
+	for entity in _fighting_manager._registered_entities:
+		if is_instance_valid(entity):
+			entity.controller.set_mode(EntityController.Mode.MANUAL if toggled_on else EntityController.Mode.AUTO)
 
 
 # Quand on clique sur une entité en mode manual : elle passe en contrôle joueur
@@ -115,25 +116,4 @@ func _on_entity_clicked(entity: Entity) -> void:
 		entity.clickable.select()
 	_currently_controlled = entity
 	Verbose.debug("Manual control: now piloting " + entity.entity_name, Verbose.Category.ENTITY)
-
-
-func _release_manual_control() -> void:
-	if _currently_controlled != null:
-		if _currently_controlled.controller != null:
-			_currently_controlled.controller.set_selected(false)
-			_currently_controlled.controller.set_mode(EntityController.Mode.AUTO)
-		if _currently_controlled.clickable != null:
-			_currently_controlled.clickable.deselect()
-	_currently_controlled = null
-
-
-
-
-
-
-
-
-
-
-
  

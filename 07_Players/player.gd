@@ -109,6 +109,7 @@ func setup_components() -> void:
 
 # ============================== Private functions ==============================
 func _init() -> void:
+	deck = PlayerDeck.new()
 	state = PlayerState.new()
 	skill_manager = SkillManager.new()
 	skill_manager.init(self)

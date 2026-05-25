@@ -11,10 +11,10 @@
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://90_Modules/PickableClickable/PickableModule/pickable_module.tscn" id="9_614kc"]
 [ext_resource type="PackedScene" uid="uid://bg5efhnq0erdv" path="res://90_Modules/PickableClickable/ClickableModule/clickable_module.tscn" id="10_m73qc"]
 [ext_resource type="PackedScene" uid="uid://blncvfes4f2y7" path="res://99_Prototyping/Entity/AllActionPrototyping/testing_floorffa5.tscn" id="11_5hdqt"]
-[ext_resource type="Script" uid="uid://b0otuknba6ddv" path="res://99_Prototyping/Entity/floor_area.gd" id="13_jd8sj"]
+[ext_resource type="Script" uid="uid://b0otuknba6ddv" path="res://06_FloatingIsland/FightingIsland/FightingArea/floor_area.gd" id="13_jd8sj"]
 [ext_resource type="PackedScene" uid="uid://q7gxxkhg5u54" path="res://06_FloatingIsland/FightingIsland/Pool/ArchIsland/arch_island_visual.tscn" id="17_ko5bb"]
 [ext_resource type="PackedScene" uid="uid://c0l0roxttdtlp" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/FightingManager/fighting_manager.tscn" id="17_m26y3"]
-[ext_resource type="PackedScene" uid="uid://jcwiqcnilmtk" path="res://02_Entities/Pool/Mobs/Vrok/vrock.tscn" id="17_rnrfd"]
+[ext_resource type="PackedScene" uid="uid://jcwiqcnilmtk" path="res://02_Entities/Pool/Mobs/Vrock/vrock.tscn" id="17_rnrfd"]
 [ext_resource type="Environment" uid="uid://cghu0yr6lj5i2" path="res://21_Props/DefaultBattleIsland/Arch_island/world_environment.tres" id="18_ko5bb"]
 [ext_resource type="PackedScene" uid="uid://dp4x7wkxd6i2q" path="res://99_Prototyping/Entity/EntityController/entity_controller.proto.tscn" id="19_x0odd"]
 
@@ -117,8 +117,8 @@ theme = ExtResource("2_083cp")
 anchors_preset = 0
 offset_left = 24.0
 offset_top = 24.0
-offset_right = 320.0
-offset_bottom = 181.0
+offset_right = 391.0
+offset_bottom = 238.0
 
 [node name="Panel" type="Panel" parent="Node3D/Control/GlobalCommandsControl" unique_id=1653859956]
 layout_mode = 1
@@ -135,9 +135,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 5
+theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
+theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer" unique_id=528893688]
@@ -169,30 +169,29 @@ size_flags_vertical = 3
 text = "Reset SCENE"
 script = ExtResource("3_6kn6i")
 
-[node name="MarginContainer" type="MarginContainer" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=1290145158]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_right = 5
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/MarginContainer" unique_id=539222233]
-layout_mode = 2
-alignment = 1
-
-[node name="AutoAttackCheckButton" type="CheckButton" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=2050907256]
+[node name="ManualModeCheckButton" type="CheckButton" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=2102497393]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.38607535, 0.38267398, 0.36233804, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+text = "Manual Mode"
+
+[node name="AutoAttackCheckButton" type="CheckButton" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=2050907256]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.38607535, 0.38267398, 0.36233804, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 text = "Auto Attacks"
 
-[node name="FamilyManagersCheckButton" type="CheckButton" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=2102497392]
+[node name="FamilyManagersCheckButton" type="CheckButton" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=2102497392]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.38607535, 0.38267398, 0.36233804, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 text = "Family Managers"
-
-[node name="ManualModeCheckButton" type="CheckButton" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=2102497393]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Manual Mode"
 
 [node name="CenterPointCamera" parent="Node3D" unique_id=842815466 instance=ExtResource("4_egh8k")]
 unique_name_in_owner = true
@@ -216,6 +215,7 @@ _team_zones = {
 _center_zone = NodePath("../TestingFloorFFA5/CenterArea")
 _full_arena_zone = NodePath("../TestingFloorFFA5/FloorArea")
 _is_initialized = true
+_battle_id = 1
 
 [node name="SpawnEntities" type="Node3D" parent="Node3D" unique_id=1850617918]
 
@@ -315,8 +315,8 @@ environment = ExtResource("18_ko5bb")
 [connection signal="pressed" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StartFightButton" to="." method="_on_start_fight_button_pressed"]
 [connection signal="pressed" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StopFightButton" to="." method="_on_stop_fight_button_pressed"]
 [connection signal="pressed" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/ResetFightButton" to="." method="_on_reset_fight_button_pressed"]
-[connection signal="toggled" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/AutoAttackCheckButton" to="." method="_on_auto_attack_check_button_toggled"]
-[connection signal="toggled" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/FamilyManagersCheckButton" to="." method="_on_family_managers_check_button_toggled"]
-[connection signal="toggled" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/ManualModeCheckButton" to="." method="_on_manual_mode_check_button_toggled"]
+[connection signal="toggled" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/ManualModeCheckButton" to="." method="_on_manual_mode_check_button_toggled"]
+[connection signal="toggled" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/AutoAttackCheckButton" to="." method="_on_auto_attack_check_button_toggled"]
+[connection signal="toggled" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/FamilyManagersCheckButton" to="." method="_on_family_managers_check_button_toggled"]
 
 [editable path="Node3D/TestingFloorFFA5"]
