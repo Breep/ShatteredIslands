@@ -264,14 +264,14 @@ func _calculate_attack_timings(interval_ticks: int) -> void:
 
 
 func _resolve_aa_anim_ratio() -> float:
-	if _owner.entity_desc != null:
-		return _owner.entity_desc.aa_anim_ratio
+	#if _owner.entity_desc != null:
+		#return _owner.entity_desc.aa_anim_ratio # TODO c'est lui qui décide quel aa anim à juoer
 	return 0.7
 
 
 func _resolve_aa_release_normalized() -> float:
-	if _owner.entity_desc != null:
-		return _owner.entity_desc.aa_release_normalized
+	#if _owner.entity_desc != null:
+		#return _owner.entity_desc.aa_release_normalized
 	return DEFAULT_AA_RELEASE_NORMALIZED
 
 

@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://br00pidd4svpc"]
 
-[ext_resource type="Script" uid="uid://bsedo5cpq45ua" path="res://02_Entities/_Shared/FamiliesManagers/Mana/mana_manager.gd" id="1_ok70t"]
+[ext_resource type="Script" uid="uid://bsedo5cpq45ua" path="res://02_Entities/_Shared/Components/Mana/mana_component.gd" id="1_1xmbe"]
 
-[node name="ManaManager" type="Node" unique_id=885590916]
-script = ExtResource("1_ok70t")
+[node name="ManaComponent" type="Node" unique_id=885590916]
+script = ExtResource("1_1xmbe")
 
 [node name="ManaTickTimer" type="Timer" parent="." unique_id=1054073669]
 unique_name_in_owner = true

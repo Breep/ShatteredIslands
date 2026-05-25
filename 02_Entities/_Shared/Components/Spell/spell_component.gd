@@ -10,6 +10,7 @@ const SHROOM_SPELL_SCENE: PackedScene = preload("res://03_SpellsAndProjectiles/S
 const DEATH_FOG_SCENE: PackedScene = preload("res://03_SpellsAndProjectiles/Spells/Poison/DeathFog/death_fog.tscn")
 const LIGHTNING_SCENE: PackedScene = preload("res://03_SpellsAndProjectiles/Spells/Lightning/Lightning/spell_lightning.tscn")
 const CHAIN_LIGHTNING_SCENE: PackedScene = preload("res://03_SpellsAndProjectiles/Spells/ChainLightning/spell_chain_lightning.tscn")
+const CLEAVE_SCENE: PackedScene = preload("res://03_SpellsAndProjectiles/Spells/Cleave/spell_cleave.tscn")
 
 func _enter_tree() -> void:
 	if _owner == null: return
@@ -58,6 +59,7 @@ func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictiona
 		Spell.Type.DEATH_FOG: _cast_death_fog(spell_modifier)
 		Spell.Type.LIGHTNING: _cast_lightning(target, spell_modifier)
 		Spell.Type.CHAIN_LIGHTNING: _cast_chain_lightning(target, spell_modifier)
+		Spell.Type.CLEAVE: _cast_cleave(spell_modifier)
 		_: Verbose.error("Unknown spell type [" + str(spell_type) + "]", Verbose.Category.ENTITY_MODULE)
 
 	_consume_after_action_modifiers(Utils.ActionCategory.SPELL, {
@@ -144,3 +146,9 @@ func _cast_chain_lightning(target: Entity, spell_modifier: Dictionary) -> void:
 	var chain_lightning: SpellChainLightning = CHAIN_LIGHTNING_SCENE.instantiate()
 	chain_lightning.init(_owner, target, spell_modifier)
 	_spawn_manager.spawn_spell(chain_lightning)
+
+
+func _cast_cleave(spell_modifier: Dictionary) -> void:
+	var cleave: Cleave = CLEAVE_SCENE.instantiate()
+	cleave.init(_owner, spell_modifier)
+	_spawn_manager.spawn_spell(cleave)

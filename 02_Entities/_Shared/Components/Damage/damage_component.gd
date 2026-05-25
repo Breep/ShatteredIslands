@@ -11,12 +11,6 @@ func _enter_tree() -> void:
 		_owner.damage.queue_free()
 	_owner.damage = self
 
-
-func _ready() -> void:
-	super._ready()
-	if _owner == null or _owner.damage != self:
-		return
-
 # ============================== Public functions ==============================
 
 func direct(target: Entity, damage: float, damage_type: Utils.ActionType, action_id: StringName) -> float:

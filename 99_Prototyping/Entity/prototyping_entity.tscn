@@ -16,7 +16,23 @@
 [ext_resource type="PackedScene" uid="uid://c0l0roxttdtlp" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/FightingManager/fighting_manager.tscn" id="17_m26y3"]
 [ext_resource type="PackedScene" uid="uid://jcwiqcnilmtk" path="res://02_Entities/Pool/Mobs/Vrock/vrock.tscn" id="17_rnrfd"]
 [ext_resource type="Environment" uid="uid://cghu0yr6lj5i2" path="res://21_Props/DefaultBattleIsland/Arch_island/world_environment.tres" id="18_ko5bb"]
+[ext_resource type="PackedScene" uid="uid://cvwmo633sxskh" path="res://02_Entities/Pool/Mobs/Goblins/GoblinBerserker/goblin_berserker.tscn" id="18_kq8si"]
 [ext_resource type="PackedScene" uid="uid://dp4x7wkxd6i2q" path="res://99_Prototyping/Entity/EntityController/entity_controller.proto.tscn" id="19_x0odd"]
+
+[sub_resource type="Resource" id="Resource_kq8si"]
+script = ExtResource("3_jd8sj")
+health_max = 1000.0
+mana_max = 40.0
+mana_regen = 10.0
+auto_attack_type = 1
+attack_range = 1.0
+attack_damage = 25.0
+attack_speed = 1.0
+armor = 20.0
+magic_resistance = 10.0
+_crit_chance = 25.0
+_dodge = 20.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="Resource" id="Resource_rnrfd"]
 script = ExtResource("3_jd8sj")
@@ -35,6 +51,7 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 script = ExtResource("3_jd8sj")
 health_max = 1000.0
 mana_max = 100.0
+mana_regen = 10.0
 attack_range = 10.0
 attack_damage = 100.0
 attack_speed = 0.5
@@ -46,6 +63,7 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 script = ExtResource("3_jd8sj")
 health_max = 1000.0
 mana_max = 100.0
+mana_regen = 5.0
 attack_range = 10.0
 attack_damage = 2.0
 attack_speed = 3.0
@@ -77,8 +95,18 @@ transform = Transform3D(1.0000001, 0, 0, 0, 0.99999994, 0, 0, 0, 1.0000001, 0, 0
 [node name="Entities" type="Node3D" parent="Node3D" unique_id=38016860]
 unique_name_in_owner = true
 
+[node name="GoblinBerserker" parent="Node3D/Entities" unique_id=1459343337 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("18_kq8si")]
+transform = Transform3D(0.26981065, 0, -0.9629133, 0, 1.0000001, 0, 0.9629133, 0, 0.26981065, -4.646197, 0, 2.0751035)
+_rage_activated = true
+_big_game_hunter_activated = true
+team = 2
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+_override_base_stats = SubResource("Resource_kq8si")
+
 [node name="Vrock" parent="Node3D/Entities" unique_id=1302613586 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("17_rnrfd")]
-transform = Transform3D(-0.15243384, 0, 0.98831356, 0, 1.0000001, 0, -0.98831356, 0, -0.15243384, 3.0244966, 0, -1.4205693)
+transform = Transform3D(-0.15243384, 0, 0.98831356, 0, 1.0000001, 0, -0.98831356, 0, -0.15243384, 2.4627724, 0, -0.9544548)
 team = 1
 battle_id = 1
 _spawn_manager = NodePath("../../SpawnManager")

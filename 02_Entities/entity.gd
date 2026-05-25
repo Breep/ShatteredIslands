@@ -14,7 +14,7 @@ signal action_overhealed(target: Entity, amount: float)
 signal damage_taken(damage: float, damage_type: Utils.ActionType, is_critical: bool, blocked_by_armor: bool)
 signal heal_taken(heal_amount: float, is_critical: bool)
 signal stack_taken(stack_type: Alteration.Type, stack_number: float, is_critical: bool)
-signal auto_attack_completed()
+signal auto_attack_completed() # TODO: A virer
 signal spell_casted(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary)
 signal spawn_completed()
 signal resurrected()
@@ -111,6 +111,7 @@ var controller: EntityController
 var display_mode_module: DisplayModeModule # TODO ça à l'air inutil ça à virer je pense
 var deck_holder: DeckHolderComponent
 var family: FamilyComponent
+var mana: ManaComponent
 
 var _auto_loaded_components: Array[EntityComponent.Type] = [
 	EntityComponent.Type.DAMAGE,
@@ -129,6 +130,7 @@ var _auto_loaded_components: Array[EntityComponent.Type] = [
 	EntityComponent.Type.CLICKABLE,
 	EntityComponent.Type.DRAGGABLE,
 	EntityComponent.Type.CONTROLLER,
+	EntityComponent.Type.MANA
 ]
 
 #var display_mode: DisplayMode = DisplayMode.PREVIEW
