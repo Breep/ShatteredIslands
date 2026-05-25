@@ -111,7 +111,6 @@ func _on_entity_clicked(entity: Entity) -> void:
 
 	# Activer le contrôle joueur sur la nouvelle entité + sélectionner + marker visuel
 	entity.controller.set_mode(EntityController.Mode.MANUAL)
-	entity.controller.set_selected(true)
 	if entity.clickable != null:
 		entity.clickable.select()
 	_currently_controlled = entity

@@ -266,7 +266,7 @@ func _calculate_attack_timings(interval_ticks: int) -> void:
 func _resolve_aa_anim_ratio() -> float:
 	if _owner.entity_desc != null:
 		return _owner.entity_desc.aa_anim_ratio
-	return DEFAULT_AA_ANIM_RATIO
+	return 0.7
 
 
 func _resolve_aa_release_normalized() -> float:

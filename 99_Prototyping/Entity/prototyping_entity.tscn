@@ -14,8 +14,22 @@
 [ext_resource type="Script" uid="uid://b0otuknba6ddv" path="res://99_Prototyping/Entity/floor_area.gd" id="13_jd8sj"]
 [ext_resource type="PackedScene" uid="uid://q7gxxkhg5u54" path="res://06_FloatingIsland/FightingIsland/Pool/ArchIsland/arch_island_visual.tscn" id="17_ko5bb"]
 [ext_resource type="PackedScene" uid="uid://c0l0roxttdtlp" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/FightingManager/fighting_manager.tscn" id="17_m26y3"]
+[ext_resource type="PackedScene" uid="uid://jcwiqcnilmtk" path="res://02_Entities/Pool/Mobs/Vrok/vrock.tscn" id="17_rnrfd"]
 [ext_resource type="Environment" uid="uid://cghu0yr6lj5i2" path="res://21_Props/DefaultBattleIsland/Arch_island/world_environment.tres" id="18_ko5bb"]
 [ext_resource type="PackedScene" uid="uid://dp4x7wkxd6i2q" path="res://99_Prototyping/Entity/EntityController/entity_controller.proto.tscn" id="19_x0odd"]
+
+[sub_resource type="Resource" id="Resource_rnrfd"]
+script = ExtResource("3_jd8sj")
+health_max = 500.0
+mana_max = 100.0
+auto_attack_type = 1
+attack_range = 1.0
+attack_damage = 20.0
+attack_speed = 1.0
+movement_speed = 8.0
+_crit_chance = 20.0
+_dodge = 10.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="Resource" id="Resource_jd8sj"]
 script = ExtResource("3_jd8sj")
@@ -61,6 +75,15 @@ transform = Transform3D(1.0000001, 0, 0, 0, 0.99999994, 0, 0, 0, 1.0000001, 0, 0
 
 [node name="Entities" type="Node3D" parent="Node3D" unique_id=38016860]
 unique_name_in_owner = true
+
+[node name="Vrock" parent="Node3D/Entities" unique_id=1302613586 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("17_rnrfd")]
+transform = Transform3D(-0.15243384, 0, 0.98831356, 0, 1.0000001, 0, -0.98831356, 0, -0.15243384, 3.0244966, 0, -1.4205693)
+team = 1
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+_override_base_stats = SubResource("Resource_rnrfd")
+initial_controller_mode = 1
 
 [node name="Latika2" parent="Node3D/Entities" unique_id=1941835210 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("3_os118")]
 transform = Transform3D(-0.2632837, 0, 0.96471834, 0, 1.0000001, 0, -0.96471834, 0, -0.2632837, 3.662788, 9.536744e-07, 0.110419974)
