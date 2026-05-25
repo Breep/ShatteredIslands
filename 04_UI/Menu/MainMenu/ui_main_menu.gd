@@ -20,6 +20,16 @@ func _emit_window_opened_if_visible() -> void:
 		Events.ui_window_opened.emit()
 
 
+func _input(event: InputEvent) -> void:
+	if not event.is_action_pressed("pause"): return
+	if _play_menu.visible:
+		_play_menu.hide()
+		get_viewport().set_input_as_handled()
+	elif _game_settings.visible:
+		_game_settings.hide()
+		get_viewport().set_input_as_handled()
+
+
 func _on_play_button_pressed() -> void:
 	_play_menu.show()
 

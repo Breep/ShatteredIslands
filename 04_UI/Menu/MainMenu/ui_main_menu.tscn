@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://gg800l26c8qq" path="res://20_Data/Misc/Logo shattered island v2.png" id="7_c1ans"]
 [ext_resource type="Script" uid="uid://bm1ic5ai2cmv4" path="res://04_UI/Menu/MainMenu/auto_tween.gd" id="8_ymyx8"]
 [ext_resource type="PackedScene" uid="uid://b3pdqtw0g262b" path="res://04_UI/Menu/SettingsMenu/ui_game_settings.tscn" id="9_stngs"]
+[ext_resource type="PackedScene" uid="uid://di7eyuedvo17p" path="res://04_UI/InGame/PauseMenu/ui_pause_menu.tscn" id="10_pmenu"]
 
 [node name="UIMainMenu" type="Control" node_paths=PackedStringArray("_play_button", "_tutorial_check_box")]
 layout_mode = 3
@@ -90,5 +91,10 @@ rotation_duration = 3.0
 enable_scale = true
 scale_amount = 0.02
 scale_duration = 2.2
+
+[node name="PauseMenu" parent="." unique_id=1873625001 instance=ExtResource("10_pmenu")]
+layout_mode = 1
+show_settings = false
+show_back_to_main_menu = false
 
 [connection signal="pressed" from="VBoxContainer/Settings2" to="." method="_on_settings_2_pressed"]

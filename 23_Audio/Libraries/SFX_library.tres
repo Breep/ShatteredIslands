@@ -36,6 +36,11 @@ streams_count = 2
 stream_0/stream = ExtResource("15_clk08")
 stream_1/stream = ExtResource("16_clk12")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qh8tv"]
+streams_count = 2
+stream_0/stream = ExtResource("16_clk12")
+stream_1/stream = ExtResource("15_clk08")
+
 [resource]
 script = ExtResource("1_8m0u6")
 audio_database = Dictionary[String, AudioStream]({
@@ -43,8 +48,8 @@ audio_database = Dictionary[String, AudioStream]({
 "button_click": SubResource("AudioStreamRandomizer_btnclk"),
 "button_click_disabled": ExtResource("17_rejct"),
 "button_click_legacy": ExtResource("5_gptj1"),
-"button_hover": ExtResource("14_hover"),
-"card_bought": ExtResource("16_clk12"),
+"button_hover": SubResource("AudioStreamRandomizer_qh8tv"),
+"card_bought": ExtResource("19_gold"),
 "card_drawn": ExtResource("20_carddr"),
 "egg_hit": ExtResource("11_2p1kq"),
 "fire_ball_projectile": ExtResource("10_cqn3a"),

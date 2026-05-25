@@ -1,6 +1,12 @@
 class_name UIPauseMenu
 extends Control
 
+## Pause/escape menu. Reusable in both in-game and main-menu contexts:
+## hide Resume / Settings / Main Menu entries via exports when irrelevant.
+## Hidden Settings/Main Menu entries are replaced by placeholder TextureRects
+## so the panel proportions stay consistent. Placeholders are reset to hidden
+## when the menu closes.
+
 # ============================== Signals ==============================
 
 signal settings_requested
@@ -14,10 +20,21 @@ enum PauseState {
 	QUIT,
 }
 
+# ============================== Export ==============================
+
+@export var show_resume: bool = true
+@export var show_settings: bool = true
+@export var show_back_to_main_menu: bool = true
+
 # ============================== Local nodes ==============================
 
 @onready var _confirm_panel: Panel = %ConfirmPanel
 @onready var _confirm_label: Label = %ConfirmLabel
+@onready var _resume_button: Button = %ResumeButton
+@onready var _option_button: Button = %OptionButton
+@onready var _main_menu_button: Button = %MainMenuButton
+@onready var _settings_placeholder: TextureRect = %TextureRect
+@onready var _main_menu_placeholder: TextureRect = %TextureRect2
 
 # ============================== Private variables ==============================
 
@@ -26,19 +43,27 @@ var _pause_state: PauseState
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	visibility_changed.connect(_emit_window_opened_if_visible)
+	visibility_changed.connect(_on_visibility_changed)
+	_resume_button.visible = show_resume
+	_option_button.visible = show_settings
+	_main_menu_button.visible = show_back_to_main_menu
 	hide()
 
 
-func _emit_window_opened_if_visible() -> void:
-	if visible:
-		Events.ui_window_opened.emit()
+func _on_visibility_changed() -> void:
+	if not visible:
+		_settings_placeholder.visible = false
+		_main_menu_placeholder.visible = false
+		return
+	Events.ui_window_opened.emit()
+	_settings_placeholder.visible = not show_settings
+	_main_menu_placeholder.visible = not show_back_to_main_menu
 
 # ============================== Private functions ==============================
 
 # ============================== Callbacks ==============================
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
 		_confirm_panel.hide()
 		_pause_state = PauseState.UNDEF

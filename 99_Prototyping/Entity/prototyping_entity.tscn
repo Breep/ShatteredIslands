@@ -187,18 +187,21 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "Trigger Fighting State"
 script = ExtResource("3_6kn6i")
+play_sounds = false
 
 [node name="StopFightButton" type="Button" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=1052993556]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Trigger Idle state"
 script = ExtResource("3_6kn6i")
+play_sounds = false
 
 [node name="ResetFightButton" type="Button" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=948612650]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Reset SCENE"
 script = ExtResource("3_6kn6i")
+play_sounds = false
 
 [node name="ManualModeCheckButton" type="CheckButton" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=2102497393]
 unique_name_in_owner = true

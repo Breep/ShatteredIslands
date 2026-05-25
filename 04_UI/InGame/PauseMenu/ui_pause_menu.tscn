@@ -7,6 +7,7 @@
 [ext_resource type="Theme" uid="uid://bvr0thvdlbbky" path="res://04_UI/Menu/MainMenu/normal_button_main.tres" id="4_7g0si"]
 [ext_resource type="Script" uid="uid://bq2jprj2y5yr6" path="res://04_UI/Menu/MainMenu/button_main_ui.gd" id="6_7g0si"]
 [ext_resource type="Theme" uid="uid://d0qobfi4rit8a" path="res://04_UI/Menu/MainMenu/label_main_menu_white.tres" id="6_066xy"]
+[ext_resource type="Theme" uid="uid://co4jayq2aoi3r" path="res://04_UI/Menu/MainMenu/normal_button_rouge.tres" id="7_066xy"]
 [ext_resource type="Theme" uid="uid://djwauvkpnr27d" path="res://04_UI/Menu/MainMenu/normal_button2.tres" id="7_kb7q5"]
 
 [node name="PauseMenu" type="Control" unique_id=3407187]
@@ -49,7 +50,20 @@ layout_mode = 2
 theme_override_constants/separation = 15
 script = ExtResource("3_ibxuc")
 
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/PausePanel/MarginContainer/VBoxContainer" unique_id=1451860292]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/PausePanel/MarginContainer/VBoxContainer" unique_id=1198248524]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
 [node name="ResumeButton" type="Button" parent="CenterContainer/PausePanel/MarginContainer/VBoxContainer" unique_id=982212880]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("4_7g0si")
@@ -57,6 +71,7 @@ text = "RESUME"
 script = ExtResource("6_7g0si")
 
 [node name="OptionButton" type="Button" parent="CenterContainer/PausePanel/MarginContainer/VBoxContainer" unique_id=649972451]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("4_7g0si")
@@ -64,6 +79,7 @@ text = "SETTINGS"
 script = ExtResource("6_7g0si")
 
 [node name="MainMenuButton" type="Button" parent="CenterContainer/PausePanel/MarginContainer/VBoxContainer" unique_id=504637404]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("4_7g0si")
@@ -73,12 +89,13 @@ script = ExtResource("6_7g0si")
 [node name="QuitButton" type="Button" parent="CenterContainer/PausePanel/MarginContainer/VBoxContainer" unique_id=1664458091]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("4_7g0si")
+theme = ExtResource("7_066xy")
 text = "RAGE QUIT"
 script = ExtResource("6_7g0si")
 
 [node name="ConfirmPanel" type="Panel" parent="CenterContainer" unique_id=494661560]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(400, 400)
 layout_mode = 2
 theme = ExtResource("3_7g0si")
