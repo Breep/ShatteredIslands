@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cmstx61h3h6ar"]
 
 [ext_resource type="Script" uid="uid://cc7c0q2xebkyp" path="res://04_UI/InGame/BuyingArea/ui_buying_area.gd" id="1_5o5p6"]
-[ext_resource type="Theme" uid="uid://djwauvkpnr27d" path="res://04_UI/Menu/MainMenu/normal_button2.tres" id="3_g27vj"]
+[ext_resource type="Theme" uid="uid://lkjmyhig2cx7" path="res://04_UI/Menu/MainMenu/normal_button2_reverse.tres" id="3_g27vj"]
 [ext_resource type="PackedScene" uid="uid://d1oxnd1g75rqh" path="res://04_UI/InGame/BuyingArea/CardShop/ui_card_shop.tscn" id="4_dsp03"]
 [ext_resource type="Script" uid="uid://bq2jprj2y5yr6" path="res://04_UI/Menu/MainMenu/button_main_ui.gd" id="4_q862y"]
 
