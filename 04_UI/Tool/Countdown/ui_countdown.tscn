@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://dmfkigo1trjd0"]
 
-[ext_resource type="FontFile" uid="uid://3y3dvdvjwvmr" path="res://20_Data/font/airstrike.ttf" id="1_1snar"]
 [ext_resource type="Script" uid="uid://c3oixb8xu68w" path="res://04_UI/Tool/Countdown/ui_countdown.gd" id="1_kdeao"]
 [ext_resource type="Shader" uid="uid://or10r03jptmm" path="res://22_VFX/Shaders/Misc/countdown_gradient.gdshader" id="2_lahu3"]
+[ext_resource type="Theme" uid="uid://d0qobfi4rit8a" path="res://04_UI/Menu/MainMenu/label_main_menu_white.tres" id="3_wluo2"]
 
 [sub_resource type="Gradient" id="Gradient_uft1f"]
 offsets = PackedFloat32Array(0, 0.985294)
@@ -15,17 +15,7 @@ gradient = SubResource("Gradient_uft1f")
 shader = ExtResource("2_lahu3")
 shader_parameter/gradient = SubResource("GradientTexture1D_j0oqv")
 
-[sub_resource type="Theme" id="Theme_ol2a8"]
-Label/colors/font_color = Color(0.756686, 0.327541, 7.70092e-07, 1)
-Label/colors/font_outline_color = Color(0, 0, 0, 1)
-Label/colors/font_shadow_color = Color(0, 0, 0, 0.795)
-Label/constants/outline_size = 2
-Label/constants/shadow_offset_x = 3
-Label/constants/shadow_offset_y = 3
-Label/font_sizes/font_size = 75
-Label/fonts/font = ExtResource("1_1snar")
-
-[node name="Countdown" type="Control"]
+[node name="Countdown" type="Control" unique_id=1587382539]
 custom_minimum_size = Vector2(500, 100)
 layout_mode = 3
 anchors_preset = 8
@@ -37,7 +27,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_kdeao")
 
-[node name="TimerLabel" type="Label" parent="."]
+[node name="TimerLabel" type="Label" parent="." unique_id=895061575]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_cpdrj")
 custom_minimum_size = Vector2(500, 100)
@@ -53,12 +43,15 @@ offset_right = 26.5
 offset_bottom = 33.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_ol2a8")
-text = "8"
+theme = ExtResource("3_wluo2")
+theme_override_constants/shadow_offset_y = 25
+theme_override_constants/outline_size = 40
+theme_override_font_sizes/font_size = 128
+text = "3"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TimerCountdown" type="Timer" parent="."]
+[node name="TimerCountdown" type="Timer" parent="." unique_id=314957033]
 unique_name_in_owner = true
 
 [connection signal="timeout" from="TimerCountdown" to="." method="_on_timer_countdown_timeout"]

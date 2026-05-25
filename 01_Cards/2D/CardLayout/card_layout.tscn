@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://bd3srw4twda5w" path="res://04_UI/Tool/SmartTextLabel/ui_smart_text_label.gd" id="11_pjbj4"]
 [ext_resource type="Texture2D" uid="uid://hump1edscxip" path="res://01_Cards/2D/CardLayout/Data/StandardCard/ct_frame.png" id="12_k2vus"]
 [ext_resource type="Texture2D" uid="uid://vii43ab2auyg" path="res://01_Cards/2D/CardLayout/Data/StandardCard/ct_bottom.png" id="13_78cks"]
+[ext_resource type="FontFile" uid="uid://bdgqiedfa6ld2" path="res://20_Data/font/Nunito-ExtraBold.ttf" id="13_p31bt"]
 [ext_resource type="Texture2D" uid="uid://dn4cx5jpgh7ae" path="res://01_Cards/2D/CardLayout/Data/StandardCard/Stars/ct_level_star_1.png" id="14_78cks"]
 [ext_resource type="Texture2D" uid="uid://b7ix0d8jwrexg" path="res://01_Cards/2D/CardLayout/Data/StandardCard/ct_illustration_mask.png" id="14_xw5tp"]
 [ext_resource type="Texture2D" uid="uid://bwrwv8bs17m0i" path="res://01_Cards/2D/CardLayout/Data/StandardCard/Stars/ct_level_star_2.png" id="15_xw5tp"]
@@ -24,7 +25,6 @@
 [ext_resource type="Texture2D" uid="uid://bp08djuu2g0pr" path="res://01_Cards/2D/CardLayout/Data/StandardCard/ct_level_flag.png" id="18_p8v2y"]
 [ext_resource type="Texture2D" uid="uid://ifaj1br6koel" path="res://01_Cards/2D/CardLayout/Data/StandardCard/ct_family_frame.png" id="19_7ajba"]
 [ext_resource type="Shader" uid="uid://bquiydhxqegb5" path="res://01_Cards/2D/CardLayout/Data/Shaders/curve_text.gdshader" id="21_xw5tp"]
-[ext_resource type="FontFile" uid="uid://bty2wnxittir6" path="res://20_Data/font/LilitaOne-Regular.ttf" id="24_kmho1"]
 [ext_resource type="Texture2D" uid="uid://bxktk2p3m3g2" path="res://01_Cards/2D/CardLayout/Data/StandardCard/card_full_mask.png" id="25_7ajba"]
 [ext_resource type="FontFile" uid="uid://cvfku6uge3mvi" path="res://20_Data/font/Super Trend.ttf" id="27_hk667"]
 [ext_resource type="Shader" uid="uid://ces5qqkirl131" path="res://01_Cards/2D/CardLayout/Data/Shaders/card_aura.gdshader" id="30_aura"]
@@ -150,7 +150,7 @@ script = ExtResource("5_m3odx")
 shader = ExtResource("21_xw5tp")
 shader_parameter/height = 35.0
 shader_parameter/frequency = 0.006
-shader_parameter/phase_shift = -7.705
+shader_parameter/phase_shift = -8.015
 
 [node name="CardLayout" type="Control" unique_id=591018748 node_paths=PackedStringArray("_level_icons")]
 texture_filter = 4
@@ -243,7 +243,13 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("18_p8v2y")
 
-[node name="FamilyBackground" type="TextureRect" parent="." unique_id=328102667]
+[node name="CardFamilyFrame" type="TextureRect" parent="." unique_id=485323595]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("19_7ajba")
+
+[node name="FamilyBackground" type="TextureRect" parent="CardFamilyFrame" unique_id=328102667]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -251,7 +257,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="FamilyIcon" type="TextureRect" parent="FamilyBackground" unique_id=1313891103]
+[node name="FamilyIcon" type="TextureRect" parent="CardFamilyFrame/FamilyBackground" unique_id=1313891103]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 548.0
@@ -261,13 +267,6 @@ offset_bottom = 1066.0
 texture = ExtResource("9_mt3v6")
 expand_mode = 1
 stretch_mode = 5
-
-[node name="CardFamilyFrame" type="TextureRect" parent="." unique_id=485323595]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("19_7ajba")
-metadata/_edit_lock_ = true
 
 [node name="CardTitleBanner" type="TextureRect" parent="." unique_id=1589146951]
 layout_mode = 1
@@ -391,16 +390,18 @@ offset_top = 1260.0
 offset_right = 1070.0
 offset_bottom = 1607.0
 size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.890977, 0.97354275, 0.99999994, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_outline_size = 5
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 7
-theme_override_constants/outline_size = 12
-theme_override_fonts/normal_font = ExtResource("24_kmho1")
+theme_override_constants/line_separation = -5
+theme_override_constants/shadow_outline_size = 10
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 10
+theme_override_constants/outline_size = 24
+theme_override_fonts/normal_font = ExtResource("13_p31bt")
 theme_override_font_sizes/normal_font_size = 60
 bbcode_enabled = true
-text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
+text = "Envoie une boule de feu qui inflige 50 dégat magique et inflige 9 ignite"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("11_pjbj4")
@@ -412,9 +413,9 @@ unique_name_in_owner = true
 material = SubResource("ShaderMaterial_n6ysl")
 layout_mode = 0
 offset_left = 94.0
-offset_top = 1016.0
+offset_top = 1000.0
 offset_right = 1168.0
-offset_bottom = 1255.0
+offset_bottom = 1239.0002
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -423,9 +424,9 @@ theme_override_constants/shadow_outline_size = 12
 theme_override_constants/shadow_offset_y = 14
 theme_override_constants/outline_size = 20
 theme_override_fonts/normal_font = ExtResource("27_hk667")
-theme_override_font_sizes/normal_font_size = 80
+theme_override_font_sizes/normal_font_size = 100
 bbcode_enabled = true
-text = "THIS CARD IS NOT A CARD"
+text = "THIS CARD IS not"
 horizontal_alignment = 1
 vertical_alignment = 1
 

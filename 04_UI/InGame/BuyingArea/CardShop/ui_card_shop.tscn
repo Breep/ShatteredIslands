@@ -6,12 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://c2psjj8133op3" path="res://01_Cards/2D/CardButton/card_button.tscn" id="4_37vaa"]
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme.tres" id="5_ahun0"]
 [ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://04_UI/Tool/Misc/hover_boost_button.gd" id="5_smee4"]
+[ext_resource type="Theme" uid="uid://djwauvkpnr27d" path="res://04_UI/Menu/MainMenu/normal_button2.tres" id="6_f251f"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xt3ho"]
 blend_mode = 1
 light_mode = 1
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1gnrk"]
 
 [node name="UICardShop" type="Control" unique_id=1062653338 node_paths=PackedStringArray("_card_buttons")]
 custom_minimum_size = Vector2(700, 500)
@@ -71,6 +70,7 @@ theme_override_constants/separation = 10
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
+theme_override_constants/separation = 20
 
 [node name="BuyCardControl" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer" unique_id=342300878]
 layout_mode = 2
@@ -123,6 +123,7 @@ size_flags_vertical = 6
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
+theme_override_constants/separation = 20
 
 [node name="BuyCardControl" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer2" unique_id=638955420]
 layout_mode = 2
@@ -174,6 +175,7 @@ size_flags_vertical = 6
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
+theme_override_constants/separation = 20
 
 [node name="BuyCardControl" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer3" unique_id=1971998630]
 layout_mode = 2
@@ -222,6 +224,11 @@ scale = Vector2(0.5, 0.5)
 size_flags_horizontal = 4
 size_flags_vertical = 6
 
+[node name="HBoxContainer" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer" unique_id=506441706]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+
 [node name="BottomRow" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer" unique_id=1854433724]
 layout_mode = 2
 size_flags_vertical = 3
@@ -235,6 +242,7 @@ custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
+theme = ExtResource("6_f251f")
 theme_override_font_sizes/font_size = 30
 script = ExtResource("5_smee4")
 
@@ -313,8 +321,8 @@ custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
+theme = ExtResource("6_f251f")
 theme_override_font_sizes/font_size = 30
-theme_override_styles/focus = SubResource("StyleBoxEmpty_1gnrk")
 script = ExtResource("5_smee4")
 
 [node name="RandomCardPanel" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardButton" unique_id=363092316]
@@ -389,8 +397,8 @@ custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
+theme = ExtResource("6_f251f")
 theme_override_font_sizes/font_size = 30
-theme_override_styles/focus = SubResource("StyleBoxEmpty_1gnrk")
 script = ExtResource("5_smee4")
 
 [node name="RefreshShopPanel" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshButton" unique_id=1827589577]
