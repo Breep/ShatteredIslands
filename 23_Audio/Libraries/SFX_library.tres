@@ -1,7 +1,6 @@
 [gd_resource type="Resource" script_class="AudioLib" format=3 uid="uid://bynpy7ci6jg6o"]
 
 [ext_resource type="Script" uid="uid://bnohfh6e2eq3" path="res://23_Audio/audio_lib.gd" id="1_8m0u6"]
-[ext_resource type="AudioStream" uid="uid://douc04lqi2qo4" path="res://23_Audio/SFX/Tavern/coin3.wav" id="1_b4e2n"]
 [ext_resource type="AudioStream" uid="uid://cif8w1d56p30a" path="res://23_Audio/SFX/Projectile/Bow Attack 1.wav" id="1_tm56c"]
 [ext_resource type="AudioStream" uid="uid://xbh5awxpsrdm" path="res://23_Audio/SFX/Projectile/Bow Attack 2.wav" id="2_gptj1"]
 [ext_resource type="AudioStream" uid="uid://dpmk6bltw6pso" path="res://23_Audio/SFX/Footsteps/foley_footstep_concrete_4.wav" id="3_walk"]
@@ -45,7 +44,7 @@ audio_database = Dictionary[String, AudioStream]({
 "button_click_disabled": ExtResource("17_rejct"),
 "button_click_legacy": ExtResource("5_gptj1"),
 "button_hover": ExtResource("14_hover"),
-"card_bought": ExtResource("1_b4e2n"),
+"card_bought": ExtResource("16_clk12"),
 "card_drawn": ExtResource("20_carddr"),
 "egg_hit": ExtResource("11_2p1kq"),
 "fire_ball_projectile": ExtResource("10_cqn3a"),

@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://cu3cexueftpj4" path="res://04_UI/InGame/Result/ui_result.gd" id="2_5fo44"]
 [ext_resource type="Texture2D" uid="uid://xhyj0k42ilb3" path="res://04_UI/_Themes/Data/panel_tileable_20px_border_only.png" id="3_tu3tx"]
 [ext_resource type="Texture2D" uid="uid://db2m1yw0asd6l" path="res://04_UI/_Themes/Data/cross.png" id="4_hguj7"]
-[ext_resource type="Script" uid="uid://duibtnclassbase" path="res://04_UI/UIButton/ui_button.gd" id="ui_btn"]
+[ext_resource type="Script" uid="uid://bia26v50nwe6c" path="res://04_UI/UIButton/ui_button.gd" id="ui_btn"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_27kkc"]
 

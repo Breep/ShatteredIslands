@@ -16,4 +16,3 @@ func update_shop_cards_displayed_visual(cards: Array[Card]) -> void:
 		_cardContainer.get_node(str(i+1)).visible = true
 		var cardButton = _cardContainer.get_node(str(i+1)) as CardButton
 		cardButton.update_visual(cards[i])
-		Events.card_drawn.emit()

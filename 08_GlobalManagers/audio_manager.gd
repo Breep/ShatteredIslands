@@ -9,10 +9,18 @@ const _BGM_DEFAULT_FADE: float = 1.0
 const _GOLD_PER_SOUND: int = 10
 const _GOLD_SOUNDS_MAX: int = 8
 const _GOLD_SOUND_SPACING: float = 0.08
+
+# Volumes par défaut appliqués au démarrage (linéaire 0.0 → 1.0).
+# Forcés en code car l'éditeur Godot resauve default_bus_layout.tres tout seul
+# quand on touche au panel Audio, écrasant nos valeurs.
+const _DEFAULT_SFX_VOLUME: float = 1.0
+const _DEFAULT_UI_VOLUME: float = 0.8
+const _DEFAULT_BGM_VOLUME: float = 0.15
 #endregion
 
 #region ============================== Private vars ==============================
 @onready var _sfx_stream_player := AudioStreamPlayer.new()
+@onready var _ui_stream_player := AudioStreamPlayer.new()
 @onready var _sfx_3d_template: AudioStreamPlayer3D = %SFX3DTemplate
 var _sfx_lib: AudioLib = preload("res://23_Audio/Libraries/SFX_library.tres")
 var _bgm_lib: AudioLib = preload("res://23_Audio/Libraries/BGM_library.tres")
@@ -37,7 +45,6 @@ var _SOUND_MAP: Array = [
 
 var _BGM_MAP: Array = [
 	# [signal, clé dans BGM_library.tres]
-	[Events.card_shop_init, "BGM_01"],
 ]
 #endregion
 
@@ -46,6 +53,15 @@ func _ready() -> void:
 	_sfx_stream_player.max_polyphony = 10
 	_sfx_stream_player.bus = "SFX"
 	add_child(_sfx_stream_player)
+
+	_ui_stream_player.max_polyphony = 10
+	_ui_stream_player.bus = "UI"
+	add_child(_ui_stream_player)
+
+	# Forcer les volumes par défaut — voir _DEFAULT_*_VOLUME pour la raison.
+	set_bus_volume("SFX", _DEFAULT_SFX_VOLUME)
+	set_bus_volume("UI", _DEFAULT_UI_VOLUME)
+	set_bus_volume("Music", _DEFAULT_BGM_VOLUME)
 
 	_bgm_player_a = AudioStreamPlayer.new()
 	_bgm_player_a.bus = "Music"
@@ -73,8 +89,16 @@ func _ready() -> void:
 #endregion
 
 #region ============================== Public functions ==============================
-func play_sfx(sound_name: String) -> void:
-	_play_sound(sound_name)
+# Joue un son flat sur le bus SFX (gameplay : combat, gold, projectiles...).
+func play_sfx(sound_name: String, volume_db: float = 0.0) -> void:
+	_play_on_player(_sfx_stream_player, sound_name, volume_db)
+
+
+# Joue un son flat sur le bus UI (hover/click boutons, ouverture de fenêtre...).
+# Le bus UI envoie vers SFX, donc le slider SFX des settings s'applique aussi —
+# mais un slider UI dédié permet de baisser uniquement les sons UI.
+func play_ui(sound_name: String, volume_db: float = 0.0) -> void:
+	_play_on_player(_ui_stream_player, sound_name, volume_db)
 
 
 func play_bgm(sound_name: String, fade_duration: float = _BGM_DEFAULT_FADE) -> void:
@@ -136,15 +160,19 @@ func play_3d(sound_name: String, position: Vector3, pitch: float = 1.0) -> void:
 
 #region ============================== Private functions ==============================
 func _play_sound(sound_name: String) -> void:
-	if sound_name == null:
-		Verbose.error("Sound name played is null", Verbose.Category.AUDIO_MANAGER)
+	_play_on_player(_sfx_stream_player, sound_name, 0.0)
+
+
+func _play_on_player(player: AudioStreamPlayer, sound_name: String, volume_db: float) -> void:
+	if sound_name == null or sound_name.is_empty():
 		return
 	if _sfx_lib.audio_database.get(sound_name) == null:
 		Verbose.error("Couldn't find " + sound_name + " in audiolib.", Verbose.Category.AUDIO_MANAGER)
 		return
-	_sfx_stream_player.stream = _sfx_lib.audio_database.get(sound_name)
-	_sfx_stream_player.pitch_scale = randf_range(1.0 - _PITCH_VARIATION, 1.0 + _PITCH_VARIATION)
-	_sfx_stream_player.play()
+	player.stream = _sfx_lib.audio_database.get(sound_name)
+	player.pitch_scale = randf_range(1.0 - _PITCH_VARIATION, 1.0 + _PITCH_VARIATION)
+	player.volume_db = volume_db
+	player.play()
 
 
 func _bgm_inactive_player() -> AudioStreamPlayer:

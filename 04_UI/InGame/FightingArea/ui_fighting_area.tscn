@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://cp8df4bxwetqx" path="res://04_UI/InGame/DpsMeter/ui_dps_meter.tscn" id="3_ejw1r"]
 [ext_resource type="PackedScene" uid="uid://dmfkigo1trjd0" path="res://04_UI/Tool/Countdown/ui_countdown.tscn" id="3_ie0xi"]
 [ext_resource type="Theme" uid="uid://djwauvkpnr27d" path="res://04_UI/Menu/MainMenu/normal_button2.tres" id="4_c15xv"]
-[ext_resource type="PackedScene" uid="uid://c25ls8pp84qld" path="res://04_UI/InGame/BuyingArea/PlayerInfo/ui_player_info.tscn" id="5_omkkk"]
 [ext_resource type="Script" uid="uid://bq2jprj2y5yr6" path="res://04_UI/Menu/MainMenu/button_main_ui.gd" id="5_qg6fi"]
 
 [node name="UIFightingArea" type="Control" unique_id=1289468176]
@@ -82,9 +81,6 @@ anchor_left = 0.86
 anchor_top = 0.3
 anchor_right = 0.98
 anchor_bottom = 0.771
-
-[node name="UIPlayerInfo" parent="." unique_id=1401182090 instance=ExtResource("5_omkkk")]
-layout_mode = 1
 
 [node name="AdvanceButton" type="Button" parent="." unique_id=286258995]
 unique_name_in_owner = true
