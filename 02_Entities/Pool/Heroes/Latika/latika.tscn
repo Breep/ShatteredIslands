@@ -20,6 +20,8 @@ radius = 0.21923828
 height = 1.715332
 
 [node name="Latika" type="CharacterBody3D" unique_id=294337328 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_health_bar", "_attack_spawn_marker")]
+collision_layer = 16
+collision_mask = 17
 script = ExtResource("1_undos")
 entity_name = "Latika"
 category = 0
@@ -33,6 +35,9 @@ _projectile_type = 10
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
 [node name="GeneralSkeleton" parent="LatikaVisual" index="0" unique_id=194436225]
+bones/9/rotation = Quaternion(2.0185068e-17, 0.52131337, 0.8533654, 1.9993156e-17)
+bones/31/rotation = Quaternion(-0.036348324, 0.15220593, 0.22998704, 0.9605301)
+bones/43/rotation = Quaternion(-0.00047969824, 5.526506e-06, -1.0341784e-05, 0.9999999)
 bones/44/rotation = Quaternion(0, 1, 0, 0)
 bones/49/rotation = Quaternion(0, 1, 0, 0)
 

@@ -103,6 +103,7 @@ func _ready() -> void:
 	_owner.alterations.stunned_changed.connect(_on_owner_stunned_changed)
 	
 	_owner.action_received.connect(_on_owner_action_received)
+	_owner.ultimate_casted.connect(_on_owner_cast_ultimate)
 
 	_on_owner_life_state_changed(Entity.LifeState.ALIVE)
 
@@ -189,6 +190,10 @@ func _on_owner_action_received(source: Entity, action_type: Utils.ActionType, ac
 	if not is_critical: return
 	if not Utils.get_action_category(action_type) == Utils.ActionCategory.DAMAGE: return
 	_animation_tree.set(PARAM_ONE_SHOT_HIT, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+
+
+func _on_owner_cast_ultimate() -> void:
+	_animation_tree.set(PARAM_ONE_SHOT_ULTIMATE, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 #endregion
 
 

@@ -8,7 +8,7 @@ enum Modifier {
 
 @onready var _hit_zone: Area3D = %HitZone
 
-var _owner: Entity # Owner of this healing fire area
+var _owner: Entity
 
 var _target_hpmax_percent: float
 var _self_ad_percent: float
@@ -22,16 +22,18 @@ func init(source: Entity, modifiers: Dictionary) -> void:
 func _ready() -> void:
 	global_position = _owner.global_position
 	global_rotation = _owner.global_rotation
-	
-	var entities_inside = _hit_zone.get_overlapping_bodies().filter(func(b) -> bool: return b is Entity)
-	for entity in entities_inside:
-		if not entity is Entity: continue
-		if entity.team != _owner.team:
-			var damage: float = _self_ad_percent * _owner.stats.attack_damage / 100.0
-			damage += _target_hpmax_percent * entity.stats.health_max / 100.0
-			_owner.damage.direct(entity, damage, Utils.ActionType.DAMAGE_PHYSICAL, &"Cleave")
-	
+	await get_tree().physics_frame
+	if not is_inside_tree(): return
+
+	for body in _hit_zone.get_overlapping_bodies():
+		if not body is Entity: continue
+		var entity: Entity = body
+		if entity.team == _owner.team: continue
+
+		var damage: float = _self_ad_percent * _owner.stats.attack_damage / 100.0
+		damage += _target_hpmax_percent * entity.stats.health_max / 100.0
+		_owner.damage.direct(entity, damage, Utils.ActionType.DAMAGE_PHYSICAL, &"Cleave")
+
 	AudioManager.play_3d("whoosh", _owner.position)
-	# TODO Visuel
 	await get_tree().create_timer(1.0).timeout
 	queue_free()
