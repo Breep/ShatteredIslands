@@ -21,7 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://6yenx4veo6nn" path="res://20_Data/Blender/Map/Map/Tavern/tavern_spec_8.png" id="18_0o5k6"]
 [ext_resource type="Texture2D" uid="uid://dhi8y2j8aegxy" path="res://20_Data/Blender/Map/Map/Tavern/tavern_Tortue vagabonde.png" id="19_bw1ex"]
 [ext_resource type="PackedScene" uid="uid://bifpa3gycjmcy" path="res://06_FloatingIsland/_Maps/tavern_raw.tscn" id="20_44rnd"]
-[ext_resource type="PackedScene" uid="uid://cai63yuhuv3a8" path="res://02_Entities/Pool/NPCs/Fairy/sk_chr_fairy_01.tscn" id="21_mir4p"]
+[ext_resource type="PackedScene" uid="uid://blaktwkpk0p5s" path="res://02_Entities/Pool/Mobs/Dragon féerique/forest_drake.tscn" id="22_dc20i"]
 [ext_resource type="PackedScene" uid="uid://jjd3kidthudx" path="res://02_Entities/Pool/NPCs/Bartender/sk_chr_bartender_01.tscn" id="22_f3jqc"]
 [ext_resource type="PackedScene" uid="uid://6l0c0aa6rcl7" path="res://02_Entities/Pool/NPCs/Jester/sk_chr_jester_01.tscn" id="23_bchnt"]
 [ext_resource type="PackedScene" uid="uid://61bey01gukxt" path="res://02_Entities/Pool/NPCs/Mage/sk_chr_mage_01.tscn" id="24_44asv"]
@@ -52759,8 +52759,62 @@ metadata/extras = {
 
 [node name="PNJ" type="Node3D" parent="." unique_id=1535904852]
 
-[node name="SK_Chr_Fairy_01" parent="PNJ" unique_id=1744279905 instance=ExtResource("21_mir4p")]
-transform = Transform3D(0.0809657, 0, 0.695302, 0, 0.7, 0, -0.695302, 0, 0.0809657, -8.71288, 2.02679, -6.1605)
+[node name="ForestDrake" parent="PNJ" unique_id=402444884 instance=ExtResource("22_dc20i")]
+transform = Transform3D(0.08083219, 0, 0.6953173, 0, 0.7, 0, -0.6953173, 0, 0.08083219, -8.711291, 0.8851929, -6.7063637)
+
+[node name="Skeleton3D" parent="PNJ/ForestDrake" index="0" unique_id=1540429716]
+bones/1/position = Vector3(-0.025588805, 1.6442227, 0.21615565)
+bones/1/rotation = Quaternion(0.70398813, -0.06633667, 0.7039881, -0.0663398)
+bones/2/rotation = Quaternion(0.268349, 0.9633218, 2.6373284e-14, -9.4531086e-14)
+bones/3/rotation = Quaternion(-1.6659497e-08, 5.870127e-08, 0.060731847, 0.9981542)
+bones/4/rotation = Quaternion(-1.4583143e-08, -2.1535136e-09, 0.14609216, 0.98927104)
+bones/5/rotation = Quaternion(-2.8725244e-10, 6.092888e-08, 0.21201189, 0.97726715)
+bones/6/rotation = Quaternion(-1.0228945e-08, -3.112243e-09, 0.29108554, 0.9566971)
+bones/7/rotation = Quaternion(0.64070547, 0.29783002, 0.30005795, 0.64090484)
+bones/8/rotation = Quaternion(0.7543311, 0.6553003, 0.023260353, 0.03201888)
+bones/10/rotation = Quaternion(-0.061494775, 0.05337686, 0.57673866, 0.81286025)
+bones/13/rotation = Quaternion(-1.5010446e-08, 1.10788045e-10, -0.0073854695, 0.99997276)
+bones/14/rotation = Quaternion(2.2623492e-08, 5.514441e-08, -0.3795584, 0.9251678)
+bones/15/rotation = Quaternion(-1.8992699e-09, 5.960464e-08, 0.06360063, 0.99797547)
+bones/16/rotation = Quaternion(0.95652854, -0.291639, 4.5434724e-08, -0.00028341718)
+bones/17/rotation = Quaternion(-0.73336464, 0.67983544, -1.3387762e-08, 0.0003769301)
+bones/19/rotation = Quaternion(0.014404768, -0.02652054, 0.45121616, 0.89190423)
+bones/20/rotation = Quaternion(0.026520507, 0.014404712, 0.89187306, -0.451278)
+bones/21/rotation = Quaternion(0.0570392, 0.5624561, -0.425001, 0.7069399)
+bones/22/rotation = Quaternion(0.4337902, -0.030579448, 0.09894111, 0.89504284)
+bones/24/rotation = Quaternion(0.047273234, 0.030854272, -0.34531683, 0.9367869)
+bones/25/rotation = Quaternion(-0.0919218, -0.09988699, -0.12445467, 0.98289573)
+bones/26/rotation = Quaternion(-0.08981592, -0.30701596, -0.26804423, 0.90875006)
+bones/27/rotation = Quaternion(-0.00021362062, -0.0017089682, -0.058748186, 0.99827135)
+bones/28/rotation = Quaternion(-0.15176857, -0.11951027, -0.44074845, 0.8765983)
+bones/29/rotation = Quaternion(-0.055940427, -0.0634173, -0.15356913, 0.98451287)
+bones/30/rotation = Quaternion(-0.0244856, -0.027312158, -0.6658291, 0.745202)
+bones/31/rotation = Quaternion(0.002838267, 0.04797516, -0.10126061, 0.9936985)
+bones/32/rotation = Quaternion(-0.084108934, -0.035615057, -0.8245796, 0.55832416)
+bones/34/rotation = Quaternion(0.42200983, 0.8517716, 0.17709911, 0.25500742)
+bones/35/rotation = Quaternion(-4.5690207e-09, 6.362077e-08, 0.42207107, 0.90656275)
+bones/36/rotation = Quaternion(0.6122012, -0.034577493, -0.027558295, 0.78946483)
+bones/37/rotation = Quaternion(0.36637452, -0.10632668, -0.054994427, 0.9227351)
+bones/42/rotation = Quaternion(-0.5624559, 0.05703928, 0.7069002, 0.4250672)
+bones/43/rotation = Quaternion(0.43379018, -0.030579463, 0.098941095, 0.89504284)
+bones/45/rotation = Quaternion(0.0472732, 0.030854268, -0.3453168, 0.9367869)
+bones/46/rotation = Quaternion(-0.091921784, -0.09988699, -0.12445467, 0.98289573)
+bones/47/rotation = Quaternion(-0.089816, -0.30701602, -0.26804432, 0.90875006)
+bones/48/rotation = Quaternion(-0.00021363723, -0.0017089075, -0.058748156, 0.99827135)
+bones/49/rotation = Quaternion(-0.15176854, -0.11951027, -0.4407484, 0.87659824)
+bones/50/rotation = Quaternion(-0.05594042, -0.06341735, -0.1535692, 0.9845128)
+bones/51/rotation = Quaternion(-0.02448557, -0.027312104, -0.66582906, 0.7452021)
+bones/52/rotation = Quaternion(0.002838205, 0.04797517, -0.10126048, 0.9936985)
+bones/53/rotation = Quaternion(-0.0841089, -0.03561507, -0.8245795, 0.55832416)
+bones/55/rotation = Quaternion(0.86938083, -0.36945698, -0.2584308, 0.20221807)
+bones/56/rotation = Quaternion(-2.873362e-08, 5.2389098e-08, 0.41828665, 0.9083151)
+bones/57/rotation = Quaternion(0.77892405, -0.06378381, -0.06744596, 0.62020963)
+bones/58/rotation = Quaternion(0.36832786, -0.06793423, -0.039765768, 0.9263576)
+bones/63/rotation = Quaternion(0.6573356, -0.7464408, -0.10094623, -0.023366954)
+bones/65/rotation = Quaternion(-0.053987205, 0.06094546, 0.67790765, 0.7306246)
+
+[node name="AnimationPlayer" parent="PNJ/ForestDrake" index="1" unique_id=658987836]
+autoplay = &"idle"
 
 [node name="SK_Chr_Bartender_01" parent="PNJ" unique_id=154237058 instance=ExtResource("22_f3jqc")]
 transform = Transform3D(0.276711, 0, 0.960953, 0, 1, 0, -0.960953, 0, 0.276711, -8.76813, 0, -1.70718)
@@ -52800,3 +52854,5 @@ transform = Transform3D(-0.120431, 0, 0.992722, 0, 1, 0, -0.992722, 0, -0.120431
 
 [node name="SK_Chr_FortuneTeller_01" parent="PNJ" unique_id=2003059790 instance=ExtResource("25_8jxq7")]
 transform = Transform3D(0.190586, 0, 0.98167, 0, 1, 0, -0.98167, 0, 0.190586, -8.83945, 0, -9.06974)
+
+[editable path="PNJ/ForestDrake"]
