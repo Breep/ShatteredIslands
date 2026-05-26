@@ -16,6 +16,10 @@ script = ExtResource("2_44wrm")
 name = "Latika"
 metadata/_custom_type_script = "uid://dkrea5xbc4y8q"
 
+[sub_resource type="Resource" id="Resource_44wrm"]
+script = ExtResource("3_44wrm")
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_44wrm"]
 _data = {
 &"attack_melee_01": ExtResource("4_44wrm"),
@@ -36,6 +40,7 @@ _visual_3d = NodePath("LatikaVisual")
 _health_bar_marker = NodePath("LatikaVisual/HealthBarSpawnMarker")
 _attack_spawn_marker = NodePath("LatikaVisual/ProjectileSpawnMarker")
 _projectile_type = 10
+_override_base_stats = SubResource("Resource_44wrm")
 
 [node name="LatikaVisual" parent="." unique_id=433263620 instance=ExtResource("2_o3eb1")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)

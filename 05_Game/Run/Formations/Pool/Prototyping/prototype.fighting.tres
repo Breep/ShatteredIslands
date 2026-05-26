@@ -15,11 +15,11 @@
 
 [sub_resource type="Resource" id="Resource_630en"]
 script = ExtResource("5_2mtbx")
-health_max = 80.0
+_health_max = 80.0
 auto_attack_type = 1
-attack_range = 1.0
-attack_damage = 10.0
-attack_speed = 1.0
+_attack_range = 1.0
+_attack_damage = 10.0
+_attack_speed = 1.0
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="Resource" id="Resource_8atf3"]
@@ -31,11 +31,11 @@ transform = Transform3D(-0.1967504, 0, -0.9804536, 0, 1, 0, 0.9804536, 0, -0.196
 
 [sub_resource type="Resource" id="Resource_fn7a0"]
 script = ExtResource("5_2mtbx")
-health_max = 80.0
+_health_max = 80.0
 auto_attack_type = 1
-attack_range = 1.0
-attack_damage = 10.0
-attack_speed = 1.0
+_attack_range = 1.0
+_attack_damage = 10.0
+_attack_speed = 1.0
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="Resource" id="Resource_1ortu"]
@@ -47,11 +47,11 @@ transform = Transform3D(0.46780646, 0, -0.8838309, 0, 1, 0, 0.8838309, 0, 0.4678
 
 [sub_resource type="Resource" id="Resource_s3yei"]
 script = ExtResource("5_2mtbx")
-health_max = 80.0
+_health_max = 80.0
 auto_attack_type = 1
-attack_range = 1.0
-attack_damage = 10.0
-attack_speed = 1.0
+_attack_range = 1.0
+_attack_damage = 10.0
+_attack_speed = 1.0
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="Resource" id="Resource_n3sf7"]
@@ -63,10 +63,10 @@ transform = Transform3D(0.2371434, 0, -0.97147465, 0, 1, 0, 0.97147465, 0, 0.237
 
 [sub_resource type="Resource" id="Resource_psw7h"]
 script = ExtResource("5_2mtbx")
-health_max = 50.0
-attack_range = 10.0
-attack_damage = 10.0
-attack_speed = 1.0
+_health_max = 50.0
+_attack_range = 10.0
+_attack_damage = 10.0
+_attack_speed = 1.0
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="Resource" id="Resource_q6etj"]
@@ -78,11 +78,11 @@ transform = Transform3D(-0.23319082, 0, -0.972431, 0, 1, 0, 0.972431, 0, -0.2331
 
 [sub_resource type="Resource" id="Resource_mccaa"]
 script = ExtResource("5_2mtbx")
-health_max = 80.0
+_health_max = 80.0
 auto_attack_type = 1
-attack_range = 1.0
-attack_damage = 10.0
-attack_speed = 1.0
+_attack_range = 1.0
+_attack_damage = 10.0
+_attack_speed = 1.0
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="Resource" id="Resource_dhrjn"]
@@ -94,11 +94,11 @@ transform = Transform3D(-0.019162599, 0, -0.99981636, 0, 1, 0, 0.99981636, 0, -0
 
 [sub_resource type="Resource" id="Resource_4k2re"]
 script = ExtResource("5_2mtbx")
-health_max = 80.0
+_health_max = 80.0
 auto_attack_type = 1
-attack_range = 1.0
-attack_damage = 10.0
-attack_speed = 1.0
+_attack_range = 1.0
+_attack_damage = 10.0
+_attack_speed = 1.0
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="Resource" id="Resource_08edj"]
@@ -110,11 +110,11 @@ transform = Transform3D(-0.019162599, 0, -0.99981636, 0, 1, 0, 0.99981636, 0, -0
 
 [sub_resource type="Resource" id="Resource_4d0q2"]
 script = ExtResource("5_2mtbx")
-health_max = 80.0
+_health_max = 80.0
 auto_attack_type = 1
-attack_range = 1.0
-attack_damage = 10.0
-attack_speed = 1.0
+_attack_range = 1.0
+_attack_damage = 10.0
+_attack_speed = 1.0
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="Resource" id="Resource_n6y1v"]
@@ -126,11 +126,11 @@ transform = Transform3D(-0.019162599, 0, -0.99981636, 0, 1, 0, 0.99981636, 0, -0
 
 [sub_resource type="Resource" id="Resource_lgejm"]
 script = ExtResource("5_2mtbx")
-health_max = 80.0
+_health_max = 80.0
 auto_attack_type = 1
-attack_range = 1.0
-attack_damage = 10.0
-attack_speed = 1.0
+_attack_range = 1.0
+_attack_damage = 10.0
+_attack_speed = 1.0
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="Resource" id="Resource_lm3wx"]
@@ -142,11 +142,11 @@ transform = Transform3D(-0.019162599, 0, -0.99981636, 0, 1, 0, 0.99981636, 0, -0
 
 [sub_resource type="Resource" id="Resource_vjlnd"]
 script = ExtResource("5_2mtbx")
-health_max = 16.0
+_health_max = 16.0
 auto_attack_type = 1
-attack_range = 1.0
-attack_damage = 16.0
-attack_speed = 1.0
+_attack_range = 1.0
+_attack_damage = 16.0
+_attack_speed = 1.0
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="Resource" id="Resource_pxwx0"]

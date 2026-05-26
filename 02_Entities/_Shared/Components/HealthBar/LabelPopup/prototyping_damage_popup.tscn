@@ -17,7 +17,7 @@ height = 0.4
 
 [sub_resource type="Resource" id="Resource_poir8"]
 script = ExtResource("3_505v6")
-health_max = 500.0
+_health_max = 500.0
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [node name="PrototypingDamagePopup" type="Node3D" unique_id=242809414 node_paths=PackedStringArray("_chicken", "_center_point_camera", "_center_point", "_damage_popup_spawn", "_crit_chance_spinbox", "_min_value_spinbox", "_max_value_spinbox", "_loop_count_spinbox", "_blocked_by_armor_toggle", "_rot_toggle", "_rot_speed_spinbox", "_translate_toggle", "_speed_spinbox", "_amplitude_spinbox")]

@@ -218,6 +218,7 @@ func _enter_tree() -> void:
 		_base_stats = _override_base_stats
 		_base_stats.reset_from_self()
 	stat_modifiers_registry = EntityStatModifiersRegistry.new(_base_stats, stats)
+	stats.reset_from_self()
 
 	_auto_load_components()
 
