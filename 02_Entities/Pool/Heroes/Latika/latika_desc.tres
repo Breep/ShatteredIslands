@@ -1,0 +1,52 @@
+[gd_resource type="Resource" script_class="EntityDesc" format=3 uid="uid://dlatikadesc"]
+
+[ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="1_desc"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="2_es"]
+[ext_resource type="Resource" uid="uid://dlatikastat01" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_01.tres" id="3_l01"]
+[ext_resource type="Resource" uid="uid://dlatikastat02" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_02.tres" id="3_l02"]
+[ext_resource type="Resource" uid="uid://dlatikastat03" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_03.tres" id="3_l03"]
+[ext_resource type="Resource" uid="uid://dlatikastat04" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_04.tres" id="3_l04"]
+[ext_resource type="Resource" uid="uid://dlatikastat05" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_05.tres" id="3_l05"]
+[ext_resource type="Resource" uid="uid://dlatikastat06" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_06.tres" id="3_l06"]
+[ext_resource type="Resource" uid="uid://dlatikastat07" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_07.tres" id="3_l07"]
+[ext_resource type="Resource" uid="uid://dlatikastat08" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_08.tres" id="3_l08"]
+[ext_resource type="Resource" uid="uid://dlatikastat1a" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_09.tres" id="3_l09"]
+[ext_resource type="Resource" uid="uid://dlatikastat10" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_10.tres" id="3_l10"]
+[ext_resource type="Resource" uid="uid://dlatikastat11" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_11.tres" id="3_l11"]
+[ext_resource type="Resource" uid="uid://dlatikastat12" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_12.tres" id="3_l12"]
+[ext_resource type="Resource" uid="uid://dlatikastat13" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_13.tres" id="3_l13"]
+[ext_resource type="Resource" uid="uid://dlatikastat14" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_14.tres" id="3_l14"]
+[ext_resource type="Resource" uid="uid://dlatikastat15" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_15.tres" id="3_l15"]
+[ext_resource type="Resource" uid="uid://dlatikastat16" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_16.tres" id="3_l16"]
+[ext_resource type="Resource" uid="uid://dlatikastat17" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_17.tres" id="3_l17"]
+[ext_resource type="Resource" uid="uid://dlatikastat18" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_18.tres" id="3_l18"]
+[ext_resource type="Resource" uid="uid://dlatikastat2a" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_19.tres" id="3_l19"]
+[ext_resource type="Resource" uid="uid://dlatikastat20" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_20.tres" id="3_l20"]
+
+[resource]
+script = ExtResource("1_desc")
+name = "Latika"
+description = "L'Enfant des Loups — DPS distance / carry mono-cible. Dualité prédateur solitaire / chef de meute."
+stats = Dictionary[int, ExtResource("2_es")]({
+1: ExtResource("3_l01"),
+2: ExtResource("3_l02"),
+3: ExtResource("3_l03"),
+4: ExtResource("3_l04"),
+5: ExtResource("3_l05"),
+6: ExtResource("3_l06"),
+7: ExtResource("3_l07"),
+8: ExtResource("3_l08"),
+9: ExtResource("3_l09"),
+10: ExtResource("3_l10"),
+11: ExtResource("3_l11"),
+12: ExtResource("3_l12"),
+13: ExtResource("3_l13"),
+14: ExtResource("3_l14"),
+15: ExtResource("3_l15"),
+16: ExtResource("3_l16"),
+17: ExtResource("3_l17"),
+18: ExtResource("3_l18"),
+19: ExtResource("3_l19"),
+20: ExtResource("3_l20")
+})
+metadata/_custom_type_script = "uid://dkrea5xbc4y8q"

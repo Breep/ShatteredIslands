@@ -3,18 +3,18 @@
 [ext_resource type="Script" uid="uid://cgcrhaeq84p8u" path="res://02_Entities/Pool/Mobs/TRex/trex.gd" id="1_8gq8b"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="2_pdas5"]
 [ext_resource type="PackedScene" uid="uid://b3rf30m650nx6" path="res://02_Entities/Pool/Mobs/TRex/trex_visual.tscn" id="2_y4jfh"]
-[ext_resource type="Script" uid="uid://cnwr3o67xobtt" path="res://02_Entities/_Shared/Components/Animation/entity_animation_player.gd" id="4_vpc07"]
-[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/EntityInfoPanel/SummonSimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="5_qsrpw"]
+[ext_resource type="Script" path="res://02_Entities/_Shared/Components/Animation/entity_animation_player.gd" id="4_vpc07"]
+[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/Components/HealthBar/SmallHealthBar/small_health_bar_component.tscn" id="5_qsrpw"]
 [ext_resource type="Script" uid="uid://cgpj2rq8aj7p1" path="res://02_Entities/Pool/Mobs/TRex/trex_animation_module.gd" id="6_4nond"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://cx3s7nv5p1v5c" path="res://02_Entities/Pool/Mobs/TRex/trex_blendtree.tres" id="6_qsrpw"]
 
 [sub_resource type="Resource" id="Resource_4nond"]
 script = ExtResource("2_pdas5")
-health_max = 1200.0
+_health_max = 1200.0
 auto_attack_type = 1
-attack_range = 2.0
-attack_damage = 100.0
-attack_speed = 1.5
+_attack_range = 2.0
+_attack_damage = 100.0
+_attack_speed = 1.5
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_y4jfh"]

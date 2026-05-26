@@ -1,0 +1,295 @@
+[gd_scene format=3 uid="uid://dajhejnwne0pk"]
+
+[ext_resource type="Script" uid="uid://c4gwye7bm8df4" path="res://02_Entities/_Shared/Components/HealthBar/LabelPopup/prototyping_damage_popup.gd" id="1_myg6t"]
+[ext_resource type="PackedScene" uid="uid://xup3guwehhoc" path="res://02_Entities/Pool/Mobs/Chickens/Basic/chicken_basic.tscn" id="2_cnl0v"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_505v6"]
+[ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://10_Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="3_myg6t"]
+[ext_resource type="PackedScene" uid="uid://c1ncf16eblcti" path="res://02_Entities/_Shared/Components/Popup/label_popup_component.tscn" id="5_2cic7"]
+[ext_resource type="PackedScene" uid="uid://cmushgkek5lf8" path="res://21_Props/DefaultBattleIsland/Arch_island/arena_02.tscn" id="6_2cic7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_505v6"]
+albedo_color = Color(0.72836864, 0.00012696892, 0.6294133, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_505v6"]
+material = SubResource("StandardMaterial3D_505v6")
+radius = 0.2
+height = 0.4
+
+[sub_resource type="Resource" id="Resource_poir8"]
+script = ExtResource("3_505v6")
+_health_max = 500.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[node name="PrototypingDamagePopup" type="Node3D" unique_id=242809414 node_paths=PackedStringArray("_chicken", "_center_point_camera", "_center_point", "_damage_popup_spawn", "_crit_chance_spinbox", "_min_value_spinbox", "_max_value_spinbox", "_loop_count_spinbox", "_blocked_by_armor_toggle", "_rot_toggle", "_rot_speed_spinbox", "_translate_toggle", "_speed_spinbox", "_amplitude_spinbox")]
+script = ExtResource("1_myg6t")
+_chicken = NodePath("Chicken")
+_center_point_camera = NodePath("CenterPointCamera")
+_center_point = NodePath("CenterPoint")
+_damage_popup_spawn = NodePath("CenterPoint/DamagePopupSpawn")
+_crit_chance_spinbox = NodePath("PanelContainer/MarginContainer/VBoxContainer/CritHBox/CritChanceSpinBox")
+_min_value_spinbox = NodePath("PanelContainer/MarginContainer/VBoxContainer/MinHBox/MinValueSpinBox")
+_max_value_spinbox = NodePath("PanelContainer/MarginContainer/VBoxContainer/MaxHBox/MaxValueSpinBox")
+_loop_count_spinbox = NodePath("PanelContainer/MarginContainer/VBoxContainer/LoopHBox/LoopCountSpinBox")
+_blocked_by_armor_toggle = NodePath("PanelContainer/MarginContainer/VBoxContainer/BlockHBox/BlockedByArmorCheckButton")
+_rot_toggle = NodePath("PanelContainer/MarginContainer/VBoxContainer/RotHBox/RotToggle")
+_rot_speed_spinbox = NodePath("PanelContainer/MarginContainer/VBoxContainer/RotHBox/RotSpeedSpinBox")
+_translate_toggle = NodePath("PanelContainer/MarginContainer/VBoxContainer/TranslateHBox/TranslateToggle")
+_speed_spinbox = NodePath("PanelContainer/MarginContainer/VBoxContainer/TranslateHBox/SpeedSpinBox")
+_amplitude_spinbox = NodePath("PanelContainer/MarginContainer/VBoxContainer/TranslateHBox/AmplitudeSpinBox")
+
+[node name="CenterPoint" type="Node3D" parent="." unique_id=708438754]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.528988, 0)
+
+[node name="DamagePopupSpawn" type="Marker3D" parent="CenterPoint" unique_id=1439031961]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CenterPoint/DamagePopupSpawn" unique_id=387021477]
+mesh = SubResource("SphereMesh_505v6")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=100000001]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 240.0
+offset_bottom = 600.0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=735526634]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=100000002]
+layout_mode = 2
+
+[node name="LabelParams" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000003]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Paramètres"
+
+[node name="CritHBox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000004]
+layout_mode = 2
+
+[node name="LabelCrit" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/CritHBox" unique_id=100000005]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Crit % :"
+
+[node name="CritChanceSpinBox" type="SpinBox" parent="PanelContainer/MarginContainer/VBoxContainer/CritHBox" unique_id=100000006]
+layout_mode = 2
+size_flags_horizontal = 3
+value = 10.0
+
+[node name="MinHBox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000007]
+layout_mode = 2
+
+[node name="LabelMin" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MinHBox" unique_id=100000008]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Min :"
+
+[node name="MinValueSpinBox" type="SpinBox" parent="PanelContainer/MarginContainer/VBoxContainer/MinHBox" unique_id=100000009]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 9999.0
+value = 10.0
+
+[node name="MaxHBox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000010]
+layout_mode = 2
+
+[node name="LabelMax" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MaxHBox" unique_id=100000011]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Max :"
+
+[node name="MaxValueSpinBox" type="SpinBox" parent="PanelContainer/MarginContainer/VBoxContainer/MaxHBox" unique_id=100000012]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 9999.0
+value = 50.0
+
+[node name="LoopHBox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000025]
+layout_mode = 2
+
+[node name="LabelLoop" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/LoopHBox" unique_id=100000026]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Répétitions :"
+
+[node name="LoopCountSpinBox" type="SpinBox" parent="PanelContainer/MarginContainer/VBoxContainer/LoopHBox" unique_id=100000027]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+value = 1.0
+
+[node name="BlockHBox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000047]
+layout_mode = 2
+
+[node name="LabelBlock" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/BlockHBox" unique_id=100000048]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Bloqué armure :"
+
+[node name="BlockedByArmorCheckButton" type="CheckButton" parent="PanelContainer/MarginContainer/VBoxContainer/BlockHBox" unique_id=100000049]
+layout_mode = 2
+
+[node name="SepDamage" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000013]
+layout_mode = 2
+
+[node name="LabelDamage" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000014]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Dégâts"
+
+[node name="BtnPhysical" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000015]
+layout_mode = 2
+text = "Physique"
+
+[node name="BtnMagical" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000016]
+layout_mode = 2
+text = "Magique"
+
+[node name="BtnPoisonDmg" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000017]
+layout_mode = 2
+text = "Poison"
+
+[node name="BtnPure" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000018]
+layout_mode = 2
+text = "Pur"
+
+[node name="SepHeal" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000044]
+layout_mode = 2
+
+[node name="LabelHeal" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000045]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Soins"
+
+[node name="BtnHeal" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000046]
+layout_mode = 2
+text = "Soin"
+
+[node name="SepStacks" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000019]
+layout_mode = 2
+
+[node name="LabelStacks" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000020]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Stacks"
+
+[node name="BtnStackPoison" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000021]
+layout_mode = 2
+text = "Poison"
+
+[node name="BtnStackIgnite" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000022]
+layout_mode = 2
+text = "Ignite"
+
+[node name="BtnStackNecrosis" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000023]
+layout_mode = 2
+text = "Nécrose"
+
+[node name="BtnStackRegen" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000024]
+layout_mode = 2
+text = "Régén"
+
+[node name="BtnStackShield" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000040]
+layout_mode = 2
+text = "Bouclier"
+
+[node name="SepEvents" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000041]
+layout_mode = 2
+
+[node name="LabelEvents" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000042]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Évènements"
+
+[node name="BtnDodge" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000043]
+layout_mode = 2
+text = "Dodge"
+
+[node name="SepAnim" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000028]
+layout_mode = 2
+
+[node name="LabelAnim" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000029]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Animations"
+
+[node name="RotHBox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000030]
+layout_mode = 2
+
+[node name="RotToggle" type="CheckButton" parent="PanelContainer/MarginContainer/VBoxContainer/RotHBox" unique_id=100000031]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Rotation Y"
+
+[node name="LabelRotSpeed" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/RotHBox" unique_id=100000032]
+layout_mode = 2
+text = "°/s :"
+
+[node name="RotSpeedSpinBox" type="SpinBox" parent="PanelContainer/MarginContainer/VBoxContainer/RotHBox" unique_id=100000033]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -720.0
+max_value = 720.0
+value = 90.0
+
+[node name="TranslateHBox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000034]
+layout_mode = 2
+
+[node name="TranslateToggle" type="CheckButton" parent="PanelContainer/MarginContainer/VBoxContainer/TranslateHBox" unique_id=100000035]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Translation X"
+
+[node name="LabelSpeed" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TranslateHBox" unique_id=100000036]
+layout_mode = 2
+text = "Vit. :"
+
+[node name="SpeedSpinBox" type="SpinBox" parent="PanelContainer/MarginContainer/VBoxContainer/TranslateHBox" unique_id=100000037]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 20.0
+step = 0.1
+value = 1.0
+
+[node name="LabelAmplitude" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TranslateHBox" unique_id=100000038]
+layout_mode = 2
+text = "Amp. :"
+
+[node name="AmplitudeSpinBox" type="SpinBox" parent="PanelContainer/MarginContainer/VBoxContainer/TranslateHBox" unique_id=100000039]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 20.0
+step = 0.1
+value = 5.0
+
+[node name="Chicken" parent="." unique_id=2109615854 instance=ExtResource("2_cnl0v")]
+visible = false
+custom_base_stats = SubResource("Resource_poir8")
+
+[node name="CenterPointCamera" parent="." unique_id=823970387 instance=ExtResource("3_myg6t")]
+
+[node name="LabelPopupModule" parent="." unique_id=560239285 node_paths=PackedStringArray("_popup_marker", "_owner") instance=ExtResource("5_2cic7")]
+_popup_marker = NodePath("../CenterPoint/DamagePopupSpawn")
+_owner = NodePath("../Chicken")
+
+[node name="Arena" parent="." unique_id=978031092 instance=ExtResource("6_2cic7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.56948, -0.8271818, 15.503107)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=197418718]
+transform = Transform3D(0.813243, -0.56390136, 0.14370519, 0, 0.24694826, 0.96902865, -0.5819243, -0.7880558, 0.20082891, 0, -19.050547, 0)
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/BtnPhysical" to="." method="_on_btn_physical_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/BtnMagical" to="." method="_on_btn_magical_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/BtnPoisonDmg" to="." method="_on_btn_poison_dmg_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/BtnPure" to="." method="_on_btn_pure_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/BtnHeal" to="." method="_on_btn_heal_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/BtnStackPoison" to="." method="_on_btn_stack_poison_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/BtnStackIgnite" to="." method="_on_btn_stack_ignite_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/BtnStackNecrosis" to="." method="_on_btn_stack_necrosis_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/BtnStackRegen" to="." method="_on_btn_stack_regen_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/BtnStackShield" to="." method="_on_btn_stack_shield_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/BtnDodge" to="." method="_on_btn_dodge_pressed"]
