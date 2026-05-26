@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_jd8sj"]
 [ext_resource type="PackedScene" uid="uid://dvr7815lw1k8b" path="res://02_Entities/Pool/Heroes/Latika/latika.tscn" id="3_os118"]
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://10_Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="4_egh8k"]
+[ext_resource type="PackedScene" uid="uid://bynburu5tlkgc" path="res://02_Entities/Pool/Mobs/Goblins/GoblinArcher/goblin_archer.tscn" id="5_5qocs"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]
 [ext_resource type="PackedScene" uid="uid://dvuq5n41nak3u" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/ArenaZoneManager/arena_zone_manager.tscn" id="8_fl2p6"]
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://90_Modules/PickableClickable/PickableModule/pickable_module.tscn" id="9_614kc"]
@@ -45,6 +46,19 @@ attack_speed = 1.0
 movement_speed = 8.0
 _crit_chance = 20.0
 _dodge = 10.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_5qocs"]
+script = ExtResource("3_jd8sj")
+health_max = 600.0
+mana_max = 100.0
+mana_regen = 25.0
+attack_range = 10.0
+attack_damage = 30.0
+attack_speed = 1.0
+movement_speed = 3.0
+armor = 20.0
+magic_resistance = 20.0
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="Resource" id="Resource_jd8sj"]
@@ -113,6 +127,17 @@ _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
 _override_base_stats = SubResource("Resource_rnrfd")
 initial_controller_mode = 1
+
+[node name="GoblinArcher" parent="Node3D/Entities" unique_id=1163203318 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("5_5qocs")]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, 2.98, 0, 6.686)
+_serrated_arrow_activated = true
+_goblin_eagerness_activated = true
+_coward_cruelty_activated = true
+team = 2
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+_override_base_stats = SubResource("Resource_5qocs")
 
 [node name="Latika2" parent="Node3D/Entities" unique_id=1941835210 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("3_os118")]
 transform = Transform3D(-0.2632837, 0, 0.96471834, 0, 1.0000001, 0, -0.96471834, 0, -0.2632837, 3.662788, 9.536744e-07, 0.110419974)

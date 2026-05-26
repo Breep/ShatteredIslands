@@ -11,6 +11,7 @@ const DEATH_FOG_SCENE: PackedScene = preload("res://03_SpellsAndProjectiles/Spel
 const LIGHTNING_SCENE: PackedScene = preload("res://03_SpellsAndProjectiles/Spells/Lightning/Lightning/spell_lightning.tscn")
 const CHAIN_LIGHTNING_SCENE: PackedScene = preload("res://03_SpellsAndProjectiles/Spells/ChainLightning/spell_chain_lightning.tscn")
 const CLEAVE_SCENE: PackedScene = preload("res://03_SpellsAndProjectiles/Spells/Cleave/spell_cleave.tscn")
+const GOBLIN_FOCUS_SCENE: PackedScene = preload("res://03_SpellsAndProjectiles/Spells/GoblinFocus/spell_goblin_focus.tscn")
 
 func _enter_tree() -> void:
 	if _owner == null: return
@@ -60,6 +61,7 @@ func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictiona
 		Spell.Type.LIGHTNING: _cast_lightning(target, spell_modifier)
 		Spell.Type.CHAIN_LIGHTNING: _cast_chain_lightning(target, spell_modifier)
 		Spell.Type.CLEAVE: _cast_cleave(spell_modifier)
+		Spell.Type.GOBLIN_FOCUS: _cast_goblin_focus(target, spell_modifier)
 		_: Verbose.error("Unknown spell type [" + str(spell_type) + "]", Verbose.Category.ENTITY_MODULE)
 
 	_consume_after_action_modifiers(Utils.ActionCategory.SPELL, {
@@ -152,3 +154,12 @@ func _cast_cleave(spell_modifier: Dictionary) -> void:
 	var cleave: Cleave = CLEAVE_SCENE.instantiate()
 	cleave.init(_owner, spell_modifier)
 	_spawn_manager.spawn_spell(cleave)
+
+
+func _cast_goblin_focus(target_: Entity, spell_modifier: Dictionary) -> void:
+	if target_ == null:
+		Verbose.error("_cast_goblin_focus() -> No target", Verbose.Category.ENTITY_MODULE)
+		return
+	var goblin_focus: GoblinFocus = GOBLIN_FOCUS_SCENE.instantiate()
+	goblin_focus.init(_owner, spell_modifier, target_)
+	_spawn_manager.spawn_spell(goblin_focus)
