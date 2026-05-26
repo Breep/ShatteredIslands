@@ -81,7 +81,7 @@ func _process(_delta: float) -> void:
 	var camera := get_viewport().get_camera_3d()
 	var tracked := _get_tracked_spawn()
 	if camera != null and tracked != null:
-		_main_control.position = camera.unproject_position(tracked.global_position) + Vector2(-_main_control.size.x / 2, 0)
+		_main_control.position = camera.unproject_position(tracked.global_position) - Vector2(_main_control.size.x / 2, 0)
 
 
 func _unhandled_input(event: InputEvent) -> void:
