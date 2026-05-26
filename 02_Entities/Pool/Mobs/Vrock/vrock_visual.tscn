@@ -7,7 +7,7 @@
 radius = 0.3671875
 height = 1.2719727
 
-[node name="Fenrir" type="CharacterBody3D" unique_id=1302613586]
+[node name="Vrock" type="CharacterBody3D" unique_id=1302613586]
 script = ExtResource("1_t3k32")
 entity_name = "Fenrir"
 metadata/_custom_type_script = "uid://cpih8vqoolap4"
