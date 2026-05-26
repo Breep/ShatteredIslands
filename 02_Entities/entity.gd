@@ -54,7 +54,6 @@ enum EntityType {
 @export_group("Visual")
 @export var _visual_3d: Node3D
 @export var _health_bar_marker: Marker3D
-@export var _health_bar: SimpleInfoPanel2D
 @export_subgroup("Auto Attack")
 @export var _attack_spawn_marker: Marker3D # TODO A bouger dans le projectile component ? Ou attack component ?
 @export var _projectile_type: Projectile.Type
@@ -112,6 +111,7 @@ var display_mode_module: DisplayModeModule # TODO ça à l'air inutil ça à vir
 var deck_holder: DeckHolderComponent
 var family: FamilyComponent
 var mana: ManaComponent
+var health_bar: HealthBarComponent
 
 var _auto_loaded_components: Array[EntityComponent.Type] = [
 	EntityComponent.Type.DAMAGE,
@@ -495,17 +495,13 @@ func _on_died() -> void:
 	life_state = LifeState.DEAD
 	_state_machine.stop_combat_modules()
 
-	if _health_bar != null:
-		_health_bar.hide()
-
 	for action_modifier in death_modifiers_registry.consume_all_modifiers():
 		if action_modifier.after_action_logic_callback.is_valid():
 			action_modifier.after_action_logic_callback.call({})
 
 
 func _on_resurrected() -> void:
-	if _health_bar != null:
-		_health_bar.show()
+	pass
 
 
 func _on_gfm_fighting_phase_state_changed(fighting_phase_state: GlobalFightingManager.FightingPhaseState) -> void:

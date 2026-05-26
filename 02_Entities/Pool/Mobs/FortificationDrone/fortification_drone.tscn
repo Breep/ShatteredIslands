@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="2_d2dv0"]
 [ext_resource type="PackedScene" uid="uid://b3f15ldbddrlp" path="res://02_Entities/Pool/Mobs/FortificationDrone/Visual/fortification_drone_visual.tscn" id="2_l6jnf"]
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://10_Tool/QuickAnims/anim_hovering_module.tscn" id="4_07yhp"]
-[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/EntityInfoPanel/SummonSimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="5_7dpcc"]
+[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/Components/HealthBar/SmallHealthBar/small_health_bar_component.tscn" id="5_7dpcc"]
 
 [sub_resource type="Resource" id="Resource_07yhp"]
 script = ExtResource("2_d2dv0")

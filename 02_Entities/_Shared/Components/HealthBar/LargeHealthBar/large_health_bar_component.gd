@@ -1,57 +1,34 @@
-class_name HeroSimpleInfoPanel2D
-extends SimpleInfoPanel2D
+class_name LargeHealthBarComponent
+extends HealthBarComponent
 
 ## Hero-specific info panel: adds a mana bar, the player name label, and a
 ## tavern-vs-fight marker switch driven by apply_display_mode().
 
-#region ============================== Export ==============================
-@export_group("External Nodes/Hero")
-@export var _info_panel_spawn_tavern: Marker3D
-#endregion
-
 @onready var _mana_bar: ColorRect = %ManaBar
 @onready var _player_name_label: RichTextLabel = %PlayerNameLabel
-
-var _current_spawn: Marker3D
-
 
 #region ============================== Node base functions ==============================
 func _ready() -> void:
 	super._ready()
 
-	# Défaut : suit le marker fighting. apply_display_mode() peut réécrire vers
-	# le marker tavern quand la chaîne display_mode sera réactivée ailleurs.
-	_current_spawn = _info_panel_spawn
-
 	if _mana_bar and _mana_bar.material:
 		_mana_bar.material = _mana_bar.material.duplicate()
 
-	if _owner_entity == null or not _owner_entity.is_hero():
+	if _owner == null or not _owner.is_hero():
 		return
 
-	var stats := _owner_entity.stats
+	var stats := _owner.stats
 	_update_mana_bar(stats.mana, stats.mana_max)
 	stats.mana_changed.connect(_on_mana_changed)
 	stats.mana_max_changed.connect(_on_mana_max_changed)
 
-	_player_name_label.text = _owner_entity.entity_name
+	_player_name_label.text = _owner.entity_name
 #endregion
 
 
 #region ============================== Public API ==============================
-func apply_display_mode(display_mode: Entity.DisplayMode) -> void:
-	match display_mode:
-		Entity.DisplayMode.BUYING_PHASE:
-			_current_spawn = _info_panel_spawn_tavern
-			_mana_bar.hide()
-		Entity.DisplayMode.FIGHTING_PHASE:
-			_current_spawn = _info_panel_spawn
-#endregion
-
-
-#region ============================== Virtual hooks ==============================
-func _get_tracked_spawn() -> Marker3D:
-	return _current_spawn
+func apply_display_mode(_display_mode: Entity.DisplayMode) -> void:
+	pass
 #endregion
 
 
@@ -68,9 +45,9 @@ func _update_mana_bar(mana: float, mana_max: float) -> void:
 
 #region ============================== Callbacks ==============================
 func _on_mana_changed(new_mana: float) -> void:
-	_update_mana_bar(new_mana, _owner_entity.stats.mana_max)
+	_update_mana_bar(new_mana, _owner.stats.mana_max)
 
 
 func _on_mana_max_changed(new_mana_max: float) -> void:
-	_update_mana_bar(_owner_entity.stats.mana, new_mana_max)
+	_update_mana_bar(_owner.stats.mana, new_mana_max)
 #endregion

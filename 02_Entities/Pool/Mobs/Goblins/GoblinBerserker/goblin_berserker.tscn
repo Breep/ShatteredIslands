@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://2py6kv5aqgem" path="res://02_Entities/_Shared/hero_stats.gd" id="3_lhpae"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://1mkqj0j5kmvc" path="res://02_Entities/Pool/Mobs/Goblins/GoblinBerserker/goblin_berserker_animation_tree.res" id="4_k5uqm"]
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="5_4qwmo"]
-[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/EntityInfoPanel/HeroSimpleInfoPanel2D/hero_simple_info_panel_2d.tscn" id="6_lhpae"]
+[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/LargeHealthBar/large_health_bar_component.tscn" id="6_lhpae"]
 
 [sub_resource type="Resource" id="Resource_rl0mb"]
 script = ExtResource("2_hocf7")
@@ -23,7 +23,7 @@ metadata/_custom_type_script = "uid://dkrea5xbc4y8q"
 radius = 0.3959961
 height = 1.6645508
 
-[node name="GoblinBerserker" type="CharacterBody3D" unique_id=1459343337 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_health_bar")]
+[node name="GoblinBerserker" type="CharacterBody3D" unique_id=1459343337 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker")]
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("1_k5uqm")
@@ -31,7 +31,6 @@ entity_name = "Tony le berserker"
 entity_desc = SubResource("Resource_rl0mb")
 _visual_3d = NodePath("AllGoblinVisual")
 _health_bar_marker = NodePath("AllGoblinVisual/HealthBarMarker")
-_health_bar = NodePath("AllGoblinVisual/HeroSimpleInfoPanel2d")
 metadata/_custom_type_script = "uid://cpih8vqoolap4"
 
 [node name="AllGoblinVisual" parent="." unique_id=433263620 instance=ExtResource("1_bldbi")]
@@ -128,11 +127,6 @@ transform = Transform3D(0.7311387, 0.05932837, -0.6796443, -0.0021583661, 0.9964
 [node name="HealthBarMarker" type="Marker3D" parent="AllGoblinVisual" unique_id=1432798385]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9644763, 0)
 
-[node name="HeroSimpleInfoPanel2d" parent="AllGoblinVisual" unique_id=358992180 node_paths=PackedStringArray("_info_panel_spawn_tavern", "_owner_entity", "_info_panel_spawn") instance=ExtResource("6_lhpae")]
-_info_panel_spawn_tavern = NodePath("../HealthBarMarker")
-_owner_entity = NodePath("../..")
-_info_panel_spawn = NodePath("../HealthBarMarker")
-
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=2907201]
 root_node = NodePath("../AllGoblinVisual")
 tree_root = ExtResource("4_k5uqm")
@@ -220,6 +214,10 @@ _owner = NodePath("..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1454953419]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.86027575, 0)
 shape = SubResource("CapsuleShape3D_k5uqm")
+
+[node name="LargeHealthBarComponent" parent="." unique_id=358992180 node_paths=PackedStringArray("_spawn", "_owner") instance=ExtResource("6_lhpae")]
+_spawn = NodePath("../AllGoblinVisual/HealthBarMarker")
+_owner = NodePath("..")
 
 [editable path="AllGoblinVisual"]
 [editable path="AllGoblinVisual/GeneralSkeleton/LeftHandAttachment/Bow"]

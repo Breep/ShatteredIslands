@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://boxbtk57aorey"]
 
-[ext_resource type="Script" uid="uid://bbeek4n4ih2xe" path="res://02_Entities/_Shared/EntityInfoPanel/HeroSimpleInfoPanel2D/hero_simple_info_panel_2d.gd" id="1_fqydh"]
-[ext_resource type="Shader" uid="uid://cxvdhkkjpr75e" path="res://02_Entities/_Shared/EntityInfoPanel/Shaders/character_health_bar.gdshader" id="2_er62k"]
+[ext_resource type="Script" uid="uid://bbeek4n4ih2xe" path="res://02_Entities/_Shared/Components/HealthBar/LargeHealthBar/large_health_bar_component.gd" id="1_fqydh"]
+[ext_resource type="Shader" uid="uid://cxvdhkkjpr75e" path="res://02_Entities/_Shared/Components/HealthBar/Shaders/character_health_bar.gdshader" id="2_er62k"]
 [ext_resource type="Texture2D" uid="uid://c6pcyeugsepnp" path="res://22_VFX/VFX_3D/Explosion/textures/T_PerlinNoise_Tiled11_inv.png" id="3_lf2vs"]
-[ext_resource type="Shader" uid="uid://dncf64el86tmc" path="res://02_Entities/_Shared/EntityInfoPanel/Shaders/character_shield_bar.gdshader" id="3_u1xh6"]
+[ext_resource type="Shader" uid="uid://dncf64el86tmc" path="res://02_Entities/_Shared/Components/HealthBar/Shaders/character_shield_bar.gdshader" id="3_u1xh6"]
 [ext_resource type="Shader" uid="uid://dav4yd3tlk03a" path="res://22_VFX/VFX_2D/UI/block_bar.gdshader" id="4_47gim"]
-[ext_resource type="LabelSettings" uid="uid://bk10uxsgaj4p5" path="res://02_Entities/_Shared/EntityInfoPanel/Data/debug_label.tres" id="4_dbglb"]
+[ext_resource type="LabelSettings" uid="uid://bk10uxsgaj4p5" path="res://02_Entities/_Shared/Components/HealthBar/Data/debug_label.tres" id="4_dbglb"]
 
 [sub_resource type="Shader" id="Shader_er62k"]
 code = "shader_type canvas_item;
@@ -174,7 +174,7 @@ shader_parameter/metallic_strength = 0.0130000006175
 shader_parameter/contrast = 1.4
 shader_parameter/shine_strength = 0.0
 shader_parameter/shine_width = 0.00999999977648
-shader_parameter/shine_speed = 0.10000024225000015
+shader_parameter/shine_speed = 0.10000024225000016
 shader_parameter/noise_strength = 0.0410000019475
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4khpa"]
@@ -226,37 +226,57 @@ font_color = Color(0.9416784, 0.84232056, 0, 1)
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
-[node name="HeroSimpleInfoPanel2d" type="Control" unique_id=358992180]
+[sub_resource type="LabelSettings" id="LabelSettings_xk06y"]
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[node name="LargeHealthBarComponent" type="Node" unique_id=1823590462]
+script = ExtResource("1_fqydh")
+_owner_entity = null
+_info_panel_spawn = null
+metadata/_custom_type_script = "uid://c1dw0hnr57wx6"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1509485072]
+
+[node name="MainControl" type="Control" parent="CanvasLayer" unique_id=659756604]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 0)
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_top = -2.6400146
-offset_bottom = 2.6400146
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset_ratio = Vector2(0.5, 0.5)
-mouse_filter = 2
-script = ExtResource("1_fqydh")
 
-[node name="MainVBox" type="VBoxContainer" parent="." unique_id=558123959]
+[node name="MainVBox" type="VBoxContainer" parent="CanvasLayer/MainControl" unique_id=558123959]
+custom_minimum_size = Vector2(96, 10)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -16.5
+offset_right = 48.0
+offset_bottom = 16.5
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
 
-[node name="Control" type="Control" parent="MainVBox" unique_id=1726330834]
+[node name="Control" type="Control" parent="CanvasLayer/MainControl/MainVBox" unique_id=1726330834]
 custom_minimum_size = Vector2(96, 18)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="AlterationsContainer" type="GridContainer" parent="MainVBox/Control" unique_id=785031783]
+[node name="AlterationsContainer" type="GridContainer" parent="CanvasLayer/MainControl/MainVBox/Control" unique_id=785031783]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -267,7 +287,7 @@ grow_vertical = 2
 mouse_filter = 2
 columns = 5
 
-[node name="PlayerNameLabel" type="RichTextLabel" parent="MainVBox" unique_id=1781608924]
+[node name="PlayerNameLabel" type="RichTextLabel" parent="CanvasLayer/MainControl/MainVBox" unique_id=1781608924]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(80, 20)
@@ -280,13 +300,13 @@ text = "Breep"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HealthAndMana" type="Control" parent="MainVBox" unique_id=1222723480]
-custom_minimum_size = Vector2(80, 15)
+[node name="HealthAndMana" type="Control" parent="CanvasLayer/MainControl/MainVBox" unique_id=1222723480]
+custom_minimum_size = Vector2(96, 15)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="HealthAndMana" type="VBoxContainer" parent="MainVBox/HealthAndMana" unique_id=756449751]
-custom_minimum_size = Vector2(80, 15)
+[node name="HealthAndMana" type="VBoxContainer" parent="CanvasLayer/MainControl/MainVBox/HealthAndMana" unique_id=756449751]
+custom_minimum_size = Vector2(96, 15)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -296,14 +316,14 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/separation = -2
 
-[node name="HealthBar" type="ColorRect" parent="MainVBox/HealthAndMana/HealthAndMana" unique_id=610590936]
+[node name="HealthBar" type="ColorRect" parent="CanvasLayer/MainControl/MainVBox/HealthAndMana/HealthAndMana" unique_id=610590936]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_u1xh6")
 custom_minimum_size = Vector2(80, 10)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="ShieldBar" type="ColorRect" parent="MainVBox/HealthAndMana/HealthAndMana/HealthBar" unique_id=1699784184]
+[node name="ShieldBar" type="ColorRect" parent="CanvasLayer/MainControl/MainVBox/HealthAndMana/HealthAndMana/HealthBar" unique_id=1699784184]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_2mu5s")
 layout_mode = 1
@@ -314,7 +334,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="BlockBar" type="ColorRect" parent="MainVBox/HealthAndMana/HealthAndMana/HealthBar" unique_id=725184838]
+[node name="BlockBar" type="ColorRect" parent="CanvasLayer/MainControl/MainVBox/HealthAndMana/HealthAndMana/HealthBar" unique_id=725184838]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_jqarp")
 layout_mode = 1
@@ -325,7 +345,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.41960785, 0.41960785, 0.41960785, 1)
 
-[node name="GridBar" type="ColorRect" parent="MainVBox/HealthAndMana/HealthAndMana/HealthBar" unique_id=1715734742]
+[node name="GridBar" type="ColorRect" parent="CanvasLayer/MainControl/MainVBox/HealthAndMana/HealthAndMana/HealthBar" unique_id=1715734742]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_4khpa")
 layout_mode = 1
@@ -336,14 +356,14 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="ManaBar" type="ColorRect" parent="MainVBox/HealthAndMana/HealthAndMana" unique_id=564324133]
+[node name="ManaBar" type="ColorRect" parent="CanvasLayer/MainControl/MainVBox/HealthAndMana/HealthAndMana" unique_id=564324133]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_xw8nt")
 custom_minimum_size = Vector2(80, 5)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="DebugValues" type="HBoxContainer" parent="MainVBox/HealthAndMana" unique_id=160983650]
+[node name="DebugValues" type="HBoxContainer" parent="CanvasLayer/MainControl/MainVBox/HealthAndMana" unique_id=160983650]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
@@ -355,7 +375,7 @@ grow_vertical = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="HealthLabel" type="Label" parent="MainVBox/HealthAndMana/DebugValues" unique_id=1275148556]
+[node name="HealthLabel" type="Label" parent="CanvasLayer/MainControl/MainVBox/HealthAndMana/DebugValues" unique_id=1275148556]
 unique_name_in_owner = true
 layout_mode = 2
 text = "42"
@@ -363,8 +383,24 @@ label_settings = ExtResource("4_dbglb")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ShieldLabel" type="Label" parent="MainVBox/HealthAndMana/DebugValues" unique_id=1290683005]
+[node name="ShieldLabel" type="Label" parent="CanvasLayer/MainControl/MainVBox/HealthAndMana/DebugValues" unique_id=1290683005]
 unique_name_in_owner = true
 layout_mode = 2
 text = "42"
 label_settings = SubResource("LabelSettings_shld")
+
+[node name="LevelLabel" type="Label" parent="CanvasLayer/MainControl/MainVBox/HealthAndMana" unique_id=264669344]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -3.666667
+offset_right = 19.0
+offset_bottom = 3.666668
+grow_vertical = 2
+text = "1"
+label_settings = SubResource("LabelSettings_xk06y")
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://drw5i4ioe0ho6" path="res://02_Entities/Pool/Mobs/Vrock/vrock.gd" id="1_w4u18"]
 [ext_resource type="PackedScene" uid="uid://b45qfxbc5mg27" path="res://02_Entities/_Data/Dogs/unity_sk_animals_dog_01.tscn" id="2_w4u18"]
-[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/EntityInfoPanel/SummonSimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="3_glgkk"]
+[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/Components/HealthBar/SmallHealthBar/small_health_bar_component.tscn" id="3_glgkk"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://dg3kavrat1vul" path="res://02_Entities/Pool/Mobs/Vrock/vrock_animation_tree.res" id="3_w4u18"]
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="4_mh4ck"]
 
@@ -10,14 +10,13 @@
 radius = 0.3671875
 height = 1.2719727
 
-[node name="Vrock" type="CharacterBody3D" unique_id=1302613586 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_health_bar", "_attack_spawn_marker")]
+[node name="Vrock" type="CharacterBody3D" unique_id=1302613586 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_attack_spawn_marker")]
 collision_layer = 16
 collision_mask = 17
 script = ExtResource("1_w4u18")
-entity_name = "Fenrir"
+entity_name = "Vrock"
 _visual_3d = NodePath("VrockVisual")
 _health_bar_marker = NodePath("VrockVisual/HealthBarSpawnMarker")
-_health_bar = NodePath("VrockVisual/HealthBar")
 _attack_spawn_marker = NodePath("VrockVisual/ProjectileSpawnMarker")
 metadata/_custom_type_script = "uid://cpih8vqoolap4"
 
@@ -135,10 +134,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.132942, 0)
 [node name="ProjectileSpawnMarker" type="Marker3D" parent="VrockVisual" unique_id=1925712423]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.027648e-08, 0.716996, 0.8038692)
 
-[node name="HealthBar" parent="VrockVisual" unique_id=1628734826 node_paths=PackedStringArray("_owner_entity", "_info_panel_spawn") instance=ExtResource("3_glgkk")]
-_owner_entity = NodePath("../..")
-_info_panel_spawn = NodePath("../HealthBarSpawnMarker")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1125220947]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.36649847, -0.033447266)
 shape = SubResource("CapsuleShape3D_g1k0y")
@@ -225,6 +220,10 @@ parameters/switch_stunned_state/current_index = 0
 
 [node name="AnimationComponent" parent="." unique_id=73205791 node_paths=PackedStringArray("_animation_tree", "_owner") instance=ExtResource("4_mh4ck")]
 _animation_tree = NodePath("../AnimationTree")
+_owner = NodePath("..")
+
+[node name="SmallHealthBarComponent" parent="." unique_id=1628734826 node_paths=PackedStringArray("_spawn", "_owner") instance=ExtResource("3_glgkk")]
+_spawn = NodePath("../VrockVisual/HealthBarSpawnMarker")
 _owner = NodePath("..")
 
 [editable path="VrockVisual"]

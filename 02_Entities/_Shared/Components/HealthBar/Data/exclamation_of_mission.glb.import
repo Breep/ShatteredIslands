@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dlb6eyxutsv7l"
-path="res://.godot/imported/exclamation_of_mission.glb-0e91f271b5b042b062bfd25b4f259a9e.scn"
+path="res://.godot/imported/exclamation_of_mission.glb-a9de6dc371fac1474aebfb00087624db.scn"
 
 [deps]
 
-source_file="res://02_Entities/_Shared/EntityInfoPanel/Data/exclamation_of_mission.glb"
-dest_files=["res://.godot/imported/exclamation_of_mission.glb-0e91f271b5b042b062bfd25b4f259a9e.scn"]
+source_file="res://02_Entities/_Shared/Components/HealthBar/Data/exclamation_of_mission.glb"
+dest_files=["res://.godot/imported/exclamation_of_mission.glb-a9de6dc371fac1474aebfb00087624db.scn"]
 
 [params]
 

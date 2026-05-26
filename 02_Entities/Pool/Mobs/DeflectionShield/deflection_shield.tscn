@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://fydmei0pi85g" path="res://02_Entities/Pool/Mobs/DeflectionShield/deflection_shield.gd" id="1_l33vt"]
 [ext_resource type="PackedScene" uid="uid://k6w1gjtwhmq" path="res://02_Entities/Pool/Mobs/DeflectionShield/deflection_shield_visual.tscn" id="2_f2upg"]
-[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/EntityInfoPanel/SummonSimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="3_7n1yc"]
+[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/Components/HealthBar/SmallHealthBar/small_health_bar_component.tscn" id="3_7n1yc"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_f2upg"]
 radius = 0.23548791

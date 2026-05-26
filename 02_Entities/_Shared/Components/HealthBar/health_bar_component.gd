@@ -1,5 +1,5 @@
-class_name SimpleInfoPanel2D
-extends Control
+class_name HealthBarComponent
+extends EntityComponent
 
 ## Shared Hero/NPC info-panel base class. Drives the health/shield/block/grid
 ## bars on the main bar, the taunt 3D visual, and a dynamic container of
@@ -8,8 +8,7 @@ extends Control
 
 #region ============================== Export ==============================
 @export_group("External Nodes")
-@export var _owner_entity: Entity
-@export var _info_panel_spawn: Marker3D
+@export var _spawn: Marker3D
 #endregion
 
 #region ============================== Onready ==============================
@@ -21,11 +20,14 @@ extends Control
 @onready var _debug_values: Control = %DebugValues
 @onready var _health_label: Label = %HealthLabel
 @onready var _shield_label: Label = %ShieldLabel
+@onready var _level_label: Label = %LevelLabel
 
 @onready var _alterations_container: Container = %AlterationsContainer
+
+@onready var _main_control: Control = %MainControl
 #endregion
 
-const TAUNT_VISUAL_SCENE: PackedScene = preload("res://02_Entities/_Shared/EntityInfoPanel/Data/taunt_status_visual.tscn")
+const TAUNT_VISUAL_SCENE: PackedScene = preload("res://02_Entities/_Shared/Components/HealthBar/Data/taunt_status_visual.tscn")
 const ALTERATION_ICON_SCENE: PackedScene = preload("res://02_Entities/_Shared/Components/Alterations/AlterationIcon/alteration_icon.tscn")
 
 var _taunt_visual: Node3D
@@ -33,6 +35,13 @@ var _alteration_icons: Dictionary[Alteration.Type, AlterationIcon] = {}
 
 
 #region ============================== Node base functions ==============================
+func _enter_tree() -> void:
+	if _owner == null: return
+	if _owner.health_bar != null and _owner.health_bar != self:
+		Verbose.trace("Override: HealthBarComponent on [" + _owner.entity_name + "]", Verbose.Category.ENTITY_MODULE)
+		_owner.health_bar.queue_free()
+	_owner.health_bar = self
+
 func _ready() -> void:
 	if _health_bar and _health_bar.material:
 		_health_bar.material = _health_bar.material.duplicate()
@@ -42,8 +51,8 @@ func _ready() -> void:
 	if _grid_bar and _grid_bar.material:
 		_grid_bar.material = _grid_bar.material.duplicate()
 
-	var stats := _owner_entity.stats
-	var am := _owner_entity.alterations
+	var stats := _owner.stats
+	var am := _owner.alterations
 
 	_update_health_bar(stats.health, stats.health_max)
 	_update_shield_bar(am.shield_stacks, stats.health_max)
@@ -59,6 +68,8 @@ func _ready() -> void:
 
 	if _debug_values != null:
 		_debug_values.visible = DebugHealthBarOverlay.is_visible()
+	if _level_label != null:
+		_level_label.visible = DebugHealthBarOverlay.is_visible()
 	DebugHealthBarOverlay.register(_on_debug_overlay_toggled)
 
 
@@ -70,7 +81,7 @@ func _process(_delta: float) -> void:
 	var camera := get_viewport().get_camera_3d()
 	var tracked := _get_tracked_spawn()
 	if camera != null and tracked != null:
-		position = camera.unproject_position(tracked.global_position) + Vector2(-size.x / 2, 0)
+		_main_control.position = camera.unproject_position(tracked.global_position) + Vector2(-_main_control.size.x / 2, 0)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -81,10 +92,6 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 #region ============================== Public API ==============================
-func init(entity: Entity) -> void:
-	_owner_entity = entity
-
-
 func setup_grid_bar(small_block: int, big_block: int) -> void:
 	if _grid_bar == null or _grid_bar.material == null: return
 
@@ -108,7 +115,7 @@ func setup_grid_bar(small_block: int, big_block: int) -> void:
 ## Marker tracked in _process to project the panel on screen.
 ## Heroes override to toggle between fight/tavern markers via apply_display_mode.
 func _get_tracked_spawn() -> Marker3D:
-	return _info_panel_spawn
+	return _spawn
 #endregion
 
 
@@ -146,19 +153,19 @@ func _update_block_bar(new_value: float) -> void:
 
 
 func _update_taunt_visual(is_active: bool, _duration: float, _infinite: bool) -> void:
-	if is_active and is_instance_valid(_info_panel_spawn):
+	if is_active and is_instance_valid(_spawn):
 		_taunt_visual = TAUNT_VISUAL_SCENE.instantiate()
-		_info_panel_spawn.add_child(_taunt_visual)
+		_spawn.add_child(_taunt_visual)
 	elif not is_active and is_instance_valid(_taunt_visual):
 		_taunt_visual.queue_free()
 
 
 func _set_health_bar_color_by_team() -> void:
-	if not _health_bar or not _health_bar.material or not _owner_entity:
+	if not _health_bar or not _health_bar.material or not _owner:
 		return
 	var local_player: Player = PlayerManager.get_local_player()
 	var health_color: Color
-	if local_player == null or _owner_entity.team == local_player.team:
+	if local_player == null or _owner.team == local_player.team:
 		health_color = Color.LIME_GREEN
 	else:
 		health_color = Color.INDIAN_RED
@@ -168,8 +175,8 @@ func _set_health_bar_color_by_team() -> void:
 ## Create, update, or remove the AlterationIcon for `alteration_type` depending
 ## on whether the alteration is currently active on the owner.
 func _refresh_icon_for(alteration_type: Alteration.Type) -> void:
-	if _alterations_container == null or _owner_entity == null: return
-	var am := _owner_entity.alterations
+	if _alterations_container == null or _owner == null: return
+	var am := _owner.alterations
 	if am == null: return
 
 	var alteration: Alteration = am.get_alteration(alteration_type)
@@ -214,23 +221,25 @@ static func _alteration_display_value(alteration: Alteration) -> Variant:
 
 #region ============================== Callbacks ==============================
 func _on_health_changed(new_health: int) -> void:
-	_update_health_bar(new_health, _owner_entity.stats.health_max)
+	_update_health_bar(new_health, _owner.stats.health_max)
 
 
 func _on_health_max_changed(new_max: int) -> void:
-	_update_health_bar(_owner_entity.stats.health, new_max)
-	_update_shield_bar(_owner_entity.alterations.shield_stacks, new_max)
+	_update_health_bar(_owner.stats.health, new_max)
+	_update_shield_bar(_owner.alterations.shield_stacks, new_max)
 
 
 func _on_alteration_changed(alteration_type: Alteration.Type, _payload: Variant) -> void:
 	if alteration_type == Alteration.Type.SHIELD:
-		_update_shield_bar(_owner_entity.alterations.shield_stacks, _owner_entity.stats.health_max)
+		_update_shield_bar(_owner.alterations.shield_stacks, _owner.stats.health_max)
 	elif alteration_type == Alteration.Type.BLOCK:
-		_update_block_bar(_owner_entity.alterations.block_stacks)
+		_update_block_bar(_owner.alterations.block_stacks)
 	_refresh_icon_for(alteration_type)
 
 
 func _on_debug_overlay_toggled(is_visible: bool) -> void:
 	if _debug_values != null:
 		_debug_values.visible = is_visible
+	if _level_label != null:
+		_level_label.visible = is_visible
 #endregion

@@ -3,11 +3,11 @@
 [ext_resource type="Script" uid="uid://l4sahik8i4w1" path="res://02_Entities/Pool/Mobs/Chickens/Basic/chicken_basic.gd" id="1_t2vws"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="2_5weh6"]
 [ext_resource type="PackedScene" uid="uid://ctj0phpdgq5iu" path="res://02_Entities/Pool/Mobs/Chickens/Basic/chicken_basic_visual.tscn" id="3_awods"]
-[ext_resource type="Script" uid="uid://cnwr3o67xobtt" path="res://02_Entities/_Shared/Components/Animation/entity_animation_player.gd" id="4_xhshf"]
+[ext_resource type="Script" path="res://02_Entities/_Shared/Components/Animation/entity_animation_player.gd" id="4_xhshf"]
 [ext_resource type="Script" uid="uid://bk603mav6k516" path="res://02_Entities/Pool/Mobs/Chickens/chicken_animator.gd" id="5_8qwhc"]
-[ext_resource type="AnimationNodeBlendTree" uid="uid://cgr3043y4f2ee" path="res://02_Entities/_Shared/Animations/default_blendtree.tres" id="6_48gjc"]
+[ext_resource type="AnimationNodeBlendTree" path="res://02_Entities/_Shared/Animations/default_blendtree.tres" id="6_48gjc"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://05_Game/Run/SpawnSpecs/SpawnPoints/SpawnPoint/spawn_point.tscn" id="7_6fmmv"]
-[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/EntityInfoPanel/SummonSimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="8_5weh6"]
+[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/Components/HealthBar/SmallHealthBar/small_health_bar_component.tscn" id="8_5weh6"]
 
 [sub_resource type="Resource" id="Resource_x7yny"]
 script = ExtResource("2_5weh6")

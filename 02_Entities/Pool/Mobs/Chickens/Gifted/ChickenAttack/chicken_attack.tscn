@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://227fu8n15o1o" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenAttack/chicken_attack.gd" id="1_2s508"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="2_ny85y"]
-[ext_resource type="Script" uid="uid://cnwr3o67xobtt" path="res://02_Entities/_Shared/Components/Animation/entity_animation_player.gd" id="4_f7ykf"]
+[ext_resource type="Script" path="res://02_Entities/_Shared/Components/Animation/entity_animation_player.gd" id="4_f7ykf"]
 [ext_resource type="Script" uid="uid://bk603mav6k516" path="res://02_Entities/Pool/Mobs/Chickens/chicken_animator.gd" id="5_ydhfa"]
-[ext_resource type="AnimationNodeBlendTree" uid="uid://cgr3043y4f2ee" path="res://02_Entities/_Shared/Animations/default_blendtree.tres" id="6_0n3fm"]
+[ext_resource type="AnimationNodeBlendTree" path="res://02_Entities/_Shared/Animations/default_blendtree.tres" id="6_0n3fm"]
 [ext_resource type="PackedScene" uid="uid://hjl28rgq6dw3" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenAttack/chicken_attack_visual.tscn" id="6_15sm5"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://05_Game/Run/SpawnSpecs/SpawnPoints/SpawnPoint/spawn_point.tscn" id="7_2ccyt"]
-[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/EntityInfoPanel/SummonSimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="8_0ng8s"]
+[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/Components/HealthBar/SmallHealthBar/small_health_bar_component.tscn" id="8_0ng8s"]
 
 [sub_resource type="Resource" id="Resource_0ng8s"]
 script = ExtResource("2_ny85y")
