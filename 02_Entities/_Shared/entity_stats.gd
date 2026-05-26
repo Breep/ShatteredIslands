@@ -63,10 +63,6 @@ const RESISTANCE_ALIASES: Dictionary[StatType, Utils.ActionType] = {
 }
 #endregion
 
-#region ============================== Signals ==============================
-signal has_been_reset()
-#endregion
-
 #region ============================== Health ==============================
 signal health_max_changed(new_health_max: float)
 ## HP max de l'entité. Augmenter HP_MAX augmente aussi les HP courants du même montant.

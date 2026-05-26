@@ -72,10 +72,10 @@ enum EntityType {
 @export var _spawn_manager: SpawnManager
 @export var _arena_zone_manager: ArenaZoneManager
 @export_subgroup("Overrides")
-@export var _override_base_stats: EntityStats
-@export var _override_custom_deck: PlayerDeck
-@export var _override_data_memory: Dictionary
-@export var _override_family_levels: Dictionary[Family.Type, int] = {}
+@export var override_base_stats: EntityStats
+@export var override_custom_deck: PlayerDeck
+@export var override_data_memory: Dictionary
+@export var override_family_levels: Dictionary[Family.Type, int] = {}
 @export_subgroup("Behaviour")
 @export var auto_attack_enabled: bool = true
 @export var family_managers_enabled: bool = true
@@ -112,6 +112,7 @@ var deck_holder: DeckHolderComponent
 var family: FamilyComponent
 var mana: ManaComponent
 var health_bar: HealthBarComponent
+var progression: ProgressionComponent
 
 var _auto_loaded_components: Array[EntityComponent.Type] = [
 	EntityComponent.Type.DAMAGE,
@@ -130,7 +131,8 @@ var _auto_loaded_components: Array[EntityComponent.Type] = [
 	EntityComponent.Type.CLICKABLE,
 	EntityComponent.Type.DRAGGABLE,
 	EntityComponent.Type.CONTROLLER,
-	EntityComponent.Type.MANA
+	EntityComponent.Type.MANA,
+	EntityComponent.Type.PROGRESSION
 ]
 
 #var display_mode: DisplayMode = DisplayMode.PREVIEW
@@ -152,7 +154,7 @@ var spawn_manager: SpawnManager:
 #endregion
 
 #region ============================== Private variables ==============================
-var _base_stats: EntityStats
+
 
 # Spawn system # TODO Checker que'est-ce que ça fait ici plutôt que dans le spawn component ?
 var _original_fighting_state: FightingState = FightingState.UNDEF
@@ -202,28 +204,22 @@ func is_hero() -> bool: return category == Category.HERO
 func _init() -> void:
 	# Stats
 	stats = EntityStats.new()
-	_base_stats = EntityStats.new()
-
+	
 	# Default Modifier Registries
 	auto_attack_modifier_registry = AutoAttackModifierRegistry.new()
 	action_modifiers_registry = ActionModifiersRegistry.new()
 	death_modifiers_registry = DeathModifiersRegistry.new()
+	stat_modifiers_registry = EntityStatModifiersRegistry.new(stats)
 	Verbose.trace("Entity [" + entity_name + "_" + str(uid) + "] init", Verbose.Category.ENTITY)
 
 
 func _enter_tree() -> void:
 	Verbose.trace("Entity [" + entity_name + "_" + str(uid) + "] enter_tree", Verbose.Category.ENTITY)
-	if _override_base_stats != null:
-		Verbose.debug("Entity [" + entity_name + "] using custom_base_stats", Verbose.Category.ENTITY)
-		_base_stats = _override_base_stats
-		_base_stats.reset_from_self()
-	stat_modifiers_registry = EntityStatModifiersRegistry.new(_base_stats, stats)
-	stats.reset_from_self()
-
+	
 	_auto_load_components()
-
+	
 	battle_callback_registry = BattleCallbackRegistry.new()
-
+	
 	if is_hero() and data_memory == null:
 		data_memory = NestedRegistry.new()
 

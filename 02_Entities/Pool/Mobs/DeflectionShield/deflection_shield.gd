@@ -26,7 +26,7 @@ func init(blocked_projectiles: int, shield_per_block: float, respawn_timer: floa
 
 
 func _ready() -> void:
-	_base_stats.health_max = _blocked_projectiles
+	#_base_stats.health_max = _blocked_projectiles
 	health_bar.setup_grid_bar(1, -1)
 	alterations.take_status(Alteration.Type.INVULNERABLE, -1, "Invulnerable")
 	alterations.take_status(Alteration.Type.UNTARGETABLE, -1, "Untargetable")
@@ -49,7 +49,7 @@ func _on_died() -> void:
 
 func _on_resurrected() -> void:
 	super._on_resurrected()
-	_base_stats.health_max = _blocked_projectiles
+	#_base_stats.health_max = _blocked_projectiles
 	stat_modifiers_registry.recompute_all()
 	alterations.take_status(Alteration.Type.INVULNERABLE, -1, "Invulnerable")
 	alterations.take_status(Alteration.Type.UNTARGETABLE, -1, "Untargetable")
