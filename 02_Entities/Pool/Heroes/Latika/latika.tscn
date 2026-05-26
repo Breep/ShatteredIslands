@@ -90,7 +90,7 @@ libraries/default_humanoid_library = SubResource("AnimationLibrary_44wrm")
 transform = Transform3D(-0.9950919, 0, -0.098955125, 0, 1, 0, 0.098955125, 0, -0.9950919, -0.21317631, 1.4468175, 0.8725844)
 
 [node name="HealthBarSpawnMarker" type="Marker3D" parent="LatikaVisual" unique_id=749687975]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6, 0)
 
 [node name="HealthBarSpawnMarkerTavern" type="Marker3D" parent="LatikaVisual" unique_id=26076487]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5209526, 0)
