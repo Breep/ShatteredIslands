@@ -1,0 +1,51 @@
+[gd_resource type="Resource" script_class="EntityDesc" format=3 uid="uid://bpmfs3a0llexn"]
+
+[ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="1_cnbgm"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="2_2m0j6"]
+[ext_resource type="Resource" uid="uid://b3ls61pnwih5w" path="res://02_Entities/Pool/Mobs/Vrock/Stats/vrock_stats_lvl_01.tres" id="3_4w8h4"]
+[ext_resource type="Resource" uid="uid://bh7s85tu3istd" path="res://02_Entities/Pool/Mobs/Vrock/Stats/vrock_stats_lvl_02.tres" id="4_em81l"]
+[ext_resource type="Resource" uid="uid://n3wk5t7n0b6u" path="res://02_Entities/Pool/Mobs/Vrock/Stats/vrock_stats_lvl_03.tres" id="5_i55mu"]
+[ext_resource type="Resource" uid="uid://blmnyip4tdxg5" path="res://02_Entities/Pool/Mobs/Vrock/Stats/vrock_stats_lvl_04.tres" id="6_scbbd"]
+[ext_resource type="Resource" uid="uid://d78t2rwvjmrg" path="res://02_Entities/Pool/Mobs/Vrock/Stats/vrock_stats_lvl_05.tres" id="7_chr2k"]
+[ext_resource type="Resource" uid="uid://c3ygl41x8kfrb" path="res://02_Entities/Pool/Mobs/Vrock/Stats/vrock_stats_lvl_06.tres" id="8_pb5gm"]
+[ext_resource type="Resource" uid="uid://buu35jnofd4q" path="res://02_Entities/Pool/Mobs/Vrock/Stats/vrock_stats_lvl_07.tres" id="9_elvxi"]
+[ext_resource type="Resource" uid="uid://5ib2eci00hgb" path="res://02_Entities/Pool/Mobs/Vrock/Stats/vrock_stats_lvl_08.tres" id="10_fcuo5"]
+[ext_resource type="Resource" uid="uid://6besrwfx6r6j" path="res://02_Entities/Pool/Mobs/Vrock/Stats/vrock_stats_lvl_09.tres" id="11_onkou"]
+[ext_resource type="Resource" uid="uid://c2w2m1hsychg7" path="res://02_Entities/Pool/Mobs/Vrock/Stats/vrock_stats_lvl_10.tres" id="12_7yb51"]
+[ext_resource type="Resource" uid="uid://doi57nlrgfaxo" path="res://02_Entities/Pool/Mobs/Vrock/Stats/vrock_stats_lvl_11.tres" id="13_ja1hm"]
+[ext_resource type="Resource" uid="uid://txarwmmpg3oh" path="res://02_Entities/Pool/Mobs/Vrock/Stats/vrock_stats_lvl_12.tres" id="14_2hxel"]
+[ext_resource type="Resource" uid="uid://be5su8m32vwhm" path="res://02_Entities/Pool/Mobs/Vrock/Stats/vrock_stats_lvl_13.tres" id="15_sl8nj"]
+[ext_resource type="Resource" uid="uid://qrbhjilnnbdl" path="res://02_Entities/Pool/Mobs/Vrock/Stats/vrock_stats_lvl_14.tres" id="16_und2o"]
+[ext_resource type="Resource" uid="uid://cdmyclnuq6sp0" path="res://02_Entities/Pool/Mobs/Vrock/Stats/vrock_stats_lvl_15.tres" id="17_vkgqf"]
+[ext_resource type="Resource" uid="uid://d1ouon48v3lql" path="res://02_Entities/Pool/Mobs/Vrock/Stats/vrock_stats_lvl_16.tres" id="18_46dkb"]
+[ext_resource type="Resource" uid="uid://c0is8lrhrf2ym" path="res://02_Entities/Pool/Mobs/Vrock/Stats/vrock_stats_lvl_17.tres" id="19_yjj7t"]
+[ext_resource type="Resource" uid="uid://bbefv8c56tw65" path="res://02_Entities/Pool/Mobs/Vrock/Stats/vrock_stats_lvl_18.tres" id="20_3qsjg"]
+[ext_resource type="Resource" uid="uid://cauwnyr62300v" path="res://02_Entities/Pool/Mobs/Vrock/Stats/vrock_stats_lvl_19.tres" id="21_wudw7"]
+[ext_resource type="Resource" uid="uid://kemboy5fft7q" path="res://02_Entities/Pool/Mobs/Vrock/Stats/vrock_stats_lvl_20.tres" id="22_888de"]
+
+[resource]
+script = ExtResource("1_cnbgm")
+name = "Vrock"
+description = "Loup de Latika"
+stats = Dictionary[int, ExtResource("2_2m0j6")]({
+1: ExtResource("3_4w8h4"),
+2: ExtResource("4_em81l"),
+3: ExtResource("5_i55mu"),
+4: ExtResource("6_scbbd"),
+5: ExtResource("7_chr2k"),
+6: ExtResource("8_pb5gm"),
+7: ExtResource("9_elvxi"),
+8: ExtResource("10_fcuo5"),
+9: ExtResource("11_onkou"),
+10: ExtResource("12_7yb51"),
+11: ExtResource("13_ja1hm"),
+12: ExtResource("14_2hxel"),
+13: ExtResource("15_sl8nj"),
+14: ExtResource("16_und2o"),
+15: ExtResource("17_vkgqf"),
+16: ExtResource("18_46dkb"),
+17: ExtResource("19_yjj7t"),
+18: ExtResource("20_3qsjg"),
+19: ExtResource("21_wudw7"),
+20: ExtResource("22_888de")
+})

@@ -10,10 +10,16 @@ extends Control
 @onready var _sub_play_menu: MarginContainer = %SubPlayMenu
 
 func _ready() -> void:
+	visibility_changed.connect(_emit_window_opened_if_visible)
 	hide()
 
 	multiplayer.connected_to_server.connect(_on_connected_to_server)
 	multiplayer.connection_failed.connect(_on_connection_failed)
+
+
+func _emit_window_opened_if_visible() -> void:
+	if visible:
+		Events.ui_window_opened.emit()
 
 
 func _on_join_button_pressed() -> void:
@@ -50,6 +56,10 @@ func _on_close_button_pressed() -> void:
 
 
 func _on_start_solo_button_pressed() -> void:
+	if Settings.is_tutorial_enabled() and not Settings.has_seen_intro_cinematic():
+		Settings.mark_intro_cinematic_seen()
+		get_tree().change_scene_to_file("res://04_UI/Cinematic/StoryIntro/ui_story_intro.tscn")
+		return
 	GameManager.start_solo_game()
 
 

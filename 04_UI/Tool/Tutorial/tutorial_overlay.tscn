@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://bkh2sp5xq82gn"]
+
+[ext_resource type="Script" uid="uid://dxly2c71etun8" path="res://04_UI/Tool/Tutorial/tutorial_overlay.gd" id="1_tutov"]
+[ext_resource type="Script" uid="uid://ule1xa2gwtkf" path="res://04_UI/Tool/Tutorial/tutorial_blocker.gd" id="2_tutblk"]
+
+[node name="TutorialOverlay" type="Control" unique_id=530808721]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_tutov")
+
+[node name="Blocker" type="Control" parent="." unique_id=1067914970]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_tutblk")
+dim_color = Color(0, 0, 0, 0.90000004)

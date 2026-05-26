@@ -102,6 +102,9 @@ func _reconnect_to_cards_signals() -> void:
 			card_button.card_selected.connect(_on_card_shop_button_pressed, CONNECT_ONE_SHOT)
 
 
+const _APPEAR_STAGGER: float = 0.1
+
+
 func _update_shop_cards_displayed_visual(cards: Array[Card]) -> void:
 	Verbose.trace("UICardShop._update_shop_cards_displayed_visual() | " + str(cards.size()) + " cards, " + str(_card_buttons.size()) + " buttons", Verbose.Category.CARD_SHOP)
 	for i in _card_buttons.size():
@@ -109,6 +112,7 @@ func _update_shop_cards_displayed_visual(cards: Array[Card]) -> void:
 	for i in cards.size():
 		_card_buttons[i].update_visual(cards[i])
 		_card_buttons[i].show()
+		_card_buttons[i].play_appear_animation(i * _APPEAR_STAGGER)
 
 
 # ============================== Callbacks ==============================

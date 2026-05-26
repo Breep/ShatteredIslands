@@ -3,7 +3,7 @@ extends StackAlteration
 
 ## Debuff stack. Every TICK_INTERVAL_SEC, deals `_stacks` POISON damage to the owner.
 
-const TICK_INTERVAL_SEC: float = 1.0
+const TICK_INTERVAL_SEC: float = 2.0
 const _INTERVAL_TICKS: int = int(TICK_INTERVAL_SEC * TICKS_PER_SECOND)
 
 var _ticks_remaining: int = _INTERVAL_TICKS

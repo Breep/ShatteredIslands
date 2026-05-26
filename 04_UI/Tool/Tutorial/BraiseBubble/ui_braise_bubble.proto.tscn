@@ -1,0 +1,136 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://04_UI/Tool/Tutorial/BraiseBubble/ui_braise_bubble.proto.gd" id="1_proto"]
+
+[node name="UIBraiseBubbleProto" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_proto")
+
+[node name="TargetTopLeft" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.08
+anchor_right = 0.05
+anchor_bottom = 0.08
+offset_right = 160.0
+offset_bottom = 60.0
+text = "Cible TopLeft"
+
+[node name="TargetTopRight" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.95
+anchor_top = 0.08
+anchor_right = 0.95
+anchor_bottom = 0.08
+offset_left = -160.0
+offset_bottom = 60.0
+text = "Cible TopRight"
+
+[node name="TargetBottomLeft" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.92
+anchor_right = 0.05
+anchor_bottom = 0.92
+offset_top = -60.0
+offset_right = 160.0
+text = "Cible BottomLeft"
+
+[node name="TargetBottomRight" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.95
+anchor_top = 0.92
+anchor_right = 0.95
+anchor_bottom = 0.92
+offset_left = -160.0
+offset_top = -60.0
+text = "Cible BottomRight"
+
+[node name="TargetCenter" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -30.0
+offset_right = 80.0
+offset_bottom = 30.0
+text = "Cible Center"
+
+[node name="ControlPanel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.05
+anchor_right = 0.5
+anchor_bottom = 0.05
+offset_left = -260.0
+offset_right = 260.0
+
+[node name="VBox" type="VBoxContainer" parent="ControlPanel"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="ControlPanel/VBox"]
+layout_mode = 2
+text = "UIBraiseBubble — Proto"
+horizontal_alignment = 1
+
+[node name="Row1" type="HBoxContainer" parent="ControlPanel/VBox"]
+layout_mode = 2
+
+[node name="BtnShowTopLeft" type="Button" parent="ControlPanel/VBox/Row1"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "→ TopLeft"
+
+[node name="BtnShowTopRight" type="Button" parent="ControlPanel/VBox/Row1"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "→ TopRight"
+
+[node name="BtnShowBottomLeft" type="Button" parent="ControlPanel/VBox/Row1"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "→ BottomLeft"
+
+[node name="BtnShowBottomRight" type="Button" parent="ControlPanel/VBox/Row1"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "→ BottomRight"
+
+[node name="Row2" type="HBoxContainer" parent="ControlPanel/VBox"]
+layout_mode = 2
+
+[node name="BtnShowCenter" type="Button" parent="ControlPanel/VBox/Row2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "→ Center target"
+
+[node name="BtnShowCentered" type="Button" parent="ControlPanel/VBox/Row2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "→ No target (centered)"
+
+[node name="BtnShowLong" type="Button" parent="ControlPanel/VBox/Row2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "→ Long text (typewriter)"
+
+[node name="BtnHide" type="Button" parent="ControlPanel/VBox/Row2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Hide"

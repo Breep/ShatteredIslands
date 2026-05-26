@@ -69,16 +69,18 @@ signal has_been_reset()
 
 #region ============================== Health ==============================
 signal health_max_changed(new_health_max: float)
-var _health_max: float
 ## HP max de l'entité. Augmenter HP_MAX augmente aussi les HP courants du même montant.
-@export var health_max: float:
+@export var _health_max: float = 1000
+var health_max: float:
 	get: return _health_max
 	set(value):
 		if value == _health_max: return
 		var old_health_max: float = _health_max
 		_health_max = value
-		if _health_max > old_health_max: health += _health_max - old_health_max
-		else: health = clampf(health, 0, value)
+		if _health > 0 and _health_max > old_health_max:
+			health += _health_max - old_health_max
+		else:
+			health = clampf(health, 0, value)
 		health_max_changed.emit(_health_max)
 
 signal health_changed(new_health: float)
@@ -95,9 +97,9 @@ var health: float:
 
 #region ============================== Mana ==============================
 signal mana_max_changed(new_mana_max: float)
-var _mana_max: float
 ## Seuil de mana qui déclenche l'ultimate.
-@export var mana_max: float:
+@export var _mana_max: float = 100
+var mana_max: float:
 	get: return _mana_max
 	set(value):
 		if value == _mana_max: return
@@ -115,9 +117,9 @@ var mana: float:
 		mana_changed.emit(_mana)
 
 signal mana_regen_changed(new_mana_regen: float)
-var _mana_regen: float
 ## Régénération de mana par seconde.
-@export var mana_regen: float:
+@export var _mana_regen: float = 1
+var mana_regen: float:
 	get: return _mana_regen
 	set(value):
 		if value == _mana_regen: return
@@ -130,9 +132,9 @@ var _mana_regen: float
 @export var auto_attack_type: AutoAttackType = AutoAttackType.RANGED
 
 signal attack_range_changed(new_attack_range: float)
-var _attack_range: float = -1.0 # -1 = unlimited range (default)
 ## Portée des auto-attaques en mètres. -1 = portée illimitée.
-@export var attack_range: float:
+@export var _attack_range: float = 5
+var attack_range: float:
 	get: return _attack_range
 	set(value):
 		if value == _attack_range: return
@@ -140,9 +142,9 @@ var _attack_range: float = -1.0 # -1 = unlimited range (default)
 		attack_range_changed.emit(_attack_range)
 
 signal attack_damage_changed(new_attack_damage: float)
-var _attack_damage: float
 ## Attack Damage (AD) : dégâts infligés par auto-attaque. 1 AD = 1 dégât par AA.
-@export var attack_damage: float:
+@export var _attack_damage: float = 25
+var attack_damage: float:
 	get: return _attack_damage
 	set(value):
 		if value == _attack_damage: return
@@ -150,9 +152,9 @@ var _attack_damage: float
 		attack_damage_changed.emit(_attack_damage)
 
 signal attack_speed_changed(new_attack_speed: float)
-var _attack_speed: float
 ## Attack Speed (AS) : nombre d'auto-attaques par seconde. 1 AS = 1 AA/s.
-@export var attack_speed: float:
+@export var _attack_speed: float = 1
+var attack_speed: float:
 	get: return _attack_speed
 	set(value):
 		if value == _attack_speed: return
@@ -162,9 +164,9 @@ var _attack_speed: float
 
 #region ============================== Movement ==============================
 signal movement_speed_changed(new_movement_speed: float)
-var _movement_speed: float
 ## Vitesse de déplacement en mètres par seconde.
-@export var movement_speed: float:
+@export var _movement_speed: float = 5
+var movement_speed: float:
 	get: return _movement_speed
 	set(value):
 		if value == _movement_speed: return
@@ -174,9 +176,9 @@ var _movement_speed: float
 
 #region ============================== AP ==============================
 signal attack_power_changed(new_attack_power: float)
-var _attack_power: float
 ## Ability Power (AP) : puissance magique scalant les compétences.
-@export var attack_power: float:
+@export var _attack_power: float = 10
+var attack_power: float:
 	get: return _attack_power
 	set(value):
 		if value == _attack_power: return
@@ -186,9 +188,9 @@ var _attack_power: float
 
 #region ============================== Scale ==============================
 signal scale_changed(new_scale: float)
-var _scale: float = 1.0
 ## Échelle visuelle de l'entité (1.0 = taille normale).
-@export var scale: float:
+@export var _scale: float = 1.0
+var scale: float:
 	get: return _scale
 	set(value):
 		if value == _scale: return
@@ -200,6 +202,12 @@ var _scale: float = 1.0
 signal crit_resistance_changed(new_crit_resistance: float)
 ## Réduction de la chance de se faire crit (%). S'applique à toutes les actions.
 @export var _crit_resistance: float = 0.0
+var crit_resistance: float:
+	get: return _crit_resistance
+	set(value):
+		if value == _crit_resistance: return
+		_crit_resistance = value
+		crit_resistance_changed.emit(_crit_resistance)
 
 signal armor_changed(new_armor: float)
 ## Armure : réduit les dégâts physiques reçus (%). Alias éditeur de m_resistances[DAMAGE_PHYSICAL].
@@ -227,18 +235,42 @@ signal poison_resistance_changed(new_poison_resistance: float)
 signal crit_chance_changed(new_crit_chance: float)
 ## Chance de crit globale (%). S'ajoute à m_crit_chances[action] pour les actions linked (PHYS/MAG/POISON).
 @export var _crit_chance: float = 0.0
+var crit_chance: float:
+	get: return _crit_chance
+	set(value):
+		if value == _crit_chance: return
+		_crit_chance = value
+		crit_chance_changed.emit(_crit_chance)
 
 signal crit_mult_changed(new_crit_mult: float)
 ## Multiplicateur de crit global (%). S'ajoute à m_crit_mults[action] pour les actions linked.
 @export var _crit_mult: float = 100.0
+var crit_mult: float:
+	get: return _crit_mult
+	set(value):
+		if value == _crit_mult: return
+		_crit_mult = value
+		crit_mult_changed.emit(_crit_mult)
 
 signal dodge_changed(new_dodge: float)
 ## Chance d'esquiver (%). S'ajoute à m_dodges[action] pour les actions linked.
 @export var _dodge: float = 0.0
+var dodge: float:
+	get: return _dodge
+	set(value):
+		if value == _dodge: return
+		_dodge = value
+		dodge_changed.emit(_dodge)
 
 signal lifesteal_changed(new_lifesteal: float)
 ## % des dégâts infligés restauré en HP. S'ajoute à m_lifesteals[action] pour les actions linked.
 @export var _lifesteal: float = 0.0
+var lifesteal: float:
+	get: return _lifesteal
+	set(value):
+		if value == _lifesteal: return
+		_lifesteal = value
+		lifesteal_changed.emit(_lifesteal)
 #endregion
 
 #region ============================== Multi (m_*) ==============================
@@ -277,44 +309,6 @@ signal m_exposure_changed(new_value: float, action_type: Utils.ActionType)
 #endregion
 
 #region ============================== Public functions ==============================
-func reset_from_hero_desc(hero: HeroDesc, lvl: int) -> EntityStats:
-	if lvl < 1 or lvl > 10:
-		Verbose.error("reset_from_hero_desc() - Invalid hero level [" + str(lvl) + "]", Verbose.Category.ENTITY)
-		return self
-
-	var hs: HeroStats = hero.stats[lvl]
-	health_max = hs.health_max
-	health = health_max
-	mana_max = hs.mana_max
-	mana = 0
-	mana_regen = hs.mana_regen
-	attack_damage = hs.attack_damage
-	attack_power = hs.attack_power
-	attack_speed = hs.attack_speed
-	attack_range = hs.attack_range
-	movement_speed = hs.movement_speed
-	auto_attack_type = hs.auto_attack_type
-
-	_set_crit_chance(hs.crit_chance)
-	_set_crit_mult(hs.crit_mult)
-	_set_dodge(hs.dodge)
-	_set_lifesteal(hs.lifesteal)
-	_set_crit_resistance(hs.crit_resistance)
-
-	for action_type: Utils.ActionType in Utils.get_all_actions():
-		_set_multi(_m_crit_chances, m_crit_chance_changed, action_type, hs.m_crit_chances.get(action_type, 0.0))
-		_set_multi(_m_crit_mults,   m_crit_mult_changed,   action_type, hs.m_crit_mults.get(action_type, 0.0))
-		_set_multi(_m_dodges,       m_dodge_changed,       action_type, hs.m_dodges.get(action_type, 0.0))
-		_set_multi(_m_lifesteals,   m_lifesteal_changed,   action_type, hs.m_lifesteals.get(action_type, 0.0))
-		_set_multi(_m_powers,       m_power_changed,       action_type, hs.m_powers.get(action_type, 0.0))
-		_set_multi(_m_fragilities,  m_fragility_changed,   action_type, hs.m_fragilities.get(action_type, 0.0))
-		_set_m_resistance(action_type, hs.m_resistances.get(action_type, 0.0))
-		_set_multi(_m_exposures,    m_exposure_changed,    action_type, hs.m_exposures.get(action_type, 0.0))
-
-	has_been_reset.emit()
-	return self
-
-
 func reset_from_self() -> EntityStats:
 	if health == 0 and health_max > 0:
 		health = health_max
@@ -400,11 +394,11 @@ func update_stat(stat_type: StatType, value: float, action_type: Utils.ActionTyp
 		StatType.AR:              attack_range = value
 		StatType.MS:              movement_speed = value
 		StatType.SCALE:           scale = value
-		StatType.CRIT_RESISTANCE: _set_crit_resistance(value)
-		StatType.CRIT_CHANCE:     _set_crit_chance(value)
-		StatType.CRIT_MULT:       _set_crit_mult(value)
-		StatType.DODGE:           _set_dodge(value)
-		StatType.LIFESTEAL:       _set_lifesteal(value)
+		StatType.CRIT_RESISTANCE: crit_resistance = value
+		StatType.CRIT_CHANCE:     crit_chance = value
+		StatType.CRIT_MULT:       crit_mult = value
+		StatType.DODGE:           dodge = value
+		StatType.LIFESTEAL:       lifesteal = value
 		StatType.M_CRIT_CHANCE:   _set_multi(_m_crit_chances, m_crit_chance_changed, action_type, value)
 		StatType.M_CRIT_MULT:     _set_multi(_m_crit_mults,   m_crit_mult_changed,   action_type, value)
 		StatType.M_DODGE:         _set_multi(_m_dodges,       m_dodge_changed,       action_type, value)
@@ -455,34 +449,4 @@ func _set_m_resistance(action_type: Utils.ActionType, value: float) -> void:
 		Utils.ActionType.DAMAGE_PHYSICAL: armor_changed.emit(value)
 		Utils.ActionType.DAMAGE_MAGICAL: magic_resistance_changed.emit(value)
 		Utils.ActionType.DAMAGE_POISON: poison_resistance_changed.emit(value)
-
-
-func _set_crit_chance(value: float) -> void:
-	if value == _crit_chance: return
-	_crit_chance = value
-	crit_chance_changed.emit(value)
-
-
-func _set_crit_mult(value: float) -> void:
-	if value == _crit_mult: return
-	_crit_mult = value
-	crit_mult_changed.emit(value)
-
-
-func _set_dodge(value: float) -> void:
-	if value == _dodge: return
-	_dodge = value
-	dodge_changed.emit(value)
-
-
-func _set_lifesteal(value: float) -> void:
-	if value == _lifesteal: return
-	_lifesteal = value
-	lifesteal_changed.emit(value)
-
-
-func _set_crit_resistance(value: float) -> void:
-	if value == _crit_resistance: return
-	_crit_resistance = value
-	crit_resistance_changed.emit(value)
 #endregion

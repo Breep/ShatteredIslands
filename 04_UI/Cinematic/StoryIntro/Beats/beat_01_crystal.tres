@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="StoryBeat" format=3 uid="uid://bbs5agx3y7kas"]
+
+[ext_resource type="Script" uid="uid://do3c63due4ld" path="res://04_UI/Cinematic/StoryIntro/Resource/story_beat.gd" id="1_beat"]
+[ext_resource type="AudioStream" uid="uid://cequ6ou7dyb8w" path="res://04_UI/Cinematic/StoryIntro/Assets/Ambiance/phatphrogstudio-demonic-spirit-voice-sinister-laughter-487002.mp3" id="1_whuvc"]
+[ext_resource type="PackedScene" uid="uid://c25pfqt4fld1a" path="res://04_UI/Cinematic/StoryIntro/Beats/beat_01_crystal.tscn" id="2_scene"]
+
+[resource]
+script = ExtResource("1_beat")
+id = &"beat_01_crystal"
+text = "[b]« Qui es-tu, étranger ? »[/b]
+
+[b]« Es-tu... digne ? »[/b]"
+beat_scene = ExtResource("2_scene")
+hold_after_typewriter = 5.0
+ambiance_stream = ExtResource("1_whuvc")

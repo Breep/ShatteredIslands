@@ -3,6 +3,12 @@
 [ext_resource type="Script" uid="uid://c8alyo5som56r" path="res://04_UI/Menu/PlayMenu/ui_play_menu.gd" id="1_ae5as"]
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme.tres" id="2_0s0ho"]
 [ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://04_UI/Tool/Misc/hover_boost_button.gd" id="3_0s0ho"]
+[ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/Menu/MainMenu/panel_main_menu.tres" id="3_hnq2v"]
+[ext_resource type="Script" uid="uid://gsw58as4o14w" path="res://04_UI/Menu/MainMenu/container_tween.gd" id="3_r5qcc"]
+[ext_resource type="Theme" uid="uid://d0qobfi4rit8a" path="res://04_UI/Menu/MainMenu/label_main_menu_white.tres" id="4_jr6su"]
+[ext_resource type="Script" uid="uid://b8j1p60tvfgch" path="res://04_UI/Menu/MainMenu/label_tween.gd" id="5_r5qcc"]
+[ext_resource type="Theme" uid="uid://djwauvkpnr27d" path="res://04_UI/Menu/MainMenu/normal_button2.tres" id="7_d067f"]
+[ext_resource type="Script" uid="uid://bq2jprj2y5yr6" path="res://04_UI/Menu/MainMenu/button_main_ui.gd" id="8_jr6su"]
 
 [node name="PlayMenu" type="Control" unique_id=1396296226]
 custom_minimum_size = Vector2(700, 500)
@@ -70,13 +76,30 @@ theme_override_constants/margin_bottom = 20
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/InfoPanel/MarginContainer" unique_id=1239946731]
 layout_mode = 2
+script = ExtResource("3_r5qcc")
 
-[node name="Label" type="Label" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/InfoPanel/MarginContainer/VBoxContainer" unique_id=288518842]
+[node name="Panel" type="Panel" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/InfoPanel/MarginContainer/VBoxContainer" unique_id=1980887128]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("3_hnq2v")
+
+[node name="MarginContainer" type="MarginContainer" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/InfoPanel/MarginContainer/VBoxContainer/Panel" unique_id=442818014]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 35
+
+[node name="Label" type="Label" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/InfoPanel/MarginContainer/VBoxContainer/Panel/MarginContainer" unique_id=288518842]
 layout_mode = 2
 size_flags_vertical = 6
+theme = ExtResource("4_jr6su")
 text = "Hello there !
 Welcome in the tournament
 of the Shattered Islands !"
+script = ExtResource("5_r5qcc")
 
 [node name="SoloPanel" type="Control" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=34166357]
 layout_mode = 2
@@ -99,10 +122,8 @@ layout_mode = 2
 
 [node name="SoloLabel" type="Label" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/SoloPanel/MarginContainer/VBoxContainer" unique_id=1138525412]
 layout_mode = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 50
-theme_override_font_sizes/font_size = 50
-text = "SOLO"
+theme = ExtResource("4_jr6su")
+theme_override_font_sizes/font_size = 64
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -122,10 +143,9 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 mouse_default_cursor_shape = 2
-theme_override_constants/outline_size = 100
-theme_override_font_sizes/font_size = 30
+theme = ExtResource("7_d067f")
 text = "RUN DÉMO"
-script = ExtResource("3_0s0ho")
+script = ExtResource("8_jr6su")
 
 [node name="OnlinePanel" type="Control" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer" unique_id=552877892]
 visible = false

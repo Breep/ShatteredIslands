@@ -79,8 +79,11 @@ var gold: int:
 	set(value):
 		var clamped := clampi(value, 0, 10000)
 		if state.gold == clamped: return
+		var previous := state.gold
 		state.gold = clamped
 		gold_changed.emit(self, state.gold)
+		if clamped > previous and PlayerManager.get_local_player() == self:
+			Events.gold_gained.emit(clamped - previous)
 #endregion
 
 #region ============================== Public functions ==============================

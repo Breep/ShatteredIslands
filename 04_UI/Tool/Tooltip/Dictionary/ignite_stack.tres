@@ -6,7 +6,7 @@
 script = ExtResource("1_l55a7")
 key = &"IGNITE"
 title = "{{COLOR:FIRE_COLOR}}IGNITE{{/COLOR}}"
-description = "1 stack deals 0.1% HP Max as magical damage [[MAGICAL_DAMAGE]]
-10% stacks decay /sec"
+description = "1 stack deals 1 magical damage [[MAGICAL_DAMAGE]] /sec
+15% stacks decay /sec (min 2)"
 icon_key = "IGNITE_ICON"
 metadata/_custom_type_script = "uid://cr1qi4s4jv5f7"

@@ -1,0 +1,303 @@
+[gd_scene format=3 uid="uid://dx4glv1dbjwgu"]
+
+[ext_resource type="Script" uid="uid://bmyokrij3b8p6" path="res://Game/LevelSelector/level_selector_tree.proto.gd" id="1_proto"]
+[ext_resource type="Script" uid="uid://br3yh3bu1oj75" path="res://Game/LevelSelector/paths_layer.gd" id="2_paths"]
+
+[node name="LevelSelectorTreeProto" type="Control" unique_id=1547738443]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_proto")
+
+[node name="Background" type="ColorRect" parent="." unique_id=208303416]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.12, 0.14, 0.2, 1)
+
+[node name="WorldViewport" type="Control" parent="." unique_id=160342508]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="World" type="Node2D" parent="WorldViewport" unique_id=1324455503]
+unique_name_in_owner = true
+
+[node name="PathsLayer" type="Node2D" parent="WorldViewport/World" unique_id=602219190]
+unique_name_in_owner = true
+script = ExtResource("2_paths")
+start_pad = 65.0
+end_pad = 65.0
+curve_strength = 0.16
+
+[node name="IslandsRoot" type="Node2D" parent="WorldViewport/World" unique_id=1155365045]
+unique_name_in_owner = true
+
+[node name="ControlsPanel" type="PanelContainer" parent="." unique_id=99008912]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 290.0
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ControlsPanel" unique_id=1283598910]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="ControlsPanel/ScrollContainer" unique_id=1164107239]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBox" type="VBoxContainer" parent="ControlsPanel/ScrollContainer/Margin" unique_id=2110884035]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="TitleLabel" type="Label" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=817911809]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Map Tree Generator"
+
+[node name="SeedLabel" type="Label" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=2036253443]
+layout_mode = 2
+text = "Seed"
+
+[node name="SeedField" type="LineEdit" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=472480997]
+unique_name_in_owner = true
+layout_mode = 2
+text = "17"
+placeholder_text = "entier"
+
+[node name="LevelCountLabel" type="Label" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=13267929]
+layout_mode = 2
+text = "Niveaux"
+
+[node name="LevelCount" type="SpinBox" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=2120204857]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 1.0
+max_value = 15.0
+value = 10.0
+
+[node name="AutoFillSep" type="HSeparator" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=798776909]
+layout_mode = 2
+
+[node name="AutoFillTitle" type="Label" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=1162262167]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Auto-fill (formule)"
+
+[node name="TotalNodesLabel" type="Label" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=1267650700]
+layout_mode = 2
+text = "Total nodes (cible)"
+
+[node name="TotalNodes" type="SpinBox" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=1205411970]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 1.0
+max_value = 200.0
+value = 85.0
+
+[node name="RootBranchesLabel" type="Label" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=1550159411]
+layout_mode = 2
+text = "Branches racines (niveau 1)"
+
+[node name="RootBranches" type="SpinBox" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=1803536550]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 1.0
+max_value = 8.0
+value = 6.0
+
+[node name="DecayExponentLabel" type="Label" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=105527979]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Décroissance par niveau : 0.70"
+
+[node name="DecayExponent" type="HSlider" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=1366896239]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 2.0
+step = 0.1
+value = 0.7
+
+[node name="TargetsLabel" type="Label" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=617479277]
+layout_mode = 2
+text = "Nodes par niveau"
+
+[node name="LevelTargetsGrid" type="GridContainer" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=317290017]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 2
+columns = 4
+
+[node name="AutoFillTargetsBtn" type="Button" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=1487525953]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Auto-fill"
+
+[node name="ConstraintsSep" type="HSeparator" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=801965248]
+layout_mode = 2
+
+[node name="ConstraintsTitle" type="Label" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=1165589165]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Contraintes"
+
+[node name="MinChildrenLabel" type="Label" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=1688232104]
+layout_mode = 2
+text = "Min enfants / parent"
+
+[node name="MinChildren" type="SpinBox" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=1363962275]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 1.0
+max_value = 6.0
+value = 2.0
+
+[node name="MaxChildrenLabel" type="Label" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=540196735]
+layout_mode = 2
+text = "Max enfants / parent"
+
+[node name="MaxChildren" type="SpinBox" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=1115110587]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 1.0
+max_value = 6.0
+value = 3.0
+
+[node name="RingSpacingLabel" type="Label" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=2134918123]
+layout_mode = 2
+text = "Espacement anneaux (px)"
+
+[node name="RingSpacing" type="SpinBox" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=125937612]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 50.0
+max_value = 800.0
+value = 400.0
+
+[node name="MinAngularGapLabel" type="Label" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=2058959071]
+layout_mode = 2
+text = "Écartement min entre frères (px)"
+
+[node name="MinAngularGap" type="SpinBox" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=1354572784]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 50.0
+max_value = 1200.0
+value = 600.0
+
+[node name="MinNodeDistanceLabel" type="Label" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=1432392800]
+layout_mode = 2
+text = "Distance min entre nodes (px)"
+
+[node name="MinNodeDistance" type="SpinBox" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=222204051]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 800.0
+value = 400.0
+
+[node name="InterBranchCrossLabel" type="Label" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=1857130423]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Cross inter-branches : 1.00"
+
+[node name="InterBranchCross" type="HSlider" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=1946469679]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+value = 0.5
+
+[node name="InterBranchMaxDistLabel" type="Label" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=1891257170]
+layout_mode = 2
+text = "Distance max cross (px)"
+
+[node name="InterBranchMaxDist" type="SpinBox" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=2046160449]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 100.0
+max_value = 4000.0
+value = 600.0
+
+[node name="VarianceSep" type="HSeparator" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=816938828]
+layout_mode = 2
+
+[node name="VarianceTitle" type="Label" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=137137871]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Variance"
+
+[node name="AngularJitterLabel" type="Label" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=1230162496]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Jitter angulaire : 0.35"
+
+[node name="AngularJitter" type="HSlider" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=1469468613]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 0.5
+step = 0.05
+value = 0.35
+
+[node name="RadialJitterLabel" type="Label" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=2120810980]
+layout_mode = 2
+text = "Jitter radial (px)"
+
+[node name="RadialJitter" type="SpinBox" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=1211378296]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 400.0
+value = 200.0
+
+[node name="ZoomSep" type="HSeparator" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=292978648]
+layout_mode = 2
+
+[node name="ZoomLabel" type="Label" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=364705619]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Zoom : 1.00×"
+
+[node name="ZoomSlider" type="HSlider" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=263350685]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 0.15
+max_value = 2.0
+step = 0.05
+value = 1.0
+
+[node name="ActionSep" type="HSeparator" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=789276470]
+layout_mode = 2
+
+[node name="RegenerateBtn" type="Button" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=373758972]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Régénérer"
+
+[node name="RecenterBtn" type="Button" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=1120468404]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Recentrer"
+
+[node name="StatsLabel" type="Label" parent="ControlsPanel/ScrollContainer/Margin/VBox" unique_id=2089588781]
+unique_name_in_owner = true
+layout_mode = 2
+autowrap_mode = 2

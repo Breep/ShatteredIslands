@@ -1,3 +1,6 @@
+# Carte du shop : Control avec tilt 3D shader (suit la souris) + lift/scale au
+# survol + son hover/click. N'étend pas UIButton car ce n'est pas un Button —
+# les sons sont déclenchés manuellement via AudioManager.play_ui().
 class_name CardButton
 extends Control
 
@@ -12,6 +15,13 @@ const LAYER_BACK = 0
 const ROT_SPEED: float = 4
 const CARD_PREVIEW_SCENE: PackedScene = preload("res://01_Cards/2D/CardPreview/ui_card_preview.tscn")
 
+const _HOVER_SCALE: float = 1.04
+const _HOVER_LIFT_Y: float = -8.0
+const _HOVER_TWEEN_IN: float = 0.15
+const _HOVER_TWEEN_OUT: float = 0.20
+const _APPEAR_START_SCALE: float = 0.7
+const _APPEAR_DURATION: float = 0.25
+
 # ============================== Public variables ==============================
 
 var card: Card:
@@ -20,8 +30,8 @@ var card: Card:
 
 # ============================== Private variables ==============================
 
-var _angle_x_max: float = 30.0
-var _angle_y_max: float = 30.0
+var _angle_x_max: float = 55.0
+var _angle_y_max: float = 55.0
 var _card: Card
 
 var _target_rot_x: float
@@ -30,6 +40,9 @@ var _current_rot_x: float
 var _current_rot_y: float
 
 var _is_focused: bool = false
+var _card_tween: Tween
+var _canvas_base_position: Vector2
+var _canvas_base_scale: Vector2
 
 # ============================== Local scene nodes ==============================
 
@@ -47,6 +60,26 @@ func update_visual(new_card: Card) -> void:
 		return
 	_card_layout.update_content(new_card)
 
+
+# Anime l'apparition : pop-in scale + fade-in alpha, après un délai optionnel.
+# Appelé par UICardShop quand le shop refresh — délai stagger entre les cartes.
+# Le son joue APRÈS le délai, en sync avec le début de l'animation visuelle.
+func play_appear_animation(delay: float = 0.0) -> void:
+	if _card_tween and _card_tween.is_running():
+		_card_tween.kill()
+
+	# État initial : invisible et rétréci, sans casser _canvas_base_*.
+	modulate.a = 0.0
+	_canvas_group.scale = _canvas_base_scale * _APPEAR_START_SCALE
+	_canvas_group.position = _canvas_base_position
+
+	_card_tween = create_tween().set_ease(Tween.EASE_OUT)
+	if delay > 0.0:
+		_card_tween.tween_interval(delay)
+	_card_tween.tween_callback(func(): AudioManager.play_ui("card_drawn"))
+	_card_tween.tween_property(self, "modulate:a", 1.0, _APPEAR_DURATION).set_trans(Tween.TRANS_SINE)
+	_card_tween.parallel().tween_property(_canvas_group, "scale", _canvas_base_scale, _APPEAR_DURATION).set_trans(Tween.TRANS_BACK)
+
 func remove_shader() -> void:
 	_canvas_group.material = null
 
@@ -60,6 +93,8 @@ func set_locked(locked: bool) -> void:
 func _ready() -> void:
 	if _canvas_group.material != null:
 		_canvas_group.material = _canvas_group.material.duplicate()
+	_canvas_base_position = _canvas_group.position
+	_canvas_base_scale = _canvas_group.scale
 	var parent := self as Node
 	while parent:
 		if parent is ScrollContainer:
@@ -106,19 +141,49 @@ func _animation_reset_3d_rotation() -> void:
 func _on_control_mouse_entered() -> void:
 	_is_focused = true
 	_card_layout.mouse_entered()
+	_animate_hover(true)
+	AudioManager.play_ui("card_drawn")
 
 
 func _on_control_mouse_exited() -> void:
 	_is_focused = false
 	_animation_reset_3d_rotation()
 	_card_layout.mouse_exited()
+	_animate_hover(false)
 
 
 func _on_control_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
+			AudioManager.play_ui("button_click")
 			card_selected.emit(self, card)
 		elif event.button_index == MOUSE_BUTTON_RIGHT and _card != null:
 			var preview: UICardPreview = CARD_PREVIEW_SCENE.instantiate()
 			get_tree().root.add_child(preview)
 			preview.update_visual(_card)
+
+
+# Anime scale + lift + z-index pour faire ressortir la carte au survol.
+# Important : on scale la CanvasGroup (pas le root Control), sinon le hit-test
+# souris du Control change avec la scale et mouse_exited peut ne jamais firer.
+# `entering = true` : pop-in avec léger overshoot. `false` : retour smooth.
+func _animate_hover(entering: bool) -> void:
+	if _card_tween and _card_tween.is_running():
+		_card_tween.kill()
+
+	# Si une appear-animation a été interrompue, on s'assure que l'alpha est OK.
+	modulate.a = 1.0
+
+	var scale_factor: float = _HOVER_SCALE if entering else 1.0
+	var target_scale: Vector2 = _canvas_base_scale * scale_factor
+	var target_pos: Vector2 = _canvas_base_position + Vector2(0, _HOVER_LIFT_Y) if entering else _canvas_base_position
+	var duration: float = _HOVER_TWEEN_IN if entering else _HOVER_TWEEN_OUT
+
+	# z_index instantané : on veut que la carte passe devant ses voisines dès l'entrée
+	z_index = 1 if entering else 0
+
+	_card_tween = create_tween().set_parallel(true)
+	_card_tween.set_ease(Tween.EASE_OUT)
+	_card_tween.set_trans(Tween.TRANS_BACK if entering else Tween.TRANS_SINE)
+	_card_tween.tween_property(_canvas_group, "scale", target_scale, duration)
+	_card_tween.tween_property(_canvas_group, "position", target_pos, duration)

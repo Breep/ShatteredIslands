@@ -1,5 +1,7 @@
+# Bouton texte avec animation hover (zoom font) — étend UIButton pour bénéficier
+# des sons UI standards.
 class_name TextButton
-extends Button
+extends UIButton
 
 @onready var _default_font_size: float
 
@@ -9,6 +11,7 @@ extends Button
 var _hover_tween: Tween
 
 func _ready() -> void:
+	super._ready()
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
 

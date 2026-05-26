@@ -11,7 +11,7 @@ extends Resource
 @export var portrait: CompressedTexture2D
 @export_multiline var description: String
 
-@export var stats: Dictionary[int, HeroStats]
+@export var stats: Dictionary[int, EntityStats]
 
 @export_group("Auto-Attack timing")
 ## Fraction of the AA cycle (1/AS) occupied by the attack animation.

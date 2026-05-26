@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_wr8al"]
 script = ExtResource("2_yxmo2")
-health_max = 42.0
+_health_max = 42.0
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [node name="ChickenEgg" type="CharacterBody3D" unique_id=105635652 node_paths=PackedStringArray("_visual_3d")]

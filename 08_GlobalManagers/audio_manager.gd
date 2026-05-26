@@ -6,10 +6,21 @@ extends Node
 const _PITCH_VARIATION: float = 0.05
 const _BGM_SILENT_DB: float = -80.0
 const _BGM_DEFAULT_FADE: float = 1.0
+const _GOLD_PER_SOUND: int = 10
+const _GOLD_SOUNDS_MAX: int = 8
+const _GOLD_SOUND_SPACING: float = 0.08
+
+# Volumes par défaut appliqués au démarrage (linéaire 0.0 → 1.0).
+# Forcés en code car l'éditeur Godot resauve default_bus_layout.tres tout seul
+# quand on touche au panel Audio, écrasant nos valeurs.
+const _DEFAULT_SFX_VOLUME: float = 1.0
+const _DEFAULT_UI_VOLUME: float = 0.8
+const _DEFAULT_BGM_VOLUME: float = 0.15
 #endregion
 
 #region ============================== Private vars ==============================
 @onready var _sfx_stream_player := AudioStreamPlayer.new()
+@onready var _ui_stream_player := AudioStreamPlayer.new()
 @onready var _sfx_3d_template: AudioStreamPlayer3D = %SFX3DTemplate
 var _sfx_lib: AudioLib = preload("res://23_Audio/Libraries/SFX_library.tres")
 var _bgm_lib: AudioLib = preload("res://23_Audio/Libraries/BGM_library.tres")
@@ -27,11 +38,13 @@ var _SOUND_MAP: Array = [
 	[Events.hero_locked, "hero_locked"],
 	[Events.ui_family_portrait_requested, "ui_family_portrait_requested"],
 	[Events.tavern_continue_pressed, "start_fight"],
+	[Events.card_drawn, "card_drawn"],
+	[Events.insufficient_gold, "insufficient_gold"],
+	[Events.ui_window_opened, "window_appear"],
 ]
 
 var _BGM_MAP: Array = [
 	# [signal, clé dans BGM_library.tres]
-	[Events.card_shop_init, "BGM_01"],
 ]
 #endregion
 
@@ -40,6 +53,15 @@ func _ready() -> void:
 	_sfx_stream_player.max_polyphony = 10
 	_sfx_stream_player.bus = "SFX"
 	add_child(_sfx_stream_player)
+
+	_ui_stream_player.max_polyphony = 10
+	_ui_stream_player.bus = "UI"
+	add_child(_ui_stream_player)
+
+	# Forcer les volumes par défaut — voir _DEFAULT_*_VOLUME pour la raison.
+	set_bus_volume("SFX", _DEFAULT_SFX_VOLUME)
+	set_bus_volume("UI", _DEFAULT_UI_VOLUME)
+	set_bus_volume("Music", _DEFAULT_BGM_VOLUME)
 
 	_bgm_player_a = AudioStreamPlayer.new()
 	_bgm_player_a.bus = "Music"
@@ -57,6 +79,8 @@ func _ready() -> void:
 		var sfx_count := _signal_arg_count(entry[0])
 		entry[0].connect(sfx_callable.unbind(sfx_count) if sfx_count > 0 else sfx_callable)
 
+	Events.gold_gained.connect(_on_gold_gained)
+
 	for entry in _BGM_MAP:
 		var key: String = entry[1]
 		var bgm_callable := func(): play_bgm(key)
@@ -65,8 +89,16 @@ func _ready() -> void:
 #endregion
 
 #region ============================== Public functions ==============================
-func play_sfx(sound_name: String) -> void:
-	_play_sound(sound_name)
+# Joue un son flat sur le bus SFX (gameplay : combat, gold, projectiles...).
+func play_sfx(sound_name: String, volume_db: float = 0.0) -> void:
+	_play_on_player(_sfx_stream_player, sound_name, volume_db)
+
+
+# Joue un son flat sur le bus UI (hover/click boutons, ouverture de fenêtre...).
+# Le bus UI envoie vers SFX, donc le slider SFX des settings s'applique aussi —
+# mais un slider UI dédié permet de baisser uniquement les sons UI.
+func play_ui(sound_name: String, volume_db: float = 0.0) -> void:
+	_play_on_player(_ui_stream_player, sound_name, volume_db)
 
 
 func play_bgm(sound_name: String, fade_duration: float = _BGM_DEFAULT_FADE) -> void:
@@ -128,19 +160,36 @@ func play_3d(sound_name: String, position: Vector3, pitch: float = 1.0) -> void:
 
 #region ============================== Private functions ==============================
 func _play_sound(sound_name: String) -> void:
-	if sound_name == null:
-		Verbose.error("Sound name played is null", Verbose.Category.AUDIO_MANAGER)
+	_play_on_player(_sfx_stream_player, sound_name, 0.0)
+
+
+func _play_on_player(player: AudioStreamPlayer, sound_name: String, volume_db: float) -> void:
+	if sound_name == null or sound_name.is_empty():
 		return
 	if _sfx_lib.audio_database.get(sound_name) == null:
 		Verbose.error("Couldn't find " + sound_name + " in audiolib.", Verbose.Category.AUDIO_MANAGER)
 		return
-	_sfx_stream_player.stream = _sfx_lib.audio_database.get(sound_name)
-	_sfx_stream_player.pitch_scale = randf_range(1.0 - _PITCH_VARIATION, 1.0 + _PITCH_VARIATION)
-	_sfx_stream_player.play()
+	player.stream = _sfx_lib.audio_database.get(sound_name)
+	player.pitch_scale = randf_range(1.0 - _PITCH_VARIATION, 1.0 + _PITCH_VARIATION)
+	player.volume_db = volume_db
+	player.play()
 
 
 func _bgm_inactive_player() -> AudioStreamPlayer:
 	return _bgm_player_b if _bgm_active_player == _bgm_player_a else _bgm_player_a
+
+
+# Plays gold_gained 1 fois par tranche de _GOLD_PER_SOUND, capé à _GOLD_SOUNDS_MAX,
+# espacé de _GOLD_SOUND_SPACING. Un gain < 10 joue quand même 1 son.
+func _on_gold_gained(amount: int) -> void:
+	if amount <= 0:
+		return
+	var count: int = clampi(maxi(1, int(amount / float(_GOLD_PER_SOUND))), 1, _GOLD_SOUNDS_MAX)
+	for i in count:
+		if i == 0:
+			_play_sound("gold_gained")
+		else:
+			get_tree().create_timer(i * _GOLD_SOUND_SPACING).timeout.connect(func(): _play_sound("gold_gained"))
 
 
 func _signal_arg_count(sig: Signal) -> int:

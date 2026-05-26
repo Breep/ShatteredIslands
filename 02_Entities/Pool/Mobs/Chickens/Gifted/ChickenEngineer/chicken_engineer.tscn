@@ -3,19 +3,19 @@
 [ext_resource type="Script" uid="uid://2wtyo7uiyo0k" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenEngineer/chicken_engineer.gd" id="1_427g7"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="2_jtpo7"]
 [ext_resource type="Script" uid="uid://bk603mav6k516" path="res://02_Entities/Pool/Mobs/Chickens/chicken_animator.gd" id="3_86l0h"]
-[ext_resource type="AnimationNodeBlendTree" uid="uid://cgr3043y4f2ee" path="res://02_Entities/_Shared/Animations/default_blendtree.tres" id="4_ipffw"]
+[ext_resource type="AnimationNodeBlendTree" path="res://02_Entities/_Shared/Animations/default_blendtree.tres" id="4_ipffw"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://05_Game/Run/SpawnSpecs/SpawnPoints/SpawnPoint/spawn_point.tscn" id="5_1vngc"]
 [ext_resource type="PackedScene" uid="uid://dmlipqu47nhn0" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenEngineer/chicken_engineer_visual.tscn" id="5_x4yyx"]
-[ext_resource type="Script" uid="uid://cnwr3o67xobtt" path="res://02_Entities/_Shared/Components/Animation/entity_animation_player.gd" id="7_qe5ys"]
-[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/EntityInfoPanel/SummonSimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="8_u3s5i"]
+[ext_resource type="Script" path="res://02_Entities/_Shared/Components/Animation/entity_animation_player.gd" id="7_qe5ys"]
+[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/Components/HealthBar/SmallHealthBar/small_health_bar_component.tscn" id="8_u3s5i"]
 
 [sub_resource type="Resource" id="Resource_tce5d"]
 script = ExtResource("2_jtpo7")
-health_max = 80.0
+_health_max = 80.0
 auto_attack_type = 1
-attack_range = 1.0
-attack_damage = 10.0
-attack_speed = 1.0
+_attack_range = 1.0
+_attack_damage = 10.0
+_attack_speed = 1.0
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x7yny"]

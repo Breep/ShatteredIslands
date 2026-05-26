@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://q7gxxkhg5u54" path="res://06_FloatingIsland/FightingIsland/Pool/ArchIsland/arch_island_visual.tscn" id="1_hqc1e"]
 [ext_resource type="PackedScene" uid="uid://c66yw4go2ykwa" path="res://06_FloatingIsland/FightingIsland/FightingArea/fighting_area.tscn" id="3_nh3rf"]
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://10_Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="4_45gxp"]
+[ext_resource type="Environment" uid="uid://cghu0yr6lj5i2" path="res://21_Props/DefaultBattleIsland/Arch_island/world_environment.tres" id="5_env"]
 
 [node name="ArchIsland" type="Node3D" unique_id=796314808 node_paths=PackedStringArray("_fighting_area", "_center_point_camera")]
 script = ExtResource("1_4eaaq")
@@ -15,5 +16,8 @@ _center_point_camera = NodePath("CenterPointCamera")
 [node name="FightingArea" parent="." unique_id=2072382245 instance=ExtResource("3_nh3rf")]
 
 [node name="CenterPointCamera" parent="." unique_id=823970387 instance=ExtResource("4_45gxp")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1357924681]
+environment = ExtResource("5_env")
 
 [editable path="CenterPointCamera"]

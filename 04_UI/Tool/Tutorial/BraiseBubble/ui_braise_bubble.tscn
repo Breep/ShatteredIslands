@@ -1,0 +1,183 @@
+[gd_scene format=3 uid="uid://nvki5s5cv50m"]
+
+[ext_resource type="Script" uid="uid://c7j572pn45gis" path="res://04_UI/Tool/Tutorial/BraiseBubble/ui_braise_bubble.gd" id="1_brbub"]
+[ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/Menu/MainMenu/panel_main_menu.tres" id="2_tie0n"]
+[ext_resource type="Texture2D" uid="uid://bio1y4e87wftj" path="res://04_UI/Tool/Tutorial/BraiseBubble/Data/tavernier.png" id="3_i241c"]
+[ext_resource type="Theme" uid="uid://d0qobfi4rit8a" path="res://04_UI/Menu/MainMenu/label_main_menu_white.tres" id="4_8d78f"]
+[ext_resource type="Theme" uid="uid://djwauvkpnr27d" path="res://04_UI/Menu/MainMenu/normal_button2.tres" id="5_4txja"]
+[ext_resource type="Texture2D" uid="uid://cssqr8m5ucf6x" path="res://04_UI/Tool/Tutorial/BraiseBubble/Data/Arrow.png" id="5_arrow"]
+
+[node name="UIBraiseBubble" type="Control" unique_id=155577175]
+custom_minimum_size = Vector2(520, 180)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 520.0
+offset_bottom = 180.0
+mouse_filter = 2
+script = ExtResource("1_brbub")
+
+[node name="Panel" type="Panel" parent="." unique_id=1555686511]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = ExtResource("2_tie0n")
+
+[node name="Margin" type="MarginContainer" parent="Panel" unique_id=102611616]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 28
+
+[node name="HBox" type="HBoxContainer" parent="Panel/Margin" unique_id=1476201838]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Portrait" type="TextureRect" parent="Panel/Margin/HBox" unique_id=2133892066]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("3_i241c")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Right" type="VBoxContainer" parent="Panel/Margin/HBox" unique_id=1114074393]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="NameLabel" type="Label" parent="Panel/Margin/HBox/Right" unique_id=1743489353]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("4_8d78f")
+theme_override_font_sizes/font_size = 20
+text = "Le Tavernier"
+
+[node name="TextLabel" type="Label" parent="Panel/Margin/HBox/Right" unique_id=968912648]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("4_8d78f")
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 7
+theme_override_font_sizes/font_size = 16
+text = "test text"
+
+[node name="ButtonRow" type="HBoxContainer" parent="Panel/Margin/HBox/Right" unique_id=2044570051]
+layout_mode = 2
+alignment = 2
+
+[node name="SkipButton" type="Button" parent="Panel/Margin/HBox/Right/ButtonRow" unique_id=785087504]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("5_4txja")
+
+[node name="SkipLabel" type="Label" parent="Panel/Margin/HBox/Right/ButtonRow/SkipButton" unique_id=2099887766]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_8d78f")
+theme_override_font_sizes/font_size = 20
+text = "Continuer"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ArrowLeft" type="TextureRect" parent="." unique_id=1710971834]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -24.0
+offset_right = -8.0
+offset_bottom = 24.0
+grow_vertical = 2
+rotation = -1.5708
+pivot_offset = Vector2(24, 24)
+texture = ExtResource("5_arrow")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ArrowRight" type="TextureRect" parent="." unique_id=521493481]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 8.0
+offset_top = -24.0
+offset_right = 56.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.5708
+pivot_offset = Vector2(24, 24)
+texture = ExtResource("5_arrow")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ArrowTop" type="TextureRect" parent="." unique_id=1463825750]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -24.0
+offset_top = -56.0
+offset_right = 24.0
+offset_bottom = -8.0
+grow_horizontal = 2
+pivot_offset = Vector2(24, 24)
+texture = ExtResource("5_arrow")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ArrowBottom" type="TextureRect" parent="." unique_id=269562446]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -24.0
+offset_top = 8.0
+offset_right = 24.0
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.14159
+pivot_offset = Vector2(24, 24)
+texture = ExtResource("5_arrow")
+expand_mode = 1
+stretch_mode = 5

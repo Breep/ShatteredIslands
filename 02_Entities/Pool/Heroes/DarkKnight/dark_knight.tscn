@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cusafkpxrg6we" path="res://02_Entities/Pool/Heroes/DarkKnight/dark_knight.gd" id="1_ufk4g"]
 [ext_resource type="PackedScene" uid="uid://dv0rauvoaxb0y" path="res://02_Entities/Pool/Heroes/DarkKnight/Skins/Standard/dark_knight_black.tscn" id="3_5c32l"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://d2v3r7r65ablv" path="res://02_Entities/Pool/Heroes/DarkKnight/dark_knight_animation_blend_tree.tres" id="4_m5vbw"]
-[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/EntityInfoPanel/HeroSimpleInfoPanel2D/hero_simple_info_panel_2d.tscn" id="6_3htvw"]
+[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/LargeHealthBar/large_health_bar_component.tscn" id="6_3htvw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rxegs"]
 height = 2.0229492

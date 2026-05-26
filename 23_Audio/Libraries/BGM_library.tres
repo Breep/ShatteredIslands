@@ -2,10 +2,12 @@
 
 [ext_resource type="Script" uid="uid://bnohfh6e2eq3" path="res://23_Audio/audio_lib.gd" id="1_774qr"]
 [ext_resource type="AudioStream" uid="uid://bejum4g64ietj" path="res://23_Audio/BGM/Iron Man 2012 Remaster.mp3" id="1_aacct"]
+[ext_resource type="AudioStream" uid="uid://dcp8tj4uec56q" path="res://23_Audio/SFX/Tavern/tavern music.mp3" id="2_tavrn"]
 
 [resource]
 script = ExtResource("1_774qr")
 audio_database = Dictionary[String, AudioStream]({
-"BGM_01": ExtResource("1_aacct")
+"BGM_01": ExtResource("1_aacct"),
+"tavern_music": ExtResource("2_tavrn")
 })
 metadata/_custom_type_script = "uid://bnohfh6e2eq3"

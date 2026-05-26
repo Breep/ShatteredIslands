@@ -1,0 +1,169 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://Game/LevelSelector/level_selector.gd" id="1_root"]
+[ext_resource type="PackedScene" path="res://Game/LevelSelector/island.tscn" id="2_island"]
+[ext_resource type="PackedScene" path="res://Game/LevelSelector/turtle.tscn" id="3_turtle"]
+[ext_resource type="Script" uid="uid://br3yh3bu1oj75" path="res://Game/LevelSelector/paths_layer.gd" id="4_paths"]
+[ext_resource type="Script" uid="uid://bia26v50nwe6c" path="res://04_UI/UIButton/ui_button.gd" id="ui_btn"]
+
+[node name="LevelSelector" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_root")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.42, 0.72, 0.95, 1)
+mouse_filter = 2
+
+[node name="BackgroundBand" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -320.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.62, 0.82, 0.95, 0.55)
+mouse_filter = 2
+
+[node name="TitleLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -500.0
+offset_top = 40.0
+offset_right = 500.0
+offset_bottom = 110.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.92, 0.72, 1)
+theme_override_colors/font_outline_color = Color(0.15, 0.1, 0.05, 0.9)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 64
+text = "LE VOYAGE CÉLESTE"
+horizontal_alignment = 1
+
+[node name="SubtitleLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -400.0
+offset_top = 120.0
+offset_right = 400.0
+offset_bottom = 160.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.92)
+theme_override_colors/font_outline_color = Color(0.15, 0.1, 0.05, 0.7)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 32
+text = "SÉLECTION DU NIVEAU"
+horizontal_alignment = 1
+
+[node name="PathsLayer" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("4_paths")
+
+[node name="IslandsRoot" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Island_1" parent="IslandsRoot" instance=ExtResource("2_island")]
+position = Vector2(300, 600)
+island_id = &"island_1"
+tier = 1
+display_title = "NIVEAU 1"
+display_subtitle = "DÉPART"
+radius = 105.0
+body_color = Color(0.5, 0.78, 0.48, 1)
+
+[node name="Island_2A" parent="IslandsRoot" instance=ExtResource("2_island")]
+position = Vector2(720, 340)
+island_id = &"island_2a"
+tier = 2
+display_title = "PALAIS 2"
+display_subtitle = "2A: FORÊT ANCIENNE"
+radius = 95.0
+body_color = Color(0.32, 0.6, 0.35, 1)
+
+[node name="Island_2B" parent="IslandsRoot" instance=ExtResource("2_island")]
+position = Vector2(720, 820)
+island_id = &"island_2b"
+tier = 2
+display_title = "PALAIS 2"
+display_subtitle = "2B: GROTTES CRISTALLINES"
+radius = 95.0
+body_color = Color(0.55, 0.62, 0.78, 1)
+
+[node name="Island_3A" parent="IslandsRoot" instance=ExtResource("2_island")]
+position = Vector2(1200, 340)
+island_id = &"island_3a"
+tier = 3
+display_title = "PALAIS 3"
+display_subtitle = "3A: CIME VOLCANIQUE"
+radius = 95.0
+body_color = Color(0.72, 0.35, 0.25, 1)
+
+[node name="Island_3B" parent="IslandsRoot" instance=ExtResource("2_island")]
+position = Vector2(1200, 820)
+island_id = &"island_3b"
+tier = 3
+display_title = "PALAIS 3"
+display_subtitle = "3B: ARCHIPEL SUSPENDU"
+radius = 95.0
+body_color = Color(0.35, 0.72, 0.6, 1)
+
+[node name="Island_4" parent="IslandsRoot" instance=ExtResource("2_island")]
+position = Vector2(1630, 560)
+island_id = &"island_4"
+tier = 4
+display_title = "PALAIS 4"
+display_subtitle = "FINALE: LE CHÂTEAU"
+radius = 115.0
+body_color = Color(0.85, 0.72, 0.38, 1)
+
+[node name="Turtle" parent="." instance=ExtResource("3_turtle")]
+unique_name_in_owner = true
+
+[node name="BackButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = -95.0
+offset_right = 240.0
+offset_bottom = -35.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 28
+text = "RETOUR"
+script = ExtResource("ui_btn")
+
+[node name="StartButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -280.0
+offset_top = -95.0
+offset_right = -40.0
+offset_bottom = -35.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 28
+text = "COMMENCER"
+script = ExtResource("ui_btn")

@@ -1,14 +1,12 @@
 class_name IgniteAlteration
 extends StackAlteration
 
-## Debuff stack. Every TICK_INTERVAL_SEC, deals MAXHP_PERCENT_PER_STACK × stacks
-## of max-HP MAGICAL damage, then decays by DECAY_PERCENT (clamped).
+## Debuff stack. Every TICK_INTERVAL_SEC, deals `_stacks` MAGICAL damage,
+## then decays with a hybrid rule: max(DECAY_MIN, stacks × DECAY_PERCENT).
 
-const TICK_INTERVAL_SEC: float = 0.5
-const MAXHP_PERCENT_PER_STACK: float = 0.03
+const TICK_INTERVAL_SEC: float = 1.0
 const DECAY_PERCENT: float = 15.0
-const DECAY_MIN: int = 1
-const DECAY_MAX: int = 10000
+const DECAY_MIN: int = 2
 const _INTERVAL_TICKS: int = int(TICK_INTERVAL_SEC * TICKS_PER_SECOND)
 
 var _ticks_remaining: int = _INTERVAL_TICKS
@@ -28,13 +26,11 @@ func process_tick() -> void:
 	_ticks_remaining = _INTERVAL_TICKS
 	if _stacks <= 0 or _owner == null: return
 
-	var percent: float = MAXHP_PERCENT_PER_STACK * _stacks
-	_owner.damage.take_percent(percent, Utils.PercentModifier.MAX_HP, Utils.ActionType.DAMAGE_MAGICAL, false, "Ignite Periodic")
+	_owner.damage.take(_stacks, Utils.ActionType.DAMAGE_MAGICAL, false, "Ignite Periodic")
 	_decay()
 
 
 func _decay() -> void:
 	if _stacks <= 0: return
-	var decay: int = int(_stacks * DECAY_PERCENT / 100.0)
-	decay = clampi(decay, DECAY_MIN, DECAY_MAX)
+	var decay: int = max(DECAY_MIN, int(_stacks * DECAY_PERCENT / 100.0))
 	_stacks -= decay

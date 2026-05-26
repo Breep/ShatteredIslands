@@ -1,86 +1,20 @@
-[gd_resource type="Resource" script_class="HeroStats" format=3 uid="uid://clatikastat10"]
+[gd_resource type="Resource" script_class="EntityStats" format=3 uid="uid://dlatikastat10"]
 
-[ext_resource type="Script" uid="uid://2py6kv5aqgem" path="res://02_Entities/_Shared/hero_stats.gd" id="1_lat10"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="1_es"]
 
 [resource]
-script = ExtResource("1_lat10")
-health_max = 5987
-mana_regen = 2.45
-attack_damage = 29
-attack_speed = 2.0167266
-attack_range = 7.0
-movement_speed = 3.0
-crit_chance = 0.0
-crit_mult = 100.0
-m_resistances = Dictionary[int, float]({
-0: 0.0,
-1: 0.0,
-2: 0.0,
-4: 0.0,
-5: 0.0,
-6: 0.0,
-7: 0.0,
-8: 0.0,
-9: 0.0,
-10: 0.0,
-11: 0.0,
-12: 0.0
+script = ExtResource("1_es")
+_health_max = 1450.0
+_mana_regen = 2.8
+_attack_range = 7.7
+_attack_damage = 43.0
+_attack_speed = 1.4
+_movement_speed = 5.9
+_crit_chance = 9.5
+_dodge = 9.5
+_m_resistances = Dictionary[int, float]({
+0: 0.9,
+1: 0.9,
+2: 1.8
 })
-m_exposures = Dictionary[int, float]({
-0: 0.0,
-1: 0.0,
-2: 0.0,
-4: 0.0,
-5: 0.0,
-6: 0.0,
-7: 0.0,
-8: 0.0,
-9: 0.0,
-10: 0.0,
-11: 0.0,
-12: 0.0
-})
-dodge = 0.0
-m_powers = Dictionary[int, float]({
-0: 0.0,
-1: 0.0,
-2: 0.0,
-4: 0.0,
-5: 0.0,
-6: 0.0,
-7: 0.0,
-8: 0.0,
-9: 0.0,
-10: 0.0,
-11: 0.0,
-12: 0.0
-})
-m_fragilities = Dictionary[int, float]({
-0: 0.0,
-1: 0.0,
-2: 0.0,
-4: 0.0,
-5: 0.0,
-6: 0.0,
-7: 0.0,
-8: 0.0,
-9: 0.0,
-10: 0.0,
-11: 0.0,
-12: 0.0
-})
-crit_m_resistances = Dictionary[int, float]({
-0: 0.0,
-1: 0.0,
-2: 0.0,
-4: 0.0,
-5: 0.0,
-6: 0.0,
-7: 0.0,
-8: 0.0,
-9: 0.0,
-10: 0.0,
-11: 0.0,
-12: 0.0
-})
-lifesteal = 0.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"

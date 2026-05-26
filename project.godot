@@ -29,6 +29,7 @@ buses/default_bus_layout="uid://c3slvo4b5haid"
 Console="*uid://dinahj02x6npw"
 Verbose="*res://09_Lib/verbose.gd"
 Utils="*res://09_Lib/utils.gd"
+Settings="*res://08_GlobalManagers/settings.gd"
 GameManager="*res://08_GlobalManagers/game_manager.gd"
 CardShopManager="*res://08_GlobalManagers/card_shop_manager.gd"
 ServerOracleShop="*res://08_GlobalManagers/server_oracle_shop.gd"
@@ -41,6 +42,7 @@ GlobalGameManager="*res://08_GlobalManagers/global_game_manager.gd"
 AudioManager="*res://08_GlobalManagers/audio_manager.tscn"
 Shared="*res://09_Lib/shared.gd"
 Debug="*uid://woc06wbtruty"
+TutorialManager="*res://04_UI/Tool/Tutorial/tutorial_manager.gd"
 
 [debug]
 

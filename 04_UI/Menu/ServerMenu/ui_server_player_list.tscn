@@ -4,6 +4,7 @@
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme.tres" id="3_w1xft"]
 [ext_resource type="PackedScene" uid="uid://dqkyovx2krwgi" path="res://04_UI/Menu/ServerMenu/ui_player_info_template.tscn" id="4_eeq53"]
 [ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://04_UI/Tool/Misc/hover_boost_button.gd" id="4_urncf"]
+[ext_resource type="Script" uid="uid://bia26v50nwe6c" path="res://04_UI/UIButton/ui_button.gd" id="ui_btn"]
 
 [node name="UIServerPlayerList" type="Control"]
 layout_mode = 3
@@ -95,6 +96,7 @@ size_flags_stretch_ratio = 0.5
 theme_override_font_sizes/font_size = 75
 text = "START
 GAME"
+script = ExtResource("ui_btn")
 
 [connection signal="pressed" from="CenterContainer/ServerPanels/ConnectedPlayersPanel/MarginContainer/HBoxContainer/VBoxContainer/AddBotButton" to="." method="_on_add_bot_button_pressed"]
 [connection signal="pressed" from="CenterContainer/ServerPanels/StartButton" to="." method="_on_start_button_pressed"]

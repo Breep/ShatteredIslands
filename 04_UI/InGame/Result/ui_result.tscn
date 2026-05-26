@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cu3cexueftpj4" path="res://04_UI/InGame/Result/ui_result.gd" id="2_5fo44"]
 [ext_resource type="Texture2D" uid="uid://xhyj0k42ilb3" path="res://04_UI/_Themes/Data/panel_tileable_20px_border_only.png" id="3_tu3tx"]
 [ext_resource type="Texture2D" uid="uid://db2m1yw0asd6l" path="res://04_UI/_Themes/Data/cross.png" id="4_hguj7"]
+[ext_resource type="Script" uid="uid://bia26v50nwe6c" path="res://04_UI/UIButton/ui_button.gd" id="ui_btn"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_27kkc"]
 
@@ -111,6 +112,7 @@ mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 30
 theme_override_styles/focus = SubResource("StyleBoxEmpty_27kkc")
 text = "STAY"
+script = ExtResource("ui_btn")
 
 [node name="LeavePanel" type="Panel" parent="Control/MainPanel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1618166461]
 layout_mode = 2
@@ -129,6 +131,7 @@ mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 30
 theme_override_styles/focus = SubResource("StyleBoxEmpty_27kkc")
 text = "MAIN MENU"
+script = ExtResource("ui_btn")
 
 [node name="TitlePanel" type="Panel" parent="Control" unique_id=399669026]
 custom_minimum_size = Vector2(300, 70)
@@ -195,6 +198,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_default_cursor_shape = 2
 theme_override_styles/focus = SubResource("StyleBoxEmpty_xymv4")
+script = ExtResource("ui_btn")
 
 [node name="ConfirmPanel" type="Panel" parent="Control" unique_id=1199396325]
 unique_name_in_owner = true
@@ -258,12 +262,14 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "YES"
+script = ExtResource("ui_btn")
 
 [node name="NoButton" type="Button" parent="Control/ConfirmPanel/PanelBorder/MarginContainer/VBoxContainer/HBoxContainer" unique_id=2121079062]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "NO"
+script = ExtResource("ui_btn")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=505299927]
 layout_mode = 1

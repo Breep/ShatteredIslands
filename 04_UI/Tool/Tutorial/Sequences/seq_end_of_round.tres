@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="TutorialSequence" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://04_UI/Tool/Tutorial/Resource/tutorial_sequence.gd" id="1_seq"]
+[ext_resource type="Script" path="res://04_UI/Tool/Tutorial/Resource/tutorial_step.gd" id="2_step"]
+
+[sub_resource type="Resource" id="step_notoriety"]
+script = ExtResource("2_step")
+id = &"end_round_notoriety"
+text = "À la fin d'un combat tu gagnes ou perds de la notoriété. Le public t'acclamera ou te détestera... Tiens bon !"
+target_unique_name = &""
+validation_event = 0
+validation_filter = &""
+auto_advance_delay = 7.0
+
+[resource]
+script = ExtResource("1_seq")
+id = &"seq_end_of_round"
+trigger_state = 5
+steps = Array[ExtResource("2_step")]([SubResource("step_notoriety")])

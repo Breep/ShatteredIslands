@@ -21,8 +21,10 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_g86nx")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=588175552]
-layout_mode = 1
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1903271045]
+layer = 128
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=588175552]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -31,7 +33,7 @@ grow_vertical = 2
 pivot_offset = Vector2(0.5, 0.5)
 color = Color(0.1764706, 0.1764706, 0.1764706, 0.47843137)
 
-[node name="Control2" type="Control" parent="." unique_id=117143554]
+[node name="Control2" type="Control" parent="CanvasLayer" unique_id=117143554]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -45,13 +47,13 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CanvasGroup" type="CanvasGroup" parent="Control2" unique_id=1268256076]
+[node name="CanvasGroup" type="CanvasGroup" parent="CanvasLayer/Control2" unique_id=1268256076]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_xk7ho")
 scale = Vector2(0.625, 0.625)
 fit_margin = 1024.0
 
-[node name="CardLayout" parent="Control2/CanvasGroup" unique_id=591018748 instance=ExtResource("2_g86nx")]
+[node name="CardLayout" parent="CanvasLayer/Control2/CanvasGroup" unique_id=591018748 instance=ExtResource("2_g86nx")]
 unique_name_in_owner = true
 anchors_preset = 8
 anchor_left = 0.5
@@ -64,7 +66,7 @@ offset_right = 630.0
 offset_bottom = 880.00006
 mouse_filter = 2
 
-[node name="Control" type="Control" parent="Control2" unique_id=623134606]
+[node name="Control" type="Control" parent="CanvasLayer/Control2" unique_id=623134606]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

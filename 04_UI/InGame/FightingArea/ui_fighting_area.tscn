@@ -1,9 +1,11 @@
 [gd_scene format=3 uid="uid://bhxhqex1pbh2p"]
 
 [ext_resource type="Script" uid="uid://cl4rtcia6te0m" path="res://04_UI/InGame/FightingArea/ui_fighting_area.gd" id="1_xkiby"]
+[ext_resource type="Script" uid="uid://gsw58as4o14w" path="res://04_UI/Menu/MainMenu/container_tween.gd" id="2_qg6fi"]
 [ext_resource type="PackedScene" uid="uid://cp8df4bxwetqx" path="res://04_UI/InGame/DpsMeter/ui_dps_meter.tscn" id="3_ejw1r"]
 [ext_resource type="PackedScene" uid="uid://dmfkigo1trjd0" path="res://04_UI/Tool/Countdown/ui_countdown.tscn" id="3_ie0xi"]
-[ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://04_UI/Tool/Misc/hover_boost_button.gd" id="4_pf14x"]
+[ext_resource type="Theme" uid="uid://lkjmyhig2cx7" path="res://04_UI/Menu/MainMenu/normal_button2_reverse.tres" id="5_omkkk"]
+[ext_resource type="Script" uid="uid://bq2jprj2y5yr6" path="res://04_UI/Menu/MainMenu/button_main_ui.gd" id="5_qg6fi"]
 
 [node name="UIFightingArea" type="Control" unique_id=1289468176]
 layout_mode = 3
@@ -31,6 +33,9 @@ theme_override_constants/margin_bottom = 25
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1934912557]
 layout_mode = 2
 mouse_filter = 2
+script = ExtResource("2_qg6fi")
+duration = 0.5
+delay_between_elements = 0.1
 
 [node name="EmptyTop" type="Control" parent="MarginContainer/VBoxContainer" unique_id=960803526]
 layout_mode = 2
@@ -70,26 +75,24 @@ mouse_filter = 2
 
 [node name="UiDpsMeter" parent="." unique_id=1054308253 instance=ExtResource("3_ejw1r")]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 1804.0
-offset_top = 478.0
-offset_right = 1804.0
-offset_bottom = 478.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.86
+anchor_top = 0.3
+anchor_right = 0.98
+anchor_bottom = 0.771
 
 [node name="AdvanceButton" type="Button" parent="." unique_id=286258995]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -172.0
-offset_top = -79.0
-offset_right = -17.0
-offset_bottom = -21.0
-grow_horizontal = 0
-grow_vertical = 0
+anchors_preset = -1
+anchor_left = 0.834
+anchor_top = 0.88
+anchor_right = 0.9
+anchor_bottom = 0.92
+offset_right = 152.08008
+offset_bottom = 26.0
+theme = ExtResource("5_omkkk")
 text = "READY"
-script = ExtResource("4_pf14x")
+script = ExtResource("5_qg6fi")
 metadata/_custom_type_script = "uid://dbg5i1sglgh5g"

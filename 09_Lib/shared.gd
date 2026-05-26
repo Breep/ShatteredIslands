@@ -1,8 +1,8 @@
 extends Node
 
-var HEROES: Dictionary[HeroDesc.HeroId, HeroDesc] = {
+var HEROES: Dictionary[HeroDesc.HeroId, EntityDesc] = {
 	HeroDesc.HeroId.DARK_KNIGHT: load("res://02_Entities/Pool/Heroes/DarkKnight/dark_knight.tres"),
-	HeroDesc.HeroId.LATIKA: load("res://02_Entities/Pool/Heroes/Latika/latika.tres"),
+	HeroDesc.HeroId.LATIKA: load("res://02_Entities/Pool/Heroes/Latika/latika_desc.tres"),
 }
 
 var HERO_SCENES: Dictionary[HeroDesc.HeroId, PackedScene] = {
