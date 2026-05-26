@@ -201,14 +201,14 @@
 #}
 #
 ## === Private ===
-#var _owner_entity: Entity
+#var _owner: Entity
 #
 ## ============================== Public ==============================
 #
 #func connect_entity(owner_entity: Entity) -> void:
-	#if _owner_entity != null:
+	#if _owner != null:
 		#_disconnect_from_signals()
-	#_owner_entity = owner_entity
+	#_owner = owner_entity
 	#_connect_to_signals()
 	#_update_layout()
 #
@@ -225,7 +225,7 @@
 #
 #
 #func _connect_to_signals() -> void:
-	#var s: EntityStats = _owner_entity.stats
+	#var s: EntityStats = _owner.stats
 	## Simple stats
 	#_safe_connect(s.health_changed, _on_health_changed)
 	#_safe_connect(s.health_max_changed, _on_health_max_changed)
@@ -238,7 +238,7 @@
 	#_safe_connect(s.attack_power_changed, _on_ap_changed)
 	#_safe_connect(s.crit_resistance_changed, _on_crit_resist_mono_changed)
 	#
-	#var c: AlterationsModule = _owner_entity.alterations
+	#var c: AlterationsModule = _owner.alterations
 	#if c != null:
 		#_safe_connect(c.defense_stacks_changed, _on_defence_changed)
 		#_safe_connect(c.block_stacks_changed, _on_block_changed)
@@ -255,7 +255,7 @@
 #
 #
 #func _disconnect_from_signals() -> void:
-	#var s: EntityStats = _owner_entity.stats
+	#var s: EntityStats = _owner.stats
 	## Simple stats
 	#_safe_disconnect(s.health_changed, _on_health_changed)
 	#_safe_disconnect(s.health_max_changed, _on_health_max_changed)
@@ -268,7 +268,7 @@
 	#_safe_disconnect(s.attack_power_changed, _on_ap_changed)
 	#_safe_disconnect(s.crit_resistance_changed, _on_crit_resist_mono_changed)
 #
-	#var c: AlterationsModule = _owner_entity.alterations
+	#var c: AlterationsModule = _owner.alterations
 	#if c != null:
 		#_safe_disconnect(c.defense_stacks_changed, _on_defence_changed)
 		#_safe_disconnect(c.block_stacks_changed, _on_block_changed)
@@ -295,9 +295,9 @@
 #
 #
 #func _update_layout() -> void:
-	#var s: EntityStats = _owner_entity.stats
+	#var s: EntityStats = _owner.stats
 	#if _entity_name_label != null:
-		#_entity_name_label.text = _owner_entity.name
+		#_entity_name_label.text = _owner.name
 #
 	## Simple stats
 	#_set_label(_health_label, s.get_stat(EntityStats.StatType.HEALTH))
@@ -309,7 +309,7 @@
 	#_set_label(_as_label, s.get_stat(EntityStats.StatType.AS), 2)
 	#_set_label(_attack_range_label, s.get_stat(EntityStats.StatType.AR))
 	#_set_label(_ap_label, s.get_stat(EntityStats.StatType.AP))
-	#var c: AlterationsModule = _owner_entity.alterations
+	#var c: AlterationsModule = _owner.alterations
 	#_set_label(_defence_label, c.defense_stacks if c != null else 0.0)
 	#_set_label(_block_label, c.block_stacks if c != null else 0.0)
 	#_set_label(_thorn_label, c.thorn_stacks if c != null else 0.0)

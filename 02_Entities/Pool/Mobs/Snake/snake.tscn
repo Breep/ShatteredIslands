@@ -4,18 +4,18 @@
 [ext_resource type="PackedScene" uid="uid://c56dr1ix2y718" path="res://02_Entities/Pool/Mobs/Snake/snake_visual.tscn" id="2_61c56"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="2_ptbxe"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://brnwae0xxk00f" path="res://02_Entities/Pool/Mobs/Snake/snake_blendtree.tres" id="5_duvd4"]
-[ext_resource type="Script" uid="uid://cnwr3o67xobtt" path="res://02_Entities/_Shared/Components/Animation/entity_animation_player.gd" id="6_obplm"]
+[ext_resource type="Script" path="res://02_Entities/_Shared/Components/Animation/entity_animation_player.gd" id="6_obplm"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://05_Game/Run/SpawnSpecs/SpawnPoints/SpawnPoint/spawn_point.tscn" id="7_jendl"]
-[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/EntityInfoPanel/SummonSimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="8_nh8ax"]
+[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/Components/HealthBar/SmallHealthBar/small_health_bar_component.tscn" id="8_nh8ax"]
 [ext_resource type="Script" uid="uid://dbu0yi2foobod" path="res://02_Entities/_Shared/Components/Animation/animation_component.gd" id="9_ptbxe"]
 
 [sub_resource type="Resource" id="Resource_6o6k5"]
 script = ExtResource("2_ptbxe")
-health_max = 100.0
+_health_max = 100.0
 auto_attack_type = 1
-attack_range = 1.0
-attack_damage = 10.0
-attack_speed = 0.5
+_attack_range = 1.0
+_attack_damage = 10.0
+_attack_speed = 0.5
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nh8ax"]

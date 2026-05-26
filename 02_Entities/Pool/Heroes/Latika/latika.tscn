@@ -1,13 +1,14 @@
 [gd_scene format=3 uid="uid://dvr7815lw1k8b"]
 
 [ext_resource type="Script" uid="uid://d0t00b3te6pnx" path="res://02_Entities/Pool/Heroes/Latika/latika.gd" id="1_undos"]
+[ext_resource type="Resource" uid="uid://dlatikadesc" path="res://02_Entities/Pool/Heroes/Latika/latika_desc.tres" id="2_44wrm"]
 [ext_resource type="PackedScene" uid="uid://5ccditks7xar" path="res://02_Entities/_Data/Goblins/all_goblins.tscn" id="2_o3eb1"]
 [ext_resource type="PackedScene" uid="uid://40jvxogaqt0t" path="res://02_Entities/_Data/Goblins/Attachments/sm_chr_attach_helmet_01.tscn" id="3_o3eb1"]
 [ext_resource type="Animation" uid="uid://c4ygogs4o0tdh" path="res://02_Entities/_Data/_Animations/Default/Animations/attack_melee_01.res" id="4_44wrm"]
 [ext_resource type="Animation" uid="uid://b472cy5ij8062" path="res://02_Entities/_Data/_Animations/Default/Animations/flying.res" id="4_q55dg"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://2xmw31o447pb" path="res://02_Entities/Pool/Heroes/Latika/latika_animation_tree.res" id="7_44wrm"]
-[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/EntityInfoPanel/HeroSimpleInfoPanel2D/hero_simple_info_panel_2d.tscn" id="7_n3ceh"]
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="8_croh3"]
+[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/LargeHealthBar/large_health_bar_component.tscn" id="8_q55dg"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_44wrm"]
 _data = {
@@ -16,25 +17,25 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_undos"]
-radius = 0.21923828
+radius = 0.38134766
 height = 1.715332
 
-[node name="Latika" type="CharacterBody3D" unique_id=294337328 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_health_bar", "_attack_spawn_marker")]
+[node name="Latika" type="CharacterBody3D" unique_id=294337328 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_attack_spawn_marker")]
 collision_layer = 16
 collision_mask = 17
 script = ExtResource("1_undos")
 entity_name = "Latika"
 category = 0
+entity_desc = ExtResource("2_44wrm")
 _visual_3d = NodePath("LatikaVisual")
 _health_bar_marker = NodePath("LatikaVisual/HealthBarSpawnMarker")
-_health_bar = NodePath("LatikaVisual/HeroSimpleInfoPanel2d")
 _attack_spawn_marker = NodePath("LatikaVisual/ProjectileSpawnMarker")
 _projectile_type = 10
 
 [node name="LatikaVisual" parent="." unique_id=433263620 instance=ExtResource("2_o3eb1")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
-[node name="GeneralSkeleton" parent="LatikaVisual" index="0" unique_id=758051454]
+[node name="GeneralSkeleton" parent="LatikaVisual" index="0" unique_id=194436225]
 bones/9/rotation = Quaternion(2.0185068e-17, 0.52131337, 0.8533654, 1.9993156e-17)
 bones/29/rotation = Quaternion(-0.39662176, 0.58540165, 0.6479593, -0.28309876)
 bones/30/rotation = Quaternion(-0.03993733, 0.117868915, -0.14163901, 0.98206437)
@@ -85,7 +86,7 @@ visible = false
 [node name="SM_Chr_Attach_Bags_03" parent="LatikaVisual/GeneralSkeleton/HipsAttachment" parent_id_path=PackedInt32Array(433263620, 504179125) index="2" unique_id=1284670100]
 visible = false
 
-[node name="AnimationPlayer" parent="LatikaVisual" index="1" unique_id=1642206184]
+[node name="AnimationPlayer" parent="LatikaVisual" index="1" unique_id=258929934]
 libraries/default_humanoid_library = SubResource("AnimationLibrary_44wrm")
 
 [node name="ProjectileSpawnMarker" type="Marker3D" parent="LatikaVisual" unique_id=607808498]
@@ -96,11 +97,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4, 0)
 
 [node name="HealthBarSpawnMarkerTavern" type="Marker3D" parent="LatikaVisual" unique_id=26076487]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5209526, 0)
-
-[node name="HeroSimpleInfoPanel2d" parent="LatikaVisual" unique_id=358992180 node_paths=PackedStringArray("_info_panel_spawn_tavern", "_owner_entity", "_info_panel_spawn") instance=ExtResource("7_n3ceh")]
-_info_panel_spawn_tavern = NodePath("../HealthBarSpawnMarkerTavern")
-_owner_entity = NodePath("../..")
-_info_panel_spawn = NodePath("../HealthBarSpawnMarker")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=448635789]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.84680724, 0)
@@ -188,6 +184,10 @@ parameters/switch_stunned_state/current_index = 0
 
 [node name="AnimationComponent" parent="." unique_id=73205791 node_paths=PackedStringArray("_animation_tree", "_owner") instance=ExtResource("8_croh3")]
 _animation_tree = NodePath("../AnimationTree")
+_owner = NodePath("..")
+
+[node name="LargeHealthBarComponent" parent="." unique_id=1823590462 node_paths=PackedStringArray("_spawn", "_owner") instance=ExtResource("8_q55dg")]
+_spawn = NodePath("../LatikaVisual/HealthBarSpawnMarker")
 _owner = NodePath("..")
 
 [editable path="LatikaVisual"]
