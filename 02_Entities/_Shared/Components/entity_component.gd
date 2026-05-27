@@ -61,15 +61,6 @@ static var _crit_check_number: int = -1
 
 @export var _owner: Entity # Owner of the module
 
-# Alias .tscn-only — toutes les scenes d'entités historiques posent
-# `_owner_entity` (au lieu de `_owner`). On expose un alias pour préserver
-# le wiring sans re-saver toutes les .tscn. Sera supprimé après migration.
-@export var _owner_entity: Entity:
-	set(value):
-		_owner = value
-	get:
-		return _owner
-
 var _dodge_number: int = -1
 
 static func add(component_type: Type, entity_owner: Entity) -> void:

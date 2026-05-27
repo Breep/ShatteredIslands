@@ -1,0 +1,58 @@
+[gd_resource type="Resource" script_class="EntityDesc" format=3 uid="uid://djaob0oam5pk0"]
+
+[ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="1_t44nj"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="2_6gam0"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_61olp"]
+[ext_resource type="Resource" uid="uid://mgbv5sx2doob" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/Stats/celestial_chicken_stats_lvl_01.tres" id="4_adcmo"]
+[ext_resource type="Resource" uid="uid://bufd4txtrdbwa" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/Stats/celestial_chicken_stats_lvl_02.tres" id="5_7ij4n"]
+[ext_resource type="Resource" uid="uid://4pcr1jdll1fu" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/Stats/celestial_chicken_stats_lvl_03.tres" id="6_70l3q"]
+[ext_resource type="Resource" uid="uid://pnwtu21th182" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/Stats/celestial_chicken_stats_lvl_04.tres" id="7_fe8ou"]
+[ext_resource type="Resource" uid="uid://ct0l6wok6kdt" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/Stats/celestial_chicken_stats_lvl_05.tres" id="8_2mjit"]
+[ext_resource type="Resource" uid="uid://bsyt2nvghrv0c" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/Stats/celestial_chicken_stats_lvl_06.tres" id="9_tnuih"]
+[ext_resource type="Resource" uid="uid://dhnwvlsxn2r0x" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/Stats/celestial_chicken_stats_lvl_07.tres" id="10_cm5tk"]
+[ext_resource type="Resource" uid="uid://17n06kga4yhv" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/Stats/celestial_chicken_stats_lvl_08.tres" id="11_oh4xx"]
+[ext_resource type="Resource" uid="uid://b8i3q71nllb56" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/Stats/celestial_chicken_stats_lvl_09.tres" id="12_8xyy5"]
+[ext_resource type="Resource" uid="uid://dkdelphv2hdk2" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/Stats/celestial_chicken_stats_lvl_10.tres" id="13_g5tg0"]
+[ext_resource type="Resource" uid="uid://bt13q3kd771wh" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/Stats/celestial_chicken_stats_lvl_11.tres" id="14_d0dts"]
+[ext_resource type="Resource" uid="uid://b3ec4vypywmsf" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/Stats/celestial_chicken_stats_lvl_12.tres" id="15_3bfjc"]
+[ext_resource type="Resource" uid="uid://hven404hfjeb" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/Stats/celestial_chicken_stats_lvl_13.tres" id="16_x8cfm"]
+[ext_resource type="Resource" uid="uid://bacgllvsmxwi6" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/Stats/celestial_chicken_stats_lvl_14.tres" id="17_s5cdb"]
+[ext_resource type="Resource" uid="uid://dmet83prrf4l5" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/Stats/celestial_chicken_stats_lvl_15.tres" id="18_d17y8"]
+[ext_resource type="Resource" uid="uid://6q0ksxvxom1d" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/Stats/celestial_chicken_stats_lvl_16.tres" id="19_2tuoh"]
+[ext_resource type="Resource" uid="uid://cf7coxle38i74" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/Stats/celestial_chicken_stats_lvl_17.tres" id="20_bbw26"]
+[ext_resource type="Resource" uid="uid://6bfp4c6lio36" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/Stats/celestial_chicken_stats_lvl_18.tres" id="21_5lils"]
+[ext_resource type="Resource" uid="uid://dad8yp6lkorqm" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/Stats/celestial_chicken_stats_lvl_19.tres" id="22_itteg"]
+[ext_resource type="Resource" uid="uid://f4fcm12s6j1l" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/Stats/celestial_chicken_stats_lvl_20.tres" id="23_xalr5"]
+
+[resource]
+script = ExtResource("1_t44nj")
+name = "Celestial chicken"
+description = "Bok bok"
+stats = Dictionary[int, ExtResource("3_61olp")]({
+1: ExtResource("4_adcmo"),
+2: ExtResource("5_7ij4n"),
+3: ExtResource("6_70l3q"),
+4: ExtResource("7_fe8ou"),
+5: ExtResource("8_2mjit"),
+6: ExtResource("9_tnuih"),
+7: ExtResource("10_cm5tk"),
+8: ExtResource("11_oh4xx"),
+9: ExtResource("12_8xyy5"),
+10: ExtResource("13_g5tg0"),
+11: ExtResource("14_d0dts"),
+12: ExtResource("15_3bfjc"),
+13: ExtResource("16_x8cfm"),
+14: ExtResource("17_s5cdb"),
+15: ExtResource("18_d17y8"),
+16: ExtResource("19_2tuoh"),
+17: ExtResource("20_bbw26"),
+18: ExtResource("21_5lils"),
+19: ExtResource("22_itteg"),
+20: ExtResource("23_xalr5")
+})
+aa_1_release_normalized = 0.8
+aa_2_release_normalized = 0.8
+aa_3_release_normalized = 0.8
+aa_1_anim_base_duration = 0.6
+aa_2_anim_base_duration = 0.6
+aa_3_anim_base_duration = 0.6
