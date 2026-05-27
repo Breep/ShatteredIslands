@@ -92,6 +92,9 @@ func _ready() -> void:
 	_rng.randomize()
 
 	_animation_tree.set(PARAM_SWITCH_ENTITY_MODE, VALUE_SWITCH_ENTITY_MODE_INGAME)
+	_animation_tree.set(PARAM_SWITCH_MAIN, VALUE_SWITCH_MAIN_IDLE)
+	_animation_tree.set(PARAM_SWITCH_IDLE, VALUE_SWITCH_IDLE_STANDING_NEUTRAL)
+	_animation_tree.set(PARAM_SEEK_IDLE_STANDING_NEUTRAL, randf())
 	_init_aa_durations()
 
 	_owner.life_state_changed.connect(_on_owner_life_state_changed)

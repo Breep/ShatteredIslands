@@ -150,9 +150,9 @@ func _on_portrait_family_unselected(_portrait_family: UIFamilyPortrait) -> void:
 
 func _on_events_entity_clicked(entity: Entity) -> void:
 	if not entity.is_hero(): return
-	var hero: Entity = entity
-	if hero.player != null:
-		update_content(hero.player)
+	#var hero: Entity = entity
+	#if hero.player != null:
+		#update_content(hero.player)
 
 
 

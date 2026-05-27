@@ -1,5 +1,6 @@
-# Spec d'une unité antagoniste (ennemi de combat) placée dans une formation de combat.
-# Marker typé — toutes les données héritent d'EntitySpec.
+# Marker spec : un antagoniste (mob ennemi de combat). Toutes les données
+# vivent sur EntitySpec. La sous-classe existe pour la compat des .tres legacy
+# et le typage tooling.
 @tool
 class_name AntagonistSpec
 extends EntitySpec

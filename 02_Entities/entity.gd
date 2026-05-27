@@ -328,16 +328,30 @@ func apply_context(context: EntityContext) -> void:
 	# Pour les heroes/specs, entity_owner est null → on reste sans summoner.
 	if context.entity_owner != null:
 		summoner = context.entity_owner
-		summoner.bds_registry.register_summon(self)
+		if summoner.bds_registry != null:
+			summoner.bds_registry.register_summon(self)
 
-	projectile.connect_to_spawn_manager(_spawn_manager)
-	spell.connect_to_spawn_manager(_spawn_manager)
-	summon.connect_to_spawn_manager(_spawn_manager)
-	target.connect_to_spawn_manager(_spawn_manager)
-	
-	summon.connect_to_arena_zone_manager(_arena_zone_manager)
+	# Composants potentiellement encore null si apply_context est appelé avant
+	# add_child (cf SpawnManager.spawn_entity). Les guards évitent le crash ;
+	# _enter_tree rejouera _connect_components_to_managers une fois auto-loaded.
+	_connect_components_to_managers()
 
 	Verbose.debug("Entity [" + entity_name + "] received fighting_state [" + str(FightingState.keys()[context.fighting_state]) + "] from context", Verbose.Category.ENTITY)
+
+
+# Câble les composants au spawn_manager / arena_zone_manager. Idempotent et
+# null-safe : peut être appelé plusieurs fois (avant et après auto-loading).
+func _connect_components_to_managers() -> void:
+	if _spawn_manager == null: return
+	if projectile != null:
+		projectile.connect_to_spawn_manager(_spawn_manager)
+	if spell != null:
+		spell.connect_to_spawn_manager(_spawn_manager)
+	if summon != null:
+		summon.connect_to_spawn_manager(_spawn_manager)
+		summon.connect_to_arena_zone_manager(_arena_zone_manager)
+	if target != null:
+		target.connect_to_spawn_manager(_spawn_manager)
 
 
 func connect_to_fighting_area(fighting_area_ref: FightingArea) -> void:
