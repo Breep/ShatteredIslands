@@ -57,6 +57,7 @@ func _ready() -> void:
 	_update_health_bar(stats.health, stats.health_max)
 	_update_shield_bar(am.shield_stacks, stats.health_max)
 	_update_block_bar(am.block_stacks)
+	_update_level_value(_owner.progression.level)
 
 	for alteration_type: Alteration.Type in Alteration.Type.values():
 		_refresh_icon_for(alteration_type)
@@ -65,6 +66,7 @@ func _ready() -> void:
 	stats.health_max_changed.connect(_on_health_max_changed)
 	am.alteration_changed.connect(_on_alteration_changed)
 	am.taunted_changed.connect(_update_taunt_visual)
+	_owner.progression.level_changed.connect(_on_owner_progression_level_changed)
 
 	if _debug_values != null:
 		_debug_values.visible = DebugHealthBarOverlay.is_visible()
@@ -196,6 +198,10 @@ func _refresh_icon_for(alteration_type: Alteration.Type) -> void:
 		_alteration_icons.erase(alteration_type)
 
 
+func _update_level_value(level: int) -> void:
+	if _level_label != null:
+		_level_label.text = str(level)
+
 static func _is_alteration_active(alteration: Alteration) -> bool:
 	if alteration is StackAlteration:
 		return (alteration as StackAlteration).stacks > 0
@@ -242,4 +248,8 @@ func _on_debug_overlay_toggled(is_visible: bool) -> void:
 		_debug_values.visible = is_visible
 	if _level_label != null:
 		_level_label.visible = is_visible
+
+
+func _on_owner_progression_level_changed(level: int) -> void:
+	_update_level_value(level)
 #endregion

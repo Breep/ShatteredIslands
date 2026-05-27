@@ -123,7 +123,7 @@ var _stats_modifiers_dictionaries: Dictionary[EntityStats.StatType, StatModifier
 
 # ============================== Node base functions ==============================
 
-func _init(_base_stats: EntityStats, current_stats: EntityStats) -> void:
+func _init(stats: EntityStats) -> void:
 	# Mono pure (single)
 	_stats_modifiers_dictionaries[EntityStats.StatType.HEALTH_MAX] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.MANA_MAX] = StatModifierDictionary.new()
@@ -152,16 +152,18 @@ func _init(_base_stats: EntityStats, current_stats: EntityStats) -> void:
 	_stats_modifiers_dictionaries[EntityStats.StatType.M_RESISTANCE] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.M_EXPOSURE] = StatModifierDictionary.new()
 
-	_entity_base_stats = _base_stats
-	_entity_stats = current_stats
-	_entity_stats.auto_attack_type = _entity_base_stats.auto_attack_type
-	_entity_base_stats.has_been_reset.connect(_on_entity_base_stats_has_been_reset)
-	for stat_type: EntityStats.StatType in _stats_modifiers_dictionaries.keys():
-		_stats_modifiers_dictionaries[stat_type].setup(stat_type, _entity_stats, _entity_base_stats)
-		_stats_modifiers_dictionaries[stat_type].recompute_stats()
-	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
+	_entity_stats = stats
 
 # ============================== Public functions ==============================
+
+func update_base_stats(base_stats: EntityStats) -> void:
+	if base_stats == null:
+		Verbose.warn("No base stats for entity - Using default base stats", Verbose.Category.STAT_MODIFIER)
+		base_stats = EntityStats.new()
+	_entity_base_stats = base_stats
+	_entity_stats.auto_attack_type = base_stats.auto_attack_type
+	recompute_all()
+	_entity_stats.reset_from_self()
 
 func register_modifier(stat_modifier: StatModifier) -> void:
 	_normalize_alias(stat_modifier)
@@ -209,14 +211,9 @@ func _auto_cleanup_all() -> void:
 		smd.auto_cleanup()
 		smd.recompute_stats()
 
-# ============================== Callbacks ==============================
-
-func _on_entity_base_stats_has_been_reset() -> void:
-	for smd: StatModifierDictionary in _stats_modifiers_dictionaries.values():
-		smd.recompute_stats()
-
-
-func _on_game_manager_game_state_changed(game_state: GameManager.GameState) -> void:
-	match game_state:
-		GameManager.GameState.ENDING_ROUND:
-			_auto_cleanup_all()
+## ============================== Callbacks ==============================
+#
+#func _on_game_manager_game_state_changed(game_state: GameManager.GameState) -> void:
+	#match game_state:
+		#GameManager.GameState.ENDING_ROUND:
+			#_auto_cleanup_all()

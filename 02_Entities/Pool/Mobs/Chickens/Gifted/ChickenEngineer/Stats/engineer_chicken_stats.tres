@@ -1,0 +1,119 @@
+[gd_resource type="Resource" script_class="EntityStatsBuilder" format=3 uid="uid://lmsu3k3ec5g"]
+
+[ext_resource type="Script" uid="uid://58307hvsc6op" path="res://10_Tool/EntityStatsBuilder/entity_stats_builder.gd" id="1_gkkaf"]
+[ext_resource type="Script" uid="uid://brthobm35g70u" path="res://10_Tool/EntityStatsBuilder/stat_growth_rule.gd" id="1_v6p0n"]
+
+[sub_resource type="Resource" id="Resource_x26gi"]
+script = ExtResource("1_v6p0n")
+type = 1
+base = 10.0
+slope = 1.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_mfnc0"]
+script = ExtResource("1_v6p0n")
+type = 1
+base = 7.0
+slope = 1.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_7687l"]
+script = ExtResource("1_v6p0n")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_0600o"]
+script = ExtResource("1_v6p0n")
+base = 1.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_3j8h1"]
+script = ExtResource("1_v6p0n")
+type = 1
+base = 0.8
+slope = 0.1
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_x0yvl"]
+script = ExtResource("1_v6p0n")
+base = 5.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_xdadt"]
+script = ExtResource("1_v6p0n")
+base = 100.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_7hbuf"]
+script = ExtResource("1_v6p0n")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_kbmqg"]
+script = ExtResource("1_v6p0n")
+base = 5.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_v6p0n"]
+script = ExtResource("1_v6p0n")
+type = 1
+base = 30.0
+slope = 5.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_k52b0"]
+script = ExtResource("1_v6p0n")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_du5dj"]
+script = ExtResource("1_v6p0n")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_q3wex"]
+script = ExtResource("1_v6p0n")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_f1jg1"]
+script = ExtResource("1_v6p0n")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_j4n4q"]
+script = ExtResource("1_v6p0n")
+type = 1
+base = 4.5
+slope = 0.1
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_gwimk"]
+script = ExtResource("1_v6p0n")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_x3yv7"]
+script = ExtResource("1_v6p0n")
+base = 1.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[resource]
+script = ExtResource("1_gkkaf")
+output_dir = "res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenEngineer/Stats"
+stats_file_prefix = "engineer_chicken_stats"
+desc_file_name = "engineer_chicken_entity_desc"
+entity_name = "Smart Bok"
+entity_description = "Bok = Kob"
+health_max = SubResource("Resource_v6p0n")
+mana_max = SubResource("Resource_q3wex")
+mana_regen = SubResource("Resource_f1jg1")
+attack_damage = SubResource("Resource_mfnc0")
+attack_speed = SubResource("Resource_3j8h1")
+attack_range = SubResource("Resource_0600o")
+attack_power = SubResource("Resource_7687l")
+movement_speed = SubResource("Resource_j4n4q")
+scale = SubResource("Resource_x3yv7")
+crit_chance = SubResource("Resource_x0yvl")
+crit_mult = SubResource("Resource_xdadt")
+dodge = SubResource("Resource_kbmqg")
+lifesteal = SubResource("Resource_k52b0")
+crit_resistance = SubResource("Resource_7hbuf")
+armor = SubResource("Resource_x26gi")
+magic_resistance = SubResource("Resource_du5dj")
+poison_resistance = SubResource("Resource_gwimk")
+auto_attack_type = 1
+metadata/_custom_type_script = "uid://58307hvsc6op"

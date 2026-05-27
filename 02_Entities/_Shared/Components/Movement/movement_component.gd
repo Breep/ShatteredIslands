@@ -289,4 +289,4 @@ func _compute_initial_angle(center: Vector3) -> float:
 
 
 func _get_move_speed() -> float:
-	return 4 # _owner.stats.move_speed
+	return _owner.stats.movement_speed

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://bts22443uo7i3"]
 
 [ext_resource type="Texture2D" uid="uid://dnpy1x6ryvstv" path="res://02_Entities/Pool/Heroes/DarkKnight/Data/b1_corruption.jpeg" id="1_c4usc"]
-[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/skill.gd" id="2_vctfu"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="2_vctfu"]
 
 [resource]
 script = ExtResource("2_vctfu")

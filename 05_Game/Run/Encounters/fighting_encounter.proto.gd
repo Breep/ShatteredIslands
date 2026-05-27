@@ -31,7 +31,7 @@ func _ready() -> void:
 	await _encounter_runner.ready
 
 	var party: Party = Party.new()
-	party.formation = _default_player_formation.populate_with(_hero_scenes, _acolyte_scenes)
+	party.formation = _default_player_formation.populate_with(party, _hero_scenes, _acolyte_scenes)
 
 	await _encounter_runner.setup_fighting(_fighting_encounter, party.formation)
 

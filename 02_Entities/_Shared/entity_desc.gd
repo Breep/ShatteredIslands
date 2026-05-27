@@ -11,7 +11,12 @@ extends Resource
 @export var portrait: CompressedTexture2D
 @export_multiline var description: String
 
+@export var scene: PackedScene
+@export var default_category: Entity.Category = Entity.Category.MOB
+@export var starting_companions: Array[EntityDesc]
+
 @export var stats: Dictionary[int, EntityStats]
+@export var skills: Dictionary[Skill.Type, Skill]
 
 @export_group("Auto-Attack timing")
 ## Fraction of the AA cycle (1/AS) occupied by the attack animation.

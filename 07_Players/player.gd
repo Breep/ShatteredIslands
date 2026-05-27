@@ -1,9 +1,10 @@
 # Représente un joueur dans une session : identité réseau (id, name, team),
 # porte-monnaie et progression (gold sur PlayerState ; level/xp proxiés vers
-# le HeroSpec de la formation). Les données hero-level (deck, level, xp,
-# data_memory) vivent canoniquement dans HeroSpec ; Player expose des getters/
-# setters qui pointent dessus pour préserver l'API existante des call sites
-# et pour porter les signaux runtime (lvl_changed, xp_changed).
+# la RoasterEntry du héros dans party.roaster). Les données hero-level (deck,
+# level, xp, data_memory) vivent canoniquement dans RoasterEntry ; Player
+# expose des getters/setters qui pointent dessus pour préserver l'API
+# existante des call sites et pour porter les signaux runtime (lvl_changed,
+# xp_changed).
 class_name Player
 extends Node
 
@@ -27,49 +28,49 @@ var team: int:
 		_team = value
 		if hero != null: hero.team = _team
 
-# === Proxies vers HeroSpec (truth canonique des données hero-level) ===
+# === Proxies vers RoasterEntry (truth canonique des données hero-level) ===
 
 var deck: PlayerDeck:
 	get:
-		var spec: HeroSpec = _get_my_hero_spec()
-		return spec.deck if spec != null else null
+		var entry: RoasterEntry = _get_my_roaster_entry()
+		return entry.deck if entry != null else null
 	set(value):
-		var spec: HeroSpec = _get_my_hero_spec()
-		if spec != null: spec.deck = value
+		var entry: RoasterEntry = _get_my_roaster_entry()
+		if entry != null: entry.deck = value
 
 var data_memory: NestedRegistry:
 	get:
-		var spec: HeroSpec = _get_my_hero_spec()
-		return spec.data_memory if spec != null else null
+		var entry: RoasterEntry = _get_my_roaster_entry()
+		return entry.data_memory if entry != null else null
 	set(value):
-		var spec: HeroSpec = _get_my_hero_spec()
-		if spec != null: spec.data_memory = value
+		var entry: RoasterEntry = _get_my_roaster_entry()
+		if entry != null: entry.data_memory = value
 
 signal lvl_changed(self_ref: Player, new_lvl: int)
 var lvl: int:
 	get:
-		var spec: HeroSpec = _get_my_hero_spec()
-		return spec.level if spec != null else 1
+		var entry: RoasterEntry = _get_my_roaster_entry()
+		return entry.level if entry != null else 1
 	set(value):
-		var spec: HeroSpec = _get_my_hero_spec()
-		if spec == null: return
+		var entry: RoasterEntry = _get_my_roaster_entry()
+		if entry == null: return
 		var clamped := clampi(value, 1, 10)
-		if spec.level == clamped: return
-		spec.level = clamped
-		lvl_changed.emit(self, spec.level)
+		if entry.level == clamped: return
+		entry.level = clamped
+		lvl_changed.emit(self, entry.level)
 
 signal xp_changed(self_ref: Player, new_xp: int)
 var xp: int:
 	get:
-		var spec: HeroSpec = _get_my_hero_spec()
-		return spec.xp if spec != null else 0
+		var entry: RoasterEntry = _get_my_roaster_entry()
+		return entry.xp if entry != null else 0
 	set(value):
-		var spec: HeroSpec = _get_my_hero_spec()
-		if spec == null: return
-		if spec.xp == value: return
-		spec.xp = value
+		var entry: RoasterEntry = _get_my_roaster_entry()
+		if entry == null: return
+		if entry.xp == value: return
+		entry.xp = value
 		_check_lvl_up()
-		xp_changed.emit(self, spec.xp)
+		xp_changed.emit(self, entry.xp)
 
 # === Porte-monnaie (reste sur PlayerState) ===
 
@@ -118,17 +119,12 @@ func _init() -> void:
 	skill_manager.init(self)
 
 
-# Résout la HeroSpec du joueur dans la formation active. En solo : 1ère HeroSpec
-# de party.formation. En multi (futur) : convention via slot index / mapping.
-func _get_my_hero_spec() -> HeroSpec:
+# Résout la RoasterEntry du joueur dans la party active. En solo : 1ère entry
+# de catégorie HERO. En multi (futur) : convention via slot index / mapping.
+func _get_my_roaster_entry() -> RoasterEntry:
 	if GameManager.run_context == null: return null
 	if GameManager.run_context.party == null: return null
-	var formation: FightingFormation = GameManager.run_context.party.formation
-	if formation == null: return null
-	for spec: EntitySpec in formation.entity_specs:
-		if spec is HeroSpec:
-			return spec
-	return null
+	return GameManager.run_context.party.get_first_entry_of_category(Entity.Category.HERO)
 
 
 func _check_lvl_up() -> void:

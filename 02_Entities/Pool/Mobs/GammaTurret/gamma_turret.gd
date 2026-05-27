@@ -35,9 +35,9 @@ func init(shield: int, ad: float, attack_speed: float, hp: int, master: Entity, 
 
 
 func _ready() -> void:
-	_base_stats.health_max = _hp
-	_base_stats.attack_damage = _ad
-	_base_stats.attack_speed = _as
+	#_base_stats.health_max = _hp
+	#_base_stats.attack_damage = _ad
+	#_base_stats.attack_speed = _as
 	stat_modifiers_registry.recompute_all()
 	if not is_instance_valid(_master): _master = summoner
 	movement.orbit_entity(_master, 2, 1, MovementComponent.OrbitFacing.NONE)

@@ -66,8 +66,9 @@ var _run_scene: PackedScene = load("res://05_Game/Run/RunRoot/run_root.tscn")
 const RUN_SAVE_PATH := "user://saves/run.tres"
 const DEMO_RUN_PATH := "res://05_Game/Run/Runs/Pool/Prototyping/demo_run.tres"
 const DEMO_PLAYER_FORMATION_PATH := "res://05_Game/Run/Formations/Pool/Prototyping/default_solo.fighting.tres"
-const DEMO_HERO_SCENE_PATH := "res://02_Entities/Heroes/Latika/latika.tscn"
-const DEMO_ACOLYTE_SCENE_PATH := "res://02_Entities/Summons/ChickenLord/Chicken/Basic/chicken_basic.tscn"
+const DEMO_HERO_DESC_PATH := "res://02_Entities/Pool/Heroes/Latika/latika_desc.tres"
+const DEMO_HERO_SCENE_PATH := "res://02_Entities/Pool/Heroes/Latika/latika.tscn"
+const DEMO_ACOLYTE_SCENE_PATH := "res://02_Entities/Pool/Mobs/Chickens/Basic/chicken_basic.tscn"
 
 var _FAMILIES_REF: Dictionary[Family.Type, Family] = {
 }
@@ -179,27 +180,89 @@ func _populate_demo_party_formation(party: Party) -> void:
 	if default_formation == null:
 		Verbose.error("start_solo_run: default_solo formation introuvable", Verbose.Category.GLOBAL_MANAGER)
 		return
-	var hero_scenes: Array[PackedScene] = [load(DEMO_HERO_SCENE_PATH) as PackedScene]
-	var acolyte_scenes: Array[PackedScene] = [load(DEMO_ACOLYTE_SCENE_PATH) as PackedScene,
-			load(DEMO_ACOLYTE_SCENE_PATH) as PackedScene,
-			load(DEMO_ACOLYTE_SCENE_PATH) as PackedScene,
-			load(DEMO_ACOLYTE_SCENE_PATH) as PackedScene]
-	party.formation = default_formation.populate_with(hero_scenes, acolyte_scenes)
-	_init_hero_specs_runtime_data(party)
+
+	# Roaster : source canonique. Latika + 4 chickens (chicken desc inline,
+	# pas de .tres pour les chickens à ce stade — sera créé plus tard).
+	# Note : `desc.scene` n'est pas stocké dans le .tres (cycle de dépendance
+	# car la scene référence aussi la desc) — on l'attache ici au runtime.
+	var hero_desc: EntityDesc = load(DEMO_HERO_DESC_PATH) as EntityDesc
+	if hero_desc != null:
+		if hero_desc.scene == null:
+			hero_desc.scene = load(DEMO_HERO_SCENE_PATH) as PackedScene
+		party.add_to_roaster(RoasterEntry.from_desc(hero_desc))
+	else:
+		Verbose.warn("start_solo_run: hero desc introuvable", Verbose.Category.GLOBAL_MANAGER)
+
+	var chicken_desc: EntityDesc = _build_demo_chicken_desc()
+	if chicken_desc != null:
+		for i in 4:
+			party.add_to_roaster(RoasterEntry.from_desc(chicken_desc))
+
+	# Formation : positions issues des spawn_specs de la formation par défaut,
+	# mappées aux entries du roaster dans l'ordre (hero puis acolytes).
+	party.formation = _build_formation_from_roaster(party.roaster, default_formation)
+
+	_init_roaster_runtime_data(party)
 
 
-# Garantit que chaque HeroSpec de la formation a des Resources non-null pour deck
-# et data_memory (truth canonique des données hero-level, lues à chaque spawn).
-func _init_hero_specs_runtime_data(party: Party) -> void:
-	if party == null or party.formation == null: return
+# Construit une FightingFormation en posant les entries du roaster sur les
+# spawn_specs de la formation modèle. Premier hero → premier hero_spawn_spec ;
+# acolytes dans l'ordre sur acolyte_spawn_specs. Surplus dropé.
+func _build_formation_from_roaster(roaster: Array[RoasterEntry], template: FightingFormation) -> FightingFormation:
+	var formation := FightingFormation.new()
+	if template == null: return formation
+	var hero_entries: Array[RoasterEntry] = []
+	var acolyte_entries: Array[RoasterEntry] = []
+	for entry: RoasterEntry in roaster:
+		if entry == null or entry.desc == null: continue
+		match entry.desc.default_category:
+			Entity.Category.HERO: hero_entries.append(entry)
+			Entity.Category.ACOLYTE: acolyte_entries.append(entry)
+
+	var hero_count: int = mini(hero_entries.size(), template.hero_spawn_specs.size())
+	for i in hero_count:
+		formation.entity_specs.append(_make_player_spec(hero_entries[i], template.hero_spawn_specs[i].transform, "Hero_" + str(i)))
+
+	var acolyte_count: int = mini(acolyte_entries.size(), template.acolyte_spawn_specs.size())
+	for i in acolyte_count:
+		formation.entity_specs.append(_make_player_spec(acolyte_entries[i], template.acolyte_spawn_specs[i].transform, "Acolyte_" + str(i)))
+
+	return formation
+
+
+func _make_player_spec(entry: RoasterEntry, t: Transform3D, label: String) -> EntitySpec:
+	var spec := EntitySpec.new()
+	spec.desc = entry.desc
+	spec.entry = entry
+	spec.transform = t
+	spec.display_label = label
+	return spec
+
+
+func _build_demo_chicken_desc() -> EntityDesc:
+	var chicken_scene: PackedScene = load(DEMO_ACOLYTE_SCENE_PATH) as PackedScene
+	if chicken_scene == null:
+		Verbose.warn("start_solo_run: chicken scene introuvable", Verbose.Category.GLOBAL_MANAGER)
+		return null
+	var desc := EntityDesc.new()
+	desc.scene = chicken_scene
+	desc.default_category = Entity.Category.ACOLYTE
+	desc.name = "Chicken"
+	return desc
+
+
+# Garantit que chaque RoasterEntry hero a deck et data_memory non-null. Source
+# canonique des données hero-level, lues à chaque spawn via EntitySpec.entry.
+func _init_roaster_runtime_data(party: Party) -> void:
+	if party == null: return
 	var local_player_name: String = PlayerManager.get_local_player().player_name if PlayerManager.get_local_player() != null else ""
-	for spec: EntitySpec in party.formation.entity_specs:
-		if spec is HeroSpec:
-			var hero_spec: HeroSpec = spec
-			if hero_spec.deck == null:
-				hero_spec.deck = PlayerDeck.new().init(local_player_name)
-			if hero_spec.data_memory == null:
-				hero_spec.data_memory = NestedRegistry.new()
+	for entry: RoasterEntry in party.roaster:
+		if entry == null or entry.desc == null: continue
+		if entry.desc.default_category != Entity.Category.HERO: continue
+		if entry.deck == null:
+			entry.deck = PlayerDeck.new().init(local_player_name)
+		if entry.data_memory == null:
+			entry.data_memory = NestedRegistry.new()
 
 
 func get_active_families() -> Array[Family]:

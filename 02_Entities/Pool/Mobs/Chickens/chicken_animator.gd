@@ -1,2 +1,0 @@
-class_name ChickenAnimationModule
-extends AnimationComponent

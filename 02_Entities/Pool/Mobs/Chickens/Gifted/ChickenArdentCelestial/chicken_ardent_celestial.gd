@@ -2,7 +2,7 @@ class_name ChickenArdentCelestial
 extends ChickenGifted
 
 var _bonus_ms_ratio: float
-var _ignite_stacks: int
+var _ignite_stacks: int = 30
 var _hp_threshold_ratio: float
 var _rush_target: Entity
 

@@ -72,10 +72,10 @@ enum EntityType {
 @export var _spawn_manager: SpawnManager
 @export var _arena_zone_manager: ArenaZoneManager
 @export_subgroup("Overrides")
-@export var _override_base_stats: EntityStats
-@export var _override_custom_deck: PlayerDeck
-@export var _override_data_memory: Dictionary
-@export var _override_family_levels: Dictionary[Family.Type, int] = {}
+@export var override_base_stats: EntityStats
+@export var override_custom_deck: PlayerDeck
+@export var override_data_memory: Dictionary
+@export var override_family_levels: Dictionary[Family.Type, int] = {}
 @export_subgroup("Behaviour")
 @export var auto_attack_enabled: bool = true
 @export var family_managers_enabled: bool = true
@@ -112,6 +112,8 @@ var deck_holder: DeckHolderComponent
 var family: FamilyComponent
 var mana: ManaComponent
 var health_bar: HealthBarComponent
+var progression: ProgressionComponent
+var skill: SkillComponent
 
 var _auto_loaded_components: Array[EntityComponent.Type] = [
 	EntityComponent.Type.DAMAGE,
@@ -130,7 +132,9 @@ var _auto_loaded_components: Array[EntityComponent.Type] = [
 	EntityComponent.Type.CLICKABLE,
 	EntityComponent.Type.DRAGGABLE,
 	EntityComponent.Type.CONTROLLER,
-	EntityComponent.Type.MANA
+	EntityComponent.Type.MANA,
+	EntityComponent.Type.PROGRESSION,
+	EntityComponent.Type.SKILL,
 ]
 
 #var display_mode: DisplayMode = DisplayMode.PREVIEW
@@ -152,7 +156,7 @@ var spawn_manager: SpawnManager:
 #endregion
 
 #region ============================== Private variables ==============================
-var _base_stats: EntityStats
+
 
 # Spawn system # TODO Checker que'est-ce que ça fait ici plutôt que dans le spawn component ?
 var _original_fighting_state: FightingState = FightingState.UNDEF
@@ -202,28 +206,22 @@ func is_hero() -> bool: return category == Category.HERO
 func _init() -> void:
 	# Stats
 	stats = EntityStats.new()
-	_base_stats = EntityStats.new()
-
+	
 	# Default Modifier Registries
 	auto_attack_modifier_registry = AutoAttackModifierRegistry.new()
 	action_modifiers_registry = ActionModifiersRegistry.new()
 	death_modifiers_registry = DeathModifiersRegistry.new()
+	stat_modifiers_registry = EntityStatModifiersRegistry.new(stats)
 	Verbose.trace("Entity [" + entity_name + "_" + str(uid) + "] init", Verbose.Category.ENTITY)
 
 
 func _enter_tree() -> void:
 	Verbose.trace("Entity [" + entity_name + "_" + str(uid) + "] enter_tree", Verbose.Category.ENTITY)
-	if _override_base_stats != null:
-		Verbose.debug("Entity [" + entity_name + "] using custom_base_stats", Verbose.Category.ENTITY)
-		_base_stats = _override_base_stats
-		_base_stats.reset_from_self()
-	stat_modifiers_registry = EntityStatModifiersRegistry.new(_base_stats, stats)
-	stats.reset_from_self()
-
+	
 	_auto_load_components()
-
+	
 	battle_callback_registry = BattleCallbackRegistry.new()
-
+	
 	if is_hero() and data_memory == null:
 		data_memory = NestedRegistry.new()
 
@@ -330,16 +328,30 @@ func apply_context(context: EntityContext) -> void:
 	# Pour les heroes/specs, entity_owner est null → on reste sans summoner.
 	if context.entity_owner != null:
 		summoner = context.entity_owner
-		summoner.bds_registry.register_summon(self)
+		if summoner.bds_registry != null:
+			summoner.bds_registry.register_summon(self)
 
-	projectile.connect_to_spawn_manager(_spawn_manager)
-	spell.connect_to_spawn_manager(_spawn_manager)
-	summon.connect_to_spawn_manager(_spawn_manager)
-	target.connect_to_spawn_manager(_spawn_manager)
-	
-	summon.connect_to_arena_zone_manager(_arena_zone_manager)
+	# Composants potentiellement encore null si apply_context est appelé avant
+	# add_child (cf SpawnManager.spawn_entity). Les guards évitent le crash ;
+	# _enter_tree rejouera _connect_components_to_managers une fois auto-loaded.
+	_connect_components_to_managers()
 
 	Verbose.debug("Entity [" + entity_name + "] received fighting_state [" + str(FightingState.keys()[context.fighting_state]) + "] from context", Verbose.Category.ENTITY)
+
+
+# Câble les composants au spawn_manager / arena_zone_manager. Idempotent et
+# null-safe : peut être appelé plusieurs fois (avant et après auto-loading).
+func _connect_components_to_managers() -> void:
+	if _spawn_manager == null: return
+	if projectile != null:
+		projectile.connect_to_spawn_manager(_spawn_manager)
+	if spell != null:
+		spell.connect_to_spawn_manager(_spawn_manager)
+	if summon != null:
+		summon.connect_to_spawn_manager(_spawn_manager)
+		summon.connect_to_arena_zone_manager(_arena_zone_manager)
+	if target != null:
+		target.connect_to_spawn_manager(_spawn_manager)
 
 
 func connect_to_fighting_area(fighting_area_ref: FightingArea) -> void:

@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://02_Entities/_Shared/hero_desc.gd" id="1_hluaq"]
 [ext_resource type="Script" uid="uid://2py6kv5aqgem" path="res://02_Entities/_Shared/hero_stats.gd" id="3_hluaq"]
 [ext_resource type="Resource" uid="uid://bulji3na650gb" path="res://02_Entities/Pool/Heroes/DarkKnight/Skills/b1_spark_of_light.tres" id="4_ec2v6"]
-[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/skill.gd" id="4_f1ben"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="4_f1ben"]
 [ext_resource type="Resource" uid="uid://bts22443uo7i3" path="res://02_Entities/Pool/Heroes/DarkKnight/Skills/b2_corruption.tres" id="5_4eec3"]
 [ext_resource type="Resource" uid="uid://tws8irvjtsk8" path="res://02_Entities/Pool/Heroes/DarkKnight/Skills/s1_pain.tres" id="6_bdgmw"]
 [ext_resource type="Resource" uid="uid://budjocpe7prm0" path="res://02_Entities/Pool/Heroes/DarkKnight/Skills/s2_cataclysm.tres" id="7_gdfuu"]
