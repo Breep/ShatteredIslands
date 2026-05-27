@@ -1,12 +1,22 @@
 [gd_scene format=4 uid="uid://bd2qh22vqambg"]
 
 [ext_resource type="AnimationLibrary" uid="uid://dc35h3toilmvd" path="res://02_Entities/_Data/_Animations/Mixamo/AnimationLibraries/humanoid_locomotion_library.tres" id="1_eluva"]
+[ext_resource type="Texture2D" uid="uid://cq112i34iitp2" path="res://02_Entities/_Data/FantasyGirl/AssassinFemale/T_Hu_F_Assassin_Hair_Bl_D.tga" id="2_hair_d"]
+[ext_resource type="Texture2D" uid="uid://b7wsjssmtajce" path="res://02_Entities/_Data/FantasyGirl/AssassinFemale/T_Hu_F_Assassin_Hair_N.tga" id="3_hair_n"]
+[ext_resource type="Texture2D" uid="uid://c53gf3mrp3i7f" path="res://02_Entities/_Data/FantasyGirl/AssassinFemale/T_Hu_F_Assassin_Body_Bl_D.tga" id="4_body_d"]
+[ext_resource type="Texture2D" uid="uid://mp5w3qw7vck3" path="res://02_Entities/_Data/FantasyGirl/AssassinFemale/T_Hu_F_Assassin_Body_N.tga" id="5_body_n"]
+[ext_resource type="Texture2D" uid="uid://c4mdw7bpj203n" path="res://02_Entities/_Data/FantasyGirl/AssassinFemale/T_Hu_F_Assassin_Armor_Bl_D.tga" id="6_armor_d"]
+[ext_resource type="Texture2D" uid="uid://shanufoe0nau" path="res://02_Entities/_Data/FantasyGirl/AssassinFemale/T_Hu_F_Assassin_Armor_N.tga" id="7_armor_n"]
+[ext_resource type="Texture2D" uid="uid://bgmgdasnfmkqg" path="res://02_Entities/_Data/FantasyGirl/AssassinFemale/T_Hu_F_Assassin_Armor_M.tga" id="8_armor_m"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_47dmo"]
 resource_name = "M_Hu_F_Assassin_Hair"
 vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_hair_d")
 emission_enabled = true
 emission_energy_multiplier = 0.0
+normal_enabled = true
+normal_texture = ExtResource("3_hair_n")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_spoid"]
 resource_name = "Hair"
@@ -68,8 +78,11 @@ bind/10/pose = Transform3D(-0.012367202, 0.99978316, -0.016758986, 0.0092840735,
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w6kfc"]
 resource_name = "M_Hu_F_Assassin_Body"
 vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("4_body_d")
 emission_enabled = true
 emission_energy_multiplier = 0.0
+normal_enabled = true
+normal_texture = ExtResource("5_body_n")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_5i1fw"]
 resource_name = "Body"
@@ -194,8 +207,13 @@ bind/31/pose = Transform3D(0.7242825, 0.68537295, 0.07535842, -0.14720497, 0.046
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ac3l8"]
 resource_name = "M_Hu_F_Assassin_Armor"
 vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("6_armor_d")
+metallic = 1.0
+metallic_texture = ExtResource("8_armor_m")
 emission_enabled = true
 emission_energy_multiplier = 0.0
+normal_enabled = true
+normal_texture = ExtResource("7_armor_n")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_grg61"]
 resource_name = "Belt_01"
@@ -45840,46 +45858,57 @@ bones/90/rotation = Quaternion(0, 0, 0, 1)
 bones/90/scale = Vector3(1, 1, 1)
 
 [node name="Hair" type="MeshInstance3D" parent="GeneralSkeleton" unique_id=870465678]
+material_override = SubResource("StandardMaterial3D_47dmo")
 mesh = SubResource("ArrayMesh_spoid")
 skin = SubResource("Skin_7f48m")
 
 [node name="Body" type="MeshInstance3D" parent="GeneralSkeleton" unique_id=2084640475]
+material_override = SubResource("StandardMaterial3D_w6kfc")
 mesh = SubResource("ArrayMesh_5i1fw")
 skin = SubResource("Skin_mxj37")
 
 [node name="Belt_01" type="MeshInstance3D" parent="GeneralSkeleton" unique_id=1802783923]
+material_override = SubResource("StandardMaterial3D_ac3l8")
 mesh = SubResource("ArrayMesh_grg61")
 skin = SubResource("Skin_yul03")
 
 [node name="Skirt" type="MeshInstance3D" parent="GeneralSkeleton" unique_id=1332236050]
+material_override = SubResource("StandardMaterial3D_ac3l8")
 mesh = SubResource("ArrayMesh_7du14")
 skin = SubResource("Skin_8qccl")
 
 [node name="Belt_02" type="MeshInstance3D" parent="GeneralSkeleton" unique_id=825871624]
+material_override = SubResource("StandardMaterial3D_ac3l8")
 mesh = SubResource("ArrayMesh_gpwc6")
 skin = SubResource("Skin_ynpbx")
 
 [node name="Bracers" type="MeshInstance3D" parent="GeneralSkeleton" unique_id=1149582305]
+material_override = SubResource("StandardMaterial3D_ac3l8")
 mesh = SubResource("ArrayMesh_hjrct")
 skin = SubResource("Skin_ib0hw")
 
 [node name="Cowl" type="MeshInstance3D" parent="GeneralSkeleton" unique_id=82753957]
+material_override = SubResource("StandardMaterial3D_ac3l8")
 mesh = SubResource("ArrayMesh_sxojk")
 skin = SubResource("Skin_0fho8")
 
 [node name="Cape" type="MeshInstance3D" parent="GeneralSkeleton" unique_id=1561018578]
+material_override = SubResource("StandardMaterial3D_ac3l8")
 mesh = SubResource("ArrayMesh_jgi7t")
 skin = SubResource("Skin_fok2n")
 
 [node name="Earrings" type="MeshInstance3D" parent="GeneralSkeleton" unique_id=1708849835]
+material_override = SubResource("StandardMaterial3D_ac3l8")
 mesh = SubResource("ArrayMesh_6l5m2")
 skin = SubResource("Skin_dmxk6")
 
 [node name="Chest" type="MeshInstance3D" parent="GeneralSkeleton" unique_id=1996010964]
+material_override = SubResource("StandardMaterial3D_ac3l8")
 mesh = SubResource("ArrayMesh_5iwuj")
 skin = SubResource("Skin_r3pun")
 
 [node name="Legs" type="MeshInstance3D" parent="GeneralSkeleton" unique_id=2139504051]
+material_override = SubResource("StandardMaterial3D_ac3l8")
 mesh = SubResource("ArrayMesh_npdha")
 skin = SubResource("Skin_3v2aq")
 

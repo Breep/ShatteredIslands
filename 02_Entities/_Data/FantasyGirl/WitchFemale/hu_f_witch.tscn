@@ -12,14 +12,11 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p6at5"]
 resource_name = "M_Armor"
-transparency = 4
-vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("1_pq3du")
 metallic = 1.0
 metallic_texture = ExtResource("5_armor_m")
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
-emission_energy_multiplier = 1.0
 emission_operator = 1
 emission_texture = ExtResource("6_armor_e")
 normal_enabled = true
@@ -198,7 +195,6 @@ bind/48/pose = Transform3D(0.013791534, -0.98201746, 0.18828556, -0.9089648, -0.
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ut1s2"]
 resource_name = "M_Body"
-transparency = 4
 vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("2_5l7t0")
 emission_enabled = true
@@ -1135,9 +1131,8 @@ skin = SubResource("Skin_i8p0e")
 
 [node name="Chest_Open" type="MeshInstance3D" parent="Skeleton3D" unique_id=42622849]
 mesh = SubResource("ArrayMesh_7bwgo")
-surface_material_override/0 = SubResource("StandardMaterial3D_p6at5")
-surface_material_override/1 = SubResource("StandardMaterial3D_ut1s2")
 skin = SubResource("Skin_e17kl")
+surface_material_override/0 = SubResource("StandardMaterial3D_p6at5")
 
 [node name="Chest_Closed" type="MeshInstance3D" parent="Skeleton3D" unique_id=507971968]
 material_override = SubResource("StandardMaterial3D_p6at5")
