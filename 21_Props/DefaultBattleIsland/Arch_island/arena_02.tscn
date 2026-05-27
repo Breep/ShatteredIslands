@@ -1,8 +1,19 @@
 [gd_scene format=4 uid="uid://cmushgkek5lf8"]
 
+[ext_resource type="Texture2D" uid="uid://b8cxtqjsmn4db" path="res://TestTODO_TOTRASH/texture/texture arene 4k.jpg" id="1_qj88s"]
 [ext_resource type="Texture2D" uid="uid://cukia7nu7x182" path="res://21_Props/DefaultBattleIsland/Arch_island/textures/Arena_0.png" id="1_sml5e"]
+[ext_resource type="Texture2D" uid="uid://dv12qkbn54xuv" path="res://TestTODO_TOTRASH/texture/normal map arene 4k.png" id="2_daqaj"]
 [ext_resource type="Texture2D" uid="uid://dpj5jj3ehljkb" path="res://21_Props/DefaultBattleIsland/Arch_island/textures/Arena_1.png" id="2_evvnx"]
 [ext_resource type="Texture2D" uid="uid://bqnx0ilj3ftjk" path="res://21_Props/DefaultBattleIsland/Arch_island/textures/Arena_2.png" id="3_xyiuh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_daqaj"]
+albedo_texture = ExtResource("1_qj88s")
+normal_enabled = true
+normal_scale = -0.3
+normal_texture = ExtResource("2_daqaj")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_m0has"]
+size = Vector2(27, 27)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uoq31"]
 resource_name = "Arena"
@@ -53,6 +64,12 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_iwhl0")
 
 [node name="Arena" type="Node3D" unique_id=978031092]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=583323362]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.334, 0.56, -15.641)
+material_override = SubResource("StandardMaterial3D_daqaj")
+mesh = SubResource("PlaneMesh_m0has")
+skeleton = NodePath("../RootNode/Arena_Low/Arena_Low2")
 
 [node name="RootNode" type="Node3D" parent="." unique_id=667115032]
 transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
