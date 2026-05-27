@@ -80,20 +80,21 @@ func _setup_tavern(encounter: TavernEncounter, party: Party = null) -> BuyingIsl
 	if encounter == null:
 		Verbose.error("EncounterRunner._setup_tavern: encounter null", Verbose.Category.ENCOUNTER_RUNNER)
 		return null
-	
+
 	var buying_island: BuyingIsland = BUYING_ISLAND_SCENE.instantiate()
 	get_tree().root.add_child.call_deferred(buying_island)
 	await buying_island.ready
-	
-	var hero_spec: HeroSpec = null
-	var acolyte_specs: Array[AcolyteSpec] = []
+
+	var hero_entries: Array[RoasterEntry] = []
+	var acolyte_entries: Array[RoasterEntry] = []
 	if party != null:
-		var heroe_specs: Array[HeroSpec] = party.get_hero_specs()
-		if not heroe_specs.is_empty():
-			hero_spec = heroe_specs[0]
-		acolyte_specs = party.get_acolyte_specs()
-	
-	buying_island.start_buying_phase_from_encounter(encounter, hero_spec, acolyte_specs) # TODO Adapter ça pour accepter plusieurs héros
+		for entry: RoasterEntry in party.roaster:
+			if entry == null or entry.desc == null: continue
+			match entry.desc.default_category:
+				Entity.Category.HERO: hero_entries.append(entry)
+				Entity.Category.ACOLYTE: acolyte_entries.append(entry)
+
+	buying_island.start_buying_phase_from_encounter(encounter, hero_entries, acolyte_entries)
 	buying_island.set_active()
 	# Relay du signal naturel de l'île vers tavern_phase_ended pour que run_tavern
 	# (et toute proto qui émet directement tavern_phase_ended) partage le même await.

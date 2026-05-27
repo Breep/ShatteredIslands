@@ -12,6 +12,7 @@ extends Resource
 @export var party: Party
 @export var game_rules: GameRules
 @export var active_families: Array[Family]
+@export var encounter_modifiers: Array[EncounterModifier]
 
 @export var rng_seed: int = 0
 @export var run_id: String = ""

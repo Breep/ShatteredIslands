@@ -43,24 +43,13 @@ func remove_from_roaster(entry: RoasterEntry) -> bool:
 	return true
 
 
-# Helpers : extraire les specs par rôle depuis formation.entity_specs.
-# Utilisés par les Runners pour alimenter la taverne ET le combat — les specs
-# portent la donnée canonique (deck, level, etc. sur HeroSpec) que les deux
-# phases ont besoin d'injecter sur l'instance Hero éphémère.
-func get_hero_specs() -> Array[HeroSpec]:
-	var result: Array[HeroSpec] = []
-	if formation == null: return result
-	for spec: EntitySpec in formation.entity_specs:
-		if spec is HeroSpec:
-			result.append(spec)
-	return result
-
-
-func get_acolyte_specs() -> Array[AcolyteSpec]:
-	var result: Array[AcolyteSpec] = []
-	if formation == null: return result
-	for spec: EntitySpec in formation.entity_specs:
-		if spec is AcolyteSpec:
-			result.append(spec)
-	return result
+# Première entrée du roaster d'une catégorie donnée. Utilisé par Player pour
+# résoudre "mon entrée" en solo (futur multi : mapping via player.team / id).
+func get_first_entry_of_category(category: Entity.Category) -> RoasterEntry:
+	for entry: RoasterEntry in roaster:
+		if entry == null or entry.desc == null:
+			continue
+		if entry.desc.default_category == category:
+			return entry
+	return null
 #endregion
