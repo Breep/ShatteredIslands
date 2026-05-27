@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdqokamonkews"
-path.s3tc="res://.godot/imported/T_Spear_2HL_Kobold_Gn_D.tga-cb845071ba67d988b81216d8c1d66da3.s3tc.ctex"
+uid="uid://dodjdy8t7qs0v"
+path="res://.godot/imported/T_Kobold_Warrior_Body_Gn_D.tga-1615df2e23c5918e87c97b9112fc2cd0.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Weapon2H/T_Spear_2HL_Kobold_Gn_D.tga"
-dest_files=["res://.godot/imported/T_Spear_2HL_Kobold_Gn_D.tga-cb845071ba67d988b81216d8c1d66da3.s3tc.ctex"]
+source_file="res://02_Entities/_Data/Kobold/KoboldWarrior/T_Kobold_Warrior_Body_Gn_D.tga"
+dest_files=["res://.godot/imported/T_Kobold_Warrior_Body_Gn_D.tga-1615df2e23c5918e87c97b9112fc2cd0.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -24,7 +23,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -38,4 +37,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

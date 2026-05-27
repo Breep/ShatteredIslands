@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://be7ry4118dn0o"
-path="res://.godot/imported/Spear_2HL_Kobold.fbx-df3f154d8d19b4e4654f6606e9f87f98.scn"
+path="res://.godot/imported/Spear_2HL_Kobold.fbx-4e497fc31b5776a6785c5aebd7d5bc3d.scn"
 
 [deps]
 
-source_file="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Weapon2H/Spear_2HL_Kobold.fbx"
-dest_files=["res://.godot/imported/Spear_2HL_Kobold.fbx-df3f154d8d19b4e4654f6606e9f87f98.scn"]
+source_file="res://02_Entities/_Data/Kobold/KoboldWarrior/Weapon2H/Spear_2HL_Kobold.fbx"
+dest_files=["res://.godot/imported/Spear_2HL_Kobold.fbx-4e497fc31b5776a6785c5aebd7d5bc3d.scn"]
 
 [params]
 

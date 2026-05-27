@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hdao6fei46vu"
-path="res://.godot/imported/T_Kobold_Warrior_Armor_Rd_D.tga-99c0dbd18e76ba63ae221ef8b5d1538c.ctex"
+uid="uid://cwn0hjm522u5e"
+path="res://.godot/imported/T_Kobold_Warrior_Armor_Gn_D.tga-f8ab556e9cae9bda10aea06887fca92e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/T_Kobold_Warrior_Armor_Rd_D.tga"
-dest_files=["res://.godot/imported/T_Kobold_Warrior_Armor_Rd_D.tga-99c0dbd18e76ba63ae221ef8b5d1538c.ctex"]
+source_file="res://02_Entities/_Data/Kobold/KoboldWarrior/T_Kobold_Warrior_Armor_Gn_D.tga"
+dest_files=["res://.godot/imported/T_Kobold_Warrior_Armor_Gn_D.tga-f8ab556e9cae9bda10aea06887fca92e.ctex"]
 
 [params]
 

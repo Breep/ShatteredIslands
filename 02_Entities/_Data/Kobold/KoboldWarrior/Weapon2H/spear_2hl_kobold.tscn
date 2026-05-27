@@ -1,10 +1,10 @@
 [gd_scene format=4 uid="uid://b3ansn8obo8k4"]
 
-[ext_resource type="Texture2D" uid="uid://ctj08pc10h1wh" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Weapon2H/T_Spear_2HL_Kobold_Bk_D.tga" id="1_7bain"]
-[ext_resource type="Texture2D" uid="uid://cnowo758dwgqo" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Weapon2H/T_Spear_2HL_Kobold_AO.tga" id="2_fwc85"]
-[ext_resource type="Texture2D" uid="uid://bsi1khe5a8bms" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Weapon2H/T_Spear_2HL_Kobold_MR.tga" id="3_kiavw"]
-[ext_resource type="Texture2D" uid="uid://bb8lsm1p2cmge" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Weapon2H/T_Spear_2HL_Kobold_N.tga" id="4_03ug8"]
-[ext_resource type="Texture2D" uid="uid://cdqokamonkews" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Weapon2H/T_Spear_2HL_Kobold_Gn_D.tga" id="5_mqqmy"]
+[ext_resource type="Texture2D" uid="uid://ctj08pc10h1wh" path="res://02_Entities/_Data/Kobold/KoboldWarrior/Weapon2H/T_Spear_2HL_Kobold_Bk_D.tga" id="1_7bain"]
+[ext_resource type="Texture2D" uid="uid://cnowo758dwgqo" path="res://02_Entities/_Data/Kobold/KoboldWarrior/Weapon2H/T_Spear_2HL_Kobold_AO.tga" id="2_fwc85"]
+[ext_resource type="Texture2D" uid="uid://bsi1khe5a8bms" path="res://02_Entities/_Data/Kobold/KoboldWarrior/Weapon2H/T_Spear_2HL_Kobold_MR.tga" id="3_kiavw"]
+[ext_resource type="Texture2D" uid="uid://bb8lsm1p2cmge" path="res://02_Entities/_Data/Kobold/KoboldWarrior/Weapon2H/T_Spear_2HL_Kobold_N.tga" id="4_03ug8"]
+[ext_resource type="Texture2D" uid="uid://cdqokamonkews" path="res://02_Entities/_Data/Kobold/KoboldWarrior/Weapon2H/T_Spear_2HL_Kobold_Gn_D.tga" id="5_mqqmy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hecg3"]
 albedo_texture = ExtResource("1_7bain")

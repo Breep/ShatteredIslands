@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://c76usf7h0qkj4"
-path="res://.godot/imported/Kobold_Warrior.fbx-7697e3e1138cfdee888f2b33d930c601.scn"
+path="res://.godot/imported/Kobold_Warrior.fbx-565b06acb4aefcc8a13f1c1cdf56cd6c.scn"
 
 [deps]
 
-source_file="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Kobold_Warrior.fbx"
-dest_files=["res://.godot/imported/Kobold_Warrior.fbx-7697e3e1138cfdee888f2b33d930c601.scn"]
+source_file="res://02_Entities/_Data/Kobold/KoboldWarrior/Kobold_Warrior.fbx"
+dest_files=["res://.godot/imported/Kobold_Warrior.fbx-565b06acb4aefcc8a13f1c1cdf56cd6c.scn"]
 
 [params]
 
