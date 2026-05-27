@@ -20,4 +20,3 @@ enum HeroId {
 # ============================== Export ==============================
 
 @export var id: HeroId
-@export var skills: Dictionary[Skill.SkillID, Skill]

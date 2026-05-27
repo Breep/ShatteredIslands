@@ -1,7 +1,7 @@
 class_name SE_CriticalEye
 extends SkillEffect
 
-var _crit_bonus: float = 10.0
+@export var _crit_bonus: float = 10.0
 
 func apply(ctx: SkillContext) -> void:
 	var _owner = ctx.entity

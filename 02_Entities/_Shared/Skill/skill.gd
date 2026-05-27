@@ -13,11 +13,11 @@ enum SkillID {
 }
 
 enum Type {
-	PASSIVE,
-	BRONZE,
-	SILVER,
-	GOLD,
-	ULTIMATE
+	PASSIVE = 0,
+	BRONZE = 1,
+	SILVER = 2,
+	GOLD = 3,
+	ULTIMATE = 4
 }
 
 const TIER_NAMES: Dictionary [SkillID, String] = {

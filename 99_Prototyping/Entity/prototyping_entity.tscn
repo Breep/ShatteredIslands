@@ -51,8 +51,6 @@ unique_name_in_owner = true
 
 [node name="GoblinBerserker" parent="Node3D/Entities" unique_id=1459343337 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("18_kq8si")]
 transform = Transform3D(0.26981065, 0, -0.9629133, 0, 1.0000001, 0, 0.9629133, 0, 0.26981065, -4.646197, 0, 2.0751035)
-_rage_activated = true
-_big_game_hunter_activated = true
 level = 4
 team = 2
 battle_id = 1
