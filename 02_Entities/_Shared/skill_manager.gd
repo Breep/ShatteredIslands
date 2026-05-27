@@ -3,17 +3,17 @@ extends Resource
 
 # ============================== Signal ==============================
 
-signal skill_unlocked(skill_type: Skill.SkillType)
+signal skill_unlocked(skill_type: Skill.Type)
 signal skill_picked(skill_id: Skill.SkillID)
 
 # ============================== Public variables ==============================
 
-var skills_pending: Dictionary[Skill.SkillType, bool] = {
-	Skill.SkillType.BRONZE: false,
-	Skill.SkillType.SILVER: false,
-	Skill.SkillType.GOLD: false
+var skills_pending: Dictionary[Skill.Type, bool] = {
+	Skill.Type.BRONZE: false,
+	Skill.Type.SILVER: false,
+	Skill.Type.GOLD: false
 }
-var skills_choosen: Dictionary[Skill.SkillType, Skill.SkillID]
+var skills_choosen: Dictionary[Skill.Type, Skill.SkillID]
 
 # ============================== Private variables ==============================
 
@@ -35,17 +35,17 @@ func init(player: Player) -> void:
 
 func _check_skills(lvl: int) -> void:
 	if lvl >= GameManager.game_rules.bronze_skill_unlock_lvl:
-		if not skills_choosen.has(Skill.SkillType.BRONZE) and skills_pending[Skill.SkillType.BRONZE] == false:
-			skill_unlocked.emit(Skill.SkillType.BRONZE)
-			skills_pending[Skill.SkillType.BRONZE] = true
+		if not skills_choosen.has(Skill.Type.BRONZE) and skills_pending[Skill.Type.BRONZE] == false:
+			skill_unlocked.emit(Skill.Type.BRONZE)
+			skills_pending[Skill.Type.BRONZE] = true
 	if lvl >= GameManager.game_rules.silver_skill_unlock_lvl:
-		if not skills_choosen.has(Skill.SkillType.SILVER) and skills_pending[Skill.SkillType.SILVER] == false:
-			skill_unlocked.emit(Skill.SkillType.SILVER)
-			skills_pending[Skill.SkillType.SILVER] = true
+		if not skills_choosen.has(Skill.Type.SILVER) and skills_pending[Skill.Type.SILVER] == false:
+			skill_unlocked.emit(Skill.Type.SILVER)
+			skills_pending[Skill.Type.SILVER] = true
 	if lvl >= GameManager.game_rules.gold_skill_unlock_lvl:
-		if not skills_choosen.has(Skill.SkillType.GOLD) and skills_pending[Skill.SkillType.GOLD] == false:
-			skill_unlocked.emit(Skill.SkillType.GOLD)
-			skills_pending[Skill.SkillType.GOLD] = true
+		if not skills_choosen.has(Skill.Type.GOLD) and skills_pending[Skill.Type.GOLD] == false:
+			skill_unlocked.emit(Skill.Type.GOLD)
+			skills_pending[Skill.Type.GOLD] = true
 
 # ============================== Callback ==============================
 
@@ -54,13 +54,13 @@ func _on_player_owner_lvl_changed(_player_ref: Player, lvl: int) -> void:
 
 
 func _on_ui_skill_picked(skill_id: Skill.SkillID) -> void:
-	var skill_type: Skill.SkillType
+	var skill_type: Skill.Type
 	if skill_id == Skill.SkillID.BRONZE1 or skill_id == Skill.SkillID.BRONZE2:
-		skill_type = Skill.SkillType.BRONZE
+		skill_type = Skill.Type.BRONZE
 	if skill_id == Skill.SkillID.SILVER1 or skill_id == Skill.SkillID.SILVER2:
-		skill_type = Skill.SkillType.SILVER
+		skill_type = Skill.Type.SILVER
 	if skill_id == Skill.SkillID.GOLD1 or skill_id == Skill.SkillID.GOLD2:
-		skill_type = Skill.SkillType.GOLD
+		skill_type = Skill.Type.GOLD
 	if skills_pending[skill_type] == false:
 		printerr("SkillManager: Can't pick this skill")
 		return

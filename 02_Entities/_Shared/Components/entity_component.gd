@@ -28,6 +28,7 @@ enum Type {
 	DRAGGABLE = 18,
 	CONTROLLER = 19,
 	PROGRESSION = 20,
+	SKILL = 21,
 }
 
 static var ENTITY_COMPONENT_SCENES: Dictionary[EntityComponent.Type, PackedScene] = {
@@ -51,7 +52,8 @@ static var ENTITY_COMPONENT_SCENES: Dictionary[EntityComponent.Type, PackedScene
 	Type.DRAGGABLE:            load("res://02_Entities/_Shared/Components/Draggable/draggable_component.tscn"),
 	Type.CONTROLLER:           load("res://02_Entities/_Shared/Components/Controller/entity_controller.tscn"),
 	Type.MANA:                 load("res://02_Entities/_Shared/Components/Mana/mana_component.tscn"),
-	Type.PROGRESSION:          load("res://02_Entities/_Shared/Components/Progression/progression_component.tscn")
+	Type.PROGRESSION:          load("res://02_Entities/_Shared/Components/Progression/progression_component.tscn"),
+	Type.SKILL:                load("res://02_Entities/_Shared/Components/Skill/skill_component.tscn"),
 }
 
 static var _global_dodge_number: int = 0
