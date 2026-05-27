@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://hk2313biuea3"]
+
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_s84ih"]
+[ext_resource type="Script" uid="uid://b1bod33y0vjmh" path="res://02_Entities/Pool/Mobs/Goblins/GoblinBerserker/Skills/Silver/rage.gd" id="2_ibra0"]
+
+[sub_resource type="Resource" id="Resource_neyb6"]
+script = ExtResource("2_ibra0")
+metadata/_custom_type_script = "uid://b1bod33y0vjmh"
+
+[resource]
+script = ExtResource("1_s84ih")
+skill_id = 2
+name = "Rage"
+skill_effect = SubResource("Resource_neyb6")
+metadata/_custom_type_script = "uid://dfby4merlgkep"

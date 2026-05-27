@@ -35,7 +35,7 @@ func apply_all_cards_upgrades(deck: PlayerDeck) -> void:
 	if deck == null:
 		Verbose.error("DeckHolder: can't apply cards upgrades, deck is null", Verbose.Category.HERO)
 		return
-
+	
 	Verbose.debug("Applying all cards upgrades", Verbose.Category.HERO)
 	for card: Card in deck.get_active_deck():
 		card.player_upgrade.apply_card(_card_context, card.lvl)

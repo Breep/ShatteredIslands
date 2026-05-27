@@ -65,7 +65,7 @@ func _on_auto_attack_completed() -> void:
 			cb_vars[AutoAttackModifier.VarType.DAMAGE_ADD] += damage_inc
 		else:
 			cb_vars[AutoAttackModifier.VarType.DAMAGE_ADD] = damage_inc
-		AudioManager.play_3d("thud", target.position)
+		AudioManager.play_3d("bonk", target.position)
 	auto_attack_modifier_registry.register_modifier(mod)
 
 

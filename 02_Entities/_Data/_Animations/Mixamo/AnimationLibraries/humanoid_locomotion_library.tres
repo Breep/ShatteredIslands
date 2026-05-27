@@ -26,7 +26,7 @@
 [ext_resource type="Animation" uid="uid://c2pvkepd0ol8x" path="res://02_Entities/_Data/_Animations/Mixamo/Animations/kneeling_idle.res" id="20_mmb5i"]
 [ext_resource type="Animation" uid="uid://dfb5033oefxbo" path="res://02_Entities/_Data/_Animations/Mixamo/Animations/run_fast.res" id="21_ktgxc"]
 [ext_resource type="Animation" uid="uid://yahu21lkfdg7" path="res://02_Entities/_Data/_Animations/Mixamo/Animations/run_injured.res" id="22_714lv"]
-[ext_resource type="Animation" uid="uid://b4ckinscex4mc" path="res://02_Entities/_Data/_Animations/Mixamo/Animations/idle_drunk.res" id="22_soxge"]
+[ext_resource type="Animation" uid="uid://dgjagrdujy6tp" path="res://02_Entities/_Data/_Animations/Mixamo/Animations/idle_drunk.res" id="22_soxge"]
 [ext_resource type="Animation" uid="uid://g0r24d752d7r" path="res://02_Entities/_Data/_Animations/Mixamo/Animations/run_naruto.res" id="23_y6rn7"]
 [ext_resource type="Animation" uid="uid://upl8rlv4kmxt" path="res://02_Entities/_Data/_Animations/Mixamo/Animations/run_slow.res" id="24_mpmrn"]
 [ext_resource type="Animation" uid="uid://8nq2hbftbghd" path="res://02_Entities/_Data/_Animations/Mixamo/Animations/sitting_idle.res" id="25_42jym"]
@@ -39,6 +39,7 @@
 [ext_resource type="Animation" uid="uid://88ii1agh4n6n" path="res://02_Entities/_Data/_Animations/Mixamo/Animations/spell_cast_03.res" id="31_tvp1t"]
 [ext_resource type="Animation" uid="uid://bvw8gw28i3g37" path="res://02_Entities/_Data/_Animations/Mixamo/Animations/walking.res" id="32_limcn"]
 [ext_resource type="Animation" uid="uid://bp4sgolibdx8i" path="res://02_Entities/_Data/_Animations/Mixamo/Animations/walking_injured.res" id="33_8w11l"]
+[ext_resource type="Animation" uid="uid://cyctpww8fd2ql" path="res://02_Entities/_Data/_Animations/Mixamo/Animations/standing_melee_attack_360_high.res" id="38_1ouqc"]
 
 [resource]
 _data = {
@@ -79,6 +80,7 @@ _data = {
 &"spell_cast_01_right_hand": ExtResource("29_ibu6c"),
 &"spell_cast_02_two_hands": ExtResource("30_wqhba"),
 &"spell_cast_03": ExtResource("31_tvp1t"),
+&"standing_melee_attack_360_high": ExtResource("38_1ouqc"),
 &"walking": ExtResource("32_limcn"),
 &"walking_injured": ExtResource("33_8w11l")
 }

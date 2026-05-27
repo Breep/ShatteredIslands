@@ -19,12 +19,6 @@
 [ext_resource type="PackedScene" uid="uid://cvwmo633sxskh" path="res://02_Entities/Pool/Mobs/Goblins/GoblinBerserker/goblin_berserker.tscn" id="18_kq8si"]
 [ext_resource type="PackedScene" uid="uid://dp4x7wkxd6i2q" path="res://99_Prototyping/Entity/EntityController/entity_controller.proto.tscn" id="19_x0odd"]
 
-[sub_resource type="Resource" id="Resource_kq8si"]
-script = ExtResource("4_kq8si")
-auto_attack_type = 1
-_attack_range = 1.0
-metadata/_custom_type_script = "uid://bf01q5yq3glxi"
-
 [sub_resource type="Resource" id="Resource_5qocs"]
 script = ExtResource("4_kq8si")
 _health_max = 5000.0
@@ -59,11 +53,11 @@ unique_name_in_owner = true
 transform = Transform3D(0.26981065, 0, -0.9629133, 0, 1.0000001, 0, 0.9629133, 0, 0.26981065, -4.646197, 0, 2.0751035)
 _rage_activated = true
 _big_game_hunter_activated = true
+level = 4
 team = 2
 battle_id = 1
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
-override_base_stats = SubResource("Resource_kq8si")
 
 [node name="Latika2" parent="Node3D/Entities" unique_id=1941835210 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("3_os118")]
 transform = Transform3D(-0.2632837, 0, 0.96471834, 0, 1.0000001, 0, -0.96471834, 0, -0.2632837, 3.662788, 9.536744e-07, 0.110419974)
@@ -75,6 +69,7 @@ _arena_zone_manager = NodePath("../../ArenaZoneManager")
 
 [node name="Latika3" parent="Node3D/Entities" unique_id=294337328 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("3_os118")]
 transform = Transform3D(0.022006778, 0, -0.99975777, 0, 1.0000001, 0, 0.99975777, 0, 0.022006778, -5.361015, 9.536744e-07, 0.110419974)
+level = 4
 team = 2
 battle_id = 1
 _spawn_manager = NodePath("../../SpawnManager")

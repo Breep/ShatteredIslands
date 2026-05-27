@@ -19,6 +19,7 @@ var unlocked_skills: Dictionary [Skill.Type, bool] = {
 	Skill.Type.ULTIMATE: false
 }
 
+var _skill_context: SkillContext
 
 func _enter_tree() -> void:
 	if _owner == null: return
@@ -32,6 +33,7 @@ func _ready() -> void:
 	super._ready()
 	_owner.progression.level_changed.connect(_on_owner_progression_level_changed)
 	_update_unlocked_skills(_owner.progression.level)
+	_skill_context = SkillContext.create(_owner)
 
 
 func _on_owner_progression_level_changed(level: int) -> void:
