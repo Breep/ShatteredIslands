@@ -25,7 +25,7 @@ metadata/_custom_type_script = "uid://cpih8vqoolap4"
 [node name="VrockVisual" parent="." unique_id=33620102 instance=ExtResource("2_w4u18")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
-[node name="Skeleton3D" parent="VrockVisual" index="1" unique_id=1854923004]
+[node name="Skeleton3D" parent="VrockVisual" index="1" unique_id=769758089]
 bones/2/position = Vector3(0, 0.6764799, -0.24666874)
 bones/2/rotation = Quaternion(0, 0, 0, 1)
 bones/3/position = Vector3(0, -0.00066752, 0.01302807)

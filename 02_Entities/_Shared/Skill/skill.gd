@@ -12,10 +12,12 @@ enum SkillID {
 	ULTIMATE,
 }
 
-enum SkillType {
-	BRONZE,
-	SILVER,
-	GOLD
+enum Type {
+	PASSIVE = 0,
+	BRONZE = 1,
+	SILVER = 2,
+	GOLD = 3,
+	ULTIMATE = 4
 }
 
 const TIER_NAMES: Dictionary [SkillID, String] = {
@@ -44,3 +46,4 @@ const COLORS: Dictionary [SkillID, Color] = {
 @export var name: String
 @export_multiline var description: String
 @export var portrait: CompressedTexture2D
+@export var skill_effect: SkillEffect

@@ -12,6 +12,7 @@ extends Resource
 @export_multiline var description: String
 
 @export var stats: Dictionary[int, EntityStats]
+@export var skills: Dictionary[Skill.Type, Skill]
 
 @export_group("Auto-Attack timing")
 ## Fraction of the AA cycle (1/AS) occupied by the attack animation.

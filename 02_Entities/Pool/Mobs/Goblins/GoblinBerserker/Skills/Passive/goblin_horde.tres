@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://crek7jo3c7e0g"]
+
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_y2vn3"]
+[ext_resource type="Script" uid="uid://djc8pepftgthv" path="res://02_Entities/Pool/Mobs/Goblins/GoblinBerserker/Skills/Passive/goblin_horde.gd" id="2_exdee"]
+
+[sub_resource type="Resource" id="Resource_25y08"]
+script = ExtResource("2_exdee")
+metadata/_custom_type_script = "uid://djc8pepftgthv"
+
+[resource]
+script = ExtResource("1_y2vn3")
+skill_id = 6
+name = "Goblin Horde"
+description = "bla bla"
+skill_effect = SubResource("Resource_25y08")
+metadata/_custom_type_script = "uid://dfby4merlgkep"

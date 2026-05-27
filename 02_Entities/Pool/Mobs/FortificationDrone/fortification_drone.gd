@@ -38,7 +38,7 @@ var _shield_count: int # Number of shield done on the linked_ally
 #region ============================== Node base functions ==============================
 func _ready() -> void:
 	alterations.take_condition_stacks(_on_spawn_shield_amount, Alteration.Type.SHIELD, false, "Initial shield")
-	_base_stats.health_max = _on_spawn_hp_max
+	#_base_stats.health_max = _on_spawn_hp_max
 	stat_modifiers_registry.recompute_all()
 	battle_callback_registry.register_periodic("Periodic Shield", 1.0, _periodic_beam_callback)
 	spawn_completed.connect(_on_spawn_completed)
