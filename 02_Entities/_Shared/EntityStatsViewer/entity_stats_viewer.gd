@@ -45,12 +45,14 @@ var _connections: Array[Dictionary] = []
 
 #region ============================== Node base functions ==============================
 func _ready() -> void:
+	return
 	_apply_tooltips()
 	_main.hide()
 	Events.entity_alt_clicked.connect(_on_entity_alt_clicked)
 
 
 func _process(_delta: float) -> void:
+	return
 	if not _main.visible: return
 	if not is_instance_valid(_entity):
 		_unbind()
@@ -135,3 +137,11 @@ func _on_entity_alt_clicked(entity: Entity) -> void:
 func _on_entity_died(_self_ref: Entity) -> void:
 	_unbind()
 #endregion
+
+
+func _on_apply_button_pressed() -> void:
+	pass # Replace with function body.
+
+
+func _on_clear_button_pressed() -> void:
+	pass # Replace with function body.

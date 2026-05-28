@@ -1,9 +1,8 @@
 [gd_scene format=3 uid="uid://cum4bwnnvuilh"]
 
-[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme_old.tres" id="1_2vwyg"]
+[ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="1_cvuy6"]
 [ext_resource type="Texture2D" uid="uid://mbywgrya6a52" path="res://20_Data/Assets/Misc/Misc_IMG/timer circle.png" id="2_fbqj2"]
 [ext_resource type="Texture2D" uid="uid://bl5f54pvygwuh" path="res://04_UI/_Themes/Data/book.png" id="3_iihpr"]
-[ext_resource type="FontFile" uid="uid://cl0jltnxq5gum" path="res://04_UI/_Themes/Fonts/GlacialIndifference-Bold.otf" id="3_l2bya"]
 [ext_resource type="Script" uid="uid://bgre5ftopmpca" path="res://04_UI/Tool/Tooltip/ui_tooltip.gd" id="3_tsmqo"]
 
 [node name="Tooltip" type="Control" unique_id=648222625]
@@ -16,7 +15,7 @@ offset_right = -10.8
 offset_bottom = -9.60001
 grow_horizontal = 2
 mouse_filter = 1
-theme = ExtResource("1_2vwyg")
+theme = ExtResource("1_cvuy6")
 script = ExtResource("3_tsmqo")
 
 [node name="Panel" type="Panel" parent="." unique_id=53459980]
@@ -67,8 +66,9 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 mouse_filter = 2
-theme_override_fonts/normal_font = ExtResource("3_l2bya")
-theme_override_font_sizes/normal_font_size = 30
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 9
+theme_override_font_sizes/normal_font_size = 35
 bbcode_enabled = true
 text = "TOOLTIP"
 fit_content = true

@@ -1,8 +1,6 @@
 [gd_scene format=3 uid="uid://dqno5p3aprq7f"]
 
 [ext_resource type="Script" uid="uid://brd0wxqwulj8y" path="res://99_Prototyping/Entity/prototyping_entity.gd" id="1_6kn6i"]
-[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme_old.tres" id="2_083cp"]
-[ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://04_UI/Tool/Misc/hover_boost_button.gd" id="3_6kn6i"]
 [ext_resource type="PackedScene" uid="uid://dvr7815lw1k8b" path="res://02_Entities/Pool/Heroes/Latika/latika.tscn" id="3_os118"]
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://10_Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="4_egh8k"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="4_kq8si"]
@@ -12,9 +10,10 @@
 [ext_resource type="PackedScene" uid="uid://dr2axaqcdg5x3" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/chicken_colossus.tscn" id="8_tmkd7"]
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://90_Modules/PickableClickable/PickableModule/pickable_module.tscn" id="9_614kc"]
 [ext_resource type="PackedScene" uid="uid://bg5efhnq0erdv" path="res://90_Modules/PickableClickable/ClickableModule/clickable_module.tscn" id="10_m73qc"]
+[ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="10_r0wv3"]
 [ext_resource type="PackedScene" uid="uid://blncvfes4f2y7" path="res://99_Prototyping/Entity/AllActionPrototyping/testing_floorffa5.tscn" id="11_5hdqt"]
+[ext_resource type="Script" uid="uid://bia26v50nwe6c" path="res://04_UI/UIButton/ui_button.gd" id="11_r0wv3"]
 [ext_resource type="PackedScene" uid="uid://ygk0snmo5oj" path="res://02_Entities/_Shared/EntityStatsViewer/entity_stats_viewer.tscn" id="12_r0wv3"]
-[ext_resource type="PackedScene" uid="uid://cwtfwprwo6t0t" path="res://02_Entities/_Shared/EntityStatsWriter/entity_stats_writer.tscn" id="13_cs3s0"]
 [ext_resource type="Script" uid="uid://b0otuknba6ddv" path="res://06_FloatingIsland/FightingIsland/FightingArea/floor_area.gd" id="13_jd8sj"]
 [ext_resource type="PackedScene" uid="uid://q7gxxkhg5u54" path="res://06_FloatingIsland/FightingIsland/Pool/ArchIsland/arch_island_visual.tscn" id="17_ko5bb"]
 [ext_resource type="PackedScene" uid="uid://c0l0roxttdtlp" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/FightingManager/fighting_manager.tscn" id="17_m26y3"]
@@ -119,20 +118,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme = ExtResource("2_083cp")
+theme = ExtResource("10_r0wv3")
 
 [node name="GlobalCommandsControl" type="Control" parent="Node3D/Control" unique_id=738247091]
 anchors_preset = 0
 offset_left = 24.0
 offset_top = 24.0
 offset_right = 391.0
-offset_bottom = 238.0
+offset_bottom = 329.0
 
 [node name="Panel" type="Panel" parent="Node3D/Control/GlobalCommandsControl" unique_id=1653859956]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = -17.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -159,54 +159,63 @@ text = "GLOBAL COMMANDS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="StartFightButton" type="Button" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=2115662025]
+[node name="StartFightButton" type="Button" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=1585653480]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_default_cursor_shape = 2
 text = "Trigger Fighting State"
-script = ExtResource("3_6kn6i")
-play_sounds = false
+script = ExtResource("11_r0wv3")
+metadata/_custom_type_script = "uid://bia26v50nwe6c"
 
-[node name="StopFightButton" type="Button" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=1052993556]
+[node name="StopFightButton" type="Button" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=1036924909]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_default_cursor_shape = 2
 text = "Trigger Idle state"
-script = ExtResource("3_6kn6i")
-play_sounds = false
+script = ExtResource("11_r0wv3")
+metadata/_custom_type_script = "uid://bia26v50nwe6c"
 
-[node name="ResetFightButton" type="Button" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=948612650]
+[node name="ResetFightButton" type="Button" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=450840103]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_default_cursor_shape = 2
 text = "Reset SCENE"
-script = ExtResource("3_6kn6i")
-play_sounds = false
+script = ExtResource("11_r0wv3")
+metadata/_custom_type_script = "uid://bia26v50nwe6c"
 
-[node name="ManualModeCheckButton" type="CheckButton" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=2102497393]
+[node name="GridContainer" type="GridContainer" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=135598126]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 2
+
+[node name="ManualModeCheckButton" type="CheckButton" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/GridContainer" unique_id=2102497393]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 0
-theme_override_colors/font_color = Color(0.38607535, 0.38267398, 0.36233804, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
 text = "Manual Mode"
+script = ExtResource("11_r0wv3")
 
-[node name="AutoAttackCheckButton" type="CheckButton" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=2050907256]
+[node name="AutoAttackCheckButton" type="CheckButton" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/GridContainer" unique_id=2050907256]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 0
-theme_override_colors/font_color = Color(0.38607535, 0.38267398, 0.36233804, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
 text = "Auto Attacks"
+script = ExtResource("11_r0wv3")
 
-[node name="FamilyManagersCheckButton" type="CheckButton" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=2102497392]
+[node name="FamilyManagersCheckButton" type="CheckButton" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/GridContainer" unique_id=2102497392]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 0
-theme_override_colors/font_color = Color(0.38607535, 0.38267398, 0.36233804, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
 text = "Family Managers"
+script = ExtResource("11_r0wv3")
 
 [node name="EntityStatsViewer" parent="Node3D/Control" unique_id=779799398 instance=ExtResource("12_r0wv3")]
-
-[node name="EntityStatsWriter" parent="Node3D/Control" unique_id=1475476604 instance=ExtResource("13_cs3s0")]
 
 [node name="CenterPointCamera" parent="Node3D" unique_id=842815466 instance=ExtResource("4_egh8k")]
 unique_name_in_owner = true
@@ -330,8 +339,8 @@ environment = ExtResource("18_ko5bb")
 [connection signal="pressed" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StartFightButton" to="." method="_on_start_fight_button_pressed"]
 [connection signal="pressed" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StopFightButton" to="." method="_on_stop_fight_button_pressed"]
 [connection signal="pressed" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/ResetFightButton" to="." method="_on_reset_fight_button_pressed"]
-[connection signal="toggled" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/ManualModeCheckButton" to="." method="_on_manual_mode_check_button_toggled"]
-[connection signal="toggled" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/AutoAttackCheckButton" to="." method="_on_auto_attack_check_button_toggled"]
-[connection signal="toggled" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/FamilyManagersCheckButton" to="." method="_on_family_managers_check_button_toggled"]
+[connection signal="toggled" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/GridContainer/ManualModeCheckButton" to="." method="_on_manual_mode_check_button_toggled"]
+[connection signal="toggled" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/GridContainer/AutoAttackCheckButton" to="." method="_on_auto_attack_check_button_toggled"]
+[connection signal="toggled" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/GridContainer/FamilyManagersCheckButton" to="." method="_on_family_managers_check_button_toggled"]
 
 [editable path="Node3D/TestingFloorFFA5"]
