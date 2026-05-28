@@ -1,0 +1,130 @@
+[gd_resource type="Resource" script_class="EntityStatsBuilder" format=3 uid="uid://c0hftpk5xe4yg"]
+
+[ext_resource type="Script" uid="uid://brthobm35g70u" path="res://10_Tool/EntityStatsBuilder/stat_growth_rule.gd" id="1_1aqr6"]
+[ext_resource type="Script" uid="uid://58307hvsc6op" path="res://10_Tool/EntityStatsBuilder/entity_stats_builder.gd" id="1_xse40"]
+
+[sub_resource type="Resource" id="Resource_vyrcj"]
+script = ExtResource("1_1aqr6")
+type = 1
+base = 3.0
+slope = 0.1
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_wqjk4"]
+script = ExtResource("1_1aqr6")
+type = 1
+base = 20.0
+slope = 2.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_npcvb"]
+script = ExtResource("1_1aqr6")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_0f8n4"]
+script = ExtResource("1_1aqr6")
+base = 1.5
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_uhw78"]
+script = ExtResource("1_1aqr6")
+type = 1
+base = 0.5
+slope = 0.05
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_v3gpe"]
+script = ExtResource("1_1aqr6")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_vrxjm"]
+script = ExtResource("1_1aqr6")
+base = 100.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_4hxgn"]
+script = ExtResource("1_1aqr6")
+type = 1
+base = 10.0
+slope = 0.05
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_ijxtf"]
+script = ExtResource("1_1aqr6")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_dv34f"]
+script = ExtResource("1_1aqr6")
+type = 1
+base = 600.0
+slope = 60.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_q7b7v"]
+script = ExtResource("1_1aqr6")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_7wxp6"]
+script = ExtResource("1_1aqr6")
+type = 1
+base = 3.0
+slope = 0.1
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_3y1i7"]
+script = ExtResource("1_1aqr6")
+base = 100.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_tq0j1"]
+script = ExtResource("1_1aqr6")
+type = 1
+base = 2.0
+slope = 0.1
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_y6jeu"]
+script = ExtResource("1_1aqr6")
+type = 1
+base = 5.0
+slope = 0.25
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_0thaw"]
+script = ExtResource("1_1aqr6")
+type = 1
+base = 3.0
+slope = 0.1
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_amnjd"]
+script = ExtResource("1_1aqr6")
+base = 1.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[resource]
+script = ExtResource("1_xse40")
+output_dir = "res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Stats"
+stats_file_prefix = "kobold_knight_stats"
+desc_file_name = "kobold_knight_entity_desc"
+entity_name = "Kobby the Kobold"
+entity_description = "Kobby is happy"
+health_max = SubResource("Resource_dv34f")
+mana_max = SubResource("Resource_3y1i7")
+mana_regen = SubResource("Resource_tq0j1")
+attack_damage = SubResource("Resource_wqjk4")
+attack_speed = SubResource("Resource_uhw78")
+attack_range = SubResource("Resource_0f8n4")
+attack_power = SubResource("Resource_npcvb")
+movement_speed = SubResource("Resource_y6jeu")
+scale = SubResource("Resource_amnjd")
+crit_chance = SubResource("Resource_v3gpe")
+crit_mult = SubResource("Resource_vrxjm")
+dodge = SubResource("Resource_ijxtf")
+lifesteal = SubResource("Resource_q7b7v")
+crit_resistance = SubResource("Resource_4hxgn")
+armor = SubResource("Resource_vyrcj")
+magic_resistance = SubResource("Resource_7wxp6")
+poison_resistance = SubResource("Resource_0thaw")
+auto_attack_type = 1
+metadata/_custom_type_script = "uid://58307hvsc6op"

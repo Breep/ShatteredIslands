@@ -3,9 +3,10 @@
 [ext_resource type="Script" uid="uid://djo5msd40bxq" path="res://02_Entities/Pool/Mobs/Goblins/GoblinArcher/goblin_archer.gd" id="1_sjdat"]
 [ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="2_boaaa"]
 [ext_resource type="PackedScene" uid="uid://5ccditks7xar" path="res://02_Entities/_Data/Goblins/all_goblins.tscn" id="2_ovu33"]
-[ext_resource type="Script" uid="uid://2py6kv5aqgem" path="res://02_Entities/_Shared/hero_stats.gd" id="3_2lmyn"]
-[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/EntityInfoPanel/HeroSimpleInfoPanel2D/hero_simple_info_panel_2d.tscn" id="3_bfpeu"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="3_2lmyn"]
+[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/LargeHealthBar/large_health_bar_component.tscn" id="3_bfpeu"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://xjiuc10pv21c" path="res://02_Entities/Pool/Mobs/Goblins/GoblinArcher/goblin_archer_animatrion_tree.res" id="4_dhx74"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="4_r6t07"]
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="7_r6t07"]
 
 [sub_resource type="Resource" id="Resource_y4yvn"]
@@ -18,7 +19,7 @@ metadata/_custom_type_script = "uid://dkrea5xbc4y8q"
 radius = 0.32958984
 height = 1.7062988
 
-[node name="GoblinArcher" type="CharacterBody3D" unique_id=1163203318 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_health_bar", "_attack_spawn_marker")]
+[node name="GoblinArcher" type="CharacterBody3D" unique_id=1163203318 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_attack_spawn_marker")]
 collision_layer = 16
 collision_mask = 25
 script = ExtResource("1_sjdat")
@@ -26,7 +27,6 @@ entity_name = "Goby l'archer"
 entity_desc = SubResource("Resource_y4yvn")
 _visual_3d = NodePath("AllGoblinVisual")
 _health_bar_marker = NodePath("AllGoblinVisual/HealthBarMarker")
-_health_bar = NodePath("AllGoblinVisual/HeroSimpleInfoPanel2d")
 _attack_spawn_marker = NodePath("AllGoblinVisual/AAspawnmarker")
 _projectile_type = 10
 metadata/_custom_type_script = "uid://cpih8vqoolap4"
@@ -80,10 +80,7 @@ visible = false
 [node name="HealthBarMarker" type="Marker3D" parent="AllGoblinVisual" unique_id=179970257]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1072268, 0)
 
-[node name="HeroSimpleInfoPanel2d" parent="AllGoblinVisual" unique_id=358992180 node_paths=PackedStringArray("_info_panel_spawn_tavern", "_owner_entity", "_info_panel_spawn") instance=ExtResource("3_bfpeu")]
-_info_panel_spawn_tavern = NodePath("../HealthBarMarker")
-_owner_entity = NodePath("../..")
-_info_panel_spawn = NodePath("../HealthBarMarker")
+[node name="HeroSimpleInfoPanel2d" parent="AllGoblinVisual" unique_id=358992180 instance=ExtResource("3_bfpeu")]
 
 [node name="AAspawnmarker" type="Marker3D" parent="AllGoblinVisual" unique_id=209130784]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1830777, 1.3456783, 1.0083058)

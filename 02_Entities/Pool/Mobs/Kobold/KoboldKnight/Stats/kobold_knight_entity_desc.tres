@@ -1,0 +1,70 @@
+[gd_resource type="Resource" script_class="EntityDesc" format=3 uid="uid://dddkh5njmooe1"]
+
+[ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="1_30n6k"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="2_xe2fy"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_mbghl"]
+[ext_resource type="Resource" uid="uid://5rufecknsbju" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Skills/Bronze/fight_me.tres" id="3_xe2fy"]
+[ext_resource type="Resource" uid="uid://ckd5py8va6t0c" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Skills/Silver/rallying_banner.tres" id="4_mbghl"]
+[ext_resource type="Resource" uid="uid://xd0bl006atib" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Stats/kobold_knight_stats_lvl_01.tres" id="4_yo66y"]
+[ext_resource type="Resource" uid="uid://d22nuc31mr1d6" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Stats/kobold_knight_stats_lvl_02.tres" id="5_evq6r"]
+[ext_resource type="Resource" uid="uid://dt8bhpsnta7oo" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Skills/Gold/goblin_protection.tres" id="5_yo66y"]
+[ext_resource type="Resource" uid="uid://y3wwso7x17c7" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Skills/Passive/goblin_horde_tank.tres" id="6_fqdos"]
+[ext_resource type="Resource" uid="uid://xbponvk6kjyc" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Stats/kobold_knight_stats_lvl_03.tres" id="6_pn8g5"]
+[ext_resource type="Resource" uid="uid://h3r1xq1l04ls" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Skills/Ultimate/protector_warcry.tres" id="7_dyb1v"]
+[ext_resource type="Resource" uid="uid://bbxpu803apknn" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Stats/kobold_knight_stats_lvl_04.tres" id="7_fqdos"]
+[ext_resource type="Resource" uid="uid://6x13tgdlxm3k" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Stats/kobold_knight_stats_lvl_05.tres" id="8_dyb1v"]
+[ext_resource type="Resource" uid="uid://rbjqa3gain47" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Stats/kobold_knight_stats_lvl_06.tres" id="9_yl3jy"]
+[ext_resource type="Resource" uid="uid://btgjh2krf1s51" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Stats/kobold_knight_stats_lvl_07.tres" id="10_6by3r"]
+[ext_resource type="Resource" uid="uid://cyocgaf8jvaq0" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Stats/kobold_knight_stats_lvl_08.tres" id="11_1orxo"]
+[ext_resource type="Resource" uid="uid://cc2orjhc2ts6g" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Stats/kobold_knight_stats_lvl_09.tres" id="12_qve0c"]
+[ext_resource type="Resource" uid="uid://bb77kekbqjlh" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Stats/kobold_knight_stats_lvl_10.tres" id="13_y6dnr"]
+[ext_resource type="Resource" uid="uid://cglfxhdsnlmvb" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Stats/kobold_knight_stats_lvl_11.tres" id="14_8k3r6"]
+[ext_resource type="Resource" uid="uid://ckfb46tq0wvb0" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Stats/kobold_knight_stats_lvl_12.tres" id="15_e8fkq"]
+[ext_resource type="Resource" uid="uid://clr0ov2r614r5" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Stats/kobold_knight_stats_lvl_13.tres" id="16_1lm5k"]
+[ext_resource type="Resource" uid="uid://cxnxrgcns4ry6" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Stats/kobold_knight_stats_lvl_14.tres" id="17_64ngv"]
+[ext_resource type="Resource" uid="uid://b2i47j4eqjdmx" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Stats/kobold_knight_stats_lvl_15.tres" id="18_cijua"]
+[ext_resource type="Resource" uid="uid://ctaoai1pk4eo4" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Stats/kobold_knight_stats_lvl_16.tres" id="19_auu70"]
+[ext_resource type="Resource" uid="uid://sppke0hvylc7" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Stats/kobold_knight_stats_lvl_17.tres" id="20_qmdhm"]
+[ext_resource type="Resource" uid="uid://csx2qj87iiqkj" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Stats/kobold_knight_stats_lvl_18.tres" id="21_tqrqp"]
+[ext_resource type="Resource" uid="uid://oh88bhyk42j" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Stats/kobold_knight_stats_lvl_19.tres" id="22_lvlj5"]
+[ext_resource type="Resource" uid="uid://bpl8tus8ktjfy" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Stats/kobold_knight_stats_lvl_20.tres" id="23_xxddl"]
+
+[resource]
+script = ExtResource("1_30n6k")
+name = "Kobby the Kobold"
+description = "Kobby is happy"
+stats = Dictionary[int, ExtResource("3_mbghl")]({
+1: ExtResource("4_yo66y"),
+2: ExtResource("5_evq6r"),
+3: ExtResource("6_pn8g5"),
+4: ExtResource("7_fqdos"),
+5: ExtResource("8_dyb1v"),
+6: ExtResource("9_yl3jy"),
+7: ExtResource("10_6by3r"),
+8: ExtResource("11_1orxo"),
+9: ExtResource("12_qve0c"),
+10: ExtResource("13_y6dnr"),
+11: ExtResource("14_8k3r6"),
+12: ExtResource("15_e8fkq"),
+13: ExtResource("16_1lm5k"),
+14: ExtResource("17_64ngv"),
+15: ExtResource("18_cijua"),
+16: ExtResource("19_auu70"),
+17: ExtResource("20_qmdhm"),
+18: ExtResource("21_tqrqp"),
+19: ExtResource("22_lvlj5"),
+20: ExtResource("23_xxddl")
+})
+skills = Dictionary[int, ExtResource("2_xe2fy")]({
+0: ExtResource("6_fqdos"),
+1: ExtResource("3_xe2fy"),
+2: ExtResource("4_mbghl"),
+3: ExtResource("5_yo66y"),
+4: ExtResource("7_dyb1v")
+})
+aa_1_release_normalized = 0.3
+aa_2_release_normalized = 0.4
+aa_3_release_normalized = 0.44
+aa_1_anim_base_duration = 1.0
+aa_2_anim_base_duration = 1.167
+aa_3_anim_base_duration = 1.333

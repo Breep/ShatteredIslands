@@ -67,6 +67,7 @@ func _update_unlocked_skills(level: int) -> void:
 	for skill_type: Skill.Type in unlocked_skills:
 		var is_skill_active: bool = level >= SKILL_UNLOCK_LEVEL[skill_type]
 		if unlocked_skills[skill_type] != is_skill_active:
+			Verbose.trace("Skill [" + str(Skill.Type.keys()[skill_type]) + "] from owner: " + str(_owner.name) + " state change " + str(is_skill_active), Verbose.Category.ENTITY_MODULE)
 			unlocked_skills[skill_type] = is_skill_active
 			has_changed = true
 	if has_changed:
@@ -80,8 +81,8 @@ func _load_skills() -> void:
 	
 	for skill_type: Skill.Type in roaster:
 		if not _owner.entity_desc.skills.has(skill_type):
-			Verbose.warn("Skill not found in entity_desc [" + str(Skill.Type.keys()[skill_type]) + "]", Verbose.Category.ENTITY_MODULE)
-			return
+			Verbose.warn("Skill from " + str(_owner.name) + " not found in entity_desc [" + str(Skill.Type.keys()[skill_type]) + "]", Verbose.Category.ENTITY_MODULE)
+			continue
 		roaster[skill_type] = _owner.entity_desc.skills[skill_type]
 
 
