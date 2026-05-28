@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://4d5xa7r1dcd2"
-path="res://.godot/imported/red_arrow.svg-0797ddb93893052c3bbb4963d986ebd7.ctex"
+path="res://.godot/imported/red_arrow.svg-1ef180787cacf51849027f4576b629dc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://04_UI/_Themes/Data/Icons/AlterationsIcons/red_arrow.svg"
-dest_files=["res://.godot/imported/red_arrow.svg-0797ddb93893052c3bbb4963d986ebd7.ctex"]
+source_file="res://04_UI/_Themes/Data/Icons/Misc/red_arrow.svg"
+dest_files=["res://.godot/imported/red_arrow.svg-1ef180787cacf51849027f4576b629dc.ctex"]
 
 [params]
 

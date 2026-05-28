@@ -8,7 +8,7 @@ func _init() -> void:
 	type = Type.WEAKNESS
 	polarity = Polarity.DEBUFF
 	id = &"Weakness"
-	icon = preload("res://02_Entities/_Shared/Components/Alterations/AlterationIcon/Icons/strength_weakness_icon.png")
+	icon = preload("res://04_UI/_Themes/Data/Icons/AlterationsIcons/defense_stroke.svg")
 	display_color = Color.SLATE_GRAY
 	_stat_type = EntityStats.StatType.M_FRAGILITY
 	_modifier_id = &"Weakness Alteration"

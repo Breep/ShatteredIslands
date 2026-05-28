@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5ymfmebrtgfe"
-path="res://.godot/imported/red_arrow_stroke.svg-d677f96e27f4e0416bae882bde7ab12c.ctex"
+uid="uid://b6lhls3tira0o"
+path="res://.godot/imported/defense_stroke.svg-bda357bf0b950982adba5ac8a9d6f5d0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://04_UI/_Themes/Data/Icons/AlterationsIcons/red_arrow_stroke.svg"
-dest_files=["res://.godot/imported/red_arrow_stroke.svg-d677f96e27f4e0416bae882bde7ab12c.ctex"]
+source_file="res://04_UI/_Themes/Data/Icons/AlterationsIcons/defense_stroke.svg"
+dest_files=["res://.godot/imported/defense_stroke.svg-bda357bf0b950982adba5ac8a9d6f5d0.ctex"]
 
 [params]
 

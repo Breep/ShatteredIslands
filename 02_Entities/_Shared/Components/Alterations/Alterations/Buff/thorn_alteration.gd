@@ -11,7 +11,7 @@ func _init() -> void:
 	polarity = Polarity.BUFF
 	id = &"Thorn"
 	display_color = Color.SADDLE_BROWN
-	icon = preload("res://02_Entities/_Shared/Components/Alterations/AlterationIcon/Icons/thorn_icon.png")
+	icon = preload("res://04_UI/_Themes/Data/Icons/AlterationsIcons/thorn_stroke.svg")
 
 
 func get_return_damage() -> float:
