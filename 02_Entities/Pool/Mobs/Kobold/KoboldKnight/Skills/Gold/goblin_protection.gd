@@ -8,9 +8,7 @@ func apply(ctx: SkillContext) -> void:
 	_owner.battle_callback_registry.register_battle_start(&"Goblin Protection", func() -> void:
 		if _owner != null and is_instance_valid(_owner):
 			var allies: Array[Entity] = _owner.target.get_targets(TargetComponent.MultipleTargettingStrategy.ALLIES)
-			var shield_gain: float = _total_shield/(1 + allies.size())
-			_owner.alterations.inflict_condition_stacks(_owner, shield_gain, Alteration.Type.SHIELD, &"Goblin Protection")
-			ShieldVfxSpawner.spawn_on(_owner)
+			var shield_gain: float = _total_shield/(allies.size())
 			for entity in allies:
 				_owner.alterations.inflict_condition_stacks(entity, shield_gain, Alteration.Type.SHIELD, &"Goblin Protection")
 				ShieldVfxSpawner.spawn_on(entity)

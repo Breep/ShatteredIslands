@@ -1,0 +1,116 @@
+[gd_resource type="Resource" script_class="EntityStatsBuilder" format=3 uid="uid://c4hjwabcbbnev"]
+
+[ext_resource type="Script" uid="uid://brthobm35g70u" path="res://10_Tool/EntityStatsBuilder/stat_growth_rule.gd" id="1_84udo"]
+[ext_resource type="Script" uid="uid://58307hvsc6op" path="res://10_Tool/EntityStatsBuilder/entity_stats_builder.gd" id="2_owfj1"]
+
+[sub_resource type="Resource" id="Resource_ymekk"]
+script = ExtResource("1_84udo")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_kbnr8"]
+script = ExtResource("1_84udo")
+type = 1
+base = 40.0
+slope = 2.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_625sc"]
+script = ExtResource("1_84udo")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_gwbm3"]
+script = ExtResource("1_84udo")
+base = 1.5
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_kcmyr"]
+script = ExtResource("1_84udo")
+type = 1
+base = 0.8
+slope = 0.02
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_vs7ir"]
+script = ExtResource("1_84udo")
+base = 5.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_dxv7d"]
+script = ExtResource("1_84udo")
+base = 100.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_nar4u"]
+script = ExtResource("1_84udo")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_kc1mh"]
+script = ExtResource("1_84udo")
+base = 5.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_4gkpw"]
+script = ExtResource("1_84udo")
+type = 1
+base = 1600.0
+slope = 80.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_efafj"]
+script = ExtResource("1_84udo")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_2jjtk"]
+script = ExtResource("1_84udo")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_6ruex"]
+script = ExtResource("1_84udo")
+base = 100.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_oer6k"]
+script = ExtResource("1_84udo")
+base = 4.0
+slope = 0.1
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_cywrw"]
+script = ExtResource("1_84udo")
+type = 1
+base = 6.0
+slope = 0.3
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_h32o2"]
+script = ExtResource("1_84udo")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_gcexe"]
+script = ExtResource("1_84udo")
+base = 1.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[resource]
+script = ExtResource("2_owfj1")
+output_dir = "res://02_Entities/Pool/Mobs/Satyr/BasicSatyr/Stats"
+entity_name = "Pan the Satyr"
+health_max = SubResource("Resource_4gkpw")
+mana_max = SubResource("Resource_6ruex")
+mana_regen = SubResource("Resource_oer6k")
+attack_damage = SubResource("Resource_kbnr8")
+attack_speed = SubResource("Resource_kcmyr")
+attack_range = SubResource("Resource_gwbm3")
+attack_power = SubResource("Resource_625sc")
+movement_speed = SubResource("Resource_cywrw")
+scale = SubResource("Resource_gcexe")
+crit_chance = SubResource("Resource_vs7ir")
+crit_mult = SubResource("Resource_dxv7d")
+dodge = SubResource("Resource_kc1mh")
+lifesteal = SubResource("Resource_efafj")
+crit_resistance = SubResource("Resource_nar4u")
+armor = SubResource("Resource_ymekk")
+magic_resistance = SubResource("Resource_2jjtk")
+poison_resistance = SubResource("Resource_h32o2")
+auto_attack_type = 1
+metadata/_custom_type_script = "uid://58307hvsc6op"

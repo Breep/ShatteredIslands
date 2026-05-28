@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="4_kq8si"]
 [ext_resource type="PackedScene" uid="uid://bes7q2ujh87bk" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/kobold_knight.tscn" id="6_5qocs"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]
+[ext_resource type="PackedScene" uid="uid://di0hhdfbpptu6" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/satyr_berserker.tscn" id="6_ia2qg"]
 [ext_resource type="PackedScene" uid="uid://dvuq5n41nak3u" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/ArenaZoneManager/arena_zone_manager.tscn" id="8_fl2p6"]
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://90_Modules/PickableClickable/PickableModule/pickable_module.tscn" id="9_614kc"]
 [ext_resource type="PackedScene" uid="uid://bg5efhnq0erdv" path="res://90_Modules/PickableClickable/ClickableModule/clickable_module.tscn" id="10_m73qc"]
@@ -79,6 +80,14 @@ override_base_stats = SubResource("Resource_5qocs")
 transform = Transform3D(-0.01726045, 0, 0.9998509, 0, 1.0000001, 0, -0.9998509, 0, -0.01726045, 2.644456, 0, -2.3240192)
 level = 10
 team = 1
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
+[node name="Satyr" parent="Node3D/Entities" unique_id=1916637063 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("6_ia2qg")]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, 2.7595112, 0, 4.657131)
+level = 5
+team = 2
 battle_id = 1
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
