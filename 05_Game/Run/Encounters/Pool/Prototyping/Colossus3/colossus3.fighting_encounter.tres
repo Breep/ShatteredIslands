@@ -11,4 +11,5 @@ formation_b = ExtResource("1_hia2w")
 encounter_id = &"Colossus3"
 display_name = "Colossus 3"
 design_notes = "3 poulets colossus et leur acolytes"
+music = "battle_drums"
 metadata/_custom_type_script = "uid://dg13tr0kcjyll"

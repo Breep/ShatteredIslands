@@ -4,22 +4,8 @@
 [ext_resource type="Script" uid="uid://t0ycuxntigox" path="res://04_UI/InGame/Persistant/ui_persistant.gd" id="1_oypi2"]
 [ext_resource type="PackedScene" uid="uid://bvqsnkh0s11q2" path="res://04_UI/InGame/FamilyPortrait/ui_all_families_portrait.tscn" id="5_oypi2"]
 [ext_resource type="PackedScene" uid="uid://cxlyl8wdndq08" path="res://04_UI/InGame/HeroPortrait/ui_hero_portrait.tscn" id="6_kt7rx"]
-[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme.tres" id="7_sm0s7"]
-[ext_resource type="Script" uid="uid://dqsbil04m2fyg" path="res://04_UI/Menu/MainMenu/text_button.gd" id="8_16n6v"]
 [ext_resource type="PackedScene" uid="uid://ci1xegvy2t2jm" path="res://04_UI/InGame/FamilyViewer/ui_family_viewer.tscn" id="9_16n6v"]
 [ext_resource type="PackedScene" uid="uid://bkh2sp5xq82gn" path="res://04_UI/Tool/Tutorial/tutorial_overlay.tscn" id="10_tutov"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_endbuy_frame"]
-bg_color = Color(0, 0, 0, 0)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(1, 0.92, 0.55, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
 
 [node name="Persistant" type="Control" unique_id=1275150033]
 layout_mode = 3
@@ -100,39 +86,6 @@ offset_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 0
 
-[node name="EndBuyingPhaseButton" type="Button" parent="." unique_id=980577284]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(220, 64)
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -252.0
-offset_top = -96.0
-offset_right = -32.0
-offset_bottom = -32.0
-grow_horizontal = 0
-grow_vertical = 0
-pivot_offset_ratio = Vector2(0.5, 0.4)
-theme = ExtResource("7_sm0s7")
-theme_override_font_sizes/font_size = 22
-text = "Prochain combat"
-script = ExtResource("8_16n6v")
-metadata/_custom_type_script = "uid://dqsbil04m2fyg"
-
-[node name="EndBuyingPhaseFrame" type="Panel" parent="EndBuyingPhaseButton" unique_id=980577285]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_endbuy_frame")
-
 [node name="UiFamilyViewer" parent="." unique_id=452679620 instance=ExtResource("9_16n6v")]
 unique_name_in_owner = true
 layout_mode = 1
@@ -151,5 +104,3 @@ layout_mode = 1
 [node name="UIPlayerInfo" parent="." unique_id=1134887515 instance=ExtResource("1_lw8yd")]
 unique_name_in_owner = true
 layout_mode = 1
-
-[connection signal="pressed" from="EndBuyingPhaseButton" to="." method="_on_end_buying_phase_button_pressed"]

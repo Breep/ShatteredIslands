@@ -4,13 +4,14 @@ extends EntityComponent
 # Gère l'interaction click et hover sur une entité.
 # - Mouse hover : toggle marker (hover) + cursor pointing hand
 # - Left mouse press → tracked. Si release dans les SHORT_CLICK_THRESHOLD_S
-#   secondes, on émet Events.entity_clicked (= clic court "intentionnel"). Sinon,
-#   on ne fait rien (l'utilisateur est en train de faire un long press → DraggableComponent).
+#   secondes, on émet Events.entity_clicked (= clic court "intentionnel"), ou
+#   Events.entity_alt_clicked si Alt était maintenu au moment du press (ex: ouvrir
+#   l'overlay de stats). Sinon, on ne fait rien (long press → DraggableComponent).
 # - select() / deselect() exposés pour piloter le marker depuis l'extérieur (ex: proto).
 
 #region ============================== Constants ==============================
 const _SELECTION_MARKER_SCENE: PackedScene = preload("res://02_Entities/_Shared/Misc/selection_marker.tscn")
-const SHORT_CLICK_THRESHOLD_S: float = 0.1
+const SHORT_CLICK_THRESHOLD_S: float = 0.2
 #endregion
 
 #region ============================== Private variables ==============================
@@ -21,6 +22,7 @@ var _is_hovered: bool = false
 # Track press en cours : démarré sur input_event de l'entité, terminé sur release global.
 var _press_pending: bool = false
 var _press_start_msec: int = 0
+var _press_alt: bool = false
 #endregion
 
 #region ============================== Node base functions ==============================
@@ -54,8 +56,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	set_process_unhandled_input(false)
 
 	if duration_s < SHORT_CLICK_THRESHOLD_S:
-		Events.entity_clicked.emit(_owner)
-		Verbose.debug("Click court (" + str(duration_s).pad_decimals(3) + "s) sur " + _owner.entity_name, Verbose.Category.ENTITY)
+		if _press_alt:
+			Events.entity_alt_clicked.emit(_owner)
+		else:
+			Events.entity_clicked.emit(_owner)
+		Verbose.debug("Click court (" + str(duration_s).pad_decimals(3) + "s) sur " + _owner.entity_name + (" [ALT]" if _press_alt else ""), Verbose.Category.ENTITY)
 		_play_click_marker_animation()
 #endregion
 
@@ -86,6 +91,7 @@ func _on_owner_input_event(_camera: Node, event: InputEvent, _event_position: Ve
 
 	# Left press : démarrer le tracking — l'émission se fera sur release dans _unhandled_input.
 	_press_pending = true
+	_press_alt = mb.alt_pressed
 	_press_start_msec = Time.get_ticks_msec()
 	set_process_unhandled_input(true)
 

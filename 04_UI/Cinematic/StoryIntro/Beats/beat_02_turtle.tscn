@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://j8ublcsrgcgk"]
 
 [ext_resource type="Texture2D" uid="uid://bief0vpi2m0mx" path="res://04_UI/Cinematic/StoryIntro/Assets/shattered_logo.png" id="1_tteoi"]
-[ext_resource type="FontFile" uid="uid://cvfku6uge3mvi" path="res://20_Data/font/Super Trend.ttf" id="2_font"]
+[ext_resource type="FontFile" uid="uid://cvfku6uge3mvi" path="res://04_UI/_Themes/Fonts/Super Trend.ttf" id="2_font"]
 
 [sub_resource type="Animation" id="Animation_tteoi"]
 length = 8.0

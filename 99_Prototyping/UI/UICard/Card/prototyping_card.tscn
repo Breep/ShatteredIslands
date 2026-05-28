@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://c177mpfa0ym1f"]
 
+[ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="1_6lwqt"]
 [ext_resource type="PackedScene" uid="uid://c2psjj8133op3" path="res://01_Cards/2D/CardButton/card_button.tscn" id="1_cpxnc"]
 [ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://01_Cards/Templates/family.gd" id="2_jjnsp"]
 [ext_resource type="Script" uid="uid://cs1mp6knp8v0p" path="res://99_Prototyping/UI/UICard/Card/prototyping_card.gd" id="2_script"]
@@ -16,6 +17,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_6lwqt")
 script = ExtResource("2_script")
 _families = Array[ExtResource("2_jjnsp")]([ExtResource("3_7e1et"), ExtResource("4_etvcx"), ExtResource("5_i36ej"), ExtResource("6_7lhnd")])
 

@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://di7eyuedvo17p"]
 
 [ext_resource type="Script" uid="uid://uarp5atsjtdt" path="res://04_UI/InGame/PauseMenu/ui_pause_menu.gd" id="1_41y25"]
-[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme.tres" id="2_e76lw"]
-[ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/Menu/MainMenu/panel_main_menu.tres" id="3_7g0si"]
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme_old.tres" id="2_e76lw"]
+[ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="3_7g0si"]
 [ext_resource type="Script" uid="uid://gsw58as4o14w" path="res://04_UI/Menu/MainMenu/container_tween.gd" id="3_ibxuc"]
-[ext_resource type="Theme" uid="uid://bvr0thvdlbbky" path="res://04_UI/Menu/MainMenu/normal_button_main.tres" id="4_7g0si"]
+[ext_resource type="Theme" uid="uid://bvr0thvdlbbky" path="res://04_UI/_Themes/normal_button_main.tres" id="4_7g0si"]
 [ext_resource type="Script" uid="uid://bq2jprj2y5yr6" path="res://04_UI/Menu/MainMenu/button_main_ui.gd" id="6_7g0si"]
-[ext_resource type="Theme" uid="uid://d0qobfi4rit8a" path="res://04_UI/Menu/MainMenu/label_main_menu_white.tres" id="6_066xy"]
-[ext_resource type="Theme" uid="uid://co4jayq2aoi3r" path="res://04_UI/Menu/MainMenu/normal_button_rouge.tres" id="7_066xy"]
-[ext_resource type="Theme" uid="uid://djwauvkpnr27d" path="res://04_UI/Menu/MainMenu/normal_button2.tres" id="7_kb7q5"]
+[ext_resource type="Theme" uid="uid://d0qobfi4rit8a" path="res://04_UI/_Themes/label_main_menu_white.tres" id="6_066xy"]
+[ext_resource type="Theme" uid="uid://co4jayq2aoi3r" path="res://04_UI/_Themes/normal_button_rouge.tres" id="7_066xy"]
+[ext_resource type="Theme" uid="uid://djwauvkpnr27d" path="res://04_UI/_Themes/normal_button2.tres" id="7_kb7q5"]
 
 [node name="PauseMenu" type="Control" unique_id=3407187]
 layout_mode = 3

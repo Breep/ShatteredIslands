@@ -74,6 +74,16 @@ class StatModifierDictionary extends Resource:
 					Verbose.debug("Auto cleaning | " + modifier.id, Verbose.Category.STAT_MODIFIER)
 					_modifiers.erase(modifier.id)
 
+
+	# Valeur du modifier d'id donné pour cette stat (0.0 s'il n'existe pas).
+	func get_modifier_value(id: StringName, action_type: Utils.ActionType) -> float:
+		var modifier: StatModifier
+		if EntityStats.is_multi_stat(_stat_type):
+			modifier = _modifiers_per_action_type[action_type].get(id)
+		else:
+			modifier = _modifiers.get(id)
+		return modifier.value if modifier != null else 0.0
+
 	# ============================== Private functions ==============================
 
 	func _recompute_stats() -> void:
@@ -189,6 +199,18 @@ func remove_modifier(stat_type: EntityStats.StatType, id: String, action_type: U
 	dummy.id = id
 	dummy.action_type = action_type
 	unregister_modifier(dummy)
+
+
+# Valeur courante du modifier d'id donné sur une stat (résout les alias ARMOR/MR/PR).
+# Retourne 0.0 si aucun modifier de cet id n'est appliqué.
+func get_modifier_value(stat_type: EntityStats.StatType, id: StringName, action_type: Utils.ActionType = Utils.ActionType.DAMAGE_PHYSICAL) -> float:
+	var resolved: Dictionary = EntityStats.resolve_alias(stat_type)
+	if not resolved.is_empty():
+		stat_type = resolved["stat_type"]
+		action_type = resolved["action_type"]
+	if not _stats_modifiers_dictionaries.has(stat_type):
+		return 0.0
+	return _stats_modifiers_dictionaries[stat_type].get_modifier_value(id, action_type)
 
 
 func recompute_all() -> void:

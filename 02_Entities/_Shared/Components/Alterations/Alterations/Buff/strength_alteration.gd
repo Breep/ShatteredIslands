@@ -20,7 +20,7 @@ func _init() -> void:
 	polarity = Polarity.BUFF
 	id = &"Strength"
 	display_color = Color.STEEL_BLUE
-	icon = preload("res://02_Entities/_Shared/Components/Alterations/AlterationIcon/Icons/strength_weakness_icon.png")
+	icon = preload("res://04_UI/_Themes/Data/Icons/AlterationsIcons/strength_stroke.svg")
 	stacks_changed.connect(_on_stacks_changed)
 
 

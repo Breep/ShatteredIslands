@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dyf154pndkj6u"]
 
 [ext_resource type="Script" uid="uid://4mjiyc4ne1" path="res://04_UI/InGame/BuyingArea/PlayerPortrait/ui_player_portrait.gd" id="1_7toxq"]
-[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme.tres" id="1_q7lmx"]
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme_old.tres" id="1_q7lmx"]
 [ext_resource type="Texture2D" uid="uid://bysuxqpthk6jh" path="res://04_UI/InGame/BuyingArea/PlayerPortrait/Data/Hexagone_mask.png" id="3_861v8"]
 [ext_resource type="BitMap" uid="uid://coqsy2fcdqwso" path="res://04_UI/InGame/BuyingArea/PlayerPortrait/Data/Hexagone_mask_bitmap.png" id="4_uhgtx"]
 [ext_resource type="Script" uid="uid://dq0ub1oemlk0p" path="res://22_VFX/VFEZ-godot-main/vfez_material_2d.gd" id="4_vr4pg"]

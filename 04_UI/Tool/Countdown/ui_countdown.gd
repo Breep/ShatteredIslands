@@ -21,6 +21,8 @@ func start(countdown_sec: int, endword: String) -> void:
 	_timer_label.pivot_offset = _timer_label.size / 2.0
 	_update_label()
 	show()
+	AudioManager.play_sfx("thud_2")
+	AudioManager.play_sfx("thud_3")
 
 
 func _update_label() -> void:
@@ -44,12 +46,16 @@ func _animate_endword_effect() -> void:
 func _on_timer_countdown_timeout() -> void:
 	_sec_timer -= 1  
 	_animate_label() 
-	_update_label()  
-
+	_update_label()
+	
 	if _sec_timer <= 0:
+		AudioManager.play_sfx("boxing_bell_3")
 		_timer.stop()  
 		_timer_label.text = _end_timer_word 
 		_timer_label.pivot_offset = _timer_label.size / 2.0
 		_animate_endword_effect()  
 		await get_tree().create_timer(1).timeout
 		hide()
+	else:
+		AudioManager.play_sfx("thud_2")
+		AudioManager.play_sfx("thud_3")

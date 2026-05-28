@@ -36,6 +36,7 @@ func signal_player_lost_a_fight(player: Player) -> void:
 # ============================== CLICKABLE ==============================
 
 signal entity_clicked(entity: Entity)
+signal entity_alt_clicked(entity: Entity)
 signal entity_right_clicked(entity: Entity)
 signal furniture_clicked(furniture: Furniture)
 func signal_clickable_cliked(clickable: Node3D) -> void:
