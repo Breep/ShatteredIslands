@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://ygk0snmo5oj"]
+
+[ext_resource type="StyleBox" uid="uid://dr88rw2wgw2id" path="res://04_UI/Menu/MainMenu/panel_ui_menu_box.tres" id="1_msd43"]
+
+[node name="EntityStatsOverlay" type="Node" unique_id=1498890485]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=925935475]
+
+[node name="Control" type="Panel" parent="CanvasLayer" unique_id=582348049]
+offset_left = -4.0
+offset_top = -2.0
+offset_right = 259.0
+offset_bottom = 330.0
+theme_override_styles/panel = ExtResource("1_msd43")
