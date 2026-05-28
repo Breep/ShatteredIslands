@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://uejah0y27fuv"
-path.s3tc="res://.godot/imported/T_Kobold_Thief_Armor_N.tga-76f7536df7e1e8c769c984aa3beff408.s3tc.ctex"
+path.s3tc="res://.godot/imported/T_Kobold_Thief_Armor_N.tga-e42fb431d843bf829aa72a41bc83bbb5.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/T_Kobold_Thief_Armor_N.tga"
-dest_files=["res://.godot/imported/T_Kobold_Thief_Armor_N.tga-76f7536df7e1e8c769c984aa3beff408.s3tc.ctex"]
+source_file="res://02_Entities/_Data/Kobold/KoboldThief/T_Kobold_Thief_Armor_N.tga"
+dest_files=["res://.godot/imported/T_Kobold_Thief_Armor_N.tga-e42fb431d843bf829aa72a41bc83bbb5.s3tc.ctex"]
 
 [params]
 
