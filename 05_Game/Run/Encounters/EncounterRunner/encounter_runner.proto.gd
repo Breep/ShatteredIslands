@@ -33,7 +33,7 @@ func _ready() -> void:
 	add_child(_encounter_runner)
 
 	_party = Party.new()
-	_party.formation = _default_player_formation.populate_with(_hero_scenes, _acolyte_scenes)
+	_party.formation = _default_player_formation.populate_with(_party, _hero_scenes, _acolyte_scenes)
 
 	_run_button.pressed.connect(_on_run_pressed)
 	_reload_button.pressed.connect(_on_reload_pressed)

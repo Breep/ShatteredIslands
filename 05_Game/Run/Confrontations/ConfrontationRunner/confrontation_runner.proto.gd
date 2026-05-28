@@ -39,7 +39,7 @@ func _ready() -> void:
 	_confrontation_runner.confrontation_ended.connect(_on_confrontation_ended)
 
 	var party: Party = Party.new()
-	party.formation = _default_player_formation.populate_with(_hero_scenes, _acolyte_scenes)
+	party.formation = _default_player_formation.populate_with(party, _hero_scenes, _acolyte_scenes)
 
 	_end_tavern_button.pressed.connect(_on_end_tavern_pressed)
 	_end_fight_button.pressed.connect(_on_end_fight_pressed)

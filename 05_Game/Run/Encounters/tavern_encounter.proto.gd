@@ -29,7 +29,7 @@ func _ready() -> void:
 	add_child(_encounter_runner)
 
 	var party: Party = Party.new()
-	party.formation = _default_player_formation.populate_with(_hero_scenes, _acolyte_scenes)
+	party.formation = _default_player_formation.populate_with(party, _hero_scenes, _acolyte_scenes)
 
 	await _encounter_runner._setup_tavern(_tavern_encounter, party)
 

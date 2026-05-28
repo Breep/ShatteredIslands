@@ -1,3 +1,9 @@
+# Disposition d'une formation côté combat : entity_specs porte le placement
+# concret (positions relatives à la fighting_area). hero_spawn_specs /
+# acolyte_spawn_specs sont utilisés UNIQUEMENT par les .tres "template" de
+# layout de départ (consommés par le runtime pour bâtir une formation à partir
+# d'un roaster). Une vraie formation de combat n'a généralement que
+# entity_specs renseigné.
 class_name FightingFormation
 extends Formation
 
@@ -23,56 +29,46 @@ func mirrored() -> FightingFormation:
 	return copy
 
 
-func populate_with(hero_scenes: Array[PackedScene], acolyte_scenes: Array[PackedScene]) -> FightingFormation:
-	var result: FightingFormation = duplicate(true)
+func add_entity(spec: EntitySpec) -> EntitySpec:
+	if spec == null: return null
+	entity_specs.append(spec)
+	return spec
 
-	var placed_heroes: int = mini(hero_scenes.size(), result.hero_spawn_specs.size())
+
+# Helper transitionnel utilisé par les proto scenes : depuis ce template
+# (spawn_specs uniquement), crée une formation peuplée. Side effect : ajoute
+# des RoasterEntry (avec EntityDesc transient) au roaster de la party.
+func populate_with(party: Party, hero_scenes: Array[PackedScene], acolyte_scenes: Array[PackedScene]) -> FightingFormation:
+	var formation := FightingFormation.new()
+	if party == null:
+		return formation
+	var placed_heroes: int = mini(hero_scenes.size(), hero_spawn_specs.size())
 	for i in placed_heroes:
 		if hero_scenes[i] == null: continue
-		result.entity_specs.append(_make_hero_spec(hero_scenes[i], result.hero_spawn_specs[i], "Hero_" + str(i)))
-
-	var placed_acolytes: int = mini(acolyte_scenes.size(), result.acolyte_spawn_specs.size())
+		var entry: RoasterEntry = party.add_to_roaster(_make_transient_entry(hero_scenes[i], Entity.Category.HERO))
+		formation.entity_specs.append(_make_spec_for_entry(entry, hero_spawn_specs[i].transform, "Hero_" + str(i)))
+	var placed_acolytes: int = mini(acolyte_scenes.size(), acolyte_spawn_specs.size())
 	for i in placed_acolytes:
 		if acolyte_scenes[i] == null: continue
-		result.entity_specs.append(_make_acolyte_spec(acolyte_scenes[i], result.acolyte_spawn_specs[i], "Acolyte_" + str(i)))
-
-	var dropped_heroes: int = maxi(0, hero_scenes.size() - result.hero_spawn_specs.size())
-	var dropped_acolytes: int = maxi(0, acolyte_scenes.size() - result.acolyte_spawn_specs.size())
-	if dropped_heroes > 0 or dropped_acolytes > 0:
-		Verbose.warn(
-			"populate_with: %d heroes / %d acolytes dropped (not enough spawn points)" % [dropped_heroes, dropped_acolytes],
-			Verbose.Category.ENCOUNTER_RUNNER
-		)
-	return result
+		var entry: RoasterEntry = party.add_to_roaster(_make_transient_entry(acolyte_scenes[i], Entity.Category.ACOLYTE))
+		formation.entity_specs.append(_make_spec_for_entry(entry, acolyte_spawn_specs[i].transform, "Acolyte_" + str(i)))
+	return formation
 
 
-func add_hero(scene: PackedScene) -> HeroSpec:
-	var spawn: SpawnSpec = _find_free_spawn(hero_spawn_specs)
-	if spawn == null:
-		Verbose.warn("add_hero: no free hero spawn point", Verbose.Category.ENCOUNTER_RUNNER)
-		return null
-	var spec: HeroSpec = _make_hero_spec(scene, spawn, _default_label(scene))
-	entity_specs.append(spec)
-	return spec
+static func _make_transient_entry(scene: PackedScene, category: Entity.Category) -> RoasterEntry:
+	var desc := EntityDesc.new()
+	desc.scene = scene
+	desc.default_category = category
+	desc.name = "Transient"
+	return RoasterEntry.from_desc(desc)
 
 
-func add_acolyte(scene: PackedScene) -> AcolyteSpec:
-	var spawn: SpawnSpec = _find_free_spawn(acolyte_spawn_specs)
-	if spawn == null:
-		Verbose.warn("add_acolyte: no free acolyte spawn point", Verbose.Category.ENCOUNTER_RUNNER)
-		return null
-	var spec: AcolyteSpec = _make_acolyte_spec(scene, spawn, _default_label(scene))
-	entity_specs.append(spec)
-	return spec
-
-
-func add_building(scene: PackedScene, position: Vector3, rotation_y: float = 0.0) -> BuildingSpec:
-	var spec: BuildingSpec = BuildingSpec.new()
-	spec.scene = scene
-	spec.display_label = _default_label(scene)
-	spec.free_position = position
-	spec.rotation_y = rotation_y
-	entity_specs.append(spec)
+static func _make_spec_for_entry(entry: RoasterEntry, t: Transform3D, label: String) -> EntitySpec:
+	var spec := EntitySpec.new()
+	spec.desc = entry.desc
+	spec.entry = entry
+	spec.transform = t
+	spec.display_label = label
 	return spec
 
 
@@ -88,39 +84,3 @@ func move_entity(spec: EntitySpec, new_position: Vector3, new_rotation_y: float 
 	spec.free_position = new_position
 	if not is_nan(new_rotation_y):
 		spec.rotation_y = new_rotation_y
-
-
-func _make_hero_spec(scene: PackedScene, spawn: SpawnSpec, label: String) -> HeroSpec:
-	var spec: HeroSpec = HeroSpec.new()
-	spec.scene = scene
-	spec.display_label = label
-	spec.transform = spawn.transform
-	return spec
-
-
-func _make_acolyte_spec(scene: PackedScene, spawn: SpawnSpec, label: String) -> AcolyteSpec:
-	var spec: AcolyteSpec = AcolyteSpec.new()
-	spec.scene = scene
-	spec.display_label = label
-	spec.transform = spawn.transform
-	return spec
-
-
-func _find_free_spawn(spawns: Array) -> SpawnSpec:
-	for spawn: SpawnSpec in spawns:
-		if not _is_position_occupied(spawn.free_position):
-			return spawn
-	return null
-
-
-func _is_position_occupied(pos: Vector3) -> bool:
-	for entity_spec: EntitySpec in entity_specs:
-		if entity_spec.free_position == pos:
-			return true
-	return false
-
-
-func _default_label(scene: PackedScene) -> String:
-	if scene == null or scene.resource_path == "":
-		return "Entity"
-	return scene.resource_path.get_file().get_basename()

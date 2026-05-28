@@ -1,0 +1,58 @@
+[gd_resource type="Resource" script_class="EntityDesc" format=3 uid="uid://dy8c5d1swpce1"]
+
+[ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="1_h7wnh"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="2_ccole"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_o4pvy"]
+[ext_resource type="Resource" uid="uid://dqv038jtjek7y" path="res://02_Entities/Pool/Mobs/Chickens/Basic/Stats/chicken_stats_lvl_01.tres" id="4_3qjcv"]
+[ext_resource type="Resource" uid="uid://cskbdakxpbd74" path="res://02_Entities/Pool/Mobs/Chickens/Basic/Stats/chicken_stats_lvl_02.tres" id="5_2tu2j"]
+[ext_resource type="Resource" uid="uid://bxhp7bbsj8g82" path="res://02_Entities/Pool/Mobs/Chickens/Basic/Stats/chicken_stats_lvl_03.tres" id="6_8y1tc"]
+[ext_resource type="Resource" uid="uid://ssrf1fyy5s0m" path="res://02_Entities/Pool/Mobs/Chickens/Basic/Stats/chicken_stats_lvl_04.tres" id="7_quii3"]
+[ext_resource type="Resource" uid="uid://d0j20817aqfa8" path="res://02_Entities/Pool/Mobs/Chickens/Basic/Stats/chicken_stats_lvl_05.tres" id="8_klywq"]
+[ext_resource type="Resource" uid="uid://cbaf4l31oa7td" path="res://02_Entities/Pool/Mobs/Chickens/Basic/Stats/chicken_stats_lvl_06.tres" id="9_uwknr"]
+[ext_resource type="Resource" uid="uid://bv40ormvkcq53" path="res://02_Entities/Pool/Mobs/Chickens/Basic/Stats/chicken_stats_lvl_07.tres" id="10_glo4a"]
+[ext_resource type="Resource" uid="uid://bcbpo35yenwfs" path="res://02_Entities/Pool/Mobs/Chickens/Basic/Stats/chicken_stats_lvl_08.tres" id="11_2vm76"]
+[ext_resource type="Resource" uid="uid://g7l37ot0lslm" path="res://02_Entities/Pool/Mobs/Chickens/Basic/Stats/chicken_stats_lvl_09.tres" id="12_q2k4r"]
+[ext_resource type="Resource" uid="uid://xfw8h1ggryyp" path="res://02_Entities/Pool/Mobs/Chickens/Basic/Stats/chicken_stats_lvl_10.tres" id="13_kqlru"]
+[ext_resource type="Resource" uid="uid://bhuphq8p6iaoj" path="res://02_Entities/Pool/Mobs/Chickens/Basic/Stats/chicken_stats_lvl_11.tres" id="14_xh5r0"]
+[ext_resource type="Resource" uid="uid://bui8skmgpgptl" path="res://02_Entities/Pool/Mobs/Chickens/Basic/Stats/chicken_stats_lvl_12.tres" id="15_6a17b"]
+[ext_resource type="Resource" uid="uid://dxt4xvlqmpydj" path="res://02_Entities/Pool/Mobs/Chickens/Basic/Stats/chicken_stats_lvl_13.tres" id="16_tt4to"]
+[ext_resource type="Resource" uid="uid://cwt7jeocbql2i" path="res://02_Entities/Pool/Mobs/Chickens/Basic/Stats/chicken_stats_lvl_14.tres" id="17_eegb6"]
+[ext_resource type="Resource" uid="uid://bnu2k4upfwx38" path="res://02_Entities/Pool/Mobs/Chickens/Basic/Stats/chicken_stats_lvl_15.tres" id="18_7vfa1"]
+[ext_resource type="Resource" uid="uid://bdjpflsvrgpb7" path="res://02_Entities/Pool/Mobs/Chickens/Basic/Stats/chicken_stats_lvl_16.tres" id="19_8dipb"]
+[ext_resource type="Resource" uid="uid://lh864wq51qtk" path="res://02_Entities/Pool/Mobs/Chickens/Basic/Stats/chicken_stats_lvl_17.tres" id="20_cr5h1"]
+[ext_resource type="Resource" uid="uid://681q6yv5k46q" path="res://02_Entities/Pool/Mobs/Chickens/Basic/Stats/chicken_stats_lvl_18.tres" id="21_8sair"]
+[ext_resource type="Resource" uid="uid://dsvltp2bro5au" path="res://02_Entities/Pool/Mobs/Chickens/Basic/Stats/chicken_stats_lvl_19.tres" id="22_xugjy"]
+[ext_resource type="Resource" uid="uid://byudl3ksy120k" path="res://02_Entities/Pool/Mobs/Chickens/Basic/Stats/chicken_stats_lvl_20.tres" id="23_5xtn7"]
+
+[resource]
+script = ExtResource("1_h7wnh")
+name = "Basic chicken"
+description = "Bok bok"
+stats = Dictionary[int, ExtResource("3_o4pvy")]({
+1: ExtResource("4_3qjcv"),
+2: ExtResource("5_2tu2j"),
+3: ExtResource("6_8y1tc"),
+4: ExtResource("7_quii3"),
+5: ExtResource("8_klywq"),
+6: ExtResource("9_uwknr"),
+7: ExtResource("10_glo4a"),
+8: ExtResource("11_2vm76"),
+9: ExtResource("12_q2k4r"),
+10: ExtResource("13_kqlru"),
+11: ExtResource("14_xh5r0"),
+12: ExtResource("15_6a17b"),
+13: ExtResource("16_tt4to"),
+14: ExtResource("17_eegb6"),
+15: ExtResource("18_7vfa1"),
+16: ExtResource("19_8dipb"),
+17: ExtResource("20_cr5h1"),
+18: ExtResource("21_8sair"),
+19: ExtResource("22_xugjy"),
+20: ExtResource("23_5xtn7")
+})
+aa_1_release_normalized = 0.75
+aa_2_release_normalized = 0.75
+aa_3_release_normalized = 0.75
+aa_1_anim_base_duration = 0.625
+aa_2_anim_base_duration = 0.625
+aa_3_anim_base_duration = 0.625

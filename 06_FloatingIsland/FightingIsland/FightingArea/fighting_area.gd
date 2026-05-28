@@ -94,8 +94,9 @@ func _spawn_specs(specs: Array[EntitySpec], team: int) -> void:
 		ctx.fighting_state = Entity.FightingState.IDLE
 		ctx.display_mode = Entity.DisplayMode.FIGHTING_PHASE
 		# En solo : local player possède toutes les unités côté joueur.
-		# En multi (futur) : faudra une convention via team ou un mapping explicite.
-		if spec is HeroSpec or spec is AcolyteSpec:
+		# Signal "spec joueur" = entry présente (créée à partir d'une RoasterEntry).
+		# Fallback marker class pour compat legacy.
+		if spec.entry != null or spec is HeroSpec or spec is AcolyteSpec:
 			ctx.runtime_owner_player = local_player
 		var node: Node = spec.spawn_into(self, ctx)
 		var entity := node as Entity

@@ -1,0 +1,52 @@
+[gd_resource type="Resource" script_class="EntityDesc" format=3 uid="uid://dw7ldi0qmim6x"]
+
+[ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="1_m8cld"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="2_3k65a"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_vd0cm"]
+[ext_resource type="Resource" uid="uid://bp4lx4n2ptndv" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenEngineer/Stats/engineer_chicken_stats_lvl_01.tres" id="4_s2fbc"]
+[ext_resource type="Resource" uid="uid://cnsggb4yksivu" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenEngineer/Stats/engineer_chicken_stats_lvl_02.tres" id="5_5uct4"]
+[ext_resource type="Resource" uid="uid://dbar4c5oioa7y" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenEngineer/Stats/engineer_chicken_stats_lvl_03.tres" id="6_haxhn"]
+[ext_resource type="Resource" uid="uid://m3jcpdts12fa" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenEngineer/Stats/engineer_chicken_stats_lvl_04.tres" id="7_lafcd"]
+[ext_resource type="Resource" uid="uid://bs0ytitqp77ga" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenEngineer/Stats/engineer_chicken_stats_lvl_05.tres" id="8_q8p27"]
+[ext_resource type="Resource" uid="uid://bwj0jcacqivhg" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenEngineer/Stats/engineer_chicken_stats_lvl_06.tres" id="9_3rx1u"]
+[ext_resource type="Resource" uid="uid://brgnt2nd2nst2" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenEngineer/Stats/engineer_chicken_stats_lvl_07.tres" id="10_cc7vs"]
+[ext_resource type="Resource" uid="uid://ia2w6wnkbs4y" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenEngineer/Stats/engineer_chicken_stats_lvl_08.tres" id="11_oajn6"]
+[ext_resource type="Resource" uid="uid://cdpdjnupg37v1" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenEngineer/Stats/engineer_chicken_stats_lvl_09.tres" id="12_ubncw"]
+[ext_resource type="Resource" uid="uid://x4kir1to2imt" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenEngineer/Stats/engineer_chicken_stats_lvl_10.tres" id="13_k7yb1"]
+[ext_resource type="Resource" uid="uid://buy3l4a61llwi" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenEngineer/Stats/engineer_chicken_stats_lvl_11.tres" id="14_audlq"]
+[ext_resource type="Resource" uid="uid://3i8m6cqgxa4g" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenEngineer/Stats/engineer_chicken_stats_lvl_12.tres" id="15_6cf1m"]
+[ext_resource type="Resource" uid="uid://b7gaq8yfuqyqg" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenEngineer/Stats/engineer_chicken_stats_lvl_13.tres" id="16_0a4ru"]
+[ext_resource type="Resource" uid="uid://dlv6824cpq68o" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenEngineer/Stats/engineer_chicken_stats_lvl_14.tres" id="17_1wy7x"]
+[ext_resource type="Resource" uid="uid://b6a1jvqtsc52r" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenEngineer/Stats/engineer_chicken_stats_lvl_15.tres" id="18_6c283"]
+[ext_resource type="Resource" uid="uid://m70drfe0mrli" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenEngineer/Stats/engineer_chicken_stats_lvl_16.tres" id="19_sp7e5"]
+[ext_resource type="Resource" uid="uid://cohpoo5x5kqf3" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenEngineer/Stats/engineer_chicken_stats_lvl_17.tres" id="20_x8ja2"]
+[ext_resource type="Resource" uid="uid://drsyapxciwyu4" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenEngineer/Stats/engineer_chicken_stats_lvl_18.tres" id="21_3v5x3"]
+[ext_resource type="Resource" uid="uid://cq0yadm1gcohc" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenEngineer/Stats/engineer_chicken_stats_lvl_19.tres" id="22_1e4o7"]
+[ext_resource type="Resource" uid="uid://b1aofglhojmrn" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenEngineer/Stats/engineer_chicken_stats_lvl_20.tres" id="23_1db2y"]
+
+[resource]
+script = ExtResource("1_m8cld")
+name = "Smart Bok"
+description = "Bok = Kob"
+stats = Dictionary[int, ExtResource("3_vd0cm")]({
+1: ExtResource("4_s2fbc"),
+2: ExtResource("5_5uct4"),
+3: ExtResource("6_haxhn"),
+4: ExtResource("7_lafcd"),
+5: ExtResource("8_q8p27"),
+6: ExtResource("9_3rx1u"),
+7: ExtResource("10_cc7vs"),
+8: ExtResource("11_oajn6"),
+9: ExtResource("12_ubncw"),
+10: ExtResource("13_k7yb1"),
+11: ExtResource("14_audlq"),
+12: ExtResource("15_6cf1m"),
+13: ExtResource("16_0a4ru"),
+14: ExtResource("17_1wy7x"),
+15: ExtResource("18_6c283"),
+16: ExtResource("19_sp7e5"),
+17: ExtResource("20_x8ja2"),
+18: ExtResource("21_3v5x3"),
+19: ExtResource("22_1e4o7"),
+20: ExtResource("23_1db2y")
+})

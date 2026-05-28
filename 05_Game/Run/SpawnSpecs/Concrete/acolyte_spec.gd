@@ -1,5 +1,5 @@
-# Spec d'un acolyte (unité summon contrôlée par un héros) placé dans une formation.
-# Marker typé — toutes les données héritent d'EntitySpec.
+# Marker spec : un acolyte joueur. Toutes les données vivent sur EntitySpec.
+# La sous-classe existe pour la compat des .tres legacy et le typage tooling.
 @tool
 class_name AcolyteSpec
 extends EntitySpec

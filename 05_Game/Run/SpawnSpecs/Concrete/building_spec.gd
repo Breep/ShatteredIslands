@@ -1,5 +1,5 @@
-# Spec d'un bâtiment achetable placé dans une formation de combat.
-# Marker typé — toutes les données héritent d'EntitySpec.
+# Marker spec : un bâtiment achetable. Toutes les données vivent sur EntitySpec.
+# La sous-classe existe pour la compat des .tres legacy et le typage tooling.
 @tool
 class_name BuildingSpec
 extends EntitySpec

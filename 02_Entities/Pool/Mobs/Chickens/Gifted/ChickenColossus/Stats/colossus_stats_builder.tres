@@ -1,0 +1,120 @@
+[gd_resource type="Resource" script_class="EntityStatsBuilder" format=3 uid="uid://bkpj8nn3fyca0"]
+
+[ext_resource type="Script" uid="uid://brthobm35g70u" path="res://10_Tool/EntityStatsBuilder/stat_growth_rule.gd" id="1_7vv6r"]
+[ext_resource type="Script" uid="uid://58307hvsc6op" path="res://10_Tool/EntityStatsBuilder/entity_stats_builder.gd" id="1_r33ur"]
+
+[sub_resource type="Resource" id="Resource_gpveo"]
+script = ExtResource("1_7vv6r")
+type = 1
+base = 0.5
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_m1duo"]
+script = ExtResource("1_7vv6r")
+type = 1
+base = 25.0
+slope = 2.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_qqq0i"]
+script = ExtResource("1_7vv6r")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_mxnfi"]
+script = ExtResource("1_7vv6r")
+base = 1.5
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_vi21m"]
+script = ExtResource("1_7vv6r")
+type = 1
+base = 0.5
+slope = 0.05
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_cekwh"]
+script = ExtResource("1_7vv6r")
+type = 1
+base = 5.0
+slope = 0.2
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_7dmsk"]
+script = ExtResource("1_7vv6r")
+base = 100.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_n4v25"]
+script = ExtResource("1_7vv6r")
+base = 10.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_awc78"]
+script = ExtResource("1_7vv6r")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_7vv6r"]
+script = ExtResource("1_7vv6r")
+type = 1
+base = 300.0
+slope = 20.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_r8iqb"]
+script = ExtResource("1_7vv6r")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_r7ev5"]
+script = ExtResource("1_7vv6r")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_6qi6u"]
+script = ExtResource("1_7vv6r")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_eae0q"]
+script = ExtResource("1_7vv6r")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_olm1l"]
+script = ExtResource("1_7vv6r")
+type = 1
+base = 3.0
+slope = 0.2
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_4qg03"]
+script = ExtResource("1_7vv6r")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_imw8q"]
+script = ExtResource("1_7vv6r")
+base = 1.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[resource]
+script = ExtResource("1_r33ur")
+output_dir = "res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats"
+stats_file_prefix = "colossus_chicken_stats"
+desc_file_name = "colossus_chjicken_entity_desc"
+entity_name = "Big Bok"
+entity_description = "BOK BOK"
+health_max = SubResource("Resource_7vv6r")
+mana_max = SubResource("Resource_6qi6u")
+mana_regen = SubResource("Resource_eae0q")
+attack_damage = SubResource("Resource_m1duo")
+attack_speed = SubResource("Resource_vi21m")
+attack_range = SubResource("Resource_mxnfi")
+attack_power = SubResource("Resource_qqq0i")
+movement_speed = SubResource("Resource_olm1l")
+scale = SubResource("Resource_imw8q")
+crit_chance = SubResource("Resource_cekwh")
+crit_mult = SubResource("Resource_7dmsk")
+dodge = SubResource("Resource_awc78")
+lifesteal = SubResource("Resource_r8iqb")
+crit_resistance = SubResource("Resource_n4v25")
+armor = SubResource("Resource_gpveo")
+magic_resistance = SubResource("Resource_r7ev5")
+poison_resistance = SubResource("Resource_4qg03")
+auto_attack_type = 1
+metadata/_custom_type_script = "uid://58307hvsc6op"
