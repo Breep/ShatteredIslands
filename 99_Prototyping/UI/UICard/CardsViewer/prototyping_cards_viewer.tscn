@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bqiox3j3gtn21"]
 
-[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme.tres" id="1_wc8wo"]
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme_old.tres" id="1_wc8wo"]
 [ext_resource type="Script" uid="uid://cxd0fu3ysb6ea" path="res://99_Prototyping/UI/UICard/CardsViewer/prototyping_cards_viewer.gd" id="2_r08fy"]
 [ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://01_Cards/Templates/family.gd" id="3_4wtaq"]
 [ext_resource type="Resource" uid="uid://cbmvayb0bb72n" path="res://01_Cards/Descriptions/Families/warrior_family.tres" id="4_d2ccr"]

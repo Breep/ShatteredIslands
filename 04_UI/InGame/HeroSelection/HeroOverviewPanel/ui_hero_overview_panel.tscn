@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://ddugcksbtixea"]
 
 [ext_resource type="Script" uid="uid://72f2hpoywkt6" path="res://04_UI/InGame/HeroSelection/HeroOverviewPanel/ui_hero_overview_panel.gd" id="1_w3h7f"]
-[ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/Menu/MainMenu/panel_main_menu.tres" id="2_s1bc7"]
-[ext_resource type="Theme" uid="uid://d0qobfi4rit8a" path="res://04_UI/Menu/MainMenu/label_main_menu_white.tres" id="3_ee7lt"]
+[ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="2_s1bc7"]
+[ext_resource type="Theme" uid="uid://d0qobfi4rit8a" path="res://04_UI/_Themes/label_main_menu_white.tres" id="3_ee7lt"]
 [ext_resource type="Texture2D" uid="uid://dagqv7cd1gdn1" path="res://04_UI/_Themes/Data/Separator/plant.png" id="3_rp41f"]
 [ext_resource type="Texture2D" uid="uid://bg6pifa7ua0v0" path="res://20_Data/Heroes/Portraits/dummy_default.png" id="5_5cpim"]
 [ext_resource type="Texture2D" uid="uid://cia42t0jcdkfg" path="res://20_Data/Assets/Card/ICONS/HP color.png" id="5_rp41f"]

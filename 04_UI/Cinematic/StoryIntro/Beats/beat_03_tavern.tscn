@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cuuqkbvocx6y3" path="res://04_UI/Cinematic/StoryIntro/Assets/tavern.png" id="1_kbc4w"]
 [ext_resource type="Texture2D" uid="uid://c4u1x4cu700ot" path="res://04_UI/Cinematic/StoryIntro/Assets/cam 2.png" id="2_6aa4w"]
 [ext_resource type="Texture2D" uid="uid://36g4e0rg7hdj" path="res://04_UI/Cinematic/StoryIntro/Assets/cam 4.png" id="3_53rm4"]
-[ext_resource type="FontFile" uid="uid://cvfku6uge3mvi" path="res://20_Data/font/Super Trend.ttf" id="4_font"]
+[ext_resource type="FontFile" uid="uid://cvfku6uge3mvi" path="res://04_UI/_Themes/Fonts/Super Trend.ttf" id="4_font"]
 [ext_resource type="AudioStream" uid="uid://ddtsfnbwigrx8" path="res://04_UI/Cinematic/StoryIntro/Assets/Ambiance/phatphrogstudio-rpg-m-wizard-voice-greeting-player-no-ai-479595.mp3" id="5_53rm4"]
 
 [sub_resource type="Animation" id="Animation_53rm4"]

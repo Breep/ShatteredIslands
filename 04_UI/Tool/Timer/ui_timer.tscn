@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cxalabhvxw1pd"]
 
 [ext_resource type="Script" uid="uid://dpdkql4y12nuv" path="res://04_UI/Tool/Timer/ui_timer.gd" id="1_ima6g"]
-[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme.tres" id="2_72iub"]
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme_old.tres" id="2_72iub"]
 [ext_resource type="Texture2D" uid="uid://bcq8p2t5mali7" path="res://20_Data/Assets/Misc/Misc_IMG/1_DC-HzVwxf7jUhlQ0BiRgQA.png" id="2_mo022"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_72iub"]

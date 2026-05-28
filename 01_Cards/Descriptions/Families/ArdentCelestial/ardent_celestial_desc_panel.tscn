@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://d0y3w6vobf4iy"]
 
-[ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/Menu/MainMenu/panel_main_menu.tres" id="2_stthf"]
+[ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="2_stthf"]
 [ext_resource type="Script" uid="uid://bd3srw4twda5w" path="res://04_UI/Tool/SmartTextLabel/ui_smart_text_label.gd" id="2_w0e4n"]
 [ext_resource type="Script" uid="uid://co4qwqn0uq24r" path="res://01_Cards/Descriptions/Families/ArdentCelestial/ardent_celestial_desc_panel.gd" id="3_desc"]
-[ext_resource type="FontFile" uid="uid://bty2wnxittir6" path="res://20_Data/font/LilitaOne-Regular.ttf" id="3_h10jj"]
-[ext_resource type="Theme" uid="uid://d0qobfi4rit8a" path="res://04_UI/Menu/MainMenu/label_main_menu_white.tres" id="5_u1gfg"]
+[ext_resource type="FontFile" uid="uid://bty2wnxittir6" path="res://04_UI/_Themes/Fonts/LilitaOne-Regular.ttf" id="3_h10jj"]
+[ext_resource type="Theme" uid="uid://d0qobfi4rit8a" path="res://04_UI/_Themes/label_main_menu_white.tres" id="5_u1gfg"]
 
 [node name="ArdentCelestialDescPanel" type="Control" unique_id=2092295896]
 layout_mode = 3

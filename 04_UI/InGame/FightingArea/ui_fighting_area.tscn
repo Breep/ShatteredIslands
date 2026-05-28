@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://gsw58as4o14w" path="res://04_UI/Menu/MainMenu/container_tween.gd" id="2_qg6fi"]
 [ext_resource type="PackedScene" uid="uid://cp8df4bxwetqx" path="res://04_UI/InGame/DpsMeter/ui_dps_meter.tscn" id="3_ejw1r"]
 [ext_resource type="PackedScene" uid="uid://dmfkigo1trjd0" path="res://04_UI/Tool/Countdown/ui_countdown.tscn" id="3_ie0xi"]
-[ext_resource type="Theme" uid="uid://lkjmyhig2cx7" path="res://04_UI/Menu/MainMenu/normal_button2_reverse.tres" id="5_omkkk"]
+[ext_resource type="Theme" uid="uid://lkjmyhig2cx7" path="res://04_UI/_Themes/normal_button2_reverse.tres" id="5_omkkk"]
 [ext_resource type="Script" uid="uid://bq2jprj2y5yr6" path="res://04_UI/Menu/MainMenu/button_main_ui.gd" id="5_qg6fi"]
 
 [node name="UIFightingArea" type="Control" unique_id=1289468176]

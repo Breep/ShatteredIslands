@@ -1,68 +1,90 @@
-[gd_resource type="Theme" format=3 uid="uid://deijluejrkd7e"]
+[gd_resource type="Theme" format=3 uid="uid://by6rg0mxsvh5w"]
 
-[ext_resource type="FontFile" uid="uid://dpqctqw78chgn" path="res://20_Data/font/Supersonic Rocketship.ttf" id="2_c6cb3"]
-[ext_resource type="FontFile" uid="uid://cxbnk5lhycv08" path="res://20_Data/font/KAMIKZOM.ttf" id="2_m6wv4"]
+[ext_resource type="StyleBox" uid="uid://dr88rw2wgw2id" path="res://04_UI/_Themes/panel_ui_menu_box.tres" id="1_iy36y"]
+[ext_resource type="FontFile" uid="uid://bty2wnxittir6" path="res://04_UI/_Themes/Fonts/LilitaOne-Regular.ttf" id="2_iyfkc"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1psgx"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iyfkc"]
+bg_color = Color(0.7490196, 0.4862745, 0.20784314, 1)
+border_width_right = 4
+border_width_bottom = 7
+border_color = Color(0.90588236, 0.8666667, 0.7058824, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tcw41"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hw28s"]
+bg_color = Color(0.101960786, 0.14901961, 0.2, 1)
+border_width_right = 4
+border_width_bottom = 7
+border_color = Color(0.0627451, 0.09411765, 0.13333334, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 10
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m6wv4"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iy36y"]
+bg_color = Color(0.101960786, 0.14901961, 0.2, 1)
+border_width_right = 4
+border_width_bottom = 7
+border_color = Color(0.0627451, 0.09411765, 0.13333334, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 10
+shadow_color = Color(0.0627451, 0.09411765, 0.13333334, 1)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0lla8"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iy36y"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c6cb3"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fmn5p"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0pcbd"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4nuse"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bck8t"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c6cb3"]
-bg_color = Color(0.40443814, 0.40443814, 0.40443814, 0.90000004)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_acl3e"]
+bg_color = Color(0.5913344, 0.47705543, 0.3083428, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 4.0
+expand_margin_right = 4.0
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nkx1b"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iyfkc"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8s0gw"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_acl3e"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yrare"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hw28s"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vnk8o"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4lwm2"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eh5cd"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dwuhn"]
 
 [resource]
-Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
-Button/colors/font_outline_color = Color(0, 0, 0, 1)
-Button/colors/font_pressed_color = Color(0.46618086, 0.4661808, 0.4661808, 1)
-Button/constants/outline_size = 5
-Button/fonts/font = ExtResource("2_m6wv4")
-Button/styles/focus = SubResource("StyleBoxEmpty_1psgx")
-Button/styles/hover = SubResource("StyleBoxEmpty_tcw41")
-Button/styles/normal = SubResource("StyleBoxEmpty_m6wv4")
-Button/styles/pressed = SubResource("StyleBoxEmpty_0lla8")
-HScrollBar/styles/grabber = SubResource("StyleBoxEmpty_c6cb3")
-HScrollBar/styles/grabber_highlight = SubResource("StyleBoxEmpty_fmn5p")
-HScrollBar/styles/grabber_pressed = SubResource("StyleBoxEmpty_0pcbd")
-HScrollBar/styles/scroll = SubResource("StyleBoxEmpty_4nuse")
-HScrollBar/styles/scroll_focus = SubResource("StyleBoxEmpty_bck8t")
+Button/fonts/font = ExtResource("2_iyfkc")
+Button/styles/hover = SubResource("StyleBoxFlat_iyfkc")
+Button/styles/hover_pressed = SubResource("StyleBoxFlat_hw28s")
+Button/styles/normal = SubResource("StyleBoxFlat_iy36y")
+ItemList/colors/font_color = Color(1, 1, 1, 1)
+ItemList/colors/guide_color = Color(0, 0, 0, 0)
+ItemList/constants/outline_size = 4
+ItemList/fonts/font = ExtResource("2_iyfkc")
+ItemList/styles/panel = SubResource("StyleBoxEmpty_iy36y")
 Label/colors/font_color = Color(1, 1, 1, 1)
 Label/colors/font_outline_color = Color(0, 0, 0, 1)
-Label/constants/outline_size = 5
-Label/fonts/font = ExtResource("2_m6wv4")
-Panel/styles/panel = SubResource("StyleBoxFlat_c6cb3")
-RichTextLabel/constants/outline_size = 5
-RichTextLabel/fonts/normal_font = ExtResource("2_c6cb3")
-VScrollBar/styles/grabber = SubResource("StyleBoxEmpty_nkx1b")
-VScrollBar/styles/grabber_highlight = SubResource("StyleBoxEmpty_8s0gw")
-VScrollBar/styles/grabber_pressed = SubResource("StyleBoxEmpty_yrare")
-VScrollBar/styles/scroll = SubResource("StyleBoxEmpty_vnk8o")
-VScrollBar/styles/scroll_focus = SubResource("StyleBoxEmpty_eh5cd")
+Label/colors/font_shadow_color = Color(0, 0, 0, 1)
+Label/constants/outline_size = 10
+Label/constants/shadow_offset_y = 5
+Label/font_sizes/font_size = 33
+Label/fonts/font = ExtResource("2_iyfkc")
+Panel/styles/panel = ExtResource("1_iy36y")
+TextEdit/constants/outline_size = 6
+TextEdit/fonts/font = ExtResource("2_iyfkc")
+TextEdit/styles/normal = SubResource("StyleBoxFlat_acl3e")
+VScrollBar/styles/grabber = SubResource("StyleBoxEmpty_iyfkc")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxEmpty_acl3e")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxEmpty_hw28s")
+VScrollBar/styles/scroll = SubResource("StyleBoxEmpty_4lwm2")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxEmpty_dwuhn")

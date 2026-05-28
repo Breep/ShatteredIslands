@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c25pfqt4fld1a"]
 
 [ext_resource type="Texture2D" uid="uid://34c8b1bujexo" path="res://04_UI/Cinematic/StoryIntro/Assets/crystal2.png" id="2_10jhf"]
-[ext_resource type="FontFile" uid="uid://cvfku6uge3mvi" path="res://20_Data/font/Super Trend.ttf" id="2_font"]
+[ext_resource type="FontFile" uid="uid://cvfku6uge3mvi" path="res://04_UI/_Themes/Fonts/Super Trend.ttf" id="2_font"]
 [ext_resource type="Texture2D" uid="uid://blyoahth1qe6b" path="res://04_UI/Tool/Tutorial/BraiseBubble/Data/SPR_FantasyWarrior_Frame_Box_Small01fond.png" id="3_6lgno"]
 [ext_resource type="Shader" uid="uid://dkc8eivv535x8" path="res://04_UI/Cinematic/StoryIntro/Beats/crystal_pulse.gdshader" id="3_shader"]
 

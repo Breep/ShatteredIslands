@@ -1,0 +1,184 @@
+[gd_scene format=3 uid="uid://cwtfwprwo6t0t"]
+
+[ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="2_0vwbj"]
+[ext_resource type="Texture2D" uid="uid://cu78qhut5ecvk" path="res://04_UI/_Themes/Data/Icons/EntityStats/health_max_colored.svg" id="2_pirj0"]
+[ext_resource type="Script" uid="uid://dsxuam12s8e2a" path="res://02_Entities/_Shared/EntityStatsWriter/entity_stats_writer.gd" id="2_script"]
+[ext_resource type="Texture2D" uid="uid://b10t6bod6w58w" path="res://04_UI/_Themes/Data/Icons/EntityStats/mana_max_colored.svg" id="3_0vwbj"]
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme_old.tres" id="4_3qlek"]
+[ext_resource type="Texture2D" uid="uid://c06llh5l1a3h7" path="res://04_UI/_Themes/Data/Icons/EntityStats/mana_regen_colored.svg" id="4_mjd2w"]
+[ext_resource type="Texture2D" uid="uid://b6rimvk88hn24" path="res://04_UI/_Themes/Data/Icons/EntityStats/attack_damage_colored.svg" id="5_2mloh"]
+[ext_resource type="Texture2D" uid="uid://d2kybwt3oan51" path="res://04_UI/_Themes/Data/Icons/EntityStats/attack_speed_colored.svg" id="6_3qlek"]
+[ext_resource type="Texture2D" uid="uid://bvw264c6finmi" path="res://04_UI/_Themes/Data/Icons/EntityStats/attack_power_colored.svg" id="7_1e4l4"]
+[ext_resource type="Texture2D" uid="uid://dyk4gkh6vx61y" path="res://04_UI/_Themes/Data/Icons/EntityStats/attack_range_colored.svg" id="8_3l5ep"]
+[ext_resource type="Texture2D" uid="uid://bo3c1wt2f1wbn" path="res://04_UI/_Themes/Data/Icons/EntityStats/move_speed_colored.svg" id="9_one02"]
+[ext_resource type="Texture2D" uid="uid://b13krllsainfs" path="res://04_UI/_Themes/Data/Icons/EntityStats/armor_colored.svg" id="10_fvc84"]
+[ext_resource type="Texture2D" uid="uid://cglkmf7fsuq1w" path="res://04_UI/_Themes/Data/Icons/EntityStats/magic_resist_colored.svg" id="11_awfnr"]
+[ext_resource type="Texture2D" uid="uid://d0tbxj0ryk1jh" path="res://04_UI/_Themes/Data/Icons/EntityStats/poison_resist_colored.svg" id="12_th4hl"]
+[ext_resource type="Texture2D" uid="uid://whmow6k6ww3r" path="res://04_UI/_Themes/Data/Icons/EntityStats/crit_chance_colored.svg" id="13_xym5p"]
+[ext_resource type="Texture2D" uid="uid://cse0se2yh4m70" path="res://04_UI/_Themes/Data/Icons/EntityStats/crit_mult_colored.svg" id="14_kte4n"]
+[ext_resource type="Texture2D" uid="uid://bmkd4sxjnlixr" path="res://04_UI/_Themes/Data/Icons/EntityStats/crit_res_colored.svg" id="15_pbctl"]
+[ext_resource type="Texture2D" uid="uid://cmtsqmy038iqr" path="res://04_UI/_Themes/Data/Icons/EntityStats/life_steal_colored.svg" id="16_axb2m"]
+[ext_resource type="Texture2D" uid="uid://dsdkh6xhg03q4" path="res://04_UI/_Themes/Data/Icons/EntityStats/dodge_colored.svg" id="17_bvswt"]
+[ext_resource type="Texture2D" uid="uid://bilq8c5d04x2v" path="res://04_UI/_Themes/Data/Icons/EntityStats/scale_colored.svg" id="18_b0ati"]
+
+[node name="EntityStatsWriter" type="Node" unique_id=1155849581]
+script = ExtResource("2_script")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2074311100]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=339216901]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_0vwbj")
+
+[node name="EntityStatsWriter" type="Panel" parent="CanvasLayer/Control" unique_id=378724885]
+custom_minimum_size = Vector2(160, 40)
+layout_mode = 0
+offset_left = -261.0
+offset_top = -113.0
+offset_right = -75.0
+offset_bottom = 37.0
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/EntityStatsWriter" unique_id=11339048]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/EntityStatsWriter/MarginContainer" unique_id=484682143]
+layout_mode = 2
+
+[node name="StatNameLabel" type="Label" parent="CanvasLayer/Control/EntityStatsWriter/MarginContainer/VBoxContainer" unique_id=1565698397]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Stat name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatsTextEdit" type="TextEdit" parent="CanvasLayer/Control/EntityStatsWriter/MarginContainer/VBoxContainer" unique_id=779408882]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("4_3qlek")
+text = "0"
+placeholder_text = "0"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/EntityStatsWriter/MarginContainer/VBoxContainer" unique_id=812948261]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ClearButton" type="Button" parent="CanvasLayer/Control/EntityStatsWriter/MarginContainer/VBoxContainer/HBoxContainer" unique_id=964787611]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Clear"
+
+[node name="ApplyButton" type="Button" parent="CanvasLayer/Control/EntityStatsWriter/MarginContainer/VBoxContainer/HBoxContainer" unique_id=296575064]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Apply"
+
+[node name="MainControl" type="Panel" parent="CanvasLayer/Control" unique_id=1750372105]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 260)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.0
+offset_top = -134.0
+offset_right = 84.0
+offset_bottom = 134.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/MainControl" unique_id=1812801728]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ItemList" type="ItemList" parent="CanvasLayer/Control/MainControl/MarginContainer" unique_id=2114617360]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+item_count = 17
+max_columns = 2
+same_column_width = true
+fixed_column_width = 68
+fixed_icon_size = Vector2i(18, 18)
+item_0/text = "0"
+item_0/icon = ExtResource("2_pirj0")
+item_0/selectable = false
+item_1/text = "0"
+item_1/icon = ExtResource("3_0vwbj")
+item_1/selectable = false
+item_2/text = "0"
+item_2/icon = ExtResource("4_mjd2w")
+item_2/selectable = false
+item_3/text = "0"
+item_3/icon = ExtResource("5_2mloh")
+item_3/selectable = false
+item_4/text = "0"
+item_4/icon = ExtResource("6_3qlek")
+item_4/selectable = false
+item_5/text = "0"
+item_5/icon = ExtResource("7_1e4l4")
+item_5/selectable = false
+item_6/text = "0"
+item_6/icon = ExtResource("8_3l5ep")
+item_6/selectable = false
+item_7/text = "0"
+item_7/icon = ExtResource("9_one02")
+item_7/selectable = false
+item_8/text = "0"
+item_8/icon = ExtResource("10_fvc84")
+item_8/selectable = false
+item_9/text = "0"
+item_9/icon = ExtResource("11_awfnr")
+item_9/selectable = false
+item_10/text = "0"
+item_10/icon = ExtResource("12_th4hl")
+item_10/selectable = false
+item_11/text = "0"
+item_11/icon = ExtResource("13_xym5p")
+item_11/selectable = false
+item_12/text = "0"
+item_12/icon = ExtResource("14_kte4n")
+item_12/selectable = false
+item_13/text = "0"
+item_13/icon = ExtResource("15_pbctl")
+item_13/selectable = false
+item_14/text = "0"
+item_14/icon = ExtResource("16_axb2m")
+item_14/selectable = false
+item_15/text = "0"
+item_15/icon = ExtResource("17_bvswt")
+item_15/selectable = false
+item_16/text = "0"
+item_16/icon = ExtResource("18_b0ati")
+item_16/selectable = false

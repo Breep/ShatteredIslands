@@ -1,6 +1,0 @@
-[gd_resource type="Theme" format=3 uid="uid://by6rg0mxsvh5w"]
-
-[ext_resource type="StyleBox" uid="uid://dr88rw2wgw2id" path="res://04_UI/Menu/MainMenu/panel_ui_menu_box.tres" id="1_ia5d0"]
-
-[resource]
-Panel/styles/panel = ExtResource("1_ia5d0")
