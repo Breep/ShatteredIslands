@@ -11,7 +11,6 @@ _attack_damage = 18.0
 _attack_speed = 1.4
 _movement_speed = 7.0
 _attack_power = 0.0
-_scale = 0.0
 armor = 2.0
 magic_resistance = 2.0
 poison_resistance = 0.5

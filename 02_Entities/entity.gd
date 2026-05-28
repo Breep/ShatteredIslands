@@ -498,6 +498,11 @@ func _on_stats_health_changed(new_health: float) -> void:
 
 
 func _on_stats_scale_changed(new_scale: float) -> void:
+	# Un scale <= 0 rend le visuel invisible tout en gardant la collision active :
+	# symptôme silencieux d'une stat SCALE mal renseignée. On log et on n'applique pas.
+	if new_scale <= 0.0:
+		Verbose.warn("Entity [" + entity_name + "] scale <= 0 ignoré (donnée SCALE invalide)", Verbose.Category.ENTITY)
+		return
 	if is_instance_valid(_visual_3d):
 		_visual_3d.scale = Vector3(new_scale, new_scale, new_scale)
 

@@ -11,7 +11,7 @@ extends EntityComponent
 
 #region ============================== Constants ==============================
 const _SELECTION_MARKER_SCENE: PackedScene = preload("res://02_Entities/_Shared/Misc/selection_marker.tscn")
-const SHORT_CLICK_THRESHOLD_S: float = 0.1
+const SHORT_CLICK_THRESHOLD_S: float = 0.2
 #endregion
 
 #region ============================== Private variables ==============================
