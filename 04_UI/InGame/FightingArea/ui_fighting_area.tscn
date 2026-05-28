@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dmfkigo1trjd0" path="res://04_UI/Tool/Countdown/ui_countdown.tscn" id="3_ie0xi"]
 [ext_resource type="Theme" uid="uid://lkjmyhig2cx7" path="res://04_UI/_Themes/normal_button2_reverse.tres" id="5_omkkk"]
 [ext_resource type="Script" uid="uid://bq2jprj2y5yr6" path="res://04_UI/Menu/MainMenu/button_main_ui.gd" id="5_qg6fi"]
+[ext_resource type="PackedScene" uid="uid://ygk0snmo5oj" path="res://02_Entities/_Shared/EntityStatsViewer/entity_stats_viewer.tscn" id="7_omkkk"]
 
 [node name="UIFightingArea" type="Control" unique_id=1289468176]
 layout_mode = 3
@@ -98,3 +99,6 @@ theme = ExtResource("5_omkkk")
 text = "READY"
 script = ExtResource("5_qg6fi")
 metadata/_custom_type_script = "uid://dbg5i1sglgh5g"
+
+[node name="EntityStatsViewer" parent="." unique_id=779799398 instance=ExtResource("7_omkkk")]
+_prototyping = true

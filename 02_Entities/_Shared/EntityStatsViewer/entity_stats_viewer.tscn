@@ -26,6 +26,7 @@
 script = ExtResource("2_script")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=74984651]
+layer = 2
 
 [node name="MainControl" type="Panel" parent="CanvasLayer" unique_id=739140285]
 unique_name_in_owner = true
