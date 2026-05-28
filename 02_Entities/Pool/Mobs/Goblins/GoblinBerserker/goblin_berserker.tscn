@@ -13,11 +13,14 @@
 [ext_resource type="Animation" uid="uid://ilpl5pha4cx" path="res://02_Entities/_Data/_Animations/Default/Animations/walk.res" id="7_2kj5j"]
 [ext_resource type="Animation" uid="uid://dsq0sow2uvsad" path="res://02_Entities/_Data/_Animations/Default/Animations/attack_melee_02.res" id="7_f210m"]
 [ext_resource type="Animation" uid="uid://qka2cjnu6yrx" path="res://02_Entities/_Data/_Animations/Default/Animations/battle_idle.res" id="8_84j5x"]
-[ext_resource type="Animation" uid="uid://cfrvia6dbyvrk" path="res://02_Entities/_Data/_Animations/Default/Animations/damage.res" id="9_mqagh"]
+[ext_resource type="Animation" uid="uid://cfrvia6dbyvrk" path="res://02_Entities/_Data/_Animations/Default/Animations/damage_1.res" id="9_mqagh"]
 [ext_resource type="Animation" uid="uid://dqnjw5lvbr0yh" path="res://02_Entities/_Data/_Animations/Default/Animations/fall.res" id="10_4267c"]
-[ext_resource type="Animation" uid="uid://w6hoqufn62pb" path="res://02_Entities/_Data/_Animations/Default/Animations/land.res" id="12_jteh3"]
+[ext_resource type="Animation" uid="uid://cj402l8xkgn3" path="res://02_Entities/_Data/_Animations/Default/Animations/damage_2.res" id="10_mqagh"]
+[ext_resource type="Animation" uid="uid://mbpgi25c2esr" path="res://02_Entities/_Data/_Animations/Default/Animations/damage_3.res" id="11_4267c"]
+[ext_resource type="Animation" uid="uid://c50h21hsmfjo6" path="res://02_Entities/_Data/_Animations/Default/Animations/death.res" id="12_e62nl"]
+[ext_resource type="Animation" uid="uid://ca6fg8gpt5pv7" path="res://02_Entities/_Data/_Animations/Default/Animations/land.res" id="12_jteh3"]
 [ext_resource type="Animation" uid="uid://qj5wlhmvrw5w" path="res://02_Entities/_Data/_Animations/Default/Animations/run_right_arm_weapon.res" id="13_e62nl"]
-[ext_resource type="Animation" uid="uid://r5f651tqe8ew" path="res://02_Entities/_Data/_Animations/Default/Animations/stun.res" id="14_gymfe"]
+[ext_resource type="Animation" uid="uid://dbqan4vvbh0bm" path="res://02_Entities/_Data/_Animations/Default/Animations/stun.res" id="14_gymfe"]
 
 [sub_resource type="Resource" id="Resource_rl0mb"]
 script = ExtResource("2_hocf7")
@@ -37,6 +40,9 @@ _data = {
 &"attack_melee_02": ExtResource("7_f210m"),
 &"battle_idle": ExtResource("8_84j5x"),
 &"damage": ExtResource("9_mqagh"),
+&"damage_2": ExtResource("10_mqagh"),
+&"damage_3": ExtResource("11_4267c"),
+&"death": ExtResource("12_e62nl"),
 &"fall": ExtResource("10_4267c"),
 &"flying": ExtResource("6_rk7p4"),
 &"land": ExtResource("12_jteh3"),
@@ -63,29 +69,54 @@ metadata/_custom_type_script = "uid://cpih8vqoolap4"
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
 [node name="GeneralSkeleton" parent="AllGoblinVisual" index="0" unique_id=95676885]
-bones/1/position = Vector3(-3.1156372e-07, 0.8762761, 4.871386e-07)
-bones/1/rotation = Quaternion(4.656613e-10, 1.4872057e-08, -3.8417056e-09, 1)
-bones/2/rotation = Quaternion(0, -5.820766e-11, -3.8417056e-09, 1)
-bones/3/rotation = Quaternion(1.0244548e-08, -3.9790393e-13, -3.559819e-12, 1)
-bones/4/rotation = Quaternion(0.2212398, -2.7284845e-12, 1.981216e-05, 0.9752195)
-bones/5/rotation = Quaternion(-3.7252899e-09, -2.8421707e-13, -1.8260946e-12, 1)
-bones/6/rotation = Quaternion(3.72529e-09, 0, 0, 1)
-bones/10/rotation = Quaternion(0.59093094, 0.39986384, 0.50141275, -0.48938203)
-bones/11/rotation = Quaternion(-0.057813607, 0.8966893, -0.4388688, -2.9802319e-08)
-bones/12/rotation = Quaternion(0.42424035, -0.6100602, 0.27508774, 0.6100602)
-bones/13/rotation = Quaternion(-6.1722654e-09, 0.70710677, 3.5974587e-08, 0.70710677)
-bones/25/rotation = Quaternion(0.5, -0.5, -0.50000006, -0.50000006)
-bones/26/rotation = Quaternion(0.21227688, 0.8645003, -0.45560718, 5.2154064e-08)
-bones/27/rotation = Quaternion(0.33174855, 0.6617894, -0.11837446, 0.6617894)
-bones/28/rotation = Quaternion(1.3504178e-08, -0.70710677, -1.3504178e-08, 0.70710677)
-bones/40/rotation = Quaternion(-5.47152e-09, 0.017199188, 0.9862308, 0.16447815)
-bones/41/rotation = Quaternion(-0.10957621, 0.95750535, -0.26678956, 0)
-bones/42/rotation = Quaternion(-0.099401064, 0.74858356, -0.6479672, -0.099401005)
-bones/44/rotation = Quaternion(2.2653933e-07, 1, -4.470349e-07, 5.7951922e-08)
-bones/45/rotation = Quaternion(4.703179e-08, 0.24188837, 0.96278, -0.120601535)
-bones/46/rotation = Quaternion(0.06884754, 0.95413196, -0.29136288, 2.9802322e-08)
-bones/47/rotation = Quaternion(-0.029273456, 0.85083354, -0.523802, -0.029273497)
-bones/49/rotation = Quaternion(3.951268e-09, 1, 0, -3.8195584e-08)
+bones/1/position = Vector3(-0.007007167, 0.8150437, 0.0016134505)
+bones/1/rotation = Quaternion(-0.036936257, -0.36721715, -0.0150630735, 0.92927957)
+bones/2/rotation = Quaternion(0.049735013, 0.040808056, -0.0069399816, 0.9979043)
+bones/3/rotation = Quaternion(0.09955476, 0.080943175, -0.018230898, 0.9915668)
+bones/4/rotation = Quaternion(0.09953738, 0.08097563, -0.018210368, 0.9915663)
+bones/5/rotation = Quaternion(-0.033651214, -0.010763731, 0.0016140867, 0.9993744)
+bones/6/rotation = Quaternion(-0.05893226, 0.17657407, -0.010480169, 0.98246574)
+bones/7/position = Vector3(1.4794772e-17, 0.09447605, 0.1227222)
+bones/8/position = Vector3(1.4775588e-17, 0.1276692, 0.12272221)
+bones/10/rotation = Quaternion(0.5233669, 0.46163487, 0.5389813, -0.47167718)
+bones/11/rotation = Quaternion(0.047889978, 0.84208393, -0.5249072, 0.1143403)
+bones/12/rotation = Quaternion(0.28161994, -0.6018148, 0.2977788, 0.6854467)
+bones/13/rotation = Quaternion(-0.09252288, 0.79083735, 0.11216884, 0.5945031)
+bones/14/rotation = Quaternion(0.28308576, 0.6479677, -0.58540934, -0.3966059)
+bones/15/rotation = Quaternion(-0.039942227, 0.11784033, -0.14163585, 0.982068)
+bones/16/rotation = Quaternion(-0.0364033, 0.1520346, 0.22999513, 0.9605532)
+bones/17/rotation = Quaternion(0.4637476, 0.533796, -0.5298225, -0.468282)
+bones/18/rotation = Quaternion(-0.0011539992, 0.010741555, -0.098329805, 0.99509525)
+bones/19/rotation = Quaternion(-0.006912194, 0.025717527, -0.057002537, 0.9980188)
+bones/20/rotation = Quaternion(-0.0045196577, 0.02803993, 0.15906805, 0.986859)
+bones/21/rotation = Quaternion(-0.49364036, -0.5062798, 0.44727433, 0.547673)
+bones/22/rotation = Quaternion(0.0026372757, -0.019491982, -0.021269318, 0.9995803)
+bones/23/rotation = Quaternion(-0.018149137, 0.071478695, -0.0925109, 0.9929769)
+bones/24/rotation = Quaternion(0.016646294, -0.096525095, 0.16913001, 0.98071444)
+bones/25/rotation = Quaternion(0.48843578, -0.48565722, -0.5862696, -0.4264453)
+bones/26/rotation = Quaternion(0.1866197, 0.8429881, -0.49605048, -0.0920767)
+bones/27/rotation = Quaternion(0.28934094, 0.6737395, -0.22188178, 0.6427483)
+bones/28/rotation = Quaternion(0.15317303, -0.7416113, 0.004360595, 0.653094)
+bones/29/rotation = Quaternion(-0.39660597, 0.5854094, 0.64796764, -0.28308573)
+bones/30/rotation = Quaternion(-0.039942224, 0.11784034, -0.14163586, 0.982068)
+bones/31/rotation = Quaternion(-0.036403313, 0.1520346, 0.22999513, 0.9605532)
+bones/32/rotation = Quaternion(-0.46828213, 0.5298225, 0.53379595, -0.46374762)
+bones/33/rotation = Quaternion(-0.0011539932, 0.010741624, -0.09832994, 0.99509525)
+bones/34/rotation = Quaternion(-0.006912198, 0.025717424, -0.057002377, 0.99801886)
+bones/35/rotation = Quaternion(-0.0045196447, 0.028039927, 0.15906803, 0.986859)
+bones/37/rotation = Quaternion(0.0026372697, -0.01949202, -0.021269329, 0.9995803)
+bones/38/rotation = Quaternion(-0.018149221, 0.07147895, -0.09251084, 0.9929769)
+bones/39/rotation = Quaternion(0.01664637, -0.09652534, 0.16913004, 0.98071444)
+bones/40/rotation = Quaternion(-0.124964274, 0.027640369, 0.98413515, 0.12287353)
+bones/41/rotation = Quaternion(0.025933905, 0.95610046, -0.28182098, -0.07600198)
+bones/42/rotation = Quaternion(0.09689159, 0.5633155, -0.8134799, -0.10741579)
+bones/43/rotation = Quaternion(0, 0, 0, 1)
+bones/44/rotation = Quaternion(0.003446634, 0.99986243, 0.015885951, -0.0033228304)
+bones/45/rotation = Quaternion(0.07870172, 0.21245863, 0.9686771, -0.10164705)
+bones/46/rotation = Quaternion(0.037129562, 0.9497911, -0.28764793, -0.1173757)
+bones/47/rotation = Quaternion(-0.042535637, 0.67075515, -0.7389728, 0.046876132)
+bones/48/rotation = Quaternion(0, 0, 0, 1)
+bones/49/rotation = Quaternion(0.027978044, 0.99937075, 0.020412669, -0.007657001)
 
 [node name="SM_Chr_Ranger_01" parent="AllGoblinVisual/GeneralSkeleton" index="9" unique_id=623479622]
 visible = false
@@ -94,7 +125,7 @@ visible = false
 visible = true
 
 [node name="LeftHandAttachment" parent="AllGoblinVisual/GeneralSkeleton" index="17" unique_id=297417579]
-transform = Transform3D(0.12215113, 0.26792932, -0.9556637, -0.41243786, -0.86209923, -0.29441464, -0.90275925, 0.430115, 0.005197752, 0.3568794, 0.8997069, -0.1118543)
+transform = Transform3D(0.7631428, 0.21308988, -0.6100869, -0.3804784, -0.61493796, -0.6907151, -0.5223497, 0.7592391, -0.38820952, 0.27552158, 0.7923118, 0.20863387)
 visible = false
 
 [node name="Skeleton3D" parent="AllGoblinVisual/GeneralSkeleton/LeftHandAttachment/Bow" parent_id_path=PackedInt32Array(433263620, 526129373) index="0" unique_id=2143212340]
@@ -104,26 +135,26 @@ bones/1/position = Vector3(0, 0, -0.11986062)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.11986062)
 
 [node name="ShieldAttachment" parent="AllGoblinVisual/GeneralSkeleton" index="18" unique_id=1828555638]
-transform = Transform3D(-0.9556637, 0.26792926, -0.122151114, -0.29441458, -0.86209923, 0.41243783, 0.005197726, 0.43011498, 0.90275925, 0.28673637, 1.1250324, -0.24537684)
+transform = Transform3D(-0.8312474, 0.01882605, -0.5555841, -0.358129, -0.7825288, 0.50930554, -0.42517254, 0.6223296, 0.6572169, 0.2810067, 0.9942713, 0.027796425)
 
 [node name="RightHandWeaponAttachment" parent="AllGoblinVisual/GeneralSkeleton" index="19" unique_id=1743821847]
-transform = Transform3D(-0.0735862, -0.3681168, 0.92686296, -0.06451217, -0.92567915, -0.37276846, 0.99520016, -0.08722461, 0.04436931, -0.43429112, 0.9383594, -0.26142353)
+transform = Transform3D(-0.1771322, -0.2326934, 0.95628345, 0.33023393, -0.92937016, -0.16497529, 0.92712986, 0.2865748, 0.24146459, -0.31492972, 0.798075, -0.22768761)
 visible = true
 
 [node name="BackPackAttachment" parent="AllGoblinVisual/GeneralSkeleton" index="20" unique_id=801280550]
-transform = Transform3D(1, -3.861575e-05, 8.786563e-06, 3.862703e-05, 0.9021059, -0.4315147, 8.736855e-06, 0.4315147, 0.9021059, -3.0623485e-07, 1.3374457, -0.032661762)
+transform = Transform3D(0.9423605, -0.12533587, -0.31023842, -0.01601779, 0.90923136, -0.41598284, 0.33421612, 0.3969751, 0.8548161, 0.0022046398, 1.27567, 0.011457182)
 
 [node name="FaceAttachment" parent="AllGoblinVisual/GeneralSkeleton" index="21" unique_id=538487173]
-transform = Transform3D(1, -3.8615748e-05, 8.786562e-06, 3.8627026e-05, 0.9021059, -0.4315147, 8.736854e-06, 0.4315147, 0.9021059, -9.0077465e-06, 1.5344275, 0.092404805)
+transform = Transform3D(0.99784863, -0.06555034, -0.001205802, 0.06349, 0.97074413, -0.23157021, 0.01635012, 0.23099545, 0.97281754, -0.03374631, 1.4790615, 0.12042373)
 
 [node name="LeftFootAttachment" parent="AllGoblinVisual/GeneralSkeleton" index="22" unique_id=1967920387]
-transform = Transform3D(-0.9963337, -6.7055225e-08, -0.0855505, -0.07201554, -0.53980434, 0.8387041, -0.046180606, 0.84179044, 0.53782535, 0.24202895, 0.12248281, 0.11023231)
+transform = Transform3D(-0.7130681, -0.7010889, 0.002891995, 0.0013966995, 0.0027043968, 0.9999953, -0.7010935, 0.71306884, -0.00094911456, 0.09899221, 0.059147477, 0.2598886)
 
 [node name="RightFootAttachment" parent="AllGoblinVisual/GeneralSkeleton" index="23" unique_id=1806943128]
-transform = Transform3D(-0.92158335, -0.38617256, 0.03942753, 0.2604419, -0.53980434, 0.800488, -0.28784344, 0.74798506, 0.59805036, -0.26968643, 0.13739946, -0.20278113)
+transform = Transform3D(-0.31278953, -0.9498222, 0.00061038136, 0.0012944033, 0.00021639466, 0.99999917, -0.94982165, 0.31279007, 0.0011618808, -0.07169577, 0.056393802, -0.27678162)
 
 [node name="HipsAttachment" parent="AllGoblinVisual/GeneralSkeleton" index="24" unique_id=504179125]
-transform = Transform3D(1, 7.683411e-09, 2.9744115e-08, -7.683411e-09, 1, -9.313227e-10, -2.9744115e-08, 9.3132246e-10, 1, -3.1156372e-07, 0.8762761, 4.871386e-07)
+transform = Transform3D(0.72984934, 0.05512286, -0.681382, -0.00086835586, 0.99681765, 0.07971105, 0.6836075, -0.057585374, 0.7275746, -0.007007167, 0.8150437, 0.0016134505)
 
 [node name="AnimationPlayer" parent="AllGoblinVisual" index="1" unique_id=1936765670]
 libraries/default_humanoid = SubResource("AnimationLibrary_rpre5")
@@ -217,6 +248,7 @@ _owner = NodePath("..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1454953419]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.86027575, 0)
+visible = false
 shape = SubResource("CapsuleShape3D_k5uqm")
 
 [node name="LargeHealthBarComponent" parent="." unique_id=358992180 node_paths=PackedStringArray("_spawn", "_owner") instance=ExtResource("6_lhpae")]
