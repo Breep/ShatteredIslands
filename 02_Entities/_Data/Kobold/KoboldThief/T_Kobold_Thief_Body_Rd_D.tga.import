@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bo4fdp57i3ycv"
-path="res://.godot/imported/T_Kobold_Thief_Body_Rd_D.tga-57d4f2fba2e632148b2e6ab53ed6ab57.ctex"
+path="res://.godot/imported/T_Kobold_Thief_Body_Rd_D.tga-d0aae19f36baa8fc979b46ae26393ba0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/T_Kobold_Thief_Body_Rd_D.tga"
-dest_files=["res://.godot/imported/T_Kobold_Thief_Body_Rd_D.tga-57d4f2fba2e632148b2e6ab53ed6ab57.ctex"]
+source_file="res://02_Entities/_Data/Kobold/KoboldThief/T_Kobold_Thief_Body_Rd_D.tga"
+dest_files=["res://.godot/imported/T_Kobold_Thief_Body_Rd_D.tga-d0aae19f36baa8fc979b46ae26393ba0.ctex"]
 
 [params]
 
