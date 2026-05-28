@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://b1hnvijka2dfw"]
+
+[ext_resource type="Script" uid="uid://df27b7unj5lxp" path="res://01_Cards/Pool/Cards/Warrior/Legendary/RussianRoulette/attack_russian_roulette.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_template"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ik5f7"]
+
+[sub_resource type="Resource" id="Resource_upgrade"]
+script = ExtResource("1_script")
+_min_percent = Array[int]([60])
+_max_percent = Array[int]([180])
+
+[resource]
+script = ExtResource("1_template")
+name = "Russian Roulette"
+picture = SubResource("PlaceholderTexture2D_ik5f7")
+families = Array[int]([1])
+rarity = 3
+player_upgrade = SubResource("Resource_upgrade")
+points = Dictionary[int, int]({
+1: 5
+})
+lvl = 1

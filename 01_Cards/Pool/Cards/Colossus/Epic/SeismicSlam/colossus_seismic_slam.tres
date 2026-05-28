@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://yu8vfa6x3r0g"]
+
+[ext_resource type="Script" uid="uid://dt8pvso07y6fi" path="res://01_Cards/Pool/Cards/Colossus/Epic/SeismicSlam/colossus_seismic_slam.gd" id="1_f4tqf"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_y2ilx"]
+[ext_resource type="Texture2D" uid="uid://btsavc4kievdf" path="res://01_Cards/Pool/Cards/Colossus/Common/ColossalTitan/colosse.png" id="2_colos"]
+
+[sub_resource type="Resource" id="Resource_aj4k2"]
+script = ExtResource("1_f4tqf")
+_increase_sizes = Array[float]([10.0, 15.0, 20.0])
+_periods = Array[float]([10.0, 10.0, 10.0])
+_stun_durations = Array[float]([0.7, 1.0, 1.5])
+metadata/_custom_type_script = "uid://dt8pvso07y6fi"
+
+[resource]
+script = ExtResource("1_y2ilx")
+name = "Seismic Slam"
+picture = ExtResource("2_colos")
+families = Array[int]([6])
+rarity = 2
+player_upgrade = SubResource("Resource_aj4k2")
+points = Dictionary[int, int]({
+0: 0,
+6: 3
+})
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

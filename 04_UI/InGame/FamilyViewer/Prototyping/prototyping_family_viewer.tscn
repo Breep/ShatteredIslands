@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cro1uvqa8bt5e" path="res://04_UI/InGame/FamilyViewer/Prototyping/prototyping_family_viewer.gd" id="1_2u1xt"]
 [ext_resource type="PackedScene" uid="uid://ci1xegvy2t2jm" path="res://04_UI/InGame/FamilyViewer/ui_family_viewer.tscn" id="2_l8edu"]
-[ext_resource type="Resource" uid="uid://cqw2clgppw78q" path="res://01_Cards/Descriptions/Families/ChickenLord/chicken_lord_family.tres" id="2_owofe"]
+[ext_resource type="Resource" uid="uid://cqw2clgppw78q" path="res://01_Cards/Pool/Families/ChickenLord/chicken_lord_family.tres" id="2_owofe"]
 
 [node name="PrototypingFamilyViewer" type="Control" unique_id=1656203624]
 layout_mode = 3

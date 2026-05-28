@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://bfq5kalwldwjr"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_card_script"]
+[ext_resource type="Script" uid="uid://bcgx32f3oc7b0" path="res://01_Cards/Pool/Cards/StormCaller/Common/LightningRod/storm_lightning_rod.gd" id="2_upgrade_script"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_tl3hd"]
+
+[sub_resource type="Resource" id="Resource_upgrade"]
+script = ExtResource("2_upgrade_script")
+_base_threshold = Array[float]([70.0, 65.0, 60.0, 55.0, 50.0])
+_base_resistance = Array[float]([20.0, 25.0, 30.0, 35.0, 50.0])
+
+[resource]
+script = ExtResource("1_card_script")
+name = "Lightning Rod"
+picture = SubResource("PlaceholderTexture2D_tl3hd")
+families = Array[int]([4])
+player_upgrade = SubResource("Resource_upgrade")
+points = Dictionary[int, int]({
+4: 1
+})

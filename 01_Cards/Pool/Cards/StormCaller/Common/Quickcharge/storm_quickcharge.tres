@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://dtclhv8aaqrbk"]
+
+[ext_resource type="Texture2D" uid="uid://cfvvs2g0qi6n3" path="res://01_Cards/Pool/Cards/StormCaller/Common/Quickcharge/storm_quick_charge.jpg" id="1_r7bhl"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_template"]
+[ext_resource type="Script" uid="uid://518q5n4xejla" path="res://01_Cards/Pool/Cards/StormCaller/Common/Quickcharge/storm_quickcharge.gd" id="2_script"]
+
+[sub_resource type="Resource" id="Resource_upgrade"]
+script = ExtResource("2_script")
+_base_grind_percent = Array[float]([20.0, 40.0, 60.0, 80.0, 100.0])
+
+[resource]
+script = ExtResource("1_template")
+name = "Quickcharge"
+picture = ExtResource("1_r7bhl")
+families = Array[int]([4])
+player_upgrade = SubResource("Resource_upgrade")
+points = Dictionary[int, int]({
+4: 1
+})

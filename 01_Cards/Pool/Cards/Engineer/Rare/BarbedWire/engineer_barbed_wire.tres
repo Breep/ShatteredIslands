@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://bgx3j85dxco0q"]
+
+[ext_resource type="Script" uid="uid://bl5lh6siyusit" path="res://01_Cards/Pool/Cards/Engineer/Rare/BarbedWire/engineer_barbed_wire.gd" id="1_pft7x"]
+[ext_resource type="Texture2D" uid="uid://psnthd75twnn" path="res://01_Cards/Pool/Cards/Engineer/Common/ForceField/engineer_force_field.png" id="2_engr1"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="2_fws5g"]
+
+[sub_resource type="Resource" id="Resource_swgwi"]
+script = ExtResource("1_pft7x")
+_thorns = Array[float]([10.0, 17.0, 24.0, 31.0, 38.0])
+_rarity = 1
+metadata/_custom_type_script = "uid://bl5lh6siyusit"
+
+[resource]
+script = ExtResource("2_fws5g")
+name = "Barbed Wire"
+picture = ExtResource("2_engr1")
+families = Array[int]([2])
+rarity = 1
+player_upgrade = SubResource("Resource_swgwi")
+points = Dictionary[int, int]({
+2: 2
+})
+lvl = 5
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"
