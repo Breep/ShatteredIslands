@@ -1,5 +1,5 @@
 class_name ArdentCelestialFireBall
-extends HeroUpgrade
+extends CardEffect
 
 @export var _damages: Array[float]
 @export var _chances_to_bounce: Array[float]

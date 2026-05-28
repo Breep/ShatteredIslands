@@ -1,5 +1,5 @@
 class_name FireCosmopolitan
-extends HeroUpgrade
+extends CardEffect
 
 @export var _ignite_stacks_multipliers: Array[float]
 

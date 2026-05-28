@@ -1,5 +1,5 @@
 class_name EngineerBarbedWire
-extends HeroUpgrade
+extends CardEffect
 
 @export var _thorns: Array[float]
 

@@ -1,5 +1,5 @@
 class_name ChickenChickenSwarm
-extends HeroUpgrade
+extends CardEffect
 
 @export var _spawn_numbers_increase: Array[int]
 

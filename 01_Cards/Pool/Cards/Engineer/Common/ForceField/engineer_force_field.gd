@@ -1,5 +1,5 @@
 class_name EngineerForceField
-extends HeroUpgrade
+extends CardEffect
 
 @export var _period: Array[float]
 @export var _lost_hp_percent: Array[float]

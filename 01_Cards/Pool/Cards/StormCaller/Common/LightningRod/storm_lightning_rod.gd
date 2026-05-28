@@ -1,5 +1,5 @@
 class_name StormLightningRod
-extends HeroUpgrade
+extends CardEffect
 
 @export var _base_threshold: Array[float]
 @export var _base_resistance: Array[float]

@@ -1,5 +1,5 @@
 class_name StormSchrodingerStorm
-extends HeroUpgrade
+extends CardEffect
 
 @export var _stacks: Array[float]
 

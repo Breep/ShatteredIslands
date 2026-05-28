@@ -1,5 +1,5 @@
 class_name SerenityRadiantOverflow
-extends HeroUpgrade
+extends CardEffect
 
 @export var _ratio: Array[float]
 

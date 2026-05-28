@@ -1,5 +1,5 @@
 class_name EngineerReactiveCover
-extends HeroUpgrade
+extends CardEffect
 
 @export var _base_chance: Array[float]
 @export var _base_shield_amount: Array[float]

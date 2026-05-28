@@ -1,5 +1,5 @@
 class_name LightHolyTouch
-extends HeroUpgrade
+extends CardEffect
 
 @export var _heal_amount: Array[int]
 @export var _period: Array[float]

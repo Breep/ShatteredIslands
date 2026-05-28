@@ -1,5 +1,5 @@
 class_name StormElectrocute
-extends HeroUpgrade
+extends CardEffect
 
 @export var _base_chance: Array[float]
 @export var _base_necrosis_amount: Array[float]

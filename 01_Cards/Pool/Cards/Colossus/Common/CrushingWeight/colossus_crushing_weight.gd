@@ -1,5 +1,5 @@
 class_name ColossusCrushingWeight
-extends HeroUpgrade
+extends CardEffect
 
 @export var _stun_increase_percents: Array[float]
 

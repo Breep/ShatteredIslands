@@ -1,5 +1,5 @@
 class_name FireOrbitalStation
-extends HeroUpgrade
+extends CardEffect
 
 @export var _crit_chance: Array[float]
 

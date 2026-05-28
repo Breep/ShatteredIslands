@@ -1,7 +1,7 @@
 class_name CardContext
 extends RefCounted
 
-## Context object passed to HeroUpgrade.apply_card() — gives cards access to
+## Context object passed to CardEffect.apply_card() — gives cards access to
 ## all registries they need without coupling directly to Hero internals.
 
 var hero: Entity

@@ -1,5 +1,5 @@
 class_name ColossusSeismicSlam
-extends HeroUpgrade
+extends CardEffect
 
 const SEISMIC_DECAL_SCENE: PackedScene = preload("res://22_VFX/VFX_3D/SeismicSlam/vfx_seismic_slam_decal.tscn")
 

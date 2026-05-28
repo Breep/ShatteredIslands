@@ -1,5 +1,5 @@
 class_name ColossusVitalPulse
-extends HeroUpgrade
+extends CardEffect
 
 const VITAL_PULSE_VFX: PackedScene = preload("res://22_VFX/VFX_3D/VFX/Scenes/VFX_Vital_Pulse.tscn")
 

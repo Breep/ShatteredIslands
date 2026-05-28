@@ -1,5 +1,5 @@
 class_name ColossusAncientCollector
-extends HeroUpgrade
+extends CardEffect
 
 @export var _amount_per_card: Array[float]
 

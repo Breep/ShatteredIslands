@@ -1,5 +1,5 @@
 class_name ArdentCelestialArmagedheal
-extends HeroUpgrade
+extends CardEffect
 
 @export var _heal: Array[int]
 @export var _proc_chance: Array[float]

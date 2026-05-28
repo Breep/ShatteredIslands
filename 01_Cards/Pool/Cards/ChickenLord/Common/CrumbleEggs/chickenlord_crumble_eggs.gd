@@ -1,5 +1,5 @@
 class_name ChickenLordCrumbleEggs
-extends HeroUpgrade
+extends CardEffect
 
 @export var _periods: Array[float]
 @export var _damage_per_chickens: Array[float]

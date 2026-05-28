@@ -1,5 +1,5 @@
 class_name EngineerShieldThrow
-extends HeroUpgrade
+extends CardEffect
 
 @export var _threshold: Array[float]
 @export var _damage: Array[float]

@@ -1,5 +1,5 @@
 class_name ChickenYangChicken
-extends HeroUpgrade
+extends CardEffect
 
 @export var _strength_increases: Array[float]
 @export var _chances: Array[float]

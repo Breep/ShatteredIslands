@@ -1,5 +1,5 @@
 class_name StormViolentOverload
-extends HeroUpgrade
+extends CardEffect
 
 @export var _base_crit_mult_boost: Array[float]
 

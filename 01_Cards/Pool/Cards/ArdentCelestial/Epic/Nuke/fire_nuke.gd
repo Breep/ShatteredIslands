@@ -1,5 +1,5 @@
 class_name FireNuke
-extends HeroUpgrade
+extends CardEffect
 
 @export var _ignite_stacks: Array[int]
 

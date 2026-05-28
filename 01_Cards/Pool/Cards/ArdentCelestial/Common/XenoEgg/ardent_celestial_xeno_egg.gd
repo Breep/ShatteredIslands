@@ -1,5 +1,5 @@
 class_name ArdentCelestialXenoEgg
-extends HeroUpgrade
+extends CardEffect
 
 @export var _proc_chances: Array[float]
 

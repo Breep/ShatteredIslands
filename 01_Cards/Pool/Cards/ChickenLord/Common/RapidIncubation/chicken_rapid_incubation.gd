@@ -1,5 +1,5 @@
 class_name ChickenRapidIncubation
-extends HeroUpgrade
+extends CardEffect
 
 @export var _timer_decrease: Array[float]
 

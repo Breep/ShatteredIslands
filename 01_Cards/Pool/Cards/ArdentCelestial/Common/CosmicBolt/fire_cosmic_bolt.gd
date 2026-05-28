@@ -1,5 +1,5 @@
 class_name FireCosmicBolt
-extends HeroUpgrade
+extends CardEffect
 
 @export var _stacks: Array[float]
 

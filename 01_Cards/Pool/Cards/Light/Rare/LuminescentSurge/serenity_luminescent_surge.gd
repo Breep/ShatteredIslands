@@ -1,5 +1,5 @@
 class_name SerenityLuminescentSurge
-extends HeroUpgrade
+extends CardEffect
 
 @export var _base_period: Array[float]
 @export var _base_target_count: Array[int]

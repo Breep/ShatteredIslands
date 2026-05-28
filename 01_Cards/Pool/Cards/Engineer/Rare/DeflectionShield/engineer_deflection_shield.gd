@@ -1,5 +1,5 @@
 class_name EngineerDeflectionShield
-extends HeroUpgrade
+extends CardEffect
 
 @export var _blocked_projectiles: Array[int]
 @export var _shield_per_blocks: Array[int]

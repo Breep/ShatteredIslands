@@ -1,5 +1,5 @@
 class_name SerenityWarmAura
-extends HeroUpgrade
+extends CardEffect
 
 @export var _base_chance: Array[float]
 @export var _base_cleanse_amount: Array[float]

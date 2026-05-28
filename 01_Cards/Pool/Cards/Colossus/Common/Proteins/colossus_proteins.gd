@@ -1,5 +1,5 @@
 class_name ColossusProteins
-extends HeroUpgrade
+extends CardEffect
 
 @export var _max_hp_increase: Array[float]
 

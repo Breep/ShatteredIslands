@@ -1,5 +1,5 @@
 class_name ChickenFeatheredDodge
-extends HeroUpgrade
+extends CardEffect
 
 @export var _dodge_increases: Array[float]
 @export var _chicken_inheritances: Array[float]

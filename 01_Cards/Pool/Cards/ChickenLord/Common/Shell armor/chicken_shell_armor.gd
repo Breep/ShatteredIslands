@@ -1,5 +1,5 @@
 class_name ChickenShellArmor
-extends HeroUpgrade
+extends CardEffect
 
 @export var _block_stacks: Array[int]
 

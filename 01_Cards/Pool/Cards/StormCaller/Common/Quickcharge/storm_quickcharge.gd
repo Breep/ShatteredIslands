@@ -1,5 +1,5 @@
 class_name StormQuickcharge
-extends HeroUpgrade
+extends CardEffect
 
 @export var _base_grind_percent: Array[float]
 

@@ -1,5 +1,5 @@
 class_name StormStormBreaker
-extends HeroUpgrade
+extends CardEffect
 
 @export var _base_reduction_percent: Array[float]
 

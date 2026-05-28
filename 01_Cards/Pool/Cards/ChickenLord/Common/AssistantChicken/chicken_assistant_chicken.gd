@@ -1,5 +1,5 @@
 class_name ChickenAssistantChicken
-extends HeroUpgrade
+extends CardEffect
 
 @export var _shield_amounts: Array[float]
 

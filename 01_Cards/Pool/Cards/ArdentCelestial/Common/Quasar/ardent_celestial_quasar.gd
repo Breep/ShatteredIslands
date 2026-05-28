@@ -1,5 +1,5 @@
 class_name ArdentCelestialQuasar
-extends HeroUpgrade
+extends CardEffect
 
 @export var _hp_amount: Array[float]
 

@@ -1,5 +1,5 @@
 class_name ChickenLordBloodFrenzy
-extends HeroUpgrade
+extends CardEffect
 
 @export var _ad_per_deaths: Array[float]
 

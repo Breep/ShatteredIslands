@@ -1,5 +1,5 @@
 class_name EngineerAegisBlade
-extends HeroUpgrade
+extends CardEffect
 
 @export var _attack_ads: Array[float]
 @export var _attack_speeds: Array[float]

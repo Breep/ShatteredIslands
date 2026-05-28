@@ -1,5 +1,5 @@
 class_name FireScorpius
-extends HeroUpgrade
+extends CardEffect
 
 @export var _poison_stacks: Array[float]
 

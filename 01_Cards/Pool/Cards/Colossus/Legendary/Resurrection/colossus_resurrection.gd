@@ -1,5 +1,5 @@
 class_name ColossusResurrection
-extends HeroUpgrade
+extends CardEffect
 
 @export var _time_before_revive: Array[float]
 @export var _damage_percent: Array[float]

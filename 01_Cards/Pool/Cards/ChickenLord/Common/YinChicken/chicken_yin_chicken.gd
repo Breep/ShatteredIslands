@@ -1,5 +1,5 @@
 class_name ChickenYinChicken
-extends HeroUpgrade
+extends CardEffect
 
 @export var _vulnerable_applications: Array[float]
 @export var _chances: Array[float]

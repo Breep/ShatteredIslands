@@ -1,5 +1,5 @@
 class_name ChickenDeathBlock
-extends HeroUpgrade
+extends CardEffect
 
 @export var _block_amounts: Array[int]
 

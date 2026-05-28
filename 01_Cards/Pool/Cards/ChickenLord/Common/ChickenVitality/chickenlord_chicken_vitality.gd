@@ -1,5 +1,5 @@
 class_name ChickenLordChickenVitality
-extends HeroUpgrade
+extends CardEffect
 
 @export var _hp_bonuses: Array[float]
 

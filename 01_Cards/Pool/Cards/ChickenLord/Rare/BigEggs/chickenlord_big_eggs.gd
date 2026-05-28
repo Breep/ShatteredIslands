@@ -1,5 +1,5 @@
 class_name ChickenLordBigEggs
-extends HeroUpgrade
+extends CardEffect
 
 @export var _big_egg_numbers: Array[int]
 @export var _chicken_per_eggs: Array[int]

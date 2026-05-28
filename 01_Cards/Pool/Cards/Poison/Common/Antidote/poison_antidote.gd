@@ -1,5 +1,5 @@
 class_name PoisonAntidote
-extends HeroUpgrade
+extends CardEffect
 
 @export var _damage_deacrease: Array[float]
 

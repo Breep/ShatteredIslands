@@ -1,5 +1,5 @@
 class_name EngineerShieldRush
-extends HeroUpgrade
+extends CardEffect
 
 @export var _shield_amount: Array[float]
 

@@ -1,5 +1,5 @@
 class_name AttackDoubleEdgeSword
-extends HeroUpgrade
+extends CardEffect
 
 @export var _damage_percent: Array[int] # % of damage increased when changing target
 @export var _attacks_number: Array[int] # Number of attack boosted

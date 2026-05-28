@@ -1,5 +1,5 @@
 class_name ChickenTwins
-extends HeroUpgrade
+extends CardEffect
 
 @export var _chance: Array[float]
 

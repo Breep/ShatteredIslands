@@ -1,5 +1,5 @@
 class_name AttackDiamondSword
-extends HeroUpgrade
+extends CardEffect
 
 @export var _damage: Array[int]
 

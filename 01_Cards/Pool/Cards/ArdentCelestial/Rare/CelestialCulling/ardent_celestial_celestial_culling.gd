@@ -1,5 +1,5 @@
 class_name ArdentCelestialCelestialCulling
-extends HeroUpgrade
+extends CardEffect
 
 @export var _thresholds: Array[float]
 

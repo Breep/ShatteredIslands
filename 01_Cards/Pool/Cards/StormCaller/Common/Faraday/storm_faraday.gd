@@ -1,5 +1,5 @@
 class_name StormFaraday
-extends HeroUpgrade
+extends CardEffect
 
 @export var _base_crit_chance_boost: Array[float]
 

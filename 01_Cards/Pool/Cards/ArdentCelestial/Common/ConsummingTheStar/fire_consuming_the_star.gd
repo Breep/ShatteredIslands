@@ -1,5 +1,5 @@
 class_name FireConsumingTheStar
-extends HeroUpgrade
+extends CardEffect
 
 @export var _mana_burn: Array[float]
 @export var _proc_chances: Array[float]

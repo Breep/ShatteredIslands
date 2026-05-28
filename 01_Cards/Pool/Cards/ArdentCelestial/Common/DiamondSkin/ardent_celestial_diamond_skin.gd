@@ -1,5 +1,5 @@
 class_name ArdentCelestialDiamondSkin
-extends HeroUpgrade
+extends CardEffect
 
 @export var _magical_resistances: Array[float]
 

@@ -1,5 +1,5 @@
 class_name StormEyeOfTheCyclone
-extends HeroUpgrade
+extends CardEffect
 
 @export var _base_max_hp_percent_bonus: Array[float]
 

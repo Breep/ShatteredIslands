@@ -1,5 +1,5 @@
 class_name ColossusColossalTitan
-extends HeroUpgrade
+extends CardEffect
 
 const AXE_VISUAL = preload("res://03_SpellsAndProjectiles/Spells/ColossalTitan/Visual/colossal_titan_visual.tscn")
 const DEPLOY_TIME: float = 0.7

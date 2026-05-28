@@ -1,5 +1,5 @@
 class_name AttackSurgicalKnife
-extends HeroUpgrade
+extends CardEffect
 
 @export var _chance: Array[float]
 @export var _cleanse_amount: Array[float]

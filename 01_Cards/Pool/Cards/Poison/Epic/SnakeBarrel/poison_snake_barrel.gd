@@ -1,5 +1,5 @@
 class_name PoisonSnakeBarrel
-extends HeroUpgrade
+extends CardEffect
 
 @export var _barrel_health: Array[int]
 @export var _snake_number: Array[int]

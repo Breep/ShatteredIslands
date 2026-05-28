@@ -1,5 +1,5 @@
 class_name EngineerGasMask
-extends HeroUpgrade
+extends CardEffect
 
 @export var _base_efficiency: Array[float]
 

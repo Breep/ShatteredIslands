@@ -1,5 +1,5 @@
 class_name ChickenLordEggBombardment
-extends HeroUpgrade
+extends CardEffect
 
 @export var _spawn_chances: Array[float]
 

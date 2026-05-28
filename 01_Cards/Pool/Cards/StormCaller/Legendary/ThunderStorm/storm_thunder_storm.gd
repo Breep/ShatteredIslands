@@ -1,5 +1,5 @@
 class_name StormThunderStorm
-extends HeroUpgrade
+extends CardEffect
 
 @export var _duration_bonus: Array[float]
 

@@ -1,5 +1,5 @@
 class_name EngineerEnergyBarrier
-extends HeroUpgrade
+extends CardEffect
 
 @export var _shield_amount: Array[float]
 @export var _period: Array[float]

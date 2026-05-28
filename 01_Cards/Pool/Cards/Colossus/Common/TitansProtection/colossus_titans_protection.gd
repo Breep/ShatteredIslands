@@ -1,5 +1,5 @@
 class_name ColossusTitansProtection
-extends HeroUpgrade
+extends CardEffect
 
 @export var _lost_hp_percent: Array[float]
 @export var _period: Array[float]

@@ -1,5 +1,5 @@
 class_name EngineerFortificationDrone
-extends HeroUpgrade
+extends CardEffect
 
 @export var _drones_numbers: Array[int]
 @export var _shield_per_seconds: Array[float]

@@ -1,5 +1,5 @@
 class_name AttackRustyDagger
-extends HeroUpgrade
+extends CardEffect
 
 @export var _chance: Array[float]
 @export var _poison_stacks: Array[float]

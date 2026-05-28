@@ -1,5 +1,5 @@
 class_name AttackBladeRush
-extends HeroUpgrade
+extends CardEffect
 
 @export var _damage_increase: Array[float]
 @export var _duration: Array[float]

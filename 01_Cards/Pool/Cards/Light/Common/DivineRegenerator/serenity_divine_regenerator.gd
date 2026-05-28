@@ -1,5 +1,5 @@
 class_name SerenityDivineRegenerator
-extends HeroUpgrade
+extends CardEffect
 
 @export var _bonus_duration: Array[int]
 

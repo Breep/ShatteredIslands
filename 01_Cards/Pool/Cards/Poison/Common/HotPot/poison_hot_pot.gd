@@ -1,5 +1,5 @@
 class_name PoisonHotPot
-extends HeroUpgrade
+extends CardEffect
 
 @export var _chance: Array[float]
 @export var _ignite_stacks: Array[int]

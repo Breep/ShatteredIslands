@@ -1,5 +1,5 @@
 class_name AttackAimAssist
-extends HeroUpgrade
+extends CardEffect
 
 @export var _bonus_ad_per_card: Array[float]
 

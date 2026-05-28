@@ -1,5 +1,5 @@
 class_name EngineerFragileProtocol
-extends HeroUpgrade
+extends CardEffect
 
 @export var _heal_resistance: Array[float]
 @export var _shield_power: Array[float]

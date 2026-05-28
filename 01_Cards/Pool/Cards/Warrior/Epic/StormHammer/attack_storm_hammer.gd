@@ -1,5 +1,5 @@
 class_name StormHammer
-extends HeroUpgrade
+extends CardEffect
 
 @export var _chance_percent: Array[float]
 

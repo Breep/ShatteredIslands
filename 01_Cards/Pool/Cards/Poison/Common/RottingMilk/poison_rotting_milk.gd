@@ -1,5 +1,5 @@
 class_name PoisonRottingMilk
-extends HeroUpgrade
+extends CardEffect
 
 @export var _chance: Array[float]
 @export var _regen_stacks: Array[int]

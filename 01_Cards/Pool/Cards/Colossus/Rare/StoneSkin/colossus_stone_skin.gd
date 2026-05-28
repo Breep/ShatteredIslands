@@ -1,5 +1,5 @@
 class_name ColossusStoneSkin
-extends HeroUpgrade
+extends CardEffect
 
 @export var _base_thorn_values: Array[float]
 @export var _bonus_thorn_factors: Array[float]

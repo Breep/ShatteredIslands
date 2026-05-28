@@ -1,5 +1,5 @@
 class_name EngineerMagneticSiphon
-extends HeroUpgrade
+extends CardEffect
 
 @export var _period: Array[float]
 @export var _steal_percent: Array[float]

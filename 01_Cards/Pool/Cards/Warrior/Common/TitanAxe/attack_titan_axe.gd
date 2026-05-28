@@ -1,5 +1,5 @@
 class_name AttackTitanAxe
-extends HeroUpgrade
+extends CardEffect
 
 const AXE_VISUAL = preload("res://03_SpellsAndProjectiles/Spells/TitanAxe/Visual/titan_axe_visual.tscn")
 const DEPLOY_TIME: float = 0.7

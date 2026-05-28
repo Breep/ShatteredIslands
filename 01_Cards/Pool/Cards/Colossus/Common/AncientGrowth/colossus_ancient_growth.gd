@@ -1,5 +1,5 @@
 class_name ColossusAncientGrowth
-extends HeroUpgrade
+extends CardEffect
 
 @export var _size_increase: Array[float]
 @export var _period: Array[float]

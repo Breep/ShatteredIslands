@@ -1,5 +1,5 @@
 class_name EngineerAegisResonator
-extends HeroUpgrade
+extends CardEffect
 
 @export var _period: Array[float]
 @export var _shared_shields: Array[float]

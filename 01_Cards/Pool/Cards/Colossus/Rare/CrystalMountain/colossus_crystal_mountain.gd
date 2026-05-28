@@ -1,5 +1,5 @@
 class_name ColossusCrystalMountain
-extends HeroUpgrade
+extends CardEffect
 
 @export var _defense_increase: Array[float]
 

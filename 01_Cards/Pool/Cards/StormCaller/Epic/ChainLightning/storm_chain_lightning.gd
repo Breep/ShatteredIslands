@@ -1,5 +1,5 @@
 class_name StormChainLightning
-extends HeroUpgrade
+extends CardEffect
 
 @export var _dist_factor: Array[float]
 @export var _chance_percent: Array[float]

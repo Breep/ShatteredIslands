@@ -1,5 +1,5 @@
 class_name ColossusBearStrength
-extends HeroUpgrade
+extends CardEffect
 
 @export var _as_reduction: Array[float]
 @export var _hp_to_ad_percents: Array[float]

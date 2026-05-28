@@ -1,5 +1,5 @@
 class_name DefenseAetherRedirector
-extends HeroUpgrade
+extends CardEffect
 
 @export var _base_period: Array[float]
 @export var _base_shield: Array[float]

@@ -1,5 +1,5 @@
 class_name ColossusUnbreakableWall
-extends HeroUpgrade
+extends CardEffect
 
 @export var _base_hp_threshold_percent: Array[float]
 

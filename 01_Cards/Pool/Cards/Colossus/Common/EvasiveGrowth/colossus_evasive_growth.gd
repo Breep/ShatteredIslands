@@ -1,5 +1,5 @@
 class_name ColossusEvasiveGrowth
-extends HeroUpgrade
+extends CardEffect
 
 @export var _increase_dodge: Array[float]
 @export var _increase_sizes: Array[float]

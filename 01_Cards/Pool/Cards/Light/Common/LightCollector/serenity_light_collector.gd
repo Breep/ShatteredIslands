@@ -1,5 +1,5 @@
 class_name SerenityLightCollector
-extends HeroUpgrade
+extends CardEffect
 
 @export var _regen_per_card: Array[float]
 

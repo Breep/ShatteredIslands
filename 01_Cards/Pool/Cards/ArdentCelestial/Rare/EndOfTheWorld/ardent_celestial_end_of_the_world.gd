@@ -1,5 +1,5 @@
 class_name ArdentCelestialEndOfTheWorld
-extends HeroUpgrade
+extends CardEffect
 
 @export var _bonus_meteor_chances: Array[float]
 

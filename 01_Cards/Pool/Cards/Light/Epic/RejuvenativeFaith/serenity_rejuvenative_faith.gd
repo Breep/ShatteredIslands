@@ -1,5 +1,5 @@
 class_name SerenityRejuvenativeFaith
-extends HeroUpgrade
+extends CardEffect
 
 @export var _base_chance: Array[float]
 @export var _base_amount: Array[float]

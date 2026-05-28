@@ -1,5 +1,5 @@
 class_name DefenseProtectiveDome
-extends HeroUpgrade
+extends CardEffect
 
 @export var _armor_percent: Array[float]
 

@@ -1,5 +1,5 @@
 class_name ColossusTaintedBlood
-extends HeroUpgrade
+extends CardEffect
 
 const ORB_VISUAL = preload("res://03_SpellsAndProjectiles/Spells/TaintedBlood/Visual/tainted_blood_orb_visual.tscn")
 

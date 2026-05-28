@@ -1,5 +1,5 @@
 class_name EngineerGammaTurret
-extends HeroUpgrade
+extends CardEffect
 
 @export var _ad: Array[float]
 @export var _shield: Array[int]

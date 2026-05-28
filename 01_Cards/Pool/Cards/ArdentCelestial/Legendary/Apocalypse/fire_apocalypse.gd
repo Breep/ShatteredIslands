@@ -1,5 +1,5 @@
 class_name FireApocalypse
-extends HeroUpgrade
+extends CardEffect
 
 @export var _meteor_bonus_chance: Array[float]
 

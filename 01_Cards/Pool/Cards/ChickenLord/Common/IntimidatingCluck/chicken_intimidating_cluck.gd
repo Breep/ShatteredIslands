@@ -1,5 +1,5 @@
 class_name ChickenIntimidatingCluck
-extends HeroUpgrade
+extends CardEffect
 
 @export var _stun_durations: Array[float]
 @export var _stun_chances: Array[float]

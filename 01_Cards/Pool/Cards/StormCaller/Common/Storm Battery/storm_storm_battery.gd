@@ -1,5 +1,5 @@
 class_name StormStormBattery
-extends HeroUpgrade
+extends CardEffect
 
 @export var _base_mana_gain: Array[float]
 

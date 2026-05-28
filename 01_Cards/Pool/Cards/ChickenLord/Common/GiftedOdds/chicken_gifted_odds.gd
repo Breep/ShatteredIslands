@@ -1,5 +1,5 @@
 class_name ChickenGiftedOdds
-extends HeroUpgrade
+extends CardEffect
 
 @export var _gifted_chances_increase: Array[float]
 
