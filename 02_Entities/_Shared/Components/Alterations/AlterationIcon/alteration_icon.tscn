@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c4altricooba"]
 
 [ext_resource type="Script" uid="uid://bta4n1f0vqnlv" path="res://02_Entities/_Shared/Components/Alterations/AlterationIcon/alteration_icon.gd" id="1_script"]
-[ext_resource type="Texture2D" uid="uid://bfqjobifdq86a" path="res://02_Entities/_Shared/Components/Alterations/AlterationIcon/Icons/ignite_icon.png" id="2_kqqdc"]
+[ext_resource type="Texture2D" uid="uid://dv6lhc7rwbn3q" path="res://04_UI/_Themes/Data/Icons/AlterationsIcons/ignite_stroke.svg" id="2_kqqdc"]
 
 [node name="AlterationIcon" type="Control" unique_id=1181080459]
 custom_minimum_size = Vector2(16, 16)

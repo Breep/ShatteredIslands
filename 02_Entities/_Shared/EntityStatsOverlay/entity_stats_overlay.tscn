@@ -7,8 +7,8 @@
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=925935475]
 
 [node name="Control" type="Panel" parent="CanvasLayer" unique_id=582348049]
-offset_left = -4.0
-offset_top = -2.0
-offset_right = 259.0
-offset_bottom = 330.0
+offset_left = 9.0
+offset_top = 5.0
+offset_right = 272.0
+offset_bottom = 337.0
 theme_override_styles/panel = ExtResource("1_msd43")
