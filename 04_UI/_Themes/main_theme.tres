@@ -38,6 +38,11 @@ shadow_color = Color(0.0627451, 0.09411765, 0.13333334, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ublo5"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ls0cl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ublo5"]
+bg_color = Color(0.101960786, 0.14901961, 0.2, 1)
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iy36y"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fwkpx"]
@@ -94,7 +99,10 @@ ItemList/colors/font_color = Color(1, 1, 1, 1)
 ItemList/colors/guide_color = Color(0, 0, 0, 0)
 ItemList/constants/outline_size = 4
 ItemList/fonts/font = ExtResource("2_iyfkc")
+ItemList/styles/hovered = SubResource("StyleBoxEmpty_ls0cl")
+ItemList/styles/hovered_selected = SubResource("StyleBoxFlat_ublo5")
 ItemList/styles/panel = SubResource("StyleBoxEmpty_iy36y")
+ItemList/styles/selected = SubResource("StyleBoxFlat_ublo5")
 Label/colors/font_color = Color(1, 1, 1, 1)
 Label/colors/font_outline_color = Color(0, 0, 0, 1)
 Label/colors/font_shadow_color = Color(0, 0, 0, 1)

@@ -216,6 +216,7 @@ text = "Family Managers"
 script = ExtResource("11_r0wv3")
 
 [node name="EntityStatsViewer" parent="Node3D/Control" unique_id=779799398 instance=ExtResource("12_r0wv3")]
+_prototyping = true
 
 [node name="CenterPointCamera" parent="Node3D" unique_id=842815466 instance=ExtResource("4_egh8k")]
 unique_name_in_owner = true

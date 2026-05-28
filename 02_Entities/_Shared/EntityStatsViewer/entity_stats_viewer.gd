@@ -7,9 +7,14 @@ extends Node
 ## (tooltip). Les valeurs suivent les stats en live via les signaux *_changed.
 ## Les items (icône + "0") sont déjà présents dans la scène pour visualisation en
 ## éditeur — leur ordre DOIT suivre l'ordre de _STATS.
+## En mode prototyping, les items deviennent cliquables et deux panneaux (stat
+## modifier + level) permettent de bricoler l'entité en direct.
 
 #region ============================== Constants ==============================
 const _SCREEN_OFFSET: Vector2 = Vector2(40, -140)
+
+# Id du StatModifier injecté par le panneau de prototyping (un seul par stat).
+const PROTOTYPING_MODIFIER_ID: StringName = &"Prototyping"
 
 # Ordre = ordre des items dans la scène. { StatType: { name (tooltip), sig (signal float 1 arg) } }
 const _STATS: Dictionary = {
@@ -33,26 +38,41 @@ const _STATS: Dictionary = {
 }
 #endregion
 
+#region ============================== Prototyping ==============================
+@export var _prototyping: bool = false
+#endregion
+
 #region ============================== Onready ==============================
-@onready var _main: PanelContainer = %MainControl
+@onready var _main: Panel = %MainControl
 @onready var _list: ItemList = %ItemList
+@onready var _stat_name_label: Label = %StatNameLabel
+@onready var _stat_modifier_text_edit: TextEdit = %StatModifierTextEdit
+@onready var _entity_stats_writer: Control = %EntityStatsWriter
+@onready var _entity_level_writer: Control = %EntityLevelWriter
+@onready var _level_value_label: Label = %LevelValueLabel
 #endregion
 
 #region ============================== Private variables ==============================
 var _entity: Entity = null
 var _connections: Array[Dictionary] = []
+var _selected_stat_type: EntityStats.StatType = EntityStats.StatType.HEALTH_MAX
 #endregion
 
 #region ============================== Node base functions ==============================
 func _ready() -> void:
-	return
 	_apply_tooltips()
 	_main.hide()
 	Events.entity_alt_clicked.connect(_on_entity_alt_clicked)
 
+	_entity_stats_writer.visible = _prototyping
+	_entity_level_writer.visible = _prototyping
+	for i: int in _list.item_count:
+		_list.set_item_selectable(i, _prototyping)
+	if _prototyping:
+		_list.item_clicked.connect(_on_item_clicked)
+
 
 func _process(_delta: float) -> void:
-	return
 	if not _main.visible: return
 	if not is_instance_valid(_entity):
 		_unbind()
@@ -63,7 +83,6 @@ func _process(_delta: float) -> void:
 
 
 # Position écran du panneau à partir de la position projetée de l'entité.
-# Surchargé par EntityStatsWriter pour s'ancrer à gauche au lieu de droite.
 func _panel_position(entity_screen_pos: Vector2) -> Vector2:
 	return entity_screen_pos + _SCREEN_OFFSET
 #endregion
@@ -84,6 +103,9 @@ func bind(entity: Entity) -> void:
 		idx += 1
 	if not entity.died.is_connected(_on_entity_died):
 		entity.died.connect(_on_entity_died)
+	if not entity.progression.level_changed.is_connected(_on_entity_progression_level_changed):
+		entity.progression.level_changed.connect(_on_entity_progression_level_changed)
+	_on_entity_progression_level_changed(entity.progression.level)
 	_main.show()
 
 
@@ -116,6 +138,8 @@ func _unbind() -> void:
 				stats.disconnect(connection["sig"], connection["cb"])
 		if _entity.died.is_connected(_on_entity_died):
 			_entity.died.disconnect(_on_entity_died)
+		if _entity.progression.level_changed.is_connected(_on_entity_progression_level_changed):
+			_entity.progression.level_changed.disconnect(_on_entity_progression_level_changed)
 	_connections.clear()
 	_entity = null
 	_main.hide()
@@ -136,12 +160,46 @@ func _on_entity_alt_clicked(entity: Entity) -> void:
 
 func _on_entity_died(_self_ref: Entity) -> void:
 	_unbind()
+
+
+# Sélection d'une stat (prototyping) : le panneau modifier affiche le nom de la stat
+# et la valeur actuelle de son modifier "Prototyping" (0 si aucun).
+func _on_item_clicked(index: int, _at_position: Vector2, _mouse_button_index: int) -> void:
+	if not is_instance_valid(_entity): return
+	if index < 0 or index >= _STATS.size(): return
+	_selected_stat_type = _STATS.keys()[index]
+	_stat_name_label.text = _STATS[_selected_stat_type]["name"]
+	var current: float = _entity.stat_modifiers_registry.get_modifier_value(_selected_stat_type, PROTOTYPING_MODIFIER_ID)
+	_stat_modifier_text_edit.text = str(current)
+
+
+func _on_apply_stat_modifier_button_pressed() -> void:
+	if not is_instance_valid(_entity): return
+	var mod := StatModifier.new()
+	mod.id = PROTOTYPING_MODIFIER_ID
+	mod.value = float(_stat_modifier_text_edit.text)
+	mod.stat_type = _selected_stat_type
+	mod.calc_type = StatModifier.CalcType.ADD
+	_entity.stat_modifiers_registry.register_modifier(mod)
+
+
+func _on_clear_stat_modifier_button_pressed() -> void:
+	if not is_instance_valid(_entity): return
+	_entity.stat_modifiers_registry.remove_modifier(_selected_stat_type, PROTOTYPING_MODIFIER_ID)
+
+
+func _on_plus_level_button_pressed() -> void:
+	if _entity == null: return
+	if _entity.progression.level >= 20: return
+	_entity.progression.level += 1
+
+
+func _on_minus_level_button_pressed() -> void:
+	if _entity == null: return
+	if _entity.progression.level <= 1: return
+	_entity.progression.level -= 1
+
+
+func _on_entity_progression_level_changed(level: int) -> void:
+	_level_value_label.text = str(level)
 #endregion
-
-
-func _on_apply_button_pressed() -> void:
-	pass # Replace with function body.
-
-
-func _on_clear_button_pressed() -> void:
-	pass # Replace with function body.
