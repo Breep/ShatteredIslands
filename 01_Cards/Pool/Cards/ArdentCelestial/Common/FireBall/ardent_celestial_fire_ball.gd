@@ -32,8 +32,10 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if target == null: return
 		ctx.hero.projectile.projectile_attack(target, Projectile.Type.FIRE_BALL, ctx.hero, proj_stats)
 		)
-	
 
+
+func revert_card(ctx: CardContext, _card_lvl: int) -> void:
+	ctx.battle_callbacks.unregister_all(&"Fire Ball")
 
 
 func get_description(cardlvl: int) -> String:

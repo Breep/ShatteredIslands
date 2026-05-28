@@ -12,13 +12,18 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var burn: float = _mana_burn[card_lvl - 1]
 	var proc_chance: float = _proc_chances[card_lvl - 1]
 	
-	ctx.hero.families_stats.ardent_celestial.meteor_on_hit_callbacks.append(func(cb_vars: Dictionary) -> void:
+	var ardent_stats: FamilyArdentCelestialStats = ctx.hero.families_stats.ardent_celestial
+	ardent_stats.add_card_item(ctx.card_id, ardent_stats.meteor_on_hit_callbacks, func(cb_vars: Dictionary) -> void:
 		var entities_inside: Array = cb_vars.get(Meteor.VarType.ENTITIES_INSIDE, [])
 		for entity: Entity in entities_inside:
 			if entity != null and is_instance_valid(entity) and entity.team != ctx.hero.team:
 				if Utils.is_randomize_modifier_active(proc_chance, entity.battle_id) and entity.stats.mana > 0:
 					entity.stats.mana = max(0.0, entity.stats.mana - burn)
 	)
+
+
+func revert_card(ctx: CardContext, _card_lvl: int) -> void:
+	ctx.hero.families_stats.ardent_celestial.remove_card_items(ctx.card_id)
 
 
 func get_description(cardlvl: int) -> String:

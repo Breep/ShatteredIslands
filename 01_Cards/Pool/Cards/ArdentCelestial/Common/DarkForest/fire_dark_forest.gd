@@ -31,6 +31,14 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	ctx.action_modifiers.register_modifier(action_mod)
 
 
+func revert_card(ctx: CardContext, _card_lvl: int) -> void:
+	ctx.stat_modifiers.remove_modifier(EntityStats.StatType.DODGE, &"Dark Forest")
+	var action_mod := ActionModifier.new()
+	action_mod.action_type = Utils.ActionCategory.DODGE
+	action_mod.id = &"Dark Forest"
+	ctx.action_modifiers.unregister_modifier(action_mod)
+
+
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[Card.Rarity.COMMON]:
 		printerr("Dark Forest: Wrong cardlvl: ", cardlvl)

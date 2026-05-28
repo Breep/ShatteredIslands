@@ -14,6 +14,14 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		ctx.hero.alterations.add_typed_stack(Alteration.Type.STRENGTH, Utils.ActionType.STACK_SHIELD, _shield_power[card_lvl - 1])
 
 
+func revert_card(ctx: CardContext, card_lvl: int) -> void:
+	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:
+		return
+	if ctx.hero.alterations != null:
+		ctx.hero.alterations.remove_typed_stack(Alteration.Type.WEAKNESS, Utils.ActionType.UTILITY_HEAL, _heal_resistance[card_lvl - 1])
+		ctx.hero.alterations.remove_typed_stack(Alteration.Type.STRENGTH, Utils.ActionType.STACK_SHIELD, _shield_power[card_lvl - 1])
+
+
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
 		printerr("Fragile Protocole: Wrong cardlvl: ", cardlvl)

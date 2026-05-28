@@ -14,7 +14,10 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	ctx.hero.battle_callback_registry.register_periodic(&"Apocalypse", 1, func() -> void:
 		ctx.hero.families_stats.ardent_celestial.apocalypse_bonus_meteor_chance += meteor_bonus_chance
 	)
-	
+
+
+func revert_card(ctx: CardContext, _card_lvl: int) -> void:
+	ctx.hero.battle_callback_registry.unregister_all(&"Apocalypse")
 
 
 func get_description(cardlvl: int) -> String:

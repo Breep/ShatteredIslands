@@ -10,12 +10,17 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 	var proc_chance: float = _proc_chances[card_lvl - 1]
 	
-	ctx.hero.families_stats.ardent_celestial.meteor_on_hit_callbacks.append(func(cb_vars: Dictionary) -> void:
+	var ardent_stats: FamilyArdentCelestialStats = ctx.hero.families_stats.ardent_celestial
+	ardent_stats.add_card_item(ctx.card_id, ardent_stats.meteor_on_hit_callbacks, func(cb_vars: Dictionary) -> void:
 		if Utils.is_randomize_modifier_active(proc_chance, ctx.hero.battle_id):
 			var position: Vector3 = cb_vars.get(Meteor.VarType.POSITION)
 			ctx.hero.summon.summon_entity(Entity.EntityType.CHICKEN_EGG, SpawnLocationConfig.create_exact(position, 2), {})
-			
+
 	)
+
+
+func revert_card(ctx: CardContext, _card_lvl: int) -> void:
+	ctx.hero.families_stats.ardent_celestial.remove_card_items(ctx.card_id)
 
 
 func get_description(cardlvl: int) -> String:

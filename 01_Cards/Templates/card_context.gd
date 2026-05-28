@@ -10,6 +10,11 @@ var action_modifiers: ActionModifiersRegistry
 var auto_attack_modifiers: AutoAttackModifierRegistry
 var battle_callbacks: BattleCallbackRegistry
 
+## Id de design de la carte en cours d'apply/revert. Positionné par le DeckHolder
+## avant chaque appel ; utilisé par les cartes pour retirer leurs ajouts keyés
+## dans les FamilyStats au revert.
+var card_id: StringName
+
 
 static func create(
 		p_hero: Entity,

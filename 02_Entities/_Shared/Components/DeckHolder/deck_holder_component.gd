@@ -38,7 +38,30 @@ func apply_all_cards_upgrades(deck: Hand) -> void:
 
 	Verbose.debug("Applying all cards upgrades", Verbose.Category.HERO)
 	for card: Card in deck.get_cards_raw():
-		card.player_upgrade.apply_card(_card_context, card.lvl)
+		apply_card(card)
+
+
+# Applique une carte (achat / pose). Positionne le card_id du contexte pour que
+# la carte puisse retirer ses ajouts keyés au revert.
+func apply_card(card: Card) -> void:
+	if _card_context == null:
+		Verbose.error("DeckHolder: card_context not set, call setup() first", Verbose.Category.HERO)
+		return
+	if card == null or card.player_upgrade == null:
+		return
+	_card_context.card_id = card.design_id()
+	card.player_upgrade.apply_card(_card_context, card.lvl)
+
+
+# Retire une carte (vente / retrait) : défait ce que apply_card a posé.
+func revert_card(card: Card) -> void:
+	if _card_context == null:
+		Verbose.error("DeckHolder: card_context not set, call setup() first", Verbose.Category.HERO)
+		return
+	if card == null or card.player_upgrade == null:
+		return
+	_card_context.card_id = card.design_id()
+	card.player_upgrade.revert_card(_card_context, card.lvl)
 
 
 func get_card_context() -> CardContext:

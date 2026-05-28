@@ -14,7 +14,11 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		var targets: Array[Entity] = ctx.hero.target.get_targets(TargetComponent.MultipleTargettingStrategy.ENEMIES)
 		for target: Entity in targets:
 			ctx.hero.alterations.inflict_condition_stacks(target, stacks, Alteration.Type.IGNITE, &"Nuke")
-	)
+	, &"Nuke")
+
+
+func revert_card(ctx: CardContext, _card_lvl: int) -> void:
+	ctx.hero.battle_callback_registry.unregister_all(&"Nuke")
 
 
 func get_description(cardlvl: int) -> String:

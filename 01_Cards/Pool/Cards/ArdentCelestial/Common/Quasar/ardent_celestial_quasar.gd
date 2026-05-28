@@ -29,6 +29,12 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	ctx.action_modifiers.register_modifier(spell_modifier)
 
 
+func revert_card(ctx: CardContext, _card_lvl: int) -> void:
+	var spell_modifier := ActionModifier.new()
+	spell_modifier.action_type = Utils.ActionCategory.SPELL
+	spell_modifier.id = &"Quasar"
+	ctx.action_modifiers.unregister_modifier(spell_modifier)
+
 
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:

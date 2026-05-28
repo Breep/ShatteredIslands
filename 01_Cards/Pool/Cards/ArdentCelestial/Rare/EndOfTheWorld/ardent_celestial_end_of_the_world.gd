@@ -12,6 +12,10 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	ctx.hero.families_stats.ardent_celestial.end_of_the_world_bonus_meteor_chance = bonus_meteor_chance
 
 
+func revert_card(ctx: CardContext, _card_lvl: int) -> void:
+	ctx.hero.families_stats.ardent_celestial.end_of_the_world_bonus_meteor_chance = 0
+
+
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[Card.Rarity.RARE]:
 		return "ERROR"
