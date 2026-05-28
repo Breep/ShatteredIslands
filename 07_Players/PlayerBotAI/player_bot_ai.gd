@@ -105,20 +105,8 @@ func _score_card(card: Card) -> float:
 		Card.Rarity.RARE:
 			score += 5.0
 
-	# 4. Proximité level-up famille (0 / 10 / 20)
-	var best_level_up_score: float = 0.0
-	for family_type: Family.Type in card.points.keys():
-		var current_points: int = player.deck.get_family_points(family_type)
-		var current_family_level: int = GameManager.game_rules.get_family_level(current_points)
-		if current_family_level >= 4:
-			continue
-		var next_threshold: int = GameManager.game_rules.family_level_points[current_family_level + 1]
-		var points_after: int = current_points + card.points[family_type]
-		if points_after >= next_threshold:
-			best_level_up_score = maxf(best_level_up_score, 20.0)
-		elif next_threshold - current_points <= 5:
-			best_level_up_score = maxf(best_level_up_score, 10.0)
-	score += best_level_up_score
+	# 4. Proximité level-up famille : retirée avec la refonte du deck (la nouvelle
+	# mécanique de familles sera rebranchée plus tard).
 
 	return score
 

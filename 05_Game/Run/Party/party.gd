@@ -18,6 +18,8 @@ signal roaster_entry_removed(entry: RoasterEntry)
 @export var players: Array[PlayerState]
 @export var formation: FightingFormation
 @export var roaster: Array[RoasterEntry]
+## Coffre partagé par toute l'équipe : stockage de cartes hors-héros.
+@export var chest: Deck = Deck.new()
 #endregion
 
 

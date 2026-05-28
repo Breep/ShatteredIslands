@@ -30,7 +30,7 @@ var team: int:
 
 # === Proxies vers RoasterEntry (truth canonique des données hero-level) ===
 
-var deck: PlayerDeck:
+var deck: Hand:
 	get:
 		var entry: RoasterEntry = _get_my_roaster_entry()
 		return entry.deck if entry != null else null
@@ -113,7 +113,7 @@ func setup_components() -> void:
 
 # ============================== Private functions ==============================
 func _init() -> void:
-	deck = PlayerDeck.new()
+	deck = Hand.new()
 	state = PlayerState.new()
 	skill_manager = SkillManager.new()
 	skill_manager.init(self)

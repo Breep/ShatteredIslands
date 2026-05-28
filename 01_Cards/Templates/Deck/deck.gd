@@ -1,170 +1,98 @@
+# Conteneur pur de cartes, indexé par l'id de design (Card.design_id()). Un même
+# design n'occupe qu'une entrée : ré-ajouter le même design fait monter son
+# niveau au lieu de créer un doublon. Aucune dépendance aux singletons — base
+# partagée par la main du joueur (Hand) et le coffre d'équipe (chest de Party).
 class_name Deck
 extends Resource
 
-# ============================== Public variables ==============================
+#region ============================== Signals ==============================
+signal has_changed()
+signal card_added(card: Card)
+signal card_removed(card: Card)
+#endregion
 
-@export var _card_pile: Dictionary[int, Card]
 
-@export var _families_count: Dictionary[Family.Type, int]
-var families_count: Dictionary[Family.Type, int]:
-	get: return _families_count
+#region ============================== Export ==============================
+@export var _card_pile: Dictionary[StringName, Card]
+#endregion
 
-# ============================== Public functions ==============================
 
-func get_card(uid: int) -> Card:
-	return _card_pile[uid] if _card_pile.has(uid) else null
+#region ============================== Public functions ==============================
+func get_card(design_id: StringName) -> Card:
+	return _card_pile.get(design_id)
+
 
 func get_cards_raw() -> Array[Card]:
 	return _card_pile.values()
 
-func add_card(card_to_add: Card) -> void:
-	if card_to_add == null:
-		printerr("Deck: Can't add a null card inside the card_pile")
-	else:
-		if _card_pile.has(card_to_add.uid):
-			printerr("Deck: Adding an already existing card into a deck [", card_to_add.uid, "-", card_to_add.name, "]")
-			return
-		_card_pile[card_to_add.uid] = card_to_add
-		if _families_count.has(card_to_add.families[0]):
-			_families_count[card_to_add.families[0]] += 1
-		else:
-			_families_count[card_to_add.families[0]] = 1
+
+func has(design_id: StringName) -> bool:
+	return _card_pile.has(design_id)
 
 
-func remove_card(card_to_remove: Card) -> void:
-	if card_to_remove == null:
-		printerr("Can't remove a null card")
-	elif card_to_remove in _card_pile.values():
-		_card_pile.erase(card_to_remove.uid)
-		if _families_count.has(card_to_remove.families[0]):
-			_families_count[card_to_remove.families[0]] -= 1
+func contains(card: Card) -> bool:
+	return card != null and _card_pile.has(card.design_id())
 
 
-func size():
+func size() -> int:
 	return _card_pile.size()
 
-# ============================== Private functions ==============================
 
-func _remove_all_same_card_in_array(card_to_remove: Card, cards: Array[Card]) -> void:
+func get_unique_card_count() -> int:
+	return _card_pile.size()
+
+
+func get_card_lvl(card: Card) -> int:
+	if card == null:
+		return 0
+	var existing: Card = _card_pile.get(card.design_id())
+	return existing.lvl if existing != null else 0
+
+
+func get_cards_by_type(family_type: Family.Type) -> Array[Card]:
+	var cards: Array[Card] = []
+	for card: Card in _card_pile.values():
+		if family_type in card.families:
+			cards.append(card)
+	return cards
+
+
+# Ajoute une carte. Si le design est déjà présent, monte son niveau (sans
+# nouvelle entrée). Retourne true si le deck a été modifié.
+func add_card(card_to_add: Card) -> bool:
+	if card_to_add == null:
+		Verbose.error("Deck: can't add a null card", Verbose.Category.DECK)
+		return false
+
+	var design_id: StringName = card_to_add.design_id()
+	var existing: Card = _card_pile.get(design_id)
+	if existing != null:
+		if existing.is_max_level():
+			Verbose.warn("Deck: card already maxed | " + String(design_id), Verbose.Category.DECK)
+			return false
+		existing.lvl += 1
+		has_changed.emit()
+		return true
+
+	_card_pile[design_id] = card_to_add
+	card_added.emit(card_to_add)
+	has_changed.emit()
+	return true
+
+
+func remove_card(card_to_remove: Card) -> bool:
 	if card_to_remove == null:
-		printerr("Can't remove a null card")
-		return
-	
-	var cards_duplicated: Array[Card] = cards.duplicate()
-	for card in cards_duplicated:
-		if card.name == card_to_remove.name:
-			cards.erase(card)
+		Verbose.error("Deck: can't remove a null card", Verbose.Category.DECK)
+		return false
+	return remove_card_by_id(card_to_remove.design_id())
 
 
-func _remove_card_at_pos_in_array(index: int, cards: Array[Card]) -> void:
-	if index >= 0 and index < cards.size():
-		cards.remove_at(index)
-	else:
-		printerr("Invalid index :", index)
-
-
-func _draw_card_in_array(index: int, cards: Array[Card]) -> Card:
-	if cards.is_empty():
-		printerr("Deck: Trying to draw a card in an empty deck.")
-		return null
-	
-	if index >= 0 and index < cards.size():
-		var drawn_card: Card = cards[index]
-		_remove_card_at_pos_in_array(index, cards)
-		return drawn_card
-	else:
-		printerr("Deck: Invalid index", index)
-		return null
-
-
-func _draw_random_card_in_array(cards: Array[Card]) -> Card:
-	if cards.is_empty():
-		printerr("The card_pile is empty. Cannot draw a card.")
-		return null
-	
-	var random_index = Utils.get_randi_range(0, cards.size() - 1)
-	return _draw_card_in_array(random_index, cards)
-
-
- #TODO Improve this function to accept a draw chance rule (like 50% chance common, 30% chance rare, 20% chance epic)
-func _draw_n_random_different_cards_in_array(number_of_cards_to_draw :int, cards: Array[Card]) -> Array[Card]:
-	if cards.is_empty():
-		printerr("The card_pile is empty. Cannot draw cards.")
-		return []
-	
-	if number_of_cards_to_draw > _get_diffent_cards_number_in_array(cards):
-		number_of_cards_to_draw = _get_diffent_cards_number_in_array(cards)
-	
-	var returned_cards: Array[Card] = []
-	var cards_duplicate = cards.duplicate()
-	while returned_cards.size() < number_of_cards_to_draw:
-		var randomCard = _draw_random_card_in_array(cards_duplicate)
-		_remove_all_same_card_in_array(randomCard, cards_duplicate)
-		returned_cards.append(randomCard)
-	
-	return returned_cards
-
-
-func _get_array_with_no_duplicate(cards: Array) -> Array:
-	var unique_cards: Array[Card] = []
-	for card in cards:
-		if not _is_card_in_array(card, unique_cards):
-			unique_cards.append(card)
-	
-	return unique_cards
-
-
-# A card_pile with {A,A,A,B,C,C,C,C,C,D,E,E,E} will return 5
-func _get_diffent_cards_number_in_array(cards: Array[Card]) -> int:
-	return _get_array_with_no_duplicate(cards).size()
-
-
-func _is_card_in_array(card_to_find: Card, cards: Array[Card]) -> bool:
-	for card in cards:
-		if card_to_find.name == card.name:
-			return true
-	
-	return false
-
-
-func _legacy_draw_n_card(number_of_cards_to_draw: int) -> Array[Card]:
-	var card_pile_values_duplicate: Array[Card] = _card_pile.values().duplicate()
-	var cards_drawn: Array[Card] = _draw_n_random_different_cards_in_array(number_of_cards_to_draw, card_pile_values_duplicate)
-	for card in cards_drawn:
-		_card_pile.erase(card.uid)
-	return cards_drawn
-
-
-func _get_all_cards_of_rarity(rarity: Card.Rarity, family_type: Family.Type, cards: Array[Card]) -> Array[Card]:
-	var cards_matching_rarity: Array[Card]
-	for card: Card in cards:
-		if card.families[0] == family_type and card.rarity == rarity:
-			cards_matching_rarity.append(card)
-	return cards_matching_rarity
-
-
-func _get_all_cards_of_rarities_of_family_type(rarities: Array[Card.Rarity], family_type: Family.Type, cards: Array[Card]) -> Array[Card]:
-	var cards_matching_rarities: Array[Card]
-	for rarity in rarities:
-		cards_matching_rarities.append_array(_get_all_cards_of_rarity(rarity, family_type, cards))
-	return cards_matching_rarities
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
+func remove_card_by_id(design_id: StringName) -> bool:
+	var existing: Card = _card_pile.get(design_id)
+	if existing == null:
+		return false
+	_card_pile.erase(design_id)
+	card_removed.emit(existing)
+	has_changed.emit()
+	return true
+#endregion

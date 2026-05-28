@@ -6,7 +6,7 @@ class_name DeckHolderComponent
 extends EntityComponent
 
 #region ============================== Public variables ==============================
-var deck: PlayerDeck
+var deck: Hand
 #endregion
 
 
@@ -28,16 +28,16 @@ func setup() -> void:
 
 
 # Applique les upgrades de toutes les cartes du deck via leur player_upgrade.
-func apply_all_cards_upgrades(deck: PlayerDeck) -> void:
+func apply_all_cards_upgrades(deck: Hand) -> void:
 	if _card_context == null:
 		Verbose.error("DeckHolder: card_context not set, call setup() first", Verbose.Category.HERO)
 		return
 	if deck == null:
 		Verbose.error("DeckHolder: can't apply cards upgrades, deck is null", Verbose.Category.HERO)
 		return
-	
+
 	Verbose.debug("Applying all cards upgrades", Verbose.Category.HERO)
-	for card: Card in deck.get_active_deck():
+	for card: Card in deck.get_cards_raw():
 		card.player_upgrade.apply_card(_card_context, card.lvl)
 
 

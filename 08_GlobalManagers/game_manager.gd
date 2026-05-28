@@ -260,7 +260,7 @@ func _init_roaster_runtime_data(party: Party) -> void:
 		if entry == null or entry.desc == null: continue
 		if entry.desc.default_category != Entity.Category.HERO: continue
 		if entry.deck == null:
-			entry.deck = PlayerDeck.new().init(local_player_name)
+			entry.deck = Hand.new().init(local_player_name)
 		if entry.data_memory == null:
 			entry.data_memory = NestedRegistry.new()
 

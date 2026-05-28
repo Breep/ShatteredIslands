@@ -73,7 +73,7 @@ enum EntityType {
 @export var _arena_zone_manager: ArenaZoneManager
 @export_subgroup("Overrides")
 @export var override_base_stats: EntityStats
-@export var override_custom_deck: PlayerDeck
+@export var override_custom_deck: Hand
 @export var override_data_memory: Dictionary
 @export var override_family_levels: Dictionary[Family.Type, int] = {}
 @export_subgroup("Behaviour")

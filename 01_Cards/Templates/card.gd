@@ -1,3 +1,6 @@
+# Donnée d'une carte : identité (id de design + uid d'instance), rareté, niveau
+# et l'effet appliqué au héros (player_upgrade). Resource sérialisable, dupliquée
+# par instance dans le pool du marchand.
 class_name Card
 extends Resource
 
@@ -29,6 +32,8 @@ const RARITY_CARD_VALUE: Dictionary[Rarity, int] = {
 	Rarity.LEGENDARY: 5,
 }
 
+## Identité de design stable (réseau, dédoublonnage main/coffre, leveling).
+@export var id : StringName
 @export var name : String
 @export var picture : Texture2D
 @export var families: Array[Family.Type]
@@ -47,5 +52,12 @@ var _lvl: int = 1 # Current lvl
 
 func is_max_level() -> bool:
 	return _lvl == RARITY_MAX_LEVEL[rarity]
+
+
+# Identité de design effective. Retombe sur `name` tant que `id` n'est pas
+# renseigné, pour rester compatible avec les .tres existants.
+func design_id() -> StringName:
+	return id if id != &"" else StringName(name)
+
 
 var uid: int

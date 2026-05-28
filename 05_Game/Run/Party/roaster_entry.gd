@@ -7,7 +7,7 @@ extends Resource
 @export var desc: EntityDesc
 @export_range(1, 20) var level: int = 1
 @export var xp: int = 0
-@export var deck: PlayerDeck
+@export var deck: Hand
 @export var data_memory: NestedRegistry
 
 
