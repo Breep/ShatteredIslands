@@ -25,6 +25,10 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	#)
 
 
+func revert_card(_ctx: CardContext, _card_lvl: int) -> void:
+	pass
+
+
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
 		printerr("Light Collector: Wrong cardlvl: ", cardlvl)

@@ -5,7 +5,7 @@ extends CardEffect
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var block_amount: int = _block_amounts[card_lvl - 1]
-	ctx.hero.families_stats.chicken_lord.on_chicken_death_callbacks.append(func(cb_vars: Dictionary) -> void:
+	ctx.hero.families_stats.chicken_lord.add_card_item(ctx.card_id, ctx.hero.families_stats.chicken_lord.on_chicken_death_callbacks, func(cb_vars: Dictionary) -> void:
 		var dead_chicken: Chicken = cb_vars.get(FamilyChickenLordStats.CbVars.SELF_CHICKEN)
 		if not is_instance_valid(dead_chicken):
 			return
@@ -24,6 +24,10 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if closest_ally_chicken.alterations != null:
 			closest_ally_chicken.alterations.add_stack(Alteration.Type.BLOCK, block_amount)
 		)
+
+
+func revert_card(ctx: CardContext, _card_lvl: int) -> void:
+	ctx.hero.families_stats.chicken_lord.remove_card_items(ctx.card_id)
 
 
 func get_description(cardlvl: int) -> String:

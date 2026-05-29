@@ -12,7 +12,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var state := {&"accumulated": 0.0}
 
 	var storm_stats: FamilyStormCallerStats = ctx.hero.families_stats.storm_caller
-	storm_stats.on_rank_s_callbacks.append(
+	storm_stats.add_card_item(ctx.card_id, storm_stats.on_rank_s_callbacks,
 		func(_rank_mult: float) -> void:
 			var max_hp_bonus: float = ctx.hero.stats.health_max * (hp_percent / 100.0)
 			state[&"accumulated"] += max_hp_bonus
@@ -33,6 +33,11 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		state[&"accumulated"] = 0.0
 		ctx.stat_modifiers.remove_modifier(EntityStats.StatType.HEALTH_MAX, &"Eye of the Cyclone")
 	)
+
+
+func revert_card(ctx: CardContext, _card_lvl: int) -> void:
+	ctx.hero.families_stats.storm_caller.remove_card_items(ctx.card_id)
+	ctx.battle_callbacks.unregister_all(&"Eye of the Cyclone")
 
 
 func get_description(cardlvl: int) -> String:

@@ -9,11 +9,17 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	if card_lvl == 3:
 		ctx.hero.families_stats.chicken_lord.spawn_trex_on_start = true
 	
-	ctx.hero.families_stats.chicken_lord.on_chicken_death_callbacks.append(func(cb_vars: Dictionary) -> void:
+	ctx.hero.families_stats.chicken_lord.add_card_item(ctx.card_id, ctx.hero.families_stats.chicken_lord.on_chicken_death_callbacks, func(cb_vars: Dictionary) -> void:
 		var dead_chicken: Chicken = cb_vars.get(FamilyChickenLordStats.CbVars.SELF_CHICKEN)
 		if Utils.is_randomize_modifier_active(chance, ctx.hero.battle_id):
 			ctx.hero.summon.summon_entity(Entity.EntityType.CHICKEN_EGG, SpawnLocationConfig.create_entity_relative(dead_chicken, 0.5), {})
 	)
+
+
+func revert_card(ctx: CardContext, card_lvl: int) -> void:
+	ctx.hero.families_stats.chicken_lord.remove_card_items(ctx.card_id)
+	if card_lvl == 3:
+		ctx.hero.families_stats.chicken_lord.spawn_trex_on_start = false
 
 
 func get_description(cardlvl: int) -> String:

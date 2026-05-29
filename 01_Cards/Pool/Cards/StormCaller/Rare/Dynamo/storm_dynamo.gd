@@ -13,7 +13,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var base_shield: float = _base_shield[card_lvl - 1]
 
 	var storm_stats: FamilyStormCallerStats = ctx.hero.families_stats.storm_caller
-	storm_stats.on_lightning_callbacks.append(
+	storm_stats.add_card_item(ctx.card_id, storm_stats.on_lightning_callbacks,
 		func(_target: Entity, _rank: StormCallerManager.Rank, rank_mult: float) -> void:
 			if ctx.hero == null or not is_instance_valid(ctx.hero): return
 			var final_regen: float = base_regen * rank_mult
@@ -23,6 +23,10 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			if final_shield > 0:
 				ctx.hero.alterations.inflict_condition_stacks(ctx.hero, final_shield, Alteration.Type.SHIELD, &"Dynamo")
 	)
+
+
+func revert_card(ctx: CardContext, _card_lvl: int) -> void:
+	ctx.hero.families_stats.storm_caller.remove_card_items(ctx.card_id)
 
 
 func get_description(cardlvl: int) -> String:

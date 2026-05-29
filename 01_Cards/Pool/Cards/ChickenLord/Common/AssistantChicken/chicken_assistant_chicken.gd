@@ -6,7 +6,7 @@ extends CardEffect
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var shield_amount: float = _shield_amounts[card_lvl - 1]
 	
-	ctx.hero.families_stats.chicken_lord.on_chicken_spawned_callbacks.append(func(cb_vars: Dictionary) -> void:
+	ctx.hero.families_stats.chicken_lord.add_card_item(ctx.card_id, ctx.hero.families_stats.chicken_lord.on_chicken_spawned_callbacks, func(cb_vars: Dictionary) -> void:
 		var chicken: Chicken = cb_vars.get(FamilyChickenLordStats.CbVars.SELF_CHICKEN)
 		if not is_instance_valid(chicken): return
 #		ça devrait être chicken.target? mais le target module du chicken est pas encore fonctionnel
@@ -17,6 +17,10 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		#chicken.alterations.inflict_condition_stacks(target, shield_amount, &"Doctor Chicken")
 		target.alterations.take_condition_stacks(shield_amount, Alteration.Type.SHIELD, false, &"Assistant Chicken", chicken)
 		)
+
+
+func revert_card(ctx: CardContext, _card_lvl: int) -> void:
+	ctx.hero.families_stats.chicken_lord.remove_card_items(ctx.card_id)
 
 
 func get_description(cardlvl: int) -> String:

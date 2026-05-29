@@ -109,7 +109,6 @@ anchor_bottom = 0.5
 offset_left = -24.0
 offset_top = -21.0
 offset_right = 24.0
-offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2

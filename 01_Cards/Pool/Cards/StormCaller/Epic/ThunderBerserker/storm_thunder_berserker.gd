@@ -26,7 +26,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 	# On rank change: if penalty phase active, accumulate crit mult penalty
 	var storm_stats: FamilyStormCallerStats = ctx.hero.families_stats.storm_caller
-	storm_stats.on_rank_change_callbacks.append(
+	storm_stats.add_card_item(ctx.card_id, storm_stats.on_rank_change_callbacks,
 		func(_rank: StormCallerManager.Rank, _rank_mult: float) -> void:
 			if not state[&"penalty_active"]: return
 			state[&"accumulated"] += penalty
@@ -52,6 +52,12 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 				state[&"penalty_active"] = true
 			)
 	)
+
+
+func revert_card(ctx: CardContext, _card_lvl: int) -> void:
+	ctx.hero.families_stats.storm_caller.remove_card_items(ctx.card_id)
+	ctx.battle_callbacks.unregister_all(&"Thunder Berserker")
+	ctx.stat_modifiers.remove_modifier(EntityStats.StatType.CRIT_MULT, &"Thunder Berserker Boost")
 
 
 func get_description(cardlvl: int) -> String:

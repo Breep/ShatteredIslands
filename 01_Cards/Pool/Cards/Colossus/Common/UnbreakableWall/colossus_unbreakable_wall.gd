@@ -32,6 +32,12 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			ctx.hero.stats.health_changed.connect(_on_health_changed)
 	)
 
+func revert_card(ctx: CardContext, _card_lvl: int) -> void:
+	ctx.battle_callbacks.unregister_all(&"Unbreakable Wall")
+	if ctx.hero.alterations != null:
+		ctx.hero.alterations.cancel_state(Alteration.Type.TAUNT)
+
+
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[Card.Rarity.COMMON]:
 		printerr("Unbreakable Wall: Wrong cardlvl: ", cardlvl)

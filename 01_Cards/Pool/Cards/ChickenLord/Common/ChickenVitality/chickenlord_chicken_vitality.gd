@@ -10,7 +10,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 	var hp_bonus: float = _hp_bonuses[card_lvl - 1]
 
-	ctx.hero.families_stats.chicken_lord.on_chicken_spawned_callbacks.append(func(cb_vars: Dictionary) -> void:
+	ctx.hero.families_stats.chicken_lord.add_card_item(ctx.card_id, ctx.hero.families_stats.chicken_lord.on_chicken_spawned_callbacks, func(cb_vars: Dictionary) -> void:
 		var chicken: Chicken = cb_vars.get(FamilyChickenLordStats.CbVars.SELF_CHICKEN)
 		if not is_instance_valid(chicken): return
 		var mod := StatModifier.new()
@@ -20,6 +20,10 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		mod.value = hp_bonus
 		chicken.stat_modifiers_registry.register_modifier(mod)
 	)
+
+
+func revert_card(ctx: CardContext, _card_lvl: int) -> void:
+	ctx.hero.families_stats.chicken_lord.remove_card_items(ctx.card_id)
 
 
 func get_description(cardlvl: int) -> String:

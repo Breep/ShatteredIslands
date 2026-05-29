@@ -22,6 +22,13 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	ctx.action_modifiers.register_modifier(modifier)
 
 
+func revert_card(ctx: CardContext, _card_lvl: int) -> void:
+	var modifier := ActionModifier.new()
+	modifier.action_type = Utils.ActionCategory.STACK
+	modifier.id = &"Divine Regenerator"
+	ctx.action_modifiers.unregister_modifier(modifier)
+
+
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[Card.Rarity.COMMON]:
 		return "ERROR"

@@ -6,7 +6,7 @@ extends CardEffect
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var ad: float = _ad_per_deaths[card_lvl - 1]
 
-	ctx.hero.families_stats.chicken_lord.on_chicken_death_callbacks.append(func(cb_vars: Dictionary) -> void:
+	ctx.hero.families_stats.chicken_lord.add_card_item(ctx.card_id, ctx.hero.families_stats.chicken_lord.on_chicken_death_callbacks, func(cb_vars: Dictionary) -> void:
 		var alive_chickens: Array[Chicken] = cb_vars.get(FamilyChickenLordStats.CbVars.ALIVE_CHICKENS)
 		var death_count: int = cb_vars.get(FamilyChickenLordStats.CbVars.DEATH_COUNT, 0)
 		if alive_chickens == null or alive_chickens.is_empty() or death_count <= 0:
@@ -21,7 +21,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			chicken.stat_modifiers_registry.register_modifier(mod)
 	)
 
-	ctx.hero.families_stats.chicken_lord.on_chicken_spawned_callbacks.append(func(cb_vars: Dictionary) -> void:
+	ctx.hero.families_stats.chicken_lord.add_card_item(ctx.card_id, ctx.hero.families_stats.chicken_lord.on_chicken_spawned_callbacks, func(cb_vars: Dictionary) -> void:
 		var chicken: Chicken = cb_vars.get(FamilyChickenLordStats.CbVars.SELF_CHICKEN)
 		var death_count: int = cb_vars.get(FamilyChickenLordStats.CbVars.DEATH_COUNT, 0)
 		if not is_instance_valid(chicken) or death_count <= 0: return
@@ -32,6 +32,10 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		mod.value = ad * death_count
 		chicken.stat_modifiers_registry.register_modifier(mod)
 	)
+
+
+func revert_card(ctx: CardContext, _card_lvl: int) -> void:
+	ctx.hero.families_stats.chicken_lord.remove_card_items(ctx.card_id)
 
 
 func get_description(cardlvl: int) -> String:

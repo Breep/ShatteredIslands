@@ -19,6 +19,10 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	)
 
 
+func revert_card(ctx: CardContext, _card_lvl: int) -> void:
+	ctx.battle_callbacks.unregister_all(&"Putrid Touch")
+
+
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
 		printerr("Putrid Touch: Wrong cardlvl: ", cardlvl)

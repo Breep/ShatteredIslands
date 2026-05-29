@@ -34,7 +34,11 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		for i in big_egg_number:
 			ctx.hero.summon.summon_entity(Entity.EntityType.CHICKEN_EGG, SpawnLocationConfig.create_arena_center(3), {})
 		ctx.hero.action_modifiers_registry.unregister_modifier(big_egg_mod)
-		)
+		, &"Big Eggs")
+
+
+func revert_card(ctx: CardContext, _card_lvl: int) -> void:
+	ctx.battle_callbacks.unregister_all(&"Big Eggs")
 
 
 func get_description(cardlvl: int) -> String:

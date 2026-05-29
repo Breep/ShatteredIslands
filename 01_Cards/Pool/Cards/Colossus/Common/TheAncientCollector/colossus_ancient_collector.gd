@@ -17,6 +17,10 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	ctx.stat_modifiers.register_modifier(mod)
 
 
+func revert_card(ctx: CardContext, _card_lvl: int) -> void:
+	ctx.stat_modifiers.remove_modifier(EntityStats.StatType.HEALTH_MAX, &"The Ancient Collector")
+
+
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
 		printerr("The Ancient Collector: Wrong cardlvl: ", cardlvl)

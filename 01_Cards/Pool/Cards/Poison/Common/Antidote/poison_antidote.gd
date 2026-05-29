@@ -16,6 +16,10 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	ctx.stat_modifiers.register_modifier(mod)
 
 
+func revert_card(ctx: CardContext, _card_lvl: int) -> void:
+	ctx.stat_modifiers.remove_modifier(EntityStats.StatType.POISON_RESIST, &"Antidote")
+
+
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[Card.Rarity.COMMON]:
 		printerr("Antidote: Wrong cardlvl: ", cardlvl)

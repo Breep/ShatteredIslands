@@ -7,12 +7,16 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var block_stack: int = _block_stacks[card_lvl - 1]
 	
 	print(str(_block_stacks[card_lvl - 1]))
-	ctx.hero.families_stats.chicken_lord.on_chicken_spawned_callbacks.append(func(cb_vars: Dictionary) -> void:
+	ctx.hero.families_stats.chicken_lord.add_card_item(ctx.card_id, ctx.hero.families_stats.chicken_lord.on_chicken_spawned_callbacks, func(cb_vars: Dictionary) -> void:
 		var chicken: Chicken = cb_vars.get(FamilyChickenLordStats.CbVars.SELF_CHICKEN)
 		if not is_instance_valid(chicken): return
 		if chicken.alterations != null:
 			chicken.alterations.add_stack(Alteration.Type.BLOCK, block_stack)
 	)
+
+
+func revert_card(ctx: CardContext, _card_lvl: int) -> void:
+	ctx.hero.families_stats.chicken_lord.remove_card_items(ctx.card_id)
 
 
 func get_description(cardlvl: int) -> String:

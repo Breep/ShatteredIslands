@@ -12,6 +12,10 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	storm_stats.thunder_storm_duration_bonus = _duration_bonus[card_lvl - 1]
 
 
+func revert_card(ctx: CardContext, _card_lvl: int) -> void:
+	ctx.hero.families_stats.storm_caller.thunder_storm_duration_bonus = 0.0
+
+
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
 		printerr("Thunder Storm: Wrong cardlvl: ", cardlvl)

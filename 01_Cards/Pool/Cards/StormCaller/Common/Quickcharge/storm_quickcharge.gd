@@ -12,6 +12,10 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	storm_stats.quickcharge_grind_percent = _base_grind_percent[card_lvl - 1]
 
 
+func revert_card(ctx: CardContext, _card_lvl: int) -> void:
+	ctx.hero.families_stats.storm_caller.quickcharge_grind_percent = 0.0
+
+
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
 		printerr("Quickcharge: Wrong cardlvl: ", cardlvl)

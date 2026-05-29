@@ -45,6 +45,14 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			state[&"iteration"] += 1
 	ctx.action_modifiers.register_modifier(action_mod)
 
+func revert_card(ctx: CardContext, _card_lvl: int) -> void:
+	ctx.stat_modifiers.remove_modifier(EntityStats.StatType.DODGE, &"Evasive Growth")
+	var action_mod := ActionModifier.new()
+	action_mod.id = &"Evasive Growth"
+	action_mod.action_type = Utils.ActionCategory.DODGE
+	ctx.action_modifiers.unregister_modifier(action_mod)
+
+
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[Card.Rarity.COMMON]:
 		printerr("Evasive Growth: Wrong cardlvl: ", cardlvl)

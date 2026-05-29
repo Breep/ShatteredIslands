@@ -17,6 +17,10 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		ctx.hero.summon.summon_entity(Entity.EntityType.CHICKEN_EGG, SpawnLocationConfig.create_entity_relative(target, 1), {})
 	ctx.hero.auto_attack_modifier_registry.register_modifier(aa_mod)
 
+func revert_card(ctx: CardContext, _card_lvl: int) -> void:
+	ctx.hero.auto_attack_modifier_registry.unregister_modifier(&"Feathered Knife")
+
+
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
 		printerr("Feathered Knife: Wrong cardlvl: ", cardlvl)

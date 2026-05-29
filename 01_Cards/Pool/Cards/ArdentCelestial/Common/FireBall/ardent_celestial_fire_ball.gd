@@ -10,7 +10,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:
 		printerr("Fire Ball: Wrong card_lvl: ", card_lvl)
 		return
-
+	
 	var damage: float = _damages[card_lvl - 1]
 	var chance_to_bounce: float = _chances_to_bounce[card_lvl - 1]
 	var period: float = _periods[card_lvl - 1]
@@ -26,8 +26,8 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		var projectile: Projectile = cb_vars.get(ProjectileStats.VarType.PROJECTILE)
 		projectile.add_bounce(bounce_bonus)
 		)
-		
-	ctx.battle_callbacks.register_periodic("Fire Ball", period, func() -> void:
+	
+	ctx.battle_callbacks.register_periodic(&"Fire Ball", period, func() -> void:
 		var target: Entity = ctx.hero.target.get_target(TargetComponent.TargettingStrategy.HIGHEST_HP_PERCENT_HERO_ENEMY)
 		if target == null: return
 		ctx.hero.projectile.projectile_attack(target, Projectile.Type.FIRE_BALL, ctx.hero, proj_stats)

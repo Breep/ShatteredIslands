@@ -38,7 +38,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 	# On crit: accumulate dodge bonus
 	var storm_stats: FamilyStormCallerStats = ctx.hero.families_stats.storm_caller
-	storm_stats.on_crit_callbacks.append(
+	storm_stats.add_card_item(ctx.card_id, storm_stats.on_crit_callbacks,
 		func(_target: Entity, _base_value: float, _real_value: float) -> void:
 			state[&"bonus"] += dodge_increase
 			var update_mod := StatModifier.new()
@@ -49,6 +49,15 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			update_mod.tags = [StatModifier.TagType.CARD]
 			ctx.stat_modifiers.register_modifier(update_mod)
 	)
+
+
+func revert_card(ctx: CardContext, _card_lvl: int) -> void:
+	ctx.hero.families_stats.storm_caller.remove_card_items(ctx.card_id)
+	ctx.stat_modifiers.remove_modifier(EntityStats.StatType.DODGE, &"Lightning Footwork")
+	var action_modifier := ActionModifier.new()
+	action_modifier.action_type = Utils.ActionCategory.DODGE
+	action_modifier.id = &"Lightning Footwork"
+	ctx.action_modifiers.unregister_modifier(action_modifier)
 
 
 func get_description(cardlvl: int) -> String:

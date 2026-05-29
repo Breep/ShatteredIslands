@@ -8,6 +8,10 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	ctx.hero.families_stats.chicken_lord.gifted_chance_increase = gifted_chance_increase
 
 
+func revert_card(ctx: CardContext, _card_lvl: int) -> void:
+	ctx.hero.families_stats.chicken_lord.gifted_chance_increase = 0.0
+
+
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
 		printerr("Gifted Odds: Wrong cardlvl: ", cardlvl)

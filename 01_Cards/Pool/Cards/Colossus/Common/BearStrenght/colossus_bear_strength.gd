@@ -5,8 +5,11 @@ extends CardEffect
 @export var _hp_to_ad_percents: Array[float]
 @export var _scale_to_ad_percents: Array[float]
 
-var _hp_to_ad_percent: float 
-var _scale_to_ad_percent: float 
+var _hp_to_ad_percent: float
+var _scale_to_ad_percent: float
+
+var _scale_cb: Callable
+var _hp_cb: Callable
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	# Reduce attack speed
@@ -23,15 +26,25 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	_scale_to_ad_percent = _scale_to_ad_percents[card_lvl - 1]
 	
 	_update_ad_modifier(ctx.hero.stats.scale, ctx.hero.stats.health_max, ctx.hero)
-	ctx.hero.stats.scale_changed.connect(func(scale: float) -> void:
+	_scale_cb = func(scale: float) -> void:
 		if not is_instance_valid(ctx.hero): return
 		_update_ad_modifier(scale, ctx.hero.stats.health_max, ctx.hero)
-	)
-	
-	ctx.hero.stats.health_max_changed.connect(func(hp_max: float) -> void:
+	ctx.hero.stats.scale_changed.connect(_scale_cb)
+
+	_hp_cb = func(hp_max: float) -> void:
 		if not is_instance_valid(ctx.hero): return
 		_update_ad_modifier(ctx.hero.stats.scale, hp_max, ctx.hero)
-	)
+	ctx.hero.stats.health_max_changed.connect(_hp_cb)
+
+
+func revert_card(ctx: CardContext, _card_lvl: int) -> void:
+	if _scale_cb.is_valid() and ctx.hero.stats.scale_changed.is_connected(_scale_cb):
+		ctx.hero.stats.scale_changed.disconnect(_scale_cb)
+	if _hp_cb.is_valid() and ctx.hero.stats.health_max_changed.is_connected(_hp_cb):
+		ctx.hero.stats.health_max_changed.disconnect(_hp_cb)
+	ctx.stat_modifiers.remove_modifier(EntityStats.StatType.AS, &"Bear Strength")
+	ctx.hero.stat_modifiers_registry.remove_modifier(EntityStats.StatType.AD, &"Bear Strength")
+
 
 func _update_ad_modifier(scale: float, hp_max: float, hero: Entity) -> void:
 	var ad_mod := StatModifier.new()

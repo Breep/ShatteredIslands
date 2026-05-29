@@ -4,6 +4,8 @@ extends CardEffect
 @export var _base_thorn_values: Array[float]
 @export var _bonus_thorn_factors: Array[float]
 
+var _scale_cb: Callable
+
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:
@@ -18,14 +20,25 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	# Dynamic thorn tracked via a local delta keeper; re-applied on scale changes.
 	var last_dynamic: Array[float] = [0.0]
 	_apply_thorn_scaling(ctx.hero, card_lvl, last_dynamic)
-	var _on_scale_changed: Callable
-	_on_scale_changed = func(_scale: float) -> void:
+	_scale_cb = func(_scale: float) -> void:
 		if is_instance_valid(ctx.hero) and not ctx.hero.is_queued_for_deletion():
 			_apply_thorn_scaling(ctx.hero, card_lvl, last_dynamic)
 
-	if not ctx.hero.stats.scale_changed.is_connected(_on_scale_changed):
-		ctx.hero.stats.scale_changed.connect(_on_scale_changed)
+	if not ctx.hero.stats.scale_changed.is_connected(_scale_cb):
+		ctx.hero.stats.scale_changed.connect(_scale_cb)
 		
+
+
+func revert_card(ctx: CardContext, card_lvl: int) -> void:
+	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:
+		return
+	if _scale_cb.is_valid() and ctx.hero.stats.scale_changed.is_connected(_scale_cb):
+		ctx.hero.stats.scale_changed.disconnect(_scale_cb)
+	if ctx.hero.alterations == null:
+		return
+	var base_thorn: float = _base_thorn_values[card_lvl - 1]
+	var dynamic_thorn: float = _bonus_thorn_factors[card_lvl - 1] * (ctx.hero.stats.scale - 1) * 100
+	ctx.hero.alterations.remove_stack(Alteration.Type.THORN, base_thorn + maxf(0.0, dynamic_thorn))
 
 
 func get_description(cardlvl: int) -> String:

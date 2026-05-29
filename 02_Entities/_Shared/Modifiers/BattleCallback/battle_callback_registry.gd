@@ -109,14 +109,14 @@ func process_tick() -> void:
 	for effect in _periodic_effects:
 		if not effect.is_running:
 			continue
-
+	
 		effect.ticks_left -= 1
-
+	
 		if effect.ticks_left <= 0:
 			effect.callback.call()
 			# On réinitialise avec la période exacte (déterminisme parfait)
 			effect.ticks_left = effect.period_ticks
-
+	
 	var fired: Array[OneShotEffect] = []
 	for effect in _oneshots:
 		effect.ticks_left -= 1

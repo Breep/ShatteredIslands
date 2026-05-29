@@ -11,7 +11,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var base_amount: float = _stacks[card_lvl - 1]
 
 	var storm_stats: FamilyStormCallerStats = ctx.hero.families_stats.storm_caller
-	storm_stats.on_rank_change_callbacks.append(
+	storm_stats.add_card_item(ctx.card_id, storm_stats.on_rank_change_callbacks,
 		func(_rank: StormCallerManager.Rank, rank_mult: float) -> void:
 			# 50/50 chance for Ally vs Enemy
 			var target_is_ally: bool = Utils.get_randf_range(0, 1, ctx.hero.battle_id, "schrodinger_storm_1") < 0.5
@@ -49,6 +49,10 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			if final_amount > 0:
 				ctx.hero.alterations.inflict_condition_stacks(target, final_amount, stack_type, &"Schrödinger's Storm")
 	)
+
+
+func revert_card(ctx: CardContext, _card_lvl: int) -> void:
+	ctx.hero.families_stats.storm_caller.remove_card_items(ctx.card_id)
 
 
 func get_description(cardlvl: int) -> String:

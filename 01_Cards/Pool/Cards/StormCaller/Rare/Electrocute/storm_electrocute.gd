@@ -13,12 +13,16 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var necrosis_amount: float = _base_necrosis_amount[card_lvl - 1]
 
 	var storm_stats: FamilyStormCallerStats = ctx.hero.families_stats.storm_caller
-	storm_stats.on_lightning_callbacks.append(
+	storm_stats.add_card_item(ctx.card_id, storm_stats.on_lightning_callbacks,
 		func(target: Entity, _rank: StormCallerManager.Rank, _rank_mult: float) -> void:
 			if target == null or not is_instance_valid(target): return
 			if Utils.is_randomize_modifier_active(chance, ctx.hero.battle_id):
 				ctx.hero.alterations.inflict_condition_stacks(target, necrosis_amount, Alteration.Type.NECROSIS, &"Electrocute")
 	)
+
+
+func revert_card(ctx: CardContext, _card_lvl: int) -> void:
+	ctx.hero.families_stats.storm_caller.remove_card_items(ctx.card_id)
 
 
 func get_description(cardlvl: int) -> String:

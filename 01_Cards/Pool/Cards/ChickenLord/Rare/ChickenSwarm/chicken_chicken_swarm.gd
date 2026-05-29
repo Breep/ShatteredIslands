@@ -8,6 +8,10 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	ctx.hero.families_stats.chicken_lord.spawn_number_increase = spawn_number_increase
 
 
+func revert_card(ctx: CardContext, _card_lvl: int) -> void:
+	ctx.hero.families_stats.chicken_lord.spawn_number_increase = 0
+
+
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
 		printerr("Chicken Swarm: Wrong cardlvl: ", cardlvl)

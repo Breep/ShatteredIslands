@@ -23,6 +23,13 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	ctx.hero.action_modifiers_registry.register_modifier(mod)
 
 
+func revert_card(ctx: CardContext, _card_lvl: int) -> void:
+	var mod := ActionModifier.new()
+	mod.action_type = Utils.ActionCategory.STACK
+	mod.id = &"Egg Bombardment"
+	ctx.hero.action_modifiers_registry.unregister_modifier(mod)
+
+
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
 		printerr("Egg Bombardment: Wrong cardlvl: ", cardlvl)

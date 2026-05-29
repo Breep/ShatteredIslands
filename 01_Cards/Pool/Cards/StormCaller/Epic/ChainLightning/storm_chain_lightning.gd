@@ -13,7 +13,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var chance: float = _chance_percent[card_lvl - 1]
 
 	var storm_stats: FamilyStormCallerStats = ctx.hero.families_stats.storm_caller
-	storm_stats.on_crit_callbacks.append(
+	storm_stats.add_card_item(ctx.card_id, storm_stats.on_crit_callbacks,
 		func(target: Entity, _base_value: float, real_value: float) -> void:
 			if not Utils.is_randomize_modifier_active(chance, ctx.hero.battle_id): return
 			if target == null or not is_instance_valid(target): return
@@ -48,6 +48,10 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			}
 			ctx.hero.spell.cast_spell(furthest_enemy, Spell.Type.CHAIN_LIGHTNING, spell_modifiers)
 	)
+
+
+func revert_card(ctx: CardContext, _card_lvl: int) -> void:
+	ctx.hero.families_stats.storm_caller.remove_card_items(ctx.card_id)
 
 
 func get_description(cardlvl: int) -> String:
