@@ -4,6 +4,8 @@
 class_name Hand
 extends Deck
 
+signal max_slot_changed(new_max_slots: int)
+
 #region ============================== Export ==============================
 @export var _owner_name: String
 
@@ -27,12 +29,13 @@ func is_full() -> bool:
 	return size() >= _max_slots
 
 
-# Vrai si la carte peut entrer en main : design déjà présent (level up) ou un
-# slot reste libre.
+# Vrai si la carte peut entrer en main :
+# - slot reste libre
+# - Carte déjà présente dans le deck et non niveau max (level up)
 func can_add(card: Card) -> bool:
 	if card == null:
 		return false
-	return contains(card) or not is_full()
+	return not is_full() or contains(card)
 
 
 func add_card(card_to_add: Card) -> bool:

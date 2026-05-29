@@ -13,45 +13,45 @@ signal card_removed(card: Card)
 
 
 #region ============================== Export ==============================
-@export var _card_pile: Dictionary[StringName, Card]
+@export var _cards: Dictionary[StringName, Card]
 #endregion
 
 
 #region ============================== Public functions ==============================
 func get_card(design_id: StringName) -> Card:
-	return _card_pile.get(design_id)
+	return _cards.get(design_id)
 
 
 func get_cards_raw() -> Array[Card]:
-	return _card_pile.values()
+	return _cards.values()
 
 
 func has(design_id: StringName) -> bool:
-	return _card_pile.has(design_id)
+	return _cards.has(design_id)
 
 
 func contains(card: Card) -> bool:
-	return card != null and _card_pile.has(card.design_id())
+	return card != null and _cards.has(card.design_id())
 
 
 func size() -> int:
-	return _card_pile.size()
+	return _cards.size()
 
 
 func get_unique_card_count() -> int:
-	return _card_pile.size()
+	return _cards.size()
 
 
 func get_card_lvl(card: Card) -> int:
 	if card == null:
 		return 0
-	var existing: Card = _card_pile.get(card.design_id())
+	var existing: Card = _cards.get(card.design_id())
 	return existing.lvl if existing != null else 0
 
 
 func get_cards_by_type(family_type: Family.Type) -> Array[Card]:
 	var cards: Array[Card] = []
-	for card: Card in _card_pile.values():
+	for card: Card in _cards.values():
 		if family_type in card.families:
 			cards.append(card)
 	return cards
@@ -63,9 +63,9 @@ func add_card(card_to_add: Card) -> bool:
 	if card_to_add == null:
 		Verbose.error("Deck: can't add a null card", Verbose.Category.DECK)
 		return false
-
+	
 	var design_id: StringName = card_to_add.design_id()
-	var existing: Card = _card_pile.get(design_id)
+	var existing: Card = _cards.get(design_id)
 	if existing != null:
 		if existing.is_max_level():
 			Verbose.warn("Deck: card already maxed | " + String(design_id), Verbose.Category.DECK)
@@ -73,8 +73,8 @@ func add_card(card_to_add: Card) -> bool:
 		existing.lvl += 1
 		has_changed.emit()
 		return true
-
-	_card_pile[design_id] = card_to_add
+	
+	_cards[design_id] = card_to_add
 	card_added.emit(card_to_add)
 	has_changed.emit()
 	return true
@@ -88,10 +88,10 @@ func remove_card(card_to_remove: Card) -> bool:
 
 
 func remove_card_by_id(design_id: StringName) -> bool:
-	var existing: Card = _card_pile.get(design_id)
+	var existing: Card = _cards.get(design_id)
 	if existing == null:
 		return false
-	_card_pile.erase(design_id)
+	_cards.erase(design_id)
 	card_removed.emit(existing)
 	has_changed.emit()
 	return true

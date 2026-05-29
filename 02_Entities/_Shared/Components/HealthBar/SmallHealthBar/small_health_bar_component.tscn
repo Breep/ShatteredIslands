@@ -79,7 +79,7 @@ outline_color = Color(0, 0, 0, 1)
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
-[node name="SumonSimpleInfoPanel2d" type="Node" unique_id=1476139569]
+[node name="SmallHealthBarComponent" type="Node" unique_id=1476139569]
 script = ExtResource("1_wiwv7")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=841210394]

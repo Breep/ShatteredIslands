@@ -6,32 +6,64 @@ class_name ShopDeck
 extends Resource
 
 #region ============================== Private variables ==============================
-# Instances disponibles, regroupées par rareté.
-var _pools: Dictionary[Card.Rarity, Array] # Array[Card]
-# Index uid -> Card pour la résolution réseau (RPC d'achat / refresh).
-var _by_uid: Dictionary[int, Card]
+@export var _unique_card_catalogs: Array[Card]
+@export var _rarity_card_numbers: Dictionary[Card.Rarity, int] ={
+	Card.Rarity.COMMON: 10,
+	Card.Rarity.RARE: 5,
+	Card.Rarity.EPIC: 3,
+	Card.Rarity.LEGENDARY: 1,
+}
+@export_group("Internal")
+@export var _pools: Dictionary[Card.Rarity, Array] # Array[Card]
+@export var _by_uid: Dictionary[int, Card]
 #endregion
 
 
-#region ============================== Public functions ==============================
-# Construit le pool : pour chaque carte de chaque famille, crée le nombre
-# d'instances dicté par `rarity_card_numbers`, avec un uid unique.
-func construct(families: Array[Family], rarity_card_numbers: Dictionary[Card.Rarity, int]) -> void:
+#region ============================== Init functions ==============================
+func init_catalog(cards: Array[Card]) -> void:
+	var unique_cards: Array[Card] = []
+	var seen_ids: Dictionary = {}
+	var has_duplicates: bool = false
+	
+	for card in cards:
+		if card == null: continue
+		if seen_ids.has(card.id):
+			has_duplicates = true
+			Verbose.warn("ShopDeck: Carte en double ignorée (ID: %s, Nom: %s)" % [card.id, card.resource_name], Verbose.Category.SHOP_DECK)
+		else:
+			seen_ids[card.id] = true
+			unique_cards.append(card)
+	
+	if has_duplicates:
+		Verbose.warn("ShopDeck.init_catalog(): Des cartes dupliquées ont été détectées et retirées du catalogue.", Verbose.Category.SHOP_DECK)
+	
+	_unique_card_catalogs = cards
+
+
+func init_generation_rules(rarity_card_numbers: Dictionary[Card.Rarity, int]) -> void:
+	_rarity_card_numbers = rarity_card_numbers
+
+
+func generate() -> void:
+	if not _pools.is_empty() or not _by_uid.is_empty():
+		Verbose.warn("Regenerating the CardShop", Verbose.Category.SHOP_DECK)
+	
 	_pools.clear()
 	_by_uid.clear()
+	
 	var uid: int = 0
-	for family: Family in families:
-		for card: Card in family.cards:
-			var copies: int = rarity_card_numbers.get(card.rarity, 0)
+	for card: Card in _unique_card_catalogs:
+			var copies: int = _rarity_card_numbers.get(card.rarity, 0)
 			for _i in copies:
 				var instance: Card = card.duplicate()
 				instance.uid = uid
 				instance.lvl = 1
 				uid += 1
 				_add(instance)
-	Verbose.debug("ShopDeck constructed | total cards = " + str(_by_uid.size()), Verbose.Category.SHOP_DECK)
+	Verbose.debug("ShopDeck generated | total cards = " + str(_by_uid.size()), Verbose.Category.SHOP_DECK)
+#endregion
 
-
+#region ============================== Public API ==============================
 func get_card(uid: int) -> Card:
 	return _by_uid.get(uid)
 
@@ -73,6 +105,9 @@ func draw(count: int, rarity_chances: Dictionary[Card.Rarity, float]) -> Array[C
 	for card in drawn:
 		remove_card(card)
 	return drawn
+
+func get_cards() -> Array:
+	return _by_uid.values()
 #endregion
 
 

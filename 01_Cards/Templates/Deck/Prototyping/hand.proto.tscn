@@ -1,0 +1,194 @@
+[gd_scene format=3 uid="uid://dlfaobycrx3f2"]
+
+[ext_resource type="PackedScene" uid="uid://dj7bvdysxgxe6" path="res://01_Cards/2D/CardsViewer/ui_cards_viewer.tscn" id="1_bcbds"]
+[ext_resource type="Script" uid="uid://d1do4dkwlf7gc" path="res://01_Cards/Templates/Deck/Prototyping/hand.proto.gd" id="1_mr6cy"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="2_xangt"]
+[ext_resource type="Script" uid="uid://cq8l8mwv8k27y" path="res://01_Cards/Templates/Deck/shop_deck.gd" id="2_ym2m1"]
+[ext_resource type="Resource" uid="uid://d26wrf73bpc87" path="res://01_Cards/Pool/Cards/ArdentCelestial/Common/ConsummingTheStar/fire_consuming_the_star.tres" id="3_jwt2k"]
+[ext_resource type="Resource" uid="uid://ifly0ma88lh6" path="res://01_Cards/Pool/Cards/ArdentCelestial/Common/CosmicBolt/fire_cosmic_bolt.tres" id="4_00qip"]
+[ext_resource type="Resource" uid="uid://cno4627vx3nt8" path="res://01_Cards/Pool/Cards/Colossus/Epic/VitalPulse/colossus_vital_pulse.tres" id="5_t6h7b"]
+[ext_resource type="Resource" uid="uid://bgx3j85dxco0q" path="res://01_Cards/Pool/Cards/Engineer/Rare/BarbedWire/engineer_barbed_wire.tres" id="6_87usm"]
+[ext_resource type="Resource" uid="uid://hbwmi3ykad2r" path="res://01_Cards/Pool/Cards/ChickenLord/Legendary/chickenlord_eggfinity.tres" id="7_2isfx"]
+[ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="10_00qip"]
+[ext_resource type="Script" uid="uid://bia26v50nwe6c" path="res://04_UI/UIButton/ui_button.gd" id="10_t6h7b"]
+
+[sub_resource type="Resource" id="Resource_xangt"]
+script = ExtResource("2_ym2m1")
+_unique_card_catalogs = Array[ExtResource("2_xangt")]([ExtResource("3_jwt2k"), ExtResource("4_00qip"), ExtResource("5_t6h7b"), ExtResource("6_87usm"), ExtResource("7_2isfx")])
+metadata/_custom_type_script = "uid://cq8l8mwv8k27y"
+
+[node name="HandProto" type="Node" unique_id=1135353111]
+script = ExtResource("1_mr6cy")
+shop_deck = SubResource("Resource_xangt")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=811336425]
+
+[node name="Control" type="Control" parent="UI" unique_id=1112592724]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("10_00qip")
+
+[node name="Panel" type="Panel" parent="UI/Control" unique_id=1339017744]
+layout_mode = 0
+offset_left = 527.0
+offset_top = 44.0
+offset_right = 1354.0
+offset_bottom = 157.0
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Control/Panel" unique_id=774939339]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Control/Panel/MarginContainer" unique_id=1828406098]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/Panel/MarginContainer/HBoxContainer" unique_id=142013545]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="UI/Control/Panel/MarginContainer/HBoxContainer/VBoxContainer" unique_id=349194719]
+layout_mode = 2
+size_flags_vertical = 3
+text = "COMMON"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CommonPercentTextEdit" type="TextEdit" parent="UI/Control/Panel/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1308357146]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 30
+text = "50"
+placeholder_text = "0"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="UI/Control/Panel/MarginContainer/HBoxContainer" unique_id=1977252978]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="UI/Control/Panel/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=591493200]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.4913811, 0.74057937, 0.9464466, 1)
+text = "RARE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RarePercentTextEdit" type="TextEdit" parent="UI/Control/Panel/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=958936907]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 30
+text = "30"
+placeholder_text = "0"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="UI/Control/Panel/MarginContainer/HBoxContainer" unique_id=2059639133]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="UI/Control/Panel/MarginContainer/HBoxContainer/VBoxContainer3" unique_id=778273771]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.8544001, 0.6188679, 0.91941595, 1)
+text = "EPIC"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EpicPercentTextEdit" type="TextEdit" parent="UI/Control/Panel/MarginContainer/HBoxContainer/VBoxContainer3" unique_id=483254025]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 30
+text = "15"
+placeholder_text = "0"
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="UI/Control/Panel/MarginContainer/HBoxContainer" unique_id=466941070]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="UI/Control/Panel/MarginContainer/HBoxContainer/VBoxContainer4" unique_id=501165479]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.9409494, 0.71686447, 0.29111144, 1)
+text = "LEGENDARY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LegendaryPercentTextEdit" type="TextEdit" parent="UI/Control/Panel/MarginContainer/HBoxContainer/VBoxContainer4" unique_id=684943937]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 30
+text = "5"
+placeholder_text = "0"
+
+[node name="Panel2" type="Panel" parent="UI/Control" unique_id=1164694199]
+layout_mode = 0
+offset_left = 1458.0
+offset_top = 42.0
+offset_right = 1741.0
+offset_bottom = 161.0
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Control/Panel2" unique_id=1466304774]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/Panel2/MarginContainer" unique_id=1225693214]
+layout_mode = 2
+
+[node name="DrawButton" type="Button" parent="UI/Control/Panel2/MarginContainer/VBoxContainer" unique_id=1511185391]
+layout_mode = 2
+size_flags_vertical = 3
+text = "DRAW"
+script = ExtResource("10_t6h7b")
+metadata/_custom_type_script = "uid://bia26v50nwe6c"
+
+[node name="GiveBackButton" type="Button" parent="UI/Control/Panel2/MarginContainer/VBoxContainer" unique_id=228496521]
+layout_mode = 2
+size_flags_vertical = 3
+text = "GIVE BACK"
+script = ExtResource("10_t6h7b")
+metadata/_custom_type_script = "uid://bia26v50nwe6c"
+
+[node name="UIShopDeckCardsViewer" parent="UI" unique_id=303247800 instance=ExtResource("1_bcbds")]
+unique_name_in_owner = true
+offset_left = -1433.0
+offset_top = -988.0
+offset_right = 477.0
+offset_bottom = 782.0
+scale = Vector2(0.26, 0.26)
+
+[node name="UIHandCardsViewer" parent="UI" unique_id=705345619 instance=ExtResource("1_bcbds")]
+unique_name_in_owner = true
+offset_left = -500.0
+offset_top = -986.0
+offset_right = 1410.0
+offset_bottom = 784.0
+scale = Vector2(0.26, 0.26)
+
+[connection signal="pressed" from="UI/Control/Panel2/MarginContainer/VBoxContainer/DrawButton" to="." method="_on_draw_button_pressed"]
+[connection signal="pressed" from="UI/Control/Panel2/MarginContainer/VBoxContainer/GiveBackButton" to="." method="_on_give_back_button_pressed"]
