@@ -60,8 +60,24 @@ var game_state: GameState:
 
 # ============================== Private variables ==============================
 
-var _game_scene: PackedScene = load("res://05_Game/game.tscn")
-var _run_scene: PackedScene = load("res://05_Game/Run/RunRoot/run_root.tscn")
+# Chargées paresseusement au 1er accès puis mises en cache (évite de cascader
+# tout l'arbre de jeu au démarrage de chaque scène).
+const _GAME_SCENE_PATH := "res://05_Game/game.tscn"
+const _RUN_SCENE_PATH := "res://05_Game/Run/RunRoot/run_root.tscn"
+
+var __game_scene_cache: PackedScene
+var _game_scene: PackedScene:
+	get:
+		if __game_scene_cache == null:
+			__game_scene_cache = load(_GAME_SCENE_PATH)
+		return __game_scene_cache
+
+var __run_scene_cache: PackedScene
+var _run_scene: PackedScene:
+	get:
+		if __run_scene_cache == null:
+			__run_scene_cache = load(_RUN_SCENE_PATH)
+		return __run_scene_cache
 
 const RUN_SAVE_PATH := "user://saves/run.tres"
 const DEMO_RUN_PATH := "res://05_Game/Run/Runs/Pool/Prototyping/demo_run.tres"
@@ -70,22 +86,31 @@ const DEMO_HERO_DESC_PATH := "res://02_Entities/Pool/Heroes/Latika/latika_desc.t
 const DEMO_HERO_SCENE_PATH := "res://02_Entities/Pool/Heroes/Latika/latika.tscn"
 const DEMO_ACOLYTE_SCENE_PATH := "res://02_Entities/Pool/Mobs/Chickens/Basic/chicken_basic.tscn"
 
-var _FAMILIES_REF: Dictionary[Family.Type, Family] = {
+# Familles chargées paresseusement au 1er accès (via init() / active_families),
+# plus au démarrage. Mises en cache.
+const _FAMILY_PATHS: Dictionary[Family.Type, String] = {
+	Family.Type.WARRIOR: "res://01_Cards/Pool/Families/warrior_family.tres",
+	Family.Type.ENGINEER: "res://01_Cards/Pool/Families/Engineer/engineer_family.tres",
+	Family.Type.ARDENT_CELESTIAL: "res://01_Cards/Pool/Families/ArdentCelestial/ardent_celestial_family.tres",
+	Family.Type.POISON: "res://01_Cards/Pool/Families/poison_family.tres",
+	Family.Type.STORM_CALLER: "res://01_Cards/Pool/Families/storm_caller_family.tres",
+	Family.Type.LIGHT: "res://01_Cards/Pool/Families/light_family.tres",
+	Family.Type.COLOSSUS: "res://01_Cards/Pool/Families/Colossus/colossus_family.tres",
+	Family.Type.CHICKEN_LORD: "res://01_Cards/Pool/Families/ChickenLord/chicken_lord_family.tres",
+	Family.Type.NECROSIS: "res://01_Cards/Pool/Families/necro_family.tres",
 }
+
+var __families_ref_cache: Dictionary[Family.Type, Family] = {}
+var _FAMILIES_REF: Dictionary[Family.Type, Family]:
+	get:
+		if __families_ref_cache.is_empty():
+			for family_type: Family.Type in _FAMILY_PATHS:
+				__families_ref_cache[family_type] = load(_FAMILY_PATHS[family_type]) as Family
+		return __families_ref_cache
 
 # ============================== Node base functions ==============================
 
 func _init() -> void:
-	Verbose.debug("GAME MANAGER INIT", Verbose.Category.DEFAULT)
-	_FAMILIES_REF[Family.Type.WARRIOR] = load("res://01_Cards/Pool/Families/warrior_family.tres") as Family
-	_FAMILIES_REF[Family.Type.ENGINEER] = load("res://01_Cards/Pool/Families/Engineer/engineer_family.tres") as Family
-	_FAMILIES_REF[Family.Type.ARDENT_CELESTIAL] = load("res://01_Cards/Pool/Families/ArdentCelestial/ardent_celestial_family.tres") as Family
-	_FAMILIES_REF[Family.Type.POISON] = load("res://01_Cards/Pool/Families/poison_family.tres") as Family
-	_FAMILIES_REF[Family.Type.STORM_CALLER] = load("res://01_Cards/Pool/Families/storm_caller_family.tres") as Family
-	_FAMILIES_REF[Family.Type.LIGHT] = load("res://01_Cards/Pool/Families/light_family.tres") as Family
-	_FAMILIES_REF[Family.Type.COLOSSUS] = load("res://01_Cards/Pool/Families/Colossus/colossus_family.tres") as Family
-	_FAMILIES_REF[Family.Type.CHICKEN_LORD] = load("res://01_Cards/Pool/Families/ChickenLord/chicken_lord_family.tres") as Family
-	_FAMILIES_REF[Family.Type.NECROSIS] = load("res://01_Cards/Pool/Families/necro_family.tres") as Family
 	Verbose.debug("GAME MANAGER INIT", Verbose.Category.DEFAULT)
 
 func _ready() -> void:
