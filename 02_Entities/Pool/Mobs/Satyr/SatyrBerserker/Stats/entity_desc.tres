@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://bd1ooyl8gwks1" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Skills/Bronze/wounded_fury_as.tres" id="5_rxlx3"]
 [ext_resource type="Resource" uid="uid://o5j26uoxgo27" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Skills/Silver/wounded_fury_ad.tres" id="6_8mm8k"]
 [ext_resource type="Resource" uid="uid://nmkkfb4pluye" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/stats_lvl_02.tres" id="6_70ybn"]
+[ext_resource type="Resource" uid="uid://cef1l4m2epig5" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Skills/Gold/martial_artist.tres" id="7_8mm8k"]
 [ext_resource type="Resource" uid="uid://c5vww51rbr33t" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/stats_lvl_03.tres" id="7_mxwl6"]
 [ext_resource type="Resource" uid="uid://br2rwovtna4m8" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/stats_lvl_04.tres" id="8_vwvuc"]
 [ext_resource type="Resource" uid="uid://cs2wvnujqgplx" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/stats_lvl_05.tres" id="9_0y4pw"]
@@ -57,6 +58,7 @@ skills = Dictionary[int, ExtResource("2_x6d7x")]({
 0: ExtResource("3_rlfoj"),
 1: ExtResource("5_rxlx3"),
 2: ExtResource("6_8mm8k"),
+3: ExtResource("7_8mm8k"),
 4: ExtResource("4_x6d7x")
 })
 aa_1_release_normalized = 0.36
