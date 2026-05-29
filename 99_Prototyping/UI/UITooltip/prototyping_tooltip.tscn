@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ctce0022qwf78"]
 
-[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme.tres" id="1_dpmaf"]
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme_old.tres" id="1_dpmaf"]
 [ext_resource type="Script" uid="uid://b22tkewg8jw2q" path="res://99_Prototyping/UI/UITooltip/prototyping_tooltip.gd" id="2_uhpfw"]
 [ext_resource type="PackedScene" uid="uid://elffrjkkq2jc" path="res://04_UI/Tool/SmartTextLabel/ui_smart_text_label.tscn" id="3_c4yu4"]
 [ext_resource type="Resource" uid="uid://vkyl862t2h5d" path="res://02_Entities/Pool/Heroes/DarkKnight/Skills/g2_mega_strike.tres" id="3_eoifd"]

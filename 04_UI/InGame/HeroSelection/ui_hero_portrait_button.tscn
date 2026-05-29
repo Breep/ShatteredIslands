@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b6lyxftbneqy"]
 
-[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme.tres" id="1_fftwn"]
-[ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/Menu/MainMenu/panel_main_menu.tres" id="3_svo5a"]
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme_old.tres" id="1_fftwn"]
+[ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="3_svo5a"]
 [ext_resource type="Script" uid="uid://d0bm2pkkcp3db" path="res://04_UI/InGame/HeroSelection/ui_hero_portrait_button.gd" id="3_uh3hr"]
 [ext_resource type="Shader" uid="uid://ba1avekvq4s1o" path="res://22_VFX/VFX_2D/UI/vortex_selector_v2.gdshader" id="4_6i4xs"]
 [ext_resource type="Texture2D" uid="uid://251if7lh55vt" path="res://20_Data/Texture/Kenney2/scratch 3.png" id="5_6bbru"]

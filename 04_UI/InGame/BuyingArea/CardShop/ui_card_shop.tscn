@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://8tub4ube48p7" path="res://04_UI/InGame/BuyingArea/CardShop/ui_card_shop.gd" id="1_xu7re"]
 [ext_resource type="Texture2D" uid="uid://bbcbah5ifbsrw" path="res://04_UI/_Themes/Data/coin.png" id="3_1gnrk"]
-[ext_resource type="Theme" uid="uid://d0qobfi4rit8a" path="res://04_UI/Menu/MainMenu/label_main_menu_white.tres" id="3_je1e7"]
+[ext_resource type="Theme" uid="uid://d0qobfi4rit8a" path="res://04_UI/_Themes/label_main_menu_white.tres" id="3_je1e7"]
 [ext_resource type="PackedScene" uid="uid://c2psjj8133op3" path="res://01_Cards/2D/CardButton/card_button.tscn" id="4_37vaa"]
-[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme.tres" id="5_ahun0"]
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme_old.tres" id="5_ahun0"]
 [ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://04_UI/Tool/Misc/hover_boost_button.gd" id="5_smee4"]
-[ext_resource type="Theme" uid="uid://djwauvkpnr27d" path="res://04_UI/Menu/MainMenu/normal_button2.tres" id="6_f251f"]
+[ext_resource type="Theme" uid="uid://djwauvkpnr27d" path="res://04_UI/_Themes/normal_button2.tres" id="6_f251f"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xt3ho"]
 blend_mode = 1

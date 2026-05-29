@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://ci1xegvy2t2jm"]
 
-[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme.tres" id="1_mnlqs"]
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme_old.tres" id="1_mnlqs"]
 [ext_resource type="Script" uid="uid://cha3glq6t5f5u" path="res://04_UI/InGame/FamilyViewer/ui_family_viewer.gd" id="1_ygf1p"]
-[ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/Menu/MainMenu/panel_main_menu.tres" id="3_4xjba"]
+[ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="3_4xjba"]
 [ext_resource type="PackedScene" uid="uid://dj7bvdysxgxe6" path="res://01_Cards/2D/CardsViewer/ui_cards_viewer.tscn" id="3_mnlqs"]
-[ext_resource type="Theme" uid="uid://d0qobfi4rit8a" path="res://04_UI/Menu/MainMenu/label_main_menu_white.tres" id="4_desxu"]
-[ext_resource type="Theme" uid="uid://djwauvkpnr27d" path="res://04_UI/Menu/MainMenu/normal_button2.tres" id="5_7i87i"]
-[ext_resource type="FontFile" uid="uid://cvfku6uge3mvi" path="res://20_Data/font/Super Trend.ttf" id="5_qtrka"]
+[ext_resource type="Theme" uid="uid://d0qobfi4rit8a" path="res://04_UI/_Themes/label_main_menu_white.tres" id="4_desxu"]
+[ext_resource type="Theme" uid="uid://djwauvkpnr27d" path="res://04_UI/_Themes/normal_button2.tres" id="5_7i87i"]
+[ext_resource type="FontFile" uid="uid://cvfku6uge3mvi" path="res://04_UI/_Themes/Fonts/Super Trend.ttf" id="5_qtrka"]
 [ext_resource type="PackedScene" uid="uid://d0y3w6vobf4iy" path="res://01_Cards/Descriptions/Families/ArdentCelestial/ardent_celestial_desc_panel.tscn" id="6_biljw"]
 [ext_resource type="Script" uid="uid://bq2jprj2y5yr6" path="res://04_UI/Menu/MainMenu/button_main_ui.gd" id="7_qtrka"]
 

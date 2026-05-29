@@ -53,8 +53,12 @@ func run_fighting(encounter: FightingEncounter, party_formation: FightingFormati
 
 	var fm: FightingManager = island.get_fighting_area().fighting_manager
 	fm.fight_done.connect(_on_fighting_manager_fight_done, CONNECT_ONE_SHOT)
-
+	
 	GlobalFightingManager.start()
+	
+	if not encounter.music.is_empty():
+		AudioManager.play_bgm(encounter.music, 3)
+	
 	await GlobalFightingManager.all_fights_are_over
 	island.queue_free()
 	fighting_phase_ended.emit()
@@ -72,6 +76,7 @@ func _on_fighting_manager_fight_done(_fm: FightingManager, winner_teams_order: A
 func run_tavern(encounter: TavernEncounter, party: Party = null) -> void:
 	var island: BuyingIsland = await _setup_tavern(encounter, party)
 	if island == null: return
+	AudioManager.play_bgm("tavern_music")
 	await tavern_phase_ended
 	island.queue_free()
 

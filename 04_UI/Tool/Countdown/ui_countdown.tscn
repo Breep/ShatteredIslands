@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c3oixb8xu68w" path="res://04_UI/Tool/Countdown/ui_countdown.gd" id="1_kdeao"]
 [ext_resource type="Shader" uid="uid://or10r03jptmm" path="res://22_VFX/Shaders/Misc/countdown_gradient.gdshader" id="2_lahu3"]
-[ext_resource type="Theme" uid="uid://d0qobfi4rit8a" path="res://04_UI/Menu/MainMenu/label_main_menu_white.tres" id="3_wluo2"]
+[ext_resource type="Theme" uid="uid://d0qobfi4rit8a" path="res://04_UI/_Themes/label_main_menu_white.tres" id="3_wluo2"]
 
 [sub_resource type="Gradient" id="Gradient_uft1f"]
 offsets = PackedFloat32Array(0, 0.985294)

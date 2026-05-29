@@ -9,7 +9,6 @@ auto_attack_type = 1
 _attack_range = 1.0
 _attack_damage = 10.0
 _attack_power = 0.0
-_scale = 0.0
 poison_resistance = 0.5
 _crit_chance = 5.0
 _dodge = 10.0

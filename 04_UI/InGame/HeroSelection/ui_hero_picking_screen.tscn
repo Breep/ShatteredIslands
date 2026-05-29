@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://k4dc5j8ecdxo"]
 
 [ext_resource type="Script" uid="uid://ftwn66cpwnyp" path="res://04_UI/InGame/HeroSelection/ui_hero_picking_screen.gd" id="1_r4a5p"]
-[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme.tres" id="2_5jgqs"]
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme_old.tres" id="2_5jgqs"]
 [ext_resource type="PackedScene" uid="uid://dmfkigo1trjd0" path="res://04_UI/Tool/Countdown/ui_countdown.tscn" id="2_r4a5p"]
-[ext_resource type="Theme" uid="uid://d0qobfi4rit8a" path="res://04_UI/Menu/MainMenu/label_main_menu_white.tres" id="3_58vwt"]
+[ext_resource type="Theme" uid="uid://d0qobfi4rit8a" path="res://04_UI/_Themes/label_main_menu_white.tres" id="3_58vwt"]
 [ext_resource type="PackedScene" uid="uid://b6lyxftbneqy" path="res://04_UI/InGame/HeroSelection/ui_hero_portrait_button.tscn" id="4_kexe1"]
 [ext_resource type="PackedScene" uid="uid://ddugcksbtixea" path="res://04_UI/InGame/HeroSelection/HeroOverviewPanel/ui_hero_overview_panel.tscn" id="5_bveri"]
-[ext_resource type="Theme" uid="uid://djwauvkpnr27d" path="res://04_UI/Menu/MainMenu/normal_button2.tres" id="5_gfisa"]
+[ext_resource type="Theme" uid="uid://djwauvkpnr27d" path="res://04_UI/_Themes/normal_button2.tres" id="5_gfisa"]
 [ext_resource type="Script" uid="uid://bq2jprj2y5yr6" path="res://04_UI/Menu/MainMenu/button_main_ui.gd" id="6_58vwt"]
 
 [node name="UIHeroPickingScreen" type="Control" unique_id=1036202486]
