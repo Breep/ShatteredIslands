@@ -95,7 +95,13 @@ func _init_cards_in_player_shop() -> void:
 func _construct_shop_deck(families: Array[Family], rules: GameRules) -> void:
 	Verbose.trace("_construct_shop_deck() | " + str(families.size()), Verbose.Category.CARD_SHOP)
 	shop_deck = ShopDeck.new()
-	shop_deck.construct(families, rules.rarity_card_numbers)
+	var cards: Array[Card] = []
+	for family: Family in families:
+		for card: Card in family.cards:
+			cards.append(card)
+	shop_deck.init_catalog(cards)
+	shop_deck.init_generation_rules(rules.rarity_card_numbers)
+	shop_deck.generate()
 	_is_ready = true
 	_shop_deck_shuffled.emit()
 
