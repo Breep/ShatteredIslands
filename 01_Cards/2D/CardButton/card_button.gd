@@ -176,11 +176,12 @@ func _on_control_mouse_exited() -> void:
 
 
 func _on_control_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		card_selected.emit(self, card)
 	if not _hover_enabled: return
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			AudioManager.play_ui("button_click")
-			card_selected.emit(self, card)
 		elif event.button_index == MOUSE_BUTTON_RIGHT and _card != null:
 			var preview: UICardPreview = CARD_PREVIEW_SCENE.instantiate()
 			get_tree().root.add_child(preview)

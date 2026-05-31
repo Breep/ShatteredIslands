@@ -93,6 +93,26 @@ func add_card(card_to_add: Card) -> bool:
 	return true
 
 
+# Déplace une carte (par son nom) à la position `new_index` dans l'ordre interne.
+# new_index est clampé dans [0, size()-1]. No-op si la carte n'existe pas ou si
+# elle est déjà à cette position. Émet `has_changed` quand un déplacement a lieu.
+func reorder_card(card_name: StringName, new_index: int) -> void:
+	if not _cards.has(card_name):
+		return
+	var keys: Array = _cards.keys()
+	var current_index: int = keys.find(card_name)
+	new_index = clampi(new_index, 0, keys.size() - 1)
+	if current_index == new_index:
+		return
+	keys.remove_at(current_index)
+	keys.insert(new_index, card_name)
+	var reordered: Dictionary[StringName, Card] = {}
+	for k: StringName in keys:
+		reordered[k] = _cards[k]
+	_cards = reordered
+	has_changed.emit()
+
+
 func remove_card(card_to_remove: Card) -> Array[Card]:
 	if card_to_remove == null:
 		Verbose.error("Deck: can't remove a null card", Verbose.Category.DECK)
