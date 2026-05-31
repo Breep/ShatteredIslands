@@ -113,6 +113,13 @@ var _hand_pivot_starting_position: Vector2
 var _card_flash_tweens: Dictionary[StringName, Tween] = {}
 var _counter_flash_tween: Tween
 var _hand_full_warning_tween: Tween
+
+# Nom de la carte qui vient d'être droppée : on ignore le mouse_entered qu'elle
+# va recevoir au prochain frame (le rect du nouveau bouton contient déjà la
+# souris). Sinon le hover se déclenche immédiatement après drop → carte
+# redressée à 0° + preview popup au curseur. Le flag est nettoyé au premier
+# mouse_exited sur cette carte (utilisateur a bougé la souris hors d'elle).
+var _just_dropped_card_name: StringName = &""
 #endregion
 
 
@@ -174,6 +181,7 @@ func unbind() -> void:
 	_hand.card_addition_refused.disconnect(_on_hand_card_addition_refused)
 	_hand = null
 	_hovered_card = null
+	_just_dropped_card_name = &""
 	_hide_preview()
 	_cancel_drag()
 	_clear_all_card_buttons()
@@ -465,6 +473,9 @@ func _finalize_drag() -> void:
 	# Pendant l'atterrissage, on garde la carte au-dessus pour qu'elle reste
 	# visible quel que soit sa place finale dans le z-order du fan.
 	dropped_btn.z_index = _drop_landing_z_index
+	# Marque la carte : on doit ignorer le mouse_entered automatique du frame
+	# suivant (rect tout neuf sous la souris). Sera nettoyé sur mouse_exited.
+	_just_dropped_card_name = merged_card.name
 
 	# La carte n'a jamais quitté la main côté données. On reorder si on est
 	# dans la drop zone (sinon elle reprend simplement sa position d'origine),
@@ -601,6 +612,10 @@ func _on_card_button_mouse_entered(card: Card) -> void:
 		return
 	if card == null:
 		return
+	# Carte fraîchement droppée sous le curseur : on ignore le hover automatique.
+	# Le flag se nettoie au prochain mouse_exited (l'utilisateur a bougé hors).
+	if card.name == _just_dropped_card_name:
+		return
 	_hovered_card = card
 	_start_preview_timer(card)
 	_layout_all(_hover_layout_duration)
@@ -608,6 +623,11 @@ func _on_card_button_mouse_entered(card: Card) -> void:
 
 func _on_card_button_mouse_exited(card: Card) -> void:
 	if _dragging != null:
+		return
+	# Première sortie sur la carte fraîchement droppée : on lève le flag pour
+	# que les futurs hovers (entrée délibérée) fonctionnent normalement.
+	if card.name == _just_dropped_card_name:
+		_just_dropped_card_name = &""
 		return
 	if _hovered_card == null or _hovered_card.name != card.name:
 		return
