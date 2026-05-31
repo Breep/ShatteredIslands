@@ -30,10 +30,10 @@
 script = ExtResource("2_shop")
 _unique_card_catalogs = Array[ExtResource("3_card")]([ExtResource("5_c1"), ExtResource("6_c2"), ExtResource("7_c3"), ExtResource("8_c4"), ExtResource("9_r1"), ExtResource("10_e1"), ExtResource("11_e2"), ExtResource("12_e3"), ExtResource("13_l1"), ExtResource("12_i27ff"), ExtResource("13_mu0an"), ExtResource("14_7pop2"), ExtResource("15_n4lla"), ExtResource("16_dpjrl"), ExtResource("17_bbb42"), ExtResource("18_7uobv"), ExtResource("19_blomf"), ExtResource("20_mlhx3"), ExtResource("21_ehcwa"), ExtResource("23_y87gn")])
 _rarity_card_numbers = Dictionary[int, int]({
-0: 5,
-1: 4,
-2: 3,
-3: 2
+0: 10,
+1: 6,
+2: 4,
+3: 4
 })
 metadata/_custom_type_script = "uid://cq8l8mwv8k27y"
 
@@ -45,6 +45,7 @@ _shop_deck = SubResource("Resource_shop")
 
 [node name="UIHand" parent="UI" unique_id=605653940 instance=ExtResource("4_uihand")]
 unique_name_in_owner = true
+_preview_offset = Vector2(250, -380)
 
 [node name="ControlsLayer" type="Control" parent="UI" unique_id=820977286]
 layout_mode = 3

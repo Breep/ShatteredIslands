@@ -34,7 +34,6 @@ signal card_clicked(card: Card)
 @export var _straight_spacing: float = 250.0
 
 @export_group("Cards")
-@export var _max_cards: int = 15
 @export var _card_scale: float = 0.5
 @export var _card_button_scene: PackedScene
 
@@ -75,8 +74,16 @@ signal card_clicked(card: Card)
 @export_group("Internal")
 @export var _hand_pivot: Control
 @export var _editor_preview_root: Control
+@export var _hide_show_button: Button
+
+@export_group("HideShow")
+@export var _hide_show_duration: float = 0.5
+@export var _hide_offset_y: float = 350.0
 #endregion
 
+#region ============================== Internals ==============================
+@onready var _card_counter_label: RichTextLabel = %CardCounterLabel
+@onready var _warning_hand_full_label: RichTextLabel = %WarningHandFullLabel
 
 #region ============================== Private vars ==============================
 var _hand: Hand
@@ -97,6 +104,8 @@ var _drop_index: int = -1
 # mutations de la main (re-add + reorder au drop) sans déclencher de layouts
 # intermédiaires : un seul layout final part de la position courante des boutons.
 var _batch_mode: bool = false
+
+var _hand_pivot_starting_position: Vector2
 #endregion
 
 
@@ -106,6 +115,7 @@ func _ready() -> void:
 	if _editor_preview_root != null:
 		_editor_preview_root.queue_free()
 		_editor_preview_root = null
+	_hand_pivot_starting_position = _hand_pivot.position
 
 
 func _process(_delta: float) -> void:
@@ -139,7 +149,9 @@ func bind(hand: Hand) -> void:
 	_hand.card_added.connect(_on_hand_card_added)
 	_hand.card_removed.connect(_on_hand_card_removed)
 	_hand.has_changed.connect(_on_hand_changed)
+	_hand.card_addition_refused.connect(_on_hand_card_addition_refused)
 	_rebuild_all()
+	_update_counter()
 
 
 func unbind() -> void:
@@ -148,6 +160,7 @@ func unbind() -> void:
 	_hand.card_added.disconnect(_on_hand_card_added)
 	_hand.card_removed.disconnect(_on_hand_card_removed)
 	_hand.has_changed.disconnect(_on_hand_changed)
+	_hand.card_addition_refused.disconnect(_on_hand_card_addition_refused)
 	_hand = null
 	_hovered_card = null
 	_hide_preview()
@@ -462,6 +475,7 @@ func _on_hand_card_added(card: Card) -> void:
 	if not _card_buttons.has(card.name):
 		_create_card_button(card)
 	_layout_all()
+	_update_counter()
 
 
 func _on_hand_card_removed(card: Card) -> void:
@@ -478,6 +492,7 @@ func _on_hand_card_removed(card: Card) -> void:
 		btn.queue_free()
 		_card_buttons.erase(card.name)
 	_layout_all()
+	_update_counter()
 
 
 # Couvre les cas où une carte présente change (level up, duplicat ré-ajouté…)
@@ -529,4 +544,61 @@ func _on_preview_timer_timeout(card: Card, epoch: int) -> void:
 func _on_drop_landing_finished(dropped_btn: CardButton) -> void:
 	if is_instance_valid(dropped_btn):
 		dropped_btn.z_index = 0
+
+
+var _warning_tween: Tween
+func _on_hand_card_addition_refused(card: Card, reason: Hand.RefusalReason) -> void:
+	match reason:
+		Hand.RefusalReason.CARD_ALREADY_MAXED_OUT:
+			AudioManager.play_ui("error_01")
+			var btn: CardButton = _card_buttons.get(card.name)
+			if btn != null:
+				if _warning_tween != null and _warning_tween.is_valid():
+					_warning_tween.kill()
+				_warning_tween = create_tween()
+				_warning_tween.tween_property(btn, "modulate", Color.RED, 0.15).set_trans(Tween.TRANS_SINE)
+				_warning_tween.tween_property(btn, "modulate", Color.WHITE, 0.15).set_trans(Tween.TRANS_SINE)
+		Hand.RefusalReason.HAND_IS_FULL:
+			AudioManager.play_ui("error_02")
+			var counter_tween: Tween = create_tween()
+			counter_tween.tween_property(_card_counter_label, "modulate", Color.RED, 0.1)
+			counter_tween.tween_property(_card_counter_label, "modulate", Color.WHITE, 0.1)
+			counter_tween.tween_property(_card_counter_label, "modulate", Color.RED, 0.1)
+			counter_tween.tween_property(_card_counter_label, "modulate", Color.WHITE, 0.1)
+			if _warning_hand_full_label != null:
+				if _warning_tween != null and _warning_tween.is_valid():
+					_warning_tween.kill()
+				_warning_tween = create_tween()
+				_warning_hand_full_label.visible = true
+				_warning_hand_full_label.modulate.a = 0.0 # Départ transparent
+				_warning_tween.tween_property(_warning_hand_full_label, "modulate:a", 1.0, 0.2)
+				_warning_tween.tween_interval(2.0)
+				_warning_tween.tween_property(_warning_hand_full_label, "modulate:a", 0.0, 0.3)
+				_warning_tween.tween_callback(func() -> void: _warning_hand_full_label.visible = false)
 #endregion
+
+
+var _hide_show_tween: Tween
+var _is_visible: bool = true
+func _on_hide_show_button_pressed() -> void:
+	if _hide_show_tween != null and _hide_show_tween.is_valid():
+		_hide_show_tween.kill()
+	_hide_show_tween = create_tween()
+	_hide_show_tween.set_trans(Tween.TRANS_EXPO)
+	_hide_show_tween.set_ease(Tween.EASE_OUT)
+	if _is_visible:
+		var hidden_position = _hand_pivot_starting_position + Vector2(0, _hide_offset_y)
+		_hide_show_tween.tween_property(_hand_pivot, "position", hidden_position, _hide_show_duration)
+		_hide_show_button.text = "Afficher Deck"
+		_is_visible = false
+	else:
+		_hide_show_tween.tween_property(_hand_pivot, "position", _hand_pivot_starting_position, _hide_show_duration)
+		_hide_show_button.text = "Masquer Deck"
+		_is_visible = true
+
+
+func _update_counter() -> void:
+	if _hand == null:
+		Verbose.error("Can't update counter, no ref to a hand !", Verbose.Category.CARD)
+		return
+	_card_counter_label.text = str(_hand.get_unique_card_count()) + "/" + str(_hand.max_slots)

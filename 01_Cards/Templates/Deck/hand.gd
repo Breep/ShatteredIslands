@@ -4,7 +4,13 @@
 class_name Hand
 extends Deck
 
+enum RefusalReason {
+	CARD_ALREADY_MAXED_OUT,
+	HAND_IS_FULL,
+}
+
 signal max_slot_changed(new_max_slots: int)
+signal card_addition_refused(card: Card, reason: RefusalReason)
 
 #region ============================== Export ==============================
 @export var _owner_name: String
@@ -34,8 +40,13 @@ func is_full() -> bool:
 # - Carte déjà présente dans le deck et non niveau max (level up)
 func can_add(card: Card) -> bool:
 	if card == null: return false
-	if is_max_level_card(card): return false
-	return not is_full() or contains(card)
+	if is_max_level_card(card):
+		card_addition_refused.emit(card, RefusalReason.CARD_ALREADY_MAXED_OUT)
+		return false
+	if is_full() and not contains(card):
+		card_addition_refused.emit(card, RefusalReason.HAND_IS_FULL)
+		return false
+	return true
 
 
 func add_card(card_to_add: Card) -> bool:
