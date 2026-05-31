@@ -1,7 +1,9 @@
 # Carte « flottante » qui suit la souris pendant un drag-and-drop depuis UIHand.
-# Encapsule à la fois le visuel (CardButton désactivé, mouse_filter IGNORE pour
-# ne pas intercepter la souris) et la donnée (cartes source niveau 1 prélevées
-# de la main + la carte agrégée affichée). UIHand pilote le press/release.
+# Encapsule le visuel (CardButton désactivé, mouse_filter IGNORE pour ne pas
+# intercepter la souris) et une référence à la carte agrégée affichée. La
+# donnée brute (cartes source niveau 1) reste dans la main : on ne fait que
+# tenir la carte temporairement ; la décision d'éventuelle suppression (vente,
+# coffre) est prise par d'autres systèmes au release. UIHand pilote le drag.
 class_name HoveringCard
 extends Control
 
@@ -16,7 +18,6 @@ extends Control
 
 #region ============================== Private vars ==============================
 var _merged_card: Card
-var _source_cards: Array[Card]
 # Offset cursor → root au moment du grab : on conserve cet écart pour que la
 # carte reste accrochée à l'endroit cliqué, peu importe où la souris bouge.
 var _grab_offset: Vector2
@@ -25,10 +26,9 @@ var _card_button: CardButton
 
 
 #region ============================== Public functions ==============================
-func init(card_button: CardButton, merged_card: Card, source_cards: Array[Card], grab_offset: Vector2) -> void:
+func init(card_button: CardButton, merged_card: Card, grab_offset: Vector2) -> void:
 	_card_button = card_button
 	_merged_card = merged_card
-	_source_cards = source_cards
 	_grab_offset = grab_offset
 	add_child(_card_button)
 	_card_button.update_visual(_merged_card)
@@ -41,10 +41,6 @@ func init(card_button: CardButton, merged_card: Card, source_cards: Array[Card],
 
 func get_merged_card() -> Card:
 	return _merged_card
-
-
-func get_source_cards() -> Array[Card]:
-	return _source_cards
 
 
 func get_card_button() -> CardButton:

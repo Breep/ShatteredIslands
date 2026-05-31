@@ -148,6 +148,8 @@ func bind(hand: Hand) -> void:
 	_hand = hand
 	_hand.card_added.connect(_on_hand_card_added)
 	_hand.card_removed.connect(_on_hand_card_removed)
+	_hand.card_held.connect(_on_hand_card_held)
+	_hand.card_released.connect(_on_hand_card_released)
 	_hand.has_changed.connect(_on_hand_changed)
 	_hand.card_addition_refused.connect(_on_hand_card_addition_refused)
 	_rebuild_all()
@@ -159,6 +161,8 @@ func unbind() -> void:
 		return
 	_hand.card_added.disconnect(_on_hand_card_added)
 	_hand.card_removed.disconnect(_on_hand_card_removed)
+	_hand.card_held.disconnect(_on_hand_card_held)
+	_hand.card_released.disconnect(_on_hand_card_released)
 	_hand.has_changed.disconnect(_on_hand_changed)
 	_hand.card_addition_refused.disconnect(_on_hand_card_addition_refused)
 	_hand = null
@@ -211,7 +215,8 @@ func _layout_all(duration: float = -1.0) -> void:
 		return
 	_sync_child_order()
 	var effective_duration: float = duration if duration >= 0.0 else _layout_tween_duration
-	var cards: Array[Card] = _hand.get_cards_raw()
+	# La carte tenue (drag en cours) est exclue : get_visible_cards filtre.
+	var cards: Array[Card] = _hand.get_visible_cards()
 	var n_real: int = cards.size()
 	var dragging: bool = _dragging != null
 	var has_gap: bool = dragging and _drop_index >= 0
@@ -291,7 +296,9 @@ func _find_hovered_index(cards: Array[Card]) -> int:
 func _sync_child_order() -> void:
 	if _hand == null:
 		return
-	var cards: Array[Card] = _hand.get_cards_raw()
+	# Itère sur les cartes visibles uniquement : la tenue (drag) n'a pas de
+	# bouton dans _hand_pivot — son visuel vit dans la HoveringCard.
+	var cards: Array[Card] = _hand.get_visible_cards()
 	for i: int in cards.size():
 		var card: Card = cards[i]
 		var btn: CardButton = _card_buttons.get(card.name)
@@ -360,11 +367,13 @@ func _start_drag(card: Card) -> void:
 	if btn == null:
 		return
 
-	# Capture l'offset cursor→centre visuel AVANT remove (le bouton sera freed).
+	# Capture l'offset cursor→centre visuel AVANT hold (le bouton sera freed
+	# par _on_hand_card_held).
 	var grab_offset: Vector2 = btn.global_position - get_global_mouse_position()
 
-	# L'index initial = position d'origine de la carte. Si la souris ne bouge
-	# pas et que l'utilisateur relâche, la carte retombe à sa place d'origine.
+	# L'index initial = position d'origine de la carte dans le dict complet.
+	# Le gap apparaîtra à cet index, et un release sans déplacement remettra
+	# la carte exactement où elle était.
 	var cards: Array[Card] = _hand.get_cards_raw()
 	var original_index: int = -1
 	for i: int in cards.size():
@@ -374,16 +383,17 @@ func _start_drag(card: Card) -> void:
 	if original_index < 0:
 		return
 
-	var source_cards: Array[Card] = _hand.remove_card(card)
-	if source_cards.is_empty():
+	# La carte n'est PAS retirée de la main : on la marque comme « tenue ».
+	# Données préservées (level, sources, position dans le dict). Seul le
+	# visuel quitte le fan vers la HoveringCard.
+	if not _hand.hold_card(card):
 		return
 
-	# Le hover est nettoyé par _on_hand_card_removed (la carte hover était celle
-	# qu'on clique). Ne pas re-toucher ici.
+	# Le hover et le bouton sont nettoyés par _on_hand_card_held.
 	var visual_button: CardButton = _card_button_scene.instantiate()
 	var hovering: HoveringCard = HoveringCard.new()
 	add_child(hovering)
-	hovering.init(visual_button, card, source_cards, grab_offset)
+	hovering.init(visual_button, card, grab_offset)
 	hovering.z_index = 200
 	_dragging = hovering
 	_drop_index = original_index
@@ -394,7 +404,6 @@ func _start_drag(card: Card) -> void:
 func _finalize_drag() -> void:
 	if _dragging == null:
 		return
-	var source_cards: Array[Card] = _dragging.get_source_cards()
 	var merged_card: Card = _dragging.get_merged_card()
 	var final_drop_index: int = _drop_index
 	# Capture la position globale + scale de la HoveringCard pour que la carte
@@ -408,13 +417,13 @@ func _finalize_drag() -> void:
 	_drop_index = -1
 	set_process(false)
 
-	if source_cards.is_empty():
+	if merged_card == null:
 		_layout_all()
 		return
 
 	# Pré-crée le bouton à la position courante de la HoveringCard. Le futur
-	# _on_hand_card_added verra que _card_buttons contient déjà ce nom et ne
-	# créera pas de doublon.
+	# _on_hand_card_released verra que _card_buttons contient déjà ce nom et
+	# n'en créera pas un nouveau au default.
 	_batch_mode = true
 	var dropped_btn: CardButton = _create_card_button(merged_card)
 	dropped_btn.global_position = drop_origin_global
@@ -423,12 +432,12 @@ func _finalize_drag() -> void:
 	# visible quel que soit sa place finale dans le z-order du fan.
 	dropped_btn.z_index = _drop_landing_z_index
 
-	# Re-ajout dans la main : le premier add recrée le slot en fin, les suivants
-	# montent simplement le level (cf. Deck.add_card). Puis on reorder à l'index.
-	for src: Card in source_cards:
-		_hand.add_card(src)
+	# La carte n'a jamais quitté la main côté données. On reorder si on est
+	# dans la drop zone (sinon elle reprend simplement sa position d'origine),
+	# puis on lâche le hold.
 	if final_drop_index >= 0:
 		_hand.reorder_card(merged_card.name, final_drop_index)
+	_hand.release_held_card()
 
 	_batch_mode = false
 	_layout_all()
@@ -453,7 +462,9 @@ func _cancel_drag() -> void:
 func _compute_drop_index(mouse_global: Vector2) -> int:
 	if _hand == null:
 		return 0
-	var n_visual: int = _hand.size() + 1
+	# N visuel = nombre de cartes visibles + 1 (le gap où atterrirait le drop).
+	# La tenue n'est pas comptée puisqu'elle n'est pas dans le fan.
+	var n_visual: int = _hand.get_visible_cards().size() + 1
 	if n_visual <= 1:
 		return 0
 	var pivot_global_x: float = _hand_pivot.global_position.x
@@ -479,6 +490,13 @@ func _on_hand_card_added(card: Card) -> void:
 
 
 func _on_hand_card_removed(card: Card) -> void:
+	# Si la carte retirée était en cours de drag (vente / coffre déclenché
+	# pendant le drag plus tard), on cancel le drag pour éviter une
+	# HoveringCard orpheline.
+	if _dragging != null:
+		var merged: Card = _dragging.get_merged_card()
+		if merged != null and merged.name == card.name:
+			_cancel_drag()
 	if _hovered_card != null and _hovered_card.name == card.name:
 		_hovered_card = null
 		_cancel_preview_timer()
@@ -496,14 +514,50 @@ func _on_hand_card_removed(card: Card) -> void:
 
 
 # Couvre les cas où une carte présente change (level up, duplicat ré-ajouté…)
-# sans ajout ni retrait de slot.
+# sans ajout ni retrait de slot. Itère les cartes visibles + rafraîchit le
+# visuel de la HoveringCard si on est en plein drag (la carte tenue peut
+# avoir changé de level pendant le drag).
 func _on_hand_changed() -> void:
 	if _hand == null:
 		return
-	for card: Card in _hand.get_cards_raw():
+	for card: Card in _hand.get_visible_cards():
 		var btn: CardButton = _card_buttons.get(card.name)
 		if btn != null:
 			btn.update_visual(card)
+	if _dragging != null:
+		var held: Card = _hand.get_held_card()
+		if held != null:
+			_dragging.get_card_button().update_visual(held)
+
+
+# La carte vient d'être marquée comme tenue : on free son bouton du fan
+# (le visuel vit maintenant dans la HoveringCard), on nettoie le hover si
+# elle était survolée. Les données restent en main.
+func _on_hand_card_held(card: Card) -> void:
+	if _hovered_card != null and _hovered_card.name == card.name:
+		_hovered_card = null
+		_cancel_preview_timer()
+		_hide_preview()
+	var btn: CardButton = _card_buttons.get(card.name)
+	if btn != null:
+		var tween: Tween = _layout_tweens.get(card.name)
+		if tween != null and tween.is_running():
+			tween.kill()
+		_layout_tweens.erase(card.name)
+		btn.queue_free()
+		_card_buttons.erase(card.name)
+	_layout_all()
+
+
+# La carte tenue est rendue au fan. Si _finalize_drag a déjà pré-créé le
+# bouton (cas standard), rien à faire d'autre. Sinon (release externe), on
+# crée le bouton au default ; _layout_all positionnera.
+func _on_hand_card_released(card: Card) -> void:
+	if card == null:
+		return
+	if not _card_buttons.has(card.name) and _dragging == null:
+		_create_card_button(card)
+	_layout_all()
 
 
 func _on_card_button_mouse_entered(card: Card) -> void:
