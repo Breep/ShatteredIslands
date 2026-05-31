@@ -40,6 +40,7 @@ var _current_rot_x: float
 var _current_rot_y: float
 
 var _is_focused: bool = false
+var _hover_enabled: bool = true
 var _card_tween: Tween
 var _canvas_base_position: Vector2
 var _canvas_base_scale: Vector2
@@ -88,6 +89,15 @@ func set_locked(locked: bool) -> void:
 	_canvas_group.self_modulate = Color(0.333, 0.333, 0.333, 1.0)
 	#_card_layout.set_locked(locked)
 
+
+# Désactive le survol (hover scale/lift + 3D shader tracking + son hover) et
+# bloque les clics. Utilisé par UIHand pour neutraliser ces effets tant que
+# l'éventail n'est pas validé.
+func set_hover_enabled(enabled: bool) -> void:
+	_hover_enabled = enabled
+	if not enabled and _is_focused:
+		_on_control_mouse_exited()
+
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
@@ -107,6 +117,7 @@ func _process(delta: float) -> void:
 	_animation_3d_rotate(delta)
 
 func _input(event: InputEvent) -> void:
+	if not _hover_enabled: return
 	if event is InputEventMouseMotion and _is_focused:
 		_update_rotation_target()
 
@@ -139,6 +150,7 @@ func _animation_reset_3d_rotation() -> void:
 
 
 func _on_control_mouse_entered() -> void:
+	if not _hover_enabled: return
 	_is_focused = true
 	_card_layout.mouse_entered()
 	_animate_hover(true)
@@ -153,6 +165,7 @@ func _on_control_mouse_exited() -> void:
 
 
 func _on_control_gui_input(event: InputEvent) -> void:
+	if not _hover_enabled: return
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			AudioManager.play_ui("button_click")

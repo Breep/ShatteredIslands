@@ -104,5 +104,7 @@ func remove_card(card_to_remove: Card) -> Array[Card]:
 		removed_cards.append(_by_uid[card.uid])
 		_by_uid.erase(card.uid)
 	_by_name.erase(card_to_remove.name)
+	card_removed.emit(card_to_remove)
+	has_changed.emit()
 	return removed_cards
 #endregion

@@ -1,169 +1,104 @@
 [gd_scene format=3 uid="uid://cmy7daws5mc0v"]
 
-[ext_resource type="PackedScene" uid="uid://c2psjj8133op3" path="res://01_Cards/2D/CardButton/card_button.tscn" id="1_pi8wf"]
+[ext_resource type="PackedScene" uid="uid://c2psjj8133op3" path="res://01_Cards/2D/CardButton/card_button.tscn" id="1_card"]
+[ext_resource type="Script" uid="uid://bi1y3f5bsadr0" path="res://01_Cards/2D/Hand/ui_hand.gd" id="2_script"]
 
-[node name="UIHand" type="Control" unique_id=2098178256]
+[node name="UIHand" type="Control" unique_id=77925465 node_paths=PackedStringArray("_hand_pivot", "_editor_preview_root")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("2_script")
+_card_button_scene = ExtResource("1_card")
+_hand_pivot = NodePath("HandPivot")
+_editor_preview_root = NodePath("HandPivot/_EditorPreview")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1675288258]
-
-[node name="HandCenter" type="Control" parent="CanvasLayer" unique_id=1426973884]
-layout_mode = 3
-anchors_preset = 0
-
-[node name="C1" type="Control" parent="CanvasLayer/HandCenter" unique_id=1110004361]
-anchors_preset = 0
-rotation = -0.34906584
-
-[node name="CardButton" parent="CanvasLayer/HandCenter/C1" unique_id=1390086147 instance=ExtResource("1_pi8wf")]
+[node name="HandPivot" type="Control" parent="." unique_id=109951534]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = -3.0357144
-anchor_top = -9.349056
-anchor_right = -3.0357144
-anchor_bottom = -9.349056
-offset_top = -1000.0
-offset_bottom = -1000.0
-grow_horizontal = 1
-grow_vertical = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_top = -150.0
+offset_bottom = -150.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="_EditorPreview" type="Control" parent="HandPivot" unique_id=2120272582]
+layout_mode = 1
+anchors_preset = 0
+
+[node name="Card1" parent="HandPivot/_EditorPreview" unique_id=2034696892 instance=ExtResource("1_card")]
+layout_mode = 1
+offset_left = -354.36
+offset_top = 82.74
+offset_right = -354.36
+offset_bottom = 82.74
+rotation = -0.4593
 scale = Vector2(0.5, 0.5)
 
-[node name="C2" type="Control" parent="CanvasLayer/HandCenter" unique_id=195611903]
-anchors_preset = 0
-rotation = -0.2617994
-
-[node name="CardButton" parent="CanvasLayer/HandCenter/C2" unique_id=1034168276 instance=ExtResource("1_pi8wf")]
+[node name="Card2" parent="HandPivot/_EditorPreview" unique_id=1855468504 instance=ExtResource("1_card")]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = -3.0357144
-anchor_top = -9.349056
-anchor_right = -3.0357144
-anchor_bottom = -9.349056
-offset_top = -1000.0
-offset_bottom = -1000.0
-grow_horizontal = 1
-grow_vertical = 1
+offset_left = -257.87
+offset_top = 42.74
+offset_right = -257.87
+offset_bottom = 42.74
+rotation = -0.328
 scale = Vector2(0.5, 0.5)
 
-[node name="C3" type="Control" parent="CanvasLayer/HandCenter" unique_id=82666858]
-anchors_preset = 0
-rotation = -0.17453292
-
-[node name="CardButton" parent="CanvasLayer/HandCenter/C3" unique_id=1480222798 instance=ExtResource("1_pi8wf")]
+[node name="Card3" parent="HandPivot/_EditorPreview" unique_id=1976295263 instance=ExtResource("1_card")]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = -3.0357144
-anchor_top = -9.349056
-anchor_right = -3.0357144
-anchor_bottom = -9.349056
-offset_top = -1000.0
-offset_bottom = -1000.0
-grow_horizontal = 1
-grow_vertical = 1
+offset_left = -156.5
+offset_top = 15.41
+offset_right = -156.5
+offset_bottom = 15.41
+rotation = -0.1968
 scale = Vector2(0.5, 0.5)
 
-[node name="C4" type="Control" parent="CanvasLayer/HandCenter" unique_id=1096007162]
-anchors_preset = 0
-rotation = -0.08726646
-
-[node name="CardButton" parent="CanvasLayer/HandCenter/C4" unique_id=938301714 instance=ExtResource("1_pi8wf")]
+[node name="Card4" parent="HandPivot/_EditorPreview" unique_id=304247677 instance=ExtResource("1_card")]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = -3.0357144
-anchor_top = -9.349056
-anchor_right = -3.0357144
-anchor_bottom = -9.349056
-offset_top = -1000.0
-offset_bottom = -1000.0
-grow_horizontal = 1
-grow_vertical = 1
+offset_left = -52.46
+offset_top = 1.72
+offset_right = -52.46
+offset_bottom = 1.72
+rotation = -0.0656
 scale = Vector2(0.5, 0.5)
 
-[node name="C5" type="Control" parent="CanvasLayer/HandCenter" unique_id=858920299]
-anchors_preset = 0
-
-[node name="CardButton" parent="CanvasLayer/HandCenter/C5" unique_id=180969143 instance=ExtResource("1_pi8wf")]
+[node name="Card5" parent="HandPivot/_EditorPreview" unique_id=1010053505 instance=ExtResource("1_card")]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = -3.0357144
-anchor_top = -9.349056
-anchor_right = -3.0357144
-anchor_bottom = -9.349056
-offset_top = -1000.0
-offset_bottom = -1000.0
-grow_horizontal = 1
-grow_vertical = 1
+offset_left = 52.46
+offset_top = 1.72
+offset_right = 52.46
+offset_bottom = 1.72
+rotation = 0.0656
 scale = Vector2(0.5, 0.5)
 
-[node name="C6" type="Control" parent="CanvasLayer/HandCenter" unique_id=1039971100]
-anchors_preset = 0
-rotation = 0.08726646
-
-[node name="CardButton" parent="CanvasLayer/HandCenter/C6" unique_id=1096537378 instance=ExtResource("1_pi8wf")]
+[node name="Card6" parent="HandPivot/_EditorPreview" unique_id=1410529412 instance=ExtResource("1_card")]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = -3.0357144
-anchor_top = -9.349056
-anchor_right = -3.0357144
-anchor_bottom = -9.349056
-offset_top = -1000.0
-offset_bottom = -1000.0
-grow_horizontal = 1
-grow_vertical = 1
+offset_left = 156.5
+offset_top = 15.41
+offset_right = 156.5
+offset_bottom = 15.41
+rotation = 0.1968
 scale = Vector2(0.5, 0.5)
 
-[node name="C7" type="Control" parent="CanvasLayer/HandCenter" unique_id=851728925]
-anchors_preset = 0
-rotation = 0.17453292
-
-[node name="CardButton" parent="CanvasLayer/HandCenter/C7" unique_id=1184187148 instance=ExtResource("1_pi8wf")]
+[node name="Card7" parent="HandPivot/_EditorPreview" unique_id=617487931 instance=ExtResource("1_card")]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = -3.0357144
-anchor_top = -9.349056
-anchor_right = -3.0357144
-anchor_bottom = -9.349056
-offset_top = -1000.0
-offset_bottom = -1000.0
-grow_horizontal = 1
-grow_vertical = 1
+offset_left = 257.87
+offset_top = 42.74
+offset_right = 257.87
+offset_bottom = 42.74
+rotation = 0.328
 scale = Vector2(0.5, 0.5)
 
-[node name="C8" type="Control" parent="CanvasLayer/HandCenter" unique_id=1441260201]
-anchors_preset = 0
-rotation = 0.2617994
-
-[node name="CardButton" parent="CanvasLayer/HandCenter/C8" unique_id=296068790 instance=ExtResource("1_pi8wf")]
+[node name="Card8" parent="HandPivot/_EditorPreview" unique_id=304716912 instance=ExtResource("1_card")]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = -3.0357144
-anchor_top = -9.349056
-anchor_right = -3.0357144
-anchor_bottom = -9.349056
-offset_top = -1000.0
-offset_bottom = -1000.0
-grow_horizontal = 1
-grow_vertical = 1
-scale = Vector2(0.5, 0.5)
-
-[node name="C9" type="Control" parent="CanvasLayer/HandCenter" unique_id=679756169]
-anchors_preset = 0
-rotation = 0.34906584
-
-[node name="CardButton" parent="CanvasLayer/HandCenter/C9" unique_id=1686768916 instance=ExtResource("1_pi8wf")]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -3.0357144
-anchor_top = -9.349056
-anchor_right = -3.0357144
-anchor_bottom = -9.349056
-offset_top = -1000.0
-offset_bottom = -1000.0
-grow_horizontal = 1
-grow_vertical = 1
+offset_left = 354.36
+offset_top = 82.74
+offset_right = 354.36
+offset_bottom = 82.74
+rotation = 0.4593
 scale = Vector2(0.5, 0.5)
