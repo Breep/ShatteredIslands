@@ -106,6 +106,13 @@ var _drop_index: int = -1
 var _batch_mode: bool = false
 
 var _hand_pivot_starting_position: Vector2
+
+# Tweens de feedback de refus d'ajout. Chaque cible a son propre tracker pour
+# qu'un nouveau refus sur une cible n'aille pas tuer un tween en cours sur
+# une autre (sinon la précédente reste figée à mi-anim).
+var _card_flash_tweens: Dictionary[StringName, Tween] = {}
+var _counter_flash_tween: Tween
+var _hand_full_warning_tween: Tween
 #endregion
 
 
@@ -170,6 +177,7 @@ func unbind() -> void:
 	_hide_preview()
 	_cancel_drag()
 	_clear_all_card_buttons()
+	_kill_refusal_tweens()
 #endregion
 
 
@@ -315,6 +323,32 @@ func _tween_card_to(card_name: StringName, btn: CardButton, target_pos: Vector2,
 	tween.tween_property(btn, "rotation", target_rot, duration)
 	tween.tween_property(btn, "scale", target_scale, duration)
 	_layout_tweens[card_name] = tween
+
+
+func _kill_card_flash_tween(card_name: StringName) -> void:
+	var tween: Tween = _card_flash_tweens.get(card_name)
+	if tween != null and tween.is_valid():
+		tween.kill()
+	_card_flash_tweens.erase(card_name)
+
+
+# Coupe tous les tweens de feedback de refus en cours et remet les cibles à
+# leur état neutre (modulate blanc, warning label caché).
+func _kill_refusal_tweens() -> void:
+	for tween: Tween in _card_flash_tweens.values():
+		if tween != null and tween.is_valid():
+			tween.kill()
+	_card_flash_tweens.clear()
+	if _counter_flash_tween != null and _counter_flash_tween.is_valid():
+		_counter_flash_tween.kill()
+	_counter_flash_tween = null
+	if _card_counter_label != null:
+		_card_counter_label.modulate = Color.WHITE
+	if _hand_full_warning_tween != null and _hand_full_warning_tween.is_valid():
+		_hand_full_warning_tween.kill()
+	_hand_full_warning_tween = null
+	if _warning_hand_full_label != null:
+		_warning_hand_full_label.visible = false
 
 
 func _start_preview_timer(card: Card) -> void:
@@ -501,6 +535,7 @@ func _on_hand_card_removed(card: Card) -> void:
 		_hovered_card = null
 		_cancel_preview_timer()
 		_hide_preview()
+	_kill_card_flash_tween(card.name)
 	var btn: CardButton = _card_buttons.get(card.name)
 	if btn != null:
 		var tween: Tween = _layout_tweens.get(card.name)
@@ -538,6 +573,7 @@ func _on_hand_card_held(card: Card) -> void:
 		_hovered_card = null
 		_cancel_preview_timer()
 		_hide_preview()
+	_kill_card_flash_tween(card.name)
 	var btn: CardButton = _card_buttons.get(card.name)
 	if btn != null:
 		var tween: Tween = _layout_tweens.get(card.name)
@@ -600,35 +636,67 @@ func _on_drop_landing_finished(dropped_btn: CardButton) -> void:
 		dropped_btn.z_index = 0
 
 
-var _warning_tween: Tween
 func _on_hand_card_addition_refused(card: Card, reason: Hand.RefusalReason) -> void:
 	match reason:
 		Hand.RefusalReason.CARD_ALREADY_MAXED_OUT:
 			AudioManager.play_ui("error_01")
-			var btn: CardButton = _card_buttons.get(card.name)
-			if btn != null:
-				if _warning_tween != null and _warning_tween.is_valid():
-					_warning_tween.kill()
-				_warning_tween = create_tween()
-				_warning_tween.tween_property(btn, "modulate", Color.RED, 0.15).set_trans(Tween.TRANS_SINE)
-				_warning_tween.tween_property(btn, "modulate", Color.WHITE, 0.15).set_trans(Tween.TRANS_SINE)
+			_flash_card_red(card)
 		Hand.RefusalReason.HAND_IS_FULL:
 			AudioManager.play_ui("error_02")
-			var counter_tween: Tween = create_tween()
-			counter_tween.tween_property(_card_counter_label, "modulate", Color.RED, 0.1)
-			counter_tween.tween_property(_card_counter_label, "modulate", Color.WHITE, 0.1)
-			counter_tween.tween_property(_card_counter_label, "modulate", Color.RED, 0.1)
-			counter_tween.tween_property(_card_counter_label, "modulate", Color.WHITE, 0.1)
-			if _warning_hand_full_label != null:
-				if _warning_tween != null and _warning_tween.is_valid():
-					_warning_tween.kill()
-				_warning_tween = create_tween()
-				_warning_hand_full_label.visible = true
-				_warning_hand_full_label.modulate.a = 0.0 # Départ transparent
-				_warning_tween.tween_property(_warning_hand_full_label, "modulate:a", 1.0, 0.2)
-				_warning_tween.tween_interval(2.0)
-				_warning_tween.tween_property(_warning_hand_full_label, "modulate:a", 0.0, 0.3)
-				_warning_tween.tween_callback(func() -> void: _warning_hand_full_label.visible = false)
+			_flash_counter_red()
+			_show_hand_full_warning()
+
+
+# Flash rouge → blanc sur le bouton de la carte refusée. Tracker par-carte
+# pour que spammer sur plusieurs cartes ne kill pas les flashs en cours sur
+# les autres (et qu'elles ne restent pas figées en rouge).
+func _flash_card_red(card: Card) -> void:
+	var btn: CardButton = _card_buttons.get(card.name)
+	if btn == null:
+		return
+	var existing: Tween = _card_flash_tweens.get(card.name)
+	if existing != null and existing.is_valid():
+		existing.kill()
+	# Reset explicite à blanc avant de relancer, sinon un kill au milieu d'un
+	# fade-out laisserait la carte à mi-rouge.
+	btn.modulate = Color.WHITE
+	var tween: Tween = create_tween().set_trans(Tween.TRANS_SINE)
+	tween.tween_property(btn, "modulate", Color.RED, 0.15)
+	tween.tween_property(btn, "modulate", Color.WHITE, 0.15)
+	_card_flash_tweens[card.name] = tween
+
+
+func _flash_counter_red() -> void:
+	if _counter_flash_tween != null and _counter_flash_tween.is_valid():
+		_counter_flash_tween.kill()
+	_card_counter_label.modulate = Color.WHITE
+	_counter_flash_tween = create_tween()
+	_counter_flash_tween.tween_property(_card_counter_label, "modulate", Color.RED, 0.1)
+	_counter_flash_tween.tween_property(_card_counter_label, "modulate", Color.WHITE, 0.1)
+	_counter_flash_tween.tween_property(_card_counter_label, "modulate", Color.RED, 0.1)
+	_counter_flash_tween.tween_property(_card_counter_label, "modulate", Color.WHITE, 0.1)
+
+
+func _show_hand_full_warning() -> void:
+	if _warning_hand_full_label == null:
+		return
+	if _hand_full_warning_tween != null and _hand_full_warning_tween.is_valid():
+		_hand_full_warning_tween.kill()
+	# Reset explicite : si on était à mi-fade-out, on repart proprement de 0
+	# transparent (la callback `visible = false` peut ne pas avoir fire si
+	# le tween précédent a été tué).
+	_warning_hand_full_label.visible = true
+	_warning_hand_full_label.modulate.a = 0.0
+	_hand_full_warning_tween = create_tween()
+	_hand_full_warning_tween.tween_property(_warning_hand_full_label, "modulate:a", 1.0, 0.2)
+	_hand_full_warning_tween.tween_interval(2.0)
+	_hand_full_warning_tween.tween_property(_warning_hand_full_label, "modulate:a", 0.0, 0.3)
+	_hand_full_warning_tween.tween_callback(_hide_hand_full_warning)
+
+
+func _hide_hand_full_warning() -> void:
+	if _warning_hand_full_label != null:
+		_warning_hand_full_label.visible = false
 #endregion
 
 
