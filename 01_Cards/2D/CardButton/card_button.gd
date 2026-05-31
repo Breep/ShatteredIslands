@@ -7,6 +7,8 @@ extends Control
 # ============================== Signals ==============================
 
 signal card_selected(self_ref: CardButton, card: Card)
+signal mouse_entered_card(card: Card)
+signal mouse_exited_card(card: Card)
 
 # ============================== Constants ==============================
 
@@ -41,6 +43,7 @@ var _current_rot_y: float
 
 var _is_focused: bool = false
 var _hover_enabled: bool = true
+var _hover_audio_enabled: bool = true
 var _card_tween: Tween
 var _canvas_base_position: Vector2
 var _canvas_base_scale: Vector2
@@ -91,12 +94,16 @@ func set_locked(locked: bool) -> void:
 
 
 # Désactive le survol (hover scale/lift + 3D shader tracking + son hover) et
-# bloque les clics. Utilisé par UIHand pour neutraliser ces effets tant que
-# l'éventail n'est pas validé.
+# bloque les clics. Les signaux mouse_entered_card / mouse_exited_card restent
+# émis pour que l'extérieur (UIHand) puisse piloter sa propre logique de hover.
 func set_hover_enabled(enabled: bool) -> void:
 	_hover_enabled = enabled
 	if not enabled and _is_focused:
 		_on_control_mouse_exited()
+
+
+func set_hover_audio_enabled(enabled: bool) -> void:
+	_hover_audio_enabled = enabled
 
 # ============================== Node base functions ==============================
 
@@ -150,14 +157,18 @@ func _animation_reset_3d_rotation() -> void:
 
 
 func _on_control_mouse_entered() -> void:
+	mouse_entered_card.emit(_card)
 	if not _hover_enabled: return
 	_is_focused = true
 	_card_layout.mouse_entered()
 	_animate_hover(true)
-	AudioManager.play_ui("card_drawn")
+	if _hover_audio_enabled:
+		AudioManager.play_ui("card_drawn")
 
 
 func _on_control_mouse_exited() -> void:
+	mouse_exited_card.emit(_card)
+	if not _is_focused: return
 	_is_focused = false
 	_animation_reset_3d_rotation()
 	_card_layout.mouse_exited()

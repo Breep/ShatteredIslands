@@ -10,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("2_script")
 _card_button_scene = ExtResource("1_card")
 _hand_pivot = NodePath("HandPivot")
@@ -26,6 +27,7 @@ offset_top = -150.0
 offset_bottom = -150.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
 
 [node name="_EditorPreview" type="Control" parent="HandPivot" unique_id=2120272582]
 layout_mode = 1
