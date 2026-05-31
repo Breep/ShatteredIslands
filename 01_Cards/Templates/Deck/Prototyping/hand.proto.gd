@@ -29,7 +29,10 @@ func _ready() -> void:
 func _on_draw_button_pressed() -> void:
 	var drawn: Array[Card] = shop_deck.draw(1, _rarity_chances)
 	for card: Card in drawn:
-		_hand.add_card(card)
+		if _hand.can_add(card):
+			_hand.add_card(card)
+		else:
+			shop_deck.add_card(card)
 	_refresh_viewers()
 
 
@@ -38,8 +41,9 @@ func _on_give_back_button_pressed() -> void:
 	if hand_cards.is_empty():
 		return
 	var card: Card = hand_cards.back()
-	_hand.remove_card(card)
-	shop_deck.add_card(card)
+	var removed_cards: Array[Card] = _hand.remove_card(card)
+	for removed_card: Card in removed_cards:
+		shop_deck.add_card(removed_card)
 	_refresh_viewers()
 
 

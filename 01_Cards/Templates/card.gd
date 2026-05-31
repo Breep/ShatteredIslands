@@ -33,13 +33,13 @@ const RARITY_CARD_VALUE: Dictionary[Rarity, int] = {
 }
 
 ## Identité de design stable (réseau, dédoublonnage main/coffre, leveling).
-@export var id : StringName
-@export var name : String
+@export var name : StringName
 @export var picture : Texture2D
 @export var families: Array[Family.Type]
 @export var rarity : Rarity
 @export var player_upgrade: CardEffect
 @export var points: Dictionary[Family.Type, int]
+var uid: int
 
 var _lvl: int = 1 # Current lvl
 @export_range(1, 5) var lvl: int:
@@ -52,12 +52,3 @@ var _lvl: int = 1 # Current lvl
 
 func is_max_level() -> bool:
 	return _lvl == RARITY_MAX_LEVEL[rarity]
-
-
-# Identité de design effective. Retombe sur `name` tant que `id` n'est pas
-# renseigné, pour rester compatible avec les .tres existants.
-func design_id() -> StringName:
-	return id if id != &"" else StringName(name)
-
-
-var uid: int

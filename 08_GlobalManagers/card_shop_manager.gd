@@ -324,7 +324,7 @@ func _answer_refresh_shop(cards_uids: Array[int]) -> void:
 
 func _server_try_sell_card(player: Player, card: Card) -> bool:
 	Verbose.trace("_server_try_sell_card() | " + player.player_name + " | " + card.name, Verbose.Category.CARD_SHOP)
-	var hand_card: Card = player.deck.get_card(card.design_id())
+	var hand_card: Card = player.deck.get_card(card.get_id())
 	if hand_card == null:
 		Verbose.warn("Peer." + str(player.id) + " tries to sell a card not in his hand [" + card.name + "]", Verbose.Category.CARD_SHOP)
 		return false
@@ -336,7 +336,7 @@ func _server_try_sell_card(player: Player, card: Card) -> bool:
 signal _answer_for_selling_request_received()
 func _client_try_sell_card(card: Card) -> bool:
 	Verbose.trace("_client_try_sell_card() | " + card.name, Verbose.Category.CARD_SHOP)
-	_ask_sell_card.rpc_id(SERVER_ID, String(card.design_id()))
+	_ask_sell_card.rpc_id(SERVER_ID, String(card.get_id()))
 	await _answer_for_selling_request_received
 
 	if _server_response == ServerResponse.OK:

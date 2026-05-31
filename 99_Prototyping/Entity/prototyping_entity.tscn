@@ -59,6 +59,38 @@ battle_id = 1
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
 
+[node name="GoblinBerserker2" parent="Node3D/Entities" unique_id=250141282 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("18_kq8si")]
+transform = Transform3D(0.26981065, 0, -0.9629133, 0, 1.0000001, 0, 0.9629133, 0, 0.26981065, -3.5715346, 0, -0.37205693)
+level = 4
+team = 2
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
+[node name="GoblinBerserker3" parent="Node3D/Entities" unique_id=1388256540 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("18_kq8si")]
+transform = Transform3D(0.26981065, 0, -0.9629133, 0, 1.0000001, 0, 0.9629133, 0, 0.26981065, -5.8804364, 0, 5.646377)
+level = 4
+team = 2
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
+[node name="GoblinBerserker4" parent="Node3D/Entities" unique_id=1568344774 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("18_kq8si")]
+transform = Transform3D(0.26981065, 0, -0.9629133, 0, 1.0000001, 0, 0.9629133, 0, 0.26981065, -9.620904, 0, 5.7527604)
+level = 4
+team = 2
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
+[node name="GoblinBerserker5" parent="Node3D/Entities" unique_id=250410107 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("18_kq8si")]
+transform = Transform3D(0.26981065, 0, -0.9629133, 0, 1.0000001, 0, 0.9629133, 0, 0.26981065, -2.0081131, 0, 7.4490247)
+level = 4
+team = 2
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
 [node name="Latika2" parent="Node3D/Entities" unique_id=1941835210 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("3_os118")]
 transform = Transform3D(-0.2632837, 0, 0.96471834, 0, 1.0000001, 0, -0.96471834, 0, -0.2632837, 3.662788, 9.536744e-07, 0.110419974)
 level = 20
@@ -78,6 +110,30 @@ override_base_stats = SubResource("Resource_5qocs")
 
 [node name="Vrock2" parent="Node3D/Entities" unique_id=471542115 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("17_rnrfd")]
 transform = Transform3D(-0.01726045, 0, 0.9998509, 0, 1.0000001, 0, -0.9998509, 0, -0.01726045, 2.644456, 0, -2.3240192)
+level = 10
+team = 1
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
+[node name="Vrock3" parent="Node3D/Entities" unique_id=1302613586 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("17_rnrfd")]
+transform = Transform3D(-0.01726045, 0, 0.9998509, 0, 1.0000001, 0, -0.9998509, 0, -0.01726045, 1.5381408, 0, 7.4387455)
+level = 10
+team = 1
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
+[node name="Vrock4" parent="Node3D/Entities" unique_id=2033312693 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("17_rnrfd")]
+transform = Transform3D(-0.01726045, 0, 0.9998509, 0, 1.0000001, 0, -0.9998509, 0, -0.01726045, 0.8567457, 0, 2.817228)
+level = 10
+team = 1
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
+[node name="Vrock5" parent="Node3D/Entities" unique_id=701026156 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("17_rnrfd")]
+transform = Transform3D(-0.01726045, 0, 0.9998509, 0, 1.0000001, 0, -0.9998509, 0, -0.01726045, 0.8945203, 4.768372e-07, -0.69487685)
 level = 10
 team = 1
 battle_id = 1
@@ -254,6 +310,7 @@ _owner = NodePath("..")
 
 [node name="TestingFloorFFA5" parent="Node3D" unique_id=283551194 instance=ExtResource("11_5hdqt")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+visible = false
 
 [node name="FloorArea" parent="Node3D/TestingFloorFFA5" index="0" unique_id=2121644269]
 collision_layer = 8

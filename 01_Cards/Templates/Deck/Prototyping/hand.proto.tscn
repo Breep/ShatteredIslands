@@ -9,12 +9,24 @@
 [ext_resource type="Resource" uid="uid://cno4627vx3nt8" path="res://01_Cards/Pool/Cards/Colossus/Epic/VitalPulse/colossus_vital_pulse.tres" id="5_t6h7b"]
 [ext_resource type="Resource" uid="uid://bgx3j85dxco0q" path="res://01_Cards/Pool/Cards/Engineer/Rare/BarbedWire/engineer_barbed_wire.tres" id="6_87usm"]
 [ext_resource type="Resource" uid="uid://hbwmi3ykad2r" path="res://01_Cards/Pool/Cards/ChickenLord/Legendary/chickenlord_eggfinity.tres" id="7_2isfx"]
+[ext_resource type="Resource" uid="uid://cqpsc1s0ykjx2" path="res://01_Cards/Pool/Cards/ArdentCelestial/Legendary/Apocalypse/fire_apocalypse.tres" id="7_twr7d"]
+[ext_resource type="Resource" uid="uid://cbphkih3mu1ij" path="res://01_Cards/Pool/Cards/ArdentCelestial/Epic/ArmagedHeal/ardent_celestial_armaged'heal.tres" id="8_dqb6v"]
 [ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="10_00qip"]
+[ext_resource type="Resource" uid="uid://cx8ghn5qu8ot6" path="res://01_Cards/Pool/Cards/ArdentCelestial/Common/DarkForest/fire_dark_forest.tres" id="10_dku5n"]
 [ext_resource type="Script" uid="uid://bia26v50nwe6c" path="res://04_UI/UIButton/ui_button.gd" id="10_t6h7b"]
+[ext_resource type="Resource" uid="uid://c8xlom0vjt6rp" path="res://01_Cards/Pool/Cards/ArdentCelestial/Common/DiamondSkin/ardent_celestial_diamond_skin.tres" id="11_rkbpd"]
+[ext_resource type="Resource" uid="uid://qcfmiuxm33bh" path="res://01_Cards/Pool/Cards/ChickenLord/Epic/BloodFrenzy/chickenlord_blood_frenzy.tres" id="12_dhoup"]
+[ext_resource type="Resource" uid="uid://que1ypgbtrlx" path="res://01_Cards/Pool/Cards/ChickenLord/Epic/ChickenTwins/chicken_twins.tres" id="13_ang6d"]
 
 [sub_resource type="Resource" id="Resource_xangt"]
 script = ExtResource("2_ym2m1")
-_unique_card_catalogs = Array[ExtResource("2_xangt")]([ExtResource("3_jwt2k"), ExtResource("4_00qip"), ExtResource("5_t6h7b"), ExtResource("6_87usm"), ExtResource("7_2isfx")])
+_unique_card_catalogs = Array[ExtResource("2_xangt")]([ExtResource("3_jwt2k"), ExtResource("5_t6h7b"), ExtResource("6_87usm"), ExtResource("7_2isfx"), ExtResource("7_twr7d"), ExtResource("8_dqb6v"), ExtResource("4_00qip"), ExtResource("10_dku5n"), ExtResource("11_rkbpd"), ExtResource("12_dhoup"), ExtResource("13_ang6d")])
+_rarity_card_numbers = Dictionary[int, int]({
+0: 3,
+1: 2,
+2: 2,
+3: 1
+})
 metadata/_custom_type_script = "uid://cq8l8mwv8k27y"
 
 [node name="HandProto" type="Node" unique_id=1135353111]
@@ -34,10 +46,10 @@ theme = ExtResource("10_00qip")
 
 [node name="Panel" type="Panel" parent="UI/Control" unique_id=1339017744]
 layout_mode = 0
-offset_left = 527.0
-offset_top = 44.0
-offset_right = 1354.0
-offset_bottom = 157.0
+offset_left = 540.0
+offset_top = 48.0
+offset_right = 1367.0
+offset_bottom = 161.0
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/Control/Panel" unique_id=774939339]
 layout_mode = 1

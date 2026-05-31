@@ -22,16 +22,16 @@ extends Resource
 #region ============================== Init functions ==============================
 func init_catalog(cards: Array[Card]) -> void:
 	var unique_cards: Array[Card] = []
-	var seen_ids: Dictionary = {}
+	var seen_names: Dictionary = {}
 	var has_duplicates: bool = false
 	
 	for card in cards:
 		if card == null: continue
-		if seen_ids.has(card.id):
+		if seen_names.has(card.name):
 			has_duplicates = true
 			Verbose.warn("ShopDeck: Carte en double ignorée (ID: %s, Nom: %s)" % [card.id, card.resource_name], Verbose.Category.SHOP_DECK)
 		else:
-			seen_ids[card.id] = true
+			seen_names[card.name] = true
 			unique_cards.append(card)
 	
 	if has_duplicates:
@@ -91,17 +91,17 @@ func remove_card(card: Card) -> void:
 # de design dans une même pioche. Les cartes piochées sont retirées du pool.
 func draw(count: int, rarity_chances: Dictionary[Card.Rarity, float]) -> Array[Card]:
 	var drawn: Array[Card] = []
-	var drawn_ids: Array[StringName] = []
+	var drawn_names: Array[StringName] = []
 	for _i in count:
 		var rarity: Card.Rarity = _roll_rarity(rarity_chances)
-		var card: Card = _pick_available(rarity, drawn_ids)
+		var card: Card = _pick_available(rarity, drawn_names)
 		if card == null:
-			card = _pick_fallback(rarity, drawn_ids)
+			card = _pick_fallback(rarity, drawn_names)
 		if card == null:
 			Verbose.warn("ShopDeck: no more cards available to draw", Verbose.Category.SHOP_DECK)
 			break
 		drawn.append(card)
-		drawn_ids.append(card.design_id())
+		drawn_names.append(card.name)
 	for card in drawn:
 		remove_card(card)
 	return drawn
@@ -115,16 +115,17 @@ func get_cards() -> Array:
 func _add(card: Card) -> void:
 	if not _pools.has(card.rarity):
 		_pools[card.rarity] = [] as Array[Card]
+	card.lvl = 1
 	_pools[card.rarity].append(card)
 	_by_uid[card.uid] = card
 
 
-func _pick_available(rarity: Card.Rarity, exclude_ids: Array[StringName]) -> Card:
+func _pick_available(rarity: Card.Rarity, exclude_names: Array[StringName]) -> Card:
 	if not _pools.has(rarity):
 		return null
 	var candidates: Array[Card] = []
 	for card: Card in _pools[rarity]:
-		if not card.design_id() in exclude_ids:
+		if not card.name in exclude_names:
 			candidates.append(card)
 	if candidates.is_empty():
 		return null
@@ -133,7 +134,7 @@ func _pick_available(rarity: Card.Rarity, exclude_ids: Array[StringName]) -> Car
 
 # Cherche une rareté de repli (de la plus haute vers la plus basse) si la rareté
 # tirée est épuisée.
-func _pick_fallback(rarity: Card.Rarity, exclude_ids: Array[StringName]) -> Card:
+func _pick_fallback(rarity: Card.Rarity, exclude_names: Array[StringName]) -> Card:
 	var order: Array[Card.Rarity] = [
 		Card.Rarity.LEGENDARY,
 		Card.Rarity.EPIC,
@@ -142,7 +143,7 @@ func _pick_fallback(rarity: Card.Rarity, exclude_ids: Array[StringName]) -> Card
 	]
 	var start: int = order.find(rarity)
 	for i in range(start + 1, order.size()):
-		var card: Card = _pick_available(order[i], exclude_ids)
+		var card: Card = _pick_available(order[i], exclude_names)
 		if card != null:
 			return card
 	return null

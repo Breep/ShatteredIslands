@@ -49,7 +49,7 @@ func apply_card(card: Card) -> void:
 		return
 	if card == null or card.player_upgrade == null:
 		return
-	_card_context.card_id = card.design_id()
+	_card_context.card_id = card.get_id()
 	card.player_upgrade.apply_card(_card_context, card.lvl)
 
 
@@ -60,7 +60,7 @@ func revert_card(card: Card) -> void:
 		return
 	if card == null or card.player_upgrade == null:
 		return
-	_card_context.card_id = card.design_id()
+	_card_context.card_id = card.get_id()
 	card.player_upgrade.revert_card(_card_context, card.lvl)
 
 

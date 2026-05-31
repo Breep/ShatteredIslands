@@ -33,8 +33,8 @@ func is_full() -> bool:
 # - slot reste libre
 # - Carte déjà présente dans le deck et non niveau max (level up)
 func can_add(card: Card) -> bool:
-	if card == null:
-		return false
+	if card == null: return false
+	if is_max_level_card(card): return false
 	return not is_full() or contains(card)
 
 
