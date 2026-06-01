@@ -30,6 +30,19 @@ func get_cards_raw() -> Array[Card]:
 	return _cards.values()
 
 
+# Renvoie une copie de la liste des cartes (UID distincts) qui composent le
+# design `name` — une carte agrégée niveau N empile N cartes. Utile pour un
+# drag : la cible (vente, coffre) a besoin des cartes réelles, pas seulement de
+# l'agrégat affiché.
+func get_source_cards(name: StringName) -> Array[Card]:
+	var result: Array[Card] = []
+	if not _by_name.has(name):
+		return result
+	for card: Card in _by_name[name]:
+		result.append(card)
+	return result
+
+
 func has(name: StringName) -> bool:
 	return _cards.has(name)
 

@@ -4,6 +4,7 @@
 [ext_resource type="Resource" uid="uid://cmq4qbn1jck17" path="res://01_Cards/Templates/CardShop/shop_deck.proto.tres" id="2_nv5th"]
 [ext_resource type="PackedScene" uid="uid://cmy7daws5mc0v" path="res://01_Cards/2D/Hand/ui_hand.tscn" id="4_uihand"]
 [ext_resource type="PackedScene" uid="uid://d1oxnd1g75rqh" path="res://04_UI/InGame/BuyingArea/CardShop/ui_card_shop.tscn" id="5_uishop"]
+[ext_resource type="Script" uid="uid://het037dux5qw" path="res://04_UI/Tool/DragCoordinator/drag_coordinator.gd" id="6_dragco"]
 [ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="15_theme"]
 
 [node name="CardShopHandProto" type="Node" unique_id=1979912402]
@@ -11,13 +12,16 @@ script = ExtResource("1_proto")
 _shop_deck = ExtResource("2_nv5th")
 _hand_max_slots = 5
 
+[node name="DragCoordinator" type="Node" parent="." unique_id=1979912403]
+script = ExtResource("6_dragco")
+
 [node name="UI" type="CanvasLayer" parent="." unique_id=1421883916]
 
-[node name="UIHand" parent="UI" unique_id=680488006 node_paths=PackedStringArray("_ui_card_shop") instance=ExtResource("4_uihand")]
+[node name="UIHand" parent="UI" unique_id=680488006 node_paths=PackedStringArray("_drag_coordinator") instance=ExtResource("4_uihand")]
 unique_name_in_owner = true
-_ui_card_shop = NodePath("../UICardShop")
+_drag_coordinator = NodePath("../../DragCoordinator")
 
-[node name="UICardShop" parent="UI" unique_id=793435432 node_paths=PackedStringArray("_ui_hand") instance=ExtResource("5_uishop")]
+[node name="UICardShop" parent="UI" unique_id=793435432 node_paths=PackedStringArray("_drag_coordinator") instance=ExtResource("5_uishop")]
 unique_name_in_owner = true
 anchors_preset = 10
 anchor_left = 0.0
@@ -29,7 +33,8 @@ offset_top = 40.0
 offset_right = -292.0
 offset_bottom = 600.0
 grow_vertical = 1
-_ui_hand = NodePath("../UIHand")
+_drag_coordinator = NodePath("../../DragCoordinator")
+_proto_mode = true
 
 [node name="ControlsLayer" type="Control" parent="UI" unique_id=1703991210]
 layout_mode = 3

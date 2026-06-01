@@ -1,30 +1,48 @@
-# UI du shop de cartes : affiche jusqu'à N cartes du PlayerCardShop. Les cartes
-# se drag depuis le shop ; si elles sont droppées dans la drop_zone de UIHand,
-# on tente l'achat via PlayerCardShop.try_buy_card. Sinon (drop hors zone ou
-# achat refusé), la carte est tweenée de retour à son slot d'origine.
+# UI du shop de cartes : affiche jusqu'à N cartes du PlayerCardShop, en ligne,
+# extensible. Conteneur de drag-and-drop enregistré auprès d'un DragCoordinator
+# (injecté) ; il ne connaît PAS les autres conteneurs.
+#
+# Deux rôles via le contrat container :
+#  - ORIGINE (achat) : on drag une carte du shop. Si elle atterrit dans un autre
+#    conteneur (la main), celui-ci tente de l'accueillir ; le shop facture l'or
+#    (can_supply / commit_removal). Drop ailleurs → retour au slot.
+#  - CIBLE (vente) : une carte d'un autre conteneur droppée sur le shop est
+#    rachetée. Le shop connaît la valeur de revente par rareté ; une carte
+#    niveau N = N cartes source → remboursement = N × valeur.
 class_name UICardShop
 extends Control
 
 #region ============================== Signals ==============================
 signal card_bought(card: Card)
+signal card_sold(card: Card, refund: int)
 #endregion
 
 
 #region ============================== Export ==============================
 @export var _card_buttons: Array[CardButton]
-## UIHand utilisé pour interroger sa drop_zone et tenter d'ajouter la carte.
-## Câblé dans la scène parent qui contient à la fois UICardShop et UIHand.
-@export var _ui_hand: UIHand
+## Médiateur de drag-and-drop. Injecté dans la scène parent. Le shop s'y
+## enregistre au _ready ; aucune référence directe aux autres conteneurs.
+@export var _drag_coordinator: DragCoordinator
 ## Mode proto : skip la résolution player/PlayerCardShop. Les cartes sont
-## fournies par display_cards() ; le drop dans la main passe directement par
-## UIHand.try_add_card (pas de gold, pas de serveur).
+## fournies par display_cards() ; pas de gold ni de serveur.
 @export var _proto_mode: bool = false
+
+@export_group("Economy")
+## Prix d'achat d'une carte (mode normal, vérifié via can_supply).
+@export var _buy_price: int = 100
+## Valeur de revente unitaire par rareté. Le remboursement d'une carte agrégée
+## niveau N = N × cette valeur (N = nombre de cartes source).
+@export var _sell_value_per_rarity: Dictionary[Card.Rarity, int] = {
+	Card.Rarity.COMMON: 50,
+	Card.Rarity.RARE: 50,
+	Card.Rarity.EPIC: 50,
+	Card.Rarity.LEGENDARY: 50,
+}
 
 @export_group("Drag")
 @export var _return_tween_duration: float = 0.25
-## Zone de drop du shop (positionnée dans l'éditeur, debug rect en @tool). Pour
-## l'instant utilisée seulement par d'autres UIs qui voudraient interroger « est
-## sur le shop ? » (futur : drop carte main → vente).
+@export var _sell_vanish_duration: float = 0.2
+## Zone de drop du shop (positionnée dans l'éditeur, debug rect en @tool).
 @export var _drop_zone: DropZone
 #endregion
 
@@ -38,14 +56,15 @@ var _local_player: Player
 var _is_active: bool = true
 var _is_locked: bool
 
-# Cartes actuellement affichées dans les slots du shop. Source de vérité côté
-# UI (mode proto) ou copie locale alimentée par shop_refreshed (mode normal).
+# Cartes actuellement affichées dans les slots. Source de vérité côté UI (proto)
+# ou copie locale alimentée par shop_refreshed (mode normal).
 var _displayed_cards: Array[Card] = []
 
-# Drag state
-var _dragging: HoveringCard
+# Drag state quand le shop est l'origine (achat en cours).
 var _drag_source_button: CardButton
 var _drag_source_card: Card
+
+var _sell_panel_shown: bool = false
 #endregion
 
 
@@ -58,25 +77,18 @@ var _drag_source_card: Card
 
 #region ============================== Node base functions ==============================
 func _ready() -> void:
-	# Connexions communes aux deux modes.
-	if _card_buttons.is_empty():
-		Verbose.warn("UICardShop._ready(): _card_buttons is empty (export not assigned?)", Verbose.Category.CARD_SHOP)
 	for card_button: CardButton in _card_buttons:
-		# Connection permanente (pas CONNECT_ONE_SHOT) : c'est le _dragging flag
-		# qui bloque les clics multiples pendant un drag.
+		# Connection permanente : c'est le coordinator qui empêche un nouveau drag
+		# pendant qu'un autre est en cours.
 		card_button.card_selected.connect(_on_card_shop_button_pressed)
 
+	if _drag_coordinator != null:
+		_drag_coordinator.register_container(self)
+
 	if _proto_mode:
-		# Pas de player infrastructure : refresh/random sont gérés par le
-		# script driver de la proto via display_cards().
 		_refresh_button.disabled = true
 		_random_card_button.disabled = true
 		return
-
-	# Mode normal : bind au PlayerCardShop via PlayerManager.
-	#if GameManager.game_type != GameManager.GameType.SOLO and multiplayer.is_server():
-		#queue_free()
-		#return
 
 	_local_player = PlayerManager.get_local_player()
 	if _local_player == null:
@@ -99,17 +111,9 @@ func _ready() -> void:
 	_card_shop.refresh_for_free()
 
 
-func _process(_delta: float) -> void:
-	# Pour l'instant rien : la HoveringCard suit la souris d'elle-même via son
-	# propre _process. Reservé pour un futur tracking de drop-target (highlight).
-	pass
-
-
-func _input(event: InputEvent) -> void:
-	if _dragging == null:
-		return
-	if event is InputEventMouseButton and not event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		_finalize_drag()
+func _exit_tree() -> void:
+	if _drag_coordinator != null:
+		_drag_coordinator.unregister_container(self)
 #endregion
 
 
@@ -130,33 +134,106 @@ func set_inactive() -> void:
 # autre source de données qui ne passe pas par PlayerCardShop / shop_refreshed).
 func display_cards(cards: Array[Card]) -> void:
 	_update_shop_cards_displayed_visual(cards)
+#endregion
 
 
-# Vrai si le point global est dans la zone d'accueil du shop. Pour qu'une UI
-# externe (la main, le coffre) puisse détecter qu'on drop dans la zone shop.
+#region ============================== Container contract (DragCoordinator) ==============================
+func get_drop_zone() -> DropZone:
+	return _drop_zone
+
+
+func on_drag_started(_payload: CardPayload, _origin: Object) -> void:
+	pass
+
+
+# Affiche le panneau de vente quand une carte EXTERNE (pas du shop) survole la
+# zone du shop.
+func on_drag_motion(payload: CardPayload, mouse_global: Vector2) -> void:
+	if payload.origin == self:
+		return
+	var inside: bool = _drop_zone != null and _drop_zone.contains_global(mouse_global)
+	if inside and not _sell_panel_shown:
+		_show_sell_panel(_compute_sell_value(payload))
+	elif not inside and _sell_panel_shown:
+		_hide_sell_panel()
+
+
+func on_drag_ended() -> void:
+	if _sell_panel_shown:
+		_hide_sell_panel()
+
+
+# Le shop accueille un drop = VENTE. Il rachète toute carte qui ne vient pas de
+# lui-même.
+func can_receive(payload: CardPayload) -> bool:
+	return payload.origin != self
+
+
+func receive(payload: CardPayload, hovering: HoveringCard) -> bool:
+	var refund: int = _compute_sell_value(payload)
+	if _local_player != null:
+		_local_player.gold += refund
+	card_sold.emit(payload.merged_card, refund)
+	AudioManager.play_ui("coin_01")
+	_animate_sell_vanish(hovering)
+	return true
+
+
+# can_supply : appelé par la cible (la main) pour valider qu'on peut « fournir »
+# la carte avant achat. Mode proto / pas de joueur → gratuit.
+func can_supply(_payload: CardPayload) -> bool:
+	if _local_player == null:
+		return true
+	return _local_player.gold >= _buy_price
+
+
+# La carte du shop a été achetée (acceptée par la main) : on facture et on retire
+# la carte du shop. La main possède la HoveringCard et joue l'atterrissage.
+func commit_removal(payload: CardPayload) -> void:
+	if _local_player != null:
+		_local_player.gold -= _buy_price
+	_displayed_cards.erase(payload.merged_card)
+	if _drag_source_button != null:
+		var slot: Control = _slot_for_button(_drag_source_button)
+		if slot != null:
+			slot.hide()
+	_drag_source_button = null
+	_drag_source_card = null
+	card_bought.emit(payload.merged_card)
+	Events.card_bought.emit(payload.merged_card)
+
+
+# Achat annulé (drop hors d'une cible valide, ou cible qui refuse) : la carte du
+# shop revient à son slot.
+func return_to_origin(_payload: CardPayload, hovering: HoveringCard) -> void:
+	var src_button: CardButton = _drag_source_button
+	var target_global: Vector2 = src_button.global_position if src_button != null else hovering.global_position
+	var target_scale: Vector2 = src_button.scale if src_button != null else hovering.get_card_button().scale
+	var card_btn: CardButton = hovering.get_card_button()
+	var tween: Tween = create_tween().set_parallel(true).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	tween.tween_property(hovering, "global_position", target_global, _return_tween_duration)
+	tween.tween_property(card_btn, "scale", target_scale, _return_tween_duration)
+	tween.chain().tween_callback(_on_return_finished.bind(hovering, src_button))
+	_drag_source_button = null
+	_drag_source_card = null
+	AudioManager.play_ui("card_06")
+#endregion
+
+
+#region ============================== Public helpers ==============================
 func is_inside_drop_zone(global_pos: Vector2) -> bool:
 	if _drop_zone == null:
 		return false
 	return _drop_zone.contains_global(global_pos)
-
-
-var sell_panel_visible: bool = false
-func show_sell_panel() -> void:
-	_show_sell_panel()
-
-
-func hide_sell_panel() -> void:
-	_hide_sell_panel()
 #endregion
 
 
 #region ============================== Private functions ==============================
 func _update_shop_cards_displayed_visual(cards: Array[Card]) -> void:
 	_displayed_cards = cards
-	# Cache tous les slots, puis affiche autant que de cartes (jusqu'à
-	# _card_buttons.size()). On masque le slot ENTIER (VBoxContainer parent)
-	# pour ne pas laisser le price label visible sur un slot vide.
 	AudioManager.play_ui("card_shuffle_01")
+	# Cache tous les slots, puis affiche autant que de cartes. On masque le slot
+	# ENTIER (parent) pour ne pas laisser le price label visible sur un vide.
 	for btn: CardButton in _card_buttons:
 		var slot: Control = _slot_for_button(btn)
 		if slot != null:
@@ -166,8 +243,8 @@ func _update_shop_cards_displayed_visual(cards: Array[Card]) -> void:
 		var slot: Control = _slot_for_button(btn)
 		if slot != null:
 			slot.show()
-		btn.update_visual(cards[i])
 		btn.show()
+		btn.update_visual(cards[i])
 		btn.play_appear_animation(i * _APPEAR_STAGGER)
 
 
@@ -181,165 +258,93 @@ func _slot_for_button(btn: CardButton) -> Control:
 	return intermediate.get_parent() as Control
 
 
-func _start_drag(card: Card, source_button: CardButton) -> void:
-	if _dragging != null or card == null or source_button == null:
+func _begin_drag_from_shop(card: Card, source_button: CardButton) -> void:
+	if _drag_coordinator == null or _drag_coordinator.is_dragging():
 		return
 	var grab_offset: Vector2 = source_button.global_position - get_global_mouse_position()
-	# On cache le bouton source pendant le drag — la HoveringCard prend le relais
-	# visuellement. La carte data reste dans cards_displayed du PlayerCardShop.
 	source_button.hide()
 
 	var visual_button: CardButton = _instance_card_button_for_drag()
-	var hovering: HoveringCard = HoveringCard.new()
-	add_child(hovering)
-	hovering.init(visual_button, card, grab_offset)
-	hovering.z_index = 200
-
-	_dragging = hovering
+	# Une carte du shop est une carte unique → une seule carte source.
+	var sources: Array[Card] = [card]
+	var payload: CardPayload = CardPayload.new(card, sources, self)
 	_drag_source_button = source_button
 	_drag_source_card = card
+	_drag_coordinator.begin_drag(self, payload, visual_button, grab_offset)
 
 
 # Instancie un CardButton à partir de la même PackedScene que les boutons du
-# shop (on prend le premier comme template). Évite de hardcoder le path.
+# shop (premier comme template). Évite de hardcoder le path.
 func _instance_card_button_for_drag() -> CardButton:
-	# Tous les CardButton instances du shop partagent la même scene_file_path.
 	var template_path: String = _card_buttons[0].scene_file_path
 	var scene: PackedScene = load(template_path)
 	return scene.instantiate() as CardButton
 
 
-func _finalize_drag() -> void:
-	if _dragging == null:
-		return
-	var card: Card = _drag_source_card
-	var source_button: CardButton = _drag_source_button
-	var drop_global: Vector2 = _dragging.global_position
-	var drop_scale: Vector2 = _dragging.get_card_button().scale
-
-	var mouse: Vector2 = get_global_mouse_position()
-	var in_hand_zone: bool = _ui_hand != null and _ui_hand.is_inside_drop_zone(mouse)
-
-	if in_hand_zone:
-		var bought: bool = await _try_perform_buy(card)
-		if bought:
-			# Succès : en mode normal, shop_refreshed nettoie les slots.
-			# En mode proto, _try_perform_buy a déjà retiré la carte localement.
-			_clear_drag_state()
-			return
-		# Échec d'achat (gold, refus serveur, main pleine…) : retour visuel.
-		_animate_return_to_source(drop_global, drop_scale, source_button)
-	else:
-		_animate_return_to_source(drop_global, drop_scale, source_button)
+func _compute_sell_value(payload: CardPayload) -> int:
+	var total: int = 0
+	for card: Card in payload.source_cards:
+		total += _sell_value_per_rarity.get(card.rarity, 0)
+	return total
 
 
-# Tente l'achat selon le mode. Mode normal : PlayerCardShop (gold + serveur).
-# Mode proto : appel direct à UIHand.try_add_card + retrait visuel ciblé.
-func _try_perform_buy(card: Card) -> bool:
-	if _card_shop != null:
-		return await _card_shop.try_buy_card(card)
-	if _ui_hand != null:
-		var added: bool = _ui_hand.try_add_card(card)
-		if added:
-			# Pas de shop_refreshed en proto. On retire la donnée et on cache
-			# UNIQUEMENT le slot acheté — pas de full redraw qui re-animerait
-			# l'appear de toutes les cartes restantes. Le HBoxContainer décale
-			# les visibles pour combler le trou tout en gardant la separation
-			# constante.
-			_displayed_cards.erase(card)
-			_hide_bought_slot()
-		return added
-	return false
-
-
-func _hide_bought_slot() -> void:
-	if _drag_source_button == null:
-		return
-	var slot: Control = _slot_for_button(_drag_source_button)
-	if slot != null:
-		slot.hide()
-
-
-# Tween la HoveringCard de sa position actuelle vers la position du bouton
-# source, puis free la HoveringCard et réaffiche le bouton.
-func _animate_return_to_source(start_global: Vector2, start_scale: Vector2, source_button: CardButton) -> void:
-	if _dragging == null:
-		return
-	var target_global: Vector2 = source_button.global_position
-	var target_scale: Vector2 = source_button.scale
-	# La HoveringCard est déjà à start_global / start_scale — on tween vers
-	# la position du slot. Pendant ce temps le bouton source reste caché ;
-	# il sera réaffiché à la fin du tween.
-	var hovering: HoveringCard = _dragging
-	hovering.set_process(false) # Stop le follow-souris pendant l'anim retour.
+# Anime la carte vendue qui « disparaît » dans le shop (shrink + fade) puis free.
+func _animate_sell_vanish(hovering: HoveringCard) -> void:
 	var card_btn: CardButton = hovering.get_card_button()
-	var tween: Tween = create_tween().set_parallel(true).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
-	tween.tween_property(hovering, "global_position", target_global, _return_tween_duration)
-	tween.tween_property(card_btn, "scale", target_scale, _return_tween_duration)
-	tween.chain().tween_callback(_on_return_animation_finished.bind(hovering, source_button))
-	# Reset l'état drag tout de suite côté UIHand : nouveau clic permis pendant
-	# que l'anim de retour joue (sur n'importe quelle autre carte).
-	_dragging = null
-	_drag_source_button = null
-	_drag_source_card = null
-	AudioManager.play_ui("card_06")
+	var tween: Tween = create_tween().set_parallel(true).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
+	tween.tween_property(card_btn, "scale", card_btn.scale * 0.2, _sell_vanish_duration)
+	tween.tween_property(hovering, "modulate:a", 0.0, _sell_vanish_duration)
+	tween.chain().tween_callback(_free_hovering.bind(hovering))
 
 
-func _on_return_animation_finished(hovering: HoveringCard, source_button: CardButton) -> void:
+func _free_hovering(hovering: HoveringCard) -> void:
+	if is_instance_valid(hovering):
+		hovering.queue_free()
+
+
+func _on_return_finished(hovering: HoveringCard, source_button: CardButton) -> void:
 	if is_instance_valid(hovering):
 		hovering.queue_free()
 	if is_instance_valid(source_button):
 		source_button.show()
 
 
-func _clear_drag_state() -> void:
-	if _dragging != null and is_instance_valid(_dragging):
-		_dragging.queue_free()
-	_dragging = null
-	_drag_source_button = null
-	_drag_source_card = null
-
-
 var _sell_panel_tween: Tween
-func _show_sell_panel() -> void:
-	sell_panel_visible = true
-	if _sell_panel_tween:
+func _show_sell_panel(refund_value: int) -> void:
+	_sell_panel_shown = true
+	if _sell_panel_tween != null and _sell_panel_tween.is_valid():
 		_sell_panel_tween.kill()
-	
-	_sell_card_panel.show() 
-	
+	_set_sell_panel_value(refund_value)
+	_sell_card_panel.show()
 	_sell_panel_tween = create_tween()
 	_sell_panel_tween.tween_property(_sell_card_panel, "modulate:a", 1.0, 0.25)
 
 
 func _hide_sell_panel() -> void:
-	sell_panel_visible = false
-	if _sell_panel_tween:
+	_sell_panel_shown = false
+	if _sell_panel_tween != null and _sell_panel_tween.is_valid():
 		_sell_panel_tween.kill()
-	
 	_sell_panel_tween = create_tween()
-	
 	_sell_panel_tween.tween_property(_sell_card_panel, "modulate:a", 0.0, 0.25)
-	
 	_sell_panel_tween.tween_callback(_sell_card_panel.hide)
+
+
+# Affiche la valeur de revente sur le panneau si un Label est présent dessous.
+func _set_sell_panel_value(refund_value: int) -> void:
+	var label: Label = _sell_card_panel.get_node_or_null("Label") as Label
+	if label != null:
+		label.text = "+%d" % refund_value
 #endregion
 
 
 #region ============================== Callbacks ==============================
 func _on_card_shop_button_pressed(button: CardButton, card: Card) -> void:
-	if _dragging != null:
-		return
 	if card == null:
 		return
-	_start_drag(card, button)
+	_begin_drag_from_shop(card, button)
 
 
 func _on_card_shop_shop_refreshed(new_cards: Array[Card]) -> void:
-	# Si un drag est en cours quand le shop refresh (succès d'achat), on cancel
-	# proprement (la HoveringCard est déjà en train de disparaître par _clear_drag_state
-	# si on vient de drop in-hand-zone ; sinon on s'assure de cleanup).
-	if _dragging != null:
-		_clear_drag_state()
 	_update_shop_cards_displayed_visual(new_cards)
 
 

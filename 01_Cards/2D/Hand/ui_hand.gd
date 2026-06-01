@@ -4,9 +4,14 @@
 # croît légèrement avec le nombre de cartes (spread = base + a*sqrt(N)). Au
 # survol d'une carte : la carte se redresse + grossit + monte, les voisines
 # s'écartent (décroissance exponentielle), et un preview agrandi apparaît près
-# du curseur après un délai. Au clic gauche sur une carte : la carte sort de la
-# main et flotte sous la souris (HoveringCard) ; le release la replace soit dans
-# la main à l'index visé (Rect2 drop zone), soit en fin (hors zone).
+# du curseur après un délai.
+#
+# Drag-and-drop : la main est un conteneur enregistré auprès d'un DragCoordinator
+# (injecté). Elle ne connaît PAS les autres conteneurs (shop, coffre) ; le
+# coordinator route les transferts. La main implémente le contrat container
+# (get_drop_zone / on_drag_* / can_receive / receive / return_to_origin /
+# commit_removal). Une carte tenue reste dans la Hand (hold) tant qu'elle n'est
+# pas transférée ailleurs ; un drop dans la main = simple reorder.
 class_name UIHand
 extends Control
 
@@ -16,7 +21,9 @@ signal card_clicked(card: Card)
 
 
 #region ============================== Export ==============================
-@export var _ui_card_shop: UICardShop
+## Médiateur de drag-and-drop. Injecté dans la scène parent. La main s'y
+## enregistre au _ready ; aucune référence directe aux autres conteneurs.
+@export var _drag_coordinator: DragCoordinator
 
 @export_group("Fan layout")
 ## Rayon de l'arc virtuel sur lequel se placent les cartes. Plus grand = arc
@@ -100,13 +107,16 @@ var _hovered_card: Card
 var _preview_epoch: int = 0
 var _preview_instance: CardButton
 
-var _dragging: HoveringCard
-# Index visuel du gap pendant un drag : -1 = hors zone (pas de gap, layout
-# normal sur N-1 cartes) ; sinon position cible (0..N) dans un layout N visuel.
-var _drop_index: int = -1
+# État de drag (piloté par le DragCoordinator via le contrat container).
+# _drag_active : un drag est en cours (n'importe quelle origine) → hover suspendu.
+# _drag_drop_index : position du « trou » visuel dans le fan (-1 = pas de trou).
+# _drag_original_index : index d'origine de la carte tenue, pour un retour hors zone.
+var _drag_active: bool = false
+var _drag_drop_index: int = -1
+var _drag_original_index: int = -1
 # Quand true, _layout_all() est court-circuité. Utilisé pour grouper plusieurs
-# mutations de la main (re-add + reorder au drop) sans déclencher de layouts
-# intermédiaires : un seul layout final part de la position courante des boutons.
+# mutations de la main (reorder + release, ou adds multiples) sans déclencher de
+# layouts intermédiaires : le layout final part de la position de la HoveringCard.
 var _batch_mode: bool = false
 
 var _hand_pivot_starting_position: Vector2
@@ -129,35 +139,17 @@ var _just_dropped_card_name: StringName = &""
 
 #region ============================== Node base functions ==============================
 func _ready() -> void:
-	set_process(false)
 	if _editor_preview_root != null:
 		_editor_preview_root.queue_free()
 		_editor_preview_root = null
 	_hand_pivot_starting_position = _hand_pivot.position
+	if _drag_coordinator != null:
+		_drag_coordinator.register_container(self)
 
 
-func _process(_delta: float) -> void:
-	if _dragging == null:
-		return
-	var mouse: Vector2 = get_global_mouse_position()
-	var new_index: int = -1
-	if is_inside_drop_zone(mouse):
-		new_index = _compute_drop_index(mouse)
-	if _ui_card_shop != null:
-		if _ui_card_shop.is_inside_drop_zone(mouse) and not _ui_card_shop.sell_panel_visible:
-			_ui_card_shop.show_sell_panel()
-		elif not _ui_card_shop.is_inside_drop_zone(mouse) and _ui_card_shop.sell_panel_visible:
-			_ui_card_shop.hide_sell_panel()
-	if new_index != _drop_index:
-		_drop_index = new_index
-		_layout_all(_hover_layout_duration)
-
-
-func _input(event: InputEvent) -> void:
-	if _dragging == null:
-		return
-	if event is InputEventMouseButton and not event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		_finalize_drag()
+func _exit_tree() -> void:
+	if _drag_coordinator != null:
+		_drag_coordinator.unregister_container(self)
 #endregion
 
 
@@ -179,27 +171,6 @@ func bind(hand: Hand) -> void:
 	_update_counter()
 
 
-# Vrai si le point global est dans la zone d'accueil de la main (la `DropZone`
-# configurée dans la scène). Utilisé par les autres UIs (shop, coffre) pour
-# détecter si leur drag a abouti dans la main.
-func is_inside_drop_zone(global_pos: Vector2) -> bool:
-	if _drop_zone == null:
-		return false
-	return _drop_zone.contains_global(global_pos)
-
-
-# Tente d'ajouter une carte dans la main (passe par Hand.add_card → vérifie
-# can_add, fire les signaux de refus si besoin). Utilisé par les autres UIs
-# qui veulent dropper une carte dans la main sans connaître les internes.
-func try_add_card(card: Card) -> bool:
-	if _hand == null or card == null:
-		return false
-	if _hand.add_card(card) == true:
-		AudioManager.play_ui("card_02")
-		return true
-	return false
-
-
 func unbind() -> void:
 	if _hand == null:
 		return
@@ -213,9 +184,95 @@ func unbind() -> void:
 	_hovered_card = null
 	_just_dropped_card_name = &""
 	_hide_preview()
-	_cancel_drag()
 	_clear_all_card_buttons()
 	_kill_refusal_tweens()
+#endregion
+
+
+#region ============================== Container contract (DragCoordinator) ==============================
+func get_drop_zone() -> DropZone:
+	return _drop_zone
+
+
+# Un drag a commencé quelque part (cette main ou ailleurs). On suspend le hover
+# et on nettoie tout état de survol en cours.
+func on_drag_started(_payload: CardPayload, _origin: Object) -> void:
+	_drag_active = true
+	if _hovered_card != null:
+		_hovered_card = null
+		_cancel_preview_timer()
+		_hide_preview()
+	_layout_all(_hover_layout_duration)
+
+
+# Chaque frame du drag : on calcule où la carte atterrirait si on était dans la
+# zone, et on déplace le « trou » du fan en conséquence.
+func on_drag_motion(_payload: CardPayload, mouse_global: Vector2) -> void:
+	var inside: bool = is_inside_drop_zone(mouse_global)
+	var new_index: int = _compute_drop_index(mouse_global) if inside else -1
+	if new_index != _drag_drop_index:
+		_drag_drop_index = new_index
+		_layout_all(_hover_layout_duration)
+
+
+func on_drag_ended() -> void:
+	_drag_active = false
+	_drag_drop_index = -1
+	_layout_all(_hover_layout_duration)
+
+
+# La main peut-elle accueillir ce payload ? Room dans la main + (optionnel) la
+# source autorise la fourniture (ex : le shop vérifie l'or du joueur).
+func can_receive(payload: CardPayload) -> bool:
+	if _hand == null or payload.merged_card == null:
+		return false
+	if not _hand.can_add(payload.merged_card):
+		return false
+	if payload.origin != null and payload.origin != self and payload.origin.has_method("can_supply"):
+		if not payload.origin.can_supply(payload):
+			return false
+	return true
+
+
+# Accueille le payload : ajoute toutes les cartes source (niveau N → N adds) et
+# fait atterrir la carte agrégée depuis la position de la HoveringCard.
+func receive(payload: CardPayload, hovering: HoveringCard) -> bool:
+	_batch_mode = true
+	for src: Card in payload.source_cards:
+		_hand.add_card(src)
+	_land_dropped_card(payload.merged_card, hovering)
+	_batch_mode = false
+	return true
+
+
+# La carte tenue revient à la main : reorder à l'index visé si on est dans la
+# zone, sinon retour à sa position d'origine. Puis release du hold + atterrissage.
+func return_to_origin(payload: CardPayload, hovering: HoveringCard) -> void:
+	var mouse: Vector2 = get_global_mouse_position()
+	var idx: int = _compute_drop_index(mouse) if is_inside_drop_zone(mouse) else _drag_original_index
+	_batch_mode = true
+	if idx >= 0:
+		_hand.reorder_card(payload.merged_card.name, idx)
+	_hand.release_held_card()
+	_land_dropped_card(payload.merged_card, hovering)
+	_batch_mode = false
+
+
+# La carte tenue a été transférée ailleurs (vendue / mise au coffre) : on la
+# retire pour de bon. Le hold est nettoyé par Hand.remove_card.
+func commit_removal(payload: CardPayload) -> void:
+	if _hand == null:
+		return
+	_hand.remove_card(payload.merged_card)
+#endregion
+
+
+#region ============================== Public helpers ==============================
+# Vrai si le point global est dans la zone d'accueil de la main.
+func is_inside_drop_zone(global_pos: Vector2) -> bool:
+	if _drop_zone == null:
+		return false
+	return _drop_zone.contains_global(global_pos)
 #endregion
 
 
@@ -252,6 +309,59 @@ func _create_card_button(card: Card) -> CardButton:
 	return btn
 
 
+# Démarre un drag depuis la main : marque la carte comme tenue (hold, données
+# préservées) et délègue la HoveringCard au coordinator.
+func _begin_drag_from_hand(card: Card) -> void:
+	if _drag_coordinator == null or _drag_coordinator.is_dragging():
+		return
+	var btn: CardButton = _card_buttons.get(card.name)
+	if btn == null:
+		return
+	# Offset cursor→centre AVANT hold (le bouton sera freed par _on_hand_card_held).
+	var grab_offset: Vector2 = btn.global_position - get_global_mouse_position()
+
+	# Index d'origine dans l'ordre complet : un release hors zone y ramène la carte.
+	_drag_original_index = -1
+	var cards: Array[Card] = _hand.get_cards_raw()
+	for i: int in cards.size():
+		if cards[i].name == card.name:
+			_drag_original_index = i
+			break
+	if _drag_original_index < 0:
+		return
+
+	# Les cartes source réelles (UID) voyagent dans le payload pour une éventuelle
+	# vente/stockage. La carte n'est PAS retirée : juste tenue.
+	var sources: Array[Card] = _hand.get_source_cards(card.name)
+	if not _hand.hold_card(card):
+		return
+
+	var visual_button: CardButton = _card_button_scene.instantiate()
+	var payload: CardPayload = CardPayload.new(card, sources, self)
+	_drag_coordinator.begin_drag(self, payload, visual_button, grab_offset)
+
+
+# Fait apparaître/positionne le bouton de la carte agrégée à la position de la
+# HoveringCard, puis libère cette dernière. Le tween vers le slot final est
+# joué par le _layout_all() qui suit (déclenché par on_drag_ended).
+func _land_dropped_card(merged: Card, hovering: HoveringCard) -> void:
+	var btn: CardButton = _card_buttons.get(merged.name)
+	if btn == null:
+		btn = _create_card_button(merged)
+	btn.global_position = hovering.global_position
+	btn.scale = hovering.get_card_button().scale
+	btn.z_index = _drop_landing_z_index
+	_just_dropped_card_name = merged.name
+	if is_instance_valid(hovering):
+		hovering.queue_free()
+	AudioManager.play_ui("card_06")
+	# Reset du z_index après le tween. Timer (pas tween.finished) car un autre
+	# layout pourrait kill le tween avant son terme.
+	get_tree().create_timer(_layout_tween_duration).timeout.connect(
+		_on_drop_landing_finished.bind(btn)
+	)
+
+
 # `duration < 0` => utilise _layout_tween_duration. Les callbacks de hover passent
 # _hover_layout_duration pour une réaction plus snappy.
 func _layout_all(duration: float = -1.0) -> void:
@@ -261,18 +371,17 @@ func _layout_all(duration: float = -1.0) -> void:
 		return
 	_sync_child_order()
 	var effective_duration: float = duration if duration >= 0.0 else _layout_tween_duration
-	# La carte tenue (drag en cours) est exclue : get_visible_cards filtre.
+	# La carte tenue (drag depuis cette main) est exclue : get_visible_cards filtre.
 	var cards: Array[Card] = _hand.get_visible_cards()
 	var n_real: int = cards.size()
-	var dragging: bool = _dragging != null
-	var has_gap: bool = dragging and _drop_index >= 0
+	var has_gap: bool = _drag_active and _drag_drop_index >= 0
 	var n_visual: int = n_real + (1 if has_gap else 0)
 	# Hover suspendu pendant un drag : pas de lift + scale, pas de spread.
-	var hovered_index: int = -1 if dragging else _find_hovered_index(cards)
+	var hovered_index: int = -1 if _drag_active else _find_hovered_index(cards)
 
 	var visual_index: int = 0
 	for i: int in n_real:
-		if has_gap and visual_index == _drop_index:
+		if has_gap and visual_index == _drag_drop_index:
 			visual_index += 1
 		var card: Card = cards[i]
 		var btn: CardButton = _card_buttons.get(card.name)
@@ -342,8 +451,6 @@ func _find_hovered_index(cards: Array[Card]) -> int:
 func _sync_child_order() -> void:
 	if _hand == null:
 		return
-	# Itère sur les cartes visibles uniquement : la tenue (drag) n'a pas de
-	# bouton dans _hand_pivot — son visuel vit dans la HoveringCard.
 	var cards: Array[Card] = _hand.get_visible_cards()
 	for i: int in cards.size():
 		var card: Card = cards[i]
@@ -432,114 +539,11 @@ func _disable_mouse_recursive(node: Node) -> void:
 		_disable_mouse_recursive(child)
 
 
-func _start_drag(card: Card) -> void:
-	if _dragging != null or card == null:
-		return
-	var btn: CardButton = _card_buttons.get(card.name)
-	if btn == null:
-		return
-
-	# Capture l'offset cursor→centre visuel AVANT hold (le bouton sera freed
-	# par _on_hand_card_held).
-	var grab_offset: Vector2 = btn.global_position - get_global_mouse_position()
-
-	# L'index initial = position d'origine de la carte dans le dict complet.
-	# Le gap apparaîtra à cet index, et un release sans déplacement remettra
-	# la carte exactement où elle était.
-	var cards: Array[Card] = _hand.get_cards_raw()
-	var original_index: int = -1
-	for i: int in cards.size():
-		if cards[i].name == card.name:
-			original_index = i
-			break
-	if original_index < 0:
-		return
-
-	# La carte n'est PAS retirée de la main : on la marque comme « tenue ».
-	# Données préservées (level, sources, position dans le dict). Seul le
-	# visuel quitte le fan vers la HoveringCard.
-	if not _hand.hold_card(card):
-		return
-
-	# Le hover et le bouton sont nettoyés par _on_hand_card_held.
-	var visual_button: CardButton = _card_button_scene.instantiate()
-	var hovering: HoveringCard = HoveringCard.new()
-	add_child(hovering)
-	hovering.init(visual_button, card, grab_offset)
-	hovering.z_index = 200
-	_dragging = hovering
-	_drop_index = original_index
-	set_process(true)
-	_layout_all(_hover_layout_duration)
-
-
-func _finalize_drag() -> void:
-	if _dragging == null:
-		return
-	var merged_card: Card = _dragging.get_merged_card()
-	var final_drop_index: int = _drop_index
-	# Capture la position globale + scale de la HoveringCard pour que la carte
-	# droppée parte exactement de là (au lieu de pop à la position par défaut
-	# du _hand_pivot puis de tween).
-	var drop_origin_global: Vector2 = _dragging.global_position
-	var drop_origin_scale: Vector2 = _dragging.get_card_button().scale
-
-	_dragging.queue_free()
-	_dragging = null
-	_drop_index = -1
-	set_process(false)
-	AudioManager.play_ui("card_06")
-
-	if merged_card == null:
-		_layout_all()
-		return
-
-	# Pré-crée le bouton à la position courante de la HoveringCard. Le futur
-	# _on_hand_card_released verra que _card_buttons contient déjà ce nom et
-	# n'en créera pas un nouveau au default.
-	_batch_mode = true
-	var dropped_btn: CardButton = _create_card_button(merged_card)
-	dropped_btn.global_position = drop_origin_global
-	dropped_btn.scale = drop_origin_scale
-	# Pendant l'atterrissage, on garde la carte au-dessus pour qu'elle reste
-	# visible quel que soit sa place finale dans le z-order du fan.
-	dropped_btn.z_index = _drop_landing_z_index
-	# Marque la carte : on doit ignorer le mouse_entered automatique du frame
-	# suivant (rect tout neuf sous la souris). Sera nettoyé sur mouse_exited.
-	_just_dropped_card_name = merged_card.name
-
-	# La carte n'a jamais quitté la main côté données. On reorder si on est
-	# dans la drop zone (sinon elle reprend simplement sa position d'origine),
-	# puis on lâche le hold.
-	if final_drop_index >= 0:
-		_hand.reorder_card(merged_card.name, final_drop_index)
-	_hand.release_held_card()
-
-	_batch_mode = false
-	_layout_all()
-
-	# Reset du z_index à la fin du tween. On utilise un Timer plutôt que
-	# tween.finished : un nouveau layout (ex: hover) pourrait kill le tween
-	# avant son terme, dans ce cas finished ne firera jamais.
-	get_tree().create_timer(_layout_tween_duration).timeout.connect(
-		_on_drop_landing_finished.bind(dropped_btn)
-	)
-
-
-func _cancel_drag() -> void:
-	if _dragging == null:
-		return
-	_dragging.queue_free()
-	_dragging = null
-	_drop_index = -1
-	set_process(false)
-
-
 func _compute_drop_index(mouse_global: Vector2) -> int:
 	if _hand == null:
 		return 0
 	# N visuel = nombre de cartes visibles + 1 (le gap où atterrirait le drop).
-	# La tenue n'est pas comptée puisqu'elle n'est pas dans le fan.
+	# La carte tenue (si la main est l'origine) n'est pas dans les visibles.
 	var n_visual: int = _hand.get_visible_cards().size() + 1
 	if n_visual <= 1:
 		return 0
@@ -566,13 +570,6 @@ func _on_hand_card_added(card: Card) -> void:
 
 
 func _on_hand_card_removed(card: Card) -> void:
-	# Si la carte retirée était en cours de drag (vente / coffre déclenché
-	# pendant le drag plus tard), on cancel le drag pour éviter une
-	# HoveringCard orpheline.
-	if _dragging != null:
-		var merged: Card = _dragging.get_merged_card()
-		if merged != null and merged.name == card.name:
-			_cancel_drag()
 	if _hovered_card != null and _hovered_card.name == card.name:
 		_hovered_card = null
 		_cancel_preview_timer()
@@ -591,9 +588,7 @@ func _on_hand_card_removed(card: Card) -> void:
 
 
 # Couvre les cas où une carte présente change (level up, duplicat ré-ajouté…)
-# sans ajout ni retrait de slot. Itère les cartes visibles + rafraîchit le
-# visuel de la HoveringCard si on est en plein drag (la carte tenue peut
-# avoir changé de level pendant le drag).
+# sans ajout ni retrait de slot.
 func _on_hand_changed() -> void:
 	if _hand == null:
 		return
@@ -601,15 +596,11 @@ func _on_hand_changed() -> void:
 		var btn: CardButton = _card_buttons.get(card.name)
 		if btn != null:
 			btn.update_visual(card)
-	if _dragging != null:
-		var held: Card = _hand.get_held_card()
-		if held != null:
-			_dragging.get_card_button().update_visual(held)
 
 
-# La carte vient d'être marquée comme tenue : on free son bouton du fan
-# (le visuel vit maintenant dans la HoveringCard), on nettoie le hover si
-# elle était survolée. Les données restent en main.
+# La carte vient d'être marquée comme tenue : on free son bouton du fan (le
+# visuel vit maintenant dans la HoveringCard), on nettoie le hover si elle était
+# survolée. Les données restent en main.
 func _on_hand_card_held(card: Card) -> void:
 	if _hovered_card != null and _hovered_card.name == card.name:
 		_hovered_card = null
@@ -627,19 +618,18 @@ func _on_hand_card_held(card: Card) -> void:
 	_layout_all()
 
 
-# La carte tenue est rendue au fan. Si _finalize_drag a déjà pré-créé le
-# bouton (cas standard), rien à faire d'autre. Sinon (release externe), on
-# crée le bouton au default ; _layout_all positionnera.
+# La carte tenue est rendue au fan : on s'assure qu'un bouton existe (le
+# positionnement/atterrissage est géré par return_to_origin).
 func _on_hand_card_released(card: Card) -> void:
 	if card == null:
 		return
-	if not _card_buttons.has(card.name) and _dragging == null:
+	if not _card_buttons.has(card.name):
 		_create_card_button(card)
 	_layout_all()
 
 
 func _on_card_button_mouse_entered(card: Card) -> void:
-	if _dragging != null:
+	if _drag_active:
 		return
 	if card == null:
 		return
@@ -653,7 +643,7 @@ func _on_card_button_mouse_entered(card: Card) -> void:
 
 
 func _on_card_button_mouse_exited(card: Card) -> void:
-	if _dragging != null:
+	if _drag_active:
 		return
 	# Première sortie sur la carte fraîchement droppée : on lève le flag pour
 	# que les futurs hovers (entrée délibérée) fonctionnent normalement.
@@ -669,9 +659,7 @@ func _on_card_button_mouse_exited(card: Card) -> void:
 
 
 func _on_card_button_selected(_button: CardButton, card: Card) -> void:
-	if _dragging != null:
-		return
-	_start_drag(card)
+	_begin_drag_from_hand(card)
 
 
 func _on_preview_timer_timeout(card: Card, epoch: int) -> void:
@@ -751,6 +739,7 @@ func _hide_hand_full_warning() -> void:
 #endregion
 
 
+#region ============================== Hide / Show ==============================
 var _hide_show_tween: Tween
 var _is_visible: bool = true
 func _on_hide_show_button_pressed() -> void:
@@ -760,7 +749,7 @@ func _on_hide_show_button_pressed() -> void:
 	_hide_show_tween.set_trans(Tween.TRANS_EXPO)
 	_hide_show_tween.set_ease(Tween.EASE_OUT)
 	if _is_visible:
-		var hidden_position = _hand_pivot_starting_position + Vector2(0, _hide_offset_y)
+		var hidden_position: Vector2 = _hand_pivot_starting_position + Vector2(0, _hide_offset_y)
 		_hide_show_tween.tween_property(_hand_pivot, "position", hidden_position, _hide_show_duration)
 		_hide_show_button.text = "Afficher Deck"
 		_is_visible = false
@@ -775,3 +764,4 @@ func _update_counter() -> void:
 		Verbose.error("Can't update counter, no ref to a hand !", Verbose.Category.CARD)
 		return
 	_card_counter_label.text = str(_hand.get_unique_card_count()) + "/" + str(_hand.max_slots)
+#endregion

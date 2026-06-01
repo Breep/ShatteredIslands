@@ -34,7 +34,6 @@ var _bgm_tween: Tween
 #region ============================== Signal maps ==============================
 var _SOUND_MAP: Array = [
 	# [signal, clé dans SFX_library.tres]
-	[Events.card_bought, "card_bought"],
 	[Events.hero_locked, "hero_locked"],
 	[Events.ui_family_portrait_requested, "ui_family_portrait_requested"],
 	[Events.tavern_continue_pressed, "start_fight"],
