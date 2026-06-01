@@ -43,7 +43,7 @@ var _current_rot_y: float
 
 var _is_focused: bool = false
 var _hover_enabled: bool = true
-var _hover_audio_enabled: bool = true
+var _hover_audio_enabled: bool = false
 var _card_tween: Tween
 var _canvas_base_position: Vector2
 var _canvas_base_scale: Vector2
@@ -80,7 +80,7 @@ func play_appear_animation(delay: float = 0.0) -> void:
 	_card_tween = create_tween().set_ease(Tween.EASE_OUT)
 	if delay > 0.0:
 		_card_tween.tween_interval(delay)
-	_card_tween.tween_callback(func(): AudioManager.play_ui("card_drawn"))
+	#_card_tween.tween_callback(func(): AudioManager.play_ui("card_drawn"))
 	_card_tween.tween_property(self, "modulate:a", 1.0, _APPEAR_DURATION).set_trans(Tween.TRANS_SINE)
 	_card_tween.parallel().tween_property(_canvas_group, "scale", _canvas_base_scale, _APPEAR_DURATION).set_trans(Tween.TRANS_BACK)
 
@@ -181,7 +181,8 @@ func _on_control_gui_input(event: InputEvent) -> void:
 	if not _hover_enabled: return
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
-			AudioManager.play_ui("button_click")
+			#AudioManager.play_ui("button_click")
+			pass
 		elif event.button_index == MOUSE_BUTTON_RIGHT and _card != null:
 			var preview: UICardPreview = CARD_PREVIEW_SCENE.instantiate()
 			get_tree().root.add_child(preview)

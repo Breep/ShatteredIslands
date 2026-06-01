@@ -187,7 +187,10 @@ func is_inside_drop_zone(global_pos: Vector2) -> bool:
 func try_add_card(card: Card) -> bool:
 	if _hand == null or card == null:
 		return false
-	return _hand.add_card(card)
+	if _hand.add_card(card) == true:
+		AudioManager.play_ui("card_02")
+		return true
+	return false
 
 
 func unbind() -> void:
@@ -478,6 +481,7 @@ func _finalize_drag() -> void:
 	_dragging = null
 	_drop_index = -1
 	set_process(false)
+	AudioManager.play_ui("card_06")
 
 	if merged_card == null:
 		_layout_all()

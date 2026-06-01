@@ -7,12 +7,13 @@
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme_old.tres" id="5_ahun0"]
 [ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://04_UI/Tool/Misc/hover_boost_button.gd" id="5_smee4"]
 [ext_resource type="Theme" uid="uid://djwauvkpnr27d" path="res://04_UI/_Themes/normal_button2.tres" id="6_f251f"]
+[ext_resource type="Script" uid="uid://bgm4mv022wemj" path="res://04_UI/Tool/DropZone/drop_zone.gd" id="7_dropzone"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xt3ho"]
 blend_mode = 1
 light_mode = 1
 
-[node name="UICardShop" type="Control" unique_id=1062653338 node_paths=PackedStringArray("_card_buttons")]
+[node name="UICardShop" type="Control" unique_id=1062653338 node_paths=PackedStringArray("_card_buttons", "_drop_zone")]
 custom_minimum_size = Vector2(700, 500)
 layout_mode = 3
 anchors_preset = 8
@@ -30,6 +31,7 @@ mouse_filter = 2
 theme = ExtResource("5_ahun0")
 script = ExtResource("1_xu7re")
 _card_buttons = [NodePath("MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer/Control/CardButton"), NodePath("MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer2/Control/CardButton"), NodePath("MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer3/Control/CardButton"), NodePath("MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer4/Control/CardButton"), NodePath("MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer5/Control/CardButton"), NodePath("MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer6/Control/CardButton")]
+_drop_zone = NodePath("DropZone")
 
 [node name="MainPanel" type="Control" parent="." unique_id=1644505787]
 layout_mode = 1
@@ -66,10 +68,11 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 0.8
 mouse_filter = 2
 theme_override_constants/separation = 10
+alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer" unique_id=1025790872]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 0
 mouse_filter = 2
 theme_override_constants/separation = 20
 
@@ -122,7 +125,7 @@ size_flags_vertical = 6
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer" unique_id=1244962155]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 0
 mouse_filter = 2
 theme_override_constants/separation = 20
 
@@ -174,7 +177,7 @@ size_flags_vertical = 6
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer" unique_id=1405090374]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 0
 mouse_filter = 2
 theme_override_constants/separation = 20
 
@@ -228,7 +231,7 @@ size_flags_vertical = 6
 [node name="VBoxContainer4" type="VBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer" unique_id=8780419]
 visible = false
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 0
 mouse_filter = 2
 theme_override_constants/separation = 20
 
@@ -282,7 +285,7 @@ size_flags_vertical = 6
 [node name="VBoxContainer5" type="VBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer" unique_id=1275953903]
 visible = false
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 0
 mouse_filter = 2
 theme_override_constants/separation = 20
 
@@ -336,7 +339,7 @@ size_flags_vertical = 6
 [node name="VBoxContainer6" type="VBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer" unique_id=955014375]
 visible = false
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 0
 mouse_filter = 2
 theme_override_constants/separation = 20
 
@@ -544,3 +547,13 @@ mouse_filter = 2
 texture = ExtResource("3_1gnrk")
 expand_mode = 3
 stretch_mode = 5
+
+[node name="DropZone" type="Control" parent="." unique_id=991139886]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("7_dropzone")

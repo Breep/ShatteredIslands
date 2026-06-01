@@ -51,6 +51,7 @@ func get_card_button() -> CardButton:
 #region ============================== Node base functions ==============================
 func _ready() -> void:
 	global_position = get_global_mouse_position() + _grab_offset
+	AudioManager.play_ui("card_01")
 
 
 func _process(delta: float) -> void:

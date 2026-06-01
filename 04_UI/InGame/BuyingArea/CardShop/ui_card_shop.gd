@@ -21,8 +21,11 @@ signal card_bought(card: Card)
 @export var _proto_mode: bool = false
 
 @export_group("Drag")
-@export var _hovering_scale: float = 0.55
 @export var _return_tween_duration: float = 0.25
+## Zone de drop du shop (positionnée dans l'éditeur, debug rect en @tool). Pour
+## l'instant utilisée seulement par d'autres UIs qui voudraient interroger « est
+## sur le shop ? » (futur : drop carte main → vente).
+@export var _drop_zone: DropZone
 #endregion
 
 
@@ -126,6 +129,14 @@ func set_inactive() -> void:
 # autre source de données qui ne passe pas par PlayerCardShop / shop_refreshed).
 func display_cards(cards: Array[Card]) -> void:
 	_update_shop_cards_displayed_visual(cards)
+
+
+# Vrai si le point global est dans la zone d'accueil du shop. Pour qu'une UI
+# externe (la main, le coffre) puisse détecter qu'on drop dans la zone shop.
+func is_inside_drop_zone(global_pos: Vector2) -> bool:
+	if _drop_zone == null:
+		return false
+	return _drop_zone.contains_global(global_pos)
 #endregion
 
 
@@ -135,6 +146,7 @@ func _update_shop_cards_displayed_visual(cards: Array[Card]) -> void:
 	# Cache tous les slots, puis affiche autant que de cartes (jusqu'à
 	# _card_buttons.size()). On masque le slot ENTIER (VBoxContainer parent)
 	# pour ne pas laisser le price label visible sur un slot vide.
+	AudioManager.play_ui("card_shuffle_01")
 	for btn: CardButton in _card_buttons:
 		var slot: Control = _slot_for_button(btn)
 		if slot != null:
@@ -212,19 +224,30 @@ func _finalize_drag() -> void:
 
 
 # Tente l'achat selon le mode. Mode normal : PlayerCardShop (gold + serveur).
-# Mode proto : appel direct à UIHand.try_add_card + mise à jour locale du shop.
+# Mode proto : appel direct à UIHand.try_add_card + retrait visuel ciblé.
 func _try_perform_buy(card: Card) -> bool:
 	if _card_shop != null:
 		return await _card_shop.try_buy_card(card)
 	if _ui_hand != null:
 		var added: bool = _ui_hand.try_add_card(card)
 		if added:
-			# Pas de shop_refreshed en proto : on retire localement et on
-			# rafraîchit le visuel.
+			# Pas de shop_refreshed en proto. On retire la donnée et on cache
+			# UNIQUEMENT le slot acheté — pas de full redraw qui re-animerait
+			# l'appear de toutes les cartes restantes. Le HBoxContainer décale
+			# les visibles pour combler le trou tout en gardant la separation
+			# constante.
 			_displayed_cards.erase(card)
-			_update_shop_cards_displayed_visual(_displayed_cards)
+			_hide_bought_slot()
 		return added
 	return false
+
+
+func _hide_bought_slot() -> void:
+	if _drag_source_button == null:
+		return
+	var slot: Control = _slot_for_button(_drag_source_button)
+	if slot != null:
+		slot.hide()
 
 
 # Tween la HoveringCard de sa position actuelle vers la position du bouton
@@ -249,6 +272,7 @@ func _animate_return_to_source(start_global: Vector2, start_scale: Vector2, sour
 	_dragging = null
 	_drag_source_button = null
 	_drag_source_card = null
+	AudioManager.play_ui("card_06")
 
 
 func _on_return_animation_finished(hovering: HoveringCard, source_button: CardButton) -> void:
