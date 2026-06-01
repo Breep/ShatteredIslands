@@ -52,6 +52,7 @@ var _drag_source_card: Card
 #region ============================== Local scene nodes ==============================
 @onready var _refresh_button: Button = %RefreshButton
 @onready var _random_card_button: Button = %RandomCardButton
+@onready var _sell_card_panel: Control = %SellCardPanel
 #endregion
 
 
@@ -137,6 +138,15 @@ func is_inside_drop_zone(global_pos: Vector2) -> bool:
 	if _drop_zone == null:
 		return false
 	return _drop_zone.contains_global(global_pos)
+
+
+var sell_panel_visible: bool = false
+func show_sell_panel() -> void:
+	_show_sell_panel()
+
+
+func hide_sell_panel() -> void:
+	_hide_sell_panel()
 #endregion
 
 
@@ -288,6 +298,30 @@ func _clear_drag_state() -> void:
 	_dragging = null
 	_drag_source_button = null
 	_drag_source_card = null
+
+
+var _sell_panel_tween: Tween
+func _show_sell_panel() -> void:
+	sell_panel_visible = true
+	if _sell_panel_tween:
+		_sell_panel_tween.kill()
+	
+	_sell_card_panel.show() 
+	
+	_sell_panel_tween = create_tween()
+	_sell_panel_tween.tween_property(_sell_card_panel, "modulate:a", 1.0, 0.25)
+
+
+func _hide_sell_panel() -> void:
+	sell_panel_visible = false
+	if _sell_panel_tween:
+		_sell_panel_tween.kill()
+	
+	_sell_panel_tween = create_tween()
+	
+	_sell_panel_tween.tween_property(_sell_card_panel, "modulate:a", 0.0, 0.25)
+	
+	_sell_panel_tween.tween_callback(_sell_card_panel.hide)
 #endregion
 
 

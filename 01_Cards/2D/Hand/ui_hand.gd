@@ -16,6 +16,8 @@ signal card_clicked(card: Card)
 
 
 #region ============================== Export ==============================
+@export var _ui_card_shop: UICardShop
+
 @export_group("Fan layout")
 ## Rayon de l'arc virtuel sur lequel se placent les cartes. Plus grand = arc
 ## plus plat (cartes presque horizontales sur les côtés).
@@ -141,6 +143,11 @@ func _process(_delta: float) -> void:
 	var new_index: int = -1
 	if is_inside_drop_zone(mouse):
 		new_index = _compute_drop_index(mouse)
+	if _ui_card_shop != null:
+		if _ui_card_shop.is_inside_drop_zone(mouse) and not _ui_card_shop.sell_panel_visible:
+			_ui_card_shop.show_sell_panel()
+		elif not _ui_card_shop.is_inside_drop_zone(mouse) and _ui_card_shop.sell_panel_visible:
+			_ui_card_shop.hide_sell_panel()
 	if new_index != _drop_index:
 		_drop_index = new_index
 		_layout_all(_hover_layout_duration)

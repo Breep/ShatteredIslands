@@ -163,15 +163,26 @@ func _play_sound(sound_name: String) -> void:
 	_play_on_player(_sfx_stream_player, sound_name, 0.0)
 
 
-func _play_on_player(player: AudioStreamPlayer, sound_name: String, volume_db: float) -> void:
+func _play_on_player(template_player: AudioStreamPlayer, sound_name: String, volume_db: float) -> void:
 	if sound_name == null or sound_name.is_empty():
 		return
-	if _sfx_lib.audio_database.get(sound_name) == null:
+		
+	var audio_stream = _sfx_lib.audio_database.get(sound_name)
+	if audio_stream == null:
 		Verbose.error("Couldn't find " + sound_name + " in audiolib.", Verbose.Category.AUDIO_MANAGER)
 		return
-	player.stream = _sfx_lib.audio_database.get(sound_name)
+		
+	# On crée une copie du player (qui a déjà le bon bus assigné)
+	var player := template_player.duplicate() as AudioStreamPlayer
+	player.stream = audio_stream
 	player.pitch_scale = randf_range(1.0 - _PITCH_VARIATION, 1.0 + _PITCH_VARIATION)
 	player.volume_db = volume_db
+	
+	add_child(player)
+	
+	# On détruit le nœud quand le son est terminé pour éviter les fuites de mémoire
+	player.finished.connect(player.queue_free)
+	
 	player.play()
 
 

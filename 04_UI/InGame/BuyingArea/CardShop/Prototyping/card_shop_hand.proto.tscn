@@ -9,11 +9,13 @@
 [node name="CardShopHandProto" type="Node" unique_id=1979912402]
 script = ExtResource("1_proto")
 _shop_deck = ExtResource("2_nv5th")
+_hand_max_slots = 5
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1421883916]
 
-[node name="UIHand" parent="UI" unique_id=680488006 instance=ExtResource("4_uihand")]
+[node name="UIHand" parent="UI" unique_id=680488006 node_paths=PackedStringArray("_ui_card_shop") instance=ExtResource("4_uihand")]
 unique_name_in_owner = true
+_ui_card_shop = NodePath("../UICardShop")
 
 [node name="UICardShop" parent="UI" unique_id=793435432 node_paths=PackedStringArray("_ui_hand") instance=ExtResource("5_uishop")]
 unique_name_in_owner = true
