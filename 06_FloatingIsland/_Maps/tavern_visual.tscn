@@ -21,7 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://6yenx4veo6nn" path="res://20_Data/Blender/Map/Map/Tavern/tavern_spec_8.png" id="18_0o5k6"]
 [ext_resource type="Texture2D" uid="uid://dhi8y2j8aegxy" path="res://20_Data/Blender/Map/Map/Tavern/tavern_Tortue vagabonde.png" id="19_bw1ex"]
 [ext_resource type="PackedScene" uid="uid://bifpa3gycjmcy" path="res://06_FloatingIsland/_Maps/tavern_raw.tscn" id="20_44rnd"]
-[ext_resource type="PackedScene" uid="uid://blaktwkpk0p5s" path="res://02_Entities/Pool/Mobs/Dragon féerique/forest_drake.tscn" id="22_dc20i"]
+[ext_resource type="PackedScene" uid="uid://blaktwkpk0p5s" path="res://02_Entities/_Data/Dragon féerique/forest_drake_visual.tscn" id="22_dc20i"]
 [ext_resource type="PackedScene" uid="uid://jjd3kidthudx" path="res://02_Entities/Pool/NPCs/Bartender/sk_chr_bartender_01.tscn" id="22_f3jqc"]
 [ext_resource type="PackedScene" uid="uid://6l0c0aa6rcl7" path="res://02_Entities/Pool/NPCs/Jester/sk_chr_jester_01.tscn" id="23_bchnt"]
 [ext_resource type="PackedScene" uid="uid://61bey01gukxt" path="res://02_Entities/Pool/NPCs/Mage/sk_chr_mage_01.tscn" id="24_44asv"]

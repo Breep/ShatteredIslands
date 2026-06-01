@@ -1,0 +1,346 @@
+[gd_scene format=3 uid="uid://dqno5p3aprq7f"]
+
+[ext_resource type="Script" uid="uid://brd0wxqwulj8y" path="res://99_Prototyping/Entity/prototyping_entity.gd" id="1_6kn6i"]
+[ext_resource type="PackedScene" uid="uid://dvr7815lw1k8b" path="res://02_Entities/Pool/Heroes/Latika/latika.tscn" id="3_os118"]
+[ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://10_Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="4_egh8k"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="4_kq8si"]
+[ext_resource type="PackedScene" uid="uid://bes7q2ujh87bk" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/kobold_knight.tscn" id="6_5qocs"]
+[ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]
+[ext_resource type="PackedScene" uid="uid://di0hhdfbpptu6" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/satyr_berserker.tscn" id="6_ia2qg"]
+[ext_resource type="PackedScene" uid="uid://dvuq5n41nak3u" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/ArenaZoneManager/arena_zone_manager.tscn" id="8_fl2p6"]
+[ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://90_Modules/PickableClickable/PickableModule/pickable_module.tscn" id="9_614kc"]
+[ext_resource type="PackedScene" uid="uid://bg5efhnq0erdv" path="res://90_Modules/PickableClickable/ClickableModule/clickable_module.tscn" id="10_m73qc"]
+[ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="10_r0wv3"]
+[ext_resource type="PackedScene" uid="uid://blncvfes4f2y7" path="res://99_Prototyping/Entity/AllActionPrototyping/testing_floorffa5.tscn" id="11_5hdqt"]
+[ext_resource type="Script" uid="uid://bia26v50nwe6c" path="res://04_UI/UIButton/ui_button.gd" id="11_r0wv3"]
+[ext_resource type="PackedScene" uid="uid://ygk0snmo5oj" path="res://02_Entities/_Shared/EntityStatsViewer/entity_stats_viewer.tscn" id="12_r0wv3"]
+[ext_resource type="Script" uid="uid://b0otuknba6ddv" path="res://06_FloatingIsland/FightingIsland/FightingArea/floor_area.gd" id="13_jd8sj"]
+[ext_resource type="PackedScene" uid="uid://q7gxxkhg5u54" path="res://06_FloatingIsland/FightingIsland/Pool/ArchIsland/arch_island_visual.tscn" id="17_ko5bb"]
+[ext_resource type="PackedScene" uid="uid://c0l0roxttdtlp" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/FightingManager/fighting_manager.tscn" id="17_m26y3"]
+[ext_resource type="PackedScene" uid="uid://jcwiqcnilmtk" path="res://02_Entities/Pool/Mobs/Vrock/vrock.tscn" id="17_rnrfd"]
+[ext_resource type="Environment" uid="uid://cghu0yr6lj5i2" path="res://21_Props/DefaultBattleIsland/Arch_island/world_environment.tres" id="18_ko5bb"]
+[ext_resource type="PackedScene" uid="uid://cvwmo633sxskh" path="res://02_Entities/Pool/Mobs/Goblins/GoblinBerserker/goblin_berserker.tscn" id="18_kq8si"]
+[ext_resource type="PackedScene" uid="uid://dp4x7wkxd6i2q" path="res://99_Prototyping/Entity/EntityController/entity_controller.proto.tscn" id="19_x0odd"]
+[ext_resource type="PackedScene" uid="uid://422k2gp3h5wg" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/forest_drake.tscn" id="22_awloh"]
+
+[sub_resource type="Resource" id="Resource_5qocs"]
+script = ExtResource("4_kq8si")
+_health_max = 5000.0
+_attack_range = 20.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m73qc"]
+albedo_color = Color(0.97405916, 0, 0.8521372, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_m73qc"]
+material = SubResource("StandardMaterial3D_m73qc")
+top_radius = 0.2
+bottom_radius = 0.2
+height = 5.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_5hdqt"]
+height = 5.0
+radius = 0.2
+
+[node name="PrototypingEntity" type="Node3D" unique_id=1287034780]
+script = ExtResource("1_6kn6i")
+_auto_attack_enabled = true
+_manual_mode_enabled = true
+
+[node name="Node3D" type="Node3D" parent="." unique_id=1257562586]
+transform = Transform3D(1.0000001, 0, 0, 0, 0.99999994, 0, 0, 0, 1.0000001, 0, 0, 0)
+
+[node name="Entities" type="Node3D" parent="Node3D" unique_id=38016860]
+unique_name_in_owner = true
+
+[node name="GoblinBerserker" parent="Node3D/Entities" unique_id=1459343337 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("18_kq8si")]
+transform = Transform3D(0.26981065, 0, -0.9629133, 0, 1.0000001, 0, 0.9629133, 0, 0.26981065, -4.646197, 0, 2.0751035)
+level = 4
+team = 2
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
+[node name="Latika2" parent="Node3D/Entities" unique_id=1941835210 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("3_os118")]
+transform = Transform3D(-0.2632837, 0, 0.96471834, 0, 1.0000001, 0, -0.96471834, 0, -0.2632837, 3.662788, 9.536744e-07, 0.110419974)
+level = 20
+team = 1
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
+[node name="Latika3" parent="Node3D/Entities" unique_id=294337328 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("3_os118")]
+transform = Transform3D(0.022006778, 0, -0.99975777, 0, 1.0000001, 0, 0.99975777, 0, 0.022006778, -5.361015, 9.536744e-07, 0.110419974)
+level = 4
+team = 2
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+override_base_stats = SubResource("Resource_5qocs")
+
+[node name="Vrock2" parent="Node3D/Entities" unique_id=471542115 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("17_rnrfd")]
+transform = Transform3D(-0.01726045, 0, 0.9998509, 0, 1.0000001, 0, -0.9998509, 0, -0.01726045, 2.644456, 0, -2.3240192)
+level = 10
+team = 1
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
+[node name="Satyr" parent="Node3D/Entities" unique_id=1916637063 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("6_ia2qg")]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, 2.7595112, 0, 4.657131)
+level = 7
+team = 2
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
+[node name="ForestDrake" parent="Node3D/Entities" unique_id=1600538521 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("22_awloh")]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, 5.935304, 0, 4.4929256)
+team = 2
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
+[node name="KoboldKnight" parent="Node3D/Entities" unique_id=1037434066 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("6_5qocs")]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, 0.0055747028, 0, 5.585501)
+level = 7
+team = 2
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
+[node name="Control" type="Control" parent="Node3D" unique_id=1104542732]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("10_r0wv3")
+
+[node name="GlobalCommandsControl" type="Control" parent="Node3D/Control" unique_id=738247091]
+anchors_preset = 0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 391.0
+offset_bottom = 329.0
+
+[node name="Panel" type="Panel" parent="Node3D/Control/GlobalCommandsControl" unique_id=1653859956]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Node3D/Control/GlobalCommandsControl/Panel" unique_id=228849344]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer" unique_id=528893688]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=2109792230]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+text = "GLOBAL COMMANDS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartFightButton" type="Button" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=1585653480]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+text = "Trigger Fighting State"
+script = ExtResource("11_r0wv3")
+metadata/_custom_type_script = "uid://bia26v50nwe6c"
+
+[node name="StopFightButton" type="Button" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=1036924909]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+text = "Trigger Idle state"
+script = ExtResource("11_r0wv3")
+metadata/_custom_type_script = "uid://bia26v50nwe6c"
+
+[node name="ResetFightButton" type="Button" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=450840103]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+text = "Reset SCENE"
+script = ExtResource("11_r0wv3")
+metadata/_custom_type_script = "uid://bia26v50nwe6c"
+
+[node name="GridContainer" type="GridContainer" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=135598126]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 2
+
+[node name="ManualModeCheckButton" type="CheckButton" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/GridContainer" unique_id=2102497393]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+text = "Manual Mode"
+script = ExtResource("11_r0wv3")
+
+[node name="AutoAttackCheckButton" type="CheckButton" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/GridContainer" unique_id=2050907256]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+text = "Auto Attacks"
+script = ExtResource("11_r0wv3")
+
+[node name="FamilyManagersCheckButton" type="CheckButton" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/GridContainer" unique_id=2102497392]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+text = "Family Managers"
+script = ExtResource("11_r0wv3")
+
+[node name="EntityStatsViewer" parent="Node3D/Control" unique_id=779799398 instance=ExtResource("12_r0wv3")]
+_prototyping = true
+
+[node name="CenterPointCamera" parent="Node3D" unique_id=842815466 instance=ExtResource("4_egh8k")]
+unique_name_in_owner = true
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
+_zoom_min = 1.0
+
+[node name="SpawnManager" parent="Node3D" unique_id=562272433 node_paths=PackedStringArray("_entities_node", "_projectiles_node", "_spells_node") instance=ExtResource("6_egh8k")]
+unique_name_in_owner = true
+_entities_node = NodePath("../SpawnEntities")
+_projectiles_node = NodePath("../SpawnProjectiles")
+_spells_node = NodePath("../SpawnSpells")
+
+[node name="ArenaZoneManager" parent="Node3D" unique_id=641704685 node_paths=PackedStringArray("_team_zones", "_center_zone", "_full_arena_zone") instance=ExtResource("8_fl2p6")]
+_team_zones = {
+1: NodePath("../TestingFloorFFA5/CenterNode3D/Center1/Team1Area"),
+2: NodePath("../TestingFloorFFA5/CenterNode3D/Center2/Team2Area"),
+3: NodePath("../TestingFloorFFA5/CenterNode3D/Center3/Team3Area"),
+4: NodePath("../TestingFloorFFA5/CenterNode3D/Center4/Team4Area"),
+5: NodePath("../TestingFloorFFA5/CenterNode3D/Center5/Team5Area")
+}
+_center_zone = NodePath("../TestingFloorFFA5/CenterArea")
+_full_arena_zone = NodePath("../TestingFloorFFA5/FloorArea")
+_is_initialized = true
+_battle_id = 1
+
+[node name="SpawnEntities" type="Node3D" parent="Node3D" unique_id=1850617918]
+
+[node name="SpawnProjectiles" type="Node3D" parent="Node3D" unique_id=2042389318]
+
+[node name="SpawnSpells" type="Node3D" parent="Node3D" unique_id=810701074]
+
+[node name="EntityController" parent="Node3D" unique_id=1995738742 node_paths=PackedStringArray("spawn_summon_localizer") instance=ExtResource("19_x0odd")]
+spawn_summon_localizer = NodePath("../SpawnLocaliser")
+
+[node name="SpawnLocaliser" type="StaticBody3D" parent="Node3D" unique_id=2103681594]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.8728027, 0, 30.472715)
+collision_layer = 64
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/SpawnLocaliser" unique_id=2131096925]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5057838, 0)
+mesh = SubResource("CylinderMesh_m73qc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/SpawnLocaliser" unique_id=1026829353]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+shape = SubResource("CylinderShape3D_5hdqt")
+
+[node name="PickableModule" parent="Node3D/SpawnLocaliser" unique_id=1622352735 node_paths=PackedStringArray("_owner") instance=ExtResource("9_614kc")]
+_owner = NodePath("..")
+
+[node name="ClickableModule" parent="Node3D/SpawnLocaliser" unique_id=1507041719 node_paths=PackedStringArray("_nodes_where_to_find_meshs", "_owner") instance=ExtResource("10_m73qc")]
+_nodes_where_to_find_meshs = [NodePath("../MeshInstance3D")]
+_owner = NodePath("..")
+
+[node name="TestingFloorFFA5" parent="Node3D" unique_id=283551194 instance=ExtResource("11_5hdqt")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="FloorArea" parent="Node3D/TestingFloorFFA5" index="0" unique_id=2121644269]
+collision_layer = 8
+script = ExtResource("13_jd8sj")
+
+[node name="CollisionShape3D" parent="Node3D/TestingFloorFFA5/FloorArea" index="0" unique_id=493050158]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49644023, 0)
+
+[node name="MeshInstance3D" parent="Node3D/TestingFloorFFA5/FloorArea" index="1" unique_id=1440029104]
+visible = false
+
+[node name="CenterArea" parent="Node3D/TestingFloorFFA5" index="1" unique_id=987179195]
+input_ray_pickable = false
+monitoring = false
+monitorable = false
+
+[node name="MeshInstance3D" parent="Node3D/TestingFloorFFA5/CenterArea" index="1" unique_id=409198330]
+visible = false
+
+[node name="Team1Area" parent="Node3D/TestingFloorFFA5/CenterNode3D/Center1" parent_id_path=PackedInt32Array(283551194, 337183783) index="0" unique_id=155190666]
+input_ray_pickable = false
+monitorable = false
+
+[node name="MeshInstance3D" parent="Node3D/TestingFloorFFA5/CenterNode3D/Center1/Team1Area" index="1" unique_id=1030576179]
+visible = false
+
+[node name="SpawnPoint1" parent="Node3D/TestingFloorFFA5/CenterNode3D/Center1/Team1Area" index="2" unique_id=933717393]
+visible = false
+
+[node name="Team2Area" parent="Node3D/TestingFloorFFA5/CenterNode3D/Center2" parent_id_path=PackedInt32Array(283551194, 1639903339) index="0" unique_id=1034680613]
+input_ray_pickable = false
+monitorable = false
+
+[node name="MeshInstance3D" parent="Node3D/TestingFloorFFA5/CenterNode3D/Center2/Team2Area" index="1" unique_id=826441766]
+visible = false
+
+[node name="Team3Area" parent="Node3D/TestingFloorFFA5/CenterNode3D/Center3" parent_id_path=PackedInt32Array(283551194, 1191788827) index="0" unique_id=1349800311]
+input_ray_pickable = false
+monitorable = false
+
+[node name="MeshInstance3D" parent="Node3D/TestingFloorFFA5/CenterNode3D/Center3/Team3Area" index="1" unique_id=1581609339]
+visible = false
+
+[node name="Team4Area" parent="Node3D/TestingFloorFFA5/CenterNode3D/Center4" parent_id_path=PackedInt32Array(283551194, 1749071442) index="0" unique_id=2088771533]
+input_ray_pickable = false
+monitorable = false
+
+[node name="MeshInstance3D" parent="Node3D/TestingFloorFFA5/CenterNode3D/Center4/Team4Area" index="1" unique_id=2064288510]
+visible = false
+
+[node name="Team5Area" parent="Node3D/TestingFloorFFA5/CenterNode3D/Center5" parent_id_path=PackedInt32Array(283551194, 853946546) index="0" unique_id=2136403487]
+input_ray_pickable = false
+monitorable = false
+
+[node name="MeshInstance3D" parent="Node3D/TestingFloorFFA5/CenterNode3D/Center5/Team5Area" index="1" unique_id=1937256180]
+visible = false
+
+[node name="FightingManager" parent="Node3D" unique_id=1380390082 instance=ExtResource("17_m26y3")]
+unique_name_in_owner = true
+
+[node name="ArchIsland" parent="Node3D" unique_id=1045725859 instance=ExtResource("17_ko5bb")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2134323998]
+environment = ExtResource("18_ko5bb")
+
+[connection signal="pressed" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StartFightButton" to="." method="_on_start_fight_button_pressed"]
+[connection signal="pressed" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StopFightButton" to="." method="_on_stop_fight_button_pressed"]
+[connection signal="pressed" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/ResetFightButton" to="." method="_on_reset_fight_button_pressed"]
+[connection signal="toggled" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/GridContainer/ManualModeCheckButton" to="." method="_on_manual_mode_check_button_toggled"]
+[connection signal="toggled" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/GridContainer/AutoAttackCheckButton" to="." method="_on_auto_attack_check_button_toggled"]
+[connection signal="toggled" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/GridContainer/FamilyManagersCheckButton" to="." method="_on_family_managers_check_button_toggled"]
+
+[editable path="Node3D/TestingFloorFFA5"]
