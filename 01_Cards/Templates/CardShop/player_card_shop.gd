@@ -110,6 +110,39 @@ func try_buy_random_card() -> bool:
 	shop_tried_to_buy_random_card.emit()
 	return card != null
 
+# ============================== Économie (drag-and-drop) ==============================
+# API métier consommée par l'UI (UICardShop). L'UI ne décide ni ne calcule rien :
+# elle délègue ici. Les mutations de DONNÉES de la main (add/remove_card) restent
+# pilotées par la vue de la main (liaison vue↔modèle) ; ces méthodes ne touchent
+# QUE l'économie (or + valeur), via les règles du jeu (GameRules).
+
+# Valeur de revente du lot de cartes source (une carte niveau N = N cartes).
+func get_sell_value(cards: Array[Card]) -> int:
+	return GameManager.game_rules.get_sell_value(cards)
+
+
+# Vrai si ces cartes peuvent être vendues au marchand.
+func can_sell(cards: Array[Card]) -> bool:
+	return not cards.is_empty()
+
+
+# Crédite l'or du joueur pour la vente et renvoie le montant remboursé.
+func sell(cards: Array[Card]) -> int:
+	var value: int = get_sell_value(cards)
+	player.gold += value
+	return value
+
+
+# Vrai si le joueur peut s'offrir cette carte.
+func can_buy(card: Card) -> bool:
+	return player.gold >= GameManager.game_rules.get_card_price(card.rarity)
+
+
+# Débite l'or du joueur pour l'achat.
+func buy(card: Card) -> void:
+	player.gold -= GameManager.game_rules.get_card_price(card.rarity)
+
+
 # ============================== Private functions ==============================
 
 func _adapt_cards_lvl_to_player() -> void:

@@ -171,6 +171,16 @@ func get_card_price(rarity: Card.Rarity) -> int:
 	return common_price
 
 
+# Valeur de revente d'un lot de cartes. Une carte agrégée niveau N est composée
+# de N cartes empilées : on somme le prix de chacune. (Revente = prix d'achat
+# pour l'instant ; ajouter un ratio ici si la revente doit être décotée.)
+func get_sell_value(cards: Array[Card]) -> int:
+	var total: int = 0
+	for card: Card in cards:
+		total += get_card_price(card.rarity)
+	return total
+
+
 func get_locked_rarities(family_level: int) -> Array[Card.Rarity]:
 	if family_level < 0 or family_level > card_rarities_locked_by_level.size():
 		return []

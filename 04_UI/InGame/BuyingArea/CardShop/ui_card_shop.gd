@@ -27,18 +27,6 @@ signal card_sold(card: Card, refund: int)
 ## fournies par display_cards() ; pas de gold ni de serveur.
 @export var _proto_mode: bool = false
 
-@export_group("Economy")
-## Prix d'achat d'une carte (mode normal, vérifié via can_supply).
-@export var _buy_price: int = 100
-## Valeur de revente unitaire par rareté. Le remboursement d'une carte agrégée
-## niveau N = N × cette valeur (N = nombre de cartes source).
-@export var _sell_value_per_rarity: Dictionary[Card.Rarity, int] = {
-	Card.Rarity.COMMON: 50,
-	Card.Rarity.RARE: 50,
-	Card.Rarity.EPIC: 50,
-	Card.Rarity.LEGENDARY: 50,
-}
-
 @export_group("Drag")
 @export var _return_tween_duration: float = 0.25
 @export var _sell_vanish_duration: float = 0.2
@@ -147,13 +135,13 @@ func on_drag_started(_payload: CardPayload, _origin: Object) -> void:
 
 
 # Affiche le panneau de vente quand une carte EXTERNE (pas du shop) survole la
-# zone du shop.
+# zone du shop. La valeur affichée vient du domaine (PlayerCardShop).
 func on_drag_motion(payload: CardPayload, mouse_global: Vector2) -> void:
 	if payload.origin == self:
 		return
 	var inside: bool = _drop_zone != null and _drop_zone.contains_global(mouse_global)
 	if inside and not _sell_panel_shown:
-		_show_sell_panel(_compute_sell_value(payload))
+		_show_sell_panel(_domain_sell_value(payload))
 	elif not inside and _sell_panel_shown:
 		_hide_sell_panel()
 
@@ -163,35 +151,37 @@ func on_drag_ended() -> void:
 		_hide_sell_panel()
 
 
-# Le shop accueille un drop = VENTE. Il rachète toute carte qui ne vient pas de
-# lui-même.
+# Le shop accueille un drop = VENTE. La décision « vendable ? » appartient au
+# domaine (PlayerCardShop) ; sans domaine (proto) la vente est toujours permise.
 func can_receive(payload: CardPayload) -> bool:
-	return payload.origin != self
+	if payload.origin == self:
+		return false
+	return _card_shop == null or _card_shop.can_sell(payload.source_cards)
 
 
+# Délègue la transaction au domaine (or + valeur). L'UI ne fait qu'animer le
+# visuel et notifier. Sans domaine (proto) : remboursement 0.
 func receive(payload: CardPayload, hovering: HoveringCard) -> bool:
-	var refund: int = _compute_sell_value(payload)
-	if _local_player != null:
-		_local_player.gold += refund
+	var refund: int = 0
+	if _card_shop != null:
+		refund = _card_shop.sell(payload.source_cards)
 	card_sold.emit(payload.merged_card, refund)
 	AudioManager.play_ui("coin_01")
 	_animate_sell_vanish(hovering)
 	return true
 
 
-# can_supply : appelé par la cible (la main) pour valider qu'on peut « fournir »
-# la carte avant achat. Mode proto / pas de joueur → gratuit.
-func can_supply(_payload: CardPayload) -> bool:
-	if _local_player == null:
-		return true
-	return _local_player.gold >= _buy_price
+# can_supply : appelé par la cible (la main) pour valider l'achat avant transfert.
+# Décision déléguée au domaine ; sans domaine (proto) → toujours possible.
+func can_supply(payload: CardPayload) -> bool:
+	return _card_shop == null or _card_shop.can_buy(payload.merged_card)
 
 
-# La carte du shop a été achetée (acceptée par la main) : on facture et on retire
-# la carte du shop. La main possède la HoveringCard et joue l'atterrissage.
+# La carte du shop a été achetée : on délègue la facturation au domaine, puis on
+# retire la carte de l'affichage. La main possède la HoveringCard (atterrissage).
 func commit_removal(payload: CardPayload) -> void:
-	if _local_player != null:
-		_local_player.gold -= _buy_price
+	if _card_shop != null:
+		_card_shop.buy(payload.merged_card)
 	_displayed_cards.erase(payload.merged_card)
 	if _drag_source_button != null:
 		var slot: Control = _slot_for_button(_drag_source_button)
@@ -281,11 +271,12 @@ func _instance_card_button_for_drag() -> CardButton:
 	return scene.instantiate() as CardButton
 
 
-func _compute_sell_value(payload: CardPayload) -> int:
-	var total: int = 0
-	for card: Card in payload.source_cards:
-		total += _sell_value_per_rarity.get(card.rarity, 0)
-	return total
+# Valeur de revente, demandée au domaine (le shop sait combien vaut une carte).
+# Sans domaine (proto) : 0 — on n'affiche pas de chiffre.
+func _domain_sell_value(payload: CardPayload) -> int:
+	if _card_shop == null:
+		return 0
+	return _card_shop.get_sell_value(payload.source_cards)
 
 
 # Anime la carte vendue qui « disparaît » dans le shop (shrink + fade) puis free.
