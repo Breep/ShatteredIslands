@@ -3,9 +3,10 @@
 [ext_resource type="PackedScene" uid="uid://c2psjj8133op3" path="res://01_Cards/2D/CardButton/card_button.tscn" id="1_card"]
 [ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="1_gj04k"]
 [ext_resource type="Script" uid="uid://bi1y3f5bsadr0" path="res://01_Cards/2D/Hand/ui_hand.gd" id="2_script"]
+[ext_resource type="Script" uid="uid://bgm4mv022wemj" path="res://04_UI/Tool/DropZone/drop_zone.gd" id="3_dropzone"]
 [ext_resource type="Script" uid="uid://bia26v50nwe6c" path="res://04_UI/UIButton/ui_button.gd" id="4_022ej"]
 
-[node name="UIHand" type="Control" unique_id=77925465 node_paths=PackedStringArray("_hand_pivot", "_editor_preview_root", "_hide_show_button")]
+[node name="UIHand" type="Control" unique_id=77925465 node_paths=PackedStringArray("_drop_zone", "_hand_pivot", "_editor_preview_root", "_hide_show_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,9 +17,24 @@ mouse_filter = 2
 theme = ExtResource("1_gj04k")
 script = ExtResource("2_script")
 _card_button_scene = ExtResource("1_card")
+_drop_zone = NodePath("DropZone")
 _hand_pivot = NodePath("HandPivot")
 _editor_preview_root = NodePath("HandPivot/_EditorPreview")
 _hide_show_button = NodePath("HideShowButton")
+
+[node name="DropZone" type="Control" parent="." unique_id=699235962]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 285.0
+offset_top = -329.0
+offset_right = -295.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+script = ExtResource("3_dropzone")
 
 [node name="HandPivot" type="Control" parent="." unique_id=109951534]
 unique_name_in_owner = true

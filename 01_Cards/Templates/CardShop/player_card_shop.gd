@@ -130,4 +130,3 @@ func _refresh_shop_cards(is_free: bool) -> void:
 		Verbose.warn("PlayerCardShop._refresh_shop_cards() | CardShopManager returned 0 cards", Verbose.Category.CARD_SHOP)
 	_adapt_cards_lvl_to_player()
 	shop_refreshed.emit(cards_displayed)
-

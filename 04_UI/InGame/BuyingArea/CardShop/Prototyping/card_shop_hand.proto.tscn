@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://cx63258afuapq"]
+
+[ext_resource type="Script" uid="uid://dn4ncsn102v0s" path="res://04_UI/InGame/BuyingArea/CardShop/Prototyping/card_shop_hand.proto.gd" id="1_proto"]
+[ext_resource type="Resource" uid="uid://cmq4qbn1jck17" path="res://01_Cards/Templates/CardShop/shop_deck.proto.tres" id="2_nv5th"]
+[ext_resource type="PackedScene" uid="uid://cmy7daws5mc0v" path="res://01_Cards/2D/Hand/ui_hand.tscn" id="4_uihand"]
+[ext_resource type="PackedScene" uid="uid://d1oxnd1g75rqh" path="res://04_UI/InGame/BuyingArea/CardShop/ui_card_shop.tscn" id="5_uishop"]
+[ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="15_theme"]
+
+[node name="CardShopHandProto" type="Node" unique_id=1979912402]
+script = ExtResource("1_proto")
+_shop_deck = ExtResource("2_nv5th")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1421883916]
+
+[node name="UIHand" parent="UI" unique_id=680488006 instance=ExtResource("4_uihand")]
+unique_name_in_owner = true
+
+[node name="UICardShop" parent="UI" unique_id=793435432 node_paths=PackedStringArray("_ui_hand") instance=ExtResource("5_uishop")]
+unique_name_in_owner = true
+anchors_preset = 10
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = 30.0
+offset_top = 40.0
+offset_right = -30.0
+offset_bottom = 600.0
+grow_vertical = 1
+_ui_hand = NodePath("../UIHand")
+
+[node name="ControlsLayer" type="Control" parent="UI" unique_id=1703991210]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("15_theme")
+
+[node name="Panel" type="Panel" parent="UI/ControlsLayer" unique_id=1103905174]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -280.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 240.0
+grow_horizontal = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/ControlsLayer/Panel" unique_id=1763019627]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ControlsLayer/Panel/MarginContainer" unique_id=625714311]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="HandCountLabel" type="Label" parent="UI/ControlsLayer/Panel/MarginContainer/VBoxContainer" unique_id=218174580]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0 / 15"
+horizontal_alignment = 1
+
+[node name="RefreshShopButton" type="Button" parent="UI/ControlsLayer/Panel/MarginContainer/VBoxContainer" unique_id=793047056]
+layout_mode = 2
+text = "Refresh shop"
+
+[node name="ClearHandButton" type="Button" parent="UI/ControlsLayer/Panel/MarginContainer/VBoxContainer" unique_id=758187412]
+layout_mode = 2
+text = "Vider la main"
+
+[connection signal="pressed" from="UI/ControlsLayer/Panel/MarginContainer/VBoxContainer/RefreshShopButton" to="." method="_on_refresh_shop_button_pressed"]
+[connection signal="pressed" from="UI/ControlsLayer/Panel/MarginContainer/VBoxContainer/ClearHandButton" to="." method="_on_clear_hand_button_pressed"]

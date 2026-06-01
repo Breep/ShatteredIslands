@@ -83,18 +83,18 @@ func _update_card_layout(card: Card) -> void:
 	if card == null:
 		Verbose.error("Trying to update a <null> card", Verbose.Category.CARD_LAYOUT)
 		return
-
+	
 	# Flash uniquement sur un changement réel (nouveau design ou level up).
 	# Empêche le clignotement de toutes les cartes à chaque modif de main.
 	var should_flash: bool = card.name != _previous_card_name or card.lvl != _previous_card_lvl
 	_previous_card_name = card.name
 	_previous_card_lvl = card.lvl
-
+	
 	_card_name_label.text = card.name
 	_card_desc_label.text_raw = card.player_upgrade.get_description(card.lvl)
 	_card_portrait_texture.texture = card.picture
 	_rune_glow_tools.set_rarity(card.rarity)
-
+	
 	match card.rarity:
 		Card.Rarity.COMMON: _base_intensity = 1.0
 		Card.Rarity.RARE: _base_intensity = 2.0

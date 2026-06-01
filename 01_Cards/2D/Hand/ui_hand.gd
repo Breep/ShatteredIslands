@@ -58,9 +58,11 @@ signal card_clicked(card: Card)
 @export var _preview_offset: Vector2 = Vector2(300.0, -380.0)
 
 @export_group("Drag & Drop")
-## Zone (en coords écran) considérée comme « dans la main » : un release dedans
-## insère la carte à l'index calculé, dehors la carte revient en fin de main.
-@export var _drop_zone_rect: Rect2 = Rect2(0.0, 680.0, 1920.0, 400.0)
+## Zone (Control positionné dans l'éditeur) considérée comme « dans la main » :
+## un release dedans insère la carte à l'index calculé, dehors la carte garde
+## sa position d'origine. Le Control est visible en éditeur (debug rect), inerte
+## en runtime (mouse_filter IGNORE).
+@export var _drop_zone: DropZone
 ## z_index temporaire de la carte droppée pendant qu'elle « atterrit » dans son
 ## slot, pour rester visible au-dessus des autres. Reset à 0 à la fin du tween.
 @export var _drop_landing_z_index: int = 50
@@ -137,7 +139,7 @@ func _process(_delta: float) -> void:
 		return
 	var mouse: Vector2 = get_global_mouse_position()
 	var new_index: int = -1
-	if _drop_zone_rect.has_point(mouse):
+	if is_inside_drop_zone(mouse):
 		new_index = _compute_drop_index(mouse)
 	if new_index != _drop_index:
 		_drop_index = new_index
@@ -168,6 +170,24 @@ func bind(hand: Hand) -> void:
 	_hand.card_addition_refused.connect(_on_hand_card_addition_refused)
 	_rebuild_all()
 	_update_counter()
+
+
+# Vrai si le point global est dans la zone d'accueil de la main (la `DropZone`
+# configurée dans la scène). Utilisé par les autres UIs (shop, coffre) pour
+# détecter si leur drag a abouti dans la main.
+func is_inside_drop_zone(global_pos: Vector2) -> bool:
+	if _drop_zone == null:
+		return false
+	return _drop_zone.contains_global(global_pos)
+
+
+# Tente d'ajouter une carte dans la main (passe par Hand.add_card → vérifie
+# can_add, fire les signaux de refus si besoin). Utilisé par les autres UIs
+# qui veulent dropper une carte dans la main sans connaître les internes.
+func try_add_card(card: Card) -> bool:
+	if _hand == null or card == null:
+		return false
+	return _hand.add_card(card)
 
 
 func unbind() -> void:
