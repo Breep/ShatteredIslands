@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://cym6w7oxbnpcj"]
+
+[ext_resource type="Script" uid="uid://bpeqyc8barw75" path="res://04_UI/InGame/HeroPortrait/ui_entity_portrait.proto.gd" id="1_proto"]
+[ext_resource type="PackedScene" uid="uid://cxlyl8wdndq08" path="res://04_UI/InGame/HeroPortrait/ui_entity_portrait.tscn" id="2_portrait"]
+
+[node name="UiEntityPortraitProto" type="Control" unique_id=1907166010]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_proto")
+
+[node name="Controls" type="VBoxContainer" parent="." unique_id=1120001474]
+layout_mode = 1
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 232.0
+offset_bottom = 392.0
+theme_override_constants/separation = 8
+
+[node name="InfoLabel" type="Label" parent="Controls" unique_id=733967805]
+layout_mode = 2
+text = "Survole / clique les icônes
+de skill pour le tween + le swap.
+Clic en dehors d'un skill = retour stats."
+autowrap_mode = 2
+
+[node name="BindButton" type="Button" parent="Controls" unique_id=1507206596]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Bind dummy entity"
+
+[node name="MutateADButton" type="Button" parent="Controls" unique_id=156555591]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Mutate AD (+10)"
+
+[node name="MutateArmorButton" type="Button" parent="Controls" unique_id=1265055356]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Mutate Armor (+5)"
+
+[node name="SetLevelButton" type="Button" parent="Controls" unique_id=61294671]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Set random level"
+
+[node name="ShowDescButton" type="Button" parent="Controls" unique_id=1422384465]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Show Bronze desc"
+
+[node name="ShowStatsButton" type="Button" parent="Controls" unique_id=337491637]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Show stats"
+
+[node name="EntityPortrait" parent="." unique_id=1005766928 instance=ExtResource("2_portrait")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 520.0
+offset_top = 480.0
+offset_right = 648.0
+offset_bottom = 608.0
+grow_horizontal = 1
+grow_vertical = 1
