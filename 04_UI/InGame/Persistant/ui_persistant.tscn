@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://t0ycuxntigox" path="res://04_UI/InGame/Persistant/ui_persistant.gd" id="1_oypi2"]
 [ext_resource type="PackedScene" uid="uid://bvqsnkh0s11q2" path="res://04_UI/InGame/FamilyPortrait/ui_all_families_portrait.tscn" id="5_oypi2"]
 [ext_resource type="PackedScene" uid="uid://cxlyl8wdndq08" path="res://04_UI/InGame/HeroPortrait/ui_hero_portrait.tscn" id="6_kt7rx"]
+[ext_resource type="PackedScene" uid="uid://cmy7daws5mc0v" path="res://01_Cards/2D/Hand/ui_hand.tscn" id="7_1asy4"]
 [ext_resource type="PackedScene" uid="uid://ci1xegvy2t2jm" path="res://04_UI/InGame/FamilyViewer/ui_family_viewer.tscn" id="9_16n6v"]
 [ext_resource type="PackedScene" uid="uid://bkh2sp5xq82gn" path="res://04_UI/Tool/Tutorial/tutorial_overlay.tscn" id="10_tutov"]
 
@@ -104,3 +105,11 @@ layout_mode = 1
 [node name="UIPlayerInfo" parent="." unique_id=1134887515 instance=ExtResource("1_lw8yd")]
 unique_name_in_owner = true
 layout_mode = 1
+
+[node name="UIHand" parent="." unique_id=77925465 instance=ExtResource("7_1asy4")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+grow_vertical = 0

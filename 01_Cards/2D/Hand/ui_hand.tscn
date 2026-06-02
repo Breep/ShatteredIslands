@@ -17,6 +17,7 @@ mouse_filter = 2
 theme = ExtResource("1_gj04k")
 script = ExtResource("2_script")
 _card_button_scene = ExtResource("1_card")
+_hover_spread_amount = 30.0
 _drop_zone = NodePath("DropZone")
 _hand_pivot = NodePath("HandPivot")
 _editor_preview_root = NodePath("HandPivot/_EditorPreview")
