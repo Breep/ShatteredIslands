@@ -19,6 +19,7 @@
 [ext_resource type="Environment" uid="uid://cghu0yr6lj5i2" path="res://21_Props/DefaultBattleIsland/Arch_island/world_environment.tres" id="18_ko5bb"]
 [ext_resource type="PackedScene" uid="uid://cvwmo633sxskh" path="res://02_Entities/Pool/Mobs/Goblins/GoblinBerserker/goblin_berserker.tscn" id="18_kq8si"]
 [ext_resource type="PackedScene" uid="uid://dp4x7wkxd6i2q" path="res://99_Prototyping/Entity/EntityController/entity_controller.proto.tscn" id="19_x0odd"]
+[ext_resource type="PackedScene" uid="uid://btqko5dh71wxi" path="res://02_Entities/Pool/Mobs/SkeletonDragon/skeleton_dragon.tscn" id="20_tmkd7"]
 [ext_resource type="PackedScene" uid="uid://422k2gp3h5wg" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/forest_drake.tscn" id="22_awloh"]
 
 [sub_resource type="Resource" id="Resource_5qocs"]
@@ -88,6 +89,11 @@ transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, 5.935
 level = 7
 team = 2
 battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
+[node name="SkeletonDragon" parent="Node3D/Entities" unique_id=434739176 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("20_tmkd7")]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, 0.5904154, -2.384186e-07, 7.004996)
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
 
@@ -163,6 +169,12 @@ mouse_default_cursor_shape = 2
 text = "Reset SCENE"
 script = ExtResource("11_r0wv3")
 metadata/_custom_type_script = "uid://bia26v50nwe6c"
+
+[node name="TriggerFlightButton" type="Button" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=523735139]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+text = "Trigger Flight (dragon)"
 
 [node name="GridContainer" type="GridContainer" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=135598126]
 layout_mode = 2
@@ -321,6 +333,7 @@ environment = ExtResource("18_ko5bb")
 [connection signal="pressed" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StartFightButton" to="." method="_on_start_fight_button_pressed"]
 [connection signal="pressed" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StopFightButton" to="." method="_on_stop_fight_button_pressed"]
 [connection signal="pressed" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/ResetFightButton" to="." method="_on_reset_fight_button_pressed"]
+[connection signal="pressed" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/TriggerFlightButton" to="." method="_on_trigger_flight_button_pressed"]
 [connection signal="toggled" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/GridContainer/ManualModeCheckButton" to="." method="_on_manual_mode_check_button_toggled"]
 [connection signal="toggled" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/GridContainer/AutoAttackCheckButton" to="." method="_on_auto_attack_check_button_toggled"]
 [connection signal="toggled" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/GridContainer/FamilyManagersCheckButton" to="." method="_on_family_managers_check_button_toggled"]

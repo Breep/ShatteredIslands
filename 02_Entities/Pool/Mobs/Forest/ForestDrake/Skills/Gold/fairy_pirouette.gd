@@ -14,6 +14,7 @@ func apply(ctx: SkillContext) -> void:
 		_can_do_pirouette = false
 		
 		_owner.battle_callback_registry.register_oneshot(_cd, func()-> void:
+			_owner.alterations.cancel_state(Alteration.Type.UNTARGETABLE)
 			_can_do_pirouette = true
 		)
 	)

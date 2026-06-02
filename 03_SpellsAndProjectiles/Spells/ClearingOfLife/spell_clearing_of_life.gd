@@ -10,7 +10,7 @@ enum Modifier {
 	RADIUS,
 }
 
-@onready var _hit_zone: Area3D = %HitZone
+#@onready var _hit_zone: Area3D = %HitZone
 
 var _owner: Entity
 
