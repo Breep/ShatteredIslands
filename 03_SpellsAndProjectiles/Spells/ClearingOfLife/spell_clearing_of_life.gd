@@ -11,6 +11,8 @@ enum Modifier {
 }
 
 #@onready var _hit_zone: Area3D = %HitZone
+@onready var _healing_vfx: AnimationPlayer = $HitZone/HealingArea/AnimationPlayer
+@onready var _healing_circle: CPUParticles3D = $HitZone/HealingArea/CPUParticles3D
 
 var _owner: Entity
 
@@ -32,7 +34,9 @@ func init(source: Entity, modifiers: Dictionary) -> void:
 
 
 func _ready() -> void:
-	
+	_healing_circle.lifetime = _duration
+	_healing_vfx.play(&"start")
+
 	_owner.battle_callback_registry.register_periodic(&"Clearing Of Life", _period, func() -> void:
 		if _owner == null or not is_instance_valid(_owner): return
 		var amount: float = _owner.stats.attack_damage * _ad_ratio/100 + _owner.stats.attack_power * _ap_ratio/100
@@ -43,11 +47,14 @@ func _ready() -> void:
 			_owner.alterations.cleanse(entity, _cleanse_value, &"Clearing Of Life")
 			, true
 	)
-	_owner.battle_callback_registry.register_oneshot(_duration,func() -> void:
+	_owner.battle_callback_registry.register_oneshot(_duration, func() -> void:
 		_owner.battle_callback_registry.unregister(&"Clearing Of Life")
+		_healing_vfx.play(&"end")
+		)
+	_owner.battle_callback_registry.register_oneshot(_duration + 2.0, func() -> void:
 		queue_free()
 		)
-		
+
 	#AudioManager.play_3d("slash_01", _owner.position)
 
 func _process(delta: float) -> void:
