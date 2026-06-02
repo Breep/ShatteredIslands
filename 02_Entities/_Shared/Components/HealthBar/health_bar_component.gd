@@ -17,6 +17,10 @@ extends EntityComponent
 @onready var _grid_bar: ColorRect = %GridBar
 @onready var _block_bar: ColorRect = %BlockBar
 
+# Custom-display state visuals — only present in the LargeHealthBar scene.
+@onready var _metal_bar: ColorRect = get_node_or_null("%MetalBar")
+@onready var _taunt_shield_icon: TextureRect = get_node_or_null("%TauntShieldIcon")
+
 @onready var _debug_values: Control = %DebugValues
 @onready var _health_label: Label = %HealthLabel
 @onready var _shield_label: Label = %ShieldLabel
@@ -50,6 +54,8 @@ func _ready() -> void:
 		_shield_bar.material = _shield_bar.material.duplicate()
 	if _grid_bar and _grid_bar.material:
 		_grid_bar.material = _grid_bar.material.duplicate()
+	if _metal_bar and _metal_bar.material:
+		_metal_bar.material = _metal_bar.material.duplicate()
 
 	var stats := _owner.stats
 	var am := _owner.alterations
@@ -66,12 +72,12 @@ func _ready() -> void:
 	stats.health_max_changed.connect(_on_health_max_changed)
 	am.alteration_changed.connect(_on_alteration_changed)
 	am.taunted_changed.connect(_update_taunt_visual)
+	am.taunted_changed.connect(_update_taunt_shield_icon)
+	am.invulnerable_changed.connect(_update_invulnerable_overlay)
 	_owner.progression.level_changed.connect(_on_owner_progression_level_changed)
 
 	if _debug_values != null:
 		_debug_values.visible = DebugHealthBarOverlay.is_visible()
-	if _level_label != null:
-		_level_label.visible = DebugHealthBarOverlay.is_visible()
 	DebugHealthBarOverlay.register(_on_debug_overlay_toggled)
 
 
@@ -162,6 +168,19 @@ func _update_taunt_visual(is_active: bool, _duration: float, _infinite: bool) ->
 		_taunt_visual.queue_free()
 
 
+## Gold metallic sheen over the whole bar while the owner is invulnerable.
+func _update_invulnerable_overlay(is_active: bool, _duration: float, _infinite: bool) -> void:
+	if _metal_bar == null: return
+	_metal_bar.visible = is_active
+
+
+## 2D shield badge on the left of the bar while the owner is taunted,
+## complementing the 3D taunt marker.
+func _update_taunt_shield_icon(is_active: bool, _duration: float, _infinite: bool) -> void:
+	if _taunt_shield_icon == null: return
+	_taunt_shield_icon.visible = is_active
+
+
 func _set_health_bar_color_by_team() -> void:
 	if not _health_bar or not _health_bar.material or not _owner:
 		return
@@ -246,8 +265,6 @@ func _on_alteration_changed(alteration_type: Alteration.Type, _payload: Variant)
 func _on_debug_overlay_toggled(is_visible: bool) -> void:
 	if _debug_values != null:
 		_debug_values.visible = is_visible
-	if _level_label != null:
-		_level_label.visible = is_visible
 
 
 func _on_owner_progression_level_changed(level: int) -> void:

@@ -6,6 +6,8 @@
 [ext_resource type="Shader" uid="uid://dncf64el86tmc" path="res://02_Entities/_Shared/Components/HealthBar/Shaders/character_shield_bar.gdshader" id="3_u1xh6"]
 [ext_resource type="Shader" uid="uid://dav4yd3tlk03a" path="res://22_VFX/VFX_2D/UI/block_bar.gdshader" id="4_47gim"]
 [ext_resource type="LabelSettings" uid="uid://bk10uxsgaj4p5" path="res://02_Entities/_Shared/Components/HealthBar/Data/debug_label.tres" id="4_dbglb"]
+[ext_resource type="Shader" uid="uid://bk6a2rmxlibvg" path="res://02_Entities/_Shared/Components/HealthBar/Shaders/character_level_frame.gdshader" id="5_lvlfr"]
+[ext_resource type="Texture2D" uid="uid://cc1t8fkok04ex" path="res://04_UI/_Themes/Data/Icons/AlterationsIcons/taunt.png" id="6_57utb"]
 
 [sub_resource type="Shader" id="Shader_er62k"]
 code = "shader_type canvas_item;
@@ -199,6 +201,18 @@ shader_parameter/BorderColor = Color(0.05, 0.05, 0.05, 1)
 shader_parameter/BorderThicknessPx = 2.0
 shader_parameter/CornerRadius = 0.05
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_metal"]
+shader = ExtResource("4_47gim")
+shader_parameter/base_color = Color(0.83, 0.69, 0.22, 1)
+shader_parameter/highlight_color = Color(1, 0.95, 0.6, 1)
+shader_parameter/shadow_color = Color(0.35, 0.27, 0.05, 1)
+shader_parameter/metallic_strength = 0.0
+shader_parameter/contrast = 0.0
+shader_parameter/shine_strength = 0.2770000131575
+shader_parameter/shine_width = 0.40000001830148
+shader_parameter/shine_speed = 0.5750002648125001
+shader_parameter/noise_strength = 0.0
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xw8nt"]
 shader = ExtResource("2_er62k")
 shader_parameter/HealthAmount = 0.506000024035
@@ -226,8 +240,27 @@ font_color = Color(0.9416784, 0.84232056, 0, 1)
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lvlfr"]
+shader = ExtResource("5_lvlfr")
+shader_parameter/CornerRadius = 0.2000000095
+shader_parameter/MarginPx = 0.0
+shader_parameter/FillColor = Color(0.011087594, 0.011087573, 0.01108758, 0.60784316)
+shader_parameter/OutlineColor = Color(0.08741879, 0.08053652, 0.062070146, 1)
+shader_parameter/OutlineThicknessPx = 2.000000095
+shader_parameter/EnableOutlineGlow = true
+shader_parameter/OutlineGlowColor = Color(0.288518, 0.28851798, 0.28851798, 0.19215687)
+shader_parameter/OutlineGlowSizePx = 6.0
+shader_parameter/OutlineGlowIntensity = 1.0
+shader_parameter/EnableInnerGlow = true
+shader_parameter/InnerGlowColor = Color(0.433512, 0.4346832, 0.4006247, 0.5019608)
+shader_parameter/InnerGlowSizePx = 7.0000003325
+shader_parameter/InnerGlowIntensity = 0.9200000437
+shader_parameter/GlowPulse = false
+shader_parameter/GlowPulseSpeed = 2.0
+
 [sub_resource type="LabelSettings" id="LabelSettings_xk06y"]
-outline_size = 8
+font_size = 10
+outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
 [node name="LargeHealthBarComponent" type="Node" unique_id=1823590462]
@@ -355,6 +388,37 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="MetalBar" type="ColorRect" parent="CanvasLayer/MainControl/MainVBox/HealthAndMana/HealthAndMana/HealthBar" unique_id=1835823138]
+unique_name_in_owner = true
+visible = false
+material = SubResource("ShaderMaterial_metal")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TauntShieldIcon" type="TextureRect" parent="CanvasLayer/MainControl/MainVBox/HealthAndMana/HealthAndMana/HealthBar" unique_id=720735588]
+unique_name_in_owner = true
+visible = false
+z_index = 1
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 1.0
+offset_left = -15.0
+offset_top = -15.5
+offset_right = 9.0
+offset_bottom = 3.5
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_57utb")
+expand_mode = 1
+stretch_mode = 5
+
 [node name="ManaBar" type="ColorRect" parent="CanvasLayer/MainControl/MainVBox/HealthAndMana/HealthAndMana" unique_id=564324133]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_xw8nt")
@@ -388,18 +452,29 @@ layout_mode = 2
 text = "42"
 label_settings = SubResource("LabelSettings_shld")
 
-[node name="LevelLabel" type="Label" parent="CanvasLayer/MainControl/MainVBox/HealthAndMana" unique_id=264669344]
-unique_name_in_owner = true
+[node name="BottomBar" type="Control" parent="CanvasLayer/MainControl/MainVBox" unique_id=817419775]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+
+[node name="CadreLevel" type="ColorRect" parent="CanvasLayer/MainControl/MainVBox/BottomBar" unique_id=1081713847]
+material = SubResource("ShaderMaterial_lvlfr")
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 1.0
+anchor_right = 0.2
+anchor_bottom = 1.0
+offset_top = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LevelLabel" type="Label" parent="CanvasLayer/MainControl/MainVBox/BottomBar/CadreLevel" unique_id=264669344]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -3.666667
-offset_right = 19.0
-offset_bottom = 3.666668
+grow_horizontal = 2
 grow_vertical = 2
-text = "1"
+text = "12"
 label_settings = SubResource("LabelSettings_xk06y")
 horizontal_alignment = 1
 vertical_alignment = 1

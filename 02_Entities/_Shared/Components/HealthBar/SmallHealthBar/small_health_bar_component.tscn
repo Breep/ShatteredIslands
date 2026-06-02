@@ -3,6 +3,9 @@
 [ext_resource type="Shader" uid="uid://cxvdhkkjpr75e" path="res://02_Entities/_Shared/Components/HealthBar/Shaders/character_health_bar.gdshader" id="1_2hyq6"]
 [ext_resource type="Script" uid="uid://b4yl7aebvyoih" path="res://02_Entities/_Shared/Components/HealthBar/SmallHealthBar/small_health_bar_component.gd" id="1_wiwv7"]
 [ext_resource type="Shader" uid="uid://dncf64el86tmc" path="res://02_Entities/_Shared/Components/HealthBar/Shaders/character_shield_bar.gdshader" id="2_fsx5g"]
+[ext_resource type="Shader" uid="uid://bk6a2rmxlibvg" path="res://02_Entities/_Shared/Components/HealthBar/Shaders/character_level_frame.gdshader" id="4_fy0s0"]
+[ext_resource type="Shader" uid="uid://dav4yd3tlk03a" path="res://22_VFX/VFX_2D/UI/block_bar.gdshader" id="5_block"]
+[ext_resource type="Texture2D" uid="uid://cc1t8fkok04ex" path="res://04_UI/_Themes/Data/Icons/AlterationsIcons/taunt.png" id="5_otnhm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fsx5g"]
 shader = ExtResource("1_2hyq6")
@@ -63,20 +66,51 @@ shader_parameter/BorderColor = Color(0.05, 0.05, 0.05, 1)
 shader_parameter/BorderThicknessPx = 2.0
 shader_parameter/CornerRadius = 0.05
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_metal"]
+shader = ExtResource("5_block")
+shader_parameter/base_color = Color(0.83, 0.69, 0.22, 1)
+shader_parameter/highlight_color = Color(1, 0.95, 0.6, 1)
+shader_parameter/shadow_color = Color(0.35, 0.27, 0.05, 1)
+shader_parameter/metallic_strength = 1.0
+shader_parameter/contrast = 1.4
+shader_parameter/shine_strength = 1.2
+shader_parameter/shine_width = 0.12
+shader_parameter/shine_speed = 0.8
+shader_parameter/noise_strength = 0.15
+
 [sub_resource type="LabelSettings" id="LabelSettings_6by0q"]
-font_size = 12
+font_size = 8
 font_color = Color(0.06343331, 0.84661055, 0, 1)
-outline_size = 5
+outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_wwjhb"]
-font_size = 12
+font_size = 8
 font_color = Color(0.9416784, 0.84232056, 0, 1)
-outline_size = 5
+outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_bgus1"]
-outline_size = 8
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_226wg"]
+shader = ExtResource("4_fy0s0")
+shader_parameter/CornerRadius = 0.2000000095
+shader_parameter/MarginPx = 0.0
+shader_parameter/FillColor = Color(0.011087594, 0.011087573, 0.01108758, 0.60784316)
+shader_parameter/OutlineColor = Color(0.08741879, 0.08053652, 0.062070146, 1)
+shader_parameter/OutlineThicknessPx = 2.000000095
+shader_parameter/EnableOutlineGlow = true
+shader_parameter/OutlineGlowColor = Color(0.288518, 0.28851798, 0.28851798, 0.19215687)
+shader_parameter/OutlineGlowSizePx = 6.0
+shader_parameter/OutlineGlowIntensity = 1.0
+shader_parameter/EnableInnerGlow = true
+shader_parameter/InnerGlowColor = Color(0.433512, 0.4346832, 0.4006247, 0.5019608)
+shader_parameter/InnerGlowSizePx = 7.0000003325
+shader_parameter/InnerGlowIntensity = 0.9200000437
+shader_parameter/GlowPulse = false
+shader_parameter/GlowPulseSpeed = 2.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_otnhm"]
+font_size = 8
+outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
 [node name="SumonSimpleInfoPanel2d" type="Node" unique_id=1476139569]
@@ -109,11 +143,30 @@ anchor_bottom = 0.5
 offset_left = -24.0
 offset_top = -21.0
 offset_right = 24.0
-offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
+
+[node name="Control" type="Control" parent="CanvasLayer/MainControl/MainVBox" unique_id=1726330835]
+custom_minimum_size = Vector2(48, 15)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="AlterationsContainer" type="HBoxContainer" parent="CanvasLayer/MainControl/MainVBox/Control" unique_id=1870219170]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 15)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -24.0
+offset_right = 24.0
+offset_bottom = 16.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+alignment = 1
 
 [node name="HealthAndShield" type="Control" parent="CanvasLayer/MainControl/MainVBox" unique_id=1222723481]
 custom_minimum_size = Vector2(48, 6)
@@ -164,6 +217,37 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="MetalBar" type="ColorRect" parent="CanvasLayer/MainControl/MainVBox/HealthAndShield/HealthBar" unique_id=1348070806]
+unique_name_in_owner = true
+visible = false
+material = SubResource("ShaderMaterial_metal")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TauntShieldIcon" type="TextureRect" parent="CanvasLayer/MainControl/MainVBox/HealthAndShield/HealthBar" unique_id=1553552518]
+unique_name_in_owner = true
+visible = false
+z_index = 2
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -7.0
+offset_right = 4.0
+offset_bottom = 5.0
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_otnhm")
+expand_mode = 1
+stretch_mode = 5
+
 [node name="DebugValues" type="HBoxContainer" parent="CanvasLayer/MainControl/MainVBox/HealthAndShield" unique_id=160983649]
 unique_name_in_owner = true
 layout_mode = 1
@@ -189,38 +273,27 @@ layout_mode = 2
 text = "42"
 label_settings = SubResource("LabelSettings_wwjhb")
 
-[node name="LevelLabel" type="Label" parent="CanvasLayer/MainControl/MainVBox/HealthAndShield" unique_id=1107355139]
-unique_name_in_owner = true
+[node name="BottomBar" type="Control" parent="CanvasLayer/MainControl/MainVBox" unique_id=809924644]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="CadreLevel" type="ColorRect" parent="CanvasLayer/MainControl/MainVBox/BottomBar" unique_id=82833482]
+material = SubResource("ShaderMaterial_226wg")
+custom_minimum_size = Vector2(10, 8)
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 1.0
+anchor_right = 0.25
+anchor_bottom = 1.0
+
+[node name="LevelLabel" type="Label" parent="CanvasLayer/MainControl/MainVBox/BottomBar/CadreLevel" unique_id=282639132]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -3.666667
-offset_right = 19.0
-offset_bottom = 3.666668
+grow_horizontal = 2
 grow_vertical = 2
-text = "1"
-label_settings = SubResource("LabelSettings_bgus1")
+text = "12"
+label_settings = SubResource("LabelSettings_otnhm")
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Control" type="Control" parent="CanvasLayer/MainControl/MainVBox" unique_id=1726330835]
-custom_minimum_size = Vector2(48, 15)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="AlterationsContainer" type="HBoxContainer" parent="CanvasLayer/MainControl/MainVBox/Control" unique_id=1870219170]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(48, 15)
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -24.0
-offset_right = 24.0
-offset_bottom = 16.0
-grow_horizontal = 2
-mouse_filter = 2
-theme_override_constants/separation = 2
-alignment = 1
