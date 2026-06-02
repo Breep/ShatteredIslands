@@ -36879,18 +36879,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_1dmqf")
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_pbmx4"]
-noise_type = 0
-
-[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_r3wn7"]
-noise = SubResource("FastNoiseLite_pbmx4")
-
-[sub_resource type="FogMaterial" id="FogMaterial_ki22c"]
-emission = Color(0.287806, 0.756974, 0, 1)
-height_falloff = 0.678472
-edge_fade = 0.69644
-density_texture = SubResource("NoiseTexture3D_r3wn7")
-
 [sub_resource type="ArrayMesh" id="ArrayMesh_m5gsb"]
 _surfaces = [{
 "aabb": AABB(-0.149658, -0.182697, -0.448602, 0.299315, 0.675333, 0.897204),
@@ -52229,13 +52217,6 @@ draw_pass_1 = SubResource("QuadMesh_6ggro")
 [node name="OmniLight3D" type="OmniLight3D" parent="Tavern/Light/KitchenLight/SM_Prop_Cooking_Block_03_001/VFX_Fire_lantern" unique_id=72154974]
 light_color = Color(0.773171, 0.37814, 0.132921, 1)
 light_energy = 1.604
-
-[node name="FogLight" type="Node3D" parent="Tavern/Light" unique_id=250263784]
-
-[node name="FogVolume" type="FogVolume" parent="Tavern/Light/FogLight" unique_id=299131544]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.14867, -0.0477628, -12.9269)
-size = Vector3(5.18457, 3.8, 4.19141)
-material = SubResource("FogMaterial_ki22c")
 
 [node name="WallLight" type="Node3D" parent="Tavern/Light" unique_id=1009423228]
 
