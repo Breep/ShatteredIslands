@@ -1,33 +1,33 @@
 [gd_scene format=4 uid="uid://cbd5jq0bp7fef"]
 
-[ext_resource type="Script" uid="uid://cheqkh8k8emb0" path="res://05_Game/HeroSelector/hero_selector.gd" id="1_fiyb4"]
-[ext_resource type="Texture2D" uid="uid://wbrwetv4d7je" path="res://20_Data/Blender/Map/Map/Tavern/tavern_spec.png" id="2_qvgyr"]
-[ext_resource type="Material" uid="uid://d3cx4okwaescj" path="res://22_VFX/Shaders/3D/Vfezwater/vfez_rocky.tres" id="3_a388w"]
-[ext_resource type="Texture2D" uid="uid://dev5bfgw1kmer" path="res://20_Data/Blender/Map/Map/Tavern/tavern_PolygonHorrorCarnival_Texture_01_A.png" id="4_1s1vq"]
-[ext_resource type="Texture2D" uid="uid://bgdiqhq6uruum" path="res://20_Data/Blender/Map/Map/Tavern/tavern_PolygonHorrorCarnival_Emissive_01_A.png" id="5_fqioc"]
-[ext_resource type="Texture2D" uid="uid://dnjmmnd3ub2oi" path="res://20_Data/Blender/Map/Map/Tavern/tavern_PolygonFantasyKingdom_Texture_02_A.png" id="6_awl7k"]
-[ext_resource type="Texture2D" uid="uid://j0dc3sfg7v6v" path="res://20_Data/Blender/Map/Map/Tavern/tavern_PolygonFantasyKingdom_Texture_04_A.png" id="7_8o1uu"]
-[ext_resource type="Texture2D" uid="uid://6yenx4veo6nn" path="res://20_Data/Blender/Map/Map/Tavern/tavern_spec_8.png" id="8_jqh5f"]
-[ext_resource type="Texture2D" uid="uid://dhi8y2j8aegxy" path="res://20_Data/Blender/Map/Map/Tavern/tavern_Tortue vagabonde.png" id="9_q25jc"]
-[ext_resource type="PackedScene" uid="uid://bifpa3gycjmcy" path="res://06_FloatingIsland/_Maps/tavern_raw.tscn" id="10_j6n7c"]
-[ext_resource type="PackedScene" uid="uid://ce3p3v6y8hed1" path="res://22_VFX/VFX_3D/Fire/vfx_candle_fire_3d.tscn" id="11_qsbt6"]
-[ext_resource type="Script" uid="uid://1hqrwl2e0q2r" path="res://05_Game/MainMenu/torch_light.gd" id="12_81212"]
-[ext_resource type="Texture2D" uid="uid://b8ghyhoetfbsr" path="res://20_Data/Blender/Map/Map/Tavern/tavern_Dungeons_Texture_01.png" id="13_g08xg"]
-[ext_resource type="PackedScene" uid="uid://cq2ek5rxx4h7w" path="res://22_VFX/VFX_3D/Light/vfx_fire_lantern.tscn" id="14_ralhh"]
-[ext_resource type="Shader" uid="uid://bcu1kjfpd6cri" path="res://22_VFX/Shaders/3D/Fire/fire_3d.tres" id="15_dkxfd"]
-[ext_resource type="Texture2D" uid="uid://b87qfbv8yqlo1" path="res://20_Data/Texture/2D/fire texture 1.png" id="16_5uf51"]
-[ext_resource type="Texture2D" uid="uid://byg7j5pbkqak" path="res://20_Data/Texture/2D/fire texture 2.png" id="17_g67jh"]
-[ext_resource type="Texture2D" uid="uid://dfnid3c2l0ajl" path="res://20_Data/Texture/2D/T_VFX_simple_1.png" id="18_ftdbu"]
-[ext_resource type="Shader" uid="uid://dxvrfcjpmkb2q" path="res://22_VFX/Shaders/3D/Fire/fire_embers.tres" id="19_jrw2c"]
-[ext_resource type="PackedScene" uid="uid://crsudi66jyt3p" path="res://22_VFX/VFX_3D/Fire/vfx_torch_fire_3d.tscn" id="20_c3yot"]
-[ext_resource type="Material" uid="uid://dhd4kj45npr4m" path="res://22_VFX/Shaders/Material/light_fenetre.tres" id="21_ln2ur"]
-[ext_resource type="PackedScene" uid="uid://dvr7815lw1k8b" path="res://02_Entities/Pool/Heroes/Latika/latika.tscn" id="22_a388w"]
-[ext_resource type="PackedScene" uid="uid://k4dc5j8ecdxo" path="res://04_UI/InGame/HeroSelection/ui_hero_picking_screen.tscn" id="23_1s1vq"]
+[ext_resource type="Script" uid="uid://cheqkh8k8emb0" path="res://05_Game/HeroSelector/hero_selector.gd" id="1_ko53h"]
+[ext_resource type="Texture2D" uid="uid://wbrwetv4d7je" path="res://20_Data/Blender/Map/Map/Tavern/tavern_spec.png" id="2_l31ec"]
+[ext_resource type="Material" uid="uid://d3cx4okwaescj" path="res://22_VFX/Shaders/3D/Vfezwater/vfez_rocky.tres" id="3_3ybi6"]
+[ext_resource type="Texture2D" uid="uid://dev5bfgw1kmer" path="res://20_Data/Blender/Map/Map/Tavern/tavern_PolygonHorrorCarnival_Texture_01_A.png" id="4_kkb13"]
+[ext_resource type="Texture2D" uid="uid://bgdiqhq6uruum" path="res://20_Data/Blender/Map/Map/Tavern/tavern_PolygonHorrorCarnival_Emissive_01_A.png" id="5_qrqu0"]
+[ext_resource type="Texture2D" uid="uid://dnjmmnd3ub2oi" path="res://20_Data/Blender/Map/Map/Tavern/tavern_PolygonFantasyKingdom_Texture_02_A.png" id="6_o78dd"]
+[ext_resource type="Texture2D" uid="uid://j0dc3sfg7v6v" path="res://20_Data/Blender/Map/Map/Tavern/tavern_PolygonFantasyKingdom_Texture_04_A.png" id="7_d8f4j"]
+[ext_resource type="Texture2D" uid="uid://6yenx4veo6nn" path="res://20_Data/Blender/Map/Map/Tavern/tavern_spec_8.png" id="8_gjfnl"]
+[ext_resource type="Texture2D" uid="uid://dhi8y2j8aegxy" path="res://20_Data/Blender/Map/Map/Tavern/tavern_Tortue vagabonde.png" id="9_xgekl"]
+[ext_resource type="PackedScene" uid="uid://bifpa3gycjmcy" path="res://06_FloatingIsland/_Maps/tavern_raw.tscn" id="10_1tklk"]
+[ext_resource type="PackedScene" uid="uid://ce3p3v6y8hed1" path="res://22_VFX/VFX_3D/Fire/vfx_candle_fire_3d.tscn" id="11_mlgqw"]
+[ext_resource type="Script" uid="uid://1hqrwl2e0q2r" path="res://05_Game/MainMenu/torch_light.gd" id="12_xepsr"]
+[ext_resource type="Texture2D" uid="uid://b8ghyhoetfbsr" path="res://20_Data/Blender/Map/Map/Tavern/tavern_Dungeons_Texture_01.png" id="13_qf1x7"]
+[ext_resource type="PackedScene" uid="uid://cq2ek5rxx4h7w" path="res://22_VFX/VFX_3D/Light/vfx_fire_lantern.tscn" id="14_q3wwb"]
+[ext_resource type="Shader" uid="uid://bcu1kjfpd6cri" path="res://22_VFX/Shaders/3D/Fire/fire_3d.tres" id="15_77i0v"]
+[ext_resource type="Texture2D" uid="uid://b87qfbv8yqlo1" path="res://20_Data/Texture/2D/fire texture 1.png" id="16_8sb7b"]
+[ext_resource type="Texture2D" uid="uid://byg7j5pbkqak" path="res://20_Data/Texture/2D/fire texture 2.png" id="17_f5u72"]
+[ext_resource type="Texture2D" uid="uid://dfnid3c2l0ajl" path="res://20_Data/Texture/2D/T_VFX_simple_1.png" id="18_slenp"]
+[ext_resource type="Shader" uid="uid://dxvrfcjpmkb2q" path="res://22_VFX/Shaders/3D/Fire/fire_embers.tres" id="19_jqdqc"]
+[ext_resource type="PackedScene" uid="uid://crsudi66jyt3p" path="res://22_VFX/VFX_3D/Fire/vfx_torch_fire_3d.tscn" id="20_3tjg5"]
+[ext_resource type="Material" uid="uid://dhd4kj45npr4m" path="res://22_VFX/Shaders/Material/light_fenetre.tres" id="21_n20ns"]
+[ext_resource type="PackedScene" uid="uid://dvr7815lw1k8b" path="res://02_Entities/Pool/Heroes/Latika/latika.tscn" id="22_8au67"]
+[ext_resource type="PackedScene" uid="uid://k4dc5j8ecdxo" path="res://04_UI/InGame/HeroSelection/ui_hero_picking_screen.tscn" id="23_bnso8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vhqui"]
 resource_name = "Wood Floor"
 cull_mode = 2
-albedo_texture = ExtResource("2_qvgyr")
+albedo_texture = ExtResource("2_l31ec")
 metadata/extras = {
 "yp": {
 "active_ypaint_node": ""
@@ -1141,10 +1141,10 @@ metadata/extras = {
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yiao2"]
 resource_name = "lambert3"
 cull_mode = 2
-albedo_texture = ExtResource("4_1s1vq")
+albedo_texture = ExtResource("4_kkb13")
 roughness = 0.552786
 emission_enabled = true
-emission_texture = ExtResource("5_fqioc")
+emission_texture = ExtResource("5_qrqu0")
 metadata/extras = {
 "yp": {
 "active_ypaint_node": ""
@@ -1994,7 +1994,7 @@ shadow_mesh = SubResource("ArrayMesh_do8br")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7i0wv"]
 resource_name = "Polygon 2A"
 cull_mode = 2
-albedo_texture = ExtResource("6_awl7k")
+albedo_texture = ExtResource("6_o78dd")
 metadata/extras = {
 "yp": {
 "active_ypaint_node": ""
@@ -27755,7 +27755,7 @@ shadow_mesh = SubResource("ArrayMesh_g371d")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_josul"]
 resource_name = "wall 2 brique"
 cull_mode = 2
-albedo_texture = ExtResource("7_8o1uu")
+albedo_texture = ExtResource("7_d8f4j")
 metadata/extras = {
 "yp": {
 "active_ypaint_node": ""
@@ -28001,7 +28001,7 @@ shadow_mesh = SubResource("ArrayMesh_lx6qc")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p8sqi"]
 resource_name = "Wood Floor.001"
 cull_mode = 2
-albedo_texture = ExtResource("8_jqh5f")
+albedo_texture = ExtResource("8_gjfnl")
 metadata/extras = {
 "yp": {
 "active_ypaint_node": ""
@@ -33247,7 +33247,7 @@ shadow_mesh = SubResource("ArrayMesh_gajpa")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rnp05"]
 resource_name = "wall red"
 cull_mode = 2
-albedo_texture = ExtResource("7_8o1uu")
+albedo_texture = ExtResource("7_d8f4j")
 metadata/extras = {
 "yp": {
 "active_ypaint_node": ""
@@ -34267,7 +34267,7 @@ shadow_mesh = SubResource("ArrayMesh_xqil5")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mvw5q"]
 resource_name = "Material"
 cull_mode = 2
-albedo_texture = ExtResource("9_q25jc")
+albedo_texture = ExtResource("9_xgekl")
 roughness = 0.5
 metadata/extras = {
 "yp": {
@@ -36418,7 +36418,7 @@ shadow_mesh = SubResource("ArrayMesh_cg8vb")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_87hve"]
 resource_name = "lambert2.001"
 cull_mode = 2
-albedo_texture = ExtResource("13_g08xg")
+albedo_texture = ExtResource("13_qf1x7")
 roughness = 0.552786
 metadata/extras = {
 "yp": {
@@ -36469,12 +36469,12 @@ fill_to = Vector2(0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_eaast"]
 render_priority = 0
-shader = ExtResource("15_dkxfd")
+shader = ExtResource("15_77i0v")
 shader_parameter/Speed = Vector2(0, 1)
-shader_parameter/Texture_move = ExtResource("17_g67jh")
+shader_parameter/Texture_move = ExtResource("17_f5u72")
 shader_parameter/Speed_divider = 4.0
 shader_parameter/Gradient = SubResource("GradientTexture2D_sibqq")
-shader_parameter/Texture_main = ExtResource("16_5uf51")
+shader_parameter/Texture_main = ExtResource("16_8sb7b")
 shader_parameter/Color_Fire = Color(4, 0.8, 0, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_ckkax"]
@@ -36527,7 +36527,7 @@ nodes/fragment/connections = PackedInt32Array(2, 0, 4, 0, 3, 0, 4, 1, 4, 0, 0, 0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_eeng1"]
 render_priority = 0
 shader = SubResource("VisualShader_bcinc")
-shader_parameter/tex_frg_3 = ExtResource("18_ftdbu")
+shader_parameter/tex_frg_3 = ExtResource("18_slenp")
 
 [sub_resource type="Gradient" id="Gradient_hk3ye"]
 offsets = PackedFloat32Array(0, 0.443548, 1)
@@ -36576,7 +36576,7 @@ hue_variation_max = 0.00999998
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_31rku"]
 render_priority = 0
-shader = ExtResource("19_jrw2c")
+shader = ExtResource("19_jqdqc")
 
 [sub_resource type="Gradient" id="Gradient_68jbb"]
 offsets = PackedFloat32Array(0, 0.443548, 1)
@@ -37663,8 +37663,11 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ha3p7")
 
+[sub_resource type="Environment" id="Environment_317s8"]
+background_energy_multiplier = 0.1
+
 [node name="HeroSelector" type="Node" unique_id=849220554 node_paths=PackedStringArray("_spot_lights")]
-script = ExtResource("1_fiyb4")
+script = ExtResource("1_ko53h")
 _spot_lights = [NodePath("Tavern/Light/SpotLight1"), NodePath("Tavern/Light/SpotLight2")]
 
 [node name="Tavern" type="Node3D" parent="." unique_id=257802823]
@@ -38105,7 +38108,7 @@ metadata/extras = {
 [node name="SM_Item_Crystal_05" type="MeshInstance3D" parent="Tavern/Voyante" unique_id=256411557]
 transform = Transform3D(0.0325563, 0, 0, 0, 0, -0.0325563, 0, 0.0325563, 0, -10.1004, 0.366085, -7.85107)
 visible = false
-material_override = ExtResource("3_a388w")
+material_override = ExtResource("3_3ybi6")
 mesh = SubResource("ArrayMesh_ioxv0")
 metadata/extras = {
 "currentUVSet": "map1",
@@ -51653,7 +51656,7 @@ metadata/extras = {
 }
 }
 
-[node name="Tavern Raw" parent="Tavern" unique_id=332543501 instance=ExtResource("10_j6n7c")]
+[node name="Tavern Raw" parent="Tavern" unique_id=332543501 instance=ExtResource("10_1tklk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.007748604, -0.016782522, -0.0014219284)
 
 [node name="Light" type="Node3D" parent="Tavern" unique_id=1176846887]
@@ -51673,13 +51676,13 @@ metadata/extras = {
 }
 }
 
-[node name="VFXCandleFire3D" parent="Tavern/Light/CandleLight/SM_Item_Candlestick_01" unique_id=1020323661 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D" parent="Tavern/Light/CandleLight/SM_Item_Candlestick_01" unique_id=1020323661 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, -1.78814e-07, -2.13163e-14, -5.96046e-08, 1, 1.42109e-14, -7.10543e-15, 1.42109e-14, 1, -12.0107, -0.0454102, -41.6127)
 
-[node name="VFXCandleFire3D2" parent="Tavern/Light/CandleLight/SM_Item_Candlestick_01" unique_id=696424401 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D2" parent="Tavern/Light/CandleLight/SM_Item_Candlestick_01" unique_id=696424401 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -50.22)
 
-[node name="VFXCandleFire3D3" parent="Tavern/Light/CandleLight/SM_Item_Candlestick_01" unique_id=932046508 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D3" parent="Tavern/Light/CandleLight/SM_Item_Candlestick_01" unique_id=932046508 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, -1.78814e-07, -2.13163e-14, -5.96046e-08, 1, 1.42109e-14, -7.10543e-15, 1.42109e-14, 1, 12.5942, 0.453613, -44.9747)
 
 [node name="SM_Item_Candlestick_02" type="MeshInstance3D" parent="Tavern/Light/CandleLight" unique_id=2110684087]
@@ -51695,7 +51698,7 @@ metadata/extras = {
 }
 }
 
-[node name="VFXCandleFire3D" parent="Tavern/Light/CandleLight/SM_Item_Candlestick_02" unique_id=457482384 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D" parent="Tavern/Light/CandleLight/SM_Item_Candlestick_02" unique_id=457482384 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -50.5076)
 
 [node name="SM_Item_Candlestick_02_001" type="MeshInstance3D" parent="Tavern/Light/CandleLight" unique_id=1660929128]
@@ -51711,7 +51714,7 @@ metadata/extras = {
 }
 }
 
-[node name="VFXCandleFire3D" parent="Tavern/Light/CandleLight/SM_Item_Candlestick_02_001" unique_id=1352295311 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D" parent="Tavern/Light/CandleLight/SM_Item_Candlestick_02_001" unique_id=1352295311 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -50.1218)
 
 [node name="SM_Item_Candlestick_02_002" type="MeshInstance3D" parent="Tavern/Light/CandleLight" unique_id=463197726]
@@ -51727,7 +51730,7 @@ metadata/extras = {
 }
 }
 
-[node name="VFXCandleFire3D" parent="Tavern/Light/CandleLight/SM_Item_Candlestick_02_002" unique_id=2113346444 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D" parent="Tavern/Light/CandleLight/SM_Item_Candlestick_02_002" unique_id=2113346444 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -50.22)
 
 [node name="SM_Item_Candlestick_02_003" type="MeshInstance3D" parent="Tavern/Light/CandleLight" unique_id=957129628]
@@ -51743,7 +51746,7 @@ metadata/extras = {
 }
 }
 
-[node name="VFXCandleFire3D" parent="Tavern/Light/CandleLight/SM_Item_Candlestick_02_003" unique_id=649365093 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D" parent="Tavern/Light/CandleLight/SM_Item_Candlestick_02_003" unique_id=649365093 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -50.22)
 
 [node name="SM_Item_Candlestick_02_004" type="MeshInstance3D" parent="Tavern/Light/CandleLight" unique_id=2136233729]
@@ -51759,7 +51762,7 @@ metadata/extras = {
 }
 }
 
-[node name="VFXCandleFire3D" parent="Tavern/Light/CandleLight/SM_Item_Candlestick_02_004" unique_id=1861409291 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D" parent="Tavern/Light/CandleLight/SM_Item_Candlestick_02_004" unique_id=1861409291 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -50.22)
 
 [node name="SM_Item_Candlestick_02_005" type="MeshInstance3D" parent="Tavern/Light/CandleLight" unique_id=1285204297]
@@ -51775,7 +51778,7 @@ metadata/extras = {
 }
 }
 
-[node name="VFXCandleFire3D" parent="Tavern/Light/CandleLight/SM_Item_Candlestick_02_005" unique_id=779276065 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D" parent="Tavern/Light/CandleLight/SM_Item_Candlestick_02_005" unique_id=779276065 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -50.22)
 
 [node name="SM_Item_Candlestick_03" type="MeshInstance3D" parent="Tavern/Light/CandleLight" unique_id=347267845]
@@ -51813,7 +51816,7 @@ light_color = Color(0.96347, 0.776861, 0.466365, 1)
 light_energy = 2.432
 shadow_enabled = true
 omni_range = 23.142
-script = ExtResource("12_81212")
+script = ExtResource("12_xepsr")
 metadata/_custom_type_script = "uid://1hqrwl2e0q2r"
 
 [node name="TorchLight2" type="OmniLight3D" parent="Tavern/Light/MainLight" unique_id=1821116009]
@@ -51822,7 +51825,7 @@ light_color = Color(0.96347, 0.776861, 0.466365, 1)
 light_energy = 2.432
 shadow_enabled = true
 omni_range = 23.142
-script = ExtResource("12_81212")
+script = ExtResource("12_xepsr")
 metadata/_custom_type_script = "uid://1hqrwl2e0q2r"
 
 [node name="TorchLight3" type="OmniLight3D" parent="Tavern/Light/MainLight" unique_id=588502810]
@@ -51831,7 +51834,7 @@ light_color = Color(0.96347, 0.776861, 0.466365, 1)
 light_energy = 2.432
 shadow_enabled = true
 omni_range = 23.142
-script = ExtResource("12_81212")
+script = ExtResource("12_xepsr")
 metadata/_custom_type_script = "uid://1hqrwl2e0q2r"
 
 [node name="TorchLight4" type="OmniLight3D" parent="Tavern/Light/MainLight" unique_id=23074711]
@@ -51840,7 +51843,7 @@ light_color = Color(0.96347, 0.776861, 0.466365, 1)
 light_energy = 2.432
 shadow_enabled = true
 omni_range = 23.142
-script = ExtResource("12_81212")
+script = ExtResource("12_xepsr")
 metadata/_custom_type_script = "uid://1hqrwl2e0q2r"
 
 [node name="TorchStageLight" type="Node3D" parent="Tavern/Light" unique_id=578350439]
@@ -51859,7 +51862,7 @@ metadata/extras = {
 }
 }
 
-[node name="VFX_Fire_lantern" parent="Tavern/Light/TorchStageLight/Torch_stage" unique_id=1283352632 instance=ExtResource("14_ralhh")]
+[node name="VFX_Fire_lantern" parent="Tavern/Light/TorchStageLight/Torch_stage" unique_id=1283352632 instance=ExtResource("14_q3wwb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.333328)
 
 [node name="Torch_stage2" type="MeshInstance3D" parent="Tavern/Light/TorchStageLight" unique_id=1333392602]
@@ -51876,7 +51879,7 @@ metadata/extras = {
 }
 }
 
-[node name="VFX_Fire_lantern" parent="Tavern/Light/TorchStageLight/Torch_stage2" unique_id=1803449792 instance=ExtResource("14_ralhh")]
+[node name="VFX_Fire_lantern" parent="Tavern/Light/TorchStageLight/Torch_stage2" unique_id=1803449792 instance=ExtResource("14_q3wwb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.318898)
 
 [node name="Torch_stage3" type="MeshInstance3D" parent="Tavern/Light/TorchStageLight" unique_id=1940715372]
@@ -51893,7 +51896,7 @@ metadata/extras = {
 }
 }
 
-[node name="VFX_Fire_lantern" parent="Tavern/Light/TorchStageLight/Torch_stage3" unique_id=325336136 instance=ExtResource("14_ralhh")]
+[node name="VFX_Fire_lantern" parent="Tavern/Light/TorchStageLight/Torch_stage3" unique_id=325336136 instance=ExtResource("14_q3wwb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.299859)
 
 [node name="Torch_stage4" type="MeshInstance3D" parent="Tavern/Light/TorchStageLight" unique_id=459093778]
@@ -51955,28 +51958,28 @@ metadata/extras = {
 }
 }
 
-[node name="VFXCandleFire3D" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_01_004" unique_id=2124663285 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_01_004" unique_id=2124663285 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.4533, -24.1046, 144.591)
 
-[node name="VFXCandleFire3D2" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_01_004" unique_id=1187847394 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D2" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_01_004" unique_id=1187847394 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64.5092, 28.38, 145.807)
 
-[node name="VFXCandleFire3D3" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_01_004" unique_id=142368937 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D3" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_01_004" unique_id=142368937 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5987, 65.0538, 147.858)
 
-[node name="VFXCandleFire3D4" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_01_004" unique_id=536143667 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D4" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_01_004" unique_id=536143667 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.4733, 64.3194, 147.858)
 
-[node name="VFXCandleFire3D5" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_01_004" unique_id=996946889 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D5" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_01_004" unique_id=996946889 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65.0934, 27.8423, 142.215)
 
-[node name="VFXCandleFire3D6" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_01_004" unique_id=1826106948 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D6" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_01_004" unique_id=1826106948 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65.4121, -27.9447, 151.843)
 
-[node name="VFXCandleFire3D7" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_01_004" unique_id=1582973842 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D7" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_01_004" unique_id=1582973842 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.1705, -65.0936, 143.453)
 
-[node name="VFXCandleFire3D8" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_01_004" unique_id=1682755261 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D8" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_01_004" unique_id=1682755261 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.2995, -65.7558, 152.026)
 
 [node name="SM_Prop_Chandelier_01_005" type="MeshInstance3D" parent="Tavern/Light/LustreLight" unique_id=950847185]
@@ -51992,28 +51995,28 @@ metadata/extras = {
 }
 }
 
-[node name="VFXCandleFire3D" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_01_005" unique_id=1198541909 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_01_005" unique_id=1198541909 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.4533, -24.1046, 144.591)
 
-[node name="VFXCandleFire3D2" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_01_005" unique_id=43391344 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D2" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_01_005" unique_id=43391344 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64.5092, 28.38, 145.807)
 
-[node name="VFXCandleFire3D3" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_01_005" unique_id=1484175601 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D3" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_01_005" unique_id=1484175601 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5987, 65.0538, 147.858)
 
-[node name="VFXCandleFire3D4" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_01_005" unique_id=670091304 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D4" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_01_005" unique_id=670091304 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.4733, 64.3194, 147.858)
 
-[node name="VFXCandleFire3D5" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_01_005" unique_id=655837935 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D5" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_01_005" unique_id=655837935 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65.0934, 27.8423, 142.215)
 
-[node name="VFXCandleFire3D6" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_01_005" unique_id=1758983092 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D6" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_01_005" unique_id=1758983092 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65.4121, -27.9447, 151.843)
 
-[node name="VFXCandleFire3D7" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_01_005" unique_id=1266658308 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D7" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_01_005" unique_id=1266658308 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.1705, -65.0936, 143.453)
 
-[node name="VFXCandleFire3D8" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_01_005" unique_id=55296617 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D8" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_01_005" unique_id=55296617 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.2995, -65.7558, 152.026)
 
 [node name="SM_Prop_Chandelier_04" type="MeshInstance3D" parent="Tavern/Light/LustreLight" unique_id=1904599562]
@@ -52029,19 +52032,19 @@ metadata/extras = {
 }
 }
 
-[node name="VFXCandleFire3D5" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_04" unique_id=439785500 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D5" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_04" unique_id=439785500 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5676, 31.8996, 77.7113)
 
-[node name="VFXCandleFire3D6" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_04" unique_id=588075586 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D6" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_04" unique_id=588075586 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.9932, 13.1634, 78.4348)
 
-[node name="VFXCandleFire3D7" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_04" unique_id=1363782887 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D7" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_04" unique_id=1363782887 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.8, -30.951, 70.9061)
 
-[node name="VFXCandleFire3D8" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_04" unique_id=1983853764 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D8" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_04" unique_id=1983853764 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.1943, -22.389, 79.0053)
 
-[node name="VFXCandleFire3D9" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_04" unique_id=224674351 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D9" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_04" unique_id=224674351 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.2924, 0.191803, 72.5504)
 
 [node name="SM_Prop_Chandelier_Rope_01_001" type="MeshInstance3D" parent="Tavern/Light/LustreLight" unique_id=253260990]
@@ -52097,28 +52100,28 @@ metadata/extras = {
 }
 }
 
-[node name="VFXCandleFire3D" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_Rope_01_003/SM_Prop_Chandelier_01_003" unique_id=1560914816 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_Rope_01_003/SM_Prop_Chandelier_01_003" unique_id=1560914816 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.4533, -24.1046, 144.591)
 
-[node name="VFXCandleFire3D2" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_Rope_01_003/SM_Prop_Chandelier_01_003" unique_id=1018437243 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D2" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_Rope_01_003/SM_Prop_Chandelier_01_003" unique_id=1018437243 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64.5092, 28.38, 145.807)
 
-[node name="VFXCandleFire3D3" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_Rope_01_003/SM_Prop_Chandelier_01_003" unique_id=1852503652 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D3" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_Rope_01_003/SM_Prop_Chandelier_01_003" unique_id=1852503652 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5987, 65.0538, 147.858)
 
-[node name="VFXCandleFire3D4" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_Rope_01_003/SM_Prop_Chandelier_01_003" unique_id=1415485417 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D4" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_Rope_01_003/SM_Prop_Chandelier_01_003" unique_id=1415485417 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.4733, 64.3194, 147.858)
 
-[node name="VFXCandleFire3D5" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_Rope_01_003/SM_Prop_Chandelier_01_003" unique_id=921572591 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D5" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_Rope_01_003/SM_Prop_Chandelier_01_003" unique_id=921572591 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65.0934, 27.8423, 142.215)
 
-[node name="VFXCandleFire3D6" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_Rope_01_003/SM_Prop_Chandelier_01_003" unique_id=2083118659 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D6" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_Rope_01_003/SM_Prop_Chandelier_01_003" unique_id=2083118659 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65.4121, -27.9447, 151.843)
 
-[node name="VFXCandleFire3D7" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_Rope_01_003/SM_Prop_Chandelier_01_003" unique_id=943344040 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D7" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_Rope_01_003/SM_Prop_Chandelier_01_003" unique_id=943344040 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.1705, -65.0936, 143.453)
 
-[node name="VFXCandleFire3D8" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_Rope_01_003/SM_Prop_Chandelier_01_003" unique_id=689652395 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D8" parent="Tavern/Light/LustreLight/SM_Prop_Chandelier_Rope_01_003/SM_Prop_Chandelier_01_003" unique_id=689652395 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.2995, -65.7558, 152.026)
 
 [node name="SM_Prop_Chandelier_Rope_01_004" type="MeshInstance3D" parent="Tavern/Light/LustreLight" unique_id=1332914001]
@@ -52250,7 +52253,7 @@ metadata/extras = {
 }
 }
 
-[node name="VFXTorchFire3D" parent="Tavern/Light/WallLight/BigTorchLight/SM_Prop_Torch_Ornate_02_001" unique_id=1968561109 instance=ExtResource("20_c3yot")]
+[node name="VFXTorchFire3D" parent="Tavern/Light/WallLight/BigTorchLight/SM_Prop_Torch_Ornate_02_001" unique_id=1968561109 instance=ExtResource("20_3tjg5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.379169, -0.365085)
 
 [node name="SM_Prop_Torch_Ornate_02_003" type="MeshInstance3D" parent="Tavern/Light/WallLight/BigTorchLight" unique_id=1095552168]
@@ -52265,7 +52268,7 @@ metadata/extras = {
 }
 }
 
-[node name="VFXTorchFire3D" parent="Tavern/Light/WallLight/BigTorchLight/SM_Prop_Torch_Ornate_02_003" unique_id=329860577 instance=ExtResource("20_c3yot")]
+[node name="VFXTorchFire3D" parent="Tavern/Light/WallLight/BigTorchLight/SM_Prop_Torch_Ornate_02_003" unique_id=329860577 instance=ExtResource("20_3tjg5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.379169, -0.365085)
 
 [node name="SM_Prop_Torch_Ornate_02_002" type="MeshInstance3D" parent="Tavern/Light/WallLight/BigTorchLight" unique_id=1028279496]
@@ -52280,7 +52283,7 @@ metadata/extras = {
 }
 }
 
-[node name="VFXTorchFire3D" parent="Tavern/Light/WallLight/BigTorchLight/SM_Prop_Torch_Ornate_02_002" unique_id=1278281629 instance=ExtResource("20_c3yot")]
+[node name="VFXTorchFire3D" parent="Tavern/Light/WallLight/BigTorchLight/SM_Prop_Torch_Ornate_02_002" unique_id=1278281629 instance=ExtResource("20_3tjg5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.379169, -0.365085)
 
 [node name="SmallTorchLight" type="Node3D" parent="Tavern/Light/WallLight" unique_id=1955531914]
@@ -52324,7 +52327,7 @@ metadata/extras = {
 }
 }
 
-[node name="VFXCandleFire3D" parent="Tavern/Light/WallLight/SmallTorchLight/SM_Prop_Torch_06" unique_id=1161845169 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D" parent="Tavern/Light/WallLight/SmallTorchLight/SM_Prop_Torch_06" unique_id=1161845169 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.275757, 30.1074, -33.4163)
 
 [node name="SM_Prop_Torch_09" type="MeshInstance3D" parent="Tavern/Light/WallLight/SmallTorchLight" unique_id=540201505]
@@ -52340,7 +52343,7 @@ metadata/extras = {
 }
 }
 
-[node name="VFXCandleFire3D" parent="Tavern/Light/WallLight/SmallTorchLight/SM_Prop_Torch_09" unique_id=911047994 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D" parent="Tavern/Light/WallLight/SmallTorchLight/SM_Prop_Torch_09" unique_id=911047994 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.275757, 30.1074, -33.4163)
 
 [node name="SM_Prop_Torch_10" type="MeshInstance3D" parent="Tavern/Light/WallLight/SmallTorchLight" unique_id=275551825]
@@ -52356,7 +52359,7 @@ metadata/extras = {
 }
 }
 
-[node name="VFXCandleFire3D" parent="Tavern/Light/WallLight/SmallTorchLight/SM_Prop_Torch_10" unique_id=1061253344 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D" parent="Tavern/Light/WallLight/SmallTorchLight/SM_Prop_Torch_10" unique_id=1061253344 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.275757, 30.1074, -33.4163)
 
 [node name="SM_Prop_Torch_05" type="MeshInstance3D" parent="Tavern/Light/WallLight/SmallTorchLight" unique_id=932280805]
@@ -52372,7 +52375,7 @@ metadata/extras = {
 }
 }
 
-[node name="VFXCandleFire3D" parent="Tavern/Light/WallLight/SmallTorchLight/SM_Prop_Torch_05" unique_id=1550958342 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D" parent="Tavern/Light/WallLight/SmallTorchLight/SM_Prop_Torch_05" unique_id=1550958342 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.275757, 30.1074, -33.4163)
 
 [node name="SM_Prop_Torch_07" type="MeshInstance3D" parent="Tavern/Light/WallLight/SmallTorchLight" unique_id=1823279383]
@@ -52388,7 +52391,7 @@ metadata/extras = {
 }
 }
 
-[node name="VFXCandleFire3D" parent="Tavern/Light/WallLight/SmallTorchLight/SM_Prop_Torch_07" unique_id=1247540189 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D" parent="Tavern/Light/WallLight/SmallTorchLight/SM_Prop_Torch_07" unique_id=1247540189 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.275757, 30.1074, -33.4163)
 
 [node name="SM_Prop_Torch_08" type="MeshInstance3D" parent="Tavern/Light/WallLight/SmallTorchLight" unique_id=501154663]
@@ -52404,14 +52407,14 @@ metadata/extras = {
 }
 }
 
-[node name="VFXCandleFire3D" parent="Tavern/Light/WallLight/SmallTorchLight/SM_Prop_Torch_08" unique_id=1887598883 instance=ExtResource("11_qsbt6")]
+[node name="VFXCandleFire3D" parent="Tavern/Light/WallLight/SmallTorchLight/SM_Prop_Torch_08" unique_id=1887598883 instance=ExtResource("11_mlgqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.275757, 30.1074, -33.4163)
 
 [node name="WindowLight" type="Node3D" parent="Tavern/Light" unique_id=737902159]
 
 [node name="SM_Bld_House_Wall_Window_01_Glass" type="MeshInstance3D" parent="Tavern/Light/WindowLight" unique_id=198523347]
 transform = Transform3D(0, 0.02, 0, -1.19209e-09, -7.10543e-17, -0.02, -0.02, 0, 1.19209e-09, 18.2678, 1.12152e-14, -2.47901)
-material_overlay = ExtResource("21_ln2ur")
+material_overlay = ExtResource("21_n20ns")
 mesh = SubResource("ArrayMesh_vy8gg")
 skeleton = NodePath("")
 metadata/extras = {
@@ -52427,7 +52430,7 @@ metadata/extras = {
 
 [node name="SM_Bld_House_Wall_Window_01_Glass_001" type="MeshInstance3D" parent="Tavern/Light/WindowLight" unique_id=1408125328]
 transform = Transform3D(0, 0.02, 0, -1.19209e-09, -7.10543e-17, -0.02, -0.02, 0, 1.19209e-09, 18.2352, 0.039079, 17.2241)
-material_overlay = ExtResource("21_ln2ur")
+material_overlay = ExtResource("21_n20ns")
 mesh = SubResource("ArrayMesh_l6xjh")
 skeleton = NodePath("")
 metadata/extras = {
@@ -52443,7 +52446,7 @@ metadata/extras = {
 
 [node name="SM_Bld_House_Wall_Window_02_Glass" type="MeshInstance3D" parent="Tavern/Light/WindowLight" unique_id=936605044]
 transform = Transform3D(0, 0.02, 0, 0, 0, -0.02, -0.02, 0, 0, 8.12074, 4.90136, -17.1167)
-material_overlay = ExtResource("21_ln2ur")
+material_overlay = ExtResource("21_n20ns")
 mesh = SubResource("ArrayMesh_y6fce")
 skeleton = NodePath("")
 metadata/extras = {
@@ -52459,7 +52462,7 @@ metadata/extras = {
 
 [node name="SM_Bld_House_Wall_Window_02_Glass_001" type="MeshInstance3D" parent="Tavern/Light/WindowLight" unique_id=702148228]
 transform = Transform3D(0, 0.02, 0, 0, 0, -0.02, -0.02, 0, 0, -11.5373, 4.99164, 12.505)
-material_overlay = ExtResource("21_ln2ur")
+material_overlay = ExtResource("21_n20ns")
 mesh = SubResource("ArrayMesh_y57by")
 skeleton = NodePath("")
 metadata/extras = {
@@ -52475,7 +52478,7 @@ metadata/extras = {
 
 [node name="SM_Bld_House_Wall_Window_02_Glass_002" type="MeshInstance3D" parent="Tavern/Light/WindowLight" unique_id=1283554312]
 transform = Transform3D(-0.02, -3.25841e-09, -3.25841e-09, 3.25841e-09, 0, -0.02, 3.25841e-09, -0.02, 5.30863e-16, -1.5386, 4.98817, -22.1971)
-material_overlay = ExtResource("21_ln2ur")
+material_overlay = ExtResource("21_n20ns")
 mesh = SubResource("ArrayMesh_7j2gx")
 skeleton = NodePath("")
 metadata/extras = {
@@ -52491,7 +52494,7 @@ metadata/extras = {
 
 [node name="SM_Bld_House_Wall_Window_02_Glass_003" type="MeshInstance3D" parent="Tavern/Light/WindowLight" unique_id=72812407]
 transform = Transform3D(0, 0.02, 0, 0, 0, -0.02, -0.02, 0, 0, 18.2904, 4.99164, 17.5284)
-material_overlay = ExtResource("21_ln2ur")
+material_overlay = ExtResource("21_n20ns")
 mesh = SubResource("ArrayMesh_m5q87")
 skeleton = NodePath("")
 metadata/extras = {
@@ -52507,7 +52510,7 @@ metadata/extras = {
 
 [node name="SM_Bld_House_Wall_Window_02_Glass_004" type="MeshInstance3D" parent="Tavern/Light/WindowLight" unique_id=1304021502]
 transform = Transform3D(0, 0.02, 0, 0, 0, -0.02, -0.02, 0, 0, 18.2904, 4.99164, 12.5004)
-material_overlay = ExtResource("21_ln2ur")
+material_overlay = ExtResource("21_n20ns")
 mesh = SubResource("ArrayMesh_ujj04")
 skeleton = NodePath("")
 metadata/extras = {
@@ -52523,7 +52526,7 @@ metadata/extras = {
 
 [node name="SM_Bld_House_Wall_Window_02_Glass_005" type="MeshInstance3D" parent="Tavern/Light/WindowLight" unique_id=1387685840]
 transform = Transform3D(0, 0.02, 0, 0, 0, -0.02, -0.02, 0, 0, 18.2904, 4.99164, 7.4593)
-material_overlay = ExtResource("21_ln2ur")
+material_overlay = ExtResource("21_n20ns")
 mesh = SubResource("ArrayMesh_pvdjc")
 skeleton = NodePath("")
 metadata/extras = {
@@ -52539,7 +52542,7 @@ metadata/extras = {
 
 [node name="SM_Bld_House_Wall_Window_02_Glass_008" type="MeshInstance3D" parent="Tavern/Light/WindowLight" unique_id=1386126665]
 transform = Transform3D(-0.02, -3.25841e-09, -3.25841e-09, 3.25841e-09, 0, -0.02, 3.25841e-09, -0.02, 5.30863e-16, 13.419, 5.01172, -17.2312)
-material_overlay = ExtResource("21_ln2ur")
+material_overlay = ExtResource("21_n20ns")
 mesh = SubResource("ArrayMesh_x5ik1")
 skeleton = NodePath("")
 metadata/extras = {
@@ -52555,7 +52558,7 @@ metadata/extras = {
 
 [node name="SM_Bld_House_Wall_Window_02_Glass_017" type="MeshInstance3D" parent="Tavern/Light/WindowLight" unique_id=1552741791]
 transform = Transform3D(-0.02, -3.25841e-09, -3.25841e-09, 3.25841e-09, 0, -0.02, 3.25841e-09, -0.02, 5.30863e-16, 8.48548, 4.98817, -22.1971)
-material_overlay = ExtResource("21_ln2ur")
+material_overlay = ExtResource("21_n20ns")
 mesh = SubResource("ArrayMesh_p346w")
 skeleton = NodePath("")
 metadata/extras = {
@@ -52571,7 +52574,7 @@ metadata/extras = {
 
 [node name="SM_Bld_House_Wall_Window_02_Glass_018" type="MeshInstance3D" parent="Tavern/Light/WindowLight" unique_id=725132902]
 transform = Transform3D(-0.02, -2.66237e-09, -2.66237e-09, 2.66237e-09, 0, -0.02, 2.66237e-09, -0.02, 3.5441e-16, 18.4003, 4.99164, 22.5718)
-material_overlay = ExtResource("21_ln2ur")
+material_overlay = ExtResource("21_n20ns")
 mesh = SubResource("ArrayMesh_jas17")
 skeleton = NodePath("")
 metadata/extras = {
@@ -52587,7 +52590,7 @@ metadata/extras = {
 
 [node name="SM_Bld_House_Wall_Window_02_Glass_019" type="MeshInstance3D" parent="Tavern/Light/WindowLight" unique_id=1661347561]
 transform = Transform3D(0, 0.02, 0, 0, 0, -0.02, -0.02, 0, 0, 18.2904, 4.99164, 22.5149)
-material_overlay = ExtResource("21_ln2ur")
+material_overlay = ExtResource("21_n20ns")
 mesh = SubResource("ArrayMesh_oox71")
 skeleton = NodePath("")
 metadata/extras = {
@@ -52603,7 +52606,7 @@ metadata/extras = {
 
 [node name="SM_Bld_House_Wall_Window_02_Glass_020" type="MeshInstance3D" parent="Tavern/Light/WindowLight" unique_id=1814282338]
 transform = Transform3D(0, 0.02, 0, 0, 0, -0.02, -0.02, 0, 0, -11.5373, 4.99164, -2.47137)
-material_overlay = ExtResource("21_ln2ur")
+material_overlay = ExtResource("21_n20ns")
 mesh = SubResource("ArrayMesh_g4yrn")
 skeleton = NodePath("")
 metadata/extras = {
@@ -52619,7 +52622,7 @@ metadata/extras = {
 
 [node name="SM_Bld_House_Wall_Window_02_Glass_021" type="MeshInstance3D" parent="Tavern/Light/WindowLight" unique_id=824336160]
 transform = Transform3D(0, 0.02, 0, 0, 0, -0.02, -0.02, 0, 0, -11.5373, 4.99164, -17.2025)
-material_overlay = ExtResource("21_ln2ur")
+material_overlay = ExtResource("21_n20ns")
 mesh = SubResource("ArrayMesh_o5yrc")
 skeleton = NodePath("")
 metadata/extras = {
@@ -52635,7 +52638,7 @@ metadata/extras = {
 
 [node name="SM_Bld_House_Wall_Window_03_Glass" type="MeshInstance3D" parent="Tavern/Light/WindowLight" unique_id=1360194579]
 transform = Transform3D(0, 0.02, 0, -1.19209e-09, -7.10543e-17, -0.02, -0.02, 0, 1.19209e-09, -11.573, 1.94611, -5.00516)
-material_overlay = ExtResource("21_ln2ur")
+material_overlay = ExtResource("21_n20ns")
 mesh = SubResource("ArrayMesh_ax4g7")
 skeleton = NodePath("")
 metadata/extras = {
@@ -52651,7 +52654,7 @@ metadata/extras = {
 
 [node name="SM_Bld_House_Wall_Window_03_Glass_001" type="MeshInstance3D" parent="Tavern/Light/WindowLight" unique_id=1400480691]
 transform = Transform3D(0, 0.02, 0, -1.19209e-09, -7.10543e-17, -0.02, -0.02, 0, 1.19209e-09, -11.573, 1.94611, 5.00068)
-material_overlay = ExtResource("21_ln2ur")
+material_overlay = ExtResource("21_n20ns")
 mesh = SubResource("ArrayMesh_16vux")
 skeleton = NodePath("")
 metadata/extras = {
@@ -52667,7 +52670,7 @@ metadata/extras = {
 
 [node name="SM_Bld_House_Wall_WindowBox_06_Glass" type="MeshInstance3D" parent="Tavern/Light/WindowLight" unique_id=282705686]
 transform = Transform3D(-0.02, -8.74228e-10, -8.74228e-10, 8.74228e-10, 0, -0.02, 8.74228e-10, -0.02, 3.82137e-17, -9.20936, 7.18951, -23.4183)
-material_overlay = ExtResource("21_ln2ur")
+material_overlay = ExtResource("21_n20ns")
 mesh = SubResource("ArrayMesh_ekqwr")
 skeleton = NodePath("")
 metadata/extras = {
@@ -52683,7 +52686,7 @@ metadata/extras = {
 
 [node name="SM_Bld_House_Wall_WindowBox_06_Glass_001" type="MeshInstance3D" parent="Tavern/Light/WindowLight" unique_id=1277213577]
 transform = Transform3D(-0.02, -3.25841e-09, -3.25841e-09, 3.25841e-09, 0, -0.02, 3.25841e-09, -0.02, 5.30863e-16, 0.260456, 7.16802, -23.4742)
-material_overlay = ExtResource("21_ln2ur")
+material_overlay = ExtResource("21_n20ns")
 mesh = SubResource("ArrayMesh_eq514")
 skeleton = NodePath("")
 metadata/extras = {
@@ -52699,7 +52702,7 @@ metadata/extras = {
 
 [node name="SM_Bld_House_Wall_Window_02_Glass_006" type="MeshInstance3D" parent="Tavern/Light/WindowLight" unique_id=1545397559]
 transform = Transform3D(0, 0.02, 0, 0, 0, -0.02, -0.02, 0, 0, 18.2904, 4.99164, -2.44768)
-material_overlay = ExtResource("21_ln2ur")
+material_overlay = ExtResource("21_n20ns")
 mesh = SubResource("ArrayMesh_kvwyj")
 skeleton = NodePath("")
 metadata/extras = {
@@ -52715,7 +52718,7 @@ metadata/extras = {
 
 [node name="SM_Bld_House_Wall_Window_02_Glass_007" type="MeshInstance3D" parent="Tavern/Light/WindowLight" unique_id=662645465]
 transform = Transform3D(0, 0.02, 0, 0, 0, -0.02, -0.02, 0, 0, 18.2904, 4.99164, -12.4403)
-material_overlay = ExtResource("21_ln2ur")
+material_overlay = ExtResource("21_n20ns")
 mesh = SubResource("ArrayMesh_umvji")
 skeleton = NodePath("")
 metadata/extras = {
@@ -52754,7 +52757,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.574597, 0)
 unique_name_in_owner = true
 transform = Transform3D(0.009511892, 0, -0.99995476, 0, 0.9999999, 0, 0.99995476, 0, 0.009511892, -0.9193905, 0, 0.12321366)
 
-[node name="Latika" parent="Tavern/HeroesPreview/HeroSpawnPoint" unique_id=294337328 instance=ExtResource("22_a388w")]
+[node name="Latika" parent="Tavern/HeroesPreview/HeroSpawnPoint" unique_id=294337328 instance=ExtResource("22_8au67")]
 transform = Transform3D(0.99999994, 0, 0, 0, 1.0000001, 0, 0, 0, 0.99999994, 0, 0, 0)
 metadata/_edit_lock_ = true
 
@@ -52762,5 +52765,8 @@ metadata/_edit_lock_ = true
 transform = Transform3D(-4.371139e-08, -0.24645777, 0.9691535, 0, 0.9691535, 0.24645777, -1, 1.0773011e-08, -4.2363045e-08, 4.70505, 2.939973, 0.20216416)
 fov = 35.0
 
-[node name="UIHeroPickingScreen" parent="." unique_id=1036202486 instance=ExtResource("23_1s1vq")]
+[node name="UIHeroPickingScreen" parent="." unique_id=1036202486 instance=ExtResource("23_bnso8")]
 unique_name_in_owner = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1262329884]
+environment = SubResource("Environment_317s8")
