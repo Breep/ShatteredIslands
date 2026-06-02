@@ -1,8 +1,9 @@
-# UIHeroPortrait — Fiche perso de l'entité sélectionnée : portrait, niveau, skills
+# UIEntityPortrait — Fiche perso de l'entité sélectionnée : portrait, niveau, skills
 # et stats. Snapshot au clic (Events.entity_clicked) puis suivi live via les signaux
-# de l'entité. Le panneau central bascule entre la liste de stats et la description
-# d'un skill au clic sur une icône (clic en dehors d'un skill => retour aux stats).
-class_name UIHeroPortrait
+# de l'entité. Cliquer le portrait ouvre/ferme la fiche (EntityDescriptionPanel) ;
+# le panneau central bascule entre stats et description d'un skill au clic sur une
+# icône (clic en dehors d'un skill => stats, clic en dehors de la fiche => fermeture).
+class_name UIEntityPortrait
 extends Control
 
 #region ============================== Constants ==============================
@@ -12,6 +13,8 @@ const _HOVER_SCALE := Vector2(1.1, 1.1)
 const _PRESS_SCALE := Vector2(0.92, 0.92)
 const _BUTTON_TWEEN_TIME: float = 0.08
 const _NO_SKILL_TEXT: String = "Compétence non disponible."
+const _PANEL_POP_TIME: float = 0.18
+const _PANEL_POP_SCALE := Vector2(0.92, 0.92)
 
 # { ItemList unique-name : [ {stat, sig (signal float 1 arg)} ] }
 # L'ordre des items DOIT suivre l'ordre des icônes posées dans la scène.
@@ -64,6 +67,8 @@ const _SECONDARY_BUTTONS: Array[String] = ["BronzeButton2", "SilverButton2", "Go
 @onready var _skill_desc_panel: VBoxContainer = %SkillDescriptionContainer
 @onready var _skill_name_label: Label = %SkillNameLabel
 @onready var _skill_desc_label: RichTextLabel = %SkillDescriptionLabel
+@onready var _panel: Panel = %EntityDescriptionPanel
+@onready var _portrait_button: TextureButton = %PortraitButton
 #endregion
 
 #region ============================== Private variables ==============================
@@ -74,6 +79,8 @@ var _button_tweens: Dictionary = {} # TextureButton -> Tween (feedback hover/pre
 var _showing_desc: bool = false
 var _current_desc_type: Skill.Type = Skill.Type.PASSIVE
 var _fade_tween: Tween
+var _panel_open: bool = false
+var _panel_tween: Tween
 #endregion
 
 #region ============================== Node base functions ==============================
@@ -81,14 +88,21 @@ func _ready() -> void:
 	_collect_skill_buttons()
 	_hide_secondary_buttons()
 	_show_stats_instant()
+	_close_panel_instant()
+	_portrait_button.pressed.connect(_on_portrait_button_pressed)
 	Events.entity_clicked.connect(_on_events_entity_clicked)
 
 
 func _input(event: InputEvent) -> void:
-	if not _showing_desc: return
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		if not _is_over_skill_button():
-			_show_stats()
+	if not (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT):
+		return
+	var mouse: Vector2 = get_global_mouse_position()
+	if _panel_open and not _panel.get_global_rect().has_point(mouse) \
+			and not _portrait_button.get_global_rect().has_point(mouse):
+		_close_panel()
+		return
+	if _showing_desc and not _is_over_skill_button():
+		_show_stats()
 
 
 func _exit_tree() -> void:
@@ -206,6 +220,45 @@ func _crossfade(node_in: CanvasItem, node_out: CanvasItem) -> void:
 	_fade_tween.tween_callback(node_out.hide)
 #endregion
 
+#region ============================== Private functions — description panel ==============================
+func _open_panel() -> void:
+	_panel_open = true
+	if _panel_tween != null and _panel_tween.is_valid():
+		_panel_tween.kill()
+	_panel.show()
+	_panel.pivot_offset = _panel.size * 0.5
+	_panel.modulate.a = 0.0
+	_panel.scale = _PANEL_POP_SCALE
+	_panel_tween = create_tween()
+	_panel_tween.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	_panel_tween.set_parallel(true)
+	_panel_tween.tween_property(_panel, "scale", Vector2.ONE, _PANEL_POP_TIME)
+	_panel_tween.tween_property(_panel, "modulate:a", 1.0, _PANEL_POP_TIME)
+
+
+func _close_panel() -> void:
+	_panel_open = false
+	if _panel_tween != null and _panel_tween.is_valid():
+		_panel_tween.kill()
+	_panel.pivot_offset = _panel.size * 0.5
+	_panel_tween = create_tween()
+	_panel_tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	_panel_tween.set_parallel(true)
+	_panel_tween.tween_property(_panel, "scale", _PANEL_POP_SCALE, _PANEL_POP_TIME)
+	_panel_tween.tween_property(_panel, "modulate:a", 0.0, _PANEL_POP_TIME)
+	_panel_tween.set_parallel(false)
+	_panel_tween.tween_callback(_panel.hide)
+
+
+func _close_panel_instant() -> void:
+	_panel_open = false
+	if _panel_tween != null and _panel_tween.is_valid():
+		_panel_tween.kill()
+	_panel.hide()
+	_panel.scale = Vector2.ONE
+	_panel.modulate.a = 1.0
+#endregion
+
 #region ============================== Private functions — buttons ==============================
 func _collect_skill_buttons() -> void:
 	for btn_name: String in _PRIMARY_SKILLS:
@@ -263,6 +316,13 @@ func _set_item_value(list: ItemList, idx: int, value: float) -> void:
 #region ============================== Callbacks ==============================
 func _on_events_entity_clicked(entity: Entity) -> void:
 	bind(entity)
+
+
+func _on_portrait_button_pressed() -> void:
+	if _panel_open:
+		_close_panel()
+	else:
+		_open_panel()
 
 
 func _on_stat_changed(value: float, list: ItemList, idx: int) -> void:

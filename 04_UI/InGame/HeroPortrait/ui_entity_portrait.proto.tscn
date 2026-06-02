@@ -22,8 +22,10 @@ theme_override_constants/separation = 8
 
 [node name="InfoLabel" type="Label" parent="Controls" unique_id=733967805]
 layout_mode = 2
-text = "Survole / clique les icônes
-de skill pour le tween + le swap.
+text = "Clique le portrait hexagonal pour
+ouvrir/fermer la fiche ; clic ailleurs = fermer.
+Survole / clique les icônes de skill
+pour le tween + le swap stats/desc.
 Clic en dehors d'un skill = retour stats."
 autowrap_mode = 2
 

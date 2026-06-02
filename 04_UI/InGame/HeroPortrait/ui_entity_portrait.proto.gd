@@ -1,4 +1,4 @@
-# Proto scene de UIHeroPortrait : exerce le composant isolé du jeu.
+# Proto scene de UIEntityPortrait : exerce le composant isolé du jeu.
 # - Tween hover/press : survoler/cliquer les icônes de skill directement.
 # - Swap stats <-> description : boutons "Desc Bronze" / "Stats" + clic en dehors.
 # - Snapshot + suivi live des stats : un Entity créé hors-arbre (pas de _ready
@@ -6,7 +6,7 @@
 # - Placeholder portrait : l'Entity n'a pas d'entity_desc => texture par défaut.
 extends Control
 
-@onready var _portrait: UIHeroPortrait = %HeroPortrait
+@onready var _portrait: UIEntityPortrait = %EntityPortrait
 @onready var _bind_button: Button = %BindButton
 @onready var _mutate_ad_button: Button = %MutateADButton
 @onready var _mutate_armor_button: Button = %MutateArmorButton
