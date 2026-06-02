@@ -83,6 +83,9 @@ var _current_desc_type: Skill.Type = Skill.Type.PASSIVE
 var _fade_tween: Tween
 var _panel_open: bool = false
 var _panel_tween: Tween
+# Frame du dernier entity_clicked : sert à NE PAS fermer la fiche quand le clic qui
+# atteint _unhandled_input correspond en fait à la sélection d'une autre entité.
+var _last_entity_click_frame: int = -1
 #endregion
 
 #region ============================== Node base functions ==============================
@@ -103,11 +106,17 @@ func _input(event: InputEvent) -> void:
 		_show_stats()
 
 
+# Un clic qui atteint _unhandled_input n'a été consommé ni par le GUI ni par une
+# entité (ClickableComponent) => clic « dans le vide ». On réagit sur le RELEASE
+# (même phase que le set_input_as_handled du clickable) et on diffère la fermeture :
+# si un entity_clicked survient la même frame, c'est une re-sélection => on garde
+# ouvert. Le deferred s'exécute après tous les _unhandled_input + l'émission du
+# signal, donc l'ordre d'appel des handlers n'a pas d'importance.
 func _unhandled_input(event: InputEvent) -> void:
-	if not (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT):
+	if not (event is InputEventMouseButton and not event.pressed and event.button_index == MOUSE_BUTTON_LEFT):
 		return
 	if _panel_open:
-		_close_panel()
+		_maybe_close_panel.call_deferred()
 
 
 func _exit_tree() -> void:
@@ -291,6 +300,12 @@ func _close_panel_instant() -> void:
 	_panel.hide()
 	_panel.scale = Vector2.ONE
 	_panel.modulate.a = 1.0
+
+
+func _maybe_close_panel() -> void:
+	if Engine.get_process_frames() == _last_entity_click_frame:
+		return
+	_close_panel()
 #endregion
 
 #region ============================== Private functions — buttons ==============================
@@ -350,6 +365,7 @@ func _set_item_value(list: ItemList, idx: int, value: float) -> void:
 #region ============================== Callbacks ==============================
 func _on_events_entity_clicked(entity: Entity) -> void:
 	bind(entity)
+	_last_entity_click_frame = Engine.get_process_frames()
 
 
 func _on_portrait_button_pressed() -> void:

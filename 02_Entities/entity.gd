@@ -135,6 +135,7 @@ var _auto_loaded_components: Array[EntityComponent.Type] = [
 	EntityComponent.Type.MANA,
 	EntityComponent.Type.PROGRESSION,
 	EntityComponent.Type.SKILL,
+	EntityComponent.Type.DECK_HOLDER
 ]
 
 #var display_mode: DisplayMode = DisplayMode.PREVIEW
