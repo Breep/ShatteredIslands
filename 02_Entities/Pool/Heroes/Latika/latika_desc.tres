@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="EntityDesc" format=3 uid="uid://dlatikadesc"]
 
 [ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="1_desc"]
+[ext_resource type="Texture2D" uid="uid://d1e0ogx2plmkc" path="res://02_Entities/Pool/Heroes/Latika/Data/hero_portrait_latika.png" id="1_pxqef"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="2_es"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="2_psofn"]
 [ext_resource type="Resource" uid="uid://dlatikastat01" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_01.tres" id="3_l01"]
@@ -27,6 +28,7 @@
 [resource]
 script = ExtResource("1_desc")
 name = "Latika"
+portrait = ExtResource("1_pxqef")
 description = "L'Enfant des Loups — DPS distance / carry mono-cible. Dualité prédateur solitaire / chef de meute."
 default_category = 0
 stats = Dictionary[int, ExtResource("2_es")]({

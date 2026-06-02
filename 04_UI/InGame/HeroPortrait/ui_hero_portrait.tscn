@@ -1,14 +1,42 @@
 [gd_scene format=3 uid="uid://cxlyl8wdndq08"]
 
 [ext_resource type="Script" uid="uid://104q00bex1w5" path="res://04_UI/InGame/HeroPortrait/ui_hero_portrait.gd" id="1_7ey5r"]
+[ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="1_q0a4j"]
 [ext_resource type="Texture2D" uid="uid://bysuxqpthk6jh" path="res://04_UI/InGame/BuyingArea/PlayerPortrait/Data/Hexagone_mask.png" id="2_x8rfx"]
 [ext_resource type="BitMap" uid="uid://coqsy2fcdqwso" path="res://04_UI/InGame/BuyingArea/PlayerPortrait/Data/Hexagone_mask_bitmap.png" id="3_rs4lt"]
+[ext_resource type="Texture2D" uid="uid://dfcy3dpkcvyx2" path="res://04_UI/_Themes/Data/Icons/Backgrounds/skill_passive_background.svg" id="3_xeyfs"]
+[ext_resource type="Texture2D" uid="uid://ds2dracb280n" path="res://02_Entities/Pool/Heroes/Latika/Skills/Passive/skill_target.svg" id="4_bkbtd"]
+[ext_resource type="Texture2D" uid="uid://carfsdb3rsrq6" path="res://04_UI/_Themes/Data/Icons/Backgrounds/skill_bronze_background.svg" id="4_p61mv"]
 [ext_resource type="Script" uid="uid://dq0ub1oemlk0p" path="res://22_VFX/VFEZ-godot-main/vfez_material_2d.gd" id="4_qwwg1"]
-[ext_resource type="Texture2D" uid="uid://difeq0pm3hgjs" path="res://02_Entities/Pool/Heroes/DarkKnight/Data/darkknight_portrait.png" id="5_4in7r"]
+[ext_resource type="Texture2D" uid="uid://cexqu5b6xfn6l" path="res://04_UI/_Themes/Data/Icons/Backgrounds/skill_silver_background.svg" id="5_bkbtd"]
+[ext_resource type="Texture2D" uid="uid://d1e0ogx2plmkc" path="res://02_Entities/Pool/Heroes/Latika/Data/hero_portrait_latika.png" id="5_to4kj"]
 [ext_resource type="Texture2D" uid="uid://bmx7nnd8pibtg" path="res://04_UI/InGame/BuyingArea/PlayerPortrait/Data/Hexagone_frame.png" id="6_7oc7k"]
-[ext_resource type="Texture2D" uid="uid://dnyr8e1nfawch" path="res://04_UI/InGame/BuyingArea/PlayerPortrait/Data/Name_frame.png" id="7_u7csg"]
+[ext_resource type="Texture2D" uid="uid://dh6gsh2ddl52l" path="res://02_Entities/Pool/Heroes/Latika/Skills/Bronze/skill_wild_hunt.svg" id="6_akk3c"]
+[ext_resource type="Texture2D" uid="uid://cqi38wk48ksg6" path="res://04_UI/_Themes/Data/Icons/Backgrounds/skill_gold_background.svg" id="6_cottl"]
+[ext_resource type="Texture2D" uid="uid://isvymof3movr" path="res://04_UI/_Themes/Data/Icons/Backgrounds/skill_ultimate_background.svg" id="7_1a1uy"]
+[ext_resource type="Script" uid="uid://ddn8p84mlkyr0" path="res://04_UI/Tool/HexGridContainer/hex_grid_container.gd" id="7_5ry3c"]
+[ext_resource type="Texture2D" uid="uid://dayao4gj672ua" path="res://02_Entities/Pool/Heroes/Latika/Skills/Bronze/skill_hawk_eye.svg" id="7_akk3c"]
+[ext_resource type="Texture2D" uid="uid://dd1f2yw8yk0tf" path="res://02_Entities/Pool/Heroes/Latika/Skills/Silver/skill_bestial_reflex.svg" id="9_5ry3c"]
+[ext_resource type="Texture2D" uid="uid://by11x2e6rpn8o" path="res://02_Entities/Pool/Heroes/Latika/Skills/Gold/blood_link.svg" id="10_4fn3k"]
+[ext_resource type="Texture2D" uid="uid://e6guwivvf6ln" path="res://02_Entities/Pool/Heroes/Latika/Skills/Ultimate/skill_predator_arrow.svg" id="12_jebl5"]
+[ext_resource type="Texture2D" uid="uid://cxa3f4kgmd0b6" path="res://04_UI/_Themes/Data/Icons/Backgrounds/level_background.svg" id="13_xeyfs"]
+[ext_resource type="Texture2D" uid="uid://b10t6bod6w58w" path="res://04_UI/_Themes/Data/Icons/EntityStats/mana_max_colored.svg" id="16_krs1a"]
+[ext_resource type="Texture2D" uid="uid://c06llh5l1a3h7" path="res://04_UI/_Themes/Data/Icons/EntityStats/mana_regen_colored.svg" id="17_gvh0l"]
+[ext_resource type="Texture2D" uid="uid://b6rimvk88hn24" path="res://04_UI/_Themes/Data/Icons/EntityStats/attack_damage_colored.svg" id="18_airt0"]
+[ext_resource type="Texture2D" uid="uid://d2kybwt3oan51" path="res://04_UI/_Themes/Data/Icons/EntityStats/attack_speed_colored.svg" id="19_wxn7h"]
+[ext_resource type="Texture2D" uid="uid://bvw264c6finmi" path="res://04_UI/_Themes/Data/Icons/EntityStats/attack_power_colored.svg" id="20_ciq0q"]
+[ext_resource type="Texture2D" uid="uid://dyk4gkh6vx61y" path="res://04_UI/_Themes/Data/Icons/EntityStats/attack_range_colored.svg" id="21_xhio7"]
+[ext_resource type="Texture2D" uid="uid://bo3c1wt2f1wbn" path="res://04_UI/_Themes/Data/Icons/EntityStats/move_speed_colored.svg" id="22_ow2ug"]
+[ext_resource type="Texture2D" uid="uid://b13krllsainfs" path="res://04_UI/_Themes/Data/Icons/EntityStats/armor_colored.svg" id="23_txtj0"]
+[ext_resource type="Texture2D" uid="uid://cglkmf7fsuq1w" path="res://04_UI/_Themes/Data/Icons/EntityStats/magic_resist_colored.svg" id="24_epaie"]
+[ext_resource type="Texture2D" uid="uid://d0tbxj0ryk1jh" path="res://04_UI/_Themes/Data/Icons/EntityStats/poison_resist_colored.svg" id="25_jp85h"]
+[ext_resource type="Texture2D" uid="uid://whmow6k6ww3r" path="res://04_UI/_Themes/Data/Icons/EntityStats/crit_chance_colored.svg" id="26_c70rx"]
+[ext_resource type="Texture2D" uid="uid://cse0se2yh4m70" path="res://04_UI/_Themes/Data/Icons/EntityStats/crit_mult_colored.svg" id="27_8db81"]
+[ext_resource type="Texture2D" uid="uid://dsdkh6xhg03q4" path="res://04_UI/_Themes/Data/Icons/EntityStats/dodge_colored.svg" id="29_w34vm"]
+[ext_resource type="Texture2D" uid="uid://cmtsqmy038iqr" path="res://04_UI/_Themes/Data/Icons/EntityStats/life_steal_colored.svg" id="30_8p1gy"]
+[ext_resource type="Texture2D" uid="uid://bilq8c5d04x2v" path="res://04_UI/_Themes/Data/Icons/EntityStats/scale_colored.svg" id="31_h7ky1"]
 
-[sub_resource type="Shader" id="Shader_x8rfx"]
+[sub_resource type="Shader" id="Shader_5ry3c"]
 resource_name = "VFEZ2DPreview"
 code = "
 // This shader was dynamically generated by the VFEZ material.
@@ -25,7 +53,7 @@ shader_type canvas_item;
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lkloo"]
-shader = SubResource("Shader_x8rfx")
+shader = SubResource("Shader_5ry3c")
 shader_parameter/texture_scale = Vector2(1, 1)
 shader_parameter/texture_offset = Vector2(0, 0)
 shader_parameter/texture_scroll_speed = Vector2(0, 0)
@@ -103,7 +131,402 @@ offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme = ExtResource("1_q0a4j")
 script = ExtResource("1_7ey5r")
+
+[node name="Panel" type="Panel" parent="." unique_id=1346640612]
+layout_mode = 0
+offset_left = 64.0
+offset_top = -402.0
+offset_right = 522.0
+offset_bottom = 176.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=1314912586]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=1140449857]
+layout_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="EntityNameContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=1743274540]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="EntityNameLabel" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer/EntityNameContainer" unique_id=1156250120]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/normal_font_size = 48
+text = "Latika"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer" unique_id=247019172]
+layout_mode = 2
+
+[node name="SkillsContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=1724625510]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/SkillsContainer" unique_id=1023940887]
+layout_mode = 2
+alignment = 1
+
+[node name="PassiveControl" type="CenterContainer" parent="Panel/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer" unique_id=87405495]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PassiveButton" type="TextureButton" parent="Panel/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/PassiveControl" unique_id=1762071247]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("3_xeyfs")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/PassiveControl/PassiveButton" unique_id=1633453114]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PassivePortrait" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/PassiveControl/PassiveButton/MarginContainer" unique_id=284632933]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_bkbtd")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BronzeControl" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer" unique_id=733352570]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HexGridContainer" type="Container" parent="Panel/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/BronzeControl" unique_id=328090988]
+layout_mode = 2
+script = ExtResource("7_5ry3c")
+columns = 1
+cell_size = Vector2(64, 64)
+metadata/_custom_type_script = "uid://ddn8p84mlkyr0"
+
+[node name="TextureButton4" type="TextureButton" parent="Panel/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/BronzeControl/HexGridContainer" unique_id=278512939]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("4_p61mv")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/BronzeControl/HexGridContainer/TextureButton4" unique_id=451741011]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_akk3c")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureButton5" type="TextureButton" parent="Panel/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/BronzeControl/HexGridContainer" unique_id=546513338]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("4_p61mv")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/BronzeControl/HexGridContainer/TextureButton5" unique_id=1316709280]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_akk3c")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SilverControl" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer" unique_id=1150912595]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HexGridContainer" type="Container" parent="Panel/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/SilverControl" unique_id=1761219388]
+layout_mode = 2
+script = ExtResource("7_5ry3c")
+columns = 1
+cell_size = Vector2(64, 64)
+metadata/_custom_type_script = "uid://ddn8p84mlkyr0"
+
+[node name="TextureButton4" type="TextureButton" parent="Panel/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/SilverControl/HexGridContainer" unique_id=1560013368]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("5_bkbtd")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/SilverControl/HexGridContainer/TextureButton4" unique_id=1029241726]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_5ry3c")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureButton5" type="TextureButton" parent="Panel/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/SilverControl/HexGridContainer" unique_id=614341473]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("5_bkbtd")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/SilverControl/HexGridContainer/TextureButton5" unique_id=1254551881]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_akk3c")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GoldControl" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer" unique_id=770671821]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HexGridContainer" type="Container" parent="Panel/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/GoldControl" unique_id=225714867]
+layout_mode = 2
+script = ExtResource("7_5ry3c")
+columns = 1
+cell_size = Vector2(64, 64)
+metadata/_custom_type_script = "uid://ddn8p84mlkyr0"
+
+[node name="TextureButton4" type="TextureButton" parent="Panel/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/GoldControl/HexGridContainer" unique_id=2012858156]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("6_cottl")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/GoldControl/HexGridContainer/TextureButton4" unique_id=1232938780]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_4fn3k")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureButton5" type="TextureButton" parent="Panel/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/GoldControl/HexGridContainer" unique_id=1033890728]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("6_cottl")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/GoldControl/HexGridContainer/TextureButton5" unique_id=1146282168]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_akk3c")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="UltimateControl" type="CenterContainer" parent="Panel/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer" unique_id=778891334]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureButton5" type="TextureButton" parent="Panel/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/UltimateControl" unique_id=1607106523]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("7_1a1uy")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/UltimateControl/TextureButton5" unique_id=1545109086]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_jebl5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HSeparator2" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer" unique_id=607266385]
+layout_mode = 2
+
+[node name="StatsSkillDescContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=809523691]
+layout_mode = 2
+
+[node name="StatsContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/StatsSkillDescContainer" unique_id=1484502842]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="AttackStats" type="ItemList" parent="Panel/MarginContainer/VBoxContainer/StatsSkillDescContainer/StatsContainer" unique_id=225910915]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 0
+item_count = 4
+max_columns = 5
+same_column_width = true
+fixed_column_width = 100
+fixed_icon_size = Vector2i(32, 32)
+item_0/text = "0"
+item_0/icon = ExtResource("18_airt0")
+item_0/selectable = false
+item_1/text = "0"
+item_1/icon = ExtResource("19_wxn7h")
+item_1/selectable = false
+item_2/text = "0"
+item_2/icon = ExtResource("20_ciq0q")
+item_2/selectable = false
+item_3/text = "0"
+item_3/icon = ExtResource("21_xhio7")
+item_3/selectable = false
+
+[node name="DefenseStats" type="ItemList" parent="Panel/MarginContainer/VBoxContainer/StatsSkillDescContainer/StatsContainer" unique_id=1907004918]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 0
+item_count = 3
+max_columns = 5
+same_column_width = true
+fixed_column_width = 100
+fixed_icon_size = Vector2i(32, 32)
+item_0/text = "0"
+item_0/icon = ExtResource("23_txtj0")
+item_0/selectable = false
+item_1/text = "0"
+item_1/icon = ExtResource("24_epaie")
+item_1/selectable = false
+item_2/text = "0"
+item_2/icon = ExtResource("25_jp85h")
+item_2/selectable = false
+
+[node name="CriticStats" type="ItemList" parent="Panel/MarginContainer/VBoxContainer/StatsSkillDescContainer/StatsContainer" unique_id=1967765795]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 0
+item_count = 2
+max_columns = 5
+same_column_width = true
+fixed_column_width = 100
+fixed_icon_size = Vector2i(32, 32)
+item_0/text = "0"
+item_0/icon = ExtResource("26_c70rx")
+item_0/selectable = false
+item_1/text = "0"
+item_1/icon = ExtResource("27_8db81")
+item_1/selectable = false
+
+[node name="ManaStats" type="ItemList" parent="Panel/MarginContainer/VBoxContainer/StatsSkillDescContainer/StatsContainer" unique_id=2014129419]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 0
+item_count = 2
+max_columns = 5
+same_column_width = true
+fixed_column_width = 100
+fixed_icon_size = Vector2i(32, 32)
+item_0/text = "0"
+item_0/icon = ExtResource("16_krs1a")
+item_1/text = "0"
+item_1/icon = ExtResource("17_gvh0l")
+item_1/selectable = false
+
+[node name="MiscStats" type="ItemList" parent="Panel/MarginContainer/VBoxContainer/StatsSkillDescContainer/StatsContainer" unique_id=27840444]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 0
+item_count = 4
+max_columns = 5
+same_column_width = true
+fixed_column_width = 100
+fixed_icon_size = Vector2i(32, 32)
+item_0/text = "0"
+item_0/icon = ExtResource("22_ow2ug")
+item_0/selectable = false
+item_1/text = "0"
+item_1/icon = ExtResource("29_w34vm")
+item_1/selectable = false
+item_2/text = "0"
+item_2/icon = ExtResource("30_8p1gy")
+item_2/selectable = false
+item_3/text = "0"
+item_3/icon = ExtResource("31_h7ky1")
+item_3/selectable = false
+
+[node name="SkillDescriptionContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/StatsSkillDescContainer" unique_id=1864939956]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="SkillNameLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/StatsSkillDescContainer/SkillDescriptionContainer" unique_id=798743532]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.47843137, 0.6392157, 1, 1)
+text = "Skill name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer/StatsSkillDescContainer/SkillDescriptionContainer" unique_id=1292778968]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer/StatsSkillDescContainer/SkillDescriptionContainer/MarginContainer" unique_id=1052553272]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = " Lorem ipsum dolor sit amet, [color=violet]consectetur[/color] adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing [shake]nec[/shake], ultricies sed, dolor. Cras elementum ultrices diam. [rainbow]Maecenas[/rainbow] ligula massa, varius a, semper congue, [wave]euismod[/wave] non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat."
+
+[node name="HSeparator3" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer" unique_id=1043306322]
+layout_mode = 2
 
 [node name="TextureButton" type="TextureButton" parent="." unique_id=178563449]
 layout_mode = 1
@@ -118,7 +541,7 @@ texture_click_mask = ExtResource("3_rs4lt")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="PlayerIllusatrationPortrait" type="TextureRect" parent="." unique_id=1056642670]
+[node name="EntityPortraitTexture" type="TextureRect" parent="." unique_id=1056642670]
 material = SubResource("ShaderMaterial_lkloo")
 layout_mode = 1
 anchors_preset = 15
@@ -127,10 +550,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("5_4in7r")
+texture = ExtResource("5_to4kj")
 expand_mode = 1
 
-[node name="HexagonFrame" type="TextureRect" parent="." unique_id=133177450]
+[node name="EntityPortraitFrame" type="TextureRect" parent="." unique_id=133177450]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -141,33 +564,25 @@ mouse_filter = 2
 texture = ExtResource("6_7oc7k")
 expand_mode = 1
 
-[node name="PlayerNamePanel" type="TextureRect" parent="." unique_id=440866254]
+[node name="EntityLevelFrame" type="TextureRect" parent="." unique_id=1393798833]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 182.0
+offset_right = 90.0
+offset_bottom = 241.0
+texture = ExtResource("13_xeyfs")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="EntityLevelLabel" type="Label" parent="EntityLevelFrame" unique_id=1229009248]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("7_u7csg")
-expand_mode = 1
-
-[node name="PlayerNameLabel" type="RichTextLabel" parent="." unique_id=708937298]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.804
-anchor_right = 0.5
-anchor_bottom = 0.804
-offset_left = -66.0
-offset_top = -15.82399
-offset_right = 66.0
-offset_bottom = 21.17601
-mouse_filter = 2
-theme_override_constants/outline_size = 7
-theme_override_font_sizes/normal_font_size = 18
-theme_override_font_sizes/bold_font_size = 10
-text = "BREEP"
+text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_lock_ = true

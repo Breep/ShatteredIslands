@@ -38,6 +38,12 @@ shadow_color = Color(0.0627451, 0.09411765, 0.13333334, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ublo5"]
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_iy36y"]
+color = Color(0.109251775, 0.08148203, 0.113029934, 1)
+grow_begin = -5.0
+grow_end = -5.0
+thickness = 2
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ls0cl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ublo5"]
@@ -95,6 +101,8 @@ CheckButton/styles/normal = SubResource("StyleBoxEmpty_ublo5")
 CheckButton/styles/normal_mirrored = SubResource("StyleBoxEmpty_ublo5")
 CheckButton/styles/pressed = SubResource("StyleBoxEmpty_ublo5")
 CheckButton/styles/pressed_mirrored = SubResource("StyleBoxEmpty_ublo5")
+HSeparator/constants/separation = 10
+HSeparator/styles/separator = SubResource("StyleBoxLine_iy36y")
 ItemList/colors/font_color = Color(1, 1, 1, 1)
 ItemList/colors/guide_color = Color(0, 0, 0, 0)
 ItemList/constants/outline_size = 4
