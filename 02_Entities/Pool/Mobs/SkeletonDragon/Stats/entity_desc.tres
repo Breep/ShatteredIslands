@@ -1,0 +1,50 @@
+[gd_resource type="Resource" script_class="EntityDesc" format=3 uid="uid://u5ir3c4mxsrj"]
+
+[ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="1_5bbmg"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="2_1uu4l"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_40nx0"]
+[ext_resource type="Resource" uid="uid://0m8vj5ggrum" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Stats/stats_lvl_01.tres" id="4_fwtbi"]
+[ext_resource type="Resource" uid="uid://gqcdpc4lvmi7" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Stats/stats_lvl_02.tres" id="5_tkl2o"]
+[ext_resource type="Resource" uid="uid://b8w6bd2gdguch" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Stats/stats_lvl_03.tres" id="6_s05oq"]
+[ext_resource type="Resource" uid="uid://5ijob612h5ug" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Stats/stats_lvl_04.tres" id="7_vaeqp"]
+[ext_resource type="Resource" uid="uid://0vdri7lvag1q" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Stats/stats_lvl_05.tres" id="8_xdamf"]
+[ext_resource type="Resource" uid="uid://bggnumuj00hpn" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Stats/stats_lvl_06.tres" id="9_m52s5"]
+[ext_resource type="Resource" uid="uid://lyrbxhiq834g" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Stats/stats_lvl_07.tres" id="10_x6ogt"]
+[ext_resource type="Resource" uid="uid://ce4ol4hqwvob4" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Stats/stats_lvl_08.tres" id="11_lpwoj"]
+[ext_resource type="Resource" uid="uid://bt3gam6d06udv" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Stats/stats_lvl_09.tres" id="12_bee1y"]
+[ext_resource type="Resource" uid="uid://bqgflpwoeer3q" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Stats/stats_lvl_10.tres" id="13_qkrsn"]
+[ext_resource type="Resource" uid="uid://cog6evybjkf74" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Stats/stats_lvl_11.tres" id="14_rit3s"]
+[ext_resource type="Resource" uid="uid://lm0pcfd7442n" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Stats/stats_lvl_12.tres" id="15_wjgdb"]
+[ext_resource type="Resource" uid="uid://dlgoql6q2knnx" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Stats/stats_lvl_13.tres" id="16_ooixp"]
+[ext_resource type="Resource" uid="uid://b0sp64s1gdmvy" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Stats/stats_lvl_14.tres" id="17_3hxxj"]
+[ext_resource type="Resource" uid="uid://dfi4y4j4mcmu3" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Stats/stats_lvl_15.tres" id="18_r234n"]
+[ext_resource type="Resource" uid="uid://c08ohx3egkrkq" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Stats/stats_lvl_16.tres" id="19_3hrmd"]
+[ext_resource type="Resource" uid="uid://b3lcqoxnmsspd" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Stats/stats_lvl_17.tres" id="20_0uv7j"]
+[ext_resource type="Resource" uid="uid://b8ki234pkrbye" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Stats/stats_lvl_18.tres" id="21_x6nhj"]
+[ext_resource type="Resource" uid="uid://bncutdmlyqqeo" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Stats/stats_lvl_19.tres" id="22_w8rhe"]
+[ext_resource type="Resource" uid="uid://b32aemq3cfnps" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Stats/stats_lvl_20.tres" id="23_6v0lk"]
+
+[resource]
+script = ExtResource("1_5bbmg")
+stats = Dictionary[int, ExtResource("3_40nx0")]({
+1: ExtResource("4_fwtbi"),
+2: ExtResource("5_tkl2o"),
+3: ExtResource("6_s05oq"),
+4: ExtResource("7_vaeqp"),
+5: ExtResource("8_xdamf"),
+6: ExtResource("9_m52s5"),
+7: ExtResource("10_x6ogt"),
+8: ExtResource("11_lpwoj"),
+9: ExtResource("12_bee1y"),
+10: ExtResource("13_qkrsn"),
+11: ExtResource("14_rit3s"),
+12: ExtResource("15_wjgdb"),
+13: ExtResource("16_ooixp"),
+14: ExtResource("17_3hxxj"),
+15: ExtResource("18_r234n"),
+16: ExtResource("19_3hrmd"),
+17: ExtResource("20_0uv7j"),
+18: ExtResource("21_x6nhj"),
+19: ExtResource("22_w8rhe"),
+20: ExtResource("23_6v0lk")
+})

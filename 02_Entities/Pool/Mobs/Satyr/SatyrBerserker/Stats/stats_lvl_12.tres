@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EntityStats" format=3 uid="uid://dpuiwfponx1x6"]
+
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="1_qji1o"]
+
+[resource]
+script = ExtResource("1_qji1o")
+_health_max = 1625.0
+_mana_regen = 4.0
+auto_attack_type = 1
+_attack_range = 1.5
+_attack_damage = 62.0
+_attack_speed = 1.02
+_movement_speed = 9.3
+_attack_power = 0.0
+_crit_chance = 5.0
+_dodge = 5.0
