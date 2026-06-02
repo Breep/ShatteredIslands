@@ -119,12 +119,13 @@ func _init() -> void:
 	skill_manager.init(self)
 
 
-# Résout la RoasterEntry du joueur dans la party active. En solo : 1ère entry
-# de catégorie HERO. En multi (futur) : convention via slot index / mapping.
+# Résout la RoasterEntry du joueur dans la party active : 1ère entry HERO
+# possédée par le slot de ce joueur (state.slot).
 func _get_my_roaster_entry() -> RoasterEntry:
 	if GameManager.run_context == null: return null
 	if GameManager.run_context.party == null: return null
-	return GameManager.run_context.party.get_first_entry_of_category(Entity.Category.HERO)
+	if state == null: return null
+	return GameManager.run_context.party.get_owned_entry_of_category(Entity.Category.HERO, state.slot)
 
 
 func _check_lvl_up() -> void:

@@ -210,18 +210,22 @@ func _populate_demo_party_formation(party: Party) -> void:
 	# pas de .tres pour les chickens à ce stade — sera créé plus tard).
 	# Note : `desc.scene` n'est pas stocké dans le .tres (cycle de dépendance
 	# car la scene référence aussi la desc) — on l'attache ici au runtime.
+	# Solo : tout appartient au joueur local (slot PLAYER_1 via PlayerManager).
+	var local_player: Player = PlayerManager.get_local_player()
+	var owner: PlayerState.Slot = local_player.state.slot if local_player != null and local_player.state != null else PlayerState.Slot.PLAYER_1
+
 	var hero_desc: EntityDesc = load(DEMO_HERO_DESC_PATH) as EntityDesc
 	if hero_desc != null:
 		if hero_desc.scene == null:
 			hero_desc.scene = load(DEMO_HERO_SCENE_PATH) as PackedScene
-		party.add_to_roaster(RoasterEntry.from_desc(hero_desc))
+		party.add_to_roaster(RoasterEntry.from_desc(hero_desc, owner))
 	else:
 		Verbose.warn("start_solo_run: hero desc introuvable", Verbose.Category.GLOBAL_MANAGER)
 
 	var chicken_desc: EntityDesc = _build_demo_chicken_desc()
 	if chicken_desc != null:
 		for i in 4:
-			party.add_to_roaster(RoasterEntry.from_desc(chicken_desc))
+			party.add_to_roaster(RoasterEntry.from_desc(chicken_desc, owner))
 
 	# Formation : positions issues des spawn_specs de la formation par défaut,
 	# mappées aux entries du roaster dans l'ordre (hero puis acolytes).
