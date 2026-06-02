@@ -229,6 +229,7 @@ func _is_target_valid(target: Entity) -> bool:
 	if not is_instance_valid(target): return false
 	if target.is_queued_for_deletion(): return false
 	if target.is_dead(): return false
+	if target.alterations.has_state(Alteration.Type.UNTARGETABLE) : return false
 	return true
 
 

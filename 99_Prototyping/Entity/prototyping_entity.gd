@@ -68,6 +68,12 @@ func _on_start_fight_button_pressed() -> void:
 	_fighting_manager.request_phase_advance()
 
 
+func _on_trigger_flight_button_pressed() -> void:
+	for entity in _entities:
+		if is_instance_valid(entity) and entity.has_method("start_flight"):
+			entity.start_flight()
+
+
 func _on_stop_fight_button_pressed() -> void:
 	pass
 

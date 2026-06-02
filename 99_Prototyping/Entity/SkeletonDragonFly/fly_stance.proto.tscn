@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://cghwx0cuudlfj"]
+
+[ext_resource type="Script" uid="uid://ctr31p4cl41sn" path="res://99_Prototyping/Entity/SkeletonDragonFly/fly_stance.proto.gd" id="1_proto"]
+[ext_resource type="PackedScene" uid="uid://deihd6vwrcxcj" path="res://02_Entities/_Data/DragonSkeleton/skeletal_dragon_visual.tscn" id="2_visual"]
+
+[node name="FlyStanceProto" type="Node3D" unique_id=1733880704]
+script = ExtResource("1_proto")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=992456127]
+transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 12, 0)
+shadow_enabled = true
+
+[node name="FillLight" type="DirectionalLight3D" parent="." unique_id=1675910405]
+transform = Transform3D(-0.7071068, 0, -0.7071068, 0, 1, 0, 0.7071068, 0, -0.7071068, 0, 8, 0)
+light_energy = 0.4
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1941900844]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 26)
+
+[node name="SkeletalDragonVisual" parent="." unique_id=693334302 instance=ExtResource("2_visual")]
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=497906550]
+
+[node name="Panel" type="PanelContainer" parent="UI" unique_id=82227976]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 236.0
+offset_bottom = 220.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Panel" unique_id=837347667]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="StatusLabel" type="Label" parent="UI/Panel/VBoxContainer" unique_id=504241801]
+unique_name_in_owner = true
+layout_mode = 2
+text = "State: GROUNDED"
+
+[node name="TakeOffButton" type="Button" parent="UI/Panel/VBoxContainer" unique_id=95250028]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Take off"
+
+[node name="FlyForwardButton" type="Button" parent="UI/Panel/VBoxContainer" unique_id=1968775637]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Fly forward"
+
+[node name="LandButton" type="Button" parent="UI/Panel/VBoxContainer" unique_id=1343903524]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Land"
+
+[node name="ResetButton" type="Button" parent="UI/Panel/VBoxContainer" unique_id=339207]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Reset (ground idle)"
