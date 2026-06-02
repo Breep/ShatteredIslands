@@ -119,6 +119,7 @@ Label/constants/shadow_offset_y = 5
 Label/font_sizes/font_size = 33
 Label/fonts/font = ExtResource("2_iyfkc")
 Panel/styles/panel = ExtResource("1_iy36y")
+PanelContainer/styles/panel = ExtResource("1_iy36y")
 RichTextLabel/colors/default_color = Color(1, 1, 1, 1)
 RichTextLabel/colors/font_outline_color = Color(0, 0, 0, 1)
 RichTextLabel/colors/font_shadow_color = Color(0, 0, 0, 1)
