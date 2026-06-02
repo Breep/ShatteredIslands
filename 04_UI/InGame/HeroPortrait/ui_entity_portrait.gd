@@ -16,33 +16,33 @@ const _NO_SKILL_TEXT: String = "Compétence non disponible."
 const _PANEL_POP_TIME: float = 0.18
 const _PANEL_POP_SCALE := Vector2(0.92, 0.92)
 
-# { ItemList unique-name : [ {stat, sig (signal float 1 arg)} ] }
+# { ItemList unique-name : [ {stat, sig (signal float 1 arg), name (tooltip)} ] }
 # L'ordre des items DOIT suivre l'ordre des icônes posées dans la scène.
 const _STAT_LISTS: Dictionary = {
 	"AttackStats": [
-		{"stat": EntityStats.StatType.AD, "sig": &"attack_damage_changed"},
-		{"stat": EntityStats.StatType.AS, "sig": &"attack_speed_changed"},
-		{"stat": EntityStats.StatType.AP, "sig": &"attack_power_changed"},
-		{"stat": EntityStats.StatType.AR, "sig": &"attack_range_changed"},
+		{"stat": EntityStats.StatType.AD, "sig": &"attack_damage_changed", "name": "Dégâts d'attaque"},
+		{"stat": EntityStats.StatType.AS, "sig": &"attack_speed_changed", "name": "Vitesse d'attaque"},
+		{"stat": EntityStats.StatType.AP, "sig": &"attack_power_changed", "name": "Puissance magique"},
+		{"stat": EntityStats.StatType.AR, "sig": &"attack_range_changed", "name": "Portée"},
 	],
 	"DefenseStats": [
-		{"stat": EntityStats.StatType.ARMOR, "sig": &"armor_changed"},
-		{"stat": EntityStats.StatType.MAGIC_RESIST, "sig": &"magic_resistance_changed"},
-		{"stat": EntityStats.StatType.POISON_RESIST, "sig": &"poison_resistance_changed"},
+		{"stat": EntityStats.StatType.ARMOR, "sig": &"armor_changed", "name": "Armure"},
+		{"stat": EntityStats.StatType.MAGIC_RESIST, "sig": &"magic_resistance_changed", "name": "Résist. magique"},
+		{"stat": EntityStats.StatType.POISON_RESIST, "sig": &"poison_resistance_changed", "name": "Résist. poison"},
 	],
 	"CriticStats": [
-		{"stat": EntityStats.StatType.CRIT_CHANCE, "sig": &"crit_chance_changed"},
-		{"stat": EntityStats.StatType.CRIT_MULT, "sig": &"crit_mult_changed"},
+		{"stat": EntityStats.StatType.CRIT_CHANCE, "sig": &"crit_chance_changed", "name": "Chance de critique"},
+		{"stat": EntityStats.StatType.CRIT_MULT, "sig": &"crit_mult_changed", "name": "Multi. critique"},
 	],
 	"ManaStats": [
-		{"stat": EntityStats.StatType.MANA_MAX, "sig": &"mana_max_changed"},
-		{"stat": EntityStats.StatType.MANA_REGEN, "sig": &"mana_regen_changed"},
+		{"stat": EntityStats.StatType.MANA_MAX, "sig": &"mana_max_changed", "name": "Mana max"},
+		{"stat": EntityStats.StatType.MANA_REGEN, "sig": &"mana_regen_changed", "name": "Régén. mana"},
 	],
 	"MiscStats": [
-		{"stat": EntityStats.StatType.MS, "sig": &"movement_speed_changed"},
-		{"stat": EntityStats.StatType.DODGE, "sig": &"dodge_changed"},
-		{"stat": EntityStats.StatType.LIFESTEAL, "sig": &"lifesteal_changed"},
-		{"stat": EntityStats.StatType.SCALE, "sig": &"scale_changed"},
+		{"stat": EntityStats.StatType.MS, "sig": &"movement_speed_changed", "name": "Vitesse de déplacement"},
+		{"stat": EntityStats.StatType.DODGE, "sig": &"dodge_changed", "name": "Esquive"},
+		{"stat": EntityStats.StatType.LIFESTEAL, "sig": &"lifesteal_changed", "name": "Vol de vie"},
+		{"stat": EntityStats.StatType.SCALE, "sig": &"scale_changed", "name": "Taille"},
 	],
 }
 
@@ -69,6 +69,8 @@ const _SECONDARY_BUTTONS: Array[String] = ["BronzeButton2", "SilverButton2", "Go
 @onready var _skill_desc_label: RichTextLabel = %SkillDescriptionLabel
 @onready var _panel: Panel = %EntityDescriptionPanel
 @onready var _portrait_button: TextureButton = %PortraitButton
+@onready var _health_bar: ProgressBar = %HealthBar
+@onready var _health_label: Label = %HealthLabel
 #endregion
 
 #region ============================== Private variables ==============================
@@ -87,6 +89,7 @@ var _panel_tween: Tween
 func _ready() -> void:
 	_collect_skill_buttons()
 	_hide_secondary_buttons()
+	_apply_tooltips()
 	_show_stats_instant()
 	_close_panel_instant()
 	_portrait_button.pressed.connect(_on_portrait_button_pressed)
@@ -96,13 +99,15 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if not (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT):
 		return
-	var mouse: Vector2 = get_global_mouse_position()
-	if _panel_open and not _panel.get_global_rect().has_point(mouse) \
-			and not _portrait_button.get_global_rect().has_point(mouse):
-		_close_panel()
-		return
 	if _showing_desc and not _is_over_skill_button():
 		_show_stats()
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if not (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT):
+		return
+	if _panel_open:
+		_close_panel()
 
 
 func _exit_tree() -> void:
@@ -117,6 +122,7 @@ func bind(entity: Entity) -> void:
 	_show_stats_instant()
 	_update_identity()
 	_bind_stats()
+	_bind_health()
 	_bind_level()
 	_bind_skills()
 	if not entity.died.is_connected(_on_entity_died):
@@ -133,6 +139,15 @@ func _update_identity() -> void:
 		_portrait.texture = _make_placeholder()
 
 
+func _apply_tooltips() -> void:
+	for list_name: String in _STAT_LISTS:
+		var list: ItemList = get_node("%" + list_name)
+		var entries: Array = _STAT_LISTS[list_name]
+		for i: int in entries.size():
+			if i < list.item_count:
+				list.set_item_tooltip(i, entries[i]["name"])
+
+
 func _bind_stats() -> void:
 	var stats: EntityStats = _entity.stats
 	for list_name: String in _STAT_LISTS:
@@ -144,6 +159,21 @@ func _bind_stats() -> void:
 			var cb: Callable = _on_stat_changed.bind(list, i)
 			stats.connect(sig, cb)
 			_stat_connections.append({"sig": sig, "cb": cb})
+
+
+func _bind_health() -> void:
+	var stats: EntityStats = _entity.stats
+	_update_health_display(stats.health, stats.health_max)
+	if not stats.health_changed.is_connected(_on_health_changed):
+		stats.health_changed.connect(_on_health_changed)
+	if not stats.health_max_changed.is_connected(_on_health_max_changed):
+		stats.health_max_changed.connect(_on_health_max_changed)
+
+
+func _update_health_display(health: float, health_max: float) -> void:
+	_health_bar.max_value = health_max
+	_health_bar.value = health
+	_health_label.text = "%d/%d" % [roundi(health), roundi(health_max)]
 
 
 func _bind_level() -> void:
@@ -168,6 +198,10 @@ func _unbind() -> void:
 		for connection: Dictionary in _stat_connections:
 			if stats.is_connected(connection["sig"], connection["cb"]):
 				stats.disconnect(connection["sig"], connection["cb"])
+		if stats.health_changed.is_connected(_on_health_changed):
+			stats.health_changed.disconnect(_on_health_changed)
+		if stats.health_max_changed.is_connected(_on_health_max_changed):
+			stats.health_max_changed.disconnect(_on_health_max_changed)
 		if _entity.progression != null and _entity.progression.level_changed.is_connected(_on_level_changed):
 			_entity.progression.level_changed.disconnect(_on_level_changed)
 		if _entity.died.is_connected(_on_entity_died):
@@ -327,6 +361,14 @@ func _on_portrait_button_pressed() -> void:
 
 func _on_stat_changed(value: float, list: ItemList, idx: int) -> void:
 	_set_item_value(list, idx, value)
+
+
+func _on_health_changed(new_health: float) -> void:
+	_update_health_display(new_health, _entity.stats.health_max)
+
+
+func _on_health_max_changed(new_health_max: float) -> void:
+	_update_health_display(_entity.stats.health, new_health_max)
 
 
 func _on_level_changed(new_level: int) -> void:

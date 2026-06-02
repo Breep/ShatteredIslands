@@ -36,6 +36,37 @@
 [ext_resource type="Texture2D" uid="uid://cmtsqmy038iqr" path="res://04_UI/_Themes/Data/Icons/EntityStats/life_steal_colored.svg" id="30_8p1gy"]
 [ext_resource type="Texture2D" uid="uid://bilq8c5d04x2v" path="res://04_UI/_Themes/Data/Icons/EntityStats/scale_colored.svg" id="31_h7ky1"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1w027"]
+bg_color = Color(0.5395219, 0.64106786, 0.42242658, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pr6f0"]
+bg_color = Color(0.21795338, 0.5369359, 0.145531, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gdv5j"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [sub_resource type="Shader" id="Shader_1w027"]
 resource_name = "VFEZ2DPreview"
 code = "
@@ -136,7 +167,6 @@ script = ExtResource("1_7ey5r")
 
 [node name="EntityDescriptionPanel" type="Panel" parent="." unique_id=1346640612]
 unique_name_in_owner = true
-visible = false
 layout_mode = 0
 offset_left = 64.0
 offset_top = -402.0
@@ -618,6 +648,43 @@ text = " Lorem ipsum dolor sit amet, [color=violet]consectetur[/color] adipiscin
 
 [node name="HSeparator3" type="HSeparator" parent="EntityDescriptionPanel/MarginContainer/VBoxContainer" unique_id=1043306322]
 layout_mode = 2
+
+[node name="HealthBar" type="ProgressBar" parent="EntityDescriptionPanel" unique_id=932212325]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 198.0
+offset_top = 518.0
+offset_right = 447.0
+offset_bottom = 567.0
+theme_override_styles/background = SubResource("StyleBoxFlat_1w027")
+theme_override_styles/fill = SubResource("StyleBoxFlat_pr6f0")
+value = 85.67
+show_percentage = false
+
+[node name="Panel" type="Panel" parent="EntityDescriptionPanel/HealthBar" unique_id=1088416659]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_gdv5j")
+metadata/_edit_lock_ = true
+
+[node name="HealthLabel" type="Label" parent="EntityDescriptionPanel/HealthBar" unique_id=516267926]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 24
+text = "1000/1000"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="PortraitButton" type="TextureButton" parent="." unique_id=178563449]
 unique_name_in_owner = true

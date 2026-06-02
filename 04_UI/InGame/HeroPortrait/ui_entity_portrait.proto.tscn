@@ -10,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_proto")
 
 [node name="Controls" type="VBoxContainer" parent="." unique_id=1120001474]
@@ -58,6 +59,11 @@ text = "Show Bronze desc"
 unique_name_in_owner = true
 layout_mode = 2
 text = "Show stats"
+
+[node name="DamageButton" type="Button" parent="Controls" unique_id=337491638]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Damage (-100)"
 
 [node name="EntityPortrait" parent="." unique_id=1005766928 instance=ExtResource("2_portrait")]
 unique_name_in_owner = true

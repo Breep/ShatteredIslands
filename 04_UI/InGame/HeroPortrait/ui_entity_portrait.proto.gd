@@ -13,6 +13,7 @@ extends Control
 @onready var _set_level_button: Button = %SetLevelButton
 @onready var _show_desc_button: Button = %ShowDescButton
 @onready var _show_stats_button: Button = %ShowStatsButton
+@onready var _damage_button: Button = %DamageButton
 
 var _dummy: Entity = null
 
@@ -24,6 +25,7 @@ func _ready() -> void:
 	_set_level_button.pressed.connect(_on_set_level_pressed)
 	_show_desc_button.pressed.connect(_on_show_desc_pressed)
 	_show_stats_button.pressed.connect(_on_show_stats_pressed)
+	_damage_button.pressed.connect(_on_damage_pressed)
 
 
 func _exit_tree() -> void:
@@ -35,6 +37,7 @@ func _on_bind_pressed() -> void:
 	_dummy = Entity.new()
 	_dummy.entity_name = "Proto Mob"
 	_dummy.stats.health_max = 1200
+	_dummy.stats.health = 1000
 	_dummy.stats.attack_damage = 42
 	_dummy.stats.attack_speed = 1.3
 	_dummy.stats.attack_power = 25
@@ -52,6 +55,11 @@ func _on_mutate_ad_pressed() -> void:
 func _on_mutate_armor_pressed() -> void:
 	if is_instance_valid(_dummy):
 		_dummy.stats.armor += 5
+
+
+func _on_damage_pressed() -> void:
+	if is_instance_valid(_dummy):
+		_dummy.stats.health -= 100
 
 
 func _on_set_level_pressed() -> void:
