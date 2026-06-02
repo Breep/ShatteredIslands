@@ -15,7 +15,15 @@ var _is_active: bool
 
 
 #region ============================== Node base functions ==============================
+func _ready() -> void:
+	_shop_main_control.hide()
+	_shop_main_control.modulate.a = 0.0
+	_open_shop_button.show()
+
+
 func _unhandled_input(event: InputEvent) -> void:
+	if not _shop_main_control.visible:
+		return
 	if event is InputEventMouseButton and not event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		_hide_shop_panel()
 

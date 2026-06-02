@@ -199,7 +199,7 @@ func _add_player_cards() -> void:
 		for card: Card in players_cards[i]:
 			card.uid = card_uid
 			card_uid += 1
-			_players[i].deck.add_card(card)
+			_players[i].hand.add_card(card)
 
 
 func _setup_sync_debug_panel() -> void:

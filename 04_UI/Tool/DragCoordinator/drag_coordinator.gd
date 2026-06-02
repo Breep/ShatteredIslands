@@ -58,6 +58,9 @@ func _input(event: InputEvent) -> void:
 		return
 	if event is InputEventMouseButton and not event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		_resolve_drop()
+		# Le drag possède son relâchement : on le consomme pour qu'il ne retombe
+		# pas en _unhandled_input (ex : fermeture du panneau shop au drop).
+		get_viewport().set_input_as_handled()
 #endregion
 
 

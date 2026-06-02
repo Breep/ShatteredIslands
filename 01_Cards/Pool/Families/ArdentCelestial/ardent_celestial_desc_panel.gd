@@ -82,9 +82,9 @@ func _clear_additional_effects() -> void:
 func _populate_additional_effects(entity: Entity) -> void:
 	if entity.deck_holder == null:
 		return
-	var cards := entity.deck_holder.deck.get_cards_by_type(Family.Type.ARDENT_CELESTIAL)
+	var cards := entity.deck_holder.hand.get_cards_by_type(Family.Type.ARDENT_CELESTIAL)
 	for card in cards:
-		var lvl: int = entity.deck.get_card_lvl(card)
+		var lvl: int = entity.hand.get_card_lvl(card)
 		if lvl < 1:
 			continue
 		var upgrade := card.player_upgrade

@@ -9,8 +9,8 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		return
 
 	#var count: int = 0
-	#if ctx.hero.deck:
-		#count = ctx.hero.deck.get_unique_card_count(Family.Type.WARRIOR)
+	#if ctx.hero.hand:
+		#count = ctx.hero.hand.get_unique_card_count(Family.Type.WARRIOR)
 	#else:
 		#push_warning("Aim Assist: deck is null")
 #

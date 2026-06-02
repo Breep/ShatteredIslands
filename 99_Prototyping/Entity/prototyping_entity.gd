@@ -49,7 +49,7 @@ func _apply_settings_to_entities() -> void:
 
 # Les entités posées en éditeur (enfants statiques de _entities_node) sont
 # adoptées par le SpawnManager : elles gardent leur position, leurs overrides
-# (@export _override_base_stats, _override_custom_deck, etc.) et leur state
+# (@export _override_base_stats, _override_custom_hand, etc.) et leur state
 # d'éditeur. Le SpawnManager leur attribue juste un UID et les enregistre.
 func _adopt_pre_placed_entities() -> void:
 	for child in _entities_node.get_children():

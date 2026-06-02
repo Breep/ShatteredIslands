@@ -1,6 +1,6 @@
 # Représente un joueur dans une session : identité réseau (id, name, team),
 # porte-monnaie et progression (gold sur PlayerState ; level/xp proxiés vers
-# la RoasterEntry du héros dans party.roaster). Les données hero-level (deck,
+# la RoasterEntry du héros dans party.roaster). Les données hero-level (hand,
 # level, xp, data_memory) vivent canoniquement dans RoasterEntry ; Player
 # expose des getters/setters qui pointent dessus pour préserver l'API
 # existante des call sites et pour porter les signaux runtime (lvl_changed,
@@ -30,13 +30,13 @@ var team: int:
 
 # === Proxies vers RoasterEntry (truth canonique des données hero-level) ===
 
-var deck: Hand:
+var hand: Hand:
 	get:
 		var entry: RoasterEntry = _get_my_roaster_entry()
-		return entry.deck if entry != null else null
+		return entry.hand if entry != null else null
 	set(value):
 		var entry: RoasterEntry = _get_my_roaster_entry()
-		if entry != null: entry.deck = value
+		if entry != null: entry.hand = value
 
 var data_memory: NestedRegistry:
 	get:
@@ -113,7 +113,7 @@ func setup_components() -> void:
 
 # ============================== Private functions ==============================
 func _init() -> void:
-	deck = Hand.new()
+	hand = Hand.new()
 	state = PlayerState.new()
 	skill_manager = SkillManager.new()
 	skill_manager.init(self)

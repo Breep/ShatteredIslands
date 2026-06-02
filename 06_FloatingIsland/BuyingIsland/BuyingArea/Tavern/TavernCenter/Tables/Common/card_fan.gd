@@ -18,14 +18,14 @@ func _ready() -> void:
 # ============================== Public functions ==============================
 
 func connect_to_player(player: Player) -> void:
-	player.deck_changed.connect(_on_player_deck_changed)
+	player.deck_changed.connect(_on_player_hand_changed)
 
 # ============================== Private functions ==============================
 
-func _update_visual(deck: Hand):
+func _update_visual(hand: Hand):
 	pass
-	#var families_lvl_raw = deck.get_families_lvl_raw()
-	#var cards_number = deck.card_pile.size()
+	#var families_lvl_raw = hand.get_families_lvl_raw()
+	#var cards_number = hand.card_pile.size()
 	#for i in min(cards_number, _cards.size()):
 		#_cards[i].show()
 	#
@@ -65,5 +65,5 @@ func _get_highest_family_lvl_raw(families_lvl_raw: Dictionary) -> Family.Type:
 
 # ============================== Callbacks ==============================
 
-func _on_player_deck_changed(deck: Hand) -> void:
-	_update_visual(deck)
+func _on_player_hand_changed(hand: Hand) -> void:
+	_update_visual(hand)

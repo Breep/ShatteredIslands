@@ -1,12 +1,12 @@
 # Encapsule la création du CardContext et l'application des upgrades de cartes du
-# deck. Le state externe (deck, _custom_deck, data_memory, _custom_data_memory)
+# deck. Le state externe (hand, _custom_hand, data_memory, _custom_data_memory)
 # vit sur Hero (timing hero_spec.spawn_into qui set les valeurs AVANT add_child).
 # Le module agit, Hero conserve les fields.
 class_name DeckHolderComponent
 extends EntityComponent
 
 #region ============================== Public variables ==============================
-var deck: Hand
+var hand: Hand
 #endregion
 
 
@@ -16,7 +16,7 @@ var _card_context: CardContext
 
 
 #region ============================== Public functions ==============================
-# Crée le CardContext (indépendant du deck — peut être appelé sans deck dispo).
+# Crée le CardContext (indépendant de la main — peut être appelé sans main dispo).
 func setup() -> void:
 	_card_context = CardContext.create(
 		_owner,
@@ -27,17 +27,17 @@ func setup() -> void:
 	)
 
 
-# Applique les upgrades de toutes les cartes du deck via leur player_upgrade.
-func apply_all_cards_upgrades(deck: Hand) -> void:
+# Applique les upgrades de toutes les cartes de la main via leur player_upgrade.
+func apply_all_cards_upgrades(hand: Hand) -> void:
 	if _card_context == null:
 		Verbose.error("DeckHolder: card_context not set, call setup() first", Verbose.Category.HERO)
 		return
-	if deck == null:
-		Verbose.error("DeckHolder: can't apply cards upgrades, deck is null", Verbose.Category.HERO)
+	if hand == null:
+		Verbose.error("DeckHolder: can't apply cards upgrades, hand is null", Verbose.Category.HERO)
 		return
 
 	Verbose.debug("Applying all cards upgrades", Verbose.Category.HERO)
-	for card: Card in deck.get_cards_raw():
+	for card: Card in hand.get_cards_raw():
 		apply_card(card)
 
 

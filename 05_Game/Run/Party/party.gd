@@ -1,6 +1,6 @@
 # Une Party = un groupe de joueurs persistant à travers les confrontations.
 # Détient les joueurs (état de run sauvegardable), le roaster (inventaire
-# canonique des entités du joueur avec leurs méta-données : niveau, deck,
+# canonique des entités du joueur avec leurs méta-données : niveau, hand,
 # mémoire) et la formation actuelle (positions des entités sur le board côté
 # joueur). C'est l'état "vivant" injecté dans chaque Encounter.
 #

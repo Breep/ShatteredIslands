@@ -87,7 +87,7 @@ func _score_card(card: Card) -> float:
 		score += 25.0
 
 	# 2. Upgrade existant (-100 / +10 / +30)
-	var current_lvl: int = player.deck.get_card_lvl(card)
+	var current_lvl: int = player.hand.get_card_lvl(card)
 	if current_lvl > 0:
 		if card.is_max_level(): # card.lvl est déjà set au niveau post-achat par le shop
 			score -= 100.0

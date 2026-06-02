@@ -108,8 +108,3 @@ layout_mode = 1
 
 [node name="UIHand" parent="." unique_id=77925465 instance=ExtResource("7_1asy4")]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-grow_vertical = 0

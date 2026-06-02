@@ -148,12 +148,12 @@ func buy(card: Card) -> void:
 func _adapt_cards_lvl_to_player() -> void:
 	Verbose.trace("PlayerCardShop._adapt_cards_lvl_to_player() | " + str(cards_displayed.size()) + " cards", Verbose.Category.CARD_SHOP)
 	for card in cards_displayed:
-		card.lvl = player.deck.get_card_lvl(card) + 1
+		card.lvl = player.hand.get_card_lvl(card) + 1
 
 
 func _refresh_shop_cards(is_free: bool) -> void:
 	Verbose.trace("PlayerCardShop._refresh_shop_cards() | is_free=" + str(is_free) + " player=" + (player.player_name if player != null else "<null>"), Verbose.Category.CARD_SHOP)
-	if player.deck == null:
+	if player.hand == null:
 		Verbose.error("Can't update shop cards, there is no player_deck", Verbose.Category.CARD_SHOP)
 		return
 

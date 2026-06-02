@@ -125,12 +125,12 @@ func _server_try_buy_card_from_player_shop(player: Player, card_to_buy: Card) ->
 		Verbose.warn("Peer." + str(player.id) + " is not rich enough", Verbose.Category.CARD_SHOP)
 		return false
 
-	if not player.deck.can_add(card_to_buy):
+	if not player.hand.can_add(card_to_buy):
 		Verbose.warn("Peer." + str(player.id) + " hand is full [" + card_to_buy.name + "]", Verbose.Category.CARD_SHOP)
 		return false
 
 	_cards_in_player_shop[player.id].erase(card_to_buy)
-	player.deck.add_card(card_to_buy)
+	player.hand.add_card(card_to_buy)
 	player.gold -= 100
 	return true
 
@@ -143,7 +143,7 @@ func _client_try_buy_card_from_player_shop(card: Card) -> bool:
 	
 	match _server_response:
 		ServerResponse.OK:
-			PlayerManager.get_local_player().deck.add_card(card)
+			PlayerManager.get_local_player().hand.add_card(card)
 			return true
 		ServerResponse.NOT_ENOUGHT_MONEY:
 			Verbose.warn("CardShopManager: Not enought money", Verbose.Category.CARD_SHOP)
@@ -176,13 +176,13 @@ func _ask_buy_card_from_player_shop(card_uid: int) -> void:
 		_answer_buy_card_from_player_shop.rpc_id(peer_id, ServerResponse.NOT_ENOUGHT_MONEY)
 		return
 
-	if not PlayerManager.players[peer_id].deck.can_add(card_to_buy):
+	if not PlayerManager.players[peer_id].hand.can_add(card_to_buy):
 		Verbose.warn("Peer." + str(peer_id) + " hand is full", Verbose.Category.CARD_SHOP)
 		_answer_buy_card_from_player_shop.rpc_id(peer_id, ServerResponse.HAND_FULL)
 		return
 
 	_cards_in_player_shop[peer_id].erase(card_to_buy)
-	PlayerManager.players[peer_id].deck.add_card(card_to_buy)
+	PlayerManager.players[peer_id].hand.add_card(card_to_buy)
 	PlayerManager.players[peer_id].gold -= 100
 	_answer_buy_card_from_player_shop.rpc_id(peer_id, ServerResponse.OK)
 
@@ -204,11 +204,11 @@ func _server_try_buy_random_card_for_player(player: Player) -> Card:
 	if cards.is_empty():
 		Verbose.warn("CardShopManager: (" + player.player_name + ") No more random card from the server", Verbose.Category.CARD_SHOP)
 		return null
-	if not player.deck.can_add(cards[0]):
+	if not player.hand.can_add(cards[0]):
 		Verbose.warn("CardShopManager: (" + player.player_name + ") hand is full, returning card to pool", Verbose.Category.CARD_SHOP)
 		shop_deck.add_card(cards[0])
 		return null
-	player.deck.add_card(cards[0])
+	player.hand.add_card(cards[0])
 	player.gold -= 90
 	return cards[0]
 
@@ -221,7 +221,7 @@ func _client_try_buy_random_card_for_player() -> Card:
 	await _server_buy_random_card_answered
 	match _server_response:
 		ServerResponse.OK:
-			PlayerManager.get_local_player().deck.add_card(_random_card_bought)
+			PlayerManager.get_local_player().hand.add_card(_random_card_bought)
 		ServerResponse.NOT_ENOUGHT_MONEY:
 			Verbose.warn("CardShopManager: Not enought money", Verbose.Category.CARD_SHOP)
 	return _random_card_bought
@@ -241,11 +241,11 @@ func _ask_buy_random_card_from_all() -> void:
 	if cards.is_empty():
 		_answer_buy_random_card_from_all.rpc_id(peer_id, -1, ServerResponse.CARD_NOT_BUYABLE)
 		return
-	if not player.deck.can_add(cards[0]):
+	if not player.hand.can_add(cards[0]):
 		shop_deck.add_card(cards[0])
 		_answer_buy_random_card_from_all.rpc_id(peer_id, -1, ServerResponse.HAND_FULL)
 		return
-	player.deck.add_card(cards[0])
+	player.hand.add_card(cards[0])
 	player.gold -= 90
 	_answer_buy_random_card_from_all.rpc_id(peer_id, cards[0].uid, ServerResponse.OK)
 
@@ -324,12 +324,12 @@ func _answer_refresh_shop(cards_uids: Array[int]) -> void:
 
 func _server_try_sell_card(player: Player, card: Card) -> bool:
 	Verbose.trace("_server_try_sell_card() | " + player.player_name + " | " + card.name, Verbose.Category.CARD_SHOP)
-	var hand_card: Card = player.deck.get_card(card.get_id())
+	var hand_card: Card = player.hand.get_card(card.get_id())
 	if hand_card == null:
 		Verbose.warn("Peer." + str(player.id) + " tries to sell a card not in his hand [" + card.name + "]", Verbose.Category.CARD_SHOP)
 		return false
 	# Une carte agrégée niveau N = N cartes empilées : on rembourse N × prix.
-	var removed: Array[Card] = player.deck.remove_card(hand_card)
+	var removed: Array[Card] = player.hand.remove_card(hand_card)
 	player.gold += removed.size() * _game_rules.get_card_price(hand_card.rarity)
 	return true
 
@@ -341,7 +341,7 @@ func _client_try_sell_card(card: Card) -> bool:
 	await _answer_for_selling_request_received
 
 	if _server_response == ServerResponse.OK:
-		PlayerManager.get_local_player().deck.remove_card(card)
+		PlayerManager.get_local_player().hand.remove_card(card)
 		return true
 	Verbose.warn("CardShopManager: can't sell this card [" + card.name + "]", Verbose.Category.CARD_SHOP)
 	return false
@@ -353,13 +353,13 @@ func _ask_sell_card(card_design_id: String) -> void:
 	if not multiplayer.is_server(): return
 	var peer_id: int = multiplayer.get_remote_sender_id()
 	var player: Player = PlayerManager.players[peer_id]
-	var hand_card: Card = player.deck.get_card(StringName(card_design_id))
+	var hand_card: Card = player.hand.get_card(StringName(card_design_id))
 	if hand_card == null:
 		Verbose.warn("Peer." + str(peer_id) + " tries to sell a card not in his hand [" + card_design_id + "]", Verbose.Category.CARD_SHOP)
 		_answer_sell_card.rpc_id(peer_id, ServerResponse.CARD_NOT_OWNED)
 		return
 	# Une carte agrégée niveau N = N cartes empilées : on rembourse N × prix.
-	var removed: Array[Card] = player.deck.remove_card(hand_card)
+	var removed: Array[Card] = player.hand.remove_card(hand_card)
 	player.gold += removed.size() * _game_rules.get_card_price(hand_card.rarity)
 	_answer_sell_card.rpc_id(peer_id, ServerResponse.OK)
 

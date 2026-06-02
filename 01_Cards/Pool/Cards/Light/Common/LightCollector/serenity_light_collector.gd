@@ -11,10 +11,10 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	#var regen_amount: float = _regen_per_card[card_lvl - 1]
 #
 	#ctx.battle_callbacks.register_battle_start(&"Light Collector", func() -> void:
-		#if ctx.hero.deck == null:
+		#if ctx.hero.hand == null:
 			#push_warning("Light Collector: deck is null")
 			#return
-		#var count: int = ctx.hero.deck.get_unique_card_count(Family.Type.LIGHT)
+		#var count: int = ctx.hero.hand.get_unique_card_count(Family.Type.LIGHT)
 		#var total_regen: float = count * regen_amount
 		#if total_regen <= 0: return
 #

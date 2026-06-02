@@ -5,7 +5,7 @@ extends CardEffect
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var amount: float = _amount_per_card[card_lvl - 1]
-	var card_count: int = ctx.hero.deck.get_unique_card_count()
+	var card_count: int = ctx.hero.hand.get_unique_card_count()
 
 	var mod := StatModifier.new()
 	mod.id = &"The Ancient Collector"

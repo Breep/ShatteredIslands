@@ -41,7 +41,7 @@ const COLORS = {
 
 # ============================== Public variables ==============================
 
-var lvl: int # Current level of the family (number of cards in the player deck affiliated with this family)
+var lvl: int # Current level of the family (number of cards in the player hand affiliated with this family)
 
 # ============================== Public functions ==============================
 

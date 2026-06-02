@@ -19,4 +19,4 @@ func _ready() -> void:
 	add_child(_player)
 
 func _on_add_random_card_button_pressed() -> void:
-	_player.deck.has_changed.emit()
+	_player.hand.has_changed.emit()

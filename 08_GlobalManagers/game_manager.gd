@@ -276,7 +276,7 @@ func _build_demo_chicken_desc() -> EntityDesc:
 	return desc
 
 
-# Garantit que chaque RoasterEntry hero a deck et data_memory non-null. Source
+# Garantit que chaque RoasterEntry hero a hand et data_memory non-null. Source
 # canonique des données hero-level, lues à chaque spawn via EntitySpec.entry.
 func _init_roaster_runtime_data(party: Party) -> void:
 	if party == null: return
@@ -284,8 +284,8 @@ func _init_roaster_runtime_data(party: Party) -> void:
 	for entry: RoasterEntry in party.roaster:
 		if entry == null or entry.desc == null: continue
 		if entry.desc.default_category != Entity.Category.HERO: continue
-		if entry.deck == null:
-			entry.deck = Hand.new().init(local_player_name)
+		if entry.hand == null:
+			entry.hand = Hand.new().init(local_player_name)
 		if entry.data_memory == null:
 			entry.data_memory = NestedRegistry.new()
 
