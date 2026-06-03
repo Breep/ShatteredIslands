@@ -93,11 +93,12 @@ func _spawn_specs(specs: Array[EntitySpec], team: int) -> void:
 		ctx.arena_zone_manager = _arena_zone_manager
 		ctx.fighting_state = Entity.FightingState.IDLE
 		ctx.display_mode = Entity.DisplayMode.FIGHTING_PHASE
-		# En solo : local player possède toutes les unités côté joueur.
+		# Owner runtime résolu depuis le slot de l'entry (RoasterEntry.owner_slot).
 		# Signal "spec joueur" = entry présente (créée à partir d'une RoasterEntry).
-		# Fallback marker class pour compat legacy.
+		# Fallback marker class + local player pour compat legacy / solo.
 		if spec.entry != null or spec is HeroSpec or spec is AcolyteSpec:
-			ctx.runtime_owner_player = local_player
+			var owner: Player = PlayerManager.get_player_by_slot(spec.entry.owner_slot) if spec.entry != null else null
+			ctx.runtime_owner_player = owner if owner != null else local_player
 		var node: Node = spec.spawn_into(self, ctx)
 		var entity := node as Entity
 		if entity != null:

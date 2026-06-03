@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cnqpy6nwe1bwm"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_card"]
+[ext_resource type="Script" uid="uid://cosyht0s570nu" path="res://01_Cards/Pool/Cards/ChickenLord/Epic/NaturalSelection/chickenlord_natural_selection.gd" id="1_upg"]
+[ext_resource type="Texture2D" uid="uid://cslxv8ffyte5k" path="res://01_Cards/Pool/Cards/ChickenLord/Common/AssistantChicken/chicken lord.png" id="2_tex"]
+
+[sub_resource type="Resource" id="Resource_natsel"]
+script = ExtResource("1_upg")
+_evolution_times = Array[float]([10.0, 8.0, 6.0])
+_rarity = 2
+
+[resource]
+script = ExtResource("1_card")
+name = "Natural Selection"
+picture = ExtResource("2_tex")
+families = Array[int]([8])
+rarity = 2
+player_upgrade = SubResource("Resource_natsel")
+points = Dictionary[int, int]({
+8: 3
+})

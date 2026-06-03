@@ -1,6 +1,6 @@
 # Représente un joueur dans une session : identité réseau (id, name, team),
 # porte-monnaie et progression (gold sur PlayerState ; level/xp proxiés vers
-# la RoasterEntry du héros dans party.roaster). Les données hero-level (deck,
+# la RoasterEntry du héros dans party.roaster). Les données hero-level (hand,
 # level, xp, data_memory) vivent canoniquement dans RoasterEntry ; Player
 # expose des getters/setters qui pointent dessus pour préserver l'API
 # existante des call sites et pour porter les signaux runtime (lvl_changed,
@@ -30,13 +30,13 @@ var team: int:
 
 # === Proxies vers RoasterEntry (truth canonique des données hero-level) ===
 
-var deck: PlayerDeck:
+var hand: Hand:
 	get:
 		var entry: RoasterEntry = _get_my_roaster_entry()
-		return entry.deck if entry != null else null
+		return entry.hand if entry != null else null
 	set(value):
 		var entry: RoasterEntry = _get_my_roaster_entry()
-		if entry != null: entry.deck = value
+		if entry != null: entry.hand = value
 
 var data_memory: NestedRegistry:
 	get:
@@ -98,7 +98,7 @@ func setup_components() -> void:
 
 	# CardShop: local human player OR bot on server
 	if (is_local and not is_bot) or (is_bot and is_server):
-		var card_shop: PlayerCardShop = preload("res://05_Game/CardShop/player_card_shop.tscn").instantiate()
+		var card_shop: PlayerCardShop = preload("res://01_Cards/Templates/CardShop/player_card_shop.tscn").instantiate()
 		card_shop.name = "CardShop"
 		card_shop.player = self
 		add_child(card_shop)
@@ -113,18 +113,19 @@ func setup_components() -> void:
 
 # ============================== Private functions ==============================
 func _init() -> void:
-	deck = PlayerDeck.new()
+	hand = Hand.new()
 	state = PlayerState.new()
 	skill_manager = SkillManager.new()
 	skill_manager.init(self)
 
 
-# Résout la RoasterEntry du joueur dans la party active. En solo : 1ère entry
-# de catégorie HERO. En multi (futur) : convention via slot index / mapping.
+# Résout la RoasterEntry du joueur dans la party active : 1ère entry HERO
+# possédée par le slot de ce joueur (state.slot).
 func _get_my_roaster_entry() -> RoasterEntry:
 	if GameManager.run_context == null: return null
 	if GameManager.run_context.party == null: return null
-	return GameManager.run_context.party.get_first_entry_of_category(Entity.Category.HERO)
+	if state == null: return null
+	return GameManager.run_context.party.get_owned_entry_of_category(Entity.Category.HERO, state.slot)
 
 
 func _check_lvl_up() -> void:

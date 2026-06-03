@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://b0vxjhrs71sxg"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_template"]
+[ext_resource type="Script" uid="uid://b28t7k5allmwe" path="res://01_Cards/Pool/Cards/Light/Common/OverflowingLight/serenity_overflowing_light.gd" id="2_script"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_hsyqo"]
+
+[sub_resource type="Resource" id="Resource_upgrade"]
+script = ExtResource("2_script")
+_base_shield_percent = Array[float]([15.0, 20.0, 25.0, 30.0, 35.0])
+
+[resource]
+script = ExtResource("1_template")
+name = "Overflowing Light"
+picture = SubResource("PlaceholderTexture2D_hsyqo")
+families = Array[int]([5])
+player_upgrade = SubResource("Resource_upgrade")
+points = Dictionary[int, int]({
+5: 1
+})
+lvl = 5

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://b6j3wpi41auhr"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_card_template"]
+[ext_resource type="Texture2D" uid="uid://btsavc4kievdf" path="res://01_Cards/Pool/Cards/Colossus/Common/ColossalTitan/colosse.png" id="2_colos"]
+[ext_resource type="Script" uid="uid://883goe4ixa30" path="res://01_Cards/Pool/Cards/Colossus/Common/TheAncientCollector/colossus_ancient_collector.gd" id="2_script"]
+
+[sub_resource type="Resource" id="Resource_ancient_collector"]
+script = ExtResource("2_script")
+_amount_per_card = Array[float]([10.0, 15.0, 20.0, 25.0, 30.0])
+
+[resource]
+script = ExtResource("1_card_template")
+name = "The Ancient Collector"
+picture = ExtResource("2_colos")
+families = Array[int]([6])
+player_upgrade = SubResource("Resource_ancient_collector")
+points = Dictionary[int, int]({
+6: 1
+})

@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cj0r7d80wkhg0"]
+
+[ext_resource type="Texture2D" uid="uid://x1nd4rf2qjgw" path="res://01_Cards/Pool/Cards/ArdentCelestial/Common/OrbitalStation/fire_orbital_station.png" id="1_4j42q"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_y384u"]
+[ext_resource type="Script" uid="uid://b5vp3gyky2psq" path="res://01_Cards/Pool/Cards/ArdentCelestial/Common/OrbitalStation/fire_orbital_station.gd" id="2_1ndg4"]
+
+[sub_resource type="Resource" id="Resource_nmbcg"]
+script = ExtResource("2_1ndg4")
+_crit_chance = Array[float]([5.0, 10.0, 15.0, 20.0, 25.0])
+metadata/_custom_type_script = "uid://b5vp3gyky2psq"
+
+[resource]
+script = ExtResource("1_y384u")
+name = "Orbital Station"
+picture = ExtResource("1_4j42q")
+families = Array[int]([4])
+player_upgrade = SubResource("Resource_nmbcg")
+points = Dictionary[int, int]({
+4: 1
+})
+lvl = 5
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

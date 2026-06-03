@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://b62a25wa2mjlv"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_8w70h"]
+[ext_resource type="Texture2D" uid="uid://dxss3ukecvweq" path="res://01_Cards/Pool/Cards/Colossus/Rare/Tainted Blood/colossus_tainted_blood.jpg.png" id="1_exk8y"]
+[ext_resource type="Script" uid="uid://dghxcic5r32g3" path="res://01_Cards/Pool/Cards/Colossus/Rare/Tainted Blood/colossus_tainted_blood.gd" id="2_rrrq5"]
+
+[sub_resource type="Resource" id="Resource_f8k5s"]
+script = ExtResource("2_rrrq5")
+_lost_hp_percent = Array[float]([1.0, 1.5, 2.0, 2.5, 3.0])
+_period = Array[float]([4.0, 4.0, 4.0, 4.0, 4.0])
+metadata/_custom_type_script = "uid://dghxcic5r32g3"
+
+[resource]
+script = ExtResource("1_8w70h")
+name = "Tainted Blood"
+picture = ExtResource("1_exk8y")
+families = Array[int]([6, 7, 3])
+rarity = 1
+player_upgrade = SubResource("Resource_f8k5s")
+points = Dictionary[int, int]({
+3: 1,
+6: 1,
+7: 1
+})
+lvl = 5
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

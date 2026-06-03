@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://by5tud5u1y87o"]
+
+[ext_resource type="Texture2D" uid="uid://psnthd75twnn" path="res://01_Cards/Pool/Cards/Engineer/Common/ForceField/engineer_force_field.png" id="1_n4itg"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_svenj"]
+[ext_resource type="Script" uid="uid://dbrbch8fom76l" path="res://01_Cards/Pool/Cards/Engineer/Common/ForceField/engineer_force_field.gd" id="2_1jt0m"]
+
+[sub_resource type="Resource" id="Resource_0hj2g"]
+script = ExtResource("2_1jt0m")
+_period = Array[float]([1.7, 1.7, 1.7, 1.7, 1.7])
+_lost_hp_percent = Array[float]([1.0, 2.0, 3.0, 4.0, 6.0])
+metadata/_custom_type_script = "uid://dbrbch8fom76l"
+
+[resource]
+script = ExtResource("1_svenj")
+name = "Force Field"
+picture = ExtResource("1_n4itg")
+families = Array[int]([2, 6])
+player_upgrade = SubResource("Resource_0hj2g")
+points = Dictionary[int, int]({
+2: 1,
+6: 1
+})
+lvl = 5
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

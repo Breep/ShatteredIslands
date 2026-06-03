@@ -60,8 +60,24 @@ var game_state: GameState:
 
 # ============================== Private variables ==============================
 
-var _game_scene: PackedScene = load("res://05_Game/game.tscn")
-var _run_scene: PackedScene = load("res://05_Game/Run/RunRoot/run_root.tscn")
+# Chargées paresseusement au 1er accès puis mises en cache (évite de cascader
+# tout l'arbre de jeu au démarrage de chaque scène).
+const _GAME_SCENE_PATH := "res://05_Game/game.tscn"
+const _RUN_SCENE_PATH := "res://05_Game/Run/RunRoot/run_root.tscn"
+
+var __game_scene_cache: PackedScene
+var _game_scene: PackedScene:
+	get:
+		if __game_scene_cache == null:
+			__game_scene_cache = load(_GAME_SCENE_PATH)
+		return __game_scene_cache
+
+var __run_scene_cache: PackedScene
+var _run_scene: PackedScene:
+	get:
+		if __run_scene_cache == null:
+			__run_scene_cache = load(_RUN_SCENE_PATH)
+		return __run_scene_cache
 
 const RUN_SAVE_PATH := "user://saves/run.tres"
 const DEMO_RUN_PATH := "res://05_Game/Run/Runs/Pool/Prototyping/demo_run.tres"
@@ -70,22 +86,31 @@ const DEMO_HERO_DESC_PATH := "res://02_Entities/Pool/Heroes/Latika/latika_desc.t
 const DEMO_HERO_SCENE_PATH := "res://02_Entities/Pool/Heroes/Latika/latika.tscn"
 const DEMO_ACOLYTE_SCENE_PATH := "res://02_Entities/Pool/Mobs/Chickens/Basic/chicken_basic.tscn"
 
-var _FAMILIES_REF: Dictionary[Family.Type, Family] = {
+# Familles chargées paresseusement au 1er accès (via init() / active_families),
+# plus au démarrage. Mises en cache.
+const _FAMILY_PATHS: Dictionary[Family.Type, String] = {
+	Family.Type.WARRIOR: "res://01_Cards/Pool/Families/warrior_family.tres",
+	Family.Type.ENGINEER: "res://01_Cards/Pool/Families/Engineer/engineer_family.tres",
+	Family.Type.ARDENT_CELESTIAL: "res://01_Cards/Pool/Families/ArdentCelestial/ardent_celestial_family.tres",
+	Family.Type.POISON: "res://01_Cards/Pool/Families/poison_family.tres",
+	Family.Type.STORM_CALLER: "res://01_Cards/Pool/Families/storm_caller_family.tres",
+	Family.Type.LIGHT: "res://01_Cards/Pool/Families/light_family.tres",
+	Family.Type.COLOSSUS: "res://01_Cards/Pool/Families/Colossus/colossus_family.tres",
+	Family.Type.CHICKEN_LORD: "res://01_Cards/Pool/Families/ChickenLord/chicken_lord_family.tres",
+	Family.Type.NECROSIS: "res://01_Cards/Pool/Families/necro_family.tres",
 }
+
+var __families_ref_cache: Dictionary[Family.Type, Family] = {}
+var _FAMILIES_REF: Dictionary[Family.Type, Family]:
+	get:
+		if __families_ref_cache.is_empty():
+			for family_type: Family.Type in _FAMILY_PATHS:
+				__families_ref_cache[family_type] = load(_FAMILY_PATHS[family_type]) as Family
+		return __families_ref_cache
 
 # ============================== Node base functions ==============================
 
 func _init() -> void:
-	Verbose.debug("GAME MANAGER INIT", Verbose.Category.DEFAULT)
-	_FAMILIES_REF[Family.Type.WARRIOR] = load("res://01_Cards/Descriptions/Families/warrior_family.tres") as Family
-	_FAMILIES_REF[Family.Type.ENGINEER] = load("res://01_Cards/Descriptions/Families/Engineer/engineer_family.tres") as Family
-	_FAMILIES_REF[Family.Type.ARDENT_CELESTIAL] = load("res://01_Cards/Descriptions/Families/ArdentCelestial/ardent_celestial_family.tres") as Family
-	_FAMILIES_REF[Family.Type.POISON] = load("res://01_Cards/Descriptions/Families/poison_family.tres") as Family
-	_FAMILIES_REF[Family.Type.STORM_CALLER] = load("res://01_Cards/Descriptions/Families/storm_caller_family.tres") as Family
-	_FAMILIES_REF[Family.Type.LIGHT] = load("res://01_Cards/Descriptions/Families/light_family.tres") as Family
-	_FAMILIES_REF[Family.Type.COLOSSUS] = load("res://01_Cards/Descriptions/Families/Colossus/colossus_family.tres") as Family
-	_FAMILIES_REF[Family.Type.CHICKEN_LORD] = load("res://01_Cards/Descriptions/Families/ChickenLord/chicken_lord_family.tres") as Family
-	_FAMILIES_REF[Family.Type.NECROSIS] = load("res://01_Cards/Descriptions/Families/necro_family.tres") as Family
 	Verbose.debug("GAME MANAGER INIT", Verbose.Category.DEFAULT)
 
 func _ready() -> void:
@@ -120,12 +145,12 @@ func clear() -> void:
 
 func init() -> void:
 	_game_rules = load("res://05_Game/GameRules/normal_game_rules.tres")
-	_active_families.append(_FAMILIES_REF[Family.Type.ENGINEER])
+	#_active_families.append(_FAMILIES_REF[Family.Type.ENGINEER])
 	#_active_families.append(_FAMILIES_REF[Family.Type.POISON])
-	_active_families.append(_FAMILIES_REF[Family.Type.ARDENT_CELESTIAL])
+	#_active_families.append(_FAMILIES_REF[Family.Type.ARDENT_CELESTIAL])
 	#_active_families.append(_FAMILIES_REF[Family.Type.WARRIOR])
 	#_active_families.append(_FAMILIES_REF[Family.Type.LIGHT])
-	_active_families.append(_FAMILIES_REF[Family.Type.CHICKEN_LORD])
+	#_active_families.append(_FAMILIES_REF[Family.Type.CHICKEN_LORD])
 	_active_families.append(_FAMILIES_REF[Family.Type.COLOSSUS])
 	#_active_families.append(_FAMILIES_REF[Family.Type.NECROSIS])
 
@@ -185,18 +210,22 @@ func _populate_demo_party_formation(party: Party) -> void:
 	# pas de .tres pour les chickens à ce stade — sera créé plus tard).
 	# Note : `desc.scene` n'est pas stocké dans le .tres (cycle de dépendance
 	# car la scene référence aussi la desc) — on l'attache ici au runtime.
+	# Solo : tout appartient au joueur local (slot PLAYER_1 via PlayerManager).
+	var local_player: Player = PlayerManager.get_local_player()
+	var owner: PlayerState.Slot = local_player.state.slot if local_player != null and local_player.state != null else PlayerState.Slot.PLAYER_1
+
 	var hero_desc: EntityDesc = load(DEMO_HERO_DESC_PATH) as EntityDesc
 	if hero_desc != null:
 		if hero_desc.scene == null:
 			hero_desc.scene = load(DEMO_HERO_SCENE_PATH) as PackedScene
-		party.add_to_roaster(RoasterEntry.from_desc(hero_desc))
+		party.add_to_roaster(RoasterEntry.from_desc(hero_desc, owner))
 	else:
 		Verbose.warn("start_solo_run: hero desc introuvable", Verbose.Category.GLOBAL_MANAGER)
 
 	var chicken_desc: EntityDesc = _build_demo_chicken_desc()
 	if chicken_desc != null:
 		for i in 4:
-			party.add_to_roaster(RoasterEntry.from_desc(chicken_desc))
+			party.add_to_roaster(RoasterEntry.from_desc(chicken_desc, owner))
 
 	# Formation : positions issues des spawn_specs de la formation par défaut,
 	# mappées aux entries du roaster dans l'ordre (hero puis acolytes).
@@ -251,7 +280,7 @@ func _build_demo_chicken_desc() -> EntityDesc:
 	return desc
 
 
-# Garantit que chaque RoasterEntry hero a deck et data_memory non-null. Source
+# Garantit que chaque RoasterEntry hero a hand et data_memory non-null. Source
 # canonique des données hero-level, lues à chaque spawn via EntitySpec.entry.
 func _init_roaster_runtime_data(party: Party) -> void:
 	if party == null: return
@@ -259,8 +288,8 @@ func _init_roaster_runtime_data(party: Party) -> void:
 	for entry: RoasterEntry in party.roaster:
 		if entry == null or entry.desc == null: continue
 		if entry.desc.default_category != Entity.Category.HERO: continue
-		if entry.deck == null:
-			entry.deck = PlayerDeck.new().init(local_player_name)
+		if entry.hand == null:
+			entry.hand = Hand.new().init(local_player_name)
 		if entry.data_memory == null:
 			entry.data_memory = NestedRegistry.new()
 

@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://5pfuup7p5qk4"]
+
+[ext_resource type="Script" uid="uid://cfilebgojn6hx" path="res://01_Cards/Pool/Cards/ArdentCelestial/Common/FireBall/ardent_celestial_fire_ball.gd" id="1_m64wx"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_n2vhm"]
+[ext_resource type="Texture2D" uid="uid://tuwewl8ngbqu" path="res://01_Cards/Pool/Cards/ArdentCelestial/Common/DarkForest/fire_dark_forest.png" id="2_ardnt"]
+
+[sub_resource type="Resource" id="Resource_iw2ls"]
+script = ExtResource("1_m64wx")
+_damages = Array[float]([20.0, 20.0, 20.0, 20.0, 20.0])
+_chances_to_bounce = Array[float]([0.1, 0.2, 0.3, 0.4, 0.5])
+_periods = Array[float]([5.0, 5.0, 5.0, 5.0, 5.0])
+_ignite_stacks = Array[int]([10, 10, 10, 10, 10])
+metadata/_custom_type_script = "uid://cfilebgojn6hx"
+
+[resource]
+script = ExtResource("1_n2vhm")
+name = "Fire Ball"
+picture = ExtResource("2_ardnt")
+families = Array[int]([3])
+player_upgrade = SubResource("Resource_iw2ls")
+points = Dictionary[int, int]({
+3: 1
+})
+lvl = 5
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

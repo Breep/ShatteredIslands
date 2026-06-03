@@ -70,11 +70,11 @@ func reset_buttons_state() -> void:
 # ============================== Private functions ==============================
 
 func _connect_new_player(new_player: Player) -> void:
-	if _player != null and _player.deck.has_changed.is_connected(_on_player_deck_has_changed):
-			_player.deck.has_changed.disconnect(_on_player_deck_has_changed)
+	if _player != null and _player.hand.has_changed.is_connected(_on_player_hand_has_changed):
+			_player.hand.has_changed.disconnect(_on_player_hand_has_changed)
 	
 	_player = new_player
-	#_player.deck.has_changed.connect(_on_player_deck_has_changed) # TODO a rework complétement
+	#_player.hand.has_changed.connect(_on_player_hand_has_changed) # TODO a rework complétement
 	_update_portrait_families()
 	Events.signal_ui_family_portrait_unselected()
 
@@ -82,10 +82,10 @@ func _connect_new_player(new_player: Player) -> void:
 func _update_portrait_families() -> void:
 	for family_portrait: UIFamilyPortrait in _family_portraits:
 		var family_type: Family.Type = family_portrait.family_type
-		var family_point: int = 40# _player.deck.get_family_points(family_type)
+		var family_point: int = 40# _player.hand.get_family_points(family_type)
 		var xp: int = GameManager.game_rules.family_point_to_xp(family_point)
 		var xp_max: int = GameManager.game_rules.family_point_to_xp_max(family_point)
-		var lvl: int = 4#_player.deck.get_family_level(family_type) # TODO a rework complètement
+		var lvl: int = 4#_player.hand.get_family_level(family_type) # TODO a rework complètement
 		family_portrait.family_xp = xp
 		family_portrait.family_xp_max = xp_max
 		family_portrait.family_lvl = lvl
@@ -129,7 +129,7 @@ func _animate_family_controls(active_portrait: UIFamilyPortrait) -> void:
 
 # ============================== Callbacks ==============================
 
-func _on_player_deck_has_changed() -> void:
+func _on_player_hand_has_changed() -> void:
 	_update_portrait_families()
 
 

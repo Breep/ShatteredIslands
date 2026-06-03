@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://by2fg3cyrvuja"]
+
+[ext_resource type="Texture2D" uid="uid://bjha34otkn5mo" path="res://01_Cards/Pool/Cards/Engineer/Common/ReflectoBelt/shieldomatic_reflecto_belt.png" id="1_18q5t"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_tuqjb"]
+[ext_resource type="Script" uid="uid://bmb03fcdh2kgs" path="res://01_Cards/Pool/Cards/Engineer/Common/ReflectoBelt/defense_reflecto_belt.gd" id="1_u73hx"]
+
+[sub_resource type="Resource" id="Resource_rtxvx"]
+script = ExtResource("1_u73hx")
+_shield_threshold = Array[float]([100.0, 100.0, 100.0, 100.0, 100.0])
+_attacks_count = Array[float]([1.0, 1.0, 1.0, 1.0, 1.0])
+_damage_percent = Array[float]([100.0, 150.0, 200.0, 250.0, 300.0])
+metadata/_custom_type_script = "uid://bmb03fcdh2kgs"
+
+[resource]
+script = ExtResource("1_tuqjb")
+name = "Reflecto Belt"
+picture = ExtResource("1_18q5t")
+families = Array[int]([1])
+player_upgrade = SubResource("Resource_rtxvx")
+points = Dictionary[int, int]({
+1: 1
+})
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

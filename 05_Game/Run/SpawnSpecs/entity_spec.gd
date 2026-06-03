@@ -3,7 +3,7 @@
 # une référence vers une RoasterEntry (côté joueur, lien vers l'inventaire).
 #
 # Source de la scene : `desc.scene` (préférence) ou `scene` (legacy/fallback).
-# Quand `entry` est non-null (cas joueur), level/deck/data_memory de l'entry
+# Quand `entry` est non-null (cas joueur), level/hand/data_memory de l'entry
 # écrasent ceux de la scene au spawn — ils sont la source canonique.
 @tool
 class_name EntitySpec
@@ -44,8 +44,8 @@ func spawn_into(parent: Node, ctx: EntityContext = null) -> Node:
 	# Méta-data canoniques depuis l'entry (joueur) ou la scene (ennemi).
 	if entry != null:
 		entity.level = entry.level
-		if entry.deck != null and "deck" in entity:
-			entity.deck = entry.deck
+		if entry.hand != null and "hand" in entity:
+			entity.hand = entry.hand
 		if entry.data_memory != null and "data_memory" in entity:
 			entity.data_memory = entry.data_memory
 

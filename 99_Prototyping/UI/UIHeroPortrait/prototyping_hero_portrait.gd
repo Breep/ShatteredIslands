@@ -57,6 +57,6 @@
 #
 #
 #func _on_add_card_pressed() -> void:
-	#var cards: Array[Card] = _shop_deck.draw_n_cards(1, _player.deck)
-	#_player.deck.add_card(cards[0])
-	#_cards_viewer.update_content(_player.deck.get_active_deck())
+	#var cards: Array[Card] = _shop_deck.draw_n_cards(1, _player.hand)
+	#_player.hand.add_card(cards[0])
+	#_cards_viewer.update_content(_player.hand.get_active_deck())

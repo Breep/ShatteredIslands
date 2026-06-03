@@ -2,10 +2,10 @@ class_name UIFamilyViewer
 extends Control
 
 const DESC_PANELS: Dictionary = {
-	Family.Type.ARDENT_CELESTIAL: preload("res://01_Cards/Descriptions/Families/ArdentCelestial/ardent_celestial_desc_panel.tscn"),
-	Family.Type.CHICKEN_LORD: preload("res://01_Cards/Descriptions/Families/ChickenLord/chicken_lord_desc_panel.tscn"),
-	Family.Type.COLOSSUS: preload("res://01_Cards/Descriptions/Families/Colossus/colossus_desc_panel.tscn"),
-	Family.Type.ENGINEER: preload("res://01_Cards/Descriptions/Families/Engineer/engineer_desc_panel.tscn"),
+	Family.Type.ARDENT_CELESTIAL: preload("res://01_Cards/Pool/Families/ArdentCelestial/ardent_celestial_desc_panel.tscn"),
+	Family.Type.CHICKEN_LORD: preload("res://01_Cards/Pool/Families/ChickenLord/chicken_lord_desc_panel.tscn"),
+	Family.Type.COLOSSUS: preload("res://01_Cards/Pool/Families/Colossus/colossus_desc_panel.tscn"),
+	Family.Type.ENGINEER: preload("res://01_Cards/Pool/Families/Engineer/engineer_desc_panel.tscn"),
 }
 
 @onready var _family_name_label: RichTextLabel = %FamilyNameLabel
@@ -20,13 +20,13 @@ var _current_desc_panel: Control = null
 
 #region ============================== Public API ==============================
 func display_family(player: Player, family: Family) -> void:
-	if _player and _player.deck.has_changed.is_connected(_on_deck_has_changed):
-		_player.deck.has_changed.disconnect(_on_deck_has_changed)
+	if _player and _player.hand.has_changed.is_connected(_on_hand_has_changed):
+		_player.hand.has_changed.disconnect(_on_hand_has_changed)
 
 	_player = player
 	_family = family
 	_hero = _player.hero
-	_player.deck.has_changed.connect(_on_deck_has_changed)
+	_player.hand.has_changed.connect(_on_hand_has_changed)
 	_family_name_label.text = _family.family_name
 	_refresh_cards_viewer()
 	_refresh_desc_panel()
@@ -55,13 +55,13 @@ func _on_show_all_button_pressed() -> void:
 
 
 func _refresh_cards_viewer() -> void:
-	var unlocked_cards: Array[Card] = _player.deck.get_cards_by_type(_family.family_type)
+	var unlocked_cards: Array[Card] = _player.hand.get_cards_by_type(_family.family_type)
 	_ui_cards_viewer.update_content(_family.cards, unlocked_cards)
 	_ui_cards_viewer.set_display_mode(_current_display_mode)
 	_ui_cards_viewer.reset_scroll()
 
 
-func _on_deck_has_changed() -> void:
+func _on_hand_has_changed() -> void:
 	_refresh_cards_viewer()
 	_refresh_desc_panel()
 
