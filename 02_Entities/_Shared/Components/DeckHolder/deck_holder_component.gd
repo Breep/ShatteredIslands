@@ -94,11 +94,12 @@ func get_card_context() -> CardContext:
 
 
 func _on_hand_card_added(card: Card) -> void:
-	apply_all_cards_upgrades()
+	card.apply_effect(_card_context)
 
 func _on_hand_card_removed(card: Card) -> void:
-	apply_all_cards_upgrades()
+	card.revert_effect(_card_context)
 
 func _on_hand_card_upgraded(card: Card) -> void:
-	apply_all_cards_upgrades()
+	card.revert_effect(_card_context)
+	card.apply_effect(_card_context)
 #endregion
