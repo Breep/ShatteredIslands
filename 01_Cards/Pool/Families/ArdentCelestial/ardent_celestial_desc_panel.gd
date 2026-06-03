@@ -82,26 +82,10 @@ func _clear_additional_effects() -> void:
 func _populate_additional_effects(entity: Entity) -> void:
 	if entity.deck_holder == null:
 		return
-	var cards := entity.deck_holder.hand.get_cards_by_type(Family.Type.ARDENT_CELESTIAL)
-	for card in cards:
-		var lvl: int = entity.hand.get_card_lvl(card)
-		if lvl < 1:
-			continue
-		var upgrade := card.get_card_effect()
-		if upgrade is FireScorpius:
-			_add_effect_row("[[POISON_STACK]]", _val(upgrade._poison_stacks[lvl - 1]))
-		elif upgrade is ArdentCelestialQuasar:
-			_add_effect_row("Max HP", "%s / meteor" % _val(upgrade._hp_amount[lvl - 1]))
-		elif upgrade is FireKuiperBelt:
-			_add_effect_row("[[SHIELD]]", "%s / meteor" % _val(upgrade._shield_amount[lvl - 1]))
-		elif upgrade is ArdentCelestialCelestialCulling:
-			_add_effect_row("Execute", "%s%%" % _fmt(upgrade._thresholds[lvl - 1]))
-		elif upgrade is FireConsumingTheStar:
-			_add_effect_row("[[MANA]] burn", _val(upgrade._mana_burn[lvl - 1]))
-		elif upgrade is ArdentCelestialXenoEgg:
-			_add_effect_row("Spawn Egg", "%s%%" % _fmt(upgrade._proc_chances[lvl - 1]))
-		elif upgrade is ArdentCelestialArmagedheal:
-			_add_effect_row("Heal", "%s | %s%%" % [_val(upgrade._heal[lvl - 1]), _fmt(upgrade._proc_chance[lvl - 1])])
+	# Les cartes "meteor adder" historiques ont été retirées ; aucune carte du pool
+	# actuel n'ajoute d'effet on-hit au météore. Le panneau n'affiche donc que les
+	# stats de base du météore. Rebrancher des lignes ici si de telles cartes reviennent.
+	pass
 
 
 func _add_effect_row(label_text: String, value_bbcode: String) -> void:

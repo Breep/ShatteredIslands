@@ -1,32 +1,25 @@
 class_name ArdentCelestialDiamondSkin
 extends CardEffect
 
+## Ardent Celestial — augmente la résistance du héros aux dégâts magiques.
+
 @export var _magical_resistances: Array[float]
 
-func apply_card(ctx: CardContext, card_lvl: int) -> void:
-	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("Diamond Skin: Wrong card_lvl: ", card_lvl)
-		return
-
-	var magical_resistance: float = _magical_resistances[card_lvl - 1]
-
+func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
+	var owner: Entity = ctx.entity_owner
 	var mod := StatModifier.new()
-	mod.id = &"Diamond Skin"
+	mod.id = card_name
 	mod.stat_type = EntityStats.StatType.M_RESISTANCE
 	mod.action_type = Utils.ActionType.DAMAGE_MAGICAL
 	mod.calc_type = StatModifier.CalcType.ADD
 	mod.tags = [StatModifier.TagType.CARD]
-	mod.value = magical_resistance
-	ctx.hero.stat_modifiers_registry.register_modifier(mod)
+	mod.value = _magical_resistances[card_lvl - 1]
+	owner.stat_modifiers_registry.register_modifier(mod)
 
 
-func revert_card(ctx: CardContext, _card_lvl: int) -> void:
-	ctx.hero.stat_modifiers_registry.remove_modifier(EntityStats.StatType.M_RESISTANCE, &"Diamond Skin", Utils.ActionType.DAMAGE_MAGICAL)
+func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
+	ctx.entity_owner.stat_modifiers_registry.remove_modifier(EntityStats.StatType.M_RESISTANCE, card_name, Utils.ActionType.DAMAGE_MAGICAL)
 
 
-func get_description(cardlvl: int) -> String:
-	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("Diamond Skin: Wrong cardlvl: ", cardlvl)
-		return "ERROR"
-
-	return "Le héros gagne " + str(_magical_resistances[cardlvl - 1]) + " de résistance aux [[MAGICAL_DAMAGE]]."
+func get_description(card_lvl: int) -> String:
+	return "Le héros gagne " + str(_magical_resistances[card_lvl - 1]) + " de résistance aux [[MAGICAL_DAMAGE]]."
