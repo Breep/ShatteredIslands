@@ -9,9 +9,9 @@
 [ext_resource type="Resource" uid="uid://7i4uh3v4xxba" path="res://01_Cards/Pool/Cards/Colossus/Common/CrushingBlow/colossus_crushing_blow.tres" id="7_crush"]
 [ext_resource type="Resource" uid="uid://cbeastbond001" path="res://01_Cards/Pool/Cards/Colossus/Common/BeastBond/colossus_beast_bond.tres" id="8_bond"]
 [ext_resource type="Resource" uid="uid://b6rcxah2x0aqm" path="res://01_Cards/Pool/Cards/Colossus/Rare/BearStrength/colossus_bear_strength.tres" id="9_bear"]
-[ext_resource type="Resource" uid="uid://cprovocation01" path="res://01_Cards/Pool/Cards/Colossus/Rare/Provocation/colossus_provocation.tres" id="10_provoc"]
+[ext_resource type="Resource" uid="uid://cl4ma4yjnga3y" path="res://01_Cards/Pool/Cards/Colossus/Rare/Provocation/colossus_provocation.tres" id="10_provoc"]
 [ext_resource type="Resource" uid="uid://cno4627vx3nt8" path="res://01_Cards/Pool/Cards/Colossus/Epic/VitalPulse/colossus_vital_pulse.tres" id="11_vital"]
-[ext_resource type="Resource" uid="uid://cstonecarapace1" path="res://01_Cards/Pool/Cards/Colossus/Epic/StoneCarapace/colossus_stone_carapace.tres" id="12_carapace"]
+[ext_resource type="Resource" uid="uid://cg63fcakweap3" path="res://01_Cards/Pool/Cards/Colossus/Epic/StoneCarapace/colossus_stone_carapace.tres" id="12_carapace"]
 [ext_resource type="Resource" uid="uid://c1jb5nmdg2bsh" path="res://01_Cards/Pool/Cards/Colossus/Legendary/Resurrection/colossus_resurrection.tres" id="13_resurrect"]
 [ext_resource type="Texture2D" uid="uid://mxp6ngtlf1py" path="res://01_Cards/Pool/Families/Icons/colossus logo 2.png" id="14_icon"]
 

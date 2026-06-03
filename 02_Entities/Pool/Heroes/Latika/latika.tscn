@@ -22,7 +22,7 @@ height = 1.715332
 
 [node name="Latika" type="CharacterBody3D" unique_id=294337328 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_attack_spawn_marker")]
 collision_layer = 16
-collision_mask = 17
+collision_mask = 25
 script = ExtResource("1_undos")
 entity_name = "Latika"
 category = 0

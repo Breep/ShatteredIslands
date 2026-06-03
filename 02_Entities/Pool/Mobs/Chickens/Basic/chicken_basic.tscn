@@ -13,7 +13,7 @@ height = 0.84375
 
 [node name="Chicken" type="CharacterBody3D" unique_id=2109615854 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker")]
 collision_layer = 16
-collision_mask = 0
+collision_mask = 25
 script = ExtResource("1_t2vws")
 entity_name = "Chicken"
 entity_desc = ExtResource("2_unxfj")

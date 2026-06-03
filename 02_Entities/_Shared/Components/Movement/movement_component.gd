@@ -140,6 +140,7 @@ func process_tick() -> void:
 
 func _move_toward_target() -> void:
 	if not _is_moving:
+		_owner.velocity = Vector3.ZERO
 		return
 
 	# Update target position if following an entity
@@ -150,21 +151,22 @@ func _move_toward_target() -> void:
 		_target_position = _target_entity.global_position
 
 	var speed: float = _rush_speed if _is_rushing else _get_move_speed()
-	var step_distance: float = speed / 60.0
+	var step_distance: float = speed * _physics_step()
 
-	if _target_position == null or _owner.global_position.distance_to(_target_position) < step_distance:
+	if _owner.global_position.distance_to(_target_position) < step_distance:
 		if _is_rushing:
 			_owner.global_position = _target_position
 			_stop_rushing()
 		if not _follow_entity:
 			_is_moving = false
 			_owner.is_moving = false
+		_owner.velocity = Vector3.ZERO
 		return
 
 	var direction: Vector3 = (_target_position - _owner.global_position).normalized()
 	_owner.look_at_target_y_only(_target_position)
-	_owner.global_position += direction * step_distance
-	_owner.global_position = _owner.global_position.snapped(Vector3(0.01, 0.01, 0.01))
+	_owner.velocity = direction * speed
+	_owner.move_and_slide()
 
 
 func _update_orbit() -> void:
@@ -192,38 +194,44 @@ func _update_orbit_approach() -> void:
 	else:
 		approach_target = _orbit_center_point + to_entity.normalized() * _orbit_radius
 
-	var step_distance: float = _get_move_speed() / 60.0
+	var step_distance: float = _get_move_speed() * _physics_step()
 	var distance: float = _owner.global_position.distance_to(approach_target)
 
 	if distance < step_distance:
 		# Arrived on the orbit circle
-		_owner.global_position = approach_target.snapped(Vector3(0.01, 0.01, 0.01))
+		_owner.global_position = approach_target
 		_orbit_current_angle = _compute_initial_angle(_orbit_center_point)
 		_orbit_approaching = false
+		_owner.velocity = Vector3.ZERO
 		return
 
 	var direction: Vector3 = (approach_target - _owner.global_position).normalized()
 	_owner.look_at_target_y_only(approach_target)
-	_owner.global_position += direction * step_distance
-	_owner.global_position = _owner.global_position.snapped(Vector3(0.01, 0.01, 0.01))
+	_owner.velocity = direction * _get_move_speed()
+	_owner.move_and_slide()
 
 
 func _update_orbit_circle() -> void:
+	var step: float = _physics_step()
+
 	# Advance angle deterministically
-	_orbit_current_angle += _orbit_angular_speed / 60.0
+	_orbit_current_angle += _orbit_angular_speed * step
 
 	# Wrap angle to [0, TAU) to prevent floating-point drift
 	_orbit_current_angle = fmod(_orbit_current_angle, TAU)
 	if _orbit_current_angle < 0.0:
 		_orbit_current_angle += TAU
 
-	# Compute new position on the circle (XZ plane)
-	var new_position: Vector3 = Vector3(
+	# Desired position on the circle (XZ plane). We reach it through the physics
+	# engine (velocity + move_and_slide) so the orbit still resolves collisions
+	# against other entities instead of teleporting through them.
+	var desired_position: Vector3 = Vector3(
 		_orbit_center_point.x + cos(_orbit_current_angle) * _orbit_radius,
 		0.0,
 		_orbit_center_point.z + sin(_orbit_current_angle) * _orbit_radius
 	)
-	_owner.global_position = new_position.snapped(Vector3(0.01, 0.01, 0.01))
+	_owner.velocity = (desired_position - _owner.global_position) / step if step > 0.0 else Vector3.ZERO
+	_owner.move_and_slide()
 
 	# Face direction based on orbit facing mode
 	if _orbit_facing == OrbitFacing.CENTER:
@@ -290,3 +298,9 @@ func _compute_initial_angle(center: Vector3) -> float:
 
 func _get_move_speed() -> float:
 	return _owner.stats.movement_speed
+
+
+## Fixed physics step (seconds). move_and_slide already scales velocity by this
+## internally; we use it here for arrival checks and velocity-from-displacement.
+func _physics_step() -> float:
+	return get_physics_process_delta_time()
