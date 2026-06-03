@@ -87,7 +87,7 @@ func _populate_additional_effects(entity: Entity) -> void:
 		var lvl: int = entity.hand.get_card_lvl(card)
 		if lvl < 1:
 			continue
-		var upgrade := card.card_effect
+		var upgrade := card.get_card_effect()
 		if upgrade is FireScorpius:
 			_add_effect_row("[[POISON_STACK]]", _val(upgrade._poison_stacks[lvl - 1]))
 		elif upgrade is ArdentCelestialQuasar:

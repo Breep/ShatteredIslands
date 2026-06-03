@@ -91,7 +91,7 @@ func _update_card_layout(card: Card) -> void:
 	_previous_card_lvl = card.lvl
 	
 	_card_name_label.text = card.name
-	_card_desc_label.text_raw = card.card_effect.get_description(card.lvl)
+	_card_desc_label.text_raw = card.get_description()
 	_card_portrait_texture.texture = card.picture
 	_rune_glow_tools.set_rarity(card.rarity)
 	

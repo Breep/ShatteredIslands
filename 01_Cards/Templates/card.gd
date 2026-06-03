@@ -37,7 +37,7 @@ const RARITY_CARD_VALUE: Dictionary[Rarity, int] = {
 @export var picture : Texture2D
 @export var families: Array[Family.Type]
 @export var rarity : Rarity
-@export var card_effect: CardEffect
+@export var _card_effect: CardEffect
 @export var points: Dictionary[Family.Type, int]
 var uid: int
 
@@ -54,22 +54,32 @@ func is_max_level() -> bool:
 	return _lvl == RARITY_MAX_LEVEL[rarity]
 
 
+func has_effect() -> bool:
+	return _card_effect != null
+
+
+# Accès en lecture à l'effet (introspection des valeurs par les panneaux de
+# description, etc.). L'application/retrait passe par apply_effect/revert_effect.
+func get_card_effect() -> CardEffect:
+	return _card_effect
+
+
 func apply_effect(ctx: CardContext) -> void:
-	if card_effect == null:
+	if _card_effect == null:
 		Verbose.error("Can't apply effect on [" + name, Verbose.Category.CARD)
 		return
-	card_effect.apply_card(ctx, lvl)
+	_card_effect.apply(ctx, name, lvl)
 
 
 func revert_effect(ctx: CardContext) -> void:
-	if card_effect == null:
-		Verbose.error("Can't apply effect on [" + name, Verbose.Category.CARD)
+	if _card_effect == null:
+		Verbose.error("Can't revert effect on [" + name, Verbose.Category.CARD)
 		return
-	card_effect.apply_card(ctx, lvl)
+	_card_effect.revert(ctx, name, lvl)
 
 
 func get_description() -> String:
-	if card_effect == null:
-		Verbose.error("Can't apply effect on [" + name, Verbose.Category.CARD)
+	if _card_effect == null:
+		Verbose.error("Can't get description on [" + name, Verbose.Category.CARD)
 		return ""
-	return card_effect.get_description(lvl)
+	return _card_effect.get_description(lvl)
