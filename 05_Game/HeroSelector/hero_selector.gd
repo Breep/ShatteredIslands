@@ -1,9 +1,10 @@
 class_name HeroSelector
 extends Node
 
-# Drives the hero selection scene: spawns the preview models of the available
-# heroes (and their acolytes) on the stage markers, and plays the intro
-# lighting sequence (main light cut, then spotlights snapping on one by one).
+# Drives the hero selection scene: feeds the picking UI with the available
+# heroes, reacts to its selection/lock signals (updating the stage previews),
+# and plays the intro lighting sequence (main light cut, then spotlights
+# snapping on one by one).
 
 # ============================== Signals ==============================
 
@@ -12,7 +13,7 @@ signal _player_hero_picked
 
 # ============================== Configuration ==============================
 
-@export var _available_heroes: Array[EntityDesc]
+@export var _available_heroes: Array[HeroDesc]
 
 @export_group("Intro lighting")
 ## Delay before the first spotlight snaps on.
@@ -34,21 +35,11 @@ signal _player_hero_picked
 func _ready() -> void:
 	_main_light.visible = false
 
-	if not _available_heroes.is_empty():
-		load_preview(_available_heroes[0])
+	_ui_hero_picking_screen.hero_selected.connect(_on_hero_selected)
+	_ui_hero_picking_screen.hero_locked.connect(_on_hero_locked)
+	_ui_hero_picking_screen.setup(_available_heroes)
 
 	_play_intro_lighting()
-
-
-# ============================== Public functions ==============================
-
-func load_preview(hero_desc: EntityDesc) -> void:
-	_spawn_preview(_hero_spawn_point, hero_desc.preview_scene)
-
-	var acolyte: EntityDesc = null
-	if not hero_desc.starting_companions.is_empty():
-		acolyte = hero_desc.starting_companions[0]
-	_spawn_preview(_acolyte_spawn_point, acolyte.preview_scene if acolyte else null)
 
 
 # ============================== Private functions ==============================
@@ -68,3 +59,18 @@ func _play_intro_lighting() -> void:
 		tween.tween_callback(_spot_lights[i].turn_on)
 		if i < _spot_lights.size() - 1:
 			tween.tween_interval(_between_spots_delay)
+
+
+# ============================== Callbacks ==============================
+
+func _on_hero_selected(hero: HeroDesc) -> void:
+	_spawn_preview(_hero_spawn_point, hero.preview_scene)
+
+	var acolyte: EntityDesc = null
+	if not hero.starting_companions.is_empty():
+		acolyte = hero.starting_companions[0]
+	_spawn_preview(_acolyte_spawn_point, acolyte.preview_scene if acolyte else null)
+
+
+func _on_hero_locked(_hero: HeroDesc) -> void:
+	pass

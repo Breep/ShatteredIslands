@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://wbrwetv4d7je" path="res://20_Data/Blender/Map/Map/Tavern/tavern_spec.png" id="2_l31ec"]
 [ext_resource type="Material" uid="uid://d3cx4okwaescj" path="res://22_VFX/Shaders/3D/Vfezwater/vfez_rocky.tres" id="3_3ybi6"]
 [ext_resource type="Texture2D" uid="uid://dev5bfgw1kmer" path="res://20_Data/Blender/Map/Map/Tavern/tavern_PolygonHorrorCarnival_Texture_01_A.png" id="4_kkb13"]
+[ext_resource type="Resource" uid="uid://pjwj2qg04h56" path="res://02_Entities/Pool/Heroes/DarkKnight/Stats/dark_knight_hero_desc.tres" id="4_o78dd"]
 [ext_resource type="Texture2D" uid="uid://bgdiqhq6uruum" path="res://20_Data/Blender/Map/Map/Tavern/tavern_PolygonHorrorCarnival_Emissive_01_A.png" id="5_qrqu0"]
 [ext_resource type="Texture2D" uid="uid://dnjmmnd3ub2oi" path="res://20_Data/Blender/Map/Map/Tavern/tavern_PolygonFantasyKingdom_Texture_02_A.png" id="6_o78dd"]
 [ext_resource type="Texture2D" uid="uid://j0dc3sfg7v6v" path="res://20_Data/Blender/Map/Map/Tavern/tavern_PolygonFantasyKingdom_Texture_04_A.png" id="7_d8f4j"]
@@ -24,7 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://bsbbpkr8vpwu3" path="res://02_Entities/Pool/Heroes/Latika/latika_preview.tscn" id="22_l31ec"]
 [ext_resource type="PackedScene" uid="uid://k4dc5j8ecdxo" path="res://04_UI/InGame/HeroSelection/ui_hero_picking_screen.tscn" id="23_bnso8"]
 [ext_resource type="PackedScene" uid="uid://b1yg7a07pqljt" path="res://02_Entities/Pool/Mobs/Vrock/vrock_preview.tscn" id="23_l31ec"]
-[ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="24_desc"]
+[ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://02_Entities/_Shared/hero_desc.gd" id="24_desc"]
 [ext_resource type="Resource" uid="uid://dlatikadesc" path="res://02_Entities/Pool/Heroes/Latika/latika_desc.tres" id="25_latika"]
 [ext_resource type="Script" uid="uid://db3l8qpq81uob" path="res://05_Game/HeroSelector/tavern_spot_light.gd" id="26_spot"]
 
@@ -37660,7 +37661,7 @@ background_energy_multiplier = 0.1
 
 [node name="HeroSelector" type="Node" unique_id=849220554 node_paths=PackedStringArray("_spot_lights")]
 script = ExtResource("1_ko53h")
-_available_heroes = Array[ExtResource("24_desc")]([ExtResource("25_latika")])
+_available_heroes = Array[ExtResource("24_desc")]([ExtResource("25_latika"), ExtResource("4_o78dd")])
 _first_spot_delay = 2.0
 _spot_lights = [NodePath("Tavern/Light/SpotLights/CenterPoint/SpotLight1"), NodePath("Tavern/Light/SpotLights/CenterPoint2/SpotLight1")]
 
