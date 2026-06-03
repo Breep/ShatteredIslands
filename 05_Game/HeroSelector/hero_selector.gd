@@ -73,4 +73,4 @@ func _on_hero_selected(hero: HeroDesc) -> void:
 
 
 func _on_hero_locked(_hero: HeroDesc) -> void:
-	pass
+	AudioManager.play_sfx("fanfar_trumpet", -1)

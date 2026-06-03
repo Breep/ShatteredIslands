@@ -44,6 +44,8 @@ func _clear_grid() -> void:
 
 
 func _select(hero: HeroDesc) -> void:
+	if hero == _selected_hero:
+		return
 	_selected_hero = hero
 	_overview_panel.update(hero)
 	hero_selected.emit(hero)

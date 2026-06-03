@@ -30,7 +30,7 @@
 [resource]
 script = ExtResource("2_7xng1")
 id = 1
-category = "DPS / Melee"
+category = "Melee / DPS"
 name = "Dark Knight"
 portrait = ExtResource("2_4g173")
 preview_scene = ExtResource("2_u5c3u")

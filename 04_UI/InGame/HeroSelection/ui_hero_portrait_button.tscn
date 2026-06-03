@@ -49,17 +49,17 @@ shader_parameter/seal_points = 5.0
 shader_parameter/seal_sharpness = 0.15
 shader_parameter/max_zoom = 4.0
 
-[node name="HeroPortraitButton" type="Button" unique_id=563825061 node_paths=PackedStringArray("_portrait", "_button")]
+[node name="HeroPortraitButton" type="Button" unique_id=563825061 node_paths=PackedStringArray("_portrait")]
 custom_minimum_size = Vector2(128, 128)
 offset_right = 128.0
 offset_bottom = 128.0
 size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_lwqqh")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_svo5a")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_a2137")
 script = ExtResource("3_uh3hr")
 _portrait = NodePath("MarginContainer/Portrait")
-_button = NodePath("")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=261702249]
 layout_mode = 0
@@ -67,6 +67,7 @@ offset_right = 128.0
 offset_bottom = 128.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
@@ -75,6 +76,7 @@ theme_override_constants/margin_bottom = 5
 [node name="Portrait" type="TextureRect" parent="MarginContainer" unique_id=592397894]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("8_nbu27")
 expand_mode = 1
 stretch_mode = 5
@@ -86,6 +88,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = -5
 theme_override_constants/margin_top = -5
 theme_override_constants/margin_right = -5
@@ -93,12 +96,16 @@ theme_override_constants/margin_bottom = -5
 
 [node name="Panel" type="Panel" parent="MarginContainer/Portrait/MarginContainer" unique_id=306784038]
 layout_mode = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_svo5a")
 
 [node name="shader" type="TextureRect" parent="MarginContainer" unique_id=1610693461]
 visible = false
 material = SubResource("ShaderMaterial_pbbth")
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("6_kdn62")
 expand_mode = 1
 script = ExtResource("7_1r36m")
+
+[connection signal="pressed" from="." to="." method="_on_button_pressed"]
