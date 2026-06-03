@@ -1,30 +1,19 @@
 [gd_resource type="Resource" script_class="Family" format=3 uid="uid://dw66lnwee8ruk"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_yud7m"]
-[ext_resource type="Resource" uid="uid://mr4x6u0j5sbf" path="res://01_Cards/Pool/Cards/Engineer/Common/EnergyBarrier/engineer_energy_barrier.tres" id="3_jrdhl"]
 [ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://01_Cards/Templates/family.gd" id="3_p2pe3"]
-[ext_resource type="Resource" uid="uid://c3rq8k7pj84qi" path="res://01_Cards/Pool/Cards/Engineer/Common/EvasiveBarrier/engineer_evasive_barrier.tres" id="4_ybs4r"]
-[ext_resource type="Resource" uid="uid://by5tud5u1y87o" path="res://01_Cards/Pool/Cards/Engineer/Common/ForceField/engineer_force_field.tres" id="5_spcg6"]
-[ext_resource type="Resource" uid="uid://ch6lrtduf0q25" path="res://01_Cards/Pool/Cards/Engineer/Common/MagneticSyphon/engineer_magnetic_syphon.tres" id="6_dcgsq"]
-[ext_resource type="Resource" uid="uid://r3rk3cnyponr" path="res://01_Cards/Pool/Cards/Engineer/Common/ProtectiveDome/shieldomatic_protective_dome.tres" id="7_adttv"]
-[ext_resource type="Resource" uid="uid://coqupis51li0i" path="res://01_Cards/Pool/Cards/Engineer/Common/ReactiveCover/engineer_reactive_cover.tres" id="8_0vd2r"]
-[ext_resource type="Resource" uid="uid://c88cqm481bhcu" path="res://01_Cards/Pool/Cards/Engineer/Common/ShieldRush/engineer_shield_rush.tres" id="8_adttv"]
-[ext_resource type="Resource" uid="uid://c2fbdsokd2ayt" path="res://01_Cards/Pool/Cards/Engineer/Epic/AegisResonator/shieldomatic_aegis_resonator.tres" id="9_0vd2r"]
-[ext_resource type="Resource" uid="uid://cwywvggm7tovg" path="res://01_Cards/Pool/Cards/Engineer/Common/GasMask/engineer_gas_mask.tres" id="9_6ti66"]
-[ext_resource type="Resource" uid="uid://c1gpijnrsdj2h" path="res://01_Cards/Pool/Cards/Engineer/Rare/DeflectionShield/engineer_deflection_shield.tres" id="12_6ti66"]
-[ext_resource type="Resource" uid="uid://yph6mhvbkj0c" path="res://01_Cards/Pool/Cards/Engineer/Legendary/AegisBlade/engineer_aegis_blade.tres" id="13_6vf5b"]
-[ext_resource type="Resource" uid="uid://ckk1rjelx5ht" path="res://01_Cards/Pool/Cards/Engineer/Epic/FortificationDrone/engineer_fortification_drone.tres" id="14_tdd4c"]
-[ext_resource type="Resource" uid="uid://bgx3j85dxco0q" path="res://01_Cards/Pool/Cards/Engineer/Rare/BarbedWire/engineer_barbed_wire.tres" id="15_fk40c"]
-[ext_resource type="Resource" uid="uid://du0o8udb4adn5" path="res://01_Cards/Pool/Cards/Engineer/Rare/ShieldThrow/engineer_shield_throw.tres" id="15_lhiy4"]
-[ext_resource type="Resource" uid="uid://nhheckrvkmd2" path="res://01_Cards/Pool/Cards/Engineer/Common/FragileProtocol/engineer_fragile_protocol.tres" id="16_nc3bn"]
-[ext_resource type="Resource" uid="uid://dm4yi57mem0b4" path="res://01_Cards/Pool/Cards/Warrior/Common/ProtectoSpear/attack_protecto_spear.tres" id="17_nc3bn"]
-[ext_resource type="Resource" uid="uid://5d3si44q6tkg" path="res://01_Cards/Pool/Cards/Engineer/Common/GammaTurret/engineer_gamma_turret.tres" id="18_khwye"]
-[ext_resource type="Texture2D" uid="uid://c2esp1sla1xxa" path="res://01_Cards/Pool/Families/Icons/engineer logo 2.png" id="19_khwye"]
+[ext_resource type="Resource" uid="uid://mr4x6u0j5sbf" path="res://01_Cards/Pool/Cards/Engineer/Common/EnergyBarrier/engineer_energy_barrier.tres" id="3_energy"]
+[ext_resource type="Resource" uid="uid://c88cqm481bhcu" path="res://01_Cards/Pool/Cards/Engineer/Common/ShieldRush/engineer_shield_rush.tres" id="4_rush"]
+[ext_resource type="Resource" uid="uid://celecgrenad1" path="res://01_Cards/Pool/Cards/Engineer/Common/ElectricGrenade/engineer_electric_grenade.tres" id="5_grenade"]
+[ext_resource type="Resource" uid="uid://c3rq8k7pj84qi" path="res://01_Cards/Pool/Cards/Engineer/Common/EvasiveBarrier/engineer_evasive_barrier.tres" id="6_evasive"]
+[ext_resource type="Resource" uid="uid://ccombatshld1" path="res://01_Cards/Pool/Cards/Engineer/Common/CombatShield/engineer_combat_shield.tres" id="7_combat"]
+[ext_resource type="Resource" uid="uid://du0o8udb4adn5" path="res://01_Cards/Pool/Cards/Engineer/Epic/ShieldThrow/engineer_shield_throw.tres" id="8_throw"]
+[ext_resource type="Texture2D" uid="uid://c2esp1sla1xxa" path="res://01_Cards/Pool/Families/Icons/engineer logo 2.png" id="9_icon"]
 
 [resource]
 script = ExtResource("3_p2pe3")
-cards = Array[ExtResource("1_yud7m")]([ExtResource("3_jrdhl"), ExtResource("4_ybs4r"), ExtResource("5_spcg6"), ExtResource("6_dcgsq"), ExtResource("7_adttv"), ExtResource("8_0vd2r"), ExtResource("8_adttv"), ExtResource("9_6ti66"), ExtResource("9_0vd2r"), ExtResource("15_lhiy4"), ExtResource("12_6ti66"), ExtResource("13_6vf5b"), ExtResource("14_tdd4c"), ExtResource("15_fk40c"), ExtResource("16_nc3bn"), ExtResource("17_nc3bn"), ExtResource("18_khwye")])
-icon = ExtResource("19_khwye")
+cards = Array[ExtResource("1_yud7m")]([ExtResource("3_energy"), ExtResource("4_rush"), ExtResource("5_grenade"), ExtResource("6_evasive"), ExtResource("7_combat"), ExtResource("8_throw")])
+icon = ExtResource("9_icon")
 family_name = "Engineer"
 family_type = 2
 color = Color(0.573467, 0.31114, 0.127107, 1)

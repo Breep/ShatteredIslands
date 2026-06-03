@@ -14,7 +14,7 @@ script = ExtResource("1_aeacc")
 name = "Shield Rush"
 picture = ExtResource("1_tcq60")
 families = Array[int]([2])
-player_upgrade = SubResource("Resource_t7xpg")
+_card_effect = SubResource("Resource_t7xpg")
 points = Dictionary[int, int]({
 2: 1
 })

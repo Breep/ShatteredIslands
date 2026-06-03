@@ -1,33 +1,30 @@
 class_name EngineerShieldRush
 extends CardEffect
 
+## Engineer — au début du combat, génère un burst de shield réparti entre tous
+## les alliés.
+
 @export var _shield_amount: Array[float]
 
-func apply_card(ctx: CardContext, card_lvl: int) -> void:
-	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("Shield Rush: Wrong card_lvl: ", card_lvl)
-		return
-
+func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
+	var owner: Entity = ctx.entity_owner
 	var amount: int = int(_shield_amount[card_lvl - 1])
 
-	ctx.battle_callbacks.register_battle_start(&"Shield Rush", func() -> void:
-		if ctx.hero != null and is_instance_valid(ctx.hero):
-			var allies: Array[Entity] = ctx.hero.target.get_targets(TargetComponent.MultipleTargettingStrategy.ALLIES)
-			var shield_distribution: Array[float] = Utils.get_randf_distribution(amount, allies.size(), ctx.hero.battle_id)
-			for i in allies.size():
-				var shield_gain: float = shield_distribution[i]
-				ctx.hero.alterations.inflict_condition_stacks(allies[i], shield_gain, Alteration.Type.SHIELD, &"Shield Rush")
-				ShieldVfxSpawner.spawn_on(allies[i])
+	owner.battle_callback_registry.register_battle_start(card_name, func() -> void:
+		if not is_instance_valid(owner): return
+		var allies: Array[Entity] = owner.target.get_targets(TargetComponent.MultipleTargettingStrategy.ALLIES)
+		if allies.is_empty(): return
+		var shield_distribution: Array[float] = Utils.get_randf_distribution(amount, allies.size(), owner.battle_id)
+		for i in allies.size():
+			owner.alterations.inflict_condition_stacks(allies[i], shield_distribution[i], Alteration.Type.SHIELD, card_name)
+			ShieldVfxSpawner.spawn_on(allies[i])
 	)
 
 
-func revert_card(ctx: CardContext, _card_lvl: int) -> void:
-	ctx.battle_callbacks.unregister_all(&"Shield Rush")
+func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
+	ctx.entity_owner.battle_callback_registry.unregister_all(card_name)
 
 
-func get_description(cardlvl: int) -> String:
-	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("Shield Rush: Wrong cardlvl: ", cardlvl)
-		return "ERROR"
-
-	return "Au début du combat, [[SHIELD]] de " + str(_shield_amount[cardlvl - 1]) + "."
+func get_description(card_lvl: int) -> String:
+	return "Au début du combat, génère " + str(_shield_amount[card_lvl - 1]) \
+		+ " [[SHIELD]] répartis entre tous les alliés."

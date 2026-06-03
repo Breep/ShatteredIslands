@@ -6,8 +6,8 @@
 
 [sub_resource type="Resource" id="Resource_w1q6s"]
 script = ExtResource("2_rfirt")
-_shield_amount = Array[float]([5.0, 10.0, 15.0, 20.0, 30.0])
-_period = Array[float]([2.0, 2.0, 2.0, 2.0, 2.0])
+_shield_amount = Array[float]([20.0, 25.0, 30.0, 40.0, 50.0])
+_period = Array[float]([1.2, 1.2, 1.2, 1.2, 1.2])
 metadata/_custom_type_script = "uid://ldmia5mvuk4x"
 
 [resource]
@@ -15,7 +15,7 @@ script = ExtResource("1_fxxdn")
 name = "Energy Barrier"
 picture = ExtResource("1_rfirt")
 families = Array[int]([2])
-player_upgrade = SubResource("Resource_w1q6s")
+_card_effect = SubResource("Resource_w1q6s")
 points = Dictionary[int, int]({
 2: 1
 })
