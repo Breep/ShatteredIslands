@@ -51796,7 +51796,6 @@ metadata/extras = {
 }
 
 [node name="MainLight" type="Node3D" parent="Tavern/Light" unique_id=139444022]
-visible = false
 
 [node name="TorchLight" type="OmniLight3D" parent="Tavern/Light/MainLight" unique_id=1874105677]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.5, 6.1)
@@ -52741,6 +52740,9 @@ transform = Transform3D(0.009511892, 0, -0.99995476, 0, 0.9999999, 0, 0.99995476
 [node name="Latika" parent="Tavern/HeroesPreview/HeroSpawnPoint" unique_id=294337328 instance=ExtResource("22_8au67")]
 transform = Transform3D(0.99999994, 0, 0, 0, 1.0000001, 0, 0, 0, 0.99999994, 0, 0, 0)
 metadata/_edit_lock_ = true
+
+[node name="AcolyteSpawnPoint" type="Marker3D" parent="Tavern/HeroesPreview" unique_id=1434485065]
+transform = Transform3D(0.26648143, 0, -0.96384007, 0, 1, 0, 0.96384007, 0, 0.26648143, -1.5787725, -2.3841858e-07, 1.0395672)
 
 [node name="Camera3D" type="Camera3D" parent="Tavern" unique_id=909175759]
 transform = Transform3D(-4.371139e-08, -0.24645777, 0.9691535, 0, 0.9691535, 0.24645777, -1, 1.0773011e-08, -4.2363045e-08, 4.70505, 2.939973, 0.20216416)

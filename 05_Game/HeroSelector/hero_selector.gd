@@ -16,3 +16,7 @@ signal _player_hero_picked
 
 @onready var _ui_hero_picking_screen: UIHeroPickingScreen = %UIHeroPickingScreen
 @onready var _hero_spawn_point: Marker3D = %HeroSpawnPoint
+
+func load_preview(hero_desc: HeroDesc) -> void:
+	
+	pass

@@ -14,6 +14,22 @@ var hand: Hand
 var _card_context: CardContext
 #endregion
 
+#region ============================== Node base variables ==============================
+func _enter_tree() -> void:
+	if _owner == null: return
+	if _owner.deck_holder != null and _owner.deck_holder != self:
+		Verbose.trace("Override: DeckHolderComponent on [" + _owner.entity_name + "]", Verbose.Category.ENTITY_MODULE)
+		_owner.deck_holder.queue_free()
+	_owner.deck_holder = self
+
+
+func _ready() -> void:
+	if _owner.override_custom_hand != null:
+		Verbose.debug("Overriding hand on [" + _owner.entity_name + "]", Verbose.Category.ENTITY_MODULE)
+		hand = _owner.override_custom_hand
+	setup()
+	apply_all_cards_upgrades()
+
 
 #region ============================== Public functions ==============================
 # Crée le CardContext (indépendant de la main — peut être appelé sans main dispo).
@@ -28,12 +44,12 @@ func setup() -> void:
 
 
 # Applique les upgrades de toutes les cartes de la main via leur player_upgrade.
-func apply_all_cards_upgrades(hand: Hand) -> void:
+func apply_all_cards_upgrades() -> void:
 	if _card_context == null:
 		Verbose.error("DeckHolder: card_context not set, call setup() first", Verbose.Category.HERO)
 		return
 	if hand == null:
-		Verbose.error("DeckHolder: can't apply cards upgrades, hand is null", Verbose.Category.HERO)
+		Verbose.debug("DeckHolder: can't apply cards upgrades, hand is null", Verbose.Category.HERO)
 		return
 
 	Verbose.debug("Applying all cards upgrades", Verbose.Category.HERO)
@@ -49,7 +65,7 @@ func apply_card(card: Card) -> void:
 		return
 	if card == null or card.player_upgrade == null:
 		return
-	_card_context.card_id = card.get_id()
+	_card_context.card_id = card.name
 	card.player_upgrade.apply_card(_card_context, card.lvl)
 
 
