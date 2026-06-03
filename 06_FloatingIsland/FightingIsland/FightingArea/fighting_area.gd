@@ -105,6 +105,9 @@ func _spawn_specs(specs: Array[EntitySpec], team: int) -> void:
 			entity.fight_role = _fight_role_for_spec(spec)
 			if entity.is_hero():
 				_heroes.append(entity)
+				# Lien runtime player -> instance de héros de cette scène.
+				if ctx.runtime_owner_player != null:
+					ctx.runtime_owner_player.hero = entity
 
 
 # Map a spec type to its fight role. Handles both the new typed specs

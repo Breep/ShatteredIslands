@@ -81,4 +81,7 @@ func _spawn_entry_at(entry: RoasterEntry, target_transform: Transform3D, fallbac
 	spec.entry = entry
 	spec.transform = target_transform
 	spec.display_label = fallback_name
-	spec.spawn_into(parent, ctx)
+	var entity := spec.spawn_into(parent, ctx) as Entity
+	# Lien runtime player -> instance de héros de cette scène.
+	if entity != null and entity.is_hero() and ctx.runtime_owner_player != null:
+		ctx.runtime_owner_player.hero = entity
