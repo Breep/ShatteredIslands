@@ -6,13 +6,12 @@
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="4_kq8si"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="5_r0wv3"]
 [ext_resource type="PackedScene" uid="uid://bes7q2ujh87bk" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/kobold_knight.tscn" id="6_5qocs"]
-[ext_resource type="Resource" uid="uid://cl4ma4yjnga3y" path="res://01_Cards/Pool/Cards/Colossus/Rare/Provocation/colossus_provocation.tres" id="6_cs3s0"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]
+[ext_resource type="Resource" uid="uid://b1hnvijka2dfw" path="res://01_Cards/Pool/Cards/Warrior/Legendary/RussianRoulette/attack_russian_roulette.tres" id="6_r0wv3"]
 [ext_resource type="Script" uid="uid://nkraydv4mdse" path="res://01_Cards/Templates/Deck/hand.gd" id="7_jbcul"]
 [ext_resource type="PackedScene" uid="uid://dvuq5n41nak3u" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/ArenaZoneManager/arena_zone_manager.tscn" id="8_fl2p6"]
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://90_Modules/PickableClickable/PickableModule/pickable_module.tscn" id="9_614kc"]
-[ext_resource type="Resource" uid="uid://cg63fcakweap3" path="res://01_Cards/Pool/Cards/Colossus/Epic/StoneCarapace/colossus_stone_carapace.tres" id="9_cs3s0"]
-[ext_resource type="Resource" uid="uid://c1jb5nmdg2bsh" path="res://01_Cards/Pool/Cards/Colossus/Legendary/Resurrection/colossus_resurrection.tres" id="10_jbcul"]
+[ext_resource type="Resource" uid="uid://cj6hexnvedxmb" path="res://01_Cards/Pool/Cards/Warrior/Common/FightBack/attack_fight_back.tres" id="9_cs3s0"]
 [ext_resource type="PackedScene" uid="uid://bg5efhnq0erdv" path="res://90_Modules/PickableClickable/ClickableModule/clickable_module.tscn" id="10_m73qc"]
 [ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="10_r0wv3"]
 [ext_resource type="PackedScene" uid="uid://blncvfes4f2y7" path="res://99_Prototyping/Entity/AllActionPrototyping/testing_floorffa5.tscn" id="11_5hdqt"]
@@ -32,7 +31,7 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 [sub_resource type="Resource" id="Resource_5ixv2"]
 script = ExtResource("7_jbcul")
 _cards = Dictionary[StringName, ExtResource("5_r0wv3")]({
-&"": ExtResource("6_cs3s0")
+&"": ExtResource("6_r0wv3")
 })
 metadata/_custom_type_script = "uid://nkraydv4mdse"
 
@@ -45,8 +44,7 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 [sub_resource type="Resource" id="Resource_jbcul"]
 script = ExtResource("7_jbcul")
 _cards = Dictionary[StringName, ExtResource("5_r0wv3")]({
-&"": ExtResource("9_cs3s0"),
-&"rez": ExtResource("10_jbcul")
+&"": ExtResource("9_cs3s0")
 })
 metadata/_custom_type_script = "uid://nkraydv4mdse"
 

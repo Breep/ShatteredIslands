@@ -1,42 +1,35 @@
 class_name HealingCrossbow
 extends CardEffect
 
+## Warrior — à chaque auto-attaque, une chance de soigner l'allié le plus en danger.
+
 @export var _chance: Array[float]
 @export var _heal_amount: Array[float]
 
-func apply_card(ctx: CardContext, card_lvl: int) -> void:
-	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("Healing Crossbow: Wrong card_lvl: ", card_lvl)
-		return
-	
+func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
+	var owner: Entity = ctx.entity_owner
 	var chance: float = _chance[card_lvl - 1]
 	var heal: float = _heal_amount[card_lvl - 1]
-	
+
 	var aa_mod := AutoAttackModifier.new()
-	aa_mod.id = &"Healing Crossbow"
+	aa_mod.id = card_name
 	aa_mod.tags = [AutoAttackModifier.TagType.CARD]
 	aa_mod.is_one_time_effect = false
 	aa_mod.additional_effect_callback = func(_cb_vars: Dictionary) -> void:
-		if not Utils.is_randomize_modifier_active(chance, ctx.hero.battle_id): return
-		var target: Entity = ctx.hero.target.get_target(TargetComponent.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
+		if not Utils.is_randomize_modifier_active(chance, owner.battle_id): return
+		var target: Entity = owner.target.get_target(TargetComponent.TargettingStrategy.LOWEST_HP_PERCENT_ALLY_INCLUDING_SELF)
 		if target == null: return
-		ctx.hero.heal.direct(target, heal, &"Healing Crossbow")
-	
-	ctx.battle_callbacks.register_battle_start(&"Healing Crossbow", func() -> void:
-		ctx.auto_attack_modifiers.register_modifier(aa_mod)
-	)
-	ctx.battle_callbacks.register_battle_end(&"Healing Crossbow", func() -> void:
-		ctx.auto_attack_modifiers.unregister_modifier(&"Healing Crossbow")
+		owner.heal.direct(target, heal, card_name)
+
+	owner.battle_callback_registry.register_battle_start(card_name, func() -> void:
+		owner.auto_attack_modifier_registry.register_modifier(aa_mod)
 	)
 
 
-func revert_card(ctx: CardContext, _card_lvl: int) -> void:
-	ctx.battle_callbacks.unregister_all(&"Healing Crossbow")
+func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
+	ctx.entity_owner.battle_callback_registry.unregister_all(card_name)
 
 
-func get_description(cardlvl: int) -> String:
-	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("Healing Crossbow: Wrong cardlvl: ", cardlvl)
-		return "ERROR"
-
-	return str(_chance[cardlvl - 1]) + "% chance to heal for " + str(_heal_amount[cardlvl - 1]) + " on auto-attack."
+func get_description(card_lvl: int) -> String:
+	return "À l'attaque, " + str(_chance[card_lvl - 1]) + "% de chance de soigner " \
+		+ str(_heal_amount[card_lvl - 1]) + " PV à l'allié le plus en danger."

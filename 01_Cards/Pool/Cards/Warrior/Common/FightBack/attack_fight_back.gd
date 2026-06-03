@@ -1,56 +1,51 @@
 class_name AttackFightBack
 extends CardEffect
 
+## Warrior — augmente l'esquive ; chaque esquive accumule des dégâts d'attaque (AD).
+
 @export var _increase_dodge: Array[float]
 @export var _increase_attack_damage: Array[float]
 
-func apply_card(ctx: CardContext, card_lvl: int) -> void:
-	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("Fight Back: Wrong card_lvl: ", card_lvl)
-		return
+func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
+	var owner: Entity = ctx.entity_owner
 
-	var dodge_value: float = _increase_dodge[card_lvl - 1]
-	var ad_per_dodge: float = _increase_attack_damage[card_lvl - 1]
-
-	# Stat modifier: +dodge
 	var dodge_mod := StatModifier.new()
-	dodge_mod.id = &"Fight Back"
+	dodge_mod.id = card_name
 	dodge_mod.stat_type = EntityStats.StatType.DODGE
 	dodge_mod.calc_type = StatModifier.CalcType.ADD
-	dodge_mod.value = dodge_value
+	dodge_mod.value = _increase_dodge[card_lvl - 1]
 	dodge_mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
-	ctx.stat_modifiers.register_modifier(dodge_mod)
+	owner.stat_modifiers_registry.register_modifier(dodge_mod)
 
-	# Action modifier: on dodge → accumulate AD
+	var ad_per_dodge: float = _increase_attack_damage[card_lvl - 1]
 	var state := {&"dodge_count": 0}
 
 	var action_mod := ActionModifier.new()
-	action_mod.id = &"Fight Back"
+	action_mod.id = card_name
 	action_mod.action_type = Utils.ActionCategory.DODGE
 	action_mod.is_one_time_effect = false
 	action_mod.after_action_logic_callback = func(_cb_vars: Dictionary) -> void:
 		state[&"dodge_count"] += 1
 		var ad_mod := StatModifier.new()
-		ad_mod.id = &"Fight Back"
+		ad_mod.id = card_name
 		ad_mod.stat_type = EntityStats.StatType.AD
 		ad_mod.calc_type = StatModifier.CalcType.ADD
 		ad_mod.value = state[&"dodge_count"] * ad_per_dodge
 		ad_mod.tags = [StatModifier.TagType.CARD]
-		ctx.stat_modifiers.register_modifier(ad_mod)
-	ctx.action_modifiers.register_modifier(action_mod)
+		owner.stat_modifiers_registry.register_modifier(ad_mod)
+	owner.action_modifiers_registry.register_modifier(action_mod)
 
 
-func revert_card(ctx: CardContext, _card_lvl: int) -> void:
-	ctx.stat_modifiers.remove_modifier(EntityStats.StatType.DODGE, &"Fight Back")
+func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
+	var owner: Entity = ctx.entity_owner
+	owner.stat_modifiers_registry.remove_modifier(EntityStats.StatType.DODGE, card_name)
+	owner.stat_modifiers_registry.remove_modifier(EntityStats.StatType.AD, card_name)
 	var action_mod := ActionModifier.new()
-	action_mod.id = &"Fight Back"
+	action_mod.id = card_name
 	action_mod.action_type = Utils.ActionCategory.DODGE
-	ctx.action_modifiers.unregister_modifier(action_mod)
+	owner.action_modifiers_registry.unregister_modifier(action_mod)
 
 
-func get_description(cardlvl: int) -> String:
-	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("Fight Back: Wrong cardlvl: ", cardlvl)
-		return "ERROR"
-
-	return "Increase dodge by " + str(_increase_dodge[cardlvl - 1]) + ". On dodge, increase attack damage by " + str(_increase_attack_damage[cardlvl - 1]) + "."
+func get_description(card_lvl: int) -> String:
+	return "Augmente le [[DODGE]] de " + str(_increase_dodge[card_lvl - 1]) \
+		+ ". Chaque esquive augmente l'[[AD]] de " + str(_increase_attack_damage[card_lvl - 1]) + "."

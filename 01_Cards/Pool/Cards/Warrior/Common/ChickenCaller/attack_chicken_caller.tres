@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cwarchickcal1"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_card"]
+[ext_resource type="Script" uid="uid://dhjp4xq1l0c4" path="res://01_Cards/Pool/Cards/Warrior/Common/ChickenCaller/attack_chicken_caller.gd" id="2_eff"]
+
+[sub_resource type="Resource" id="Resource_chick"]
+script = ExtResource("2_eff")
+_chance = Array[float]([10.0, 12.0, 14.0, 16.0, 20.0])
+
+[resource]
+script = ExtResource("1_card")
+name = "Chicken Caller"
+families = Array[int]([1, 8])
+_card_effect = SubResource("Resource_chick")
+points = Dictionary[int, int]({
+1: 1,
+8: 1
+})

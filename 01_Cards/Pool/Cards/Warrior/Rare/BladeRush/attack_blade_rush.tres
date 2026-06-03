@@ -16,7 +16,7 @@ name = "Blade Rush"
 picture = ExtResource("1_lr76t")
 families = Array[int]([1])
 rarity = 1
-player_upgrade = SubResource("Resource_v6egr")
+_card_effect = SubResource("Resource_v6egr")
 points = Dictionary[int, int]({
 1: 2
 })

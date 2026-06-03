@@ -7,7 +7,7 @@
 [sub_resource type="Resource" id="Resource_gve44"]
 script = ExtResource("2_hu4al")
 _threshold = Array[float]([60.0, 60.0, 60.0])
-_damage = Array[float]([14.0, 18.0, 22.0])
+_damage = Array[float]([40.0, 60.0, 100.0])
 _shield_return = Array[float]([7.0, 11.0, 15.0])
 _bounces = Array[float]([1.5, 2.5, 4.0])
 metadata/_custom_type_script = "uid://cpitkii24654s"
