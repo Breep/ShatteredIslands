@@ -59,19 +59,19 @@ func apply_card(card: Card) -> void:
 	if _card_context == null:
 		Verbose.error("DeckHolder: card_context not set, call setup() first", Verbose.Category.HERO)
 		return
-	if card == null or card.card_effect == null:
+	if card == null or not card.has_effect():
 		return
-	card.card_effect.apply_card(_card_context, card.lvl)
+	card.apply_effect(_card_context)
 
 
-# Retire une carte (vente / retrait) : défait ce que apply_card a posé.
+# Retire une carte (vente / retrait) : défait ce que apply a posé.
 func revert_card(card: Card) -> void:
 	if _card_context == null:
 		Verbose.error("DeckHolder: card_context not set, call setup() first", Verbose.Category.HERO)
 		return
-	if card == null or card.card_effect == null:
+	if card == null or not card.has_effect():
 		return
-	card.card_effect.revert_card(_card_context, card.lvl)
+	card.revert_effect(_card_context)
 
 
 func get_card_context() -> CardContext:
