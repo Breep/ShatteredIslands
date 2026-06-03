@@ -15,6 +15,9 @@ signal _player_hero_picked
 
 @export var _available_heroes: Array[HeroDesc]
 
+## Delay between locking the hero (fanfare/cheer) and transitioning to the Run.
+@export var _lock_transition_delay: float = 1.5
+
 @export_group("Intro lighting")
 ## Delay before the first spotlight snaps on.
 @export var _first_spot_delay: float = 1.0
@@ -73,6 +76,8 @@ func _on_hero_selected(hero: HeroDesc) -> void:
 	_spawn_preview(_acolyte_spawn_point, acolyte.preview_scene if acolyte else null)
 
 
-func _on_hero_locked(_hero: HeroDesc) -> void:
+func _on_hero_locked(hero: HeroDesc) -> void:
 	AudioManager.play_sfx("fanfar_trumpet", -1)
 	AudioManager.play_sfx("crowd_cheer_small")
+	await get_tree().create_timer(_lock_transition_delay).timeout
+	GameManager.lock_hero_into_run(hero)

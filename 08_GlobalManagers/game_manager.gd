@@ -82,9 +82,14 @@ var _run_scene: PackedScene:
 const RUN_SAVE_PATH := "user://saves/run.tres"
 const DEMO_RUN_PATH := "res://05_Game/Run/Runs/Pool/Prototyping/demo_run.tres"
 const DEMO_PLAYER_FORMATION_PATH := "res://05_Game/Run/Formations/Pool/Prototyping/default_solo.fighting.tres"
-const DEMO_HERO_DESC_PATH := "res://02_Entities/Pool/Heroes/Latika/latika_desc.tres"
-const DEMO_HERO_SCENE_PATH := "res://02_Entities/Pool/Heroes/Latika/latika.tscn"
-const DEMO_ACOLYTE_SCENE_PATH := "res://02_Entities/Pool/Mobs/Chickens/Basic/chicken_basic.tscn"
+
+const _HERO_SELECTOR_SCENE_PATH := "res://05_Game/HeroSelector/hero_selector.tscn"
+var __hero_selector_scene_cache: PackedScene
+var _hero_selector_scene: PackedScene:
+	get:
+		if __hero_selector_scene_cache == null:
+			__hero_selector_scene_cache = load(_HERO_SELECTOR_SCENE_PATH)
+		return __hero_selector_scene_cache
 
 # Familles chargées paresseusement au 1er accès (via init() / active_families),
 # plus au démarrage. Mises en cache.
@@ -171,8 +176,8 @@ func start_solo_game() -> void:
 
 
 # Flow B (roguelite démo) : 1 humain, pas de bots, Run chargée depuis le .tres
-# de démo, formation joueur hardcodée (sera remplacée par un HeroSelector
-# pré-run plus tard).
+# de démo. La party est vide à ce stade : le joueur compose son roaster via le
+# HeroSelector, qui rappelle lock_hero_into_run() puis enchaîne sur la Run.
 func start_solo_run() -> void:
 	_game_type = GameType.SOLO
 	PlayerManager.join_game(1, "Breepsolo")
@@ -181,8 +186,54 @@ func start_solo_run() -> void:
 		Verbose.error("start_solo_run: demo_run.tres introuvable", Verbose.Category.GLOBAL_MANAGER)
 		return
 	_run_context = _build_new_run_context(demo_run)
-	_populate_demo_party_formation(_run_context.party)
+	get_tree().change_scene_to_packed(_hero_selector_scene)
+
+
+# Appelé par HeroSelector quand le joueur verrouille son héros : ajoute le héros
+# (et ses compagnons) au roaster de la party, résout les scènes, construit la
+# formation depuis le roaster, puis lance la Run (succession de confrontations).
+func lock_hero_into_run(hero: HeroDesc) -> void:
+	if _run_context == null or _run_context.party == null:
+		Verbose.error("lock_hero_into_run: RunContext/party absent", Verbose.Category.GLOBAL_MANAGER)
+		return
+
+	var party: Party = _run_context.party
+	party.add_to_roaster(RoasterEntry.from_desc(hero, _resolve_local_owner_slot()))
+	_attach_roaster_scenes(party)
+	_init_roaster_runtime_data(party)
+
+	var template: FightingFormation = load(DEMO_PLAYER_FORMATION_PATH) as FightingFormation
+	if template == null:
+		Verbose.error("lock_hero_into_run: default_solo formation introuvable", Verbose.Category.GLOBAL_MANAGER)
+		return
+	party.formation = _build_formation_from_roaster(party.roaster, template)
+
 	start_run()
+
+
+# Solo : tout appartient au joueur local (slot PLAYER_1 via PlayerManager).
+func _resolve_local_owner_slot() -> PlayerState.Slot:
+	var local_player: Player = PlayerManager.get_local_player()
+	if local_player != null and local_player.state != null:
+		return local_player.state.slot
+	return PlayerState.Slot.PLAYER_1
+
+
+# `desc.scene` n'est pas stocké dans les .tres (cycle de dépendance) : on le
+# rattache au runtime depuis les registres de Shared (héros par id, compagnons
+# par desc). Mute les ressources desc mises en cache, comme le faisait l'ancien
+# code de peuplement démo.
+func _attach_roaster_scenes(party: Party) -> void:
+	for entry: RoasterEntry in party.roaster:
+		if entry == null or entry.desc == null or entry.desc.scene != null:
+			continue
+		var desc: EntityDesc = entry.desc
+		if desc is HeroDesc:
+			desc.scene = Shared.HERO_SCENES.get((desc as HeroDesc).id)
+		else:
+			desc.scene = Shared.ACOLYTE_SCENES.get(desc)
+		if desc.scene == null:
+			Verbose.warn("_attach_roaster_scenes: aucune scene résolue pour " + desc.name, Verbose.Category.GLOBAL_MANAGER)
 
 
 func _build_new_run_context(run: Run = null) -> RunContext:
@@ -198,40 +249,6 @@ func _build_new_run_context(run: Run = null) -> RunContext:
 		if player.state != null:
 			ctx.party.players.append(player.state)
 	return ctx
-
-
-func _populate_demo_party_formation(party: Party) -> void:
-	var default_formation: FightingFormation = load(DEMO_PLAYER_FORMATION_PATH) as FightingFormation
-	if default_formation == null:
-		Verbose.error("start_solo_run: default_solo formation introuvable", Verbose.Category.GLOBAL_MANAGER)
-		return
-
-	# Roaster : source canonique. Latika + 4 chickens (chicken desc inline,
-	# pas de .tres pour les chickens à ce stade — sera créé plus tard).
-	# Note : `desc.scene` n'est pas stocké dans le .tres (cycle de dépendance
-	# car la scene référence aussi la desc) — on l'attache ici au runtime.
-	# Solo : tout appartient au joueur local (slot PLAYER_1 via PlayerManager).
-	var local_player: Player = PlayerManager.get_local_player()
-	var owner: PlayerState.Slot = local_player.state.slot if local_player != null and local_player.state != null else PlayerState.Slot.PLAYER_1
-
-	var hero_desc: EntityDesc = load(DEMO_HERO_DESC_PATH) as EntityDesc
-	if hero_desc != null:
-		if hero_desc.scene == null:
-			hero_desc.scene = load(DEMO_HERO_SCENE_PATH) as PackedScene
-		party.add_to_roaster(RoasterEntry.from_desc(hero_desc, owner))
-	else:
-		Verbose.warn("start_solo_run: hero desc introuvable", Verbose.Category.GLOBAL_MANAGER)
-
-	var chicken_desc: EntityDesc = _build_demo_chicken_desc()
-	if chicken_desc != null:
-		for i in 4:
-			party.add_to_roaster(RoasterEntry.from_desc(chicken_desc, owner))
-
-	# Formation : positions issues des spawn_specs de la formation par défaut,
-	# mappées aux entries du roaster dans l'ordre (hero puis acolytes).
-	party.formation = _build_formation_from_roaster(party.roaster, default_formation)
-
-	_init_roaster_runtime_data(party)
 
 
 # Construit une FightingFormation en posant les entries du roaster sur les
@@ -266,18 +283,6 @@ func _make_player_spec(entry: RoasterEntry, t: Transform3D, label: String) -> En
 	spec.transform = t
 	spec.display_label = label
 	return spec
-
-
-func _build_demo_chicken_desc() -> EntityDesc:
-	var chicken_scene: PackedScene = load(DEMO_ACOLYTE_SCENE_PATH) as PackedScene
-	if chicken_scene == null:
-		Verbose.warn("start_solo_run: chicken scene introuvable", Verbose.Category.GLOBAL_MANAGER)
-		return null
-	var desc := EntityDesc.new()
-	desc.scene = chicken_scene
-	desc.default_category = Entity.Category.ACOLYTE
-	desc.name = "Chicken"
-	return desc
 
 
 # Garantit que chaque RoasterEntry hero a hand et data_memory non-null. Source
