@@ -36,14 +36,10 @@ func _ready() -> void:
 func setup() -> void:
 	_card_context = CardContext.create(
 		_owner,
-		_owner.stat_modifiers_registry,
-		_owner.action_modifiers_registry,
-		_owner.auto_attack_modifier_registry,
-		_owner.battle_callback_registry
 	)
 
 
-# Applique les upgrades de toutes les cartes de la main via leur player_upgrade.
+# Applique les upgrades de toutes les cartes de la main via leur card_effect.
 func apply_all_cards_upgrades() -> void:
 	if _card_context == null:
 		Verbose.error("DeckHolder: card_context not set, call setup() first", Verbose.Category.HERO)
@@ -63,10 +59,9 @@ func apply_card(card: Card) -> void:
 	if _card_context == null:
 		Verbose.error("DeckHolder: card_context not set, call setup() first", Verbose.Category.HERO)
 		return
-	if card == null or card.player_upgrade == null:
+	if card == null or card.card_effect == null:
 		return
-	_card_context.card_id = card.name
-	card.player_upgrade.apply_card(_card_context, card.lvl)
+	card.card_effect.apply_card(_card_context, card.lvl)
 
 
 # Retire une carte (vente / retrait) : défait ce que apply_card a posé.
@@ -74,10 +69,9 @@ func revert_card(card: Card) -> void:
 	if _card_context == null:
 		Verbose.error("DeckHolder: card_context not set, call setup() first", Verbose.Category.HERO)
 		return
-	if card == null or card.player_upgrade == null:
+	if card == null or card.card_effect == null:
 		return
-	_card_context.card_id = card.get_id()
-	card.player_upgrade.revert_card(_card_context, card.lvl)
+	card.card_effect.revert_card(_card_context, card.lvl)
 
 
 func get_card_context() -> CardContext:

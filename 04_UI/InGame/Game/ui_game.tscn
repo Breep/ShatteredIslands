@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://da7u7sme0yrjw" path="res://04_UI/InGame/Result/ui_result.tscn" id="3_y4wsx"]
 [ext_resource type="PackedScene" uid="uid://di7eyuedvo17p" path="res://04_UI/InGame/PauseMenu/ui_pause_menu.tscn" id="4_ij2s5"]
 [ext_resource type="PackedScene" uid="uid://bhxhqex1pbh2p" path="res://04_UI/InGame/FightingArea/ui_fighting_area.tscn" id="4_qmks4"]
-[ext_resource type="PackedScene" uid="uid://k4dc5j8ecdxo" path="res://04_UI/InGame/HeroSelection/ui_hero_picking_screen.tscn" id="7_d48pm"]
 [ext_resource type="PackedScene" uid="uid://btd2mq1ktm86w" path="res://04_UI/Tool/TransitionScreen/ui_transition_screen.tscn" id="8_qmks4"]
 [ext_resource type="PackedScene" uid="uid://b3pdqtw0g262b" path="res://04_UI/Menu/SettingsMenu/ui_game_settings.tscn" id="9_stngs"]
 
@@ -44,11 +43,6 @@ visible = false
 layout_mode = 1
 
 [node name="Result" parent="." unique_id=965496786 instance=ExtResource("3_y4wsx")]
-unique_name_in_owner = true
-visible = false
-layout_mode = 1
-
-[node name="HeroPickingScreen" parent="." unique_id=1923987196 instance=ExtResource("7_d48pm")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
