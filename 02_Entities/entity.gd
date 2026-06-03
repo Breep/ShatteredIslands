@@ -176,6 +176,11 @@ var life_state: LifeState:
 			_life_state = value
 			life_state_changed.emit(_life_state)
 
+## Quand true, l'entité morte ne disparaît pas (pas de despawn) et n'élimine pas
+## son équipe : elle attend une résurrection (ex: légendaire Colossus). Posé/retiré
+## par l'effet de carte qui gère la renaissance.
+var can_revive: bool = false
+
 signal fighting_state_changed(new_fighting_state: FightingState)
 var _fighting_state: FightingState = FightingState.UNDEF
 var _initial_fighting_state_from_context: FightingState = FightingState.UNDEF # Stored during apply_context

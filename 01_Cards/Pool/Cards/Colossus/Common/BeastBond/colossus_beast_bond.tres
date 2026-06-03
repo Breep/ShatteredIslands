@@ -6,7 +6,6 @@
 [sub_resource type="Resource" id="Resource_bond"]
 script = ExtResource("2_eff")
 _resist_per_summon = Array[float]([1.0, 1.0, 1.0, 1.0, 1.0])
-_period = Array[float]([1.0, 1.0, 1.0, 1.0, 1.0])
 metadata/_custom_type_script = "uid://ds443ic7ub0i7"
 
 [resource]

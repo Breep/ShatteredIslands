@@ -45,6 +45,9 @@ func play_despawn_animation() -> void:
 func _on_owner_died() -> void:
 	if _despawn_timer <= 0.0:
 		return
+	# L'entité peut renaître (ex: légendaire Colossus) : on ne la fait pas disparaître.
+	if _owner.can_revive:
+		return
 	if _owner.battle_callback_registry == null:
 		return
 	_owner.battle_callback_registry.register_oneshot(_despawn_timer, play_despawn_animation)

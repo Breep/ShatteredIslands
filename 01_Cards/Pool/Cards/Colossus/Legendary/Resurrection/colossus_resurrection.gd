@@ -13,6 +13,7 @@ const EXPLOSION_VFX_SCENE = preload("res://22_VFX/VFX_Explosion_B.tscn")
 
 func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 	var owner: Entity = ctx.entity_owner
+	owner.can_revive = true
 
 	var mod := ActionModifier.new()
 	mod.id = card_name
@@ -61,10 +62,15 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 		size_mod.value = (_size_increase[card_lvl - 1] / 100)
 		owner.stat_modifiers_registry.register_modifier(size_mod)
 
+		# La résurrection (modifier one-shot) est consommée : une prochaine mort
+		# doit despawn / éliminer normalement.
+		owner.can_revive = false
+
 	owner.death_modifiers_registry.register_modifier(mod)
 
 
 func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
+	ctx.entity_owner.can_revive = false
 	var mod := ActionModifier.new()
 	mod.id = card_name
 	ctx.entity_owner.death_modifiers_registry.unregister_modifier(mod)

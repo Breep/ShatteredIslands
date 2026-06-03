@@ -220,34 +220,25 @@ func get_target_from(from_pos: Vector3, targetting_from_strategy: TargettingFrom
 
 
 func get_targets(strategy: MultipleTargettingStrategy, radius: float = -1.0) -> Array[Entity]:
+	var source: Array[Entity]
+	match strategy:
+		MultipleTargettingStrategy.ALL: source = _entities
+		MultipleTargettingStrategy.ALLIES: source = _allies
+		MultipleTargettingStrategy.ENEMIES: source = _enemies
+		_:
+			printerr("TargetComponent: Unknown strategy")
+			var empty: Array[Entity]
+			return empty
+
+	var alive: Array[Entity] = _get_alive_entities(source)
 	if radius <= 0:
-		match strategy:
-			MultipleTargettingStrategy.ALL: return _entities.duplicate()
-			MultipleTargettingStrategy.ALLIES: return _allies.duplicate()
-			MultipleTargettingStrategy.ENEMIES: return _enemies.duplicate()
-	else:
-		var returned_entities: Array[Entity]
-		match strategy:
-			MultipleTargettingStrategy.ALL:
-				for entity in _entities:
-					if entity == null: continue
-					if entity.global_position.distance_to(_owner.global_position) <= radius:
-						returned_entities.append(entity)
-			MultipleTargettingStrategy.ALLIES:
-				for entity in _allies:
-					if entity == null: continue
-					if entity.global_position.distance_to(_owner.global_position) <= radius:
-						returned_entities.append(entity)
-			MultipleTargettingStrategy.ENEMIES:
-				for entity in _enemies:
-					if entity == null: continue
-					if entity.global_position.distance_to(_owner.global_position) <= radius:
-						returned_entities.append(entity)
-		return returned_entities
-	
-	printerr("TargetComponent: Unknown strategy")
-	var empty: Array[Entity]
-	return empty
+		return alive
+
+	var returned_entities: Array[Entity]
+	for entity in alive:
+		if entity.global_position.distance_to(_owner.global_position) <= radius:
+			returned_entities.append(entity)
+	return returned_entities
 
 
 ## Check if entity is within attack range
