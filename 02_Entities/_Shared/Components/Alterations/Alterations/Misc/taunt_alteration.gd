@@ -16,6 +16,7 @@ func _init() -> void:
 	polarity = Polarity.DEBUFF
 	id = &"Taunt"
 	display_color = Color.CRIMSON
+	display_mode = DisplayMode.CUSTOM
 
 
 func _on_added() -> void:

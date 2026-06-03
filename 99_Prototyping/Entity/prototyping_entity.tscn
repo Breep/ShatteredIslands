@@ -6,12 +6,13 @@
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="4_kq8si"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="5_r0wv3"]
 [ext_resource type="PackedScene" uid="uid://bes7q2ujh87bk" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/kobold_knight.tscn" id="6_5qocs"]
-[ext_resource type="Resource" uid="uid://cj72i47u7d1nu" path="res://01_Cards/Pool/Cards/Colossus/Common/Proteins/colossus_proteins.tres" id="6_cs3s0"]
+[ext_resource type="Resource" uid="uid://cl4ma4yjnga3y" path="res://01_Cards/Pool/Cards/Colossus/Rare/Provocation/colossus_provocation.tres" id="6_cs3s0"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]
-[ext_resource type="Resource" uid="uid://5pfuup7p5qk4" path="res://01_Cards/Pool/Cards/ArdentCelestial/Common/FireBall/ardent_celestial_fire_ball.tres" id="7_cs3s0"]
 [ext_resource type="Script" uid="uid://nkraydv4mdse" path="res://01_Cards/Templates/Deck/hand.gd" id="7_jbcul"]
 [ext_resource type="PackedScene" uid="uid://dvuq5n41nak3u" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/ArenaZoneManager/arena_zone_manager.tscn" id="8_fl2p6"]
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://90_Modules/PickableClickable/PickableModule/pickable_module.tscn" id="9_614kc"]
+[ext_resource type="Resource" uid="uid://cg63fcakweap3" path="res://01_Cards/Pool/Cards/Colossus/Epic/StoneCarapace/colossus_stone_carapace.tres" id="9_cs3s0"]
+[ext_resource type="Resource" uid="uid://c1jb5nmdg2bsh" path="res://01_Cards/Pool/Cards/Colossus/Legendary/Resurrection/colossus_resurrection.tres" id="10_jbcul"]
 [ext_resource type="PackedScene" uid="uid://bg5efhnq0erdv" path="res://90_Modules/PickableClickable/ClickableModule/clickable_module.tscn" id="10_m73qc"]
 [ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="10_r0wv3"]
 [ext_resource type="PackedScene" uid="uid://blncvfes4f2y7" path="res://99_Prototyping/Entity/AllActionPrototyping/testing_floorffa5.tscn" id="11_5hdqt"]
@@ -20,7 +21,6 @@
 [ext_resource type="Script" uid="uid://b0otuknba6ddv" path="res://06_FloatingIsland/FightingIsland/FightingArea/floor_area.gd" id="13_jd8sj"]
 [ext_resource type="PackedScene" uid="uid://q7gxxkhg5u54" path="res://06_FloatingIsland/FightingIsland/Pool/ArchIsland/arch_island_visual.tscn" id="17_ko5bb"]
 [ext_resource type="PackedScene" uid="uid://c0l0roxttdtlp" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/FightingManager/fighting_manager.tscn" id="17_m26y3"]
-[ext_resource type="PackedScene" uid="uid://jcwiqcnilmtk" path="res://02_Entities/Pool/Mobs/Vrock/vrock.tscn" id="17_rnrfd"]
 [ext_resource type="Environment" uid="uid://cghu0yr6lj5i2" path="res://21_Props/DefaultBattleIsland/Arch_island/world_environment.tres" id="18_ko5bb"]
 [ext_resource type="PackedScene" uid="uid://cvwmo633sxskh" path="res://02_Entities/Pool/Mobs/Goblins/GoblinBerserker/goblin_berserker.tscn" id="18_kq8si"]
 [ext_resource type="PackedScene" uid="uid://dp4x7wkxd6i2q" path="res://99_Prototyping/Entity/EntityController/entity_controller.proto.tscn" id="19_x0odd"]
@@ -32,8 +32,7 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 [sub_resource type="Resource" id="Resource_5ixv2"]
 script = ExtResource("7_jbcul")
 _cards = Dictionary[StringName, ExtResource("5_r0wv3")]({
-&"Fire Ball": ExtResource("7_cs3s0"),
-&"Proteins": ExtResource("6_cs3s0")
+&"": ExtResource("6_cs3s0")
 })
 metadata/_custom_type_script = "uid://nkraydv4mdse"
 
@@ -42,6 +41,14 @@ script = ExtResource("4_kq8si")
 _health_max = 5000.0
 _attack_range = 20.0
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_jbcul"]
+script = ExtResource("7_jbcul")
+_cards = Dictionary[StringName, ExtResource("5_r0wv3")]({
+&"": ExtResource("9_cs3s0"),
+&"rez": ExtResource("10_jbcul")
+})
+metadata/_custom_type_script = "uid://nkraydv4mdse"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m73qc"]
 albedo_color = Color(0.97405916, 0, 0.8521372, 1)
@@ -126,45 +133,14 @@ _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
 override_base_stats = SubResource("Resource_5qocs")
 
-[node name="Vrock2" parent="Node3D/Entities" unique_id=471542115 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("17_rnrfd")]
-transform = Transform3D(-0.01726045, 0, 0.9998509, 0, 1.0000001, 0, -0.9998509, 0, -0.01726045, 2.644456, 0, -2.3240192)
-level = 10
-team = 1
-battle_id = 1
-_spawn_manager = NodePath("../../SpawnManager")
-_arena_zone_manager = NodePath("../../ArenaZoneManager")
-
-[node name="Vrock3" parent="Node3D/Entities" unique_id=1302613586 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("17_rnrfd")]
-transform = Transform3D(-0.01726045, 0, 0.9998509, 0, 1.0000001, 0, -0.9998509, 0, -0.01726045, 1.5381408, 0, 7.4387455)
-level = 10
-team = 1
-battle_id = 1
-_spawn_manager = NodePath("../../SpawnManager")
-_arena_zone_manager = NodePath("../../ArenaZoneManager")
-
-[node name="Vrock4" parent="Node3D/Entities" unique_id=2033312693 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("17_rnrfd")]
-transform = Transform3D(-0.01726045, 0, 0.9998509, 0, 1.0000001, 0, -0.9998509, 0, -0.01726045, 0.8567457, 0, 2.817228)
-level = 10
-team = 1
-battle_id = 1
-_spawn_manager = NodePath("../../SpawnManager")
-_arena_zone_manager = NodePath("../../ArenaZoneManager")
-
-[node name="Vrock5" parent="Node3D/Entities" unique_id=701026156 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("17_rnrfd")]
-transform = Transform3D(-0.01726045, 0, 0.9998509, 0, 1.0000001, 0, -0.9998509, 0, -0.01726045, 0.8945203, 4.768372e-07, -0.69487685)
-level = 10
-team = 1
-battle_id = 1
-_spawn_manager = NodePath("../../SpawnManager")
-_arena_zone_manager = NodePath("../../ArenaZoneManager")
-
 [node name="KoboldKnight" parent="Node3D/Entities" unique_id=1037434066 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("6_5qocs")]
 transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, 0.0055747028, 0, 5.585501)
 level = 7
-team = 2
+team = 1
 battle_id = 1
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
+override_custom_hand = SubResource("Resource_jbcul")
 
 [node name="Control" type="Control" parent="Node3D" unique_id=1104542732]
 layout_mode = 3

@@ -1,8 +1,9 @@
 class_name CardContext
 extends RefCounted
 
-## Context object passed to CardEffect.apply_card() — gives cards access to
-## all registries they need without coupling directly to Hero internals.
+## Context object passed to CardEffect.apply() / revert() — donne aux cartes
+## l'accès au porteur de la carte. Tout le reste de l'entité (registres,
+## composants) est accessible via `entity_owner`.
 
 var entity_owner: Entity
 

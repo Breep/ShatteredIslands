@@ -1,61 +1,69 @@
 class_name ColossusEvasiveGrowth
 extends CardEffect
 
+## Colossus — augmente l'esquive physique. Chaque esquive octroie des PV max
+## mais réduit l'esquive suivante (rendements décroissants).
+
 @export var _increase_dodge: Array[float]
-@export var _increase_sizes: Array[float]
-@export var _dodge_reductions: Array[int]
+@export var _hp_per_dodge: Array[float]
+@export var _dodge_reductions: Array[float]
 
-func apply_card(ctx: CardContext, card_lvl: int) -> void:
-	
-	var size_gain: float = _increase_sizes[card_lvl - 1]
+func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
+	var owner: Entity = ctx.entity_owner
 
-	# Stat modifier: increase dodge vs physical damage
 	var dodge_mod := StatModifier.new()
-	dodge_mod.id = &"Evasive Growth"
+	dodge_mod.id = card_name
 	dodge_mod.stat_type = EntityStats.StatType.DODGE
 	dodge_mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
 	dodge_mod.calc_type = StatModifier.CalcType.ADD
 	dodge_mod.value = _increase_dodge[card_lvl - 1]
 	dodge_mod.tags = [StatModifier.TagType.CARD]
-	ctx.stat_modifiers.register_modifier(dodge_mod)
+	owner.stat_modifiers_registry.register_modifier(dodge_mod)
 
-	# Action modifier: on dodge -> increase size, decrease dodge chance
+	var base_dodge: float = _increase_dodge[card_lvl - 1]
+	var hp_per_dodge: float = _hp_per_dodge[card_lvl - 1]
+	var dodge_reduction: float = _dodge_reductions[card_lvl - 1]
+	var state := {&"iteration": 1}
+
 	var action_mod := ActionModifier.new()
-	action_mod.id = &"Evasive Growth"
+	action_mod.id = card_name
 	action_mod.action_type = Utils.ActionCategory.DODGE
 	action_mod.is_one_time_effect = false
-	var state := {&"iteration": 1}
 	action_mod.after_action_logic_callback = func(_cb_vars: Dictionary) -> void:
-		if ctx.hero and is_instance_valid(ctx.hero):
-			var mod2 := StatModifier.new()
-			mod2.id = &"Evasive Growth"
-			mod2.stat_type = EntityStats.StatType.DODGE
-			mod2.action_type = Utils.ActionType.DAMAGE_PHYSICAL
-			mod2.calc_type = StatModifier.CalcType.ADD
-			mod2.value = _dodge_reductions[card_lvl - 1] * (state[&"iteration"] * -1)
-			ctx.stat_modifiers.register_modifier(mod2)
-			
-			var mod3 := StatModifier.new()
-			mod3.id = &"Evasive Growth"
-			mod3.stat_type = EntityStats.StatType.SCALE
-			mod3.calc_type = StatModifier.CalcType.ADD
-			mod3.value = (_increase_sizes[card_lvl - 1]/100) * state[&"iteration"]
-			ctx.stat_modifiers.register_modifier(mod3)
-			
-			state[&"iteration"] += 1
-	ctx.action_modifiers.register_modifier(action_mod)
+		if not is_instance_valid(owner): return
 
-func revert_card(ctx: CardContext, _card_lvl: int) -> void:
-	ctx.stat_modifiers.remove_modifier(EntityStats.StatType.DODGE, &"Evasive Growth")
+		var dodge_update := StatModifier.new()
+		dodge_update.id = card_name
+		dodge_update.stat_type = EntityStats.StatType.DODGE
+		dodge_update.action_type = Utils.ActionType.DAMAGE_PHYSICAL
+		dodge_update.calc_type = StatModifier.CalcType.ADD
+		dodge_update.value = base_dodge - dodge_reduction * state[&"iteration"]
+		dodge_update.tags = [StatModifier.TagType.CARD]
+		owner.stat_modifiers_registry.register_modifier(dodge_update)
+
+		var hp_mod := StatModifier.new()
+		hp_mod.id = card_name
+		hp_mod.stat_type = EntityStats.StatType.HEALTH_MAX
+		hp_mod.calc_type = StatModifier.CalcType.ADD
+		hp_mod.value = hp_per_dodge * state[&"iteration"]
+		hp_mod.tags = [StatModifier.TagType.CARD]
+		owner.stat_modifiers_registry.register_modifier(hp_mod)
+
+		state[&"iteration"] += 1
+	owner.action_modifiers_registry.register_modifier(action_mod)
+
+
+func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
+	var owner: Entity = ctx.entity_owner
+	owner.stat_modifiers_registry.remove_modifier(EntityStats.StatType.DODGE, card_name)
+	owner.stat_modifiers_registry.remove_modifier(EntityStats.StatType.HEALTH_MAX, card_name)
 	var action_mod := ActionModifier.new()
-	action_mod.id = &"Evasive Growth"
+	action_mod.id = card_name
 	action_mod.action_type = Utils.ActionCategory.DODGE
-	ctx.action_modifiers.unregister_modifier(action_mod)
+	owner.action_modifiers_registry.unregister_modifier(action_mod)
 
 
-func get_description(cardlvl: int) -> String:
-	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[Card.Rarity.COMMON]:
-		printerr("Evasive Growth: Wrong cardlvl: ", cardlvl)
-		return "ERROR"
-
-	return "Augmente le [[DODGE]] de " + str(_increase_dodge[cardlvl - 1]) + ". Esquiver augmente le [[SCALE]] de " + str(_increase_sizes[cardlvl - 1]) + "%."
+func get_description(card_lvl: int) -> String:
+	return "Augmente le [[DODGE]] de " + str(_increase_dodge[card_lvl - 1]) \
+		+ ". Chaque esquive octroie " + str(_hp_per_dodge[card_lvl - 1]) \
+		+ " PV max mais réduit l'esquive de " + str(_dodge_reductions[card_lvl - 1]) + "."
