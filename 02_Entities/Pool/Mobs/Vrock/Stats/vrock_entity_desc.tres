@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="1_cnbgm"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="2_2m0j6"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="2_4w8h4"]
 [ext_resource type="Resource" uid="uid://b3ls61pnwih5w" path="res://02_Entities/Pool/Mobs/Vrock/Stats/vrock_stats_lvl_01.tres" id="3_4w8h4"]
 [ext_resource type="Resource" uid="uid://bh7s85tu3istd" path="res://02_Entities/Pool/Mobs/Vrock/Stats/vrock_stats_lvl_02.tres" id="4_em81l"]
 [ext_resource type="Resource" uid="uid://n3wk5t7n0b6u" path="res://02_Entities/Pool/Mobs/Vrock/Stats/vrock_stats_lvl_03.tres" id="5_i55mu"]
@@ -22,11 +23,14 @@
 [ext_resource type="Resource" uid="uid://bbefv8c56tw65" path="res://02_Entities/Pool/Mobs/Vrock/Stats/vrock_stats_lvl_18.tres" id="20_3qsjg"]
 [ext_resource type="Resource" uid="uid://cauwnyr62300v" path="res://02_Entities/Pool/Mobs/Vrock/Stats/vrock_stats_lvl_19.tres" id="21_wudw7"]
 [ext_resource type="Resource" uid="uid://kemboy5fft7q" path="res://02_Entities/Pool/Mobs/Vrock/Stats/vrock_stats_lvl_20.tres" id="22_888de"]
+[ext_resource type="PackedScene" uid="uid://b1yg7a07pqljt" path="res://02_Entities/Pool/Mobs/Vrock/vrock_preview.tscn" id="23_prev"]
 
 [resource]
 script = ExtResource("1_cnbgm")
 name = "Vrock"
 description = "Loup de Latika"
+preview_scene = ExtResource("23_prev")
+default_category = 2
 stats = Dictionary[int, ExtResource("2_2m0j6")]({
 1: ExtResource("3_4w8h4"),
 2: ExtResource("4_em81l"),

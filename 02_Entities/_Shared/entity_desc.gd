@@ -12,6 +12,9 @@ extends Resource
 @export_multiline var description: String
 
 @export var scene: PackedScene
+## Lightweight visual-only scene (mesh + AnimationPlayer, no Entity logic) used
+## by selection/presentation screens.
+@export var preview_scene: PackedScene
 @export var default_category: Entity.Category = Entity.Category.MOB
 @export var starting_companions: Array[EntityDesc]
 

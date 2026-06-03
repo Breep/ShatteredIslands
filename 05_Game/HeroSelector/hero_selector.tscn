@@ -21,8 +21,12 @@
 [ext_resource type="Shader" uid="uid://dxvrfcjpmkb2q" path="res://22_VFX/Shaders/3D/Fire/fire_embers.tres" id="19_jqdqc"]
 [ext_resource type="PackedScene" uid="uid://crsudi66jyt3p" path="res://22_VFX/VFX_3D/Fire/vfx_torch_fire_3d.tscn" id="20_3tjg5"]
 [ext_resource type="Material" uid="uid://dhd4kj45npr4m" path="res://22_VFX/Shaders/Material/light_fenetre.tres" id="21_n20ns"]
-[ext_resource type="PackedScene" uid="uid://dvr7815lw1k8b" path="res://02_Entities/Pool/Heroes/Latika/latika.tscn" id="22_8au67"]
+[ext_resource type="PackedScene" uid="uid://bsbbpkr8vpwu3" path="res://02_Entities/Pool/Heroes/Latika/latika_preview.tscn" id="22_l31ec"]
 [ext_resource type="PackedScene" uid="uid://k4dc5j8ecdxo" path="res://04_UI/InGame/HeroSelection/ui_hero_picking_screen.tscn" id="23_bnso8"]
+[ext_resource type="PackedScene" uid="uid://b1yg7a07pqljt" path="res://02_Entities/Pool/Mobs/Vrock/vrock_preview.tscn" id="23_l31ec"]
+[ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="24_desc"]
+[ext_resource type="Resource" uid="uid://dlatikadesc" path="res://02_Entities/Pool/Heroes/Latika/latika_desc.tres" id="25_latika"]
+[ext_resource type="Script" uid="uid://db3l8qpq81uob" path="res://05_Game/HeroSelector/tavern_spot_light.gd" id="26_spot"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vhqui"]
 resource_name = "Wood Floor"
@@ -37656,7 +37660,9 @@ background_energy_multiplier = 0.1
 
 [node name="HeroSelector" type="Node" unique_id=849220554 node_paths=PackedStringArray("_spot_lights")]
 script = ExtResource("1_ko53h")
-_spot_lights = [NodePath("Tavern/Light/SpotLight1"), NodePath("Tavern/Light/SpotLight2")]
+_available_heroes = Array[ExtResource("24_desc")]([ExtResource("25_latika")])
+_first_spot_delay = 2.0
+_spot_lights = [NodePath("Tavern/Light/SpotLights/CenterPoint/SpotLight1"), NodePath("Tavern/Light/SpotLights/CenterPoint2/SpotLight1")]
 
 [node name="Tavern" type="Node3D" parent="." unique_id=257802823]
 
@@ -51796,6 +51802,7 @@ metadata/extras = {
 }
 
 [node name="MainLight" type="Node3D" parent="Tavern/Light" unique_id=139444022]
+unique_name_in_owner = true
 
 [node name="TorchLight" type="OmniLight3D" parent="Tavern/Light/MainLight" unique_id=1874105677]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.5, 6.1)
@@ -52712,23 +52719,35 @@ metadata/extras = {
 }
 }
 
-[node name="SpotLight1" type="SpotLight3D" parent="Tavern/Light" unique_id=1774694251]
-transform = Transform3D(0.5825912, -0.45306858, 0.6747713, -2.9802322e-08, 0.83021665, 0.5574408, -0.81276536, -0.3247601, 0.4836769, 2.9051294, 4.6828403, 3.7140727)
-visible = false
-light_color = Color(0.95313424, 0.8386115, 0.72652507, 1)
-light_energy = 3.943
-spot_range = 18.176
-spot_attenuation = 0.42
-spot_angle = 20.17
+[node name="SpotLights" type="Node3D" parent="Tavern/Light" unique_id=1212150916]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9023623, 0, 0.041914523)
 
-[node name="SpotLight2" type="SpotLight3D" parent="Tavern/Light" unique_id=2109712168]
-transform = Transform3D(-0.607792, -0.45460078, 0.6510967, -0.1284203, 0.8653985, 0.4843491, -0.78364354, 0.21076962, -0.5843622, 4.1101894, 4.582034, -3.7421017)
-visible = false
+[node name="CenterPoint" type="Node3D" parent="Tavern/Light/SpotLights" unique_id=1525212820]
+transform = Transform3D(0.7475199, 0, 0.6642394, -0.20080179, 0.95321184, 0.22597778, -0.6331608, -0.30230334, 0.7125448, 0, 0, 0)
+
+[node name="SpotLight1" type="SpotLight3D" parent="Tavern/Light/SpotLights/CenterPoint" unique_id=1774694251]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.6188354)
 light_color = Color(0.95313424, 0.8386115, 0.72652507, 1)
 light_energy = 3.943
+shadow_enabled = true
 spot_range = 18.176
 spot_attenuation = 0.42
 spot_angle = 20.17
+script = ExtResource("26_spot")
+
+[node name="CenterPoint2" type="Node3D" parent="Tavern/Light/SpotLights" unique_id=418816774]
+transform = Transform3D(-0.5912914, -0.30185008, 0.74783754, -0.20080183, 0.95321196, 0.22597782, -0.781059, -0.016548384, -0.6242381, 0, 0, 0)
+
+[node name="SpotLight1" type="SpotLight3D" parent="Tavern/Light/SpotLights/CenterPoint2" unique_id=249476990]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.6188354)
+light_color = Color(0.95313424, 0.8386115, 0.72652507, 1)
+light_energy = 3.943
+shadow_enabled = true
+spot_range = 18.176
+spot_attenuation = 0.42
+spot_angle = 20.17
+script = ExtResource("26_spot")
 
 [node name="HeroesPreview" type="Node3D" parent="Tavern" unique_id=1819940947]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.574597, 0)
@@ -52737,12 +52756,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.574597, 0)
 unique_name_in_owner = true
 transform = Transform3D(0.009511892, 0, -0.99995476, 0, 0.9999999, 0, 0.99995476, 0, 0.009511892, -0.9193905, 0, 0.12321366)
 
-[node name="Latika" parent="Tavern/HeroesPreview/HeroSpawnPoint" unique_id=294337328 instance=ExtResource("22_8au67")]
-transform = Transform3D(0.99999994, 0, 0, 0, 1.0000001, 0, 0, 0, 0.99999994, 0, 0, 0)
-metadata/_edit_lock_ = true
+[node name="LatikaPreview" parent="Tavern/HeroesPreview/HeroSpawnPoint" unique_id=1528231726 instance=ExtResource("22_l31ec")]
 
 [node name="AcolyteSpawnPoint" type="Marker3D" parent="Tavern/HeroesPreview" unique_id=1434485065]
-transform = Transform3D(0.26648143, 0, -0.96384007, 0, 1, 0, 0.96384007, 0, 0.26648143, -1.5787725, -2.3841858e-07, 1.0395672)
+unique_name_in_owner = true
+transform = Transform3D(-0.11932249, 0, -0.99285555, 0, 1, 0, 0.99285555, 0, -0.11932249, -1.5787725, -2.3841858e-07, 1.0395672)
+
+[node name="VrockPreview" parent="Tavern/HeroesPreview/AcolyteSpawnPoint" unique_id=1262653344 instance=ExtResource("23_l31ec")]
 
 [node name="Camera3D" type="Camera3D" parent="Tavern" unique_id=909175759]
 transform = Transform3D(-4.371139e-08, -0.24645777, 0.9691535, 0, 0.9691535, 0.24645777, -1, 1.0773011e-08, -4.2363045e-08, 4.70505, 2.939973, 0.20216416)
