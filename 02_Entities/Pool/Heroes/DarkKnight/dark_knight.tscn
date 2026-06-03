@@ -1,22 +1,25 @@
 [gd_scene format=3 uid="uid://c48aqh8mlb7lc"]
 
 [ext_resource type="Script" uid="uid://cusafkpxrg6we" path="res://02_Entities/Pool/Heroes/DarkKnight/dark_knight.gd" id="1_ufk4g"]
+[ext_resource type="Resource" uid="uid://pjwj2qg04h56" path="res://02_Entities/Pool/Heroes/DarkKnight/Stats/dark_knight_hero_desc.tres" id="2_vlbpg"]
 [ext_resource type="PackedScene" uid="uid://dv0rauvoaxb0y" path="res://02_Entities/Pool/Heroes/DarkKnight/Skins/Standard/dark_knight_black.tscn" id="3_5c32l"]
-[ext_resource type="AnimationNodeBlendTree" uid="uid://d2v3r7r65ablv" path="res://02_Entities/Pool/Heroes/DarkKnight/dark_knight_animation_blend_tree.tres" id="4_m5vbw"]
+[ext_resource type="AnimationNodeBlendTree" uid="uid://cv35qdloi5xv6" path="res://02_Entities/Pool/Heroes/DarkKnight/dark_knight_animation_tree.res" id="3_u48vt"]
+[ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="5_8gr7v"]
 [ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/LargeHealthBar/large_health_bar_component.tscn" id="6_3htvw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rxegs"]
-height = 2.0229492
+radius = 0.63916016
+height = 2.1262207
 
-[node name="DarkKnight" type="CharacterBody3D" unique_id=937625230 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_health_bar", "_attack_spawn_marker")]
+[node name="DarkKnight" type="CharacterBody3D" unique_id=937625230 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_attack_spawn_marker")]
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("1_ufk4g")
 entity_name = "Dark Knight"
 category = 0
+entity_desc = ExtResource("2_vlbpg")
 _visual_3d = NodePath("DarkKnightVisual")
 _health_bar_marker = NodePath("DarkKnightVisual/HealthBarSpawnMarker")
-_health_bar = NodePath("HeroSimpleInfoPanel2d")
 _attack_spawn_marker = NodePath("DarkKnightVisual/AutoAttackSpawnMarker")
 
 [node name="DarkKnightVisual" parent="." unique_id=2041897312 instance=ExtResource("3_5c32l")]
@@ -58,33 +61,33 @@ bones/54/rotation = Quaternion(6.691544e-09, 1.17065795e-07, -0.2527075, 0.96754
 bones/55/rotation = Quaternion(-0.020972988, 4.864304e-08, 0.05982803, 0.99798834)
 bones/55/scale = Vector3(1, 1.0000001, 0.9999998)
 bones/56/rotation = Quaternion(-1.5716068e-07, 1.6530976e-07, -6.891787e-08, 1)
-bones/62/position = Vector3(-1.7760624e-09, 0.24209704, -0.0046103797)
+bones/62/position = Vector3(-7.527726e-10, 0.25909352, -0.0019540896)
 bones/65/rotation = Quaternion(-0.01458403, 0.7720402, 0.6351591, -0.017727152)
 bones/71/rotation = Quaternion(-0.17530265, 5.2168797e-08, 2.0204846e-08, 0.9845146)
-bones/73/rotation = Quaternion(-0.3582757, -0.024739936, -0.13803026, 0.9230245)
-bones/74/rotation = Quaternion(8.566745e-08, -2.9792357e-08, 0.5720421, 0.8202243)
-bones/76/rotation = Quaternion(-0.3234528, 0.018553356, -0.11550047, 0.93898547)
+bones/73/rotation = Quaternion(-0.36362088, -0.013855955, -0.14354718, 0.92031634)
+bones/74/rotation = Quaternion(5.788956e-08, -1.3476013e-09, 0.5748337, 0.8182703)
+bones/76/rotation = Quaternion(-0.32892773, 0.017032305, -0.116121225, 0.9370338)
 bones/77/rotation = Quaternion(-0.05999058, 0.9723158, -0.044656705, -0.2213799)
-bones/79/rotation = Quaternion(-0.35826725, -0.024754543, -0.13802402, 0.92302835)
+bones/79/rotation = Quaternion(-0.36362103, -0.013855949, -0.14354713, 0.92031634)
 bones/80/position = Vector3(-2.9802322e-08, 0.7253821, 2.3655593e-07)
-bones/81/rotation = Quaternion(-0.08946965, -0.78794634, 0.5976814, 0.11795202)
-bones/81/scale = Vector3(0.4317605, 5.3643503, 0.4317605)
-bones/83/rotation = Quaternion(-0.002607859, -0.046021078, -0.41030562, 0.91078234)
-bones/84/rotation = Quaternion(8.131493e-09, -8.243119e-08, 0.57199, 0.8202606)
-bones/85/rotation = Quaternion(-0.36615437, -0.08198999, -0.115515575, 0.91970915)
+bones/81/rotation = Quaternion(-0.08973599, -0.78818196, 0.59723693, 0.11842631)
+bones/81/scale = Vector3(0.4251665, 5.5320997, 0.4251663)
+bones/83/rotation = Quaternion(-0.0048087616, -0.032708548, -0.4119505, 0.9106063)
+bones/84/rotation = Quaternion(1.1976456e-07, -7.788937e-08, 0.5748419, 0.8182646)
+bones/85/rotation = Quaternion(-0.3734001, -0.083134174, -0.115749, 0.91665876)
 bones/88/rotation = Quaternion(0.5679376, 0.5679375, 0.4212445, -0.42124456)
-bones/89/rotation = Quaternion(-0.35826716, 0.024754345, 0.1380241, 0.9230283)
-bones/90/rotation = Quaternion(-2.172481e-07, 2.6159782e-07, -0.572042, 0.8202244)
-bones/91/rotation = Quaternion(-0.35826713, 0.024754398, 0.13802402, 0.9230283)
+bones/89/rotation = Quaternion(-0.36362073, 0.013855709, 0.14354713, 0.9203164)
+bones/90/rotation = Quaternion(-1.854186e-07, 2.4840983e-07, -0.57483375, 0.8182702)
+bones/91/rotation = Quaternion(-0.36362076, 0.0138558205, 0.14354716, 0.9203164)
 bones/92/position = Vector3(-7.450581e-09, 0.72538227, -1.3038516e-08)
-bones/93/rotation = Quaternion(0.08950082, -0.7879744, 0.5976284, -0.11800909)
-bones/93/scale = Vector3(0.43176013, 5.3643475, 0.4317606)
-bones/95/rotation = Quaternion(-0.32348612, -0.01854801, 0.115492545, 0.9389751)
-bones/99/rotation = Quaternion(-0.0026078764, 0.046021115, 0.41030562, 0.91078246)
-bones/100/rotation = Quaternion(-6.730202e-08, 8.888123e-08, -0.57198983, 0.82026076)
-bones/101/rotation = Quaternion(-0.36615443, 0.081989914, 0.115515456, 0.91970915)
+bones/93/rotation = Quaternion(0.08973535, -0.78818196, 0.5972368, -0.11842689)
+bones/93/scale = Vector3(0.42516613, 5.532097, 0.42516655)
+bones/95/rotation = Quaternion(-0.32892746, -0.017032305, 0.11612119, 0.9370339)
+bones/99/rotation = Quaternion(-0.0048087332, 0.032708563, 0.41195038, 0.9106064)
+bones/100/rotation = Quaternion(-6.7967676e-08, 1.0267989e-07, -0.57483375, 0.8182703)
+bones/101/rotation = Quaternion(-0.37340015, 0.08313419, 0.11574901, 0.91665876)
 bones/118/rotation = Quaternion(-0.28760263, -0.16181616, 0.822703, -0.4628824)
-bones/121/position = Vector3(3.396488e-10, -0.17956889, 2.871093)
+bones/121/position = Vector3(1.4396001e-10, -0.17956902, 2.888296)
 bones/121/rotation = Quaternion(6.568533e-08, 0.70710695, 0.7071066, 7.999624e-08)
 bones/122/rotation = Quaternion(-2.659688e-08, 4.0440618e-08, 2.940425e-15, 1)
 bones/124/position = Vector3(-0.49887034, 0.09604758, 1.0076787)
@@ -101,19 +104,19 @@ bones/128/scale = Vector3(0.9999999, 1, 0.99999994)
 bones/129/position = Vector3(0.40835166, -0.06881804, 1.3457543)
 bones/129/rotation = Quaternion(-0.2834447, 0.57657516, -0.45451123, 0.6169601)
 bones/129/scale = Vector3(1, 1.0000006, 0.99999994)
-bones/130/position = Vector3(-0.85973334, -0.33859032, 2.2138472)
-bones/130/rotation = Quaternion(-0.27030256, -0.23655145, 0.75005007, 0.5553423)
-bones/131/position = Vector3(0.8597328, -0.3385905, 2.2138467)
-bones/131/rotation = Quaternion(-0.2702984, 0.236568, -0.75005156, 0.55533516)
-bones/132/position = Vector3(-1.1154985, -0.43697917, 1.976258)
-bones/132/rotation = Quaternion(-0.086415455, -0.34864333, 0.29759124, 0.8845449)
-bones/133/rotation = Quaternion(-1.6978706e-07, 0.10888249, -9.2087454e-08, 0.9940547)
-bones/134/position = Vector3(1.1154987, -0.43697935, 1.9762577)
-bones/134/rotation = Quaternion(-0.086415276, 0.34864372, -0.29759133, 0.8845448)
-bones/135/rotation = Quaternion(-1.2836246e-07, -0.108883426, -3.8478642e-08, 0.99405456)
-bones/136/position = Vector3(-1.1154985, -0.43697917, 1.976258)
-bones/136/rotation = Quaternion(-0.08641553, -0.34864363, 0.29759142, 0.88454473)
-bones/137/rotation = Quaternion(-0.075708605, 0.09619893, -0.1280803, 0.9841797)
+bones/130/position = Vector3(-0.85580176, -0.33921874, 2.2271442)
+bones/130/rotation = Quaternion(-0.2663875, -0.24804579, 0.75202656, 0.5495155)
+bones/131/position = Vector3(0.8558013, -0.3392188, 2.2271438)
+bones/131/rotation = Quaternion(-0.26638746, 0.24804562, -0.7520265, 0.54951555)
+bones/132/position = Vector3(-1.107635, -0.43823552, 1.9856491)
+bones/132/rotation = Quaternion(-0.07538361, -0.3560972, 0.2994618, 0.88194937)
+bones/133/rotation = Quaternion(-1.5088176e-07, 0.11943335, -1.2405393e-07, 0.9928423)
+bones/134/position = Vector3(1.1076351, -0.43823576, 1.9856493)
+bones/134/rotation = Quaternion(-0.075383395, 0.3560975, -0.2994619, 0.88194925)
+bones/135/rotation = Quaternion(-7.1089325e-08, -0.11943424, -2.8797194e-08, 0.9928422)
+bones/136/position = Vector3(-1.107635, -0.43823576, 1.9856493)
+bones/136/rotation = Quaternion(-0.07538364, -0.3560974, 0.29946202, 0.8819492)
+bones/137/rotation = Quaternion(-0.08514321, 0.10578294, -0.12597571, 0.98269576)
 bones/138/rotation = Quaternion(-0.06809073, -0.009960345, 0.14439727, 0.987124)
 bones/141/rotation = Quaternion(-0.45428157, 0.09473347, -0.3157925, 0.82760435)
 bones/144/rotation = Quaternion(-0.32424414, 0.0048832786, -0.21469887, 0.9212743)
@@ -129,9 +132,9 @@ bones/168/rotation = Quaternion(-1.8626451e-09, -1.4874908e-07, -3.2664182e-10, 
 bones/171/rotation = Quaternion(-0.07111103, 0.0028765167, 0.26246142, 0.96231437)
 bones/173/position = Vector3(2.428037e-07, -1.3038516e-08, -5.9604645e-08)
 bones/173/rotation = Quaternion(-0.12435283, 0.049636483, 0.6285328, 0.7661718)
-bones/175/position = Vector3(1.1154987, -0.4369794, 1.9762576)
-bones/175/rotation = Quaternion(-0.0864152, 0.34864378, -0.2975914, 0.8845448)
-bones/176/rotation = Quaternion(-0.07572275, -0.09621029, 0.12807569, 0.98417807)
+bones/175/position = Vector3(1.107635, -0.4382357, 1.9856488)
+bones/175/rotation = Quaternion(-0.07538336, 0.3560975, -0.29946184, 0.8819494)
+bones/176/rotation = Quaternion(-0.08514325, -0.105782695, 0.12597571, 0.9826957)
 bones/177/rotation = Quaternion(-0.06809062, 0.009959893, -0.14439732, 0.987124)
 bones/180/rotation = Quaternion(-0.4542814, -0.09473335, 0.31579283, 0.8276043)
 bones/183/rotation = Quaternion(-0.32424393, -0.004883477, 0.21469887, 0.92127436)
@@ -179,9 +182,9 @@ bones/253/rotation = Quaternion(0.009881069, 1.5076523e-08, 0.9999512, -3.9119e-
 bones/256/rotation = Quaternion(1, -2.004011e-06, -2.4596836e-06, -1.1287643e-06)
 bones/257/position = Vector3(0.6666297, 0.8835926, 0.90426624)
 bones/257/rotation = Quaternion(-1.9321094e-09, 0.7525924, 6.241133e-08, 0.65848666)
-bones/258/position = Vector3(-1.5560104, 1.6357415, 0.32645553)
+bones/258/position = Vector3(-1.5560104, 1.6584945, 0.32645565)
 bones/258/rotation = Quaternion(-0.308664, 0.56545496, 0.75777256, -0.103769585)
-bones/259/position = Vector3(1.5560104, 1.6357415, 0.32645553)
+bones/259/position = Vector3(1.5560104, 1.6584945, 0.32645565)
 bones/259/rotation = Quaternion(0.30866405, 0.56545484, 0.75777256, 0.10376972)
 
 [node name="HealthBarSpawnMarker" type="Marker3D" parent="DarkKnightVisual" unique_id=1268526557]
@@ -194,19 +197,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3472242, 0)
 transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, -2.1376111e-07, 1.3098596, 1.4156759)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1789633148]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0114746, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0631104, 0)
 shape = SubResource("CapsuleShape3D_rxegs")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=386582721]
 root_node = NodePath("../DarkKnightVisual")
-tree_root = ExtResource("4_m5vbw")
+tree_root = ExtResource("3_u48vt")
 anim_player = NodePath("../DarkKnightVisual/AnimationPlayer")
-parameters/transition_fighting/current_state = "Idle"
-parameters/transition_fighting/transition_request = ""
-parameters/transition_fighting/current_index = 0
+parameters/switch_moving/current_state = "Walk"
+parameters/switch_moving/transition_request = ""
+parameters/switch_moving/current_index = 0
 parameters/scale_dance/scale = 1.0
 parameters/scale_die/scale = 1.0
-parameters/scale_idle/scale = 1.0
+parameters/scale_idle_standing_neutral/scale = 1.0
 parameters/one_shot_attack/active = false
 parameters/one_shot_attack/internal_active = false
 parameters/one_shot_attack/request = 0
@@ -214,27 +217,75 @@ parameters/one_shot_ultimate/active = false
 parameters/one_shot_ultimate/internal_active = false
 parameters/one_shot_ultimate/request = 0
 parameters/scale_attack/scale = 1.0
-parameters/one_shot_idle/active = false
-parameters/one_shot_idle/internal_active = false
-parameters/one_shot_idle/request = 0
+parameters/one_shot_idle_standing_neutral/active = false
+parameters/one_shot_idle_standing_neutral/internal_active = false
+parameters/one_shot_idle_standing_neutral/request = 0
 parameters/scale_ultimate/scale = 2.5
-parameters/scale_idle_var/scale = 1.0
+parameters/scale_idle_standing_neutral_var/scale = 1.0
 parameters/one_shot_sitting/active = false
 parameters/one_shot_sitting/internal_active = false
 parameters/one_shot_sitting/request = 0
-parameters/transition_global/current_state = "Fighting"
-parameters/transition_global/transition_request = ""
-parameters/transition_global/current_index = 2
+parameters/switch_entity_life_state/current_state = "Alive"
+parameters/switch_entity_life_state/transition_request = ""
+parameters/switch_entity_life_state/current_index = 1
 parameters/scale_walk/scale = 1.0
 parameters/scale_run/scale = 1.0
+parameters/switch_attack/current_state = "Attack2"
+parameters/switch_attack/transition_request = ""
+parameters/switch_attack/current_index = 1
+parameters/scale_stunned/scale = 1.0
+parameters/seek_stunned/seek_request = -1.0
+parameters/scale_idle_standing_aggresive/scale = 1.0
+parameters/scale_idle_standing_aggresive_var/scale = 1.0
+parameters/seek_idle_standing_aggresive/seek_request = -1.0
+parameters/switch_entity_mode/current_state = "InGame"
+parameters/switch_entity_mode/transition_request = ""
+parameters/switch_entity_mode/current_index = 1
+parameters/seek_idle_standing_neutral/seek_request = -1.0
+parameters/one_shot_idle_standing_aggresive/active = false
+parameters/one_shot_idle_standing_aggresive/internal_active = false
+parameters/one_shot_idle_standing_aggresive/request = 0
+parameters/seek_idle_sitting_chair/seek_request = -1.0
+parameters/scale_idle_sitting_chair/scale = 1.0
+parameters/scale_idle_sitting_chair_var/scale = 1.0
+parameters/seek_idle_sitting_floor/seek_request = -1.0
+parameters/seek_dance/seek_request = -1.0
+parameters/one_shot_idle_sitting_chair/active = false
+parameters/one_shot_idle_sitting_chair/internal_active = false
+parameters/one_shot_idle_sitting_chair/request = 0
+parameters/scale_idle_sitting_floor/scale = 1.0
+parameters/scale_idle_sitting_floor_var/scale = 1.0
+parameters/scale_attack_2/scale = 1.0
+parameters/scale_hit_1/scale = 2.0
+parameters/scale_attack_3/scale = 1.0
+parameters/switch_main/current_state = "Idle"
+parameters/switch_main/transition_request = ""
+parameters/switch_main/current_index = 0
+parameters/switch_idle/current_state = "StandingNeutral"
+parameters/switch_idle/transition_request = ""
+parameters/switch_idle/current_index = 0
+parameters/scale_drag/scale = 1.0
+parameters/scale_land/scale = 3.0
+parameters/one_shot_land/active = false
+parameters/one_shot_land/internal_active = false
+parameters/one_shot_land/request = 0
+parameters/one_shot_hit/active = false
+parameters/one_shot_hit/internal_active = false
+parameters/one_shot_hit/request = 0
+parameters/scale_attack_1/scale = 1.0
+parameters/switch_positioning/current_state = "Off"
+parameters/switch_positioning/transition_request = ""
+parameters/switch_positioning/current_index = 0
+parameters/switch_stunned_state/current_state = "NotStunned"
+parameters/switch_stunned_state/transition_request = ""
+parameters/switch_stunned_state/current_index = 0
 
-[node name="HeroSimpleInfoPanel2d" parent="." unique_id=358992180 node_paths=PackedStringArray("_info_panel_spawn_tavern", "_owner_entity", "_info_panel_spawn") instance=ExtResource("6_3htvw")]
-anchors_preset = -1
-anchor_left = 0.042000003
-anchor_right = 0.042000003
-offset_right = -0.640007
-_info_panel_spawn_tavern = NodePath("../DarkKnightVisual/HealthBarSpawnMarkerTavern")
-_owner_entity = NodePath("..")
-_info_panel_spawn = NodePath("../DarkKnightVisual/HealthBarSpawnMarker")
+[node name="HealthBar" parent="." unique_id=358992180 node_paths=PackedStringArray("_spawn", "_owner") instance=ExtResource("6_3htvw")]
+_spawn = NodePath("../DarkKnightVisual/HealthBarSpawnMarker")
+_owner = NodePath("..")
+
+[node name="AnimationComponent" parent="." unique_id=73205791 node_paths=PackedStringArray("_animation_tree", "_owner") instance=ExtResource("5_8gr7v")]
+_animation_tree = NodePath("../AnimationTree")
+_owner = NodePath("..")
 
 [editable path="DarkKnightVisual"]

@@ -1,12 +1,16 @@
 # Tool éditeur : génère N fichiers EntityStats.tres (un par niveau) selon des
-# règles de croissance par stat, plus optionnellement un EntityDesc.tres qui
-# référence le tout. Workflow :
+# règles de croissance par stat, plus optionnellement un fichier desc (EntityDesc
+# générique ou HeroDesc) qui référence le tout. Workflow :
 #   1. Créer une Resource EntityStatsBuilder dans le FileSystem
 #   2. Remplir output_dir, stats_file_prefix, level_count, les StatGrowthRule
 #   3. Cliquer le bouton "Generate" dans l'inspecteur
 @tool
 class_name EntityStatsBuilder
 extends Resource
+
+#region ============================== Enums ==============================
+enum DescType { ENTITY, HERO }
+#endregion
 
 #region ============================== Export — Output ==============================
 ## Dossier où écrire les .tres générés.
@@ -20,16 +24,24 @@ extends Resource
 #endregion
 
 
-#region ============================== Export — EntityDesc ==============================
-@export_group("EntityDesc")
-## Si vrai, génère aussi un EntityDesc.tres qui référence les stats.
+#region ============================== Export — Desc ==============================
+@export_group("Desc")
+## Si vrai, génère aussi un fichier desc (.tres) qui référence les stats.
 @export var generate_desc: bool = true
+## Classe de desc à générer : EntityDesc générique ou HeroDesc.
+@export var desc_type: DescType = DescType.ENTITY
 ## Nom du fichier desc (sans extension), placé dans output_dir.
 @export var desc_file_name: String = "entity_desc"
-## Champ name de l'EntityDesc.
+## Champ name du desc.
 @export var entity_name: String = ""
-## Champ description (multiline) de l'EntityDesc.
+## Champ description (multiline) du desc.
 @export_multiline var entity_description: String = ""
+
+@export_subgroup("Hero")
+## Identifiant héros — uniquement pris en compte si desc_type == HERO.
+@export var hero_id: HeroDesc.HeroId = HeroDesc.HeroId.UNDEF
+## Archétype/rôle affiché dans les UIs — uniquement si desc_type == HERO.
+@export var hero_category: String = ""
 #endregion
 
 
@@ -114,7 +126,7 @@ func generate() -> void:
 	print("[EntityStatsBuilder] Generated %d stats files in %s" % [level_count, output_dir])
 
 	if generate_desc:
-		var desc: EntityDesc = EntityDesc.new()
+		var desc: EntityDesc = _new_desc()
 		desc.name = entity_name
 		desc.description = entity_description
 		for lvl in saved_paths:
@@ -135,4 +147,13 @@ func generate() -> void:
 func _apply_rule_to(stats: EntityStats, property: StringName, lvl: int, rule: StatGrowthRule) -> void:
 	if rule == null: return
 	stats.set(property, rule.compute(lvl))
+
+
+func _new_desc() -> EntityDesc:
+	if desc_type == DescType.HERO:
+		var hero := HeroDesc.new()
+		hero.id = hero_id
+		hero.category = hero_category
+		return hero
+	return EntityDesc.new()
 #endregion

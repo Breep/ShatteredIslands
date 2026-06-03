@@ -522,6 +522,8 @@ func _on_died() -> void:
 	for action_modifier in death_modifiers_registry.consume_all_modifiers():
 		if action_modifier.after_action_logic_callback.is_valid():
 			action_modifier.after_action_logic_callback.call({})
+	
+	collision_layer = 0
 
 
 func _on_resurrected() -> void:

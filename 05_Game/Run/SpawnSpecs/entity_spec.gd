@@ -44,21 +44,20 @@ func spawn_into(parent: Node, ctx: EntityContext = null) -> Node:
 	# Méta-data canoniques depuis l'entry (joueur) ou la scene (ennemi).
 	if entry != null:
 		entity.level = entry.level
-		if entry.hand != null and "hand" in entity:
-			entity.hand = entry.hand
-		if entry.data_memory != null and "data_memory" in entity:
+		if entry.data_memory != null:
 			entity.data_memory = entry.data_memory
-
-	# Runtime owner (Player) injecté si le ctx en fournit un et l'entité
-	# expose le field (cas hero).
-	if ctx != null and ctx.runtime_owner_player != null and "player" in entity:
-		entity.player = ctx.runtime_owner_player
 
 	if ctx != null and ctx.spawn_manager != null:
 		ctx.spawn_manager.spawn_entity(entity, transform, ctx)
 	else:
 		parent.add_child(entity)
 		entity.transform = transform
+
+	# Bind du deck après add_child : le deck_holder est auto-loadé pendant
+	# l'entrée dans l'arbre, donc disponible seulement maintenant. bind_hand
+	# applique les upgrades des cartes dans la foulée.
+	if entry != null and entry.hand != null and entity.deck_holder != null:
+		entity.deck_holder.bind_hand(entry.hand)
 
 	if ctx != null and entity.has_method("set_display_mode"):
 		entity.set_display_mode(ctx.display_mode)

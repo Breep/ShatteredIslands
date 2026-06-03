@@ -742,21 +742,34 @@ func _hide_hand_full_warning() -> void:
 #region ============================== Hide / Show ==============================
 var _hide_show_tween: Tween
 var _is_visible: bool = true
+
+
+# Masque le deck (même effet qu'un appui sur le bouton Masquer/Afficher quand le
+# deck est visible). No-op s'il est déjà masqué.
+func hide_deck() -> void:
+	_set_deck_visible(false)
+
+
 func _on_hide_show_button_pressed() -> void:
+	_set_deck_visible(not _is_visible)
+
+
+func _set_deck_visible(visible: bool) -> void:
+	if visible == _is_visible:
+		return
 	if _hide_show_tween != null and _hide_show_tween.is_valid():
 		_hide_show_tween.kill()
 	_hide_show_tween = create_tween()
 	_hide_show_tween.set_trans(Tween.TRANS_EXPO)
 	_hide_show_tween.set_ease(Tween.EASE_OUT)
-	if _is_visible:
+	if visible:
+		_hide_show_tween.tween_property(_hand_pivot, "position", _hand_pivot_starting_position, _hide_show_duration)
+		_hide_show_button.text = "Masquer Deck"
+	else:
 		var hidden_position: Vector2 = _hand_pivot_starting_position + Vector2(0, _hide_offset_y)
 		_hide_show_tween.tween_property(_hand_pivot, "position", hidden_position, _hide_show_duration)
 		_hide_show_button.text = "Afficher Deck"
-		_is_visible = false
-	else:
-		_hide_show_tween.tween_property(_hand_pivot, "position", _hand_pivot_starting_position, _hide_show_duration)
-		_hide_show_button.text = "Masquer Deck"
-		_is_visible = true
+	_is_visible = visible
 
 
 func _update_counter() -> void:
