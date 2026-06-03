@@ -40,6 +40,7 @@ func _ready() -> void:
 	_ui_hero_picking_screen.setup(_available_heroes)
 
 	_play_intro_lighting()
+	AudioManager.play_sfx("tavern_background_ambient")
 
 
 # ============================== Private functions ==============================
@@ -74,3 +75,4 @@ func _on_hero_selected(hero: HeroDesc) -> void:
 
 func _on_hero_locked(_hero: HeroDesc) -> void:
 	AudioManager.play_sfx("fanfar_trumpet", -1)
+	AudioManager.play_sfx("crowd_cheer_small")
