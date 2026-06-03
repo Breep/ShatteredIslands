@@ -9,6 +9,10 @@ extends Resource
 signal has_changed()
 signal card_added(card: Card)
 signal card_removed(card: Card)
+## Émis quand un design déjà présent monte de niveau (pas de nouvelle entrée).
+## Distinct de card_added pour que les écouteurs puissent ré-appliquer les effets
+## sans confondre « nouvelle carte » et « carte qui level up ».
+signal card_upgraded(card: Card)
 #endregion
 
 
@@ -95,6 +99,7 @@ func add_card(card_to_add: Card) -> bool:
 		existing.lvl += 1
 		_by_name[name].append(card_to_add)
 		_by_uid[card_to_add.uid] = card_to_add
+		card_upgraded.emit(existing)
 		has_changed.emit()
 		return true
 	

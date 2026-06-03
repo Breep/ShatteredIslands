@@ -24,14 +24,29 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
-	if _owner.override_custom_hand != null:
-		Verbose.debug("Overriding hand on [" + _owner.entity_name + "]", Verbose.Category.ENTITY_MODULE)
-		hand = _owner.override_custom_hand
 	setup()
-	apply_all_cards_upgrades()
+	# Chemin proto : la main posée en éditeur via override_custom_hand est bindée
+	# ici. Au runtime, c'est le spawn qui appelle bind_hand() avec la main du
+	# joueur — on ne touche pas override_custom_hand hors prototypage.
+	if _owner.override_custom_hand != null:
+		Verbose.debug("Binding proto hand on [" + _owner.entity_name + "]", Verbose.Category.ENTITY_MODULE)
+		bind_hand(_owner.override_custom_hand)
 
 
 #region ============================== Public functions ==============================
+# Lie une main au porteur et applique immédiatement les upgrades de ses cartes.
+# Canal d'injection runtime du deck (appelé au spawn avec la main du joueur) ;
+# le proto retombe sur ce même chemin via override_custom_hand dans _ready.
+func bind_hand(new_hand: Hand) -> void:
+	hand = new_hand
+	hand.card_added.connect(_on_hand_card_added)
+	hand.card_removed.connect(_on_hand_card_removed)
+	hand.card_upgraded.connect(_on_hand_card_upgraded)
+	if _card_context == null:
+		setup()
+	apply_all_cards_upgrades()
+
+
 # Crée le CardContext (indépendant de la main — peut être appelé sans main dispo).
 func setup() -> void:
 	_card_context = CardContext.create(
@@ -76,4 +91,14 @@ func revert_card(card: Card) -> void:
 
 func get_card_context() -> CardContext:
 	return _card_context
+
+
+func _on_hand_card_added(card: Card) -> void:
+	apply_all_cards_upgrades()
+
+func _on_hand_card_removed(card: Card) -> void:
+	apply_all_cards_upgrades()
+
+func _on_hand_card_upgraded(card: Card) -> void:
+	apply_all_cards_upgrades()
 #endregion
