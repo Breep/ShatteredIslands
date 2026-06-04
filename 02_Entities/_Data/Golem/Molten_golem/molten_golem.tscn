@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://cnkjyjun7kinj"]
+
+[ext_resource type="PackedScene" uid="uid://q84mldk4ln2v" path="res://02_Entities/_Data/Golem/Golem.tscn" id="1_base"]
+[ext_resource type="Texture2D" uid="uid://carv7qn4plmm7" path="res://02_Entities/_Data/Golem/T_MoltenGolem_Rd_D.tga" id="2_albedo"]
+[ext_resource type="Texture2D" uid="uid://bs1nhseq7liq5" path="res://02_Entities/_Data/Golem/T_MoltenGolem_N.tga" id="3_normal"]
+[ext_resource type="Texture2D" uid="uid://cdxd7s8yr1mfk" path="res://02_Entities/_Data/Golem/T_MoltenGolem_E.tga" id="4_emission"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_molten"]
+resource_name = "M_MoltenGolem"
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_albedo")
+emission_enabled = true
+emission = Color(0.78431374, 0.21960784, 0.25490198, 1)
+emission_energy_multiplier = 2.0
+emission_operator = 1
+emission_texture = ExtResource("4_emission")
+normal_enabled = true
+normal_texture = ExtResource("3_normal")
+
+[node name="MoltenGolem" unique_id=806951591 instance=ExtResource("1_base")]
+
+[node name="MoltenGolem" parent="Skeleton3D" parent_id_path=PackedInt32Array(568249234) index="0" unique_id=132877774]
+material_override = SubResource("StandardMaterial3D_molten")

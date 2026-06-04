@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://c3rq8k7pj84qi"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_3rfj7"]
+[ext_resource type="Texture2D" uid="uid://cj4772cp82kn7" path="res://01_Cards/Pool/Cards/Engineer/Common/EvasiveBarrier/engineer_evasive_barrier.png" id="1_mrx1q"]
+[ext_resource type="Script" uid="uid://dkgdt80bfilx7" path="res://01_Cards/Pool/Cards/Engineer/Common/EvasiveBarrier/engineer_evasive_barrier.gd" id="2_j68n3"]
+
+[sub_resource type="Resource" id="Resource_st557"]
+script = ExtResource("2_j68n3")
+_dodge_increase = Array[float]([1.0, 2.0, 3.0, 4.0, 6.0])
+_shield_gain = Array[float]([20.0, 25.0, 30.0, 35.0, 40.0])
+metadata/_custom_type_script = "uid://dkgdt80bfilx7"
+
+[resource]
+script = ExtResource("1_3rfj7")
+name = "Evasive Barrier"
+picture = ExtResource("1_mrx1q")
+families = Array[int]([2])
+_card_effect = SubResource("Resource_st557")
+points = Dictionary[int, int]({
+2: 1
+})
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

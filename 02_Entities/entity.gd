@@ -73,7 +73,7 @@ enum EntityType {
 @export var _arena_zone_manager: ArenaZoneManager
 @export_subgroup("Overrides")
 @export var override_base_stats: EntityStats
-@export var override_custom_deck: PlayerDeck
+@export var override_custom_hand: Hand
 @export var override_data_memory: Dictionary
 @export var override_family_levels: Dictionary[Family.Type, int] = {}
 @export_subgroup("Behaviour")
@@ -135,6 +135,7 @@ var _auto_loaded_components: Array[EntityComponent.Type] = [
 	EntityComponent.Type.MANA,
 	EntityComponent.Type.PROGRESSION,
 	EntityComponent.Type.SKILL,
+	EntityComponent.Type.DECK_HOLDER
 ]
 
 #var display_mode: DisplayMode = DisplayMode.PREVIEW
@@ -174,6 +175,11 @@ var life_state: LifeState:
 		if value != _life_state:
 			_life_state = value
 			life_state_changed.emit(_life_state)
+
+## Quand true, l'entité morte ne disparaît pas (pas de despawn) et n'élimine pas
+## son équipe : elle attend une résurrection (ex: légendaire Colossus). Posé/retiré
+## par l'effet de carte qui gère la renaissance.
+var can_revive: bool = false
 
 signal fighting_state_changed(new_fighting_state: FightingState)
 var _fighting_state: FightingState = FightingState.UNDEF
@@ -516,6 +522,8 @@ func _on_died() -> void:
 	for action_modifier in death_modifiers_registry.consume_all_modifiers():
 		if action_modifier.after_action_logic_callback.is_valid():
 			action_modifier.after_action_logic_callback.call({})
+	
+	collision_layer = 0
 
 
 func _on_resurrected() -> void:

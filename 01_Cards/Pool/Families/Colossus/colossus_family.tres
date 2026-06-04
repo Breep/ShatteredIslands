@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Family" format=3 uid="uid://r422raom70t5"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_f2mb4"]
+[ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://01_Cards/Templates/family.gd" id="2_upugm"]
+[ext_resource type="Resource" uid="uid://cqbouldthrw01" path="res://01_Cards/Pool/Cards/Colossus/Common/BoulderThrow/colossus_boulder_throw.tres" id="3_boulder"]
+[ext_resource type="Resource" uid="uid://cht4oknx08jc7" path="res://01_Cards/Pool/Cards/Colossus/Common/TitansVigor/colossus_titans_vigor.tres" id="4_vigor"]
+[ext_resource type="Resource" uid="uid://b62a25wa2mjlv" path="res://01_Cards/Pool/Cards/Colossus/Common/TaintedBlood/colossus_tainted_blood.tres" id="5_tainted"]
+[ext_resource type="Resource" uid="uid://cywh2kajy8jg3" path="res://01_Cards/Pool/Cards/Colossus/Common/EvasiveGrowth/colossus_evasive_growth.tres" id="6_evasive"]
+[ext_resource type="Resource" uid="uid://7i4uh3v4xxba" path="res://01_Cards/Pool/Cards/Colossus/Common/CrushingBlow/colossus_crushing_blow.tres" id="7_crush"]
+[ext_resource type="Resource" uid="uid://cbeastbond001" path="res://01_Cards/Pool/Cards/Colossus/Common/BeastBond/colossus_beast_bond.tres" id="8_bond"]
+[ext_resource type="Resource" uid="uid://b6rcxah2x0aqm" path="res://01_Cards/Pool/Cards/Colossus/Rare/BearStrength/colossus_bear_strength.tres" id="9_bear"]
+[ext_resource type="Resource" uid="uid://cl4ma4yjnga3y" path="res://01_Cards/Pool/Cards/Colossus/Rare/Provocation/colossus_provocation.tres" id="10_provoc"]
+[ext_resource type="Resource" uid="uid://cno4627vx3nt8" path="res://01_Cards/Pool/Cards/Colossus/Epic/VitalPulse/colossus_vital_pulse.tres" id="11_vital"]
+[ext_resource type="Resource" uid="uid://cg63fcakweap3" path="res://01_Cards/Pool/Cards/Colossus/Epic/StoneCarapace/colossus_stone_carapace.tres" id="12_carapace"]
+[ext_resource type="Resource" uid="uid://c1jb5nmdg2bsh" path="res://01_Cards/Pool/Cards/Colossus/Legendary/Resurrection/colossus_resurrection.tres" id="13_resurrect"]
+[ext_resource type="Texture2D" uid="uid://mxp6ngtlf1py" path="res://01_Cards/Pool/Families/Icons/colossus logo 2.png" id="14_icon"]
+
+[resource]
+script = ExtResource("2_upugm")
+cards = Array[ExtResource("1_f2mb4")]([ExtResource("3_boulder"), ExtResource("4_vigor"), ExtResource("5_tainted"), ExtResource("6_evasive"), ExtResource("7_crush"), ExtResource("8_bond"), ExtResource("9_bear"), ExtResource("10_provoc"), ExtResource("11_vital"), ExtResource("12_carapace"), ExtResource("13_resurrect")])
+icon = ExtResource("14_icon")
+family_name = "Colossus"
+family_type = 6
+color = Color(1, 0.462745, 0, 1)
+metadata/_custom_type_script = "uid://d3wk3nm7f672j"

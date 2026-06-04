@@ -1,19 +1,11 @@
 [gd_scene format=3 uid="uid://dvv2qkpgb5occ"]
 
 [ext_resource type="Script" uid="uid://dcrtf08srbjx2" path="res://03_SpellsAndProjectiles/Spells/ClearingOfLife/spell_clearing_of_life.gd" id="1_2so7k"]
+[ext_resource type="PackedScene" uid="uid://d1wn5hltayhf" path="res://03_SpellsAndProjectiles/Spells/ClearingOfLife/VFX/VFX_Area_Healing.tscn" id="2_pd1sy"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_2so7k"]
 height = 4.0
 radius = 5.0
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_2so7k"]
-top_radius = 5.0
-bottom_radius = 5.0
-height = 0.3
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pd1sy"]
-vertex_color_use_as_albedo = true
-albedo_color = Color(0.5411765, 1, 0.48235294, 0.31764707)
 
 [node name="SpellClearingOfLife" type="Node3D" unique_id=2133897035]
 script = ExtResource("1_2so7k")
@@ -26,6 +18,5 @@ collision_mask = 16
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 shape = SubResource("CylinderShape3D_2so7k")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="HitZone" unique_id=1970429066]
-mesh = SubResource("CylinderMesh_2so7k")
-surface_material_override/0 = SubResource("StandardMaterial3D_pd1sy")
+[node name="HealingArea" parent="HitZone" unique_id=781380852 instance=ExtResource("2_pd1sy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)

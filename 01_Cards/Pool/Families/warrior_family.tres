@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Family" format=3 uid="uid://cbmvayb0bb72n"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_4dvmk"]
+[ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://01_Cards/Templates/family.gd" id="2_m6yig"]
+[ext_resource type="Resource" uid="uid://bhogu6m1synt8" path="res://01_Cards/Pool/Cards/Warrior/Common/DiamondSword/attack_diamond_sword.tres" id="3_sword"]
+[ext_resource type="Resource" uid="uid://qm75h7gw2hgn" path="res://01_Cards/Pool/Cards/Warrior/Common/HealingCrossbow/attack_healing_crossbow.tres" id="4_cross"]
+[ext_resource type="Resource" uid="uid://cj6hexnvedxmb" path="res://01_Cards/Pool/Cards/Warrior/Common/FightBack/attack_fight_back.tres" id="5_fight"]
+[ext_resource type="Resource" uid="uid://cwarchickcal1" path="res://01_Cards/Pool/Cards/Warrior/Common/ChickenCaller/attack_chicken_caller.tres" id="6_chick"]
+[ext_resource type="Resource" uid="uid://7i4uh3v4xxba" path="res://01_Cards/Pool/Cards/Colossus/Common/CrushingBlow/colossus_crushing_blow.tres" id="7_crush"]
+[ext_resource type="Resource" uid="uid://ccombatshld1" path="res://01_Cards/Pool/Cards/Engineer/Common/CombatShield/engineer_combat_shield.tres" id="8_shield"]
+[ext_resource type="Resource" uid="uid://cacburnstrk1" path="res://01_Cards/Pool/Cards/ArdentCelestial/Common/BurningStrike/ardent_celestial_burning_strike.tres" id="9_burn"]
+[ext_resource type="Resource" uid="uid://b76twqciou5cu" path="res://01_Cards/Pool/Cards/Warrior/Rare/BladeRush/attack_blade_rush.tres" id="10_blade"]
+[ext_resource type="Resource" uid="uid://3vjmnbpyyjyk" path="res://01_Cards/Pool/Cards/Warrior/Epic/GatlingGun/attack_gatling_gun.tres" id="11_gatling"]
+[ext_resource type="Resource" uid="uid://b1hnvijka2dfw" path="res://01_Cards/Pool/Cards/Warrior/Legendary/RussianRoulette/attack_russian_roulette.tres" id="12_roulette"]
+[ext_resource type="Texture2D" uid="uid://b78s362n5bu6" path="res://01_Cards/Pool/Families/Icons/warrior.png" id="13_icon"]
+
+[resource]
+script = ExtResource("2_m6yig")
+cards = Array[ExtResource("1_4dvmk")]([ExtResource("3_sword"), ExtResource("4_cross"), ExtResource("5_fight"), ExtResource("6_chick"), ExtResource("7_crush"), ExtResource("8_shield"), ExtResource("9_burn"), ExtResource("10_blade"), ExtResource("11_gatling"), ExtResource("12_roulette")])
+icon = ExtResource("13_icon")
+family_name = "Warrior"
+family_type = 1
+color = Color(0.299547, 0.299547, 0.299547, 1)
+metadata/_custom_type_script = "uid://d3wk3nm7f672j"

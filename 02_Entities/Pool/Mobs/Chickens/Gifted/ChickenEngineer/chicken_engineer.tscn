@@ -7,20 +7,20 @@
 [ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/Components/HealthBar/SmallHealthBar/small_health_bar_component.tscn" id="8_u3s5i"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x7yny"]
-radius = 0.421875
+radius = 0.29882813
 height = 0.84375
 
 [node name="ChickenShield" type="CharacterBody3D" unique_id=2109615854 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker")]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
 collision_layer = 16
-collision_mask = 0
+collision_mask = 25
 script = ExtResource("1_427g7")
 entity_name = "Chicken Shield"
 _visual_3d = NodePath("ChickenShieldVisual")
 _health_bar_marker = NodePath("ChickenShieldVisual/HealthBarSpawnMarker")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1928783995]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41943443, 0)
+transform = Transform3D(0.99999976, 0, 0, 0, 0.99999976, 0, 0, 0, 0.99999976, 0, 0.41943443, 0)
 shape = SubResource("CapsuleShape3D_x7yny")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=2080904651]

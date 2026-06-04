@@ -36,16 +36,12 @@ func get_families_level() -> Dictionary[Family.Type, int]:
 	return levels
 
 
-# Compute le level de chaque family : prend les overrides en priorité, sinon dérive
-# des family_points du deck via GameManager.game_rules.
-func compute_levels(deck: PlayerDeck, overrides: Dictionary[Family.Type, int]) -> void:
+# Applique les levels de family fournis en overrides. La dérivation depuis le
+# deck a été retirée (la nouvelle mécanique de familles sera branchée plus tard).
+func compute_levels(overrides: Dictionary[Family.Type, int]) -> void:
 	for family_type: Family.Type in _family_managers:
 		if overrides.has(family_type):
 			_family_managers[family_type].level = overrides[family_type]
-		elif deck != null:
-			var points: int = deck.get_family_points(family_type)
-			if GameManager.game_rules != null:
-				_family_managers[family_type].level = GameManager.game_rules.get_family_level(points)
 		Verbose.trace("<" + name + "> [ " + Family.Type.keys()[family_type] + " - " + str(_family_managers[family_type].level), Verbose.Category.HERO)
 
 

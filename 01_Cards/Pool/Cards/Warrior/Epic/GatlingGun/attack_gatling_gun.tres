@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://3vjmnbpyyjyk"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_rxnni"]
+[ext_resource type="Texture2D" uid="uid://dlblucvhjqc34" path="res://20_Data/Assets/Card/Portraits/Attack/attack_gattling_gun.png" id="1_simcp"]
+[ext_resource type="Script" uid="uid://huymddyommss" path="res://01_Cards/Pool/Cards/Warrior/Epic/GatlingGun/attack_gatling_gun.gd" id="2_7uy84"]
+
+[sub_resource type="Resource" id="Resource_qhoma"]
+script = ExtResource("2_7uy84")
+_attack_speed_min = Array[float]([-10.0, -20.0, -40.0])
+_attack_speed_max = Array[float]([150.0, 300.0, 500.0])
+_duration = 30.0
+metadata/_custom_type_script = "uid://huymddyommss"
+
+[resource]
+script = ExtResource("1_rxnni")
+name = "Gatling Gun"
+picture = ExtResource("1_simcp")
+families = Array[int]([1])
+rarity = 2
+_card_effect = SubResource("Resource_qhoma")
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

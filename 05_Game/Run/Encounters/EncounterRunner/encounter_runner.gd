@@ -43,6 +43,7 @@ func setup_fighting(encounter: FightingEncounter, party_formation: FightingForma
 	island.set_active()
 	island.init_fight(fa.mirrored(), fb, 1, 2)
 	fighting_started.emit(island)
+	_select_local_hero_by_default()
 	return island
 
 
@@ -105,9 +106,20 @@ func _setup_tavern(encounter: TavernEncounter, party: Party = null) -> BuyingIsl
 	# (et toute proto qui émet directement tavern_phase_ended) partage le même await.
 	buying_island.phase_ended.connect(_on_buying_island_phase_ended, CONNECT_ONE_SHOT)
 	tavern_started.emit(buying_island)
+	_select_local_hero_by_default()
 	return buying_island
 
 
 func _on_buying_island_phase_ended() -> void:
 	tavern_phase_ended.emit()
 #endregion
+
+
+# Sélectionne le héros du joueur local par défaut à l'entrée d'une scène
+# (taverne ou combat) : émet entity_clicked comme si le joueur l'avait cliqué,
+# ouvrant sa fiche d'entrée.
+func _select_local_hero_by_default() -> void:
+	var local_player: Player = PlayerManager.get_local_player()
+	if local_player == null: return
+	if not is_instance_valid(local_player.hero): return
+	Events.entity_clicked.emit(local_player.hero)

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cg63fcakweap3"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_card"]
+[ext_resource type="Script" uid="uid://ccfmm8oa1yxkd" path="res://01_Cards/Pool/Cards/Colossus/Epic/StoneCarapace/colossus_stone_carapace.gd" id="2_eff"]
+
+[sub_resource type="Resource" id="Resource_carapace"]
+script = ExtResource("2_eff")
+_chance = Array[float]([5.0, 5.0, 5.0])
+_stun_duration = Array[float]([2.0, 3.0, 4.0])
+
+[resource]
+script = ExtResource("1_card")
+name = "Stone Carapace"
+families = Array[int]([6])
+rarity = 2
+_card_effect = SubResource("Resource_carapace")
+points = Dictionary[int, int]({
+6: 3
+})

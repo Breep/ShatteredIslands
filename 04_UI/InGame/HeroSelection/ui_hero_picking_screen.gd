@@ -1,103 +1,63 @@
 class_name UIHeroPickingScreen
 extends Control
 
+# Hero selection screen controller: receives the available heroes via setup(),
+# fills the portrait grid, drives the overview panel on selection, and exposes
+# selection/lock events to whoever owns the screen (HeroSelector).
+
+# ============================== Signals ==============================
+
+signal hero_selected(hero: HeroDesc)
 signal hero_locked(hero: HeroDesc)
 
-var _tween: Tween
+# ============================== Constants ==============================
 
-var _ui_hero_portrait_button: PackedScene = preload("res://04_UI/InGame/HeroSelection/ui_hero_portrait_button.tscn")
+const _PORTRAIT_BUTTON: PackedScene = preload("res://04_UI/InGame/HeroSelection/ui_hero_portrait_button.tscn")
 
-@onready var _ui_countdown: UICountdown = %Countdown
-@onready var _player_turn_label: Label = %PlayerTurnLabel
-@onready var _grid_container: GridContainer = %GridContainer
-@onready var _lock_hero_button: Button = %LockHeroButton
-@onready var _hero_overview_panel: UIHeroOverviewPanel = %UiHeroOverviewPanel
+# ============================== Local nodes ==============================
+
+@onready var _hero_grid: GridContainer = %HeroGridContainer
+@onready var _overview_panel: UIHeroOverviewPanel = %UiHeroOverviewPanel
+
+# ============================== Private vars ==============================
 
 var _selected_hero: HeroDesc
 
-# ============================== Node base functions ==============================
-
-func _ready() -> void:
-	for child in _grid_container.get_children():
-		child.queue_free()
-	_lock_hero_button.disabled = true
-
 # ============================== Public functions ==============================
 
-func make_hero_unavailable(hero: HeroDesc) -> void:
-	for child in _grid_container.get_children():
-		var hero_portrait_button: UIHeroPortraitButton = child
-		if hero_portrait_button.hero == hero:
-			hero_portrait_button.disable()
-			return
-
-
-func open_hero_selection() -> void:
-	_lock_hero_button.disabled = false
-
-
-func update_heroes(heroes: Array[HeroDesc]) -> void:
+func setup(heroes: Array[HeroDesc]) -> void:
+	_clear_grid()
 	for hero in heroes:
-		var hero_portrait: UIHeroPortraitButton = _ui_hero_portrait_button.instantiate()
-		hero_portrait.hero = hero
-		hero_portrait.selected.connect(_on_hero_portrait_selected)
-		_grid_container.add_child(hero_portrait)
+		var button := _PORTRAIT_BUTTON.instantiate() as UIHeroPortraitButton
+		_hero_grid.add_child(button)
+		button.hero = hero
+		button.selected.connect(_on_portrait_button_selected)
+	if not heroes.is_empty():
+		_select(heroes[0])
 
-
-func update_bottom_player_name(player_name: String, is_local: bool) -> void:
-	if is_local:
-		_player_turn_label.text = "Your turn to pick !"
-		_blink_player_turn_label()
-	else:
-		_player_turn_label.text = player_name + "'s turn to pick"
-		if _tween: _tween.kill()
-
-
-func update_bottom_message(message: String) -> void:
-	_player_turn_label.text = message
-
-
-func update_countdown(value: int) -> void:
-	_ui_countdown.start(value, "")
 
 # ============================== Private functions ==============================
 
-func _blink_player_turn_label() -> void:
-	if _tween: _tween.kill()
-	_tween = create_tween().set_loops()
-	_tween.tween_property(_player_turn_label, "modulate", Color.BLACK, 0.5)
-	_tween.tween_property(_player_turn_label, "modulate", Color.CRIMSON, 0.5)
+func _clear_grid() -> void:
+	for child in _hero_grid.get_children():
+		child.queue_free()
+
+
+func _select(hero: HeroDesc) -> void:
+	if hero == _selected_hero:
+		return
+	_selected_hero = hero
+	_overview_panel.update(hero)
+	hero_selected.emit(hero)
 
 
 # ============================== Callbacks ==============================
 
-func _on_hero_portrait_selected(hero: HeroDesc) ->void:
-	_selected_hero = hero
-	_hero_overview_panel.display_hero_information(hero)
+func _on_portrait_button_selected(hero: HeroDesc) -> void:
+	_select(hero)
 
 
 func _on_lock_hero_button_pressed() -> void:
 	if _selected_hero == null:
-		printerr("UIHeroPickingScreen: Can't lock hero -> No selected hero")
-	for child in _grid_container.get_children():
-		var hero_portrait_button: UIHeroPortraitButton = child
-		if hero_portrait_button.hero == _selected_hero && hero_portrait_button.disabled:
-			return
+		return
 	hero_locked.emit(_selected_hero)
-	Events.hero_locked.emit()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 

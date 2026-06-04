@@ -74,6 +74,17 @@ func get_local_player() -> Player:
 	return players[multiplayer.get_unique_id()]
 
 
+# Résout le Player runtime portant un slot d'ownership donné (cf.
+# PlayerState.slot / RoasterEntry.owner_slot). null si NONE ou introuvable.
+func get_player_by_slot(slot: PlayerState.Slot) -> Player:
+	if slot == PlayerState.Slot.NONE:
+		return null
+	for player: Player in players.values():
+		if player.state != null and player.state.slot == slot:
+			return player
+	return null
+
+
 # En roguelite il n'y a plus de notion "mort/vivant via health PvP" : tout
 # joueur dans la map est considéré actif tant que la run n'est pas finished.
 func get_alive_players() -> Dictionary[int, Player]:
@@ -252,6 +263,9 @@ func _add_player(player_name: String, id: int, is_bot: bool) -> void:
 	new_player.player_name = player_name
 	new_player.id = id
 	new_player.is_bot = is_bot
+	# Slot d'ownership stable (≠ peer id). Mapping minimal par ordre d'arrivée :
+	# 1er joueur → PLAYER_1 (cas solo). Le vrai mapping multi viendra plus tard.
+	new_player.state.slot = players.size() + 1
 
 	players[id] = new_player
 	add_child(new_player)

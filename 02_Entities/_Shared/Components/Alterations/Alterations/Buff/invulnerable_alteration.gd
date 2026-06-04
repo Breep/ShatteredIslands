@@ -10,3 +10,4 @@ func _init() -> void:
 	polarity = Polarity.BUFF
 	id = &"Invulnerable"
 	display_color = Color.GOLD
+	display_mode = DisplayMode.CUSTOM

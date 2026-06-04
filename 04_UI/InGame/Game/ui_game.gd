@@ -41,6 +41,7 @@ func end_tavern_phase() -> void:
 func start_fighting_phase(fighting_area: FightingArea) -> void:
 	_ui_fighting_area.update_content(fighting_area)
 	_ui_fighting_area.set_active()
+	_ui_persistant.hide_hand()
 
 
 func end_fighting_phase() -> void:

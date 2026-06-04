@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cht4oknx08jc7"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_card"]
+[ext_resource type="Script" uid="uid://daqnwg11wal35" path="res://01_Cards/Pool/Cards/Colossus/Common/TitansVigor/colossus_titans_vigor.gd" id="2_eff"]
+
+[sub_resource type="Resource" id="Resource_vigor"]
+script = ExtResource("2_eff")
+_max_hp_increase = Array[float]([100.0, 150.0, 200.0, 250.0, 350.0])
+_heal_percent = Array[float]([2.0, 3.0, 4.0, 5.0, 7.0])
+_heal_period = Array[float]([2.0, 2.0, 2.0, 2.0, 2.0])
+metadata/_custom_type_script = "uid://daqnwg11wal35"
+
+[resource]
+script = ExtResource("1_card")
+name = "Titan's Vigor"
+families = Array[int]([6])
+_card_effect = SubResource("Resource_vigor")
+points = Dictionary[int, int]({
+6: 1
+})
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

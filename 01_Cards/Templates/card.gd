@@ -1,3 +1,6 @@
+# Donnée d'une carte : identité (id de design + uid d'instance), rareté, niveau
+# et l'effet appliqué au héros (card_effect). Resource sérialisable, dupliquée
+# par instance dans le pool du marchand.
 class_name Card
 extends Resource
 
@@ -29,16 +32,18 @@ const RARITY_CARD_VALUE: Dictionary[Rarity, int] = {
 	Rarity.LEGENDARY: 5,
 }
 
-@export var name : String
+## Identité de design stable (réseau, dédoublonnage main/coffre, leveling).
+@export var name : StringName
 @export var picture : Texture2D
 @export var families: Array[Family.Type]
 @export var rarity : Rarity
-@export var player_upgrade: HeroUpgrade
+@export var _card_effect: CardEffect
 @export var points: Dictionary[Family.Type, int]
+var uid: int
 
-var _lvl: int = 1 # Current lvl
-@export_range(1, 5) var lvl: int:
-	get: return _lvl
+@export_range(1, 5) var _lvl: int = 1 # Current lvl
+var lvl: int:
+	get: return clampi(_lvl, 1, RARITY_MAX_LEVEL[rarity])
 	set(value):
 		value = clampi(value, 1, RARITY_MAX_LEVEL[rarity])
 		if value == _lvl: return
@@ -48,4 +53,33 @@ var _lvl: int = 1 # Current lvl
 func is_max_level() -> bool:
 	return _lvl == RARITY_MAX_LEVEL[rarity]
 
-var uid: int
+
+func has_effect() -> bool:
+	return _card_effect != null
+
+
+# Accès en lecture à l'effet (introspection des valeurs par les panneaux de
+# description, etc.). L'application/retrait passe par apply_effect/revert_effect.
+func get_card_effect() -> CardEffect:
+	return _card_effect
+
+
+func apply_effect(ctx: CardContext) -> void:
+	if _card_effect == null:
+		Verbose.error("Can't apply effect on [" + name, Verbose.Category.CARD)
+		return
+	_card_effect.apply(ctx, name, lvl)
+
+
+func revert_effect(ctx: CardContext) -> void:
+	if _card_effect == null:
+		Verbose.error("Can't revert effect on [" + name, Verbose.Category.CARD)
+		return
+	_card_effect.revert(ctx, name, lvl)
+
+
+func get_description() -> String:
+	if _card_effect == null:
+		Verbose.error("Can't get description on [" + name, Verbose.Category.CARD)
+		return ""
+	return _card_effect.get_description(lvl)

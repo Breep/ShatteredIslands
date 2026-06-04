@@ -6,10 +6,26 @@ extends Control
 # ============================== Local nodes ==============================
 
 @onready var _ui_card_shop: UICardShop = %CardShop
+@onready var _shop_main_control: Control = %ShopMainControl
+@onready var _open_shop_button: Button = %OpenShopButton
 
 # ============================== Private variables ==============================
 
 var _is_active: bool
+
+
+#region ============================== Node base functions ==============================
+func _ready() -> void:
+	_shop_main_control.hide()
+	_shop_main_control.modulate.a = 0.0
+	_open_shop_button.show()
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if not _shop_main_control.visible:
+		return
+	if event is InputEventMouseButton and not event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		_hide_shop_panel()
 
 # ============================== Public functions ==============================
 
@@ -39,3 +55,26 @@ func hide_card_shop() -> void:
 
 func _on_continue_button_pressed() -> void:
 	Events.signal_tavern_continue_pressed()
+
+
+func _on_open_shop_button_pressed() -> void:
+	_show_shop_panel()
+
+
+var _shop_panel_tween: Tween
+func _show_shop_panel() -> void:
+	if _shop_panel_tween != null and _shop_panel_tween.is_valid():
+		_shop_panel_tween.kill()
+	_shop_main_control.show()
+	_shop_panel_tween = create_tween()
+	_shop_panel_tween.tween_property(_shop_main_control, "modulate:a", 1.0, 0.25)
+	_shop_panel_tween.tween_callback(_open_shop_button.hide)
+
+
+func _hide_shop_panel() -> void:
+	if _shop_panel_tween != null and _shop_panel_tween.is_valid():
+		_shop_panel_tween.kill()
+	_shop_panel_tween = create_tween()
+	_shop_panel_tween.tween_property(_shop_main_control, "modulate:a", 0.0, 0.25)
+	_shop_panel_tween.tween_callback(_shop_main_control.hide)
+	_shop_panel_tween.tween_callback(_open_shop_button.show)

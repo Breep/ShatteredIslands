@@ -66,7 +66,7 @@ func _clear_children(node: Node) -> void:
 func _build_tavern_ctx() -> EntityContext:
 	var ctx := EntityContext.new()
 	ctx.display_mode = Entity.DisplayMode.BUYING_PHASE
-	ctx.runtime_owner_player = PlayerManager.get_local_player()
+	# runtime_owner_player résolu par entry dans _spawn_entry_at (owner_slot).
 	# pas de spawn_manager : la tavern n'a pas de tick system, fallback
 	# add_child d'EntitySpec.spawn_into est utilisé.
 	return ctx
@@ -74,9 +74,14 @@ func _build_tavern_ctx() -> EntityContext:
 
 func _spawn_entry_at(entry: RoasterEntry, target_transform: Transform3D, fallback_name: String, parent: Node3D, ctx: EntityContext) -> void:
 	if entry == null or entry.desc == null: return
+	var owner: Player = PlayerManager.get_player_by_slot(entry.owner_slot)
+	ctx.runtime_owner_player = owner if owner != null else PlayerManager.get_local_player()
 	var spec := EntitySpec.new()
 	spec.desc = entry.desc
 	spec.entry = entry
 	spec.transform = target_transform
 	spec.display_label = fallback_name
-	spec.spawn_into(parent, ctx)
+	var entity := spec.spawn_into(parent, ctx) as Entity
+	# Lien runtime player -> instance de héros de cette scène.
+	if entity != null and entity.is_hero() and ctx.runtime_owner_player != null:
+		ctx.runtime_owner_player.hero = entity

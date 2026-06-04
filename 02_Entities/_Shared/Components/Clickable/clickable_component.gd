@@ -54,6 +54,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	var duration_s: float = float(Time.get_ticks_msec() - _press_start_msec) / 1000.0
 	_press_pending = false
 	set_process_unhandled_input(false)
+	get_viewport().set_input_as_handled()
 
 	if duration_s < SHORT_CLICK_THRESHOLD_S:
 		if _press_alt:

@@ -4,16 +4,16 @@ extends Resource
 # ============================== Enum ==============================
 
 enum Type {
-	UNDEF,
-	WARRIOR,
-	ENGINEER,
-	ARDENT_CELESTIAL,
-	STORM_CALLER,
-	LIGHT,
-	COLOSSUS,
-	POISON,
-	CHICKEN_LORD,
-	NECROSIS,
+	UNDEF = 0,
+	WARRIOR = 1,
+	ENGINEER = 2,
+	ARDENT_CELESTIAL = 3,
+	STORM_CALLER = 4,
+	LIGHT = 5,
+	COLOSSUS = 6,
+	POISON = 7,
+	CHICKEN_LORD = 8,
+	NECROSIS = 9,
 }
 
 # ============================== Constant ==============================
@@ -41,7 +41,7 @@ const COLORS = {
 
 # ============================== Public variables ==============================
 
-var lvl: int # Current level of the family (number of cards in the player deck affiliated with this family)
+var lvl: int # Current level of the family (number of cards in the player hand affiliated with this family)
 
 # ============================== Public functions ==============================
 

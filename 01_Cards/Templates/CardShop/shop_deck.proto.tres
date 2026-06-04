@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="ShopDeck" format=3 uid="uid://cmq4qbn1jck17"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_phtlr"]
+[ext_resource type="Resource" uid="uid://d26wrf73bpc87" path="res://01_Cards/Pool/Cards/ArdentCelestial/Common/ConsummingTheStar/fire_consuming_the_star.tres" id="2_2myvr"]
+[ext_resource type="Resource" uid="uid://ifly0ma88lh6" path="res://01_Cards/Pool/Cards/ArdentCelestial/Common/CosmicBolt/fire_cosmic_bolt.tres" id="3_48hyu"]
+[ext_resource type="Resource" uid="uid://cx8ghn5qu8ot6" path="res://01_Cards/Pool/Cards/ArdentCelestial/Common/DarkForest/fire_dark_forest.tres" id="4_qsvon"]
+[ext_resource type="Resource" uid="uid://c8xlom0vjt6rp" path="res://01_Cards/Pool/Cards/ArdentCelestial/Common/DiamondSkin/ardent_celestial_diamond_skin.tres" id="5_h0tvr"]
+[ext_resource type="Resource" uid="uid://bgx3j85dxco0q" path="res://01_Cards/Pool/Cards/Engineer/Rare/BarbedWire/engineer_barbed_wire.tres" id="6_pr2j4"]
+[ext_resource type="Resource" uid="uid://cno4627vx3nt8" path="res://01_Cards/Pool/Cards/Colossus/Epic/VitalPulse/colossus_vital_pulse.tres" id="7_k7gun"]
+[ext_resource type="Resource" uid="uid://cbphkih3mu1ij" path="res://01_Cards/Pool/Cards/ArdentCelestial/Epic/ArmagedHeal/ardent_celestial_armaged'heal.tres" id="8_1mp2e"]
+[ext_resource type="Resource" uid="uid://qcfmiuxm33bh" path="res://01_Cards/Pool/Cards/ChickenLord/Epic/BloodFrenzy/chickenlord_blood_frenzy.tres" id="9_kgdnv"]
+[ext_resource type="Resource" uid="uid://hbwmi3ykad2r" path="res://01_Cards/Pool/Cards/ChickenLord/Legendary/chickenlord_eggfinity.tres" id="10_hd23a"]
+[ext_resource type="Resource" uid="uid://boj2sieffvuf3" path="res://01_Cards/Pool/Cards/Colossus/Common/CrushingWeight/colossus_crushing_weight.tres" id="11_x0im2"]
+[ext_resource type="Resource" uid="uid://cywh2kajy8jg3" path="res://01_Cards/Pool/Cards/Colossus/Common/EvasiveGrowth/colossus_evasive_growth.tres" id="12_acr6a"]
+[ext_resource type="Resource" uid="uid://cj72i47u7d1nu" path="res://01_Cards/Pool/Cards/Colossus/Common/Proteins/colossus_proteins.tres" id="13_8vp8t"]
+[ext_resource type="Resource" uid="uid://b6j3wpi41auhr" path="res://01_Cards/Pool/Cards/Colossus/Common/TheAncientCollector/colossus_ancient_collector.tres" id="14_i0xtl"]
+[ext_resource type="Resource" uid="uid://bdq8el3f8q22o" path="res://01_Cards/Pool/Cards/Colossus/Common/TitansProtection/colossus_titans_protection.tres" id="15_283u8"]
+[ext_resource type="Resource" uid="uid://bkh1w5p17fgaf" path="res://01_Cards/Pool/Cards/Colossus/Common/UnbreakableWall/colossus_unbreakable_wall.tres" id="16_84c0v"]
+[ext_resource type="Resource" uid="uid://yph6mhvbkj0c" path="res://01_Cards/Pool/Cards/Engineer/Legendary/AegisBlade/engineer_aegis_blade.tres" id="17_rg6nf"]
+[ext_resource type="Resource" uid="uid://ceejbf6x7fcyp" path="res://01_Cards/Pool/Cards/Engineer/Rare/AetherRedirector/defense_aether_redirector.tres" id="18_ck6dc"]
+[ext_resource type="Resource" uid="uid://c1gpijnrsdj2h" path="res://01_Cards/Pool/Cards/Engineer/Rare/DeflectionShield/engineer_deflection_shield.tres" id="19_e678n"]
+[ext_resource type="Resource" uid="uid://du0o8udb4adn5" path="res://01_Cards/Pool/Cards/Engineer/Rare/ShieldThrow/engineer_shield_throw.tres" id="20_nlyx2"]
+[ext_resource type="Resource" uid="uid://ckk1rjelx5ht" path="res://01_Cards/Pool/Cards/Engineer/Epic/FortificationDrone/engineer_fortification_drone.tres" id="21_fw1pp"]
+[ext_resource type="Script" uid="uid://cq8l8mwv8k27y" path="res://01_Cards/Templates/Deck/shop_deck.gd" id="22_hq4pm"]
+
+[resource]
+script = ExtResource("22_hq4pm")
+_unique_card_catalogs = Array[ExtResource("1_phtlr")]([ExtResource("2_2myvr"), ExtResource("3_48hyu"), ExtResource("4_qsvon"), ExtResource("5_h0tvr"), ExtResource("6_pr2j4"), ExtResource("7_k7gun"), ExtResource("8_1mp2e"), ExtResource("9_kgdnv"), ExtResource("10_hd23a"), ExtResource("11_x0im2"), ExtResource("12_acr6a"), ExtResource("13_8vp8t"), ExtResource("14_i0xtl"), ExtResource("15_283u8"), ExtResource("16_84c0v"), ExtResource("17_rg6nf"), ExtResource("18_ck6dc"), ExtResource("19_e678n"), ExtResource("20_nlyx2"), ExtResource("21_fw1pp")])
+_rarity_card_numbers = Dictionary[int, int]({
+0: 10,
+1: 6,
+2: 4,
+3: 4
+})
+metadata/_custom_type_script = "uid://cq8l8mwv8k27y"

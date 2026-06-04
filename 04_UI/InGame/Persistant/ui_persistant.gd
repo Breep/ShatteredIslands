@@ -8,6 +8,7 @@ extends Control
 @onready var _ui_player_info: UIPlayerInfo = %UIPlayerInfo
 @onready var _ui_all_families_portraits: UIAllFamiliesPortrait = %UIAllFamiliesPortrait
 @onready var _ui_family_viewer: UIFamilyViewer = %UiFamilyViewer
+@onready var _ui_hand: UIHand = $UIHand
 
 # ============================== Node base functions ==============================
 
@@ -22,6 +23,11 @@ func _ready() -> void:
 func bind_to_local_player(player: Player) -> void:
 	_ui_player_info.connect_to_player(player)
 	_ui_all_families_portraits.update_content(player)
+	_ui_hand.bind(player.hand)
+
+
+func hide_hand() -> void:
+	_ui_hand.hide_deck()
 
 
 # ============================== Callbacks ==============================
