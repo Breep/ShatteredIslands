@@ -198,7 +198,7 @@ func lock_hero_into_run(hero: HeroDesc) -> void:
 		return
 
 	var party: Party = _run_context.party
-	party.add_to_roaster(RoasterEntry.from_desc(hero, _resolve_local_owner_slot()))
+	party.get_or_create_roaster(_resolve_local_owner_slot()).add(RoasterEntry.from_desc(hero))
 	_attach_roaster_scenes(party)
 	_init_roaster_runtime_data(party)
 
@@ -206,7 +206,7 @@ func lock_hero_into_run(hero: HeroDesc) -> void:
 	if template == null:
 		Verbose.error("lock_hero_into_run: default_solo formation introuvable", Verbose.Category.GLOBAL_MANAGER)
 		return
-	party.formation = _build_formation_from_roaster(party.roaster, template)
+	party.formation = _build_formation_from_roaster(party.all_entries(), template)
 
 	start_run()
 
@@ -224,7 +224,7 @@ func _resolve_local_owner_slot() -> PlayerState.Slot:
 # par desc). Mute les ressources desc mises en cache, comme le faisait l'ancien
 # code de peuplement démo.
 func _attach_roaster_scenes(party: Party) -> void:
-	for entry: RoasterEntry in party.roaster:
+	for entry: RoasterEntry in party.all_entries():
 		if entry == null or entry.desc == null or entry.desc.scene != null:
 			continue
 		var desc: EntityDesc = entry.desc
@@ -290,7 +290,7 @@ func _make_player_spec(entry: RoasterEntry, t: Transform3D, label: String) -> En
 func _init_roaster_runtime_data(party: Party) -> void:
 	if party == null: return
 	var local_player_name: String = PlayerManager.get_local_player().player_name if PlayerManager.get_local_player() != null else ""
-	for entry: RoasterEntry in party.roaster:
+	for entry: RoasterEntry in party.all_entries():
 		if entry == null or entry.desc == null: continue
 		if entry.desc.default_category != Entity.Category.HERO: continue
 		if entry.hand == null:

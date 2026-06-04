@@ -37,20 +37,22 @@ func add_entity(spec: EntitySpec) -> EntitySpec:
 
 # Helper transitionnel utilisé par les proto scenes : depuis ce template
 # (spawn_specs uniquement), crée une formation peuplée. Side effect : ajoute
-# des RoasterEntry (avec EntityDesc transient) au roaster de la party.
+# des RoasterEntry (avec EntityDesc transient) au roaster du slot PLAYER_1.
+# Les protos ne modélisent qu'un seul joueur local.
 func populate_with(party: Party, hero_scenes: Array[PackedScene], acolyte_scenes: Array[PackedScene]) -> FightingFormation:
 	var formation := FightingFormation.new()
 	if party == null:
 		return formation
+	var roaster: Roaster = party.get_or_create_roaster(PlayerState.Slot.PLAYER_1)
 	var placed_heroes: int = mini(hero_scenes.size(), hero_spawn_specs.size())
 	for i in placed_heroes:
 		if hero_scenes[i] == null: continue
-		var entry: RoasterEntry = party.add_to_roaster(_make_transient_entry(hero_scenes[i], Entity.Category.HERO))
+		var entry: RoasterEntry = roaster.add(_make_transient_entry(hero_scenes[i], Entity.Category.HERO))
 		formation.entity_specs.append(_make_spec_for_entry(entry, hero_spawn_specs[i].transform, "Hero_" + str(i)))
 	var placed_acolytes: int = mini(acolyte_scenes.size(), acolyte_spawn_specs.size())
 	for i in placed_acolytes:
 		if acolyte_scenes[i] == null: continue
-		var entry: RoasterEntry = party.add_to_roaster(_make_transient_entry(acolyte_scenes[i], Entity.Category.ACOLYTE))
+		var entry: RoasterEntry = roaster.add(_make_transient_entry(acolyte_scenes[i], Entity.Category.ACOLYTE))
 		formation.entity_specs.append(_make_spec_for_entry(entry, acolyte_spawn_specs[i].transform, "Acolyte_" + str(i)))
 	return formation
 

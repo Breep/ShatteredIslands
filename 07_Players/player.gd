@@ -1,8 +1,8 @@
 # Représente un joueur dans une session : identité réseau (id, name, team),
 # porte-monnaie et progression (gold sur PlayerState ; level/xp proxiés vers
-# la RoasterEntry du héros dans party.roaster). Les données hero-level (hand,
-# level, xp, data_memory) vivent canoniquement dans RoasterEntry ; Player
-# expose des getters/setters qui pointent dessus pour préserver l'API
+# la RoasterEntry du héros dans party.roasters[slot]). Les données hero-level
+# (hand, level, xp, data_memory) vivent canoniquement dans RoasterEntry ;
+# Player expose des getters/setters qui pointent dessus pour préserver l'API
 # existante des call sites et pour porter les signaux runtime (lvl_changed,
 # xp_changed).
 class_name Player
@@ -120,12 +120,13 @@ func _init() -> void:
 
 
 # Résout la RoasterEntry du joueur dans la party active : 1ère entry HERO
-# possédée par le slot de ce joueur (state.slot).
+# du Roaster du slot de ce joueur (state.slot).
 func _get_my_roaster_entry() -> RoasterEntry:
 	if GameManager.run_context == null: return null
 	if GameManager.run_context.party == null: return null
 	if state == null: return null
-	return GameManager.run_context.party.get_owned_entry_of_category(Entity.Category.HERO, state.slot)
+	var roaster: Roaster = GameManager.run_context.party.get_roaster(state.slot)
+	return roaster.get_hero() if roaster != null else null
 
 
 func _check_lvl_up() -> void:

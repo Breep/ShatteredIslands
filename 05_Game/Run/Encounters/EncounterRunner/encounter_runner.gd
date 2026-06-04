@@ -94,7 +94,7 @@ func _setup_tavern(encounter: TavernEncounter, party: Party = null) -> BuyingIsl
 	var hero_entries: Array[RoasterEntry] = []
 	var acolyte_entries: Array[RoasterEntry] = []
 	if party != null:
-		for entry: RoasterEntry in party.roaster:
+		for entry: RoasterEntry in party.all_entries():
 			if entry == null or entry.desc == null: continue
 			match entry.desc.default_category:
 				Entity.Category.HERO: hero_entries.append(entry)
