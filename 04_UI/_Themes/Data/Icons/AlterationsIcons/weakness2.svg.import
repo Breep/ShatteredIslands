@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ccpiaqvi4m6ni"
-path="res://.godot/imported/defense.svg-4a7060e6a1fa89e0c75d8859e3a7f488.ctex"
+uid="uid://btpsdjpnjiell"
+path="res://.godot/imported/weakness2.svg-55ac5de3e1098bf72bd9d84b1d83e903.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://04_UI/_Themes/Data/Icons/AlterationsIcons/defense.svg"
-dest_files=["res://.godot/imported/defense.svg-4a7060e6a1fa89e0c75d8859e3a7f488.ctex"]
+source_file="res://04_UI/_Themes/Data/Icons/AlterationsIcons/weakness2.svg"
+dest_files=["res://.godot/imported/weakness2.svg-55ac5de3e1098bf72bd9d84b1d83e903.ctex"]
 
 [params]
 
@@ -38,6 +38,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
+svg/scale=8.0
 editor/scale_with_editor_scale=false
 editor/convert_colors_with_editor_theme=false
