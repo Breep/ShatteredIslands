@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dpogwteh88fua"
-path.s3tc="res://.godot/imported/T_StumpEnt_N.tga-c1ddec76c0c7f3003e69507f318659db.s3tc.ctex"
+path.s3tc="res://.godot/imported/T_StumpEnt_N.tga-8b5eba0b869af14f5ff7e054b139f785.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://02_Entities/Pool/Mobs/StumpEnt/T_StumpEnt_N.tga"
-dest_files=["res://.godot/imported/T_StumpEnt_N.tga-c1ddec76c0c7f3003e69507f318659db.s3tc.ctex"]
+source_file="res://02_Entities/_Data/StumpEnt/T_StumpEnt_N.tga"
+dest_files=["res://.godot/imported/T_StumpEnt_N.tga-8b5eba0b869af14f5ff7e054b139f785.s3tc.ctex"]
 
 [params]
 

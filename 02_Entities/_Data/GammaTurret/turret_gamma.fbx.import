@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bp7fk1h3aj1iw"
-path="res://.godot/imported/StumpEnt.fbx-ddb5c6313e83a92f097f1f4ccac8a55a.scn"
+uid="uid://dgyjfl7mpao0m"
+path="res://.godot/imported/turret_gamma.fbx-77040ed2173e4d87951299d7476b6306.scn"
 
 [deps]
 
-source_file="res://02_Entities/Pool/Mobs/StumpEnt/StumpEnt.fbx"
-dest_files=["res://.godot/imported/StumpEnt.fbx-ddb5c6313e83a92f097f1f4ccac8a55a.scn"]
+source_file="res://02_Entities/_Data/GammaTurret/turret_gamma.fbx"
+dest_files=["res://.godot/imported/turret_gamma.fbx-77040ed2173e4d87951299d7476b6306.scn"]
 
 [params]
 

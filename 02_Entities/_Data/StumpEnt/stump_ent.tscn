@@ -1,9 +1,9 @@
 [gd_scene format=4 uid="uid://m1xr4qo8pn35"]
 
-[ext_resource type="Texture2D" uid="uid://u56ic87tttct" path="res://02_Entities/Pool/Mobs/StumpEnt/T_StumpEnt_Gn_D.tga" id="1_43436"]
-[ext_resource type="Texture2D" uid="uid://cxcl11m2n2u20" path="res://02_Entities/Pool/Mobs/StumpEnt/T_StumpEnt_E.tga" id="2_75nip"]
-[ext_resource type="Texture2D" uid="uid://dpogwteh88fua" path="res://02_Entities/Pool/Mobs/StumpEnt/T_StumpEnt_N.tga" id="3_gu6sg"]
-[ext_resource type="AnimationLibrary" uid="uid://cmoo0hngor00q" path="res://02_Entities/Pool/Mobs/StumpEnt/StumpEnt.res" id="4_75nip"]
+[ext_resource type="Texture2D" uid="uid://u56ic87tttct" path="res://02_Entities/_Data/StumpEnt/T_StumpEnt_Gn_D.tga" id="1_43436"]
+[ext_resource type="Texture2D" uid="uid://cxcl11m2n2u20" path="res://02_Entities/_Data/StumpEnt/T_StumpEnt_E.tga" id="2_75nip"]
+[ext_resource type="Texture2D" uid="uid://dpogwteh88fua" path="res://02_Entities/_Data/StumpEnt/T_StumpEnt_N.tga" id="3_gu6sg"]
+[ext_resource type="AnimationLibrary" uid="uid://cmoo0hngor00q" path="res://02_Entities/_Data/StumpEnt/StumpEnt.res" id="4_75nip"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s271w"]
 albedo_texture = ExtResource("1_43436")
