@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bwuylc03i15xf"]
+
+[ext_resource type="Script" uid="uid://dv8w8kb4xsqp3" path="res://03_SpellsAndProjectiles/Projectiles/projectile.gd" id="1_proj"]
+[ext_resource type="Script" uid="uid://dlww5csbnicq8" path="res://03_SpellsAndProjectiles/Projectiles/_Shared/Trajectories/arc_trajectory.gd" id="2_arc"]
+[ext_resource type="PackedScene" uid="uid://cq7ofw0kcoceh" path="res://03_SpellsAndProjectiles/Projectiles/Grenade/grenade_visual.tscn" id="3_vis"]
+
+[sub_resource type="Resource" id="Resource_arc"]
+script = ExtResource("2_arc")
+arc_height = 2.5
+randomize_by = 0.4
+speed = 9.0
+metadata/_custom_type_script = "uid://dlww5csbnicq8"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_grenade"]
+radius = 0.2
+
+[node name="GrenadeProjectile" type="Area3D" unique_id=1924700001]
+collision_layer = 2
+collision_mask = 16
+script = ExtResource("1_proj")
+trajectory = SubResource("Resource_arc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=183932174]
+shape = SubResource("SphereShape3D_grenade")
+
+[node name="GrenadeVisual" parent="." unique_id=772538754 instance=ExtResource("3_vis")]

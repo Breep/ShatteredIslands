@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="4_kq8si"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="5_r0wv3"]
 [ext_resource type="PackedScene" uid="uid://bes7q2ujh87bk" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/kobold_knight.tscn" id="6_5qocs"]
+[ext_resource type="Resource" uid="uid://celecgrenad1" path="res://01_Cards/Pool/Cards/Engineer/Common/ElectricGrenade/engineer_electric_grenade.tres" id="6_cs3s0"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]
 [ext_resource type="Script" uid="uid://nkraydv4mdse" path="res://01_Cards/Templates/Deck/hand.gd" id="7_jbcul"]
 [ext_resource type="PackedScene" uid="uid://dvuq5n41nak3u" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/ArenaZoneManager/arena_zone_manager.tscn" id="8_fl2p6"]
@@ -26,7 +27,15 @@
 
 [sub_resource type="Resource" id="Resource_xqnte"]
 script = ExtResource("4_kq8si")
+_attack_range = 10.0
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_5ixv2"]
+script = ExtResource("7_jbcul")
+_cards = Dictionary[StringName, ExtResource("5_r0wv3")]({
+&"": ExtResource("6_cs3s0")
+})
+metadata/_custom_type_script = "uid://nkraydv4mdse"
 
 [sub_resource type="Resource" id="Resource_5qocs"]
 script = ExtResource("4_kq8si")
@@ -114,6 +123,7 @@ battle_id = 1
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
 override_base_stats = SubResource("Resource_xqnte")
+override_custom_hand = SubResource("Resource_5ixv2")
 
 [node name="Latika3" parent="Node3D/Entities" unique_id=294337328 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("3_os118")]
 transform = Transform3D(0.022006778, 0, -0.99975777, 0, 1.0000001, 0, 0.99975777, 0, 0.022006778, -5.361015, 9.536744e-07, 0.110419974)

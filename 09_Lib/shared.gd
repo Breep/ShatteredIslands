@@ -87,6 +87,7 @@ var PROJECTILE_SCENES: Dictionary[Projectile.Type, PackedScene]:
 				Projectile.Type.BULLET: load("res://03_SpellsAndProjectiles/Projectiles/Bullet/bullet_projectile.tscn"),
 				Projectile.Type.GAMMA_TURRET: load("res://03_SpellsAndProjectiles/Projectiles/GammaTurret/gamma_turret_projectile.tscn"),
 				Projectile.Type.ARROW: load("res://03_SpellsAndProjectiles/Projectiles/Arrow/arrow_projectile.tscn"),
+				Projectile.Type.GRENADE: load("res://03_SpellsAndProjectiles/Projectiles/Grenade/Projectile/grenade_projectile.tscn"),
 			}
 		return _projectile_scenes_cache
 
