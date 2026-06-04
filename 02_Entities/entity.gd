@@ -93,6 +93,10 @@ var summoner: Entity # Set via apply_context si l'entité a été invoquée par 
 # (sert de source pour CardContext quand le héros joue une carte qui mute le
 # roaster). null pour acolytes/summons/buildings/mobs.
 var roaster: Roaster
+# RoasterEntry dont cette Entity est l'instance runtime. Posée au spawn par
+# EntitySpec.spawn_into. Sert au snapshot de positions (POSITIONING→COUNTDOWN)
+# et à toute logique qui doit remonter de l'entité vers sa donnée persistante.
+var entry: RoasterEntry
 
 #region ============================== Components ==============================
 var damage: DamageComponent

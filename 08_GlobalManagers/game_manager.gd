@@ -81,7 +81,6 @@ var _run_scene: PackedScene:
 
 const RUN_SAVE_PATH := "user://saves/run.tres"
 const DEMO_RUN_PATH := "res://05_Game/Run/Runs/Pool/Prototyping/demo_run.tres"
-const DEMO_PLAYER_FORMATION_PATH := "res://05_Game/Run/Formations/Pool/Prototyping/default_solo.fighting.tres"
 
 const _HERO_SELECTOR_SCENE_PATH := "res://05_Game/HeroSelector/hero_selector.tscn"
 var __hero_selector_scene_cache: PackedScene
@@ -190,8 +189,8 @@ func start_solo_run() -> void:
 
 
 # Appelé par HeroSelector quand le joueur verrouille son héros : ajoute le héros
-# (et ses compagnons) au roaster de la party, résout les scènes, construit la
-# formation depuis le roaster, puis lance la Run (succession de confrontations).
+# (et ses compagnons) au roaster de la party. La formation est maintenue
+# automatiquement par Party (auto-sync sur entry_added). Lance ensuite la Run.
 func lock_hero_into_run(hero: HeroDesc) -> void:
 	if _run_context == null or _run_context.party == null:
 		Verbose.error("lock_hero_into_run: RunContext/party absent", Verbose.Category.GLOBAL_MANAGER)
@@ -203,12 +202,6 @@ func lock_hero_into_run(hero: HeroDesc) -> void:
 	_attach_roaster_scenes(party)
 	for player: Player in PlayerManager.players.values():
 		player.bind_to(party)
-
-	var template: FightingFormation = load(DEMO_PLAYER_FORMATION_PATH) as FightingFormation
-	if template == null:
-		Verbose.error("lock_hero_into_run: default_solo formation introuvable", Verbose.Category.GLOBAL_MANAGER)
-		return
-	party.formation = FightingFormation.from_roaster(party.get_roaster(slot), template)
 
 	start_run()
 

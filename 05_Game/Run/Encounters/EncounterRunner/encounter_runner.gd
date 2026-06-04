@@ -7,7 +7,9 @@
 # - run_*    : setup + démarrage + await fin. Utilisé par ConfrontationRunner.
 #
 # Convention combat : la Party joue toujours côté A (override de formation_a).
-# Côté A = team 1, mirrored. Côté B = team 2, as-authored.
+# Côté A = team 1. Côté B = team 2. Aucune transformation appliquée : les
+# positions stockées dans party.formation sont posées par le joueur lui-même
+# en phase de placement (cf. snapshot POSITIONING→COUNTDOWN dans FightingArea).
 class_name EncounterRunner
 extends Node
 
@@ -41,7 +43,7 @@ func setup_fighting(encounter: FightingEncounter, party_formation: FightingForma
 	get_tree().root.add_child.call_deferred(island)
 	await island.ready
 	island.set_active()
-	island.init_fight(fa.mirrored(), fb, 1, 2)
+	island.init_fight(fa, fb, 1, 2)
 	fighting_started.emit(island)
 	_select_local_hero_by_default()
 	return island
@@ -91,16 +93,7 @@ func _setup_tavern(encounter: TavernEncounter, party: Party = null) -> BuyingIsl
 	get_tree().root.add_child.call_deferred(buying_island)
 	await buying_island.ready
 
-	var hero_entries: Array[RoasterEntry] = []
-	var acolyte_entries: Array[RoasterEntry] = []
-	if party != null:
-		for entry: RoasterEntry in party.all_entries():
-			if entry == null or entry.desc == null: continue
-			match entry.desc.default_category:
-				Entity.Category.HERO: hero_entries.append(entry)
-				Entity.Category.ACOLYTE: acolyte_entries.append(entry)
-
-	buying_island.start_buying_phase_from_encounter(encounter, hero_entries, acolyte_entries)
+	buying_island.start_buying_phase_from_encounter(encounter, party)
 	buying_island.set_active()
 	# Relay du signal naturel de l'île vers tavern_phase_ended pour que run_tavern
 	# (et toute proto qui émet directement tavern_phase_ended) partage le même await.

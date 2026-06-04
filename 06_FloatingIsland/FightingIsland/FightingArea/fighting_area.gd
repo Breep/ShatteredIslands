@@ -60,6 +60,7 @@ var arena_zone_manager: ArenaZoneManager:
 func _ready() -> void:
 	if _ready_checks() != true:
 		return
+	GlobalFightingManager.fighting_phase_state_changed.connect(_on_global_fighting_phase_state_changed)
 
 # ============================== Public functions ==============================
 
@@ -149,3 +150,23 @@ func _ready_checks() -> bool:
 func _on_fighting_manager_fight_done(_unused: FightingManager, _winner_teams_order: Array[int]) -> void:
 	if _current_battle_id < 0: return
 	_heroes.clear()
+
+
+# Étape 8 du flow run : à la fin du placement (POSITIONING → COUNTDOWN), on
+# sérialise la position courante de chaque entity player sur son EntitySpec
+# (ref partagée avec party.formation.entity_specs). Au prochain combat, les
+# specs rejoueront ces transforms.
+func _on_global_fighting_phase_state_changed(new_state: GlobalFightingManager.FightingPhaseState) -> void:
+	if new_state != GlobalFightingManager.FightingPhaseState.COUNTDOWN:
+		return
+	if _spawn_manager == null:
+		return
+	var party: Party = GameManager.run_context.party if GameManager.run_context != null else null
+	if party == null:
+		return
+	for entity: Entity in _spawn_manager.get_entities():
+		if entity == null or entity.entry == null:
+			continue
+		var spec: EntitySpec = party.find_spec_by_entry(entity.entry)
+		if spec != null:
+			spec.transform = entity.global_transform
