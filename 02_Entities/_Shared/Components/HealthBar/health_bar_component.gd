@@ -31,11 +31,12 @@ extends EntityComponent
 @onready var _main_control: Control = %MainControl
 #endregion
 
-const TAUNT_VISUAL_SCENE: PackedScene = preload("res://02_Entities/_Shared/Components/HealthBar/Data/taunt_status_visual.tscn")
 const ALTERATION_ICON_SCENE: PackedScene = preload("res://02_Entities/_Shared/Components/Alterations/AlterationIcon/alteration_icon.tscn")
+const ICONS_PER_ROW: int = 4
 
-var _taunt_visual: Node3D
 var _alteration_icons: Dictionary[Alteration.Type, AlterationIcon] = {}
+# Insertion order of active icons; drives the bottom-up row stacking layout.
+var _icon_order: Array[Alteration.Type] = []
 
 
 #region ============================== Node base functions ==============================
@@ -71,7 +72,6 @@ func _ready() -> void:
 	stats.health_changed.connect(_on_health_changed)
 	stats.health_max_changed.connect(_on_health_max_changed)
 	am.alteration_changed.connect(_on_alteration_changed)
-	am.taunted_changed.connect(_update_taunt_visual)
 	am.taunted_changed.connect(_update_taunt_shield_icon)
 	am.invulnerable_changed.connect(_update_invulnerable_overlay)
 	_owner.progression.level_changed.connect(_on_owner_progression_level_changed)
@@ -160,14 +160,6 @@ func _update_block_bar(new_value: float) -> void:
 	_block_bar.visible = new_value > 0
 
 
-func _update_taunt_visual(is_active: bool, _duration: float, _infinite: bool) -> void:
-	if is_active and is_instance_valid(_spawn):
-		_taunt_visual = TAUNT_VISUAL_SCENE.instantiate()
-		_spawn.add_child(_taunt_visual)
-	elif not is_active and is_instance_valid(_taunt_visual):
-		_taunt_visual.queue_free()
-
-
 ## Gold metallic sheen over the whole bar while the owner is invulnerable.
 func _update_invulnerable_overlay(is_active: bool, _duration: float, _infinite: bool) -> void:
 	if _metal_bar == null: return
@@ -181,15 +173,12 @@ func _update_taunt_shield_icon(is_active: bool, _duration: float, _infinite: boo
 	_taunt_shield_icon.visible = is_active
 
 
+## Allies (party side, PARTY_TEAM_ID) get a green bar, everyone else red.
 func _set_health_bar_color_by_team() -> void:
 	if not _health_bar or not _health_bar.material or not _owner:
 		return
-	var local_player: Player = PlayerManager.get_local_player()
-	var health_color: Color
-	if local_player == null or _owner.team == local_player.team:
-		health_color = Color.LIME_GREEN
-	else:
-		health_color = Color.INDIAN_RED
+	var is_ally: bool = _owner.team == EncounterRunner.PARTY_TEAM_ID
+	var health_color: Color = Color.LIME_GREEN if is_ally else Color.INDIAN_RED
 	_health_bar.material.set_shader_parameter("HealthColor", health_color)
 
 
@@ -208,13 +197,49 @@ func _refresh_icon_for(alteration_type: Alteration.Type) -> void:
 	if _is_alteration_active(alteration):
 		if existing == null:
 			existing = ALTERATION_ICON_SCENE.instantiate() as AlterationIcon
-			_alterations_container.add_child(existing)
-			existing.bind(alteration)
 			_alteration_icons[alteration_type] = existing
+			_icon_order.append(alteration_type)
+			_rebuild_icon_rows()
+			existing.bind(alteration)
 		existing.set_value(_alteration_display_value(alteration))
 	elif existing != null:
-		existing.queue_free()
 		_alteration_icons.erase(alteration_type)
+		_icon_order.erase(alteration_type)
+		if existing.get_parent() != null:
+			existing.get_parent().remove_child(existing)
+		existing.queue_free()
+		_rebuild_icon_rows()
+
+
+## Re-lay the active icons into rows of ICONS_PER_ROW, stacked bottom-up:
+## the oldest row stays pinned at the bottom (next to the bar) and newer rows
+## are added above it, so adding an icon never shifts the existing ones down.
+func _rebuild_icon_rows() -> void:
+	if _alterations_container == null: return
+
+	# Detach icons from their current rows (without freeing them), then drop
+	# the now-empty row containers.
+	for icon: AlterationIcon in _alteration_icons.values():
+		if icon.get_parent() != null:
+			icon.get_parent().remove_child(icon)
+	for row: Node in _alterations_container.get_children():
+		row.free()
+
+	# Chunk icons in insertion order; chunk 0 (oldest) must render at the bottom,
+	# so rows are added to the VBox newest-first (VBox lays children top to bottom).
+	var rows: Array[HBoxContainer] = []
+	var i: int = 0
+	while i < _icon_order.size():
+		var row := HBoxContainer.new()
+		row.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+		row.add_theme_constant_override("separation", 2)
+		for j: int in range(i, mini(i + ICONS_PER_ROW, _icon_order.size())):
+			row.add_child(_alteration_icons[_icon_order[j]])
+		rows.append(row)
+		i += ICONS_PER_ROW
+
+	for k: int in range(rows.size() - 1, -1, -1):
+		_alterations_container.add_child(rows[k])
 
 
 func _update_level_value(level: int) -> void:

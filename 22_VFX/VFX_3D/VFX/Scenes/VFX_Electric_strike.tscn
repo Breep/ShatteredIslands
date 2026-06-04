@@ -5,7 +5,7 @@
 [ext_resource type="Shader" uid="uid://bpf8re2if2yu3" path="res://22_VFX/VFX_3D/VFX/Shaders/s_FireHeader.tres" id="3_lecde"]
 [ext_resource type="Material" uid="uid://c7tmvatlueuuv" path="res://22_VFX/VFX_3D/VFX/Objects/m_Trail_lightening_1.tres" id="4_jbfai"]
 [ext_resource type="Shader" uid="uid://b28qeeghrupsv" path="res://22_VFX/VFX_3D/VFX/Shaders/s_basic_disolve_p.tres" id="5_kt8sj"]
-[ext_resource type="Texture2D" uid="uid://p882hvpsbqve" path="res://22_VFX/VFX_3D/VFX/Textures/T_VFX_spark44.jpg" id="6_3mogh"]
+[ext_resource type="Texture2D" uid="uid://p882hvpsbqve" path="res://21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Textures/T_VFX_spark44.jpg" id="6_3mogh"]
 [ext_resource type="Script" uid="uid://d1hqcabxmjoyf" path="res://22_VFX/VFX_3D/Meteor/Misc/Trail3D.gd" id="7_4ty16"]
 [ext_resource type="Shader" uid="uid://bxslcncv0mhh1" path="res://22_VFX/VFX_3D/VFX/Shaders/s_Trail_dynamic.tres" id="7_r7x17"]
 [ext_resource type="Texture2D" uid="uid://tj7s34v4h2nk" path="res://22_VFX/VFX_3D/VFX/Textures/T_VFX_TrailKuwaharaLight.jpg" id="8_u574u"]

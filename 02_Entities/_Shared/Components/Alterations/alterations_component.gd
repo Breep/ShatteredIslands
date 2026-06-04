@@ -12,8 +12,8 @@ const TICKS_PER_SECOND: int = Alteration.TICKS_PER_SECOND
 ## Single aggregate signal. `payload` depends on the alteration type:
 ## - StackAlteration: new stack count (float)
 ## - TimedAlteration: new time_left (float); is_infinite readable on the instance
-## For finer-grained events (shield_broken, typed_stacks_changed, expired),
-## subscribe to the Alteration instance directly via `get_alteration(type)`.
+## For finer-grained events (shield_broken, expired), subscribe to the
+## Alteration instance directly via `get_alteration(type)`.
 signal alteration_changed(type: Alteration.Type, payload: Variant)
 
 # Stack-count change signals (UI-facing; re-emitted from the underlying alteration)
@@ -61,31 +61,40 @@ func _ready() -> void:
 
 
 func _build_alterations() -> void:
-	# Stack alterations
-	_register(PoisonAlteration.new())
-	_register(IgniteAlteration.new())
-	_register(ShieldAlteration.new())
-	_register(RegenAlteration.new())
-	_register(NecrosisAlteration.new())
-	_register(DefenseAlteration.new())
-	_register(BlockAlteration.new())
-	_register(ThornAlteration.new())
-	_register(StrengthAlteration.new())
-	_register(WeaknessAlteration.new())
-	_register(VulnerabilityAlteration.new())
-	
-	# Timed alterations
-	_register(StunAlteration.new())
-	_register(TauntAlteration.new())
-	_register(SilenceAlteration.new())
-	_register(InvulnerableAlteration.new())
-	_register(UntargetableAlteration.new())
-	
+	for alteration: Alteration in create_all_alterations():
+		_register(alteration)
+
 	shield_alteration = _alterations[Alteration.Type.SHIELD]
 	block_alteration = _alterations[Alteration.Type.BLOCK]
 	thorn_alteration = _alterations[Alteration.Type.THORN]
-	
+
 	_wire_ui_signals()
+
+
+## Fresh instances of every alteration, in registration order. Shared with the
+## AlterationIcon proto so it can enumerate all alterations without duplicating
+## the list.
+static func create_all_alterations() -> Array[Alteration]:
+	var list: Array[Alteration] = []
+	# Stack alterations
+	list.append(PoisonAlteration.new())
+	list.append(IgniteAlteration.new())
+	list.append(ShieldAlteration.new())
+	list.append(RegenAlteration.new())
+	list.append(NecrosisAlteration.new())
+	list.append(DefenseAlteration.new())
+	list.append(BlockAlteration.new())
+	list.append(ThornAlteration.new())
+	list.append(StrengthAlteration.new())
+	list.append(WeaknessAlteration.new())
+	list.append(VulnerabilityAlteration.new())
+	# Timed alterations
+	list.append(StunAlteration.new())
+	list.append(TauntAlteration.new())
+	list.append(SilenceAlteration.new())
+	list.append(InvulnerableAlteration.new())
+	list.append(UntargetableAlteration.new())
+	return list
 
 
 func _register(alteration: Alteration) -> void:
@@ -155,14 +164,42 @@ func get_alteration(alteration_type: Alteration.Type) -> Alteration:
 	return _alterations.get(alteration_type)
 
 
-## Add stacks to a StackAlteration. `mod` may carry DURATION (Regen) or
-## ACTION_TYPE (typed stacks: Strength/Weakness/Vulnerability).
+## Stat alteration pairs that cancel each other: applying one first removes the
+## opposing stacks, and only the surplus accrues. Keeps a single side of each
+## pair active at a time, so the displayed icon follows the net automatically.
+const NET_COUNTERPART: Dictionary[Alteration.Type, Alteration.Type] = {
+	Alteration.Type.STRENGTH: Alteration.Type.WEAKNESS,
+	Alteration.Type.WEAKNESS: Alteration.Type.STRENGTH,
+	Alteration.Type.DEFENSE: Alteration.Type.VULNERABILITY,
+	Alteration.Type.VULNERABILITY: Alteration.Type.DEFENSE,
+}
+
+
+## Add stacks to a StackAlteration. `mod` may carry DURATION (Regen). Strength/
+## Weakness and Defense/Vulnerability net against their counterpart first.
 func add_stack(alteration_type: Alteration.Type, amount: float, source: Entity = null, action_id: StringName = &"", mod: Dictionary = {}) -> float:
 	var alteration: StackAlteration = _alterations.get(alteration_type) as StackAlteration
 	if alteration == null:
 		Verbose.error("add_stack: no StackAlteration for type [" + str(alteration_type) + "]", Verbose.Category.ENTITY_MODULE)
 		return 0.0
+
+	if amount > 0 and NET_COUNTERPART.has(alteration_type):
+		amount = _cancel_counterpart(alteration_type, amount)
+		if amount <= 0:
+			return alteration.stacks
+
 	return alteration.add_stack(amount, source, action_id, mod)
+
+
+## Remove up to `amount` stacks from the opposing alteration; returns the surplus
+## still to be applied to the requested type.
+func _cancel_counterpart(alteration_type: Alteration.Type, amount: float) -> float:
+	var counterpart: StackAlteration = _alterations.get(NET_COUNTERPART[alteration_type]) as StackAlteration
+	if counterpart == null: return amount
+	var cancel: float = min(amount, counterpart.stacks)
+	if cancel > 0:
+		counterpart.remove_stack(cancel)
+	return amount - cancel
 
 
 ## Remove stacks from a StackAlteration. `mod` may carry ACTION_TYPE for typed stacks.
@@ -198,13 +235,60 @@ var thorn_stacks: float:
 	get: return get_stacks(Alteration.Type.THORN)
 
 
-## Convenience for typed stacks (Strength/Weakness/Vulnerability).
+## Raw stat backing each combat alteration, used by the per-type lever below.
+const TYPED_STAT: Dictionary[Alteration.Type, EntityStats.StatType] = {
+	Alteration.Type.STRENGTH: EntityStats.StatType.M_POWER,
+	Alteration.Type.WEAKNESS: EntityStats.StatType.M_FRAGILITY,
+	Alteration.Type.DEFENSE: EntityStats.StatType.M_RESISTANCE,
+	Alteration.Type.VULNERABILITY: EntityStats.StatType.M_EXPOSURE,
+}
+
+var _typed_stat_modifiers: Dictionary[String, StatModifier] = {}
+
+
+## Single-type lever: adjusts the raw stat (M_POWER / M_FRAGILITY / M_RESISTANCE /
+## M_EXPOSURE) on ONE action_type, independent of the broad named alteration.
+## This is how cards/skills target a single type (e.g. exposure on PHYSICAL, power
+## on UTILITY_HEAL). No icon and no netting — it is a plain accumulating modifier.
 func add_typed_stack(alteration_type: Alteration.Type, action_type: Utils.ActionType, amount: float) -> float:
-	return add_stack(alteration_type, amount, null, &"", {Alteration.ModifierType.ACTION_TYPE: action_type})
+	if not TYPED_STAT.has(alteration_type):
+		Verbose.error("add_typed_stack: no raw stat for type [" + str(alteration_type) + "]", Verbose.Category.ENTITY_MODULE)
+		return 0.0
+	return _adjust_typed_stat(TYPED_STAT[alteration_type], action_type, amount)
 
 
 func remove_typed_stack(alteration_type: Alteration.Type, action_type: Utils.ActionType, amount: float) -> float:
-	return remove_stack(alteration_type, amount, {Alteration.ModifierType.ACTION_TYPE: action_type})
+	if not TYPED_STAT.has(alteration_type):
+		Verbose.error("remove_typed_stack: no raw stat for type [" + str(alteration_type) + "]", Verbose.Category.ENTITY_MODULE)
+		return 0.0
+	return _adjust_typed_stat(TYPED_STAT[alteration_type], action_type, -amount)
+
+
+func _adjust_typed_stat(stat_type: EntityStats.StatType, action_type: Utils.ActionType, delta: float) -> float:
+	if _owner == null or _owner.stat_modifiers_registry == null: return 0.0
+
+	var key: String = str(stat_type) + ":" + str(action_type)
+	var mod: StatModifier = _typed_stat_modifiers.get(key)
+	var new_value: float = (mod.value if mod != null else 0.0) + delta
+	new_value = max(0.0, new_value)
+
+	if new_value <= 0:
+		if mod != null:
+			_owner.stat_modifiers_registry.unregister_modifier(mod)
+			_typed_stat_modifiers.erase(key)
+		return 0.0
+
+	if mod == null:
+		mod = StatModifier.new()
+		mod.id = StringName("TypedStatLever:" + key)
+		mod.stat_type = stat_type
+		mod.action_type = action_type
+		mod.calc_type = StatModifier.CalcType.ADD
+		mod.tags = []
+		_typed_stat_modifiers[key] = mod
+	mod.value = new_value
+	_owner.stat_modifiers_registry.register_modifier(mod)
+	return new_value
 
 
 ## Apply a TimedAlteration. `duration == -1` → infinite.
