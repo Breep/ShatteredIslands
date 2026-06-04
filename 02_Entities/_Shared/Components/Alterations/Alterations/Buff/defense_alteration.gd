@@ -11,7 +11,7 @@ func _init() -> void:
 	polarity = Polarity.BUFF
 	id = &"Defense"
 	display_color = Color.STEEL_BLUE
-	icon = preload("res://04_UI/_Themes/Data/Icons/AlterationsIcons/defense4.svg")
+	icon = preload("res://04_UI/_Themes/Data/Icons/AlterationsIcons/shield2.svg")
 	icon_modulate = Color.DODGER_BLUE
 	_stat_type = EntityStats.StatType.M_RESISTANCE
 	_modifier_id = &"Defense Alteration"

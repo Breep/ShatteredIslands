@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c31tg6uamtqff"
-path="res://.godot/imported/card_portrait_defense_titan_gloves.png-b471bf5cf5c5dfce79f9de841d04be59.ctex"
+uid="uid://drteaos4u3nnm"
+path="res://.godot/imported/shield2.svg-a23a6a7f3b1d325f8db3e631ff0cfc28.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://20_Data/Assets/Card/Portraits/Defense/card_portrait_defense_titan_gloves.png"
-dest_files=["res://.godot/imported/card_portrait_defense_titan_gloves.png-b471bf5cf5c5dfce79f9de841d04be59.ctex"]
+source_file="res://04_UI/_Themes/Data/Icons/AlterationsIcons/shield2.svg"
+dest_files=["res://.godot/imported/shield2.svg-a23a6a7f3b1d325f8db3e631ff0cfc28.ctex"]
 
 [params]
 
@@ -23,7 +23,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -38,3 +38,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false
