@@ -198,9 +198,9 @@ func lock_hero_into_run(hero: HeroDesc) -> void:
 		return
 
 	var party: Party = _run_context.party
-	party.get_or_create_roaster(_resolve_local_owner_slot()).add(RoasterEntry.from_desc(hero))
+	var slot: PlayerState.Slot = _resolve_local_owner_slot()
+	party.get_or_create_roaster(slot).add(RoasterEntry.from_desc(hero))
 	_attach_roaster_scenes(party)
-	_init_roaster_runtime_data(party)
 	for player: Player in PlayerManager.players.values():
 		player.bind_to(party)
 
@@ -208,7 +208,7 @@ func lock_hero_into_run(hero: HeroDesc) -> void:
 	if template == null:
 		Verbose.error("lock_hero_into_run: default_solo formation introuvable", Verbose.Category.GLOBAL_MANAGER)
 		return
-	party.formation = _build_formation_from_roaster(party.all_entries(), template)
+	party.formation = FightingFormation.from_roaster(party.get_roaster(slot), template)
 
 	start_run()
 
@@ -249,54 +249,6 @@ func _build_new_run_context(run: Run = null) -> RunContext:
 	ctx.run_id = str(ctx.started_at) + "_" + str(ctx.rng_seed)
 	# party.players est peuplé par Player.bind_to() au moment du lock du héros.
 	return ctx
-
-
-# Construit une FightingFormation en posant les entries du roaster sur les
-# spawn_specs de la formation modèle. Premier hero → premier hero_spawn_spec ;
-# acolytes dans l'ordre sur acolyte_spawn_specs. Surplus dropé.
-func _build_formation_from_roaster(roaster: Array[RoasterEntry], template: FightingFormation) -> FightingFormation:
-	var formation := FightingFormation.new()
-	if template == null: return formation
-	var hero_entries: Array[RoasterEntry] = []
-	var acolyte_entries: Array[RoasterEntry] = []
-	for entry: RoasterEntry in roaster:
-		if entry == null or entry.desc == null: continue
-		match entry.desc.default_category:
-			Entity.Category.HERO: hero_entries.append(entry)
-			Entity.Category.ACOLYTE: acolyte_entries.append(entry)
-
-	var hero_count: int = mini(hero_entries.size(), template.hero_spawn_specs.size())
-	for i in hero_count:
-		formation.entity_specs.append(_make_player_spec(hero_entries[i], template.hero_spawn_specs[i].transform, "Hero_" + str(i)))
-
-	var acolyte_count: int = mini(acolyte_entries.size(), template.acolyte_spawn_specs.size())
-	for i in acolyte_count:
-		formation.entity_specs.append(_make_player_spec(acolyte_entries[i], template.acolyte_spawn_specs[i].transform, "Acolyte_" + str(i)))
-
-	return formation
-
-
-func _make_player_spec(entry: RoasterEntry, t: Transform3D, label: String) -> EntitySpec:
-	var spec := EntitySpec.new()
-	spec.desc = entry.desc
-	spec.entry = entry
-	spec.transform = t
-	spec.display_label = label
-	return spec
-
-
-# Garantit que chaque RoasterEntry hero a hand et data_memory non-null. Source
-# canonique des données hero-level, lues à chaque spawn via EntitySpec.entry.
-func _init_roaster_runtime_data(party: Party) -> void:
-	if party == null: return
-	var local_player_name: String = PlayerManager.get_local_player().player_name if PlayerManager.get_local_player() != null else ""
-	for entry: RoasterEntry in party.all_entries():
-		if entry == null or entry.desc == null: continue
-		if entry.desc.default_category != Entity.Category.HERO: continue
-		if entry.hand == null:
-			entry.hand = Hand.new().init(local_player_name)
-		if entry.data_memory == null:
-			entry.data_memory = NestedRegistry.new()
 
 
 func get_active_families() -> Array[Family]:

@@ -35,6 +35,28 @@ func add_entity(spec: EntitySpec) -> EntitySpec:
 	return spec
 
 
+# Construit une FightingFormation en posant les entries du Roaster sur les
+# spawn_specs du template. Premier hero → premier hero_spawn_spec ; acolytes
+# dans l'ordre sur acolyte_spawn_specs. Surplus dropé. Template null → formation
+# vide.
+static func from_roaster(roaster: Roaster, template: FightingFormation) -> FightingFormation:
+	var formation := FightingFormation.new()
+	if roaster == null or template == null:
+		return formation
+	var hero_entries: Array[RoasterEntry] = roaster.get_by_category(Entity.Category.HERO)
+	var acolyte_entries: Array[RoasterEntry] = roaster.get_by_category(Entity.Category.ACOLYTE)
+
+	var hero_count: int = mini(hero_entries.size(), template.hero_spawn_specs.size())
+	for i in hero_count:
+		formation.entity_specs.append(_make_spec_for_entry(hero_entries[i], template.hero_spawn_specs[i].transform, "Hero_" + str(i)))
+
+	var acolyte_count: int = mini(acolyte_entries.size(), template.acolyte_spawn_specs.size())
+	for i in acolyte_count:
+		formation.entity_specs.append(_make_spec_for_entry(acolyte_entries[i], template.acolyte_spawn_specs[i].transform, "Acolyte_" + str(i)))
+
+	return formation
+
+
 # Helper transitionnel utilisé par les proto scenes : depuis ce template
 # (spawn_specs uniquement), crée une formation peuplée. Side effect : ajoute
 # des RoasterEntry (avec EntityDesc transient) au roaster du slot PLAYER_1.

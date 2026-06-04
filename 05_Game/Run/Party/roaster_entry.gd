@@ -17,3 +17,17 @@ static func from_desc(d: EntityDesc) -> RoasterEntry:
 	var entry := RoasterEntry.new()
 	entry.desc = d
 	return entry
+
+
+# Garantit que les données runtime (hand, data_memory) sont posées sur les
+# entries héros. Idempotent : si déjà initialisées, ne fait rien. Appelée
+# automatiquement par Roaster.add() à chaque ajout.
+func ensure_runtime_initialized() -> void:
+	if desc == null:
+		return
+	if desc.default_category != Entity.Category.HERO:
+		return
+	if hand == null:
+		hand = Hand.new().init()
+	if data_memory == null:
+		data_memory = NestedRegistry.new()

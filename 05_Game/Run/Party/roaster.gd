@@ -20,6 +20,7 @@ func add(entry: RoasterEntry) -> RoasterEntry:
 		Verbose.warn("Roaster.add: entry null, ignoré", Verbose.Category.ENCOUNTER_RUNNER)
 		return null
 	entries.append(entry)
+	entry.ensure_runtime_initialized()
 	entry_added.emit(entry)
 	if entry.desc != null:
 		for companion_desc: EntityDesc in entry.desc.starting_companions:
