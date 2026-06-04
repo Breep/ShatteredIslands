@@ -75,10 +75,12 @@ func _build_tavern_ctx() -> EntityContext:
 func _spawn_entry_at(entry: RoasterEntry, target_transform: Transform3D, fallback_name: String, parent: Node3D, ctx: EntityContext) -> void:
 	if entry == null or entry.desc == null: return
 	var slot: PlayerState.Slot = PlayerState.Slot.NONE
-	if GameManager.run_context != null and GameManager.run_context.party != null:
-		slot = GameManager.run_context.party.find_slot_of(entry)
+	var party: Party = GameManager.run_context.party if GameManager.run_context != null else null
+	if party != null:
+		slot = party.find_slot_of(entry)
 	var owner: Player = PlayerManager.get_player_by_slot(slot)
 	ctx.runtime_owner_player = owner if owner != null else PlayerManager.get_local_player()
+	ctx.roaster = party.get_roaster(slot) if party != null else null
 	var spec := EntitySpec.new()
 	spec.desc = entry.desc
 	spec.entry = entry

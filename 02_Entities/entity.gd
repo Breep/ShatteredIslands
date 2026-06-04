@@ -89,6 +89,10 @@ const TICKS_PER_SECOND: int = 60
 var uid: int = -1 # Multiplayer ID of the entity
 var stats: EntityStats
 var summoner: Entity # Set via apply_context si l'entité a été invoquée par une autre
+# Roaster du joueur propriétaire. Posé au spawn pour les héros uniquement
+# (sert de source pour CardContext quand le héros joue une carte qui mute le
+# roaster). null pour acolytes/summons/buildings/mobs.
+var roaster: Roaster
 
 #region ============================== Components ==============================
 var damage: DamageComponent

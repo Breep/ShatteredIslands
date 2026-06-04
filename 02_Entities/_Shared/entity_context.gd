@@ -16,5 +16,8 @@ var entity_owner: Entity
 # Hero-specific runtime context — consommé par HeroSpec.spawn_into.
 # display_mode : BUYING_PHASE en tavern, FIGHTING_PHASE en combat.
 # runtime_owner_player : Player runtime qui contrôle ce héros (UI "c'est mon hero").
+# roaster : Roaster du joueur propriétaire (transmis aux héros uniquement, source
+# pour CardContext quand le héros joue une carte add/remove sur le roaster).
 var display_mode: Entity.DisplayMode = Entity.DisplayMode.FIGHTING_PHASE
 var runtime_owner_player: Player = null
+var roaster: Roaster = null

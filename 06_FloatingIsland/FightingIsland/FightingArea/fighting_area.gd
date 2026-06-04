@@ -98,10 +98,12 @@ func _spawn_specs(specs: Array[EntitySpec], team: int) -> void:
 		# Fallback marker class + local player pour compat legacy / solo.
 		if spec.entry != null or spec is HeroSpec or spec is AcolyteSpec:
 			var slot: PlayerState.Slot = PlayerState.Slot.NONE
-			if spec.entry != null and GameManager.run_context != null and GameManager.run_context.party != null:
-				slot = GameManager.run_context.party.find_slot_of(spec.entry)
+			var party: Party = GameManager.run_context.party if GameManager.run_context != null else null
+			if spec.entry != null and party != null:
+				slot = party.find_slot_of(spec.entry)
 			var owner: Player = PlayerManager.get_player_by_slot(slot)
 			ctx.runtime_owner_player = owner if owner != null else local_player
+			ctx.roaster = party.get_roaster(slot) if party != null else null
 		var node: Node = spec.spawn_into(self, ctx)
 		var entity := node as Entity
 		if entity != null:
