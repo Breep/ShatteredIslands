@@ -102,6 +102,7 @@ const _FAMILY_PATHS: Dictionary[Family.Type, String] = {
 	Family.Type.COLOSSUS: "res://01_Cards/Pool/Families/Colossus/colossus_family.tres",
 	Family.Type.CHICKEN_LORD: "res://01_Cards/Pool/Families/ChickenLord/chicken_lord_family.tres",
 	Family.Type.NECROSIS: "res://01_Cards/Pool/Families/necro_family.tres",
+	Family.Type.PROTOTYPING: "res://01_Cards/Pool/Families/prototyping_family.proto.tres",
 }
 
 var __families_ref_cache: Dictionary[Family.Type, Family] = {}
@@ -155,7 +156,8 @@ func init() -> void:
 	#_active_families.append(_FAMILIES_REF[Family.Type.WARRIOR])
 	#_active_families.append(_FAMILIES_REF[Family.Type.LIGHT])
 	#_active_families.append(_FAMILIES_REF[Family.Type.CHICKEN_LORD])
-	_active_families.append(_FAMILIES_REF[Family.Type.COLOSSUS])
+	#_active_families.append(_FAMILIES_REF[Family.Type.COLOSSUS])
+	_active_families.append(_FAMILIES_REF[Family.Type.PROTOTYPING])
 	#_active_families.append(_FAMILIES_REF[Family.Type.NECROSIS])
 
 

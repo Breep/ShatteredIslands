@@ -31,6 +31,7 @@
 [resource]
 script = ExtResource("1_hero")
 id = 2
+category = "Range / DPS"
 name = "Latika"
 portrait = ExtResource("1_pxqef")
 description = "L'Enfant des Loups — DPS distance / carry mono-cible. Dualité prédateur solitaire / chef de meute."
