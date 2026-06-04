@@ -42,7 +42,8 @@ enum EntityType {
 	DEFLECTION_SHIELD,
 	GAMMA_TURRET,
 	TREX,
-	CHICKEN_EGG
+	CHICKEN_EGG,
+	MOLTEN_GOLEM
 }
 #endregion
 

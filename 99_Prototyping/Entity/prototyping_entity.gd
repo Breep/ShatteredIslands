@@ -30,7 +30,7 @@ func _ready() -> void:
 	_adopt_pre_placed_entities()
 
 	_center_point_camera.set_active()
-	_fighting_manager.init(_spawn_manager, 42)
+	_fighting_manager.init(_spawn_manager, 1) # match the entities' battle_id so their seeded RNG is used
 
 	_auto_attack_check_button.button_pressed = _auto_attack_enabled
 	_family_managers_check_button.button_pressed = _family_managers_enabled

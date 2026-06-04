@@ -94,8 +94,9 @@ _arena_zone_manager = NodePath("../../ArenaZoneManager")
 
 [node name="SkeletonDragon" parent="Node3D/Entities" unique_id=434739176 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("20_tmkd7")]
 transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, 0.5904154, -2.384186e-07, 7.004996)
-level = 5
+level = 7
 team = 1
+battle_id = 1
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
 

@@ -50,6 +50,7 @@ const _LANDING_TURN_WEIGHT: float = 0.15
 const _AERIAL_AS_MOD_ID: StringName = &"AerialEnrage"
 const _AERIAL_RANGE_MOD_ID: StringName = &"AerialRange"
 const _AERIAL_RANGE_BONUS: float = 9999.0 # effectively infinite range → no approach in air
+const _NO_MANA_REGEN_MOD_ID: StringName = &"FlightNoManaRegen"
 
 var _takeoff_yaw: float
 var _takeoff_position: Vector3
@@ -62,6 +63,7 @@ var _impact_done: bool = false
 var _as_modifier: StatModifier
 var _range_modifier: StatModifier
 var _aerial_target_counter: int = 0
+var _mana_modifier: StatModifier
 #endregion
 
 #region Node base functions
@@ -103,7 +105,6 @@ func abort_flight() -> void:
 		return
 	_disable_aerial_combat()
 	_anim.end_fly()
-	_owner.alterations.cancel_state(Alteration.Type.INVULNERABLE)
 	_set_combat_active(true)
 	_phase = Phase.IDLE
 
@@ -120,6 +121,7 @@ func process_tick() -> void:
 				_begin_flying()
 		Phase.FLYING:
 			_advance_flight_path()
+			_maintain_aerial_target()
 			if _ticks >= _phase_ticks:
 				_begin_landing()
 		Phase.LANDING:
@@ -134,7 +136,6 @@ func process_tick() -> void:
 #region Private functions
 func _begin_flying() -> void:
 	_anim.enter_fly_loop()
-	_owner.alterations.apply_state(Alteration.Type.INVULNERABLE)
 	_enable_aerial_combat()
 	_enter_phase(Phase.FLYING, _to_ticks(_flight_duration))
 
@@ -152,7 +153,6 @@ func _begin_landing() -> void:
 
 func _finish_flight() -> void:
 	_anim.end_fly()
-	_owner.alterations.cancel_state(Alteration.Type.INVULNERABLE)
 	_set_combat_active(true)
 	_phase = Phase.IDLE
 	flight_landed.emit()
@@ -184,10 +184,12 @@ func _advance_flight_path() -> void:
 		_owner.look_at_target_y_only(ahead)
 
 
-# Suspends/resumes ground combat for the whole flight: active=false on takeoff,
-# active=true on land/abort. Pausing the auto-attack also drops any in-progress
-# swing (see AutoAttackComponent.set_paused), so the dragon deals no delayed hit
-# once airborne; movement is halted so it does not fight the flight path.
+# Toggles the "whole flight" state (takeoff → land/abort), active=false on takeoff,
+# active=true on land/abort. While airborne the dragon is invulnerable (also prevents
+# dying mid-flight, which would otherwise leave a corpse following the path); movement
+# is halted so it does not fight the flight path; the auto-attack is paused — which also
+# drops any in-progress swing (see AutoAttackComponent.set_paused) so no delayed hit
+# lands; mana regen is zeroed so the ultimate can't auto-cast mid-flight (stance conflict).
 func _set_combat_active(active: bool) -> void:
 	if _owner.movement != null:
 		if active:
@@ -196,6 +198,30 @@ func _set_combat_active(active: bool) -> void:
 			_owner.movement.stop()
 	if _owner.auto_attack != null:
 		_owner.auto_attack.set_paused(not active)
+	if active:
+		_owner.alterations.cancel_state(Alteration.Type.INVULNERABLE)
+		_unregister_mana_cut()
+	else:
+		_owner.alterations.apply_state(Alteration.Type.INVULNERABLE)
+		_register_mana_cut()
+
+
+func _register_mana_cut() -> void:
+	if _owner.stat_modifiers_registry == null or _mana_modifier != null:
+		return
+	_mana_modifier = StatModifier.new()
+	_mana_modifier.id = _NO_MANA_REGEN_MOD_ID
+	_mana_modifier.stat_type = EntityStats.StatType.MANA_REGEN
+	_mana_modifier.calc_type = StatModifier.CalcType.MULT
+	_mana_modifier.value = -1.0 # (1 + -1) = 0 → no mana regen while airborne
+	_owner.stat_modifiers_registry.register_modifier(_mana_modifier)
+
+
+func _unregister_mana_cut() -> void:
+	if _owner.stat_modifiers_registry == null or _mana_modifier == null:
+		return
+	_owner.stat_modifiers_registry.unregister_modifier(_mana_modifier)
+	_mana_modifier = null
 
 
 # Aerial enrage, active only during FLYING: unpause the auto-attack, apply the
@@ -208,13 +234,19 @@ func _enable_aerial_combat() -> void:
 	_register_aerial_modifiers()
 	if not _owner.auto_attack.attack_completed.is_connected(_on_aerial_attack_completed):
 		_owner.auto_attack.attack_completed.connect(_on_aerial_attack_completed)
+	if not _owner.auto_attack.attack_started.is_connected(_on_aerial_attack_started):
+		_owner.auto_attack.attack_started.connect(_on_aerial_attack_started)
 	_pick_aerial_target()
 
 
 func _disable_aerial_combat() -> void:
 	_unregister_aerial_modifiers()
-	if _owner.auto_attack != null and _owner.auto_attack.attack_completed.is_connected(_on_aerial_attack_completed):
+	if _owner.auto_attack == null:
+		return
+	if _owner.auto_attack.attack_completed.is_connected(_on_aerial_attack_completed):
 		_owner.auto_attack.attack_completed.disconnect(_on_aerial_attack_completed)
+	if _owner.auto_attack.attack_started.is_connected(_on_aerial_attack_started):
+		_owner.auto_attack.attack_started.disconnect(_on_aerial_attack_started)
 
 
 func _register_aerial_modifiers() -> void:
@@ -252,6 +284,17 @@ func _pick_aerial_target() -> void:
 		_owner.auto_attack.set_target(target)
 
 
+# Re-acquire a frontal target when the auto-attack has none — its target died, left
+# the fight, or became untargetable. Without this the dragon stays idle for the rest
+# of the flight (re-targeting otherwise only happens on attack_completed, which never
+# fires while idle).
+func _maintain_aerial_target() -> void:
+	if _owner.auto_attack == null:
+		return
+	if not is_instance_valid(_owner.auto_attack.get_current_target()):
+		_pick_aerial_target()
+
+
 # Random enemy within the frontal arc of the dragon's flight facing, so attacking it
 # never forces an impossible body turn (the body stays oriented along the path).
 # Uses the seeded RNG (battle_id) → deterministic / coop sync-safe.
@@ -283,6 +326,12 @@ func _pick_random_frontal_enemy() -> Entity:
 
 func _on_aerial_attack_completed() -> void:
 	_pick_aerial_target()
+
+
+# The ground attack anim is blocked by _lock_animation while flying; play the dedicated
+# fly-attack one-shot instead so the dragon visibly attacks in the air.
+func _on_aerial_attack_started(_lock_seconds: float) -> void:
+	_anim.play_fly_attack()
 
 
 func _on_fighting_state_changed(new_state: Entity.FightingState) -> void:
