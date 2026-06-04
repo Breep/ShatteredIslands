@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dv0rauvoaxb0y" path="res://02_Entities/Pool/Heroes/DarkKnight/Skins/Standard/dark_knight_black.tscn" id="3_5c32l"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://cv35qdloi5xv6" path="res://02_Entities/Pool/Heroes/DarkKnight/dark_knight_animation_tree.res" id="3_u48vt"]
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="5_8gr7v"]
-[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/LargeHealthBar/large_health_bar_component.tscn" id="6_3htvw"]
+[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.tscn" id="6_3htvw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rxegs"]
 radius = 0.63916016

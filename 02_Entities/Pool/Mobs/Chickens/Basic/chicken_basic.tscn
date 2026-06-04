@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://ctj0phpdgq5iu" path="res://02_Entities/Pool/Mobs/Chickens/Basic/chicken_basic_visual.tscn" id="3_awods"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://cr51ggnb0u010" path="res://02_Entities/Pool/Mobs/Chickens/chicken_animation_tree.res" id="3_n43b8"]
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="5_unxfj"]
-[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/Components/HealthBar/SmallHealthBar/small_health_bar_component.tscn" id="8_5weh6"]
+[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/SmallHealthBar/small_health_bar_component.tscn" id="8_5weh6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x7yny"]
 radius = 0.421875

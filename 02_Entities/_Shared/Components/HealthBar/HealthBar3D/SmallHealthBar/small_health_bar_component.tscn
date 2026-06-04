@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://caud4asl4y1y5"]
 
 [ext_resource type="Shader" uid="uid://cxvdhkkjpr75e" path="res://02_Entities/_Shared/Components/HealthBar/Shaders/character_health_bar.gdshader" id="1_2hyq6"]
-[ext_resource type="Script" uid="uid://b4yl7aebvyoih" path="res://02_Entities/_Shared/Components/HealthBar/SmallHealthBar/small_health_bar_component.gd" id="1_wiwv7"]
+[ext_resource type="Script" uid="uid://b4yl7aebvyoih" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/SmallHealthBar/small_health_bar_component.gd" id="1_wiwv7"]
 [ext_resource type="Shader" uid="uid://dncf64el86tmc" path="res://02_Entities/_Shared/Components/HealthBar/Shaders/character_shield_bar.gdshader" id="2_fsx5g"]
 [ext_resource type="Shader" uid="uid://bk6a2rmxlibvg" path="res://02_Entities/_Shared/Components/HealthBar/Shaders/character_level_frame.gdshader" id="4_fy0s0"]
 [ext_resource type="Shader" uid="uid://dav4yd3tlk03a" path="res://22_VFX/VFX_2D/UI/block_bar.gdshader" id="5_block"]

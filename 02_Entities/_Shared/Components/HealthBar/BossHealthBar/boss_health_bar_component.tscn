@@ -161,6 +161,8 @@ theme_override_font_sizes/normal_font_size = 28
 bbcode_enabled = true
 text = "[center]Boss Name[/center]"
 fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MainControl/MainVBox" unique_id=751066785]
 layout_mode = 2

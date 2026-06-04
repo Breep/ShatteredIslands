@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://dc5omuv2yips8" path="res://02_Entities/Pool/Mobs/Goblins/GoblinBerserker/Stats/goblin_berserker_entity_desc.tres" id="2_4qwmo"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://1mkqj0j5kmvc" path="res://02_Entities/Pool/Mobs/Goblins/GoblinBerserker/goblin_berserker_animation_tree.res" id="4_k5uqm"]
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="5_4qwmo"]
-[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/LargeHealthBar/large_health_bar_component.tscn" id="6_lhpae"]
+[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.tscn" id="6_lhpae"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k5uqm"]
 radius = 0.3959961

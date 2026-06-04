@@ -1,18 +1,18 @@
-[gd_scene load_steps=68 format=3 uid="uid://baq26fbqb5eun"]
+[gd_scene format=3 uid="uid://baq26fbqb5eun"]
 
-[ext_resource type="Shader" uid="uid://c1yk83df2els4" path="res://02_Entities/_Data/Golem/Molten_golem/vfx/shaders/s_master_explosion_X1.tres" id="1_ly1s5"]
-[ext_resource type="Texture2D" uid="uid://sfqnk8pph4px" path="res://02_Entities/_Data/Golem/Molten_golem/vfx/textures/T_VFX_Noise_075.png" id="2_s3f52"]
-[ext_resource type="Texture2D" uid="uid://ct4uygs7cju6p" path="res://02_Entities/_Data/Golem/Molten_golem/vfx/textures/T_NKQ443.png" id="3_scb70"]
-[ext_resource type="ArrayMesh" uid="uid://dai884pwf0uti" path="res://02_Entities/_Data/Golem/Molten_golem/vfx/objects/sm_cloud5cp.obj" id="4_qtbla"]
-[ext_resource type="Shader" uid="uid://1q6lsrjyrqr1" path="res://02_Entities/_Data/Golem/Molten_golem/vfx/shaders/s_simple_pfc.tres" id="5_yuha0"]
-[ext_resource type="Texture2D" uid="uid://bpkup3eluevcq" path="res://02_Entities/_Data/Golem/Molten_golem/vfx/textures/T_VFX_hit22.jpg" id="6_es2mj"]
-[ext_resource type="ArrayMesh" uid="uid://dwcusyt04617u" path="res://02_Entities/_Data/Golem/Molten_golem/vfx/objects/sm_debris_1.obj" id="7_6gowc"]
-[ext_resource type="Texture2D" uid="uid://uh8xp5ulkqx1" path="res://02_Entities/_Data/Golem/Molten_golem/vfx/textures/T_smoke_bb1fa.png" id="8_rwro2"]
-[ext_resource type="Shader" path="res://02_Entities/_Data/Golem/Molten_golem/vfx/shaders/ss_stylized_smoke_Q1_p.gdshader" id="9_ydvia"]
-[ext_resource type="Texture2D" uid="uid://du4o44wboryvw" path="res://02_Entities/_Data/Golem/Molten_golem/vfx/textures/T_Noise_001R.png" id="10_76230"]
-[ext_resource type="Gradient" uid="uid://c7skakdnd2y40" path="res://02_Entities/_Data/Golem/Molten_golem/vfx/textures/gradients/g_firepnf.tres" id="11_1kw4q"]
-[ext_resource type="Texture2D" uid="uid://reunn547okbt" path="res://02_Entities/_Data/Golem/Molten_golem/vfx/textures/T_Cracks142.png" id="12_2fps7"]
-[ext_resource type="Texture2D" uid="uid://bitbte7ryrc5l" path="res://02_Entities/_Data/Golem/Molten_golem/vfx/textures/T_Cracks411a.jpg" id="13_ia7qk"]
+[ext_resource type="Shader" uid="uid://c1yk83df2els4" path="res://21_Props/DefaultBattleIsland/Arch_island/VFX/shaders/s_master_explosion_X1.tres" id="1_ly1s5"]
+[ext_resource type="Texture2D" uid="uid://sfqnk8pph4px" path="res://22_VFX/Elementary/VFX/textures/T_VFX_Noise_075.png" id="2_s3f52"]
+[ext_resource type="Texture2D" uid="uid://ct4uygs7cju6p" path="res://22_VFX/Elementary/VFX/textures/T_NKQ443.png" id="3_scb70"]
+[ext_resource type="ArrayMesh" uid="uid://dai884pwf0uti" path="res://21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Objects/sm_cloud5cp.obj" id="4_qtbla"]
+[ext_resource type="Shader" uid="uid://1q6lsrjyrqr1" path="res://22_VFX/VFX_3D/Ultimate/Aeron/Shaders/s_simple_pfc.tres" id="5_yuha0"]
+[ext_resource type="Texture2D" uid="uid://bpkup3eluevcq" path="res://21_Props/DefaultBattleIsland/Arch_island/VFX/textures/T_VFX_hit22.jpg" id="6_es2mj"]
+[ext_resource type="ArrayMesh" uid="uid://dwcusyt04617u" path="res://22_VFX/VFX_3D/Explosion/objects/sm_debris_1.obj" id="7_6gowc"]
+[ext_resource type="Texture2D" uid="uid://uh8xp5ulkqx1" path="res://21_Props/DefaultBattleIsland/Arch_island/VFX/textures/T_smoke_bb1fa.png" id="8_rwro2"]
+[ext_resource type="Shader" uid="uid://b577uvu0wn47n" path="res://02_Entities/_Data/Golem/Molten_golem/vfx/shaders/ss_stylized_smoke_Q1_p.gdshader" id="9_ydvia"]
+[ext_resource type="Texture2D" uid="uid://du4o44wboryvw" path="res://21_Props/DefaultBattleIsland/Arch_island/VFX/textures/T_Noise_001R.png" id="10_76230"]
+[ext_resource type="Gradient" uid="uid://c7skakdnd2y40" path="res://21_Props/DefaultBattleIsland/Arch_island/VFX/textures/gradients/g_firepnf.tres" id="11_1kw4q"]
+[ext_resource type="Texture2D" uid="uid://reunn547okbt" path="res://22_VFX/Elementary/VFX/textures/T_Cracks142.png" id="12_2fps7"]
+[ext_resource type="Texture2D" uid="uid://bitbte7ryrc5l" path="res://22_VFX/Elementary/VFX/textures/T_Cracks411a.jpg" id="13_ia7qk"]
 
 [sub_resource type="Gradient" id="Gradient_o1lpg"]
 offsets = PackedFloat32Array(0, 0.686747)
@@ -25,14 +25,14 @@ gradient = SubResource("Gradient_o1lpg")
 render_priority = 0
 shader = ExtResource("1_ly1s5")
 shader_parameter/Cloud_Color_Scale = Vector2(1, 1)
+shader_parameter/Dark_variation = ExtResource("2_s3f52")
+shader_parameter/Dark_Color_Gradient_1D = SubResource("GradientTexture1D_cbmf5")
 shader_parameter/Dissapear_scale = Vector2(2, 1)
+shader_parameter/Disapear_Noise = ExtResource("2_s3f52")
 shader_parameter/Bright_Color = Color(1.7, 0.4, 0.1, 1)
 shader_parameter/Color_Intensity = 1.0
 shader_parameter/Color_max = 1.0
 shader_parameter/Noise_color_scale = Vector2(1, 0.5)
-shader_parameter/Dark_variation = ExtResource("2_s3f52")
-shader_parameter/Dark_Color_Gradient_1D = SubResource("GradientTexture1D_cbmf5")
-shader_parameter/Disapear_Noise = ExtResource("2_s3f52")
 shader_parameter/Noise_Color = ExtResource("3_scb70")
 
 [sub_resource type="Curve" id="Curve_fsne3"]
@@ -103,8 +103,8 @@ alpha_curve = SubResource("CurveTexture_lob6i")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_omyhh"]
 render_priority = 0
 shader = ExtResource("5_yuha0")
-shader_parameter/ProximityFade = 0.2
 shader_parameter/Alpha_Texture = ExtResource("6_es2mj")
+shader_parameter/ProximityFade = 0.2
 
 [sub_resource type="Curve" id="Curve_j46n0"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.631746, 0), 0.0, 0.0, 0, 0]
@@ -258,9 +258,9 @@ gradient = SubResource("Gradient_b1urf")
 render_priority = 0
 shader = ExtResource("9_ydvia")
 shader_parameter/Texture_Scale = Vector2(0.2, 0.4)
+shader_parameter/Disolver_Texture = ExtResource("10_76230")
 shader_parameter/Light_attenuation = 1.3
 shader_parameter/Shadow_roundness = 1.0
-shader_parameter/Disolver_Texture = ExtResource("10_76230")
 shader_parameter/Color_1D_Gradient = SubResource("GradientTexture1D_aeil0")
 
 [sub_resource type="Curve" id="Curve_3g3tb"]
@@ -295,6 +295,7 @@ emission_ring_axis = Vector3(0, 1, 0)
 emission_ring_height = 0.0
 emission_ring_radius = 1.0
 emission_ring_inner_radius = 0.5
+emission_ring_cone_angle = 90.0
 angle_min = -180.0
 angle_max = 180.0
 direction = Vector3(0, 1, 0)
@@ -457,13 +458,13 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7yhr6"]
 _data = {
-"Init": SubResource("Animation_nh3rv"),
-"RESET": SubResource("Animation_7sor3")
+&"Init": SubResource("Animation_nh3rv"),
+&"RESET": SubResource("Animation_7sor3")
 }
 
-[node name="VFX_FirExplosion" type="Node3D"]
+[node name="VFX_FirExplosion" type="Node3D" unique_id=202211111]
 
-[node name="smokeball" type="GPUParticles3D" parent="."]
+[node name="smokeball" type="GPUParticles3D" parent="." unique_id=1326701219]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.773307, 0)
 layers = 4
 material_override = SubResource("ShaderMaterial_rhfei")
@@ -478,7 +479,7 @@ fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_omidl")
 draw_pass_1 = ExtResource("4_qtbla")
 
-[node name="muzzle" type="GPUParticles3D" parent="."]
+[node name="muzzle" type="GPUParticles3D" parent="." unique_id=292973629]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.471835, 0)
 layers = 4
 material_override = SubResource("ShaderMaterial_omyhh")
@@ -492,7 +493,7 @@ fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_kryy5")
 draw_pass_1 = SubResource("QuadMesh_7rclw")
 
-[node name="debirs" type="GPUParticles3D" parent="."]
+[node name="debirs" type="GPUParticles3D" parent="." unique_id=217935104]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0421524, 0.405283, 0)
 layers = 4
 material_override = SubResource("StandardMaterial3D_rhfkv")
@@ -504,7 +505,7 @@ fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_spn5c")
 draw_pass_1 = ExtResource("7_6gowc")
 
-[node name="debirs2trails" type="GPUParticles3D" parent="."]
+[node name="debirs2trails" type="GPUParticles3D" parent="." unique_id=414074402]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0421524, 0.405283, 0)
 layers = 4
 material_override = SubResource("StandardMaterial3D_iupbh")
@@ -517,7 +518,7 @@ trail_lifetime = 0.4
 process_material = SubResource("ParticleProcessMaterial_cnrvl")
 draw_pass_1 = SubResource("RibbonTrailMesh_8bbrc")
 
-[node name="VFX_StylizedSmoke_ring4" type="GPUParticles3D" parent="."]
+[node name="VFX_StylizedSmoke_ring4" type="GPUParticles3D" parent="." unique_id=761842306]
 layers = 4
 material_override = SubResource("ShaderMaterial_ev5ii")
 emitting = false
@@ -530,24 +531,23 @@ fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_2obh6")
 draw_pass_1 = ExtResource("4_qtbla")
 
-[node name="Decal" type="Decal" parent="."]
+[node name="Decal" type="Decal" parent="." unique_id=55686681]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000831604, 0.570545, -0.11468)
+visible = false
 size = Vector3(6, 2.22046, 6)
 texture_albedo = ExtResource("12_2fps7")
 texture_emission = ExtResource("13_ia7qk")
 emission_energy = 0.0
-modulate = Color(0.8, 0.2, 0, 1)
+modulate = Color(0, 0, 0, 0)
 upper_fade = 0.0208044
 lower_fade = 0.0181113
 cull_mask = 1048571
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_7yhr6")
-}
-autoplay = "Init"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1661820097]
+libraries/ = SubResource("AnimationLibrary_7yhr6")
+autoplay = &"Init"
 
-[node name="OmniLight3D34" type="OmniLight3D" parent="."]
+[node name="OmniLight3D34" type="OmniLight3D" parent="." unique_id=1230376404]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.647025, 0)
 visible = false
 light_color = Color(1, 0.508001, 0.280155, 1)

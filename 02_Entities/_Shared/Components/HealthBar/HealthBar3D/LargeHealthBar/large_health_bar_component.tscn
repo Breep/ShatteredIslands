@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://boxbtk57aorey"]
 
-[ext_resource type="Script" uid="uid://bbeek4n4ih2xe" path="res://02_Entities/_Shared/Components/HealthBar/LargeHealthBar/large_health_bar_component.gd" id="1_fqydh"]
+[ext_resource type="Script" uid="uid://bbeek4n4ih2xe" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.gd" id="1_fqydh"]
 [ext_resource type="Shader" uid="uid://cxvdhkkjpr75e" path="res://02_Entities/_Shared/Components/HealthBar/Shaders/character_health_bar.gdshader" id="2_er62k"]
 [ext_resource type="Texture2D" uid="uid://c6pcyeugsepnp" path="res://22_VFX/VFX_3D/Explosion/textures/T_PerlinNoise_Tiled11_inv.png" id="3_lf2vs"]
 [ext_resource type="Shader" uid="uid://dncf64el86tmc" path="res://02_Entities/_Shared/Components/HealthBar/Shaders/character_shield_bar.gdshader" id="3_u1xh6"]

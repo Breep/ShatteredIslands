@@ -1,41 +1,39 @@
 [gd_scene format=3 uid="uid://dqrhym1sskng8"]
 
 [ext_resource type="Script" uid="uid://dgdcjemlrm0a7" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/gamma_turret.gd" id="1_7mgti"]
-[ext_resource type="PackedScene" uid="uid://b43dafam0s6e5" path="res://02_Entities/_Data/GammaTurret/turret_gamma2.tscn" id="2_b6mp1"]
+[ext_resource type="PackedScene" uid="uid://b43dafam0s6e5" path="res://02_Entities/_Data/GammaTurret/turret_gamma_visual.tscn" id="2_b6mp1"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://ds67abcdh4aq8" path="res://02_Entities/_Shared/Animations/default_animation_tree.res" id="3_gwi2y"]
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="4_f6l0l"]
-[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/LargeHealthBar/large_health_bar_component.tscn" id="5_rc10y"]
+[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.tscn" id="5_rc10y"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_jkt3l"]
-radius = 0.2780993
+[sub_resource type="BoxShape3D" id="BoxShape3D_b6mp1"]
+size = Vector3(1.5136719, 4.4697266, 1.7392578)
 
 [node name="Turret" type="CharacterBody3D" unique_id=1412979628 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_attack_spawn_marker")]
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("1_7mgti")
 entity_name = "Gamma Turret"
-_visual_3d = NodePath("turret_fire")
-_health_bar_marker = NodePath("turret_fire/HealthMarker")
-_attack_spawn_marker = NodePath("turret_fire/AAMarker")
+_visual_3d = NodePath("turret_gamma")
+_health_bar_marker = NodePath("turret_gamma/HealthBarMarker")
+_attack_spawn_marker = NodePath("turret_gamma/AAMarker")
 _projectile_type = 9
 
-[node name="turret_fire" parent="." unique_id=292281622 instance=ExtResource("2_b6mp1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0)
+[node name="turret_gamma" parent="." unique_id=1872700829 instance=ExtResource("2_b6mp1")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.63054156, 0)
 
-[node name="HealthMarker" type="Marker3D" parent="turret_fire" unique_id=1926611606]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.6842365, 0)
+[node name="HealthBarMarker" type="Marker3D" parent="turret_gamma" unique_id=1319748275]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.275872, 0)
 
-[node name="AAMarker" type="Marker3D" parent="turret_fire" unique_id=1914895184]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4779682, 2.1434035, -0.016265154)
+[node name="AAMarker" type="Marker3D" parent="turret_gamma" unique_id=238641138]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7683716e-07, 0.93349934, 4.196126)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1281618970]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1180775, 0)
-shape = SubResource("SphereShape3D_jkt3l")
+shape = SubResource("BoxShape3D_b6mp1")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=1985525116]
-root_node = NodePath("../turret_fire")
 tree_root = ExtResource("3_gwi2y")
-anim_player = NodePath("../turret_fire/AnimationPlayer")
 parameters/switch_moving/current_state = ""
 parameters/switch_moving/transition_request = ""
 parameters/switch_moving/current_index = -1
@@ -116,8 +114,5 @@ parameters/switch_stunned_state/current_index = -1
 _animation_tree = NodePath("../AnimationTree")
 _owner = NodePath("..")
 
-[node name="LargeHealthBarComponent" parent="." unique_id=1823590462 node_paths=PackedStringArray("_spawn", "_owner") instance=ExtResource("5_rc10y")]
-_spawn = NodePath("../turret_fire/HealthMarker")
+[node name="LargeHealthBarComponent" parent="." unique_id=1823590462 node_paths=PackedStringArray("_owner") instance=ExtResource("5_rc10y")]
 _owner = NodePath("..")
-
-[editable path="turret_fire"]

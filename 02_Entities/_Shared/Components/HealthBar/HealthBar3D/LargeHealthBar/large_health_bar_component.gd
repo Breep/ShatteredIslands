@@ -1,5 +1,5 @@
 class_name LargeHealthBarComponent
-extends HealthBarComponent
+extends HealthBar3DComponent
 
 ## Hero-specific info panel: adds a mana bar, the player name label, and a
 ## tavern-vs-fight marker switch driven by apply_display_mode().

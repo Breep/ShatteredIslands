@@ -1,2 +1,2 @@
 class_name SmallHealthBarComponent
-extends HealthBarComponent
+extends HealthBar3DComponent

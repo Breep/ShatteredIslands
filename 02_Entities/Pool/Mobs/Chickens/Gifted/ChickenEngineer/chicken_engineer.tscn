@@ -4,7 +4,7 @@
 [ext_resource type="AnimationNodeBlendTree" uid="uid://cr51ggnb0u010" path="res://02_Entities/Pool/Mobs/Chickens/chicken_animation_tree.res" id="2_6r7mw"]
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="5_tsowm"]
 [ext_resource type="PackedScene" uid="uid://dmlipqu47nhn0" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenEngineer/chicken_engineer_visual.tscn" id="5_x4yyx"]
-[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/Components/HealthBar/SmallHealthBar/small_health_bar_component.tscn" id="8_u3s5i"]
+[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/SmallHealthBar/small_health_bar_component.tscn" id="8_u3s5i"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x7yny"]
 radius = 0.29882813

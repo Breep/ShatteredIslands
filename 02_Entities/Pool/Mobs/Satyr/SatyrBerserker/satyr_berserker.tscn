@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bw3xevnr2p5ip" path="res://02_Entities/_Data/Satyr/satyr_visual.tscn" id="2_snu25"]
 [ext_resource type="Resource" uid="uid://dknkdso30roqe" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/entity_desc.tres" id="2_w676k"]
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="3_dkdrw"]
-[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/LargeHealthBar/large_health_bar_component.tscn" id="4_hj8ce"]
+[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.tscn" id="4_hj8ce"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://b3v6sj2fa5v7i" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/satyr_animation.res" id="4_ngc7p"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_w676k"]

@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://dddkh5njmooe1" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Stats/kobold_knight_entity_desc.tres" id="2_mmy8b"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://pdy5g53lau7e" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/kobold_knight_animation_tree.res" id="3_lwqgt"]
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="4_3kpk2"]
-[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/LargeHealthBar/large_health_bar_component.tscn" id="5_3kpk2"]
+[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.tscn" id="5_3kpk2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8pqdl"]
 radius = 0.6245117
