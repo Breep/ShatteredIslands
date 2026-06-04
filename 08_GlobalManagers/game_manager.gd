@@ -201,6 +201,8 @@ func lock_hero_into_run(hero: HeroDesc) -> void:
 	party.get_or_create_roaster(_resolve_local_owner_slot()).add(RoasterEntry.from_desc(hero))
 	_attach_roaster_scenes(party)
 	_init_roaster_runtime_data(party)
+	for player: Player in PlayerManager.players.values():
+		player.bind_to(party)
 
 	var template: FightingFormation = load(DEMO_PLAYER_FORMATION_PATH) as FightingFormation
 	if template == null:
@@ -245,9 +247,7 @@ func _build_new_run_context(run: Run = null) -> RunContext:
 	ctx.rng_seed = randi()
 	ctx.started_at = int(Time.get_unix_time_from_system())
 	ctx.run_id = str(ctx.started_at) + "_" + str(ctx.rng_seed)
-	for player: Player in PlayerManager.players.values():
-		if player.state != null:
-			ctx.party.players.append(player.state)
+	# party.players est peuplé par Player.bind_to() au moment du lock du héros.
 	return ctx
 
 

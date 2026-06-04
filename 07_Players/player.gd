@@ -1,10 +1,9 @@
 # Représente un joueur dans une session : identité réseau (id, name, team),
-# porte-monnaie et progression (gold sur PlayerState ; level/xp proxiés vers
-# la RoasterEntry du héros dans party.roasters[slot]). Les données hero-level
-# (hand, level, xp, data_memory) vivent canoniquement dans RoasterEntry ;
-# Player expose des getters/setters qui pointent dessus pour préserver l'API
-# existante des call sites et pour porter les signaux runtime (lvl_changed,
-# xp_changed).
+# porte-monnaie et progression. Le héros et son inventaire vivent dans le
+# Roaster du joueur (party.roasters[slot]) ; Player garde des refs directes
+# (roaster, hero_entry) posées par bind_to(party), et expose des proxies
+# triviaux (gold/lvl/xp/hand/data_memory) vers les sources canoniques pour
+# préserver l'API des call sites et porter les signaux runtime.
 class_name Player
 extends Node
 
@@ -28,49 +27,49 @@ var team: int:
 		_team = value
 		if hero != null: hero.team = _team
 
+# === Refs vers la sous-partie de Party qui appartient à ce joueur ===
+# Posées par bind_to(party). Null tant qu'aucun binding n'a été fait (ou si
+# la party n'a pas encore de Roaster pour ce slot).
+
+var _roaster: Roaster
+var roaster: Roaster:
+	get: return _roaster
+
+var _hero_entry: RoasterEntry
+var hero_entry: RoasterEntry:
+	get: return _hero_entry
+
 # === Proxies vers RoasterEntry (truth canonique des données hero-level) ===
 
 var hand: Hand:
-	get:
-		var entry: RoasterEntry = _get_my_roaster_entry()
-		return entry.hand if entry != null else null
+	get: return _hero_entry.hand if _hero_entry != null else null
 	set(value):
-		var entry: RoasterEntry = _get_my_roaster_entry()
-		if entry != null: entry.hand = value
+		if _hero_entry != null: _hero_entry.hand = value
 
 var data_memory: NestedRegistry:
-	get:
-		var entry: RoasterEntry = _get_my_roaster_entry()
-		return entry.data_memory if entry != null else null
+	get: return _hero_entry.data_memory if _hero_entry != null else null
 	set(value):
-		var entry: RoasterEntry = _get_my_roaster_entry()
-		if entry != null: entry.data_memory = value
+		if _hero_entry != null: _hero_entry.data_memory = value
 
 signal lvl_changed(self_ref: Player, new_lvl: int)
 var lvl: int:
-	get:
-		var entry: RoasterEntry = _get_my_roaster_entry()
-		return entry.level if entry != null else 1
+	get: return _hero_entry.level if _hero_entry != null else 1
 	set(value):
-		var entry: RoasterEntry = _get_my_roaster_entry()
-		if entry == null: return
+		if _hero_entry == null: return
 		var clamped := clampi(value, 1, 10)
-		if entry.level == clamped: return
-		entry.level = clamped
-		lvl_changed.emit(self, entry.level)
+		if _hero_entry.level == clamped: return
+		_hero_entry.level = clamped
+		lvl_changed.emit(self, _hero_entry.level)
 
 signal xp_changed(self_ref: Player, new_xp: int)
 var xp: int:
-	get:
-		var entry: RoasterEntry = _get_my_roaster_entry()
-		return entry.xp if entry != null else 0
+	get: return _hero_entry.xp if _hero_entry != null else 0
 	set(value):
-		var entry: RoasterEntry = _get_my_roaster_entry()
-		if entry == null: return
-		if entry.xp == value: return
-		entry.xp = value
+		if _hero_entry == null: return
+		if _hero_entry.xp == value: return
+		_hero_entry.xp = value
 		_check_lvl_up()
-		xp_changed.emit(self, entry.xp)
+		xp_changed.emit(self, _hero_entry.xp)
 
 # === Porte-monnaie (reste sur PlayerState) ===
 
@@ -109,24 +108,36 @@ func setup_components() -> void:
 		bot_ai.player = self
 		bot_ai.name = "PlayerBotAI"
 		add_child(bot_ai)
+
+
+# Pose les refs vers la sous-partie de Party qui appartient à ce joueur :
+# - state : récupéré depuis party.players[slot] s'il y est, sinon le state
+#   actuel y est ajouté (party.players partage la même ref que player.state).
+# - _roaster : le Roaster du joueur (null si pas encore créé pour ce slot).
+# - _hero_entry : la RoasterEntry du héros (null tant qu'aucun héros lock).
+# Idempotent : peut être rappelé après tout event qui affecte ces refs (ex.
+# lock_hero_into_run, load d'une run depuis disque).
+func bind_to(party: Party) -> void:
+	if party == null or state == null:
+		return
+	var matching_state: PlayerState = null
+	for ps: PlayerState in party.players:
+		if ps != null and ps.slot == state.slot:
+			matching_state = ps
+			break
+	if matching_state != null:
+		state = matching_state
+	elif not party.players.has(state):
+		party.players.append(state)
+	_roaster = party.get_roaster(state.slot)
+	_hero_entry = _roaster.get_hero() if _roaster != null else null
 #endregion
 
 # ============================== Private functions ==============================
 func _init() -> void:
-	hand = Hand.new()
 	state = PlayerState.new()
 	skill_manager = SkillManager.new()
 	skill_manager.init(self)
-
-
-# Résout la RoasterEntry du joueur dans la party active : 1ère entry HERO
-# du Roaster du slot de ce joueur (state.slot).
-func _get_my_roaster_entry() -> RoasterEntry:
-	if GameManager.run_context == null: return null
-	if GameManager.run_context.party == null: return null
-	if state == null: return null
-	var roaster: Roaster = GameManager.run_context.party.get_roaster(state.slot)
-	return roaster.get_hero() if roaster != null else null
 
 
 func _check_lvl_up() -> void:
