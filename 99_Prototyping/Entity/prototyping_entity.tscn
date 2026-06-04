@@ -94,6 +94,8 @@ _arena_zone_manager = NodePath("../../ArenaZoneManager")
 
 [node name="SkeletonDragon" parent="Node3D/Entities" unique_id=434739176 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("20_tmkd7")]
 transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, 0.5904154, -2.384186e-07, 7.004996)
+level = 5
+team = 1
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
 
@@ -175,6 +177,12 @@ layout_mode = 2
 size_flags_vertical = 3
 mouse_default_cursor_shape = 2
 text = "Trigger Flight (dragon)"
+
+[node name="CastUltimateButton" type="Button" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=1472428549]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+text = "Cast Ultimate"
 
 [node name="GridContainer" type="GridContainer" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=135598126]
 layout_mode = 2
@@ -334,6 +342,7 @@ environment = ExtResource("18_ko5bb")
 [connection signal="pressed" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StopFightButton" to="." method="_on_stop_fight_button_pressed"]
 [connection signal="pressed" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/ResetFightButton" to="." method="_on_reset_fight_button_pressed"]
 [connection signal="pressed" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/TriggerFlightButton" to="." method="_on_trigger_flight_button_pressed"]
+[connection signal="pressed" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/CastUltimateButton" to="." method="_on_cast_ultimate_button_pressed"]
 [connection signal="toggled" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/GridContainer/ManualModeCheckButton" to="." method="_on_manual_mode_check_button_toggled"]
 [connection signal="toggled" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/GridContainer/AutoAttackCheckButton" to="." method="_on_auto_attack_check_button_toggled"]
 [connection signal="toggled" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/GridContainer/FamilyManagersCheckButton" to="." method="_on_family_managers_check_button_toggled"]

@@ -74,6 +74,12 @@ func _on_trigger_flight_button_pressed() -> void:
 			entity.start_flight()
 
 
+func _on_cast_ultimate_button_pressed() -> void:
+	for entity in _entities:
+		if is_instance_valid(entity) and entity.skill != null:
+			entity.skill.cast_ultimate()
+
+
 func _on_stop_fight_button_pressed() -> void:
 	pass
 

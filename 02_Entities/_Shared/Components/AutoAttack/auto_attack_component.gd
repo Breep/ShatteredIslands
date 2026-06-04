@@ -70,6 +70,7 @@ var _current_target: Entity = null
 var _attack_interval_ticks: int = TICKS_PER_SECOND # base cooldown in ticks
 var _ticks_remaining: int = 0 # countdown to next attack
 var _is_stunned: bool = false # loop paused while stunned
+var _is_paused: bool = false # loop suspended by an external channel (e.g. flight)
 
 # ============================== Node base functions ==============================
 
@@ -137,7 +138,22 @@ func get_current_target() -> Entity:
 
 ## Called every tick by Entity.process_tick() (deterministic, fixed 1/60s step).
 ## Drives both the in-flight attack counters and the periodic cooldown loop.
+## Suspend/resume the auto-attack loop from an external channel that takes control
+## of the entity (e.g. the Skeleton Dragon's "Vol fracassant" flight, future channels…).
+## Pausing DROPS any in-progress swing through the shared _cancel_attack() (like the
+## stun path) — so no delayed impact lands while suspended. Resuming PRIMES an
+## immediate attack (_ticks_remaining = 0): the channels using this want to re-engage
+## at once (e.g. aerial enrage starting), unlike a stun which re-arms a full cooldown.
+func set_paused(paused: bool) -> void:
+	_is_paused = paused
+	if paused:
+		_cancel_attack()
+	else:
+		_ticks_remaining = 0
+
+
 func process_tick() -> void:
+	if _is_paused: return # suspended by an external channel (see set_paused), like a stun
 	if _is_stunned: return
 	if not _owner.is_alive(): return
 

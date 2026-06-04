@@ -329,6 +329,7 @@ process_material = SubResource("ParticleProcessMaterial_q8p4o")
 draw_pass_1 = SubResource("QuadMesh_80lqt")
 
 [node name="firecone" type="GPUParticles3D" parent="." unique_id=1714989473]
+emitting = false
 layers = 4
 material_override = SubResource("StandardMaterial3D_f3uai")
 cast_shadow = 0
@@ -341,6 +342,7 @@ process_material = SubResource("ParticleProcessMaterial_nqdqd")
 draw_pass_1 = ExtResource("6_q7f1v")
 
 [node name="sparks3" type="GPUParticles3D" parent="." unique_id=34878374]
+emitting = false
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 2, 0, -1, -8.74228e-08, 0, 0, -1.92885)
 layers = 8196
 material_override = SubResource("StandardMaterial3D_w8i3j")
@@ -354,4 +356,3 @@ draw_pass_1 = SubResource("RibbonTrailMesh_y12di")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=376395612]
 libraries/ = SubResource("AnimationLibrary_ob0mn")
-autoplay = &"Init"
