@@ -1,0 +1,2 @@
+class_name GoblinBerserker
+extends Entity

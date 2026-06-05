@@ -30,25 +30,8 @@ type = 1
 slope = 0.1
 metadata/_custom_type_script = "uid://brthobm35g70u"
 
-[sub_resource type="Resource" id="Resource_ahff3"]
-script = ExtResource("1_3alr5")
-type = 1
-base = 5.0
-slope = 5.0
-metadata/_custom_type_script = "uid://brthobm35g70u"
-
-[sub_resource type="Resource" id="Resource_y4vx4"]
-script = ExtResource("1_3alr5")
-base = 100.0
-metadata/_custom_type_script = "uid://brthobm35g70u"
-
 [sub_resource type="Resource" id="Resource_ft4fc"]
 script = ExtResource("1_3alr5")
-metadata/_custom_type_script = "uid://brthobm35g70u"
-
-[sub_resource type="Resource" id="Resource_nwog7"]
-script = ExtResource("1_3alr5")
-base = 10.0
 metadata/_custom_type_script = "uid://brthobm35g70u"
 
 [sub_resource type="Resource" id="Resource_oiqfw"]
@@ -56,10 +39,6 @@ script = ExtResource("1_3alr5")
 type = 1
 base = 500.0
 slope = 50.0
-
-[sub_resource type="Resource" id="Resource_1x8s5"]
-script = ExtResource("1_3alr5")
-metadata/_custom_type_script = "uid://brthobm35g70u"
 
 [sub_resource type="Resource" id="Resource_ahwll"]
 script = ExtResource("1_3alr5")
@@ -69,20 +48,13 @@ metadata/_custom_type_script = "uid://brthobm35g70u"
 
 [sub_resource type="Resource" id="Resource_v2ryl"]
 script = ExtResource("1_3alr5")
-base = 100.0
+base = 15.0
 metadata/_custom_type_script = "uid://brthobm35g70u"
 
 [sub_resource type="Resource" id="Resource_cyqcg"]
 script = ExtResource("1_3alr5")
 base = 1.0
 slope = 1.0
-metadata/_custom_type_script = "uid://brthobm35g70u"
-
-[sub_resource type="Resource" id="Resource_507ww"]
-script = ExtResource("1_3alr5")
-type = 1
-base = 5.0
-slope = 0.5
 metadata/_custom_type_script = "uid://brthobm35g70u"
 
 [sub_resource type="Resource" id="Resource_qa3pi"]
@@ -109,12 +81,7 @@ attack_damage = SubResource("Resource_418cy")
 attack_speed = SubResource("Resource_p00hi")
 attack_range = SubResource("Resource_lwf7c")
 attack_power = SubResource("Resource_mbp68")
-movement_speed = SubResource("Resource_507ww")
 scale = SubResource("Resource_gnmsu")
-crit_chance = SubResource("Resource_ahff3")
-crit_mult = SubResource("Resource_y4vx4")
-dodge = SubResource("Resource_nwog7")
-lifesteal = SubResource("Resource_1x8s5")
 crit_resistance = SubResource("Resource_ft4fc")
 armor = SubResource("Resource_1gblv")
 magic_resistance = SubResource("Resource_ahwll")

@@ -1,34 +1,30 @@
 [gd_scene format=3 uid="uid://bx152wib4t2ld"]
 
 [ext_resource type="Script" uid="uid://dgycyu3vxb2o7" path="res://02_Entities/Pool/Mobs/AegisBlade/aegis_blade.gd" id="1_5p7k0"]
-[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="2_7piut"]
+[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.tscn" id="2_3daqv"]
+[ext_resource type="Resource" uid="uid://7crqqe7t8nhe" path="res://02_Entities/Pool/Mobs/AegisBlade/Stats/aegis_blade_entity_desc.tres" id="2_ika5n"]
 [ext_resource type="PackedScene" uid="uid://dc124wncshpne" path="res://02_Entities/Pool/Mobs/AegisBlade/aegis_blade_visual.tscn" id="2_wshi8"]
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://10_Tool/QuickAnims/anim_hovering_module.tscn" id="3_1nowg"]
 [ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://10_Tool/QuickAnims/anim_rotating_module.tscn" id="4_wkl4h"]
-[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/SmallHealthBar/small_health_bar_component.tscn" id="6_j30e3"]
 
-[sub_resource type="Resource" id="Resource_7piut"]
-script = ExtResource("2_7piut")
-_health_max = 500.0
-auto_attack_type = 1
-_attack_range = 1.0
-_attack_speed = 1.0
-metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3daqv"]
+height = 4.6591797
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_5p7k0"]
-
-[node name="AegisBlade" type="CharacterBody3D" unique_id=342704580 node_paths=PackedStringArray("_health_bar", "_visual_3d", "_health_bar_marker")]
+[node name="AegisBlade" type="CharacterBody3D" unique_id=342704580 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker")]
 script = ExtResource("1_5p7k0")
-_health_bar = NodePath("HealthBar")
-custom_base_stats = SubResource("Resource_7piut")
-_auto_loaded_modules = Array[int]([1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 15, 16, 17, 18, 0, 4])
+entity_name = "Aegis Blade"
+category = 1
+entity_desc = ExtResource("2_ika5n")
 _visual_3d = NodePath("AegisBladeVisual")
 _health_bar_marker = NodePath("AegisBladeVisual/HealthBarSpawnMarker")
-metadata/_custom_type_script = "uid://cjfj1jcbiom2x"
+
+[node name="LargeHealthBarComponent" parent="." unique_id=1823590462 node_paths=PackedStringArray("_spawn", "_owner") instance=ExtResource("2_3daqv")]
+_spawn = NodePath("../AegisBladeVisual/HealthBarSpawnMarker")
+_owner = NodePath("..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=95730264]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.179685, 0)
-shape = SubResource("SphereShape3D_5p7k0")
+shape = SubResource("CapsuleShape3D_3daqv")
 
 [node name="AegisBladeVisual" parent="." unique_id=687254709 instance=ExtResource("2_wshi8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.498354, 0)
@@ -46,7 +42,3 @@ _owner = NodePath("..")
 _rot_axis = 1
 _rot_period = 4.0
 _rot_max = 10.0
-
-[node name="HealthBar" parent="." unique_id=1628734826 node_paths=PackedStringArray("_owner_entity", "_info_panel_spawn") instance=ExtResource("6_j30e3")]
-_owner_entity = NodePath("..")
-_info_panel_spawn = NodePath("../AegisBladeVisual/HealthBarSpawnMarker")

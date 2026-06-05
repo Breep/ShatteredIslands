@@ -23,10 +23,16 @@
 [ext_resource type="Resource" uid="uid://c7gb6oy1na20s" path="res://02_Entities/Pool/Buildings/ChickenCoop/Stats/chickencoop_stats_lvl_18.tres" id="21_3fj0u"]
 [ext_resource type="Resource" uid="uid://dr3i3su1ktrik" path="res://02_Entities/Pool/Buildings/ChickenCoop/Stats/chickencoop_stats_lvl_19.tres" id="22_12py1"]
 [ext_resource type="Resource" uid="uid://ck1h4g8w5tyws" path="res://02_Entities/Pool/Buildings/ChickenCoop/Stats/chickencoop_stats_lvl_20.tres" id="23_jivmp"]
+[ext_resource type="Resource" uid="uid://btf8my3a4o43a" path="res://02_Entities/Pool/Buildings/ChickenCoop/Skills/Passive/production_continue.tres" id="24_pas"]
+[ext_resource type="Resource" uid="uid://b8eeiyl1tbrdk" path="res://02_Entities/Pool/Buildings/ChickenCoop/Skills/Bronze/elevage_gifted.tres" id="25_bro"]
+[ext_resource type="Resource" uid="uid://cfwhr6jn83vls" path="res://02_Entities/Pool/Buildings/ChickenCoop/Skills/Silver/incubateur_rapide.tres" id="26_sil"]
+[ext_resource type="Resource" uid="uid://dcouvbli2res7" path="res://02_Entities/Pool/Buildings/ChickenCoop/Skills/Gold/couvee_blindee.tres" id="27_gol"]
+[ext_resource type="Resource" uid="uid://dyvo8bx4eim4c" path="res://02_Entities/Pool/Buildings/ChickenCoop/Skills/Ultimate/chicken_run.tres" id="28_ult"]
 
 [resource]
 script = ExtResource("1_w253t")
 name = "Chicken Coop"
+default_category = 4
 stats = Dictionary[int, ExtResource("3_ftbni")]({
 1: ExtResource("4_bkhsg"),
 2: ExtResource("5_1x4cm"),
@@ -48,4 +54,11 @@ stats = Dictionary[int, ExtResource("3_ftbni")]({
 18: ExtResource("21_3fj0u"),
 19: ExtResource("22_12py1"),
 20: ExtResource("23_jivmp")
+})
+skills = Dictionary[int, ExtResource("2_siu7e")]({
+0: ExtResource("24_pas"),
+1: ExtResource("25_bro"),
+2: ExtResource("26_sil"),
+3: ExtResource("27_gol"),
+4: ExtResource("28_ult")
 })
