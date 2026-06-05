@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://btqko5dh71wxi"]
 
+[ext_resource type="Script" uid="uid://c2gpuu7jttvs4" path="res://02_Entities/Pool/Mobs/SkeletonDragon/flight_path_profile.gd" id="1_fpp"]
 [ext_resource type="Script" uid="uid://6o208nwmrw7b" path="res://02_Entities/Pool/Mobs/SkeletonDragon/shattering_flight_ability.gd" id="1_n3twu"]
 [ext_resource type="Script" uid="uid://8geqff5ooart" path="res://02_Entities/Pool/Mobs/SkeletonDragon/skeleton_dragon.gd" id="1_slre2"]
 [ext_resource type="PackedScene" uid="uid://deihd6vwrcxcj" path="res://02_Entities/_Data/DragonSkeleton/skeletal_dragon_visual.tscn" id="2_4r8xw"]
@@ -19,13 +20,9 @@ height = 15.394043
 radius = 4.010742
 height = 11.363876
 
-[sub_resource type="Curve3D" id="Curve3D_483m2"]
-closed = true
-_data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4.833, 4, -4.104, 0, 0, 0, 0, 0, 0, 2.721, 4.5, -7.696, 0, 0, 0, 0, 0, 0, -0.78988194, 4.6212726, -10.021583, 0, 0, 0, 0, 0, 0, -4.160815, 4.2388945, -9.311221, 0, 0, 0, 0, 0, 0, -5.4575047, 3.4798641, -7.663237, 0, 0, 0, 0, 0, 0, -7.099532, 2.2791395, -5.509339, 0, 0, 0, 0, 0, 0, -6.648024, 1.8398312, -1.5294185, 0, 0, 0, 0, 0, 0, -4.372114, 1.8638245, 0.6029761, 0, 0, 0, 0, 0, 0, -1.9852148, 2.1667562, 1.0368993),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-}
-point_count = 10
+[sub_resource type="Resource" id="Resource_flightprofile"]
+script = ExtResource("1_fpp")
+disc_tilt = 0.1
 
 [node name="SkeletonDragon" type="CharacterBody3D" unique_id=434739176 node_paths=PackedStringArray("_flight_ability", "_breath_controller", "_breath_ability", "_visual_3d", "_health_bar_marker", "_attack_spawn_marker")]
 collision_mask = 25
@@ -41,7 +38,6 @@ _attack_spawn_marker = NodePath("SkeletalDragonVisual/AAMarker")
 _projectile_type = 7
 
 [node name="SkeletalDragonVisual" parent="." unique_id=1358678233 instance=ExtResource("2_4r8xw")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="SkeletalDragonVisual/root" parent_id_path=PackedInt32Array(1358678233, 19020096) index="0" unique_id=882341245]
 bones/0/position = Vector3(0.1717759, -0.32052532, 1.4495544)
@@ -247,10 +243,10 @@ transform = Transform3D(-0.029507274, 0.9986048, 0.043793697, -0.12306061, 0.039
 transform = Transform3D(-0.22308545, 0.7615265, 0.6085308, -0.20939195, -0.6471264, 0.7330635, 0.9520436, 0.036114357, 0.3038222, -1.089154, -0.7804418, 0.16197076)
 
 [node name="ik_foot_b_l" parent="SkeletalDragonVisual/root/ik_foot_root" parent_id_path=PackedInt32Array(1358678233, 1234273656) index="2" unique_id=1335928782]
-transform = Transform3D(0.6226808, 0.022042898, -0.7821654, 0.5710964, 0.6705248, 0.47354558, 0.5348997, -0.74155957, 0.4049342, 0.6821973, 1.0209022, 0.10532488)
+transform = Transform3D(0.6226808, 0.0220429, -0.7821654, 0.5710964, 0.67052484, 0.47354558, 0.5348997, -0.7415596, 0.4049342, 0.6821973, 1.0209022, 0.10532488)
 
 [node name="ik_foot_b_r" parent="SkeletalDragonVisual/root/ik_foot_root" parent_id_path=PackedInt32Array(1358678233, 1234273656) index="3" unique_id=1666923042]
-transform = Transform3D(0.9517159, 0.037999716, -0.30461854, -0.29918587, -0.10736099, -0.9481357, -0.06873305, 0.9934936, -0.0908082, -0.58209586, 0.4760998, 0.12288982)
+transform = Transform3D(0.9517159, 0.037999716, -0.30461854, -0.29918587, -0.10736099, -0.9481356, -0.06873305, 0.9934936, -0.0908082, -0.58209586, 0.4760998, 0.12288982)
 
 [node name="HealthBarMarker" type="Marker3D" parent="SkeletalDragonVisual" unique_id=292615107]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.275872, 0)
@@ -362,17 +358,13 @@ parameters/scale_end_spell/scale = 1.0
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.07131195, 3.982932, 0)
 shape = SubResource("CapsuleShape3D_y451a")
 
-[node name="ShatteringFlightAbility" type="Node" parent="." unique_id=1179989453 node_paths=PackedStringArray("_owner", "_flight_path")]
+[node name="ShatteringFlightAbility" type="Node" parent="." unique_id=1179989453 node_paths=PackedStringArray("_owner")]
 script = ExtResource("1_n3twu")
 _owner = NodePath("..")
-_flight_path = NodePath("../FlightPath")
-_flight_duration = 5.0
+_flight_profile = SubResource("Resource_flightprofile")
 _landing_impact_normalized = 0.53
+_bank_flip_width = 0.3
 metadata/_custom_type_script = "uid://6o208nwmrw7b"
-
-[node name="FlightPath" type="Path3D" parent="." unique_id=522580969]
-transform = Transform3D(0.97021794, 0.24208176, 0.008578825, -0.24022707, 0.9661262, -0.0942929, -0.031114828, 0.0894238, 0.99550754, 0, 0, 0)
-curve = SubResource("Curve3D_483m2")
 
 [node name="BossHealthBarComponent" parent="." unique_id=151477111 node_paths=PackedStringArray("_owner") instance=ExtResource("8_qe6da")]
 _owner = NodePath("..")

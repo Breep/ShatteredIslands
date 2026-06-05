@@ -5,6 +5,7 @@
 
 [sub_resource type="Resource" id="Resource_rs"]
 script = ExtResource("2_eff")
+_shield_per_thorn_percent = 250.0
 metadata/_custom_type_script = "uid://c0v14cgwvsh8"
 
 [resource]

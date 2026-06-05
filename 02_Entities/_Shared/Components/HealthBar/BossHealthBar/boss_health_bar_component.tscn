@@ -252,6 +252,25 @@ texture = ExtResource("7_taunt")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="HealthLabel" type="Label" parent="CanvasLayer/MainControl/MainVBox/HealthRow/HealthBar" unique_id=1646329810]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.5
+offset_top = -6.5
+offset_right = 12.5
+offset_bottom = 6.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "5000"
+label_settings = ExtResource("6_dbg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="DebugValues" type="HBoxContainer" parent="CanvasLayer/MainControl/MainVBox/HealthRow" unique_id=1706743429]
 unique_name_in_owner = true
 visible = false
@@ -263,14 +282,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 alignment = 1
-
-[node name="HealthLabel" type="Label" parent="CanvasLayer/MainControl/MainVBox/HealthRow/DebugValues" unique_id=1646329810]
-unique_name_in_owner = true
-layout_mode = 2
-text = "5000"
-label_settings = ExtResource("6_dbg")
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="ShieldLabel" type="Label" parent="CanvasLayer/MainControl/MainVBox/HealthRow/DebugValues" unique_id=1937752505]
 unique_name_in_owner = true

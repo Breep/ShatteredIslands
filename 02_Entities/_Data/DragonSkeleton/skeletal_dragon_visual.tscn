@@ -475,7 +475,7 @@ bind/34/pose = Transform3D(0.7880894, 0.23824309, -0.5675864, 0.55753374, -0.667
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 
 [node name="root" type="Node3D" parent="." unique_id=19020096]
-transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
+transform = Transform3D(-1, 8.742278e-08, 0, 3.821371e-15, 4.371139e-08, 1, 8.742278e-08, 1, -4.371139e-08, 0, 0, 0)
 
 [node name="Skeleton3D" type="Skeleton3D" parent="root" unique_id=882341245]
 bones/0/name = "pelvis"
