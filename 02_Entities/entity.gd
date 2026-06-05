@@ -158,6 +158,8 @@ var stat_modifiers_registry: EntityStatModifiersRegistry
 var death_modifiers_registry: DeathModifiersRegistry
 var battle_callback_registry: BattleCallbackRegistry
 var summon_modifiers_registry: SummonModifiersRegistry
+var acolyte_modifiers_registry: AcolyteModifiersRegistry
+var building_modifiers_registry: BuildingModifiersRegistry
 #endregion
 
 ##region ============================== Context ============================== 
@@ -229,6 +231,8 @@ func _init() -> void:
 	death_modifiers_registry = DeathModifiersRegistry.new()
 	stat_modifiers_registry = EntityStatModifiersRegistry.new(stats)
 	summon_modifiers_registry = SummonModifiersRegistry.new()
+	acolyte_modifiers_registry = AcolyteModifiersRegistry.new()
+	building_modifiers_registry = BuildingModifiersRegistry.new()
 	Verbose.trace("Entity [" + entity_name + "_" + str(uid) + "] init", Verbose.Category.ENTITY)
 
 
@@ -272,7 +276,10 @@ func _ready() -> void:
 	# Connect module interdependencies
 	_connect_module_dependencies()
 
-	_apply_inherited_summon_modifiers()
+	match category:
+		Category.SUMMON: _apply_inherited_summon_modifiers()
+		Category.ACOLYTE: _apply_inherited_acolyte_modifiers()
+		Category.BUILDING: _apply_inherited_building_modifiers()
 
 	_start_spawn()
 
@@ -462,6 +469,32 @@ func _apply_inherited_summon_modifiers() -> void:
 		visited.append(ancestor)
 		if ancestor.summon_modifiers_registry != null:
 			ancestor.summon_modifiers_registry.apply_to(self, ancestor)
+		ancestor = ancestor.summoner
+
+
+func _apply_inherited_acolyte_modifiers() -> void:
+	var visited: Array[Entity] = []
+	var ancestor: Entity = summoner
+	while ancestor != null:
+		if ancestor in visited:
+			Verbose.error("Cycle in summoner chain for [" + entity_name + "] at [" + ancestor.entity_name + "]", Verbose.Category.ENTITY)
+			return
+		visited.append(ancestor)
+		if ancestor.acolyte_modifiers_registry != null:
+			ancestor.acolyte_modifiers_registry.apply_to(self, ancestor)
+		ancestor = ancestor.summoner
+
+
+func _apply_inherited_building_modifiers() -> void:
+	var visited: Array[Entity] = []
+	var ancestor: Entity = summoner
+	while ancestor != null:
+		if ancestor in visited:
+			Verbose.error("Cycle in summoner chain for [" + entity_name + "] at [" + ancestor.entity_name + "]", Verbose.Category.ENTITY)
+			return
+		visited.append(ancestor)
+		if ancestor.building_modifiers_registry != null:
+			ancestor.building_modifiers_registry.apply_to(self, ancestor)
 		ancestor = ancestor.summoner
 #endregion
 

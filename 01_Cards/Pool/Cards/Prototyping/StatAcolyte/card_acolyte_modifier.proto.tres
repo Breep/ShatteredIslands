@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://dbiqa23fq8erq"]
+
+[ext_resource type="Script" uid="uid://c6fg71iare2ge" path="res://01_Cards/Pool/Cards/Prototyping/StatAcolyte/card_acolyte_modifier.proto.gd" id="1_ecalt"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_hvr07"]
+
+[sub_resource type="Resource" id="Resource_ea2ct"]
+script = ExtResource("1_ecalt")
+metadata/_custom_type_script = "uid://c6fg71iare2ge"
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_gncfj"]
+
+[resource]
+script = ExtResource("1_hvr07")
+name = &"proto acolyte"
+picture = SubResource("PlaceholderTexture2D_gncfj")
+families = Array[int]([1])
+_card_effect = SubResource("Resource_ea2ct")
+points = Dictionary[int, int]({
+1: 12
+})
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

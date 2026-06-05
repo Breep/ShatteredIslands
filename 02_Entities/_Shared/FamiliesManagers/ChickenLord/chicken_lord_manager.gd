@@ -230,9 +230,9 @@ func _spawn_n_chickens(chicken_number: int) -> void:
 ## Spawns a minimal egg. The SUMMON ActionModifier injects base stats, hatch_modifiers, and gifted roll.
 func _spawn_chicken() -> void:
 	var spawn_location_config := SpawnLocationConfig.create_random_arena()
-	_owner.summon.summon_entity(Entity.EntityType.CHICKEN_EGG, spawn_location_config, {
-		ChickenEgg.Modifier.HATCH_TIME: EGG_HATCH_TIME,
-	})
+	#_owner.summon.summon_entity(Entity.EntityType.CHICKEN_EGG, spawn_location_config, {
+		#ChickenEgg.Modifier.HATCH_TIME: EGG_HATCH_TIME,
+	#})
 
 
 func _battle_start_chicken_spawn() -> void:

@@ -4,12 +4,13 @@
 [ext_resource type="Resource" uid="uid://u3efia3larnh" path="res://01_Cards/Pool/Cards/Prototyping/HireAcolyte/card_acolyte.proto.tres" id="2_lc8nh"]
 [ext_resource type="Resource" uid="uid://cvf8iw8x8psds" path="res://01_Cards/Pool/Cards/Prototyping/StatSummon/card_sommun_modifier.proto.tres" id="3_lc8nh"]
 [ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://01_Cards/Templates/family.gd" id="3_lnuwt"]
+[ext_resource type="Resource" uid="uid://dbiqa23fq8erq" path="res://01_Cards/Pool/Cards/Prototyping/StatAcolyte/card_acolyte_modifier.proto.tres" id="4_lnuwt"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_cdp45"]
 
 [resource]
 script = ExtResource("3_lnuwt")
-cards = Array[ExtResource("1_71uv3")]([ExtResource("2_lc8nh"), ExtResource("3_lc8nh")])
+cards = Array[ExtResource("1_71uv3")]([ExtResource("2_lc8nh"), ExtResource("3_lc8nh"), ExtResource("4_lnuwt")])
 icon = SubResource("PlaceholderTexture2D_cdp45")
 family_name = "Prototyping"
 color = Color(1, 0.4301977, 0.85288113, 1)
