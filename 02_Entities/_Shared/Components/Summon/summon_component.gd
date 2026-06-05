@@ -20,7 +20,7 @@ const PROTO_SHIELD_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/Pro
 const FORTIFICATION_DRONE_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/FortificationDrone/fortification_drone.tscn")
 const AEGIS_BLADE_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/AegisBlade/aegis_blade.tscn")
 const DEFLECTION_SHIELD: PackedScene = preload("res://02_Entities/Pool/Mobs/DeflectionShield/deflection_shield.tscn")
-const GAMMA_TURRET: PackedScene = preload("res://02_Entities/Pool/Mobs/GammaTurret/gamma_turret.tscn")
+const GAMMA_TURRET: PackedScene = preload("res://02_Entities/Pool/Buildings/Turrets/GammaTurret/gamma_turret.tscn")
 
 const TREX_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/TRex/trex.tscn")
 const CHICKEN_EGG_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/ChickenEgg/chicken_egg.tscn")
