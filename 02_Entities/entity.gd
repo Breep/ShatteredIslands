@@ -342,12 +342,16 @@ func apply_context(context: EntityContext) -> void:
 	_spawn_manager = context.spawn_manager
 	_arena_zone_manager = context.arena_zone_manager
 
-	# Si le contexte porte un entity_owner (cas summon-via-summon_component), il devient
-	# notre summoner et nous enregistre dans son BDS registry pour l'action meter.
-	# Pour les heroes/specs, entity_owner est null → on reste sans summoner.
+	# Si le contexte porte un entity_owner, il devient notre summoner. Cas couverts :
+	# - summon-via-summon_component (cat = SUMMON) → register dans le BDS registry
+	#   du summoner pour que l'action meter compte le summon.
+	# - acolyte/building spawné depuis le Roaster (cat = ACOLYTE/BUILDING) → on
+	#   ferme la chaîne sur le héros propriétaire pour le SummonModifiersRegistry,
+	#   mais on n'inscrit PAS au BDS (un acolyte n'est pas un summon de gameplay).
+	# Pour heroes/mobs/antagonists/etc., entity_owner est null → pas de summoner.
 	if context.entity_owner != null:
 		summoner = context.entity_owner
-		if summoner.bds_registry != null:
+		if summoner.bds_registry != null and is_summoned():
 			summoner.bds_registry.register_summon(self)
 
 	# Composants potentiellement encore null si apply_context est appelé avant

@@ -84,36 +84,56 @@ func get_fighting_heroes() -> Array[Entity]:
 
 # ============================== Private functions ==============================
 
+# TODO: Code affreux: a refacto très vite
 func _spawn_specs(specs: Array[EntitySpec], team: int) -> void:
 	var local_player: Player = PlayerManager.get_local_player()
-	for spec: EntitySpec in specs:
-		var ctx := EntityContext.new()
-		ctx.team = team
-		ctx.battle_id = _current_battle_id
-		ctx.spawn_manager = _spawn_manager
-		ctx.arena_zone_manager = _arena_zone_manager
-		ctx.fighting_state = Entity.FightingState.IDLE
-		ctx.display_mode = Entity.DisplayMode.FIGHTING_PHASE
-		# Owner runtime résolu en remontant l'entry à son Roaster (Party.find_slot_of).
-		# Signal "spec joueur" = entry présente (créée à partir d'une RoasterEntry).
-		# Fallback marker class + local player pour compat legacy / solo.
-		if spec.entry != null or spec is HeroSpec or spec is AcolyteSpec:
-			var slot: PlayerState.Slot = PlayerState.Slot.NONE
-			var party: Party = GameManager.run_context.party if GameManager.run_context != null else null
-			if spec.entry != null and party != null:
-				slot = party.find_slot_of(spec.entry)
-			var owner: Player = PlayerManager.get_player_by_slot(slot)
-			ctx.runtime_owner_player = owner if owner != null else local_player
-			ctx.roaster = party.get_roaster(slot) if party != null else null
-		var node: Node = spec.spawn_into(self, ctx)
-		var entity := node as Entity
-		if entity != null:
-			entity.fight_role = _fight_role_for_spec(spec)
-			if entity.is_hero():
-				_heroes.append(entity)
-				# Lien runtime player -> instance de héros de cette scène.
-				if ctx.runtime_owner_player != null:
-					ctx.runtime_owner_player.hero = entity
+	# Deux passes : héros d'abord (ils deviennent la référence runtime sur
+	# ctx.runtime_owner_player.hero), puis le reste. Permet aux acolytes /
+	# buildings de poser ctx.entity_owner = leur héros et fermer la chaîne
+	# summoner pour SummonModifiersRegistry.
+	for pass_num: int in [0, 1]:
+		for spec: EntitySpec in specs:
+			var spec_is_hero: bool = spec is HeroSpec
+			if pass_num == 0 and not spec_is_hero: continue
+			if pass_num == 1 and spec_is_hero: continue
+
+			var ctx := EntityContext.new()
+			ctx.team = team
+			ctx.battle_id = _current_battle_id
+			ctx.spawn_manager = _spawn_manager
+			ctx.arena_zone_manager = _arena_zone_manager
+			ctx.fighting_state = Entity.FightingState.IDLE
+			ctx.display_mode = Entity.DisplayMode.FIGHTING_PHASE
+			# Owner runtime résolu en remontant l'entry à son Roaster (Party.find_slot_of).
+			# Signal "spec joueur" = entry présente (créée à partir d'une RoasterEntry).
+			# Fallback marker class + local player pour compat legacy / solo.
+			if spec.entry != null or spec is HeroSpec or spec is AcolyteSpec:
+				var slot: PlayerState.Slot = PlayerState.Slot.NONE
+				var party: Party = GameManager.run_context.party if GameManager.run_context != null else null
+				if spec.entry != null and party != null:
+					slot = party.find_slot_of(spec.entry)
+				var owner: Player = PlayerManager.get_player_by_slot(slot)
+				ctx.runtime_owner_player = owner if owner != null else local_player
+				ctx.roaster = party.get_roaster(slot) if party != null else null
+
+			# Pose entity_owner = hero pour acolytes/buildings → leur summoner
+			# pointera sur le héros, chaîne fermée pour SummonModifiersRegistry.
+			# Heroes already spawned in pass 0, donc runtime_owner_player.hero
+			# est posé pour ce slot.
+			if not spec_is_hero and ctx.runtime_owner_player != null and ctx.runtime_owner_player.hero != null:
+				var cat: Entity.Category = spec.get_entity_category()
+				if cat == Entity.Category.ACOLYTE or cat == Entity.Category.BUILDING:
+					ctx.entity_owner = ctx.runtime_owner_player.hero
+
+			var node: Node = spec.spawn_into(self, ctx)
+			var entity := node as Entity
+			if entity != null:
+				entity.fight_role = _fight_role_for_spec(spec)
+				if entity.is_hero():
+					_heroes.append(entity)
+					# Lien runtime player -> instance de héros de cette scène.
+					if ctx.runtime_owner_player != null:
+						ctx.runtime_owner_player.hero = entity
 
 
 # Map a spec type to its fight role. Handles both the new typed specs
