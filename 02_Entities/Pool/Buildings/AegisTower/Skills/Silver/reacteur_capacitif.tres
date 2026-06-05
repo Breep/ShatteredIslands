@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://da6t5m8nb45e"]
+
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
+[ext_resource type="Script" uid="uid://breacteur1eff7" path="res://02_Entities/Pool/Buildings/AegisTower/Skills/Silver/reacteur_capacitif.gd" id="2_eff"]
+
+[sub_resource type="Resource" id="Resource_rc"]
+script = ExtResource("2_eff")
+metadata/_custom_type_script = "uid://breacteur1eff7"
+
+[resource]
+script = ExtResource("1_skill")
+skill_id = 2
+name = "Réacteur capacitif"
+description = "La Tour gagne +1 Mana Regen par bâtiment allié dans Area(10)."
+skill_effect = SubResource("Resource_rc")
+metadata/_custom_type_script = "uid://dfby4merlgkep"

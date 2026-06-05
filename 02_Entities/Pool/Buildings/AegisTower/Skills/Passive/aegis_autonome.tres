@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://bc5hw18srm4v5"]
+
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
+[ext_resource type="Script" uid="uid://baegisauto1eff7" path="res://02_Entities/Pool/Buildings/AegisTower/Skills/Passive/aegis_autonome.gd" id="2_eff"]
+
+[sub_resource type="Resource" id="Resource_au"]
+script = ExtResource("2_eff")
+metadata/_custom_type_script = "uid://baegisauto1eff7"
+
+[resource]
+script = ExtResource("1_skill")
+skill_id = 6
+name = "Aegis autonome"
+description = "Rush : invoque 1 Aegis Blade liée à la Tour (même niveau ; meurt avec la Tour)."
+skill_effect = SubResource("Resource_au")
+metadata/_custom_type_script = "uid://dfby4merlgkep"

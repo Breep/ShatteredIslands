@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://2ihflaf1vlkp"]
+
+[ext_resource type="Script" uid="uid://kr5eqte7gtro" path="res://02_Entities/Pool/Buildings/AegisTower/aegis_tower.gd" id="1_olcvx"]
+[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.tscn" id="2_40lgm"]
+[ext_resource type="Resource" uid="uid://cafqhvit4iuf7" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegis_tower_entity_desc.tres" id="2_lt1mj"]
+[ext_resource type="PackedScene" uid="uid://bjmvftfup57hh" path="res://02_Entities/Pool/Buildings/AegisTower/aegis_tower_visual.tscn" id="3_lt1mj"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_uyyqq"]
+height = 3.7265625
+radius = 1.0834961
+
+[node name="AegisTower" type="CharacterBody3D" unique_id=2068796495]
+script = ExtResource("1_olcvx")
+entity_name = "Aegis Tower"
+category = 4
+entity_desc = ExtResource("2_lt1mj")
+
+[node name="LargeHealthBarComponent" parent="." unique_id=1823590462 node_paths=PackedStringArray("_spawn", "_owner") instance=ExtResource("2_40lgm")]
+_spawn = NodePath("../HealthBar")
+_owner = NodePath("..")
+
+[node name="Aegis_Tower" parent="." unique_id=1509900596 instance=ExtResource("3_lt1mj")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=307940308]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8005371, 0)
+shape = SubResource("CylinderShape3D_uyyqq")
+
+[node name="HealthBar" type="Marker3D" parent="." unique_id=605403481]
