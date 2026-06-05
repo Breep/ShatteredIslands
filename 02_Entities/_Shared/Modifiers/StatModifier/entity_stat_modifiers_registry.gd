@@ -61,20 +61,6 @@ class StatModifierDictionary extends Resource:
 		_recompute_stats()
 
 
-	func auto_cleanup() -> void:
-		if EntityStats.is_multi_stat(_stat_type):
-			for action_type: Utils.ActionType in _modifiers_per_action_type.keys():
-				for modifier: StatModifier in _modifiers_per_action_type[action_type].values().duplicate():
-					if modifier.auto_cleanup:
-						Verbose.debug("Auto cleaning | " + modifier.id, Verbose.Category.STAT_MODIFIER)
-						_modifiers_per_action_type[action_type].erase(modifier.id)
-		else:
-			for modifier: StatModifier in _modifiers.values().duplicate():
-				if modifier.auto_cleanup:
-					Verbose.debug("Auto cleaning | " + modifier.id, Verbose.Category.STAT_MODIFIER)
-					_modifiers.erase(modifier.id)
-
-
 	# Valeur du modifier d'id donné pour cette stat (0.0 s'il n'existe pas).
 	func get_modifier_value(id: StringName, action_type: Utils.ActionType) -> float:
 		var modifier: StatModifier
@@ -226,16 +212,3 @@ func _normalize_alias(stat_modifier: StatModifier) -> void:
 	if resolved.is_empty(): return
 	stat_modifier.stat_type = resolved["stat_type"]
 	stat_modifier.action_type = resolved["action_type"]
-
-
-func _auto_cleanup_all() -> void:
-	for smd: StatModifierDictionary in _stats_modifiers_dictionaries.values():
-		smd.auto_cleanup()
-		smd.recompute_stats()
-
-## ============================== Callbacks ==============================
-#
-#func _on_game_manager_game_state_changed(game_state: GameManager.GameState) -> void:
-	#match game_state:
-		#GameManager.GameState.ENDING_ROUND:
-			#_auto_cleanup_all()

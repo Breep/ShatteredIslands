@@ -36,7 +36,6 @@ func _register_meteor_spell_modifier() -> void:
 	modifier.id = &"ArdentCelestial Meteor"
 	modifier.action_type = Utils.ActionCategory.SPELL
 	modifier.is_one_time_effect = false
-	modifier.auto_cleanup = true
 	modifier.before_action_logic_callback = func(cb_vars: Dictionary) -> void:
 		if cb_vars.get(ActionModifier.VarType.SPELL_TYPE) != Spell.Type.METEOR:
 			return

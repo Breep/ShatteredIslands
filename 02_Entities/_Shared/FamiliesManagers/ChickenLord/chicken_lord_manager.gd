@@ -141,7 +141,6 @@ func _register_egg_summon_modifier() -> void:
 	modifier.id = &"ChickenLord Egg"
 	modifier.action_type = Utils.ActionCategory.SUMMON
 	modifier.is_one_time_effect = false
-	modifier.auto_cleanup = true
 	modifier.before_action_logic_callback = func(cb_vars: Dictionary) -> void:
 		if cb_vars.get(ActionModifier.VarType.ENTITY_TYPE) != Entity.EntityType.CHICKEN_EGG:
 			return
@@ -171,7 +170,6 @@ func _register_basic_chicken_stats_modifier() -> void:
 	modifier.id = &"ChickenLord Basic Stats"
 	modifier.action_type = Utils.ActionCategory.SUMMON
 	modifier.is_one_time_effect = false
-	modifier.auto_cleanup = true
 	modifier.before_action_logic_callback = func(cb_vars: Dictionary) -> void:
 		if cb_vars.get(ActionModifier.VarType.ENTITY_TYPE) != Entity.EntityType.CHICKEN:
 			return
@@ -189,7 +187,6 @@ func _register_gifted_chicken_stats_modifier() -> void:
 	modifier.id = &"ChickenLord Gifted Stats"
 	modifier.action_type = Utils.ActionCategory.SUMMON
 	modifier.is_one_time_effect = false
-	modifier.auto_cleanup = true
 	modifier.before_action_logic_callback = func(cb_vars: Dictionary) -> void:
 		if cb_vars.get(ActionModifier.VarType.ENTITY_TYPE) != Entity.EntityType.CHICKEN:
 			return
