@@ -474,6 +474,45 @@ tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = PackedFloat32Array(0, 1, -4.8673536e-09, 1, -9.2185736e-08, 4.3711392e-08)
 
+[sub_resource type="Animation" id="Animation_kfq6d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Base canon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.041932, 2.00734, -0.061597)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Base canon:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(100, 100, 75)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Base canon:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.5707964, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_k055l"]
 resource_name = "canon droit|canon droitAction"
 length = 0.41666666
@@ -552,69 +591,114 @@ tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = PackedFloat32Array(0, 1, -4.8673536e-09, 1, -9.2185736e-08, 4.3711392e-08)
 
+[sub_resource type="Animation" id="Animation_qdvsj"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Base canon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.041932, 2.00734, -0.061597)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Base canon:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(100, 100, 75)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Base canon:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.5707964, 0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_475ue"]
 _data = {
 &"Base canon|start": SubResource("Animation_064g1"),
+&"RESET": SubResource("Animation_kfq6d"),
 &"canon droit|canon droitAction": SubResource("Animation_k055l"),
-&"canon gauche|canon gaucheAction": SubResource("Animation_t5r6x")
+&"canon gauche|canon gaucheAction": SubResource("Animation_t5r6x"),
+&"idle": SubResource("Animation_qdvsj")
 }
 
 [node name="turret_fire" type="Node3D" unique_id=292281622]
 
-[node name="Base canon" type="MeshInstance3D" parent="." unique_id=21799283]
+[node name="Node3D" type="Node3D" parent="." unique_id=1013222324]
+transform = Transform3D(-1.3113417e-08, 0, -0.3, 0, 0.3, 0, 0.3, 0, -1.3113417e-08, 0, 0.37232554, 0)
+
+[node name="Base canon" type="MeshInstance3D" parent="Node3D" unique_id=21799283]
 transform = Transform3D(100, 0, 0, 0, -4.371139e-06, 75, 0, -100, -3.2783541e-06, 0.041932, 2.00734, -0.061597)
 mesh = SubResource("ArrayMesh_f0fhk")
 skeleton = NodePath("")
 
-[node name="canon droit" type="MeshInstance3D" parent="Base canon" unique_id=500556116]
-transform = Transform3D(6.2670485e-16, 1.9116447e-08, 0.76141965, 0.328, -1.9116447e-08, 0, 1.4337336e-08, 0.43733335, -3.328271e-08, -0.015018066, 0.0047268686, -5.6725145e-05)
+[node name="canon droit" type="MeshInstance3D" parent="Node3D/Base canon" unique_id=500556116]
+transform = Transform3D(-7.820125e-08, 1.2338486e-07, 0.76141965, 0.32799995, -1.2338485e-07, 1.8153659e-07, 9.2538635e-08, 0.43733335, -2.1481931e-07, -0.012836187, 0.0047268686, -5.6725145e-05)
 mesh = SubResource("ArrayMesh_l64ud")
 skeleton = NodePath("")
 
-[node name="embout canon gauche_001" type="MeshInstance3D" parent="Base canon/canon droit" unique_id=1751123212]
+[node name="embout canon gauche_001" type="MeshInstance3D" parent="Node3D/Base canon/canon droit" unique_id=1751123212]
 transform = Transform3D(-1.2065337, -1.174524e-08, 7.84792e-08, -1.1745262e-08, 1.2065349, -9.582601e-08, -1.8218152e-07, -2.2245061e-07, -0.5197442, 0.00041543602, 0.00074902293, -0.007920522)
 mesh = SubResource("ArrayMesh_t8kjl")
 skeleton = NodePath("")
 
-[node name="canon gauche" type="MeshInstance3D" parent="Base canon" unique_id=1503903117]
-transform = Transform3D(-6.84261e-08, 1.2338486e-07, 0.76141965, 0.32799995, -1.2338485e-07, 1.5884451e-07, 9.2538635e-08, 0.43733335, -2.1481931e-07, -0.012836218, -0.00435971, -5.6724548e-05)
+[node name="canon gauche" type="MeshInstance3D" parent="Node3D/Base canon" unique_id=1503903117]
+transform = Transform3D(-7.820125e-08, 1.2338486e-07, 0.76141965, 0.32799995, -1.2338485e-07, 1.8153659e-07, 9.2538635e-08, 0.43733335, -2.1481931e-07, -0.012836218, -0.00435971, -5.6724548e-05)
 mesh = SubResource("ArrayMesh_ircxx")
 skeleton = NodePath("")
 
-[node name="embout canon gauche" type="MeshInstance3D" parent="Base canon/canon gauche" unique_id=742465758]
+[node name="embout canon gauche" type="MeshInstance3D" parent="Node3D/Base canon/canon gauche" unique_id=742465758]
 transform = Transform3D(-1.2065337, -1.174524e-08, 7.84792e-08, -1.1745262e-08, 1.2065349, -9.582601e-08, -1.8218152e-07, -2.2245061e-07, -0.5197442, 0.00013998985, 0.0007490277, -0.007920522)
 mesh = SubResource("ArrayMesh_4na52")
 skeleton = NodePath("")
 
-[node name="Pivot rouge" type="MeshInstance3D" parent="Base canon" unique_id=1687974692]
+[node name="Pivot rouge" type="MeshInstance3D" parent="Node3D/Base canon" unique_id=1687974692]
 transform = Transform3D(0.36495528, 0, 0, 0, 0.36495525, 1.796903e-08, 0, -3.6737816e-08, 0.31734267, 4.3802545e-05, -0.0006001081, -0.012571652)
 mesh = SubResource("ArrayMesh_js6k2")
 skeleton = NodePath("")
 
-[node name="pivot" type="MeshInstance3D" parent="Base canon" unique_id=1433159650]
+[node name="pivot" type="MeshInstance3D" parent="Node3D/Base canon" unique_id=1433159650]
 transform = Transform3D(-1.1427916e-08, 0.0958643, -1.6527663e-08, 4.190362e-09, -4.1903623e-09, -0.37810877, -0.12781908, -1.5237223e-08, -2.2036877e-08, -9.649573e-05, -0.0006159696, -0.012071142)
 mesh = SubResource("ArrayMesh_p6phc")
 skeleton = NodePath("")
 
-[node name="Socle" type="MeshInstance3D" parent="." unique_id=1241800301]
-transform = Transform3D(190.61568, 2.7088117e-12, 1.07001315e-05, 1.6664151e-05, -3.408474e-05, -122.395226, 0, -190.61566, 1.4590649e-05, 0.041932, -0.91249514, -0.061597)
+[node name="Socle" type="MeshInstance3D" parent="Node3D" unique_id=1241800301]
+transform = Transform3D(-140, 1.3113417e-05, 3.8213708e-13, 0, -6.5567083e-06, 100, 1.2239188e-05, 150, 4.371139e-06, 0.041932, -0.91249514, -0.061597)
+visible = false
 mesh = SubResource("ArrayMesh_co3vr")
 skeleton = NodePath("")
 
-[node name="Sphere" type="MeshInstance3D" parent="." unique_id=358226618]
+[node name="Sphere" type="MeshInstance3D" parent="Node3D" unique_id=358226618]
 transform = Transform3D(88.61117, 0, 0, 0, -1.0563274e-05, 119.57093, 0, -88.61116, -1.4253967e-05, 0, 0, 0)
 mesh = SubResource("ArrayMesh_mnstv")
 skeleton = NodePath("")
 
-[node name="Torus" type="MeshInstance3D" parent="." unique_id=1742557874]
+[node name="Torus" type="MeshInstance3D" parent="Node3D" unique_id=1742557874]
 transform = Transform3D(112.01589, 0, 0, 0, -1.3353335e-05, 240.13959, 0, -112.015884, -2.8626871e-05, 0, -0.059933078, 0)
 mesh = SubResource("ArrayMesh_fcpd4")
 skeleton = NodePath("")
 
-[node name="pivot noir" type="MeshInstance3D" parent="." unique_id=2098223269]
+[node name="pivot noir" type="MeshInstance3D" parent="Node3D" unique_id=2098223269]
 transform = Transform3D(-37.21591, 1.9533656e-13, -2.24008e-06, 3.2535188e-06, 1.6386018e-06, -25.623522, 0, 13.745587, 3.054562e-06, 0.0682385, 1.1024665, -0.006506175)
 mesh = SubResource("ArrayMesh_a6ljk")
 skeleton = NodePath("")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1657834120]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node3D" unique_id=1657834120]
 libraries/ = SubResource("AnimationLibrary_475ue")
