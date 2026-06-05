@@ -20,6 +20,7 @@ const PROTO_SHIELD_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/Pro
 const FORTIFICATION_DRONE_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/FortificationDrone/fortification_drone.tscn")
 const AEGIS_BLADE_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/AegisBlade/aegis_blade.tscn")
 const DEFLECTION_SHIELD: PackedScene = preload("res://02_Entities/Pool/Mobs/DeflectionShield/deflection_shield.tscn")
+const GAMMA_TURRET: PackedScene = preload("res://02_Entities/Pool/Buildings/Turrets/GammaTurret/gamma_turret.tscn")
 
 const TREX_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/TRex/trex.tscn")
 const CHICKEN_EGG_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/ChickenEgg/chicken_egg.tscn")
@@ -85,6 +86,7 @@ func summon_entity(entity_type: Entity.EntityType, spawn_config: SpawnLocationCo
 		Entity.EntityType.DEFLECTION_SHIELD: _summon_deflection_shield(spawn_position, entity_modifier)
 		Entity.EntityType.TREX: _summon_trex(spawn_position, entity_modifier)
 		Entity.EntityType.CHICKEN_EGG: _summon_chicken_egg(spawn_position, entity_modifier)
+		Entity.EntityType.GAMMA_TURRET: _summon_gamma_turret(spawn_position, entity_modifier)
 		Entity.EntityType.MOLTEN_GOLEM: _summon_molten_golem(spawn_position, entity_modifier)
 
 	_consume_after_action_modifiers(Utils.ActionCategory.SUMMON, {
@@ -213,3 +215,15 @@ func _summon_deflection_shield(spawn_position: Vector3, entity_modifier: Diction
 	var respawn_timer: float = entity_modifier.get(DeflectionShield.Modifier.RESPAWN_TIMER, -1.0)
 	deflection_shield.init(blocked_projectiles, shield_per_block, respawn_timer)
 	_spawn_manager.spawn_entity(deflection_shield, Transform3D(Basis(), spawn_position), _owner.get_context())
+	
+	
+func _summon_gamma_turret(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
+	var gamma_turret: GammaTurret = GAMMA_TURRET.instantiate()
+	var shield: float = entity_modifier.get(GammaTurret.Modifier.TURRET_SHIELD, 30)
+	var ad: float = entity_modifier.get(GammaTurret.Modifier.TURRET_AD, 5)
+	var attack_speed: float = entity_modifier.get(GammaTurret.Modifier.TURRET_AS, 1.0)
+	var hp: int = entity_modifier.get(GammaTurret.Modifier.TURRET_HP, 1)
+	var master: Entity = entity_modifier.get(GammaTurret.Modifier.MASTER)
+	var respawn_timer: float = entity_modifier.get(GammaTurret.Modifier.RESPAWN_TIMER, -1.0)
+	gamma_turret.init(shield, ad, attack_speed, hp, master, respawn_timer)
+	_spawn_manager.spawn_entity(gamma_turret, Transform3D(Basis(), spawn_position), _owner.get_context())

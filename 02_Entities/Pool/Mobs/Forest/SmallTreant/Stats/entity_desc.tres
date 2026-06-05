@@ -1,0 +1,53 @@
+[gd_resource type="Resource" script_class="EntityDesc" format=3 uid="uid://duw0xcgf3d40a"]
+
+[ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="1_mwo7f"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="2_g1qfc"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_onq14"]
+[ext_resource type="Resource" uid="uid://c4lrw4ic5oeox" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Stats/stats_lvl_01.tres" id="4_t1uwf"]
+[ext_resource type="Resource" uid="uid://b4uiko1xou51x" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Stats/stats_lvl_02.tres" id="5_premn"]
+[ext_resource type="Resource" uid="uid://byxkq2h6crhdy" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Stats/stats_lvl_03.tres" id="6_am473"]
+[ext_resource type="Resource" uid="uid://0v30hai0luai" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Stats/stats_lvl_04.tres" id="7_nb14d"]
+[ext_resource type="Resource" uid="uid://jjoi2m7ptu3y" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Stats/stats_lvl_05.tres" id="8_pmib0"]
+[ext_resource type="Resource" uid="uid://old14oj4py4h" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Stats/stats_lvl_06.tres" id="9_e0ovu"]
+[ext_resource type="Resource" uid="uid://c4j8y2ta7olw" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Stats/stats_lvl_07.tres" id="10_iqktn"]
+[ext_resource type="Resource" uid="uid://cdgmxphx1p6nu" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Stats/stats_lvl_08.tres" id="11_upfxb"]
+[ext_resource type="Resource" uid="uid://pir6gyk7ub7s" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Stats/stats_lvl_09.tres" id="12_tf0hq"]
+[ext_resource type="Resource" uid="uid://bcxg2d4a4kyrf" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Stats/stats_lvl_10.tres" id="13_h6o0q"]
+[ext_resource type="Resource" uid="uid://duynfcp1s0dvd" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Stats/stats_lvl_11.tres" id="14_osu0f"]
+[ext_resource type="Resource" uid="uid://du4v7p4hy5s1c" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Stats/stats_lvl_12.tres" id="15_a52sq"]
+[ext_resource type="Resource" uid="uid://ok87xiyuwvdk" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Stats/stats_lvl_13.tres" id="16_ar714"]
+[ext_resource type="Resource" uid="uid://bx17cnhdidgox" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Stats/stats_lvl_14.tres" id="17_4pq4l"]
+[ext_resource type="Resource" uid="uid://cyw68aixygjjw" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Stats/stats_lvl_15.tres" id="18_4jtui"]
+[ext_resource type="Resource" uid="uid://boxjkykva25oe" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Stats/stats_lvl_16.tres" id="19_u7a3v"]
+[ext_resource type="Resource" uid="uid://cpbry15mubuko" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Stats/stats_lvl_17.tres" id="20_82gec"]
+[ext_resource type="Resource" uid="uid://ble8570gljruf" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Stats/stats_lvl_18.tres" id="21_xqotf"]
+[ext_resource type="Resource" uid="uid://5ppkpm0dq4im" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Stats/stats_lvl_19.tres" id="22_hls52"]
+[ext_resource type="Resource" uid="uid://bxd2s3eetra6e" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Stats/stats_lvl_20.tres" id="23_16r7w"]
+
+[resource]
+script = ExtResource("1_mwo7f")
+stats = Dictionary[int, ExtResource("3_onq14")]({
+1: ExtResource("4_t1uwf"),
+2: ExtResource("5_premn"),
+3: ExtResource("6_am473"),
+4: ExtResource("7_nb14d"),
+5: ExtResource("8_pmib0"),
+6: ExtResource("9_e0ovu"),
+7: ExtResource("10_iqktn"),
+8: ExtResource("11_upfxb"),
+9: ExtResource("12_tf0hq"),
+10: ExtResource("13_h6o0q"),
+11: ExtResource("14_osu0f"),
+12: ExtResource("15_a52sq"),
+13: ExtResource("16_ar714"),
+14: ExtResource("17_4pq4l"),
+15: ExtResource("18_4jtui"),
+16: ExtResource("19_u7a3v"),
+17: ExtResource("20_82gec"),
+18: ExtResource("21_xqotf"),
+19: ExtResource("22_hls52"),
+20: ExtResource("23_16r7w")
+})
+aa_1_anim_base_duration = 0.833
+aa_2_anim_base_duration = 0.833
+aa_3_anim_base_duration = 1.0
