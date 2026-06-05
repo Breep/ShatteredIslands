@@ -49,6 +49,7 @@ func start_combat_modules() -> void:
 	if _entity.target != null: _entity.target.start()
 	if _entity.alterations != null: _entity.alterations.start()
 	if _entity.movement != null: _entity.movement.start()
+	if _entity.battle_callback_registry != null: _entity.battle_callback_registry.start_timers()
 	if _entity.mana != null: _entity.mana.start()
 	# Auto-attack : pas de start ici, c'est le controller (IA/Player, Phase 2-3) qui set la cible.
 #endregion

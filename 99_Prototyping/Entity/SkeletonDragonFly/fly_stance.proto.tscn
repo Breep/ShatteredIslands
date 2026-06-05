@@ -55,3 +55,8 @@ text = "Land"
 unique_name_in_owner = true
 layout_mode = 2
 text = "Reset (ground idle)"
+
+[node name="BreathButton" type="Button" parent="UI/Panel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Breath (Idle01)"

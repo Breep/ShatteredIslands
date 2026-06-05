@@ -2,8 +2,8 @@ class_name AlterationIcon
 extends Control
 
 ## Small reusable widget shown in SimpleInfoPanel2D's alterations container.
-## Carries an alteration's icon plus a stack/time value; the label's tint comes
-## from the alteration's display_color (applied via modulate).
+## Carries an alteration's icon plus a stack/time value; the icon texture is
+## tinted via the alteration's configurable modulate (hue + intensity + alpha).
 
 @onready var _texture: TextureRect = %Texture
 @onready var _label: Label = %Label
@@ -15,11 +15,9 @@ func bind(alteration: Alteration) -> void:
 	_alteration = alteration
 	if _texture != null:
 		_texture.texture = alteration.icon
-		# When no icon asset, tint the (empty) rect with the alteration color so
-		# the widget still reads at a glance.
-		_texture.modulate = alteration.display_color if alteration.icon == null else Color.WHITE
-	#if _label != null:
-		#_label.modulate = alteration.display_color
+		# With an icon: apply its configurable modulate (hue + intensity + alpha).
+		# Without one: tint the empty rect with display_color so it still reads.
+		_texture.modulate = alteration.get_icon_modulate() if alteration.icon != null else alteration.display_color
 
 
 func set_value(value: Variant) -> void:

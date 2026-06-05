@@ -1,0 +1,105 @@
+[gd_scene format=3 uid="uid://cpl7wmcqapxbc"]
+
+[ext_resource type="Script" uid="uid://dci1melmlvgnk" path="res://02_Entities/_Shared/Components/Alterations/AlterationIcon/alteration_icon.proto.gd" id="1_proto"]
+
+[node name="AlterationIconProto" type="Control" unique_id=1079338910]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_proto")
+
+[node name="Margin" type="MarginContainer" parent="." unique_id=497463856]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Main" type="HBoxContainer" parent="Margin" unique_id=1943522934]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Left" type="VBoxContainer" parent="Margin/Main" unique_id=102995845]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="Margin/Main/Left" unique_id=686418836]
+layout_mode = 2
+text = "Alteration Icon Tuner — pick an icon (Edit), tune color + alpha + intensity on the right, then Save."
+
+[node name="Scroll" type="ScrollContainer" parent="Margin/Main/Left" unique_id=50331701]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="List" type="VBoxContainer" parent="Margin/Main/Left/Scroll" unique_id=2118034149]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Buttons" type="HBoxContainer" parent="Margin/Main/Left" unique_id=1639106430]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="SaveAllButton" type="Button" parent="Margin/Main/Left/Buttons" unique_id=2113714668]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Save all"
+
+[node name="ReloadButton" type="Button" parent="Margin/Main/Left/Buttons" unique_id=1926064060]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Reload from disk"
+
+[node name="Status" type="Label" parent="Margin/Main/Left/Buttons" unique_id=1536331505]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Right" type="VBoxContainer" parent="Margin/Main" unique_id=782868209]
+custom_minimum_size = Vector2(340, 0)
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="SelectedLabel" type="Label" parent="Margin/Main/Right" unique_id=628023995]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Selected: —"
+
+[node name="ColorPicker" type="ColorPicker" parent="Margin/Main/Right" unique_id=989045793]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="IntensityBox" type="HBoxContainer" parent="Margin/Main/Right" unique_id=1181467319]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="IntCaption" type="Label" parent="Margin/Main/Right/IntensityBox" unique_id=1233467238]
+layout_mode = 2
+text = "Intensity"
+
+[node name="IntensitySlider" type="HSlider" parent="Margin/Main/Right/IntensityBox" unique_id=1483462939]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 3.0
+step = 0.05
+value = 1.0
+
+[node name="IntensityValue" type="Label" parent="Margin/Main/Right/IntensityBox" unique_id=288960507]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+text = "1.00"
+
+[node name="SaveSelected" type="Button" parent="Margin/Main/Right" unique_id=333520584]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Save this icon"

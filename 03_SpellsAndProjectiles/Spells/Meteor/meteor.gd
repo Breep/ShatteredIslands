@@ -13,6 +13,8 @@ var _on_hit_callbacks: Array
 
 var _owner: Entity # Owner of this healing fire area
 var _target: Entity
+var _spawn_position: Vector3
+var _use_position: bool = false # falls on _spawn_position instead of a target entity
 var _damage_percent: float
 var _damage_flat: float
 var _radius: float
@@ -39,15 +41,26 @@ func init(target: Entity, damage_flat: float, damage_percent: float, radius: flo
 	_on_hit_callbacks = on_hit_callbacks
 
 
+## Variant that falls on a fixed world position instead of a target entity.
+func init_at_position(position: Vector3, damage_flat: float, damage_percent: float, radius: float, on_hit_callbacks: Array = [], source: Entity = null) -> void:
+	_owner = source
+	_spawn_position = position
+	_use_position = true
+	_damage_flat = damage_flat
+	_damage_percent = damage_percent
+	_radius = radius
+	_on_hit_callbacks = on_hit_callbacks
+
+
 func _ready() -> void:
-	if _target == null:
-		printerr("Meteor: No target assigned to [", get_path(), "]")
+	if not _use_position and _target == null:
+		printerr("Meteor: No target/position assigned to [", get_path(), "]")
 		queue_free()
 		return
-	
+
 	_deploy_timer.wait_time = DEPLOY_TIME
 	_deploy_timer.start()
-	global_position = _target.global_position
+	global_position = _spawn_position if _use_position else _target.global_position
 	_meteor_visual.spells_node = spells_node
 	AudioManager.play_3d("meteor", global_position, 0.95)
 

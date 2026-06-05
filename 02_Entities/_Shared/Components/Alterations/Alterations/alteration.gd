@@ -109,11 +109,53 @@ var icon: Texture2D
 var display_color: Color = Color.WHITE
 var display_mode: DisplayMode = DisplayMode.DEFAULT
 
+## Tint applied as `modulate` on the icon texture in AlterationIcon.
+## `icon_modulate` carries the hue and alpha; `icon_intensity` scales the RGB
+## channels (> 1 brightens, < 1 darkens) while leaving alpha untouched.
+## Concrete subclasses may override these in `_init()`.
+var icon_modulate: Color = Color.WHITE
+var icon_intensity: float = 1.0
+
 var _owner: Entity
 
 
 func bind(owner: Entity) -> void:
 	_owner = owner
+
+
+const ICON_CONFIG_PATH: String = "res://02_Entities/_Shared/Components/Alterations/AlterationIcon/alteration_icon_config.tres"
+
+static var _icon_config: AlterationIconConfig
+static var _icon_config_loaded: bool = false
+
+
+## Lazily-loaded per-type modulate overrides authored via the AlterationIcon
+## proto. Returns null when no config has been saved yet.
+static func get_icon_config() -> AlterationIconConfig:
+	if not _icon_config_loaded:
+		_icon_config_loaded = true
+		if ResourceLoader.exists(ICON_CONFIG_PATH):
+			_icon_config = load(ICON_CONFIG_PATH)
+	return _icon_config
+
+
+## Force the next get_icon_config() to re-read from disk (used by the proto
+## right after saving).
+static func reload_icon_config() -> void:
+	_icon_config = null
+	_icon_config_loaded = false
+
+
+## Final icon tint: base modulate (or saved override) with RGB scaled by
+## intensity, alpha preserved.
+func get_icon_modulate() -> Color:
+	var color: Color = icon_modulate
+	var intensity: float = icon_intensity
+	var cfg: AlterationIconConfig = get_icon_config()
+	if cfg != null and cfg.has_override(type):
+		color = cfg.get_color(type)
+		intensity = cfg.get_intensity(type)
+	return Color(color.r * intensity, color.g * intensity, color.b * intensity, color.a)
 
 
 ## Called when the alteration is registered with an AlterationsModule.

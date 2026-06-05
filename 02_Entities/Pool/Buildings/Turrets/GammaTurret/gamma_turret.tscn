@@ -1,0 +1,123 @@
+[gd_scene format=3 uid="uid://dqrhym1sskng8"]
+
+[ext_resource type="Script" uid="uid://dgdcjemlrm0a7" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/gamma_turret.gd" id="1_7mgti"]
+[ext_resource type="PackedScene" uid="uid://b43dafam0s6e5" path="res://02_Entities/_Data/GammaTurret/turret_gamma2.tscn" id="2_b6mp1"]
+[ext_resource type="AnimationNodeBlendTree" uid="uid://ds67abcdh4aq8" path="res://02_Entities/_Shared/Animations/default_animation_tree.res" id="3_gwi2y"]
+[ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="4_f6l0l"]
+[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/LargeHealthBar/large_health_bar_component.tscn" id="5_rc10y"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jkt3l"]
+radius = 0.2780993
+
+[node name="Turret" type="CharacterBody3D" unique_id=1412979628 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_attack_spawn_marker")]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("1_7mgti")
+entity_name = "Gamma Turret"
+_visual_3d = NodePath("turret_fire")
+_health_bar_marker = NodePath("turret_fire/HealthMarker")
+_attack_spawn_marker = NodePath("turret_fire/AAMarker")
+_projectile_type = 9
+
+[node name="turret_fire" parent="." unique_id=292281622 instance=ExtResource("2_b6mp1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0)
+
+[node name="HealthMarker" type="Marker3D" parent="turret_fire" unique_id=1926611606]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.6842365, 0)
+
+[node name="AAMarker" type="Marker3D" parent="turret_fire" unique_id=1914895184]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4779682, 2.1434035, -0.016265154)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1281618970]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1180775, 0)
+shape = SubResource("SphereShape3D_jkt3l")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1985525116]
+root_node = NodePath("../turret_fire")
+tree_root = ExtResource("3_gwi2y")
+anim_player = NodePath("../turret_fire/AnimationPlayer")
+parameters/switch_moving/current_state = ""
+parameters/switch_moving/transition_request = ""
+parameters/switch_moving/current_index = -1
+parameters/scale_dance/scale = 1.0
+parameters/scale_die/scale = 1.0
+parameters/scale_idle_standing_neutral/scale = 1.0
+parameters/one_shot_attack/active = false
+parameters/one_shot_attack/internal_active = false
+parameters/one_shot_attack/request = 0
+parameters/one_shot_ultimate/active = false
+parameters/one_shot_ultimate/internal_active = false
+parameters/one_shot_ultimate/request = 0
+parameters/scale_attack/scale = 1.0
+parameters/one_shot_idle_standing_neutral/active = false
+parameters/one_shot_idle_standing_neutral/internal_active = false
+parameters/one_shot_idle_standing_neutral/request = 0
+parameters/scale_ultimate/scale = 1.0
+parameters/scale_idle_standing_neutral_var/scale = 1.0
+parameters/one_shot_sitting/active = false
+parameters/one_shot_sitting/internal_active = false
+parameters/one_shot_sitting/request = 0
+parameters/switch_entity_life_state/current_state = ""
+parameters/switch_entity_life_state/transition_request = ""
+parameters/switch_entity_life_state/current_index = -1
+parameters/scale_walk/scale = 1.0
+parameters/scale_run/scale = 1.0
+parameters/switch_attack/current_state = ""
+parameters/switch_attack/transition_request = ""
+parameters/switch_attack/current_index = -1
+parameters/scale_stunned/scale = 1.0
+parameters/seek_stunned/seek_request = -1.0
+parameters/scale_idle_standing_aggresive/scale = 1.0
+parameters/scale_idle_standing_aggresive_var/scale = 1.0
+parameters/seek_idle_standing_aggresive/seek_request = -1.0
+parameters/switch_entity_mode/current_state = ""
+parameters/switch_entity_mode/transition_request = ""
+parameters/switch_entity_mode/current_index = -1
+parameters/seek_idle_standing_neutral/seek_request = -1.0
+parameters/one_shot_idle_standing_aggresive/active = false
+parameters/one_shot_idle_standing_aggresive/internal_active = false
+parameters/one_shot_idle_standing_aggresive/request = 0
+parameters/seek_idle_sitting_chair/seek_request = -1.0
+parameters/scale_idle_sitting_chair/scale = 1.0
+parameters/scale_idle_sitting_chair_var/scale = 1.0
+parameters/seek_idle_sitting_floor/seek_request = -1.0
+parameters/seek_dance/seek_request = -1.0
+parameters/one_shot_idle_sitting_chair/active = false
+parameters/one_shot_idle_sitting_chair/internal_active = false
+parameters/one_shot_idle_sitting_chair/request = 0
+parameters/scale_idle_sitting_floor/scale = 1.0
+parameters/scale_idle_sitting_floor_var/scale = 1.0
+parameters/scale_attack_2/scale = 1.0
+parameters/scale_hit_1/scale = 1.0
+parameters/scale_attack_3/scale = 1.0
+parameters/switch_main/current_state = ""
+parameters/switch_main/transition_request = ""
+parameters/switch_main/current_index = -1
+parameters/switch_idle/current_state = ""
+parameters/switch_idle/transition_request = ""
+parameters/switch_idle/current_index = -1
+parameters/scale_drag/scale = 1.0
+parameters/scale_land/scale = 1.0
+parameters/one_shot_land/active = false
+parameters/one_shot_land/internal_active = false
+parameters/one_shot_land/request = 0
+parameters/one_shot_hit/active = false
+parameters/one_shot_hit/internal_active = false
+parameters/one_shot_hit/request = 0
+parameters/scale_attack_1/scale = 1.0
+parameters/switch_positioning/current_state = ""
+parameters/switch_positioning/transition_request = ""
+parameters/switch_positioning/current_index = -1
+parameters/switch_stunned_state/current_state = ""
+parameters/switch_stunned_state/transition_request = ""
+parameters/switch_stunned_state/current_index = -1
+
+[node name="AnimationComponent" parent="." unique_id=73205791 node_paths=PackedStringArray("_animation_tree", "_owner") instance=ExtResource("4_f6l0l")]
+_animation_tree = NodePath("../AnimationTree")
+_owner = NodePath("..")
+
+[node name="LargeHealthBarComponent" parent="." unique_id=1823590462 node_paths=PackedStringArray("_spawn", "_owner") instance=ExtResource("5_rc10y")]
+_spawn = NodePath("../turret_fire/HealthMarker")
+_owner = NodePath("..")
+
+[editable path="turret_fire"]

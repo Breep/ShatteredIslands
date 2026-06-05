@@ -24,6 +24,7 @@ const GAMMA_TURRET: PackedScene = preload("res://02_Entities/Pool/Mobs/GammaTurr
 
 const TREX_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/TRex/trex.tscn")
 const CHICKEN_EGG_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/ChickenEgg/chicken_egg.tscn")
+const MOLTEN_GOLEM_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/Golems/MoltenGolem/molten_golem.tscn")
 
 func _enter_tree() -> void:
 	if _owner == null: return
@@ -86,6 +87,7 @@ func summon_entity(entity_type: Entity.EntityType, spawn_config: SpawnLocationCo
 		Entity.EntityType.TREX: _summon_trex(spawn_position, entity_modifier)
 		Entity.EntityType.CHICKEN_EGG: _summon_chicken_egg(spawn_position, entity_modifier)
 		Entity.EntityType.GAMMA_TURRET: _summon_gamma_turret(spawn_position, entity_modifier)
+		Entity.EntityType.MOLTEN_GOLEM: _summon_molten_golem(spawn_position, entity_modifier)
 
 	_consume_after_action_modifiers(Utils.ActionCategory.SUMMON, {
 		ActionModifier.VarType.ENTITY_TYPE: entity_type,
@@ -106,6 +108,11 @@ func _summon_snake_barrel(spawn_position: Vector3, entity_modifier: Dictionary) 
 func _summon_snake(spawn_position: Vector3, _entity_modifier: Dictionary) -> void:
 	var snake: Snake = SNAKE_SCENE.instantiate()
 	_spawn_manager.spawn_entity(snake, Transform3D(Basis(), spawn_position), _owner.get_context(), Entity.EntityType.SNAKE)
+
+
+func _summon_molten_golem(spawn_position: Vector3, _entity_modifier: Dictionary) -> void:
+	var golem: MoltenGolem = MOLTEN_GOLEM_SCENE.instantiate()
+	_spawn_manager.spawn_entity(golem, Transform3D(Basis(), spawn_position), _owner.get_context(), Entity.EntityType.MOLTEN_GOLEM)
 
 
 func _summon_chicken(spawn_position: Vector3, entity_modifier: Dictionary) -> void:

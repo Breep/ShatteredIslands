@@ -3,9 +3,14 @@
 [ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="1_5bbmg"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="2_1uu4l"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_40nx0"]
+[ext_resource type="Resource" uid="uid://dlw6ngm3psgfy" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Skills/Passive/shattering_flight.tres" id="3_fwtbi"]
 [ext_resource type="Resource" uid="uid://0m8vj5ggrum" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Stats/stats_lvl_01.tres" id="4_fwtbi"]
+[ext_resource type="Resource" uid="uid://d3j3hjw8vce8e" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Skills/Bronze/shockwave.tres" id="4_tkl2o"]
+[ext_resource type="Resource" uid="uid://buujpiwx3nfjp" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Skills/Silver/diffuse_heat.tres" id="5_s05oq"]
 [ext_resource type="Resource" uid="uid://gqcdpc4lvmi7" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Stats/stats_lvl_02.tres" id="5_tkl2o"]
 [ext_resource type="Resource" uid="uid://b8w6bd2gdguch" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Stats/stats_lvl_03.tres" id="6_s05oq"]
+[ext_resource type="Resource" uid="uid://dujh17mo200uj" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Skills/Ultimate/devastating_breath.tres" id="6_tkl2o"]
+[ext_resource type="Resource" uid="uid://c6qxrdvypk21a" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Skills/Gold/ash_brood.tres" id="7_s05oq"]
 [ext_resource type="Resource" uid="uid://5ijob612h5ug" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Stats/stats_lvl_04.tres" id="7_vaeqp"]
 [ext_resource type="Resource" uid="uid://0vdri7lvag1q" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Stats/stats_lvl_05.tres" id="8_xdamf"]
 [ext_resource type="Resource" uid="uid://bggnumuj00hpn" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Stats/stats_lvl_06.tres" id="9_m52s5"]
@@ -48,3 +53,16 @@ stats = Dictionary[int, ExtResource("3_40nx0")]({
 19: ExtResource("22_w8rhe"),
 20: ExtResource("23_6v0lk")
 })
+skills = Dictionary[int, ExtResource("2_1uu4l")]({
+0: ExtResource("3_fwtbi"),
+1: ExtResource("4_tkl2o"),
+2: ExtResource("5_s05oq"),
+3: ExtResource("7_s05oq"),
+4: ExtResource("6_tkl2o")
+})
+aa_1_release_normalized = 0.61
+aa_2_release_normalized = 0.61
+aa_3_release_normalized = 0.61
+aa_1_anim_base_duration = 1.666
+aa_2_anim_base_duration = 1.666
+aa_3_anim_base_duration = 1.666

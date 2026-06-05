@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cgrenadevis01"]
+
+[ext_resource type="Shader" uid="uid://bopqxo1shxrl6" path="res://03_SpellsAndProjectiles/Projectiles/Grenade/Projectile/s_grenade.gdshader" id="1_shader"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_grenade"]
+render_priority = 0
+shader = ExtResource("1_shader")
+shader_parameter/body_color = Color(0.21614692, 0.56135315, 0.6388948, 1)
+shader_parameter/glow_color = Color(0.25, 0.9, 1, 1)
+shader_parameter/blink_speed = 3.0
+shader_parameter/fresnel_power = 2.5
+shader_parameter/glow_strength = 0.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_grenade"]
+radius = 0.18
+height = 0.36
+radial_segments = 16
+rings = 8
+
+[node name="GrenadeVisual" type="Node3D" unique_id=1031429210]
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1418305296]
+material_override = SubResource("ShaderMaterial_grenade")
+mesh = SubResource("SphereMesh_grenade")

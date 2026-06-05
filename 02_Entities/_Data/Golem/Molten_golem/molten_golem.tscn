@@ -17,7 +17,7 @@ emission_texture = ExtResource("4_emission")
 normal_enabled = true
 normal_texture = ExtResource("3_normal")
 
-[node name="MoltenGolem" unique_id=806951591 instance=ExtResource("1_base")]
+[node name="MoltenGolemVisual" unique_id=806951591 instance=ExtResource("1_base")]
 
 [node name="MoltenGolem" parent="Skeleton3D" parent_id_path=PackedInt32Array(568249234) index="0" unique_id=132877774]
 material_override = SubResource("StandardMaterial3D_molten")

@@ -30,7 +30,7 @@ func _ready() -> void:
 	_adopt_pre_placed_entities()
 
 	_center_point_camera.set_active()
-	_fighting_manager.init(_spawn_manager, 42)
+	_fighting_manager.init(_spawn_manager, 1) # match the entities' battle_id so their seeded RNG is used
 
 	_auto_attack_check_button.button_pressed = _auto_attack_enabled
 	_family_managers_check_button.button_pressed = _family_managers_enabled
@@ -72,6 +72,12 @@ func _on_trigger_flight_button_pressed() -> void:
 	for entity in _entities:
 		if is_instance_valid(entity) and entity.has_method("start_flight"):
 			entity.start_flight()
+
+
+func _on_cast_ultimate_button_pressed() -> void:
+	for entity in _entities:
+		if is_instance_valid(entity) and entity.skill != null:
+			entity.skill.cast_ultimate()
 
 
 func _on_stop_fight_button_pressed() -> void:

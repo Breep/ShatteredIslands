@@ -13,8 +13,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			if not is_instance_valid(chicken): return
 			for ennemy in ctx.hero.target.get_targets(TargetComponent.MultipleTargettingStrategy.ENEMIES):
 				if ennemy.alterations == null: continue
-				for action_type: Utils.ActionType in Utils.get_all_actions():
-					ennemy.alterations.add_typed_stack(Alteration.Type.VULNERABILITY, action_type, vulnerable_application)
+				ennemy.alterations.add_stack(Alteration.Type.VULNERABILITY, vulnerable_application)
 		)
 
 

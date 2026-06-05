@@ -2,15 +2,17 @@ class_name ShatteringFlightAbility
 extends Node
 
 # Orchestrates the dragon's "Vol fracassant" passive on the deterministic combat
-# clock: take off, become untargetable, traverse a flight path above the arena,
-# then land and unleash the impact effects (MAGICAL_DAMAGE AOE, and talent-gated
-# stun / golem summons). All timing is tick-based (driven from SkeletonDragon.
-# process_tick) so the landing damage moment is reproducible and coop sync-safe.
-# Animation is delegated to SkeletonDragonAnimationComponent; this node never
-# touches the AnimationTree directly.
+# clock: take off, become invulnerable, traverse a flight path above the arena while
+# attacking from the air (aerial enrage: doubled attack speed + random frontal-arc
+# targeting), then land and unleash the impact effects (MAGICAL_DAMAGE AOE, plus
+# talent-gated stun / golem summons). All timing is tick-based (driven from
+# SkeletonDragon.process_tick) so the landing moment is reproducible and coop
+# sync-safe. Aerial combat uses only existing public APIs (AutoAttack, Target,
+# stat modifiers registry) — it touches no shared component.
 
 #region Signals
 signal flight_started
+signal flight_landing_impact   ## ground-contact frame — skills hook this for landing effects
 signal flight_landed
 #endregion
 
@@ -25,17 +27,43 @@ enum Phase { IDLE, TAKING_OFF, FLYING, LANDING }
 ## Ground-contact frame as a fraction of the landing clip (0..1), scale-independent
 ## — same convention as EntityDesc.aa_X_release_normalized.
 @export_range(0.0, 1.0, 0.01) var _landing_impact_normalized: float = 0.6
+
+## Aerial enrage (active during the FLYING phase only).
+@export var _aerial_attack_speed_mult: float = 1.0 ## MULT on AS → 1.0 = x2 base
+@export_range(0.0, 180.0, 1.0) var _frontal_arc_degrees: float = 60.0
+## Downward tilt of the targeting cone — the dragon flies above and aims at the ground,
+## so the cone points forward-and-down. Higher = more vertical (targets straight below).
+@export_range(0.0, 90.0, 1.0) var _aim_pitch_degrees: float = 45.0
 #endregion
 
 #region Private vars
 var _anim: SkeletonDragonAnimationComponent
-var _path_follow: PathFollow3D
+# Path global transform frozen at takeoff, so the curve is flown as a maneuver
+# relative to the takeoff pose (no feedback from moving the owner along it).
+var _takeoff_origin: Transform3D
 
+# Metres sampled ahead on the curve to orient the dragon toward its travel.
+const _FACING_LOOKAHEAD: float = 3.0
+# Per-tick weight to turn the dragon back toward its takeoff facing while landing.
+const _LANDING_TURN_WEIGHT: float = 0.15
+
+const _AERIAL_AS_MOD_ID: StringName = &"AerialEnrage"
+const _AERIAL_RANGE_MOD_ID: StringName = &"AerialRange"
+const _AERIAL_RANGE_BONUS: float = 9999.0 # effectively infinite range → no approach in air
+const _NO_MANA_REGEN_MOD_ID: StringName = &"FlightNoManaRegen"
+
+var _takeoff_yaw: float
+var _takeoff_position: Vector3
 var _phase: Phase = Phase.IDLE
 var _ticks: int = 0
 var _phase_ticks: int = 0
 var _impact_tick: int = 0
 var _impact_done: bool = false
+
+var _as_modifier: StatModifier
+var _range_modifier: StatModifier
+var _aerial_target_counter: int = 0
+var _mana_modifier: StatModifier
 #endregion
 
 #region Node base functions
@@ -49,9 +77,9 @@ func _ready() -> void:
 		Verbose.error("ShatteringFlightAbility: owner has no SkeletonDragonAnimationComponent", Verbose.Category.ENTITY)
 		return
 
-	if _flight_path != null:
-		_path_follow = PathFollow3D.new()
-		_flight_path.add_child(_path_follow)
+	# The flight advances on FightingManager ticks, which stop when the fight ends.
+	# If that happens mid-flight we'd freeze in the air → clean up on this signal.
+	_owner.fighting_state_changed.connect(_on_fighting_state_changed)
 #endregion
 
 #region Public functions
@@ -61,6 +89,11 @@ func trigger_flight() -> void:
 		return
 	if _anim == null:
 		return
+	if _flight_path != null:
+		_takeoff_origin = _flight_path.global_transform
+	_takeoff_yaw = _owner.rotation.y
+	_takeoff_position = _owner.global_position
+	_set_combat_active(false)
 	_anim.begin_takeoff()
 	_enter_phase(Phase.TAKING_OFF, _to_ticks(_anim.takeoff_length()))
 	flight_started.emit()
@@ -70,8 +103,9 @@ func trigger_flight() -> void:
 func abort_flight() -> void:
 	if _phase == Phase.IDLE:
 		return
+	_disable_aerial_combat()
 	_anim.end_fly()
-	_owner.alterations.cancel_state(Alteration.Type.UNTARGETABLE)
+	_set_combat_active(true)
 	_phase = Phase.IDLE
 
 
@@ -87,12 +121,14 @@ func process_tick() -> void:
 				_begin_flying()
 		Phase.FLYING:
 			_advance_flight_path()
+			_maintain_aerial_target()
 			if _ticks >= _phase_ticks:
 				_begin_landing()
 		Phase.LANDING:
+			_owner.rotation.y = lerp_angle(_owner.rotation.y, _takeoff_yaw, _LANDING_TURN_WEIGHT)
 			if not _impact_done and _ticks >= _impact_tick:
 				_impact_done = true
-				_apply_landing_effects()
+				flight_landing_impact.emit()
 			if _ticks >= _phase_ticks:
 				_finish_flight()
 #endregion
@@ -100,11 +136,14 @@ func process_tick() -> void:
 #region Private functions
 func _begin_flying() -> void:
 	_anim.enter_fly_loop()
-	_owner.alterations.apply_state(Alteration.Type.UNTARGETABLE)
+	_enable_aerial_combat()
 	_enter_phase(Phase.FLYING, _to_ticks(_flight_duration))
 
 
 func _begin_landing() -> void:
+	_disable_aerial_combat()
+	if _owner.auto_attack != null:
+		_owner.auto_attack.set_paused(true) # no attacks during the landing transition
 	_anim.begin_landing()
 	var landing_ticks: int = _to_ticks(_anim.landing_length())
 	_impact_tick = int(round(_landing_impact_normalized * landing_ticks))
@@ -114,7 +153,7 @@ func _begin_landing() -> void:
 
 func _finish_flight() -> void:
 	_anim.end_fly()
-	_owner.alterations.cancel_state(Alteration.Type.UNTARGETABLE)
+	_set_combat_active(true)
 	_phase = Phase.IDLE
 	flight_landed.emit()
 
@@ -130,14 +169,176 @@ func _to_ticks(seconds: float) -> int:
 
 
 func _advance_flight_path() -> void:
-	if _path_follow == null:
+	if _flight_path == null or _flight_path.curve == null:
 		return
-	_path_follow.progress_ratio = float(_ticks) / float(_phase_ticks)
-	_owner.global_position = _path_follow.global_position
+	var length: float = _flight_path.curve.get_baked_length()
+	if length <= 0.0:
+		return
+	var ratio: float = smoothstep(0.0, 1.0, float(_ticks) / float(_phase_ticks))
+	var distance: float = ratio * length
+	var world_point: Vector3 = _takeoff_origin * _flight_path.curve.sample_baked(distance)
+	_owner.global_position = world_point
+
+	var ahead: Vector3 = _takeoff_origin * _flight_path.curve.sample_baked(minf(distance + _FACING_LOOKAHEAD, length))
+	if ahead.distance_to(world_point) > 0.001:
+		_owner.look_at_target_y_only(ahead)
 
 
-func _apply_landing_effects() -> void:
-	Verbose.debug("Shattering flight landing impact", Verbose.Category.ENTITY)
-	# AOE MAGICAL_DAMAGE on the landing zone, plus talent-gated stun / golem
-	# summons, routed through the dragon's action sender pipeline.
+# Toggles the "whole flight" state (takeoff → land/abort), active=false on takeoff,
+# active=true on land/abort. While airborne the dragon is invulnerable (also prevents
+# dying mid-flight, which would otherwise leave a corpse following the path); movement
+# is halted so it does not fight the flight path; the auto-attack is paused — which also
+# drops any in-progress swing (see AutoAttackComponent.set_paused) so no delayed hit
+# lands; mana regen is zeroed so the ultimate can't auto-cast mid-flight (stance conflict).
+func _set_combat_active(active: bool) -> void:
+	if _owner.movement != null:
+		if active:
+			_owner.movement.start()
+		else:
+			_owner.movement.stop()
+	if _owner.auto_attack != null:
+		_owner.auto_attack.set_paused(not active)
+	if active:
+		_owner.alterations.cancel_state(Alteration.Type.INVULNERABLE)
+		_unregister_mana_cut()
+	else:
+		_owner.alterations.apply_state(Alteration.Type.INVULNERABLE)
+		_register_mana_cut()
+
+
+func _register_mana_cut() -> void:
+	if _owner.stat_modifiers_registry == null or _mana_modifier != null:
+		return
+	_mana_modifier = StatModifier.new()
+	_mana_modifier.id = _NO_MANA_REGEN_MOD_ID
+	_mana_modifier.stat_type = EntityStats.StatType.MANA_REGEN
+	_mana_modifier.calc_type = StatModifier.CalcType.MULT
+	_mana_modifier.value = -1.0 # (1 + -1) = 0 → no mana regen while airborne
+	_owner.stat_modifiers_registry.register_modifier(_mana_modifier)
+
+
+func _unregister_mana_cut() -> void:
+	if _owner.stat_modifiers_registry == null or _mana_modifier == null:
+		return
+	_owner.stat_modifiers_registry.unregister_modifier(_mana_modifier)
+	_mana_modifier = null
+
+
+# Aerial enrage, active only during FLYING: unpause the auto-attack, apply the
+# doubled attack speed + (effectively infinite) range stat modifiers, and re-pick a
+# random frontal enemy on every completed attack (the "strafe" feel).
+func _enable_aerial_combat() -> void:
+	if _owner.auto_attack == null:
+		return
+	_owner.auto_attack.set_paused(false)
+	_register_aerial_modifiers()
+	if not _owner.auto_attack.attack_completed.is_connected(_on_aerial_attack_completed):
+		_owner.auto_attack.attack_completed.connect(_on_aerial_attack_completed)
+	if not _owner.auto_attack.attack_started.is_connected(_on_aerial_attack_started):
+		_owner.auto_attack.attack_started.connect(_on_aerial_attack_started)
+	_pick_aerial_target()
+
+
+func _disable_aerial_combat() -> void:
+	_unregister_aerial_modifiers()
+	if _owner.auto_attack == null:
+		return
+	if _owner.auto_attack.attack_completed.is_connected(_on_aerial_attack_completed):
+		_owner.auto_attack.attack_completed.disconnect(_on_aerial_attack_completed)
+	if _owner.auto_attack.attack_started.is_connected(_on_aerial_attack_started):
+		_owner.auto_attack.attack_started.disconnect(_on_aerial_attack_started)
+
+
+func _register_aerial_modifiers() -> void:
+	if _owner.stat_modifiers_registry == null:
+		return
+	_as_modifier = StatModifier.new()
+	_as_modifier.id = _AERIAL_AS_MOD_ID
+	_as_modifier.stat_type = EntityStats.StatType.AS
+	_as_modifier.calc_type = StatModifier.CalcType.MULT
+	_as_modifier.value = _aerial_attack_speed_mult
+	_owner.stat_modifiers_registry.register_modifier(_as_modifier)
+
+	_range_modifier = StatModifier.new()
+	_range_modifier.id = _AERIAL_RANGE_MOD_ID
+	_range_modifier.stat_type = EntityStats.StatType.AR
+	_range_modifier.calc_type = StatModifier.CalcType.ADD
+	_range_modifier.value = _AERIAL_RANGE_BONUS
+	_owner.stat_modifiers_registry.register_modifier(_range_modifier)
+
+
+func _unregister_aerial_modifiers() -> void:
+	if _owner.stat_modifiers_registry == null:
+		return
+	if _as_modifier != null:
+		_owner.stat_modifiers_registry.unregister_modifier(_as_modifier)
+		_as_modifier = null
+	if _range_modifier != null:
+		_owner.stat_modifiers_registry.unregister_modifier(_range_modifier)
+		_range_modifier = null
+
+
+func _pick_aerial_target() -> void:
+	var target: Entity = _pick_random_frontal_enemy()
+	if target != null:
+		_owner.auto_attack.set_target(target)
+
+
+# Re-acquire a frontal target when the auto-attack has none — its target died, left
+# the fight, or became untargetable. Without this the dragon stays idle for the rest
+# of the flight (re-targeting otherwise only happens on attack_completed, which never
+# fires while idle).
+func _maintain_aerial_target() -> void:
+	if _owner.auto_attack == null:
+		return
+	if not is_instance_valid(_owner.auto_attack.get_current_target()):
+		_pick_aerial_target()
+
+
+# Random enemy within the frontal arc of the dragon's flight facing, so attacking it
+# never forces an impossible body turn (the body stays oriented along the path).
+# Uses the seeded RNG (battle_id) → deterministic / coop sync-safe.
+func _pick_random_frontal_enemy() -> Entity:
+	if _owner.target == null:
+		return null
+	# Aim direction: the flight's horizontal heading tilted downward, so the cone
+	# covers enemies in front AND below the airborne dragon (3D angle, not flattened).
+	var heading: Vector3 = -_owner.global_transform.basis.z
+	heading.y = 0.0
+	if heading.length_squared() < 0.0001:
+		return null
+	heading = heading.normalized()
+	var pitch: float = deg_to_rad(_aim_pitch_degrees)
+	var aim: Vector3 = (heading * cos(pitch) + Vector3.DOWN * sin(pitch)).normalized()
+
+	var candidates: Array[Entity] = []
+	for enemy: Entity in _owner.target.get_targets(TargetComponent.MultipleTargettingStrategy.ENEMIES):
+		if not is_instance_valid(enemy):
+			continue
+		var to_enemy: Vector3 = enemy.global_position - _owner.global_position
+		if to_enemy.length_squared() < 0.01:
+			continue
+		if rad_to_deg(aim.angle_to(to_enemy)) <= _frontal_arc_degrees:
+			candidates.append(enemy)
+	_aerial_target_counter += 1
+	return Utils.pick_random(candidates, _owner.battle_id, "aerial_target_" + str(_aerial_target_counter))
+
+
+func _on_aerial_attack_completed() -> void:
+	_pick_aerial_target()
+
+
+# The ground attack anim is blocked by _lock_animation while flying; play the dedicated
+# fly-attack one-shot instead so the dragon visibly attacks in the air.
+func _on_aerial_attack_started(_lock_seconds: float) -> void:
+	_anim.play_fly_attack()
+
+
+func _on_fighting_state_changed(new_state: Entity.FightingState) -> void:
+	if _phase == Phase.IDLE or new_state == Entity.FightingState.FIGHTING:
+		return
+	# Fight ended mid-flight: ticks stop, so abort now and drop the dragon to its
+	# takeoff spot instead of leaving it frozen in the air.
+	abort_flight()
+	_owner.global_position = _takeoff_position
 #endregion

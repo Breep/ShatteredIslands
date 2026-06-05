@@ -13,6 +13,8 @@ const PARAM_SWITCH_FLY: String = "parameters/switch_fly/transition_request"
 const VALUE_SWITCH_FLY_START: String = "FlyStart"
 const VALUE_SWITCH_FLY_LOOP: String = "FlyLoop"
 const VALUE_SWITCH_FLY_STOP: String = "FlyStop"
+
+const PARAM_ONE_SHOT_FLY_ATTACK: String = "parameters/one_shot_fly_attack/request"
 #endregion
 
 #region Private vars
@@ -33,6 +35,11 @@ func enter_fly_loop() -> void:
 
 func begin_landing() -> void:
 	_animation_tree.set(PARAM_SWITCH_FLY, VALUE_SWITCH_FLY_STOP)
+
+
+## Fires the in-air attack overlay (the ground attack one-shot is locked while flying).
+func play_fly_attack() -> void:
+	_animation_tree.set(PARAM_ONE_SHOT_FLY_ATTACK, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 
 func end_fly() -> void:
