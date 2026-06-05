@@ -9,7 +9,6 @@ metadata/_custom_type_script = "uid://bfilprot1eff7"
 
 [resource]
 script = ExtResource("1_skill")
-skill_id = 0
 name = "Fil protecteur"
 description = "La conversion de l'Aegis Blade passe de 25% à 35% des dégâts infligés."
 skill_effect = SubResource("Resource_fp")

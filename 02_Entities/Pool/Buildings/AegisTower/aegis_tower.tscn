@@ -9,11 +9,13 @@
 height = 3.7265625
 radius = 1.0834961
 
-[node name="AegisTower" type="CharacterBody3D" unique_id=2068796495]
+[node name="AegisTower" type="CharacterBody3D" unique_id=2068796495 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker")]
 script = ExtResource("1_olcvx")
 entity_name = "Aegis Tower"
 category = 4
 entity_desc = ExtResource("2_lt1mj")
+_visual_3d = NodePath("Aegis_Tower")
+_health_bar_marker = NodePath("HealthBar")
 
 [node name="LargeHealthBarComponent" parent="." unique_id=1823590462 node_paths=PackedStringArray("_spawn", "_owner") instance=ExtResource("2_40lgm")]
 _spawn = NodePath("../HealthBar")

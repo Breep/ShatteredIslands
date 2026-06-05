@@ -21,8 +21,10 @@ func apply(ctx: SkillContext) -> void:
 				ally.alterations.add_stack(Alteration.Type.DEFENSE, _defense, tower, &"Noyau renforcé")
 				buffed.append(ally)
 	)
+	# À la mort de la Tour : on annule le buff en ajoutant autant de Vulnerability
+	# (opposée de Defense → se compense, et passe en négatif si besoin).
 	tower.died.connect(func(_self_ref: Entity) -> void:
 		for ally: Entity in buffed:
 			if is_instance_valid(ally):
-				ally.alterations.add_stack(Alteration.Type.DEFENSE, -_defense, tower, &"Noyau renforcé")
+				ally.alterations.add_stack(Alteration.Type.VULNERABILITY, _defense, tower, &"Noyau renforcé")
 	)

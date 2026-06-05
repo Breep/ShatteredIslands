@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://di0hhdfbpptu6" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/satyr_berserker.tscn" id="7_tmkd7"]
 [ext_resource type="PackedScene" uid="uid://dvuq5n41nak3u" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/ArenaZoneManager/arena_zone_manager.tscn" id="8_fl2p6"]
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://90_Modules/PickableClickable/PickableModule/pickable_module.tscn" id="9_614kc"]
-[ext_resource type="PackedScene" uid="uid://bjmvftfup57hh" path="res://02_Entities/Pool/Buildings/AegisTower/aegis_tower_visual.tscn" id="9_r0wv3"]
+[ext_resource type="PackedScene" uid="uid://2ihflaf1vlkp" path="res://02_Entities/Pool/Buildings/AegisTower/aegis_tower.tscn" id="9_r0wv3"]
 [ext_resource type="PackedScene" uid="uid://bg5efhnq0erdv" path="res://90_Modules/PickableClickable/ClickableModule/clickable_module.tscn" id="10_m73qc"]
 [ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="10_r0wv3"]
 [ext_resource type="PackedScene" uid="uid://blncvfes4f2y7" path="res://99_Prototyping/Entity/AllActionPrototyping/testing_floorffa5.tscn" id="11_5hdqt"]
@@ -63,6 +63,22 @@ _arena_zone_manager = NodePath("../../ArenaZoneManager")
 
 [node name="GoblinBerserker2" parent="Node3D/Entities" unique_id=1681267741 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("18_kq8si")]
 transform = Transform3D(0.26981065, 0, -0.9629133, 0, 1.0000001, 0, 0.9629133, 0, 0.26981065, -4.6675324, 0, 3.8360553)
+level = 7
+team = 2
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
+[node name="GoblinBerserker9" parent="Node3D/Entities" unique_id=164461409 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("18_kq8si")]
+transform = Transform3D(0.26981065, 0, -0.9629133, 0, 1.0000001, 0, 0.9629133, 0, 0.26981065, -4.6675324, 0, 7.7449827)
+level = 7
+team = 2
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
+[node name="GoblinBerserker10" parent="Node3D/Entities" unique_id=232355036 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("18_kq8si")]
+transform = Transform3D(0.26981065, 0, -0.9629133, 0, 1.0000001, 0, 0.9629133, 0, 0.26981065, -4.6675324, 0, 5.5096507)
 level = 7
 team = 2
 battle_id = 1
@@ -157,8 +173,11 @@ battle_id = 1
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
 
-[node name="Aegis_Tower" parent="Node3D/Entities" unique_id=1509900596 instance=ExtResource("9_r0wv3")]
-transform = Transform3D(-4.3711385e-08, 0, 0.9999999, 0, 1.0000001, 0, -0.9999999, 0, -4.3711385e-08, 10.200227, -9.536744e-07, 3.7388854)
+[node name="AegisTower" parent="Node3D/Entities" unique_id=2068796495 instance=ExtResource("9_r0wv3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.14981, 0, 1.6435952)
+level = 7
+team = 1
+battle_id = 1
 
 [node name="Control" type="Control" parent="Node3D" unique_id=1104542732]
 layout_mode = 3

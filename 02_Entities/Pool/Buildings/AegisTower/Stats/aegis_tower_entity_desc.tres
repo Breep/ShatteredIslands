@@ -23,10 +23,10 @@
 [ext_resource type="Resource" uid="uid://bde8j3grq0v5s" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegistower_stats_lvl_18.tres" id="21_psolh"]
 [ext_resource type="Resource" uid="uid://ch7ssl0y2owlo" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegistower_stats_lvl_19.tres" id="22_e8y0f"]
 [ext_resource type="Resource" uid="uid://di6450pr2uwij" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegistower_stats_lvl_20.tres" id="23_e8yk8"]
-[ext_resource type="Resource" uid="uid://caegisauto2res7" path="res://02_Entities/Pool/Buildings/AegisTower/Skills/Passive/aegis_autonome.tres" id="24_pas"]
+[ext_resource type="Resource" uid="uid://bc5hw18srm4v5" path="res://02_Entities/Pool/Buildings/AegisTower/Skills/Passive/aegis_autonome.tres" id="24_pas"]
 [ext_resource type="Resource" uid="uid://cnoyau2res7" path="res://02_Entities/Pool/Buildings/AegisTower/Skills/Bronze/noyau_renforce.tres" id="25_bro"]
-[ext_resource type="Resource" uid="uid://creacteur2res7" path="res://02_Entities/Pool/Buildings/AegisTower/Skills/Silver/reacteur_capacitif.tres" id="26_sil"]
-[ext_resource type="Resource" uid="uid://cprotocole2res7" path="res://02_Entities/Pool/Buildings/AegisTower/Skills/Gold/protocole_gardien.tres" id="27_gol"]
+[ext_resource type="Resource" uid="uid://da6t5m8nb45e" path="res://02_Entities/Pool/Buildings/AegisTower/Skills/Silver/reacteur_capacitif.tres" id="26_sil"]
+[ext_resource type="Resource" uid="uid://ctevc8wijcylw" path="res://02_Entities/Pool/Buildings/AegisTower/Skills/Gold/protocole_gardien.tres" id="27_gol"]
 [ext_resource type="Resource" uid="uid://cbastion2res7" path="res://02_Entities/Pool/Buildings/AegisTower/Skills/Ultimate/bastion_aegis.tres" id="28_ult"]
 
 [resource]

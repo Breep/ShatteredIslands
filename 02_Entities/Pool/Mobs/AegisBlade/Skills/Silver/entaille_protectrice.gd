@@ -3,7 +3,7 @@ extends SkillEffect
 
 # Talent "Entaille protectrice": toutes les _combo_period attaques, la suivante inflige
 # AD x (100 + _damage_mult_bonus)% dégâts physiques et convertit _convert_ratio des dégâts
-# en Shield donné à l'allié ayant le moins de Shield.
+# en Shield donné à l'allié le plus blessé (incluant soi), comme l'ultime.
 
 @export var _combo_period: int = 4
 @export var _damage_mult_bonus: float = 50.0  # +50 → AD x 150%
@@ -36,17 +36,7 @@ func _arm_combo(blade: AegisBlade) -> void:
 		var damage: float = data.get(AutoAttackModifier.VarType.DAMAGE, 0.0)
 		if damage <= 0.0:
 			return
-		var ally: Entity = _lowest_shield_ally(blade)
+		var ally: Entity = blade.target.get_target(TargetComponent.TargettingStrategy.LOWEST_HP_PERCENT_ALLY_INCLUDING_SELF)
 		if is_instance_valid(ally):
 			blade.alterations.inflict_condition_stacks(ally, damage * _convert_ratio, Alteration.Type.SHIELD, &"Entaille protectrice")
 	blade.auto_attack_modifier_registry.register_modifier(modifier)
-
-
-func _lowest_shield_ally(blade: AegisBlade) -> Entity:
-	var best: Entity = null
-	for ally: Entity in blade.target.get_targets(TargetComponent.MultipleTargettingStrategy.ALLIES):
-		if not is_instance_valid(ally):
-			continue
-		if best == null or ally.alterations.shield_stacks < best.alterations.shield_stacks:
-			best = ally
-	return best

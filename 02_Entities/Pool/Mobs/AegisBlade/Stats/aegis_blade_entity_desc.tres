@@ -23,9 +23,9 @@
 [ext_resource type="Resource" uid="uid://b06rdybh23ppt" path="res://02_Entities/Pool/Mobs/AegisBlade/Stats/aegis_blade_stats_lvl_18.tres" id="21_kjttd"]
 [ext_resource type="Resource" uid="uid://dfr6gjvyr8kea" path="res://02_Entities/Pool/Mobs/AegisBlade/Stats/aegis_blade_stats_lvl_19.tres" id="22_ke2jf"]
 [ext_resource type="Resource" uid="uid://bmjb32col5550" path="res://02_Entities/Pool/Mobs/AegisBlade/Stats/aegis_blade_stats_lvl_20.tres" id="23_wndgn"]
-[ext_resource type="Resource" uid="uid://caegisact2res7" path="res://02_Entities/Pool/Mobs/AegisBlade/Skills/Passive/aegis_active.tres" id="24_pas"]
+[ext_resource type="Resource" uid="uid://coiprbpkhciw7" path="res://02_Entities/Pool/Mobs/AegisBlade/Skills/Passive/aegis_active.tres" id="24_pas"]
 [ext_resource type="Resource" uid="uid://cfilprot2res7" path="res://02_Entities/Pool/Mobs/AegisBlade/Skills/Bronze/fil_protecteur.tres" id="25_bro"]
-[ext_resource type="Resource" uid="uid://centaille2res7" path="res://02_Entities/Pool/Mobs/AegisBlade/Skills/Silver/entaille_protectrice.tres" id="26_sil"]
+[ext_resource type="Resource" uid="uid://c3hlvk1uv4m6g" path="res://02_Entities/Pool/Mobs/AegisBlade/Skills/Silver/entaille_protectrice.tres" id="26_sil"]
 [ext_resource type="Resource" uid="uid://cserment2res7" path="res://02_Entities/Pool/Mobs/AegisBlade/Skills/Gold/serment_de_rempart.tres" id="27_gol"]
 [ext_resource type="Resource" uid="uid://cfrappe2res7" path="res://02_Entities/Pool/Mobs/AegisBlade/Skills/Ultimate/frappe_de_rempart.tres" id="28_ult"]
 

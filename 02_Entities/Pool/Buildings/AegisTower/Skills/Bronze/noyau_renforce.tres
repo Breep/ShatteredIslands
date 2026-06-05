@@ -9,7 +9,6 @@ metadata/_custom_type_script = "uid://bnoyau1eff7"
 
 [resource]
 script = ExtResource("1_skill")
-skill_id = 0
 name = "Noyau renforcé"
 description = "Tant que la Tour est vivante, les bâtiments alliés dans Area(10) gagnent +15 Defense."
 skill_effect = SubResource("Resource_nr")
