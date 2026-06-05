@@ -51,7 +51,7 @@ func _refresh(owner: Entity, per_summon: float, card_name: StringName) -> void:
 		mod.stat_type = stat_type
 		mod.calc_type = StatModifier.CalcType.ADD
 		mod.value = resist_value
-		mod.tags = [StatModifier.TagType.CARD]
+		mod.tags = [Modifier.TagType.CARD]
 		owner.stat_modifiers_registry.register_modifier(mod)
 
 

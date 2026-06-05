@@ -1,12 +1,8 @@
+# Modifier d'action (damage/heal/dodge/summon/spell/stack) appliqué via
+# ActionModifiersRegistry. Intercepte une action avant et/ou après son
+# exécution via callbacks, ou injecte des effets visuels.
 class_name ActionModifier
-extends Node
-
-enum TagType {
-	CARD,
-	HERO,
-	QUEST,
-	EVENT
-}
+extends Modifier
 
 enum VarType { # Variable types of the callbacks dictionary
 	VISUAL_POS,
@@ -24,9 +20,7 @@ enum VarType { # Variable types of the callbacks dictionary
 }
 
 
-var id: StringName
 var action_type: Utils.ActionCategory
-var tags: Array[TagType]
 var is_one_time_effect: bool = true
 
 var before_action_logic_callback := Callable() # var: Dictionary

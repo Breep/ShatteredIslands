@@ -144,24 +144,6 @@ func _register_egg_summon_modifier() -> void:
 	modifier.before_action_logic_callback = func(cb_vars: Dictionary) -> void:
 		if cb_vars.get(ActionModifier.VarType.ENTITY_TYPE) != Entity.EntityType.CHICKEN_EGG:
 			return
-		var em: Dictionary = cb_vars[ActionModifier.VarType.ENTITY_MODIFIER]
-		
-		# 1. Inject hatch_modifiers from family stats (twins, etc.)
-		if not em.has(ChickenEgg.Modifier.HATCH_MODIFIERS):
-			em[ChickenEgg.Modifier.HATCH_MODIFIERS] = [] as Array[HatchModifier]
-		var hm: Array = em[ChickenEgg.Modifier.HATCH_MODIFIERS]
-		for hatch_mod in _chicken_lord_stats.hatch_modifiers:
-			hm.append(hatch_mod)
-		
-		# 2. Roll gifted (only if type is still BASIC — allows forced gifted from other callers)
-		if em.get(ChickenEgg.Modifier.CHICKEN_TYPE, Chicken.Type.BASIC) != Chicken.Type.BASIC:
-			return
-		if not Utils.is_randomize_modifier_active(_gifted_chance, _owner.battle_id):
-			return
-		var chicken_type = Utils.pick_random(_chicken_lord_stats.gifted_types, _owner.battle_id)
-		if chicken_type == null:
-			return
-		em[ChickenEgg.Modifier.CHICKEN_TYPE] = chicken_type
 	_owner.action_modifiers_registry.register_modifier(modifier)
 
 
@@ -230,9 +212,7 @@ func _spawn_n_chickens(chicken_number: int) -> void:
 ## Spawns a minimal egg. The SUMMON ActionModifier injects base stats, hatch_modifiers, and gifted roll.
 func _spawn_chicken() -> void:
 	var spawn_location_config := SpawnLocationConfig.create_random_arena()
-	_owner.summon.summon_entity(Entity.EntityType.CHICKEN_EGG, spawn_location_config, {
-		ChickenEgg.Modifier.HATCH_TIME: EGG_HATCH_TIME,
-	})
+	_owner.summon.summon_entity(Entity.EntityType.CHICKEN_EGG, spawn_location_config, {})
 
 
 func _battle_start_chicken_spawn() -> void:

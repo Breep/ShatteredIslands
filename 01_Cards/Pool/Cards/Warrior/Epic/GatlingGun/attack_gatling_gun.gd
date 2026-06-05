@@ -29,7 +29,7 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 		mod.stat_type = EntityStats.StatType.AS
 		mod.calc_type = StatModifier.CalcType.MULT
 		mod.value = clamped_boost / 100.0
-		mod.tags = [StatModifier.TagType.CARD]
+		mod.tags = [Modifier.TagType.CARD]
 		owner.stat_modifiers_registry.register_modifier(mod)
 	)
 

@@ -156,7 +156,7 @@ func init() -> void:
 	#_active_families.append(_FAMILIES_REF[Family.Type.WARRIOR])
 	#_active_families.append(_FAMILIES_REF[Family.Type.LIGHT])
 	#_active_families.append(_FAMILIES_REF[Family.Type.CHICKEN_LORD])
-	#_active_families.append(_FAMILIES_REF[Family.Type.COLOSSUS])
+	_active_families.append(_FAMILIES_REF[Family.Type.COLOSSUS])
 	_active_families.append(_FAMILIES_REF[Family.Type.PROTOTYPING])
 	#_active_families.append(_FAMILIES_REF[Family.Type.NECROSIS])
 

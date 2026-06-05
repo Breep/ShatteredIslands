@@ -15,7 +15,7 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 	var owner: Entity = ctx.entity_owner
 	owner.can_revive = true
 
-	var mod := ActionModifier.new()
+	var mod := DeathModifier.new()
 	mod.id = card_name
 	mod.after_action_logic_callback = func(_cb_vars: Dictionary) -> void:
 		var tween = owner.create_tween()
@@ -71,7 +71,7 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 
 func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 	ctx.entity_owner.can_revive = false
-	var mod := ActionModifier.new()
+	var mod := DeathModifier.new()
 	mod.id = card_name
 	ctx.entity_owner.death_modifiers_registry.unregister_modifier(mod)
 

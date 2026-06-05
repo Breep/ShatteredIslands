@@ -1,16 +1,8 @@
+# Modifier hérité par les summons via la chaîne d'invocation. Stocké sur
+# l'entité invocatrice (héros, acolyte, building, summon) et collecté par
+# chaque nouveau summon en remontant ses summoners.
 class_name SummonModifier
-extends Resource
-
-enum TagType {
-	CARD,
-	HERO,
-	QUEST,
-	EVENT,
-	FAMILY
-}
-
-var id: StringName
-var tags: Array[TagType]
+extends Modifier
 
 var auto_attack_modifier: AutoAttackModifier
 var action_modifier: ActionModifier

@@ -529,9 +529,9 @@ func _on_died() -> void:
 	life_state = LifeState.DEAD
 	_state_machine.stop_combat_modules()
 
-	for action_modifier in death_modifiers_registry.consume_all_modifiers():
-		if action_modifier.after_action_logic_callback.is_valid():
-			action_modifier.after_action_logic_callback.call({})
+	for death_modifier in death_modifiers_registry.consume_all_modifiers():
+		if death_modifier.after_action_logic_callback.is_valid():
+			death_modifier.after_action_logic_callback.call({})
 	
 	collision_layer = 0
 

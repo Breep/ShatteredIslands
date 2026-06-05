@@ -17,7 +17,7 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 	as_mod.stat_type = EntityStats.StatType.AS
 	as_mod.calc_type = StatModifier.CalcType.MULT
 	as_mod.value = -(_as_reduction[card_lvl - 1] / 100.0)
-	as_mod.tags = [StatModifier.TagType.CARD]
+	as_mod.tags = [Modifier.TagType.CARD]
 	owner.stat_modifiers_registry.register_modifier(as_mod)
 
 	var hp_to_ad: float = _hp_to_ad_percents[card_lvl - 1]
@@ -43,7 +43,7 @@ func _update_ad_modifier(owner: Entity, hp_to_ad_percent: float, card_name: Stri
 	ad_mod.stat_type = EntityStats.StatType.AD
 	ad_mod.calc_type = StatModifier.CalcType.ADD
 	ad_mod.value = owner.stats.health_max * (hp_to_ad_percent / 100.0)
-	ad_mod.tags = [StatModifier.TagType.CARD]
+	ad_mod.tags = [Modifier.TagType.CARD]
 	owner.stat_modifiers_registry.register_modifier(ad_mod)
 
 

@@ -17,7 +17,7 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 	dodge_mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
 	dodge_mod.calc_type = StatModifier.CalcType.ADD
 	dodge_mod.value = _increase_dodge[card_lvl - 1]
-	dodge_mod.tags = [StatModifier.TagType.CARD]
+	dodge_mod.tags = [Modifier.TagType.CARD]
 	owner.stat_modifiers_registry.register_modifier(dodge_mod)
 
 	var base_dodge: float = _increase_dodge[card_lvl - 1]
@@ -38,7 +38,7 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 		dodge_update.action_type = Utils.ActionType.DAMAGE_PHYSICAL
 		dodge_update.calc_type = StatModifier.CalcType.ADD
 		dodge_update.value = base_dodge - dodge_reduction * state[&"iteration"]
-		dodge_update.tags = [StatModifier.TagType.CARD]
+		dodge_update.tags = [Modifier.TagType.CARD]
 		owner.stat_modifiers_registry.register_modifier(dodge_update)
 
 		var hp_mod := StatModifier.new()
@@ -46,7 +46,7 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 		hp_mod.stat_type = EntityStats.StatType.HEALTH_MAX
 		hp_mod.calc_type = StatModifier.CalcType.ADD
 		hp_mod.value = hp_per_dodge * state[&"iteration"]
-		hp_mod.tags = [StatModifier.TagType.CARD]
+		hp_mod.tags = [Modifier.TagType.CARD]
 		owner.stat_modifiers_registry.register_modifier(hp_mod)
 
 		state[&"iteration"] += 1

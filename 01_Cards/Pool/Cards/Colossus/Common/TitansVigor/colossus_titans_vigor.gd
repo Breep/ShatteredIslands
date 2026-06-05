@@ -16,7 +16,7 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 	hp_mod.stat_type = EntityStats.StatType.HEALTH_MAX
 	hp_mod.calc_type = StatModifier.CalcType.ADD
 	hp_mod.value = _max_hp_increase[card_lvl - 1]
-	hp_mod.tags = [StatModifier.TagType.CARD]
+	hp_mod.tags = [Modifier.TagType.CARD]
 	owner.stat_modifiers_registry.register_modifier(hp_mod)
 
 	var percent: float = _heal_percent[card_lvl - 1]

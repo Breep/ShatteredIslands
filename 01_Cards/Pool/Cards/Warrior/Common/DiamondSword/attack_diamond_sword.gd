@@ -12,7 +12,7 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 	mod.stat_type = EntityStats.StatType.AD
 	mod.calc_type = StatModifier.CalcType.ADD
 	mod.value = _damage[card_lvl - 1]
-	mod.tags = [StatModifier.TagType.CARD]
+	mod.tags = [Modifier.TagType.CARD]
 	owner.stat_modifiers_registry.register_modifier(mod)
 
 

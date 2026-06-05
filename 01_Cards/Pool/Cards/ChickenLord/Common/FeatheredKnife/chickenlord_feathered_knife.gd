@@ -8,7 +8,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var aa_mod := AutoAttackModifier.new()
 	aa_mod.id = "Feathered Knife"
 	aa_mod.is_one_time_effect = false
-	aa_mod.tags = [AutoAttackModifier.TagType.CARD]
+	aa_mod.tags = [Modifier.TagType.CARD]
 	aa_mod.additional_effect_callback = func(cb_vars: Dictionary) -> void:
 		if not Utils.is_randomize_modifier_active(chance, ctx.hero.battle_id): return
 		if not cb_vars.has(AutoAttackModifier.VarType.TARGET): return

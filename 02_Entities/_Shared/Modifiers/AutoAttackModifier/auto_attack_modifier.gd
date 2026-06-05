@@ -1,14 +1,10 @@
+# Modifier d'auto-attaque appliqué via AutoAttackModifierRegistry. Combine
+# un add/mul de dégâts avec deux callbacks (modification de dégâts + effet
+# additionnel exécuté pendant l'attaque).
 class_name AutoAttackModifier
-extends Resource
+extends Modifier
 
 # ============================== Enum ==============================
-
-enum TagType {
-	CARD,
-	HERO,
-	QUEST,
-	EVENT
-}
 
 enum VarType { # Variable types of the callbacks dictionary
 	SOURCE,
@@ -22,10 +18,8 @@ enum VarType { # Variable types of the callbacks dictionary
 
 # ============================== Public variables ==============================
 
-var id: StringName
 var add: float # Flat damage add
 var mul: float # % damage mult
-var tags: Array[TagType]
 var is_one_time_effect: bool = true
 
 var damage_modifier_callback := Callable()
