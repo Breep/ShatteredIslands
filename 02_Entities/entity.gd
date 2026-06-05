@@ -453,8 +453,13 @@ func get_card_context() -> CardContext:
 # les modifiers ajoutés à un ancêtre après ce point ne se propageront pas
 # aux summons déjà nés.
 func _apply_inherited_summon_modifiers() -> void:
+	var visited: Array[Entity] = []
 	var ancestor: Entity = summoner
 	while ancestor != null:
+		if ancestor in visited:
+			Verbose.error("Cycle in summoner chain for [" + entity_name + "] at [" + ancestor.entity_name + "]", Verbose.Category.ENTITY)
+			return
+		visited.append(ancestor)
 		if ancestor.summon_modifiers_registry != null:
 			ancestor.summon_modifiers_registry.apply_to(self, ancestor)
 		ancestor = ancestor.summoner

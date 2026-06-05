@@ -24,3 +24,15 @@ var is_one_time_effect: bool = true
 
 var damage_modifier_callback := Callable()
 var additional_effect_callback := Callable() # var: Dictionary
+
+
+func clone() -> Modifier:
+	var c := AutoAttackModifier.new()
+	c.id = id
+	c.tags = tags.duplicate()
+	c.add = add
+	c.mul = mul
+	c.is_one_time_effect = is_one_time_effect
+	c.damage_modifier_callback = damage_modifier_callback
+	c.additional_effect_callback = additional_effect_callback
+	return c

@@ -87,6 +87,8 @@ class StatModifierDictionary extends Resource:
 	# ============================== Private functions ==============================
 
 	func _recompute_stats() -> void:
+		if _entity_base_stats_ref == null:
+			return # TODO A virer avec le refacto des modifiers registry
 		Verbose.trace("_recompute_stats()", Verbose.Category.STAT_MODIFIER)
 		if EntityStats.is_multi_stat(_stat_type):
 			_recompute_multiple_stats()

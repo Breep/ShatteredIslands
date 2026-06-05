@@ -37,7 +37,7 @@ func _init() -> void:
 # summon.
 func apply_to(summon: Entity, source_ancestor: Entity) -> void:
 	for original: StatModifier in stat_modifiers_registry.get_all_modifiers():
-		var clone: StatModifier = original.duplicate()
+		var clone: StatModifier = original.clone() as StatModifier
 		clone.id = _derive_id(original.id, source_ancestor)
 		summon.stat_modifiers_registry.register_modifier(clone)
 
@@ -47,17 +47,17 @@ func apply_to(summon: Entity, source_ancestor: Entity) -> void:
 		Utils.ActionCategory.SUMMON, Utils.ActionCategory.SPELL,
 	]:
 		for original: ActionModifier in action_modifiers_registry.get_all_modifiers(category):
-			var clone: ActionModifier = original.duplicate()
+			var clone: ActionModifier = original.clone() as ActionModifier
 			clone.id = _derive_id(original.id, source_ancestor)
 			summon.action_modifiers_registry.register_modifier(clone)
 
 	for original: AutoAttackModifier in auto_attack_modifier_registry.get_all_modifiers():
-		var clone: AutoAttackModifier = original.duplicate()
+		var clone: AutoAttackModifier = original.clone() as AutoAttackModifier
 		clone.id = _derive_id(original.id, source_ancestor)
 		summon.auto_attack_modifier_registry.register_modifier(clone)
 
 	for original: DeathModifier in death_modifiers_registry.get_all_modifiers():
-		var clone: DeathModifier = original.duplicate()
+		var clone: DeathModifier = original.clone() as DeathModifier
 		clone.id = _derive_id(original.id, source_ancestor)
 		summon.death_modifiers_registry.register_modifier(clone)
 

@@ -7,3 +7,12 @@ extends Modifier
 var is_one_time_effect: bool = true
 
 var after_action_logic_callback := Callable() # var: Dictionary
+
+
+func clone() -> Modifier:
+	var c := DeathModifier.new()
+	c.id = id
+	c.tags = tags.duplicate()
+	c.is_one_time_effect = is_one_time_effect
+	c.after_action_logic_callback = after_action_logic_callback
+	return c

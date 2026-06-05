@@ -26,3 +26,15 @@ var is_one_time_effect: bool = true
 var before_action_logic_callback := Callable() # var: Dictionary
 var after_action_logic_callback := Callable() # var: Dictionary
 var visual_callback := Callable() # var: Dictionary
+
+
+func clone() -> Modifier:
+	var c := ActionModifier.new()
+	c.id = id
+	c.tags = tags.duplicate()
+	c.action_type = action_type
+	c.is_one_time_effect = is_one_time_effect
+	c.before_action_logic_callback = before_action_logic_callback
+	c.after_action_logic_callback = after_action_logic_callback
+	c.visual_callback = visual_callback
+	return c

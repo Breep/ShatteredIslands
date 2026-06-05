@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_2wu1f"]
 [ext_resource type="Resource" uid="uid://bpmfs3a0llexn" path="res://02_Entities/Pool/Mobs/Vrock/Stats/vrock_entity_desc.tres" id="1_lwx5u"]
-[ext_resource type="Script" uid="uid://0xcknvx0htlp" path="res://01_Cards/Pool/Cards/Prototyping/card_acolyte.proto.gd" id="2_nfy7g"]
+[ext_resource type="Script" uid="uid://0xcknvx0htlp" path="res://01_Cards/Pool/Cards/Prototyping/HireAcolyte/card_acolyte.proto.gd" id="2_nfy7g"]
 
 [sub_resource type="Resource" id="Resource_35idg"]
 script = ExtResource("2_nfy7g")
