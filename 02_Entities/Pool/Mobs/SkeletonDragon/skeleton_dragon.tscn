@@ -22,6 +22,7 @@ height = 11.363876
 
 [sub_resource type="Resource" id="Resource_flightprofile"]
 script = ExtResource("1_fpp")
+radius = 12.0
 disc_tilt = 0.1
 
 [node name="SkeletonDragon" type="CharacterBody3D" unique_id=434739176 node_paths=PackedStringArray("_flight_ability", "_breath_controller", "_breath_ability", "_visual_3d", "_health_bar_marker", "_attack_spawn_marker")]
