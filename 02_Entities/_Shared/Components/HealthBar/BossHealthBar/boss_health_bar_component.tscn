@@ -166,6 +166,7 @@ vertical_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MainControl/MainVBox" unique_id=751066785]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="HealthRow" type="Control" parent="CanvasLayer/MainControl/MainVBox" unique_id=1288519857]
 custom_minimum_size = Vector2(600, 36)
@@ -285,6 +286,7 @@ offset_left = -62.0
 offset_top = -33.0
 offset_right = 38.0
 offset_bottom = 67.0
+mouse_filter = 2
 texture = ExtResource("8_2lh2a")
 expand_mode = 1
 stretch_mode = 5
@@ -296,6 +298,7 @@ offset_left = 950.0
 offset_top = -33.0
 offset_right = 1050.0
 offset_bottom = 67.0
+mouse_filter = 2
 texture = ExtResource("8_2lh2a")
 expand_mode = 1
 stretch_mode = 5
@@ -304,6 +307,7 @@ flip_h = true
 [node name="BottomBar" type="Control" parent="CanvasLayer/MainControl/MainVBox" unique_id=214108202]
 custom_minimum_size = Vector2(0, 18)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="CadreLevel" type="ColorRect" parent="CanvasLayer/MainControl/MainVBox/BottomBar" unique_id=677885794]
 material = SubResource("ShaderMaterial_lvl")
@@ -314,6 +318,7 @@ anchor_right = 0.08
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="LevelLabel" type="Label" parent="CanvasLayer/MainControl/MainVBox/BottomBar/CadreLevel" unique_id=2003374715]
 unique_name_in_owner = true

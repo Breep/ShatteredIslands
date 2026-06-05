@@ -17,6 +17,12 @@ extends HealthBarComponent
 
 
 #region ============================== Node base functions ==============================
+func _ready() -> void:
+	super._ready()
+	_owner.died.connect(_on_owner_died)
+	_owner.resurrected.connect(_on_owner_resurrected)
+
+
 func _process(_delta: float) -> void:
 	var camera := get_viewport().get_camera_3d()
 	var tracked := _get_tracked_spawn()
@@ -30,4 +36,15 @@ func _process(_delta: float) -> void:
 ## Heroes override to toggle between fight/tavern markers via apply_display_mode.
 func _get_tracked_spawn() -> Marker3D:
 	return _spawn
+#endregion
+
+
+#region ============================== Callbacks ==============================
+## La barre disparaît dès la mort ; le cadavre garde son despawn différé propre.
+func _on_owner_died() -> void:
+	_main_control.visible = false
+
+
+func _on_owner_resurrected() -> void:
+	_main_control.visible = true
 #endregion

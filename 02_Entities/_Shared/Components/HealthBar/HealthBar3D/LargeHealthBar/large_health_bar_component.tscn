@@ -458,6 +458,7 @@ label_settings = SubResource("LabelSettings_shld")
 [node name="BottomBar" type="Control" parent="CanvasLayer/MainControl/MainVBox" unique_id=817419775]
 custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="CadreLevel" type="ColorRect" parent="CanvasLayer/MainControl/MainVBox/BottomBar" unique_id=1081713847]
 material = SubResource("ShaderMaterial_lvlfr")
@@ -468,6 +469,7 @@ anchor_bottom = 1.0
 offset_top = -2.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="LevelLabel" type="Label" parent="CanvasLayer/MainControl/MainVBox/BottomBar/CadreLevel" unique_id=264669344]
 unique_name_in_owner = true
