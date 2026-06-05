@@ -40,6 +40,12 @@ func spawn_into(parent: Node, ctx: EntityContext = null) -> Node:
 		return node
 
 	entity.category = get_entity_category()
+	entity.entry = entry
+
+	# Roaster posé pour les héros uniquement : ce sont eux qui jouent des
+	# cartes pouvant muter le roaster. Acolytes/summons/buildings restent à null.
+	if entity.category == Entity.Category.HERO and ctx != null:
+		entity.roaster = ctx.roaster
 
 	# Méta-data canoniques depuis l'entry (joueur) ou la scene (ennemi).
 	if entry != null:

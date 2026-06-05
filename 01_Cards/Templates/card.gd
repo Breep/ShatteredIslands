@@ -78,6 +78,26 @@ func revert_effect(ctx: CardContext) -> void:
 	_card_effect.revert(ctx, name, lvl)
 
 
+# One-shot à l'entrée dans la main (achat, sortie de coffre). Déclenche les
+# mutations persistantes (ex. ajout au roaster). N'est PAS rejoué au respawn
+# du héros — c'est la différence avec apply_effect.
+func on_hand_enter_effect(ctx: CardContext) -> void:
+	if _card_effect == null:
+		Verbose.error("Can't on_hand_enter effect on [" + name, Verbose.Category.CARD)
+		return
+	_card_effect.on_hand_enter(ctx, name, lvl)
+
+
+# Level-up : on délègue à la carte le soin de gérer la transition prev → new
+# (delta pour les effets persistants, revert+apply pour les modifiers). À ce
+# stade lvl est déjà = new_lvl ; prev_lvl est passé par le caller (Deck).
+func on_upgrade_effect(ctx: CardContext, prev_lvl: int) -> void:
+	if _card_effect == null:
+		Verbose.error("Can't on_upgrade effect on [" + name, Verbose.Category.CARD)
+		return
+	_card_effect.on_upgrade(ctx, name, prev_lvl, lvl)
+
+
 func get_description() -> String:
 	if _card_effect == null:
 		Verbose.error("Can't get description on [" + name, Verbose.Category.CARD)

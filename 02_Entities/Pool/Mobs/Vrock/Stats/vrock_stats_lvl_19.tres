@@ -6,7 +6,7 @@
 script = ExtResource("1_syo76")
 _health_max = 1400.0
 auto_attack_type = 1
-_attack_range = 1.0
+_attack_range = 1.8
 _attack_damage = 46.0
 _attack_speed = 2.8
 _movement_speed = 14.0

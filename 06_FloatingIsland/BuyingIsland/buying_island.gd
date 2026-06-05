@@ -36,9 +36,11 @@ func start_buying_phase(battles: Array[Battle]) -> void:
 	_buying_area.start_round(battles)
 
 
-# === New API: populate from a TavernEncounter, injecting the player's hero / acolytes ===
-func start_buying_phase_from_encounter(encounter: TavernEncounter, hero_entries: Array[RoasterEntry], acolyte_entries: Array[RoasterEntry]) -> void:
-	_buying_area.start_round_from_encounter(encounter, hero_entries, acolyte_entries)
+# === New API: populate from a TavernEncounter + Party ===
+# Party permet à la tavern de spawn/despawn à la volée quand le roaster mute
+# en cours de phase (cartes "Recrute", etc.).
+func start_buying_phase_from_encounter(encounter: TavernEncounter, party: Party) -> void:
+	_buying_area.start_round_from_encounter(encounter, party)
 
 
 func set_active() -> void:

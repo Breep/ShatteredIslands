@@ -60,6 +60,7 @@ var arena_zone_manager: ArenaZoneManager:
 func _ready() -> void:
 	if _ready_checks() != true:
 		return
+	GlobalFightingManager.fighting_phase_state_changed.connect(_on_global_fighting_phase_state_changed)
 
 # ============================== Public functions ==============================
 
@@ -93,12 +94,17 @@ func _spawn_specs(specs: Array[EntitySpec], team: int) -> void:
 		ctx.arena_zone_manager = _arena_zone_manager
 		ctx.fighting_state = Entity.FightingState.IDLE
 		ctx.display_mode = Entity.DisplayMode.FIGHTING_PHASE
-		# Owner runtime résolu depuis le slot de l'entry (RoasterEntry.owner_slot).
+		# Owner runtime résolu en remontant l'entry à son Roaster (Party.find_slot_of).
 		# Signal "spec joueur" = entry présente (créée à partir d'une RoasterEntry).
 		# Fallback marker class + local player pour compat legacy / solo.
 		if spec.entry != null or spec is HeroSpec or spec is AcolyteSpec:
-			var owner: Player = PlayerManager.get_player_by_slot(spec.entry.owner_slot) if spec.entry != null else null
+			var slot: PlayerState.Slot = PlayerState.Slot.NONE
+			var party: Party = GameManager.run_context.party if GameManager.run_context != null else null
+			if spec.entry != null and party != null:
+				slot = party.find_slot_of(spec.entry)
+			var owner: Player = PlayerManager.get_player_by_slot(slot)
 			ctx.runtime_owner_player = owner if owner != null else local_player
+			ctx.roaster = party.get_roaster(slot) if party != null else null
 		var node: Node = spec.spawn_into(self, ctx)
 		var entity := node as Entity
 		if entity != null:
@@ -144,3 +150,23 @@ func _ready_checks() -> bool:
 func _on_fighting_manager_fight_done(_unused: FightingManager, _winner_teams_order: Array[int]) -> void:
 	if _current_battle_id < 0: return
 	_heroes.clear()
+
+
+# Étape 8 du flow run : à la fin du placement (POSITIONING → COUNTDOWN), on
+# sérialise la position courante de chaque entity player sur son EntitySpec
+# (ref partagée avec party.formation.entity_specs). Au prochain combat, les
+# specs rejoueront ces transforms.
+func _on_global_fighting_phase_state_changed(new_state: GlobalFightingManager.FightingPhaseState) -> void:
+	if new_state != GlobalFightingManager.FightingPhaseState.COUNTDOWN:
+		return
+	if _spawn_manager == null:
+		return
+	var party: Party = GameManager.run_context.party if GameManager.run_context != null else null
+	if party == null:
+		return
+	for entity: Entity in _spawn_manager.get_entities():
+		if entity == null or entity.entry == null:
+			continue
+		var spec: EntitySpec = party.find_spec_by_entry(entity.entry)
+		if spec != null:
+			spec.transform = entity.global_transform
