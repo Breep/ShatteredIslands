@@ -4,10 +4,12 @@
 [ext_resource type="PackedScene" uid="uid://dvr7815lw1k8b" path="res://02_Entities/Pool/Heroes/Latika/latika.tscn" id="3_os118"]
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://10_Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="4_egh8k"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="4_kq8si"]
+[ext_resource type="PackedScene" uid="uid://cafqrtw7iv7f8" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/small_treant.tscn" id="5_jbcul"]
 [ext_resource type="PackedScene" uid="uid://dqrhym1sskng8" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/gamma_turret.tscn" id="6_awloh"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]
 [ext_resource type="PackedScene" uid="uid://b2mchd77gheam" path="res://02_Entities/Pool/Buildings/ChickenCoop/chicken_coop.tscn" id="7_awloh"]
 [ext_resource type="PackedScene" uid="uid://di0hhdfbpptu6" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/satyr_berserker.tscn" id="7_tmkd7"]
+[ext_resource type="PackedScene" uid="uid://btqko5dh71wxi" path="res://02_Entities/Pool/Mobs/SkeletonDragon/skeleton_dragon.tscn" id="8_cs3s0"]
 [ext_resource type="PackedScene" uid="uid://dvuq5n41nak3u" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/ArenaZoneManager/arena_zone_manager.tscn" id="8_fl2p6"]
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://90_Modules/PickableClickable/PickableModule/pickable_module.tscn" id="9_614kc"]
 [ext_resource type="PackedScene" uid="uid://2ihflaf1vlkp" path="res://02_Entities/Pool/Buildings/AegisTower/aegis_tower.tscn" id="9_r0wv3"]
@@ -61,82 +63,40 @@ battle_id = 1
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
 
-[node name="GoblinBerserker2" parent="Node3D/Entities" unique_id=1681267741 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("18_kq8si")]
-transform = Transform3D(0.26981065, 0, -0.9629133, 0, 1.0000001, 0, 0.9629133, 0, 0.26981065, -4.6675324, 0, 3.8360553)
-level = 7
-team = 2
-battle_id = 1
-_spawn_manager = NodePath("../../SpawnManager")
-_arena_zone_manager = NodePath("../../ArenaZoneManager")
-
-[node name="GoblinBerserker9" parent="Node3D/Entities" unique_id=164461409 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("18_kq8si")]
-transform = Transform3D(0.26981065, 0, -0.9629133, 0, 1.0000001, 0, 0.9629133, 0, 0.26981065, -4.6675324, 0, 7.7449827)
-level = 7
-team = 2
-battle_id = 1
-_spawn_manager = NodePath("../../SpawnManager")
-_arena_zone_manager = NodePath("../../ArenaZoneManager")
-
-[node name="GoblinBerserker10" parent="Node3D/Entities" unique_id=232355036 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("18_kq8si")]
-transform = Transform3D(0.26981065, 0, -0.9629133, 0, 1.0000001, 0, 0.9629133, 0, 0.26981065, -4.6675324, 0, 5.5096507)
-level = 7
-team = 2
-battle_id = 1
-_spawn_manager = NodePath("../../SpawnManager")
-_arena_zone_manager = NodePath("../../ArenaZoneManager")
-
-[node name="GoblinBerserker3" parent="Node3D/Entities" unique_id=1558839681 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("18_kq8si")]
-transform = Transform3D(0.26981065, 0, -0.9629133, 0, 1.0000001, 0, 0.9629133, 0, 0.26981065, -4.6675324, 0, -0.18400286)
-level = 7
-team = 2
-battle_id = 1
-_spawn_manager = NodePath("../../SpawnManager")
-_arena_zone_manager = NodePath("../../ArenaZoneManager")
-
-[node name="GoblinBerserker4" parent="Node3D/Entities" unique_id=567555728 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("18_kq8si")]
-transform = Transform3D(0.26981065, 0, -0.9629133, 0, 1.0000001, 0, 0.9629133, 0, 0.26981065, -4.6675324, 0, -2.2362068)
-level = 7
-team = 2
-battle_id = 1
-_spawn_manager = NodePath("../../SpawnManager")
-_arena_zone_manager = NodePath("../../ArenaZoneManager")
-
-[node name="GoblinBerserker5" parent="Node3D/Entities" unique_id=18448617 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("18_kq8si")]
-transform = Transform3D(0.26981065, 0, -0.9629133, 0, 1.0000001, 0, 0.9629133, 0, 0.26981065, -4.6675324, 0, -3.853804)
-level = 7
-team = 2
-battle_id = 1
-_spawn_manager = NodePath("../../SpawnManager")
-_arena_zone_manager = NodePath("../../ArenaZoneManager")
-
-[node name="GoblinBerserker6" parent="Node3D/Entities" unique_id=670559414 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("18_kq8si")]
-transform = Transform3D(0.26981065, 0, -0.9629133, 0, 1.0000001, 0, 0.9629133, 0, 0.26981065, -4.6675324, 0, -5.2887936)
-level = 7
-team = 2
-battle_id = 1
-_spawn_manager = NodePath("../../SpawnManager")
-_arena_zone_manager = NodePath("../../ArenaZoneManager")
-
-[node name="GoblinBerserker7" parent="Node3D/Entities" unique_id=272633244 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("18_kq8si")]
-transform = Transform3D(0.26981065, 0, -0.9629133, 0, 1.0000001, 0, 0.9629133, 0, 0.26981065, -4.6675324, 0, -6.4159966)
-level = 7
-team = 2
-battle_id = 1
-_spawn_manager = NodePath("../../SpawnManager")
-_arena_zone_manager = NodePath("../../ArenaZoneManager")
-
-[node name="GoblinBerserker8" parent="Node3D/Entities" unique_id=2097595349 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("18_kq8si")]
-transform = Transform3D(0.26981065, 0, -0.9629133, 0, 1.0000001, 0, 0.9629133, 0, 0.26981065, -4.6675324, 0, -7.876441)
-level = 7
-team = 2
-battle_id = 1
-_spawn_manager = NodePath("../../SpawnManager")
-_arena_zone_manager = NodePath("../../ArenaZoneManager")
-
 [node name="Latika3" parent="Node3D/Entities" unique_id=294337328 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("3_os118")]
 transform = Transform3D(0.022006778, 0, -0.99975777, 0, 1.0000001, 0, 0.99975777, 0, 0.022006778, -5.361015, 9.536744e-07, 0.110419974)
 level = 4
 team = 2
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+override_base_stats = SubResource("Resource_5qocs")
+
+[node name="SmallTreant" parent="Node3D/Entities" unique_id=103145645 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("5_jbcul")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3478296, 0, 1.148611)
+team = 2
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
+[node name="SmallTreant2" parent="Node3D/Entities" unique_id=1286640671 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("5_jbcul")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3478296, 0, 2.7739818)
+team = 2
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
+[node name="SmallTreant5" parent="Node3D/Entities" unique_id=382359144 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("5_jbcul")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3478296, 0, -3.8132205)
+team = 2
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
+[node name="Latika4" parent="Node3D/Entities" unique_id=705349970 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("3_os118")]
+transform = Transform3D(-0.022006866, 0, 0.99975777, 0, 1.0000001, 0, -0.99975777, 0, -0.022006866, 11.269876, 9.536744e-07, 0.110419974)
+level = 7
+team = 1
 battle_id = 1
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
@@ -165,9 +125,25 @@ battle_id = 1
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
 
+[node name="SkeletonDragon" parent="Node3D/Entities" unique_id=434739176 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("8_cs3s0")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -8.450959, -0.0036760576, 8.545135)
+level = 7
+team = 2
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
 [node name="Satyr" parent="Node3D/Entities" unique_id=1916637063 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("7_tmkd7")]
 transform = Transform3D(0.13932867, 0, 0.99024606, 0, 1.0000001, 0, -0.99024606, 0, 0.13932867, 0.97693384, 0, 0.32642338)
-level = 7
+level = 10
+team = 1
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
+[node name="Satyr2" parent="Node3D/Entities" unique_id=1047611130 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("7_tmkd7")]
+transform = Transform3D(0.13932867, 0, 0.99024606, 0, 1.0000001, 0, -0.99024606, 0, 0.13932867, 0.97693384, 0, 3.2954772)
+level = 10
 team = 1
 battle_id = 1
 _spawn_manager = NodePath("../../SpawnManager")

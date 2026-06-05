@@ -3,16 +3,22 @@
 [ext_resource type="Script" uid="uid://brj7ewv22oir6" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/small_treant.gd" id="1_qlm5q"]
 [ext_resource type="PackedScene" uid="uid://m1xr4qo8pn35" path="res://02_Entities/_Data/StumpEnt/stump_ent.tscn" id="2_g65g8"]
 [ext_resource type="Resource" uid="uid://duw0xcgf3d40a" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Stats/entity_desc.tres" id="2_m1bbj"]
-[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/LargeHealthBar/large_health_bar_component.tscn" id="3_b5y8s"]
+[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.tscn" id="3_b5y8s"]
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="4_m1bbj"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://ds67abcdh4aq8" path="res://02_Entities/_Shared/Animations/default_animation_tree.res" id="6_5ct5u"]
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_5ct5u"]
+height = 1.2209473
+radius = 0.5942383
+
 [node name="SmallTreant" type="CharacterBody3D" unique_id=103145645 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker")]
+collision_mask = 25
 script = ExtResource("1_qlm5q")
 entity_name = "Small Treant"
 entity_desc = ExtResource("2_m1bbj")
 _visual_3d = NodePath("StumpEnt")
 _health_bar_marker = NodePath("StumpEnt/HealthBarMarker")
+level = 7
 
 [node name="StumpEnt" parent="." unique_id=793666288 instance=ExtResource("2_g65g8")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
@@ -32,6 +38,7 @@ bones/15/rotation = Quaternion(-0.0012986372, -0.00501091, -0.57735205, 0.816478
 bones/16/rotation = Quaternion(0.14946355, 0.98876727, -1.5032368e-09, -1.5704318e-09)
 
 [node name="HealthBarMarker" type="Marker3D" parent="StumpEnt" unique_id=1257428452]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.203794, 0)
 
 [node name="LargeHealthBarComponent" parent="." unique_id=1823590462 node_paths=PackedStringArray("_spawn", "_owner") instance=ExtResource("3_b5y8s")]
 _spawn = NodePath("../StumpEnt/HealthBarMarker")
@@ -120,5 +127,9 @@ parameters/switch_positioning/current_index = 0
 parameters/switch_stunned_state/current_state = "NotStunned"
 parameters/switch_stunned_state/transition_request = ""
 parameters/switch_stunned_state/current_index = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1396318133]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.58532715, 0)
+shape = SubResource("CylinderShape3D_5ct5u")
 
 [editable path="StumpEnt"]

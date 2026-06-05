@@ -23,9 +23,15 @@
 [ext_resource type="Resource" uid="uid://ble8570gljruf" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Stats/stats_lvl_18.tres" id="21_xqotf"]
 [ext_resource type="Resource" uid="uid://5ppkpm0dq4im" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Stats/stats_lvl_19.tres" id="22_hls52"]
 [ext_resource type="Resource" uid="uid://bxd2s3eetra6e" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Stats/stats_lvl_20.tres" id="23_16r7w"]
+[ext_resource type="Resource" uid="uid://dbarksk1res7t" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Skills/Passive/barkskin.tres" id="24_pas"]
+[ext_resource type="Resource" uid="uid://ddefstk2res7t" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Skills/Bronze/defensive_stacking.tres" id="25_bro"]
+[ext_resource type="Resource" uid="uid://cregsap3res7t" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Skills/Silver/regenerating_sap.tres" id="26_sil"]
+[ext_resource type="Resource" uid="uid://cthnleg4res7t" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Skills/Gold/thorny_legacy.tres" id="27_gol"]
+[ext_resource type="Resource" uid="uid://bthnvol5res7t" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Skills/Ultimate/thorn_volley.tres" id="28_ult"]
 
 [resource]
 script = ExtResource("1_mwo7f")
+name = "Small Treant"
 stats = Dictionary[int, ExtResource("3_onq14")]({
 1: ExtResource("4_t1uwf"),
 2: ExtResource("5_premn"),
@@ -47,6 +53,13 @@ stats = Dictionary[int, ExtResource("3_onq14")]({
 18: ExtResource("21_xqotf"),
 19: ExtResource("22_hls52"),
 20: ExtResource("23_16r7w")
+})
+skills = Dictionary[int, ExtResource("2_g1qfc")]({
+0: ExtResource("24_pas"),
+1: ExtResource("25_bro"),
+2: ExtResource("26_sil"),
+3: ExtResource("27_gol"),
+4: ExtResource("28_ult")
 })
 aa_1_anim_base_duration = 0.833
 aa_2_anim_base_duration = 0.833

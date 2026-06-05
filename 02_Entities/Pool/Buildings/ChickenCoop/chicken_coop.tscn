@@ -10,6 +10,8 @@ height = 1.5239258
 radius = 0.69433594
 
 [node name="ChickenCoop" type="CharacterBody3D" unique_id=1423893998 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker")]
+collision_layer = 16
+collision_mask = 25
 script = ExtResource("1_oh2kd")
 category = 4
 entity_desc = ExtResource("2_mwtu6")

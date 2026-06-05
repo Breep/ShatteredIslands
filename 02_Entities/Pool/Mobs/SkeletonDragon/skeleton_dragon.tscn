@@ -5,11 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://deihd6vwrcxcj" path="res://02_Entities/_Data/DragonSkeleton/skeletal_dragon_visual.tscn" id="2_4r8xw"]
 [ext_resource type="Resource" uid="uid://u5ir3c4mxsrj" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Stats/entity_desc.tres" id="2_n3twu"]
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="3_qs7xq"]
-[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/LargeHealthBar/large_health_bar_component.tscn" id="4_n3twu"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://cr6xu5yj1u41t" path="res://02_Entities/Pool/Mobs/SkeletonDragon/skeleton_dragon_animation_tree.res" id="5_qs7xq"]
 [ext_resource type="Script" uid="uid://c2hwpthqp1tpl" path="res://02_Entities/Pool/Mobs/SkeletonDragon/skeleton_dragon_animation_component.gd" id="5_y451a"]
+[ext_resource type="PackedScene" uid="uid://cw5f3m1p8raq2" path="res://02_Entities/_Shared/Components/HealthBar/BossHealthBar/boss_health_bar_component.tscn" id="8_qe6da"]
 [ext_resource type="Script" uid="uid://n0ydac247uxr" path="res://02_Entities/Pool/Mobs/SkeletonDragon/breath_vfx_controller.gd" id="9_jg7m6"]
-[ext_resource type="Script" uid="uid://dq8b7n2xkhvbr" path="res://02_Entities/_Shared/Components/HealthBar/BossHealthBar/boss_health_bar_component.gd" id="10_qe6da"]
 [ext_resource type="Script" uid="uid://betofvpdh41wr" path="res://02_Entities/Pool/Mobs/SkeletonDragon/devastating_breath_ability.gd" id="11_1dxyi"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jg7m6"]
@@ -29,7 +28,7 @@ _data = {
 point_count = 10
 
 [node name="SkeletonDragon" type="CharacterBody3D" unique_id=434739176 node_paths=PackedStringArray("_flight_ability", "_breath_controller", "_breath_ability", "_visual_3d", "_health_bar_marker", "_attack_spawn_marker")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5599823, 5.8470793, -11.958527)
+collision_mask = 25
 script = ExtResource("1_slre2")
 _flight_ability = NodePath("ShatteringFlightAbility")
 _breath_controller = NodePath("BreathVfxController")
@@ -245,13 +244,13 @@ shape = SubResource("CapsuleShape3D_jg7m6")
 transform = Transform3D(-0.029507274, 0.9986048, 0.043793697, -0.12306061, 0.039850198, -0.99159867, -0.9919602, -0.034648657, 0.12171305, 0.8640042, -2.110092, 0.08794079)
 
 [node name="ik_foot_f_r" parent="SkeletalDragonVisual/root/ik_foot_root" parent_id_path=PackedInt32Array(1358678233, 1234273656) index="1" unique_id=1887194801]
-transform = Transform3D(-0.22308545, 0.7615265, 0.6085309, -0.20939195, -0.6471264, 0.7330636, 0.9520436, 0.036114357, 0.30382222, -1.089154, -0.7804418, 0.16197076)
+transform = Transform3D(-0.22308545, 0.7615265, 0.6085308, -0.20939195, -0.6471264, 0.7330635, 0.9520436, 0.036114357, 0.3038222, -1.089154, -0.7804418, 0.16197076)
 
 [node name="ik_foot_b_l" parent="SkeletalDragonVisual/root/ik_foot_root" parent_id_path=PackedInt32Array(1358678233, 1234273656) index="2" unique_id=1335928782]
-transform = Transform3D(0.6226808, 0.022042897, -0.78216547, 0.5710964, 0.6705247, 0.4735456, 0.5348997, -0.7415595, 0.40493423, 0.6821973, 1.0209022, 0.10532488)
+transform = Transform3D(0.6226808, 0.022042898, -0.7821654, 0.5710964, 0.6705248, 0.47354558, 0.5348997, -0.74155957, 0.4049342, 0.6821973, 1.0209022, 0.10532488)
 
 [node name="ik_foot_b_r" parent="SkeletalDragonVisual/root/ik_foot_root" parent_id_path=PackedInt32Array(1358678233, 1234273656) index="3" unique_id=1666923042]
-transform = Transform3D(0.9517159, 0.037999716, -0.30461857, -0.29918587, -0.10736099, -0.94813573, -0.06873305, 0.9934936, -0.090808205, -0.58209586, 0.4760998, 0.12288982)
+transform = Transform3D(0.9517159, 0.037999716, -0.30461854, -0.29918587, -0.10736099, -0.9481357, -0.06873305, 0.9934936, -0.0908082, -0.58209586, 0.4760998, 0.12288982)
 
 [node name="HealthBarMarker" type="Marker3D" parent="SkeletalDragonVisual" unique_id=292615107]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.275872, 0)
@@ -262,10 +261,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7683716e-07, 0.93349934, 4
 [node name="AnimationComponent" parent="." unique_id=73205791 node_paths=PackedStringArray("_animation_tree", "_owner") instance=ExtResource("3_qs7xq")]
 script = ExtResource("5_y451a")
 _animation_tree = NodePath("../AnimationTree")
-_owner = NodePath("..")
-
-[node name="LargeHealthBarComponent" parent="." unique_id=1823590462 node_paths=PackedStringArray("_spawn", "_owner") instance=ExtResource("4_n3twu")]
-_spawn = NodePath("../SkeletalDragonVisual/HealthBarMarker")
 _owner = NodePath("..")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=11457855]
@@ -379,16 +374,14 @@ metadata/_custom_type_script = "uid://6o208nwmrw7b"
 transform = Transform3D(0.97021794, 0.24208176, 0.008578825, -0.24022707, 0.9661262, -0.0942929, -0.031114828, 0.0894238, 0.99550754, 0, 0, 0)
 curve = SubResource("Curve3D_483m2")
 
+[node name="BossHealthBarComponent" parent="." unique_id=151477111 node_paths=PackedStringArray("_owner") instance=ExtResource("8_qe6da")]
+_owner = NodePath("..")
+
 [node name="BreathVfxController" type="Node" parent="." unique_id=690643726 node_paths=PackedStringArray("_vfx_animation_player", "_hitbox")]
 script = ExtResource("9_jg7m6")
 _vfx_animation_player = NodePath("../SkeletalDragonVisual/root/Skeleton3D/BoneAttachment3D/VFX_Flamethrower_Anime_A/AnimationPlayer")
 _hitbox = NodePath("../SkeletalDragonVisual/root/Skeleton3D/BoneAttachment3D/BreathHitbox")
 metadata/_custom_type_script = "uid://n0ydac247uxr"
-
-[node name="BossHealthBarComponent" type="Node" parent="." unique_id=1794572058 node_paths=PackedStringArray("_owner")]
-script = ExtResource("10_qe6da")
-_owner = NodePath("..")
-metadata/_custom_type_script = "uid://dq8b7n2xkhvbr"
 
 [node name="DevastatingBreathAbility" type="Node" parent="." unique_id=1458776709 node_paths=PackedStringArray("_owner")]
 script = ExtResource("11_1dxyi")

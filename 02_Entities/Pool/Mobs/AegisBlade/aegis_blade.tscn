@@ -11,6 +11,7 @@
 height = 4.6591797
 
 [node name="AegisBlade" type="CharacterBody3D" unique_id=342704580 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker")]
+collision_mask = 25
 script = ExtResource("1_5p7k0")
 entity_name = "Aegis Blade"
 category = 1

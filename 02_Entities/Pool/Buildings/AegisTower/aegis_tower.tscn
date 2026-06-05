@@ -10,6 +10,8 @@ height = 3.7265625
 radius = 1.0834961
 
 [node name="AegisTower" type="CharacterBody3D" unique_id=2068796495 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker")]
+collision_layer = 16
+collision_mask = 25
 script = ExtResource("1_olcvx")
 entity_name = "Aegis Tower"
 category = 4

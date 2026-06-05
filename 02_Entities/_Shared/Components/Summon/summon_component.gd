@@ -217,13 +217,6 @@ func _summon_deflection_shield(spawn_position: Vector3, entity_modifier: Diction
 	_spawn_manager.spawn_entity(deflection_shield, Transform3D(Basis(), spawn_position), _owner.get_context())
 	
 	
-func _summon_gamma_turret(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
+func _summon_gamma_turret(spawn_position: Vector3, _entity_modifier: Dictionary) -> void:
 	var gamma_turret: GammaTurret = GAMMA_TURRET.instantiate()
-	var shield: float = entity_modifier.get(GammaTurret.Modifier.TURRET_SHIELD, 30)
-	var ad: float = entity_modifier.get(GammaTurret.Modifier.TURRET_AD, 5)
-	var attack_speed: float = entity_modifier.get(GammaTurret.Modifier.TURRET_AS, 1.0)
-	var hp: int = entity_modifier.get(GammaTurret.Modifier.TURRET_HP, 1)
-	var master: Entity = entity_modifier.get(GammaTurret.Modifier.MASTER)
-	var respawn_timer: float = entity_modifier.get(GammaTurret.Modifier.RESPAWN_TIMER, -1.0)
-	gamma_turret.init(shield, ad, attack_speed, hp, master, respawn_timer)
 	_spawn_manager.spawn_entity(gamma_turret, Transform3D(Basis(), spawn_position), _owner.get_context())
