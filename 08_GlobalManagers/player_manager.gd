@@ -75,7 +75,7 @@ func get_local_player() -> Player:
 
 
 # Résout le Player runtime portant un slot d'ownership donné (cf.
-# PlayerState.slot / RoasterEntry.owner_slot). null si NONE ou introuvable.
+# PlayerState.slot / Party.roasters). null si NONE ou introuvable.
 func get_player_by_slot(slot: PlayerState.Slot) -> Player:
 	if slot == PlayerState.Slot.NONE:
 		return null

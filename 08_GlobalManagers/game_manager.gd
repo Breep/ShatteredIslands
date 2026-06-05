@@ -81,7 +81,6 @@ var _run_scene: PackedScene:
 
 const RUN_SAVE_PATH := "user://saves/run.tres"
 const DEMO_RUN_PATH := "res://05_Game/Run/Runs/Pool/Prototyping/demo_run.tres"
-const DEMO_PLAYER_FORMATION_PATH := "res://05_Game/Run/Formations/Pool/Prototyping/default_solo.fighting.tres"
 
 const _HERO_SELECTOR_SCENE_PATH := "res://05_Game/HeroSelector/hero_selector.tscn"
 var __hero_selector_scene_cache: PackedScene
@@ -103,6 +102,7 @@ const _FAMILY_PATHS: Dictionary[Family.Type, String] = {
 	Family.Type.COLOSSUS: "res://01_Cards/Pool/Families/Colossus/colossus_family.tres",
 	Family.Type.CHICKEN_LORD: "res://01_Cards/Pool/Families/ChickenLord/chicken_lord_family.tres",
 	Family.Type.NECROSIS: "res://01_Cards/Pool/Families/necro_family.tres",
+	Family.Type.PROTOTYPING: "res://01_Cards/Pool/Families/prototyping_family.proto.tres",
 }
 
 var __families_ref_cache: Dictionary[Family.Type, Family] = {}
@@ -156,7 +156,8 @@ func init() -> void:
 	#_active_families.append(_FAMILIES_REF[Family.Type.WARRIOR])
 	#_active_families.append(_FAMILIES_REF[Family.Type.LIGHT])
 	#_active_families.append(_FAMILIES_REF[Family.Type.CHICKEN_LORD])
-	_active_families.append(_FAMILIES_REF[Family.Type.COLOSSUS])
+	#_active_families.append(_FAMILIES_REF[Family.Type.COLOSSUS])
+	_active_families.append(_FAMILIES_REF[Family.Type.PROTOTYPING])
 	#_active_families.append(_FAMILIES_REF[Family.Type.NECROSIS])
 
 
@@ -190,23 +191,19 @@ func start_solo_run() -> void:
 
 
 # Appelé par HeroSelector quand le joueur verrouille son héros : ajoute le héros
-# (et ses compagnons) au roaster de la party, résout les scènes, construit la
-# formation depuis le roaster, puis lance la Run (succession de confrontations).
+# (et ses compagnons) au roaster de la party. La formation est maintenue
+# automatiquement par Party (auto-sync sur entry_added). Lance ensuite la Run.
 func lock_hero_into_run(hero: HeroDesc) -> void:
 	if _run_context == null or _run_context.party == null:
 		Verbose.error("lock_hero_into_run: RunContext/party absent", Verbose.Category.GLOBAL_MANAGER)
 		return
 
 	var party: Party = _run_context.party
-	party.add_to_roaster(RoasterEntry.from_desc(hero, _resolve_local_owner_slot()))
+	var slot: PlayerState.Slot = _resolve_local_owner_slot()
+	party.get_or_create_roaster(slot).add(RoasterEntry.from_desc(hero))
 	_attach_roaster_scenes(party)
-	_init_roaster_runtime_data(party)
-
-	var template: FightingFormation = load(DEMO_PLAYER_FORMATION_PATH) as FightingFormation
-	if template == null:
-		Verbose.error("lock_hero_into_run: default_solo formation introuvable", Verbose.Category.GLOBAL_MANAGER)
-		return
-	party.formation = _build_formation_from_roaster(party.roaster, template)
+	for player: Player in PlayerManager.players.values():
+		player.bind_to(party)
 
 	start_run()
 
@@ -224,7 +221,7 @@ func _resolve_local_owner_slot() -> PlayerState.Slot:
 # par desc). Mute les ressources desc mises en cache, comme le faisait l'ancien
 # code de peuplement démo.
 func _attach_roaster_scenes(party: Party) -> void:
-	for entry: RoasterEntry in party.roaster:
+	for entry: RoasterEntry in party.all_entries():
 		if entry == null or entry.desc == null or entry.desc.scene != null:
 			continue
 		var desc: EntityDesc = entry.desc
@@ -245,58 +242,8 @@ func _build_new_run_context(run: Run = null) -> RunContext:
 	ctx.rng_seed = randi()
 	ctx.started_at = int(Time.get_unix_time_from_system())
 	ctx.run_id = str(ctx.started_at) + "_" + str(ctx.rng_seed)
-	for player: Player in PlayerManager.players.values():
-		if player.state != null:
-			ctx.party.players.append(player.state)
+	# party.players est peuplé par Player.bind_to() au moment du lock du héros.
 	return ctx
-
-
-# Construit une FightingFormation en posant les entries du roaster sur les
-# spawn_specs de la formation modèle. Premier hero → premier hero_spawn_spec ;
-# acolytes dans l'ordre sur acolyte_spawn_specs. Surplus dropé.
-func _build_formation_from_roaster(roaster: Array[RoasterEntry], template: FightingFormation) -> FightingFormation:
-	var formation := FightingFormation.new()
-	if template == null: return formation
-	var hero_entries: Array[RoasterEntry] = []
-	var acolyte_entries: Array[RoasterEntry] = []
-	for entry: RoasterEntry in roaster:
-		if entry == null or entry.desc == null: continue
-		match entry.desc.default_category:
-			Entity.Category.HERO: hero_entries.append(entry)
-			Entity.Category.ACOLYTE: acolyte_entries.append(entry)
-
-	var hero_count: int = mini(hero_entries.size(), template.hero_spawn_specs.size())
-	for i in hero_count:
-		formation.entity_specs.append(_make_player_spec(hero_entries[i], template.hero_spawn_specs[i].transform, "Hero_" + str(i)))
-
-	var acolyte_count: int = mini(acolyte_entries.size(), template.acolyte_spawn_specs.size())
-	for i in acolyte_count:
-		formation.entity_specs.append(_make_player_spec(acolyte_entries[i], template.acolyte_spawn_specs[i].transform, "Acolyte_" + str(i)))
-
-	return formation
-
-
-func _make_player_spec(entry: RoasterEntry, t: Transform3D, label: String) -> EntitySpec:
-	var spec := EntitySpec.new()
-	spec.desc = entry.desc
-	spec.entry = entry
-	spec.transform = t
-	spec.display_label = label
-	return spec
-
-
-# Garantit que chaque RoasterEntry hero a hand et data_memory non-null. Source
-# canonique des données hero-level, lues à chaque spawn via EntitySpec.entry.
-func _init_roaster_runtime_data(party: Party) -> void:
-	if party == null: return
-	var local_player_name: String = PlayerManager.get_local_player().player_name if PlayerManager.get_local_player() != null else ""
-	for entry: RoasterEntry in party.roaster:
-		if entry == null or entry.desc == null: continue
-		if entry.desc.default_category != Entity.Category.HERO: continue
-		if entry.hand == null:
-			entry.hand = Hand.new().init(local_player_name)
-		if entry.data_memory == null:
-			entry.data_memory = NestedRegistry.new()
 
 
 func get_active_families() -> Array[Family]:

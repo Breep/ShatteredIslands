@@ -14,6 +14,7 @@ enum Type {
 	POISON = 7,
 	CHICKEN_LORD = 8,
 	NECROSIS = 9,
+	PROTOTYPING = 100
 }
 
 # ============================== Constant ==============================
@@ -28,6 +29,7 @@ const COLORS = {
 	Type.COLOSSUS: Color(0.737, 0.379, 0.087), # Orange
 	Type.CHICKEN_LORD: Color(0.673, 0.504, 0.032, 1.0), # Yellow
 	Type.NECROSIS: Color(0.518, 0.148, 0.681, 1.0), # Purple
+	Type.PROTOTYPING: Color(0.621, 0.0, 0.547, 1.0), # Purple
 }
 
 # ============================== Exports ==============================

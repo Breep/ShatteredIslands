@@ -54,7 +54,11 @@ func setup() -> void:
 	)
 
 
-# Applique les upgrades de toutes les cartes de la main via leur card_effect.
+# Repose les modifiers (apply) de toutes les cartes de la main sur le héros.
+# Rejoué à CHAQUE spawn (bind_hand) car les modifiers vivent avec l'Entity et
+# disparaissent au despawn. N'appelle PAS on_purchase : les effets one-shot
+# persistants (ajout au roaster, etc.) ne doivent s'exécuter qu'au moment de
+# l'achat, pas à chaque respawn — sinon doublons à chaque cycle.
 func apply_all_cards_upgrades() -> void:
 	if _card_context == null:
 		Verbose.error("DeckHolder: card_context not set, call setup() first", Verbose.Category.HERO)
@@ -93,13 +97,23 @@ func get_card_context() -> CardContext:
 	return _card_context
 
 
+# Entrée en main (achat, sortie de coffre) : on déclenche d'abord l'effet
+# persistant one-shot (on_hand_enter) — il n'arrivera plus jamais après. Puis
+# on pose le modifier (apply) pour qu'il soit actif immédiatement, sans attendre
+# un nouveau spawn.
 func _on_hand_card_added(card: Card) -> void:
+	card.on_hand_enter_effect(_card_context)
 	card.apply_effect(_card_context)
 
+# Sortie de main (vente, mise en coffre) : revert défait à la fois les modifiers
+# en cours et les effets persistants posés par on_hand_enter (acolytes recrutés…).
 func _on_hand_card_removed(card: Card) -> void:
 	card.revert_effect(_card_context)
 
-func _on_hand_card_upgraded(card: Card) -> void:
-	card.revert_effect(_card_context)
-	card.apply_effect(_card_context)
+# Upgrade : on délègue à on_upgrade_effect, dont le défaut (revert+apply) suffit
+# à la majorité des cartes "modifier". Les cartes à effet persistant overrident
+# on_upgrade pour appliquer un delta (ex. recruter delta acolytes) sans
+# détruire/recréer.
+func _on_hand_card_upgraded(card: Card, prev_lvl: int) -> void:
+	card.on_upgrade_effect(_card_context, prev_lvl)
 #endregion
