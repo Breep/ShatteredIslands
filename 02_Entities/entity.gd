@@ -228,6 +228,7 @@ func _init() -> void:
 	action_modifiers_registry = ActionModifiersRegistry.new()
 	death_modifiers_registry = DeathModifiersRegistry.new()
 	stat_modifiers_registry = EntityStatModifiersRegistry.new(stats)
+	summon_modifiers_registry = SummonModifiersRegistry.new()
 	Verbose.trace("Entity [" + entity_name + "_" + str(uid) + "] init", Verbose.Category.ENTITY)
 
 
@@ -270,6 +271,8 @@ func _ready() -> void:
 
 	# Connect module interdependencies
 	_connect_module_dependencies()
+
+	_apply_inherited_summon_modifiers()
 
 	_start_spawn()
 
@@ -439,6 +442,19 @@ func get_card_context() -> CardContext:
 #endregion
 
 # ============================== Private functions ==============================
+
+#region ============================== Summon modifiers ==============================
+# Remonte la chaîne summoner et apply le summon_modifiers_registry de chaque
+# ancêtre sur cette entité (clone + register). Snapshot au moment du spawn :
+# les modifiers ajoutés à un ancêtre après ce point ne se propageront pas
+# aux summons déjà nés.
+func _apply_inherited_summon_modifiers() -> void:
+	var ancestor: Entity = summoner
+	while ancestor != null:
+		if ancestor.summon_modifiers_registry != null:
+			ancestor.summon_modifiers_registry.apply_to(self, ancestor)
+		ancestor = ancestor.summoner
+#endregion
 
 #region ============================== Spawn system ==============================
 func _start_spawn() -> void:

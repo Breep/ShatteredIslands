@@ -1,32 +1,70 @@
+# Registry des modifiers transmis aux summons en chaîne d'invocation.
+# Stocké sur chaque Entity invocatrice (héros, acolyte, building, summon).
+# Au spawn d'un summon, celui-ci remonte sa chaîne `summoner` et apply le
+# contenu de chaque ancestor's registry sur lui-même (clone + register).
+#
+# /!\ DETTE STRUCTURELLE — TODO refacto /!\
+# Ce registry encapsule les 5 mêmes registries qu'Entity
+# (Stat / Action / AutoAttack / Death / BattleCallback). Ces registries
+# ne sont PAS des data containers purs : ils portent de la logique active
+# (recompute des stats côté StatModifier, tick des callbacks côté
+# BattleCallback). On les utilise ici comme stores de templates ; leurs
+# side-effects sont pour l'instant inoffensifs tant que personne ne déclenche
+# process_tick / recompute dessus. À séparer en "modifier store" passif vs
+# "modifier registry actif" quand l'API summon sera stabilisée.
 class_name SummonModifiersRegistry
-extends Node
-
-var _modifiers: Dictionary[StringName, SummonModifier]
-
-#var auto_attack_modifier: AutoAttackModifier
-#var summon_modifier: ActionModifier
-#var stat_modifier: StatModifier
-
-func register_modifier(summon_modifier: SummonModifier) -> void:
-	Verbose.debug("Registering [" + summon_modifier.id + "]", Verbose.Category.ACTION_MODIFIER)
-	_modifiers[summon_modifier.id] = summon_modifier
+extends Resource
 
 
-func unregister_modifier(summon_modifier: SummonModifier) -> void:
-	Verbose.debug("Unregistering [" + summon_modifier.id + "]", Verbose.Category.ACTION_MODIFIER)
-	if not _modifiers.has(summon_modifier.id):
-		Verbose.error("unregister_modifier() - unknown action modifier | " + str(summon_modifier.id), Verbose.Category.ACTION_MODIFIER)
-		return
-	_modifiers.erase(summon_modifier.id)
+var stat_modifiers_registry: EntityStatModifiersRegistry
+var action_modifiers_registry: ActionModifiersRegistry
+var auto_attack_modifier_registry: AutoAttackModifierRegistry
+var death_modifiers_registry: DeathModifiersRegistry
+var battle_callback_registry: BattleCallbackRegistry
 
 
-func get_all_modifiers() -> Array[SummonModifier]:
-	return _modifiers.values().duplicate()
+func _init() -> void:
+	stat_modifiers_registry = EntityStatModifiersRegistry.new(EntityStats.new())
+	action_modifiers_registry = ActionModifiersRegistry.new()
+	auto_attack_modifier_registry = AutoAttackModifierRegistry.new()
+	death_modifiers_registry = DeathModifiersRegistry.new()
+	battle_callback_registry = BattleCallbackRegistry.new()
 
 
-func consume_all_modifiers() -> Array[SummonModifier]:
-	var modifiers: Array[SummonModifier] = _modifiers.values().duplicate()
-	for mod_id: StringName in _modifiers.keys().duplicate():
-		if _modifiers[mod_id].is_one_time_effect:
-			_modifiers.erase(mod_id)
-	return modifiers
+# Clone le contenu de ce registry et register chaque clone sur les registries
+# homologues du summon. Préfixe l'id du clone avec l'uid de l'ancêtre source
+# pour garantir l'unicité quand plusieurs ancêtres contribuent à un même
+# summon.
+func apply_to(summon: Entity, source_ancestor: Entity) -> void:
+	for original: StatModifier in stat_modifiers_registry.get_all_modifiers():
+		var clone: StatModifier = original.duplicate()
+		clone.id = _derive_id(original.id, source_ancestor)
+		summon.stat_modifiers_registry.register_modifier(clone)
+
+	for category: Utils.ActionCategory in [
+		Utils.ActionCategory.DAMAGE, Utils.ActionCategory.STACK,
+		Utils.ActionCategory.HEAL, Utils.ActionCategory.DODGE,
+		Utils.ActionCategory.SUMMON, Utils.ActionCategory.SPELL,
+	]:
+		for original: ActionModifier in action_modifiers_registry.get_all_modifiers(category):
+			var clone: ActionModifier = original.duplicate()
+			clone.id = _derive_id(original.id, source_ancestor)
+			summon.action_modifiers_registry.register_modifier(clone)
+
+	for original: AutoAttackModifier in auto_attack_modifier_registry.get_all_modifiers():
+		var clone: AutoAttackModifier = original.duplicate()
+		clone.id = _derive_id(original.id, source_ancestor)
+		summon.auto_attack_modifier_registry.register_modifier(clone)
+
+	for original: DeathModifier in death_modifiers_registry.get_all_modifiers():
+		var clone: DeathModifier = original.duplicate()
+		clone.id = _derive_id(original.id, source_ancestor)
+		summon.death_modifiers_registry.register_modifier(clone)
+
+	# TODO BattleCallback : structure interne plus complexe (start/end +
+	# periodic/oneshot avec Callables), apply non trivial. À traiter quand
+	# une carte le demandera.
+
+
+static func _derive_id(original_id: StringName, ancestor: Entity) -> StringName:
+	return StringName("%s@%d" % [original_id, ancestor.uid])

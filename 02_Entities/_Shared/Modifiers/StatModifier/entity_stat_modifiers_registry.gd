@@ -61,6 +61,20 @@ class StatModifierDictionary extends Resource:
 		_recompute_stats()
 
 
+	# Tous les modifiers stockés pour cette stat (toutes action_types confondues
+	# pour les multi-stats). Utilisé par SummonModifiersRegistry pour itérer.
+	func get_all_modifiers() -> Array[StatModifier]:
+		var result: Array[StatModifier] = []
+		if EntityStats.is_multi_stat(_stat_type):
+			for action_type: Utils.ActionType in _modifiers_per_action_type.keys():
+				for modifier: StatModifier in _modifiers_per_action_type[action_type].values():
+					result.append(modifier)
+		else:
+			for modifier: StatModifier in _modifiers.values():
+				result.append(modifier)
+		return result
+
+
 	# Valeur du modifier d'id donné pour cette stat (0.0 s'il n'existe pas).
 	func get_modifier_value(id: StringName, action_type: Utils.ActionType) -> float:
 		var modifier: StatModifier
@@ -203,6 +217,15 @@ func recompute_all() -> void:
 	for stat_type: EntityStats.StatType in _stats_modifiers_dictionaries.keys():
 		_stats_modifiers_dictionaries[stat_type].setup(stat_type, _entity_stats, _entity_base_stats)
 		_stats_modifiers_dictionaries[stat_type].recompute_stats()
+
+
+# Tous les StatModifier stockés, toutes stats confondues. Utilisé par
+# SummonModifiersRegistry.apply_to pour cloner et propager vers les summons.
+func get_all_modifiers() -> Array[StatModifier]:
+	var result: Array[StatModifier] = []
+	for smd: StatModifierDictionary in _stats_modifiers_dictionaries.values():
+		result.append_array(smd.get_all_modifiers())
+	return result
 
 # ============================== Private functions ==============================
 
