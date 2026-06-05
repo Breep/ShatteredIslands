@@ -66,4 +66,34 @@ func has(entry: RoasterEntry) -> bool:
 
 func size() -> int:
 	return entries.size()
+
+
+# Entries posées par une source identifiée (ex. nom d'une carte). Ordre stable
+# = ordre d'insertion. Vide si aucune entry n'a ce source_id.
+func get_by_source(source: StringName) -> Array[RoasterEntry]:
+	var result: Array[RoasterEntry] = []
+	for entry: RoasterEntry in entries:
+		if entry != null and entry.source_id == source:
+			result.append(entry)
+	return result
+
+
+# Retire toutes les entries posées par une source. Retourne le nombre retiré.
+# Chaque retrait émet entry_removed (donc Party propagera la mise à jour de
+# formation et la Tavern despawnera les Entities visuelles).
+func remove_by_source(source: StringName) -> int:
+	var to_remove: Array[RoasterEntry] = get_by_source(source)
+	for entry: RoasterEntry in to_remove:
+		remove(entry)
+	return to_remove.size()
+
+
+# Entries portant un tag donné. Tags ne sont pas exclusifs : une entry peut
+# en avoir plusieurs et matcher sur n'importe lequel.
+func get_by_tag(tag: StringName) -> Array[RoasterEntry]:
+	var result: Array[RoasterEntry] = []
+	for entry: RoasterEntry in entries:
+		if entry != null and entry.source_tags.has(tag):
+			result.append(entry)
+	return result
 #endregion

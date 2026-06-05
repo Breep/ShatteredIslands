@@ -2,6 +2,10 @@
 # l'encounter, spawn les héros et acolytes du joueur depuis le roaster, et
 # reste à l'écoute de Party pour spawn/despawn à la volée pendant la phase
 # (effets de cartes type "Recrute mercenaire").
+#
+# Les héros et acolytes occupent les slots de tavern_formation.{hero,acolyte}_spawn_specs.
+# Quand tous les slots d'une catégorie sont pris, les nouvelles entries restent
+# dans le roaster mais ne sont pas visualisées (pas de spawn 3D).
 class_name Tavern
 extends Node3D
 
@@ -14,6 +18,12 @@ extends Node3D
 #region ============================== Private variables ==============================
 var _party: Party
 var _ctx: EntityContext
+
+# Snapshots des spawn specs par catégorie pour la phase active, et assignation
+# entry → index dans le snapshot correspondant. erase au remove pour libérer
+# le slot. Symétrique entre héros et acolytes.
+var _spawn_specs_by_category: Dictionary[Entity.Category, Array] = {}
+var _slot_assignment: Dictionary[RoasterEntry, int] = {}
 #endregion
 
 
@@ -28,6 +38,8 @@ func cleanup() -> void:
 	_disconnect_party_signals()
 	_party = null
 	_ctx = null
+	_spawn_specs_by_category.clear()
+	_slot_assignment.clear()
 
 
 # === New API: populate from a TavernEncounter + Party ===
@@ -54,22 +66,14 @@ func populate_from_encounter(encounter: TavernEncounter, party: Party) -> void:
 
 	_party = party
 	_ctx = _build_tavern_ctx()
+	_spawn_specs_by_category = {
+		Entity.Category.HERO: formation.hero_spawn_specs,
+		Entity.Category.ACOLYTE: formation.acolyte_spawn_specs,
+	}
+	_slot_assignment.clear()
 
-	var hero_entries: Array[RoasterEntry] = []
-	var acolyte_entries: Array[RoasterEntry] = []
 	for entry: RoasterEntry in party.all_entries():
-		if entry == null or entry.desc == null: continue
-		match entry.desc.default_category:
-			Entity.Category.HERO: hero_entries.append(entry)
-			Entity.Category.ACOLYTE: acolyte_entries.append(entry)
-
-	var placed_heroes: int = mini(hero_entries.size(), formation.hero_spawn_specs.size())
-	for i in placed_heroes:
-		_spawn_entry_at(hero_entries[i], formation.hero_spawn_specs[i].transform, "Hero_" + str(i), root)
-
-	var placed_acolytes: int = mini(acolyte_entries.size(), formation.acolyte_spawn_specs.size())
-	for i in placed_acolytes:
-		_spawn_entry_at(acolyte_entries[i], formation.acolyte_spawn_specs[i].transform, "Acolyte_" + str(i), root)
+		_place_entry(entry, root)
 
 	_connect_party_signals()
 #endregion
@@ -99,9 +103,37 @@ func _build_tavern_ctx() -> EntityContext:
 	return ctx
 
 
-# Spawn une entry à un transform donné. Les nouvelles entries arrivant via
-# signal (entry_added pendant la phase) atterrissent à Transform3D.IDENTITY ;
-# la gestion propre des positions par défaut est hors scope (cf. CLAUDE.md).
+# Place une entry sur le premier slot libre de sa catégorie. Si aucun slot
+# disponible (ou catégorie non gérée), l'entry reste dans le roaster sans
+# spawn 3D — comportement assumé "le surnuméraire reste invisible".
+func _place_entry(entry: RoasterEntry, parent: Node3D) -> void:
+	if entry == null or entry.desc == null: return
+	var category: Entity.Category = entry.desc.default_category
+	if not _spawn_specs_by_category.has(category):
+		return
+	var slot_idx: int = _find_free_slot(category)
+	if slot_idx == -1:
+		return
+	_slot_assignment[entry] = slot_idx
+	var spec: SpawnSpec = _spawn_specs_by_category[category][slot_idx]
+	var label: String = entry.desc.name if entry.desc.name != "" else "Entity"
+	_spawn_entry_at(entry, spec.transform, label, parent)
+
+
+# Premier index libre dans les spawn specs d'une catégorie. -1 si tous occupés.
+# "Libre" = aucune entry actuelle n'est assignée à cet index pour cette catégorie.
+func _find_free_slot(category: Entity.Category) -> int:
+	var specs: Array = _spawn_specs_by_category.get(category, [])
+	var used_indices: Array[int] = []
+	for assigned_entry: RoasterEntry in _slot_assignment:
+		if assigned_entry.desc != null and assigned_entry.desc.default_category == category:
+			used_indices.append(_slot_assignment[assigned_entry])
+	for i in specs.size():
+		if not used_indices.has(i):
+			return i
+	return -1
+
+
 func _spawn_entry_at(entry: RoasterEntry, target_transform: Transform3D, fallback_name: String, parent: Node3D) -> void:
 	if entry == null or entry.desc == null or _party == null or _ctx == null: return
 	var slot: PlayerState.Slot = _party.find_slot_of(entry)
@@ -138,11 +170,12 @@ func _disconnect_party_signals() -> void:
 
 #region ============================== Callbacks ==============================
 func _on_party_entry_added(entry: RoasterEntry) -> void:
-	_spawn_entry_at(entry, Transform3D.IDENTITY, entry.desc.name if entry.desc != null else "Entity", _get_or_make_encounter_root())
+	_place_entry(entry, _get_or_make_encounter_root())
 
 
 func _on_party_entry_removed(entry: RoasterEntry) -> void:
 	if entry == null: return
+	_slot_assignment.erase(entry)
 	var root: Node3D = _get_or_make_encounter_root()
 	for child in root.get_children():
 		var entity := child as Entity

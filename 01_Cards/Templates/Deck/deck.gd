@@ -11,8 +11,10 @@ signal card_added(card: Card)
 signal card_removed(card: Card)
 ## Émis quand un design déjà présent monte de niveau (pas de nouvelle entrée).
 ## Distinct de card_added pour que les écouteurs puissent ré-appliquer les effets
-## sans confondre « nouvelle carte » et « carte qui level up ».
-signal card_upgraded(card: Card)
+## sans confondre « nouvelle carte » et « carte qui level up ». Porte prev_lvl
+## pour les effets qui veulent un delta (ex. recruter delta acolytes) plutôt
+## qu'un revert+apply complet.
+signal card_upgraded(card: Card, prev_lvl: int)
 #endregion
 
 
@@ -96,10 +98,11 @@ func add_card(card_to_add: Card) -> bool:
 		if existing.is_max_level():
 			Verbose.warn("Deck: card already maxed | " + String(name), Verbose.Category.DECK)
 			return false
+		var prev_lvl: int = existing.lvl
 		existing.lvl += 1
 		_by_name[name].append(card_to_add)
 		_by_uid[card_to_add.uid] = card_to_add
-		card_upgraded.emit(existing)
+		card_upgraded.emit(existing, prev_lvl)
 		has_changed.emit()
 		return true
 	
