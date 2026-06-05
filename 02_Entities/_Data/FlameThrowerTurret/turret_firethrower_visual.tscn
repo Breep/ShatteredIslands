@@ -203,9 +203,65 @@ tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = PackedFloat32Array(0, 1, 0.601423, 0.6023082, 0.58218)
 
+[sub_resource type="Animation" id="Animation_dejnf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.5659058, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.3, 0.3, 0.3)]
+}
+
+[sub_resource type="Animation" id="Animation_b7ft2"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.5659058, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.3, 0.3, 0.3)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sl8yw"]
 _data = {
-&"IcosphereAction": SubResource("Animation_g2asi")
+&"IcosphereAction": SubResource("Animation_g2asi"),
+&"RESET": SubResource("Animation_dejnf"),
+&"idle": SubResource("Animation_b7ft2")
 }
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_28uux"]
@@ -378,50 +434,53 @@ shadow_mesh = SubResource("ArrayMesh_g40se")
 
 [node name="turret_firethrower" type="Node3D" unique_id=1703881349]
 
-[node name="Socle" type="MeshInstance3D" parent="." unique_id=1817941204]
-transform = Transform3D(190.61568, 2.7088117e-12, 1.07001315e-05, 1.6664151e-05, -3.408474e-05, -122.395226, 0, -190.61566, 1.4590649e-05, 0.041932, -0.91249514, -0.061597)
+[node name="Node3D" type="Node3D" parent="." unique_id=678536594]
+transform = Transform3D(-1.3113417e-08, 0, -0.3, 0, 0.3, 0, 0.3, 0, -1.3113417e-08, 0, 0.5659058, 0)
+
+[node name="Socle" type="MeshInstance3D" parent="Node3D" unique_id=1817941204]
+transform = Transform3D(-150, 1.3113417e-05, 3.8213708e-13, 0, -6.5567083e-06, 100, 1.3113417e-05, 150, 4.371139e-06, 0.041932, -0.91249514, -0.061597)
 mesh = SubResource("ArrayMesh_fo6hg")
 skeleton = NodePath("")
 
-[node name="Sphere" type="MeshInstance3D" parent="." unique_id=1494888771]
+[node name="Sphere" type="MeshInstance3D" parent="Node3D" unique_id=1494888771]
 transform = Transform3D(88.61117, 0, 0, 0, -1.0563274e-05, 119.57093, 0, -88.61116, -1.4253967e-05, 0, 0, 0)
 mesh = SubResource("ArrayMesh_5ftpo")
 skeleton = NodePath("")
 
-[node name="Torus" type="MeshInstance3D" parent="." unique_id=147881567]
+[node name="Torus" type="MeshInstance3D" parent="Node3D" unique_id=147881567]
 transform = Transform3D(112.01589, 0, 0, 0, -1.3353335e-05, 240.13959, 0, -112.015884, -2.8626871e-05, 0, -0.059933078, 0)
 mesh = SubResource("ArrayMesh_bumpo")
 skeleton = NodePath("")
 
-[node name="pivot noir" type="MeshInstance3D" parent="." unique_id=715846162]
+[node name="pivot noir" type="MeshInstance3D" parent="Node3D" unique_id=715846162]
 transform = Transform3D(-37.21591, 1.9533656e-13, -2.24008e-06, 3.2535188e-06, 1.6386018e-06, -25.623522, 0, 13.745587, 3.054562e-06, 0.0682385, 1.1024665, -0.006506175)
 mesh = SubResource("ArrayMesh_bx3bq")
 skeleton = NodePath("")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2077635753]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node3D" unique_id=2077635753]
 libraries/ = SubResource("AnimationLibrary_sl8yw")
 
-[node name="Icosphere" type="MeshInstance3D" parent="." unique_id=75561141]
+[node name="Icosphere" type="MeshInstance3D" parent="Node3D" unique_id=75561141]
 transform = Transform3D(120.30151, 7.111309e-06, -52.896244, 52.896244, -3.3840784e-05, 120.30151, -7.111309e-06, -131.41714, -3.3840784e-05, 0, 2.1876848, 0)
 mesh = SubResource("ArrayMesh_5bl04")
 skeleton = NodePath("")
 
-[node name="canon gauche" type="MeshInstance3D" parent="Icosphere" unique_id=571230907]
+[node name="canon gauche" type="MeshInstance3D" parent="Node3D/Icosphere" unique_id=571230907]
 transform = Transform3D(1.1491302e-15, 2.6327728e-08, 0.58218, 0.601423, -2.6327728e-08, 0, 2.6289035e-08, 0.6023082, -2.5447896e-08, -0.011324202, 0.00034047596, -0.0013984418)
 mesh = SubResource("ArrayMesh_jim11")
 skeleton = NodePath("")
 
-[node name="embout canon gauche" type="MeshInstance3D" parent="Icosphere/canon gauche" unique_id=1735129250]
+[node name="embout canon gauche" type="MeshInstance3D" parent="Node3D/Icosphere/canon gauche" unique_id=1735129250]
 transform = Transform3D(-1.2065336, 1.8742256e-14, 7.847919e-08, -3.1744546e-15, 1.2065347, -6.2525956e-08, -1.821815e-07, -1.4514782e-07, -0.51974416, 0.00013999153, 0.0007490337, -0.007920524)
 mesh = SubResource("ArrayMesh_5knxk")
 skeleton = NodePath("")
 
-[node name="Pivot rouge" type="MeshInstance3D" parent="Icosphere" unique_id=635423422]
+[node name="Pivot rouge" type="MeshInstance3D" parent="Node3D/Icosphere" unique_id=635423422]
 transform = Transform3D(0.27770752, 0, 0, 0, 0.2777075, 1.3673277e-08, 0, -2.0966336e-08, 0.18110803, 0.0003524065, 1.206993e-05, -0.008546974)
 mesh = SubResource("ArrayMesh_13nbc")
 skeleton = NodePath("")
 
-[node name="pivot" type="MeshInstance3D" parent="Icosphere" unique_id=883272563]
+[node name="pivot" type="MeshInstance3D" parent="Node3D/Icosphere" unique_id=883272563]
 transform = Transform3D(-8.69591e-09, 0.07294657, -1.2576489e-08, 3.1885958e-09, -3.1885963e-09, -0.28771648, -0.07294657, -8.69591e-09, -1.2576484e-08, 0.00024564852, 3.6111422e-10, -0.00826133)
 mesh = SubResource("ArrayMesh_57xt7")
 skeleton = NodePath("")

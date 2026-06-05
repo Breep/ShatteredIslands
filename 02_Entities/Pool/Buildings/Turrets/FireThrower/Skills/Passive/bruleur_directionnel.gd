@@ -1,0 +1,68 @@
+class_name SE_BruleurDirectionnel
+extends SkillEffect
+
+# Passif "Brûleur directionnel": toutes les _tick_period s, applique AP x _ap_ignite_ratio
+# stacks d'Ignite à tous les ennemis présents dans la hitbox des flammes (collision shape
+# de l'Area3D). De base le passif ne fait QUE de l'Ignite. Le talent "Buse large" active en
+# plus des dégâts magiques, dont les valeurs sont posées en meta par SE_BuseLarge.
+
+const META_BUSE_FLAT := &"firethrower_buse_flat"
+const META_BUSE_AP_RATIO := &"firethrower_buse_ap_ratio"
+
+@export var _tick_period: float = 1.0
+@export var _flame_area_name: StringName = &"Area3D"
+@export var _ap_ignite_ratio: float = 0.20
+
+
+func apply(ctx: SkillContext) -> void:
+	var turret: TurretFireThrower = ctx.entity as TurretFireThrower
+	if turret == null:
+		Verbose.error("SE_BruleurDirectionnel: owner is not a TurretFireThrower", Verbose.Category.ENTITY_MODULE)
+		return
+	turret.battle_callback_registry.register_periodic(&"BruleurDirectionnel", _tick_period, func() -> void:
+		_burn_tick(turret)
+	, true)
+
+
+func _burn_tick(turret: TurretFireThrower) -> void:
+	var area := turret.find_child(String(_flame_area_name), true, false) as Area3D
+	if area == null:
+		Verbose.warn("[Brûleur] Area3D '" + String(_flame_area_name) + "' introuvable", Verbose.Category.ENTITY_MODULE)
+		return
+
+	var ap: float = turret.stats.get_stat(EntityStats.StatType.AP)
+	var ignite_stacks: float = ap * _ap_ignite_ratio
+
+	# Dégâts magiques uniquement si "Buse large" est actif (valeurs posées en meta).
+	var buse_active: bool = turret.has_meta(META_BUSE_FLAT)
+	var buse_damage: float = 0.0
+	if buse_active:
+		buse_damage = float(turret.get_meta(META_BUSE_FLAT)) + ap * float(turret.get_meta(META_BUSE_AP_RATIO))
+
+	# Filtre faction via le système de ciblage éprouvé (liste _enemies déjà team-filtrée).
+	var enemies := turret.target.get_targets(TargetComponent.MultipleTargettingStrategy.ENEMIES)
+	var bodies := area.get_overlapping_bodies()
+
+	# --- DIAGNOSTIC (à retirer une fois le passif validé) ---
+	Verbose.warn("[Brûleur] tick | monitoring=" + str(area.monitoring) \
+		+ " | overlapping_bodies=" + str(bodies.size()) \
+		+ " | enemies_known=" + str(enemies.size()) \
+		+ " | turret.team=" + str(turret.team), Verbose.Category.ENTITY_MODULE)
+	for body: Node3D in bodies:
+		var dbg_enemy := body as Entity
+		Verbose.warn("[Brûleur]   body=" + body.name + " type=" + body.get_class() \
+			+ " is_entity=" + str(dbg_enemy != null) \
+			+ " team=" + (str(dbg_enemy.team) if dbg_enemy != null else "n/a") \
+			+ " is_enemy=" + str(dbg_enemy != null and enemies.has(dbg_enemy)), Verbose.Category.ENTITY_MODULE)
+	# --- FIN DIAGNOSTIC ---
+
+	for body: Node3D in bodies:
+		var enemy := body as Entity
+		if enemy == null or not is_instance_valid(enemy) or enemy.is_dead():
+			continue
+		if not enemies.has(enemy):
+			continue
+		Verbose.warn("[Brûleur]   -> ignite " + str(ignite_stacks) + " sur " + enemy.name, Verbose.Category.ENTITY_MODULE)
+		turret.alterations.inflict_condition_stacks(enemy, ignite_stacks, Alteration.Type.IGNITE, &"Brûleur directionnel")
+		if buse_active:
+			turret.damage.direct(enemy, buse_damage, Utils.ActionType.DAMAGE_MAGICAL, &"Buse large")

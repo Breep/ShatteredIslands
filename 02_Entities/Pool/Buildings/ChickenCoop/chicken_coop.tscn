@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://b2mchd77gheam"]
+
+[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.tscn" id="1_2ibl6"]
+[ext_resource type="PackedScene" uid="uid://cr857cwxytntr" path="res://02_Entities/_Data/ChickenCoop/chicken_coop_visual.tscn" id="1_07g4a"]
+[ext_resource type="Script" uid="uid://ttupf0ajv43h" path="res://02_Entities/Pool/Buildings/ChickenCoop/chicken_coop.gd" id="1_oh2kd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oh2kd"]
+size = Vector3(0.71118164, 1.2, 0.6)
+
+[node name="ChickenCoop" type="CharacterBody3D" unique_id=1064095039]
+script = ExtResource("1_oh2kd")
+
+[node name="LargeHealthBarComponent" parent="." unique_id=1823590462 node_paths=PackedStringArray("_spawn", "_owner") instance=ExtResource("1_2ibl6")]
+_spawn = NodePath("../ChickenCoopVisual/Marker3D")
+_owner = NodePath("..")
+
+[node name="ChickenCoopVisual" parent="." unique_id=1427570308 instance=ExtResource("1_07g4a")]
+
+[node name="Marker3D" type="Marker3D" parent="ChickenCoopVisual" unique_id=1402058070]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.66080916, -0.25977564)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1658068250]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.3)
+shape = SubResource("BoxShape3D_oh2kd")
