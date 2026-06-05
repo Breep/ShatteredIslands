@@ -157,6 +157,7 @@ var action_modifiers_registry: ActionModifiersRegistry
 var stat_modifiers_registry: EntityStatModifiersRegistry
 var death_modifiers_registry: DeathModifiersRegistry
 var battle_callback_registry: BattleCallbackRegistry
+var summon_modifiers_registry: SummonModifiersRegistry
 #endregion
 
 ##region ============================== Context ============================== 
