@@ -22,6 +22,12 @@ var battle_callback_registry: BattleCallbackRegistry
 
 func _init() -> void:
 	stat_modifiers_registry = EntityStatModifiersRegistry.new(EntityStats.new())
+	# recompute_all() initialise les inner StatModifierDictionary via setup() :
+	# sans ça, leur `_stat_type` reste à 0 (HEALTH_MAX) et register_modifier
+	# rejette silencieusement tout modifier d'un autre stat_type (AD, AS, etc.).
+	# Normalement appelé via update_base_stats côté Entity (ProgressionComponent),
+	# mais ici on est un container sans base stats.
+	stat_modifiers_registry.recompute_all()
 	action_modifiers_registry = ActionModifiersRegistry.new()
 	auto_attack_modifier_registry = AutoAttackModifierRegistry.new()
 	death_modifiers_registry = DeathModifiersRegistry.new()
