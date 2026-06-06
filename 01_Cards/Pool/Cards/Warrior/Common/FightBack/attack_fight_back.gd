@@ -31,7 +31,7 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 		ad_mod.stat_type = EntityStats.StatType.AD
 		ad_mod.calc_type = StatModifier.CalcType.ADD
 		ad_mod.value = state[&"dodge_count"] * ad_per_dodge
-		ad_mod.tags = [StatModifier.TagType.CARD]
+		ad_mod.tags = [Modifier.TagType.CARD]
 		owner.stat_modifiers_registry.register_modifier(ad_mod)
 	owner.action_modifiers_registry.register_modifier(action_mod)
 

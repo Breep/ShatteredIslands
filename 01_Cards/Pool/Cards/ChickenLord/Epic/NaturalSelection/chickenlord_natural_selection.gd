@@ -28,16 +28,8 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			evolution_mod.action_type = Utils.ActionCategory.SUMMON
 			evolution_mod.is_one_time_effect = true
 			evolution_mod.id = &"Natural Selection"
-			evolution_mod.before_action_logic_callback = func(mod_vars: Dictionary) -> void:
-				if mod_vars.get(ActionModifier.VarType.ENTITY_TYPE) != Entity.EntityType.CHICKEN_EGG:
-					return
-				var em: Dictionary = mod_vars.get(ActionModifier.VarType.ENTITY_MODIFIER, {})
-				em[ChickenEgg.Modifier.CHICKEN_TYPE] = chicken_type
-
 			ctx.hero.action_modifiers_registry.register_modifier(evolution_mod)
-			ctx.hero.summon.summon_entity(Entity.EntityType.CHICKEN_EGG, spawn_loc, {
-				ChickenEgg.Modifier.HATCH_TIME: 1.5,
-			})
+			ctx.hero.summon.summon_entity(Entity.EntityType.CHICKEN_EGG, spawn_loc, {})
 			ctx.hero.action_modifiers_registry.unregister_modifier(evolution_mod)
 
 			# Kill the basic chicken

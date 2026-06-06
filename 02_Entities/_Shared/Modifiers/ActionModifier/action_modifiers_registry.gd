@@ -30,12 +30,6 @@ class ActionModifiersDictionary extends Resource:
 				_modifiers.erase(mod_id)
 		return modifiers
 
-	func auto_cleanup() -> void:
-		for modifier: ActionModifier in _modifiers.values().duplicate():
-			if modifier.auto_cleanup:
-				_modifiers.erase(modifier.id)
-
-
 
 
 var _action_modifiers_dictionaries: Dictionary [Utils.ActionCategory, ActionModifiersDictionary]
@@ -49,7 +43,6 @@ func _init() -> void:
 		Utils.ActionCategory.SUMMON: ActionModifiersDictionary.new(),
 		Utils.ActionCategory.SPELL: ActionModifiersDictionary.new(),
 	}
-	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 
 func register_modifier(action_modifier: ActionModifier) -> void:
 	var action_type: Utils.ActionCategory = action_modifier.action_type
@@ -67,16 +60,3 @@ func get_all_modifiers(action_type: Utils.ActionCategory) -> Array[ActionModifie
 
 func consume_all_modifiers(action_type: Utils.ActionCategory) -> Array[ActionModifier]:
 	return _action_modifiers_dictionaries[action_type].consume_all_modifiers()
-	
-# ============================== Private functions ==============================
-
-func _auto_cleanup_all() -> void:
-	for smd: ActionModifiersDictionary in _action_modifiers_dictionaries.values():
-		smd.auto_cleanup()
-
-# ============================== Callbacks ==============================
-
-func _on_game_manager_game_state_changed(game_state: GameManager.GameState) -> void:
-	match game_state:
-		GameManager.GameState.ENDING_ROUND:
-			_auto_cleanup_all()

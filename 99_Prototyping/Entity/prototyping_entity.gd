@@ -65,6 +65,10 @@ func _adopt_pre_placed_entities() -> void:
 		var entity: Entity = child
 		var ctx: EntityContext = entity.get_context()
 		ctx.spawn_manager = _spawn_manager
+		# get_context() pose entity_owner = self (destiné aux summons enfants).
+		# Pour l'adoption d'une entité racine on l'écrase à null sinon
+		# entity.summoner = entity et la chaîne summoner boucle à l'infini.
+		ctx.entity_owner = null
 		_spawn_manager.adopt_entity(entity, ctx)
 		_entities.append(entity)
 

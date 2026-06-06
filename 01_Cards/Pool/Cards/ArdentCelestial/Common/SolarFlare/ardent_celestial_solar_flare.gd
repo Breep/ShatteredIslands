@@ -17,7 +17,7 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 	mod.stat_type = EntityStats.StatType.DODGE
 	mod.calc_type = StatModifier.CalcType.ADD
 	mod.value = _dodge_increase[card_lvl - 1]
-	mod.tags = [StatModifier.TagType.CARD]
+	mod.tags = [Modifier.TagType.CARD]
 	owner.stat_modifiers_registry.register_modifier(mod)
 
 	var ignite: float = _ignite_stacks[card_lvl - 1]

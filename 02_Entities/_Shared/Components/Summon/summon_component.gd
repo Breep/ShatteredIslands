@@ -197,15 +197,8 @@ func _summon_trex(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
 	_spawn_manager.spawn_entity(trex, Transform3D(Basis(), spawn_position), _owner.get_context())
 
  
-func _summon_chicken_egg(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
-	var egg: ChickenEgg = CHICKEN_EGG_SCENE.instantiate()
-	var hatch_time: float = entity_modifier.get(ChickenEgg.Modifier.HATCH_TIME, 3.0)
-	var chicken_type: Chicken.Type = entity_modifier.get(ChickenEgg.Modifier.CHICKEN_TYPE, Chicken.Type.BASIC)
-	var chicken_modifiers: Dictionary = entity_modifier.get(ChickenEgg.Modifier.CHICKEN_MODIFIERS, {})
-	var hatch_modifiers: Array[HatchModifier] = entity_modifier.get(ChickenEgg.Modifier.HATCH_MODIFIERS, [] as Array[HatchModifier])
-	var opt_scale: float = entity_modifier.get(ChickenEgg.Modifier.SCALE, 1)
-	egg.init(hatch_time, chicken_type, chicken_modifiers, hatch_modifiers, opt_scale)
-	_spawn_manager.spawn_entity(egg, Transform3D(Basis(), spawn_position), _owner.get_context(), Entity.EntityType.CHICKEN_EGG)
+func _summon_chicken_egg(_spawn_position: Vector3, _entity_modifier: Dictionary) -> void:
+	pass
 
 
 func _summon_deflection_shield(spawn_position: Vector3, entity_modifier: Dictionary) -> void:

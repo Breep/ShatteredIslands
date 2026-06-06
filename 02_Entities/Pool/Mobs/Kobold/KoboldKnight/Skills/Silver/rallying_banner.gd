@@ -14,7 +14,7 @@ func apply(ctx: SkillContext) -> void:
 		if not is_instance_valid(entity): continue
 		entity.alterations.add_stack(Alteration.Type.DEFENSE, _defense_bonus, _owner, &"RallyingBanner")
 		
-	var mod := ActionModifier.new()
+	var mod := DeathModifier.new()
 	mod.id = &"Rallying Banner"
 	mod.after_action_logic_callback = func(cb_vars: Dictionary) -> void:
 		var remaining_allies: Array[Entity] = _owner.target.get_targets(TargetComponent.MultipleTargettingStrategy.ALLIES)

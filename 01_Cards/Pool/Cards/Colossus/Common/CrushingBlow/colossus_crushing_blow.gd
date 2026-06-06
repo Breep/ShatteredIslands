@@ -15,7 +15,7 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 
 	var aa_mod := AutoAttackModifier.new()
 	aa_mod.id = card_name
-	aa_mod.tags = [AutoAttackModifier.TagType.CARD]
+	aa_mod.tags = [Modifier.TagType.CARD]
 	aa_mod.is_one_time_effect = false
 	aa_mod.damage_modifier_callback = func(_cb_vars: Dictionary) -> void:
 		state[&"count"] += 1

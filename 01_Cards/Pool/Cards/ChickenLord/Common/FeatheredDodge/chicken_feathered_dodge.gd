@@ -13,7 +13,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	mod.stat_type = EntityStats.StatType.DODGE
 	mod.calc_type = StatModifier.CalcType.ADD
 	mod.value = dodge_increase
-	mod.tags = [StatModifier.TagType.CARD]
+	mod.tags = [Modifier.TagType.CARD]
 	ctx.stat_modifiers.register_modifier(mod)
 	
 	ctx.hero.families_stats.chicken_lord.add_card_item(ctx.card_id, ctx.hero.families_stats.chicken_lord.on_chicken_spawned_callbacks, func(cb_vars: Dictionary) -> void:

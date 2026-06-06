@@ -36,7 +36,6 @@ func _register_meteor_spell_modifier() -> void:
 	modifier.id = &"ArdentCelestial Meteor"
 	modifier.action_type = Utils.ActionCategory.SPELL
 	modifier.is_one_time_effect = false
-	modifier.auto_cleanup = true
 	modifier.before_action_logic_callback = func(cb_vars: Dictionary) -> void:
 		if cb_vars.get(ActionModifier.VarType.SPELL_TYPE) != Spell.Type.METEOR:
 			return
@@ -62,7 +61,7 @@ func _add_stack_modifiers() -> void:
 	var stack_modifier := ActionModifier.new()
 	stack_modifier.action_type = Utils.ActionCategory.STACK
 	stack_modifier.id = &"Celestial Passive"
-	stack_modifier.tags = [ActionModifier.TagType.CARD]
+	stack_modifier.tags = [Modifier.TagType.CARD]
 	stack_modifier.after_action_logic_callback = _on_inflict_condition_ignite
 	stack_modifier.is_one_time_effect = false
 	_owner.action_modifiers_registry.register_modifier(stack_modifier)

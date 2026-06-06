@@ -35,7 +35,7 @@ static func from_desc(d: EntityDesc) -> RoasterEntry:
 
 # Garantit que les données runtime (hand, data_memory) sont posées sur les
 # entries héros. Idempotent : si déjà initialisées, ne fait rien. Appelée
-# automatiquement par Roaster.add() à chaque ajout.
+# automatiquement par Roaster.set_hero/add_acolyte/add_building à chaque ajout.
 func ensure_runtime_initialized() -> void:
 	if desc == null:
 		return

@@ -18,12 +18,12 @@ enum Type {
 	GIFTED_NECROSIS
 }
 
-class Modifier extends RefCounted:
-	const HATCH_TIME: StringName = &"Hatch Time"
-	const CHICKEN_TYPE: StringName = &"Chicken Type"
-	const CHICKEN_MODIFIERS: StringName = &"Chicken Modifiers"
-	const HATCH_MODIFIERS: StringName = &"Hatch Modifiers"
-	const SCALE: StringName = &"Scale"
+#class Modifier extends RefCounted:
+	#const HATCH_TIME: StringName = &"Hatch Time"
+	#const CHICKEN_TYPE: StringName = &"Chicken Type"
+	#const CHICKEN_MODIFIERS: StringName = &"Chicken Modifiers"
+	#const HATCH_MODIFIERS: StringName = &"Hatch Modifiers"
+	#const SCALE: StringName = &"Scale"
 
 var _hatch_time: float
 var _chicken_type: Chicken.Type

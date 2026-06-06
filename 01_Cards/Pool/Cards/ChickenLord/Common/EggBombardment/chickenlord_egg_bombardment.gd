@@ -9,7 +9,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	mod.action_type = Utils.ActionCategory.STACK
 	mod.id = &"Egg Bombardment"
 	mod.is_one_time_effect = false
-	mod.tags = [ActionModifier.TagType.CARD]
+	mod.tags = [Modifier.TagType.CARD]
 	mod.after_action_logic_callback = func(cb_vars: Dictionary) -> void:
 		if not cb_vars.has(ActionModifier.VarType.STACK_TYPE): return
 		var stack_type: Alteration.Type = cb_vars[ActionModifier.VarType.STACK_TYPE]

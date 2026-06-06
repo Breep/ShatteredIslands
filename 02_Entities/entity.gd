@@ -157,6 +157,9 @@ var action_modifiers_registry: ActionModifiersRegistry
 var stat_modifiers_registry: EntityStatModifiersRegistry
 var death_modifiers_registry: DeathModifiersRegistry
 var battle_callback_registry: BattleCallbackRegistry
+var summon_modifiers_registry: SummonModifiersRegistry
+var acolyte_modifiers_registry: AcolyteModifiersRegistry
+var building_modifiers_registry: BuildingModifiersRegistry
 #endregion
 
 ##region ============================== Context ============================== 
@@ -227,6 +230,9 @@ func _init() -> void:
 	action_modifiers_registry = ActionModifiersRegistry.new()
 	death_modifiers_registry = DeathModifiersRegistry.new()
 	stat_modifiers_registry = EntityStatModifiersRegistry.new(stats)
+	summon_modifiers_registry = SummonModifiersRegistry.new()
+	acolyte_modifiers_registry = AcolyteModifiersRegistry.new()
+	building_modifiers_registry = BuildingModifiersRegistry.new()
 	Verbose.trace("Entity [" + entity_name + "_" + str(uid) + "] init", Verbose.Category.ENTITY)
 
 
@@ -269,6 +275,11 @@ func _ready() -> void:
 
 	# Connect module interdependencies
 	_connect_module_dependencies()
+
+	match category:
+		Category.SUMMON: _apply_inherited_summon_modifiers()
+		Category.ACOLYTE: _apply_inherited_acolyte_modifiers()
+		Category.BUILDING: _apply_inherited_building_modifiers()
 
 	_start_spawn()
 
@@ -338,12 +349,16 @@ func apply_context(context: EntityContext) -> void:
 	_spawn_manager = context.spawn_manager
 	_arena_zone_manager = context.arena_zone_manager
 
-	# Si le contexte porte un entity_owner (cas summon-via-summon_component), il devient
-	# notre summoner et nous enregistre dans son BDS registry pour l'action meter.
-	# Pour les heroes/specs, entity_owner est null → on reste sans summoner.
+	# Si le contexte porte un entity_owner, il devient notre summoner. Cas couverts :
+	# - summon-via-summon_component (cat = SUMMON) → register dans le BDS registry
+	#   du summoner pour que l'action meter compte le summon.
+	# - acolyte/building spawné depuis le Roaster (cat = ACOLYTE/BUILDING) → on
+	#   ferme la chaîne sur le héros propriétaire pour le SummonModifiersRegistry,
+	#   mais on n'inscrit PAS au BDS (un acolyte n'est pas un summon de gameplay).
+	# Pour heroes/mobs/antagonists/etc., entity_owner est null → pas de summoner.
 	if context.entity_owner != null:
 		summoner = context.entity_owner
-		if summoner.bds_registry != null:
+		if summoner.bds_registry != null and is_summoned():
 			summoner.bds_registry.register_summon(self)
 
 	# Composants potentiellement encore null si apply_context est appelé avant
@@ -439,6 +454,50 @@ func get_card_context() -> CardContext:
 
 # ============================== Private functions ==============================
 
+#region ============================== Summon modifiers ==============================
+# Remonte la chaîne summoner et apply le summon_modifiers_registry de chaque
+# ancêtre sur cette entité (clone + register). Snapshot au moment du spawn :
+# les modifiers ajoutés à un ancêtre après ce point ne se propageront pas
+# aux summons déjà nés.
+func _apply_inherited_summon_modifiers() -> void:
+	var visited: Array[Entity] = []
+	var ancestor: Entity = summoner
+	while ancestor != null:
+		if ancestor in visited:
+			Verbose.error("Cycle in summoner chain for [" + entity_name + "] at [" + ancestor.entity_name + "]", Verbose.Category.ENTITY)
+			return
+		visited.append(ancestor)
+		if ancestor.summon_modifiers_registry != null:
+			ancestor.summon_modifiers_registry.apply_to(self, ancestor)
+		ancestor = ancestor.summoner
+
+
+func _apply_inherited_acolyte_modifiers() -> void:
+	var visited: Array[Entity] = []
+	var ancestor: Entity = summoner
+	while ancestor != null:
+		if ancestor in visited:
+			Verbose.error("Cycle in summoner chain for [" + entity_name + "] at [" + ancestor.entity_name + "]", Verbose.Category.ENTITY)
+			return
+		visited.append(ancestor)
+		if ancestor.acolyte_modifiers_registry != null:
+			ancestor.acolyte_modifiers_registry.apply_to(self, ancestor)
+		ancestor = ancestor.summoner
+
+
+func _apply_inherited_building_modifiers() -> void:
+	var visited: Array[Entity] = []
+	var ancestor: Entity = summoner
+	while ancestor != null:
+		if ancestor in visited:
+			Verbose.error("Cycle in summoner chain for [" + entity_name + "] at [" + ancestor.entity_name + "]", Verbose.Category.ENTITY)
+			return
+		visited.append(ancestor)
+		if ancestor.building_modifiers_registry != null:
+			ancestor.building_modifiers_registry.apply_to(self, ancestor)
+		ancestor = ancestor.summoner
+#endregion
+
 #region ============================== Spawn system ==============================
 func _start_spawn() -> void:
 	fighting_state = FightingState.SPAWNING
@@ -528,9 +587,9 @@ func _on_died() -> void:
 	life_state = LifeState.DEAD
 	_state_machine.stop_combat_modules()
 
-	for action_modifier in death_modifiers_registry.consume_all_modifiers():
-		if action_modifier.after_action_logic_callback.is_valid():
-			action_modifier.after_action_logic_callback.call({})
+	for death_modifier in death_modifiers_registry.consume_all_modifiers():
+		if death_modifier.after_action_logic_callback.is_valid():
+			death_modifier.after_action_logic_callback.call({})
 	
 	collision_layer = 0
 

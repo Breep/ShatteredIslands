@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cvf8iw8x8psds"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_5ynqo"]
+[ext_resource type="Script" uid="uid://c6qp0e7f53sn1" path="res://01_Cards/Pool/Cards/Prototyping/StatSummon/card_summon_modifier.proto.gd" id="1_8fm54"]
+
+[sub_resource type="Resource" id="Resource_h2ufk"]
+script = ExtResource("1_8fm54")
+metadata/_custom_type_script = "uid://c6qp0e7f53sn1"
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_yqtau"]
+
+[resource]
+script = ExtResource("1_5ynqo")
+name = &"summon modifier"
+picture = SubResource("PlaceholderTexture2D_yqtau")
+families = Array[int]([8])
+_card_effect = SubResource("Resource_h2ufk")
+points = Dictionary[int, int]({
+8: 1
+})
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

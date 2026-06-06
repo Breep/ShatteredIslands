@@ -12,7 +12,7 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 	mod.stat_type = EntityStats.StatType.M_RESISTANCE
 	mod.action_type = Utils.ActionType.DAMAGE_MAGICAL
 	mod.calc_type = StatModifier.CalcType.ADD
-	mod.tags = [StatModifier.TagType.CARD]
+	mod.tags = [Modifier.TagType.CARD]
 	mod.value = _magical_resistances[card_lvl - 1]
 	owner.stat_modifiers_registry.register_modifier(mod)
 

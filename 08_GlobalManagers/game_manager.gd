@@ -200,8 +200,7 @@ func lock_hero_into_run(hero: HeroDesc) -> void:
 
 	var party: Party = _run_context.party
 	var slot: PlayerState.Slot = _resolve_local_owner_slot()
-	party.get_or_create_roaster(slot).add(RoasterEntry.from_desc(hero))
-	_attach_roaster_scenes(party)
+	party.get_or_create_roaster(slot).set_hero(hero)
 	for player: Player in PlayerManager.players.values():
 		player.bind_to(party)
 
@@ -214,23 +213,6 @@ func _resolve_local_owner_slot() -> PlayerState.Slot:
 	if local_player != null and local_player.state != null:
 		return local_player.state.slot
 	return PlayerState.Slot.PLAYER_1
-
-
-# `desc.scene` n'est pas stocké dans les .tres (cycle de dépendance) : on le
-# rattache au runtime depuis les registres de Shared (héros par id, compagnons
-# par desc). Mute les ressources desc mises en cache, comme le faisait l'ancien
-# code de peuplement démo.
-func _attach_roaster_scenes(party: Party) -> void:
-	for entry: RoasterEntry in party.all_entries():
-		if entry == null or entry.desc == null or entry.desc.scene != null:
-			continue
-		var desc: EntityDesc = entry.desc
-		if desc is HeroDesc:
-			desc.scene = Shared.HERO_SCENES.get((desc as HeroDesc).id)
-		else:
-			desc.scene = Shared.ACOLYTE_SCENES.get(desc)
-		if desc.scene == null:
-			Verbose.warn("_attach_roaster_scenes: aucune scene résolue pour " + desc.name, Verbose.Category.GLOBAL_MANAGER)
 
 
 func _build_new_run_context(run: Run = null) -> RunContext:
