@@ -45,6 +45,4 @@ func get_description(card_lvl: int) -> String:
 
 func _add_acolytes(roaster: Roaster, source: StringName, count: int) -> void:
 	for i in count:
-		var entry := RoasterEntry.from_desc(acolyte_desc)
-		entry.source_id = source
-		roaster.add(entry)
+		roaster.add_acolyte(acolyte_desc, source)

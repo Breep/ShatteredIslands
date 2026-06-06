@@ -200,7 +200,7 @@ func lock_hero_into_run(hero: HeroDesc) -> void:
 
 	var party: Party = _run_context.party
 	var slot: PlayerState.Slot = _resolve_local_owner_slot()
-	party.get_or_create_roaster(slot).add(RoasterEntry.from_desc(hero))
+	party.get_or_create_roaster(slot).set_hero(hero)
 	for player: Player in PlayerManager.players.values():
 		player.bind_to(party)
 

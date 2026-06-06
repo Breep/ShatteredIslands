@@ -74,7 +74,7 @@ func find_spec_by_entry(entry: RoasterEntry) -> EntitySpec:
 func all_entries() -> Array[RoasterEntry]:
 	var result: Array[RoasterEntry] = []
 	for roaster: Roaster in roasters.values():
-		result.append_array(roaster.entries)
+		result.append_array(roaster.all_entries())
 	return result
 #endregion
 

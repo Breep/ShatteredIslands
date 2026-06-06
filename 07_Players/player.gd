@@ -130,7 +130,7 @@ func bind_to(party: Party) -> void:
 	elif not party.players.has(state):
 		party.players.append(state)
 	_roaster = party.get_roaster(state.slot)
-	_hero_entry = _roaster.get_hero() if _roaster != null else null
+	_hero_entry = _roaster.hero if _roaster != null else null
 #endregion
 
 # ============================== Private functions ==============================

@@ -1,6 +1,6 @@
-# Roaster d'un joueur : sa sous-collection persistante de RoasterEntry
-# (héros + acolytes + bâtiments). API métier portée ici (add/remove/lookups).
-# Sérialisé via Party.roasters[slot].
+# Roaster d'un joueur : 1 héros + N acolytes + M buildings. C'est tout.
+# Sérialisé via Party.roasters[slot]. API typée pour qu'aucun call site n'ait
+# besoin de filtrer par catégorie.
 class_name Roaster
 extends Resource
 
@@ -10,90 +10,124 @@ signal entry_removed(entry: RoasterEntry)
 #endregion
 
 #region ============================== Export ==============================
-@export var entries: Array[RoasterEntry] = []
+@export var hero: RoasterEntry
+@export var acolytes: Array[RoasterEntry] = []
+@export var buildings: Array[RoasterEntry] = []
 #endregion
 
 
 #region ============================== Public functions ==============================
-func add(entry: RoasterEntry) -> RoasterEntry:
-	if entry == null:
-		Verbose.warn("Roaster.add: entry null, ignoré", Verbose.Category.ENCOUNTER_RUNNER)
+# Pose / remplace le héros du roaster. Cascade les starting_companions de la
+# desc vers les bons slots (acolyte / building) selon leur default_category.
+func set_hero(desc: EntityDesc) -> RoasterEntry:
+	if desc == null:
+		Verbose.warn("Roaster.set_hero: desc null, ignoré", Verbose.Category.ENCOUNTER_RUNNER)
 		return null
-	entries.append(entry)
+	var entry := RoasterEntry.from_desc(desc)
+	hero = entry
 	entry.ensure_runtime_initialized()
 	entry_added.emit(entry)
-	if entry.desc != null:
-		for companion_desc: EntityDesc in entry.desc.starting_companions:
-			add(RoasterEntry.from_desc(companion_desc))
+	for companion_desc: EntityDesc in desc.starting_companions:
+		_add_companion(companion_desc)
 	return entry
 
 
+func add_acolyte(desc: EntityDesc, source: StringName = &"") -> RoasterEntry:
+	if desc == null:
+		Verbose.warn("Roaster.add_acolyte: desc null, ignoré", Verbose.Category.ENCOUNTER_RUNNER)
+		return null
+	var entry := RoasterEntry.from_desc(desc)
+	entry.source_id = source
+	acolytes.append(entry)
+	entry.ensure_runtime_initialized()
+	entry_added.emit(entry)
+	return entry
+
+
+func add_building(desc: EntityDesc, source: StringName = &"") -> RoasterEntry:
+	if desc == null:
+		Verbose.warn("Roaster.add_building: desc null, ignoré", Verbose.Category.ENCOUNTER_RUNNER)
+		return null
+	var entry := RoasterEntry.from_desc(desc)
+	entry.source_id = source
+	buildings.append(entry)
+	entry.ensure_runtime_initialized()
+	entry_added.emit(entry)
+	return entry
+
+
+# Retire une entry sans avoir à connaître son type (cherche dans acolytes puis
+# buildings). Le héros n'est pas retirable ici — utiliser set_hero pour changer.
+# Retourne true si une entry a été retirée.
 func remove(entry: RoasterEntry) -> bool:
-	var idx: int = entries.find(entry)
-	if idx == -1:
-		return false
-	entries.remove_at(idx)
-	entry_removed.emit(entry)
-	return true
+	if acolytes.has(entry):
+		acolytes.erase(entry)
+		entry_removed.emit(entry)
+		return true
+	if buildings.has(entry):
+		buildings.erase(entry)
+		entry_removed.emit(entry)
+		return true
+	return false
 
 
-func get_hero() -> RoasterEntry:
-	return get_first_of_category(Entity.Category.HERO)
-
-
-func get_first_of_category(category: Entity.Category) -> RoasterEntry:
-	for entry: RoasterEntry in entries:
-		if entry == null or entry.desc == null:
-			continue
-		if entry.desc.default_category == category:
-			return entry
-	return null
-
-
-func get_by_category(category: Entity.Category) -> Array[RoasterEntry]:
+# Toutes les entries du roaster (hero + acolytes + buildings). Pour itération
+# externe ou affichage UI. L'ordre est : hero, acolytes, buildings.
+func all_entries() -> Array[RoasterEntry]:
 	var result: Array[RoasterEntry] = []
-	for entry: RoasterEntry in entries:
-		if entry == null or entry.desc == null:
-			continue
-		if entry.desc.default_category == category:
-			result.append(entry)
+	if hero != null:
+		result.append(hero)
+	result.append_array(acolytes)
+	result.append_array(buildings)
 	return result
 
 
 func has(entry: RoasterEntry) -> bool:
-	return entries.has(entry)
+	if hero == entry:
+		return true
+	return acolytes.has(entry) or buildings.has(entry)
 
 
 func size() -> int:
-	return entries.size()
+	var count: int = 0
+	if hero != null:
+		count += 1
+	count += acolytes.size()
+	count += buildings.size()
+	return count
 
 
-# Entries posées par une source identifiée (ex. nom d'une carte). Ordre stable
-# = ordre d'insertion. Vide si aucune entry n'a ce source_id.
+# Source tracking : utilisé par les cartes qui posent/retirent des entries en
+# bloc (ex: HireAcolyte). À déplacer côté carte plus tard.
 func get_by_source(source: StringName) -> Array[RoasterEntry]:
 	var result: Array[RoasterEntry] = []
-	for entry: RoasterEntry in entries:
+	for entry: RoasterEntry in acolytes:
+		if entry != null and entry.source_id == source:
+			result.append(entry)
+	for entry: RoasterEntry in buildings:
 		if entry != null and entry.source_id == source:
 			result.append(entry)
 	return result
 
 
-# Retire toutes les entries posées par une source. Retourne le nombre retiré.
-# Chaque retrait émet entry_removed (donc Party propagera la mise à jour de
-# formation et la Tavern despawnera les Entities visuelles).
 func remove_by_source(source: StringName) -> int:
 	var to_remove: Array[RoasterEntry] = get_by_source(source)
 	for entry: RoasterEntry in to_remove:
 		remove(entry)
 	return to_remove.size()
+#endregion
 
 
-# Entries portant un tag donné. Tags ne sont pas exclusifs : une entry peut
-# en avoir plusieurs et matcher sur n'importe lequel.
-func get_by_tag(tag: StringName) -> Array[RoasterEntry]:
-	var result: Array[RoasterEntry] = []
-	for entry: RoasterEntry in entries:
-		if entry != null and entry.source_tags.has(tag):
-			result.append(entry)
-	return result
+#region ============================== Private functions ==============================
+# Aiguillage d'un starting_companion vers le bon slot selon default_category.
+func _add_companion(companion_desc: EntityDesc) -> void:
+	if companion_desc == null:
+		return
+	match companion_desc.default_category:
+		Entity.Category.ACOLYTE:
+			add_acolyte(companion_desc)
+		Entity.Category.BUILDING:
+			add_building(companion_desc)
+		_:
+			Verbose.warn("Roaster: starting_companion de catégorie inattendue [" + str(companion_desc.default_category) + "] sur " + companion_desc.name, Verbose.Category.ENCOUNTER_RUNNER)
 #endregion
