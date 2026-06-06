@@ -9,11 +9,6 @@ extends Resource
 signal has_changed()
 signal card_added(card: Card)
 signal card_removed(card: Card)
-## Émis quand un design déjà présent monte de niveau (pas de nouvelle entrée).
-## Distinct de card_added pour que les écouteurs puissent ré-appliquer les effets
-## sans confondre « nouvelle carte » et « carte qui level up ». Porte prev_lvl
-## pour les effets qui veulent un delta (ex. recruter delta acolytes) plutôt
-## qu'un revert+apply complet.
 signal card_upgraded(card: Card, prev_lvl: int)
 #endregion
 

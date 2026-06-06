@@ -24,9 +24,21 @@ enum Type {
 	GRENADE,
 }
 
+enum Category {
+	ABILITY_PROJECTILE,
+	AUTO_ATTACK_PROJECTILE,
+}
+
+enum Size {
+	SMALL,
+	BIG
+}
+
 # === EXPORTS ===
 @export var trajectory: ProjectileTrajectory
 @export var lifetime_max: float = 6.0
+@export var size: Size = Size.SMALL
+@export var category: Category = Category.ABILITY_PROJECTILE
 
 var uid: int = -1
 

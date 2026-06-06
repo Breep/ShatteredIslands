@@ -1,4 +1,4 @@
-# Classe de base de tous les modifiers (Stat, Action, AutoAttack, Summon, Death).
+# Classe de base de tous les modifiers (Stat, Action, AutoAttack, Summon, Death, etc...).
 # Porte l'identité commune (id, tags) et l'enum de provenance (TagType).
 class_name Modifier
 extends Resource
