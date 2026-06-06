@@ -12,6 +12,7 @@ height = 1.2209473
 radius = 0.5942383
 
 [node name="SmallTreant" type="CharacterBody3D" unique_id=103145645 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker")]
+collision_layer = 16
 collision_mask = 25
 script = ExtResource("1_qlm5q")
 entity_name = "Small Treant"

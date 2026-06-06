@@ -23,9 +23,15 @@
 [ext_resource type="Resource" uid="uid://dlt7omuay34ms" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/stats_lvl_18.tres" id="21_04evu"]
 [ext_resource type="Resource" uid="uid://d4inw5kdyupki" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/stats_lvl_19.tres" id="22_5w1h5"]
 [ext_resource type="Resource" uid="uid://cs4bpmjy73kwo" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/stats_lvl_20.tres" id="23_q4qsx"]
+[ext_resource type="Resource" uid="uid://4am0n8bv4m6g" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Skills/Passive/combustion_mortuaire.tres" id="24_pas"]
+[ext_resource type="Resource" uid="uid://bygyhmyddskl3" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Skills/Bronze/lame_ardente.tres" id="25_bro"]
+[ext_resource type="Resource" uid="uid://hqjtk5qdmipy" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Skills/Silver/riposte_ardente.tres" id="26_sil"]
+[ext_resource type="Resource" uid="uid://ccouvinc2res7" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Skills/Gold/couvee_incandescente.tres" id="27_gol"]
+[ext_resource type="Resource" uid="uid://jby4ac3jtehq" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Skills/Ultimate/nova_ignee.tres" id="28_ult"]
 
 [resource]
 script = ExtResource("1_bnd22")
+name = "Molten Golem"
 stats = Dictionary[int, ExtResource("3_72oiu")]({
 1: ExtResource("4_p7kdi"),
 2: ExtResource("5_ibbpk"),
@@ -48,9 +54,10 @@ stats = Dictionary[int, ExtResource("3_72oiu")]({
 19: ExtResource("22_5w1h5"),
 20: ExtResource("23_q4qsx")
 })
-aa_1_release_normalized = 0.25
-aa_2_release_normalized = 0.43
-aa_3_release_normalized = 0.3
-aa_1_anim_base_duration = 1.5
-aa_2_anim_base_duration = 1.533
-aa_3_anim_base_duration = 2.333
+skills = Dictionary[int, ExtResource("2_hw6ev")]({
+0: ExtResource("24_pas"),
+1: ExtResource("25_bro"),
+2: ExtResource("26_sil"),
+3: ExtResource("27_gol"),
+4: ExtResource("28_ult")
+})

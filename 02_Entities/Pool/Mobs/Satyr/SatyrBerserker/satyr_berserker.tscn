@@ -8,12 +8,12 @@
 [ext_resource type="AnimationNodeBlendTree" uid="uid://b3v6sj2fa5v7i" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/satyr_animation.res" id="4_ngc7p"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_w676k"]
-radius = 1.0078125
+radius = 0.73535156
 height = 3.7680664
 
 [node name="Satyr" type="CharacterBody3D" unique_id=1916637063 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker")]
-collision_layer = 25
-collision_mask = 16
+collision_layer = 16
+collision_mask = 25
 script = ExtResource("1_5nxx3")
 entity_name = "Satyr"
 entity_desc = ExtResource("2_w676k")
@@ -24,67 +24,67 @@ metadata/_custom_type_script = "uid://cpih8vqoolap4"
 [node name="SatyrVisual" parent="." unique_id=1324484574 instance=ExtResource("2_snu25")]
 
 [node name="Skeleton3D" parent="SatyrVisual" index="0" unique_id=1849322826]
-bones/1/position = Vector3(-0.1571767, 0.23116395, 3.8979766)
-bones/1/rotation = Quaternion(-0.023110898, 0.0017295846, -0.030506887, 0.99926585)
-bones/2/position = Vector3(0.0006891236, 0.13136752, -0.09146986)
-bones/2/rotation = Quaternion(0.10966607, -0.008988295, 0.06412055, 0.99185747)
+bones/1/position = Vector3(-0.15749119, 0.23116395, 3.8985507)
+bones/1/rotation = Quaternion(-0.025325978, 0.001705747, -0.030505298, 0.9992123)
+bones/2/position = Vector3(0.00073241844, 0.13117659, -0.091488905)
+bones/2/rotation = Quaternion(0.09753805, -0.010674966, 0.06819344, 0.9928354)
 bones/3/position = Vector3(0.42898878, -0.16865884, -0.16587515)
-bones/3/rotation = Quaternion(0.045535244, -0.046648555, -0.051525652, 0.99654186)
+bones/3/rotation = Quaternion(0.059375186, -0.045320004, -0.050058875, 0.99594927)
 bones/4/position = Vector3(0.23819588, -0.15559971, -1.1814433)
-bones/4/rotation = Quaternion(0.006509782, 0.1213559, -0.006246211, 0.99256814)
+bones/4/rotation = Quaternion(0.0061271605, 0.120975636, -0.0062296055, 0.9926171)
 bones/5/position = Vector3(0.09726653, 0.7771291, -0.82811654)
-bones/5/rotation = Quaternion(-0.05665277, -0.06277811, 0.025661541, 0.9960878)
+bones/5/rotation = Quaternion(-0.05372097, -0.06288262, 0.026737709, 0.99621534)
 bones/6/position = Vector3(0.17154452, -0.53780276, -1.0986713)
-bones/6/rotation = Quaternion(-0.09635625, -0.011475074, -0.075795986, 0.9923905)
+bones/6/rotation = Quaternion(-0.0974664, -0.010183014, -0.08302714, 0.9917173)
 bones/7/position = Vector3(-0.48584315, -0.17458175, -0.16745761)
-bones/7/rotation = Quaternion(0.96328306, 0.082547456, -0.116858855, 0.22719137)
+bones/7/rotation = Quaternion(0.96745646, 0.081016175, -0.116136305, 0.2097067)
 bones/8/position = Vector3(-0.23819631, 0.15559918, 1.1814306)
-bones/8/rotation = Quaternion(0.21813712, 0.17004244, 0.10365369, 0.95538354)
+bones/8/rotation = Quaternion(0.21696134, 0.16943033, 0.103869826, 0.9557366)
 bones/9/position = Vector3(-0.097266056, -0.77712977, 0.8281295)
-bones/9/rotation = Quaternion(-0.115930796, -0.0025961606, 0.011350822, 0.9931891)
+bones/9/rotation = Quaternion(-0.11517352, -0.002830949, 0.011600505, 0.9932737)
 bones/10/position = Vector3(-0.19056147, 0.40247196, 1.1984435)
-bones/10/rotation = Quaternion(0.02378541, -0.07843257, 0.04320254, 0.9956989)
+bones/10/rotation = Quaternion(0.021553047, -0.07756829, 0.04327627, 0.9958142)
 bones/11/position = Vector3(5.08e-08, -1.1350863, -0.51510084)
-bones/11/rotation = Quaternion(-0.08625473, 0.043985467, -0.004878077, 0.9952898)
-bones/12/rotation = Quaternion(0.11307448, 0.0072269863, -0.028828965, 0.99314195)
+bones/11/rotation = Quaternion(-0.07391384, 0.03759476, -0.0046465183, 0.996545)
+bones/12/rotation = Quaternion(0.096633926, 0.006578758, -0.024525465, 0.9949961)
 bones/13/position = Vector3(0, -0.00926649, 0.27347982)
 bones/13/rotation = Quaternion(0.078881465, 0, 0, 0.996884)
-bones/14/position = Vector3(-2.4703102e-08, 0.10100765, 0.5670162)
-bones/14/rotation = Quaternion(-0.11045037, -0.030178314, 0.052345693, 0.9920434)
+bones/14/position = Vector3(-3.1777187e-08, 0.10100765, 0.56701607)
+bones/14/rotation = Quaternion(-0.11048311, -0.030058196, 0.051266953, 0.99209964)
 bones/15/position = Vector3(-0.009708007, -0.0006262362, 0.6042182)
 bones/15/rotation = Quaternion(-0.015798748, 0.015175228, 0.039538573, 0.9989779)
 bones/16/position = Vector3(-0.49734935, 0.0027885898, 0.22551182)
-bones/16/rotation = Quaternion(0.1847462, -0.043057423, 0.018646259, 0.9816656)
+bones/16/rotation = Quaternion(0.18291499, -0.04276578, 0.018674761, 0.9820206)
 bones/17/position = Vector3(-0.58380735, -0.008211413, -0.039112724)
-bones/17/rotation = Quaternion(-0.05332434, -0.10631623, 0.13855329, 0.9831869)
-bones/18/rotation = Quaternion(0.07707868, 0.1566718, -0.04044256, 0.98380756)
+bones/17/rotation = Quaternion(-0.053119, -0.104895145, 0.13837343, 0.98337597)
+bones/18/rotation = Quaternion(0.07925962, 0.14797293, -0.031933922, 0.98529303)
 bones/19/position = Vector3(-0.38617033, -0.34509915, -0.8331426)
-bones/19/rotation = Quaternion(-0.0067950822, -0.03739374, -0.046851017, 0.9981786)
+bones/19/rotation = Quaternion(-0.019772219, -0.023962723, -0.04517815, 0.99849576)
 bones/20/position = Vector3(0.088726945, -0.5715705, -0.17224538)
-bones/35/rotation = Quaternion(0.15349938, -0.0096511105, 0.006837575, 0.988078)
+bones/35/rotation = Quaternion(0.17258462, -0.009749289, 0.0054068957, 0.9849316)
 bones/36/position = Vector3(0, -0.17499347, 0.27785823)
-bones/36/rotation = Quaternion(0.0002782002, 0.0051866053, -0.041207984, 0.99913716)
-bones/37/position = Vector3(-0.0026264074, -0.67127043, -0.46024293)
-bones/37/rotation = Quaternion(-0.23330928, -0.037223622, -0.0010129014, 0.9716894)
-bones/38/rotation = Quaternion(-0.17023137, 0.040947918, -0.08126124, 0.98119384)
-bones/39/rotation = Quaternion(0.99490064, 0.0027208028, 0.027404306, 0.09702798)
+bones/36/rotation = Quaternion(0.0038534594, 0.0048267017, -0.041250948, 0.9991298)
+bones/37/position = Vector3(-0.0035176186, -0.6798604, -0.45920855)
+bones/37/rotation = Quaternion(-0.25045794, -0.026273208, -0.0009841296, 0.9677705)
+bones/38/rotation = Quaternion(-0.15748683, 0.044845317, -0.080953725, 0.98317516)
+bones/39/rotation = Quaternion(0.996019, 0.0035589244, 0.03167967, 0.08324594)
 bones/40/position = Vector3(0.57956874, -0.1264807, 0.29810312)
-bones/40/rotation = Quaternion(0.98328185, 0.032639023, -0.09506723, -0.15183456)
+bones/40/rotation = Quaternion(0.98169243, 0.03298166, -0.09453662, -0.16203463)
 bones/41/position = Vector3(0.5799497, 0.03904239, 0.04495617)
-bones/41/rotation = Quaternion(-0.07533051, -0.034325056, 0.15967874, 0.98369193)
+bones/41/rotation = Quaternion(-0.07549606, -0.03481657, 0.15967286, 0.98366296)
 bones/42/position = Vector3(0.7071153, -0.40535623, 0.90086126)
-bones/42/rotation = Quaternion(0.12416039, 0.062010087, -0.007113144, 0.9902971)
+bones/42/rotation = Quaternion(0.11007453, 0.06499763, 0.007167147, 0.9917699)
 bones/43/position = Vector3(0.38616875, 0.34509927, 0.83312005)
-bones/43/rotation = Quaternion(-0.106374785, -0.02363142, -0.08449672, 0.9904475)
+bones/43/rotation = Quaternion(-0.1207211, -0.01790559, -0.10333825, 0.98713076)
 
 [node name="Weapon_R" parent="SatyrVisual/Skeleton3D" index="0" unique_id=1846370224]
-transform = Transform3D(0.3791231, -0.10555368, -0.011154477, 0.034277424, 0.082599044, 0.3834094, -0.10045423, -0.37018386, 0.08873058, -0.8089851, 1.3732144, -0.09120975)
+transform = Transform3D(0.37706468, -0.112880334, -0.008977015, 0.030287491, 0.07046221, 0.38615802, -0.10911105, -0.3705312, 0.07616872, -0.8036082, 1.3719234, -0.09023323)
 
 [node name="Weapon_R" parent="SatyrVisual/Skeleton3D/Weapon_R" index="0" unique_id=1951091589]
 transform = Transform3D(-0.95172435, 0.30419928, -0.041029904, 0.30615082, 0.95037866, -0.055244785, 0.022188516, -0.065139145, -0.9976295, -0.01781366, 0.09132682, -0.01952663)
 
 [node name="Weapon_L" parent="SatyrVisual/Skeleton3D" index="1" unique_id=1825247657]
-transform = Transform3D(0.3880446, 0.016344786, -0.06445589, -0.06444765, -0.0015453845, -0.38838693, -0.016377188, 0.39335832, 0.001152426, 0.65681434, 1.3855116, -0.18515629)
+transform = Transform3D(0.3883567, 0.022184413, -0.06072295, -0.061620735, 0.0151814595, -0.38855207, -0.01955274, 0.39278194, 0.018447615, 0.652017, 1.3878424, -0.18528184)
 
 [node name="HealthBarMarker" type="Marker3D" parent="SatyrVisual" unique_id=1687358936]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.19066, 0)

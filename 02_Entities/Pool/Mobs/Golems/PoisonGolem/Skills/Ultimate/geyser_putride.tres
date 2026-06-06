@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://x786o823740a"]
+
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
+[ext_resource type="Script" uid="uid://bqv3h7jc60mtr" path="res://02_Entities/Pool/Mobs/Golems/PoisonGolem/Skills/Ultimate/geyser_putride.gd" id="2_eff"]
+
+[sub_resource type="Resource" id="Resource_e"]
+script = ExtResource("2_eff")
+metadata/_custom_type_script = "uid://bgeyserput1eff"
+
+[resource]
+script = ExtResource("1_skill")
+skill_id = 7
+name = "Geyser putride"
+description = "Saute et retombe en infligeant 90 stacks de Poison à tous les adversaires dans un rayon de 10 m."
+skill_effect = SubResource("Resource_e")
+metadata/_custom_type_script = "uid://dfby4merlgkep"

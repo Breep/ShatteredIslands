@@ -1,0 +1,115 @@
+[gd_scene format=3 uid="uid://bicegolemsc17"]
+
+[ext_resource type="Script" uid="uid://bicegolem1gd7" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/ice_golem.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://b1icegolemxx0" path="res://02_Entities/_Data/Golem/IceGolem/ice_golem.tscn" id="2_visual"]
+[ext_resource type="Resource" uid="uid://cicegolemdsc7" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/entity_desc.tres" id="3_desc"]
+[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.tscn" id="4_hb"]
+[ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="5_anim"]
+[ext_resource type="AnimationNodeBlendTree" uid="uid://ds67abcdh4aq8" path="res://02_Entities/_Shared/Animations/default_animation_tree.res" id="6_tree"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pqchb"]
+radius = 0.3227539
+height = 2.0908203
+
+[node name="IceGolem" type="CharacterBody3D" unique_id=863006387 node_paths=PackedStringArray("_health_bar_marker")]
+collision_layer = 16
+collision_mask = 25
+script = ExtResource("1_script")
+entity_name = "Ice Golem"
+entity_desc = ExtResource("3_desc")
+_health_bar_marker = NodePath("IceGolem/HealthBarMarker3D")
+
+[node name="IceGolem" parent="." unique_id=788845283 instance=ExtResource("2_visual")]
+
+[node name="HealthBarMarker3D" type="Marker3D" parent="IceGolem" unique_id=880144415]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.7625046, 0)
+
+[node name="LargeHealthBarComponent" parent="." unique_id=348310564 node_paths=PackedStringArray("_spawn", "_owner") instance=ExtResource("4_hb")]
+_spawn = NodePath("../IceGolem/HealthBarMarker3D")
+_owner = NodePath("..")
+
+[node name="AnimationComponent" parent="." unique_id=400051653 node_paths=PackedStringArray("_animation_tree", "_owner") instance=ExtResource("5_anim")]
+_animation_tree = NodePath("../AnimationTree")
+_owner = NodePath("..")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1180401390]
+tree_root = ExtResource("6_tree")
+parameters/switch_moving/current_state = ""
+parameters/switch_moving/transition_request = ""
+parameters/switch_moving/current_index = -1
+parameters/scale_dance/scale = 1.0
+parameters/scale_die/scale = 1.0
+parameters/scale_idle_standing_neutral/scale = 1.0
+parameters/one_shot_attack/active = false
+parameters/one_shot_attack/internal_active = false
+parameters/one_shot_attack/request = 0
+parameters/one_shot_ultimate/active = false
+parameters/one_shot_ultimate/internal_active = false
+parameters/one_shot_ultimate/request = 0
+parameters/scale_attack/scale = 1.0
+parameters/one_shot_idle_standing_neutral/active = false
+parameters/one_shot_idle_standing_neutral/internal_active = false
+parameters/one_shot_idle_standing_neutral/request = 0
+parameters/scale_ultimate/scale = 1.0
+parameters/scale_idle_standing_neutral_var/scale = 1.0
+parameters/one_shot_sitting/active = false
+parameters/one_shot_sitting/internal_active = false
+parameters/one_shot_sitting/request = 0
+parameters/switch_entity_life_state/current_state = "Alive"
+parameters/switch_entity_life_state/transition_request = ""
+parameters/switch_entity_life_state/current_index = 1
+parameters/scale_walk/scale = 1.0
+parameters/scale_run/scale = 1.0
+parameters/switch_attack/current_state = ""
+parameters/switch_attack/transition_request = ""
+parameters/switch_attack/current_index = -1
+parameters/scale_stunned/scale = 1.0
+parameters/seek_stunned/seek_request = -1.0
+parameters/scale_idle_standing_aggresive/scale = 1.0
+parameters/scale_idle_standing_aggresive_var/scale = 1.0
+parameters/seek_idle_standing_aggresive/seek_request = -1.0
+parameters/switch_entity_mode/current_state = "Editor"
+parameters/switch_entity_mode/transition_request = ""
+parameters/switch_entity_mode/current_index = 0
+parameters/seek_idle_standing_neutral/seek_request = -1.0
+parameters/one_shot_idle_standing_aggresive/active = false
+parameters/one_shot_idle_standing_aggresive/internal_active = false
+parameters/one_shot_idle_standing_aggresive/request = 0
+parameters/seek_idle_sitting_chair/seek_request = -1.0
+parameters/scale_idle_sitting_chair/scale = 1.0
+parameters/scale_idle_sitting_chair_var/scale = 1.0
+parameters/seek_idle_sitting_floor/seek_request = -1.0
+parameters/seek_dance/seek_request = -1.0
+parameters/one_shot_idle_sitting_chair/active = false
+parameters/one_shot_idle_sitting_chair/internal_active = false
+parameters/one_shot_idle_sitting_chair/request = 0
+parameters/scale_idle_sitting_floor/scale = 1.0
+parameters/scale_idle_sitting_floor_var/scale = 1.0
+parameters/scale_attack_2/scale = 1.0
+parameters/scale_hit_1/scale = 1.0
+parameters/scale_attack_3/scale = 1.0
+parameters/switch_main/current_state = "Idle"
+parameters/switch_main/transition_request = ""
+parameters/switch_main/current_index = 0
+parameters/switch_idle/current_state = "StandingNeutral"
+parameters/switch_idle/transition_request = ""
+parameters/switch_idle/current_index = 0
+parameters/scale_drag/scale = 1.0
+parameters/scale_land/scale = 1.0
+parameters/one_shot_land/active = false
+parameters/one_shot_land/internal_active = false
+parameters/one_shot_land/request = 0
+parameters/one_shot_hit/active = false
+parameters/one_shot_hit/internal_active = false
+parameters/one_shot_hit/request = 0
+parameters/scale_attack_1/scale = 1.0
+parameters/switch_positioning/current_state = "Off"
+parameters/switch_positioning/transition_request = ""
+parameters/switch_positioning/current_index = 0
+parameters/switch_stunned_state/current_state = "NotStunned"
+parameters/switch_stunned_state/transition_request = ""
+parameters/switch_stunned_state/current_index = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1974346637]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.82611704, 0)
+shape = SubResource("CapsuleShape3D_pqchb")

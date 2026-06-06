@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://jby4ac3jtehq"]
+
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
+[ext_resource type="Script" uid="uid://bbytfrmdmlvb8" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Skills/Ultimate/nova_ignee.gd" id="2_eff"]
+
+[sub_resource type="Resource" id="Resource_e"]
+script = ExtResource("2_eff")
+metadata/_custom_type_script = "uid://bnovaignee1eff"
+
+[resource]
+script = ExtResource("1_skill")
+skill_id = 7
+name = "Nova ignée"
+description = "Saute et retombe en infligeant 90 stacks d'Ignite à tous les adversaires dans un rayon de 10 m."
+skill_effect = SubResource("Resource_e")
+metadata/_custom_type_script = "uid://dfby4merlgkep"
