@@ -156,7 +156,62 @@ alterations  target  movement
 > composants ci-dessus → arbitrage du lead dev requis** avant d'inventer une
 > nouvelle mécanique.
 
-## 7. Exemple complet — « Poison Flask » (cible)
+## 7. Cartes qui améliorent les Summon / Acolytes / Buildings
+
+Pour buffer non pas le porteur mais **ses minions**, on n'écrit pas dans les
+registres directs de l'entité (§6) mais dans des **registres dédiés du
+porteur**, qui sont **propagés au minion à son spawn** (clone dans les
+registres actifs du minion, en remontant la chaîne `summoner`) :
+
+| Cible | Registre sur le porteur (`owner`) |
+|---|---|
+| Summons | `owner.summon_modifiers_registry` |
+| Acolytes | `owner.acolyte_modifiers_registry` |
+| Buildings | `owner.building_modifiers_registry` |
+
+Chacun **encapsule les mêmes sous-registres** qu'une `Entity`. On écrit dans le
+bon sous-registre selon le type de buff :
+
+| Type de buff | Sous-registre |
+|---|---|
+| Stat (HP, AD…) | `.stat_modifiers_registry` |
+| Effet additionnel d'auto-attaque | `.auto_attack_modifier_registry` |
+| Réaction aux actions | `.action_modifiers_registry` |
+| Mort | `.death_modifiers_registry` |
+
+> Le pattern est **identique** à un buff sur soi-même (§6) : même `StatModifier`,
+> même `AutoAttackModifier`, même `card_name` comme `id`. La seule différence est
+> le **registre de destination**. `revert` reste le miroir strict (mêmes
+> sous-registres, même `card_name`).
+
+### Exemples
+
+a. **« Tous les summons gagnent +100 HP »** → un `StatModifier` dans
+   `owner.summon_modifiers_registry.stat_modifiers_registry`.
+
+b. **« Les acolytes ajoutent +5 poison à leur auto-attaque »** → un
+   `AutoAttackModifier` (avec `additional_effect_callback`) dans
+   `owner.acolyte_modifiers_registry.auto_attack_modifier_registry`.
+
+c. **« Les buildings et le héros gagnent +5 Thorn »** → Thorn est une
+   **alteration : non fonctionnel pour le moment** (voir limites). Les buffs
+   **stat** et **effet additionnel** marchent en revanche aussi pour les
+   buildings via `owner.building_modifiers_registry.*`.
+
+Exemple de référence complet (acolytes, +40 AD + poison à l'attaque) :
+`01_Cards/Pool/Cards/Prototyping/StatAcolyte/card_acolyte_modifier.proto.gd`.
+
+### Limites actuelles
+- **Alterations non propagées** : poser une alteration (Thorn…) via ces
+  registres ne fonctionne pas encore.
+- **BattleCallback non propagé** : `apply_to` clone Stat / Action / AutoAttack /
+  Death, mais **pas** `battle_callback_registry` (TODO). Pas de timer périodique
+  hérité par les minions pour l'instant.
+- **Propagation au spawn** : le clone se fait à l'apparition du minion. Un
+  minion déjà vivant ne reçoit pas rétroactivement un modifier ajouté après son
+  spawn.
+
+## 8. Exemple complet — « Poison Flask » (cible)
 
 Inflige des stacks de poison à un ennemi aléatoire, périodiquement.
 Famille : **Poison** (consomme un timer, émet du poison → mono-famille).
@@ -171,24 +226,24 @@ extends CardEffect
 
 func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 	var owner: Entity = ctx.entity_owner
-    var stacks := _poison_stacks[card_lvl - 1]
-    var period := _period[card_lvl - 1]
-    owner.battle_callbacks.register_periodic(card_name, period, func() -> void:
-        var enemy := owner.target.get_target(TargetComponent.TargettingStrategy.RANDOM_ENEMY)
-        if enemy == null: return
-        owner.alterations.inflict_condition_stacks(enemy, stacks, Alteration.Type.POISON, card_name)
-    )
+	var stacks := _poison_stacks[card_lvl - 1]
+	var period := _period[card_lvl - 1]
+	owner.battle_callbacks.register_periodic(card_name, period, func() -> void:
+		var enemy := owner.target.get_target(TargetComponent.TargettingStrategy.RANDOM_ENEMY)
+		if enemy == null: return
+		owner.alterations.inflict_condition_stacks(enemy, stacks, Alteration.Type.POISON, card_name)
+	)
 
 
 func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 	var owner: Entity = ctx.entity_owner
-    owner.battle_callbacks.unregister_all(card_name)
+	owner.battle_callbacks.unregister_all(card_name)
 
 
 func get_description(card_lvl: int) -> String:
-    return "Inflict %d [[POISON_STACK]], every %ss" % [
-        _poison_stacks[card_lvl - 1], _period[card_lvl - 1]
-    ]
+	return "Inflict %d [[POISON_STACK]], every %ss" % [
+		_poison_stacks[card_lvl - 1], _period[card_lvl - 1]
+	]
 ```
 
 Points à noter :

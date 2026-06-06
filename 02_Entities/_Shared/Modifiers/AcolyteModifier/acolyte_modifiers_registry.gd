@@ -4,6 +4,7 @@
 # contenu de chaque ancestor's registry sur lui-même (clone + register).
 #
 # /!\ DETTE STRUCTURELLE — TODO refacto /!\
+# TODO: Modifier le CLAUDE.md en conséquence lors du refacto
 # Cf. SummonModifiersRegistry pour le même problème : ce registry encapsule
 # 5 sub-registries qui portent de la logique active (recompute stats, signaux
 # globaux). Utilisé ici comme store de templates ; side-effects inoffensifs

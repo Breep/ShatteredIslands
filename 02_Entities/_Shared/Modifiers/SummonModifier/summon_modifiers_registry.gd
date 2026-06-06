@@ -4,6 +4,7 @@
 # contenu de chaque ancestor's registry sur lui-même (clone + register).
 #
 # /!\ DETTE STRUCTURELLE — TODO refacto /!\
+# TODO: Modifier le CLAUDE.md en conséquence lors du refacto
 # Ce registry encapsule les 5 mêmes registries qu'Entity
 # (Stat / Action / AutoAttack / Death / BattleCallback). Ces registries
 # ne sont PAS des data containers purs : ils portent de la logique active
