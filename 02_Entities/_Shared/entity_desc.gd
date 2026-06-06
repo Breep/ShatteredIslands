@@ -11,7 +11,12 @@ extends Resource
 @export var portrait: CompressedTexture2D
 @export_multiline var description: String
 
-@export var scene: PackedScene
+# Scène entité runtime — JAMAIS posée en éditeur (cycle de dépendance : la scene
+# embarque un script qui référence ce desc). Résolue via Shared.HERO_SCENES /
+# Shared.ACOLYTE_SCENES par EntityDesc.resolve_scene(). Le seul cas où ce champ
+# est posé directement est une desc transient construite à la volée (cf.
+# FightingFormation._make_transient_entry) — le resolver la respecte en priorité.
+var scene: PackedScene
 ## Lightweight visual-only scene (mesh + AnimationPlayer, no Entity logic) used
 ## by selection/presentation screens.
 @export var preview_scene: PackedScene
@@ -34,3 +39,17 @@ extends Resource
 @export var aa_1_anim_base_duration: float = 3.26
 @export var aa_2_anim_base_duration: float = 3.26
 @export var aa_3_anim_base_duration: float = 3.26
+
+
+# Résout la PackedScene à instancier pour une desc. Priorité au champ runtime
+# (cas transient FightingFormation), sinon lookup Shared : HERO_SCENES par
+# HeroId pour les héros, ACOLYTE_SCENES par desc Resource pour le reste.
+# Retourne null si non résolu (l'appelant doit gérer / warn).
+static func resolve_scene(desc: EntityDesc) -> PackedScene:
+	if desc == null:
+		return null
+	if desc.scene != null:
+		return desc.scene
+	if desc is HeroDesc:
+		return Shared.HERO_SCENES.get((desc as HeroDesc).id)
+	return Shared.ACOLYTE_SCENES.get(desc)

@@ -2,7 +2,8 @@
 # Porte le placement (transform) + un override de level/stats + éventuellement
 # une référence vers une RoasterEntry (côté joueur, lien vers l'inventaire).
 #
-# Source de la scene : `desc.scene` (préférence) ou `scene` (legacy/fallback).
+# Source de la scene : `scene` (legacy/override) en priorité, sinon
+# EntityDesc.resolve_scene(desc) qui interroge Shared.
 # Quand `entry` est non-null (cas joueur), level/hand/data_memory de l'entry
 # écrasent ceux de la scene au spawn — ils sont la source canonique.
 @tool
@@ -21,9 +22,7 @@ extends SpawnSpec
 
 
 func spawn_into(parent: Node, ctx: EntityContext = null) -> Node:
-	var packed: PackedScene = scene
-	if packed == null and desc != null:
-		packed = desc.scene
+	var packed: PackedScene = scene if scene != null else EntityDesc.resolve_scene(desc)
 	if packed == null:
 		return null
 
