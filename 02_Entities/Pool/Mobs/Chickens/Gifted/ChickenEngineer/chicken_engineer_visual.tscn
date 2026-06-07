@@ -182,7 +182,7 @@ tracks/15/keys = PackedFloat32Array(0.03333333, 1, 1.5295966e-07, -0.49171227, 1
 tracks/16/type = "method"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("AnimationPlayer")
+tracks/16/path = NodePath("Node3D/AnimationPlayer")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
@@ -789,7 +789,10 @@ _data = {
 
 [node name="ChickenEngineerVisual" type="Node3D" unique_id=142901617]
 
-[node name="Skeleton3D" type="Skeleton3D" parent="." unique_id=416118163]
+[node name="Node3D" type="Node3D" parent="." unique_id=464918082]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+
+[node name="Skeleton3D" type="Skeleton3D" parent="Node3D" unique_id=416118163]
 bones/0/name = "Armature"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, -1.1920929e-07, 0.99999994, 0, -0.99999994, -1.1920929e-07, 0, 0.27427045, 0)
@@ -882,10 +885,10 @@ bones/12/position = Vector3(0.06546467, 4.942415e-09, -1.4879169e-09)
 bones/12/rotation = Quaternion(1.5295967e-07, -0.4917123, 1.5807893e-07, 0.8707578)
 bones/12/scale = Vector3(0.99999994, 1, 0.99999994)
 
-[node name="Chicken" type="MeshInstance3D" parent="Skeleton3D" unique_id=1839562433]
+[node name="Chicken" type="MeshInstance3D" parent="Node3D/Skeleton3D" unique_id=1839562433]
 material_override = SubResource("StandardMaterial3D_rn042")
 mesh = SubResource("ArrayMesh_ln18q")
 skin = SubResource("Skin_utmen")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=777400876]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node3D" unique_id=777400876]
 libraries/ = SubResource("AnimationLibrary_vqhsl")

@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/SmallHealthBar/small_health_bar_component.tscn" id="8_5weh6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x7yny"]
-radius = 0.421875
+radius = 0.21826172
 height = 0.84375
 
 [node name="Chicken" type="CharacterBody3D" unique_id=2109615854]
