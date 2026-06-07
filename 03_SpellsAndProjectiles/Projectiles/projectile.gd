@@ -37,6 +37,7 @@ enum Size {
 # === EXPORTS ===
 @export var trajectory: ProjectileTrajectory
 @export var lifetime_max: float = 6.0
+@export var type: Type= Type.SHADOW_BOLT
 @export var size: Size = Size.SMALL
 @export var category: Category = Category.ABILITY_PROJECTILE
 
@@ -70,7 +71,18 @@ func init(p_source: Entity, p_target: Entity, p_stats: ProjectileStats) -> Proje
 	_source = p_source
 	_target = p_target
 	_stats = p_stats
+	_get_modifiers()
 	return self
+
+
+func _get_modifiers() -> void:
+	if _source == null: return
+	for modifier in _source.projectile_modifiers_registry.get_all_modifiers():
+		if not modifier.filter(self): continue
+		if modifier.on_hit_callback.is_valid():
+			_stats.on_hit_callbacks.append(modifier.on_hit_callback)
+		if modifier.on_spawn_callback.is_valid():
+			_stats.on_spawn_callbacks.append(modifier.on_spawn_callback)
 
 
 func _ready() -> void:

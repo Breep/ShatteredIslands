@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://dbldebymhwgkt"]
 
 [ext_resource type="Shader" uid="uid://btx1eos8uuvop" path="res://22_VFX/VFX_3D/VFX/Shaders/s_FireHead_TypeK.tres" id="1_kuqa2"]
-[ext_resource type="ArrayMesh" uid="uid://djrkf0hipcltl" path="res://03_SpellsAndProjectiles/Projectiles/ShadowBolt/utils/m_fireb_blast.obj" id="2_mwwcc"]
-[ext_resource type="Texture2D" uid="uid://s786l5dbky4s" path="res://03_SpellsAndProjectiles/Projectiles/ShadowBolt/utils/T_VFX_Noise_531.png" id="3_8pqa4"]
-[ext_resource type="ArrayMesh" uid="uid://b7fwd41uyo6p3" path="res://03_SpellsAndProjectiles/Projectiles/ShadowBolt/utils/sm_half_sphere.obj" id="4_36g6y"]
+[ext_resource type="ArrayMesh" uid="uid://djrkf0hipcltl" path="res://03_SpellsAndProjectiles/Projectiles/AutoAttacks/ShadowBolt/utils/m_fireb_blast.obj" id="2_mwwcc"]
+[ext_resource type="Texture2D" uid="uid://s786l5dbky4s" path="res://03_SpellsAndProjectiles/Projectiles/AutoAttacks/ShadowBolt/utils/T_VFX_Noise_531.png" id="3_8pqa4"]
+[ext_resource type="ArrayMesh" uid="uid://b7fwd41uyo6p3" path="res://03_SpellsAndProjectiles/Projectiles/AutoAttacks/ShadowBolt/utils/sm_half_sphere.obj" id="4_36g6y"]
 [ext_resource type="Shader" uid="uid://bpf8re2if2yu3" path="res://22_VFX/VFX_3D/VFX/Shaders/s_FireHeader.tres" id="5_0jce0"]
 
 [sub_resource type="Gradient" id="Gradient_offnt"]

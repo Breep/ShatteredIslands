@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://baad001jt6loo"]
+
+[ext_resource type="Script" uid="uid://d4dah17nf8pch" path="res://03_SpellsAndProjectiles/Projectiles/Abilities/VenomousDart/venomous_dart_projectile.gd" id="1_yu3xq"]
+[ext_resource type="Script" uid="uid://dlww5csbnicq8" path="res://03_SpellsAndProjectiles/Projectiles/_Shared/Trajectories/arc_trajectory.gd" id="2_0gtlb"]
+[ext_resource type="PackedScene" uid="uid://cmmipw18epkmv" path="res://03_SpellsAndProjectiles/Projectiles/Abilities/VenomousDart/venomous_dart_visual.tscn" id="2_quueb"]
+
+[sub_resource type="Resource" id="Resource_s7mnt"]
+script = ExtResource("2_0gtlb")
+metadata/_custom_type_script = "uid://dlww5csbnicq8"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_yu3xq"]
+radius = 0.2
+
+[node name="VenomousDart" type="Area3D" unique_id=1535071737]
+collision_layer = 2
+collision_mask = 16
+script = ExtResource("1_yu3xq")
+trajectory = SubResource("Resource_s7mnt")
+type = 1
+
+[node name="VenomousDartVisual" parent="." unique_id=326548444 instance=ExtResource("2_quueb")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1787478272]
+shape = SubResource("SphereShape3D_yu3xq")

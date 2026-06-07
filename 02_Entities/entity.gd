@@ -160,6 +160,7 @@ var battle_callback_registry: BattleCallbackRegistry
 var summon_modifiers_registry: SummonModifiersRegistry
 var acolyte_modifiers_registry: AcolyteModifiersRegistry
 var building_modifiers_registry: BuildingModifiersRegistry
+var projectile_modifiers_registry: ProjectileModifiersRegistry
 #endregion
 
 ##region ============================== Context ============================== 
@@ -233,6 +234,7 @@ func _init() -> void:
 	summon_modifiers_registry = SummonModifiersRegistry.new()
 	acolyte_modifiers_registry = AcolyteModifiersRegistry.new()
 	building_modifiers_registry = BuildingModifiersRegistry.new()
+	projectile_modifiers_registry = ProjectileModifiersRegistry.new()
 	Verbose.trace("Entity [" + entity_name + "_" + str(uid) + "] init", Verbose.Category.ENTITY)
 
 

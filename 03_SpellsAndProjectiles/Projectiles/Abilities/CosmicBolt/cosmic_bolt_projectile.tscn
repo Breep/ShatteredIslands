@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://c614rlhx0vbdu"]
+
+[ext_resource type="Script" uid="uid://dfjd05caywnpb" path="res://03_SpellsAndProjectiles/Projectiles/Abilities/CosmicBolt/cosmic_bolt_projectile.gd" id="1_ya5m0"]
+[ext_resource type="PackedScene" uid="uid://c77b0act7ye6o" path="res://03_SpellsAndProjectiles/Projectiles/Abilities/FireBall/Visual/fire_ball_visual.tscn" id="2_kmuve"]
+[ext_resource type="Script" uid="uid://xr3esthqo6re" path="res://03_SpellsAndProjectiles/Projectiles/_Shared/Trajectories/straight_trajectory.gd" id="2_ubbt6"]
+
+[sub_resource type="Resource" id="Resource_hsrr5"]
+script = ExtResource("2_ubbt6")
+metadata/_custom_type_script = "uid://xr3esthqo6re"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_rh5nx"]
+radius = 0.2
+
+[node name="CosmicBolt" type="Area3D" unique_id=1423694373]
+collision_layer = 2
+collision_mask = 16
+script = ExtResource("1_ya5m0")
+trajectory = SubResource("Resource_hsrr5")
+type = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1547769758]
+shape = SubResource("SphereShape3D_rh5nx")
+
+[node name="CosmicBoltVisual" parent="." unique_id=1391019762 instance=ExtResource("2_kmuve")]

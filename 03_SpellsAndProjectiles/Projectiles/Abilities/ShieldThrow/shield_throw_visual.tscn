@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://c1goibqlf12t3"]
+
+[ext_resource type="PackedScene" uid="uid://c44vj0qoeccrc" path="res://03_SpellsAndProjectiles/Projectiles/Abilities/ShieldThrow/_shield_2.tscn" id="1_78y8l"]
+[ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://10_Tool/QuickAnims/anim_rotating_module.tscn" id="2_w0q37"]
+[ext_resource type="Texture2D" uid="uid://x204srgh33o" path="res://21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Textures/T_circle_transparent1.png" id="3_w0q37"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sparkle"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+albedo_color = Color(1, 0.9, 0.4, 1)
+albedo_texture = ExtResource("3_w0q37")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_sparkle"]
+offsets = PackedFloat32Array(0, 0.4, 1)
+colors = PackedColorArray(1, 0.9, 0.4, 1, 1, 0.75, 0.2, 0.8, 1, 0.6, 0.1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sparkle"]
+gradient = SubResource("Gradient_sparkle")
+
+[sub_resource type="Curve" id="Curve_sparkle_scale"]
+_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(0.3, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_sparkle_scale"]
+curve = SubResource("Curve_sparkle_scale")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_holy"]
+lifetime_randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 0.3
+direction = Vector3(0, 0, -1)
+spread = 180.0
+initial_velocity_min = 0.5
+initial_velocity_max = 1.5
+gravity = Vector3(0, 0.5, 0)
+scale_min = 0.5
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_sparkle_scale")
+color_ramp = SubResource("GradientTexture1D_sparkle")
+
+[sub_resource type="QuadMesh" id="QuadMesh_sparkle"]
+size = Vector2(0.08, 0.08)
+
+[node name="ShieldThrowVisual" type="Node3D" unique_id=663055214]
+
+[node name="_shield_2" parent="." unique_id=501651574 instance=ExtResource("1_78y8l")]
+transform = Transform3D(1, 0, 0, 0, 2.9802322e-08, 1, 0, -1, 2.9802322e-08, 0, 0, 0)
+
+[node name="AnimRotatingModule" parent="_shield_2" unique_id=1728177371 node_paths=PackedStringArray("_owner") instance=ExtResource("2_w0q37")]
+_owner = NodePath("..")
+_rot_axis = 1
+_rot_period = 1.0
+_rot_max = 360.0
+_rot_full = true
+
+[node name="HolySparkles" type="GPUParticles3D" parent="." unique_id=472234842]
+material_override = SubResource("StandardMaterial3D_sparkle")
+cast_shadow = 0
+amount = 20
+lifetime = 0.4
+process_material = SubResource("ParticleProcessMaterial_holy")
+draw_pass_1 = SubResource("QuadMesh_sparkle")
+
+[node name="HolyLight" type="OmniLight3D" parent="." unique_id=1735322245]
+light_color = Color(1, 0.85, 0.4, 1)
+light_energy = 1.5
+light_indirect_energy = 0.0
+omni_range = 0.53006744
+omni_attenuation = 1.5
