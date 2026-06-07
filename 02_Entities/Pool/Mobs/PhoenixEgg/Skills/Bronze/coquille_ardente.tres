@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://cu3n2qbyfxnf0"]
+
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
+[ext_resource type="Script" uid="uid://dnrid8k8iri7i" path="res://02_Entities/Pool/Mobs/PhoenixEgg/Skills/Bronze/coquille_ardente.gd" id="2_eff"]
+
+[sub_resource type="Resource" id="Resource_e"]
+script = ExtResource("2_eff")
+metadata/_custom_type_script = "uid://beggcoquille1e"
+
+[resource]
+script = ExtResource("1_skill")
+name = "Coquille ardente"
+description = "Tant que l'œuf existe, applique AP x 30% Ignite/s aux ennemis dans Area(3)."
+skill_effect = SubResource("Resource_e")
+metadata/_custom_type_script = "uid://dfby4merlgkep"
