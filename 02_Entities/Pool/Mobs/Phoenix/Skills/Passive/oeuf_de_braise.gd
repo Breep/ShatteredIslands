@@ -27,6 +27,10 @@ func _spawn_egg(phoenix: Entity) -> void:
 	var egg := scene.instantiate() as Entity
 	if egg == null:
 		return
+	# Niveau réglé AVANT le spawn (la progression lit _owner.level à son _ready) pour que les
+	# skills de l'œuf s'appliquent au bon niveau.
+	if phoenix.progression != null:
+		egg.level = phoenix.progression.level
+	# Transmet le compteur de résurrections à l'œuf (l'éclosion l'incrémentera).
+	egg.set_meta(SE_RenaissanceSolaire.RESURRECTION_COUNT_META, phoenix.get_meta(SE_RenaissanceSolaire.RESURRECTION_COUNT_META, 0))
 	context.spawn_manager.spawn_entity(egg, Transform3D(Basis(), phoenix.global_position), context)
-	if egg.progression != null and phoenix.progression != null:
-		egg.progression.level = phoenix.progression.level
