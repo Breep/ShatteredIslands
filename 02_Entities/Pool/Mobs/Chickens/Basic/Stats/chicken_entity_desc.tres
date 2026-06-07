@@ -23,10 +23,16 @@
 [ext_resource type="Resource" uid="uid://681q6yv5k46q" path="res://02_Entities/Pool/Mobs/Chickens/Basic/Stats/chicken_stats_lvl_18.tres" id="21_8sair"]
 [ext_resource type="Resource" uid="uid://dsvltp2bro5au" path="res://02_Entities/Pool/Mobs/Chickens/Basic/Stats/chicken_stats_lvl_19.tres" id="22_xugjy"]
 [ext_resource type="Resource" uid="uid://byudl3ksy120k" path="res://02_Entities/Pool/Mobs/Chickens/Basic/Stats/chicken_stats_lvl_20.tres" id="23_5xtn7"]
+[ext_resource type="Resource" uid="uid://cinstmeute2res" path="res://02_Entities/Pool/Mobs/Chickens/Basic/Skills/Passive/instinct_de_meute.tres" id="24_pas"]
+[ext_resource type="Resource" uid="uid://cbecnerv2res7" path="res://02_Entities/Pool/Mobs/Chickens/Basic/Skills/Bronze/bec_nerveux.tres" id="25_bro"]
+[ext_resource type="Resource" uid="uid://ccoursef2res7" path="res://02_Entities/Pool/Mobs/Chickens/Basic/Skills/Silver/course_folle.tres" id="26_sil"]
+[ext_resource type="Resource" uid="uid://cpetiteh2res7" path="res://02_Entities/Pool/Mobs/Chickens/Basic/Skills/Gold/petite_horde.tres" id="27_gol"]
+[ext_resource type="Resource" uid="uid://ccocorico2res7" path="res://02_Entities/Pool/Mobs/Chickens/Basic/Skills/Ultimate/cocorico.tres" id="28_ult"]
 
 [resource]
 script = ExtResource("1_h7wnh")
 name = "Basic chicken"
+default_category = 1
 description = "Bok bok"
 stats = Dictionary[int, ExtResource("3_o4pvy")]({
 1: ExtResource("4_3qjcv"),
@@ -49,6 +55,13 @@ stats = Dictionary[int, ExtResource("3_o4pvy")]({
 18: ExtResource("21_8sair"),
 19: ExtResource("22_xugjy"),
 20: ExtResource("23_5xtn7")
+})
+skills = Dictionary[int, ExtResource("2_ccole")]({
+0: ExtResource("24_pas"),
+1: ExtResource("25_bro"),
+2: ExtResource("26_sil"),
+3: ExtResource("27_gol"),
+4: ExtResource("28_ult")
 })
 aa_1_release_normalized = 0.75
 aa_2_release_normalized = 0.75
