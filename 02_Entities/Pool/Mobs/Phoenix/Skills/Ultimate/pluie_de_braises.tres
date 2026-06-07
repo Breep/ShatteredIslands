@@ -5,6 +5,8 @@
 
 [sub_resource type="Resource" id="Resource_e"]
 script = ExtResource("2_eff")
+_damage_ratio = 1.5
+_ignite_ratio = 0.8
 metadata/_custom_type_script = "uid://bphoenixpluie1"
 
 [resource]

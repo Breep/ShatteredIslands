@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EntityStatsBuilder" format=3]
+[gd_resource type="Resource" script_class="EntityStatsBuilder" format=3 uid="uid://b55tchg6de2h8"]
 
 [ext_resource type="Script" uid="uid://58307hvsc6op" path="res://10_Tool/EntityStatsBuilder/entity_stats_builder.gd" id="1_r33xp"]
 [ext_resource type="Script" uid="uid://brthobm35g70u" path="res://10_Tool/EntityStatsBuilder/stat_growth_rule.gd" id="1_taeb5"]
@@ -22,7 +22,7 @@ metadata/_custom_type_script = "uid://brthobm35g70u"
 
 [sub_resource type="Resource" id="Resource_2blwu"]
 script = ExtResource("1_taeb5")
-base = 1.2
+base = 2.0
 metadata/_custom_type_script = "uid://brthobm35g70u"
 
 [sub_resource type="Resource" id="Resource_5488a"]
@@ -92,7 +92,7 @@ metadata/_custom_type_script = "uid://brthobm35g70u"
 
 [resource]
 script = ExtResource("1_r33xp")
-output_dir = "res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats"
+output_dir = "res://02_Entities/Pool/Mobs/Phoenix/Stats"
 health_max = SubResource("Resource_lm364")
 mana_max = SubResource("Resource_hvqtc")
 mana_regen = SubResource("Resource_8ij7h")

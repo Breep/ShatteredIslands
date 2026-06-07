@@ -2,9 +2,10 @@
 
 [ext_resource type="Script" uid="uid://d05ookpir5mho" path="res://02_Entities/Pool/Mobs/Phoenix/phoenix.gd" id="1_nflm6"]
 [ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.tscn" id="3_gjp7p"]
+[ext_resource type="Script" uid="uid://dcqln53e2uvek" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.gd" id="4_lewpa"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://cr51ggnb0u010" path="res://02_Entities/Pool/Mobs/Chickens/chicken_animation_tree.res" id="4_qrjbe"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://05_Game/Run/SpawnSpecs/SpawnPoints/SpawnPoint/spawn_point.tscn" id="5_rp842"]
-[ext_resource type="PackedScene" path="res://02_Entities/Pool/Mobs/Phoenix/phoenix_visual.tscn" id="5_uybm6"]
+[ext_resource type="PackedScene" uid="uid://cbaehmba0yu1e" path="res://02_Entities/Pool/Mobs/Phoenix/phoenix_visual.tscn" id="5_uybm6"]
 [ext_resource type="Resource" uid="uid://34k1ljotkiup" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/entity_desc.tres" id="9_desc"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x7yny"]
@@ -18,23 +19,26 @@ script = ExtResource("1_nflm6")
 entity_name = "Phoenix"
 category = 2
 entity_desc = ExtResource("9_desc")
-_visual_3d = NodePath("ChickenLightVisual")
-_health_bar_marker = NodePath("ChickenLightVisual/HealthBarSpawnMarker")
+_visual_3d = NodePath("PhoenixVisual")
+_health_bar_marker = NodePath("PhoenixVisual/HealthBarSpawnMarker")
 
 [node name="LargeHealthBarComponent" parent="." unique_id=1823590462 node_paths=PackedStringArray("_spawn", "_owner") instance=ExtResource("3_gjp7p")]
-_spawn = NodePath("../ChickenLightVisual/HealthBarSpawnMarker")
+_spawn = NodePath("../PhoenixVisual/HealthBarSpawnMarker")
 _owner = NodePath("..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1928783995]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75244224, 0)
 shape = SubResource("CapsuleShape3D_x7yny")
 
-[node name="AnimationComponent" type="Node" parent="." unique_id=986746104]
+[node name="AnimationComponent" type="Node" parent="." unique_id=986746104 node_paths=PackedStringArray("_animation_tree", "_owner")]
+script = ExtResource("4_lewpa")
+_animation_tree = NodePath("../AnimationTree")
+_owner = NodePath("..")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=2080904651]
-root_node = NodePath("../ChickenLightVisual")
+root_node = NodePath("../PhoenixVisual")
 tree_root = ExtResource("4_qrjbe")
-anim_player = NodePath("../ChickenLightVisual/AnimationPlayer")
+anim_player = NodePath("../PhoenixVisual/AnimationPlayer")
 parameters/switch_moving/current_state = ""
 parameters/switch_moving/transition_request = ""
 parameters/switch_moving/current_index = -1
@@ -114,27 +118,10 @@ parameters/switch_stunned_state/current_index = -1
 [node name="AASpawnPoint" parent="." unique_id=1596130037 instance=ExtResource("5_rp842")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.00037944317, 0.38287425, -0.5151825)
 
-[node name="ChickenLightVisual" parent="." unique_id=142901617 instance=ExtResource("5_uybm6")]
-transform = Transform3D(-2, 0, -3.019916e-07, 0, 2, 0, 3.019916e-07, 0, -2, 0, 0, 0)
+[node name="PhoenixVisual" parent="." unique_id=142901617 instance=ExtResource("5_uybm6")]
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0, 0, 0)
 
-[node name="Skeleton3D" parent="ChickenLightVisual" index="0" unique_id=416118163]
-bones/1/rotation = Quaternion(-0.7071015, 0.70710164, 0.0027003828, 0.002722324)
-bones/1/scale = Vector3(1, 1.0000001, 1.0026102)
-bones/2/rotation = Quaternion(0.8344414, -5.671367e-06, -0.5510967, 8.916109e-06)
-bones/3/rotation = Quaternion(0.96720886, 8.169979e-08, 0.2539824, -3.0362284e-07)
-bones/4/rotation = Quaternion(-5.536811e-08, 0.007207891, -2.113776e-09, 0.999974)
-bones/5/rotation = Quaternion(-3.7732302e-06, 0.9361406, -9.8862865e-06, 0.35162592)
-bones/6/rotation = Quaternion(-6.874547e-10, -0.19154607, 2.9581084e-09, 0.98148364)
-bones/7/position = Vector3(0.06718646, -0.0814189, 0.026344843)
-bones/7/rotation = Quaternion(2.7039207e-06, -0.7286475, 1.8201537e-05, 0.68488896)
-bones/8/rotation = Quaternion(0.9932081, -1.5913089e-06, -0.116351314, 1.4519741e-05)
-bones/9/rotation = Quaternion(4.0781217e-08, -0.60039806, -2.280202e-07, 0.79970133)
-bones/10/position = Vector3(0.067186445, 0.08142003, 0.026341429)
-bones/10/rotation = Quaternion(-1.7054203e-05, -0.7286475, -2.8189572e-06, 0.68488896)
-bones/11/rotation = Quaternion(0.9932081, 1.7199596e-06, -0.116351314, -1.451974e-05)
-bones/12/rotation = Quaternion(4.8175167e-08, -0.60039806, 2.3136832e-07, 0.79970133)
-
-[node name="HealthBarSpawnMarker" type="Marker3D" parent="ChickenLightVisual" unique_id=1354833977]
+[node name="HealthBarSpawnMarker" type="Marker3D" parent="PhoenixVisual" unique_id=1354833977]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0.95944023, 0)
 
-[editable path="ChickenLightVisual"]
+[editable path="PhoenixVisual"]

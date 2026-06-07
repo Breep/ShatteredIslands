@@ -3,26 +3,26 @@
 [ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="1_desc"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="2_skill"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_stats"]
-[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_01.tres" id="4_01"]
-[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_02.tres" id="5_02"]
-[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_03.tres" id="6_03"]
-[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_04.tres" id="7_04"]
-[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_05.tres" id="8_05"]
-[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_06.tres" id="9_06"]
-[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_07.tres" id="10_07"]
-[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_08.tres" id="11_08"]
-[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_09.tres" id="12_09"]
-[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_10.tres" id="13_10"]
-[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_11.tres" id="14_11"]
-[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_12.tres" id="15_12"]
-[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_13.tres" id="16_13"]
-[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_14.tres" id="17_14"]
-[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_15.tres" id="18_15"]
-[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_16.tres" id="19_16"]
-[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_17.tres" id="20_17"]
-[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_18.tres" id="21_18"]
-[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_19.tres" id="22_19"]
-[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_20.tres" id="23_20"]
+[ext_resource type="Resource" uid="uid://b8mveydjn8ioi" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_01.tres" id="4_01"]
+[ext_resource type="Resource" uid="uid://d0p7usw5ipn3i" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_02.tres" id="5_02"]
+[ext_resource type="Resource" uid="uid://cy61qyfsyf7bc" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_03.tres" id="6_03"]
+[ext_resource type="Resource" uid="uid://bbayu50vuh1jm" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_04.tres" id="7_04"]
+[ext_resource type="Resource" uid="uid://dl2k3j7d380py" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_05.tres" id="8_05"]
+[ext_resource type="Resource" uid="uid://dprchlrcp6flv" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_06.tres" id="9_06"]
+[ext_resource type="Resource" uid="uid://fdp8oqt2gmyo" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_07.tres" id="10_07"]
+[ext_resource type="Resource" uid="uid://cte850otw5ea0" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_08.tres" id="11_08"]
+[ext_resource type="Resource" uid="uid://lnhffcuxc2r" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_09.tres" id="12_09"]
+[ext_resource type="Resource" uid="uid://dfaqgjcs6kfx5" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_10.tres" id="13_10"]
+[ext_resource type="Resource" uid="uid://bnaklnkiajo07" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_11.tres" id="14_11"]
+[ext_resource type="Resource" uid="uid://bwfeo784i7egc" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_12.tres" id="15_12"]
+[ext_resource type="Resource" uid="uid://cro5eybyxtaga" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_13.tres" id="16_13"]
+[ext_resource type="Resource" uid="uid://dfd2dr0l52ldv" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_14.tres" id="17_14"]
+[ext_resource type="Resource" uid="uid://dxgbweaggm3li" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_15.tres" id="18_15"]
+[ext_resource type="Resource" uid="uid://ljkapwsis3j" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_16.tres" id="19_16"]
+[ext_resource type="Resource" uid="uid://dgjwhsg71m55b" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_17.tres" id="20_17"]
+[ext_resource type="Resource" uid="uid://c2fq8ktibmmqo" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_18.tres" id="21_18"]
+[ext_resource type="Resource" uid="uid://0iyf2ics7o1" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_19.tres" id="22_19"]
+[ext_resource type="Resource" uid="uid://cj2st0x1wo4pv" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/stats_lvl_20.tres" id="23_20"]
 [ext_resource type="Resource" uid="uid://cb34acnejl15p" path="res://02_Entities/Pool/Mobs/Phoenix/Skills/Passive/oeuf_de_braise.tres" id="24_pas"]
 [ext_resource type="Resource" uid="uid://cb34acndm4ouc" path="res://02_Entities/Pool/Mobs/Phoenix/Skills/Bronze/nid_ardent.tres" id="25_bro"]
 [ext_resource type="Resource" uid="uid://cb34acm1jey5p" path="res://02_Entities/Pool/Mobs/Phoenix/Skills/Silver/cendres_tenaces.tres" id="26_sil"]
@@ -31,9 +31,6 @@
 
 [resource]
 script = ExtResource("1_desc")
-name = "Phoenix"
-description = "Renaît de ses cendres."
-default_category = 2
 stats = Dictionary[int, ExtResource("3_stats")]({
 1: ExtResource("4_01"),
 2: ExtResource("5_02"),
@@ -63,9 +60,3 @@ skills = Dictionary[int, ExtResource("2_skill")]({
 3: ExtResource("27_gol"),
 4: ExtResource("28_ult")
 })
-aa_1_release_normalized = 0.75
-aa_2_release_normalized = 0.75
-aa_3_release_normalized = 0.75
-aa_1_anim_base_duration = 0.625
-aa_2_anim_base_duration = 0.625
-aa_3_anim_base_duration = 0.625

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://do1w2hp4q14wu" path="res://02_Entities/Pool/Mobs/PhoenixEgg/phoenix_egg.gd" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://d2x71wirgb4hf" path="res://02_Entities/Pool/Mobs/PhoenixEgg/egg_phoenix_visual.tscn" id="2_visual"]
-[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/PhoenixEgg/Stats/entity_desc.tres" id="3_desc"]
+[ext_resource type="Resource" uid="uid://cw3uoli1h4p3d" path="res://02_Entities/Pool/Mobs/PhoenixEgg/Stats/entity_desc.tres" id="3_desc"]
 [ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.tscn" id="4_5cqpt"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_egg"]
@@ -14,6 +14,7 @@ collision_layer = 16
 collision_mask = 0
 script = ExtResource("1_script")
 entity_name = "Phoenix Egg"
+category = 1
 entity_desc = ExtResource("3_desc")
 _visual_3d = NodePath("EggPhoenixVisual")
 _health_bar_marker = NodePath("EggPhoenixVisual/HealthBarSpawnMarker")

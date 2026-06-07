@@ -5,6 +5,8 @@
 
 [sub_resource type="Resource" id="Resource_e"]
 script = ExtResource("2_eff")
+_ap_ratio = 0.4
+_period = 3.0
 metadata/_custom_type_script = "uid://bphoenixcendr1"
 
 [resource]
