@@ -14,7 +14,7 @@ height = 1.5097656
 
 [node name="Phoenix" type="CharacterBody3D" unique_id=2109615854 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker")]
 collision_layer = 16
-collision_mask = 0
+collision_mask = 25
 script = ExtResource("1_nflm6")
 entity_name = "Phoenix"
 category = 2

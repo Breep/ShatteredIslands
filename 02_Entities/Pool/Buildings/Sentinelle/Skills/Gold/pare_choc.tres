@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://bdoop1jtv1fn8"]
+
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
+[ext_resource type="Script" uid="uid://b5di1js3yubh3" path="res://02_Entities/Pool/Buildings/Sentinelle/Skills/Gold/pare_choc.gd" id="2_eff"]
+
+[sub_resource type="Resource" id="Resource_e"]
+script = ExtResource("2_eff")
+metadata/_custom_type_script = "uid://bsentparechoc1"
+
+[resource]
+script = ExtResource("1_skill")
+skill_id = 4
+name = "Pare-choc"
+description = "La zone du Rayon protecteur passe à Area(7)."
+skill_effect = SubResource("Resource_e")
+metadata/_custom_type_script = "uid://dfby4merlgkep"

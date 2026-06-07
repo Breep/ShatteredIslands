@@ -1,0 +1,102 @@
+[gd_resource type="Resource" script_class="EntityStatsBuilder" format=3]
+
+[ext_resource type="Script" uid="uid://brthobm35g70u" path="res://10_Tool/EntityStatsBuilder/stat_growth_rule.gd" id="1_ifloe"]
+[ext_resource type="Script" uid="uid://58307hvsc6op" path="res://10_Tool/EntityStatsBuilder/entity_stats_builder.gd" id="1_sbajl"]
+
+[sub_resource type="Resource" id="Resource_ikl5b"]
+script = ExtResource("1_ifloe")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_u3ywg"]
+script = ExtResource("1_ifloe")
+base = 20.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_8sieu"]
+script = ExtResource("1_ifloe")
+base = 20.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_egru0"]
+script = ExtResource("1_ifloe")
+base = 0.01
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_08f4d"]
+script = ExtResource("1_ifloe")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_0e3w6"]
+script = ExtResource("1_ifloe")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_jyhjc"]
+script = ExtResource("1_ifloe")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_vgmwi"]
+script = ExtResource("1_ifloe")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_ojdix"]
+script = ExtResource("1_ifloe")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_la0qy"]
+script = ExtResource("1_ifloe")
+base = 800.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_yth3a"]
+script = ExtResource("1_ifloe")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_hmi0e"]
+script = ExtResource("1_ifloe")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_gm00s"]
+script = ExtResource("1_ifloe")
+base = 30.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_hioiq"]
+script = ExtResource("1_ifloe")
+base = 2.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_htys3"]
+script = ExtResource("1_ifloe")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_2ix7u"]
+script = ExtResource("1_ifloe")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_uvdal"]
+script = ExtResource("1_ifloe")
+base = 1.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[resource]
+script = ExtResource("1_sbajl")
+output_dir = "res://02_Entities/Pool/Buildings/Turrets/FireThrower/Stats"
+health_max = SubResource("Resource_la0qy")
+mana_max = SubResource("Resource_gm00s")
+mana_regen = SubResource("Resource_hioiq")
+attack_damage = SubResource("Resource_u3ywg")
+attack_speed = SubResource("Resource_08f4d")
+attack_range = SubResource("Resource_egru0")
+attack_power = SubResource("Resource_8sieu")
+movement_speed = SubResource("Resource_htys3")
+scale = SubResource("Resource_uvdal")
+crit_chance = SubResource("Resource_0e3w6")
+crit_mult = SubResource("Resource_jyhjc")
+dodge = SubResource("Resource_ojdix")
+lifesteal = SubResource("Resource_yth3a")
+crit_resistance = SubResource("Resource_vgmwi")
+armor = SubResource("Resource_ikl5b")
+magic_resistance = SubResource("Resource_hmi0e")
+poison_resistance = SubResource("Resource_2ix7u")
+auto_attack_type = 1
+metadata/_custom_type_script = "uid://58307hvsc6op"

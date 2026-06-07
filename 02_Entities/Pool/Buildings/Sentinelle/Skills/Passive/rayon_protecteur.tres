@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://bdoor1q48mipy"]
+
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
+[ext_resource type="Script" uid="uid://b5di3j1fce0kh" path="res://02_Entities/Pool/Buildings/Sentinelle/Skills/Passive/rayon_protecteur.gd" id="2_eff"]
+
+[sub_resource type="Resource" id="Resource_e"]
+script = ExtResource("2_eff")
+metadata/_custom_type_script = "uid://bsentrayon1eff"
+
+[resource]
+script = ExtResource("1_skill")
+skill_id = 6
+name = "Rayon protecteur"
+description = "Toutes les 1 s, donne 20 Shield à l'allié le plus proche dans Area(4)."
+skill_effect = SubResource("Resource_e")
+metadata/_custom_type_script = "uid://dfby4merlgkep"

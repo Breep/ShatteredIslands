@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]
 [ext_resource type="PackedScene" uid="uid://b2mchd77gheam" path="res://02_Entities/Pool/Buildings/ChickenCoop/chicken_coop.tscn" id="7_awloh"]
 [ext_resource type="PackedScene" uid="uid://di0hhdfbpptu6" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/satyr_berserker.tscn" id="7_tmkd7"]
+[ext_resource type="PackedScene" uid="uid://co4ejk3dlu46n" path="res://02_Entities/Pool/Buildings/Sentinelle/sentinelle.tscn" id="7_xqnte"]
 [ext_resource type="PackedScene" uid="uid://btqko5dh71wxi" path="res://02_Entities/Pool/Mobs/SkeletonDragon/skeleton_dragon.tscn" id="8_cs3s0"]
 [ext_resource type="PackedScene" uid="uid://dvuq5n41nak3u" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/ArenaZoneManager/arena_zone_manager.tscn" id="8_fl2p6"]
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://90_Modules/PickableClickable/PickableModule/pickable_module.tscn" id="9_614kc"]
@@ -104,6 +105,14 @@ override_base_stats = SubResource("Resource_5qocs")
 
 [node name="Turret" parent="Node3D/Entities" unique_id=1412979628 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("6_awloh")]
 transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, 3.9475698, 4.768372e-07, -0.61416954)
+level = 7
+team = 1
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
+[node name="Sentinelle" parent="Node3D/Entities" unique_id=1381427842 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("7_xqnte")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3645434, 0, 2.6506398)
 level = 7
 team = 1
 battle_id = 1

@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://co4ejk3dlu46n"]
+
+[ext_resource type="Script" uid="uid://ciywhjl7p6hps" path="res://02_Entities/Pool/Buildings/Sentinelle/sentinelle.gd" id="1_gc2y3"]
+[ext_resource type="PackedScene" uid="uid://b3f15ldbddrlp" path="res://02_Entities/Pool/Mobs/FortificationDrone/Visual/fortification_drone_visual.tscn" id="2_l6jnf"]
+[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.tscn" id="3_af083"]
+[ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://10_Tool/QuickAnims/anim_hovering_module.tscn" id="4_07yhp"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Buildings/Sentinelle/Stats/entity_desc.tres" id="6_desc"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_d2dv0"]
+radius = 0.3670221
+
+[node name="Sentinelle" type="CharacterBody3D" unique_id=1381427842 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker")]
+collision_layer = 16
+collision_mask = 25
+script = ExtResource("1_gc2y3")
+entity_name = "Sentinelle"
+category = 4
+entity_desc = ExtResource("6_desc")
+_visual_3d = NodePath("FortificationDroneVisual")
+_health_bar_marker = NodePath("FortificationDroneVisual/HealthBarSpawnMarker")
+
+[node name="LargeHealthBarComponent" parent="." unique_id=1823590462 node_paths=PackedStringArray("_spawn", "_owner") instance=ExtResource("3_af083")]
+_spawn = NodePath("../FortificationDroneVisual/HealthBarSpawnMarker")
+_owner = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1130319820]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32074833, 0)
+shape = SubResource("SphereShape3D_d2dv0")
+
+[node name="FortificationDroneVisual" parent="." unique_id=50220890 instance=ExtResource("2_l6jnf")]
+unique_name_in_owner = true
+
+[node name="AnimHoveringModule" parent="FortificationDroneVisual" unique_id=1140988969 node_paths=PackedStringArray("_owner") instance=ExtResource("4_07yhp")]
+unique_name_in_owner = true
+_owner = NodePath("..")
+_hover_power = 0.5
+_hover_period = 1.1
+
+[node name="HealthBarSpawnMarker" type="Marker3D" parent="FortificationDroneVisual" unique_id=648389619]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8531499, 0)

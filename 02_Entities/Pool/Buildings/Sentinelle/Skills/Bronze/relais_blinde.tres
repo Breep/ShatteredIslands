@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://bdoor5dp3ds3k"]
+
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
+[ext_resource type="Script" uid="uid://b5di3nmy56njh" path="res://02_Entities/Pool/Buildings/Sentinelle/Skills/Bronze/relais_blinde.gd" id="2_eff"]
+
+[sub_resource type="Resource" id="Resource_e"]
+script = ExtResource("2_eff")
+metadata/_custom_type_script = "uid://bsentrelais1ef"
+
+[resource]
+script = ExtResource("1_skill")
+name = "Relais blindé"
+description = "Le Rayon protecteur applique 10 Regen toutes les 5 s."
+skill_effect = SubResource("Resource_e")
+metadata/_custom_type_script = "uid://dfby4merlgkep"

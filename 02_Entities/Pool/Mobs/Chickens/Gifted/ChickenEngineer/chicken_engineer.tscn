@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="5_tsowm"]
 [ext_resource type="PackedScene" uid="uid://dmlipqu47nhn0" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenEngineer/chicken_engineer_visual.tscn" id="5_x4yyx"]
 [ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/SmallHealthBar/small_health_bar_component.tscn" id="8_u3s5i"]
-[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenEngineer/Stats/engineer_chicken_entity_desc.tres" id="9_desc"]
+[ext_resource type="Resource" uid="uid://dw7ldi0qmim6x" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenEngineer/Stats/engineer_chicken_entity_desc.tres" id="9_desc"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x7yny"]
 radius = 0.29882813
@@ -109,7 +109,7 @@ parameters/switch_stunned_state/current_index = -1
 [node name="ChickenShieldVisual" parent="." unique_id=142901617 instance=ExtResource("5_x4yyx")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
-[node name="Skeleton3D" parent="ChickenShieldVisual" index="0" unique_id=416118163]
+[node name="Skeleton3D" parent="ChickenShieldVisual/Node3D" parent_id_path=PackedInt32Array(142901617, 464918082) index="0" unique_id=416118163]
 bones/1/position = Vector3(0, 0.047381032, -0.004717756)
 bones/2/rotation = Quaternion(0.83199865, 0.04164722, -0.5494833, -0.064124875)
 bones/3/rotation = Quaternion(0.96720886, 9.047426e-08, 0.2539824, -3.064464e-07)

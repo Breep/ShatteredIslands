@@ -23,11 +23,11 @@
 [ext_resource type="Resource" uid="uid://bovyi1wf1yp5e" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/colossus_chicken_stats_lvl_18.tres" id="21_sdw43"]
 [ext_resource type="Resource" uid="uid://backy4rf0tnup" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/colossus_chicken_stats_lvl_19.tres" id="22_1tv4e"]
 [ext_resource type="Resource" uid="uid://d3y84jiec557j" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/colossus_chicken_stats_lvl_20.tres" id="23_gnj67"]
-[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Skills/Passive/plumage_epineux.tres" id="24_pas"]
-[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Skills/Bronze/garde_de_meute.tres" id="25_bro"]
+[ext_resource type="Resource" uid="uid://cphsj0xnsijhp" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Skills/Passive/plumage_epineux.tres" id="24_pas"]
+[ext_resource type="Resource" uid="uid://cglxkd661khfn" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Skills/Bronze/garde_de_meute.tres" id="25_bro"]
 [ext_resource type="Resource" uid="uid://b36yx63fntehq" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Skills/Silver/parade_epineuse.tres" id="26_sil"]
 [ext_resource type="Resource" uid="uid://btfyvd7wf2b4m" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Skills/Gold/dernier_gloussement.tres" id="27_gol"]
-[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Skills/Ultimate/cocotte_rempart.tres" id="28_ult"]
+[ext_resource type="Resource" uid="uid://c4h4dximbl3vy" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Skills/Ultimate/cocotte_rempart.tres" id="28_ult"]
 
 [resource]
 script = ExtResource("1_bteoc")

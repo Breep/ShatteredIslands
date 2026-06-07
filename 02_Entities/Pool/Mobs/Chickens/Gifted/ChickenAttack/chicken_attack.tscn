@@ -12,7 +12,7 @@ height = 1.125
 
 [node name="ChickenAttack" type="CharacterBody3D" unique_id=2109615854 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_attack_spawn_marker")]
 collision_layer = 16
-collision_mask = 0
+collision_mask = 25
 script = ExtResource("1_2s508")
 entity_name = "Chicken Warrior"
 category = 1
