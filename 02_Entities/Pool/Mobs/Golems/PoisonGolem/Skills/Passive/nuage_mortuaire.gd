@@ -15,7 +15,7 @@ func apply(ctx: SkillContext) -> void:
 	modifier.id = &"NuageMortuaire"
 	modifier.after_action_logic_callback = func(_cb_vars: Dictionary) -> void:
 		_play_death_vfx(golem)
-		for enemy: Entity in GolemDeathUtils.enemies_in_radius(golem, _radius):
+		for enemy: Entity in golem.target.get_targets(TargetComponent.MultipleTargettingStrategy.ENEMIES, _radius):
 			golem.alterations.inflict_condition_stacks(enemy, _stacks, Alteration.Type.POISON, &"Nuage mortuaire")
 	golem.death_modifiers_registry.register_modifier(modifier)
 

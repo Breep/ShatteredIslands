@@ -2,9 +2,11 @@
 
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
 [ext_resource type="Script" uid="uid://bhd0bxnq2lvb8" path="res://02_Entities/Pool/Mobs/Golems/PoisonGolem/Skills/Passive/nuage_mortuaire.gd" id="2_eff"]
+[ext_resource type="PackedScene" uid="uid://dt7pleqy5yx0o" path="res://02_Entities/Pool/Mobs/Golems/vfx/VFX_FirExplosion_Golem.tscn" id="2_m6634"]
 
 [sub_resource type="Resource" id="Resource_e"]
 script = ExtResource("2_eff")
+_death_vfx = ExtResource("2_m6634")
 metadata/_custom_type_script = "uid://bnuagemort1eff"
 
 [resource]

@@ -16,7 +16,7 @@ func apply(ctx: SkillContext) -> void:
 	modifier.id = &"Fragmentation"
 	modifier.after_action_logic_callback = func(_cb_vars: Dictionary) -> void:
 		_play_death_vfx(golem)
-		for enemy: Entity in GolemDeathUtils.enemies_in_radius(golem, _radius):
+		for enemy: Entity in golem.target.get_targets(TargetComponent.MultipleTargettingStrategy.ENEMIES, _radius):
 			golem.damage.direct(enemy, _damage, Utils.ActionType.DAMAGE_PHYSICAL, &"Fragmentation")
 			golem.alterations.inflict_status(enemy, Alteration.Type.STUN, _stun_duration, &"Fragmentation")
 	golem.death_modifiers_registry.register_modifier(modifier)
