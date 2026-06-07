@@ -1,0 +1,117 @@
+[gd_resource type="Resource" script_class="EntityStatsBuilder" format=3]
+
+[ext_resource type="Script" uid="uid://58307hvsc6op" path="res://10_Tool/EntityStatsBuilder/entity_stats_builder.gd" id="1_k5a2o"]
+[ext_resource type="Script" uid="uid://brthobm35g70u" path="res://10_Tool/EntityStatsBuilder/stat_growth_rule.gd" id="1_oyc13"]
+
+[sub_resource type="Resource" id="Resource_hxu07"]
+script = ExtResource("1_oyc13")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_axgko"]
+script = ExtResource("1_oyc13")
+base = 10.0
+slope = 1.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_s13r7"]
+script = ExtResource("1_oyc13")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_40wm8"]
+script = ExtResource("1_oyc13")
+base = 1.5
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_0egww"]
+script = ExtResource("1_oyc13")
+base = 1.0
+slope = 0.05
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_e8klp"]
+script = ExtResource("1_oyc13")
+base = 5.0
+slope = 1.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_pgl1x"]
+script = ExtResource("1_oyc13")
+base = 100.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_r4uxx"]
+script = ExtResource("1_oyc13")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_j6blk"]
+script = ExtResource("1_oyc13")
+type = 1
+base = 5.0
+slope = 0.1
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_isdcj"]
+script = ExtResource("1_oyc13")
+type = 1
+base = 50.0
+slope = 5.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_bkfrq"]
+script = ExtResource("1_oyc13")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_ura4b"]
+script = ExtResource("1_oyc13")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_if4qb"]
+script = ExtResource("1_oyc13")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_bivml"]
+script = ExtResource("1_oyc13")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_b5idb"]
+script = ExtResource("1_oyc13")
+type = 1
+base = 5.0
+slope = 0.1
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_dimi4"]
+script = ExtResource("1_oyc13")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_llq8u"]
+script = ExtResource("1_oyc13")
+base = 1.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[resource]
+script = ExtResource("1_k5a2o")
+output_dir = "res://02_Entities/Pool/Mobs/Chickens/Basic/Stats"
+stats_file_prefix = "chicken_stats"
+desc_file_name = "chicken_entity_desc"
+entity_name = "Basic chicken"
+entity_description = "Bok bok"
+health_max = SubResource("Resource_isdcj")
+mana_max = SubResource("Resource_if4qb")
+mana_regen = SubResource("Resource_bivml")
+attack_damage = SubResource("Resource_axgko")
+attack_speed = SubResource("Resource_0egww")
+attack_range = SubResource("Resource_40wm8")
+attack_power = SubResource("Resource_s13r7")
+movement_speed = SubResource("Resource_b5idb")
+scale = SubResource("Resource_llq8u")
+crit_chance = SubResource("Resource_e8klp")
+crit_mult = SubResource("Resource_pgl1x")
+dodge = SubResource("Resource_j6blk")
+lifesteal = SubResource("Resource_bkfrq")
+crit_resistance = SubResource("Resource_r4uxx")
+armor = SubResource("Resource_hxu07")
+magic_resistance = SubResource("Resource_ura4b")
+poison_resistance = SubResource("Resource_dimi4")
+auto_attack_type = 1
+metadata/_custom_type_script = "uid://58307hvsc6op"

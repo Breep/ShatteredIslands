@@ -126,11 +126,8 @@ func _summon_chicken(spawn_position: Vector3, entity_modifier: Dictionary) -> vo
 	var chicken_type: Chicken.Type = entity_modifier.get("Type", Chicken.Type.BASIC)
 	match chicken_type:
 		Chicken.Type.BASIC: chicken = CHICKEN_BASIC_SCENE.instantiate()
-		Chicken.Type.GIFTED_ATTACK: 
+		Chicken.Type.GIFTED_ATTACK:
 			chicken = CHICKEN_ATTACK_SCENE.instantiate()
-			var attack_damage: float = entity_modifier.get("ad", 10)
-			var attack_speed: float = entity_modifier.get("as", 10)
-			(chicken as ChickenAttack).init(attack_damage, attack_speed)
 		Chicken.Type.GIFTED_POISON: 
 			chicken = CHICKEN_POISON_SCENE.instantiate()
 			var poison_stack_ratio: float = entity_modifier.get("ratio", 0)
@@ -138,8 +135,6 @@ func _summon_chicken(spawn_position: Vector3, entity_modifier: Dictionary) -> vo
 			(chicken as ChickenPoison).init(poison_stack_ratio, stacks_number)
 		Chicken.Type.GIFTED_COLOSSUS:
 			chicken = CHICKEN_COLOSSUS_SCENE.instantiate()
-			var health_max_ratio: float = entity_modifier.get("hpmax", 0)
-			(chicken as ChickenColossus).init(health_max_ratio)
 		Chicken.Type.GIFTED_LIGHT:
 			chicken = CHICKEN_LIGHT_SCENE.instantiate()
 			var ratio_regen: float = entity_modifier.get("ratio_regen", 0)
@@ -147,14 +142,8 @@ func _summon_chicken(spawn_position: Vector3, entity_modifier: Dictionary) -> vo
 			(chicken as ChickenLight).init(ratio_regen, heal_strength_modifier)
 		Chicken.Type.GIFTED_ENGINEER:
 			chicken = CHICKEN_ENGINEER_SCENE.instantiate()
-			var shield_per_attack: int = entity_modifier.get("shield_per_attack", 0)
-			var bonus_spawn: int = entity_modifier.get("bonus_spawn", 0)
-			var shield_strength_inherited: float = entity_modifier.get("shield_strength_inherited", 0)
-			(chicken as ChickenShield).init(bonus_spawn, shield_per_attack, shield_strength_inherited)
 		Chicken.Type.GIFTED_ARDENT_CELESTIAL:
 			chicken = CHICKEN_ARDENT_CELESTIAL_SCENE.instantiate()
-			var ignite_stacks: int = entity_modifier.get("ignite_stacks", 0)
-			(chicken as ChickenArdentCelestial).init(ignite_stacks)
 		Chicken.Type.GIFTED_STORM_CALLER:
 			chicken = CHICKEN_STORM_CALLER.instantiate()
 			var crit_chance: float = entity_modifier.get("crit_chance", 0)

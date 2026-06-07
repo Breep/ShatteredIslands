@@ -17,6 +17,7 @@ collision_mask = 25
 script = ExtResource("1_kf5j7")
 entity_name = "Chicken Colossus"
 entity_desc = ExtResource("2_0uqtt")
+category = 1
 _visual_3d = NodePath("ChickenColossusVisual")
 _health_bar_marker = NodePath("ChickenColossusVisual/HealthBarSpawnMarker")
 
