@@ -1,8 +1,6 @@
 class_name ProjectileModifiersRegistry
 extends Node
 
-var bounce_bonus: int = 0
-
 var _modifiers: Dictionary[StringName, ProjectileModifier]
 
 func register_modifier(projectile_modifier: ProjectileModifier) -> void:

@@ -3,6 +3,8 @@ extends EntityComponent
 
 var _spawn_manager: SpawnManager
 
+var _ability_projectiles_pool: Array[Projectile.Type]
+
 func _enter_tree() -> void:
 	if _owner == null: return
 	if _owner.projectile != null and _owner.projectile != self:
@@ -37,3 +39,19 @@ func projectile_attack(target: Entity, projectile_type: Projectile.Type, project
 		Verbose.error("No SpawnManager connected", Verbose.Category.ENTITY_MODULE)
 		return
 	_spawn_manager.spawn_projectile(_owner, target, projectile_type, projectile_spawn, projectile_stats)
+
+
+func register_projectile(projectile_type: Projectile.Type) -> void:
+	if _ability_projectiles_pool.has(projectile_type): return
+	_ability_projectiles_pool.append(projectile_type)
+
+
+func unregister_projectile(projectile_type: Projectile.Type) -> void:
+	_ability_projectiles_pool.erase(projectile_type)
+
+
+func fire_random(target: Entity, projectile_spawn: Node3D) -> void:
+	Verbose.trace("Firing random ability projectile", Verbose.Category.PROJECTILE)
+	if _ability_projectiles_pool.is_empty(): return
+	var projectile_type: Projectile.Type = _ability_projectiles_pool.pick_random()
+	projectile_attack(target, projectile_type, projectile_spawn, ProjectileStats.new())

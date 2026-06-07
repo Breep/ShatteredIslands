@@ -6,8 +6,6 @@ enum VarType { # Variable types of the callbacks dictionary
 	TARGET,
 	POSITION,
 	DAMAGE,
-	DAMAGE_ADD,
-	DAMAGE_MUL,
 	PROJECTILE
 }
 
