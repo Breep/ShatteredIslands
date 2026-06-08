@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://duw0xcgf3d40a" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Stats/entity_desc.tres" id="2_m1bbj"]
 [ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.tscn" id="3_b5y8s"]
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="4_m1bbj"]
-[ext_resource type="AnimationNodeBlendTree" uid="uid://ds67abcdh4aq8" path="res://02_Entities/_Shared/Animations/default_animation_tree.res" id="6_5ct5u"]
+[ext_resource type="AnimationNodeBlendTree" uid="uid://bgulhwin6paat" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/small_treant_animation_tree.res" id="6_5ct5u"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_5ct5u"]
 height = 1.2209473
@@ -53,9 +53,9 @@ _owner = NodePath("..")
 root_node = NodePath("../StumpEnt")
 tree_root = ExtResource("6_5ct5u")
 anim_player = NodePath("../StumpEnt/AnimationPlayer")
-parameters/switch_moving/current_state = ""
+parameters/switch_moving/current_state = "Run"
 parameters/switch_moving/transition_request = ""
-parameters/switch_moving/current_index = -1
+parameters/switch_moving/current_index = 1
 parameters/scale_dance/scale = 1.0
 parameters/scale_die/scale = 1.0
 parameters/scale_idle_standing_neutral/scale = 1.0
