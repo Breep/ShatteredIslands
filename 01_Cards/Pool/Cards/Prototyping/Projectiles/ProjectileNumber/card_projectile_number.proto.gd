@@ -12,14 +12,14 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 	var extra: int = card_lvl
 	var mod := ProjectileModifier.new()
 	mod.id = card_name
-	mod.categories = [Projectile.Category.ABILITY_PROJECTILE]
+	mod.categories = [Projectile.Category.AUTO_ATTACK_PROJECTILE]
 	mod.count_modifier_callback = func(cb_vars: Dictionary) -> void:
-		if randf_range(0, 1) < 0.8:
-			cb_vars[CountResolver.COUNT] += extra
+		if randf_range(0, 1) < 0.5:
+			cb_vars[CountResolver.COUNT] += 1
 	mod.on_hit_callback = func(cb_vars: Dictionary) -> void:
 		var target = cb_vars.get(ProjectileModifier.VarType.TARGET)
 		if not is_instance_valid(target): return
-		owner.alterations.inflict_condition_stacks(target, 5, Alteration.Type.POISON, "proto poison")
+		owner.alterations.inflict_condition_stacks(target, 0.1, Alteration.Type.POISON, "proto poison")
 	owner.projectile_modifiers_registry.register_modifier(mod)
 
 

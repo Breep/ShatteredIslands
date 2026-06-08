@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cgrenadevis01"]
 
-[ext_resource type="Shader" uid="uid://bopqxo1shxrl6" path="res://03_SpellsAndProjectiles/Projectiles/Abilities/Grenade/Projectile/s_grenade.gdshader" id="1_shader"]
+[ext_resource type="Shader" uid="uid://bopqxo1shxrl6" path="res://03_SpellsAndProjectiles/Projectiles/Abilities/Grenade/VFX/s_grenade.gdshader" id="1_shader"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_grenade"]
 render_priority = 0
