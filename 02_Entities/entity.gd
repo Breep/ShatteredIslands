@@ -127,6 +127,7 @@ var mana: ManaComponent
 var health_bar: HealthBarComponent
 var progression: ProgressionComponent
 var skill: SkillComponent
+var aura: AuraComponent
 
 var _auto_loaded_components: Array[EntityComponent.Type] = [
 	EntityComponent.Type.DAMAGE,
@@ -148,7 +149,8 @@ var _auto_loaded_components: Array[EntityComponent.Type] = [
 	EntityComponent.Type.MANA,
 	EntityComponent.Type.PROGRESSION,
 	EntityComponent.Type.SKILL,
-	EntityComponent.Type.DECK_HOLDER
+	EntityComponent.Type.DECK_HOLDER,
+	EntityComponent.Type.AURA
 ]
 
 #var display_mode: DisplayMode = DisplayMode.PREVIEW

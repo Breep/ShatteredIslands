@@ -9,8 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]
 [ext_resource type="Script" uid="uid://nkraydv4mdse" path="res://01_Cards/Templates/Deck/hand.gd" id="6_jbcul"]
 [ext_resource type="Resource" uid="uid://bx3it6njfgqys" path="res://01_Cards/Pool/Cards/Prototyping/SummonNumber/card_summon_number.proto.tres" id="6_xqnte"]
-[ext_resource type="Resource" path="res://01_Cards/Pool/Cards/Prototyping/LevelBonus/card_level_bonus.proto.tres" id="7_jbcul"]
+[ext_resource type="Resource" uid="uid://nuxyfmjwc68d" path="res://01_Cards/Pool/Cards/Prototyping/LevelBonus/card_level_bonus.proto.tres" id="7_jbcul"]
 [ext_resource type="PackedScene" uid="uid://dvuq5n41nak3u" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/ArenaZoneManager/arena_zone_manager.tscn" id="8_fl2p6"]
+[ext_resource type="Resource" path="res://01_Cards/Pool/Cards/Prototyping/AuraHp/card_aura_hp.proto.tres" id="8_xqnte"]
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://90_Modules/PickableClickable/PickableModule/pickable_module.tscn" id="9_614kc"]
 [ext_resource type="PackedScene" uid="uid://bg5efhnq0erdv" path="res://90_Modules/PickableClickable/ClickableModule/clickable_module.tscn" id="10_m73qc"]
 [ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="10_r0wv3"]
@@ -31,7 +32,8 @@ script = ExtResource("6_jbcul")
 _cards = Dictionary[StringName, ExtResource("4_r0wv3")]({
 &"aze": ExtResource("5_cs3s0"),
 &"azraf": ExtResource("6_xqnte"),
-&"fgafazf": ExtResource("7_jbcul")
+&"fgafazf": ExtResource("7_jbcul"),
+&"gfazgazgaz": ExtResource("8_xqnte")
 })
 metadata/_custom_type_script = "uid://nkraydv4mdse"
 

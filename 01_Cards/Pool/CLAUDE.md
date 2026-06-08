@@ -246,7 +246,78 @@ Exemple de référence complet (acolytes, +40 AD + poison à l'attaque) :
   minion déjà vivant ne reçoit pas rétroactivement un modifier ajouté après son
   spawn.
 
-## 9. Exemple complet — « Poison Flask » (cible)
+## 9. Cartes d'aura (buff de toute l'équipe)
+
+Pour buffer non pas le porteur (§6) ni ses minions (§8) mais **tous les
+alliés** — ceux présents sur l'île **et** ceux qui spawn ensuite —, on passe
+par l'**`AuraComponent`** du porteur (`owner.aura`), jamais par les registres
+directs.
+
+| Cible du buff | Où écrire |
+|---|---|
+| Le porteur seul | registres de `ctx` / `owner` (§6) |
+| Les minions du porteur | `owner.summon/acolyte/building_modifiers_registry` (§8) |
+| **Tous les alliés** | **`owner.aura`** |
+
+L'aura se charge de **toute la distribution** : clone du modifier, propagation
+aux alliés vivants + abonnement aux futurs spawns, et révocation. On écrit
+exactement les mêmes briques qu'un buff sur soi (`StatModifier`,
+`AutoAttackModifier`…) avec **`card_name` comme `id`** — l'aura dérive en
+interne un id unique par allié, pas à s'en soucier.
+
+### API
+
+| Méthode | Quand | Pour |
+|---|---|---|
+| `owner.aura.add_modifier(mod)` | `apply` | poser le buff sur toute l'équipe |
+| `owner.aura.remove_modifier(card_name)` | `revert` | miroir strict |
+| `owner.aura.update_modifier(mod)` | recompute | aura dynamique (même `id` → écrase) |
+
+> **Aura dynamique** (« +5 armor par bâtiment en vie ») : c'est **la carte qui
+> écoute l'event** (mort / spawn d'un bâtiment) et rappelle `update_modifier`
+> avec la valeur recalculée. L'aura ne calcule rien elle-même, elle propage.
+
+### Cycle de vie
+
+- À la mort du porteur, l'aura **retire automatiquement** le buff de tous les
+  alliés (`_expires_on_death = true` par défaut). `revert` reste néanmoins
+  obligatoire : il couvre le cas où la carte **quitte la main** (vente, coffre)
+  alors que le porteur est encore vivant.
+- `apply` est rejoué à chaque respawn du porteur ; `add_modifier` est idempotent
+  (même `card_name` → écrasement), rien de spécial à gérer.
+
+### Briques supportées
+
+Les 4 `Modifier` clonables : **Stat / Action / AutoAttack / Death**.
+
+### Limites actuelles
+
+- **Alterations hors aura** : un buff à base de stacks (defense, thorn…) ne
+  passe **pas** par l'`AuraComponent` (le modèle id-overwrite est incompatible
+  avec des stacks). À traiter autrement.
+- **Pas de `level_bonus`** : « augmente le niveau des summons » n'est pas un
+  `Modifier`, l'aura ne le gère pas.
+
+### Exemple de référence
+
+`01_Cards/Pool/Cards/Prototyping/AuraHp/card_aura_hp.proto.gd` — +500 PV max à
+tous les alliés :
+
+```gdscript
+func apply(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
+	var mod := StatModifier.new()
+	mod.id = card_name
+	mod.calc_type = StatModifier.CalcType.ADD
+	mod.value = 500.0
+	mod.stat_type = EntityStats.StatType.HEALTH_MAX
+	ctx.entity_owner.aura.add_modifier(mod)
+
+
+func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
+	ctx.entity_owner.aura.remove_modifier(card_name)
+```
+
+## 10. Exemple complet — « Poison Flask » (cible)
 
 Inflige des stacks de poison à un ennemi aléatoire, périodiquement.
 Famille : **Poison** (consomme un timer, émet du poison → mono-famille).
