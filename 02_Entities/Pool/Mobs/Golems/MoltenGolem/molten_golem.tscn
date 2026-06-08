@@ -54,7 +54,9 @@ _animation_tree = NodePath("../AnimationTree")
 _owner = NodePath("..")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=328339097]
+root_node = NodePath("../MoltenGolemVisual2/Node3D")
 tree_root = ExtResource("5_mo2ch")
+anim_player = NodePath("../MoltenGolemVisual2/Node3D/AnimationPlayer")
 parameters/switch_moving/current_state = "Walk"
 parameters/switch_moving/transition_request = ""
 parameters/switch_moving/current_index = 0
