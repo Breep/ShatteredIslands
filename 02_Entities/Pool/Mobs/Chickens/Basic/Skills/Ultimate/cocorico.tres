@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://ccocorico2res7"]
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://3y05hr5v4m6g"]
 
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
-[ext_resource type="Script" uid="uid://bcocorico1eff7" path="res://02_Entities/Pool/Mobs/Chickens/Basic/Skills/Ultimate/cocorico.gd" id="2_eff"]
+[ext_resource type="Script" uid="uid://bvnugy2fxkjmc" path="res://02_Entities/Pool/Mobs/Chickens/Basic/Skills/Ultimate/cocorico.gd" id="2_eff"]
 
 [sub_resource type="Resource" id="Resource_e"]
 script = ExtResource("2_eff")
