@@ -23,11 +23,17 @@
 [ext_resource type="Resource" uid="uid://6bfp4c6lio36" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/Stats/celestial_chicken_stats_lvl_18.tres" id="21_5lils"]
 [ext_resource type="Resource" uid="uid://dad8yp6lkorqm" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/Stats/celestial_chicken_stats_lvl_19.tres" id="22_itteg"]
 [ext_resource type="Resource" uid="uid://f4fcm12s6j1l" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/Stats/celestial_chicken_stats_lvl_20.tres" id="23_xalr5"]
+[ext_resource type="Resource" uid="uid://ccometebc2res" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/Skills/Passive/comete_basse_cour.tres" id="24_pas"]
+[ext_resource type="Resource" uid="uid://d2cprfpfag6ve" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/Skills/Bronze/braise_de_couvee.tres" id="25_bro"]
+[ext_resource type="Resource" uid="uid://cqbdn45rx5s3k" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/Skills/Silver/trainee_celeste.tres" id="26_sil"]
+[ext_resource type="Resource" uid="uid://4e6vk1um1uf0" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/Skills/Gold/coquille_solaire.tres" id="27_gol"]
+[ext_resource type="Resource" uid="uid://bgtb0ni3fkg5p" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/Skills/Ultimate/omelette_astrale.tres" id="28_ult"]
 
 [resource]
 script = ExtResource("1_t44nj")
 name = "Celestial chicken"
 description = "Bok bok"
+default_category = 1
 stats = Dictionary[int, ExtResource("3_61olp")]({
 1: ExtResource("4_adcmo"),
 2: ExtResource("5_7ij4n"),
@@ -49,6 +55,13 @@ stats = Dictionary[int, ExtResource("3_61olp")]({
 18: ExtResource("21_5lils"),
 19: ExtResource("22_itteg"),
 20: ExtResource("23_xalr5")
+})
+skills = Dictionary[int, ExtResource("2_6gam0")]({
+0: ExtResource("24_pas"),
+1: ExtResource("25_bro"),
+2: ExtResource("26_sil"),
+3: ExtResource("27_gol"),
+4: ExtResource("28_ult")
 })
 aa_1_release_normalized = 0.8
 aa_2_release_normalized = 0.8

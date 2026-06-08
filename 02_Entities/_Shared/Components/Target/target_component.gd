@@ -38,6 +38,7 @@ enum TargettingStrategy {
 	RANDOM_ALLY, # Random ally except self (can be null)
 	RANDOM_ALLY_INCLUDING_SELF, # Random ally
 	RANDOM_HERO_ALLY, # Random Hero ally
+	RANDOM_BUILDING_ALLY, # Random ally whose category is BUILDING (can be null)
 	
 	# ------- LOWEST HP (Absolute) -------
 	LOWEST_HP_ENEMY, # Enemy with lowest current HP (absolute)
@@ -154,6 +155,7 @@ func get_target(targetting_strategy: TargettingStrategy) -> Entity:
 		TargettingStrategy.RANDOM_ALLY: return _get_random(_allies, _owner)
 		TargettingStrategy.RANDOM_ALLY_INCLUDING_SELF: return _get_random(_allies, null)
 		TargettingStrategy.RANDOM_HERO_ALLY: return _get_random(_ally_heroes, null)
+		TargettingStrategy.RANDOM_BUILDING_ALLY: return _get_random_building_ally()
 		
 		# --- HP ---
 		TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF: return _get_lowest_hp(_allies, null)
@@ -460,6 +462,14 @@ func _get_random(entities: Array[Entity], excluded_entity: Entity, prioritize_ta
 	
 	_random_target_number += 1
 	return Utils.pick_random(candidates, _owner.battle_id, "random_target_" + str(_random_target_number))
+
+
+func _get_random_building_ally() -> Entity:
+	var buildings: Array[Entity] = []
+	for ally in _allies:
+		if is_instance_valid(ally) and ally.category == Entity.Category.BUILDING:
+			buildings.append(ally)
+	return _get_random(buildings, _owner)
 
 
 func _get_array_without_untargetable_targets(entities: Array[Entity]) -> Array[Entity]:

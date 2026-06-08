@@ -1,0 +1,64 @@
+[gd_resource type="Resource" script_class="EntityDesc" format=3 uid="uid://c2yci33qfr5n8"]
+
+[ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="1_d50wt"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="2_vnnhe"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_vvdh1"]
+[ext_resource type="Resource" uid="uid://v8hgklgatymk" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Stats/kobold_thief_stats_lvl_01.tres" id="4_2loy4"]
+[ext_resource type="Resource" uid="uid://drasyx8nss4x5" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Stats/kobold_thief_stats_lvl_02.tres" id="5_1rcfj"]
+[ext_resource type="Resource" uid="uid://btrlh4piu2rgm" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Stats/kobold_thief_stats_lvl_03.tres" id="6_myxin"]
+[ext_resource type="Resource" uid="uid://b1atp111tu2s5" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Stats/kobold_thief_stats_lvl_04.tres" id="7_gehkl"]
+[ext_resource type="Resource" uid="uid://bafvyuwg1g3p7" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Stats/kobold_thief_stats_lvl_05.tres" id="8_plrqf"]
+[ext_resource type="Resource" uid="uid://dbo6v0n0ai2ve" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Stats/kobold_thief_stats_lvl_06.tres" id="9_r1yr7"]
+[ext_resource type="Resource" uid="uid://bstgombfq4u62" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Stats/kobold_thief_stats_lvl_07.tres" id="10_2e0uo"]
+[ext_resource type="Resource" uid="uid://c8i2a6equl4ci" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Stats/kobold_thief_stats_lvl_08.tres" id="11_8p04u"]
+[ext_resource type="Resource" uid="uid://ul2mc2ilaxr8" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Stats/kobold_thief_stats_lvl_09.tres" id="12_3huqu"]
+[ext_resource type="Resource" uid="uid://c1ugefqyg3b04" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Stats/kobold_thief_stats_lvl_10.tres" id="13_7gloe"]
+[ext_resource type="Resource" uid="uid://de25guuqje03s" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Stats/kobold_thief_stats_lvl_11.tres" id="14_pprvw"]
+[ext_resource type="Resource" uid="uid://yix36cewiipf" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Stats/kobold_thief_stats_lvl_12.tres" id="15_2c3pc"]
+[ext_resource type="Resource" uid="uid://b24fatac5jfnw" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Stats/kobold_thief_stats_lvl_13.tres" id="16_axqe5"]
+[ext_resource type="Resource" uid="uid://dqtreppkfqwn" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Stats/kobold_thief_stats_lvl_14.tres" id="17_acyby"]
+[ext_resource type="Resource" uid="uid://dimslgu64830" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Stats/kobold_thief_stats_lvl_15.tres" id="18_oxcjs"]
+[ext_resource type="Resource" uid="uid://omv54v7ldmyu" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Stats/kobold_thief_stats_lvl_16.tres" id="19_27r3s"]
+[ext_resource type="Resource" uid="uid://bwkd7577lg6gk" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Stats/kobold_thief_stats_lvl_17.tres" id="20_dpb1a"]
+[ext_resource type="Resource" uid="uid://cf6a18ow1u3h7" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Stats/kobold_thief_stats_lvl_18.tres" id="21_i4s37"]
+[ext_resource type="Resource" uid="uid://byutt3k4sddc4" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Stats/kobold_thief_stats_lvl_19.tres" id="22_jg63n"]
+[ext_resource type="Resource" uid="uid://bvmb1xq86y6mc" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Stats/kobold_thief_stats_lvl_20.tres" id="23_mjfa4"]
+[ext_resource type="Resource" uid="uid://3hv8cbj7yg6a" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Skills/Passive/pas_de_l_ombre.tres" id="24_pas"]
+[ext_resource type="Resource" uid="uid://3hvv3o2lqrju" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Skills/Bronze/depart_fulgurant.tres" id="25_bro"]
+[ext_resource type="Resource" uid="uid://cgi8f4hanb45e" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Skills/Silver/dos_expose.tres" id="26_sil"]
+[ext_resource type="Resource" uid="uid://3hvv7sh3orju" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Skills/Gold/disparition.tres" id="27_gol"]
+[ext_resource type="Resource" uid="uid://cgi8f3hcbmipy" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Skills/Ultimate/coup_dans_le_dos.tres" id="28_ult"]
+
+[resource]
+script = ExtResource("1_d50wt")
+name = "Kobb"
+description = "Kobby is happy"
+stats = Dictionary[int, ExtResource("3_vvdh1")]({
+1: ExtResource("4_2loy4"),
+2: ExtResource("5_1rcfj"),
+3: ExtResource("6_myxin"),
+4: ExtResource("7_gehkl"),
+5: ExtResource("8_plrqf"),
+6: ExtResource("9_r1yr7"),
+7: ExtResource("10_2e0uo"),
+8: ExtResource("11_8p04u"),
+9: ExtResource("12_3huqu"),
+10: ExtResource("13_7gloe"),
+11: ExtResource("14_pprvw"),
+12: ExtResource("15_2c3pc"),
+13: ExtResource("16_axqe5"),
+14: ExtResource("17_acyby"),
+15: ExtResource("18_oxcjs"),
+16: ExtResource("19_27r3s"),
+17: ExtResource("20_dpb1a"),
+18: ExtResource("21_i4s37"),
+19: ExtResource("22_jg63n"),
+20: ExtResource("23_mjfa4")
+})
+skills = Dictionary[int, ExtResource("2_vnnhe")]({
+0: ExtResource("24_pas"),
+1: ExtResource("25_bro"),
+2: ExtResource("26_sil"),
+3: ExtResource("27_gol"),
+4: ExtResource("28_ult")
+})

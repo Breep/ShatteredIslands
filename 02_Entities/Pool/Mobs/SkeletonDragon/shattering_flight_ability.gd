@@ -22,11 +22,24 @@ enum Phase { IDLE, TAKING_OFF, FLYING, LANDING }
 
 #region Export
 @export var _owner: SkeletonDragon
-@export var _flight_path: Path3D
-@export var _flight_duration: float = 4.0
+## Procedural flight-path shape, generated at takeoff and flown relative to the takeoff pose.
+@export var _flight_profile: FlightPathProfile
+@export var _flight_duration: float = 5.0
+## Fraction of the flight spent easing in/out at each end (0 = constant speed).
+@export_range(0.0, 0.5, 0.01) var _ease_edge: float = 0.2
 ## Ground-contact frame as a fraction of the landing clip (0..1), scale-independent
 ## — same convention as EntityDesc.aa_X_release_normalized.
 @export_range(0.0, 1.0, 0.01) var _landing_impact_normalized: float = 0.6
+
+@export_group("Banking")
+## Lean angle into turns (degrees). 0 = stays flat.
+@export_range(0.0, 80.0, 1.0) var _bank_degrees: float = 40.0
+## Reverse the lean partway through the flight (the dragon rolls level, then the other way).
+@export var _bank_flip: bool = true
+## Where the flip happens, as a fraction of the flight [0..1].
+@export_range(0.0, 1.0, 0.01) var _bank_flip_at: float = 0.5
+## Half-width of the smooth roll-through-level transition around the flip point.
+@export_range(0.01, 0.3, 0.01) var _bank_flip_width: float = 0.08
 
 ## Aerial enrage (active during the FLYING phase only).
 @export var _aerial_attack_speed_mult: float = 1.0 ## MULT on AS → 1.0 = x2 base
@@ -38,13 +51,15 @@ enum Phase { IDLE, TAKING_OFF, FLYING, LANDING }
 
 #region Private vars
 var _anim: SkeletonDragonAnimationComponent
-# Path global transform frozen at takeoff, so the curve is flown as a maneuver
-# relative to the takeoff pose (no feedback from moving the owner along it).
+# Curve generated from _flight_profile at takeoff, flown in the takeoff-local space.
+var _curve: Curve3D
+# Takeoff pose (position + facing, upright) frozen at takeoff, so the curve is flown as a
+# maneuver relative to it (no feedback from moving the owner along it).
 var _takeoff_origin: Transform3D
 
 # Metres sampled ahead on the curve to orient the dragon toward its travel.
 const _FACING_LOOKAHEAD: float = 3.0
-# Per-tick weight to turn the dragon back toward its takeoff facing while landing.
+# Per-tick weight to settle the dragon back to its upright takeoff pose while landing.
 const _LANDING_TURN_WEIGHT: float = 0.15
 
 const _AERIAL_AS_MOD_ID: StringName = &"AerialEnrage"
@@ -89,10 +104,13 @@ func trigger_flight() -> void:
 		return
 	if _anim == null:
 		return
-	if _flight_path != null:
-		_takeoff_origin = _flight_path.global_transform
 	_takeoff_yaw = _owner.rotation.y
 	_takeoff_position = _owner.global_position
+	# Anchor the maneuver to the takeoff pose (position + facing), upright. The curve is
+	# authored in this local space, so -Z forward aligns with the dragon's takeoff facing.
+	_takeoff_origin = Transform3D(Basis(Vector3.UP, _takeoff_yaw), _takeoff_position)
+	if _flight_profile != null:
+		_curve = _flight_profile.build_curve()
 	_set_combat_active(false)
 	_anim.begin_takeoff()
 	_enter_phase(Phase.TAKING_OFF, _to_ticks(_anim.takeoff_length()))
@@ -125,7 +143,7 @@ func process_tick() -> void:
 			if _ticks >= _phase_ticks:
 				_begin_landing()
 		Phase.LANDING:
-			_owner.rotation.y = lerp_angle(_owner.rotation.y, _takeoff_yaw, _LANDING_TURN_WEIGHT)
+			_settle_to_upright()
 			if not _impact_done and _ticks >= _impact_tick:
 				_impact_done = true
 				flight_landing_impact.emit()
@@ -169,19 +187,82 @@ func _to_ticks(seconds: float) -> int:
 
 
 func _advance_flight_path() -> void:
-	if _flight_path == null or _flight_path.curve == null:
+	if _curve == null:
 		return
-	var length: float = _flight_path.curve.get_baked_length()
+	var length: float = _curve.get_baked_length()
 	if length <= 0.0:
 		return
-	var ratio: float = smoothstep(0.0, 1.0, float(_ticks) / float(_phase_ticks))
-	var distance: float = ratio * length
-	var world_point: Vector3 = _takeoff_origin * _flight_path.curve.sample_baked(distance)
-	_owner.global_position = world_point
+	var ratio: float = _eased(float(_ticks) / float(_phase_ticks))
+	_owner.global_transform = _flight_pose(ratio * length, length)
 
-	var ahead: Vector3 = _takeoff_origin * _flight_path.curve.sample_baked(minf(distance + _FACING_LOOKAHEAD, length))
-	if ahead.distance_to(world_point) > 0.001:
-		_owner.look_at_target_y_only(ahead)
+
+# World pose along the flight curve at a baked distance: -Z follows the travel tangent
+# (nose pitches with climbs/dives) and the up vector is a twist-free level frame rolled by
+# the banking angle. Banking is computed from the path's horizontal turn direction rather
+# than the curve's baked up-vector, whose parallel-transport flips would invert the lean.
+func _flight_pose(dist: float, length: float) -> Transform3D:
+	var pos: Vector3 = _sample_world(dist)
+	var ahead: Vector3 = _sample_world(minf(dist + _FACING_LOOKAHEAD, length))
+	var fwd: Vector3 = ahead - pos
+	if fwd.length_squared() < 0.0001:
+		fwd = -_owner.global_transform.basis.z
+	fwd = fwd.normalized()
+	return Transform3D(Basis(), pos).looking_at(pos + fwd, _banked_up(fwd, dist, length))
+
+
+func _sample_world(dist: float) -> Vector3:
+	return _takeoff_origin * _curve.sample_baked(dist)
+
+
+func _banked_up(fwd: Vector3, dist: float, length: float) -> Vector3:
+	var right: Vector3 = fwd.cross(Vector3.UP)
+	if right.length_squared() < 0.00001:  # travelling near-vertical
+		right = fwd.cross(Vector3.FORWARD)
+	right = right.normalized()
+	var level_up: Vector3 = right.cross(fwd).normalized()
+	return level_up.rotated(fwd, _roll_angle(dist, length))
+
+
+# Roll from the signed horizontal turn direction → constant lean on a constant-radius
+# loop. The flip multiplier reverses it (smoothly, through level) past _bank_flip_at.
+func _roll_angle(dist: float, length: float) -> float:
+	var e: float = 0.5
+	var pos: Vector3 = _sample_world(dist)
+	var back: Vector3 = _sample_world(clampf(dist - e, 0.0, length))
+	var front: Vector3 = _sample_world(clampf(dist + e, 0.0, length))
+	var hb: Vector2 = Vector2(pos.x - back.x, pos.z - back.z)
+	var hf: Vector2 = Vector2(front.x - pos.x, front.z - pos.z)
+	if hb.length_squared() < 0.000001 or hf.length_squared() < 0.000001:
+		return 0.0
+	return -signf(hb.angle_to(hf)) * deg_to_rad(_bank_degrees) * _flip_sign(dist / length)
+
+
+# +1 before the flip, -1 after, ramping smoothly through 0 across the flip window.
+func _flip_sign(r: float) -> float:
+	if not _bank_flip:
+		return 1.0
+	var w: float = maxf(0.001, _bank_flip_width)
+	return 1.0 - 2.0 * smoothstep(_bank_flip_at - w, _bank_flip_at + w, r)
+
+
+# Ease in/out only near the extremities, constant speed through the middle.
+func _eased(r: float) -> float:
+	var e: float = _ease_edge
+	if e <= 0.0:
+		return r
+	if r < e:
+		return smoothstep(0.0, 1.0, r / e) * e
+	if r > 1.0 - e:
+		return (1.0 - e) + smoothstep(0.0, 1.0, (r - (1.0 - e)) / e) * e
+	return r
+
+
+# Per-tick blend of the whole orientation back to the upright takeoff facing during landing
+# (the flight leaves the dragon pitched/banked; settle it before ground contact).
+func _settle_to_upright() -> void:
+	var t: Transform3D = _owner.global_transform
+	t.basis = t.basis.orthonormalized().slerp(Basis(Vector3.UP, _takeoff_yaw), _LANDING_TURN_WEIGHT)
+	_owner.global_transform = t
 
 
 # Toggles the "whole flight" state (takeoff → land/abort), active=false on takeoff,
@@ -189,7 +270,8 @@ func _advance_flight_path() -> void:
 # dying mid-flight, which would otherwise leave a corpse following the path); movement
 # is halted so it does not fight the flight path; the auto-attack is paused — which also
 # drops any in-progress swing (see AutoAttackComponent.set_paused) so no delayed hit
-# lands; mana regen is zeroed so the ultimate can't auto-cast mid-flight (stance conflict).
+# lands; enemies also drop him as a target; mana regen is zeroed so the ultimate can't
+# auto-cast mid-flight (stance conflict).
 func _set_combat_active(active: bool) -> void:
 	if _owner.movement != null:
 		if active:
@@ -200,9 +282,11 @@ func _set_combat_active(active: bool) -> void:
 		_owner.auto_attack.set_paused(not active)
 	if active:
 		_owner.alterations.cancel_state(Alteration.Type.INVULNERABLE)
+		_owner.alterations.cancel_state(Alteration.Type.UNTARGETABLE)
 		_unregister_mana_cut()
 	else:
 		_owner.alterations.apply_state(Alteration.Type.INVULNERABLE)
+		_owner.alterations.apply_state(Alteration.Type.UNTARGETABLE)
 		_register_mana_cut()
 
 
@@ -337,8 +421,8 @@ func _on_aerial_attack_started(_lock_seconds: float) -> void:
 func _on_fighting_state_changed(new_state: Entity.FightingState) -> void:
 	if _phase == Phase.IDLE or new_state == Entity.FightingState.FIGHTING:
 		return
-	# Fight ended mid-flight: ticks stop, so abort now and drop the dragon to its
-	# takeoff spot instead of leaving it frozen in the air.
+	# Fight ended mid-flight: ticks stop, so abort now and drop the dragon back to its
+	# upright takeoff pose instead of leaving it frozen, pitched and banked, in the air.
 	abort_flight()
-	_owner.global_position = _takeoff_position
+	_owner.global_transform = Transform3D(Basis(Vector3.UP, _takeoff_yaw), _takeoff_position)
 #endregion

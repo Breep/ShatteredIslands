@@ -1,0 +1,485 @@
+[gd_scene format=3 uid="uid://boxbtk57aorey"]
+
+[ext_resource type="Script" uid="uid://bbeek4n4ih2xe" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.gd" id="1_fqydh"]
+[ext_resource type="Shader" uid="uid://cxvdhkkjpr75e" path="res://02_Entities/_Shared/Components/HealthBar/Shaders/character_health_bar.gdshader" id="2_er62k"]
+[ext_resource type="Texture2D" uid="uid://c6pcyeugsepnp" path="res://22_VFX/VFX_3D/Explosion/textures/T_PerlinNoise_Tiled11_inv.png" id="3_lf2vs"]
+[ext_resource type="Shader" uid="uid://dncf64el86tmc" path="res://02_Entities/_Shared/Components/HealthBar/Shaders/character_shield_bar.gdshader" id="3_u1xh6"]
+[ext_resource type="Shader" uid="uid://dav4yd3tlk03a" path="res://22_VFX/VFX_2D/UI/block_bar.gdshader" id="4_47gim"]
+[ext_resource type="LabelSettings" uid="uid://bk10uxsgaj4p5" path="res://02_Entities/_Shared/Components/HealthBar/Data/debug_label.tres" id="4_dbglb"]
+[ext_resource type="Shader" uid="uid://bk6a2rmxlibvg" path="res://02_Entities/_Shared/Components/HealthBar/Shaders/character_level_frame.gdshader" id="5_lvlfr"]
+[ext_resource type="Texture2D" uid="uid://cc1t8fkok04ex" path="res://04_UI/_Themes/Data/Icons/AlterationsIcons/taunt.png" id="6_57utb"]
+
+[sub_resource type="Shader" id="Shader_er62k"]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+// --- 1. DONNÉES DE VIE ---
+group_uniforms Health_Data;
+uniform float HealthAmount : hint_range(0,1) = 0.6;
+uniform float MaxHealth = 2500.0;
+group_uniforms;
+
+// --- 2. COULEURS ---
+group_uniforms Colors;
+uniform vec4 HealthColor : source_color = vec4(0.11, 0.64, 0.08, 1.0);
+uniform vec4 BackgroundColor : source_color = vec4(0.15, 0.15, 0.15, 0.8);
+group_uniforms;
+
+// --- 3. EFFET SHIMMER ---
+group_uniforms Shimmer_Effect;
+uniform bool EnableShimmer = true;
+uniform float ShimmerSpeed : hint_range(0.0, 5.0) = 1.5;
+uniform float ShimmerStrength : hint_range(0.0, 1.0) = 0.3;
+uniform float VolumeStrength : hint_range(0.0, 1.0) = 0.4;
+group_uniforms;
+
+// --- 4. LIGNES GRILLE (PARAMÉTRABLES & DÉSACTIVABLES) ---
+group_uniforms Lines_Grid;
+uniform bool ShowGrid = true; // <--- L'INTERRUPTEUR EST ICI
+uniform vec4 LineColor : source_color = vec4(0.0, 0.0, 0.0, 1.0);
+
+// Palier X (Petit palier)
+uniform float Step_X_Value = 250.0;
+uniform float Step_X_Height : hint_range(0.0, 1.0) = 0.25;
+uniform float Step_X_Thickness : hint_range(0.1, 10.0) = 1.0;
+
+// Palier Y (Grand palier)
+uniform float Step_Y_Value = 1000.0;
+uniform float Step_Y_Height : hint_range(0.0, 1.0) = 0.50;
+uniform float Step_Y_Thickness : hint_range(0.1, 10.0) = 2.5;
+group_uniforms;
+
+// --- 5. BORDURE ---
+group_uniforms Border;
+uniform vec4 BorderColor : source_color = vec4(0.05, 0.05, 0.05, 1.0);
+uniform float BorderThicknessPx : hint_range(0.0, 10.0) = 2.0;
+group_uniforms;
+
+// --- 6. COINS ARRONDIS ---
+group_uniforms Corners;
+uniform float CornerRadius : hint_range(0.0, 0.5) = 0.05;
+group_uniforms;
+
+float rounded_box_sdf(vec2 center_pos, vec2 size, float radius) {
+    return length(max(abs(center_pos) - size + radius, 0.0)) - radius;
+}
+
+void fragment() {
+    vec2 pixel_size_uv = vec2(fwidth(UV.x), fwidth(UV.y));
+    float aa_width = pixel_size_uv.x;
+
+    // A. REMPLISSAGE
+    float fill_mask = 1.0 - smoothstep(HealthAmount - aa_width, HealthAmount + aa_width, UV.x);
+    float internal_gradient = 1.0 - abs(UV.y - 0.5) * VolumeStrength * 2.0;
+    vec3 health_rgb = HealthColor.rgb * internal_gradient;
+
+    // B. SHIMMER
+    if (EnableShimmer) {
+        float shimmer_pos = fract((TIME * ShimmerSpeed) - UV.x * 0.5 - UV.y * 0.2);
+        float shimmer_mask = smoothstep(0.45, 0.5, shimmer_pos) * (1.0 - smoothstep(0.5, 0.55, shimmer_pos));
+        health_rgb += vec3(1.0) * shimmer_mask * ShimmerStrength;
+    }
+
+    vec4 final_health_color = vec4(health_rgb, HealthColor.a);
+    vec4 final_color = mix(BackgroundColor, final_health_color, fill_mask);
+
+    // C. LIGNES GRILLE (Conditionnelle)
+    if (ShowGrid) {
+        float hp_at_pixel = UV.x * MaxHealth;
+        float aa_hp = pixel_size_uv.x * MaxHealth;
+
+        // Calcul Palier Y
+        float half_line_Y = (Step_Y_Thickness * pixel_size_uv.x * MaxHealth) * 0.5;
+        float dist_Y = abs(mod(hp_at_pixel, Step_Y_Value));
+        dist_Y = min(dist_Y, Step_Y_Value - dist_Y);
+        float mask_Y = smoothstep(half_line_Y + aa_hp, half_line_Y, dist_Y);
+
+        // Calcul Palier X
+        float half_line_X = (Step_X_Thickness * pixel_size_uv.x * MaxHealth) * 0.5;
+        float dist_X = abs(mod(hp_at_pixel, Step_X_Value));
+        dist_X = min(dist_X, Step_X_Value - dist_X);
+        float mask_X = smoothstep(half_line_X + aa_hp, half_line_X, dist_X);
+
+        float line_alpha = 0.0;
+        if (mask_Y > 0.01 && UV.y < Step_Y_Height) {
+            line_alpha = mask_Y;
+        } 
+        else if (mask_X > 0.01 && UV.y < Step_X_Height) {
+            line_alpha = mask_X;
+        }
+        
+        if (UV.x < aa_width * 2.0) line_alpha = 0.0;
+        final_color = mix(final_color, LineColor, line_alpha);
+    }
+
+    // D. BORDURE
+    vec2 border_width_uv = BorderThicknessPx * pixel_size_uv;
+    float border_mask_x = step(UV.x, border_width_uv.x) + step(1.0 - border_width_uv.x, UV.x);
+    float border_mask_y = step(UV.y, border_width_uv.y) + step(1.0 - border_width_uv.y, UV.y);
+    float final_border_mask = clamp(border_mask_x + border_mask_y, 0.0, 1.0);
+    final_color = mix(final_color, BorderColor, final_border_mask);
+
+    // E. COINS ARRONDIS
+    vec2 centered_uv = UV - 0.5;
+    float dist_to_rounded_edge = rounded_box_sdf(centered_uv, vec2(0.5 - pixel_size_uv.x), CornerRadius);
+    float avg_aa = (pixel_size_uv.x + pixel_size_uv.y) * 0.5;
+    float rounded_mask = 1.0 - smoothstep(0.0, avg_aa * 1.5, dist_to_rounded_edge);
+
+    final_color.a *= rounded_mask;
+    COLOR = final_color;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u1xh6"]
+shader = SubResource("Shader_er62k")
+shader_parameter/HealthAmount = 0.6
+shader_parameter/MaxHealth = 2500.0
+shader_parameter/HealthColor = Color(0.11, 0.64, 0.08, 1)
+shader_parameter/BackgroundColor = Color(0.15, 0.15, 0.15, 0.8)
+shader_parameter/EnableShimmer = false
+shader_parameter/ShimmerSpeed = 1.5
+shader_parameter/ShimmerStrength = 0.3
+shader_parameter/VolumeStrength = 0.4
+shader_parameter/ShowGrid = false
+shader_parameter/LineColor = Color(0, 0, 0, 1)
+shader_parameter/Step_X_Value = 250.0
+shader_parameter/Step_X_Height = 1.0
+shader_parameter/Step_X_Thickness = 1.0
+shader_parameter/Step_Y_Value = 1000.0
+shader_parameter/Step_Y_Height = 1.0
+shader_parameter/Step_Y_Thickness = 2.5
+shader_parameter/BorderColor = Color(0.05, 0.05, 0.05, 1)
+shader_parameter/BorderThicknessPx = 2.0
+shader_parameter/CornerRadius = 0.05
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2mu5s"]
+shader = ExtResource("3_u1xh6")
+shader_parameter/shield_color = Color(0.6080438, 0.52413857, 3.85046e-07, 1)
+shader_parameter/alpha_intensity = 0.800000038
+shader_parameter/brightness = 3.0
+shader_parameter/fill_amount = 0.3530000167675
+shader_parameter/fill_smoothness = 0.10000000149012
+shader_parameter/energy_noise = ExtResource("3_lf2vs")
+shader_parameter/noise_scale = 1.0
+shader_parameter/energy_speed = Vector2(0.15, 0)
+shader_parameter/scanline_count = 50.0
+shader_parameter/scanline_speed = -2.0
+shader_parameter/scanline_opacity = 0.3
+shader_parameter/pulse_speed = 2.0
+shader_parameter/pulse_intensity = 0.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jqarp"]
+shader = ExtResource("4_47gim")
+shader_parameter/base_color = Color(0.75, 0.78, 0.82, 1)
+shader_parameter/highlight_color = Color(1, 1, 1, 1)
+shader_parameter/shadow_color = Color(0.25, 0.28, 0.32, 1)
+shader_parameter/metallic_strength = 0.0130000006175
+shader_parameter/contrast = 1.4
+shader_parameter/shine_strength = 0.0
+shader_parameter/shine_width = 0.00999999977648
+shader_parameter/shine_speed = 0.10000024225000016
+shader_parameter/noise_strength = 0.0410000019475
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4khpa"]
+shader = ExtResource("2_er62k")
+shader_parameter/HealthAmount = 0.6
+shader_parameter/MaxHealth = 2500.0
+shader_parameter/HealthColor = Color(0.10980392, 0.6392157, 0.078431375, 0)
+shader_parameter/BackgroundColor = Color(0.14901961, 0.14901961, 0.14901961, 0)
+shader_parameter/EnableShimmer = false
+shader_parameter/ShimmerSpeed = 1.5
+shader_parameter/ShimmerStrength = 0.3
+shader_parameter/VolumeStrength = 0.4
+shader_parameter/ShowGrid = true
+shader_parameter/LineColor = Color(0, 0, 0, 1)
+shader_parameter/Step_X_Value = 250.0
+shader_parameter/Step_X_Height = 1.0
+shader_parameter/Step_X_Thickness = 0.50000002049012
+shader_parameter/Step_Y_Value = 1000.0
+shader_parameter/Step_Y_Height = 1.0
+shader_parameter/Step_Y_Thickness = 1.25000005611512
+shader_parameter/BorderColor = Color(0.05, 0.05, 0.05, 1)
+shader_parameter/BorderThicknessPx = 2.0
+shader_parameter/CornerRadius = 0.05
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_metal"]
+shader = ExtResource("4_47gim")
+shader_parameter/base_color = Color(0.83, 0.69, 0.22, 1)
+shader_parameter/highlight_color = Color(1, 0.95, 0.6, 1)
+shader_parameter/shadow_color = Color(0.35, 0.27, 0.05, 1)
+shader_parameter/metallic_strength = 0.0
+shader_parameter/contrast = 0.0
+shader_parameter/shine_strength = 0.2770000131575
+shader_parameter/shine_width = 0.40000001830148
+shader_parameter/shine_speed = 0.5750002648125001
+shader_parameter/noise_strength = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xw8nt"]
+shader = ExtResource("2_er62k")
+shader_parameter/HealthAmount = 0.506000024035
+shader_parameter/MaxHealth = 2500.0
+shader_parameter/HealthColor = Color(4.428029e-06, 0.7022774, 0.9995093, 1)
+shader_parameter/BackgroundColor = Color(0.15, 0.15, 0.15, 0.8)
+shader_parameter/EnableShimmer = false
+shader_parameter/ShimmerSpeed = 1.5
+shader_parameter/ShimmerStrength = 0.3
+shader_parameter/VolumeStrength = 0.4
+shader_parameter/ShowGrid = false
+shader_parameter/LineColor = Color(0, 0, 0, 1)
+shader_parameter/Step_X_Value = 250.0
+shader_parameter/Step_X_Height = 0.25
+shader_parameter/Step_X_Thickness = 1.0
+shader_parameter/Step_Y_Value = 1000.0
+shader_parameter/Step_Y_Height = 0.5
+shader_parameter/Step_Y_Thickness = 2.5
+shader_parameter/BorderColor = Color(0.05, 0.05, 0.05, 1)
+shader_parameter/BorderThicknessPx = 2.0
+shader_parameter/CornerRadius = 0.05
+
+[sub_resource type="LabelSettings" id="LabelSettings_shld"]
+font_size = 10
+font_color = Color(0.9416784, 0.84232056, 0, 1)
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lvlfr"]
+shader = ExtResource("5_lvlfr")
+shader_parameter/CornerRadius = 0.2000000095
+shader_parameter/MarginPx = 0.0
+shader_parameter/FillColor = Color(0.011087594, 0.011087573, 0.01108758, 0.60784316)
+shader_parameter/OutlineColor = Color(0.08741879, 0.08053652, 0.062070146, 1)
+shader_parameter/OutlineThicknessPx = 2.000000095
+shader_parameter/EnableOutlineGlow = true
+shader_parameter/OutlineGlowColor = Color(0.288518, 0.28851798, 0.28851798, 0.19215687)
+shader_parameter/OutlineGlowSizePx = 6.0
+shader_parameter/OutlineGlowIntensity = 1.0
+shader_parameter/EnableInnerGlow = true
+shader_parameter/InnerGlowColor = Color(0.433512, 0.4346832, 0.4006247, 0.5019608)
+shader_parameter/InnerGlowSizePx = 7.0000003325
+shader_parameter/InnerGlowIntensity = 0.9200000437
+shader_parameter/GlowPulse = false
+shader_parameter/GlowPulseSpeed = 2.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_xk06y"]
+font_size = 10
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="LargeHealthBarComponent" type="Node" unique_id=1823590462]
+script = ExtResource("1_fqydh")
+metadata/_custom_type_script = "uid://c1dw0hnr57wx6"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1509485072]
+
+[node name="MainControl" type="Control" parent="CanvasLayer" unique_id=659756604]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MainVBox" type="VBoxContainer" parent="CanvasLayer/MainControl" unique_id=558123959]
+custom_minimum_size = Vector2(96, 10)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -33.0
+offset_right = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Control" type="Control" parent="CanvasLayer/MainControl/MainVBox" unique_id=1726330834]
+custom_minimum_size = Vector2(96, 22)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="AlterationsContainer" type="VBoxContainer" parent="CanvasLayer/MainControl/MainVBox/Control" unique_id=785031783]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.08
+anchor_top = 1.0
+anchor_right = 0.992
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 2
+alignment = 2
+
+[node name="PlayerNameLabel" type="RichTextLabel" parent="CanvasLayer/MainControl/MainVBox" unique_id=1781608924]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(80, 20)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "Breep"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HealthAndMana" type="Control" parent="CanvasLayer/MainControl/MainVBox" unique_id=1222723480]
+custom_minimum_size = Vector2(96, 15)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HealthAndMana" type="VBoxContainer" parent="CanvasLayer/MainControl/MainVBox/HealthAndMana" unique_id=756449751]
+custom_minimum_size = Vector2(96, 15)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = -2
+
+[node name="HealthBar" type="ColorRect" parent="CanvasLayer/MainControl/MainVBox/HealthAndMana/HealthAndMana" unique_id=610590936]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_u1xh6")
+custom_minimum_size = Vector2(80, 10)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ShieldBar" type="ColorRect" parent="CanvasLayer/MainControl/MainVBox/HealthAndMana/HealthAndMana/HealthBar" unique_id=1699784184]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_2mu5s")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BlockBar" type="ColorRect" parent="CanvasLayer/MainControl/MainVBox/HealthAndMana/HealthAndMana/HealthBar" unique_id=725184838]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_jqarp")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.41960785, 0.41960785, 0.41960785, 1)
+
+[node name="GridBar" type="ColorRect" parent="CanvasLayer/MainControl/MainVBox/HealthAndMana/HealthAndMana/HealthBar" unique_id=1715734742]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_4khpa")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MetalBar" type="ColorRect" parent="CanvasLayer/MainControl/MainVBox/HealthAndMana/HealthAndMana/HealthBar" unique_id=1835823138]
+unique_name_in_owner = true
+visible = false
+material = SubResource("ShaderMaterial_metal")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TauntShieldIcon" type="TextureRect" parent="CanvasLayer/MainControl/MainVBox/HealthAndMana/HealthAndMana/HealthBar" unique_id=720735588]
+unique_name_in_owner = true
+visible = false
+z_index = 1
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 1.0
+offset_left = -15.0
+offset_top = -15.5
+offset_right = 9.0
+offset_bottom = 3.5
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_57utb")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ManaBar" type="ColorRect" parent="CanvasLayer/MainControl/MainVBox/HealthAndMana/HealthAndMana" unique_id=564324133]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_xw8nt")
+custom_minimum_size = Vector2(80, 5)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="DebugValues" type="HBoxContainer" parent="CanvasLayer/MainControl/MainVBox/HealthAndMana" unique_id=160983650]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="HealthLabel" type="Label" parent="CanvasLayer/MainControl/MainVBox/HealthAndMana/DebugValues" unique_id=1275148556]
+unique_name_in_owner = true
+layout_mode = 2
+text = "42"
+label_settings = ExtResource("4_dbglb")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShieldLabel" type="Label" parent="CanvasLayer/MainControl/MainVBox/HealthAndMana/DebugValues" unique_id=1290683005]
+unique_name_in_owner = true
+layout_mode = 2
+text = "42"
+label_settings = SubResource("LabelSettings_shld")
+
+[node name="BottomBar" type="Control" parent="CanvasLayer/MainControl/MainVBox" unique_id=817419775]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="CadreLevel" type="ColorRect" parent="CanvasLayer/MainControl/MainVBox/BottomBar" unique_id=1081713847]
+material = SubResource("ShaderMaterial_lvlfr")
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.2
+anchor_bottom = 1.0
+offset_top = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LevelLabel" type="Label" parent="CanvasLayer/MainControl/MainVBox/BottomBar/CadreLevel" unique_id=264669344]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "12"
+label_settings = SubResource("LabelSettings_xk06y")
+horizontal_alignment = 1
+vertical_alignment = 1

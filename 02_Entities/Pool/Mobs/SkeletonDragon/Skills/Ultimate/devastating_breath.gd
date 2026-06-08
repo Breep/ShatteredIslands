@@ -21,6 +21,11 @@ func apply(ctx: SkillContext) -> void:
 		Verbose.error("SE_DevastatingBreath: dragon has no breath controller", Verbose.Category.ENTITY_MODULE)
 		return
 
+	# Drive the sweep/anim/VFX (the ability turns the breath on during its CHANNEL).
+	var ability: DevastatingBreathAbility = dragon.get_breath_ability()
+	if ability != null:
+		ability.trigger()
+
 	# Per-cast wiring: connect for this breath, dedup locally so each enemy is hit
 	# once, and disconnect when the breath ends so connections never pile up.
 	var hit_this_cast: Dictionary = {}

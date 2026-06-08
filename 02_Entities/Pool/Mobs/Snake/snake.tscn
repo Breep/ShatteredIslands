@@ -6,7 +6,7 @@
 [ext_resource type="AnimationNodeBlendTree" uid="uid://brnwae0xxk00f" path="res://02_Entities/Pool/Mobs/Snake/snake_blendtree.tres" id="5_duvd4"]
 [ext_resource type="Script" path="res://02_Entities/_Shared/Components/Animation/entity_animation_player.gd" id="6_obplm"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://05_Game/Run/SpawnSpecs/SpawnPoints/SpawnPoint/spawn_point.tscn" id="7_jendl"]
-[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/Components/HealthBar/SmallHealthBar/small_health_bar_component.tscn" id="8_nh8ax"]
+[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/SmallHealthBar/small_health_bar_component.tscn" id="8_nh8ax"]
 [ext_resource type="Script" uid="uid://dbu0yi2foobod" path="res://02_Entities/_Shared/Components/Animation/animation_component.gd" id="9_ptbxe"]
 
 [sub_resource type="Resource" id="Resource_6o6k5"]

@@ -3,9 +3,10 @@ extends HealthBarComponent
 
 ## Screen-anchored boss health bar: a large health/shield/block/grid bar pinned to
 ## the top of the screen with a centered boss-name label and optional phase
-## dividers. Reuses the shared HealthBarComponent visuals but, unlike the per-entity
-## bars, it is NOT reprojected from a 3D marker — it stays fixed via the scene's
-## anchors. Drops the hero-only mana/player-name layer of LargeHealthBar.
+## dividers. Reuses the shared HealthBarComponent visuals; it stays fixed via the
+## scene's anchors and, unlike the per-entity bars, extends the marker-less base
+## directly (no 3D reprojection). Drops the hero-only mana/player-name layer of
+## LargeHealthBar.
 
 @onready var _boss_name_label: RichTextLabel = %BossNameLabel
 
@@ -15,12 +16,6 @@ func _ready() -> void:
 	super._ready()
 	if _owner != null and _boss_name_label != null:
 		_boss_name_label.text = _owner.entity_name
-
-
-## Boss bar is pinned to the screen via the scene anchors. Overriding _process to a
-## no-op disables the base class' per-frame 3D-marker reprojection.
-func _process(_delta: float) -> void:
-	pass
 #endregion
 
 

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://drw5i4ioe0ho6" path="res://02_Entities/Pool/Mobs/Vrock/vrock.gd" id="1_w4u18"]
 [ext_resource type="Resource" uid="uid://bpmfs3a0llexn" path="res://02_Entities/Pool/Mobs/Vrock/Stats/vrock_entity_desc.tres" id="2_p23nj"]
 [ext_resource type="PackedScene" uid="uid://b45qfxbc5mg27" path="res://02_Entities/_Data/Dogs/unity_sk_animals_dog_01.tscn" id="2_w4u18"]
-[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/Components/HealthBar/SmallHealthBar/small_health_bar_component.tscn" id="3_glgkk"]
+[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/SmallHealthBar/small_health_bar_component.tscn" id="3_glgkk"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://dg3kavrat1vul" path="res://02_Entities/Pool/Mobs/Vrock/vrock_animation_tree.res" id="3_w4u18"]
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="4_mh4ck"]
 

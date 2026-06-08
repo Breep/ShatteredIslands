@@ -82,6 +82,10 @@ folder_colors={
 "res://99_Prototyping/": "gray"
 }
 
+[filesystem]
+
+import/blender/enabled=false
+
 [global_group]
 
 WALL=""

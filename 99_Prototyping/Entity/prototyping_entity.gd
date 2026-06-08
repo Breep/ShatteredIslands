@@ -15,6 +15,9 @@ var _entities: Array[Entity]
 @onready var _family_managers_check_button: CheckButton = %FamilyManagersCheckButton
 @onready var _manual_mode_check_button: CheckButton = %ManualModeCheckButton
 
+@onready var _trigger_flight_button: Button = $"Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/TriggerFlightButton"
+@onready var _cast_ultimate_button: Button = $"Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/CastUltimateButton"
+
 # Manual mode : quand actif, un clic gauche court sur une entité la passe en
 # contrôle joueur (PlayerController). Les autres entités restent ou repassent
 # en AUTO. Une seule entité à la fois est contrôlée.
@@ -36,6 +39,11 @@ func _ready() -> void:
 	_family_managers_check_button.button_pressed = _family_managers_enabled
 	_manual_mode_check_button.button_pressed = _manual_mode_enabled
 	_apply_settings_to_entities()
+
+	# Dragon-only commands: only show them when a Skeleton Dragon is in the scene.
+	var has_dragon: bool = _entities.any(func(e: Entity) -> bool: return e is SkeletonDragon)
+	_trigger_flight_button.visible = has_dragon
+	_cast_ultimate_button.visible = has_dragon
 
 
 func _apply_settings_to_entities() -> void:

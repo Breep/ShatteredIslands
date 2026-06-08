@@ -23,9 +23,16 @@
 [ext_resource type="Resource" uid="uid://bsv0r2o8iwsui" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Stats/stats_lvl_18.tres" id="21_x3rr6"]
 [ext_resource type="Resource" uid="uid://b3oci7f0u4u56" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Stats/stats_lvl_19.tres" id="22_aiw83"]
 [ext_resource type="Resource" uid="uid://cj4i1flgdoe3q" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Stats/stats_lvl_20.tres" id="23_xfurl"]
+[ext_resource type="Resource" uid="uid://dnaplm1res7k2" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Skills/Silver/napalm.tres" id="24_napalm"]
+[ext_resource type="Resource" uid="uid://dsqjinymc66qu" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Skills/Passive/bruleur_directionnel.tres" id="25_pas"]
+[ext_resource type="Resource" uid="uid://c30igfeptx36t" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Skills/Bronze/buse_large.tres" id="26_bro"]
+[ext_resource type="Resource" uid="uid://b5e1uyagq5bf0" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Skills/Gold/fournaise_controlee.tres" id="27_gol"]
+[ext_resource type="Resource" uid="uid://c2urchfres8h0" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Skills/Ultimate/surchauffe.tres" id="28_ult"]
 
 [resource]
 script = ExtResource("1_d38ms")
+name = "Fire Thrower Turret"
+default_category = 4
 stats = Dictionary[int, ExtResource("3_nnba6")]({
 1: ExtResource("4_qagur"),
 2: ExtResource("5_nyu3a"),
@@ -47,4 +54,11 @@ stats = Dictionary[int, ExtResource("3_nnba6")]({
 18: ExtResource("21_x3rr6"),
 19: ExtResource("22_aiw83"),
 20: ExtResource("23_xfurl")
+})
+skills = Dictionary[int, ExtResource("2_jkyec")]({
+0: ExtResource("25_pas"),
+1: ExtResource("26_bro"),
+2: ExtResource("24_napalm"),
+3: ExtResource("27_gol"),
+4: ExtResource("28_ult")
 })

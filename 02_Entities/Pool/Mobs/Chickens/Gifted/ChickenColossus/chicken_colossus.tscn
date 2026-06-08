@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://dr2axaqcdg5x3"]
 
 [ext_resource type="Script" uid="uid://cqd7xjjl82372" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/chicken_colossus.gd" id="1_kf5j7"]
-[ext_resource type="Resource" uid="uid://caynactcxf4ak" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/colossus_chjicken_entity_desc.tres" id="2_0uqtt"]
+[ext_resource type="Resource" uid="uid://caynactcxf4ak" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/colossus_chicken_entity_desc.tres" id="2_0uqtt"]
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="5_3tx8a"]
 [ext_resource type="PackedScene" uid="uid://dithaupylit2x" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/chicken_colossus_visual.tscn" id="5_5tkf2"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://cr51ggnb0u010" path="res://02_Entities/Pool/Mobs/Chickens/chicken_animation_tree.res" id="5_bjw5k"]
-[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/Components/HealthBar/SmallHealthBar/small_health_bar_component.tscn" id="8_ea2ri"]
+[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/SmallHealthBar/small_health_bar_component.tscn" id="8_ea2ri"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x7yny"]
 radius = 0.5317383
@@ -16,6 +16,7 @@ collision_layer = 16
 collision_mask = 25
 script = ExtResource("1_kf5j7")
 entity_name = "Chicken Colossus"
+category = 1
 entity_desc = ExtResource("2_0uqtt")
 _visual_3d = NodePath("ChickenColossusVisual")
 _health_bar_marker = NodePath("ChickenColossusVisual/HealthBarSpawnMarker")

@@ -34,6 +34,9 @@ const _VFX_START: String = "Start"
 const _VFX_END: String = "End"
 
 var _active: bool = false
+# Root of the VFX subtree (the AnimationPlayer's parent). We own its visibility so the
+# breath never depends on a scene-authored visible flag.
+var _vfx_root: Node3D
 #endregion
 
 #region Node base functions
@@ -41,11 +44,15 @@ func _ready() -> void:
 	if _hitbox != null:
 		_hitbox.monitoring = false
 		_hitbox.body_entered.connect(_on_body_entered)
-	# The VFX autoplays "Init" (emitting ON) on load → force it off here. We can't go
-	# through set_breath_active(false): _active already starts false, so its guard would
-	# skip the play and leave the flame on.
+	if _vfx_animation_player != null:
+		_vfx_root = _vfx_animation_player.get_parent() as Node3D
+	# Start hidden: the VFX autoplays "Init" (emitting ON) on load, so force it off
+	# (emitting + visibility). We can't go through set_breath_active(false): _active
+	# already starts false, so its guard would skip the work.
 	if _vfx_animation_player != null:
 		_vfx_animation_player.play(_VFX_END)
+	if _vfx_root != null:
+		_vfx_root.visible = false
 	set_process(_animation_tree != null) # only self-drive when wired to a tree
 
 
@@ -59,6 +66,8 @@ func set_breath_active(active: bool) -> void:
 	if active == _active:
 		return
 	_active = active
+	if _vfx_root != null:
+		_vfx_root.visible = active
 	if _vfx_animation_player != null:
 		_vfx_animation_player.play(_VFX_START if active else _VFX_END)
 	if _hitbox != null:

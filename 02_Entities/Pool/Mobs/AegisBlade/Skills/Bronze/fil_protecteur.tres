@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://cfilprot2res7"]
+
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
+[ext_resource type="Script" uid="uid://bfilprot1eff7" path="res://02_Entities/Pool/Mobs/AegisBlade/Skills/Bronze/fil_protecteur.gd" id="2_eff"]
+
+[sub_resource type="Resource" id="Resource_fp"]
+script = ExtResource("2_eff")
+metadata/_custom_type_script = "uid://bfilprot1eff7"
+
+[resource]
+script = ExtResource("1_skill")
+name = "Fil protecteur"
+description = "La conversion de l'Aegis Blade passe de 25% à 35% des dégâts infligés."
+skill_effect = SubResource("Resource_fp")
+metadata/_custom_type_script = "uid://dfby4merlgkep"

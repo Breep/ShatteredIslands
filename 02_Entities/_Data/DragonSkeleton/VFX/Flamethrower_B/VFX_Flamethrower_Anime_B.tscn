@@ -317,6 +317,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 2, 0, -1, -8.74228e-08, 0, 0, 
 layers = 8196
 material_override = SubResource("StandardMaterial3D_4feka")
 cast_shadow = 0
+emitting = false
 amount = 60
 lifetime = 0.8
 randomness = 1.0

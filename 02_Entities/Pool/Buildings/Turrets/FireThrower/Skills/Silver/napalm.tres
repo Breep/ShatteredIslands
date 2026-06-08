@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://dnaplm1res7k2"]
+
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
+[ext_resource type="Script" uid="uid://cnaplmefgax3a" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Skills/Silver/napalm.gd" id="2_eff"]
+
+[sub_resource type="Resource" id="Resource_np"]
+script = ExtResource("2_eff")
+_flame_collision_size = Vector3(3.3, 3.8, 2.9)
+metadata/_custom_type_script = "uid://cnaplmeff9x3a"
+
+[resource]
+script = ExtResource("1_skill")
+skill_id = 2
+name = "Napalm"
+description = "Augmente la zone du lance-flamme de 200%."
+skill_effect = SubResource("Resource_np")
+metadata/_custom_type_script = "uid://dfby4merlgkep"

@@ -752,11 +752,7 @@ func _on_summon_entity_button_pressed() -> void:
 				entity_modifier[FortificationDrone.Modifier.RESPAWN_TIMER] = edits[3].text.to_float()
 
 			Entity.EntityType.AEGIS_BLADE:
-				entity_modifier[AegisBlade.Modifier.AD] = edits[0].text.to_float()
-				entity_modifier[AegisBlade.Modifier.AS] = edits[1].text.to_float()
-				entity_modifier[AegisBlade.Modifier.SHIELD_AD_MAX] = edits[2].text.to_float()
-				entity_modifier[AegisBlade.Modifier.SHIELD_AD_TAU] = edits[3].text.to_float()
-				entity_modifier[AegisBlade.Modifier.DAMAGE_AS_SHIELD] = edits[4].text.to_float()
+				pass  # Plus de modifiers : la blade tire ses stats de l'entity_desc / skills.
 
 			Entity.EntityType.TREX:
 				entity_modifier[TRex.Modifier.PRIMAL_SHAKE_PERIOD] = edits[0].text.to_float()

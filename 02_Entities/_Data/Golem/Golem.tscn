@@ -172,7 +172,10 @@ bind/45/pose = Transform3D(2.428576, 0, 0, 0, 2.4285297, -0.01497883, 0, 0.01497
 
 [node name="MoltenGolem" type="Node3D" unique_id=281509732]
 
-[node name="Skeleton3D" type="Skeleton3D" parent="." unique_id=568249234]
+[node name="Node3D" type="Node3D" parent="." unique_id=1148553213]
+transform = Transform3D(-1.5, 0, -1.3113416e-07, 0, 1.5, 0, 1.3113416e-07, 0, -1.5, 0, 0, 0)
+
+[node name="Skeleton3D" type="Skeleton3D" parent="Node3D" unique_id=568249234]
 bones/0/name = "root"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 5.960466e-08, -2.6054024e-15, -5.960466e-08, 1, -4.371139e-08, 0, 4.371139e-08, 1, 1.4232658e-07, 0, 0)
@@ -503,9 +506,9 @@ bones/46/position = Vector3(-0.0007568359, 0.107353896, 0.001044178)
 bones/46/rotation = Quaternion(0.0023402725, -0.0011765836, 0.120306194, 0.9927334)
 bones/46/scale = Vector3(1, 1, 1)
 
-[node name="MoltenGolem" type="MeshInstance3D" parent="Skeleton3D" unique_id=132877774]
+[node name="MoltenGolem" type="MeshInstance3D" parent="Node3D/Skeleton3D" unique_id=132877774]
 mesh = SubResource("ArrayMesh_qeyvq")
 skin = SubResource("Skin_tkwx2")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1349070937]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node3D" unique_id=1349070937]
 libraries/ = ExtResource("1_0u5h3")

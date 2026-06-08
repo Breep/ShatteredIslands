@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="2_boaaa"]
 [ext_resource type="PackedScene" uid="uid://5ccditks7xar" path="res://02_Entities/_Data/Goblins/all_goblins.tscn" id="2_ovu33"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="3_2lmyn"]
-[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/LargeHealthBar/large_health_bar_component.tscn" id="3_bfpeu"]
+[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.tscn" id="3_bfpeu"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://xjiuc10pv21c" path="res://02_Entities/Pool/Mobs/Goblins/GoblinArcher/goblin_archer_animatrion_tree.res" id="4_dhx74"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="4_r6t07"]
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="7_r6t07"]

@@ -3,8 +3,10 @@
 [ext_resource type="Texture2D" uid="uid://opwnfxta0ova" path="res://02_Entities/Pool/Mobs/Chickens/Data/chicken_diffuse.png" id="1_qs13o"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ykqu3"]
-albedo_color = Color(0.7493896, 0.30111715, 0.33861724, 1)
+albedo_color = Color(0.8789533, 0.43920746, 0.46432853, 1)
 albedo_texture = ExtResource("1_qs13o")
+metallic = 0.73
+roughness = 0.17
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_banjt"]
 resource_name = "Chicken"
@@ -893,6 +895,7 @@ bones/12/rotation = Quaternion(1.5295967e-07, -0.4917123, 1.5807893e-07, 0.87075
 bones/12/scale = Vector3(0.99999994, 1, 0.99999994)
 
 [node name="ChickenAttack" type="MeshInstance3D" parent="Skeleton3D" unique_id=1839562433]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_ykqu3")
 mesh = SubResource("ArrayMesh_ln18q")
 skin = SubResource("Skin_utmen")

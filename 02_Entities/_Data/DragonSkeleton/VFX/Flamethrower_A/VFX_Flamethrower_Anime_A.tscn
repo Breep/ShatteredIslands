@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://c2nyd5a7y0ble" path="res://21_Props/DefaultBattleIsland/Arch_island/VFX/shaders/s_Disolver_Firex_p.tres" id="1_eh4y0"]
 [ext_resource type="Texture2D" uid="uid://d146nw08uassy" path="res://21_Props/DefaultBattleIsland/Arch_island/VFX/textures/T_smoke_bb1fa_b.png" id="2_0kmg7"]
-[ext_resource type="Texture2D" uid="uid://nyyc5vq2e8a8" path="res://21_Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Textures/T_VFX_Noise_44xainv.png" id="3_isjqu"]
+[ext_resource type="Texture2D" uid="uid://nyyc5vq2e8a8" path="res://22_VFX/Elementary/VFX/textures/T_VFX_Noise_44xainv.png" id="3_isjqu"]
 [ext_resource type="Texture2D" uid="uid://dbolhruq43rtu" path="res://21_Props/DefaultBattleIsland/Arch_island/VFX/textures/T_Blood_bulb_UJ1_testtyyxx.png" id="4_5e0tk"]
 [ext_resource type="Curve" uid="uid://bp2w41idysxtp" path="res://21_Props/DefaultBattleIsland/Arch_island/VFX/textures/curves/c_firestretchtrho.tres" id="5_4ypdm"]
 [ext_resource type="ArrayMesh" uid="uid://b6xryu8r5hcrf" path="res://21_Props/DefaultBattleIsland/Arch_island/VFX/objects/sm_coneblood.obj" id="6_q7f1v"]
@@ -114,8 +114,8 @@ spread = 0.0
 initial_velocity_min = 16.0
 initial_velocity_max = 18.0
 gravity = Vector3(0, 0, 0)
-scale_min = 0.8
-scale_max = 1.5
+scale_min = 0.79999995
+scale_max = 2.5
 scale_curve = SubResource("CurveXYZTexture_ckbag")
 color = Color(1.4, 1, 0.6, 1)
 color_ramp = SubResource("GradientTexture1D_i6g6w")
@@ -329,7 +329,6 @@ process_material = SubResource("ParticleProcessMaterial_q8p4o")
 draw_pass_1 = SubResource("QuadMesh_80lqt")
 
 [node name="firecone" type="GPUParticles3D" parent="." unique_id=1714989473]
-emitting = false
 layers = 4
 material_override = SubResource("StandardMaterial3D_f3uai")
 cast_shadow = 0
@@ -342,7 +341,6 @@ process_material = SubResource("ParticleProcessMaterial_nqdqd")
 draw_pass_1 = ExtResource("6_q7f1v")
 
 [node name="sparks3" type="GPUParticles3D" parent="." unique_id=34878374]
-emitting = false
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 2, 0, -1, -8.74228e-08, 0, 0, -1.92885)
 layers = 8196
 material_override = SubResource("StandardMaterial3D_w8i3j")

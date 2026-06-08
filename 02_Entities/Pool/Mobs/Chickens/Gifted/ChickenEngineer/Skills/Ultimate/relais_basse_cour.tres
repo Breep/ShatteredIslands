@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://crelaisbc2res"]
+
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
+[ext_resource type="Script" uid="uid://5axt2c2oq1la" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenEngineer/Skills/Ultimate/relais_basse_cour.gd" id="2_eff"]
+
+[sub_resource type="Resource" id="Resource_e"]
+script = ExtResource("2_eff")
+metadata/_custom_type_script = "uid://brelaisbc1eff7"
+
+[resource]
+script = ExtResource("1_skill")
+skill_id = 7
+name = "Relais de basse-cour"
+description = "Donne AP x 200% Shield à l'allié le plus blessé dans Area(6)."
+skill_effect = SubResource("Resource_e")
+metadata/_custom_type_script = "uid://dfby4merlgkep"

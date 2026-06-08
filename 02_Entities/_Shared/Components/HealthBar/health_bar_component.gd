@@ -1,15 +1,12 @@
 class_name HealthBarComponent
 extends EntityComponent
 
-## Shared Hero/NPC info-panel base class. Drives the health/shield/block/grid
-## bars on the main bar, the taunt 3D visual, and a dynamic container of
+## Shared info-panel base class, marker-agnostic. Drives the health/shield/block/grid
+## bars on the main bar, the taunt/invulnerable visuals, and a dynamic container of
 ## AlterationIcon widgets (populated from the owner's alterations via
 ## the aggregate `alteration_changed` signal — no per-type wiring required).
-
-#region ============================== Export ==============================
-@export_group("External Nodes")
-@export var _spawn: Marker3D
-#endregion
+## The screen-pinned Boss bar extends this directly; the per-entity bars that follow
+## a 3D marker extend HealthBar3DComponent.
 
 #region ============================== Onready ==============================
 @onready var _health_bar: ColorRect = %HealthBar
@@ -27,8 +24,6 @@ extends EntityComponent
 @onready var _level_label: Label = %LevelLabel
 
 @onready var _alterations_container: Container = %AlterationsContainer
-
-@onready var _main_control: Control = %MainControl
 #endregion
 
 const ALTERATION_ICON_SCENE: PackedScene = preload("res://02_Entities/_Shared/Components/Alterations/AlterationIcon/alteration_icon.tscn")
@@ -85,13 +80,6 @@ func _exit_tree() -> void:
 	DebugHealthBarOverlay.unregister(_on_debug_overlay_toggled)
 
 
-func _process(_delta: float) -> void:
-	var camera := get_viewport().get_camera_3d()
-	var tracked := _get_tracked_spawn()
-	if camera != null and tracked != null:
-		_main_control.position = camera.unproject_position(tracked.global_position) - Vector2(_main_control.size.x / 2, 0)
-
-
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("trigger_health_bar_value"):
 		DebugHealthBarOverlay.toggle()
@@ -116,14 +104,6 @@ func setup_grid_bar(small_block: int, big_block: int) -> void:
 		_grid_bar.material.set_shader_parameter("Step_Y_Height", 1)
 	else:
 		_grid_bar.material.set_shader_parameter("Step_Y_Height", 0)
-#endregion
-
-
-#region ============================== Virtual hooks ==============================
-## Marker tracked in _process to project the panel on screen.
-## Heroes override to toggle between fight/tavern markers via apply_display_mode.
-func _get_tracked_spawn() -> Marker3D:
-	return _spawn
 #endregion
 
 

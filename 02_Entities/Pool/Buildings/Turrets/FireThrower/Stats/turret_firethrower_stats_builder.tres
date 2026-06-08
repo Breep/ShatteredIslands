@@ -14,16 +14,16 @@ metadata/_custom_type_script = "uid://brthobm35g70u"
 
 [sub_resource type="Resource" id="Resource_8sieu"]
 script = ExtResource("1_ifloe")
+base = 20.0
 metadata/_custom_type_script = "uid://brthobm35g70u"
 
 [sub_resource type="Resource" id="Resource_egru0"]
 script = ExtResource("1_ifloe")
-base = 10.0
+base = 0.01
 metadata/_custom_type_script = "uid://brthobm35g70u"
 
 [sub_resource type="Resource" id="Resource_08f4d"]
 script = ExtResource("1_ifloe")
-base = 1.0
 metadata/_custom_type_script = "uid://brthobm35g70u"
 
 [sub_resource type="Resource" id="Resource_0e3w6"]
@@ -44,7 +44,7 @@ metadata/_custom_type_script = "uid://brthobm35g70u"
 
 [sub_resource type="Resource" id="Resource_la0qy"]
 script = ExtResource("1_ifloe")
-base = 20.0
+base = 800.0
 metadata/_custom_type_script = "uid://brthobm35g70u"
 
 [sub_resource type="Resource" id="Resource_yth3a"]
@@ -57,11 +57,12 @@ metadata/_custom_type_script = "uid://brthobm35g70u"
 
 [sub_resource type="Resource" id="Resource_gm00s"]
 script = ExtResource("1_ifloe")
-base = 20.0
+base = 30.0
 metadata/_custom_type_script = "uid://brthobm35g70u"
 
 [sub_resource type="Resource" id="Resource_hioiq"]
 script = ExtResource("1_ifloe")
+base = 2.0
 metadata/_custom_type_script = "uid://brthobm35g70u"
 
 [sub_resource type="Resource" id="Resource_htys3"]
@@ -97,4 +98,5 @@ crit_resistance = SubResource("Resource_vgmwi")
 armor = SubResource("Resource_ikl5b")
 magic_resistance = SubResource("Resource_hmi0e")
 poison_resistance = SubResource("Resource_2ix7u")
+auto_attack_type = 1
 metadata/_custom_type_script = "uid://58307hvsc6op"
