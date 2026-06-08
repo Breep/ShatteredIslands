@@ -5,10 +5,7 @@
 
 [sub_resource type="Resource" id="Resource_grenade"]
 script = ExtResource("2_eff")
-_damage = Array[float]([20.0, 30.0, 40.0, 55.0, 70.0])
-_vulnerability_stacks = Array[float]([5.0, 7.0, 9.0, 11.0, 15.0])
 _period = Array[float]([7.0, 7.0, 7.0, 7.0, 7.0])
-_hit_radius = Array[float]([2.0, 2.0, 2.0, 2.0, 2.0])
 
 [resource]
 script = ExtResource("1_card")
@@ -18,3 +15,4 @@ _card_effect = SubResource("Resource_grenade")
 points = Dictionary[int, int]({
 2: 1
 })
+_lvl = 5

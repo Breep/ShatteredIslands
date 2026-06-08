@@ -49,7 +49,8 @@ func projectile_attack(target: Entity, projectile_type: Projectile.Type, project
 	var matching := _collect_matching_modifiers(projectile_type, category)
 	_bake_modifier_callbacks(projectile_stats, matching)
 	var count := _resolve_spawn_count(matching)
-	
+	projectile_stats.level = _resolve_spawn_level(matching)
+
 	for i in count:
 		var offset := _compute_spread_offset(i, count)
 		_spawn_manager.spawn_projectile(_owner, target, projectile_type, projectile_spawn, projectile_stats.duplicate(), offset)
@@ -95,6 +96,14 @@ func _resolve_spawn_count(modifiers: Array[ProjectileModifier]) -> int:
 		if mod.count_modifier_callback.is_valid():
 			callbacks.append(mod.count_modifier_callback)
 	return CountResolver.resolve(callbacks, 1)
+
+
+func _resolve_spawn_level(modifiers: Array[ProjectileModifier]) -> int:
+	var callbacks: Array[Callable] = []
+	for mod in modifiers:
+		if mod.level_modifier_callback.is_valid():
+			callbacks.append(mod.level_modifier_callback)
+	return clampi(LevelResolver.resolve(callbacks, 1), 1, Projectile.MAX_LEVEL)
 
 
 # Offset horizontal de spawn pour le i-ème projectile sur N.

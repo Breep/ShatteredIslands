@@ -3,35 +3,27 @@
 # dégâts magiques + stacks de vulnérabilité (magique) à tous les ennemis dans
 # un rayon autour du point d'impact.
 #
-# Le comportement vit dans la classe (voir CLAUDE.md du dossier Projectiles) :
-# _aoe_explosion est auto-enregistré comme on_hit_callback dans _ready(). Les
-# paramètres par-spawn (damage, stacks, radius, attribution) sont injectés par
-# l'émetteur via configure() — typiquement depuis un on_spawn_callback de la
-# carte qui tire la grenade.
+# Variables par-level : _damage, _vulnerability_stacks, _hit_radius sont des
+# Array @export indexées par level (résolu par ProjectileComponent +
+# LevelResolver, repris depuis _stats.level dans Projectile.init()).
+# L'attribution des actions (pour le pipeline damage / alterations) vient de
+# _stats.source_id, mis par l'émetteur (typiquement card_name côté carte).
 class_name Grenade
 extends Projectile
 
 const _EXPLOSION_VFX: PackedScene = preload("res://03_SpellsAndProjectiles/Projectiles/Abilities/Grenade/VFX/VFX_Explosion_Electric_B.tscn")
 const _EXPLOSION_LIFETIME: float = 3.0
 
-var damage: float = 0.0
-var vulnerability_stacks: float = 0.0
-var hit_radius: float = 0.0
-# Id d'attribution pour le pipeline damage/alterations (= card_name côté carte).
-var source_id: StringName = &""
-
-
-func configure(p_damage: float, p_vulnerability_stacks: float, p_hit_radius: float, p_source_id: StringName) -> void:
-	damage = p_damage
-	vulnerability_stacks = p_vulnerability_stacks
-	hit_radius = p_hit_radius
-	source_id = p_source_id
+@export var _damage: Array[float] = []
+@export var _vulnerability_stacks: Array[float] = []
+## Rayon (unités monde) de la zone d'explosion par level.
+@export var _hit_radius: Array[float] = []
 
 
 func _ready() -> void:
 	# Auto-register le comportement par défaut AVANT que super._ready() ne fasse
-	# tourner les on_spawn callbacks de la carte (qui appellent configure()).
-	# Au moment où le 1er hit arrive, _aoe_explosion est déjà dans la liste.
+	# tourner les on_spawn callbacks de la carte. Au moment où le 1er hit
+	# arrive, _aoe_explosion est déjà dans la liste.
 	if _stats != null:
 		_stats.on_hit_callbacks.append(_aoe_explosion)
 	super._ready()
@@ -41,9 +33,14 @@ func _aoe_explosion(cb_vars: Dictionary) -> void:
 	var source: Entity = cb_vars.get(ProjectileStats.VarType.SOURCE)
 	if not is_instance_valid(source): return
 	var impact_pos: Vector3 = cb_vars.get(ProjectileStats.VarType.POSITION, global_position)
-	
+
+	var damage: float = value_at_level(_damage, level, 0.0)
+	var vulnerability_stacks: float = value_at_level(_vulnerability_stacks, level, 0.0)
+	var hit_radius: float = value_at_level(_hit_radius, level, 0.0)
+	var source_id: StringName = _stats.source_id if _stats != null else &""
+
 	_spawn_explosion_vfx(source, impact_pos)
-	
+
 	for enemy: Entity in source.target.get_targets(TargetComponent.MultipleTargettingStrategy.ENEMIES):
 		if enemy == null or not is_instance_valid(enemy): continue
 		if enemy.global_position.distance_to(impact_pos) > hit_radius: continue

@@ -16,6 +16,11 @@ var sizes: Array[Projectile.Size]
 # Pré-spawn : mute le compteur de projectiles à tirer (cf. CountResolver).
 # Reçoit un Dictionary { CountResolver.COUNT: int } à muter.
 var count_modifier_callback: Callable
+# Pré-spawn : mute le level du projectile à tirer (cf. LevelResolver).
+# Reçoit un Dictionary { LevelResolver.LEVEL: int } à muter. Le level
+# détermine ensuite quel index dans les Array @export du projectile est lu
+# (damage, hit_radius, etc. selon la sous-classe).
+var level_modifier_callback: Callable
 # Per-projectile : appelés à l'apparition / au hit du projectile spawné.
 var on_spawn_callback: Callable # var: Dictionary
 var on_hit_callback: Callable # var: Dictionary

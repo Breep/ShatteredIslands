@@ -7,6 +7,11 @@ signal target_hit(entity: Entity, gpos: Vector3)
 const TICKS_PER_SECOND: int = 60
 ## Squared hit radius in world units (~0.63 unit radius). Adjust per projectile if needed.
 const HIT_DISTANCE_SQ: float = 0.4
+## Level max applicable à n'importe quel projectile. Le level résolu côté
+## composant est clampé dans [1, MAX_LEVEL]. Les sous-classes peuvent
+## déclarer leurs Array @export par-level avec moins d'entrées : la lecture
+## via value_at_level() clampe l'index sur la taille effective de l'array.
+const MAX_LEVEL: int = 10
 
 # === ENUMS ===
 enum Type {
@@ -44,6 +49,11 @@ enum Size {
 var uid: int = -1
 
 # === RUNTIME ===
+# Level résolu au lancement (cf. ProjectileComponent + LevelResolver). Sert
+# aux sous-classes pour indexer leurs Array @export par-level via
+# value_at_level(). Repris depuis _stats.level dans init().
+var level: int = 1
+
 var _source: Entity
 var _target: Entity
 var _stats: ProjectileStats
@@ -76,7 +86,18 @@ func init(p_source: Entity, p_target: Entity, p_stats: ProjectileStats) -> Proje
 	_source = p_source
 	_target = p_target
 	_stats = p_stats
+	level = p_stats.level if p_stats != null else 1
 	return self
+
+
+# Accès indexé safe à une Array @export par-level. Clamp l'index dans les
+# bornes de l'array et renvoie `default` si l'array est vide (= projectile
+# non configuré pour ce stat). Convention : level 1 → index 0.
+static func value_at_level(arr: Array, p_level: int, default: Variant = 0.0) -> Variant:
+	if arr.is_empty():
+		return default
+	var idx: int = clampi(p_level - 1, 0, arr.size() - 1)
+	return arr[idx]
 
 
 func _ready() -> void:
