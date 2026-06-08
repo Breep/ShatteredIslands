@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://vfhdgbujddoq"]
+
+[ext_resource type="Script" uid="uid://bidcpvfrwl8rd" path="res://01_Cards/Pool/Cards/Prototyping/Projectiles/ProjectileBounce/card_projectile_bounce.proto.gd" id="1_effect"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="2_card"]
+
+[sub_resource type="Resource" id="Resource_effect"]
+script = ExtResource("1_effect")
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_pic"]
+
+[resource]
+script = ExtResource("2_card")
+name = &"proto proj bounce"
+picture = SubResource("PlaceholderTexture2D_pic")
+families = Array[int]([0])
+_card_effect = SubResource("Resource_effect")
+points = Dictionary[int, int]({
+0: 1
+})
+_lvl = 5

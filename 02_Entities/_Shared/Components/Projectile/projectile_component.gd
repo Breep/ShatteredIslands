@@ -50,6 +50,7 @@ func projectile_attack(target: Entity, projectile_type: Projectile.Type, project
 	_bake_modifier_callbacks(projectile_stats, matching)
 	var count := _resolve_spawn_count(matching)
 	projectile_stats.level = _resolve_spawn_level(matching)
+	projectile_stats.bounces_remaining = _resolve_spawn_bounce(matching, projectile_stats.bounces_remaining)
 
 	for i in count:
 		var offset := _compute_spread_offset(i, count)
@@ -104,6 +105,17 @@ func _resolve_spawn_level(modifiers: Array[ProjectileModifier]) -> int:
 		if mod.level_modifier_callback.is_valid():
 			callbacks.append(mod.level_modifier_callback)
 	return clampi(LevelResolver.resolve(callbacks, 1), 1, Projectile.MAX_LEVEL)
+
+
+# Base = bounce déjà configuré sur le projectile (lu depuis projectile_stats),
+# pas une constante : les modifiers s'ajoutent par-dessus. Aucun modifier matché
+# → la valeur configurée est rendue inchangée.
+func _resolve_spawn_bounce(modifiers: Array[ProjectileModifier], base: float) -> float:
+	var callbacks: Array[Callable] = []
+	for mod in modifiers:
+		if mod.bounce_modifier_callback.is_valid():
+			callbacks.append(mod.bounce_modifier_callback)
+	return BounceResolver.resolve(callbacks, base)
 
 
 # Offset horizontal de spawn pour le i-ème projectile sur N.

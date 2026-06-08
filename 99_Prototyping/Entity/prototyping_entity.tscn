@@ -5,13 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://10_Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="4_egh8k"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="4_kq8si"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="4_r0wv3"]
-[ext_resource type="Resource" uid="uid://dcy1yaucyfsq1" path="res://01_Cards/Pool/Cards/Prototyping/PeriodicSummon/card_periodic_summon.proto.tres" id="5_cs3s0"]
+[ext_resource type="Resource" uid="uid://vfhdgbujddoq" path="res://01_Cards/Pool/Cards/Prototyping/Projectiles/ProjectileBounce/card_projectile_bounce.proto.tres" id="5_r0wv3"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]
 [ext_resource type="Script" uid="uid://nkraydv4mdse" path="res://01_Cards/Templates/Deck/hand.gd" id="6_jbcul"]
-[ext_resource type="Resource" uid="uid://bx3it6njfgqys" path="res://01_Cards/Pool/Cards/Prototyping/SummonNumber/card_summon_number.proto.tres" id="6_xqnte"]
-[ext_resource type="Resource" uid="uid://nuxyfmjwc68d" path="res://01_Cards/Pool/Cards/Prototyping/LevelBonus/card_level_bonus.proto.tres" id="7_jbcul"]
 [ext_resource type="PackedScene" uid="uid://dvuq5n41nak3u" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/ArenaZoneManager/arena_zone_manager.tscn" id="8_fl2p6"]
-[ext_resource type="Resource" path="res://01_Cards/Pool/Cards/Prototyping/AuraHp/card_aura_hp.proto.tres" id="8_xqnte"]
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://90_Modules/PickableClickable/PickableModule/pickable_module.tscn" id="9_614kc"]
 [ext_resource type="PackedScene" uid="uid://bg5efhnq0erdv" path="res://90_Modules/PickableClickable/ClickableModule/clickable_module.tscn" id="10_m73qc"]
 [ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="10_r0wv3"]
@@ -30,10 +27,7 @@
 [sub_resource type="Resource" id="Resource_xqnte"]
 script = ExtResource("6_jbcul")
 _cards = Dictionary[StringName, ExtResource("4_r0wv3")]({
-&"aze": ExtResource("5_cs3s0"),
-&"azraf": ExtResource("6_xqnte"),
-&"fgafazf": ExtResource("7_jbcul"),
-&"gfazgazgaz": ExtResource("8_xqnte")
+&"zad": ExtResource("5_r0wv3")
 })
 metadata/_custom_type_script = "uid://nkraydv4mdse"
 
@@ -68,6 +62,30 @@ unique_name_in_owner = true
 
 [node name="GoblinBerserker" parent="Node3D/Entities" unique_id=1459343337 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("18_kq8si")]
 transform = Transform3D(0.26981065, 0, -0.9629133, 0, 1.0000001, 0, 0.9629133, 0, 0.26981065, -4.646197, 0, 2.0751035)
+level = 4
+team = 2
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
+[node name="GoblinBerserker2" parent="Node3D/Entities" unique_id=217403577 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("18_kq8si")]
+transform = Transform3D(0.26981065, 0, -0.9629133, 0, 1.0000001, 0, 0.9629133, 0, 0.26981065, -4.7226706, 0, 4.701676)
+level = 4
+team = 2
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
+[node name="GoblinBerserker3" parent="Node3D/Entities" unique_id=1195568387 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("18_kq8si")]
+transform = Transform3D(0.26981065, 0, -0.9629133, 0, 1.0000001, 0, 0.9629133, 0, 0.26981065, -6.95664, 0, 3.9353442)
+level = 4
+team = 2
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
+[node name="GoblinBerserker4" parent="Node3D/Entities" unique_id=202088473 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("18_kq8si")]
+transform = Transform3D(0.26981065, 0, -0.9629133, 0, 1.0000001, 0, 0.9629133, 0, 0.26981065, -8.54075, 0, 2.1052177)
 level = 4
 team = 2
 battle_id = 1
