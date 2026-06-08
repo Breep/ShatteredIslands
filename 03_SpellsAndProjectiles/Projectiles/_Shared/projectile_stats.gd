@@ -8,9 +8,9 @@ enum VarType { # Variable types of the callbacks
 	POSITION
 }
 
-var speed: int # Speed of the projectile
+@export var speed: int # Speed of the projectile
 
-var bounces_remaining: float = 0 # number of bounce
+@export var bounces_remaining: float = 0 # number of bounce
 
-var on_spawn_callbacks: Array[Callable] # var: Dictionary
-var on_hit_callbacks: Array[Callable] # var: Dictionary
+@export var on_spawn_callbacks: Array[Callable] # var: Dictionary
+@export var on_hit_callbacks: Array[Callable] # var: Dictionary

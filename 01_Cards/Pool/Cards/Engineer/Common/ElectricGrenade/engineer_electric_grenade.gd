@@ -6,7 +6,7 @@ extends CardEffect
 ## magiques et stacks de vulnérabilité (aux dégâts magiques) à tous les ennemis
 ## dans une petite zone autour du point d'impact.
 
-const ELECTRIC_EXPLOSION_VFX: PackedScene = preload("res://03_SpellsAndProjectiles/Projectiles/Grenade/VFX/VFX_Explosion_Electric_B.tscn")
+const ELECTRIC_EXPLOSION_VFX: PackedScene = preload("res://03_SpellsAndProjectiles/Projectiles/Abilities/Grenade/VFX/VFX_Explosion_Electric_B.tscn")
 const EXPLOSION_LIFETIME: float = 3.0
 
 @export var _damage: Array[float]

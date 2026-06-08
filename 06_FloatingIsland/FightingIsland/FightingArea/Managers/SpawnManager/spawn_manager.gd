@@ -102,18 +102,18 @@ func spawn_spell(spell: Spell) -> void:
 	_spells_node.add_child(spell)
 
 
-func spawn_projectile(source: Entity, target: Entity, type: Projectile.Type, spawn_node: Node3D, stats: ProjectileStats) -> void:
+func spawn_projectile(source: Entity, target: Entity, type: Projectile.Type, spawn_node: Node3D, stats: ProjectileStats, spawn_offset: Vector3 = Vector3.ZERO) -> void:
 	var scene: PackedScene = Shared.PROJECTILE_SCENES[type]
 	if not scene: return
-	
+
 	var proj: Projectile = scene.instantiate()
 	proj.name = "Proj_" + str(_projectile_counter)
 	proj.uid = _projectile_counter
 	_projectile_counter += 1
-	
+
 	proj.init(source, target, stats)
 	_projectiles_node.add_child(proj)
-	proj.global_position = spawn_node.global_position
+	proj.global_position = spawn_node.global_position + spawn_offset
 	proj.init_trajectory()
 	_active_projectiles.append(proj)
 	

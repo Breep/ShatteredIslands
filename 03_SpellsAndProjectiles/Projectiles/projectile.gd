@@ -10,18 +10,18 @@ const HIT_DISTANCE_SQ: float = 0.4
 
 # === ENUMS ===
 enum Type {
-	SHADOW_BOLT,
-	VENOMOUS_DART,
-	SNAKE,
-	COSMIC_BOLT,
-	SHIELD_THROW,
-	POISON_FLASK,
-	SMALL_EGG,
-	FIRE_BALL,
-	BULLET,
-	GAMMA_TURRET,
-	ARROW,
-	GRENADE,
+	SHADOW_BOLT = 0,
+	VENOMOUS_DART = 1,
+	SNAKE = 2,
+	COSMIC_BOLT = 3,
+	SHIELD_THROW = 4,
+	POISON_FLASK = 5,
+	SMALL_EGG = 6,
+	FIRE_BALL = 7,
+	BULLET = 8,
+	GAMMA_TURRET = 9,
+	ARROW = 10,
+	GRENADE = 11,
 }
 
 enum Category {
@@ -67,22 +67,16 @@ func get_source() -> Entity:
 
 
 ## Must be called before adding to scene tree.
+## Les stats sont supposées déjà "bakées" par le composant émetteur
+## (ProjectileComponent.projectile_attack) : on_hit/on_spawn callbacks issus
+## des modifiers de la source y sont déjà accumulés. Le projectile lui-même
+## n'interroge plus le registre de modifiers — ce qui évite la ré-entrée
+## quand plusieurs projectiles sont spawnés en un tir (count modifier).
 func init(p_source: Entity, p_target: Entity, p_stats: ProjectileStats) -> Projectile:
 	_source = p_source
 	_target = p_target
 	_stats = p_stats
-	_get_modifiers()
 	return self
-
-
-func _get_modifiers() -> void:
-	if _source == null: return
-	for modifier in _source.projectile_modifiers_registry.get_all_modifiers():
-		if not modifier.filter(self): continue
-		if modifier.on_hit_callback.is_valid():
-			_stats.on_hit_callbacks.append(modifier.on_hit_callback)
-		if modifier.on_spawn_callback.is_valid():
-			_stats.on_spawn_callbacks.append(modifier.on_spawn_callback)
 
 
 func _ready() -> void:

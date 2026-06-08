@@ -1,6 +1,11 @@
 class_name ProjectileComponent
 extends EntityComponent
 
+# Rayon (en unités monde) de spread ajouté par projectile supplémentaire.
+# count=1 → rayon 0 (spawn pile au point indiqué). count=N → rayon = const × (N-1),
+# avec les projectiles répartis sur un cercle horizontal (plan XZ).
+const SPREAD_RADIUS_PER_EXTRA: float = 0.2
+
 var _spawn_manager: SpawnManager
 
 var _ability_projectiles_pool: Array[Projectile.Type]
@@ -38,7 +43,16 @@ func projectile_attack(target: Entity, projectile_type: Projectile.Type, project
 	if _spawn_manager == null:
 		Verbose.error("No SpawnManager connected", Verbose.Category.ENTITY_MODULE)
 		return
-	_spawn_manager.spawn_projectile(_owner, target, projectile_type, projectile_spawn, projectile_stats)
+	
+	var category: int = Projectile.Category.AUTO_ATTACK_PROJECTILE if is_auto_attack \
+		else Projectile.Category.ABILITY_PROJECTILE
+	var matching := _collect_matching_modifiers(projectile_type, category)
+	_bake_modifier_callbacks(projectile_stats, matching)
+	var count := _resolve_spawn_count(matching)
+	
+	for i in count:
+		var offset := _compute_spread_offset(i, count)
+		_spawn_manager.spawn_projectile(_owner, target, projectile_type, projectile_spawn, projectile_stats.duplicate(), offset)
 
 
 func register_projectile(projectile_type: Projectile.Type) -> void:
@@ -55,3 +69,41 @@ func fire_random(target: Entity, projectile_spawn: Node3D) -> void:
 	if _ability_projectiles_pool.is_empty(): return
 	var projectile_type: Projectile.Type = _ability_projectiles_pool.pick_random()
 	projectile_attack(target, projectile_type, projectile_spawn, ProjectileStats.new())
+
+
+# ============================== Private functions ==============================
+
+func _collect_matching_modifiers(p_type: int, p_category: int) -> Array[ProjectileModifier]:
+	var matching: Array[ProjectileModifier] = []
+	for mod: ProjectileModifier in _owner.projectile_modifiers_registry.get_all_modifiers():
+		if mod.filter_meta(p_type, p_category):
+			matching.append(mod)
+	return matching
+
+
+func _bake_modifier_callbacks(stats: ProjectileStats, modifiers: Array[ProjectileModifier]) -> void:
+	for mod in modifiers:
+		if mod.on_hit_callback.is_valid():
+			stats.on_hit_callbacks.append(mod.on_hit_callback)
+		if mod.on_spawn_callback.is_valid():
+			stats.on_spawn_callbacks.append(mod.on_spawn_callback)
+
+
+func _resolve_spawn_count(modifiers: Array[ProjectileModifier]) -> int:
+	var callbacks: Array[Callable] = []
+	for mod in modifiers:
+		if mod.count_modifier_callback.is_valid():
+			callbacks.append(mod.count_modifier_callback)
+	return CountResolver.resolve(callbacks, 1)
+
+
+# Offset horizontal de spawn pour le i-ème projectile sur N.
+# N=1 → ZERO. N>=2 → répartition uniforme sur un cercle XZ de rayon
+# proportionnel à (N-1), pour que plus on tire de projectiles plus l'éventail
+# s'élargit.
+func _compute_spread_offset(index: int, count: int) -> Vector3:
+	if count <= 1:
+		return Vector3.ZERO
+	var radius: float = SPREAD_RADIUS_PER_EXTRA * float(count - 1)
+	var angle: float = TAU * float(index) / float(count)
+	return Vector3(cos(angle) * radius, 0.0, sin(angle) * radius)
