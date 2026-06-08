@@ -111,7 +111,7 @@ mod.id = card_name
 mod.types = [Projectile.Type.GRENADE]
 var level_bonus := card_lvl - 1
 mod.level_modifier_callback = func(cb_vars: Dictionary) -> void:
-    cb_vars[LevelResolver.LEVEL] += level_bonus
+	cb_vars[LevelResolver.LEVEL] += level_bonus
 owner.projectile_modifiers_registry.register_modifier(mod)
 ```
 
