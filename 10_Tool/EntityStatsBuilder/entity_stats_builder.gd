@@ -56,6 +56,7 @@ enum DescType { ENTITY, HERO }
 @export var attack_power: StatGrowthRule
 @export var movement_speed: StatGrowthRule
 @export var scale: StatGrowthRule
+@export var aoe_size: StatGrowthRule
 @export var crit_chance: StatGrowthRule
 @export var crit_mult: StatGrowthRule
 @export var dodge: StatGrowthRule
@@ -104,6 +105,7 @@ func generate() -> void:
 		_apply_rule_to(stats, "attack_power", lvl, attack_power)
 		_apply_rule_to(stats, "movement_speed", lvl, movement_speed)
 		_apply_rule_to(stats, "scale", lvl, scale)
+		_apply_rule_to(stats, "aoe_size", lvl, aoe_size)
 		_apply_rule_to(stats, "crit_chance", lvl, crit_chance)
 		_apply_rule_to(stats, "crit_mult", lvl, crit_mult)
 		_apply_rule_to(stats, "dodge", lvl, dodge)

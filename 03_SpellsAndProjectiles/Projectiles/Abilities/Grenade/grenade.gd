@@ -36,7 +36,7 @@ func _aoe_explosion(cb_vars: Dictionary) -> void:
 
 	var damage: float = value_at_level(_damage, level, 0.0)
 	var vulnerability_stacks: float = value_at_level(_vulnerability_stacks, level, 0.0)
-	var hit_radius: float = value_at_level(_hit_radius, level, 0.0)
+	var hit_radius: float = value_at_level(_hit_radius, level, 0.0) * _source.stats.aoe_size
 	var source_id: StringName = _stats.source_id if _stats != null else &""
 
 	_spawn_explosion_vfx(source, impact_pos)

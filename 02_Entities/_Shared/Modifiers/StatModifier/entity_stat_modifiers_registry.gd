@@ -146,6 +146,7 @@ func _init(stats: EntityStats) -> void:
 	_stats_modifiers_dictionaries[EntityStats.StatType.AR] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.MS] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.SCALE] = StatModifierDictionary.new()
+	_stats_modifiers_dictionaries[EntityStats.StatType.AOE_SIZE] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.CRIT_RESISTANCE] = StatModifierDictionary.new()
 
 	# Mono avec Multi sœur (single)

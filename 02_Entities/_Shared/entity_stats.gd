@@ -19,6 +19,7 @@ enum StatType {
 	MS,
 	SCALE,
 	CRIT_RESISTANCE,
+	AOE_SIZE,
 
 	# --- Mono avec Multi sœur (lookup composite) ---
 	CRIT_CHANCE,
@@ -194,6 +195,18 @@ var scale: float:
 		scale_changed.emit(_scale)
 #endregion
 
+#region ============================== AoE Size ==============================
+signal aoe_size_changed(new_aoe_size: float)
+## Multiplicateur de taille des zones d'effet (AoE) émises par l'entité (1.0 = taille normale).
+@export var _aoe_size: float = 1.0
+var aoe_size: float:
+	get: return _aoe_size
+	set(value):
+		if value == _aoe_size: return
+		_aoe_size = value
+		aoe_size_changed.emit(_aoe_size)
+#endregion
+
 #region ============================== Protection ==============================
 signal crit_resistance_changed(new_crit_resistance: float)
 ## Réduction de la chance de se faire crit (%). S'applique à toutes les actions.
@@ -332,6 +345,7 @@ func get_stat(stat_type: StatType, action_type: Utils.ActionType = Utils.ActionT
 		StatType.AR:              return _attack_range
 		StatType.MS:              return _movement_speed
 		StatType.SCALE:           return _scale
+		StatType.AOE_SIZE:        return _aoe_size
 		StatType.CRIT_RESISTANCE: return _crit_resistance
 		StatType.CRIT_CHANCE:     return _crit_chance
 		StatType.CRIT_MULT:       return _crit_mult
@@ -390,6 +404,7 @@ func update_stat(stat_type: StatType, value: float, action_type: Utils.ActionTyp
 		StatType.AR:              attack_range = value
 		StatType.MS:              movement_speed = value
 		StatType.SCALE:           scale = value
+		StatType.AOE_SIZE:        aoe_size = value
 		StatType.CRIT_RESISTANCE: crit_resistance = value
 		StatType.CRIT_CHANCE:     crit_chance = value
 		StatType.CRIT_MULT:       crit_mult = value

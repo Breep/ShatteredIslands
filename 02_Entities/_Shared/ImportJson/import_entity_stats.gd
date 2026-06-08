@@ -34,6 +34,7 @@ const MONO_STATS: Dictionary = {
 	"attack_range": EntityStats.StatType.AR,
 	"movement_speed": EntityStats.StatType.MS,
 	"scale": EntityStats.StatType.SCALE,
+	"aoe_size": EntityStats.StatType.AOE_SIZE,
 	"crit_chance": EntityStats.StatType.CRIT_CHANCE,
 	"crit_mult": EntityStats.StatType.CRIT_MULT,
 	"dodge": EntityStats.StatType.DODGE,

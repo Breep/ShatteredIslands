@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://chhhtbofpr4y8"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_card"]
+[ext_resource type="Script" uid="uid://gx7i2kvka7b8" path="res://01_Cards/Pool/Cards/Prototyping/AoeSize/card_aoe_size.proto.gd" id="2_effect"]
+
+[sub_resource type="Resource" id="Resource_effect"]
+script = ExtResource("2_effect")
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_pic"]
+
+[resource]
+script = ExtResource("1_card")
+name = &"proto aoe size"
+picture = SubResource("PlaceholderTexture2D_pic")
+families = Array[int]([0])
+_card_effect = SubResource("Resource_effect")
+points = Dictionary[int, int]({
+0: 1
+})
