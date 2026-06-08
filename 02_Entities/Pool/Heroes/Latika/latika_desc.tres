@@ -14,7 +14,7 @@
 [ext_resource type="Resource" uid="uid://dlatikastat07" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_07.tres" id="3_l07"]
 [ext_resource type="Resource" uid="uid://dlatikastat08" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_08.tres" id="3_l08"]
 [ext_resource type="Resource" uid="uid://dlatikastat1a" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_09.tres" id="3_l09"]
-[ext_resource type="Resource" uid="uid://dlatikastat10" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_10.tres" id="3_l10"]
+[ext_resource type="Resource" uid="uid://clatikastat10" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_10.tres" id="3_l10"]
 [ext_resource type="Resource" uid="uid://dlatikastat11" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_11.tres" id="3_l11"]
 [ext_resource type="Resource" uid="uid://dlatikastat12" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_12.tres" id="3_l12"]
 [ext_resource type="Resource" uid="uid://dlatikastat13" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_13.tres" id="3_l13"]
@@ -60,4 +60,10 @@ stats = Dictionary[int, ExtResource("2_es")]({
 19: ExtResource("3_l19"),
 20: ExtResource("3_l20")
 })
+aa_1_release_normalized = 0.67
+aa_2_release_normalized = 0.67
+aa_3_release_normalized = 0.67
+aa_1_anim_base_duration = 5.0
+aa_2_anim_base_duration = 5.0
+aa_3_anim_base_duration = 5.0
 metadata/_custom_type_script = "uid://dtcjta70luxvr"
