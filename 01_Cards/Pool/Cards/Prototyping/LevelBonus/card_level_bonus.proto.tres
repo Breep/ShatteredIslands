@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://nuxyfmjwc68d"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_card"]
+[ext_resource type="Script" uid="uid://bfx3nx36ox1bc" path="res://01_Cards/Pool/Cards/Prototyping/LevelBonus/card_level_bonus.proto.gd" id="1_eff"]
+
+[sub_resource type="Resource" id="Resource_effect"]
+script = ExtResource("1_eff")
+_level_bonus = 4
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_proto"]
+
+[resource]
+script = ExtResource("1_card")
+name = &"proto level bonus"
+picture = SubResource("PlaceholderTexture2D_proto")
+families = Array[int]([0])
+_card_effect = SubResource("Resource_effect")
+points = Dictionary[int, int]({
+0: 1
+})
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

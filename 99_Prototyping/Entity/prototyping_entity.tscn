@@ -5,10 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://10_Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="4_egh8k"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="4_kq8si"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="4_r0wv3"]
-[ext_resource type="Resource" path="res://01_Cards/Pool/Cards/Prototyping/PeriodicSummon/card_periodic_summon.proto.tres" id="5_cs3s0"]
+[ext_resource type="Resource" uid="uid://dcy1yaucyfsq1" path="res://01_Cards/Pool/Cards/Prototyping/PeriodicSummon/card_periodic_summon.proto.tres" id="5_cs3s0"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]
 [ext_resource type="Script" uid="uid://nkraydv4mdse" path="res://01_Cards/Templates/Deck/hand.gd" id="6_jbcul"]
-[ext_resource type="Resource" path="res://01_Cards/Pool/Cards/Prototyping/SummonNumber/card_summon_number.proto.tres" id="6_xqnte"]
+[ext_resource type="Resource" uid="uid://bx3it6njfgqys" path="res://01_Cards/Pool/Cards/Prototyping/SummonNumber/card_summon_number.proto.tres" id="6_xqnte"]
+[ext_resource type="Resource" path="res://01_Cards/Pool/Cards/Prototyping/LevelBonus/card_level_bonus.proto.tres" id="7_jbcul"]
 [ext_resource type="PackedScene" uid="uid://dvuq5n41nak3u" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/ArenaZoneManager/arena_zone_manager.tscn" id="8_fl2p6"]
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://90_Modules/PickableClickable/PickableModule/pickable_module.tscn" id="9_614kc"]
 [ext_resource type="PackedScene" uid="uid://bg5efhnq0erdv" path="res://90_Modules/PickableClickable/ClickableModule/clickable_module.tscn" id="10_m73qc"]
@@ -29,7 +30,8 @@
 script = ExtResource("6_jbcul")
 _cards = Dictionary[StringName, ExtResource("4_r0wv3")]({
 &"aze": ExtResource("5_cs3s0"),
-&"azraf": ExtResource("6_xqnte")
+&"azraf": ExtResource("6_xqnte"),
+&"fgafazf": ExtResource("7_jbcul")
 })
 metadata/_custom_type_script = "uid://nkraydv4mdse"
 

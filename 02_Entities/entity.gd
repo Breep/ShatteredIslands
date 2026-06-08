@@ -85,6 +85,10 @@ enum EntityType {
 
 #region ============================== Constants ==============================
 const TICKS_PER_SECOND: int = 60
+## Cap appliqué aux bonus de level cumulés sur summons/acolytes/buildings
+## via les *_modifiers_registry.register_level_bonus(). Aligné sur le
+## @export_range de `level` et sur la couverture de ProgressionComponent.DEFAULT_LEVEL_REFS.
+const MAX_LEVEL: int = 20
 #endregion
 
 var uid: int = -1 # Multiplayer ID of the entity
@@ -464,6 +468,7 @@ func get_card_context() -> CardContext:
 func _apply_inherited_summon_modifiers() -> void:
 	var visited: Array[Entity] = []
 	var ancestor: Entity = summoner
+	var total_level_bonus: int = 0
 	while ancestor != null:
 		if ancestor in visited:
 			Verbose.error("Cycle in summoner chain for [" + entity_name + "] at [" + ancestor.entity_name + "]", Verbose.Category.ENTITY)
@@ -471,12 +476,15 @@ func _apply_inherited_summon_modifiers() -> void:
 		visited.append(ancestor)
 		if ancestor.summon_modifiers_registry != null:
 			ancestor.summon_modifiers_registry.apply_to(self, ancestor)
+			total_level_bonus += ancestor.summon_modifiers_registry.get_total_level_bonus()
 		ancestor = ancestor.summoner
+	_apply_inherited_level_bonus(total_level_bonus)
 
 
 func _apply_inherited_acolyte_modifiers() -> void:
 	var visited: Array[Entity] = []
 	var ancestor: Entity = summoner
+	var total_level_bonus: int = 0
 	while ancestor != null:
 		if ancestor in visited:
 			Verbose.error("Cycle in summoner chain for [" + entity_name + "] at [" + ancestor.entity_name + "]", Verbose.Category.ENTITY)
@@ -484,12 +492,15 @@ func _apply_inherited_acolyte_modifiers() -> void:
 		visited.append(ancestor)
 		if ancestor.acolyte_modifiers_registry != null:
 			ancestor.acolyte_modifiers_registry.apply_to(self, ancestor)
+			total_level_bonus += ancestor.acolyte_modifiers_registry.get_total_level_bonus()
 		ancestor = ancestor.summoner
+	_apply_inherited_level_bonus(total_level_bonus)
 
 
 func _apply_inherited_building_modifiers() -> void:
 	var visited: Array[Entity] = []
 	var ancestor: Entity = summoner
+	var total_level_bonus: int = 0
 	while ancestor != null:
 		if ancestor in visited:
 			Verbose.error("Cycle in summoner chain for [" + entity_name + "] at [" + ancestor.entity_name + "]", Verbose.Category.ENTITY)
@@ -497,7 +508,20 @@ func _apply_inherited_building_modifiers() -> void:
 		visited.append(ancestor)
 		if ancestor.building_modifiers_registry != null:
 			ancestor.building_modifiers_registry.apply_to(self, ancestor)
+			total_level_bonus += ancestor.building_modifiers_registry.get_total_level_bonus()
 		ancestor = ancestor.summoner
+	_apply_inherited_level_bonus(total_level_bonus)
+
+
+# Applique un bonus de level cumulé (sommé sur la chaîne summoner via les
+# *_modifiers_registry.get_total_level_bonus()). Push sur progression.level
+# pour déclencher le recompute des base stats via _handle_level_up().
+func _apply_inherited_level_bonus(bonus: int) -> void:
+	if bonus <= 0: return
+	var new_level: int = clampi(level + bonus, 1, MAX_LEVEL)
+	level = new_level
+	if progression != null:
+		progression.level = new_level
 #endregion
 
 #region ============================== Spawn system ==============================

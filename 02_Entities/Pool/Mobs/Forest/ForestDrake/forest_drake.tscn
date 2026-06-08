@@ -8,7 +8,7 @@
 [ext_resource type="AnimationNodeBlendTree" uid="uid://c8d25ik68uqcr" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/forest_drake_animation.res" id="6_snime"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_wqgwj"]
-radius = 1.7178956
+radius = 1.0084918
 
 [node name="ForestDrake" type="CharacterBody3D" unique_id=1600538521 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_attack_spawn_marker")]
 collision_layer = 16

@@ -20,6 +20,12 @@ var auto_attack_modifier_registry: AutoAttackModifierRegistry
 var death_modifiers_registry: DeathModifiersRegistry
 var battle_callback_registry: BattleCallbackRegistry
 
+# Bonus de level appliqué aux buildings à leur spawn — sommé le long de la
+# chaîne summoner par Entity._apply_inherited_building_modifiers(), puis clampé
+# à [1, Entity.MAX_LEVEL] côté Entity. Indexé par `id` (typiquement card_name)
+# pour idempotence et unregister propre.
+var _level_bonuses: Dictionary[StringName, int] = {}
+
 
 func _init() -> void:
 	stat_modifiers_registry = EntityStatModifiersRegistry.new(EntityStats.new())
@@ -67,3 +73,20 @@ func apply_to(target: Entity, source_ancestor: Entity) -> void:
 
 static func _derive_id(original_id: StringName, ancestor: Entity) -> StringName:
 	return StringName("%s@%d" % [original_id, ancestor.uid])
+
+
+# ============================== Level bonus API ==============================
+
+func register_level_bonus(id: StringName, bonus: int) -> void:
+	_level_bonuses[id] = bonus
+
+
+func unregister_level_bonus(id: StringName) -> void:
+	_level_bonuses.erase(id)
+
+
+func get_total_level_bonus() -> int:
+	var total: int = 0
+	for v: int in _level_bonuses.values():
+		total += v
+	return total
