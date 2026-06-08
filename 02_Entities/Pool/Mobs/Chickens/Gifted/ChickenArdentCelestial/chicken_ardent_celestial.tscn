@@ -38,17 +38,21 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.00037944317, 0.382874
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="ChickenArdentCelestialVisual/Node3D" parent_id_path=PackedInt32Array(142901617, 22277641) index="0" unique_id=416118163]
-bones/1/position = Vector3(0, 0.05110144, 0.025282245)
-bones/1/rotation = Quaternion(-0.7070917, 0.70709157, -0.004639165, -0.0046242904)
-bones/4/rotation = Quaternion(0.014691267, 0.16248217, 0.005191646, 0.98658854)
-bones/7/position = Vector3(0.06718646, -0.0814189, 0.02652973)
-bones/7/rotation = Quaternion(2.3522975e-06, -0.73279417, 1.8088816e-05, 0.6804503)
-bones/8/rotation = Quaternion(0.9918822, -1.4291735e-06, -0.12715997, 1.4427712e-05)
-bones/9/rotation = Quaternion(5.336362e-08, -0.58983433, -2.4023623e-07, 0.8075243)
-bones/10/position = Vector3(0.06718645, 0.08142003, 0.026526315)
-bones/10/rotation = Quaternion(-1.7277765e-05, -0.73279417, -3.051298e-06, 0.6804503)
-bones/11/rotation = Quaternion(0.9918822, 1.5594409e-06, -0.12715997, -1.4411013e-05)
-bones/12/rotation = Quaternion(3.9451283e-08, -0.5898342, 2.3954513e-07, 0.8075243)
+bones/1/position = Vector3(0, 0.047381032, 0.025282245)
+bones/1/rotation = Quaternion(-0.7071016, 0.7071016, 0.0027074562, 0.002722331)
+bones/1/scale = Vector3(1, 1, 1.0026101)
+bones/2/rotation = Quaternion(0.8344415, -5.6795907e-06, -0.5510966, 8.903665e-06)
+bones/3/rotation = Quaternion(0.96720886, 8.184627e-08, 0.2539824, -3.0418073e-07)
+bones/4/rotation = Quaternion(-5.536811e-08, 0.0072078905, -2.113779e-09, 0.9999741)
+bones/5/rotation = Quaternion(-3.773232e-06, 0.9361406, -9.886281e-06, 0.35162592)
+bones/7/position = Vector3(0.06718646, -0.0814189, 0.026344845)
+bones/7/rotation = Quaternion(2.7037765e-06, -0.7286475, 1.8201396e-05, 0.68488896)
+bones/8/rotation = Quaternion(0.9932081, -1.5955072e-06, -0.11635132, 1.4483898e-05)
+bones/9/rotation = Quaternion(4.0781124e-08, -0.60039806, -2.2802033e-07, 0.79970133)
+bones/10/position = Vector3(0.06718645, 0.08142003, 0.02634143)
+bones/10/rotation = Quaternion(-1.7054314e-05, -0.7286475, -2.8190655e-06, 0.68488896)
+bones/11/rotation = Quaternion(0.9932081, 1.7259488e-06, -0.116351314, -1.4468617e-05)
+bones/12/rotation = Quaternion(1.5295967e-07, -0.4917123, 1.5807893e-07, 0.8707578)
 
 [node name="HealthBarSpawnMarker" type="Marker3D" parent="ChickenArdentCelestialVisual" unique_id=431386149]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 1.5, 0)
@@ -71,9 +75,9 @@ _spawn = NodePath("../ChickenArdentCelestialVisual/HealthBarSpawnMarker")
 _owner = NodePath("..")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=2080904651]
-root_node = NodePath("../ChickenArdentCelestialVisual")
+root_node = NodePath("../ChickenArdentCelestialVisual/Node3D")
 tree_root = ExtResource("6_tas02")
-anim_player = NodePath("../ChickenArdentCelestialVisual/AnimationPlayer")
+anim_player = NodePath("../ChickenArdentCelestialVisual/Node3D/AnimationPlayer")
 parameters/switch_moving/current_state = "Walk"
 parameters/switch_moving/transition_request = ""
 parameters/switch_moving/current_index = 0
@@ -100,9 +104,9 @@ parameters/switch_entity_life_state/transition_request = ""
 parameters/switch_entity_life_state/current_index = 1
 parameters/scale_walk/scale = 1.0
 parameters/scale_run/scale = 1.0
-parameters/switch_attack/current_state = ""
+parameters/switch_attack/current_state = "Attack1"
 parameters/switch_attack/transition_request = ""
-parameters/switch_attack/current_index = -1
+parameters/switch_attack/current_index = 0
 parameters/scale_stunned/scale = 1.0
 parameters/seek_stunned/seek_request = -1.0
 parameters/scale_idle_standing_aggresive/scale = 1.0

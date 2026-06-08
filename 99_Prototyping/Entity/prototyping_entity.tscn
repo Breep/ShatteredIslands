@@ -19,13 +19,17 @@
 [ext_resource type="PackedScene" uid="uid://blncvfes4f2y7" path="res://99_Prototyping/Entity/AllActionPrototyping/testing_floorffa5.tscn" id="11_5hdqt"]
 [ext_resource type="Script" uid="uid://bia26v50nwe6c" path="res://04_UI/UIButton/ui_button.gd" id="11_r0wv3"]
 [ext_resource type="PackedScene" uid="uid://ygk0snmo5oj" path="res://02_Entities/_Shared/EntityStatsViewer/entity_stats_viewer.tscn" id="12_r0wv3"]
+[ext_resource type="PackedScene" uid="uid://7s8lg5leu3go" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/chicken_ardent_celestial.tscn" id="13_5ixv2"]
 [ext_resource type="Script" uid="uid://b0otuknba6ddv" path="res://06_FloatingIsland/FightingIsland/FightingArea/floor_area.gd" id="13_jd8sj"]
+[ext_resource type="PackedScene" uid="uid://dr2axaqcdg5x3" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/chicken_colossus.tscn" id="15_brxkt"]
+[ext_resource type="PackedScene" uid="uid://d1o2vt1qf1fdf" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenEngineer/chicken_engineer.tscn" id="16_jlh7v"]
 [ext_resource type="PackedScene" uid="uid://q7gxxkhg5u54" path="res://06_FloatingIsland/FightingIsland/Pool/ArchIsland/arch_island_visual.tscn" id="17_ko5bb"]
 [ext_resource type="PackedScene" uid="uid://c0l0roxttdtlp" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/FightingManager/fighting_manager.tscn" id="17_m26y3"]
 [ext_resource type="Environment" uid="uid://cghu0yr6lj5i2" path="res://21_Props/DefaultBattleIsland/Arch_island/world_environment.tres" id="18_ko5bb"]
 [ext_resource type="PackedScene" uid="uid://cvwmo633sxskh" path="res://02_Entities/Pool/Mobs/Goblins/GoblinBerserker/goblin_berserker.tscn" id="18_kq8si"]
 [ext_resource type="PackedScene" uid="uid://dp4x7wkxd6i2q" path="res://99_Prototyping/Entity/EntityController/entity_controller.proto.tscn" id="19_x0odd"]
 [ext_resource type="PackedScene" uid="uid://dmaek2vypoai4" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/turret_firethrower.tscn" id="21_tmkd7"]
+[ext_resource type="PackedScene" uid="uid://d286hj53megm8" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenAttack/chicken_attack.tscn" id="26_5ixv2"]
 
 [sub_resource type="Resource" id="Resource_5qocs"]
 script = ExtResource("4_kq8si")
@@ -158,11 +162,31 @@ battle_id = 1
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
 
+[node name="ChickenAttack" parent="Node3D/Entities" unique_id=2109615854 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("26_5ixv2")]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, 7.6501403, 0, -7.057276)
+team = 1
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
+[node name="ChickenArdentCelestial" parent="Node3D/Entities" unique_id=643912035 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("13_5ixv2")]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, 3.128761, 0, -4.082364)
+team = 1
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
 [node name="AegisTower" parent="Node3D/Entities" unique_id=2068796495 instance=ExtResource("9_r0wv3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.14981, 0, 1.6435952)
 level = 7
 team = 1
 battle_id = 1
+
+[node name="ChickenColossus" parent="Node3D/Entities" unique_id=636455278 instance=ExtResource("15_brxkt")]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, 10.506134, 0, -6.104479)
+
+[node name="ChickenShield" parent="Node3D/Entities" unique_id=690433010 instance=ExtResource("16_jlh7v")]
+transform = Transform3D(1.1999999, 0, 0, 0, 1.2000002, 0, 0, 0, 1.1999999, 7.0742197, -4.768372e-07, -8.621689)
 
 [node name="Control" type="Control" parent="Node3D" unique_id=1104542732]
 layout_mode = 3
