@@ -1,0 +1,122 @@
+[gd_scene format=3 uid="uid://dolubo8wodahp"]
+
+[ext_resource type="PackedScene" uid="uid://dy3hhb21u3upl" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/kobold_warrior_visual.tscn" id="1_2hqbh"]
+[ext_resource type="Script" uid="uid://4h861cpp1lvv" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/kobold_warrior.gd" id="1_lwqgt"]
+[ext_resource type="AnimationNodeBlendTree" uid="uid://pdy5g53lau7e" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/kobold_knight_animation_tree.res" id="3_nys6j"]
+[ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="4_vbc5d"]
+[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.tscn" id="5_gp4m4"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6ivet"]
+radius = 0.39404297
+height = 2.2326622
+
+[node name="Kobold_Warrior" type="CharacterBody3D" unique_id=1047411200]
+script = ExtResource("1_lwqgt")
+
+[node name="Kobold_Warrior" parent="." unique_id=1221184477 instance=ExtResource("1_2hqbh")]
+
+[node name="ik_foot_l" parent="Kobold_Warrior/root/ik_foot_root" parent_id_path=PackedInt32Array(1221184477, 1703512408) index="0" unique_id=1978195203]
+transform = Transform3D(0.031872418, 0.48494416, -0.873964, 0.031925198, 0.8734681, 0.48583332, 0.9989819, -0.04338616, 0.012357603, 0.32758436, -0.24476418, 0.10487074)
+
+[node name="ik_foot_r" parent="Kobold_Warrior/root/ik_foot_root" parent_id_path=PackedInt32Array(1221184477, 1703512408) index="1" unique_id=2076853512]
+transform = Transform3D(-0.022386841, -0.89174485, -0.45198464, -0.021053784, -0.45157722, 0.8919836, -0.9995275, 0.029484687, -0.008665216, -0.19526112, 0.39334777, 0.10487929)
+
+[node name="ik_hand_gun" parent="Kobold_Warrior/root/ik_hand_root" parent_id_path=PackedInt32Array(1221184477, 820561868) index="0" unique_id=1641656949]
+transform = Transform3D(0.59625924, -0.7684197, 0.23239158, 0.44846734, 0.0787315, -0.8903247, 0.66584665, 0.6350845, 0.39155558, -0.49982128, 0.28872585, 0.98660934)
+
+[node name="HealthMarker3D" type="Marker3D" parent="Kobold_Warrior" unique_id=1247108417]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2757185, 0)
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1049924555]
+root_node = NodePath("../Kobold_Warrior")
+tree_root = ExtResource("3_nys6j")
+anim_player = NodePath("../Kobold_Warrior/AnimationPlayer")
+parameters/switch_moving/current_state = "Walk"
+parameters/switch_moving/transition_request = ""
+parameters/switch_moving/current_index = 0
+parameters/scale_dance/scale = 1.0
+parameters/scale_die/scale = 1.0
+parameters/scale_idle_standing_neutral/scale = 1.0
+parameters/one_shot_attack/active = false
+parameters/one_shot_attack/internal_active = false
+parameters/one_shot_attack/request = 0
+parameters/one_shot_ultimate/active = false
+parameters/one_shot_ultimate/internal_active = false
+parameters/one_shot_ultimate/request = 0
+parameters/scale_attack/scale = 1.0
+parameters/one_shot_idle_standing_neutral/active = false
+parameters/one_shot_idle_standing_neutral/internal_active = false
+parameters/one_shot_idle_standing_neutral/request = 0
+parameters/scale_ultimate/scale = 1.0
+parameters/scale_idle_standing_neutral_var/scale = 1.0
+parameters/one_shot_sitting/active = false
+parameters/one_shot_sitting/internal_active = false
+parameters/one_shot_sitting/request = 0
+parameters/switch_entity_life_state/current_state = "Alive"
+parameters/switch_entity_life_state/transition_request = ""
+parameters/switch_entity_life_state/current_index = 1
+parameters/scale_walk/scale = 1.0
+parameters/scale_run/scale = 1.0
+parameters/switch_attack/current_state = "Attack2"
+parameters/switch_attack/transition_request = ""
+parameters/switch_attack/current_index = 1
+parameters/scale_stunned/scale = 1.0
+parameters/seek_stunned/seek_request = -1.0
+parameters/scale_idle_standing_aggresive/scale = 1.0
+parameters/scale_idle_standing_aggresive_var/scale = 1.0
+parameters/seek_idle_standing_aggresive/seek_request = -1.0
+parameters/switch_entity_mode/current_state = "Editor"
+parameters/switch_entity_mode/transition_request = ""
+parameters/switch_entity_mode/current_index = 0
+parameters/seek_idle_standing_neutral/seek_request = -1.0
+parameters/one_shot_idle_standing_aggresive/active = false
+parameters/one_shot_idle_standing_aggresive/internal_active = false
+parameters/one_shot_idle_standing_aggresive/request = 0
+parameters/seek_idle_sitting_chair/seek_request = -1.0
+parameters/scale_idle_sitting_chair/scale = 1.0
+parameters/scale_idle_sitting_chair_var/scale = 1.0
+parameters/seek_idle_sitting_floor/seek_request = -1.0
+parameters/seek_dance/seek_request = -1.0
+parameters/one_shot_idle_sitting_chair/active = false
+parameters/one_shot_idle_sitting_chair/internal_active = false
+parameters/one_shot_idle_sitting_chair/request = 1
+parameters/scale_idle_sitting_floor/scale = 1.0
+parameters/scale_idle_sitting_floor_var/scale = 1.0
+parameters/scale_attack_2/scale = 1.0
+parameters/scale_hit_1/scale = 1.0
+parameters/scale_attack_3/scale = 1.0
+parameters/switch_main/current_state = "Idle"
+parameters/switch_main/transition_request = ""
+parameters/switch_main/current_index = 0
+parameters/switch_idle/current_state = "StandingNeutral"
+parameters/switch_idle/transition_request = ""
+parameters/switch_idle/current_index = 0
+parameters/scale_drag/scale = 1.0
+parameters/scale_land/scale = 2.0
+parameters/one_shot_land/active = false
+parameters/one_shot_land/internal_active = false
+parameters/one_shot_land/request = 0
+parameters/one_shot_hit/active = false
+parameters/one_shot_hit/internal_active = false
+parameters/one_shot_hit/request = 0
+parameters/scale_attack_1/scale = 1.0
+parameters/switch_positioning/current_state = "Off"
+parameters/switch_positioning/transition_request = ""
+parameters/switch_positioning/current_index = 0
+parameters/switch_stunned_state/current_state = "NotStunned"
+parameters/switch_stunned_state/transition_request = ""
+parameters/switch_stunned_state/current_index = 0
+
+[node name="AnimationComponent" parent="." unique_id=73205791 node_paths=PackedStringArray("_animation_tree", "_owner") instance=ExtResource("4_vbc5d")]
+_animation_tree = NodePath("../AnimationTree")
+_owner = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=989240028]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0530852, 0)
+shape = SubResource("CapsuleShape3D_6ivet")
+
+[node name="LargeHealthBarComponent" parent="." unique_id=1823590462 node_paths=PackedStringArray("_spawn", "_owner") instance=ExtResource("5_gp4m4")]
+_spawn = NodePath("../Kobold_Warrior/HealthMarker3D")
+_owner = NodePath("..")
+
+[editable path="Kobold_Warrior"]

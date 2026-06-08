@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cc6rscvc7sgjv"]
+
+[ext_resource type="Texture2D" uid="uid://68cw28m27neq" path="res://02_Entities/_Data/Kobold/KoboldWarrior/T_Kobold_Warrior_Armor_Bk_D.tga" id="1_del7u"]
+[ext_resource type="Texture2D" uid="uid://b170x7xhedoec" path="res://02_Entities/_Data/Kobold/KoboldWarrior/T_Kobold_Warrior_Armor_AO.tga" id="2_lp1y2"]
+[ext_resource type="Texture2D" uid="uid://cse4uisjlrke6" path="res://02_Entities/_Data/Kobold/KoboldWarrior/T_Kobold_Warrior_Armor_N.tga" id="3_nnppr"]
+
+[resource]
+albedo_texture = ExtResource("1_del7u")
+normal_enabled = true
+normal_texture = ExtResource("3_nnppr")
+ao_enabled = true
+ao_light_affect = 1.0
+ao_texture = ExtResource("2_lp1y2")

@@ -1,0 +1,52 @@
+[gd_resource type="Resource" script_class="EntityDesc" format=3 uid="uid://cpmwbvgin5fcg"]
+
+[ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="1_reult"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="2_mbiqh"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_g4iju"]
+[ext_resource type="Resource" uid="uid://dxpj0yui1mdom" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Stats/kobold_warrior_stats_lvl_01.tres" id="4_jsrgl"]
+[ext_resource type="Resource" uid="uid://c6h8k1sg8eqlk" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Stats/kobold_warrior_stats_lvl_02.tres" id="5_2brci"]
+[ext_resource type="Resource" uid="uid://bvg4uwyrpijsn" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Stats/kobold_warrior_stats_lvl_03.tres" id="6_e3m2h"]
+[ext_resource type="Resource" uid="uid://cmgogyexcr4f8" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Stats/kobold_warrior_stats_lvl_04.tres" id="7_h808u"]
+[ext_resource type="Resource" uid="uid://b1evvlfd7rfhe" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Stats/kobold_warrior_stats_lvl_05.tres" id="8_p5d8i"]
+[ext_resource type="Resource" uid="uid://yb0qy733pv10" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Stats/kobold_warrior_stats_lvl_06.tres" id="9_wbo6o"]
+[ext_resource type="Resource" uid="uid://1qj8ejn6i6s0" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Stats/kobold_warrior_stats_lvl_07.tres" id="10_h1fvs"]
+[ext_resource type="Resource" uid="uid://dwev3sxx0uyi5" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Stats/kobold_warrior_stats_lvl_08.tres" id="11_4v0m5"]
+[ext_resource type="Resource" uid="uid://c34psyj2eyimi" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Stats/kobold_warrior_stats_lvl_09.tres" id="12_bkovo"]
+[ext_resource type="Resource" uid="uid://bfyifi1qxgfg2" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Stats/kobold_warrior_stats_lvl_10.tres" id="13_j5aeh"]
+[ext_resource type="Resource" uid="uid://cu8fytpudbkan" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Stats/kobold_warrior_stats_lvl_11.tres" id="14_s6kk6"]
+[ext_resource type="Resource" uid="uid://ce760ajws15l2" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Stats/kobold_warrior_stats_lvl_12.tres" id="15_kft60"]
+[ext_resource type="Resource" uid="uid://blwr2eto4ixj" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Stats/kobold_warrior_stats_lvl_13.tres" id="16_t6nxb"]
+[ext_resource type="Resource" uid="uid://c0uxg4n3k7thf" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Stats/kobold_warrior_stats_lvl_14.tres" id="17_ghhei"]
+[ext_resource type="Resource" uid="uid://cjo86mqvofmrq" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Stats/kobold_warrior_stats_lvl_15.tres" id="18_fahj3"]
+[ext_resource type="Resource" uid="uid://b8adx57v05lqw" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Stats/kobold_warrior_stats_lvl_16.tres" id="19_wbjo3"]
+[ext_resource type="Resource" uid="uid://c5khh0t3gchya" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Stats/kobold_warrior_stats_lvl_17.tres" id="20_v22y7"]
+[ext_resource type="Resource" uid="uid://ca6sdwyrr4l8k" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Stats/kobold_warrior_stats_lvl_18.tres" id="21_7r6v1"]
+[ext_resource type="Resource" uid="uid://b8jcga5ivcued" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Stats/kobold_warrior_stats_lvl_19.tres" id="22_mg4mu"]
+[ext_resource type="Resource" uid="uid://cnferbop2mj5y" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Stats/kobold_warrior_stats_lvl_20.tres" id="23_2vx0o"]
+
+[resource]
+script = ExtResource("1_reult")
+name = "Kob"
+description = "Kobby is happy"
+stats = Dictionary[int, ExtResource("3_g4iju")]({
+1: ExtResource("4_jsrgl"),
+2: ExtResource("5_2brci"),
+3: ExtResource("6_e3m2h"),
+4: ExtResource("7_h808u"),
+5: ExtResource("8_p5d8i"),
+6: ExtResource("9_wbo6o"),
+7: ExtResource("10_h1fvs"),
+8: ExtResource("11_4v0m5"),
+9: ExtResource("12_bkovo"),
+10: ExtResource("13_j5aeh"),
+11: ExtResource("14_s6kk6"),
+12: ExtResource("15_kft60"),
+13: ExtResource("16_t6nxb"),
+14: ExtResource("17_ghhei"),
+15: ExtResource("18_fahj3"),
+16: ExtResource("19_wbjo3"),
+17: ExtResource("20_v22y7"),
+18: ExtResource("21_7r6v1"),
+19: ExtResource("22_mg4mu"),
+20: ExtResource("23_2vx0o")
+})
