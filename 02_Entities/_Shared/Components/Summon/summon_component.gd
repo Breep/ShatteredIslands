@@ -1,6 +1,12 @@
 class_name SummonComponent
 extends EntityComponent
 
+# Rayon (en unités monde) de spread ajouté par entité supplémentaire quand
+# un count > 1 est résolu (cf. ActionModifier.VarType.COUNT). count=1 →
+# rayon 0 (spawn pile au point indiqué). count=N → rayon = const × (N-1),
+# avec les entités réparties sur un cercle horizontal (plan XZ).
+const SPREAD_RADIUS_PER_EXTRA: float = 0.5
+
 var _spawn_manager: SpawnManager
 var _arena_zone_manager: ArenaZoneManager
 
@@ -68,31 +74,52 @@ func summon_entity(entity_type: Entity.EntityType, spawn_config: SpawnLocationCo
 
 	var spawn_position := spawn_config.resolve(_arena_zone_manager)
 
+	# Phase pré-action : on passe COUNT=1 dans la dict ; les ActionModifier
+	# SUMMON peuvent le muter via leur before_action_logic_callback
+	# (ex: "20% de chance de summon 2 au lieu d'1"). Clampé >= 1 côté lecture.
 	var modifiers_data: Dictionary = _consume_before_action_modifiers(Utils.ActionCategory.SUMMON, {
 		ActionModifier.VarType.ENTITY_TYPE: entity_type,
 		ActionModifier.VarType.ENTITY_MODIFIER: entity_modifier,
+		ActionModifier.VarType.COUNT: 1,
 	})
 	entity_modifier = modifiers_data.get(ActionModifier.VarType.ENTITY_MODIFIER, entity_modifier)
 	entity_type = modifiers_data.get(ActionModifier.VarType.ENTITY_TYPE, entity_type)
+	var count: int = maxi(1, modifiers_data.get(ActionModifier.VarType.COUNT, 1))
 
-	match entity_type:
-		Entity.EntityType.SNAKE_BARREL: _summon_snake_barrel(spawn_position, entity_modifier)
-		Entity.EntityType.SNAKE: _summon_snake(spawn_position, entity_modifier)
-		Entity.EntityType.CHICKEN: _summon_chicken(spawn_position, entity_modifier)
-		Entity.EntityType.PROTO_SHIELD: _summon_proto_shield(spawn_position, entity_modifier)
-		Entity.EntityType.FORTIFICATION_DRONE: _summon_fortification_drone(spawn_position, entity_modifier)
-		Entity.EntityType.AEGIS_BLADE: _summon_aegis_blade(spawn_position, entity_modifier)
-		Entity.EntityType.DEFLECTION_SHIELD: _summon_deflection_shield(spawn_position, entity_modifier)
-		Entity.EntityType.TREX: _summon_trex(spawn_position, entity_modifier)
-		Entity.EntityType.CHICKEN_EGG: _summon_chicken_egg(spawn_position, entity_modifier)
-		Entity.EntityType.MOLTEN_GOLEM: _summon_molten_golem(spawn_position, entity_modifier)
+	for i in count:
+		var spawn_pos: Vector3 = spawn_position + _compute_spread_offset(i, count)
+		match entity_type:
+			Entity.EntityType.SNAKE_BARREL: _summon_snake_barrel(spawn_pos, entity_modifier)
+			Entity.EntityType.SNAKE: _summon_snake(spawn_pos, entity_modifier)
+			Entity.EntityType.CHICKEN: _summon_chicken(spawn_pos, entity_modifier)
+			Entity.EntityType.PROTO_SHIELD: _summon_proto_shield(spawn_pos, entity_modifier)
+			Entity.EntityType.FORTIFICATION_DRONE: _summon_fortification_drone(spawn_pos, entity_modifier)
+			Entity.EntityType.AEGIS_BLADE: _summon_aegis_blade(spawn_pos, entity_modifier)
+			Entity.EntityType.DEFLECTION_SHIELD: _summon_deflection_shield(spawn_pos, entity_modifier)
+			Entity.EntityType.TREX: _summon_trex(spawn_pos, entity_modifier)
+			Entity.EntityType.CHICKEN_EGG: _summon_chicken_egg(spawn_pos, entity_modifier)
+			Entity.EntityType.MOLTEN_GOLEM: _summon_molten_golem(spawn_pos, entity_modifier)
 
+	# Phase post-action : on remonte COUNT pour que les after-callbacks
+	# puissent réagir au batch complet (ex: "gagne 5 mana par summon").
 	_consume_after_action_modifiers(Utils.ActionCategory.SUMMON, {
 		ActionModifier.VarType.ENTITY_TYPE: entity_type,
 		ActionModifier.VarType.ENTITY_MODIFIER: entity_modifier,
+		ActionModifier.VarType.COUNT: count,
 	})
 
 # ============================== Private functions ==============================
+
+# Offset horizontal de spawn pour la i-ème entité sur N quand un count > 1
+# est résolu. N=1 → ZERO. N>=2 → répartition uniforme sur un cercle XZ de
+# rayon proportionnel à (N-1), pour éviter l'overlap visuel des entités.
+func _compute_spread_offset(index: int, count: int) -> Vector3:
+	if count <= 1:
+		return Vector3.ZERO
+	var radius: float = SPREAD_RADIUS_PER_EXTRA * float(count - 1)
+	var angle: float = TAU * float(index) / float(count)
+	return Vector3(cos(angle) * radius, 0.0, sin(angle) * radius)
+
 
 func _summon_snake_barrel(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
 	var snake_barrel: SnakeBarrel = SNAKE_BARREL_SCENE.instantiate()

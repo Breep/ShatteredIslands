@@ -17,6 +17,11 @@ enum VarType { # Variable types of the callbacks dictionary
 	ENTITY_MODIFIER,
 	SPELL_TYPE,
 	SPELL_MODIFIER,
+	# Nombre d'instances à spawner pour cette action. Convention : base = 1,
+	# les before_action_logic_callback peuvent muter ce champ pour ajouter des
+	# spawns (ex: SUMMON → "20% de chance d'invoquer 2 poulets au lieu d'1").
+	# Borné à >= 1 côté composant (un modifier ne peut pas annuler l'action).
+	COUNT,
 }
 
 
