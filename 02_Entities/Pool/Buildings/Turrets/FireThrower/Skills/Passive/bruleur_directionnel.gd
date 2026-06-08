@@ -27,7 +27,6 @@ func apply(ctx: SkillContext) -> void:
 func _burn_tick(turret: TurretFireThrower) -> void:
 	var area := turret.find_child(String(_flame_area_name), true, false) as Area3D
 	if area == null:
-		Verbose.warn("[Brûleur] Area3D '" + String(_flame_area_name) + "' introuvable", Verbose.Category.ENTITY_MODULE)
 		return
 
 	var ap: float = turret.stats.get_stat(EntityStats.StatType.AP)
@@ -43,26 +42,12 @@ func _burn_tick(turret: TurretFireThrower) -> void:
 	var enemies := turret.target.get_targets(TargetComponent.MultipleTargettingStrategy.ENEMIES)
 	var bodies := area.get_overlapping_bodies()
 
-	# --- DIAGNOSTIC (à retirer une fois le passif validé) ---
-	Verbose.warn("[Brûleur] tick | monitoring=" + str(area.monitoring) \
-		+ " | overlapping_bodies=" + str(bodies.size()) \
-		+ " | enemies_known=" + str(enemies.size()) \
-		+ " | turret.team=" + str(turret.team), Verbose.Category.ENTITY_MODULE)
-	for body: Node3D in bodies:
-		var dbg_enemy := body as Entity
-		Verbose.warn("[Brûleur]   body=" + body.name + " type=" + body.get_class() \
-			+ " is_entity=" + str(dbg_enemy != null) \
-			+ " team=" + (str(dbg_enemy.team) if dbg_enemy != null else "n/a") \
-			+ " is_enemy=" + str(dbg_enemy != null and enemies.has(dbg_enemy)), Verbose.Category.ENTITY_MODULE)
-	# --- FIN DIAGNOSTIC ---
-
 	for body: Node3D in bodies:
 		var enemy := body as Entity
 		if enemy == null or not is_instance_valid(enemy) or enemy.is_dead():
 			continue
 		if not enemies.has(enemy):
 			continue
-		Verbose.warn("[Brûleur]   -> ignite " + str(ignite_stacks) + " sur " + enemy.name, Verbose.Category.ENTITY_MODULE)
 		turret.alterations.inflict_condition_stacks(enemy, ignite_stacks, Alteration.Type.IGNITE, &"Brûleur directionnel")
 		if buse_active:
 			turret.damage.direct(enemy, buse_damage, Utils.ActionType.DAMAGE_MAGICAL, &"Buse large")

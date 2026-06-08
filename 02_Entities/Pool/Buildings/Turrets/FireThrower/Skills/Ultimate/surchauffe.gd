@@ -46,6 +46,5 @@ func _get_flame_vfx(turret: TurretFireThrower) -> Node3D:
 	# La racine du VFX de flammes = parent du node de particules "fire".
 	var fire := turret.find_child(String(_fire_node_name), true, false)
 	if fire == null:
-		Verbose.warn("SE_Surchauffe: node de particules introuvable: " + String(_fire_node_name), Verbose.Category.ENTITY_MODULE)
 		return null
 	return fire.get_parent() as Node3D

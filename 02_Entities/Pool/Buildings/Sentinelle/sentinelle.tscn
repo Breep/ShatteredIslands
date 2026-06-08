@@ -33,8 +33,8 @@ unique_name_in_owner = true
 [node name="AnimHoveringModule" parent="FortificationDroneVisual" unique_id=1140988969 node_paths=PackedStringArray("_owner") instance=ExtResource("4_07yhp")]
 unique_name_in_owner = true
 _owner = NodePath("..")
-_hover_power = 0.5
-_hover_period = 1.1
+_hover_power = 0.1
+_hover_period = 3.0
 
 [node name="HealthBarSpawnMarker" type="Marker3D" parent="FortificationDroneVisual" unique_id=648389619]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8531499, 0)
