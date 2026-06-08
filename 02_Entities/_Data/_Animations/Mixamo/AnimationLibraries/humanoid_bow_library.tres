@@ -1,0 +1,16 @@
+[gd_resource type="AnimationLibrary" format=3 uid="uid://ibn2ts5wdild"]
+
+[ext_resource type="Animation" uid="uid://bvxicitvnn0i1" path="res://02_Entities/_Data/_Animations/Mixamo/Animations/bow_attack_melee_punch.res" id="4_uqgbf"]
+[ext_resource type="Animation" uid="uid://bpcydjxa40oma" path="res://02_Entities/_Data/_Animations/Mixamo/Animations/bow_attack_shooting_arrow.res" id="5_186hi"]
+[ext_resource type="Animation" uid="uid://7s53co52qhci" path="res://02_Entities/_Data/_Animations/Mixamo/Animations/bow_standing_idle_var_01.res" id="7_gynjw"]
+[ext_resource type="Animation" uid="uid://d3ds7mule6edy" path="res://02_Entities/_Data/_Animations/Mixamo/Animations/bow_standing_idle_var_02.res" id="8_b80kd"]
+[ext_resource type="Animation" uid="uid://b75pkvjurfdi8" path="res://02_Entities/_Data/_Animations/Mixamo/Animations/dance_robot_hip_hop.res" id="9_j18uu"]
+
+[resource]
+_data = {
+&"bow_attack_melee_punch": ExtResource("4_uqgbf"),
+&"bow_attack_shooting_arrow": ExtResource("5_186hi"),
+&"bow_standing_idle_var_01": ExtResource("7_gynjw"),
+&"bow_standing_idle_var_02": ExtResource("8_b80kd"),
+&"dance_robot_hip_hop": ExtResource("9_j18uu")
+}

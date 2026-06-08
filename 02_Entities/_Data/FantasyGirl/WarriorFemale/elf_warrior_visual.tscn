@@ -1,31 +1,32 @@
 [gd_scene format=4 uid="uid://bo684y5l5625u"]
 
-[ext_resource type="AnimationLibrary" uid="uid://5nrbroae7ph7" path="res://02_Entities/_Data/FantasyGirl/WarriorFemale/Elf_Warrior.res" id="1_7heno"]
-[ext_resource type="Texture2D" uid="uid://nutesm7ebbec" path="res://02_Entities/_Data/FantasyGirl/WarriorFemale/T_El_F_Warrior_Extra_Pe_D.tga" id="1_yytmy"]
-[ext_resource type="Texture2D" uid="uid://d0imh8eu8clv4" path="res://02_Entities/_Data/FantasyGirl/WarriorFemale/T_El_F_Warrior_Extra_N.tga" id="3_extra_n"]
-[ext_resource type="Texture2D" uid="uid://by36jcpw52aoq" path="res://02_Entities/_Data/FantasyGirl/WarriorFemale/T_El_F_Warrior_Extra_M.tga" id="4_extra_m"]
-[ext_resource type="Texture2D" uid="uid://cc6xdlwln0pgw" path="res://02_Entities/_Data/FantasyGirl/WarriorFemale/T_El_F_Warrior_Body_Pe_D.tga" id="5_6maet"]
-[ext_resource type="Texture2D" uid="uid://b0mt568m5hk1u" path="res://02_Entities/_Data/FantasyGirl/WarriorFemale/T_El_F_Warrior_Extra_E.tga" id="5_extra_e"]
-[ext_resource type="Texture2D" uid="uid://h18quwxs8ixh" path="res://02_Entities/_Data/FantasyGirl/WarriorFemale/T_El_F_Warrior_Body_N.tga" id="7_body_n"]
-[ext_resource type="Texture2D" uid="uid://cqeqsia4pu823" path="res://02_Entities/_Data/FantasyGirl/WarriorFemale/T_El_F_Warrior_Hair_Gn_D.tga" id="8_hair_d"]
-[ext_resource type="Texture2D" uid="uid://dxl62cc1tkd1y" path="res://02_Entities/_Data/FantasyGirl/WarriorFemale/T_El_F_Warrior_Hair_N.tga" id="9_hair_n"]
-[ext_resource type="Texture2D" uid="uid://pyrmuq3py2gv" path="res://02_Entities/_Data/FantasyGirl/WarriorFemale/T_El_F_Warrior_Armor_Gn_D.tga" id="10_armor_d"]
-[ext_resource type="Texture2D" uid="uid://ducvh7su035l1" path="res://02_Entities/_Data/FantasyGirl/WarriorFemale/T_El_F_Warrior_Armor_N.tga" id="11_armor_n"]
-[ext_resource type="Texture2D" uid="uid://b1r023buog16g" path="res://02_Entities/_Data/FantasyGirl/WarriorFemale/T_El_F_Warrior_Armor_M.tga" id="12_armor_m"]
-[ext_resource type="Texture2D" uid="uid://o1ca07d6bgv4" path="res://02_Entities/_Data/FantasyGirl/WarriorFemale/T_El_F_Warrior_Armor_E.tga" id="13_armor_e"]
+[ext_resource type="Texture2D" uid="uid://nutesm7ebbec" path="res://02_Entities/_Data/FantasyGirl/WarriorFemale/T_El_F_Warrior_Extra_Pe_D.tga" id="1_8l00i"]
+[ext_resource type="Texture2D" uid="uid://b0mt568m5hk1u" path="res://02_Entities/_Data/FantasyGirl/WarriorFemale/T_El_F_Warrior_Extra_E.tga" id="2_rv83x"]
+[ext_resource type="Texture2D" uid="uid://by36jcpw52aoq" path="res://02_Entities/_Data/FantasyGirl/WarriorFemale/T_El_F_Warrior_Extra_M.tga" id="3_up6qo"]
+[ext_resource type="Texture2D" uid="uid://d0imh8eu8clv4" path="res://02_Entities/_Data/FantasyGirl/WarriorFemale/T_El_F_Warrior_Extra_N.tga" id="4_1283p"]
+[ext_resource type="Texture2D" uid="uid://cc6xdlwln0pgw" path="res://02_Entities/_Data/FantasyGirl/WarriorFemale/T_El_F_Warrior_Body_Pe_D.tga" id="5_h1jnt"]
+[ext_resource type="Texture2D" uid="uid://h18quwxs8ixh" path="res://02_Entities/_Data/FantasyGirl/WarriorFemale/T_El_F_Warrior_Body_N.tga" id="6_yku6x"]
+[ext_resource type="Texture2D" uid="uid://cqeqsia4pu823" path="res://02_Entities/_Data/FantasyGirl/WarriorFemale/T_El_F_Warrior_Hair_Gn_D.tga" id="7_v03km"]
+[ext_resource type="Texture2D" uid="uid://dxl62cc1tkd1y" path="res://02_Entities/_Data/FantasyGirl/WarriorFemale/T_El_F_Warrior_Hair_N.tga" id="8_5nkqt"]
+[ext_resource type="Texture2D" uid="uid://pyrmuq3py2gv" path="res://02_Entities/_Data/FantasyGirl/WarriorFemale/T_El_F_Warrior_Armor_Gn_D.tga" id="9_mgpcy"]
+[ext_resource type="Texture2D" uid="uid://o1ca07d6bgv4" path="res://02_Entities/_Data/FantasyGirl/WarriorFemale/T_El_F_Warrior_Armor_E.tga" id="10_mtlvi"]
+[ext_resource type="Texture2D" uid="uid://b1r023buog16g" path="res://02_Entities/_Data/FantasyGirl/WarriorFemale/T_El_F_Warrior_Armor_M.tga" id="11_6kcgh"]
+[ext_resource type="Texture2D" uid="uid://ducvh7su035l1" path="res://02_Entities/_Data/FantasyGirl/WarriorFemale/T_El_F_Warrior_Armor_N.tga" id="12_o6s1c"]
+[ext_resource type="PackedScene" uid="uid://b7q1v7j226dbl" path="res://02_Entities/_Data/FantasyGirl/WarriorFemale/sword_2h_elf_warrior_visual.tscn" id="13_1b6aw"]
+[ext_resource type="AnimationLibrary" uid="uid://5nrbroae7ph7" path="res://02_Entities/_Data/FantasyGirl/WarriorFemale/Elf_Warrior.res" id="14_vug2c"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3pur3"]
 resource_name = "M_Addons"
 albedo_color = Color(0.6651851, 0.6651851, 0.6651851, 1)
-albedo_texture = ExtResource("1_yytmy")
+albedo_texture = ExtResource("1_8l00i")
 metallic = 1.0
-metallic_texture = ExtResource("4_extra_m")
+metallic_texture = ExtResource("3_up6qo")
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_operator = 1
-emission_texture = ExtResource("5_extra_e")
+emission_texture = ExtResource("2_rv83x")
 normal_enabled = true
-normal_texture = ExtResource("3_extra_n")
+normal_texture = ExtResource("4_1283p")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_7s7y7"]
 resource_name = "Shoulders_mesh"
@@ -153,11 +154,11 @@ bind/16/pose = Transform3D(-0.012429151, 0.9882506, -0.15233575, 0.009220944, -0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mugkh"]
 resource_name = "M_Body"
 albedo_color = Color(0.6651851, 0.6651851, 0.6651851, 1)
-albedo_texture = ExtResource("5_6maet")
+albedo_texture = ExtResource("5_h1jnt")
 emission_enabled = true
 emission_energy_multiplier = 0.0
 normal_enabled = true
-normal_texture = ExtResource("7_body_n")
+normal_texture = ExtResource("6_yku6x")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_7aa2s"]
 resource_name = "Body_Mesh"
@@ -277,11 +278,11 @@ bind/29/pose = Transform3D(0.58080125, 0.7101391, -0.39796034, 0.047596272, 0.45
 resource_name = "M_Hair"
 vertex_color_use_as_albedo = true
 albedo_color = Color(0.6651851, 0.6651851, 0.6651851, 1)
-albedo_texture = ExtResource("8_hair_d")
+albedo_texture = ExtResource("7_v03km")
 emission_enabled = true
 emission_energy_multiplier = 0.0
 normal_enabled = true
-normal_texture = ExtResource("9_hair_n")
+normal_texture = ExtResource("8_5nkqt")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_7acdy"]
 resource_name = "Hair_Mesh"
@@ -347,15 +348,15 @@ bind/11/pose = Transform3D(0.003928652, -0.83487624, -0.5504236, -0.03163042, -0
 resource_name = "M_Armor"
 vertex_color_use_as_albedo = true
 albedo_color = Color(0.6651851, 0.6651851, 0.6651851, 1)
-albedo_texture = ExtResource("10_armor_d")
+albedo_texture = ExtResource("9_mgpcy")
 metallic = 1.0
-metallic_texture = ExtResource("12_armor_m")
+metallic_texture = ExtResource("11_6kcgh")
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_operator = 1
-emission_texture = ExtResource("13_armor_e")
+emission_texture = ExtResource("10_mtlvi")
 normal_enabled = true
-normal_texture = ExtResource("11_armor_n")
+normal_texture = ExtResource("12_o6s1c")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_yhq7p"]
 resource_name = "Armor_Mesh"
@@ -656,7 +657,10 @@ bind/1/pose = Transform3D(-0.013754517, 0.9998632, 0.009182332, 0.0070938934, 0.
 
 [node name="Elf_Warrior" type="Node3D" unique_id=241417041]
 
-[node name="Skeleton3D" type="Skeleton3D" parent="." unique_id=159926321]
+[node name="Node3D" type="Node3D" parent="." unique_id=1800649291]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="Skeleton3D" type="Skeleton3D" parent="Node3D" unique_id=159926321]
 bones/0/name = "root"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, -1.6292068e-07, 0, 1.6292068e-07, 1, 0, 0, 0)
@@ -1386,48 +1390,56 @@ bones/103/position = Vector3(0.783417, 0, 0)
 bones/103/rotation = Quaternion(0, 0, 0, 1)
 bones/103/scale = Vector3(1, 1, 1)
 
-[node name="Shoulders_mesh" type="MeshInstance3D" parent="Skeleton3D" unique_id=2012095596]
+[node name="Shoulders_mesh" type="MeshInstance3D" parent="Node3D/Skeleton3D" unique_id=2012095596]
 material_override = SubResource("StandardMaterial3D_3pur3")
 mesh = SubResource("ArrayMesh_7s7y7")
 skin = SubResource("Skin_h6fjy")
 
-[node name="Armorpads_mesh" type="MeshInstance3D" parent="Skeleton3D" unique_id=459979947]
+[node name="Armorpads_mesh" type="MeshInstance3D" parent="Node3D/Skeleton3D" unique_id=459979947]
 material_override = SubResource("StandardMaterial3D_3pur3")
 mesh = SubResource("ArrayMesh_ylelt")
 skin = SubResource("Skin_n36pt")
 
-[node name="Body_Mesh" type="MeshInstance3D" parent="Skeleton3D" unique_id=1008905842]
+[node name="Body_Mesh" type="MeshInstance3D" parent="Node3D/Skeleton3D" unique_id=1008905842]
 material_override = SubResource("StandardMaterial3D_mugkh")
 mesh = SubResource("ArrayMesh_7aa2s")
 skin = SubResource("Skin_sgqx0")
 
-[node name="Hair_Mesh" type="MeshInstance3D" parent="Skeleton3D" unique_id=790327700]
+[node name="Hair_Mesh" type="MeshInstance3D" parent="Node3D/Skeleton3D" unique_id=790327700]
 material_override = SubResource("StandardMaterial3D_it03p")
 mesh = SubResource("ArrayMesh_7acdy")
 skin = SubResource("Skin_1ri0s")
 
-[node name="Armor_Mesh" type="MeshInstance3D" parent="Skeleton3D" unique_id=1050408195]
+[node name="Armor_Mesh" type="MeshInstance3D" parent="Node3D/Skeleton3D" unique_id=1050408195]
 material_override = SubResource("StandardMaterial3D_yqola")
 mesh = SubResource("ArrayMesh_yhq7p")
 skin = SubResource("Skin_6idf4")
 
-[node name="Eyebrows_mesh" type="MeshInstance3D" parent="Skeleton3D" unique_id=1739366945]
+[node name="Eyebrows_mesh" type="MeshInstance3D" parent="Node3D/Skeleton3D" unique_id=1739366945]
 material_override = SubResource("StandardMaterial3D_it03p")
 mesh = SubResource("ArrayMesh_k0kqk")
 skin = SubResource("Skin_4ynk1")
 
-[node name="Hairband_Mesh" type="MeshInstance3D" parent="Skeleton3D" unique_id=863573626]
+[node name="Hairband_Mesh" type="MeshInstance3D" parent="Node3D/Skeleton3D" unique_id=863573626]
 material_override = SubResource("StandardMaterial3D_yqola")
 mesh = SubResource("ArrayMesh_v468v")
 skin = SubResource("Skin_mqomg")
 
-[node name="Eyes_Mesh" type="MeshInstance3D" parent="Skeleton3D" unique_id=230131533]
+[node name="Eyes_Mesh" type="MeshInstance3D" parent="Node3D/Skeleton3D" unique_id=230131533]
 material_override = SubResource("StandardMaterial3D_mugkh")
 mesh = SubResource("ArrayMesh_3sdx2")
 skin = SubResource("Skin_m3bn0")
 
-[node name="Meshes" type="Node3D" parent="." unique_id=1656743590]
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Node3D/Skeleton3D" unique_id=810828262]
+transform = Transform3D(-0.9503957, 0.257909, -0.17386967, 0.17392245, -0.022794306, -0.98449564, -0.25787383, -0.96590024, -0.023192704, -0.114645824, 1.1744174, 0.2812468)
+bone_name = "hand_l"
+bone_idx = 8
+
+[node name="Sword_2H_ElfWarrior" parent="Node3D/Skeleton3D/BoneAttachment3D" unique_id=1826227141 instance=ExtResource("13_1b6aw")]
+transform = Transform3D(-0.20202225, -0.7672653, 0.608681, -0.9745928, 0.21887419, -0.047570683, -0.096725255, -0.6028264, -0.7919881, 0.12801814, 0.01623547, -0.065003395)
+
+[node name="Meshes" type="Node3D" parent="Node3D" unique_id=1656743590]
 transform = Transform3D(1, 0, 0, 0, 1, -4.371139e-08, 0, 4.371139e-08, 1, 0, 0, 0)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=225411502]
-libraries/ = ExtResource("1_7heno")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node3D" unique_id=225411502]
+libraries/ = ExtResource("14_vug2c")
