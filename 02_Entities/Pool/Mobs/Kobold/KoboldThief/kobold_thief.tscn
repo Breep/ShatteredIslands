@@ -5,13 +5,20 @@
 [ext_resource type="AnimationNodeBlendTree" uid="uid://pdy5g53lau7e" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/kobold_knight_animation_tree.res" id="2_1a1fw"]
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="3_udxye"]
 [ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.tscn" id="4_757cq"]
+[ext_resource type="Resource" uid="uid://c2yci33qfr5n8" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Stats/kobold_thief_entity_desc.tres" id="5_desc"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6xdsc"]
 radius = 0.40478516
 height = 2.154049
 
-[node name="Kobold_Thief" type="CharacterBody3D" unique_id=526613656]
+[node name="Kobold_Thief" type="CharacterBody3D" unique_id=526613656 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker")]
+collision_layer = 16
+collision_mask = 25
 script = ExtResource("1_1a1fw")
+entity_name = "Kobold Thief"
+entity_desc = ExtResource("5_desc")
+_visual_3d = NodePath("Kobold_Thief")
+_health_bar_marker = NodePath("Kobold_Thief/HealthMarker3D")
 
 [node name="Kobold_Thief" parent="." unique_id=958711509 instance=ExtResource("1_mj83j")]
 
@@ -245,8 +252,9 @@ parameters/switch_stunned_state/current_state = "NotStunned"
 parameters/switch_stunned_state/transition_request = ""
 parameters/switch_stunned_state/current_index = 0
 
-[node name="AnimationComponent" parent="." unique_id=73205791 node_paths=PackedStringArray("_animation_tree") instance=ExtResource("3_udxye")]
+[node name="AnimationComponent" parent="." unique_id=73205791 node_paths=PackedStringArray("_animation_tree", "_owner") instance=ExtResource("3_udxye")]
 _animation_tree = NodePath("../AnimationTree")
+_owner = NodePath("..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1571710435]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0137786, 0)

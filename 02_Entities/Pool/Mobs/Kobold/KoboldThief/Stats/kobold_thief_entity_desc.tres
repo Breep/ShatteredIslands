@@ -23,6 +23,11 @@
 [ext_resource type="Resource" uid="uid://cf6a18ow1u3h7" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Stats/kobold_thief_stats_lvl_18.tres" id="21_i4s37"]
 [ext_resource type="Resource" uid="uid://byutt3k4sddc4" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Stats/kobold_thief_stats_lvl_19.tres" id="22_jg63n"]
 [ext_resource type="Resource" uid="uid://bvmb1xq86y6mc" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Stats/kobold_thief_stats_lvl_20.tres" id="23_mjfa4"]
+[ext_resource type="Resource" uid="uid://3hv8cbj7yg6a" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Skills/Passive/pas_de_l_ombre.tres" id="24_pas"]
+[ext_resource type="Resource" uid="uid://3hvv3o2lqrju" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Skills/Bronze/depart_fulgurant.tres" id="25_bro"]
+[ext_resource type="Resource" uid="uid://cgi8f4hanb45e" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Skills/Silver/dos_expose.tres" id="26_sil"]
+[ext_resource type="Resource" uid="uid://3hvv7sh3orju" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Skills/Gold/disparition.tres" id="27_gol"]
+[ext_resource type="Resource" uid="uid://cgi8f3hcbmipy" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Skills/Ultimate/coup_dans_le_dos.tres" id="28_ult"]
 
 [resource]
 script = ExtResource("1_d50wt")
@@ -49,4 +54,11 @@ stats = Dictionary[int, ExtResource("3_vvdh1")]({
 18: ExtResource("21_i4s37"),
 19: ExtResource("22_jg63n"),
 20: ExtResource("23_mjfa4")
+})
+skills = Dictionary[int, ExtResource("2_vnnhe")]({
+0: ExtResource("24_pas"),
+1: ExtResource("25_bro"),
+2: ExtResource("26_sil"),
+3: ExtResource("27_gol"),
+4: ExtResource("28_ult")
 })

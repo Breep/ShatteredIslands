@@ -1,12 +1,12 @@
 [gd_scene format=4 uid="uid://cese3fwuc1hvk"]
 
 [ext_resource type="PackedScene" uid="uid://bv74cpx7ocv67" path="res://02_Entities/_Data/Kobold/KoboldKnight/Weapon1H/sword_1h_kobold.tscn" id="1_a0rap"]
-[ext_resource type="Texture2D" uid="uid://bo4fdp57i3ycv" path="res://02_Entities/_Data/Kobold/KoboldThief/T_Kobold_Thief_Body_Rd_D.tga" id="2_03e7i"]
+[ext_resource type="Texture2D" uid="uid://bod4xedl1xstt" path="res://02_Entities/_Data/Kobold/KoboldThief/T_Kobold_Thief_Body_Bk_D.tga" id="2_03e7i"]
 [ext_resource type="Texture2D" uid="uid://dqbljqqk3oi48" path="res://02_Entities/_Data/Kobold/KoboldThief/T_Kobold_Thief_Body_N.tga" id="3_body_n"]
 [ext_resource type="Texture2D" uid="uid://ccu4vcpiltayx" path="res://02_Entities/_Data/Kobold/KoboldThief/T_Kobold_Thief_Body_AO.tga" id="4_body_ao"]
 [ext_resource type="Texture2D" uid="uid://btqs47f6jguyt" path="res://02_Entities/_Data/Kobold/KoboldThief/T_Kobold_Thief_Body_MR.tga" id="5_body_mr"]
 [ext_resource type="Texture2D" uid="uid://5phdojxo2ewf" path="res://02_Entities/_Data/Kobold/KoboldThief/T_Kobold_Thief_Body_E.tga" id="6_body_e"]
-[ext_resource type="Texture2D" uid="uid://dua2h6lbkmhqp" path="res://02_Entities/_Data/Kobold/KoboldThief/T_Kobold_Thief_Armor_Rd_D.tga" id="7_wqk5i"]
+[ext_resource type="Texture2D" uid="uid://cdejdbh3kun8m" path="res://02_Entities/_Data/Kobold/KoboldThief/T_Kobold_Thief_Armor_Bk_D.tga" id="7_wqk5i"]
 [ext_resource type="Texture2D" uid="uid://uejah0y27fuv" path="res://02_Entities/_Data/Kobold/KoboldThief/T_Kobold_Thief_Armor_N.tga" id="8_armor_n"]
 [ext_resource type="Texture2D" uid="uid://cx8ivtctn4wxk" path="res://02_Entities/_Data/Kobold/KoboldThief/T_Kobold_Thief_Armor_AO.tga" id="9_armor_ao"]
 [ext_resource type="Texture2D" uid="uid://044y8kgp0sks" path="res://02_Entities/_Data/Kobold/KoboldThief/T_Kobold_Thief_Armor_MR.tga" id="10_armor_mr"]
@@ -586,6 +586,7 @@ bind/11/pose = Transform3D(-2.35787e-07, 0.5353174, -0.844651, 1.8881164e-07, -0
 [node name="Kobold_Thief" type="Node3D" unique_id=958711509]
 
 [node name="Node3D" type="Node3D" parent="." unique_id=234310056]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
 
 [node name="root" type="Node3D" parent="Node3D" unique_id=1467009375]
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
