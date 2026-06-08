@@ -270,7 +270,8 @@ func _settle_to_upright() -> void:
 # dying mid-flight, which would otherwise leave a corpse following the path); movement
 # is halted so it does not fight the flight path; the auto-attack is paused — which also
 # drops any in-progress swing (see AutoAttackComponent.set_paused) so no delayed hit
-# lands; mana regen is zeroed so the ultimate can't auto-cast mid-flight (stance conflict).
+# lands; enemies also drop him as a target; mana regen is zeroed so the ultimate can't
+# auto-cast mid-flight (stance conflict).
 func _set_combat_active(active: bool) -> void:
 	if _owner.movement != null:
 		if active:
@@ -281,9 +282,11 @@ func _set_combat_active(active: bool) -> void:
 		_owner.auto_attack.set_paused(not active)
 	if active:
 		_owner.alterations.cancel_state(Alteration.Type.INVULNERABLE)
+		_owner.alterations.cancel_state(Alteration.Type.UNTARGETABLE)
 		_unregister_mana_cut()
 	else:
 		_owner.alterations.apply_state(Alteration.Type.INVULNERABLE)
+		_owner.alterations.apply_state(Alteration.Type.UNTARGETABLE)
 		_register_mana_cut()
 
 

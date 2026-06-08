@@ -5,7 +5,7 @@
 
 [sub_resource type="Resource" id="Resource_0hf40"]
 script = ExtResource("2_4711k")
-_ignite_stacks_per_tick = 50.0
+_ignite_stacks_per_tick = 12.0
 metadata/_custom_type_script = "uid://c453w6gahq6w6"
 
 [resource]

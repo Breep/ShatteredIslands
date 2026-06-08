@@ -16,9 +16,9 @@
 radius = 2.859375
 height = 15.394043
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_y451a"]
-radius = 4.010742
-height = 11.363876
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1dxyi"]
+radius = 2.4223633
+height = 10.0
 
 [sub_resource type="Resource" id="Resource_flightprofile"]
 script = ExtResource("1_fpp")
@@ -35,7 +35,7 @@ entity_name = "Gideon the Dragon"
 entity_desc = ExtResource("2_n3twu")
 _visual_3d = NodePath("SkeletalDragonVisual")
 _health_bar_marker = NodePath("SkeletalDragonVisual/HealthBarMarker")
-_attack_spawn_marker = NodePath("SkeletalDragonVisual/AAMarker")
+_attack_spawn_marker = NodePath("SkeletalDragonVisual/root/Skeleton3D/BoneAttachment3D/AAMarker")
 _projectile_type = 7
 
 [node name="SkeletalDragonVisual" parent="." unique_id=1358678233 instance=ExtResource("2_4r8xw")]
@@ -226,15 +226,26 @@ bones/90/rotation = Quaternion(0.050937086, -0.052267753, 0.04612313, 0.9962662)
 [node name="BoneAttachment3D" parent="SkeletalDragonVisual/root/Skeleton3D" index="5" unique_id=994366708]
 transform = Transform3D(0.9983675, -0.05026955, 0.027116299, -0.02193206, -0.7757605, -0.6306479, 0.05273807, 0.62902355, -0.77559644, -0.11728136, -2.889774, 0.7991228)
 
-[node name="VFX_Flamethrower_Anime_A" parent="SkeletalDragonVisual/root/Skeleton3D/BoneAttachment3D" index="0" unique_id=1173996978]
+[node name="AAMarker" type="Marker3D" parent="SkeletalDragonVisual/root/Skeleton3D/BoneAttachment3D" index="0" unique_id=1372507853]
+transform = Transform3D(-0.99836755, 0.052738044, -0.021931969, 0.05026942, 0.6290224, -0.7757589, -0.027116336, -0.7755952, -0.6306466, 0.022242714, -0.14680839, -0.011868358)
+
+[node name="VFX_Flamethrower_Anime_A" parent="SkeletalDragonVisual/root/Skeleton3D/BoneAttachment3D" index="1" unique_id=1173996978]
 visible = true
 
-[node name="BreathHitbox" type="Area3D" parent="SkeletalDragonVisual/root/Skeleton3D/BoneAttachment3D" index="1" unique_id=1266941036]
-collision_layer = 16
-collision_mask = 25
+[node name="firecone" parent="SkeletalDragonVisual/root/Skeleton3D/BoneAttachment3D/VFX_Flamethrower_Anime_A" index="1" unique_id=1714989473]
+emitting = false
+
+[node name="sparks3" parent="SkeletalDragonVisual/root/Skeleton3D/BoneAttachment3D/VFX_Flamethrower_Anime_A" index="2" unique_id=34878374]
+emitting = false
+
+[node name="BreathHitbox" type="Area3D" parent="SkeletalDragonVisual/root/Skeleton3D/BoneAttachment3D" index="2" unique_id=1266941036]
+collision_layer = 0
+collision_mask = 16
+input_ray_pickable = false
+monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SkeletalDragonVisual/root/Skeleton3D/BoneAttachment3D/BreathHitbox" unique_id=387490815]
-transform = Transform3D(0.992208, 0.03362282, -0.11996307, -0.114697084, 0.6224736, -0.7741912, 0.04864399, 0.78191876, 0.62148, 0.1668787, 3.4709377, 6.9127007)
+transform = Transform3D(0.9921515, 0.0440785, -0.117007814, -0.10942753, 0.75884646, -0.64201117, 0.060492687, 0.649777, 0.7577148, 0.29724476, 5.0258527, 4.9954643)
 shape = SubResource("CapsuleShape3D_jg7m6")
 
 [node name="ik_foot_f_l" parent="SkeletalDragonVisual/root/ik_foot_root" parent_id_path=PackedInt32Array(1358678233, 1234273656) index="0" unique_id=889725756]
@@ -247,13 +258,10 @@ transform = Transform3D(-0.22308545, 0.7615265, 0.6085308, -0.20939195, -0.64712
 transform = Transform3D(0.6226808, 0.0220429, -0.7821654, 0.5710964, 0.67052484, 0.47354558, 0.5348997, -0.7415596, 0.4049342, 0.6821973, 1.0209022, 0.10532488)
 
 [node name="ik_foot_b_r" parent="SkeletalDragonVisual/root/ik_foot_root" parent_id_path=PackedInt32Array(1358678233, 1234273656) index="3" unique_id=1666923042]
-transform = Transform3D(0.9517159, 0.037999716, -0.30461854, -0.29918587, -0.10736099, -0.9481356, -0.06873305, 0.9934936, -0.0908082, -0.58209586, 0.4760998, 0.12288982)
+transform = Transform3D(0.9517159, 0.037999716, -0.3046185, -0.29918587, -0.10736099, -0.94813555, -0.06873305, 0.9934936, -0.09080819, -0.58209586, 0.4760998, 0.12288982)
 
 [node name="HealthBarMarker" type="Marker3D" parent="SkeletalDragonVisual" unique_id=292615107]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.275872, 0)
-
-[node name="AAMarker" type="Marker3D" parent="SkeletalDragonVisual" unique_id=1372507853]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7683716e-07, 0.93349934, 4.196126)
 
 [node name="AnimationComponent" parent="." unique_id=73205791 node_paths=PackedStringArray("_animation_tree", "_owner") instance=ExtResource("3_qs7xq")]
 script = ExtResource("5_y451a")
@@ -356,8 +364,8 @@ parameters/scale_spell/scale = 1.0
 parameters/scale_end_spell/scale = 1.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1003504609]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.07131195, 3.982932, 0)
-shape = SubResource("CapsuleShape3D_y451a")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.069215775, 1.753459, -1.0741589)
+shape = SubResource("CapsuleShape3D_1dxyi")
 
 [node name="ShatteringFlightAbility" type="Node" parent="." unique_id=1179989453 node_paths=PackedStringArray("_owner")]
 script = ExtResource("1_n3twu")
