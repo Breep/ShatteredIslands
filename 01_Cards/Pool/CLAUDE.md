@@ -156,7 +156,42 @@ alterations  target  movement
 > composants ci-dessus → arbitrage du lead dev requis** avant d'inventer une
 > nouvelle mécanique.
 
-## 7. Cartes qui améliorent les Summon / Acolytes / Buildings
+## 7. Cartes qui lancent un projectile d'abilité
+
+Quand une carte (ou skill) lance un projectile de catégorie
+**`ABILITY_PROJECTILE`** — grenade, boule de feu, dard, … — il faut
+**l'enregistrer dans le pool d'abilités du porteur** via
+`ProjectileComponent.register_projectile()` côté `apply()`, et le retirer
+en miroir côté `revert()`.
+
+Ce pool est consommé par `ProjectileComponent.fire_random()` — la
+mécanique qui tire un projectile au hasard parmi les abilités acquises par
+l'entité. Sans enregistrement, le projectile ne fera **jamais** partie du
+pool tiré aléatoirement.
+
+```gdscript
+func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
+	var owner: Entity = ctx.entity_owner
+	owner.projectile.register_projectile(Projectile.Type.GRENADE)
+	# ... reste de l'apply (level modifier, periodic, etc.)
+
+
+func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
+	var owner: Entity = ctx.entity_owner
+	owner.projectile.unregister_projectile(Projectile.Type.GRENADE)
+	# ... reste du revert
+```
+
+> N'enregistre **que les `ABILITY_PROJECTILE`**. Les auto-attaques
+> (`AUTO_ATTACK_PROJECTILE`) passent par un autre canal et n'ont pas à
+> être ajoutées à ce pool.
+
+Pour le pattern complet de la carte (level modifier sur le projectile,
+attribution via `source_id`, périodique…), voir
+`01_Cards/Pool/Cards/Engineer/Common/ElectricGrenade/engineer_electric_grenade.gd`
+et le `CLAUDE.md` de `res://03_SpellsAndProjectiles/Projectiles/`.
+
+## 8. Cartes qui améliorent les Summon / Acolytes / Buildings
 
 Pour buffer non pas le porteur mais **ses minions**, on n'écrit pas dans les
 registres directs de l'entité (§6) mais dans des **registres dédiés du
@@ -211,7 +246,7 @@ Exemple de référence complet (acolytes, +40 AD + poison à l'attaque) :
   minion déjà vivant ne reçoit pas rétroactivement un modifier ajouté après son
   spawn.
 
-## 8. Exemple complet — « Poison Flask » (cible)
+## 9. Exemple complet — « Poison Flask » (cible)
 
 Inflige des stacks de poison à un ennemi aléatoire, périodiquement.
 Famille : **Poison** (consomme un timer, émet du poison → mono-famille).

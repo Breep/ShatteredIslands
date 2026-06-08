@@ -5,9 +5,10 @@ extends CardEffect
 ## sur un ennemi aléatoire. Le comportement AoE et les valeurs par-level vivent
 ## sur la classe Grenade (cf. grenade.gd : _damage, _vulnerability_stacks,
 ## _hit_radius par level). La carte n'a qu'à :
-##   1) registrer un ProjectileModifier qui boost le level des grenades de
+##   1) enregistrer GRENADE dans le pool d'abilités du porteur (cf. CLAUDE.md §7)
+##   2) registrer un ProjectileModifier qui boost le level des grenades de
 ##      (card_lvl - 1)
-##   2) déclencher le spawn périodique avec attribution (source_id = card_name)
+##   3) déclencher le spawn périodique avec attribution (source_id = card_name)
 
 @export var _period: Array[float]
 
@@ -16,6 +17,8 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 	var owner: Entity = ctx.entity_owner
 	var period: float = _period[card_lvl - 1]
 	var level_bonus: int = card_lvl - 1
+
+	owner.projectile.register_projectile(Projectile.Type.GRENADE)
 
 	var mod := ProjectileModifier.new()
 	mod.id = card_name
@@ -40,6 +43,7 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 	var stub := ProjectileModifier.new()
 	stub.id = card_name
 	owner.projectile_modifiers_registry.unregister_modifier(stub)
+	owner.projectile.unregister_projectile(Projectile.Type.GRENADE)
 
 
 func get_description(card_lvl: int) -> String:
