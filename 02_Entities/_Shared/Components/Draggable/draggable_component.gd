@@ -29,6 +29,7 @@ const SPAWN_AREA_MASK: int = 4
 #region ============================== Private variables ==============================
 var _is_dragging: bool = false
 var _ground_y: float = 0.0
+var _drag_start_position: Vector3
 var _y_tween: Tween
 
 # Tracking du press en attente du seuil long press.
@@ -113,6 +114,7 @@ func _start_drag() -> void:
 		return
 	_is_dragging = true
 	_ground_y = _owner.global_position.y
+	_drag_start_position = _owner.global_position
 	Verbose.debug("Drag started on " + _owner.entity_name, Verbose.Category.ENTITY)
 
 	if _owner.movement != null:
@@ -133,12 +135,17 @@ func _stop_drag() -> void:
 		return
 	_is_dragging = false
 	set_process(false)
+
+	var rollback: bool = _should_rollback()
 	_clear_drop_zone()
-	Verbose.debug("Drag stopped on " + _owner.entity_name, Verbose.Category.ENTITY)
+	Verbose.debug("Drag stopped on " + _owner.entity_name + (" (rollback)" if rollback else ""), Verbose.Category.ENTITY)
 
 	_kill_y_tween()
 	_y_tween = create_tween()
-	_y_tween.tween_property(_owner, "global_position:y", _ground_y, _drop_tween_duration)
+	if rollback:
+		_y_tween.tween_property(_owner, "global_position", _drag_start_position, _drop_tween_duration)
+	else:
+		_y_tween.tween_property(_owner, "global_position:y", _ground_y, _drop_tween_duration)
 
 	if _owner.movement != null:
 		_owner.movement.start()
@@ -202,6 +209,14 @@ func _team_from_collider(collider: Object) -> int:
 		if group_name.begins_with(SpawnArea.TEAM_GROUP_PREFIX):
 			return group_name.substr(SpawnArea.TEAM_GROUP_PREFIX.length()).to_int()
 	return -1
+
+
+# Une entité attachée à une équipe doit finir le drop sur sa propre spawn zone ;
+# sinon on la ramène à sa position de départ. Les entités sans équipe sont libres.
+func _should_rollback() -> bool:
+	if _owner.team <= 0:
+		return false
+	return _current_drop_zone != _owner.team
 #endregion
 
 #region ============================== Callbacks ==============================

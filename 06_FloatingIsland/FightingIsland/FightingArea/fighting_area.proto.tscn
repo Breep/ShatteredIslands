@@ -14,5 +14,6 @@ _team_zones = {
 
 [node name="Latika" parent="." unique_id=294337328 instance=ExtResource("2_h7s0s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0918322, 0, -0.59147596)
+team = 1
 
 [node name="CenterPointCamera" parent="." unique_id=823970387 instance=ExtResource("3_h7s0s")]
