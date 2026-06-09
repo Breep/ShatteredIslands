@@ -27,6 +27,7 @@ enum Type {
 	GAMMA_TURRET = 9,
 	ARROW = 10,
 	GRENADE = 11,
+	NUIT_NOIRE = 12,
 }
 
 enum Category {
