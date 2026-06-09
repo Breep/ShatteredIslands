@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="FightingEncounter" format=3 uid="uid://dviymoos11ydr"]
+
+[ext_resource type="Script" uid="uid://dg13tr0kcjyll" path="res://05_Game/Run/Encounters/fighting_encounter.gd" id="1_43nxm"]
+[ext_resource type="Resource" uid="uid://cjodt8dw6f5st" path="res://05_Game/Run/Encounters/Pool/02a_Satyrs/02a_satyrs.fighting.tres" id="1_n6wqn"]
+[ext_resource type="PackedScene" uid="uid://0x5u0h623yxt" path="res://06_FloatingIsland/FightingIsland/Pool/ArchIsland/arch_island.tscn" id="2_ed64v"]
+
+[resource]
+script = ExtResource("1_43nxm")
+island_scene = ExtResource("2_ed64v")
+formation_b = ExtResource("1_n6wqn")
+encounter_id = &"02a_Satyrs"
+display_name = "Satyrs"
+music = "battle_drums"
+metadata/_custom_type_script = "uid://dg13tr0kcjyll"

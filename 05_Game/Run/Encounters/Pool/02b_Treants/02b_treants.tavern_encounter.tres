@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="TavernEncounter" format=3 uid="uid://dytusq0k5sl3f"]
+
+[ext_resource type="Script" uid="uid://b02max168665p" path="res://05_Game/Run/Encounters/tavern_encounter.gd" id="1_ju45o"]
+[ext_resource type="Resource" uid="uid://cxuicqod28c56" path="res://05_Game/Run/Encounters/Pool/02b_Treants/02b_treants.tavern.tres" id="2_pwf30"]
+
+[resource]
+script = ExtResource("1_ju45o")
+tavern_formation = ExtResource("2_pwf30")
+encounter_id = &"01_Kobolds"
+display_name = "Kobolds"
+metadata/_custom_type_script = "uid://b02max168665p"

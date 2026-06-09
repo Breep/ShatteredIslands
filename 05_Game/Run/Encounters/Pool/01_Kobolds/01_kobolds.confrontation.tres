@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Confrontation" format=3 uid="uid://bud4osqs1tt30"]
+
+[ext_resource type="Script" uid="uid://cp06s2eytdhsh" path="res://05_Game/Run/Confrontations/confrontation.gd" id="1_eplr5"]
+
+[resource]
+script = ExtResource("1_eplr5")
+id = &"01_Kobold"
+metadata/_custom_type_script = "uid://cp06s2eytdhsh"

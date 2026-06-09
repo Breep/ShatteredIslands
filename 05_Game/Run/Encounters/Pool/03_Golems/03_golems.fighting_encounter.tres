@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="FightingEncounter" format=3 uid="uid://buy7tbxrtxfsp"]
+
+[ext_resource type="Resource" uid="uid://cm20hycb7b7bk" path="res://05_Game/Run/Encounters/Pool/03_Golems/03_golems.fighting.tres" id="1_77kmc"]
+[ext_resource type="Script" uid="uid://dg13tr0kcjyll" path="res://05_Game/Run/Encounters/fighting_encounter.gd" id="1_q8fdr"]
+[ext_resource type="PackedScene" uid="uid://0x5u0h623yxt" path="res://06_FloatingIsland/FightingIsland/Pool/ArchIsland/arch_island.tscn" id="2_r8nvg"]
+
+[resource]
+script = ExtResource("1_q8fdr")
+island_scene = ExtResource("2_r8nvg")
+formation_b = ExtResource("1_77kmc")
+encounter_id = &"03_Golems"
+display_name = "Golems"
+music = "battle_drums"
+metadata/_custom_type_script = "uid://dg13tr0kcjyll"

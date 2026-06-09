@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://ceb6m6dh5v0hb"]
 
-[ext_resource type="Texture2D" uid="uid://sfqnk8pph4px" path="res://02_Entities/Pool/Mobs/Golems/vfx/textures/T_VFX_Noise_075.png" id="1_4lsc6"]
+[ext_resource type="Texture2D" uid="uid://sfqnk8pph4px" path="res://22_VFX/Elementary/VFX/textures/T_VFX_Noise_075.png" id="1_4lsc6"]
 [ext_resource type="Texture2D" uid="uid://fy14scbokp5b" path="res://22_VFX/VFX_3D/Meteor/Textures/T_VFX_Z70.png" id="2_1rey2"]
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_b8j4h"]
