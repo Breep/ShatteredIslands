@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://cfireground001"]
+
+[ext_resource type="Script" path="res://03_SpellsAndProjectiles/Spells/FireGround/fire_ground.gd" id="1_fg"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_fg"]
+radius = 1.0
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fg"]
+transparency = 1
+albedo_color = Color(1, 0.45, 0.1, 0.45)
+emission_enabled = true
+emission = Color(1, 0.5, 0.1, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_fg"]
+top_radius = 1.0
+bottom_radius = 1.0
+height = 0.2
+
+[node name="FireGround" type="Node3D"]
+script = ExtResource("1_fg")
+
+[node name="FireVisual" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+material_override = SubResource("StandardMaterial3D_fg")
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_fg")
+
+[node name="AreaOfEffect" type="Area3D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 16
+monitorable = false
+
+[node name="AreaOfEffectCollisionShape3D" type="CollisionShape3D" parent="AreaOfEffect"]
+unique_name_in_owner = true
+shape = SubResource("CylinderShape3D_fg")
+
+[connection signal="body_entered" from="AreaOfEffect" to="." method="_on_area_of_effect_body_entered"]
+[connection signal="body_exited" from="AreaOfEffect" to="." method="_on_area_of_effect_body_exited"]

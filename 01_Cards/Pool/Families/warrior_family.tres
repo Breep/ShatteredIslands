@@ -12,11 +12,15 @@
 [ext_resource type="Resource" uid="uid://b76twqciou5cu" path="res://01_Cards/Pool/Cards/Warrior/Rare/BladeRush/attack_blade_rush.tres" id="10_blade"]
 [ext_resource type="Resource" uid="uid://3vjmnbpyyjyk" path="res://01_Cards/Pool/Cards/Warrior/Epic/GatlingGun/attack_gatling_gun.tres" id="11_gatling"]
 [ext_resource type="Resource" uid="uid://b1hnvijka2dfw" path="res://01_Cards/Pool/Cards/Warrior/Legendary/RussianRoulette/attack_russian_roulette.tres" id="12_roulette"]
+[ext_resource type="Resource" uid="uid://cwarexecution1" path="res://01_Cards/Pool/Cards/Warrior/Common/Executioner/attack_executioner.tres" id="14_exec"]
+[ext_resource type="Resource" uid="uid://cwarbanner0001" path="res://01_Cards/Pool/Cards/Warrior/Rare/WarBanner/attack_war_banner.tres" id="15_banner"]
+[ext_resource type="Resource" uid="uid://cwaradaptact01" path="res://01_Cards/Pool/Cards/Warrior/Rare/AdaptiveTactics/attack_adaptive_tactics.tres" id="16_adapt"]
+[ext_resource type="Resource" uid="uid://cwaroverdrive1" path="res://01_Cards/Pool/Cards/Warrior/Epic/Overdrive/attack_overdrive.tres" id="17_over"]
 [ext_resource type="Texture2D" uid="uid://b78s362n5bu6" path="res://01_Cards/Pool/Families/Icons/warrior.png" id="13_icon"]
 
 [resource]
 script = ExtResource("2_m6yig")
-cards = Array[ExtResource("1_4dvmk")]([ExtResource("3_sword"), ExtResource("4_cross"), ExtResource("5_fight"), ExtResource("6_chick"), ExtResource("7_crush"), ExtResource("8_shield"), ExtResource("9_burn"), ExtResource("10_blade"), ExtResource("11_gatling"), ExtResource("12_roulette")])
+cards = Array[ExtResource("1_4dvmk")]([ExtResource("3_sword"), ExtResource("4_cross"), ExtResource("5_fight"), ExtResource("6_chick"), ExtResource("7_crush"), ExtResource("8_shield"), ExtResource("9_burn"), ExtResource("10_blade"), ExtResource("11_gatling"), ExtResource("12_roulette"), ExtResource("14_exec"), ExtResource("15_banner"), ExtResource("16_adapt"), ExtResource("17_over")])
 icon = ExtResource("13_icon")
 family_name = "Warrior"
 family_type = 1

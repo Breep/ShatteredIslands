@@ -13,6 +13,7 @@ const CHAIN_LIGHTNING_SCENE: PackedScene = preload("res://03_SpellsAndProjectile
 const CLEAVE_SCENE: PackedScene = preload("res://03_SpellsAndProjectiles/Spells/Cleave/spell_cleave.tscn")
 const GOBLIN_FOCUS_SCENE: PackedScene = preload("res://03_SpellsAndProjectiles/Spells/GoblinFocus/spell_goblin_focus.tscn")
 const CLEARING_OF_LIFE: PackedScene = preload("res://03_SpellsAndProjectiles/Spells/ClearingOfLife/spell_clearing_of_life.tscn")
+const FIRE_GROUND_SCENE: PackedScene = preload("res://03_SpellsAndProjectiles/Spells/FireGround/fire_ground.tscn")
 
 func _enter_tree() -> void:
 	if _owner == null: return
@@ -64,6 +65,7 @@ func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictiona
 		Spell.Type.CLEAVE: _cast_cleave(spell_modifier)
 		Spell.Type.GOBLIN_FOCUS: _cast_goblin_focus(target, spell_modifier)
 		Spell.Type.CLEARING_OF_LIFE: _cast_clearing_of_life(spell_modifier)
+		Spell.Type.FIRE_GROUND: _cast_fire_ground(spell_modifier)
 		_: Verbose.error("Unknown spell type [" + str(spell_type) + "]", Verbose.Category.ENTITY_MODULE)
 
 	_consume_after_action_modifiers(Utils.ActionCategory.SPELL, {
@@ -170,3 +172,14 @@ func _cast_clearing_of_life(spell_modifier: Dictionary) -> void:
 	var clearing_of_life: ClearingOfLife = CLEARING_OF_LIFE.instantiate()
 	clearing_of_life.init(_owner, spell_modifier)
 	_spawn_manager.spawn_spell(clearing_of_life)
+
+
+func _cast_fire_ground(spell_modifier: Dictionary) -> void:
+	var fire_ground: FireGround = FIRE_GROUND_SCENE.instantiate()
+	var pos: Vector3 = spell_modifier.get(Spell.FireGroundModifier.POSITION, _owner.global_position)
+	var radius: float = spell_modifier.get(Spell.FireGroundModifier.RADIUS, 2.0)
+	var duration: float = spell_modifier.get(Spell.FireGroundModifier.DURATION, 4.0)
+	var ignite_per_tick: float = spell_modifier.get(Spell.FireGroundModifier.IGNITE_PER_TICK, 5.0)
+	var tick_period: float = spell_modifier.get(Spell.FireGroundModifier.TICK_PERIOD, 1.0)
+	fire_ground.init(_owner, pos, radius, duration, ignite_per_tick, tick_period)
+	_spawn_manager.spawn_spell(fire_ground)

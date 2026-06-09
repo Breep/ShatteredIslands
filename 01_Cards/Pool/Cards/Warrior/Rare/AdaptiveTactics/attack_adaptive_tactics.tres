@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://bed8ryk1aoplg"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_card"]
+[ext_resource type="Script" uid="uid://dhsg4jkqp32o4" path="res://01_Cards/Pool/Cards/Warrior/Rare/AdaptiveTactics/attack_adaptive_tactics.gd" id="2_eff"]
+
+[sub_resource type="Resource" id="Resource_adapt"]
+script = ExtResource("2_eff")
+_range_bonus = Array[float]([1.0, 2.0, 3.0, 4.0, 5.0])
+_lifesteal_bonus = Array[float]([1.0, 2.0, 3.0, 4.0, 5.0])
+
+[resource]
+script = ExtResource("1_card")
+name = "Adaptive Tactics"
+families = Array[int]([1])
+rarity = 1
+_card_effect = SubResource("Resource_adapt")
+points = Dictionary[int, int]({
+1: 2
+})
