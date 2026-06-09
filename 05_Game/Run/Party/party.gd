@@ -8,14 +8,25 @@
 #
 # Pivot des signaux : Party s'abonne aux roasters qu'elle contient et
 # maintient automatiquement formation.entity_specs en sync (1 entry =
-# 1 EntitySpec, transform IDENTITY par défaut). Elle ré-émet entry_added /
-# entry_removed pour les consommateurs externes (Tavern principalement).
+# 1 EntitySpec, posé par défaut dans la zone de spawn joueur). Elle ré-émet
+# entry_added / entry_removed pour les consommateurs externes (Tavern principalement).
 class_name Party
 extends Resource
 
 #region ============================== Signals ==============================
 signal entry_added(entry: RoasterEntry)
 signal entry_removed(entry: RoasterEntry)
+#endregion
+
+#region ============================== Constants ==============================
+# Centre de la zone de spawn côté joueur. Les entries ajoutées y sont posées
+# par défaut, puis réparties autour si la place est déjà prise.
+const SPAWN_CENTER := Vector3(6, 0, 0)
+# Pas de la grille de placement automatique (distance entre deux unités).
+const SPAWN_SPACING := 2.0
+# Garde-fou sur la recherche en anneaux concentriques (évite une boucle infinie
+# si tous les emplacements proches sont saturés).
+const MAX_SPAWN_RINGS := 6
 #endregion
 
 #region ============================== Export ==============================
@@ -87,9 +98,10 @@ func _connect_roaster(roaster: Roaster) -> void:
 		roaster.entry_removed.connect(_on_roaster_entry_removed)
 
 
-# Auto-sync formation : crée un EntitySpec (transform IDENTITY = (0,0,0)) pour
-# chaque entry ajoutée à un roaster. La position propre sera posée plus tard
-# par le joueur en phase de placement.
+# Auto-sync formation : crée un EntitySpec pour chaque entry ajoutée à un
+# roaster, posé au centre de la zone de spawn joueur (ou sur l'emplacement libre
+# le plus proche si le centre est déjà occupé). Le joueur peut le repositionner
+# ensuite en phase de placement.
 func _on_roaster_entry_added(entry: RoasterEntry) -> void:
 	if entry == null:
 		return
@@ -98,7 +110,8 @@ func _on_roaster_entry_added(entry: RoasterEntry) -> void:
 	var spec := EntitySpec.new()
 	spec.entry = entry
 	spec.desc = entry.desc
-	spec.transform = Transform3D.IDENTITY
+	spec.free_position = _find_free_spawn_position()
+	spec.rotation_y = PI / 2
 	formation.entity_specs.append(spec)
 	entry_added.emit(entry)
 
@@ -110,4 +123,39 @@ func _on_roaster_entry_removed(entry: RoasterEntry) -> void:
 	if spec != null:
 		formation.entity_specs.erase(spec)
 	entry_removed.emit(entry)
+
+
+# Cherche une position libre en partant du centre de la zone de spawn, puis sur
+# des anneaux carrés concentriques de plus en plus larges. Retourne le centre en
+# dernier recours si tout est saturé (les specs s'empilent alors).
+func _find_free_spawn_position() -> Vector3:
+	if _is_position_free(SPAWN_CENTER):
+		return SPAWN_CENTER
+	for ring: int in range(1, MAX_SPAWN_RINGS + 1):
+		for offset: Vector3 in _ring_offsets(ring):
+			var candidate: Vector3 = SPAWN_CENTER + offset
+			if _is_position_free(candidate):
+				return candidate
+	return SPAWN_CENTER
+
+
+# Offsets (en unités monde) du périmètre d'un anneau carré de rayon `ring`
+# cellules autour du centre, espacés de SPAWN_SPACING.
+func _ring_offsets(ring: int) -> Array[Vector3]:
+	var offsets: Array[Vector3] = []
+	for x: int in range(-ring, ring + 1):
+		for z: int in range(-ring, ring + 1):
+			if maxi(absi(x), absi(z)) != ring:
+				continue
+			offsets.append(Vector3(x, 0, z) * SPAWN_SPACING)
+	return offsets
+
+
+# Vrai si aucun EntitySpec déjà placé n'occupe (à une demi-cellule près) cette
+# position.
+func _is_position_free(position: Vector3) -> bool:
+	for spec: EntitySpec in formation.entity_specs:
+		if spec.free_position.distance_to(position) < SPAWN_SPACING * 0.5:
+			return false
+	return true
 #endregion
