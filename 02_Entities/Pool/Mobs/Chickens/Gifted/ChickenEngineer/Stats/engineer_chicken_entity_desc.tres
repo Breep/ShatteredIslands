@@ -31,6 +31,7 @@
 
 [resource]
 script = ExtResource("1_m8cld")
+scene_path = "res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenEngineer/chicken_engineer.tscn"
 name = "Smart Bok"
 description = "Bok = Kob"
 default_category = 1

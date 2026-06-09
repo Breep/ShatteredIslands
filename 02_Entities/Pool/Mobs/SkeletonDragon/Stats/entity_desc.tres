@@ -31,6 +31,8 @@
 
 [resource]
 script = ExtResource("1_5bbmg")
+scene_path = "res://02_Entities/Pool/Mobs/SkeletonDragon/skeleton_dragon.tscn"
+name = "Gideon The Dragon"
 stats = Dictionary[int, ExtResource("3_40nx0")]({
 1: ExtResource("4_fwtbi"),
 2: ExtResource("5_tkl2o"),

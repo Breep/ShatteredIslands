@@ -134,6 +134,7 @@ func _start_drag() -> void:
 
 	set_process(true)
 	dragged.emit()
+	Events.entity_drag_started.emit(_owner)
 	AudioManager.play_3d("whoosh", _owner.position)
 
 
@@ -158,6 +159,7 @@ func _stop_drag() -> void:
 		_owner.movement.start()
 
 	dropped.emit()
+	Events.entity_drag_stopped.emit(_owner)
 	AudioManager.play_3d("thud", _owner.position)
 
 

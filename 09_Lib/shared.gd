@@ -25,18 +25,6 @@ var HERO_SCENES: Dictionary[HeroDesc.HeroId, PackedScene]:
 			}
 		return _hero_scenes_cache
 
-var _acolyte_scenes_cache: Dictionary[EntityDesc, PackedScene] = {}
-## Scènes entité des compagnons/acolytes, résolues depuis leur EntityDesc (les
-## .tres ne stockent pas leur scene pour éviter le cycle de dépendance). Keyed
-## par la ressource desc elle-même (load() est mis en cache → identité stable).
-var ACOLYTE_SCENES: Dictionary[EntityDesc, PackedScene]:
-	get:
-		if _acolyte_scenes_cache.is_empty():
-			_acolyte_scenes_cache = {
-				load("res://02_Entities/Pool/Mobs/Vrock/Stats/vrock_entity_desc.tres"): load("res://02_Entities/Pool/Mobs/Vrock/vrock.tscn"),
-			}
-		return _acolyte_scenes_cache
-
 var _families_cache: Dictionary[Family.Type, Family] = {}
 var FAMILIES: Dictionary[Family.Type, Family]:
 	get:

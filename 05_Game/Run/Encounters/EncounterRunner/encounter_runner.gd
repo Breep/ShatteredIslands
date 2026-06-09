@@ -25,7 +25,7 @@ var _last_fight_winner_team: int = -1
 
 
 #region ============================== Fighting ==============================
-func setup_fighting(encounter: FightingEncounter, party_formation: FightingFormation = null) -> FightingIsland:
+func _setup_fighting(encounter: FightingEncounter, party_formation: FightingFormation = null) -> FightingIsland:
 	if encounter == null:
 		Verbose.error("EncounterRunner.setup_fighting: encounter null", Verbose.Category.ENCOUNTER_RUNNER)
 		return null
@@ -51,7 +51,7 @@ func setup_fighting(encounter: FightingEncounter, party_formation: FightingForma
 
 func run_fighting(encounter: FightingEncounter, party_formation: FightingFormation = null) -> bool:
 	_last_fight_winner_team = -1
-	var island: FightingIsland = await setup_fighting(encounter, party_formation)
+	var island: FightingIsland = await _setup_fighting(encounter, party_formation)
 	if island == null: return false
 
 	var fm: FightingManager = island.get_fighting_area().fighting_manager
@@ -74,8 +74,6 @@ func _on_fighting_manager_fight_done(_fm: FightingManager, winner_teams_order: A
 
 
 #region ============================== Tavern ==============================
-
-
 func run_tavern(encounter: TavernEncounter, party: Party = null) -> void:
 	var island: BuyingIsland = await _setup_tavern(encounter, party)
 	if island == null: return

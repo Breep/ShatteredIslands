@@ -12,6 +12,7 @@ _fighting_area = NodePath("FightingArea")
 _center_point_camera = NodePath("CenterPointCamera")
 
 [node name="ArchIslandVisual" parent="." unique_id=1045725859 instance=ExtResource("1_hqc1e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1605525, 0, -0.4017334)
 
 [node name="FightingArea" parent="." unique_id=2072382245 node_paths=PackedStringArray("_team_zones") instance=ExtResource("3_nh3rf")]
 _team_zones = {

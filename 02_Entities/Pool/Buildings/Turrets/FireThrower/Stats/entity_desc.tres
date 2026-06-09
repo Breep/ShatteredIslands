@@ -31,6 +31,7 @@
 
 [resource]
 script = ExtResource("1_d38ms")
+scene_path = "res://02_Entities/Pool/Buildings/Turrets/FireThrower/turret_firethrower.tscn"
 name = "Fire Thrower Turret"
 default_category = 4
 stats = Dictionary[int, ExtResource("3_nnba6")]({

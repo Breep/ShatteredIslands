@@ -469,6 +469,44 @@ func _prepare_projectile_stats() -> ProjectileStats:
 	return projectile_stats
 
 
+# Résout un impact d'auto-attaque COMPLET sur une cible donnée, instantané :
+# damage_modifiers (Executioner, RussianRoulette…) + dégâts + effets additionnels
+# (poison, ignite, shield…). Utilisé pour les frappes secondaires type cleave.
+# Le projectile transmis aux callbacks est null (une frappe cleave ne rebondit pas).
+# Note : ré-exécute les modifiers persistants ; protéger l'appelant contre la
+# ré-entrance (un effet de cleave ne doit pas se re-cleaver lui-même).
+func resolve_strike(hit_source: Entity, hit_target: Entity) -> float:
+	if not is_instance_valid(hit_source) or not is_instance_valid(hit_target):
+		return 0.0
+	var damage_modifiers_callbacks: Array[Callable] = []
+	var additional_callbacks: Array[Callable] = []
+	_consume_modifiers(damage_modifiers_callbacks, additional_callbacks)
+
+	var mod := {
+		AutoAttackModifier.VarType.SOURCE: hit_source,
+		AutoAttackModifier.VarType.TARGET: hit_target,
+		AutoAttackModifier.VarType.DAMAGE_ADD: 0,
+		AutoAttackModifier.VarType.DAMAGE_MUL: 100,
+	}
+	for damage_modifiers_callback in damage_modifiers_callbacks:
+		damage_modifiers_callback.call(mod)
+
+	var add: float = mod[AutoAttackModifier.VarType.DAMAGE_ADD]
+	var mul: float = mod[AutoAttackModifier.VarType.DAMAGE_MUL]
+	var damage: float = (_owner.stats.attack_damage + add) * (mul / 100.0)
+	var damage_done: float = hit_source.damage.direct(hit_target, damage, Utils.ActionType.DAMAGE_PHYSICAL, &"auto_attack")
+
+	for additional_callback in additional_callbacks:
+		additional_callback.call({
+			AutoAttackModifier.VarType.SOURCE: hit_source,
+			AutoAttackModifier.VarType.TARGET: hit_target,
+			AutoAttackModifier.VarType.POSITION: hit_target.global_position,
+			AutoAttackModifier.VarType.DAMAGE: damage_done,
+			AutoAttackModifier.VarType.PROJECTILE: null,
+		})
+	return damage_done
+
+
 func _consume_modifiers(damage_modifier_callbacks: Array[Callable], additional_callbacks: Array[Callable]) -> void:
 	for aa_modifier: AutoAttackModifier in _owner.auto_attack_modifier_registry.consume_all_modifiers():
 		if aa_modifier.additional_effect_callback.is_valid():

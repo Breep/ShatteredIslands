@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cmgtaf41odg41"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_card"]
+[ext_resource type="Script" uid="uid://bsopnhd7asmml" path="res://01_Cards/Pool/Cards/ArdentCelestial/Common/EmberCascade/ardent_celestial_ember_cascade.gd" id="2_eff"]
+
+[sub_resource type="Resource" id="Resource_ember"]
+script = ExtResource("2_eff")
+_chance_per_stack = Array[float]([5.0, 6.0, 7.0, 8.0, 10.0])
+
+[resource]
+script = ExtResource("1_card")
+name = "Ember Cascade"
+families = Array[int]([3])
+_card_effect = SubResource("Resource_ember")
+points = Dictionary[int, int]({
+3: 1
+})

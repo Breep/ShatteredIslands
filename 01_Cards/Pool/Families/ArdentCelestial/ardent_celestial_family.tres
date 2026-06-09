@@ -6,11 +6,18 @@
 [ext_resource type="Resource" uid="uid://c8xlom0vjt6rp" path="res://01_Cards/Pool/Cards/ArdentCelestial/Common/DiamondSkin/ardent_celestial_diamond_skin.tres" id="4_diamond"]
 [ext_resource type="Resource" uid="uid://cacsolarflr1" path="res://01_Cards/Pool/Cards/ArdentCelestial/Common/SolarFlare/ardent_celestial_solar_flare.tres" id="5_flare"]
 [ext_resource type="Resource" uid="uid://cacburnstrk1" path="res://01_Cards/Pool/Cards/ArdentCelestial/Common/BurningStrike/ardent_celestial_burning_strike.tres" id="6_burn"]
+[ext_resource type="Resource" uid="uid://cacembercasc01" path="res://01_Cards/Pool/Cards/ArdentCelestial/Common/EmberCascade/ardent_celestial_ember_cascade.tres" id="8_ember"]
+[ext_resource type="Resource" uid="uid://ccolarcanebw1" path="res://01_Cards/Pool/Cards/Colossus/Common/ArcaneBulwark/colossus_arcane_bulwark.tres" id="9_arcane"]
+[ext_resource type="Resource" uid="uid://cacempowproj01" path="res://01_Cards/Pool/Cards/ArdentCelestial/Rare/EmpoweredProjectiles/ardent_celestial_empowered_projectiles.tres" id="10_empow"]
+[ext_resource type="Resource" uid="uid://cacmeteorcad01" path="res://01_Cards/Pool/Cards/ArdentCelestial/Rare/MeteorCadence/ardent_celestial_meteor_cadence.tres" id="11_cad"]
+[ext_resource type="Resource" uid="uid://caccullingbm01" path="res://01_Cards/Pool/Cards/ArdentCelestial/Rare/CullingBeam/ardent_celestial_culling_beam.tres" id="12_cull"]
+[ext_resource type="Resource" uid="uid://cacastralbar01" path="res://01_Cards/Pool/Cards/ArdentCelestial/Legendary/AstralBarrage/ardent_celestial_astral_barrage.tres" id="13_barrage"]
+[ext_resource type="Resource" uid="uid://cacscorched001" path="res://01_Cards/Pool/Cards/ArdentCelestial/Epic/ScorchedEarth/ardent_celestial_scorched_earth.tres" id="14_scorch"]
 [ext_resource type="Texture2D" uid="uid://cc1c8vf4tv2pa" path="res://01_Cards/Pool/Families/Icons/celeste logo 2.png" id="7_icon"]
 
 [resource]
 script = ExtResource("2_u6eys")
-cards = Array[ExtResource("1_l3j17")]([ExtResource("3_meteor"), ExtResource("4_diamond"), ExtResource("5_flare"), ExtResource("6_burn")])
+cards = Array[ExtResource("1_l3j17")]([ExtResource("3_meteor"), ExtResource("4_diamond"), ExtResource("5_flare"), ExtResource("6_burn"), ExtResource("8_ember"), ExtResource("9_arcane"), ExtResource("10_empow"), ExtResource("11_cad"), ExtResource("12_cull"), ExtResource("13_barrage"), ExtResource("14_scorch")])
 icon = ExtResource("7_icon")
 family_name = "Ardent Celestial"
 family_type = 3

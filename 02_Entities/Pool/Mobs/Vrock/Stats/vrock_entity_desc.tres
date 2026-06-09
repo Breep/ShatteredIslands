@@ -27,6 +27,7 @@
 
 [resource]
 script = ExtResource("1_cnbgm")
+scene_path = "res://02_Entities/Pool/Mobs/Vrock/vrock.tscn"
 name = "Vrock"
 description = "Loup de Latika"
 preview_scene = ExtResource("1_4w8h4")

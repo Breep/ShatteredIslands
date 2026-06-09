@@ -31,6 +31,7 @@
 
 [resource]
 script = ExtResource("1_desc")
+scene_path = "res://02_Entities/Pool/Buildings/Sentinelle/sentinelle.tscn"
 name = "Sentinelle"
 default_category = 4
 description = "Bâtiment de soutien : rayon protecteur de bouclier."

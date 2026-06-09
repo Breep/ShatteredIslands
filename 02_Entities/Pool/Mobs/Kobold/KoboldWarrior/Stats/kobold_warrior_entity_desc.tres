@@ -31,6 +31,7 @@
 
 [resource]
 script = ExtResource("1_reult")
+scene_path = "res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/kobold_warrior.tscn"
 name = "Kob"
 description = "Kobby is happy"
 stats = Dictionary[int, ExtResource("3_g4iju")]({

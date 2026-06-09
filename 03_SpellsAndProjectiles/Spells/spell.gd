@@ -14,6 +14,7 @@ enum Type {
 	CLEAVE,
 	GOBLIN_FOCUS,
 	CLEARING_OF_LIFE,
+	FIRE_GROUND,
 }
 
 enum DarkStormModifier { DAMAGE, PERIOD, LIFESPAN, PAIN_STACK_PERCENT }
@@ -22,3 +23,4 @@ enum ShroomModifier { RADIUS, DAMAGE, LIFE_TIME }
 enum DeathFogModifier { GROW_SPEED, TICK_PERIOD, DAMAGE_MULTIPLIER }
 enum LightningModifier { DAMAGE }
 enum ChainLightningModifier { DAMAGE, BOUNCE_COUNT, BOUNCE_RANGE, DAMAGE_DECAY_PERCENT}
+enum FireGroundModifier { POSITION, RADIUS, DURATION, IGNITE_PER_TICK, TICK_PERIOD }
