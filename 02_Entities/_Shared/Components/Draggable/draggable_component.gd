@@ -18,6 +18,7 @@ signal drop_zone_changed(team: int)
 const LONG_PRESS_THRESHOLD_S: float = 0.2
 const DROP_RAY_LENGTH: float = 2.0
 const SPAWN_AREA_MASK: int = 4
+const CROSS_DECAL_SCENE: PackedScene = preload("res://02_Entities/_Shared/Components/Draggable/cross_decal.tscn")
 #endregion
 
 #region ============================== Export ==============================
@@ -40,6 +41,8 @@ var _press_start_msec: int = 0
 var _drop_ray: RayCast3D
 var _current_drop_zone: int = -1
 var _current_zone_area: Area3D
+var _cross_decal: CrossDecal
+var _origin_decal: CrossDecal
 #endregion
 
 #region ============================== Node base functions ==============================
@@ -121,6 +124,10 @@ func _start_drag() -> void:
 		_owner.movement.stop()
 
 	_spawn_drop_ray()
+	_spawn_cross_decal()
+	_spawn_origin_decal()
+	_update_drop_zone()
+	_refresh_decal_feedback()
 	_kill_y_tween()
 	_y_tween = create_tween()
 	_y_tween.tween_property(_owner, "global_position:y", _ground_y + _drag_height, _drag_tween_duration)
@@ -186,6 +193,7 @@ func _update_drop_zone() -> void:
 	if team != _current_drop_zone:
 		_current_drop_zone = team
 		drop_zone_changed.emit(team)
+	_refresh_decal_feedback()
 
 
 func _clear_drop_zone() -> void:
@@ -198,6 +206,39 @@ func _clear_drop_zone() -> void:
 	if _drop_ray != null:
 		_drop_ray.queue_free()
 		_drop_ray = null
+	if _cross_decal != null:
+		_cross_decal.queue_free()
+		_cross_decal = null
+	if _origin_decal != null:
+		_origin_decal.queue_free()
+		_origin_decal = null
+
+
+func _spawn_cross_decal() -> void:
+	_cross_decal = CROSS_DECAL_SCENE.instantiate() as CrossDecal
+	_owner.add_child(_cross_decal)
+
+
+# Marqueur blanc statique à la position de départ (cible du rollback). Posé dans
+# le parent de l'entité pour rester fixe pendant que l'entité suit la souris.
+func _spawn_origin_decal() -> void:
+	var parent: Node = _owner.get_parent()
+	if parent == null:
+		return
+	_origin_decal = CROSS_DECAL_SCENE.instantiate() as CrossDecal
+	parent.add_child(_origin_decal)
+	_origin_decal.global_position = _drag_start_position
+	_origin_decal.stop_pulse()
+	_origin_decal.set_neutral()
+
+
+func _refresh_decal_feedback() -> void:
+	if _cross_decal == null:
+		return
+	if _should_rollback():
+		_cross_decal.set_nok()
+	else:
+		_cross_decal.set_ok()
 
 
 func _team_from_collider(collider: Object) -> int:
