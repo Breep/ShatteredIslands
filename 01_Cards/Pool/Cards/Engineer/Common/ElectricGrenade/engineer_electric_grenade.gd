@@ -2,7 +2,7 @@ class_name EngineerElectricGrenade
 extends CardEffect
 
 ## Engineer — lance périodiquement une grenade électrique (trajectoire en cloche)
-## sur un ennemi aléatoire. Le comportement AoE et les valeurs par-level vivent
+## sur l'ennemi le plus éloigné. Le comportement AoE et les valeurs par-level vivent
 ## sur la classe Grenade (cf. grenade.gd : _damage, _vulnerability_stacks,
 ## _hit_radius par level). La carte n'a qu'à :
 ##   1) enregistrer GRENADE dans le pool d'abilités du porteur (cf. CLAUDE.md §7)
@@ -28,7 +28,7 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 	owner.projectile_modifiers_registry.register_modifier(mod)
 
 	owner.battle_callback_registry.register_periodic(card_name, period, func() -> void:
-		var target: Entity = owner.target.get_target(TargetComponent.TargettingStrategy.RANDOM_ENEMY)
+		var target: Entity = owner.target.get_target(TargetComponent.TargettingStrategy.FARTHEST_ENEMY)
 		if target == null or not is_instance_valid(target):
 			return
 		var proj_stats := ProjectileStats.new()

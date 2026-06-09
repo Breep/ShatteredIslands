@@ -26,6 +26,11 @@ var battle_callback_registry: BattleCallbackRegistry
 # pour idempotence et unregister propre.
 var _level_bonuses: Dictionary[StringName, int] = {}
 
+# Alterations (stacks) accordées à chaque building au spawn. Indexé par `id`
+# (typiquement card_name). Chaque grant : { "type": Alteration.Type, "flat": float,
+# "pct": float } → stacks = flat + building.health_max * pct / 100.
+var _alteration_grants: Dictionary[StringName, Dictionary] = {}
+
 
 func _init() -> void:
 	stat_modifiers_registry = EntityStatModifiersRegistry.new(EntityStats.new())
@@ -68,6 +73,14 @@ func apply_to(target: Entity, source_ancestor: Entity) -> void:
 		clone.id = _derive_id(original.id, source_ancestor)
 		target.death_modifiers_registry.register_modifier(clone)
 
+	# Alterations (stacks) : appliquées directement sur le building cible. La
+	# référence `target` est disponible ici → pas de problème de capture de
+	# closure (contrairement aux battle_callbacks, cf. TODO ci-dessous).
+	if target.alterations != null:
+		for grant: Dictionary in _alteration_grants.values():
+			var amount: float = grant["flat"] + target.stats.health_max * grant["pct"] / 100.0
+			target.alterations.add_stack(grant["type"], amount)
+
 	# TODO BattleCallback : voir SummonModifiersRegistry, même limite.
 
 
@@ -90,3 +103,15 @@ func get_total_level_bonus() -> int:
 	for v: int in _level_bonuses.values():
 		total += v
 	return total
+
+
+# ============================== Alteration grant API ==============================
+
+# Accorde des stacks d'une alteration à chaque building au spawn :
+# stacks = flat + building.health_max * hp_max_percent / 100.
+func register_alteration_grant(id: StringName, type: Alteration.Type, flat: float, hp_max_percent: float = 0.0) -> void:
+	_alteration_grants[id] = {"type": type, "flat": flat, "pct": hp_max_percent}
+
+
+func unregister_alteration_grant(id: StringName) -> void:
+	_alteration_grants.erase(id)
