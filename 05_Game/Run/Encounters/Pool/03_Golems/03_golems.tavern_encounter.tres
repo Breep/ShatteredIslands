@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("1_gfpjw")
 tavern_formation = ExtResource("2_t5qqc")
-encounter_id = &"01_Kobolds"
-display_name = "Kobolds"
+encounter_id = &"03_Golems"
+display_name = "Golems"
 metadata/_custom_type_script = "uid://b02max168665p"

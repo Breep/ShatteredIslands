@@ -1,70 +1,92 @@
-[gd_resource type="Resource" script_class="TavernFormation" format=3 uid="uid://bb7sjjnaqkj1v"]
+[gd_resource type="Resource" script_class="TavernFormation" format=3 uid="uid://dqagucwbv3j0f"]
 
-[ext_resource type="Script" uid="uid://flrydugnyfe7" path="res://05_Game/Run/SpawnSpecs/Concrete/acolyte_spawn_spec.gd" id="1_3yeba"]
-[ext_resource type="PackedScene" uid="uid://v8f1a76nj0ui" path="res://05_Game/Run/SpawnSpecs/SpawnPoints/AcolyteSpawn/acolyte_spawn_point.tscn" id="2_2c2fr"]
-[ext_resource type="Script" uid="uid://rj6clcd8f15a" path="res://05_Game/Run/SpawnSpecs/entity_spec.gd" id="3_kkfqo"]
-[ext_resource type="Script" uid="uid://bj0ecq2d5vir5" path="res://05_Game/Run/SpawnSpecs/Concrete/hero_spawn_spec.gd" id="4_dmex5"]
-[ext_resource type="PackedScene" uid="uid://mcgg11jy8uh1" path="res://05_Game/Run/SpawnSpecs/SpawnPoints/HeroSpawn/hero_spawn_point.tscn" id="5_y0wd0"]
-[ext_resource type="Script" uid="uid://b24wp3uvfns8t" path="res://05_Game/Run/SpawnSpecs/prop_spec.gd" id="6_d5kcj"]
-[ext_resource type="Script" uid="uid://d2ixo16r26ppd" path="res://05_Game/Run/Formations/tavern_formation.gd" id="7_vfo4v"]
-[ext_resource type="Script" uid="uid://c78ccxnqy6c16" path="res://05_Game/Run/SpawnSpecs/spawn_point_spec.gd" id="8_pv730"]
+[ext_resource type="Script" uid="uid://flrydugnyfe7" path="res://05_Game/Run/SpawnSpecs/Concrete/acolyte_spawn_spec.gd" id="1_tsf3l"]
+[ext_resource type="PackedScene" uid="uid://v8f1a76nj0ui" path="res://05_Game/Run/SpawnSpecs/SpawnPoints/AcolyteSpawn/acolyte_spawn_point.tscn" id="2_ew8gu"]
+[ext_resource type="Script" uid="uid://rj6clcd8f15a" path="res://05_Game/Run/SpawnSpecs/entity_spec.gd" id="3_bhqvu"]
+[ext_resource type="Script" uid="uid://bj0ecq2d5vir5" path="res://05_Game/Run/SpawnSpecs/Concrete/hero_spawn_spec.gd" id="4_rjwka"]
+[ext_resource type="PackedScene" uid="uid://btqko5dh71wxi" path="res://02_Entities/Pool/Mobs/SkeletonDragon/skeleton_dragon.tscn" id="4_y42ew"]
+[ext_resource type="Script" uid="uid://bcak6iy1jjxko" path="res://05_Game/Run/SpawnSpecs/Concrete/mob_spec.gd" id="5_ava6q"]
+[ext_resource type="PackedScene" uid="uid://mcgg11jy8uh1" path="res://05_Game/Run/SpawnSpecs/SpawnPoints/HeroSpawn/hero_spawn_point.tscn" id="5_y42ew"]
+[ext_resource type="PackedScene" uid="uid://73oqc1k27od6" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/molten_golem.tscn" id="6_0yi7s"]
+[ext_resource type="Script" uid="uid://b24wp3uvfns8t" path="res://05_Game/Run/SpawnSpecs/prop_spec.gd" id="6_ava6q"]
+[ext_resource type="Script" uid="uid://d2ixo16r26ppd" path="res://05_Game/Run/Formations/tavern_formation.gd" id="7_0yi7s"]
+[ext_resource type="Script" uid="uid://c78ccxnqy6c16" path="res://05_Game/Run/SpawnSpecs/spawn_point_spec.gd" id="8_y0pxs"]
 
-[sub_resource type="Resource" id="Resource_anxou"]
-script = ExtResource("1_3yeba")
-scene = ExtResource("2_2c2fr")
+[sub_resource type="Resource" id="Resource_rjwka"]
+script = ExtResource("1_tsf3l")
+scene = ExtResource("2_ew8gu")
 display_label = "AcolyteSpawnPoint01"
 transform = Transform3D(0.07910284, 0, 0.99686646, 0, 1, 0, -0.99686646, 0, 0.07910284, 3.1106496, 0.5007801, 1.2845821)
 
-[sub_resource type="Resource" id="Resource_pw0qk"]
-script = ExtResource("1_3yeba")
-scene = ExtResource("2_2c2fr")
+[sub_resource type="Resource" id="Resource_y42ew"]
+script = ExtResource("1_tsf3l")
+scene = ExtResource("2_ew8gu")
 display_label = "AcolyteSpawnPoint02"
 transform = Transform3D(-0.5121478, 0, 0.8588973, 0, 1, 0, -0.8588973, 0, -0.5121478, 2.962507, 0.5007801, -0.4523034)
 
-[sub_resource type="Resource" id="Resource_s8syp"]
-script = ExtResource("1_3yeba")
-scene = ExtResource("2_2c2fr")
+[sub_resource type="Resource" id="Resource_ava6q"]
+script = ExtResource("1_tsf3l")
+scene = ExtResource("2_ew8gu")
 display_label = "AcolyteSpawnPoint03"
 transform = Transform3D(0.55042243, 0, 0.8348863, 0, 1, 0, -0.8348863, 0, 0.55042243, 3.174803, 0.5007801, 3.3629322)
 
-[sub_resource type="Resource" id="Resource_bd4n8"]
-script = ExtResource("1_3yeba")
-scene = ExtResource("2_2c2fr")
+[sub_resource type="Resource" id="Resource_0yi7s"]
+script = ExtResource("1_tsf3l")
+scene = ExtResource("2_ew8gu")
 display_label = "AcolyteSpawnPoint04"
 transform = Transform3D(-0.77073574, 0, 0.637155, 0, 1, 0, -0.637155, 0, -0.77073574, 2.7138078, 0.5007801, -1.7932396)
 
-[sub_resource type="Resource" id="Resource_v13um"]
-script = ExtResource("1_3yeba")
-scene = ExtResource("2_2c2fr")
+[sub_resource type="Resource" id="Resource_y0pxs"]
+script = ExtResource("1_tsf3l")
+scene = ExtResource("2_ew8gu")
 display_label = "AcolyteSpawnPoint05"
 transform = Transform3D(0.36154318, 0, 0.93235534, 0, 1, 0, -0.93235534, 0, 0.36154318, 5.2365108, 0.5007801, 3.2348413)
 
-[sub_resource type="Resource" id="Resource_kk71y"]
-script = ExtResource("1_3yeba")
-scene = ExtResource("2_2c2fr")
+[sub_resource type="Resource" id="Resource_anxou"]
+script = ExtResource("1_tsf3l")
+scene = ExtResource("2_ew8gu")
 display_label = "AcolyteSpawnPoint06"
 transform = Transform3D(0.07910284, 0, 0.99686646, 0, 1, 0, -0.99686646, 0, 0.07910284, 4.96877, 0.5007801, 1.4659142)
 
-[sub_resource type="Resource" id="Resource_hpd8x"]
-script = ExtResource("1_3yeba")
-scene = ExtResource("2_2c2fr")
+[sub_resource type="Resource" id="Resource_pw0qk"]
+script = ExtResource("1_tsf3l")
+scene = ExtResource("2_ew8gu")
 display_label = "AcolyteSpawnPoint07"
 transform = Transform3D(-0.25768936, 0, 0.96622777, 0, 1, 0, -0.96622777, 0, -0.25768936, 4.5884867, 0.50077987, -0.19130683)
 
-[sub_resource type="Resource" id="Resource_h5pp0"]
-script = ExtResource("1_3yeba")
-scene = ExtResource("2_2c2fr")
+[sub_resource type="Resource" id="Resource_s8syp"]
+script = ExtResource("1_tsf3l")
+scene = ExtResource("2_ew8gu")
 display_label = "AcolyteSpawnPoint08"
 transform = Transform3D(-0.5129272, 0, 0.8584321, 0, 1, 0, -0.8584321, 0, -0.5129272, 4.6870756, 0.5007801, -1.5109103)
 
-[sub_resource type="Resource" id="Resource_nppcn"]
-script = ExtResource("4_dmex5")
-scene = ExtResource("5_y0wd0")
+[sub_resource type="Resource" id="Resource_bd4n8"]
+script = ExtResource("5_ava6q")
+scene = ExtResource("4_y42ew")
+display_label = "SkeletonDragon"
+transform = Transform3D(-0.04307884, 0, -0.99907166, 0, 1, 0, 0.99907166, 0, -0.04307884, -2.6533866, 0.55867124, 0.40090716)
+
+[sub_resource type="Resource" id="Resource_v13um"]
+script = ExtResource("5_ava6q")
+scene = ExtResource("6_0yi7s")
+display_label = "MoltenGolem"
+transform = Transform3D(0.57983595, 0, -0.81473327, 0, 1, 0, 0.81473327, 0, 0.57983595, -5.5888643, 1.090397, 3.4633746)
+
+[sub_resource type="Resource" id="Resource_kk71y"]
+script = ExtResource("5_ava6q")
+scene = ExtResource("6_0yi7s")
+display_label = "MoltenGolem2"
+transform = Transform3D(-0.3847465, 0, -0.9230223, 0, 1, 0, 0.9230223, 0, -0.3847465, -4.7810802, 0.55867124, -3.3551705)
+
+[sub_resource type="Resource" id="Resource_hpd8x"]
+script = ExtResource("4_rjwka")
+scene = ExtResource("5_y42ew")
 display_label = "HeroSpawnPoint"
 transform = Transform3D(-0.046199843, 0, 0.99893224, 0, 1, 0, -0.99893224, 0, -0.046199843, 2.0192084, 0.4951489, 0.277668)
 
 [resource]
-script = ExtResource("7_vfo4v")
-hero_spawn_specs = Array[ExtResource("4_dmex5")]([SubResource("Resource_nppcn")])
-acolyte_spawn_specs = Array[ExtResource("1_3yeba")]([SubResource("Resource_anxou"), SubResource("Resource_pw0qk"), SubResource("Resource_s8syp"), SubResource("Resource_bd4n8"), SubResource("Resource_v13um"), SubResource("Resource_kk71y"), SubResource("Resource_hpd8x"), SubResource("Resource_h5pp0")])
+script = ExtResource("7_0yi7s")
+entity_specs = Array[ExtResource("3_bhqvu")]([SubResource("Resource_bd4n8"), SubResource("Resource_v13um"), SubResource("Resource_kk71y")])
+hero_spawn_specs = Array[ExtResource("4_rjwka")]([SubResource("Resource_hpd8x")])
+acolyte_spawn_specs = Array[ExtResource("1_tsf3l")]([SubResource("Resource_rjwka"), SubResource("Resource_y42ew"), SubResource("Resource_ava6q"), SubResource("Resource_0yi7s"), SubResource("Resource_y0pxs"), SubResource("Resource_anxou"), SubResource("Resource_pw0qk"), SubResource("Resource_s8syp")])
 id = "04_skeleton_drake"

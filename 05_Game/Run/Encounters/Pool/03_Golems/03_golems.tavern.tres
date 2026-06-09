@@ -98,4 +98,4 @@ entity_specs = Array[ExtResource("3_mtq1w")]([SubResource("Resource_b4df5"), Sub
 hero_spawn_specs = Array[ExtResource("8_cc7ea")]([SubResource("Resource_0fgxa")])
 acolyte_spawn_specs = Array[ExtResource("1_35lh4")]([SubResource("Resource_h3abl"), SubResource("Resource_fxr80"), SubResource("Resource_l8pl6"), SubResource("Resource_pkboc"), SubResource("Resource_64yxi"), SubResource("Resource_jxdvj"), SubResource("Resource_vuoqd"), SubResource("Resource_ngdfp")])
 prop_specs = Array[ExtResource("10_0a6qs")]([SubResource("Resource_rw7aa")])
-id = "03_golems"
+id = "03_Golems"

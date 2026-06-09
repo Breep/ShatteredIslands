@@ -29,7 +29,7 @@ func init_catalog(cards: Array[Card]) -> void:
 		if card == null: continue
 		if seen_names.has(card.name):
 			has_duplicates = true
-			Verbose.warn("ShopDeck: Carte en double ignorée (ID: %s, Nom: %s)" % [card.id, card.resource_name], Verbose.Category.SHOP_DECK)
+			Verbose.warn("ShopDeck: Carte en double ignorée (ID: %s, Nom: %s)" % [card.name, card.resource_name], Verbose.Category.SHOP_DECK)
 		else:
 			seen_names[card.name] = true
 			unique_cards.append(card)

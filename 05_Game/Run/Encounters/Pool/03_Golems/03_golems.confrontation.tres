@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Confrontation" format=3]
+
+[ext_resource type="Script" uid="uid://cp06s2eytdhsh" path="res://05_Game/Run/Confrontations/confrontation.gd" id="1_eplr5"]
+[ext_resource type="Resource" uid="uid://c8e2jopvwlw7v" path="res://05_Game/Run/Encounters/Pool/03_Golems/03_golems.tavern_encounter.tres" id="2_tav"]
+[ext_resource type="Resource" uid="uid://buy7tbxrtxfsp" path="res://05_Game/Run/Encounters/Pool/03_Golems/03_golems.fighting_encounter.tres" id="3_fig"]
+
+[resource]
+script = ExtResource("1_eplr5")
+id = &"03_Golems"
+display_name = "Golems"
+tavern_encounter = ExtResource("2_tav")
+fighting_encounter = ExtResource("3_fig")
+metadata/_custom_type_script = "uid://cp06s2eytdhsh"

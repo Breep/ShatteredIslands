@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Confrontation" format=3]
+
+[ext_resource type="Script" uid="uid://cp06s2eytdhsh" path="res://05_Game/Run/Confrontations/confrontation.gd" id="1_eplr5"]
+[ext_resource type="Resource" uid="uid://dytusq0k5sl3f" path="res://05_Game/Run/Encounters/Pool/02b_Treants/02b_treants.tavern_encounter.tres" id="2_tav"]
+[ext_resource type="Resource" uid="uid://bnyd3v1cqselk" path="res://05_Game/Run/Encounters/Pool/02b_Treants/02b_treants.fighting_encounter.tres" id="3_fig"]
+
+[resource]
+script = ExtResource("1_eplr5")
+id = &"02b_Treants"
+display_name = "Treants"
+tavern_encounter = ExtResource("2_tav")
+fighting_encounter = ExtResource("3_fig")
+metadata/_custom_type_script = "uid://cp06s2eytdhsh"

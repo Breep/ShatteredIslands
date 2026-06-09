@@ -97,4 +97,4 @@ entity_specs = Array[ExtResource("3_n2von")]([SubResource("Resource_btrav"), Sub
 hero_spawn_specs = Array[ExtResource("7_3hn63")]([SubResource("Resource_ffevw")])
 acolyte_spawn_specs = Array[ExtResource("1_aj6pb")]([SubResource("Resource_y3a2g"), SubResource("Resource_8h44m"), SubResource("Resource_kbheg"), SubResource("Resource_mfq6c"), SubResource("Resource_s0udc"), SubResource("Resource_vg6wg"), SubResource("Resource_y70ro"), SubResource("Resource_frhp4")])
 prop_specs = Array[ExtResource("9_nrf60")]([SubResource("Resource_ib4ul")])
-id = "02a_satyrs"
+id = "02a_Satyrs"

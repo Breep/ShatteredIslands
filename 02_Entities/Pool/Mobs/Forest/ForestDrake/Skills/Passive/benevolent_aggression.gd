@@ -7,7 +7,7 @@ var _owner: Entity
 
 func apply(ctx: SkillContext) -> void:
 	_owner = ctx.entity
-	_owner.spawn_manager.entity_spawned.connect(_on_entity_spawned)
+	#_owner.spawn_manager.entity_spawned.connect(_on_entity_spawned) # TODO this (spawn_manager == null)
 
 
 func _on_entity_spawned(entity: Entity) -> void:

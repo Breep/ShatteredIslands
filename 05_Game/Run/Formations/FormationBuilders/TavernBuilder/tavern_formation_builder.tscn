@@ -81,6 +81,15 @@ metadata/extras = {
 [node name="Mobs" type="Node3D" parent="Entities" unique_id=1217234401]
 script = ExtResource("3_5q1af")
 
+[node name="SkeletonDragon" parent="Entities/Mobs" unique_id=434739176 instance=ExtResource("6_dnlas")]
+transform = Transform3D(-0.04307884, 0, -0.99907166, 0, 1, 0, 0.99907166, 0, -0.04307884, -2.6533866, 0.55867124, 0.40090716)
+
+[node name="MoltenGolem" parent="Entities/Mobs" unique_id=1400515487 instance=ExtResource("8_dcjn2")]
+transform = Transform3D(0.5798359, 0, -0.81473327, 0, 1, 0, 0.81473327, 0, 0.5798359, -5.5888643, 1.090397, 3.4633746)
+
+[node name="MoltenGolem2" parent="Entities/Mobs" unique_id=1712503817 instance=ExtResource("8_dcjn2")]
+transform = Transform3D(-0.3847465, 0, -0.9230223, 0, 1, 0, 0.9230223, 0, -0.3847465, -4.7810802, 0.55867124, -3.3551705)
+
 [node name="HeroesSpawns" type="Node3D" parent="Entities" unique_id=777508257]
 script = ExtResource("3_5q1af")
 
@@ -115,12 +124,3 @@ transform = Transform3D(-0.25768936, 0, 0.96622777, 0, 1, 0, -0.96622777, 0, -0.
 transform = Transform3D(-0.5129272, 0, 0.8584321, 0, 1, 0, -0.8584321, 0, -0.5129272, 4.6870756, 0.5007801, -1.5109103)
 
 [node name="Props" type="Node3D" parent="." unique_id=1490119890]
-
-[node name="SkeletonDragon" parent="." unique_id=434739176 instance=ExtResource("6_dnlas")]
-transform = Transform3D(-0.04307884, 0, -0.99907166, 0, 1, 0, 0.99907166, 0, -0.04307884, -2.6533866, 0, 0.40090716)
-
-[node name="MoltenGolem" parent="." unique_id=1400515487 instance=ExtResource("8_dcjn2")]
-transform = Transform3D(0.5798359, 0, -0.81473327, 0, 1, 0, 0.81473327, 0, 0.5798359, -5.5888643, 0.53172576, 3.4633746)
-
-[node name="MoltenGolem2" parent="." unique_id=1712503817 instance=ExtResource("8_dcjn2")]
-transform = Transform3D(-0.3847465, 0, -0.9230223, 0, 1, 0, 0.9230223, 0, -0.3847465, -4.7810802, 0, -3.3551705)

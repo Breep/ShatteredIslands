@@ -30,4 +30,4 @@ transform = Transform3D(0.30546266, 0, -0.95220405, 0, 1, 0, 0.95220405, 0, 0.30
 [resource]
 script = ExtResource("7_lnii1")
 entity_specs = Array[ExtResource("2_chgbo")]([SubResource("Resource_2b6ac"), SubResource("Resource_0k6gi"), SubResource("Resource_uydp8")])
-id = "01_kobolds"
+id = "01_Kobolds"

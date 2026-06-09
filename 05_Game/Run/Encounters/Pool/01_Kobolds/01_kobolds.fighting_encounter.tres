@@ -8,7 +8,7 @@
 script = ExtResource("3_h8i72")
 island_scene = ExtResource("2_jlycu")
 formation_b = ExtResource("1_d2kvm")
-encounter_id = &"01_kobolds"
+encounter_id = &"01_Kobolds"
 display_name = "Kobolds"
 music = "battle_drums"
 metadata/_custom_type_script = "uid://dg13tr0kcjyll"
