@@ -91,13 +91,13 @@ _spells_node = NodePath("../Spells")
 
 [node name="ArenaZoneManager" parent="." unique_id=641704685 instance=ExtResource("9_8iy5v")]
 
-[node name="SpawnArea1" parent="." unique_id=1845299317 node_paths=PackedStringArray("_visual_to_be_destroyed") instance=ExtResource("10_zones")]
+[node name="SpawnArea1" parent="." unique_id=1845299317 node_paths=PackedStringArray("_highlight_visual") instance=ExtResource("10_zones")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.25, 0, 0)
 collision_layer = 4
 monitoring = false
 monitorable = false
 team = 1
-_visual_to_be_destroyed = NodePath("MeshInstance3D")
+_highlight_visual = NodePath("MeshInstance3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnArea1" unique_id=642937565]
 shape = SubResource("BoxShape3D_team")
@@ -105,13 +105,13 @@ shape = SubResource("BoxShape3D_team")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SpawnArea1" unique_id=204698748]
 mesh = SubResource("BoxMesh_team1")
 
-[node name="SpawnArea2" parent="." unique_id=1249680439 node_paths=PackedStringArray("_visual_to_be_destroyed") instance=ExtResource("10_zones")]
+[node name="SpawnArea2" parent="." unique_id=1249680439 node_paths=PackedStringArray("_highlight_visual") instance=ExtResource("10_zones")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.25, 0, 0)
 collision_layer = 4
 monitoring = false
 monitorable = false
 team = 2
-_visual_to_be_destroyed = NodePath("MeshInstance3D")
+_highlight_visual = NodePath("MeshInstance3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnArea2" unique_id=1015911688]
 shape = SubResource("BoxShape3D_team")

@@ -10,10 +10,14 @@ extends EntityComponent
 #region ============================== Signals ==============================
 signal dragged()
 signal dropped()
+# Team de la spawn zone survolée pendant le drag (1, 2…), ou -1 si hors zone.
+signal drop_zone_changed(team: int)
 #endregion
 
 #region ============================== Constants ==============================
 const LONG_PRESS_THRESHOLD_S: float = 0.2
+const DROP_RAY_LENGTH: float = 2.0
+const SPAWN_AREA_MASK: int = 4
 #endregion
 
 #region ============================== Export ==============================
@@ -30,6 +34,11 @@ var _y_tween: Tween
 # Tracking du press en attente du seuil long press.
 var _press_pending: bool = false
 var _press_start_msec: int = 0
+
+# Repérage de la spawn zone survolée (raycast vertical sous l'entité).
+var _drop_ray: RayCast3D
+var _current_drop_zone: int = -1
+var _current_zone_area: Area3D
 #endregion
 
 #region ============================== Node base functions ==============================
@@ -73,6 +82,7 @@ func _process(_delta: float) -> void:
 	if hit == null: return
 	_owner.global_position.x = hit.x
 	_owner.global_position.z = hit.z
+	_update_drop_zone()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -91,6 +101,10 @@ func _unhandled_input(event: InputEvent) -> void:
 #region ============================== Public functions ==============================
 func is_dragging() -> bool:
 	return _is_dragging
+
+
+func get_drop_zone() -> int:
+	return _current_drop_zone
 #endregion
 
 #region ============================== Private functions ==============================
@@ -104,6 +118,7 @@ func _start_drag() -> void:
 	if _owner.movement != null:
 		_owner.movement.stop()
 
+	_spawn_drop_ray()
 	_kill_y_tween()
 	_y_tween = create_tween()
 	_y_tween.tween_property(_owner, "global_position:y", _ground_y + _drag_height, _drag_tween_duration)
@@ -118,6 +133,7 @@ func _stop_drag() -> void:
 		return
 	_is_dragging = false
 	set_process(false)
+	_clear_drop_zone()
 	Verbose.debug("Drag stopped on " + _owner.entity_name, Verbose.Category.ENTITY)
 
 	_kill_y_tween()
@@ -134,6 +150,58 @@ func _stop_drag() -> void:
 func _kill_y_tween() -> void:
 	if _y_tween != null and _y_tween.is_valid():
 		_y_tween.kill()
+
+
+func _spawn_drop_ray() -> void:
+	_drop_ray = RayCast3D.new()
+	_drop_ray.target_position = Vector3.DOWN * DROP_RAY_LENGTH
+	_drop_ray.collision_mask = SPAWN_AREA_MASK
+	_drop_ray.collide_with_areas = true
+	_drop_ray.collide_with_bodies = false
+	_owner.add_child(_drop_ray)
+
+
+func _update_drop_zone() -> void:
+	if _drop_ray == null:
+		return
+	_drop_ray.force_raycast_update()
+	var area: Area3D = _drop_ray.get_collider() as Area3D if _drop_ray.is_colliding() else null
+	if area == _current_zone_area:
+		return
+
+	if _current_zone_area != null and _current_zone_area.has_method("set_highlighted"):
+		_current_zone_area.set_highlighted(false)
+	_current_zone_area = area
+	if area != null and area.has_method("set_highlighted"):
+		area.set_highlighted(true)
+
+	var team: int = _team_from_collider(area)
+	if team != _current_drop_zone:
+		_current_drop_zone = team
+		drop_zone_changed.emit(team)
+
+
+func _clear_drop_zone() -> void:
+	if _current_zone_area != null and _current_zone_area.has_method("set_highlighted"):
+		_current_zone_area.set_highlighted(false)
+	_current_zone_area = null
+	if _current_drop_zone != -1:
+		_current_drop_zone = -1
+		drop_zone_changed.emit(-1)
+	if _drop_ray != null:
+		_drop_ray.queue_free()
+		_drop_ray = null
+
+
+func _team_from_collider(collider: Object) -> int:
+	var node := collider as Node
+	if node == null:
+		return -1
+	for group: StringName in node.get_groups():
+		var group_name: String = String(group)
+		if group_name.begins_with(SpawnArea.TEAM_GROUP_PREFIX):
+			return group_name.substr(SpawnArea.TEAM_GROUP_PREFIX.length()).to_int()
+	return -1
 #endregion
 
 #region ============================== Callbacks ==============================

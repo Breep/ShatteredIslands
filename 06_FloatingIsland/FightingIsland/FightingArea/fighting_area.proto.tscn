@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cuwm1rdrdir1x"]
+
+[ext_resource type="PackedScene" uid="uid://c66yw4go2ykwa" path="res://06_FloatingIsland/FightingIsland/FightingArea/fighting_area.tscn" id="1_c6h3o"]
+[ext_resource type="PackedScene" uid="uid://dvr7815lw1k8b" path="res://02_Entities/Pool/Heroes/Latika/latika.tscn" id="2_h7s0s"]
+[ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://10_Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="3_h7s0s"]
+
+[node name="FightingArea_proto" type="Node3D" unique_id=2146875398]
+
+[node name="FightingArea" parent="." unique_id=2072382245 node_paths=PackedStringArray("_team_zones") instance=ExtResource("1_c6h3o")]
+_team_zones = {
+1: NodePath("SpawnArea1"),
+2: NodePath("SpawnArea2")
+}
+
+[node name="Latika" parent="." unique_id=294337328 instance=ExtResource("2_h7s0s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0918322, 0, -0.59147596)
+
+[node name="CenterPointCamera" parent="." unique_id=823970387 instance=ExtResource("3_h7s0s")]
