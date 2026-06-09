@@ -31,6 +31,7 @@
 
 [resource]
 script = ExtResource("1_bteoc")
+scene_path = "res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/chicken_colossus.tscn"
 name = "Big Bok"
 description = "BOK BOK"
 default_category = 1

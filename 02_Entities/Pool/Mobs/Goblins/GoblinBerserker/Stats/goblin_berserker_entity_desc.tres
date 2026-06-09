@@ -31,6 +31,7 @@
 
 [resource]
 script = ExtResource("1_t2f8w")
+scene_path = "res://02_Entities/Pool/Mobs/Goblins/GoblinBerserker/goblin_berserker.tscn"
 name = "Tony le Berserker"
 stats = Dictionary[int, ExtResource("2_37wlk")]({
 1: ExtResource("3_nulgc"),
