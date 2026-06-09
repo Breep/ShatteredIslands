@@ -51,6 +51,11 @@ func signal_nothing_clicked() -> void:
 
 signal floor_clicked(position: Vector3)
 
+# ============================== DRAGGABLE ==============================
+
+signal entity_drag_started(entity: Entity)
+signal entity_drag_stopped(entity: Entity)
+
 # ============================== UI ==============================
 
 signal ui_skill_picked(skill_id: Skill.SkillID)
