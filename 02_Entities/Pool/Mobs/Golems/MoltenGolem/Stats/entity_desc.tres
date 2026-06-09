@@ -31,8 +31,8 @@
 
 [resource]
 script = ExtResource("1_bnd22")
-scene_path = "res://02_Entities/Pool/Mobs/Golems/MoltenGolem/molten_golem.tscn"
 name = "Molten Golem"
+scene_path = "res://02_Entities/Pool/Mobs/Golems/MoltenGolem/molten_golem.tscn"
 stats = Dictionary[int, ExtResource("3_72oiu")]({
 1: ExtResource("4_p7kdi"),
 2: ExtResource("5_ibbpk"),

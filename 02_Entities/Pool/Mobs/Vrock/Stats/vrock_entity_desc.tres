@@ -27,9 +27,9 @@
 
 [resource]
 script = ExtResource("1_cnbgm")
-scene_path = "res://02_Entities/Pool/Mobs/Vrock/vrock.tscn"
 name = "Vrock"
 description = "Loup de Latika"
+scene_path = "res://02_Entities/Pool/Mobs/Vrock/vrock.tscn"
 preview_scene = ExtResource("1_4w8h4")
 default_category = 2
 stats = Dictionary[int, ExtResource("2_2m0j6")]({
