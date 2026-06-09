@@ -9,14 +9,16 @@
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]
 [ext_resource type="Script" uid="uid://nkraydv4mdse" path="res://01_Cards/Templates/Deck/hand.gd" id="6_jbcul"]
 [ext_resource type="Resource" uid="uid://celecgrenad1" path="res://01_Cards/Pool/Cards/Engineer/Common/ElectricGrenade/engineer_electric_grenade.tres" id="6_xqnte"]
-[ext_resource type="Resource" path="res://01_Cards/Pool/Cards/Prototyping/AoeSize/card_aoe_size.proto.tres" id="7_5ixv2"]
+[ext_resource type="Resource" uid="uid://chhhtbofpr4y8" path="res://01_Cards/Pool/Cards/Prototyping/AoeSize/card_aoe_size.proto.tres" id="7_5ixv2"]
 [ext_resource type="PackedScene" uid="uid://dvuq5n41nak3u" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/ArenaZoneManager/arena_zone_manager.tscn" id="8_fl2p6"]
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://90_Modules/PickableClickable/PickableModule/pickable_module.tscn" id="9_614kc"]
 [ext_resource type="PackedScene" uid="uid://bg5efhnq0erdv" path="res://90_Modules/PickableClickable/ClickableModule/clickable_module.tscn" id="10_m73qc"]
 [ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="10_r0wv3"]
+[ext_resource type="PackedScene" uid="uid://cux3b38ayhml8" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/kobold_thief.tscn" id="10_xqnte"]
 [ext_resource type="PackedScene" uid="uid://blncvfes4f2y7" path="res://99_Prototyping/Entity/AllActionPrototyping/testing_floorffa5.tscn" id="11_5hdqt"]
 [ext_resource type="Script" uid="uid://bia26v50nwe6c" path="res://04_UI/UIButton/ui_button.gd" id="11_r0wv3"]
 [ext_resource type="PackedScene" uid="uid://ygk0snmo5oj" path="res://02_Entities/_Shared/EntityStatsViewer/entity_stats_viewer.tscn" id="12_r0wv3"]
+[ext_resource type="PackedScene" uid="uid://dolubo8wodahp" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/kobold_warrior.tscn" id="13_5ixv2"]
 [ext_resource type="Script" uid="uid://b0otuknba6ddv" path="res://06_FloatingIsland/FightingIsland/FightingArea/floor_area.gd" id="13_jd8sj"]
 [ext_resource type="PackedScene" uid="uid://q7gxxkhg5u54" path="res://06_FloatingIsland/FightingIsland/Pool/ArchIsland/arch_island_visual.tscn" id="17_ko5bb"]
 [ext_resource type="PackedScene" uid="uid://c0l0roxttdtlp" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/FightingManager/fighting_manager.tscn" id="17_m26y3"]
@@ -114,6 +116,13 @@ _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
 override_base_stats = SubResource("Resource_5qocs")
 
+[node name="Kobold_Thief" parent="Node3D/Entities" unique_id=526613656 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("10_xqnte")]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, 7.459776, 0, -0.08379411)
+team = 1
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
 [node name="Vrock2" parent="Node3D/Entities" unique_id=471542115 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("17_rnrfd")]
 transform = Transform3D(-0.01726045, 0, 0.9998509, 0, 1.0000001, 0, -0.9998509, 0, -0.01726045, 2.644456, 0, -2.3240192)
 level = 10
@@ -126,6 +135,13 @@ _arena_zone_manager = NodePath("../../ArenaZoneManager")
 transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, 5.935304, 0, 4.4929256)
 level = 7
 team = 2
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
+[node name="Kobold_Warrior" parent="Node3D/Entities" unique_id=1047411200 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("13_5ixv2")]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, 1.8293419, 0.05598975, 2.7767484)
+team = 1
 battle_id = 1
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")

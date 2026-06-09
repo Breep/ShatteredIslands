@@ -190,7 +190,7 @@ transform = Transform3D(0.47414637, -0.81642324, 0.32960314, -0.47580266, 0.0773
 transform = Transform3D(0.47414652, -0.81642306, 0.32960325, 0.4758032, -0.07738456, -0.8761408, 0.74080783, 0.57224554, 0.3517651, -0.60861975, -0.0022190511, 0.94833696)
 
 [node name="ik_foot_l" parent="KoboldKnightVisual/root/ik_foot_root" parent_id_path=PackedInt32Array(952577520, 1719754154) index="0" unique_id=931208385]
-transform = Transform3D(-0.01952133, -0.36071634, -0.9324714, 0.055922255, 0.93079495, -0.3612387, 0.998244, -0.059197765, 0.0020017182, 0.15587923, 0.11546686, 0.10487587)
+transform = Transform3D(-0.019521328, -0.36071634, -0.9324714, 0.055922255, 0.93079495, -0.3612387, 0.9982439, -0.059197765, 0.0020017182, 0.15587923, 0.11546686, 0.10487587)
 
 [node name="ik_foot_r" parent="KoboldKnightVisual/root/ik_foot_root" parent_id_path=PackedInt32Array(952577520, 1719754154) index="1" unique_id=144571900]
 transform = Transform3D(-0.019521572, -0.3607171, -0.9324707, -0.055922676, -0.9307947, 0.36123925, -0.99824417, 0.059198238, -0.002001687, -0.15587959, 0.115467116, 0.104875796)
@@ -199,7 +199,7 @@ transform = Transform3D(-0.019521572, -0.3607171, -0.9324707, -0.055922676, -0.9
 transform = Transform3D(0.4741468, -0.8164228, 0.3296035, 0.4758033, -0.07738464, -0.87614083, 0.74080795, 0.5722456, 0.35176498, -0.6086198, -0.00222005, 0.9483373)
 
 [node name="ik_hand_l" parent="KoboldKnightVisual/root/ik_hand_root/ik_hand_gun" index="0" unique_id=2004046771]
-transform = Transform3D(-0.5503696, -0.7742083, 0.31256127, -0.77420896, 0.3330929, -0.5381909, 0.31256005, -0.5381916, -0.78272325, 0.5771506, -0.99378145, 0.40120617)
+transform = Transform3D(-0.5503696, -0.77420825, 0.31256127, -0.77420896, 0.33309287, -0.5381909, 0.31256005, -0.5381916, -0.78272325, 0.5771506, -0.99378145, 0.40120617)
 
 [node name="HealthMarker3D" type="Marker3D" parent="KoboldKnightVisual" unique_id=1144852839]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2757185, 0)
@@ -208,9 +208,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2757185, 0)
 root_node = NodePath("../KoboldKnightVisual")
 tree_root = ExtResource("3_lwqgt")
 anim_player = NodePath("../KoboldKnightVisual/AnimationPlayer")
-parameters/switch_moving/current_state = "Walk"
+parameters/switch_moving/current_state = "Run"
 parameters/switch_moving/transition_request = ""
-parameters/switch_moving/current_index = 0
+parameters/switch_moving/current_index = 1
 parameters/scale_dance/scale = 1.0
 parameters/scale_die/scale = 1.0
 parameters/scale_idle_standing_neutral/scale = 1.0
@@ -262,9 +262,9 @@ parameters/scale_idle_sitting_floor_var/scale = 1.0
 parameters/scale_attack_2/scale = 1.0
 parameters/scale_hit_1/scale = 1.0
 parameters/scale_attack_3/scale = 1.0
-parameters/switch_main/current_state = "Idle"
+parameters/switch_main/current_state = "Moving"
 parameters/switch_main/transition_request = ""
-parameters/switch_main/current_index = 0
+parameters/switch_main/current_index = 1
 parameters/switch_idle/current_state = "StandingNeutral"
 parameters/switch_idle/transition_request = ""
 parameters/switch_idle/current_index = 0
