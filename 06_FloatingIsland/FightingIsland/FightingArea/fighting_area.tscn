@@ -103,6 +103,7 @@ _highlight_visual = NodePath("MeshInstance3D")
 shape = SubResource("BoxShape3D_team")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SpawnArea1" unique_id=386571952]
+layers = 8
 mesh = SubResource("BoxMesh_team2")
 
 [node name="SpawnArea2" parent="." unique_id=1845299317 node_paths=PackedStringArray("_highlight_visual") instance=ExtResource("10_zones")]
@@ -117,6 +118,7 @@ _highlight_visual = NodePath("MeshInstance3D")
 shape = SubResource("BoxShape3D_team")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SpawnArea2" unique_id=204698748]
+layers = 8
 mesh = SubResource("BoxMesh_team1")
 
 [node name="CenterArea" type="Area3D" parent="." unique_id=1978970165]

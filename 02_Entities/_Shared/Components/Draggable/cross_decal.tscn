@@ -7,5 +7,7 @@
 layers = 8
 size = Vector3(2, 18.194824, 2)
 texture_albedo = ExtResource("1_8wb8q")
+upper_fade = 0.0
+lower_fade = 0.0
 cull_mask = 8
 script = ExtResource("2_decal")

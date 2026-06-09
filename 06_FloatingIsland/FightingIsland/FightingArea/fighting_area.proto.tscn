@@ -3,7 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://c66yw4go2ykwa" path="res://06_FloatingIsland/FightingIsland/FightingArea/fighting_area.tscn" id="1_c6h3o"]
 [ext_resource type="PackedScene" uid="uid://dvr7815lw1k8b" path="res://02_Entities/Pool/Heroes/Latika/latika.tscn" id="2_h7s0s"]
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://10_Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="3_h7s0s"]
-[ext_resource type="PackedScene" uid="uid://c2fkkneeqw65s" path="res://02_Entities/_Shared/Components/Draggable/cross_decal.tscn" id="4_vqek6"]
 
 [node name="FightingArea_proto" type="Node3D" unique_id=2146875398]
 
@@ -18,6 +17,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0918322, 0, -0.59147596)
 team = 1
 
 [node name="CenterPointCamera" parent="." unique_id=823970387 instance=ExtResource("3_h7s0s")]
-
-[node name="CrossDecal" parent="." unique_id=777442761 instance=ExtResource("4_vqek6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.481757, -4.880615, -3.3925314)
