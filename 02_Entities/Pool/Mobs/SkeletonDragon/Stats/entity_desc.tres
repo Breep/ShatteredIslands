@@ -31,6 +31,7 @@
 
 [resource]
 script = ExtResource("1_5bbmg")
+name = "Gideon The Dragon"
 stats = Dictionary[int, ExtResource("3_40nx0")]({
 1: ExtResource("4_fwtbi"),
 2: ExtResource("5_tkl2o"),

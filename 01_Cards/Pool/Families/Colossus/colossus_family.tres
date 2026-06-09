@@ -13,11 +13,13 @@
 [ext_resource type="Resource" uid="uid://cno4627vx3nt8" path="res://01_Cards/Pool/Cards/Colossus/Epic/VitalPulse/colossus_vital_pulse.tres" id="11_vital"]
 [ext_resource type="Resource" uid="uid://cg63fcakweap3" path="res://01_Cards/Pool/Cards/Colossus/Epic/StoneCarapace/colossus_stone_carapace.tres" id="12_carapace"]
 [ext_resource type="Resource" uid="uid://c1jb5nmdg2bsh" path="res://01_Cards/Pool/Cards/Colossus/Legendary/Resurrection/colossus_resurrection.tres" id="13_resurrect"]
+[ext_resource type="Resource" uid="uid://ccolarcanebw1" path="res://01_Cards/Pool/Cards/Colossus/Common/ArcaneBulwark/colossus_arcane_bulwark.tres" id="15_arcane"]
+[ext_resource type="Resource" uid="uid://ccolblastrad01" path="res://01_Cards/Pool/Cards/Colossus/Rare/BlastRadius/colossus_blast_radius.tres" id="16_blast"]
 [ext_resource type="Texture2D" uid="uid://mxp6ngtlf1py" path="res://01_Cards/Pool/Families/Icons/colossus logo 2.png" id="14_icon"]
 
 [resource]
 script = ExtResource("2_upugm")
-cards = Array[ExtResource("1_f2mb4")]([ExtResource("3_boulder"), ExtResource("4_vigor"), ExtResource("5_tainted"), ExtResource("6_evasive"), ExtResource("7_crush"), ExtResource("8_bond"), ExtResource("9_bear"), ExtResource("10_provoc"), ExtResource("11_vital"), ExtResource("12_carapace"), ExtResource("13_resurrect")])
+cards = Array[ExtResource("1_f2mb4")]([ExtResource("3_boulder"), ExtResource("4_vigor"), ExtResource("5_tainted"), ExtResource("6_evasive"), ExtResource("7_crush"), ExtResource("8_bond"), ExtResource("9_bear"), ExtResource("10_provoc"), ExtResource("11_vital"), ExtResource("12_carapace"), ExtResource("13_resurrect"), ExtResource("15_arcane"), ExtResource("16_blast")])
 icon = ExtResource("14_icon")
 family_name = "Colossus"
 family_type = 6
