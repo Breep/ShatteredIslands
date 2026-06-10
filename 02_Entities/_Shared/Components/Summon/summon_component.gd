@@ -148,13 +148,13 @@ func _summon_chicken(spawn_position: Vector3, entity_modifier: Dictionary) -> vo
 	var base_armor: float = entity_modifier.get(Chicken.BaseStatsModifier.ARMOR, 0)
 	var base_crit_chance: float = entity_modifier.get(Chicken.BaseStatsModifier.CRIT_CHANCE, 5)
 	var base_crit_multi: float = entity_modifier.get(Chicken.BaseStatsModifier.CRIT_MULTI, 100)
-	
+
 	var chicken_type: Chicken.Type = entity_modifier.get("Type", Chicken.Type.BASIC)
 	match chicken_type:
 		Chicken.Type.BASIC: chicken = CHICKEN_BASIC_SCENE.instantiate()
 		Chicken.Type.GIFTED_ATTACK:
 			chicken = CHICKEN_ATTACK_SCENE.instantiate()
-		Chicken.Type.GIFTED_POISON: 
+		Chicken.Type.GIFTED_POISON:
 			chicken = CHICKEN_POISON_SCENE.instantiate()
 			var poison_stack_ratio: float = entity_modifier.get("ratio", 0)
 			var stacks_number: int = entity_modifier.get("number", 1)
@@ -175,7 +175,7 @@ func _summon_chicken(spawn_position: Vector3, entity_modifier: Dictionary) -> vo
 			var crit_chance: float = entity_modifier.get("crit_chance", 0)
 			var crit_mult: float = entity_modifier.get("crit_mult", 0)
 			(chicken as ChickenStormCaller).init(crit_chance, crit_mult)
-			
+
 	chicken.set_base_stats(base_hp, base_ad, base_armor, base_crit_chance, base_crit_multi)
 	_spawn_manager.spawn_entity(chicken, Transform3D(Basis(), spawn_position), _owner.get_context(), Entity.EntityType.CHICKEN)
 
@@ -211,7 +211,7 @@ func _summon_trex(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
 	trex.init(gifted_spawn_period, gifted_spawn_number, hp_bonus)
 	_spawn_manager.spawn_entity(trex, Transform3D(Basis(), spawn_position), _owner.get_context())
 
- 
+
 func _summon_chicken_egg(_spawn_position: Vector3, _entity_modifier: Dictionary) -> void:
 	pass
 
@@ -223,8 +223,8 @@ func _summon_deflection_shield(spawn_position: Vector3, entity_modifier: Diction
 	var respawn_timer: float = entity_modifier.get(DeflectionShield.Modifier.RESPAWN_TIMER, -1.0)
 	deflection_shield.init(blocked_projectiles, shield_per_block, respawn_timer)
 	_spawn_manager.spawn_entity(deflection_shield, Transform3D(Basis(), spawn_position), _owner.get_context())
-	
-	
+
+
 func _summon_gamma_turret(spawn_position: Vector3, _entity_modifier: Dictionary) -> void:
 	var gamma_turret: GammaTurret = GAMMA_TURRET.instantiate()
 	_spawn_manager.spawn_entity(gamma_turret, Transform3D(Basis(), spawn_position), _owner.get_context())

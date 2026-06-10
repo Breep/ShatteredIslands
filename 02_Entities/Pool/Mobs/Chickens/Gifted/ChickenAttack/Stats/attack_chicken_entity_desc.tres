@@ -31,9 +31,9 @@
 
 [resource]
 script = ExtResource("1_desc")
-scene_path = "res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenAttack/chicken_attack.tscn"
 name = "Chicken Attack"
 description = "Bok bok"
+scene_path = "res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenAttack/chicken_attack.tscn"
 default_category = 1
 stats = Dictionary[int, ExtResource("3_stats")]({
 1: ExtResource("4_01"),

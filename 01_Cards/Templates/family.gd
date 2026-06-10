@@ -34,7 +34,10 @@ const COLORS = {
 
 # ============================== Exports ==============================
 
-@export var cards: Array[Card] # ALL cards in this game of this family type
+@export var common_cards: Array[Card]
+@export var rare_cards: Array[Card]
+@export var epic_cards: Array[Card]
+@export var legendary_cards: Array[Card]
 @export var icon: Texture2D
 @export var family_name: String
 @export var family_type: Type
@@ -44,8 +47,12 @@ const COLORS = {
 # ============================== Public variables ==============================
 
 var lvl: int # Current level of the family (number of cards in the player hand affiliated with this family)
+var cards: Array[Card] # ALL cards in this game of this family type
 
 # ============================== Public functions ==============================
+
+func get_cards() -> Array[Card]:
+	return common_cards + rare_cards + epic_cards + legendary_cards
 
 func get_description() -> String: # Virtual
 	return "Virtual family shouldn't be instanciated"

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://1c1rmx4an1ea"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_card"]
+[ext_resource type="Script" uid="uid://dmgebcxmqjjad" path="res://01_Cards/Pool/Cards/ChickenLord/Common/OpeningBrood/chickenlord_opening_brood.gd" id="2_eff"]
+
+[sub_resource type="Resource" id="Resource_opening"]
+script = ExtResource("2_eff")
+_chicken_count = Array[int]([2, 2, 3, 3, 4])
+
+[resource]
+script = ExtResource("1_card")
+name = "Opening Brood"
+families = Array[int]([8])
+_card_effect = SubResource("Resource_opening")
+points = Dictionary[int, int]({
+8: 1
+})

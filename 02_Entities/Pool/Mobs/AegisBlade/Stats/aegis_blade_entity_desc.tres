@@ -31,8 +31,8 @@
 
 [resource]
 script = ExtResource("1_tcmu6")
-scene_path = "res://02_Entities/Pool/Mobs/AegisBlade/aegis_blade.tscn"
 name = "Aegis Blade"
+scene_path = "res://02_Entities/Pool/Mobs/AegisBlade/aegis_blade.tscn"
 default_category = 1
 stats = Dictionary[int, ExtResource("3_2eb21")]({
 1: ExtResource("4_gn1s5"),

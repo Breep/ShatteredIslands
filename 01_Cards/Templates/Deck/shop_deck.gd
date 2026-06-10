@@ -90,6 +90,7 @@ func remove_card(card: Card) -> void:
 # Pioche `count` cartes en respectant les % de chance par rareté. Pas de doublon
 # de design dans une même pioche. Les cartes piochées sont retirées du pool.
 func draw(count: int, rarity_chances: Dictionary[Card.Rarity, float]) -> Array[Card]:
+	Verbose.trace("Draw cards (drop rates: " + str(rarity_chances) + ")", Verbose.Category.CARD_SHOP)
 	var drawn: Array[Card] = []
 	var drawn_names: Array[StringName] = []
 	for _i in count:

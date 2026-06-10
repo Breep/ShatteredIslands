@@ -193,7 +193,6 @@ func _update_drop_zone() -> void:
 
 	var team: int = _team_from_collider(area)
 	if team != _current_drop_zone:
-		#Verbose.warn("Team = " + str(team) + " current_drop_zone = " + str(_current_drop_zone), Verbose.Category.DEFAULT)
 		_current_drop_zone = team
 		drop_zone_changed.emit(team)
 	_refresh_decal_feedback()
@@ -258,7 +257,7 @@ func _team_from_collider(collider: Object) -> int:
 # Une entité attachée à une équipe doit finir le drop sur sa propre spawn zone ;
 # sinon on la ramène à sa position de départ. Les entités sans équipe sont libres.
 func _should_rollback() -> bool:
-	Verbose.warn("Team = " + str(_owner.team) + " current_drop_zone = " + str(_current_drop_zone), Verbose.Category.DEFAULT)
+	Verbose.trace("Team = " + str(_owner.team) + " current_drop_zone = " + str(_current_drop_zone), Verbose.Category.ENTITY_MODULE)
 	if _owner.team <= 0:
 		return false
 	return _current_drop_zone != _owner.team

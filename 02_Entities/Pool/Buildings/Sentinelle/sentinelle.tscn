@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://b3f15ldbddrlp" path="res://02_Entities/Pool/Mobs/FortificationDrone/Visual/fortification_drone_visual.tscn" id="2_l6jnf"]
 [ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.tscn" id="3_af083"]
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://10_Tool/QuickAnims/anim_hovering_module.tscn" id="4_07yhp"]
-[ext_resource type="Resource" path="res://02_Entities/Pool/Buildings/Sentinelle/Stats/entity_desc.tres" id="6_desc"]
+[ext_resource type="Resource" uid="uid://caplw345lqegg" path="res://02_Entities/Pool/Buildings/Sentinelle/Stats/entity_desc.tres" id="6_desc"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_d2dv0"]
 radius = 0.3670221

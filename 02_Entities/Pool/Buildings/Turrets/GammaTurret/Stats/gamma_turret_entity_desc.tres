@@ -31,8 +31,8 @@
 
 [resource]
 script = ExtResource("1_d24m6")
-scene_path = "res://02_Entities/Pool/Buildings/Turrets/GammaTurret/gamma_turret.tscn"
 name = "Gamma Turret"
+scene_path = "res://02_Entities/Pool/Buildings/Turrets/GammaTurret/gamma_turret.tscn"
 default_category = 4
 stats = Dictionary[int, ExtResource("3_5dkom")]({
 1: ExtResource("4_1a4g1"),
