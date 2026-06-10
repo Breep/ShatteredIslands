@@ -32,11 +32,23 @@
 [ext_resource type="Resource" uid="uid://cdkb2trs" path="res://02_Entities/Pool/Heroes/DarkKnight/Skills/Bronze/garde_declipse.tres" id="28_b2"]
 [ext_resource type="Resource" uid="uid://cdks1trs" path="res://02_Entities/Pool/Heroes/DarkKnight/Skills/Silver/soif_occulte.tres" id="29_s1"]
 [ext_resource type="Resource" uid="uid://cdks2trs" path="res://02_Entities/Pool/Heroes/DarkKnight/Skills/Silver/eclat_multiplie.tres" id="30_s2"]
+[ext_resource type="Resource" uid="uid://cdkg2trs" path="res://02_Entities/Pool/Heroes/DarkKnight/Skills/Gold/tempete_declipse.tres" id="31_g2"]
+[ext_resource type="Resource" uid="uid://cdkg1trs" path="res://02_Entities/Pool/Heroes/DarkKnight/Skills/Gold/eclipse_lourde.tres" id="32_g1"]
 
 [resource]
 script = ExtResource("2_7xng1")
 id = 1
 category = "Melee / DPS"
+hero_skills = Dictionary[int, ExtResource("1_1git3")]({
+0: ExtResource("27_b1"),
+1: ExtResource("28_b2"),
+2: ExtResource("29_s1"),
+3: ExtResource("30_s2"),
+4: ExtResource("32_g1"),
+5: ExtResource("31_g2"),
+6: ExtResource("25_pass"),
+7: ExtResource("26_ult")
+})
 name = "Dark Knight"
 portrait = ExtResource("2_4g173")
 preview_scene = ExtResource("2_u5c3u")
@@ -63,18 +75,11 @@ stats = Dictionary[int, ExtResource("4_4g173")]({
 19: ExtResource("23_t4xip"),
 20: ExtResource("24_xxgnk")
 })
-hero_skills = Dictionary[int, ExtResource("1_1git3")]({
-0: ExtResource("27_b1"),
-1: ExtResource("28_b2"),
-2: ExtResource("29_s1"),
-3: ExtResource("30_s2"),
-6: ExtResource("25_pass"),
-7: ExtResource("26_ult")
-})
 skills = Dictionary[int, ExtResource("1_1git3")]({
 0: ExtResource("25_pass"),
 1: ExtResource("28_b2"),
 2: ExtResource("29_s1"),
+3: ExtResource("31_g2"),
 4: ExtResource("26_ult")
 })
 aa_1_release_normalized = 0.33

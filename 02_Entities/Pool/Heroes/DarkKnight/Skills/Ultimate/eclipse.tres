@@ -5,7 +5,6 @@
 
 [sub_resource type="Resource" id="Resource_eclipse"]
 script = ExtResource("2_eff")
-_base_triggers = 5
 metadata/_custom_type_script = "uid://cdkskill02"
 
 [resource]

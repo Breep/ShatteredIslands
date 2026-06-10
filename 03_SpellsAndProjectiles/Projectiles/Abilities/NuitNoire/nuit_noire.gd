@@ -31,6 +31,6 @@ func _on_impact(cb_vars: Dictionary) -> void:
 
 	source.damage.direct(target, damage, Utils.ActionType.DAMAGE_MAGICAL, source_id)
 
-	var debuff: Alteration.Type = Alteration.Type.WEAKNESS if randi() % 2 == 0 \
-		else Alteration.Type.VULNERABILITY
+	var debuff: Alteration.Type = Utils.pick_random(
+		[Alteration.Type.WEAKNESS, Alteration.Type.VULNERABILITY], source.battle_id, "NuitNoire")
 	source.alterations.inflict_condition_stacks(target, stacks, debuff, source_id)

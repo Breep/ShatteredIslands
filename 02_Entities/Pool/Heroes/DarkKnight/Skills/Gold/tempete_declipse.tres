@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://cdkg2trs"]
+
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
+[ext_resource type="Script" uid="uid://cdkskill07" path="res://02_Entities/Pool/Heroes/DarkKnight/Skills/Gold/tempete_declipse.gd" id="2_eff"]
+
+[sub_resource type="Resource" id="Resource_tempetedeclipse"]
+script = ExtResource("2_eff")
+metadata/_custom_type_script = "uid://cdkskill07"
+
+[resource]
+script = ExtResource("1_skill")
+skill_id = 5
+name = "Tempête d'Éclipse"
+description = "Éclipse déclenche Lame d'Ombre 2 fois supplémentaires (5 → 7)."
+skill_effect = SubResource("Resource_tempetedeclipse")
+metadata/_custom_type_script = "uid://dfby4merlgkep"

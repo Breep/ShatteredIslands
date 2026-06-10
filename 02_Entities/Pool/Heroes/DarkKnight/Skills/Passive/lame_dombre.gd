@@ -11,6 +11,7 @@ const META_SHIELD_RATIO := &"dk_shield_ratio"      # Bronze2 Garde d'Éclipse
 const META_APPLY_WEAKNESS := &"dk_apply_weakness"  # Silver1 Soif Occulte
 const META_APPLY_VULN := &"dk_apply_vuln"          # Silver2 Éclat Multiplié
 const META_ULT_EXTRA := &"dk_ult_extra"            # Gold2 Tempête d'Éclipse
+const META_PROJ_SIZE := &"dk_proj_size"            # Gold1 Éclipse Lourde
 
 @export var _base_chance: float = 15.0
 
@@ -32,7 +33,7 @@ func apply(ctx: SkillContext) -> void:
 		if not is_instance_valid(source) or not is_instance_valid(target):
 			return
 		var chance: float = _base_chance + source.get_meta(META_CHANCE_BONUS, 0.0)
-		if randf() * 100.0 >= chance:
+		if not Utils.is_randomize_modifier_active(chance, source.battle_id, "LameDOmbre"):
 			return
 		perform_trigger(source, target)
 	dk.auto_attack_modifier_registry.register_modifier(modifier)
@@ -44,7 +45,8 @@ static func perform_trigger(dk: Entity, target: Entity) -> void:
 	if not is_instance_valid(dk) or not is_instance_valid(target):
 		return
 
-	dk.projectile.fire_random(target, dk)
+	var size: int = dk.get_meta(META_PROJ_SIZE, Projectile.Size.SMALL)
+	dk.projectile.fire_random(target, dk, size)
 
 	var shield_ratio: float = dk.get_meta(META_SHIELD_RATIO, 0.0)
 	if shield_ratio > 0.0:

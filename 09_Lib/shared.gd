@@ -79,6 +79,18 @@ var PROJECTILE_SCENES: Dictionary[Projectile.Type, PackedScene]:
 			}
 		return _projectile_scenes_cache
 
+
+# Résout la Size d'un Projectile.Type. La taille n'est portée que par la scène
+# (Projectile.size) : on instancie une fois la scène hors de l'arbre (donc sans
+# déclencher _ready) pour lire la valeur, puis on cache le résultat.
+var _projectile_sizes_cache: Dictionary[Projectile.Type, Projectile.Size] = {}
+func get_projectile_size(type: Projectile.Type) -> Projectile.Size:
+	if not _projectile_sizes_cache.has(type):
+		var instance := PROJECTILE_SCENES[type].instantiate() as Projectile
+		_projectile_sizes_cache[type] = instance.size
+		instance.free()
+	return _projectile_sizes_cache[type]
+
 var _damage_popup_scene_cache: PackedScene
 var DAMAGE_POPUP_SCENE: PackedScene:
 	get:

@@ -66,10 +66,20 @@ func unregister_projectile(projectile_type: Projectile.Type) -> void:
 	_ability_projectiles_pool.erase(projectile_type)
 
 
-func fire_random(target: Entity, projectile_spawn: Node3D) -> void:
+# Fire a random projectile type from the pool of projectiles of the Entity
+func fire_random(target: Entity, projectile_spawn: Node3D, projectile_size: int = -1) -> void:
 	Verbose.trace("Firing random ability projectile", Verbose.Category.PROJECTILE)
 	if _ability_projectiles_pool.is_empty(): return
-	var projectile_type: Projectile.Type = _ability_projectiles_pool.pick_random()
+
+	var candidates: Array = _ability_projectiles_pool
+	if projectile_size >= 0:
+		candidates = _ability_projectiles_pool.filter(
+			func(type: Projectile.Type) -> bool: return Shared.get_projectile_size(type) == projectile_size)
+	if candidates.is_empty():
+		Verbose.trace("No ability projectile matching size " + str(projectile_size), Verbose.Category.PROJECTILE)
+		return
+
+	var projectile_type: Projectile.Type = Utils.pick_random(candidates, _owner.battle_id, "fire_random")
 	projectile_attack(target, projectile_type, projectile_spawn, ProjectileStats.new())
 
 

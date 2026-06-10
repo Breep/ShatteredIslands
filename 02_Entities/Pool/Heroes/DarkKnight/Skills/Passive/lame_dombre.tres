@@ -5,7 +5,6 @@
 
 [sub_resource type="Resource" id="Resource_lamedombre"]
 script = ExtResource("2_eff")
-_base_chance = 15.0
 metadata/_custom_type_script = "uid://cdkskill01"
 
 [resource]
