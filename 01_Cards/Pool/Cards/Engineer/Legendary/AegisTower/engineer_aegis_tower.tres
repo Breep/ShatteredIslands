@@ -1,8 +1,8 @@
-[gd_resource type="Resource" script_class="Card" format=3 uid="uid://baeg1stwr7lgnd"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://dg623ekroygk8"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_card"]
 [ext_resource type="Resource" uid="uid://cafqhvit4iuf7" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegis_tower_entity_desc.tres" id="2_desc"]
-[ext_resource type="Script" uid="uid://caeg1stwr3lgnd" path="res://01_Cards/Pool/Cards/Engineer/Legendary/AegisTower/engineer_aegis_tower.gd" id="3_effect"]
+[ext_resource type="Script" uid="uid://coi8rvbih5krd" path="res://01_Cards/Pool/Cards/Engineer/Legendary/AegisTower/engineer_aegis_tower.gd" id="3_effect"]
 
 [sub_resource type="Resource" id="Resource_effect"]
 script = ExtResource("3_effect")
