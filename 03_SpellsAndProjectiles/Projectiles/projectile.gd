@@ -28,7 +28,7 @@ enum Type {
 	ARROW = 10,
 	GRENADE = 11,
 	BOULDER = 12,
-	METEOR = 13
+	METEOR = 13,
 	NIGHTFALL = 14,
 }
 

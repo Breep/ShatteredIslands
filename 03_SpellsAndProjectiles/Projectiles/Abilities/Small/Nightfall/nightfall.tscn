@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cdknnoirescn"]
 
-[ext_resource type="Script" uid="uid://cdknuitnoir01" path="res://03_SpellsAndProjectiles/Projectiles/Abilities/Nightfall/nightfall.gd" id="1_proj"]
+[ext_resource type="Script" uid="uid://cdknuitnoir01" path="res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/Nightfall/nightfall.gd" id="1_proj"]
 [ext_resource type="Script" uid="uid://xr3esthqo6re" path="res://03_SpellsAndProjectiles/Projectiles/_Shared/Trajectories/straight_trajectory.gd" id="2_traj"]
 [ext_resource type="PackedScene" uid="uid://bxqb2r5cdt3gw" path="res://22_VFX/VFX_3D/VFX/Scenes/VFX_Darkness_projectile.tscn" id="3_vis"]
 
@@ -18,7 +18,7 @@ collision_mask = 16
 script = ExtResource("1_proj")
 _damage = Array[float]([15.0, 22.0, 30.0, 40.0, 52.0, 66.0, 82.0, 100.0, 122.0, 150.0])
 trajectory = SubResource("Resource_traj")
-type = 13
+type = 14
 
 [node name="NightfallVisual" parent="." unique_id=1560508901 instance=ExtResource("3_vis")]
 transform = Transform3D(2, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)

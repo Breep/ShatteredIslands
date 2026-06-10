@@ -65,6 +65,9 @@ var PROJECTILE_SCENES: Dictionary[Projectile.Type, PackedScene]:
 		if _projectile_scenes_cache.is_empty():
 			_projectile_scenes_cache = {
 				Projectile.Type.BULLET: load("res://03_SpellsAndProjectiles/Projectiles/AutoAttacks/Bullet/bullet_projectile.tscn"),
+				Projectile.Type.ARROW: load("res://03_SpellsAndProjectiles/Projectiles/AutoAttacks/Arrow/arrow_projectile.tscn"),
+				Projectile.Type.GAMMA_TURRET: load("res://03_SpellsAndProjectiles/Projectiles/AutoAttacks/GammaTurret/gamma_turret_projectile.tscn"),
+				Projectile.Type.SHADOW_BOLT: load("res://03_SpellsAndProjectiles/Projectiles/AutoAttacks/ShadowBolt/shadow_bolt_projectile.tscn"),
 				
 				Projectile.Type.VENOMOUS_DART: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/VenomousDart/venomous_dart_projectile.tscn"),
 				Projectile.Type.COSMIC_BOLT: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/CosmicBolt/cosmic_bolt_projectile.tscn"),
@@ -73,7 +76,7 @@ var PROJECTILE_SCENES: Dictionary[Projectile.Type, PackedScene]:
 				Projectile.Type.SMALL_EGG: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/SmallEgg/small_egg_projectile.tscn"),
 				Projectile.Type.FIRE_BALL: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/FireBall/fire_ball_projectile.tscn"),
 				Projectile.Type.GRENADE: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/Grenade/grenade.tscn"),
-				Projectile.Type.NIGHTFALL: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Nightfall/nightfall.tscn"),
+				Projectile.Type.NIGHTFALL: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/Nightfall/nightfall.tscn"),
 				
 				Projectile.Type.BOULDER: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Big/Boulder/boulder.tscn"),
 				Projectile.Type.METEOR: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Big/Meteor/meteor.tscn")
