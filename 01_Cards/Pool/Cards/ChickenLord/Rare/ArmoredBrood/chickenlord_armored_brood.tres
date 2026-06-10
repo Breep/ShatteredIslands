@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cclarmoredbr01"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_card"]
+[ext_resource type="Script" path="res://01_Cards/Pool/Cards/ChickenLord/Rare/ArmoredBrood/chickenlord_armored_brood.gd" id="2_eff"]
+
+[sub_resource type="Resource" id="Resource_armored"]
+script = ExtResource("2_eff")
+_block_amount = Array[float]([10.0, 15.0, 20.0, 25.0, 35.0])
+
+[resource]
+script = ExtResource("1_card")
+name = "Armored Brood"
+families = Array[int]([8])
+rarity = 1
+_card_effect = SubResource("Resource_armored")
+points = Dictionary[int, int]({
+8: 2
+})

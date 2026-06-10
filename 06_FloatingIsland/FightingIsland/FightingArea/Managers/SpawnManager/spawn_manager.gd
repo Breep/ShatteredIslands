@@ -46,6 +46,7 @@ func spawn_entity(entity: Entity, global_transform: Transform3D, context: Entity
 
 	entity.uid = _entity_counter
 	_entity_counter += 1
+	entity.spawned_entity_type = type
 
 	if context != null:
 		entity.apply_context(context)
