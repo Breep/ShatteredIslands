@@ -5,8 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://10_Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="4_egh8k"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="4_kq8si"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="4_r0wv3"]
-[ext_resource type="Resource" uid="uid://cacmeteor001" path="res://01_Cards/Pool/Cards/ArdentCelestial/Common/Meteor/ardent_celestial_meteor.tres" id="4_tmkd7"]
-[ext_resource type="Resource" uid="uid://cqbouldthrw01" path="res://01_Cards/Pool/Cards/Colossus/Common/BoulderThrow/colossus_boulder_throw.tres" id="5_tmkd7"]
+[ext_resource type="Resource" uid="uid://b26g0mf54dxwf" path="res://01_Cards/Pool/Cards/ChickenLord/Common/SchrodingerEgg/chickenlord_schrodinger_egg.tres" id="4_tmkd7"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]
 [ext_resource type="Script" uid="uid://nkraydv4mdse" path="res://01_Cards/Templates/Deck/hand.gd" id="6_jbcul"]
 [ext_resource type="PackedScene" uid="uid://bicegolemsc17" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/ice_golem.tscn" id="7_tmkd7"]
@@ -23,18 +22,17 @@
 [ext_resource type="Environment" uid="uid://cghu0yr6lj5i2" path="res://21_Props/DefaultBattleIsland/Arch_island/world_environment.tres" id="18_ko5bb"]
 [ext_resource type="PackedScene" uid="uid://dp4x7wkxd6i2q" path="res://99_Prototyping/Entity/EntityController/entity_controller.proto.tscn" id="19_x0odd"]
 
-[sub_resource type="Resource" id="Resource_xqnte"]
-script = ExtResource("6_jbcul")
-_cards = Dictionary[StringName, ExtResource("4_r0wv3")]({
-&"azfafazf": ExtResource("5_tmkd7"),
-&"fazfaz": ExtResource("4_tmkd7")
-})
-metadata/_custom_type_script = "uid://nkraydv4mdse"
-
 [sub_resource type="Resource" id="Resource_5qocs"]
 script = ExtResource("4_kq8si")
 _attack_range = 20.0
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_xqnte"]
+script = ExtResource("6_jbcul")
+_cards = Dictionary[StringName, ExtResource("4_r0wv3")]({
+&"dazd": ExtResource("4_tmkd7")
+})
+metadata/_custom_type_script = "uid://nkraydv4mdse"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m73qc"]
 albedo_color = Color(0.97405916, 0, 0.8521372, 1)
@@ -63,6 +61,40 @@ _manual_mode_enabled = true
 [node name="Node3D" type="Node3D" parent="." unique_id=1257562586]
 transform = Transform3D(1.0000001, 0, 0, 0, 0.99999994, 0, 0, 0, 1.0000001, 0, 0, 0)
 
+[node name="Latika4" parent="Node3D" unique_id=603191004 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("3_os118")]
+transform = Transform3D(0.022006778, 0, -0.99975777, 0, 1.0000001, 0, 0.99975777, 0, 0.022006778, -5.361015, 9.536744e-07, -2.080019)
+visible = false
+level = 4
+team = 2
+battle_id = 1
+_spawn_manager = NodePath("../SpawnManager")
+_arena_zone_manager = NodePath("../ArenaZoneManager")
+override_base_stats = SubResource("Resource_5qocs")
+
+[node name="IceGolem" parent="Node3D" unique_id=863006387 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("7_tmkd7")]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, -5.450213, 0, 7.97276)
+visible = false
+team = 2
+battle_id = 1
+_spawn_manager = NodePath("../SpawnManager")
+_arena_zone_manager = NodePath("../ArenaZoneManager")
+
+[node name="IceGolem2" parent="Node3D" unique_id=1880969174 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("7_tmkd7")]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, -5.450213, 0, 5.3626723)
+visible = false
+team = 2
+battle_id = 1
+_spawn_manager = NodePath("../SpawnManager")
+_arena_zone_manager = NodePath("../ArenaZoneManager")
+
+[node name="IceGolem3" parent="Node3D" unique_id=381652645 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("7_tmkd7")]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, -5.450213, 0, 2.818342)
+visible = false
+team = 2
+battle_id = 1
+_spawn_manager = NodePath("../SpawnManager")
+_arena_zone_manager = NodePath("../ArenaZoneManager")
+
 [node name="Entities" type="Node3D" parent="Node3D" unique_id=38016860]
 unique_name_in_owner = true
 
@@ -83,36 +115,6 @@ battle_id = 1
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
 override_base_stats = SubResource("Resource_5qocs")
-
-[node name="Latika4" parent="Node3D/Entities" unique_id=603191004 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("3_os118")]
-transform = Transform3D(0.022006778, 0, -0.99975777, 0, 1.0000001, 0, 0.99975777, 0, 0.022006778, -5.361015, 9.536744e-07, -2.080019)
-level = 4
-team = 2
-battle_id = 1
-_spawn_manager = NodePath("../../SpawnManager")
-_arena_zone_manager = NodePath("../../ArenaZoneManager")
-override_base_stats = SubResource("Resource_5qocs")
-
-[node name="IceGolem" parent="Node3D/Entities" unique_id=863006387 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("7_tmkd7")]
-transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, -5.450213, 0, 7.97276)
-team = 2
-battle_id = 1
-_spawn_manager = NodePath("../../SpawnManager")
-_arena_zone_manager = NodePath("../../ArenaZoneManager")
-
-[node name="IceGolem2" parent="Node3D/Entities" unique_id=1880969174 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("7_tmkd7")]
-transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, -5.450213, 0, 5.3626723)
-team = 2
-battle_id = 1
-_spawn_manager = NodePath("../../SpawnManager")
-_arena_zone_manager = NodePath("../../ArenaZoneManager")
-
-[node name="IceGolem3" parent="Node3D/Entities" unique_id=381652645 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("7_tmkd7")]
-transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, -5.450213, 0, 2.818342)
-team = 2
-battle_id = 1
-_spawn_manager = NodePath("../../SpawnManager")
-_arena_zone_manager = NodePath("../../ArenaZoneManager")
 
 [node name="Control" type="Control" parent="Node3D" unique_id=1104542732]
 layout_mode = 3

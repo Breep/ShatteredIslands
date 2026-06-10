@@ -73,7 +73,7 @@ var PROJECTILE_SCENES: Dictionary[Projectile.Type, PackedScene]:
 				Projectile.Type.COSMIC_BOLT: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/CosmicBolt/cosmic_bolt_projectile.tscn"),
 				Projectile.Type.SHIELD_THROW: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/ShieldThrow/shield_throw_projectile.tscn"),
 				Projectile.Type.POISON_FLASK: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/PoisonFlask/poison_flask_projectile.tscn"),
-				Projectile.Type.SMALL_EGG: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/SmallEgg/small_egg_projectile.tscn"),
+				Projectile.Type.SMALL_EGG: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/SmallEgg/small_egg.tscn"),
 				Projectile.Type.FIRE_BALL: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/FireBall/fire_ball_projectile.tscn"),
 				Projectile.Type.GRENADE: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/Grenade/grenade.tscn"),
 				Projectile.Type.NIGHTFALL: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/Nightfall/nightfall.tscn"),
