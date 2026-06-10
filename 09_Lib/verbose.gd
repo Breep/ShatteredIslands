@@ -129,7 +129,7 @@ var current_categories_level: Dictionary[Category, Level] = {
 	Category.DEFAULT: Level.DEBUG,
 	Category.NET: Level.WARN,
 	Category.GLOBAL_MANAGER: Level.DEBUG,
-	Category.CARD_SHOP: Level.WARN,
+	Category.CARD_SHOP: Level.TRACE,
 	Category.CARD: Level.DEBUG,
 	Category.SHOP_DECK: Level.WARN,
 	Category.CARD_LAYOUT: Level.WARN,
