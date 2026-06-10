@@ -8,6 +8,7 @@
 [ext_resource type="Resource" uid="uid://1c1rmx4an1ea" path="res://01_Cards/Pool/Cards/ChickenLord/Common/OpeningBrood/chickenlord_opening_brood.tres" id="6_opening"]
 [ext_resource type="Resource" uid="uid://0w30n7t6n1ea" path="res://01_Cards/Pool/Cards/ChickenLord/Rare/ArmoredBrood/chickenlord_armored_brood.tres" id="8_armored"]
 [ext_resource type="Resource" uid="uid://0x32nssgqaea" path="res://01_Cards/Pool/Cards/ChickenLord/Rare/BroodCommand/chickenlord_brood_command.tres" id="9_broodcmd"]
+[ext_resource type="Resource" uid="uid://b26g0mf54dxwf" path="res://01_Cards/Pool/Cards/ChickenLord/Common/SchrodingerEgg/chickenlord_schrodinger_egg.tres" id="9_idgy0"]
 [ext_resource type="Resource" uid="uid://02w2b1as1aea" path="res://01_Cards/Pool/Cards/ChickenLord/Rare/FlockSynergy/chickenlord_flock_synergy.tres" id="10_flock"]
 [ext_resource type="Resource" uid="uid://1mt1gfqhtaea" path="res://01_Cards/Pool/Cards/ChickenLord/Epic/YinYang/chickenlord_yin_yang.tres" id="11_yy"]
 [ext_resource type="Resource" uid="uid://1fpvmu5lonea" path="res://01_Cards/Pool/Cards/ChickenLord/Epic/Reinforcements/chickenlord_reinforcements.tres" id="12_reinf"]
@@ -19,7 +20,7 @@
 
 [resource]
 script = ExtResource("2_family")
-common_cards = Array[ExtResource("1_card")]([ExtResource("3_guard"), ExtResource("4_ninja"), ExtResource("6_opening"), ExtResource("5_phoenix"), ExtResource("14_caller"), ExtResource("15_bond"), ExtResource("17_coop")])
+common_cards = Array[ExtResource("1_card")]([ExtResource("3_guard"), ExtResource("4_ninja"), ExtResource("6_opening"), ExtResource("5_phoenix"), ExtResource("14_caller"), ExtResource("15_bond"), ExtResource("17_coop"), ExtResource("9_idgy0")])
 rare_cards = Array[ExtResource("1_card")]([ExtResource("8_armored"), ExtResource("9_broodcmd"), ExtResource("10_flock")])
 epic_cards = Array[ExtResource("1_card")]([ExtResource("12_reinf"), ExtResource("11_yy")])
 legendary_cards = Array[ExtResource("1_card")]([ExtResource("13_undying")])
