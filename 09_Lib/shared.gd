@@ -75,7 +75,8 @@ var PROJECTILE_SCENES: Dictionary[Projectile.Type, PackedScene]:
 				Projectile.Type.GAMMA_TURRET: load("res://03_SpellsAndProjectiles/Projectiles/AutoAttacks/GammaTurret/gamma_turret_projectile.tscn"),
 				Projectile.Type.ARROW: load("res://03_SpellsAndProjectiles/Projectiles/AutoAttacks/Arrow/arrow_projectile.tscn"),
 				Projectile.Type.GRENADE: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Grenade/grenade.tscn"),
-				Projectile.Type.NUIT_NOIRE: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/NuitNoire/nuit_noire.tscn"),
+				Projectile.Type.BOULDER: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Big/Boulder/boulder.tscn"),
+				Projectile.Type.NIGHTFALL: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Nightfall/nightfall.tscn"),
 			}
 		return _projectile_scenes_cache
 

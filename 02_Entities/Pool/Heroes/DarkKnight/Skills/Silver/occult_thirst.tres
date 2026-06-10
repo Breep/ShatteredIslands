@@ -1,16 +1,16 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://cdks1trs"]
 
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
-[ext_resource type="Script" uid="uid://cdkskill05" path="res://02_Entities/Pool/Heroes/DarkKnight/Skills/Silver/soif_occulte.gd" id="2_eff"]
+[ext_resource type="Script" uid="uid://cdkskill05" path="res://02_Entities/Pool/Heroes/DarkKnight/Skills/Silver/occult_thirst.gd" id="2_eff"]
 
-[sub_resource type="Resource" id="Resource_soifocculte"]
+[sub_resource type="Resource" id="Resource_occultthirst"]
 script = ExtResource("2_eff")
 metadata/_custom_type_script = "uid://cdkskill05"
 
 [resource]
 script = ExtResource("1_skill")
 skill_id = 2
-name = "Soif Occulte"
-description = "Lame d'Ombre applique Weakness à la cible à chaque déclenchement."
-skill_effect = SubResource("Resource_soifocculte")
+name = "Occult Thirst"
+description = "Shadow Blade applies Weakness to the target on each trigger."
+skill_effect = SubResource("Resource_occultthirst")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

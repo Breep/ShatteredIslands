@@ -1,16 +1,16 @@
 [gd_resource type="Resource" script_class="Card" format=3 uid="uid://cdknnoirecard"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_card"]
-[ext_resource type="Script" uid="uid://cdknuitnoir02" path="res://01_Cards/Pool/Cards/Necro/Common/NuitNoire/necro_nuit_noire.gd" id="2_eff"]
+[ext_resource type="Script" uid="uid://cdknuitnoir02" path="res://01_Cards/Pool/Cards/Necro/Common/Nightfall/necro_nightfall.gd" id="2_eff"]
 
-[sub_resource type="Resource" id="Resource_nuitnoire"]
+[sub_resource type="Resource" id="Resource_nightfall"]
 script = ExtResource("2_eff")
 
 [resource]
 script = ExtResource("1_card")
-name = "Nuit Noire"
+name = "Nightfall"
 families = Array[int]([9])
-_card_effect = SubResource("Resource_nuitnoire")
+_card_effect = SubResource("Resource_nightfall")
 points = Dictionary[int, int]({
 9: 1
 })

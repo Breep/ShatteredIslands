@@ -10,7 +10,7 @@ metadata/_custom_type_script = "uid://cdkskill02"
 [resource]
 script = ExtResource("1_skill")
 skill_id = 7
-name = "Éclipse"
-description = "Libère toute l'énergie d'éclipse et déclenche Lame d'Ombre 5 fois en rafale (déclenchements forcés)."
+name = "Eclipse"
+description = "Unleashes all eclipse energy and triggers Shadow Blade 5 times in a burst (forced triggers)."
 skill_effect = SubResource("Resource_eclipse")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://cdkpassivetrs"]
+
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
+[ext_resource type="Script" uid="uid://cdkskill01" path="res://02_Entities/Pool/Heroes/DarkKnight/Skills/Passive/shadow_blade.gd" id="2_eff"]
+
+[sub_resource type="Resource" id="Resource_shadowblade"]
+script = ExtResource("2_eff")
+metadata/_custom_type_script = "uid://cdkskill01"
+
+[resource]
+script = ExtResource("1_skill")
+skill_id = 6
+name = "Shadow Blade"
+description = "Auto-attacks have a 15% chance to release a player-controlled projectile (base: Nightfall) at the current target."
+skill_effect = SubResource("Resource_shadowblade")
+metadata/_custom_type_script = "uid://dfby4merlgkep"

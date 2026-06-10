@@ -1,4 +1,4 @@
-# Nuit Noire — projectile signature du Dark Knight. Comportement par défaut à
+# Nightfall — projectile signature du Dark Knight. Comportement par défaut à
 # l'impact : dégâts magiques sur la cible touchée + 1 stack d'un debuff tiré au
 # hasard (Weakness OU Vulnerability). Le tirage est refait pour chaque projectile
 # (chaque instance reroll son propre debuff dans son on_hit).
@@ -6,7 +6,7 @@
 # Variables par-level : _damage et _debuff_stacks sont des Array @export indexées
 # par level (résolu par ProjectileComponent + LevelResolver). L'attribution des
 # actions vient de _stats.source_id, posé par l'émetteur.
-class_name NuitNoire
+class_name Nightfall
 extends Projectile
 
 @export var _damage: Array[float] = []
@@ -32,5 +32,5 @@ func _on_impact(cb_vars: Dictionary) -> void:
 	source.damage.direct(target, damage, Utils.ActionType.DAMAGE_MAGICAL, source_id)
 
 	var debuff: Alteration.Type = Utils.pick_random(
-		[Alteration.Type.WEAKNESS, Alteration.Type.VULNERABILITY], source.battle_id, "NuitNoire")
+		[Alteration.Type.WEAKNESS, Alteration.Type.VULNERABILITY], source.battle_id, "Nightfall")
 	source.alterations.inflict_condition_stacks(target, stacks, debuff, source_id)
