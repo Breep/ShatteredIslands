@@ -3,8 +3,6 @@ extends CardEffect
 
 ## Ardent Celestial — les projectiles d'abilité du héros exécutent les ennemis
 ## dont les PV tombent sous un pourcentage seuil.
-## NOTE: appliqué aux projectiles du héros (la carte est libellée "Aura" ; l'aura
-## d'équipe ne propage pas les ProjectileModifier — voir CLAUDE.md §9).
 
 @export var _execute_threshold: Array[float]
 

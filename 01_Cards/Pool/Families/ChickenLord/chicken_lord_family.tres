@@ -9,11 +9,11 @@
 [ext_resource type="Resource" uid="uid://0w30n7t6n1ea" path="res://01_Cards/Pool/Cards/ChickenLord/Rare/ArmoredBrood/chickenlord_armored_brood.tres" id="8_armored"]
 [ext_resource type="Resource" uid="uid://0x32nssgqaea" path="res://01_Cards/Pool/Cards/ChickenLord/Rare/BroodCommand/chickenlord_brood_command.tres" id="9_broodcmd"]
 [ext_resource type="Resource" uid="uid://02w2b1as1aea" path="res://01_Cards/Pool/Cards/ChickenLord/Rare/FlockSynergy/chickenlord_flock_synergy.tres" id="10_flock"]
-[ext_resource type="Resource" uid="uid://1mt1gfqhtaea" path="res://01_Cards/Pool/Cards/ChickenLord/Epic/YingYang/chickenlord_ying_yang.tres" id="11_yy"]
+[ext_resource type="Resource" uid="uid://1mt1gfqhtaea" path="res://01_Cards/Pool/Cards/ChickenLord/Epic/YinYang/chickenlord_yin_yang.tres" id="11_yy"]
 [ext_resource type="Resource" uid="uid://1fpvmu5lonea" path="res://01_Cards/Pool/Cards/ChickenLord/Epic/Reinforcements/chickenlord_reinforcements.tres" id="12_reinf"]
 [ext_resource type="Resource" uid="uid://1iyqxx4an1ea" path="res://01_Cards/Pool/Cards/ChickenLord/Legendary/UndyingBrood/chickenlord_undying_brood.tres" id="13_undying"]
 [ext_resource type="Resource" uid="uid://cwarchickcal1" path="res://01_Cards/Pool/Cards/Warrior/Common/ChickenCaller/attack_chicken_caller.tres" id="14_caller"]
-[ext_resource type="Resource" uid="uid://cbeastbond001" path="res://01_Cards/Pool/Cards/Colossus/Common/BeastBond/colossus_beast_bond.tres" id="15_bond"]
+[ext_resource type="Resource" uid="uid://cbeastbond001" path="res://01_Cards/Pool/Cards/ChickenLord/Common/BeastBond/chicken_lord_beast_bond.tres" id="15_bond"]
 [ext_resource type="Texture2D" uid="uid://f0pluuonvtsf" path="res://01_Cards/Pool/Families/Icons/chicken lord 2.png" id="16_icon"]
 [ext_resource type="Resource" uid="uid://bovs06ff8gvkc" path="res://01_Cards/Pool/Cards/Engineer/Common/ChickenCoop/chickenlord_chicken_coop.tres" id="17_coop"]
 

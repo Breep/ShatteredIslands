@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://cacmeteor001" path="res://01_Cards/Pool/Cards/ArdentCelestial/Common/Meteor/ardent_celestial_meteor.tres" id="3_meteor"]
 [ext_resource type="Resource" uid="uid://c8xlom0vjt6rp" path="res://01_Cards/Pool/Cards/ArdentCelestial/Common/DiamondSkin/ardent_celestial_diamond_skin.tres" id="4_diamond"]
 [ext_resource type="Resource" uid="uid://cacsolarflr1" path="res://01_Cards/Pool/Cards/ArdentCelestial/Common/SolarFlare/ardent_celestial_solar_flare.tres" id="5_flare"]
-[ext_resource type="Resource" uid="uid://cacburnstrk1" path="res://01_Cards/Pool/Cards/ArdentCelestial/Common/BurningStrike/ardent_celestial_burning_strike.tres" id="6_burn"]
+[ext_resource type="Resource" uid="uid://cacburnstrk1" path="res://01_Cards/Pool/Cards/Warrior/Common/BurningStrike/warrior_burning_strike.tres" id="6_burn"]
 [ext_resource type="Texture2D" uid="uid://cc1c8vf4tv2pa" path="res://01_Cards/Pool/Families/Icons/celeste logo 2.png" id="7_icon"]
 [ext_resource type="Resource" uid="uid://cmgtaf41odg41" path="res://01_Cards/Pool/Cards/ArdentCelestial/Common/EmberCascade/ardent_celestial_ember_cascade.tres" id="8_ember"]
 [ext_resource type="Resource" uid="uid://cmgtoqbf58n41" path="res://01_Cards/Pool/Cards/ArdentCelestial/Rare/EmpoweredProjectiles/ardent_celestial_empowered_projectiles.tres" id="10_empow"]
@@ -14,7 +14,7 @@
 [ext_resource type="Resource" uid="uid://cmc0ssnbotv41" path="res://01_Cards/Pool/Cards/ArdentCelestial/Legendary/AstralBarrage/ardent_celestial_astral_barrage.tres" id="13_barrage"]
 [ext_resource type="Resource" uid="uid://cmujnso6rw441" path="res://01_Cards/Pool/Cards/ArdentCelestial/Epic/ScorchedEarth/ardent_celestial_scorched_earth.tres" id="14_scorch"]
 [ext_resource type="Resource" uid="uid://1ds2d3yrn1ea" path="res://01_Cards/Pool/Cards/ChickenLord/Common/PhoenixBrood/chickenlord_phoenix_brood.tres" id="15_phoenix"]
-[ext_resource type="Resource" uid="uid://ccolarcanebw1" path="res://01_Cards/Pool/Cards/Colossus/Common/ArcaneBulwark/colossus_arcane_bulwark.tres" id="16_arcane"]
+[ext_resource type="Resource" uid="uid://ccolarcanebw1" path="res://01_Cards/Pool/Cards/ArdentCelestial/Common/ArcaneBulwark/ardent_celestial_arcane_bulwark.tres" id="16_arcane"]
 [ext_resource type="Resource" uid="uid://oiu0oh5bt42w" path="res://01_Cards/Pool/Cards/Engineer/Common/FlameThrowerTurret/engineer_flame_thrower_turret.tres" id="17_flame"]
 
 [resource]

@@ -1,7 +1,7 @@
-class_name EngineerCombatShield
+class_name WarriorCombatShield
 extends CardEffect
 
-## Engineer / Guerrier — à chaque auto-attaque, une chance de générer du shield
+## Guerrier / Engineer — à chaque auto-attaque, une chance de générer du shield
 ## sur un allié aléatoire (soi-même inclus).
 
 @export var _chance: Array[float]

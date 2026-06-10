@@ -7,7 +7,7 @@
 [ext_resource type="Resource" uid="uid://celecgrenad1" path="res://01_Cards/Pool/Cards/Engineer/Common/ElectricGrenade/engineer_electric_grenade.tres" id="5_grenade"]
 [ext_resource type="Resource" uid="uid://50n64sybm7wa" path="res://01_Cards/Pool/Cards/Engineer/Rare/GammaTurret/engineer_gamma_turret.tres" id="6_8uakq"]
 [ext_resource type="Resource" uid="uid://c3rq8k7pj84qi" path="res://01_Cards/Pool/Cards/Engineer/Common/EvasiveBarrier/engineer_evasive_barrier.tres" id="6_evasive"]
-[ext_resource type="Resource" uid="uid://ccombatshld1" path="res://01_Cards/Pool/Cards/Engineer/Common/CombatShield/engineer_combat_shield.tres" id="7_combat"]
+[ext_resource type="Resource" uid="uid://ccombatshld1" path="res://01_Cards/Pool/Cards/Warrior/Common/CombatShield/warrior_combat_shield.tres" id="7_combat"]
 [ext_resource type="Resource" uid="uid://oiu0oh5bt42w" path="res://01_Cards/Pool/Cards/Engineer/Common/FlameThrowerTurret/engineer_flame_thrower_turret.tres" id="8_e3164"]
 [ext_resource type="Resource" uid="uid://du0o8udb4adn5" path="res://01_Cards/Pool/Cards/Engineer/Epic/ShieldThrow/engineer_shield_throw.tres" id="8_throw"]
 [ext_resource type="Texture2D" uid="uid://c2esp1sla1xxa" path="res://01_Cards/Pool/Families/Icons/engineer logo 2.png" id="9_icon"]

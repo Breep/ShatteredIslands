@@ -1,7 +1,7 @@
-class_name ArdentCelestialBurningStrike
+class_name WarriorBurningStrike
 extends CardEffect
 
-## Ardent Celestial / Guerrier — à chaque auto-attaque, une chance d'appliquer
+## Guerrier / Ardent Celestial — à chaque auto-attaque, une chance d'appliquer
 ## des stacks d'ignite à la cible.
 
 @export var _chance: Array[float]

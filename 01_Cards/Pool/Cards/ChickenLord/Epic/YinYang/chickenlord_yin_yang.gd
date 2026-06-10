@@ -1,4 +1,4 @@
-class_name ChickenLordYingYang
+class_name ChickenLordYinYang
 extends CardEffect
 
 ## Chicken Lord — Ying & Yang : quand un summon allié apparaît, une chance

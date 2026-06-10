@@ -1,7 +1,7 @@
-class_name ColossusArcaneBulwark
+class_name ArdentCelestialArcaneBulwark
 extends CardEffect
 
-## Colossus / Ardent Celestial — à chaque impact d'un projectile d'abilité du
+## Ardent Celestial / Colossus — à chaque impact d'un projectile d'abilité du
 ## héros, celui-ci gagne des PV max (cumulatif, remis à zéro à chaque combat).
 ## Hook : ProjectileModifier filtré sur Projectile.Category.ABILITY_PROJECTILE.
 

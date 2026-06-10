@@ -1,7 +1,7 @@
-class_name ColossusBeastBond
+class_name ChickenLordBeastBond
 extends CardEffect
 
-## Colossus / Seigneur Poulet — augmente les résistances (armure, magique, poison)
+## Seigneur Poulet / Colossus — augmente les résistances (armure, magique, poison)
 ## d'une valeur par summon allié en vie, mis à jour en temps réel (apparition /
 ## mort des summons).
 ## NOTE: le déblocage « Colosse Surdoué » (Gifted Colossus) n'est pas géré ici —

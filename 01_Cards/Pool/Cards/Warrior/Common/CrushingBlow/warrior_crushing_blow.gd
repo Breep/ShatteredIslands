@@ -1,7 +1,7 @@
-class_name ColossusCrushingBlow
+class_name WarriorCrushingBlow
 extends CardEffect
 
-## Colossus / Guerrier — toutes les X attaques, inflige un bonus de dégâts
+## Guerrier / Colossus — toutes les X attaques, inflige un bonus de dégâts
 ## physiques égal à un pourcentage des PV max de la cible.
 
 @export var _attack_number: int
