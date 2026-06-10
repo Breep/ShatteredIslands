@@ -77,7 +77,8 @@ var PROJECTILE_SCENES: Dictionary[Projectile.Type, PackedScene]:
 				Projectile.Type.FIRE_BALL: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/FireBall/fire_ball_projectile.tscn"),
 				Projectile.Type.GRENADE: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/Grenade/grenade.tscn"),
 				
-				Projectile.Type.BOULDER: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Big/Boulder/boulder.tscn")
+				Projectile.Type.BOULDER: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Big/Boulder/boulder.tscn"),
+				Projectile.Type.METEOR: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Big/Meteor/meteor.tscn")
 			}
 		return _projectile_scenes_cache
 

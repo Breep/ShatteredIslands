@@ -5,8 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://10_Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="4_egh8k"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="4_kq8si"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="4_r0wv3"]
-[ext_resource type="Resource" uid="uid://cmc0ssnbotv41" path="res://01_Cards/Pool/Cards/ArdentCelestial/Legendary/AstralBarrage/ardent_celestial_astral_barrage.tres" id="5_awloh"]
-[ext_resource type="Resource" uid="uid://cqbouldthrw01" path="res://01_Cards/Pool/Cards/Colossus/Common/BoulderThrow/colossus_boulder_throw.tres" id="5_tmkd7"]
+[ext_resource type="Resource" uid="uid://cacmeteor001" path="res://01_Cards/Pool/Cards/ArdentCelestial/Common/Meteor/ardent_celestial_meteor.tres" id="4_tmkd7"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]
 [ext_resource type="Script" uid="uid://nkraydv4mdse" path="res://01_Cards/Templates/Deck/hand.gd" id="6_jbcul"]
 [ext_resource type="PackedScene" uid="uid://bicegolemsc17" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/ice_golem.tscn" id="7_tmkd7"]
@@ -26,8 +25,7 @@
 [sub_resource type="Resource" id="Resource_xqnte"]
 script = ExtResource("6_jbcul")
 _cards = Dictionary[StringName, ExtResource("4_r0wv3")]({
-&"": ExtResource("5_awloh"),
-&"dzad": ExtResource("5_tmkd7")
+&"aze": ExtResource("4_tmkd7")
 })
 metadata/_custom_type_script = "uid://nkraydv4mdse"
 
@@ -289,7 +287,7 @@ _owner = NodePath("..")
 [node name="TestingFloorFFA5" parent="Node3D" unique_id=283551194 instance=ExtResource("11_5hdqt")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 
-[node name="FloorArea" parent="Node3D/TestingFloorFFA5" index="0" unique_id=2121644269]
+[node name="FloorArea" parent="Node3D/TestingFloorFFA5" index="0" unique_id=2121644269 groups=["GROUND"]]
 collision_layer = 8
 script = ExtResource("13_jd8sj")
 

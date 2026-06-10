@@ -1,3 +1,33 @@
 [gd_scene format=3 uid="uid://bfl86rnj6nrfo"]
 
-[node name="Meteor" type="Node3D" unique_id=1063658978]
+[ext_resource type="Script" uid="uid://c0tsxui7jakx3" path="res://03_SpellsAndProjectiles/Projectiles/Abilities/Big/Meteor/meteor.gd" id="1_qhrqo"]
+[ext_resource type="PackedScene" uid="uid://kxiy1l64qcho" path="res://03_SpellsAndProjectiles/Projectiles/Abilities/Big/Meteor/meteor_visual.tscn" id="1_s84ub"]
+[ext_resource type="Curve3D" uid="uid://dllpxnob8xfk" path="res://03_SpellsAndProjectiles/Projectiles/Abilities/Big/Meteor/meteor_curve_3d.tres" id="2_4mxbe"]
+[ext_resource type="Script" uid="uid://cvw1q28ikfiwu" path="res://03_SpellsAndProjectiles/Projectiles/_Shared/Trajectories/path_trajectory.gd" id="3_wnqxx"]
+
+[sub_resource type="Resource" id="Resource_w3mod"]
+script = ExtResource("3_wnqxx")
+curve = ExtResource("2_4mxbe")
+start_speed_ratio = 0.5
+progress_power = 3.0
+speed = 50.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qhrqo"]
+radius = 1.0
+
+[node name="Meteor" type="Area3D" unique_id=2109710244]
+collision_layer = 2
+collision_mask = 25
+script = ExtResource("1_qhrqo")
+_damage_percents = Array[float]([3.0, 3.3, 3.6, 3.9, 4.2, 4.5, 4.8, 5.1, 5.4, 5.7])
+_ignite_stacks = Array[float]([9.0, 14.0, 19.0, 24.0, 29.0, 34.0, 39.0, 44.0, 49.0, 54.0])
+trajectory = SubResource("Resource_w3mod")
+lifetime_max = 20.0
+type = 13
+size = 1
+metadata/_custom_type_script = "uid://dv8w8kb4xsqp3"
+
+[node name="MeteorVisual" parent="." unique_id=539238532 instance=ExtResource("1_s84ub")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1221826043]
+shape = SubResource("SphereShape3D_qhrqo")

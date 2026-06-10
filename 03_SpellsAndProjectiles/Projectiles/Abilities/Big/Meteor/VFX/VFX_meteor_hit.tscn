@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://bin1lmqiaoja2"]
 
-[ext_resource type="Texture2D" uid="uid://bu33n68riy6qg" path="res://21_Props/DefaultBattleIsland/Arch_island/VFX/textures/T_VFX_Wave56.jpg" id="2_dp8ep"]
-[ext_resource type="ArrayMesh" uid="uid://dx5npxivo6fhv" path="res://22_VFX/VFX_3D/Meteor/Objects/sm_half_sphere.obj" id="3_yphr5"]
-[ext_resource type="Texture2D" uid="uid://cqb68vqjl2kdg" path="res://22_VFX/VFX_3D/VFX/Textures/T_VFX_SparklesF21.jpg" id="5_ygjlt"]
-[ext_resource type="Texture2D" uid="uid://cgmio377pqmd8" path="res://21_Props/DefaultBattleIsland/Arch_island/VFX/textures/T_VFX_Glo31.png" id="7_jv6ev"]
+[ext_resource type="Texture2D" uid="uid://bu33n68riy6qg" path="res://21_Props/DefaultBattleIsland/Arch_island/VFX/textures/T_VFX_Wave56.jpg" id="1_qa6op"]
+[ext_resource type="ArrayMesh" uid="uid://dx5npxivo6fhv" path="res://22_VFX/VFX_3D/Meteor/Objects/sm_half_sphere.obj" id="2_0kmwo"]
+[ext_resource type="Texture2D" uid="uid://cqb68vqjl2kdg" path="res://22_VFX/VFX_3D/VFX/Textures/T_VFX_SparklesF21.jpg" id="3_jvgvj"]
+[ext_resource type="Texture2D" uid="uid://cgmio377pqmd8" path="res://21_Props/DefaultBattleIsland/Arch_island/VFX/textures/T_VFX_Glo31.png" id="4_iepgi"]
 
 [sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_066ks"]
 default_input_values = [0, Vector2(0, 0), 1, Vector2(0, 0)]
@@ -168,7 +168,7 @@ render_priority = 0
 shader = SubResource("VisualShader_xiew6")
 shader_parameter/Fire_Scale = Vector2(1, 1)
 shader_parameter/Fire_Speed = Vector2(0, 1)
-shader_parameter/Fire_Texture = ExtResource("2_dp8ep")
+shader_parameter/Fire_Texture = ExtResource("1_qa6op")
 shader_parameter/Gradient_Substract = SubResource("GradientTexture2D_q5f6i")
 shader_parameter/Color_Dissipation = 1.09
 shader_parameter/Color_1D_Gradient = SubResource("GradientTexture1D_k7lua")
@@ -323,7 +323,7 @@ render_priority = 0
 shader = SubResource("VisualShader_npwxl")
 shader_parameter/Line_Color = Color(1, 1, 2, 1)
 shader_parameter/Scale = Vector2(1, 1)
-shader_parameter/Texture = ExtResource("5_ygjlt")
+shader_parameter/Texture = ExtResource("3_jvgvj")
 shader_parameter/Gradient_1D_texture = SubResource("GradientTexture1D_3xeqq")
 shader_parameter/Line_Thickness = 0.1
 shader_parameter/Proximity_Fade = 0.3
@@ -446,7 +446,7 @@ nodes/fragment/connections = PackedInt32Array(2, 0, 3, 2, 4, 0, 0, 0, 4, 4, 5, 0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_doubm"]
 render_priority = -1
 shader = SubResource("VisualShader_d6c8c")
-shader_parameter/Mask_Texture = ExtResource("7_jv6ev")
+shader_parameter/Mask_Texture = ExtResource("4_iepgi")
 shader_parameter/Proximity_fade = 0.079
 
 [sub_resource type="Curve" id="Curve_k6ky2"]
@@ -573,7 +573,7 @@ explosiveness = 1.0
 fixed_fps = 60
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_r2q4s")
-draw_pass_1 = ExtResource("3_yphr5")
+draw_pass_1 = ExtResource("2_0kmwo")
 
 [node name="sparks" type="GPUParticles3D" parent="." unique_id=1715412241]
 transform = Transform3D(0.34533224, -0.9135151, 0.21502563, 0.48817807, -0.020826437, -0.87249553, 0.801516, 0.4062716, 0.438766, 0, 0, -0.3327365)

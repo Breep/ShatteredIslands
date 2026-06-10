@@ -1,43 +1,41 @@
 class_name ArdentCelestialMeteor
 extends CardEffect
 
-## Ardent Celestial — invoque périodiquement un météore sur un ennemi aléatoire :
-## dégâts magiques en % des PV max de la cible, et applique des stacks d'ignite
-## aux ennemis touchés.
+## Ardent Celestial — invoque périodiquement un météore sur un ennemi aléatoire.
+## Le météore (projectile) porte ses propres valeurs par level (dégâts magiques
+## en % des PV max + ignite) ; la carte ne fait que monter son level via un
+## ProjectileModifier, comme Colossus Boulder Throw.
 
-@export var _damage_percent: Array[float]
-@export var _ignite_stacks: Array[float]
+@export var _level_bonus: Array[int]
 @export var _period: Array[float]
+
 
 func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 	var owner: Entity = ctx.entity_owner
-	var damage_percent: float = _damage_percent[card_lvl - 1]
-	var ignite: float = _ignite_stacks[card_lvl - 1]
 	var period: float = _period[card_lvl - 1]
 
-	var on_hit := func(cb_vars: Dictionary) -> void:
-		var entities: Array = cb_vars.get(Meteor.VarType.ENTITIES_INSIDE, [])
-		for e in entities:
-			if e == null or not is_instance_valid(e): continue
-			if e.team == owner.team: continue
-			owner.alterations.inflict_condition_stacks(e, ignite, Alteration.Type.IGNITE, card_name)
+	var mod := ProjectileModifier.new()
+	mod.id = card_name
+	mod.types = [Projectile.Type.METEOR]
+	mod.level_modifier_callback = func(cb_vars: Dictionary) -> void:
+		cb_vars[LevelResolver.LEVEL] += _level_bonus[card_lvl - 1]
+	owner.projectile_modifiers_registry.register_modifier(mod)
 
 	owner.battle_callback_registry.register_periodic(card_name, period, func() -> void:
 		var target: Entity = owner.target.get_target(TargetComponent.TargettingStrategy.RANDOM_ENEMY)
-		if target == null or not is_instance_valid(target):
-			return
-		owner.spell.cast_spell(target, Spell.Type.METEOR, {
-			Meteor.Modifier.DAMAGE_PERCENT: damage_percent,
-			Meteor.Modifier.ON_HIT_CALLBACKS: [on_hit],
-		})
+		if not is_instance_valid(target): return
+		owner.projectile.projectile_attack(target, Projectile.Type.METEOR, owner, ProjectileStats.new())
 	)
+
+	owner.projectile.register_projectile(Projectile.Type.METEOR)
 
 
 func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 	ctx.entity_owner.battle_callback_registry.unregister_all(card_name)
+	ctx.entity_owner.projectile_modifiers_registry.unregister_modifier(card_name)
+	ctx.entity_owner.projectile.unregister_projectile(Projectile.Type.METEOR)
 
 
 func get_description(card_lvl: int) -> String:
-	return "Toutes les " + str(_period[card_lvl - 1]) + "s, invoque un météore infligeant " \
-		+ str(_damage_percent[card_lvl - 1]) + "% des PV max en [[MAGICAL_DAMAGE]] et " \
-		+ str(_ignite_stacks[card_lvl - 1]) + " [[IGNITE]] aux ennemis touchés."
+	return "Toutes les " + str(_period[card_lvl - 1]) + "s, invoque un météore infligeant des " \
+		+ "[[MAGICAL_DAMAGE]] (% PV max) et de l'[[IGNITE]] aux ennemis touchés."
