@@ -35,6 +35,7 @@ const _STATS: Dictionary = {
 	EntityStats.StatType.DODGE:           {"name": "Esquive",                "sig": &"dodge_changed"},
 	EntityStats.StatType.LIFESTEAL:       {"name": "Vol de vie",             "sig": &"lifesteal_changed"},
 	EntityStats.StatType.SCALE:           {"name": "Taille",                 "sig": &"scale_changed"},
+	EntityStats.StatType.AOE_SIZE:        {"name": "Taille des AoE",         "sig": &"aoe_size_changed"},
 }
 #endregion
 
