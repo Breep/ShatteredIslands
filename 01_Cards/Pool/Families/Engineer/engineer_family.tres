@@ -16,10 +16,11 @@
 [ext_resource type="Resource" uid="uid://dg623ekroygk8" path="res://01_Cards/Pool/Cards/Engineer/Legendary/AegisTower/engineer_aegis_tower.tres" id="12_aegis"]
 [ext_resource type="Resource" uid="uid://c23mytt6luv7a" path="res://01_Cards/Pool/Cards/Engineer/Rare/BlueprintUpgrade/engineer_blueprint_upgrade.tres" id="13_mymjx"]
 [ext_resource type="Resource" uid="uid://c233q8sbjxi7a" path="res://01_Cards/Pool/Cards/Engineer/Common/ReactivePlating/engineer_reactive_plating.tres" id="14_1f1g4"]
+[ext_resource type="Resource" uid="uid://c23n0cqclnaea" path="res://01_Cards/Pool/Cards/Engineer/Rare/CommandAura/engineer_command_aura.tres" id="15_e0wt6"]
 
 [resource]
 script = ExtResource("3_p2pe3")
-cards = Array[ExtResource("1_yud7m")]([ExtResource("3_energy"), ExtResource("4_rush"), ExtResource("5_grenade"), ExtResource("6_evasive"), ExtResource("7_combat"), ExtResource("8_throw"), ExtResource("8_e3164"), ExtResource("9_vb4en"), ExtResource("10_vpjdj"), ExtResource("11_ctvwl"), ExtResource("12_aegis"), ExtResource("13_mymjx"), ExtResource("14_1f1g4")])
+cards = Array[ExtResource("1_yud7m")]([ExtResource("3_energy"), ExtResource("4_rush"), ExtResource("5_grenade"), ExtResource("6_evasive"), ExtResource("7_combat"), ExtResource("8_throw"), ExtResource("8_e3164"), ExtResource("9_vb4en"), ExtResource("10_vpjdj"), ExtResource("11_ctvwl"), ExtResource("12_aegis"), ExtResource("13_mymjx"), ExtResource("14_1f1g4"), ExtResource("15_e0wt6")])
 icon = ExtResource("9_icon")
 family_name = "Engineer"
 family_type = 2
