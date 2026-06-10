@@ -11,7 +11,7 @@
 [ext_resource type="Resource" uid="uid://du0o8udb4adn5" path="res://01_Cards/Pool/Cards/Engineer/Epic/ShieldThrow/engineer_shield_throw.tres" id="8_throw"]
 [ext_resource type="Texture2D" uid="uid://c2esp1sla1xxa" path="res://01_Cards/Pool/Families/Icons/engineer logo 2.png" id="9_icon"]
 [ext_resource type="Resource" uid="uid://bovs06ff8gvkc" path="res://01_Cards/Pool/Cards/Engineer/Common/ChickenCoop/chickenlord_chicken_coop.tres" id="9_vb4en"]
-[ext_resource type="Resource" uid="uid://50n64sybm7wa" path="res://01_Cards/Pool/Cards/Engineer/Common/GammaTurret/engineer_gamma_turret.tres" id="10_vpjdj"]
+[ext_resource type="Resource" uid="uid://50n64sybm7wa" path="res://01_Cards/Pool/Cards/Engineer/Rare/GammaTurret/engineer_gamma_turret.tres" id="10_vpjdj"]
 [ext_resource type="Resource" uid="uid://3gus2oy5w7ip" path="res://01_Cards/Pool/Cards/Engineer/Epic/Sentinelle/engineer_sentinelle.tres" id="11_ctvwl"]
 [ext_resource type="Resource" uid="uid://dg623ekroygk8" path="res://01_Cards/Pool/Cards/Engineer/Legendary/AegisTower/engineer_aegis_tower.tres" id="12_aegis"]
 [ext_resource type="Resource" uid="uid://c23mytt6luv7a" path="res://01_Cards/Pool/Cards/Engineer/Rare/BlueprintUpgrade/engineer_blueprint_upgrade.tres" id="13_mymjx"]
