@@ -48,6 +48,8 @@
 [ext_resource type="AudioStream" uid="uid://c8486hmjk2406" path="res://23_Audio/SFX/Misc/sad_trumpet.mp3" id="45_wklle"]
 [ext_resource type="AudioStream" uid="uid://ds2cuq5h2n2hp" path="res://23_Audio/SFX/Misc/crowd_cheer_small.wav" id="46_wklle"]
 [ext_resource type="AudioStream" uid="uid://ctcvfn0jencyq" path="res://23_Audio/SFX/Misc/tavern_background_ambient.wav" id="47_6mp1o"]
+[ext_resource type="AudioStream" uid="uid://paep8yeufobj" path="res://03_SpellsAndProjectiles/Projectiles/Abilities/Boulder/SFX/large_boulder_hit_wall.wav" id="49_8fdcl"]
+[ext_resource type="AudioStream" uid="uid://chxhqg18gpm3n" path="res://03_SpellsAndProjectiles/Projectiles/Abilities/Boulder/SFX/large_boulder_rolling.wav" id="50_f0eap"]
 [ext_resource type="AudioStream" uid="uid://tk2rh4p2powo" path="res://03_SpellsAndProjectiles/Projectiles/Abilities/Grenade/SFX/grenade electric_.wav" id="60_grenade"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2l36p"]
@@ -102,6 +104,8 @@ audio_database = Dictionary[String, AudioStream]({
 "grenade_explosion": ExtResource("60_grenade"),
 "hero_locked": ExtResource("6_2l36p"),
 "insufficient_gold": ExtResource("21_nogold"),
+"large_boulder_hit_wall": ExtResource("49_8fdcl"),
+"large_boulder_rolling": ExtResource("50_f0eap"),
 "latika_walk": ExtResource("3_walk"),
 "meteor": ExtResource("9_ulois"),
 "meteor_impact": ExtResource("12_gb7ch"),

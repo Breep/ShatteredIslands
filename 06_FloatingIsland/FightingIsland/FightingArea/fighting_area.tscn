@@ -67,6 +67,12 @@ size = Vector3(25, 1, 25)
 [sub_resource type="BoxShape3D" id="BoxShape3D_8iy5v"]
 size = Vector3(20, 5, 10)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_yv518"]
+size = Vector3(2.3232422, 9.508728, 30.281006)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_owbkj"]
+size = Vector3(29.652344, 9.508728, 3.1503906)
+
 [node name="FightingArea" type="Node3D" unique_id=2072382245 node_paths=PackedStringArray("_spawn_manager", "_fighting_manager", "_entity_manager", "_arena_zone_manager", "_team_zones", "_center_zone", "_full_arena_zone")]
 script = ExtResource("1_t74of")
 _spawn_manager = NodePath("SpawnManager")
@@ -186,3 +192,22 @@ collision_mask = 16
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ScannerArea3D" unique_id=1351499465]
 shape = SubResource("BoxShape3D_8iy5v")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=538808466 groups=["WALL"]]
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=791618610]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.55042, 0.15762329, -1.9622803)
+shape = SubResource("BoxShape3D_yv518")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D" unique_id=2132482930]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.679305, 0.15762329, -1.9622803)
+shape = SubResource("BoxShape3D_yv518")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Area3D" unique_id=895726604]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14735508, 0.15762329, 15.000687)
+shape = SubResource("BoxShape3D_owbkj")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="Area3D" unique_id=1076264221]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14735508, 0.15762329, -15.1921215)
+shape = SubResource("BoxShape3D_owbkj")
