@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dv8w8kb4xsqp3" path="res://03_SpellsAndProjectiles/Projectiles/projectile.gd" id="1_wbga5"]
 [ext_resource type="Script" uid="uid://xr3esthqo6re" path="res://03_SpellsAndProjectiles/Projectiles/_Shared/Trajectories/straight_trajectory.gd" id="2_nltp6"]
-[ext_resource type="PackedScene" uid="uid://c77b0act7ye6o" path="res://03_SpellsAndProjectiles/Projectiles/Abilities/FireBall/Visual/fire_ball_visual.tscn" id="3_o1kwr"]
+[ext_resource type="PackedScene" uid="uid://c77b0act7ye6o" path="res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/FireBall/Visual/fire_ball_visual.tscn" id="3_o1kwr"]
 
 [sub_resource type="Resource" id="Resource_3j240"]
 script = ExtResource("2_nltp6")
