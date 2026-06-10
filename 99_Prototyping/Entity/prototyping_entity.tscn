@@ -3,37 +3,51 @@
 [ext_resource type="Script" uid="uid://brd0wxqwulj8y" path="res://99_Prototyping/Entity/prototyping_entity.gd" id="1_6kn6i"]
 [ext_resource type="PackedScene" uid="uid://dvr7815lw1k8b" path="res://02_Entities/Pool/Heroes/Latika/latika.tscn" id="3_os118"]
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://10_Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="4_egh8k"]
+[ext_resource type="Resource" uid="uid://1ds2d3yrn1ea" path="res://01_Cards/Pool/Cards/ChickenLord/Common/PhoenixBrood/chickenlord_phoenix_brood.tres" id="4_jbcul"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="4_kq8si"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="4_r0wv3"]
-[ext_resource type="Resource" uid="uid://vfhdgbujddoq" path="res://01_Cards/Pool/Cards/Prototyping/Projectiles/ProjectileBounce/card_projectile_bounce.proto.tres" id="5_r0wv3"]
+[ext_resource type="Resource" uid="uid://1c1rmx4an1ea" path="res://01_Cards/Pool/Cards/ChickenLord/Common/OpeningBrood/chickenlord_opening_brood.tres" id="5_xqnte"]
+[ext_resource type="Resource" uid="uid://1bt1ipsbukxa" path="res://01_Cards/Pool/Cards/ChickenLord/Common/NinjaChicken/chickenlord_ninja_chicken.tres" id="6_5ixv2"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]
 [ext_resource type="Script" uid="uid://nkraydv4mdse" path="res://01_Cards/Templates/Deck/hand.gd" id="6_jbcul"]
-[ext_resource type="Resource" uid="uid://celecgrenad1" path="res://01_Cards/Pool/Cards/Engineer/Common/ElectricGrenade/engineer_electric_grenade.tres" id="6_xqnte"]
-[ext_resource type="Resource" uid="uid://chhhtbofpr4y8" path="res://01_Cards/Pool/Cards/Prototyping/AoeSize/card_aoe_size.proto.tres" id="7_5ixv2"]
+[ext_resource type="Resource" uid="uid://036nqsw36kua" path="res://01_Cards/Pool/Cards/ChickenLord/Common/GuardianHatch/chickenlord_guardian_hatch.tres" id="7_58hbo"]
 [ext_resource type="PackedScene" uid="uid://dvuq5n41nak3u" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/ArenaZoneManager/arena_zone_manager.tscn" id="8_fl2p6"]
+[ext_resource type="Resource" uid="uid://0x32nssgqaea" path="res://01_Cards/Pool/Cards/ChickenLord/Rare/BroodCommand/chickenlord_brood_command.tres" id="8_jlh7v"]
+[ext_resource type="PackedScene" uid="uid://b2mchd77gheam" path="res://02_Entities/Pool/Buildings/ChickenCoop/chicken_coop.tscn" id="8_xqnte"]
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://90_Modules/PickableClickable/PickableModule/pickable_module.tscn" id="9_614kc"]
+[ext_resource type="Resource" uid="uid://02w2b1as1aea" path="res://01_Cards/Pool/Cards/ChickenLord/Rare/FlockSynergy/chickenlord_flock_synergy.tres" id="9_qlwm0"]
 [ext_resource type="PackedScene" uid="uid://bg5efhnq0erdv" path="res://90_Modules/PickableClickable/ClickableModule/clickable_module.tscn" id="10_m73qc"]
+[ext_resource type="Resource" uid="uid://1fpvmu5lonea" path="res://01_Cards/Pool/Cards/ChickenLord/Epic/Reinforcements/chickenlord_reinforcements.tres" id="10_qlwm0"]
 [ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="10_r0wv3"]
 [ext_resource type="PackedScene" uid="uid://cux3b38ayhml8" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/kobold_thief.tscn" id="10_xqnte"]
 [ext_resource type="PackedScene" uid="uid://blncvfes4f2y7" path="res://99_Prototyping/Entity/AllActionPrototyping/testing_floorffa5.tscn" id="11_5hdqt"]
+[ext_resource type="Resource" uid="uid://1mt1gfqhtaea" path="res://01_Cards/Pool/Cards/ChickenLord/Epic/YingYang/chickenlord_ying_yang.tres" id="11_dtduh"]
 [ext_resource type="Script" uid="uid://bia26v50nwe6c" path="res://04_UI/UIButton/ui_button.gd" id="11_r0wv3"]
+[ext_resource type="Resource" uid="uid://1iyqxx4an1ea" path="res://01_Cards/Pool/Cards/ChickenLord/Legendary/UndyingBrood/chickenlord_undying_brood.tres" id="12_217qm"]
 [ext_resource type="PackedScene" uid="uid://ygk0snmo5oj" path="res://02_Entities/_Shared/EntityStatsViewer/entity_stats_viewer.tscn" id="12_r0wv3"]
 [ext_resource type="PackedScene" uid="uid://dolubo8wodahp" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/kobold_warrior.tscn" id="13_5ixv2"]
+[ext_resource type="Resource" uid="uid://cwarchickcal1" path="res://01_Cards/Pool/Cards/Warrior/Common/ChickenCaller/attack_chicken_caller.tres" id="13_217qm"]
 [ext_resource type="Script" uid="uid://b0otuknba6ddv" path="res://06_FloatingIsland/FightingIsland/FightingArea/floor_area.gd" id="13_jd8sj"]
 [ext_resource type="PackedScene" uid="uid://q7gxxkhg5u54" path="res://06_FloatingIsland/FightingIsland/Pool/ArchIsland/arch_island_visual.tscn" id="17_ko5bb"]
 [ext_resource type="PackedScene" uid="uid://c0l0roxttdtlp" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/FightingManager/fighting_manager.tscn" id="17_m26y3"]
 [ext_resource type="PackedScene" uid="uid://jcwiqcnilmtk" path="res://02_Entities/Pool/Mobs/Vrock/vrock.tscn" id="17_rnrfd"]
 [ext_resource type="Environment" uid="uid://cghu0yr6lj5i2" path="res://21_Props/DefaultBattleIsland/Arch_island/world_environment.tres" id="18_ko5bb"]
-[ext_resource type="PackedScene" uid="uid://cvwmo633sxskh" path="res://02_Entities/Pool/Mobs/Goblins/GoblinBerserker/goblin_berserker.tscn" id="18_kq8si"]
 [ext_resource type="PackedScene" uid="uid://dp4x7wkxd6i2q" path="res://99_Prototyping/Entity/EntityController/entity_controller.proto.tscn" id="19_x0odd"]
 [ext_resource type="PackedScene" uid="uid://422k2gp3h5wg" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/forest_drake.tscn" id="22_awloh"]
 
 [sub_resource type="Resource" id="Resource_xqnte"]
 script = ExtResource("6_jbcul")
 _cards = Dictionary[StringName, ExtResource("4_r0wv3")]({
-&"afgz": ExtResource("6_xqnte"),
-&"gfaz": ExtResource("7_5ixv2"),
-&"zad": ExtResource("5_r0wv3")
+&"": ExtResource("4_jbcul"),
+&"c": ExtResource("5_xqnte"),
+&"cfg": ExtResource("13_217qm"),
+&"fd": ExtResource("8_jlh7v"),
+&"g": ExtResource("7_58hbo"),
+&"jj": ExtResource("10_qlwm0"),
+&"n": ExtResource("6_5ixv2"),
+&"ssdqq": ExtResource("11_dtduh"),
+&"sssdq": ExtResource("9_qlwm0"),
+&"xwx": ExtResource("12_217qm")
 })
 metadata/_custom_type_script = "uid://nkraydv4mdse"
 
@@ -66,41 +80,9 @@ transform = Transform3D(1.0000001, 0, 0, 0, 0.99999994, 0, 0, 0, 1.0000001, 0, 0
 [node name="Entities" type="Node3D" parent="Node3D" unique_id=38016860]
 unique_name_in_owner = true
 
-[node name="GoblinBerserker" parent="Node3D/Entities" unique_id=1459343337 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("18_kq8si")]
-transform = Transform3D(0.26981065, 0, -0.9629133, 0, 1.0000001, 0, 0.9629133, 0, 0.26981065, -4.646197, 0, 2.0751035)
-level = 4
-team = 2
-battle_id = 1
-_spawn_manager = NodePath("../../SpawnManager")
-_arena_zone_manager = NodePath("../../ArenaZoneManager")
-
-[node name="GoblinBerserker2" parent="Node3D/Entities" unique_id=217403577 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("18_kq8si")]
-transform = Transform3D(0.26981065, 0, -0.9629133, 0, 1.0000001, 0, 0.9629133, 0, 0.26981065, -4.7226706, 0, 4.701676)
-level = 4
-team = 2
-battle_id = 1
-_spawn_manager = NodePath("../../SpawnManager")
-_arena_zone_manager = NodePath("../../ArenaZoneManager")
-
-[node name="GoblinBerserker3" parent="Node3D/Entities" unique_id=1195568387 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("18_kq8si")]
-transform = Transform3D(0.26981065, 0, -0.9629133, 0, 1.0000001, 0, 0.9629133, 0, 0.26981065, -6.95664, 0, 3.9353442)
-level = 4
-team = 2
-battle_id = 1
-_spawn_manager = NodePath("../../SpawnManager")
-_arena_zone_manager = NodePath("../../ArenaZoneManager")
-
-[node name="GoblinBerserker4" parent="Node3D/Entities" unique_id=202088473 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("18_kq8si")]
-transform = Transform3D(0.26981065, 0, -0.9629133, 0, 1.0000001, 0, 0.9629133, 0, 0.26981065, -8.54075, 0, 2.1052177)
-level = 4
-team = 2
-battle_id = 1
-_spawn_manager = NodePath("../../SpawnManager")
-_arena_zone_manager = NodePath("../../ArenaZoneManager")
-
 [node name="Latika2" parent="Node3D/Entities" unique_id=1941835210 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("3_os118")]
 transform = Transform3D(-0.2632837, 0, 0.96471834, 0, 1.0000001, 0, -0.96471834, 0, -0.2632837, 3.662788, 9.536744e-07, 0.110419974)
-level = 20
+level = 7
 team = 1
 battle_id = 1
 _spawn_manager = NodePath("../../SpawnManager")
@@ -123,6 +105,13 @@ battle_id = 1
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
 
+[node name="ChickenCoop" parent="Node3D/Entities" unique_id=1423893998 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("8_xqnte")]
+transform = Transform3D(-0.50000006, 0, -0.8660254, 0, 1, 0, 0.8660254, 0, -0.50000006, 8.695114, 0, 0)
+team = 1
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
 [node name="Vrock2" parent="Node3D/Entities" unique_id=471542115 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("17_rnrfd")]
 transform = Transform3D(-0.01726045, 0, 0.9998509, 0, 1.0000001, 0, -0.9998509, 0, -0.01726045, 2.644456, 0, -2.3240192)
 level = 10
@@ -134,14 +123,39 @@ _arena_zone_manager = NodePath("../../ArenaZoneManager")
 [node name="ForestDrake" parent="Node3D/Entities" unique_id=1600538521 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("22_awloh")]
 transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, 5.935304, 0, 4.4929256)
 level = 7
-team = 2
+team = 1
 battle_id = 1
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
 
 [node name="Kobold_Warrior" parent="Node3D/Entities" unique_id=1047411200 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("13_5ixv2")]
-transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, 1.8293419, 0.05598975, 2.7767484)
-team = 1
+transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1.0000001, 0, 0.9999999, 0, -4.3711385e-08, -3.1840827, 0.055989757, 2.7767484)
+level = 7
+team = 2
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
+[node name="Kobold_Warrior2" parent="Node3D/Entities" unique_id=165433740 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("13_5ixv2")]
+transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1.0000001, 0, 0.9999999, 0, -4.3711385e-08, -3.1840827, 0.05598976, -3.0590453)
+level = 7
+team = 2
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
+[node name="Kobold_Warrior3" parent="Node3D/Entities" unique_id=793559408 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("13_5ixv2")]
+transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1.0000001, 0, 0.9999999, 0, -4.3711385e-08, -3.1840827, 0.055989765, -0.08969974)
+level = 7
+team = 2
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
+[node name="Kobold_Warrior4" parent="Node3D/Entities" unique_id=1533099582 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("13_5ixv2")]
+transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1.0000001, 0, 0.9999999, 0, -4.3711385e-08, -3.1840827, 0.05598977, -4.713557)
+level = 7
+team = 2
 battle_id = 1
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")

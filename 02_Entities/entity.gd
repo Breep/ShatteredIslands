@@ -92,9 +92,6 @@ const MAX_LEVEL: int = 20
 #endregion
 
 var uid: int = -1 # Multiplayer ID of the entity
-# Type d'entité passé à son spawn (cf. SpawnManager.spawn_entity). Permet de
-# retrouver « quoi ré-invoquer » à partir d'une entité existante (ex. respawn).
-var spawned_entity_type: EntityType = EntityType.HERO
 var stats: EntityStats
 var summoner: Entity # Set via apply_context si l'entité a été invoquée par une autre
 # Roaster du joueur propriétaire. Posé au spawn pour les héros uniquement

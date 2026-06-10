@@ -1,11 +1,11 @@
-[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cclbroodcmd001"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://0x32nssgqaea"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_card"]
-[ext_resource type="Script" path="res://01_Cards/Pool/Cards/ChickenLord/Rare/BroodCommand/chickenlord_brood_command.gd" id="2_eff"]
+[ext_resource type="Script" uid="uid://cad8wjljb2d6v" path="res://01_Cards/Pool/Cards/ChickenLord/Rare/BroodCommand/chickenlord_brood_command.gd" id="2_eff"]
 
 [sub_resource type="Resource" id="Resource_broodcmd"]
 script = ExtResource("2_eff")
-_level_bonus = Array[int]([1, 1, 2, 2, 3])
+_level_bonus = Array[int]([1, 2, 3, 4, 5])
 
 [resource]
 script = ExtResource("1_card")

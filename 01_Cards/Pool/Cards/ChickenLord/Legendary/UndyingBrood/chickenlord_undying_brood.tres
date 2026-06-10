@@ -1,11 +1,11 @@
-[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cclundyingbr01"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://1iyqxx4an1ea"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_card"]
-[ext_resource type="Script" path="res://01_Cards/Pool/Cards/ChickenLord/Legendary/UndyingBrood/chickenlord_undying_brood.gd" id="2_eff"]
+[ext_resource type="Script" uid="uid://bcvx2wlslsto0" path="res://01_Cards/Pool/Cards/ChickenLord/Legendary/UndyingBrood/chickenlord_undying_brood.gd" id="2_eff"]
 
 [sub_resource type="Resource" id="Resource_undying"]
 script = ExtResource("2_eff")
-_respawn_chance = Array[float]([30.0, 35.0, 40.0])
+_respawn_chance = Array[float]([25.0, 35.0, 40.0])
 _hp_percent = Array[float]([50.0, 50.0, 50.0])
 
 [resource]

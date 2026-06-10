@@ -1,12 +1,12 @@
-[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cclphoenixbr01"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://1ds2d3yrn1ea"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_card"]
-[ext_resource type="Script" path="res://01_Cards/Pool/Cards/ChickenLord/Common/PhoenixBrood/chickenlord_phoenix_brood.gd" id="2_eff"]
+[ext_resource type="Script" uid="uid://ctnu5xdymqgmg" path="res://01_Cards/Pool/Cards/ChickenLord/Common/PhoenixBrood/chickenlord_phoenix_brood.gd" id="2_eff"]
 
 [sub_resource type="Resource" id="Resource_phoenix"]
 script = ExtResource("2_eff")
-_chance = Array[float]([10.0, 12.0, 14.0, 16.0, 20.0])
-_ignite_stacks = Array[float]([5.0, 5.0, 5.0, 5.0, 7.0])
+_chance = Array[float]([100.0, 12.0, 14.0, 16.0, 20.0])
+_ignite_stacks = Array[float]([5.0, 5.0, 5.0, 5.0, 5.0])
 
 [resource]
 script = ExtResource("1_card")
@@ -14,6 +14,6 @@ name = "Phoenix Brood"
 families = Array[int]([8, 3])
 _card_effect = SubResource("Resource_phoenix")
 points = Dictionary[int, int]({
-8: 1,
-3: 1
+3: 1,
+8: 1
 })

@@ -4,8 +4,8 @@ extends CardEffect
 ## Chicken Lord — Ying & Yang : quand un summon allié apparaît, une chance
 ## d'appliquer du Strength à tous les alliés ; quand un summon meurt, une chance
 ## d'appliquer de la Vulnerability à tous les ennemis.
-## NOTE: Strength/Vulnerability sont des stacks typés → appliqués sur les dégâts
-## physiques (DAMAGE_PHYSICAL) par défaut.
+## Strength/Vulnerability ne sont pas typés : ils affectent les 3 types de
+## dégâts (physique, magique, poison) via add_stack.
 
 @export var _strength_chance: Array[float]
 @export var _vulnerable_chance: Array[float]
@@ -27,14 +27,14 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 		if Utils.is_randomize_modifier_active(s_chance, owner.battle_id):
 			for ally in owner.target.get_targets(TargetComponent.MultipleTargettingStrategy.ALLIES):
 				if ally != null and is_instance_valid(ally) and ally.alterations != null:
-					ally.alterations.add_typed_stack(Alteration.Type.STRENGTH, Utils.ActionType.DAMAGE_PHYSICAL, s_stacks)
+					ally.alterations.add_stack(Alteration.Type.STRENGTH, s_stacks)
 		# Mort → Vulnerability aux ennemis.
 		e.died.connect(func() -> void:
 			if not is_instance_valid(owner): return
 			if not Utils.is_randomize_modifier_active(v_chance, owner.battle_id): return
 			for enemy in owner.target.get_targets(TargetComponent.MultipleTargettingStrategy.ENEMIES):
 				if enemy != null and is_instance_valid(enemy) and enemy.alterations != null:
-					enemy.alterations.add_typed_stack(Alteration.Type.VULNERABILITY, Utils.ActionType.DAMAGE_PHYSICAL, v_stacks)
+					enemy.alterations.add_stack(Alteration.Type.VULNERABILITY, v_stacks)
 		, CONNECT_ONE_SHOT)
 	owner.target.new_entity_detected.connect(_on_detected)
 
