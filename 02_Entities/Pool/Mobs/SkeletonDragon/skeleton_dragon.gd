@@ -5,6 +5,14 @@ extends Entity
 @export var _breath_controller: BreathVfxController
 @export var _breath_ability: DevastatingBreathAbility
 
+# Guards the once-per-fight ground roar; re-arms when the dragon leaves the fight.
+var _roared: bool = false
+
+
+func _ready() -> void:
+	super._ready()
+	fighting_state_changed.connect(_on_fighting_state_changed_roar)
+
 
 func process_tick() -> void:
 	super.process_tick()
@@ -31,3 +39,17 @@ func get_breath_controller() -> BreathVfxController:
 
 func get_breath_ability() -> DevastatingBreathAbility:
 	return _breath_ability
+
+
+# Ground roar (+ sound) the first time the dragon enters combat; re-arm on leaving it.
+func _on_fighting_state_changed_roar(new_state: FightingState) -> void:
+	if new_state != FightingState.FIGHTING:
+		_roared = false
+		return
+	if _roared:
+		return
+	_roared = true
+	var anim: SkeletonDragonAnimationComponent = animation as SkeletonDragonAnimationComponent
+	if anim != null:
+		anim.play_roar()
+	AudioManager.play_3d("dragon_roar", global_position)

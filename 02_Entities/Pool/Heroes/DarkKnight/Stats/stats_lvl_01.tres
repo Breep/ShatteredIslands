@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1_5bp1a")
+_mana_regen = 25.0
 auto_attack_type = 1
 _attack_range = 1.5
 _attack_damage = 30.0

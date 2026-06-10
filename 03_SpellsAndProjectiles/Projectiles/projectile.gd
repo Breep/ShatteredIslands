@@ -29,6 +29,7 @@ enum Type {
 	GRENADE = 11,
 	BOULDER = 12,
 	METEOR = 13
+	NIGHTFALL = 14,
 }
 
 enum Category {

@@ -16,6 +16,10 @@ const VALUE_SWITCH_FLY_STOP: String = "FlyStop"
 
 const PARAM_ONE_SHOT_FLY_ATTACK: String = "parameters/one_shot_fly_attack/request"
 
+## Roar one-shot fired at fight start. The matching node must exist in the AnimationTree
+## (a one-shot named "one_shot_roar" playing the "Combat_Ground_Roar_Up" clip).
+const PARAM_ONE_SHOT_ROAR: String = "parameters/one_shot_roar/request"
+
 const VALUE_SWITCH_MAIN_SPELL: String = "Spell"
 const PARAM_SWITCH_SPELL: String = "parameters/switch_spell/transition_request"
 const VALUE_SWITCH_SPELL_START: String = "SpellStart"
@@ -48,6 +52,11 @@ func begin_landing() -> void:
 ## Fires the in-air attack overlay (the ground attack one-shot is locked while flying).
 func play_fly_attack() -> void:
 	_animation_tree.set(PARAM_ONE_SHOT_FLY_ATTACK, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+
+
+## Fires the ground roar overlay at fight start (see PARAM_ONE_SHOT_ROAR).
+func play_roar() -> void:
+	_animation_tree.set(PARAM_ONE_SHOT_ROAR, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 
 func end_fly() -> void:

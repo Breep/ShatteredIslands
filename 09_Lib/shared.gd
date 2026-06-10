@@ -64,9 +64,6 @@ var PROJECTILE_SCENES: Dictionary[Projectile.Type, PackedScene]:
 	get:
 		if _projectile_scenes_cache.is_empty():
 			_projectile_scenes_cache = {
-				Projectile.Type.SHADOW_BOLT: load("res://03_SpellsAndProjectiles/Projectiles/AutoAttacks/ShadowBolt/shadow_bolt_projectile.tscn"),
-				Projectile.Type.GAMMA_TURRET: load("res://03_SpellsAndProjectiles/Projectiles/AutoAttacks/GammaTurret/gamma_turret_projectile.tscn"),
-				Projectile.Type.ARROW: load("res://03_SpellsAndProjectiles/Projectiles/AutoAttacks/Arrow/arrow_projectile.tscn"),
 				Projectile.Type.BULLET: load("res://03_SpellsAndProjectiles/Projectiles/AutoAttacks/Bullet/bullet_projectile.tscn"),
 				
 				Projectile.Type.VENOMOUS_DART: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/VenomousDart/venomous_dart_projectile.tscn"),
@@ -76,11 +73,24 @@ var PROJECTILE_SCENES: Dictionary[Projectile.Type, PackedScene]:
 				Projectile.Type.SMALL_EGG: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/SmallEgg/small_egg_projectile.tscn"),
 				Projectile.Type.FIRE_BALL: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/FireBall/fire_ball_projectile.tscn"),
 				Projectile.Type.GRENADE: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/Grenade/grenade.tscn"),
+				Projectile.Type.NIGHTFALL: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Nightfall/nightfall.tscn"),
 				
 				Projectile.Type.BOULDER: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Big/Boulder/boulder.tscn"),
 				Projectile.Type.METEOR: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Big/Meteor/meteor.tscn")
 			}
 		return _projectile_scenes_cache
+
+
+# Résout la Size d'un Projectile.Type. La taille n'est portée que par la scène
+# (Projectile.size) : on instancie une fois la scène hors de l'arbre (donc sans
+# déclencher _ready) pour lire la valeur, puis on cache le résultat.
+var _projectile_sizes_cache: Dictionary[Projectile.Type, Projectile.Size] = {}
+func get_projectile_size(type: Projectile.Type) -> Projectile.Size:
+	if not _projectile_sizes_cache.has(type):
+		var instance := PROJECTILE_SCENES[type].instantiate() as Projectile
+		_projectile_sizes_cache[type] = instance.size
+		instance.free()
+	return _projectile_sizes_cache[type]
 
 var _damage_popup_scene_cache: PackedScene
 var DAMAGE_POPUP_SCENE: PackedScene:

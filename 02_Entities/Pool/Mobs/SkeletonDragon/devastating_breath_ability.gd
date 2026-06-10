@@ -106,6 +106,7 @@ func _begin_channel() -> void:
 	_anim.channel_spell()
 	if _breath != null:
 		_breath.set_breath_active(true)
+	AudioManager.play_3d("dragon_firebreath", _owner.global_position)
 	channel_started.emit()
 	_enter_phase(Phase.CHANNEL, _to_ticks(_channel_duration))
 
