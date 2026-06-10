@@ -18,9 +18,7 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 
 
 func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
-	var stub := ProjectileModifier.new()
-	stub.id = card_name
-	ctx.entity_owner.projectile_modifiers_registry.unregister_modifier(stub)
+	ctx.entity_owner.projectile_modifiers_registry.unregister_modifier(card_name)
 
 
 func get_description(card_lvl: int) -> String:

@@ -195,6 +195,7 @@ shape = SubResource("BoxShape3D_8iy5v")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=538808466 groups=["WALL"]]
 collision_mask = 0
+input_ray_pickable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=791618610]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.55042, 0.15762329, -1.9622803)

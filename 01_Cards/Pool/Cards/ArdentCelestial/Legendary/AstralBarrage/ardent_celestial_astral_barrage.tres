@@ -16,3 +16,4 @@ _card_effect = SubResource("Resource_barrage")
 points = Dictionary[int, int]({
 3: 5
 })
+_lvl = 3
