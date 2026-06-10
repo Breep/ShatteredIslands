@@ -135,9 +135,6 @@ func _ready() -> void:
 	for status_type: Alteration.Type in Alteration.STATE_TYPES:
 		_inflict_status_choice.add_item(Alteration.Type.keys()[status_type], status_type)
 	
-	# Initialize spell parameters with default (METEOR)
-	_update_spell_parameters(Spell.Type.METEOR)
-	
 	# Initialize entity parameters with default (SNAKE_BARREL)
 	_update_entity_parameters(Entity.EntityType.SNAKE_BARREL)
 	
@@ -369,13 +366,6 @@ func _update_spell_parameters(spell_type: Spell.Type) -> void:
 	var param_configs: Array[Dictionary] = []
 	
 	match spell_type:
-		Spell.Type.METEOR:
-			param_configs = [
-				{"label": "Damage %", "default": "5"},
-				{"label": "Radius", "default": "5"},
-				{"label": "(Callbacks)", "default": "0"},
-				{"label": "(Unused)", "default": "0"}
-			]
 		Spell.Type.DARK_STORM:
 			param_configs = [
 				{"label": "Damage", "default": "10"},
@@ -455,9 +445,6 @@ func _on_cast_spell_button_pressed() -> void:
 	
 	# Build spell_modifier dictionary based on spell type
 	match spell_type:
-		Spell.Type.METEOR:
-			spell_modifier[Meteor.Modifier.DAMAGE_PERCENT] = _spell_param1_edit.text.to_float()
-			spell_modifier[Meteor.Modifier.RADIUS] = _spell_param2_edit.text.to_float()
 			# ON_HIT_CALLBACKS would be handled separately if needed
 		
 		Spell.Type.DARK_STORM:

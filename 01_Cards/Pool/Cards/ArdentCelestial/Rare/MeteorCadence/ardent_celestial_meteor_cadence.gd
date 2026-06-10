@@ -20,19 +20,17 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 		if state[&"count"] < threshold: return
 		state[&"count"] = 0
 		var target: Entity = owner.target.get_target(TargetComponent.TargettingStrategy.RANDOM_ENEMY)
-		if target != null and is_instance_valid(target):
-			owner.spell.cast_spell(target, Spell.Type.METEOR)
+		if not is_instance_valid(target): return
+		owner.projectile.projectile_attack(target, Projectile.Type.METEOR, owner, ProjectileStats.new())
 	owner.projectile_modifiers_registry.register_modifier(mod)
-
-	owner.battle_callback_registry.register_battle_start(card_name, func() -> void:
-		state[&"count"] = 0
-	)
+	owner.projectile.register_projectile(Projectile.Type.METEOR)
 
 
 func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 	var owner: Entity = ctx.entity_owner
 	owner.projectile_modifiers_registry.unregister_modifier(card_name)
 	owner.battle_callback_registry.unregister_all(card_name)
+	owner.projectile.unregister_projectile(Projectile.Type.METEOR)
 
 
 func get_description(card_lvl: int) -> String:

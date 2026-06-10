@@ -2,14 +2,14 @@ class_name ArdentCelestialEmberCascade
 extends CardEffect
 
 ## Ardent Celestial — pour chaque stack d'ignite infligé par le héros, une chance
-## de tirer un projectile d'abilité aléatoire depuis son pool (deck).
+## de tirer un projectile d'abilité aléatoire depuis son pool.
 
 @export var _chance_per_stack: Array[float]
 
 func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 	var owner: Entity = ctx.entity_owner
 	var chance: float = _chance_per_stack[card_lvl - 1]
-
+	
 	var mod := ActionModifier.new()
 	mod.id = card_name
 	mod.action_type = Utils.ActionCategory.STACK
