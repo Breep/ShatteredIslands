@@ -16,10 +16,11 @@
 [ext_resource type="Texture2D" uid="uid://mxp6ngtlf1py" path="res://01_Cards/Pool/Families/Icons/colossus logo 2.png" id="14_icon"]
 [ext_resource type="Resource" uid="uid://ccolarcanebw1" path="res://01_Cards/Pool/Cards/Colossus/Common/ArcaneBulwark/colossus_arcane_bulwark.tres" id="15_arcane"]
 [ext_resource type="Resource" uid="uid://38myaablmmea" path="res://01_Cards/Pool/Cards/Colossus/Rare/BlastRadius/colossus_blast_radius.tres" id="16_blast"]
+[ext_resource type="Resource" uid="uid://c233q8sbjxi7a" path="res://01_Cards/Pool/Cards/Engineer/Common/ReactivePlating/engineer_reactive_plating.tres" id="17_reactive"]
 
 [resource]
 script = ExtResource("2_upugm")
-common_cards = Array[ExtResource("1_f2mb4")]([ExtResource("15_arcane"), ExtResource("8_bond"), ExtResource("3_boulder"), ExtResource("7_crush"), ExtResource("6_evasive"), ExtResource("5_tainted"), ExtResource("4_vigor")])
+common_cards = Array[ExtResource("1_f2mb4")]([ExtResource("15_arcane"), ExtResource("8_bond"), ExtResource("3_boulder"), ExtResource("7_crush"), ExtResource("6_evasive"), ExtResource("5_tainted"), ExtResource("4_vigor"), ExtResource("17_reactive")])
 rare_cards = Array[ExtResource("1_f2mb4")]([ExtResource("9_bear"), ExtResource("16_blast"), ExtResource("10_provoc")])
 epic_cards = Array[ExtResource("1_f2mb4")]([ExtResource("11_vital"), ExtResource("12_carapace")])
 legendary_cards = Array[ExtResource("1_f2mb4")]([ExtResource("13_resurrect")])
