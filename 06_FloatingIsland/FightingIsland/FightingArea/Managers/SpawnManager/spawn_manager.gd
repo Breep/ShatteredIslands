@@ -102,6 +102,19 @@ func spawn_spell(spell: Spell) -> void:
 	_spells_node.add_child(spell)
 
 
+## Spawn a transient, purely-cosmetic VFX scene at a world position (no gameplay).
+## Auto-frees after `lifetime` seconds — the raw pack scenes don't free themselves.
+func spawn_vfx(scene: PackedScene, position: Vector3, lifetime: float = 3.0) -> Node3D:
+	if scene == null: return null
+	var vfx: Node3D = scene.instantiate() as Node3D
+	if vfx == null: return null
+	_spells_node.add_child(vfx)
+	vfx.global_position = position
+	if lifetime > 0.0:
+		get_tree().create_timer(lifetime).timeout.connect(vfx.queue_free)
+	return vfx
+
+
 func spawn_projectile(source: Entity, target: Entity, type: Projectile.Type, spawn_node: Node3D, stats: ProjectileStats, spawn_offset: Vector3 = Vector3.ZERO) -> void:
 	var scene: PackedScene = Shared.PROJECTILE_SCENES[type]
 	if not scene: return
