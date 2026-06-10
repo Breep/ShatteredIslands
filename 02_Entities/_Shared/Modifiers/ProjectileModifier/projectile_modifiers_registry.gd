@@ -8,12 +8,12 @@ func register_modifier(projectile_modifier: ProjectileModifier) -> void:
 	_modifiers[projectile_modifier.id] = projectile_modifier
 
 
-func unregister_modifier(projectile_modifier: ProjectileModifier) -> void:
-	Verbose.debug("Unregistering [" + projectile_modifier.id + "]", Verbose.Category.ACTION_MODIFIER)
-	if not _modifiers.has(projectile_modifier.id):
-		Verbose.error("unregister_modifier() - unknown action modifier | " + str(projectile_modifier.id), Verbose.Category.ACTION_MODIFIER)
+func unregister_modifier(projectile_modifier_id: StringName) -> void:
+	Verbose.debug("Unregistering [" + projectile_modifier_id + "]", Verbose.Category.ACTION_MODIFIER)
+	if not _modifiers.has(projectile_modifier_id):
+		Verbose.error("unregister_modifier() - unknown action modifier | " + str(projectile_modifier_id), Verbose.Category.ACTION_MODIFIER)
 		return
-	_modifiers.erase(projectile_modifier.id)
+	_modifiers.erase(projectile_modifier_id)
 
 
 func get_all_modifiers() -> Array[ProjectileModifier]:

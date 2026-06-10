@@ -20,9 +20,22 @@ _team_zones = {
 2: NodePath("SpawnArea2")
 }
 
+[node name="CollisionShape3D" parent="FightingArea/Area3D" parent_id_path=PackedInt32Array(2072382245, 538808466) index="0" unique_id=791618610]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.11943, 0.15762329, -1.9622803)
+
+[node name="CollisionShape3D2" parent="FightingArea/Area3D" parent_id_path=PackedInt32Array(2072382245, 538808466) index="1" unique_id=2132482930]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.104651, 0.15762329, -1.9622803)
+
+[node name="CollisionShape3D3" parent="FightingArea/Area3D" parent_id_path=PackedInt32Array(2072382245, 538808466) index="2" unique_id=895726604]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14735508, 0.15762329, 14.426033)
+
+[node name="CollisionShape3D4" parent="FightingArea/Area3D" parent_id_path=PackedInt32Array(2072382245, 538808466) index="3" unique_id=1076264221]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14735508, 0.15762329, -14.222393)
+
 [node name="CenterPointCamera" parent="." unique_id=823970387 instance=ExtResource("4_45gxp")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1357924681]
 environment = ExtResource("5_env")
 
+[editable path="FightingArea"]
 [editable path="CenterPointCamera"]

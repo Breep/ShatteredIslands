@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://tk2rh4p2powo"
+path="res://.godot/imported/grenade electric_.wav-13dc0f87b0a05a131a8e9a04f387d061.sample"
+
+[deps]
+
+source_file="res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/Grenade/SFX/grenade electric_.wav"
+dest_files=["res://.godot/imported/grenade electric_.wav-13dc0f87b0a05a131a8e9a04f387d061.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

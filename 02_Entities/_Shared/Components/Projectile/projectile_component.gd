@@ -5,6 +5,7 @@ extends EntityComponent
 # count=1 → rayon 0 (spawn pile au point indiqué). count=N → rayon = const × (N-1),
 # avec les projectiles répartis sur un cercle horizontal (plan XZ).
 const SPREAD_RADIUS_PER_EXTRA: float = 0.2
+const MULT_PROJ_DELAY: float = 0.2
 
 var _spawn_manager: SpawnManager
 
@@ -54,7 +55,9 @@ func projectile_attack(target: Entity, projectile_type: Projectile.Type, project
 
 	for i in count:
 		var offset := _compute_spread_offset(i, count)
-		_spawn_manager.spawn_projectile(_owner, target, projectile_type, projectile_spawn, projectile_stats.duplicate(), offset)
+		_owner.battle_callback_registry.register_oneshot(i * MULT_PROJ_DELAY, func() -> void:
+			_spawn_manager.spawn_projectile(_owner, target, projectile_type, projectile_spawn, projectile_stats.duplicate(), offset)
+			)
 
 
 func register_projectile(projectile_type: Projectile.Type) -> void:

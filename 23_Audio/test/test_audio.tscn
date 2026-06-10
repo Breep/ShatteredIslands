@@ -1,8 +1,0 @@
-[gd_scene format=3 uid="uid://dvqoyeb2u7i4n"]
-
-[ext_resource type="AudioStream" uid="uid://2vso10yojigy" path="res://23_Audio/SFX/Projectile/mixkit-air-in-a-hit-2161.wav" id="1_p372k"]
-
-[node name="TestAudio" type="Node2D" unique_id=1829912420]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1951907543]
-stream = ExtResource("1_p372k")

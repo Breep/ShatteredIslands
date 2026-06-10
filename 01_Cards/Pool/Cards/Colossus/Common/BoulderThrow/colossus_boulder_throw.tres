@@ -5,9 +5,8 @@
 
 [sub_resource type="Resource" id="Resource_boulder"]
 script = ExtResource("2_eff")
-_damage = Array[float]([15.0, 20.0, 25.0, 30.0, 40.0])
-_stun_duration = Array[float]([5.0, 1.0, 1.0, 1.0, 1.0])
-_period = Array[float]([10.0, 10.0, 10.0, 10.0, 10.0])
+_level_bonus = Array[int]([1, 2, 3, 4, 5])
+_period = Array[float]([5.0, 10.0, 10.0, 10.0, 10.0])
 
 [resource]
 script = ExtResource("1_card")
