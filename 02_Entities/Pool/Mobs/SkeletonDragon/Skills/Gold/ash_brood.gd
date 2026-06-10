@@ -5,7 +5,7 @@ extends SkillEffect
 # _golem_count Molten Golems — each heralded by a meteor that falls on a random
 # arena spot and spawns the golem on impact (the golem plays its JumpEnd landing).
 
-const _METEOR_SCENE: PackedScene = preload("res://03_SpellsAndProjectiles/Spells/Meteor/meteor.tscn")
+#const _METEOR_SCENE: PackedScene = preload("res://03_SpellsAndProjectiles/Spells/Meteor/meteor.tscn")
 
 @export var _golem_count: int = 2
 
@@ -34,6 +34,6 @@ func _drop_golems(dragon: SkeletonDragon) -> void:
 		var spawn_golem: Callable = func(_data: Dictionary) -> void:
 			dragon.summon.summon_entity(Entity.EntityType.MOLTEN_GOLEM, SpawnLocationConfig.create_exact(pos), {})
 
-		var meteor: Meteor = _METEOR_SCENE.instantiate()
-		meteor.init_at_position(pos, 0.0, 0.0, 1.0, [spawn_golem], dragon)
-		context.spawn_manager.spawn_spell(meteor)
+		#var meteor: Meteor = _METEOR_SCENE.instantiate()
+		#meteor.init_at_position(pos, 0.0, 0.0, 1.0, [spawn_golem], dragon)
+		#context.spawn_manager.spawn_spell(meteor)

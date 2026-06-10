@@ -16,7 +16,7 @@ metadata/_custom_type_script = "uid://b1chkncoopcfx7"
 script = ExtResource("1_card")
 name = &"Chicken Coop"
 picture = SubResource("PlaceholderTexture2D_sapo3")
-families = Array[int]([8, 2])
+families = Array[int]([2, 8])
 _card_effect = SubResource("Resource_fx")
 points = Dictionary[int, int]({
 2: 1,
