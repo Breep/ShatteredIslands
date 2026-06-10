@@ -31,6 +31,7 @@
 
 [resource]
 script = ExtResource("1_desc")
+scene_path = "res://02_Entities/Pool/Mobs/Golems/IceGolem/ice_golem.tscn"
 name = "Ice Golem"
 stats = Dictionary[int, ExtResource("3_stats")]({
 1: ExtResource("4_01"),

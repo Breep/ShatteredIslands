@@ -45,8 +45,7 @@ func _aoe_explosion(cb_vars: Dictionary) -> void:
 		if enemy == null or not is_instance_valid(enemy): continue
 		if enemy.global_position.distance_to(impact_pos) > hit_radius: continue
 		source.damage.direct(enemy, damage, Utils.ActionType.DAMAGE_MAGICAL, source_id)
-		if enemy.alterations != null:
-			enemy.alterations.add_typed_stack(Alteration.Type.VULNERABILITY, Utils.ActionType.DAMAGE_MAGICAL, vulnerability_stacks)
+		_source.alterations.inflict_condition_stacks(enemy, vulnerability_stacks, Alteration.Type.VULNERABILITY, &"grenade")
 
 
 func _spawn_explosion_vfx(source: Entity, pos: Vector3) -> void:

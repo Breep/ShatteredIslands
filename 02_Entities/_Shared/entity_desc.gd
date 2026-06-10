@@ -12,11 +12,16 @@ extends Resource
 @export_multiline var description: String
 
 # Scène entité runtime — JAMAIS posée en éditeur (cycle de dépendance : la scene
-# embarque un script qui référence ce desc). Résolue via Shared.HERO_SCENES /
-# Shared.ACOLYTE_SCENES par EntityDesc.resolve_scene(). Le seul cas où ce champ
-# est posé directement est une desc transient construite à la volée (cf.
+# embarque un script qui référence ce desc). Le seul cas où ce champ est posé
+# directement est une desc transient construite à la volée (cf.
 # FightingFormation._make_transient_entry) — le resolver la respecte en priorité.
 var scene: PackedScene
+## Chemin de la scène entité runtime, source de vérité pour tous les non-héros.
+## Stocké en String (et non PackedScene) pour casser le cycle de dépendance
+## desc → scene → desc : un String n'est pas suivi au chargement. Résolu
+## paresseusement par resolve_scene() via load(), dont le cache ResourceLoader
+## évite tout rechargement. Les héros passent par Shared.HERO_SCENES (clé HeroId).
+@export_file("*.tscn") var scene_path: String
 ## Lightweight visual-only scene (mesh + AnimationPlayer, no Entity logic) used
 ## by selection/presentation screens.
 @export var preview_scene: PackedScene
@@ -41,9 +46,9 @@ var scene: PackedScene
 @export var aa_3_anim_base_duration: float = 3.26
 
 
-# Résout la PackedScene à instancier pour une desc. Priorité au champ runtime
-# (cas transient FightingFormation), sinon lookup Shared : HERO_SCENES par
-# HeroId pour les héros, ACOLYTE_SCENES par desc Resource pour le reste.
+# Résout la PackedScene à instancier pour une desc. Ordre de priorité : champ
+# runtime `scene` (cas transient FightingFormation), puis HERO_SCENES par HeroId
+# pour les héros, puis `scene_path` chargé via load() pour tout le reste.
 # Retourne null si non résolu (l'appelant doit gérer / warn).
 static func resolve_scene(desc: EntityDesc) -> PackedScene:
 	if desc == null:
@@ -52,4 +57,6 @@ static func resolve_scene(desc: EntityDesc) -> PackedScene:
 		return desc.scene
 	if desc is HeroDesc:
 		return Shared.HERO_SCENES.get((desc as HeroDesc).id)
-	return Shared.ACOLYTE_SCENES.get(desc)
+	if desc.scene_path != "":
+		return load(desc.scene_path)
+	return null

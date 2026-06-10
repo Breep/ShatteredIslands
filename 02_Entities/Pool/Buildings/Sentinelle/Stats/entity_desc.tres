@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EntityDesc" format=3]
+[gd_resource type="Resource" script_class="EntityDesc" format=3 uid="uid://caplw345lqegg"]
 
 [ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="1_desc"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="2_skill"]
@@ -23,17 +23,18 @@
 [ext_resource type="Resource" path="res://02_Entities/Pool/Buildings/Sentinelle/Stats/stats_lvl_18.tres" id="21_18"]
 [ext_resource type="Resource" path="res://02_Entities/Pool/Buildings/Sentinelle/Stats/stats_lvl_19.tres" id="22_19"]
 [ext_resource type="Resource" path="res://02_Entities/Pool/Buildings/Sentinelle/Stats/stats_lvl_20.tres" id="23_20"]
-[ext_resource type="Resource" uid="uid://csentrayon2res" path="res://02_Entities/Pool/Buildings/Sentinelle/Skills/Passive/rayon_protecteur.tres" id="24_pas"]
-[ext_resource type="Resource" uid="uid://csentrelais2re" path="res://02_Entities/Pool/Buildings/Sentinelle/Skills/Bronze/relais_blinde.tres" id="25_bro"]
-[ext_resource type="Resource" uid="uid://csentprisme2re" path="res://02_Entities/Pool/Buildings/Sentinelle/Skills/Silver/prisme_stable.tres" id="26_sil"]
-[ext_resource type="Resource" uid="uid://csentparechoc2" path="res://02_Entities/Pool/Buildings/Sentinelle/Skills/Gold/pare_choc.tres" id="27_gol"]
-[ext_resource type="Resource" uid="uid://csentsurch2res" path="res://02_Entities/Pool/Buildings/Sentinelle/Skills/Ultimate/surcharge_defensive.tres" id="28_ult"]
+[ext_resource type="Resource" uid="uid://bdoor1q48mipy" path="res://02_Entities/Pool/Buildings/Sentinelle/Skills/Passive/rayon_protecteur.tres" id="24_pas"]
+[ext_resource type="Resource" uid="uid://bdoor5dp3ds3k" path="res://02_Entities/Pool/Buildings/Sentinelle/Skills/Bronze/relais_blinde.tres" id="25_bro"]
+[ext_resource type="Resource" uid="uid://bdooqja86xs3k" path="res://02_Entities/Pool/Buildings/Sentinelle/Skills/Silver/prisme_stable.tres" id="26_sil"]
+[ext_resource type="Resource" uid="uid://bdoop1jtv1fn8" path="res://02_Entities/Pool/Buildings/Sentinelle/Skills/Gold/pare_choc.tres" id="27_gol"]
+[ext_resource type="Resource" uid="uid://bdootmjr2mipy" path="res://02_Entities/Pool/Buildings/Sentinelle/Skills/Ultimate/surcharge_defensive.tres" id="28_ult"]
 
 [resource]
 script = ExtResource("1_desc")
 name = "Sentinelle"
-default_category = 4
 description = "Bâtiment de soutien : rayon protecteur de bouclier."
+scene_path = "res://02_Entities/Pool/Buildings/Sentinelle/sentinelle.tscn"
+default_category = 4
 stats = Dictionary[int, ExtResource("3_stats")]({
 1: ExtResource("4_01"),
 2: ExtResource("5_02"),

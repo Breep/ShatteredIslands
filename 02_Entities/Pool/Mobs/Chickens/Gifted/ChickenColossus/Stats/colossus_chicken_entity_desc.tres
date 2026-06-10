@@ -33,6 +33,7 @@
 script = ExtResource("1_bteoc")
 name = "Big Bok"
 description = "BOK BOK"
+scene_path = "res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/chicken_colossus.tscn"
 default_category = 1
 stats = Dictionary[int, ExtResource("3_jyrfj")]({
 1: ExtResource("4_cb45n"),

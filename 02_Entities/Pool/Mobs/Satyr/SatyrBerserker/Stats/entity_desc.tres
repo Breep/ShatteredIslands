@@ -31,6 +31,7 @@
 
 [resource]
 script = ExtResource("1_5viap")
+scene_path = "res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/satyr_berserker.tscn"
 name = "Pan the Satyr"
 stats = Dictionary[int, ExtResource("4_rxlx3")]({
 1: ExtResource("5_8mm8k"),

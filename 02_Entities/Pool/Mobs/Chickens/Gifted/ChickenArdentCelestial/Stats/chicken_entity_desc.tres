@@ -33,6 +33,7 @@
 script = ExtResource("1_t44nj")
 name = "Celestial chicken"
 description = "Bok bok"
+scene_path = "res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/chicken_ardent_celestial.tscn"
 default_category = 1
 stats = Dictionary[int, ExtResource("3_61olp")]({
 1: ExtResource("4_adcmo"),

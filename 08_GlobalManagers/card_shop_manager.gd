@@ -97,7 +97,7 @@ func _construct_shop_deck(families: Array[Family], rules: GameRules) -> void:
 	shop_deck = ShopDeck.new()
 	var cards: Array[Card] = []
 	for family: Family in families:
-		for card: Card in family.cards:
+		for card: Card in family.get_cards():
 			cards.append(card)
 	shop_deck.init_catalog(cards)
 	shop_deck.init_generation_rules(rules.rarity_card_numbers)

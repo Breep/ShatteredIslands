@@ -31,6 +31,7 @@
 
 [resource]
 script = ExtResource("1_s5na4")
+scene_path = "res://02_Entities/Pool/Mobs/Forest/ForestDrake/forest_drake.tscn"
 stats = Dictionary[int, ExtResource("3_qrmea")]({
 1: ExtResource("4_yg6ig"),
 2: ExtResource("5_i4e5c"),

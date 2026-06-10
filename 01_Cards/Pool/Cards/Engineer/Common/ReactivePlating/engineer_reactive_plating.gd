@@ -14,15 +14,10 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 	var owner: Entity = ctx.entity_owner
 	var base: float = _base_thorn[card_lvl - 1]
 	var pct: float = _hp_max_percent[card_lvl - 1]
-
-	# Bâtiments : grant propagé à chaque building au spawn.
-	owner.building_modifiers_registry.register_alteration_grant(card_name, Alteration.Type.THORN, base, pct)
-
-	# Héros : application directe au début du combat.
+	
 	owner.battle_callback_registry.register_battle_start(card_name, func() -> void:
-		if not is_instance_valid(owner) or owner.alterations == null: return
-		owner.alterations.add_stack(Alteration.Type.THORN, base + owner.stats.health_max * pct / 100.0)
-	)
+		_apply_thorn(owner, base, pct, card_name)
+		)
 
 
 func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
@@ -34,3 +29,28 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 func get_description(card_lvl: int) -> String:
 	return "Le héros et ses bâtiments gagnent " + str(_base_thorn[card_lvl - 1]) + " + " \
 		+ str(_hp_max_percent[card_lvl - 1]) + "% de leurs PV max en [[THORN]]."
+
+
+func _apply_thorn(owner: Entity, base: float, pct: float, card_name: StringName) -> void:
+	if not is_instance_valid(owner): return
+	var thorn_value: float = base + owner.stats.health_max * pct / 100.0
+	var buildings = owner.target.get_targets(TargetComponent.MultipleTargettingStrategy.ALLIES).filter(func(e: Entity) -> bool:
+		return e.category == Entity.Category.BUILDING)
+	
+	for building: Entity in buildings:
+		if is_instance_valid(building):
+			building.alterations.add_stack(Alteration.Type.THORN, thorn_value, owner, card_name)
+	owner.alterations.add_stack(Alteration.Type.THORN, thorn_value, owner, card_name)
+
+
+
+
+
+
+
+
+
+
+
+
+ 

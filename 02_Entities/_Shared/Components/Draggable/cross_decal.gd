@@ -12,16 +12,28 @@ const COLOR_NEUTRAL: Color = Color.WHITE
 const PULSE_MIN: float = 0.85
 const PULSE_MAX: float = 1.15
 const PULSE_HALF_DURATION: float = 0.5
+
+const GLOW_BASE: float = 1.0
+const GLOW_AMPLITUDE: float = 0.8
+const GLOW_FREQUENCY: float = 1.2     # Hz
 #endregion
 
 #region ============================== Private variables ==============================
 var _pulse_tween: Tween
+var _glow_enabled: bool = false
+var _time: float = 0.0
 #endregion
 
 #region ============================== Node base functions ==============================
 func _ready() -> void:
 	set_ok()
 	_start_pulse()
+	set_process(false)
+
+
+func _process(delta: float) -> void:
+	_time += delta
+	emission_energy = maxf(0.0, GLOW_BASE + GLOW_AMPLITUDE * sin(_time * TAU * GLOW_FREQUENCY))
 #endregion
 
 #region ============================== Public functions ==============================
@@ -35,6 +47,17 @@ func set_nok() -> void:
 
 func set_neutral() -> void:
 	modulate = COLOR_NEUTRAL
+
+
+# Active un glow pulsé (emission sinusoïdale) — utilisé quand le decal sert de
+# marqueur de sélection. La texture d'émission reprend la croix de l'albedo.
+func enable_glow() -> void:
+	if _glow_enabled:
+		return
+	_glow_enabled = true
+	if texture_emission == null:
+		texture_emission = texture_albedo
+	set_process(true)
 
 
 # Fige le decal (marqueur statique, ex. position d'origine) : stoppe le pulse et

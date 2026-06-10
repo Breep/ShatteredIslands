@@ -13,7 +13,7 @@ metadata/_custom_type_script = "uid://c3vd2j0u7h1u0"
 script = ExtResource("1_aa6og")
 name = &"proto proj numb"
 picture = SubResource("PlaceholderTexture2D_bvl2y")
-families = Array[int]([0])
+families = Array[int]([1])
 _card_effect = SubResource("Resource_ym5vn")
 points = Dictionary[int, int]({
 0: 1
