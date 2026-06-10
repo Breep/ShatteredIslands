@@ -18,7 +18,7 @@ const _JUMP_DURATION: float = 0.12
 @export var _roll_radius: float = 0.5
 
 # === PRIVATE VARS ===
-@onready var _visual: Node3D = %BoulderVisual
+@onready var _visual: BoulderVisual = %BoulderVisual
 
 var _dying: bool = false
 
@@ -53,6 +53,8 @@ func _destroy() -> void:
 	if _dying: return
 	_dying = true
 	AudioManager.play_3d("large_boulder_hit_wall", global_position)
+	if is_instance_valid(_visual):
+		_visual.play_impact()
 	var base_y: float = position.y
 	var tween := create_tween()
 	tween.tween_property(self, "position:y", base_y + _JUMP_HEIGHT, _JUMP_DURATION).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
@@ -68,7 +70,7 @@ func _roll(delta: float) -> void:
 	var radius: float = _roll_radius * aoe
 	if radius <= 0.0: return
 	var angle: float = (trajectory.speed * delta) / radius
-	_visual.rotate_object_local(Vector3.RIGHT, -angle)
+	_visual.roll(angle)
 
 
 # === Overrides ===
