@@ -1,17 +1,15 @@
 [gd_resource type="Resource" script_class="Family" format=3 uid="uid://b1qbsfy5xa3tk"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_71uv3"]
-[ext_resource type="Resource" uid="uid://u3efia3larnh" path="res://01_Cards/Pool/Cards/Prototyping/HireAcolyte/card_acolyte.proto.tres" id="2_lc8nh"]
-[ext_resource type="Resource" uid="uid://cvf8iw8x8psds" path="res://01_Cards/Pool/Cards/Prototyping/StatSummon/card_sommun_modifier.proto.tres" id="3_lc8nh"]
+[ext_resource type="Resource" uid="uid://bovs06ff8gvkc" path="res://01_Cards/Pool/Cards/Engineer/Common/ChickenCoop/chickenlord_chicken_coop.tres" id="2_lc8nh"]
+[ext_resource type="Resource" uid="uid://1ds2d3yrn1ea" path="res://01_Cards/Pool/Cards/ChickenLord/Common/PhoenixBrood/chickenlord_phoenix_brood.tres" id="3_cdp45"]
 [ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://01_Cards/Templates/family.gd" id="3_lnuwt"]
-[ext_resource type="Resource" uid="uid://dbiqa23fq8erq" path="res://01_Cards/Pool/Cards/Prototyping/StatAcolyte/card_acolyte_modifier.proto.tres" id="4_lnuwt"]
-[ext_resource type="Resource" uid="uid://sjin8of5pcs2" path="res://01_Cards/Pool/Cards/Prototyping/Projectiles/ProjectileNumber/card_projectile_number.proto.tres" id="5_cdp45"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_cdp45"]
 
 [resource]
 script = ExtResource("3_lnuwt")
-cards = Array[ExtResource("1_71uv3")]([ExtResource("2_lc8nh"), ExtResource("3_lc8nh"), ExtResource("4_lnuwt"), ExtResource("5_cdp45")])
+common_cards = Array[ExtResource("1_71uv3")]([ExtResource("2_lc8nh"), ExtResource("3_cdp45")])
 icon = SubResource("PlaceholderTexture2D_cdp45")
 family_name = "Prototyping"
 color = Color(1, 0.4301977, 0.85288113, 1)

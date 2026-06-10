@@ -2,10 +2,15 @@
 
 [ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="1_reult"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="2_mbiqh"]
+[ext_resource type="Resource" uid="uid://c18dpdl0syrsn" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Skills/Passive/goblin_horde_berserk.tres" id="3_e3m2h"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_g4iju"]
+[ext_resource type="Resource" uid="uid://dce1dwqiusp4k" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Skills/Bronze/critical_eye.tres" id="4_h808u"]
 [ext_resource type="Resource" uid="uid://dxpj0yui1mdom" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Stats/kobold_warrior_stats_lvl_01.tres" id="4_jsrgl"]
 [ext_resource type="Resource" uid="uid://c6h8k1sg8eqlk" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Stats/kobold_warrior_stats_lvl_02.tres" id="5_2brci"]
+[ext_resource type="Resource" uid="uid://j2qrg8w2rni7" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Skills/Gold/bonk.tres" id="5_p5d8i"]
 [ext_resource type="Resource" uid="uid://bvg4uwyrpijsn" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Stats/kobold_warrior_stats_lvl_03.tres" id="6_e3m2h"]
+[ext_resource type="Resource" uid="uid://dkhplcivga14h" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Skills/Silver/rage.tres" id="6_wbo6o"]
+[ext_resource type="Resource" uid="uid://c86ka4pl1rscw" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Skills/Ultimate/cleave.tres" id="7_h1fvs"]
 [ext_resource type="Resource" uid="uid://cmgogyexcr4f8" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Stats/kobold_warrior_stats_lvl_04.tres" id="7_h808u"]
 [ext_resource type="Resource" uid="uid://b1evvlfd7rfhe" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Stats/kobold_warrior_stats_lvl_05.tres" id="8_p5d8i"]
 [ext_resource type="Resource" uid="uid://yb0qy733pv10" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Stats/kobold_warrior_stats_lvl_06.tres" id="9_wbo6o"]
@@ -51,3 +56,16 @@ stats = Dictionary[int, ExtResource("3_g4iju")]({
 19: ExtResource("22_mg4mu"),
 20: ExtResource("23_2vx0o")
 })
+skills = Dictionary[int, ExtResource("2_mbiqh")]({
+0: ExtResource("3_e3m2h"),
+1: ExtResource("4_h808u"),
+2: ExtResource("6_wbo6o"),
+3: ExtResource("5_p5d8i"),
+4: ExtResource("7_h1fvs")
+})
+aa_1_release_normalized = 0.3
+aa_2_release_normalized = 0.4
+aa_3_release_normalized = 0.26
+aa_1_anim_base_duration = 1.0
+aa_2_anim_base_duration = 1.166
+aa_3_anim_base_duration = 1.0

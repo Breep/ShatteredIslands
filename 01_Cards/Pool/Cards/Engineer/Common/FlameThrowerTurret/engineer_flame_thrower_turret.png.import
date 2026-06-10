@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bbtxn2wbruip0"
-path="res://.godot/imported/engineer_flame_thrower_turret.png-647667b5c8a423eca3285bcb5a8ca0b1.ctex"
+path="res://.godot/imported/engineer_flame_thrower_turret.png-7e1a4b5040588bd7377e72a7064915e5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://01_Cards/Pool/Cards/Engineer/Common/FlameThrowerTurret/engineer_flame_thrower_turret.png"
-dest_files=["res://.godot/imported/engineer_flame_thrower_turret.png-647667b5c8a423eca3285bcb5a8ca0b1.ctex"]
+source_file="res://01_Cards/Pool/Cards/Engineer/Common/FlamethrowerTurret/engineer_flame_thrower_turret.png"
+dest_files=["res://.godot/imported/engineer_flame_thrower_turret.png-7e1a4b5040588bd7377e72a7064915e5.ctex"]
 
 [params]
 
