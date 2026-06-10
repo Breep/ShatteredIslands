@@ -3,7 +3,6 @@ extends EntityComponent
 
 var _spawn_manager: SpawnManager
 
-const METEOR_SCENE: PackedScene = preload("res://03_SpellsAndProjectiles/Spells/Meteor/meteor.tscn")
 const DARK_STORM_SCENE: PackedScene = preload("res://03_SpellsAndProjectiles/Spells/DarkStorm/dark_storm.tscn")
 const CONTAGION_SPELL_SCENE: PackedScene = preload("res://03_SpellsAndProjectiles/Spells/Poison/Contagion/contagion_spell_area.tscn")
 const SHROOM_SPELL_SCENE: PackedScene = preload("res://03_SpellsAndProjectiles/Spells/Poison/Shroom/shroom_spell.tscn")
@@ -55,7 +54,6 @@ func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictiona
 	spell_modifier = modifiers_data.get(ActionModifier.VarType.SPELL_MODIFIER, spell_modifier)
 
 	match spell_type:
-		Spell.Type.METEOR: _cast_meteor(target, spell_modifier)
 		Spell.Type.DARK_STORM: _cast_dark_storm(target, spell_modifier)
 		Spell.Type.CONTAGION: _cast_contagion(spell_modifier)
 		Spell.Type.SHROOM: _cast_shroom(target, spell_modifier)
@@ -78,23 +76,6 @@ func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictiona
 
 
 # ============================== Private functions ==============================
-
-func _cast_meteor(target: Entity, spell_modifier: Dictionary) -> void:
-	if target == null:
-		Verbose.error("_cast_meteor() -> No target", Verbose.Category.ENTITY_MODULE)
-		return
-	var on_cast_callbacks: Array = spell_modifier.get(Meteor.Modifier.ON_CAST_CALLBACKS, [])
-	for cb: Callable in on_cast_callbacks:
-		if cb.is_valid():
-			cb.call(spell_modifier)
-	var meteor: Meteor = METEOR_SCENE.instantiate()
-	var damage_percent: float = spell_modifier.get(Meteor.Modifier.DAMAGE_PERCENT, 0)
-	var damage_flat: float = spell_modifier.get(Meteor.Modifier.DAMAGE_FLAT, 0)
-	var radius: float = spell_modifier.get(Meteor.Modifier.RADIUS, 1)
-	var on_hit_callbacks: Array = spell_modifier.get(Meteor.Modifier.ON_HIT_CALLBACKS, [])
-	meteor.init(target, damage_flat, damage_percent, radius, on_hit_callbacks, _owner)
-	_spawn_manager.spawn_spell(meteor)
-
 
 func _cast_dark_storm(target: Entity, spell_modifier: Dictionary) -> void:
 	if target == null:
