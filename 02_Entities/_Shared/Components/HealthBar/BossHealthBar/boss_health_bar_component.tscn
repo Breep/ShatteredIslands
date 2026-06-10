@@ -94,6 +94,14 @@ shader_parameter/shine_width = 0.4
 shader_parameter/shine_speed = 0.575
 shader_parameter/noise_strength = 0.0
 
+[sub_resource type="LabelSettings" id="LabelSettings_f0d5q"]
+font_size = 24
+outline_size = 15
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.79)
+shadow_offset = Vector2(3, 3)
+
 [sub_resource type="LabelSettings" id="LabelSettings_shield"]
 font_color = Color(0.9416784, 0.84232056, 0, 1)
 outline_size = 8
@@ -233,6 +241,23 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="Invulnerable" type="Label" parent="CanvasLayer/MainControl/MainVBox/HealthRow/HealthBar/MetalBar" unique_id=461315679]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.852
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -295.0
+offset_top = -21.0
+offset_bottom = 21.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "INVULNERABILITY"
+label_settings = SubResource("LabelSettings_f0d5q")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="TauntShieldIcon" type="TextureRect" parent="CanvasLayer/MainControl/MainVBox/HealthRow/HealthBar" unique_id=1801541335]
 unique_name_in_owner = true
 visible = false
@@ -363,7 +388,7 @@ offset_right = 150.0
 offset_bottom = 9.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(3, 3)
+scale = Vector2(1.5, 1.5)
 pivot_offset_ratio = Vector2(0.5, 0.5)
 mouse_filter = 2
 columns = 8

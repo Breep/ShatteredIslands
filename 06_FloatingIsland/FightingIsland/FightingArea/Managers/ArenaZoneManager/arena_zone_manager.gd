@@ -131,6 +131,73 @@ func clamp_to_arena(position: Vector3) -> Vector3:
 	return position
 
 
+## Position of a full-arena corner, pulled inward by `inset` so spawns never land on
+## or past the boundary. x_sign / z_sign pick the corner (e.g. (-1, 1) and (1, -1) are
+## the two opposite corners of one diagonal). Y is kept at the arena's ground level.
+func get_arena_corner(x_sign: float, z_sign: float, inset: float = 0.0) -> Vector3:
+	if _full_arena_zone == null:
+		Verbose.warn("ArenaZoneManager: No full arena zone defined, cannot get corner", Verbose.Category.FIGHTING_AREA)
+		return Vector3.ZERO
+
+	var collision_shape: CollisionShape3D = null
+	for child in _full_arena_zone.get_children():
+		if child is CollisionShape3D:
+			collision_shape = child
+			break
+
+	if collision_shape == null:
+		Verbose.warn("ArenaZoneManager: No CollisionShape3D in full arena zone, cannot get corner", Verbose.Category.FIGHTING_AREA)
+		return _full_arena_zone.global_position
+
+	var shape := collision_shape.shape
+	if shape is BoxShape3D:
+		var half_size: Vector3 = shape.size / 2.0
+		var center := collision_shape.global_position
+		var x: float = center.x + signf(x_sign) * maxf(0.0, half_size.x - inset)
+		var z: float = center.z + signf(z_sign) * maxf(0.0, half_size.z - inset)
+		return Vector3(x, center.y, z)
+
+	Verbose.warn("ArenaZoneManager: Unsupported shape type for corner, returning center", Verbose.Category.FIGHTING_AREA)
+	return collision_shape.global_position
+
+
+## Horizontal frame for the dragon's backline sweep. The sweep axis is fixed to world X
+## (right<->left); the backline depth runs along world Z, on the enemy side (inferred from
+## the team-zone Z positions). origin = enemy back-edge centre at `altitude`, pulled inward
+## by `back_inset`. basis.x = world X (lateral sweep); basis.z points toward the enemy back
+## wall (so +basis.z bows the arc toward the backline).
+func get_enemy_back_frame(own_team: int, back_inset: float, altitude: float) -> Transform3D:
+	var collision_shape: CollisionShape3D = null
+	if _full_arena_zone != null:
+		for child in _full_arena_zone.get_children():
+			if child is CollisionShape3D:
+				collision_shape = child
+				break
+
+	var center: Vector3 = collision_shape.global_position if collision_shape != null \
+		else (_full_arena_zone.global_position if _full_arena_zone != null else Vector3.ZERO)
+
+	# Which Z side belongs to the enemy.
+	var enemy_sign := 1.0
+	var enemy_team: int = own_team
+	for t: int in _team_zones:
+		if t != own_team:
+			enemy_team = t
+			break
+	if _team_zones.has(own_team) and _team_zones.has(enemy_team):
+		var dz: float = _team_zones[enemy_team].global_position.z - _team_zones[own_team].global_position.z
+		if absf(dz) > 0.0001:
+			enemy_sign = signf(dz)
+
+	var back_z: float = center.z
+	if collision_shape != null and collision_shape.shape is BoxShape3D:
+		var half_z: float = (collision_shape.shape as BoxShape3D).size.z / 2.0
+		back_z = center.z + enemy_sign * maxf(0.0, half_z - back_inset)
+
+	var anchor := Vector3(center.x, center.y + altitude, back_z)
+	return Transform3D(Basis(Vector3.RIGHT, Vector3.UP, Vector3(0.0, 0.0, enemy_sign)), anchor)
+
+
 ## Apply randomization offset to a position
 func apply_randomization(position: Vector3, radius: float) -> Vector3:
 	if radius <= 0.0:
