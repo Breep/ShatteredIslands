@@ -97,6 +97,7 @@ func _ready() -> void:
 	_close_panel_instant()
 	_portrait_button.pressed.connect(_on_portrait_button_pressed)
 	Events.entity_clicked.connect(_on_events_entity_clicked)
+	Events.nothing_clicked.connect(_on_events_nothing_clicked)
 
 
 func _input(event: InputEvent) -> void:
@@ -366,6 +367,14 @@ func _set_item_value(list: ItemList, idx: int, value: float) -> void:
 func _on_events_entity_clicked(entity: Entity) -> void:
 	bind(entity)
 	_last_entity_click_frame = Engine.get_process_frames()
+	if visible == false:
+		show()
+	if _panel_open == false:
+		_open_panel()
+
+
+func _on_events_nothing_clicked() -> void:
+	hide()
 
 
 func _on_portrait_button_pressed() -> void:
