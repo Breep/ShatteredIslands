@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cc1c8vf4tv2pa" path="res://01_Cards/Pool/Families/Icons/celeste logo 2.png" id="7_icon"]
 [ext_resource type="Resource" uid="uid://cmgtaf41odg41" path="res://01_Cards/Pool/Cards/ArdentCelestial/Common/EmberCascade/ardent_celestial_ember_cascade.tres" id="8_ember"]
 [ext_resource type="Resource" uid="uid://cmgtoqbf58n41" path="res://01_Cards/Pool/Cards/ArdentCelestial/Rare/EmpoweredProjectiles/ardent_celestial_empowered_projectiles.tres" id="10_empow"]
+[ext_resource type="Resource" path="res://01_Cards/Pool/Cards/ArdentCelestial/Epic/Phoenix/ardent_celestial_phoenix.tres" id="11_2qwo8"]
 [ext_resource type="Resource" uid="uid://cmolsf2hpth41" path="res://01_Cards/Pool/Cards/ArdentCelestial/Rare/MeteorCadence/ardent_celestial_meteor_cadence.tres" id="11_cad"]
 [ext_resource type="Resource" uid="uid://cme2kmvdtuq41" path="res://01_Cards/Pool/Cards/ArdentCelestial/Rare/CullingBeam/ardent_celestial_culling_beam.tres" id="12_cull"]
 [ext_resource type="Resource" uid="uid://cmc0ssnbotv41" path="res://01_Cards/Pool/Cards/ArdentCelestial/Legendary/AstralBarrage/ardent_celestial_astral_barrage.tres" id="13_barrage"]
@@ -21,7 +22,7 @@
 script = ExtResource("2_u6eys")
 common_cards = Array[ExtResource("1_l3j17")]([ExtResource("6_burn"), ExtResource("4_diamond"), ExtResource("8_ember"), ExtResource("3_meteor"), ExtResource("5_flare"), ExtResource("15_phoenix"), ExtResource("16_arcane"), ExtResource("17_flame")])
 rare_cards = Array[ExtResource("1_l3j17")]([ExtResource("11_cad"), ExtResource("10_empow"), ExtResource("12_cull")])
-epic_cards = Array[ExtResource("1_l3j17")]([ExtResource("14_scorch")])
+epic_cards = Array[ExtResource("1_l3j17")]([ExtResource("14_scorch"), ExtResource("11_2qwo8")])
 legendary_cards = Array[ExtResource("1_l3j17")]([ExtResource("13_barrage")])
 icon = ExtResource("7_icon")
 family_name = "Ardent Celestial"

@@ -31,7 +31,9 @@
 
 [resource]
 script = ExtResource("1_desc")
+name = "Phoenix"
 scene_path = "res://02_Entities/Pool/Mobs/Phoenix/phoenix.tscn"
+default_category = 2
 stats = Dictionary[int, ExtResource("3_stats")]({
 1: ExtResource("4_01"),
 2: ExtResource("5_02"),

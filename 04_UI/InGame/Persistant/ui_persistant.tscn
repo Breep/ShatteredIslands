@@ -61,6 +61,7 @@ mouse_filter = 2
 
 [node name="UIAllFamiliesPortrait" parent="." unique_id=758463995 instance=ExtResource("5_oypi2")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 9
 anchor_left = 0.0
@@ -89,6 +90,7 @@ grow_vertical = 0
 
 [node name="UiFamilyViewer" parent="." unique_id=452679620 instance=ExtResource("9_16n6v")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 offset_left = -667.0
 offset_top = -339.0
