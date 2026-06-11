@@ -48,9 +48,9 @@ corner_radius_bottom_left = 10
 [node name="UiHeroOverviewPanel" type="Control" unique_id=1696511393]
 layout_mode = 3
 anchor_right = 0.22500001
-anchor_bottom = 4.582
+anchor_bottom = 1.802
 offset_right = -3.0517578e-05
-offset_bottom = -0.13671875
+offset_bottom = -0.16003418
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_s1bc7")
