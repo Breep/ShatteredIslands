@@ -26,11 +26,6 @@
 [ext_resource type="PackedScene" uid="uid://6l0c0aa6rcl7" path="res://02_Entities/Pool/NPCs/Jester/sk_chr_jester_01.tscn" id="23_bchnt"]
 [ext_resource type="PackedScene" uid="uid://61bey01gukxt" path="res://02_Entities/Pool/NPCs/Mage/sk_chr_mage_01.tscn" id="24_44asv"]
 [ext_resource type="PackedScene" uid="uid://d05soq0vastae" path="res://02_Entities/Pool/NPCs/FortuneTeller/sk_chr_fortune_teller_01.tscn" id="25_8jxq7"]
-[ext_resource type="PackedScene" uid="uid://cpqybr37lbypi" path="res://99_Prototyping/test ground/ground_modular.tscn" id="27_avl42"]
-[ext_resource type="PackedScene" uid="uid://ejyfl7v0mmpt" path="res://99_Prototyping/test ground/ground_modular_bellcross.tscn" id="28_fqjo0"]
-[ext_resource type="PackedScene" uid="uid://bw3xevnr2p5ip" path="res://02_Entities/Pool/Mobs/Satyr/satyr_full.tscn" id="29_2om4y"]
-[ext_resource type="PackedScene" uid="uid://p8ir8qi2yd37" path="res://99_Prototyping/test ground/bellcross/test_bellcross.fbx" id="29_fqjo0"]
-[ext_resource type="PackedScene" uid="uid://deihd6vwrcxcj" path="res://02_Entities/Pool/Mobs/DragonSkeleton/skeletal_dragon.tscn" id="31_30b7g"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vhqui"]
 resource_name = "Wood Floor"
@@ -52809,77 +52804,34 @@ transform = Transform3D(-0.120431, 0, 0.992722, 0, 1, 0, -0.992722, 0, -0.120431
 [node name="SK_Chr_FortuneTeller_01" parent="PNJ" unique_id=2003059790 instance=ExtResource("25_8jxq7")]
 transform = Transform3D(0.190586, 0, 0.98167, 0, 1, 0, -0.98167, 0, 0.190586, -8.83945, 0, -9.06974)
 
-[node name="Node3D3" parent="PNJ" unique_id=122772227 instance=ExtResource("28_fqjo0")]
+[node name="Node3D3" parent="PNJ" unique_id=122772227]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -9.481995, 0.065609634, 20.59964)
 
-[node name="Node3D4" parent="PNJ/Node3D3" unique_id=733047285 instance=ExtResource("28_fqjo0")]
+[node name="Node3D4" parent="PNJ/Node3D3" unique_id=733047285]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
 
-[node name="Node3D7" parent="PNJ/Node3D3" unique_id=164594501 instance=ExtResource("28_fqjo0")]
+[node name="Node3D7" parent="PNJ/Node3D3" unique_id=164594501]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
 
-[node name="Node3D8" parent="PNJ/Node3D3" unique_id=1924272906 instance=ExtResource("28_fqjo0")]
+[node name="Node3D8" parent="PNJ/Node3D3" unique_id=1924272906]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -3.9999995)
 
-[node name="Node3D9" parent="PNJ/Node3D3" unique_id=1950933114 instance=ExtResource("28_fqjo0")]
+[node name="Node3D9" parent="PNJ/Node3D3" unique_id=1950933114]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4)
 
-[node name="Node3D10" parent="PNJ/Node3D3" unique_id=843650385 instance=ExtResource("28_fqjo0")]
+[node name="Node3D10" parent="PNJ/Node3D3" unique_id=843650385]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
 
-[node name="Node3D11" parent="PNJ/Node3D3" unique_id=82340428 instance=ExtResource("28_fqjo0")]
+[node name="Node3D11" parent="PNJ/Node3D3" unique_id=82340428]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -8)
 
-[node name="Node3D12" parent="PNJ/Node3D3" unique_id=1513404284 instance=ExtResource("28_fqjo0")]
+[node name="Node3D12" parent="PNJ/Node3D3" unique_id=1513404284]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -8)
 
-[node name="Node3D13" parent="PNJ/Node3D3" unique_id=420054361 instance=ExtResource("28_fqjo0")]
+[node name="Node3D13" parent="PNJ/Node3D3" unique_id=420054361]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
 
-[node name="Node3D5" parent="PNJ/Node3D3" unique_id=1101115258 instance=ExtResource("28_fqjo0")]
+[node name="Node3D5" parent="PNJ/Node3D3" unique_id=1101115258]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -19.306362, 0.63439035, -8.669946)
 
-[node name="Node3D" parent="." unique_id=1649792066 instance=ExtResource("27_avl42")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -9.919939, 0.0695796, 20.527103)
-
-[node name="Node3D2" parent="Node3D" unique_id=237720747 instance=ExtResource("27_avl42")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
-
-[node name="Node3D3" parent="Node3D" unique_id=1795166740 instance=ExtResource("27_avl42")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
-
-[node name="Node3D4" parent="Node3D" unique_id=1495107110 instance=ExtResource("27_avl42")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
-
-[node name="Node3D5" parent="Node3D" unique_id=671770915 instance=ExtResource("27_avl42")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -3.9999995)
-
-[node name="Node3D6" parent="Node3D" unique_id=1141595661 instance=ExtResource("27_avl42")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4)
-
-[node name="Node3D7" parent="Node3D" unique_id=988818666 instance=ExtResource("27_avl42")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10000038, 0, -4)
-
-[node name="Node3D8" parent="Node3D" unique_id=1709907319 instance=ExtResource("27_avl42")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10000038, 0, -8)
-
-[node name="Node3D9" parent="Node3D" unique_id=1004524128 instance=ExtResource("27_avl42")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.1000004, 0, -8)
-
-[node name="Node3D10" parent="Node3D" unique_id=478860554 instance=ExtResource("27_avl42")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.1, 0, -7.9999995)
-
-[node name="Satyr_Full" parent="." unique_id=1324484574 instance=ExtResource("29_2om4y")]
-transform = Transform3D(-0.50000006, 0, 0.8660254, 0, 1, 0, -0.8660254, 0, -0.50000006, -8.300001, 0, 18.4)
-
-[node name="test_bellcross" parent="." unique_id=1367800871 instance=ExtResource("29_fqjo0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.521444, 0.06401038, 8.869023)
-
-[node name="SkeletalDragon" parent="." unique_id=1358678233 instance=ExtResource("31_30b7g")]
-transform = Transform3D(-0.47910848, -0.022813905, 0.14118998, -0.06230108, 0.47759676, -0.13423832, -0.12873879, -0.14622204, -0.46048397, -5.081359, -0.012054563, 20.320576)
-
-[node name="VFX_Flamethrower_Anime_A" parent="SkeletalDragon/root/Skeleton3D" parent_id_path=PackedInt32Array(1358678233, 882341245) index="6" unique_id=1173996978]
-visible = false
-
 [editable path="PNJ/ForestDrake"]
-[editable path="SkeletalDragon"]
