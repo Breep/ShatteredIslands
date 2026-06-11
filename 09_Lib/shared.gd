@@ -65,12 +65,12 @@ var PROJECTILE_SCENES: Dictionary[Projectile.Type, PackedScene]:
 		if _projectile_scenes_cache.is_empty():
 			_projectile_scenes_cache = {
 				Projectile.Type.SHADOW_BOLT: load("res://03_SpellsAndProjectiles/Projectiles/AutoAttacks/ShadowBolt/shadow_bolt_projectile.tscn"),
-				Projectile.Type.VENOMOUS_DART: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/VenomousDart/venomous_dart_projectile.tscn"),
-				Projectile.Type.COSMIC_BOLT: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/CosmicBolt/cosmic_bolt_projectile.tscn"),
-				Projectile.Type.SHIELD_THROW: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/ShieldThrow/shield_throw_projectile.tscn"),
-				Projectile.Type.POISON_FLASK: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/PoisonFlask/poison_flask_projectile.tscn"),
-				Projectile.Type.SMALL_EGG: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/SmallEgg/small_egg_projectile.tscn"),
-				Projectile.Type.FIRE_BALL: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/FireBall/fire_ball_projectile.tscn"),
+				Projectile.Type.VENOMOUS_DART: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/VenomousDart/venomous_dart_projectile.tscn"),
+				Projectile.Type.COSMIC_BOLT: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/CosmicBolt/cosmic_bolt_projectile.tscn"),
+				Projectile.Type.SHIELD_THROW: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/ShieldThrow/shield_throw_projectile.tscn"),
+				Projectile.Type.POISON_FLASK: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/PoisonFlask/poison_flask_projectile.tscn"),
+				Projectile.Type.SMALL_EGG: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/SmallEgg/small_egg_projectile.tscn"),
+				Projectile.Type.FIRE_BALL: load("res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/FireBall/fire_ball_projectile.tscn"),
 				Projectile.Type.BULLET: load("res://03_SpellsAndProjectiles/Projectiles/AutoAttacks/Bullet/bullet_projectile.tscn"),
 				Projectile.Type.GAMMA_TURRET: load("res://03_SpellsAndProjectiles/Projectiles/AutoAttacks/GammaTurret/gamma_turret_projectile.tscn"),
 				Projectile.Type.ARROW: load("res://03_SpellsAndProjectiles/Projectiles/AutoAttacks/Arrow/arrow_projectile.tscn"),

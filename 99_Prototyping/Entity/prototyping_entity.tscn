@@ -27,6 +27,7 @@
 [ext_resource type="Environment" uid="uid://cghu0yr6lj5i2" path="res://21_Props/DefaultBattleIsland/Arch_island/world_environment.tres" id="18_ko5bb"]
 [ext_resource type="PackedScene" uid="uid://dp4x7wkxd6i2q" path="res://99_Prototyping/Entity/EntityController/entity_controller.proto.tscn" id="19_x0odd"]
 [ext_resource type="PackedScene" uid="uid://422k2gp3h5wg" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/forest_drake.tscn" id="22_awloh"]
+[ext_resource type="PackedScene" uid="uid://btqko5dh71wxi" path="res://02_Entities/Pool/Mobs/SkeletonDragon/skeleton_dragon.tscn" id="28_58hbo"]
 
 [sub_resource type="Resource" id="Resource_xqnte"]
 script = ExtResource("6_jbcul")
@@ -118,6 +119,13 @@ _arena_zone_manager = NodePath("../../ArenaZoneManager")
 transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, 1.8293419, 0.05598975, 2.7767484)
 team = 1
 battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
+[node name="SkeletonDragon" parent="Node3D/Entities" unique_id=434739176 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("28_58hbo")]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, -2.685705, 0, 8.06334)
+level = 7
+team = 2
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
 
