@@ -16,6 +16,8 @@ extends Resource
 @export_group("Internal")
 @export var _pools: Dictionary[Card.Rarity, Array] # Array[Card]
 @export var _by_uid: Dictionary[int, Card]
+
+var is_tutorial: bool = true
 #endregion
 
 
@@ -90,14 +92,14 @@ func remove_card(card: Card) -> void:
 # Pioche `count` cartes en respectant les % de chance par rareté. Pas de doublon
 # de design dans une même pioche. Les cartes piochées sont retirées du pool.
 func draw(count: int, rarity_chances: Dictionary[Card.Rarity, float]) -> Array[Card]:
+	if is_tutorial and _tutorial_draw_index < _TUTORIAL_DRAWS.size():
+		return _tutorial_draw(count, rarity_chances)
+
 	Verbose.trace("Draw cards (drop rates: " + str(rarity_chances) + ")", Verbose.Category.CARD_SHOP)
 	var drawn: Array[Card] = []
 	var drawn_names: Array[StringName] = []
 	for _i in count:
-		var rarity: Card.Rarity = _roll_rarity(rarity_chances)
-		var card: Card = _pick_available(rarity, drawn_names)
-		if card == null:
-			card = _pick_fallback(rarity, drawn_names)
+		var card: Card = _draw_random(rarity_chances, drawn_names)
 		if card == null:
 			Verbose.warn("ShopDeck: no more cards available to draw", Verbose.Category.SHOP_DECK)
 			break
@@ -119,6 +121,14 @@ func _add(card: Card) -> void:
 	card.lvl = 1
 	_pools[card.rarity].append(card)
 	_by_uid[card.uid] = card
+
+
+func _draw_random(rarity_chances: Dictionary[Card.Rarity, float], exclude_names: Array[StringName]) -> Card:
+	var rarity: Card.Rarity = _roll_rarity(rarity_chances)
+	var card: Card = _pick_available(rarity, exclude_names)
+	if card == null:
+		card = _pick_fallback(rarity, exclude_names)
+	return card
 
 
 func _pick_available(rarity: Card.Rarity, exclude_names: Array[StringName]) -> Card:
@@ -158,4 +168,52 @@ func _roll_rarity(rarity_chances: Dictionary[Card.Rarity, float]) -> Card.Rarity
 		if roll < cumulative:
 			return rarity
 	return Card.Rarity.COMMON
+#endregion
+
+
+#region ============================== Tutorial (isolé — supprimable) ==============================
+# Bloc tutoriel autonome : quand `is_tutorial` est vrai, les premières pioches
+# renvoient des cartes scriptées au lieu d'un tirage aléatoire. Pour retirer la
+# feature : supprimer ce region + la garde en tête de draw(). Pour la modifier :
+# éditer _TUTORIAL_DRAWS (un nom vide "" = slot rempli aléatoirement comme d'hab).
+
+const _TUTORIAL_DRAWS: Array = [
+	["Burning Strike", "Healing Crossbow", "War Banner"],
+	["Phoenix Brood", "Beast Bond", "Electric Grenade"],
+	["Burning Strike", "Meteor", "Chicken Coop"],
+]
+
+var _tutorial_draw_index: int = 0
+
+
+func _tutorial_draw(count: int, rarity_chances: Dictionary[Card.Rarity, float]) -> Array[Card]:
+	var script: Array = _TUTORIAL_DRAWS[_tutorial_draw_index]
+	_tutorial_draw_index += 1
+
+	var drawn: Array[Card] = []
+	var drawn_names: Array[StringName] = []
+	for i in count:
+		var forced_name: String = script[i] if i < script.size() else ""
+		var card: Card = null
+		if forced_name != "":
+			card = _take_by_name(forced_name, drawn_names)
+			if card == null:
+				Verbose.error("ShopDeck (tutorial): carte scriptée '%s' indisponible dans le pool — tirage aléatoire de repli" % forced_name, Verbose.Category.SHOP_DECK)
+		if card == null:
+			card = _draw_random(rarity_chances, drawn_names)
+		if card == null:
+			Verbose.warn("ShopDeck: no more cards available to draw", Verbose.Category.SHOP_DECK)
+			break
+		drawn.append(card)
+		drawn_names.append(card.name)
+	for card in drawn:
+		remove_card(card)
+	return drawn
+
+
+func _take_by_name(card_name: String, exclude_names: Array[StringName]) -> Card:
+	for card: Card in _by_uid.values():
+		if card.name == card_name and not card.name in exclude_names:
+			return card
+	return null
 #endregion

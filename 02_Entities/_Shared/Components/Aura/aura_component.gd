@@ -63,6 +63,7 @@ func clear() -> void:
 	for ally: Entity in _served.keys():
 		if not is_instance_valid(ally): continue
 		for clone: Modifier in _served[ally].values():
+			if not is_instance_valid(clone): continue
 			_unregister_clone(ally, clone)
 	_served.clear()
 	_active = false
