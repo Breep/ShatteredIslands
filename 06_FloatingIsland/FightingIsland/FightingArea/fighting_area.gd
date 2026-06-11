@@ -189,4 +189,4 @@ func _on_global_fighting_phase_state_changed(new_state: GlobalFightingManager.Fi
 			continue
 		var spec: EntitySpec = party.find_spec_by_entry(entity.entry)
 		if spec != null:
-			spec.transform = entity.global_transform
+			spec.transform = entity.transform

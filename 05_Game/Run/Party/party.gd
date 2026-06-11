@@ -110,8 +110,7 @@ func _on_roaster_entry_added(entry: RoasterEntry) -> void:
 	var spec := EntitySpec.new()
 	spec.entry = entry
 	spec.desc = entry.desc
-	spec.free_position = _find_free_spawn_position()
-	spec.rotation_y = PI / 2
+	spec.transform = Transform3D(Basis.from_euler(Vector3(0, PI / 2, 0)), _find_free_spawn_position())
 	formation.entity_specs.append(spec)
 	entry_added.emit(entry)
 
@@ -155,7 +154,7 @@ func _ring_offsets(ring: int) -> Array[Vector3]:
 # position.
 func _is_position_free(position: Vector3) -> bool:
 	for spec: EntitySpec in formation.entity_specs:
-		if spec.free_position.distance_to(position) < SPAWN_SPACING * 0.5:
+		if spec.transform.origin.distance_to(position) < SPAWN_SPACING * 0.5:
 			return false
 	return true
 #endregion

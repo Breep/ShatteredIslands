@@ -41,7 +41,11 @@ func get_projectiles() -> Array[Projectile]:
 
 # ============================== Public functions (Spawning) ==============================
 
-func spawn_entity(entity: Entity, global_transform: Transform3D, context: EntityContext = null, type := Entity.EntityType.HERO) -> void:
+# `local_space` : quand true, `spawn_transform` est interprété en coordonnées
+# locales relatives à `_entities_node` — c'est le cas des formations (EntitySpec),
+# pour que la rotation/orientation de l'island se propage aux entités. Les summons
+# runtime passent des positions monde déjà résolues → restent en global (false).
+func spawn_entity(entity: Entity, spawn_transform: Transform3D, context: EntityContext = null, type := Entity.EntityType.HERO, local_space: bool = false) -> void:
 	if entity == null: return
 
 	entity.uid = _entity_counter
@@ -50,7 +54,10 @@ func spawn_entity(entity: Entity, global_transform: Transform3D, context: Entity
 	if context != null:
 		entity.apply_context(context)
 	_entities_node.add_child(entity)
-	entity.global_transform = global_transform
+	if local_space:
+		entity.transform = spawn_transform
+	else:
+		entity.global_transform = spawn_transform
 	_active_entities.append(entity)
 
 	entity_spawned.emit(entity)

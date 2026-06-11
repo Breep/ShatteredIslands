@@ -104,8 +104,7 @@ func _entity_to_spec(entity: Entity) -> EntitySpec:
 	var spec := EntitySpec.new()
 	spec.scene = load(entity.scene_file_path)
 	spec.display_label = entity.name
-	spec.free_position = entity.global_position
-	spec.rotation_y = entity.rotation.y
+	spec.transform = entity.transform
 	if entity.override_base_stats != null:
 		spec.stats_override = entity.override_base_stats.duplicate(true)
 	return spec

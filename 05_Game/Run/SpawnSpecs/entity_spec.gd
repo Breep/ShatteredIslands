@@ -53,7 +53,7 @@ func spawn_into(parent: Node, ctx: EntityContext = null) -> Node:
 			entity.data_memory = entry.data_memory
 
 	if ctx != null and ctx.spawn_manager != null:
-		ctx.spawn_manager.spawn_entity(entity, transform, ctx)
+		ctx.spawn_manager.spawn_entity(entity, transform, ctx, Entity.EntityType.HERO, true)
 	else:
 		parent.add_child(entity)
 		entity.transform = transform
