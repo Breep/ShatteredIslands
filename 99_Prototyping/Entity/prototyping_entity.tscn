@@ -236,6 +236,7 @@ _prototyping = true
 unique_name_in_owner = true
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
 _zoom_min = 1.0
+_locked = false
 
 [node name="SpawnManager" parent="Node3D" unique_id=562272433 node_paths=PackedStringArray("_entities_node", "_projectiles_node", "_spells_node") instance=ExtResource("6_egh8k")]
 unique_name_in_owner = true
@@ -381,4 +382,5 @@ shape = SubResource("BoxShape3D_awloh")
 [connection signal="toggled" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/GridContainer/AutoAttackCheckButton" to="." method="_on_auto_attack_check_button_toggled"]
 [connection signal="toggled" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/GridContainer/FamilyManagersCheckButton" to="." method="_on_family_managers_check_button_toggled"]
 
+[editable path="Node3D/CenterPointCamera"]
 [editable path="Node3D/TestingFloorFFA5"]

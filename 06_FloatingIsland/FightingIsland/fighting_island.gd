@@ -44,6 +44,7 @@ func set_active() -> void:
 	if _is_active: return
 	_is_active = true
 	_center_point_camera.set_active()
+	_center_point_camera.play_intro()
 
 
 func set_inactive() -> void:

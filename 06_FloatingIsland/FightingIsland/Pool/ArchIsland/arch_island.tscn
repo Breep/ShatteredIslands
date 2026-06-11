@@ -12,9 +12,9 @@ _fighting_area = NodePath("FightingArea")
 _center_point_camera = NodePath("CenterPointCamera")
 
 [node name="ArchIslandVisual" parent="." unique_id=1045725859 instance=ExtResource("1_hqc1e")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1605525, 0, -0.4017334)
 
 [node name="FightingArea" parent="." unique_id=2072382245 node_paths=PackedStringArray("_team_zones") instance=ExtResource("3_nh3rf")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 _team_zones = {
 1: NodePath("SpawnArea1"),
 2: NodePath("SpawnArea2")
@@ -33,6 +33,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14735508, 0.15762329, 14.42
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14735508, 0.15762329, -14.222393)
 
 [node name="CenterPointCamera" parent="." unique_id=823970387 instance=ExtResource("4_45gxp")]
+
+[node name="Camera3D" parent="CenterPointCamera/CenterPoint" parent_id_path=PackedInt32Array(823970387, 139917612) index="0" unique_id=1198164968]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 35, 0, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1357924681]
 environment = ExtResource("5_env")
