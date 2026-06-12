@@ -1,15 +1,16 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://c86ka4pl1rscw"]
 
+[ext_resource type="Texture2D" uid="uid://by2jnbs3rcl14" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Skills/Ultimate/skill_cleave.svg" id="1_ci3cq"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_nxcy8"]
 [ext_resource type="Script" uid="uid://cpj5xecs5w1as" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Skills/Ultimate/cleave.gd" id="2_gjc0g"]
 
 [sub_resource type="Resource" id="Resource_wehw2"]
 script = ExtResource("2_gjc0g")
-metadata/_custom_type_script = "uid://dupmg41oqkfp0"
 
 [resource]
 script = ExtResource("1_nxcy8")
 skill_id = 7
 name = "Cleave"
+portrait = ExtResource("1_ci3cq")
 skill_effect = SubResource("Resource_wehw2")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

@@ -24,3 +24,8 @@ func apply(ctx: SkillContext) -> void:
 			cb_vars[AutoAttackModifier.VarType.DAMAGE_ADD] = damage_inc
 		AudioManager.play_3d("thud", target.position)
 	_owner.auto_attack_modifier_registry.register_modifier(mod)
+
+
+func get_description() -> String:
+	return "Toutes les " + _value(_attack_number) + " auto-attaques, inflige " \
+		+ _value(_hpmax_percent) + "% des PV max de la cible en [[PHYSICAL_DAMAGE]] bonus."

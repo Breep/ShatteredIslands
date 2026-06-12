@@ -10,3 +10,9 @@ func apply(ctx: SkillContext) -> void:
 		Cleave.Modifier.AD: _damage_self_ad_percent,
 		Cleave.Modifier.HPMAX: _damage_target_hpmax_percent
 	})
+
+
+func get_description() -> String:
+	return "Frappe en arc les ennemis proches, infligeant " \
+		+ _value(_damage_self_ad_percent) + "% de ses dégâts d'attaque + " \
+		+ _value(_damage_target_hpmax_percent) + "% des PV max de la cible en [[PHYSICAL_DAMAGE]]."

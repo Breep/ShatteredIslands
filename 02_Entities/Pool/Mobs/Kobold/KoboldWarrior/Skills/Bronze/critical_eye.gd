@@ -12,3 +12,7 @@ func apply(ctx: SkillContext) -> void:
 	mod.id = &"Critical Eye"
 	mod.value = _crit_bonus
 	_owner.stat_modifiers_registry.register_modifier(mod)
+
+
+func get_description() -> String:
+	return "Gagne " + _value(_crit_bonus) + " de [[CRIT_CHANCE]]."

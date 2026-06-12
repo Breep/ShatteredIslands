@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://c18dpdl0syrsn"]
 
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_fqb4u"]
+[ext_resource type="Texture2D" uid="uid://dkn2td37wudgw" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Skills/Passive/skill_goblin_horde.svg" id="1_uwvxt"]
 [ext_resource type="Script" uid="uid://dpvgv3ct2qtid" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Skills/Passive/goblin_horde.gd" id="2_bcs8e"]
 
 [sub_resource type="Resource" id="Resource_25y08"]
@@ -11,5 +12,6 @@ script = ExtResource("1_fqb4u")
 skill_id = 6
 name = "Goblin Horde"
 description = "bla bla"
+portrait = ExtResource("1_uwvxt")
 skill_effect = SubResource("Resource_25y08")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

@@ -11,6 +11,11 @@ func apply(ctx: SkillContext) -> void:
 	_owner.stats.health_changed.connect(_on_stats_health_changed.bind(_owner))
 
 
+func get_description() -> String:
+	return "Lorsqu'il passe sous " + _value(_hp_threshold_percent) + "% de ses PV, " \
+		+ "entre en rage et gagne " + _value(_force_flat) + " [[STRENGTH]] (une seule fois)."
+
+
 func _on_stats_health_changed(_new_health: float, entity_owner: Entity) -> void:
 	if _rage_triggered: return
 	if entity_owner.stats.health < entity_owner.stats.health_max * _hp_threshold_percent / 100.0:
