@@ -21,3 +21,8 @@ func apply(ctx: SkillContext) -> void:
 			return
 		golem.alterations.inflict_status(target, Alteration.Type.STUN, _stun_duration, &"Coups gelants")
 	golem.auto_attack_modifier_registry.register_modifier(modifier)
+
+
+func get_description() -> String:
+	return "Chaque auto-attaque a " + _value(_chance_percent) + "% de chance d'infliger " \
+		+ "[[STUN]] " + _value(_stun_duration) + " s à la cible."

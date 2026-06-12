@@ -24,3 +24,9 @@ func apply(ctx: SkillContext) -> void:
 			golem.damage.direct(enemy, _damage, Utils.ActionType.DAMAGE_PHYSICAL, _IMPACT_ID)
 			golem.alterations.inflict_status(enemy, Alteration.Type.STUN, _stun_duration, _IMPACT_ID)
 	, _IMPACT_ID)
+
+
+func get_description() -> String:
+	return "Bondit puis, à l'atterrissage, inflige " + _value(_damage) + " de " \
+		+ "[[PHYSICAL_DAMAGE]] + [[STUN]] " + _value(_stun_duration) + " s à tous les " \
+		+ "ennemis proches."

@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://ccoupsgel2res"]
 
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
+[ext_resource type="Texture2D" uid="uid://hp7641rat2mo" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Skills/Bronze/skill_freezing_strike.svg" id="1_ufx0s"]
 [ext_resource type="Script" uid="uid://bv6vhw4cxkjmc" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Skills/Bronze/coups_gelants.gd" id="2_eff"]
 
 [sub_resource type="Resource" id="Resource_e"]
@@ -11,5 +12,6 @@ metadata/_custom_type_script = "uid://bcoupsgel1eff7"
 script = ExtResource("1_skill")
 name = "Coups gelants"
 description = "Chaque attaque a 50% de chance d'appliquer STUN 1 s sur la cible."
+portrait = ExtResource("1_ufx0s")
 skill_effect = SubResource("Resource_e")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

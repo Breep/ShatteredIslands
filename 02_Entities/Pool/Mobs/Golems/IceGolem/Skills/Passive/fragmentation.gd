@@ -22,6 +22,11 @@ func apply(ctx: SkillContext) -> void:
 	golem.death_modifiers_registry.register_modifier(modifier)
 
 
+func get_description() -> String:
+	return "À sa mort, explose et inflige " + _value(_damage) + " de [[PHYSICAL_DAMAGE]] " \
+		+ "+ [[STUN]] " + _value(_stun_duration) + " s à tous les ennemis proches."
+
+
 func _play_death_vfx(golem: Entity) -> void:
 	if _death_vfx == null:
 		return

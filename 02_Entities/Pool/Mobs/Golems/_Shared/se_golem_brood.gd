@@ -24,6 +24,11 @@ func apply(ctx: SkillContext) -> void:
 	golem.death_modifiers_registry.register_modifier(modifier)
 
 
+func get_description() -> String:
+	return "À sa mort, invoque " + _value(_count) + " petits golems de niveau " \
+		+ _value(_spawn_level) + " qui combattent jusqu'à leur propre mort."
+
+
 func _spawn_brood(golem: Entity) -> void:
 	if _golem_scene_path.is_empty():
 		return

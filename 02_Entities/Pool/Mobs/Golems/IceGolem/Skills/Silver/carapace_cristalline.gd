@@ -19,3 +19,8 @@ func apply(ctx: SkillContext) -> void:
 			return
 		golem.alterations.inflict_status(source, Alteration.Type.STUN, _stun_duration, &"Carapace cristalline")
 	)
+
+
+func get_description() -> String:
+	return "Chaque auto-attaque subie a " + _value(_chance_percent) + "% de chance " \
+		+ "d'infliger [[STUN]] " + _value(_stun_duration) + " s à l'attaquant."
