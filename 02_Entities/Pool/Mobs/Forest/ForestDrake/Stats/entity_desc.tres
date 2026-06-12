@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="EntityDesc" format=3 uid="uid://chlhtpwl6nsgw"]
 
+[ext_resource type="Texture2D" uid="uid://dsr0bggcn6dri" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Data/forest_dragon_portrait.png" id="1_kc8f1"]
 [ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="1_s5na4"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="2_rsrlv"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_qrmea"]
@@ -31,6 +32,8 @@
 
 [resource]
 script = ExtResource("1_s5na4")
+name = "Forest dragon"
+portrait = ExtResource("1_kc8f1")
 scene_path = "res://02_Entities/Pool/Mobs/Forest/ForestDrake/forest_drake.tscn"
 stats = Dictionary[int, ExtResource("3_qrmea")]({
 1: ExtResource("4_yg6ig"),

@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="EntityDesc" format=3 uid="uid://u5ir3c4mxsrj"]
 
 [ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="1_5bbmg"]
+[ext_resource type="Texture2D" uid="uid://c8y3lddtquqxu" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Data/skeleton_dragon_portrait.png" id="1_vaeqp"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="2_1uu4l"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_40nx0"]
 [ext_resource type="Resource" uid="uid://dlw6ngm3psgfy" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Skills/Passive/shattering_flight.tres" id="3_fwtbi"]
@@ -31,8 +32,9 @@
 
 [resource]
 script = ExtResource("1_5bbmg")
-scene_path = "res://02_Entities/Pool/Mobs/SkeletonDragon/skeleton_dragon.tscn"
 name = "Gideon The Dragon"
+portrait = ExtResource("1_vaeqp")
+scene_path = "res://02_Entities/Pool/Mobs/SkeletonDragon/skeleton_dragon.tscn"
 stats = Dictionary[int, ExtResource("3_40nx0")]({
 1: ExtResource("4_fwtbi"),
 2: ExtResource("5_tkl2o"),

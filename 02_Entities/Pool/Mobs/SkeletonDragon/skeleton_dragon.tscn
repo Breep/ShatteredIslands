@@ -252,13 +252,13 @@ shape = SubResource("CapsuleShape3D_jg7m6")
 transform = Transform3D(-0.029507272, 0.9986048, 0.043793697, -0.1230606, 0.039850198, -0.99159867, -0.99196017, -0.034648657, 0.12171305, 0.8640042, -2.110092, 0.08794079)
 
 [node name="ik_foot_f_r" parent="SkeletalDragonVisual/root/ik_foot_root" parent_id_path=PackedInt32Array(1358678233, 1234273656) index="1" unique_id=1887194801]
-transform = Transform3D(-0.2230854, 0.7615265, 0.60853076, -0.20939192, -0.6471264, 0.73306346, 0.9520434, 0.036114357, 0.30382216, -1.089154, -0.7804418, 0.16197076)
+transform = Transform3D(-0.22308539, 0.7615265, 0.60853076, -0.2093919, -0.6471264, 0.73306346, 0.9520434, 0.036114357, 0.30382216, -1.089154, -0.7804418, 0.16197076)
 
 [node name="ik_foot_b_l" parent="SkeletalDragonVisual/root/ik_foot_root" parent_id_path=PackedInt32Array(1358678233, 1234273656) index="2" unique_id=1335928782]
 transform = Transform3D(0.6226808, 0.0220429, -0.78216535, 0.5710964, 0.67052484, 0.47354552, 0.5348997, -0.7415596, 0.40493417, 0.6821973, 1.0209022, 0.10532488)
 
 [node name="ik_foot_b_r" parent="SkeletalDragonVisual/root/ik_foot_root" parent_id_path=PackedInt32Array(1358678233, 1234273656) index="3" unique_id=1666923042]
-transform = Transform3D(0.95171595, 0.03799972, -0.30461845, -0.29918587, -0.107361, -0.9481354, -0.06873305, 0.9934937, -0.090808176, -0.58209586, 0.4760998, 0.12288982)
+transform = Transform3D(0.95171595, 0.03799972, -0.30461845, -0.29918587, -0.107361, -0.9481353, -0.06873305, 0.9934937, -0.09080817, -0.58209586, 0.4760998, 0.12288982)
 
 [node name="HealthBarMarker" type="Marker3D" parent="SkeletalDragonVisual" unique_id=292615107]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.275872, 0)
