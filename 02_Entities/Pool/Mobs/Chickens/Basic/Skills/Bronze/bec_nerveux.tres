@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://cbecnerv2res7"]
 
+[ext_resource type="Texture2D" uid="uid://4thm6ouclboe" path="res://02_Entities/Pool/Mobs/Chickens/Basic/Skills/Bronze/skill_bec_nerveux.svg" id="1_idoq0"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
 [ext_resource type="Script" uid="uid://dw0c3iba0qs0v" path="res://02_Entities/Pool/Mobs/Chickens/Basic/Skills/Bronze/bec_nerveux.gd" id="2_eff"]
 
@@ -11,5 +12,6 @@ metadata/_custom_type_script = "uid://bbecnerveux1eff"
 script = ExtResource("1_skill")
 name = "Bec nerveux"
 description = "Spawn : donne 1 Block à un allié aléatoire."
+portrait = ExtResource("1_idoq0")
 skill_effect = SubResource("Resource_e")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

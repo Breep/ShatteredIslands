@@ -21,3 +21,8 @@ func apply(ctx: SkillContext) -> void:
 	chicken.battle_callback_registry.register_oneshot(_duration, func() -> void:
 		chicken.stat_modifiers_registry.remove_modifier(EntityStats.StatType.MS, "CourseFolle")
 	)
+
+
+func get_description() -> String:
+	return "À son apparition, gagne +" + _value(_ms_bonus_percent) + "% de vitesse de " \
+		+ "déplacement pendant " + _value(_duration) + " s."

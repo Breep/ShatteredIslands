@@ -15,3 +15,7 @@ func apply(ctx: SkillContext) -> void:
 		if is_instance_valid(ally):
 			ally.alterations.add_stack(Alteration.Type.BLOCK, _block, chicken, &"Petite horde")
 	chicken.death_modifiers_registry.register_modifier(modifier)
+
+
+func get_description() -> String:
+	return "À sa mort, donne " + _value(_block) + " [[BLOCK]] à l'allié le plus proche."
