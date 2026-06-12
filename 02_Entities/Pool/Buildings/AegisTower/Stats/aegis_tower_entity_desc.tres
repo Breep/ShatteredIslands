@@ -31,8 +31,8 @@
 
 [resource]
 script = ExtResource("1_ms22t")
-scene_path = "res://02_Entities/Pool/Buildings/AegisTower/aegis_tower.tscn"
 name = "Aegis Tower"
+scene_path = "res://02_Entities/Pool/Buildings/AegisTower/aegis_tower.tscn"
 default_category = 4
 stats = Dictionary[int, ExtResource("3_88ouh")]({
 1: ExtResource("4_5jh8m"),

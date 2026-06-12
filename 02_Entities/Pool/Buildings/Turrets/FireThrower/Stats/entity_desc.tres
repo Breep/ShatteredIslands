@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="EntityDesc" format=3 uid="uid://b0t2j5enr1m7m"]
 
 [ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="1_d38ms"]
+[ext_resource type="Texture2D" uid="uid://b6kg02t17pcc" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Data/flamme_thrower_portrait.png" id="1_lyflw"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="2_jkyec"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_nnba6"]
 [ext_resource type="Resource" uid="uid://cprp7yxi6v71l" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Stats/stats_lvl_01.tres" id="4_qagur"]
@@ -32,6 +33,7 @@
 [resource]
 script = ExtResource("1_d38ms")
 name = "Fire Thrower Turret"
+portrait = ExtResource("1_lyflw")
 scene_path = "res://02_Entities/Pool/Buildings/Turrets/FireThrower/turret_firethrower.tscn"
 default_category = 4
 stats = Dictionary[int, ExtResource("3_nnba6")]({

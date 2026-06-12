@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="EntityDesc" format=3 uid="uid://4vi18nh1d1dn"]
 
+[ext_resource type="Texture2D" uid="uid://c1a58jbmu7cc6" path="res://02_Entities/Pool/Buildings/ChickenCoop/Data/chicken_coop_portrait.png" id="1_6eqnl"]
 [ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="1_w253t"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="2_siu7e"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_ftbni"]
@@ -31,8 +32,9 @@
 
 [resource]
 script = ExtResource("1_w253t")
-scene_path = "res://02_Entities/Pool/Buildings/ChickenCoop/chicken_coop.tscn"
 name = "Chicken Coop"
+portrait = ExtResource("1_6eqnl")
+scene_path = "res://02_Entities/Pool/Buildings/ChickenCoop/chicken_coop.tscn"
 default_category = 4
 stats = Dictionary[int, ExtResource("3_ftbni")]({
 1: ExtResource("4_bkhsg"),

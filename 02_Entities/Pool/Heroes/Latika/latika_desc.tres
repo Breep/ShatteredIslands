@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="1_desc"]
 [ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://02_Entities/_Shared/hero_desc.gd" id="1_hero"]
+[ext_resource type="Texture2D" uid="uid://d1e0ogx2plmkc" path="res://02_Entities/Pool/Heroes/Latika/Data/hero_portrait_latika.png" id="1_pxqef"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="2_es"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="2_psofn"]
-[ext_resource type="Texture2D" uid="uid://epdfjjie1s85" path="res://02_Entities/Pool/Heroes/Latika/Data/latika_portrait.png" id="2_q20ea"]
 [ext_resource type="Resource" uid="uid://dlatikastat01" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_01.tres" id="3_l01"]
 [ext_resource type="Resource" uid="uid://dlatikastat02" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_02.tres" id="3_l02"]
 [ext_resource type="Resource" uid="uid://dlatikastat03" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_03.tres" id="3_l03"]
@@ -33,7 +33,7 @@ script = ExtResource("1_hero")
 id = 2
 category = "Range / DPS"
 name = "Latika"
-portrait = ExtResource("2_q20ea")
+portrait = ExtResource("1_pxqef")
 description = "L'Enfant des Loups — DPS distance / carry mono-cible. Dualité prédateur solitaire / chef de meute."
 preview_scene = ExtResource("5_prev")
 default_category = 0
