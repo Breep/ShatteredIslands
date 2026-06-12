@@ -1,11 +1,7 @@
 [gd_scene format=3 uid="uid://b6lyxftbneqy"]
 
+[ext_resource type="Texture2D" uid="uid://epdfjjie1s85" path="res://02_Entities/Pool/Heroes/Latika/Data/latika_portrait.png" id="2_b2yhr"]
 [ext_resource type="Script" uid="uid://d0bm2pkkcp3db" path="res://04_UI/InGame/HeroSelection/ui_hero_portrait_button.gd" id="3_uh3hr"]
-[ext_resource type="Shader" uid="uid://ba1avekvq4s1o" path="res://22_VFX/VFX_2D/UI/vortex_selector_v2.gdshader" id="4_6i4xs"]
-[ext_resource type="Texture2D" uid="uid://251if7lh55vt" path="res://20_Data/Texture/Kenney2/scratch 3.png" id="5_6bbru"]
-[ext_resource type="Texture2D" uid="uid://1bc5vvkoe4ur" path="res://20_Data/Heroes/Portraits/darkknight.png" id="6_kdn62"]
-[ext_resource type="Script" uid="uid://dqqxecxho5t70" path="res://22_VFX/VFX_2D/UI/react_mouse.gd" id="7_1r36m"]
-[ext_resource type="Texture2D" uid="uid://d1e0ogx2plmkc" path="res://02_Entities/Pool/Heroes/Latika/Data/hero_portrait_latika.png" id="8_nbu27"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lwqqh"]
 
@@ -25,29 +21,6 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 corner_detail = 10
-
-[sub_resource type="Gradient" id="Gradient_1d3l3"]
-offsets = PackedFloat32Array(0, 0.235294, 0.463235, 0.698529, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.227451, 0, 0, 1, 0.16765, 0.118264, 0.473579, 1, 0, 0, 0, 1, 0.541176, 0, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_20ndy"]
-gradient = SubResource("Gradient_1d3l3")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pbbth"]
-shader = ExtResource("4_6i4xs")
-shader_parameter/speed = 5.0
-shader_parameter/wave_frequency = Vector2(10, 6)
-shader_parameter/wave_amplitude = 0.05
-shader_parameter/noise_texture = ExtResource("5_6bbru")
-shader_parameter/color_gradient = SubResource("GradientTexture1D_20ndy")
-shader_parameter/mouse_pos = Vector2(0, 0)
-shader_parameter/node_size = Vector2(0, 0)
-shader_parameter/effect_radius = 0.25
-shader_parameter/repulsion_force = 0.2
-shader_parameter/glow_intensity = 0.0
-shader_parameter/seal_points = 5.0
-shader_parameter/seal_sharpness = 0.15
-shader_parameter/max_zoom = 4.0
 
 [node name="HeroPortraitButton" type="Button" unique_id=563825061 node_paths=PackedStringArray("_portrait")]
 custom_minimum_size = Vector2(128, 128)
@@ -77,7 +50,7 @@ theme_override_constants/margin_bottom = 5
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
-texture = ExtResource("8_nbu27")
+texture = ExtResource("2_b2yhr")
 expand_mode = 1
 stretch_mode = 5
 
@@ -98,14 +71,5 @@ theme_override_constants/margin_bottom = -5
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_svo5a")
-
-[node name="shader" type="TextureRect" parent="MarginContainer" unique_id=1610693461]
-visible = false
-material = SubResource("ShaderMaterial_pbbth")
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("6_kdn62")
-expand_mode = 1
-script = ExtResource("7_1r36m")
 
 [connection signal="pressed" from="." to="." method="_on_button_pressed"]
