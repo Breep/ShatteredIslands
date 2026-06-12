@@ -15,3 +15,8 @@ func apply(ctx: SkillContext) -> void:
 			if is_instance_valid(enemy):
 				owner.alterations.inflict_condition_stacks(enemy, _ignite_stacks, Alteration.Type.IGNITE, &"DiffuseHeat")
 	, true)
+
+
+func get_description() -> String:
+	return "Toutes les " + _value(_period) + " s, applique " + _value(_ignite_stacks) \
+		+ " stacks d'[[IGNITE]] à tous les ennemis."

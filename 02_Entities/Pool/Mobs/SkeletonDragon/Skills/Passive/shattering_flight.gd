@@ -42,3 +42,16 @@ func apply(ctx: SkillContext) -> void:
 			if is_instance_valid(enemy):
 				dragon.damage.direct(enemy, _landing_damage, Utils.ActionType.DAMAGE_MAGICAL, &"ShatteringFlight")
 	)
+
+
+func get_description() -> String:
+	return "Quand ses PV franchissent un nouveau palier (" + _palier_list() + "), s'envole " \
+		+ "puis, à l'atterrissage, inflige " + _value(_landing_damage) + " de [[MAGICAL_DAMAGE]] " \
+		+ "à tous les ennemis."
+
+
+func _palier_list() -> String:
+	var parts: PackedStringArray = []
+	for threshold: float in _thresholds_percent:
+		parts.append(_value(threshold) + "%")
+	return " / ".join(parts)

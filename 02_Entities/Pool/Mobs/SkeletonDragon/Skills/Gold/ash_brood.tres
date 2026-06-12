@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://c6qxrdvypk21a"]
 
+[ext_resource type="Texture2D" uid="uid://ctjknhrusje3m" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Skills/Gold/skill_ash_brood.svg" id="1_fdxmu"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_umqfb"]
 [ext_resource type="Script" uid="uid://bve0hhe0t3g5c" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Skills/Gold/ash_brood.gd" id="2_ogeq3"]
 
@@ -11,5 +12,6 @@ metadata/_custom_type_script = "uid://bve0hhe0t3g5c"
 script = ExtResource("1_umqfb")
 skill_id = 4
 name = "Ash Brood"
+portrait = ExtResource("1_fdxmu")
 skill_effect = SubResource("Resource_fdxmu")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

@@ -26,6 +26,11 @@ func apply(ctx: SkillContext) -> void:
 	ability.flight_started.connect(func() -> void: _spawn_golems(dragon))
 
 
+func get_description() -> String:
+	return "À chaque envol (Vol fracassant), invoque " + _value(_CORNERS.size()) + " Golems " \
+		+ "de magma dans des coins opposés de l'arène, montés à son niveau."
+
+
 func _spawn_golems(dragon: SkeletonDragon) -> void:
 	var context: EntityContext = dragon.get_context()
 	if context.spawn_manager == null or context.arena_zone_manager == null:

@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://d3j3hjw8vce8e"]
 
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_y21t3"]
+[ext_resource type="Texture2D" uid="uid://crjshmhryhk1d" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Skills/Bronze/skill_shockwave.svg" id="1_ykuuj"]
 [ext_resource type="Script" uid="uid://2kqe04ejvii2" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Skills/Bronze/shockwave.gd" id="2_6u16n"]
 
 [sub_resource type="Resource" id="Resource_ykuuj"]
@@ -10,5 +11,6 @@ metadata/_custom_type_script = "uid://2kqe04ejvii2"
 [resource]
 script = ExtResource("1_y21t3")
 name = "Shockwave"
+portrait = ExtResource("1_ykuuj")
 skill_effect = SubResource("Resource_ykuuj")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://buujpiwx3nfjp"]
 
+[ext_resource type="Texture2D" uid="uid://brl5b2c2xsmpd" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Skills/Silver/skill_diffuse_heat.svg" id="1_45dix"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_dhq3n"]
 [ext_resource type="Script" uid="uid://cytmge7ueqe" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Skills/Silver/diffuse_heat.gd" id="2_xobq4"]
 
@@ -12,5 +13,6 @@ metadata/_custom_type_script = "uid://cytmge7ueqe"
 script = ExtResource("1_dhq3n")
 skill_id = 2
 name = "Diffuse Heat"
+portrait = ExtResource("1_45dix")
 skill_effect = SubResource("Resource_45dix")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

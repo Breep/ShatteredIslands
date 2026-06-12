@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://dlw6ngm3psgfy"]
 
+[ext_resource type="Texture2D" uid="uid://h5xa1yygkyl6" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Skills/Passive/skill_shattering_flight.svg" id="1_hc0en"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_iqw55"]
 [ext_resource type="Script" uid="uid://c2ky1b2fxkegc" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Skills/Passive/shattering_flight.gd" id="2_fdtu1"]
 
@@ -12,5 +13,6 @@ metadata/_custom_type_script = "uid://c2ky1b2fxkegc"
 script = ExtResource("1_iqw55")
 skill_id = 6
 name = "Shattering Flight"
+portrait = ExtResource("1_hc0en")
 skill_effect = SubResource("Resource_hc0en")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

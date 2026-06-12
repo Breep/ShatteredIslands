@@ -43,6 +43,12 @@ func apply(ctx: SkillContext) -> void:
 	, CONNECT_ONE_SHOT)
 
 
+func get_description() -> String:
+	return "Souffle qui balaie l'arène : chaque ennemi touché reçoit " + _value(_tick_count) \
+		+ " salves de " + _value(_ignite_stacks_per_tick) + " stacks d'[[IGNITE]] " \
+		+ "(une fois par incantation)."
+
+
 # Entry-triggered Ignite DoT: _tick_count applications of _ignite_stacks_per_tick,
 # spaced by _tick_interval on the deterministic clock.
 func _apply_breath_ignite(dragon: SkeletonDragon, enemy: Entity) -> void:

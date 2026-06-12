@@ -35,6 +35,12 @@ func apply(ctx: SkillContext) -> void:
 	)
 
 
+func get_description() -> String:
+	return "À chaque atterrissage (Vol fracassant), dissipe " + _value(_debuff_removal_ratio * 100) \
+		+ "% de ses malus offensifs ([[POISON_STACK]], [[IGNITE]], [[NECROSIS]]) et gagne " \
+		+ _value(_regen_stacks) + " [[REGEN]] pendant " + _value(_regen_duration) + " s."
+
+
 func _shed_debuffs(dragon: SkeletonDragon) -> void:
 	for debuff: Alteration.Type in _DAMAGE_DEBUFFS:
 		var stacks: float = dragon.alterations.get_stacks(debuff)
