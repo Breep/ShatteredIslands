@@ -30,6 +30,7 @@ enum Type {
 	PROGRESSION = 20,
 	SKILL = 21,
 	AURA = 22,
+	HIT_MARKER = 23,
 }
 
 # Chemins (String) volontairement dans un const, et non des load() dans un static var :
@@ -61,6 +62,7 @@ const _SCENE_PATHS := {
 	Type.PROGRESSION:          "res://02_Entities/_Shared/Components/Progression/progression_component.tscn",
 	Type.SKILL:                "res://02_Entities/_Shared/Components/Skill/skill_component.tscn",
 	Type.AURA:                 "res://02_Entities/_Shared/Components/Aura/aura_component.tscn",
+	Type.HIT_MARKER:           "res://02_Entities/_Shared/Components/HitMarker/hit_marker_component.tscn",
 }
 
 static var _scene_cache: Dictionary[Type, PackedScene] = {}

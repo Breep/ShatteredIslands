@@ -1,16 +1,10 @@
-[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://latbeastreflextrs"]
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://dtkwngsahs4nk"]
 
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
-[ext_resource type="Script" uid="uid://latbeastreflexeff" path="res://02_Entities/Pool/Heroes/Latika/Skills/Silver/bestial_reflex.gd" id="2_eff"]
+[ext_resource type="Script" uid="uid://dtkwngsahsoa6" path="res://02_Entities/Pool/Heroes/Latika/Skills/Silver/bestial_reflex.gd" id="2_eff"]
 
 [sub_resource type="Resource" id="Resource_bestialreflex"]
 script = ExtResource("2_eff")
-_hp_threshold_percent = 30.0
-_heal_amount = 1000.0
-_dash_distance = 4.0
-_dash_speed = 20.0
-_untargetable_duration = 2.0
-_cooldown = 15.0
 metadata/_custom_type_script = "uid://latbeastreflexeff"
 
 [resource]

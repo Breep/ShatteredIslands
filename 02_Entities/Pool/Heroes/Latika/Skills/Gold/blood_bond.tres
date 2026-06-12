@@ -1,13 +1,10 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://ce2ydmnp2xu3"]
 
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
-[ext_resource type="Script" uid="uid://latbloodbondeff" path="res://02_Entities/Pool/Heroes/Latika/Skills/Gold/blood_bond.gd" id="2_eff"]
+[ext_resource type="Script" uid="uid://ce2ydmnp2iip" path="res://02_Entities/Pool/Heroes/Latika/Skills/Gold/blood_bond.gd" id="2_eff"]
 
 [sub_resource type="Resource" id="Resource_bloodbond"]
 script = ExtResource("2_eff")
-_required_pack_size = 3
-_global_as_percent = 20.0
-_damage_percent = 25.0
 metadata/_custom_type_script = "uid://latbloodbondeff"
 
 [resource]
