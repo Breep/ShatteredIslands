@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="EntityDesc" format=3 uid="uid://duw0xcgf3d40a"]
 
 [ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="1_mwo7f"]
+[ext_resource type="Texture2D" uid="uid://ctk50rguymg22" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Data/treant_portrait.png" id="1_nb14d"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="2_g1qfc"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_onq14"]
 [ext_resource type="Resource" uid="uid://c4lrw4ic5oeox" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Stats/stats_lvl_01.tres" id="4_t1uwf"]
@@ -31,8 +32,9 @@
 
 [resource]
 script = ExtResource("1_mwo7f")
-scene_path = "res://02_Entities/Pool/Mobs/Forest/SmallTreant/small_treant.tscn"
 name = "Small Treant"
+portrait = ExtResource("1_nb14d")
+scene_path = "res://02_Entities/Pool/Mobs/Forest/SmallTreant/small_treant.tscn"
 stats = Dictionary[int, ExtResource("3_onq14")]({
 1: ExtResource("4_t1uwf"),
 2: ExtResource("5_premn"),
