@@ -62,7 +62,7 @@ func _ready() -> void:
 	GameManager.game_state_changed.connect(_on_game_state_changed)
 	Events.entity_clicked.connect(_on_entity_clicked)
 	Events.furniture_clicked.connect(_on_furniture_clicked)
-	Events.ui_skill_picked.connect(_on_ui_skill_picked)
+	Events.skill_selected.connect(_on_skill_selected)
 
 	set_process(false)
 
@@ -263,7 +263,7 @@ func _on_furniture_clicked(furniture) -> void:
 	_validate_and_advance(TutorialStep.ValidationEvent.FURNITURE_CLICKED, filter)
 
 
-func _on_ui_skill_picked(_skill_id) -> void:
+func _on_skill_selected(_skill: Skill) -> void:
 	if not Settings.is_tutorial_enabled(): return
 	_validate_and_advance(TutorialStep.ValidationEvent.UI_SKILL_PICKED)
 

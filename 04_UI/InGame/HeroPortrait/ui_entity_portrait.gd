@@ -48,16 +48,32 @@ const _STAT_LISTS: Dictionary = {
 	],
 }
 
-# Boutons skill principaux (5, communs mobs + héros) : { bouton unique-name : {icon, type} }
-const _PRIMARY_SKILLS: Dictionary = {
-	"PassiveButton": {"icon": "PassiveIcon", "type": Skill.Type.PASSIVE},
-	"BronzeButton": {"icon": "BronzeIcon", "type": Skill.Type.BRONZE},
-	"SilverButton": {"icon": "SilverIcon", "type": Skill.Type.SILVER},
-	"GoldButton": {"icon": "GoldIcon", "type": Skill.Type.GOLD},
-	"UltimateButton": {"icon": "UltimateIcon", "type": Skill.Type.ULTIMATE},
+# Tous les slots skill, keyés par SkillID (le slot fin BRONZE1/BRONZE2/... distingue
+# les deux skills d'un même tier chez un héros) : { bouton unique-name : {icon, id} }
+const _SKILL_SLOTS: Dictionary = {
+	"PassiveButton":  {"icon": "PassiveIcon",  "id": Skill.SkillID.PASSIVE},
+	"BronzeButton":   {"icon": "BronzeIcon",   "id": Skill.SkillID.BRONZE1},
+	"BronzeButton2":  {"icon": "BronzeIcon2",  "id": Skill.SkillID.BRONZE2},
+	"SilverButton":   {"icon": "SilverIcon",   "id": Skill.SkillID.SILVER1},
+	"SilverButton2":  {"icon": "SilverIcon2",  "id": Skill.SkillID.SILVER2},
+	"GoldButton":     {"icon": "GoldIcon",     "id": Skill.SkillID.GOLD1},
+	"GoldButton2":    {"icon": "GoldIcon2",    "id": Skill.SkillID.GOLD2},
+	"UltimateButton": {"icon": "UltimateIcon", "id": Skill.SkillID.ULTIMATE},
 }
 
-# Boutons de 2e choix par tier : masqués tant que le skill_tree héros n'est pas conçu.
+# Mapping SkillID -> Type pour résoudre dans le roaster (Type-keyé) côté non-héros.
+const _SKILLID_TO_TYPE: Dictionary[Skill.SkillID, Skill.Type] = {
+	Skill.SkillID.PASSIVE:  Skill.Type.PASSIVE,
+	Skill.SkillID.BRONZE1:  Skill.Type.BRONZE,
+	Skill.SkillID.BRONZE2:  Skill.Type.BRONZE,
+	Skill.SkillID.SILVER1:  Skill.Type.SILVER,
+	Skill.SkillID.SILVER2:  Skill.Type.SILVER,
+	Skill.SkillID.GOLD1:    Skill.Type.GOLD,
+	Skill.SkillID.GOLD2:    Skill.Type.GOLD,
+	Skill.SkillID.ULTIMATE: Skill.Type.ULTIMATE,
+}
+
+# 2e choix par tier : visibles uniquement pour les héros (2 skills par tier).
 const _SECONDARY_BUTTONS: Array[String] = ["BronzeButton2", "SilverButton2", "GoldButton2"]
 #endregion
 
@@ -78,10 +94,10 @@ const _SECONDARY_BUTTONS: Array[String] = ["BronzeButton2", "SilverButton2", "Go
 #region ============================== Private variables ==============================
 var _entity: Entity = null
 var _stat_connections: Array[Dictionary] = [] # {sig, cb} branchés sur _entity.stats
-var _skill_buttons: Dictionary = {} # TextureButton -> {type, icon, ...}
+var _skill_buttons: Dictionary = {} # TextureButton -> {id, icon, skill}
 var _button_tweens: Dictionary = {} # TextureButton -> Tween (feedback hover/press)
 var _showing_desc: bool = false
-var _current_desc_type: Skill.Type = Skill.Type.PASSIVE
+var _current_desc_btn: TextureButton = null
 var _fade_tween: Tween
 var _panel_open: bool = false
 var _panel_tween: Tween
@@ -93,7 +109,7 @@ var _last_entity_click_frame: int = -1
 #region ============================== Node base functions ==============================
 func _ready() -> void:
 	_collect_skill_buttons()
-	_hide_secondary_buttons()
+	_set_secondary_visible(false)
 	_apply_tooltips()
 	_show_stats_instant()
 	_close_panel_instant()
@@ -196,12 +212,29 @@ func _bind_level() -> void:
 
 
 func _bind_skills() -> void:
-	var skill_comp: SkillComponent = _entity.skill
+	var is_hero: bool = _entity.entity_desc is HeroDesc
+	_set_secondary_visible(is_hero)
 	for btn: TextureButton in _skill_buttons:
 		var data: Dictionary = _skill_buttons[btn]
-		var skill: Skill = skill_comp.roaster.get(data["type"]) if skill_comp != null else null
-		var icon: TextureRect = data["icon"]
-		icon.texture = skill.portrait if skill != null else null
+		var skill: Skill = _resolve_skill(data["id"], is_hero)
+		data["skill"] = skill
+		data["icon"].texture = skill.portrait if skill != null else null
+
+
+# Héros : skills d'affichage dans HeroDesc.hero_skills (8 slots fins). Autres entités :
+# roaster du SkillComponent (Type-keyé, une skill par tier).
+func _resolve_skill(id: Skill.SkillID, is_hero: bool) -> Skill:
+	if is_hero:
+		return (_entity.entity_desc as HeroDesc).hero_skills.get(id)
+	var skill_comp: SkillComponent = _entity.skill
+	return skill_comp.roaster.get(_SKILLID_TO_TYPE[id]) if skill_comp != null else null
+
+
+func _set_secondary_visible(is_visible: bool) -> void:
+	for btn_name: String in _SECONDARY_BUTTONS:
+		var btn: Control = get_node_or_null("%" + btn_name)
+		if btn != null:
+			btn.visible = is_visible
 
 
 func _unbind() -> void:
@@ -223,13 +256,10 @@ func _unbind() -> void:
 #endregion
 
 #region ============================== Private functions — skill panel swap ==============================
-func _show_desc(skill_type: Skill.Type) -> void:
-	_current_desc_type = skill_type
+func _show_desc(btn: TextureButton) -> void:
+	_current_desc_btn = btn
 	_showing_desc = true
-	# NB : on ne gère pas encore le déverrouillage héros (skill tree) — tout le
-	# monde est supposé avoir ses 5 skills.
-	var skill_comp: SkillComponent = _entity.skill if is_instance_valid(_entity) else null
-	var skill: Skill = skill_comp.roaster.get(skill_type) if skill_comp != null else null
+	var skill: Skill = _skill_buttons[btn]["skill"]
 	if skill != null:
 		_skill_name_label.text = skill.name
 		_skill_desc_label.text = _skill_desc_text(skill)
@@ -324,10 +354,10 @@ func _maybe_close_panel() -> void:
 
 #region ============================== Private functions — buttons ==============================
 func _collect_skill_buttons() -> void:
-	for btn_name: String in _PRIMARY_SKILLS:
+	for btn_name: String in _SKILL_SLOTS:
 		var btn: TextureButton = get_node("%" + btn_name)
-		var icon: TextureRect = get_node("%" + str(_PRIMARY_SKILLS[btn_name]["icon"]))
-		_skill_buttons[btn] = {"type": _PRIMARY_SKILLS[btn_name]["type"], "icon": icon}
+		var icon: TextureRect = get_node("%" + str(_SKILL_SLOTS[btn_name]["icon"]))
+		_skill_buttons[btn] = {"id": _SKILL_SLOTS[btn_name]["id"], "icon": icon, "skill": null}
 		btn.pressed.connect(_on_skill_button_pressed.bind(btn))
 		btn.mouse_entered.connect(_on_button_hover.bind(btn, true))
 		btn.mouse_exited.connect(_on_button_hover.bind(btn, false))
@@ -335,16 +365,10 @@ func _collect_skill_buttons() -> void:
 		btn.button_up.connect(_on_button_up.bind(btn))
 
 
-func _hide_secondary_buttons() -> void:
-	for btn_name: String in _SECONDARY_BUTTONS:
-		var btn: Control = get_node_or_null("%" + btn_name)
-		if btn != null:
-			btn.hide()
-
-
 func _is_over_skill_button() -> bool:
 	var mouse: Vector2 = get_global_mouse_position()
 	for btn: Control in _skill_buttons:
+		if not btn.visible: continue
 		if btn.get_global_rect().has_point(mouse):
 			return true
 	return false
@@ -418,11 +442,10 @@ func _on_entity_died(_self_ref: Entity) -> void:
 
 
 func _on_skill_button_pressed(btn: TextureButton) -> void:
-	var skill_type: Skill.Type = _skill_buttons[btn]["type"]
-	if _showing_desc and _current_desc_type == skill_type:
+	if _showing_desc and _current_desc_btn == btn:
 		_show_stats()
 	else:
-		_show_desc(skill_type)
+		_show_desc(btn)
 
 
 func _on_button_hover(btn: Control, entered: bool) -> void:

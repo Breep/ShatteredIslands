@@ -29,7 +29,7 @@ func init(player: Player) -> void:
 	_player_owner = player
 	_player_owner.lvl_changed.connect(_on_player_owner_lvl_changed)
 	_check_skills(player.lvl)
-	Events.ui_skill_picked.connect(_on_ui_skill_picked)
+	Events.skill_selected.connect(_on_skill_selected)
 
 # ============================== Private functions ==============================
 
@@ -53,7 +53,8 @@ func _on_player_owner_lvl_changed(_player_ref: Player, lvl: int) -> void:
 	_check_skills(lvl)
 
 
-func _on_ui_skill_picked(skill_id: Skill.SkillID) -> void:
+func _on_skill_selected(skill: Skill) -> void:
+	var skill_id := skill.skill_id
 	var skill_type: Skill.Type
 	if skill_id == Skill.SkillID.BRONZE1 or skill_id == Skill.SkillID.BRONZE2:
 		skill_type = Skill.Type.BRONZE

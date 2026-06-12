@@ -58,9 +58,9 @@ signal entity_drag_stopped(entity: Entity)
 
 # ============================== UI ==============================
 
-signal ui_skill_picked(skill_id: Skill.SkillID)
-func signal_ui_skill_picked(skill_id: Skill.SkillID) -> void:
-	ui_skill_picked.emit(skill_id)
+signal skill_selected(skill: Skill)
+func signal_skill_selected(skill: Skill) -> void:
+	skill_selected.emit(skill)
 
 signal scene_switched(floating_island: FloatingIsland)
 func signal_scene_switched(floating_island: FloatingIsland) -> void:

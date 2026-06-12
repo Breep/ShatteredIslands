@@ -67,7 +67,7 @@ func _on_set_level_pressed() -> void:
 
 
 func _on_show_desc_pressed() -> void:
-	_portrait._show_desc(Skill.Type.BRONZE)
+	_portrait._show_desc(_portrait.get_node("%BronzeButton"))
 
 
 func _on_show_stats_pressed() -> void:
