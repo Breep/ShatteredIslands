@@ -2,13 +2,12 @@ class_name ShatteringFlightAbility
 extends Node
 
 # Orchestrates the dragon's "Vol fracassant" passive on the deterministic combat
-# clock: take off, become invulnerable, traverse a flight path above the arena while
-# attacking from the air (aerial enrage: doubled attack speed + random frontal-arc
-# targeting), then land and unleash the impact effects (MAGICAL_DAMAGE AOE, plus
-# talent-gated stun / golem summons). All timing is tick-based (driven from
-# SkeletonDragon.process_tick) so the landing moment is reproducible and coop
-# sync-safe. Aerial combat uses only existing public APIs (AutoAttack, Target,
-# stat modifiers registry) — it touches no shared component.
+# clock: take off, become invulnerable, fly to the enemy backline and sweep it
+# left↔right from the air (attacking within a frontal-arc cone), then land and
+# unleash the impact effects (MAGICAL_DAMAGE AOE, plus talent-gated golem summons).
+# All timing is tick-based (driven from SkeletonDragon.process_tick) so the landing
+# moment is reproducible and coop sync-safe. Aerial combat uses only existing public
+# APIs (AutoAttack, Target, stat modifiers registry) — it touches no shared component.
 
 #region Signals
 signal flight_started
@@ -17,38 +16,23 @@ signal flight_landed
 #endregion
 
 #region Enums
-enum Phase { IDLE, TAKING_OFF, FLYING, LANDING }
+enum Phase { IDLE, TAKING_OFF, FLY_IN, SWEEP, FLY_OUT, LANDING }
 #endregion
 
 #region Export
 @export var _owner: SkeletonDragon
-## Procedural flight-path shape, generated at takeoff and flown relative to the takeoff pose.
-@export var _flight_profile: FlightPathProfile
-@export var _flight_duration: float = 5.0
-## Fraction of the flight spent easing in/out at each end (0 = constant speed).
-@export_range(0.0, 0.5, 0.01) var _ease_edge: float = 0.2
 ## Ground-contact frame as a fraction of the landing clip (0..1), scale-independent
 ## — same convention as EntityDesc.aa_X_release_normalized.
 @export_range(0.0, 1.0, 0.01) var _landing_impact_normalized: float = 0.6
 
-@export_group("Banking")
-## Lean angle into turns (degrees). 0 = stays flat.
-@export_range(0.0, 80.0, 1.0) var _bank_degrees: float = 40.0
-## Reverse the lean partway through the flight (the dragon rolls level, then the other way).
-@export var _bank_flip: bool = true
-## Where the flip happens, as a fraction of the flight [0..1].
-@export_range(0.0, 1.0, 0.01) var _bank_flip_at: float = 0.5
-## Half-width of the smooth roll-through-level transition around the flip point.
-@export_range(0.01, 0.3, 0.01) var _bank_flip_width: float = 0.08
-
-## Aerial enrage (active during the FLYING phase only).
+## Aerial enrage (active during the SWEEP phase only).
 @export var _aerial_attack_speed_mult: float = 0.0 ## MULT on AS → 0.0 = base speed, 1.0 = x2
 @export_range(0.0, 180.0, 1.0) var _frontal_arc_degrees: float = 60.0
 ## Downward tilt of the targeting cone — the dragon flies above and aims at the ground,
 ## so the cone points forward-and-down. Higher = more vertical (targets straight below).
 @export_range(0.0, 90.0, 1.0) var _aim_pitch_degrees: float = 45.0
 
-@export_group("Backline sweep (FLYING)")
+@export_group("Backline sweep")
 ## Altitude above the arena floor while sweeping.
 @export var _fly_altitude: float = 8.0
 ## How far the sweep line is pulled inward from the enemy back edge.
@@ -57,24 +41,19 @@ enum Phase { IDLE, TAKING_OFF, FLYING, LANDING }
 @export var _sweep_half_width: float = 8.0
 ## Seconds for one full left→right→left cycle (higher = slower sweep).
 @export var _sweep_period: float = 6.0
+## Number of extremity→extremity passes before landing (when not held by golems).
+@export var _sweep_passes: int = 2
 ## Bulge of the arc at mid-sweep (toward the enemy back wall), in metres. Keep < _back_inset.
 @export var _arc_depth: float = 2.0
-## Ease-in duration from the takeoff spot to the sweep line at FLYING start.
-@export var _fly_in_seconds: float = 1.0
+## Transit speed (m/s) to/from the sweep line — travel time scales with the distance.
+@export var _fly_transit_speed: float = 6.0
 ## Safety cap: even while held by the golems, the dragon lands after this many seconds.
 @export var _max_hold_seconds: float = 20.0
 #endregion
 
 #region Private vars
 var _anim: SkeletonDragonAnimationComponent
-# Curve generated from _flight_profile at takeoff, flown in the takeoff-local space.
-var _curve: Curve3D
-# Takeoff pose (position + facing, upright) frozen at takeoff, so the curve is flown as a
-# maneuver relative to it (no feedback from moving the owner along it).
-var _takeoff_origin: Transform3D
 
-# Metres sampled ahead on the curve to orient the dragon toward its travel.
-const _FACING_LOOKAHEAD: float = 3.0
 # Per-tick weight to settle the dragon back to its upright takeoff pose while landing.
 const _LANDING_TURN_WEIGHT: float = 0.15
 # Per-tick weight for smoothing the dragon's orientation while sweeping (lower = lazier turns).
@@ -98,14 +77,19 @@ var _range_modifier: StatModifier
 var _aerial_target_counter: int = 0
 var _mana_modifier: StatModifier
 
-# While held (Ash Brood golems alive), FLYING ignores the fixed timer and sweeps until the
-# tracked entities are all dead (polled each tick) or the safety cap is reached.
+# While held (Ash Brood golems alive), the sweep ignores the fixed pass count and runs until
+# the tracked entities are all dead (polled each tick) or the safety cap is reached.
 var _held: bool = false
 var _hold_entities: Array[Entity] = []
-# Enemy-backline frame (origin + lateral/back axes) captured at FLYING start.
+# Enemy-backline frame (origin + lateral/back axes) captured at FLY_IN start.
 var _back_frame: Transform3D
-# Position at FLYING start, used to ease the dragon into the sweep line.
-var _fly_entry_pos: Vector3
+# Endpoints of the current transit (FLY_IN / FLY_OUT), eased from→to over the phase.
+var _transit_from: Vector3
+var _transit_to: Vector3
+# Ticks for one extremity→extremity pass; sweep extremities fall on its multiples.
+var _half_period_ticks: int = 1
+# Set once the sweep should end; the actual landing waits for the next extremity.
+var _sweep_release: bool = false
 #endregion
 
 #region Node base functions
@@ -136,11 +120,6 @@ func trigger_flight() -> void:
 	_hold_entities.clear()
 	_takeoff_yaw = _owner.rotation.y
 	_takeoff_position = _owner.global_position
-	# Anchor the maneuver to the takeoff pose (position + facing), upright. The curve is
-	# authored in this local space, so -Z forward aligns with the dragon's takeoff facing.
-	_takeoff_origin = Transform3D(Basis(Vector3.UP, _takeoff_yaw), _takeoff_position)
-	if _flight_profile != null:
-		_curve = _flight_profile.build_curve()
 	_set_combat_active(false)
 	_anim.begin_takeoff()
 	_enter_phase(Phase.TAKING_OFF, _to_ticks(_anim.takeoff_length()))
@@ -173,15 +152,18 @@ func process_tick() -> void:
 	match _phase:
 		Phase.TAKING_OFF:
 			if _ticks >= _phase_ticks:
-				_begin_flying()
-		Phase.FLYING:
-			_fly_oscillate()
+				_begin_fly_in()
+		Phase.FLY_IN:
+			_advance_transit()
+			if _ticks >= _phase_ticks:
+				_begin_sweep()
+		Phase.SWEEP:
+			_advance_sweep()
 			_maintain_aerial_target()
-			if _held:
-				if _ticks >= _to_ticks(_max_hold_seconds) or _hold_entities_all_dead():
-					_held = false
-					_begin_landing()
-			elif _ticks >= _phase_ticks:
+			_update_sweep_exit()
+		Phase.FLY_OUT:
+			_advance_transit()
+			if _ticks >= _phase_ticks:
 				_begin_landing()
 		Phase.LANDING:
 			_settle_to_upright()
@@ -197,12 +179,31 @@ func process_tick() -> void:
 #endregion
 
 #region Private functions
-func _begin_flying() -> void:
+func _begin_fly_in() -> void:
 	_anim.enter_fly_loop()
-	_enable_aerial_combat()
+	_anim.set_fly_dir_forward()
 	_back_frame = _compute_back_frame()
-	_fly_entry_pos = _owner.global_position
-	_enter_phase(Phase.FLYING, _to_ticks(_flight_duration))
+	_half_period_ticks = _to_ticks(_sweep_period / 2.0)
+	_transit_from = _owner.global_position
+	_transit_to = _sweep_point(0) # phase 0 → the entry extremity of the sweep
+	_enter_phase(Phase.FLY_IN, _travel_ticks(_transit_from, _transit_to))
+
+
+func _begin_sweep() -> void:
+	_anim.set_fly_dir_hover()
+	_enable_aerial_combat()
+	_sweep_release = false
+	_enter_phase(Phase.SWEEP, _sweep_passes * _half_period_ticks)
+
+
+func _begin_fly_out() -> void:
+	_disable_aerial_combat()
+	if _owner.auto_attack != null:
+		_owner.auto_attack.set_paused(true) # no attacks during the retreat
+	_anim.set_fly_dir_forward() # flies home nose-first (home lies past the enemies from the backline)
+	_transit_from = _owner.global_position
+	_transit_to = _takeoff_position + Vector3.UP * _fly_altitude
+	_enter_phase(Phase.FLY_OUT, _travel_ticks(_transit_from, _transit_to))
 
 
 func _begin_landing() -> void:
@@ -241,48 +242,58 @@ func _hold_entities_all_dead() -> bool:
 	return true
 
 
-# Hover over the enemy backline and sweep left↔right along a shallow arc (bowing toward the
-# arena centre at mid-sweep), always facing the current target. Eases in from the takeoff
-# spot over _fly_in_seconds. Deterministic (position is a pure function of the tick).
-func _fly_oscillate() -> void:
-	var t: float = float(_ticks) / float(Entity.TICKS_PER_SECOND)
-	var phase: float = TAU * t / maxf(0.1, _sweep_period)
-	var lateral: float = sin(phase) * _sweep_half_width
-	var bulge: float = _arc_depth * cos(phase) * cos(phase)  # >= 0, max at mid-sweep
-	var target_pos: Vector3 = _back_frame.origin \
-		+ _back_frame.basis.x * lateral \
-		+ _back_frame.basis.z * bulge
-
-	var entry_ticks: int = _to_ticks(_fly_in_seconds)
-	if _ticks < entry_ticks:
-		_owner.global_position = _fly_entry_pos.lerp(target_pos, smoothstep(0.0, 1.0, float(_ticks) / float(entry_ticks)))
-	else:
-		_owner.global_position = target_pos
-
-	_orient_flight(phase)
+# FLY_IN / FLY_OUT: ease the dragon along a straight line between the transit endpoints at a
+# distance-scaled pace (smoothstep = soft start/stop), always flying nose-first toward the
+# destination (forward clip). The single ~180° wheel-around happens at the FLY_IN→SWEEP handoff.
+func _advance_transit() -> void:
+	var r: float = smoothstep(0.0, 1.0, float(_ticks) / float(_phase_ticks))
+	_owner.global_position = _transit_from.lerp(_transit_to, r)
+	_face_heading(_transit_to - _transit_from)
 
 
-# Smoothly aim the nose at the current target while banking into the lateral sweep (the lean
-# eases through level at the turn extremes). The orientation is slerped, not snapped, so the
-# dragon turns like it flies rather than rotating instantly. Falls back to facing the arena
-# centre when it has no target.
-func _orient_flight(phase: float) -> void:
-	var pos: Vector3 = _owner.global_position
-	var target: Entity = _owner.auto_attack.get_current_target() if _owner.auto_attack != null else null
-	var look_pos: Vector3 = target.global_position if is_instance_valid(target) else pos - _back_frame.basis.z
-	var fwd: Vector3 = look_pos - pos
-	if fwd.length_squared() < 0.0001:
-		fwd = -_owner.global_transform.basis.z
-	fwd = fwd.normalized()
+# Semi-stationary sweep over the enemy backline, facing the arena. Position is a pure function
+# of the tick (deterministic). Extremities (lateral velocity ≈ 0) land on _half_period_ticks.
+func _advance_sweep() -> void:
+	_owner.global_position = _sweep_point(_ticks)
+	_face_heading(-_back_frame.basis.z)
 
-	var right: Vector3 = fwd.cross(Vector3.UP)
-	if right.length_squared() < 0.00001:
-		right = fwd.cross(Vector3.FORWARD)
-	right = right.normalized()
-	# Roll into the turn — proportional to lateral velocity (cos of the sweep phase).
-	var banked_up: Vector3 = right.cross(fwd).normalized().rotated(fwd, deg_to_rad(_bank_degrees) * cos(phase))
 
-	var desired: Basis = Transform3D(Basis(), pos).looking_at(pos + fwd, banked_up).basis
+# Sweep position at a given tick: lateral cosine wave across the backline (tick 0 = an
+# extremity), bowing toward the back wall at mid-pass and flattening at the extremities.
+func _sweep_point(ticks: int) -> Vector3:
+	var phase: float = PI * float(ticks) / float(_half_period_ticks)
+	var lateral: float = cos(phase) * _sweep_half_width
+	var bulge: float = _arc_depth * sin(phase) * sin(phase)
+	return _back_frame.origin + _back_frame.basis.x * lateral + _back_frame.basis.z * bulge
+
+
+# End the sweep when the pass count is reached (or the golem hold is released), then hand off
+# to FLY_OUT on the next extremity, where the lateral motion is momentarily still.
+func _update_sweep_exit() -> void:
+	if not _sweep_release:
+		if _held:
+			if _ticks >= _to_ticks(_max_hold_seconds) or _hold_entities_all_dead():
+				_held = false
+				_sweep_release = true
+		elif _ticks >= _phase_ticks:
+			_sweep_release = true
+	if _sweep_release and _ticks % _half_period_ticks == 0:
+		_begin_fly_out()
+
+
+func _travel_ticks(from: Vector3, to: Vector3) -> int:
+	return _to_ticks(from.distance_to(to) / maxf(0.1, _fly_transit_speed))
+
+
+# Slerp the body to face a horizontal heading (-Z toward it), kept level. Banking is off for
+# now (re-introduce here, proportional to lateral acceleration, once the feel is locked).
+func _face_heading(heading: Vector3) -> void:
+	var h: Vector3 = heading
+	h.y = 0.0
+	if h.length_squared() < 0.0001:
+		return
+	h = h.normalized()
+	var desired: Basis = Transform3D(Basis(), Vector3.ZERO).looking_at(h, Vector3.UP).basis
 	_owner.global_transform.basis = _owner.global_transform.basis.orthonormalized().slerp(desired, _FLY_TURN_WEIGHT)
 
 
@@ -297,77 +308,6 @@ func _compute_back_frame() -> Transform3D:
 	var origin: Vector3 = _takeoff_position + Vector3.UP * _fly_altitude
 	# basis.z = -fwd so -basis.z = fwd → the arc bulges forward, like the arena frame.
 	return Transform3D(Basis(fwd.cross(Vector3.UP).normalized(), Vector3.UP, -fwd), origin)
-
-
-func _advance_flight_path() -> void:
-	if _curve == null:
-		return
-	var length: float = _curve.get_baked_length()
-	if length <= 0.0:
-		return
-	var ratio: float = _eased(float(_ticks) / float(_phase_ticks))
-	_owner.global_transform = _flight_pose(ratio * length, length)
-
-
-# World pose along the flight curve at a baked distance: -Z follows the travel tangent
-# (nose pitches with climbs/dives) and the up vector is a twist-free level frame rolled by
-# the banking angle. Banking is computed from the path's horizontal turn direction rather
-# than the curve's baked up-vector, whose parallel-transport flips would invert the lean.
-func _flight_pose(dist: float, length: float) -> Transform3D:
-	var pos: Vector3 = _sample_world(dist)
-	var ahead: Vector3 = _sample_world(minf(dist + _FACING_LOOKAHEAD, length))
-	var fwd: Vector3 = ahead - pos
-	if fwd.length_squared() < 0.0001:
-		fwd = -_owner.global_transform.basis.z
-	fwd = fwd.normalized()
-	return Transform3D(Basis(), pos).looking_at(pos + fwd, _banked_up(fwd, dist, length))
-
-
-func _sample_world(dist: float) -> Vector3:
-	return _takeoff_origin * _curve.sample_baked(dist)
-
-
-func _banked_up(fwd: Vector3, dist: float, length: float) -> Vector3:
-	var right: Vector3 = fwd.cross(Vector3.UP)
-	if right.length_squared() < 0.00001:  # travelling near-vertical
-		right = fwd.cross(Vector3.FORWARD)
-	right = right.normalized()
-	var level_up: Vector3 = right.cross(fwd).normalized()
-	return level_up.rotated(fwd, _roll_angle(dist, length))
-
-
-# Roll from the signed horizontal turn direction → constant lean on a constant-radius
-# loop. The flip multiplier reverses it (smoothly, through level) past _bank_flip_at.
-func _roll_angle(dist: float, length: float) -> float:
-	var e: float = 0.5
-	var pos: Vector3 = _sample_world(dist)
-	var back: Vector3 = _sample_world(clampf(dist - e, 0.0, length))
-	var front: Vector3 = _sample_world(clampf(dist + e, 0.0, length))
-	var hb: Vector2 = Vector2(pos.x - back.x, pos.z - back.z)
-	var hf: Vector2 = Vector2(front.x - pos.x, front.z - pos.z)
-	if hb.length_squared() < 0.000001 or hf.length_squared() < 0.000001:
-		return 0.0
-	return -signf(hb.angle_to(hf)) * deg_to_rad(_bank_degrees) * _flip_sign(dist / length)
-
-
-# +1 before the flip, -1 after, ramping smoothly through 0 across the flip window.
-func _flip_sign(r: float) -> float:
-	if not _bank_flip:
-		return 1.0
-	var w: float = maxf(0.001, _bank_flip_width)
-	return 1.0 - 2.0 * smoothstep(_bank_flip_at - w, _bank_flip_at + w, r)
-
-
-# Ease in/out only near the extremities, constant speed through the middle.
-func _eased(r: float) -> float:
-	var e: float = _ease_edge
-	if e <= 0.0:
-		return r
-	if r < e:
-		return smoothstep(0.0, 1.0, r / e) * e
-	if r > 1.0 - e:
-		return (1.0 - e) + smoothstep(0.0, 1.0, (r - (1.0 - e)) / e) * e
-	return r
 
 
 # Per-tick blend of the whole orientation back to the upright takeoff facing during landing
@@ -423,9 +363,9 @@ func _unregister_mana_cut() -> void:
 	_mana_modifier = null
 
 
-# Aerial enrage, active only during FLYING: unpause the auto-attack, apply the
-# doubled attack speed + (effectively infinite) range stat modifiers, and re-pick a
-# random frontal enemy on every completed attack (the "strafe" feel).
+# Aerial enrage, active only during the SWEEP phase: unpause the auto-attack, apply the
+# attack-speed + (effectively infinite) range stat modifiers, and re-pick a random
+# frontal enemy on every completed attack (the "strafe" feel).
 func _enable_aerial_combat() -> void:
 	if _owner.auto_attack == null:
 		return

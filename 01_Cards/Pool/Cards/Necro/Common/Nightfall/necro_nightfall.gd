@@ -25,9 +25,7 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 
 func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 	var owner: Entity = ctx.entity_owner
-	var stub := ProjectileModifier.new()
-	stub.id = card_name
-	owner.projectile_modifiers_registry.unregister_modifier(stub)
+	owner.projectile_modifiers_registry.unregister_modifier(card_name)
 	owner.projectile.unregister_projectile(Projectile.Type.NIGHTFALL)
 
 

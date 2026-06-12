@@ -5,27 +5,36 @@
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://10_Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="4_egh8k"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="4_kq8si"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="4_r0wv3"]
-[ext_resource type="Resource" uid="uid://b26g0mf54dxwf" path="res://01_Cards/Pool/Cards/ChickenLord/Common/SchrodingerEgg/chickenlord_schrodinger_egg.tres" id="4_tmkd7"]
+[ext_resource type="Resource" uid="uid://vfhdgbujddoq" path="res://01_Cards/Pool/Cards/Prototyping/Projectiles/ProjectileBounce/card_projectile_bounce.proto.tres" id="5_r0wv3"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]
 [ext_resource type="Script" uid="uid://nkraydv4mdse" path="res://01_Cards/Templates/Deck/hand.gd" id="6_jbcul"]
-[ext_resource type="PackedScene" uid="uid://bicegolemsc17" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/ice_golem.tscn" id="7_tmkd7"]
+[ext_resource type="Resource" uid="uid://celecgrenad1" path="res://01_Cards/Pool/Cards/Engineer/Common/ElectricGrenade/engineer_electric_grenade.tres" id="6_xqnte"]
+[ext_resource type="Resource" uid="uid://chhhtbofpr4y8" path="res://01_Cards/Pool/Cards/Prototyping/AoeSize/card_aoe_size.proto.tres" id="7_5ixv2"]
 [ext_resource type="PackedScene" uid="uid://dvuq5n41nak3u" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/ArenaZoneManager/arena_zone_manager.tscn" id="8_fl2p6"]
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://90_Modules/PickableClickable/PickableModule/pickable_module.tscn" id="9_614kc"]
 [ext_resource type="PackedScene" uid="uid://bg5efhnq0erdv" path="res://90_Modules/PickableClickable/ClickableModule/clickable_module.tscn" id="10_m73qc"]
 [ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="10_r0wv3"]
+[ext_resource type="PackedScene" uid="uid://cux3b38ayhml8" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/kobold_thief.tscn" id="10_xqnte"]
 [ext_resource type="PackedScene" uid="uid://blncvfes4f2y7" path="res://99_Prototyping/Entity/AllActionPrototyping/testing_floorffa5.tscn" id="11_5hdqt"]
 [ext_resource type="Script" uid="uid://bia26v50nwe6c" path="res://04_UI/UIButton/ui_button.gd" id="11_r0wv3"]
+[ext_resource type="PackedScene" uid="uid://c48aqh8mlb7lc" path="res://02_Entities/Pool/Heroes/DarkKnight/dark_knight.tscn" id="12_5ixv2"]
 [ext_resource type="PackedScene" uid="uid://ygk0snmo5oj" path="res://02_Entities/_Shared/EntityStatsViewer/entity_stats_viewer.tscn" id="12_r0wv3"]
+[ext_resource type="PackedScene" uid="uid://dolubo8wodahp" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/kobold_warrior.tscn" id="13_5ixv2"]
 [ext_resource type="Script" uid="uid://b0otuknba6ddv" path="res://06_FloatingIsland/FightingIsland/FightingArea/floor_area.gd" id="13_jd8sj"]
 [ext_resource type="PackedScene" uid="uid://q7gxxkhg5u54" path="res://06_FloatingIsland/FightingIsland/Pool/ArchIsland/arch_island_visual.tscn" id="17_ko5bb"]
 [ext_resource type="PackedScene" uid="uid://c0l0roxttdtlp" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/FightingManager/fighting_manager.tscn" id="17_m26y3"]
+[ext_resource type="PackedScene" uid="uid://jcwiqcnilmtk" path="res://02_Entities/Pool/Mobs/Vrock/vrock.tscn" id="17_rnrfd"]
 [ext_resource type="Environment" uid="uid://cghu0yr6lj5i2" path="res://21_Props/DefaultBattleIsland/Arch_island/world_environment.tres" id="18_ko5bb"]
 [ext_resource type="PackedScene" uid="uid://dp4x7wkxd6i2q" path="res://99_Prototyping/Entity/EntityController/entity_controller.proto.tscn" id="19_x0odd"]
+[ext_resource type="PackedScene" uid="uid://422k2gp3h5wg" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/forest_drake.tscn" id="22_awloh"]
+[ext_resource type="PackedScene" uid="uid://btqko5dh71wxi" path="res://02_Entities/Pool/Mobs/SkeletonDragon/skeleton_dragon.tscn" id="28_58hbo"]
 
 [sub_resource type="Resource" id="Resource_xqnte"]
 script = ExtResource("6_jbcul")
 _cards = Dictionary[StringName, ExtResource("4_r0wv3")]({
-&"dazd": ExtResource("4_tmkd7")
+&"afgz": ExtResource("6_xqnte"),
+&"gfaz": ExtResource("7_5ixv2"),
+&"zad": ExtResource("5_r0wv3")
 })
 metadata/_custom_type_script = "uid://nkraydv4mdse"
 
@@ -47,12 +56,6 @@ height = 5.0
 height = 5.0
 radius = 0.2
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_tmkd7"]
-size = Vector3(2.3232422, 9.508728, 30.281006)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_awloh"]
-size = Vector3(29.652344, 9.508728, 3.1503906)
-
 [node name="PrototypingEntity" type="Node3D" unique_id=1287034780]
 script = ExtResource("1_6kn6i")
 _auto_attack_enabled = true
@@ -66,7 +69,7 @@ unique_name_in_owner = true
 
 [node name="Latika2" parent="Node3D/Entities" unique_id=1941835210 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("3_os118")]
 transform = Transform3D(-0.2632837, 0, 0.96471834, 0, 1.0000001, 0, -0.96471834, 0, -0.2632837, 3.662788, 9.536744e-07, 0.110419974)
-level = 10
+level = 20
 team = 1
 battle_id = 1
 _spawn_manager = NodePath("../../SpawnManager")
@@ -82,33 +85,47 @@ _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
 override_base_stats = SubResource("Resource_5qocs")
 
-[node name="Latika4" parent="Node3D/Entities" unique_id=603191004 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("3_os118")]
-transform = Transform3D(0.022006778, 0, -0.99975777, 0, 1.0000001, 0, 0.99975777, 0, 0.022006778, -5.361015, 9.536744e-07, -2.080019)
-level = 4
-team = 2
-battle_id = 1
-_spawn_manager = NodePath("../../SpawnManager")
-_arena_zone_manager = NodePath("../../ArenaZoneManager")
-override_base_stats = SubResource("Resource_5qocs")
-
-[node name="IceGolem" parent="Node3D/Entities" unique_id=863006387 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("7_tmkd7")]
-transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, -5.450213, 0, 7.97276)
-team = 2
+[node name="Kobold_Thief" parent="Node3D/Entities" unique_id=526613656 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("10_xqnte")]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, 7.459776, 0, -0.08379411)
+team = 1
 battle_id = 1
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
 
-[node name="IceGolem2" parent="Node3D/Entities" unique_id=1880969174 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("7_tmkd7")]
-transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, -5.450213, 0, 5.3626723)
+[node name="Vrock2" parent="Node3D/Entities" unique_id=471542115 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("17_rnrfd")]
+transform = Transform3D(-0.01726045, 0, 0.9998509, 0, 1.0000001, 0, -0.9998509, 0, -0.01726045, 2.644456, 0, -2.3240192)
+level = 10
+team = 1
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
+[node name="ForestDrake" parent="Node3D/Entities" unique_id=1600538521 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("22_awloh")]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, 5.935304, 0, 4.4929256)
+level = 7
 team = 2
 battle_id = 1
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
 
-[node name="IceGolem3" parent="Node3D/Entities" unique_id=381652645 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("7_tmkd7")]
-transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, -5.450213, 0, 2.818342)
+[node name="DarkKnight" parent="Node3D/Entities" unique_id=1015131150 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("12_5ixv2")]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, -5.8133435, 0, 3.8980126)
 team = 2
 battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
+[node name="Kobold_Warrior" parent="Node3D/Entities" unique_id=1047411200 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("13_5ixv2")]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, 1.8293419, 0.05598975, 2.7767484)
+team = 1
+battle_id = 1
+_spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
+
+[node name="SkeletonDragon" parent="Node3D/Entities" unique_id=434739176 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("28_58hbo")]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, -2.685705, 0, 8.06334)
+level = 7
+team = 2
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
 
@@ -287,7 +304,7 @@ _owner = NodePath("..")
 [node name="TestingFloorFFA5" parent="Node3D" unique_id=283551194 instance=ExtResource("11_5hdqt")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 
-[node name="FloorArea" parent="Node3D/TestingFloorFFA5" index="0" unique_id=2121644269 groups=["GROUND"]]
+[node name="FloorArea" parent="Node3D/TestingFloorFFA5" index="0" unique_id=2121644269]
 collision_layer = 8
 script = ExtResource("13_jd8sj")
 
@@ -351,26 +368,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1199169, 0, -0.008602141)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2134323998]
 environment = ExtResource("18_ko5bb")
-
-[node name="Walls" type="Area3D" parent="." unique_id=1837378280 groups=["WALL"]]
-collision_mask = 0
-input_ray_pickable = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls" unique_id=1425374067]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.421384, 0.15762329, -1.9622803)
-shape = SubResource("BoxShape3D_tmkd7")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls" unique_id=1614321857]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.0341215, 0.15762329, -1.9622803)
-shape = SubResource("BoxShape3D_tmkd7")
-
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="Walls" unique_id=2115109565]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14735508, 0.15762329, 14.742613)
-shape = SubResource("BoxShape3D_awloh")
-
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="Walls" unique_id=1313301489]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14735508, 0.15762329, -13.772722)
-shape = SubResource("BoxShape3D_awloh")
 
 [connection signal="pressed" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StartFightButton" to="." method="_on_start_fight_button_pressed"]
 [connection signal="pressed" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StopFightButton" to="." method="_on_stop_fight_button_pressed"]

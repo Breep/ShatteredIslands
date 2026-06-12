@@ -7,6 +7,9 @@ extends Entity
 
 # Guards the once-per-fight ground roar; re-arms when the dragon leaves the fight.
 var _roared: bool = false
+# A flight (Vol fracassant) requested while the ultimate is casting waits here until the
+# ultimate fully finishes; drained in process_tick.
+var _flight_queued: bool = false
 
 
 func _ready() -> void:
@@ -20,11 +23,19 @@ func process_tick() -> void:
 		_flight_ability.process_tick()
 	if _breath_ability != null:
 		_breath_ability.process_tick()
+	# Drain a flight queued during the ultimate, now that it has fully finished (ticked above).
+	if _flight_queued and (_breath_ability == null or not _breath_ability.is_active()):
+		_flight_queued = false
+		start_flight()
 
 
 func start_flight() -> void:
 	if _flight_ability == null:
 		Verbose.warn("start_flight: no flight ability", Verbose.Category.ENTITY)
+		return
+	# An ongoing ultimate must finish its full cast first — queue the flight behind it.
+	if _breath_ability != null and _breath_ability.is_active():
+		_flight_queued = true
 		return
 	_flight_ability.trigger_flight()
 
@@ -45,6 +56,7 @@ func get_breath_ability() -> DevastatingBreathAbility:
 func _on_fighting_state_changed_roar(new_state: FightingState) -> void:
 	if new_state != FightingState.FIGHTING:
 		_roared = false
+		_flight_queued = false # drop any flight queued behind an interrupted ultimate
 		return
 	if _roared:
 		return

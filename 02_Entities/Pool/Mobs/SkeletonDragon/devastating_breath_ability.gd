@@ -71,6 +71,11 @@ func trigger() -> void:
 	_enter_phase(Phase.WINDUP, _to_ticks(_anim.spell_start_length()))
 
 
+## True from WINDUP through the end of RECOVERY — i.e. the ultimate is not fully done yet.
+func is_active() -> bool:
+	return _phase != Phase.IDLE
+
+
 ## Hard interrupt (e.g. death mid-channel): stops the spell and restores state.
 func abort() -> void:
 	if _phase == Phase.IDLE:

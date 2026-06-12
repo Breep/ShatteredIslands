@@ -14,6 +14,12 @@ const VALUE_SWITCH_FLY_START: String = "FlyStart"
 const VALUE_SWITCH_FLY_LOOP: String = "FlyLoop"
 const VALUE_SWITCH_FLY_STOP: String = "FlyStop"
 
+## Directional pick inside the FlyLoop: Forward (Walk_Fly_Forward) for the transits,
+## Hover (Walk_Fly_Backwards) for the semi-stationary sweep + the backward return.
+const PARAM_SWITCH_FLY_DIR: String = "parameters/switch_fly_dir/transition_request"
+const VALUE_SWITCH_FLY_DIR_FORWARD: String = "Forward"
+const VALUE_SWITCH_FLY_DIR_HOVER: String = "Hover"
+
 const PARAM_ONE_SHOT_FLY_ATTACK: String = "parameters/one_shot_fly_attack/request"
 
 ## Roar one-shot fired at fight start. The matching node must exist in the AnimationTree
@@ -43,6 +49,16 @@ func begin_takeoff() -> void:
 
 func enter_fly_loop() -> void:
 	_animation_tree.set(PARAM_SWITCH_FLY, VALUE_SWITCH_FLY_LOOP)
+
+
+## Forward flight clip — used while transiting to/from the sweep line.
+func set_fly_dir_forward() -> void:
+	_animation_tree.set(PARAM_SWITCH_FLY_DIR, VALUE_SWITCH_FLY_DIR_FORWARD)
+
+
+## Semi-stationary hover clip — the sweep pose (also used for the backward return).
+func set_fly_dir_hover() -> void:
+	_animation_tree.set(PARAM_SWITCH_FLY_DIR, VALUE_SWITCH_FLY_DIR_HOVER)
 
 
 func begin_landing() -> void:
@@ -118,6 +134,14 @@ func _player() -> AnimationPlayer:
 # The dragon drives its ultimate through begin_spell/channel_spell/end_spell
 # (DevastatingBreathAbility), so the generic one-shot ultimate of the base must
 # never fire — its node no longer exists in this tree.
-func _on_owner_ultimate_casted() -> void:
+func _on_owner_cast_ultimate() -> void:
 	pass
+
+
+# A critical hit fires a hit-reaction overlay (base). Suppress it whenever the dragon's
+# animation is locked into a sequence (ultimate channel, flight) so it can't interrupt it.
+func _on_owner_action_received(source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
+	if _lock_animation:
+		return
+	super(source, action_type, action_id, value, is_critical)
 #endregion

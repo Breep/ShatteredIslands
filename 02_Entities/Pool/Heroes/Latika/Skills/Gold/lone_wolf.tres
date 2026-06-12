@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://latlonewolftrs"]
+
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
+[ext_resource type="Script" uid="uid://latlonewolfeff" path="res://02_Entities/Pool/Heroes/Latika/Skills/Gold/lone_wolf.gd" id="2_eff"]
+
+[sub_resource type="Resource" id="Resource_lonewolf"]
+script = ExtResource("2_eff")
+_damage_percent = 25.0
+_crit_percent = 20.0
+_isolation_radius = 3.0
+_check_period = 0.5
+metadata/_custom_type_script = "uid://latlonewolfeff"
+
+[resource]
+script = ExtResource("1_skill")
+skill_id = 4
+name = "Loup Solitaire"
+description = "+25% dégâts et +20% chance de critique. Actif uniquement si aucun allié à moins de 3 m."
+skill_effect = SubResource("Resource_lonewolf")
+metadata/_custom_type_script = "uid://dfby4merlgkep"
