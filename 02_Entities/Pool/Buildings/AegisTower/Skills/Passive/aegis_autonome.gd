@@ -17,6 +17,11 @@ func apply(ctx: SkillContext) -> void:
 	)
 
 
+func get_description() -> String:
+	return "Au début du combat, invoque une Aegis Blade liée à la Tour (à son niveau, " \
+		+ "elle meurt si la Tour meurt)."
+
+
 func _summon_linked_blade(tower: AegisTower) -> void:
 	if tower.summon == null:
 		return

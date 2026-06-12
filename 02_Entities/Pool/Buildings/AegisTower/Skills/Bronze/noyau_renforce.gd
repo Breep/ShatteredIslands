@@ -28,3 +28,8 @@ func apply(ctx: SkillContext) -> void:
 			if is_instance_valid(ally):
 				ally.alterations.add_stack(Alteration.Type.VULNERABILITY, _defense, tower, &"Noyau renforcé")
 	)
+
+
+func get_description() -> String:
+	return "Tant qu'elle est en vie, les bâtiments alliés proches gagnent +" \
+		+ _value(_defense) + " [[DEFENCE]]."

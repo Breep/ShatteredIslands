@@ -18,3 +18,8 @@ func apply(ctx: SkillContext) -> void:
 	for ally: Entity in tower.target.get_targets(TargetComponent.MultipleTargettingStrategy.ALLIES, _radius):
 		if is_instance_valid(ally):
 			tower.alterations.inflict_condition_stacks(ally, shield, Alteration.Type.SHIELD, &"Bastion Aegis")
+
+
+func get_description() -> String:
+	return "Donne à tous les alliés proches un [[SHIELD]] égal à " + _value(_ap_ratio * 100) \
+		+ "% de sa puissance magique."

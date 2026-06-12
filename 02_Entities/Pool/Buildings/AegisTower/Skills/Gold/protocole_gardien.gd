@@ -36,6 +36,12 @@ func apply(ctx: SkillContext) -> void:
 	tower.died.connect(died_callback, CONNECT_ONE_SHOT)
 
 
+func get_description() -> String:
+	return "La première fois qu'un héros allié passe sous " + _value(_hp_threshold * 100) \
+		+ "% de ses PV, lui accorde un [[SHIELD]] égal à " + _value(_ap_ratio * 100) \
+		+ "% de sa puissance magique (une fois par combat)."
+
+
 func _on_ally_health_changed(new_health: float, tower: AegisTower, ally: Entity, triggered: Array[bool], connections: Array[Dictionary]) -> void:
 	if triggered[0] or not is_instance_valid(tower) or not is_instance_valid(ally) or not tower.is_alive():
 		return

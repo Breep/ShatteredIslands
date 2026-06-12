@@ -25,3 +25,8 @@ func apply(ctx: SkillContext) -> void:
 		modifier.value = building_count * _regen_per_building
 		tower.stat_modifiers_registry.register_modifier(modifier)
 	)
+
+
+func get_description() -> String:
+	return "Au début du combat, gagne +" + _value(_regen_per_building) + " de régén. de " \
+		+ "[[MANA]] par bâtiment allié proche."

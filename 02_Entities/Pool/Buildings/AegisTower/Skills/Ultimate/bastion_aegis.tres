@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://cbastion2res7"]
 
+[ext_resource type="Texture2D" uid="uid://drer21wuq4w38" path="res://02_Entities/Pool/Buildings/AegisTower/Skills/Ultimate/skill_bastian_aegis.svg" id="1_dioum"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
 [ext_resource type="Script" uid="uid://bbastion1eff7" path="res://02_Entities/Pool/Buildings/AegisTower/Skills/Ultimate/bastion_aegis.gd" id="2_eff"]
 
@@ -12,5 +13,6 @@ script = ExtResource("1_skill")
 skill_id = 7
 name = "Bastion Aegis"
 description = "La Tour donne AP x 150% Shield aux alliés et bâtiments dans Area(10)."
+portrait = ExtResource("1_dioum")
 skill_effect = SubResource("Resource_ba")
 metadata/_custom_type_script = "uid://dfby4merlgkep"
