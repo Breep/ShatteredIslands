@@ -30,17 +30,17 @@ transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0, 0
 
 [node name="Skeleton3D" parent="ChickenVisual" index="0" unique_id=416118163]
 animate_physical_bones = false
-bones/1/position = Vector3(0, 0.047908634, 0.025282245)
-bones/1/rotation = Quaternion(-0.70710397, 0.70710397, 0.0020065208, 0.0020213954)
-bones/4/rotation = Quaternion(-0.2853892, 0.006904156, -0.035646297, 0.9577238)
-bones/7/position = Vector3(0.06718646, -0.0814189, 0.02648047)
-bones/7/rotation = Quaternion(2.6919306e-06, -0.72914135, 1.8175386e-05, 0.68436325)
-bones/8/rotation = Quaternion(0.99308693, -1.5796713e-06, -0.1173815, 1.4478622e-05)
-bones/9/rotation = Quaternion(4.16807e-08, -0.5996465, -2.2889476e-07, 0.80026513)
-bones/10/position = Vector3(0.06718645, 0.08142003, 0.026477056)
-bones/10/rotation = Quaternion(-1.7051001e-05, -0.72914135, -2.8593308e-06, 0.68436325)
-bones/11/rotation = Quaternion(0.99308693, 1.7100971e-06, -0.11738149, -1.4463204e-05)
-bones/12/rotation = Quaternion(4.7551982e-08, -0.5996465, 2.3195415e-07, 0.80026513)
+bones/1/position = Vector3(0, 0.052426323, 0.025282245)
+bones/1/rotation = Quaternion(-0.70705885, 0.7070587, -0.008242995, -0.00822812)
+bones/4/rotation = Quaternion(0.13370097, 0.0065096146, 0.019578578, 0.99080694)
+bones/7/position = Vector3(0.06718646, -0.0814189, 0.027292041)
+bones/7/rotation = Quaternion(2.409026e-06, -0.7348844, 1.8195957e-05, 0.67819244)
+bones/8/rotation = Quaternion(0.99106514, -1.3332823e-06, -0.13337931, 1.4394574e-05)
+bones/9/rotation = Quaternion(6.031256e-08, -0.58395314, -2.4696882e-07, 0.8117874)
+bones/10/position = Vector3(0.06718645, 0.08142003, 0.027288625)
+bones/10/rotation = Quaternion(-1.7155891e-05, -0.7348844, -3.0044432e-06, 0.67819244)
+bones/11/rotation = Quaternion(0.99106514, 1.4634427e-06, -0.1333793, -1.4377056e-05)
+bones/12/rotation = Quaternion(3.4627696e-08, -0.58395314, 2.4404562e-07, 0.8117874)
 
 [node name="HealthBarSpawnPoint" type="Marker3D" parent="ChickenVisual" unique_id=1542741370]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 1.2658772, 0)

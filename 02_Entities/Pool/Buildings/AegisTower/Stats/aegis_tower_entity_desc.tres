@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="EntityDesc" format=3 uid="uid://cafqhvit4iuf7"]
 
+[ext_resource type="Texture2D" uid="uid://tmm32tbpm4bv" path="res://02_Entities/Pool/Buildings/AegisTower/Data/aegis_tower_portrait.png" id="1_5oocd"]
 [ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="1_ms22t"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="2_ncjog"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_88ouh"]
@@ -32,6 +33,7 @@
 [resource]
 script = ExtResource("1_ms22t")
 name = "Aegis Tower"
+portrait = ExtResource("1_5oocd")
 scene_path = "res://02_Entities/Pool/Buildings/AegisTower/aegis_tower.tscn"
 default_category = 4
 stats = Dictionary[int, ExtResource("3_88ouh")]({

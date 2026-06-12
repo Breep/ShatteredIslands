@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="EntityDesc" format=3 uid="uid://dy8c5d1swpce1"]
 
 [ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="1_h7wnh"]
+[ext_resource type="Texture2D" uid="uid://3wdt2ud5qo5g" path="res://02_Entities/Pool/Mobs/Chickens/Basic/Data/chicken_portrait.png" id="1_quii3"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="2_ccole"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_o4pvy"]
 [ext_resource type="Resource" uid="uid://dqv038jtjek7y" path="res://02_Entities/Pool/Mobs/Chickens/Basic/Stats/chicken_stats_lvl_01.tres" id="4_3qjcv"]
@@ -32,6 +33,7 @@
 [resource]
 script = ExtResource("1_h7wnh")
 name = "Basic chicken"
+portrait = ExtResource("1_quii3")
 description = "Bok bok"
 scene_path = "res://02_Entities/Pool/Mobs/Chickens/Basic/chicken_basic.tscn"
 default_category = 1
