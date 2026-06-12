@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="EntityDesc" format=3 uid="uid://cpmwbvgin5fcg"]
 
+[ext_resource type="Texture2D" uid="uid://dd2i6bcmp37fc" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Data/kobold_warrior_portrait.png" id="1_h808u"]
 [ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="1_reult"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="2_mbiqh"]
 [ext_resource type="Resource" uid="uid://c18dpdl0syrsn" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Skills/Passive/goblin_horde_berserk.tres" id="3_e3m2h"]
@@ -32,6 +33,7 @@
 [resource]
 script = ExtResource("1_reult")
 name = "Kob"
+portrait = ExtResource("1_h808u")
 description = "Kobby is happy"
 scene_path = "res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/kobold_warrior.tscn"
 stats = Dictionary[int, ExtResource("3_g4iju")]({
