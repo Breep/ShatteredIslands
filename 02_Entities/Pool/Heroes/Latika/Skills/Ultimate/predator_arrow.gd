@@ -21,3 +21,8 @@ func apply(ctx: SkillContext) -> void:
 	latika.spell.cast_spell(aim, Spell.Type.PREDATOR_ARROW, {
 		PredatorArrow.Modifier.DAMAGE: _damage,
 	})
+
+
+func get_description() -> String:
+	return "Décoche un trait perçant vers l'ennemi le plus proche, traversant tous les " \
+		+ "ennemis sur sa trajectoire pour " + _value(_damage) + " de [[PHYSICAL_DAMAGE]]."

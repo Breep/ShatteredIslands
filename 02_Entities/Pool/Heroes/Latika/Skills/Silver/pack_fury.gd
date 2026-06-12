@@ -26,3 +26,8 @@ func apply(ctx: SkillContext) -> void:
 		source.alterations.inflict_condition_stacks(
 			target, _vulnerability_stacks, Alteration.Type.VULNERABILITY, &"PackFuryVulnerability")
 	latika.acolyte_modifiers_registry.auto_attack_modifier_registry.register_modifier(aa_mod)
+
+
+func get_description() -> String:
+	return "Les auto-attaques des loups de Latika appliquent " + _value(_vulnerability_stacks) \
+		+ " [[VULNERABILITY]] à leur cible."

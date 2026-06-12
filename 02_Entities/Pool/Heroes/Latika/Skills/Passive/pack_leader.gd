@@ -46,6 +46,11 @@ func apply(ctx: SkillContext) -> void:
 		latika.set_meta(META_MARKED_TARGET, null))
 
 
+func get_description() -> String:
+	return "Son auto-attaque marque sa cible : celle-ci subit +" + _value(_mark_exposure) \
+		+ "% de dégâts. La marque suit son focus (une seule cible à la fois)."
+
+
 # Déplace la marque de l'ancienne cible vers la nouvelle (no-op si identique).
 func _move_mark(latika: Entity, new_target: Entity) -> void:
 	var previous: Entity = latika.get_meta(META_MARKED_TARGET, null)

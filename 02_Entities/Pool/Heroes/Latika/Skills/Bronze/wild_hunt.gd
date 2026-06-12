@@ -28,3 +28,8 @@ func apply(ctx: SkillContext) -> void:
 	ms_mod.stat_type = EntityStats.StatType.MS
 	ms_mod.value = _wolf_ms_bonus
 	latika.acolyte_modifiers_registry.stat_modifiers_registry.register_modifier(ms_mod)
+
+
+func get_description() -> String:
+	return "Les loups de Latika gagnent +" + _value(_wolf_hp_percent) + "% de PV max et +" \
+		+ _value(_wolf_ms_bonus) + " de vitesse de déplacement."

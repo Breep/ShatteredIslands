@@ -53,6 +53,12 @@ func apply(ctx: SkillContext) -> void:
 	latika.battle_callback_registry.register_battle_start(&"BloodBondScan", on_battle_start)
 
 
+func get_description() -> String:
+	return "Tant qu'au moins " + _value(_required_pack_size) + " loups sont en vie, Latika " \
+		+ "et ses loups gagnent +" + _value(_global_as_percent) + "% de vitesse d'attaque et +" \
+		+ _value(_damage_percent) + "% de dégâts."
+
+
 # Retrouve les loups de Latika sur la zone : acolytes Vrock dont le summoner est Latika.
 func _scan_pack(latika: Entity) -> Array[Entity]:
 	var pack: Array[Entity] = []

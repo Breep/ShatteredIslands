@@ -41,6 +41,12 @@ func apply(ctx: SkillContext) -> void:
 	latika.battle_callback_registry.register_periodic(&"LoneWolfCheck", _check_period, check)
 
 
+func get_description() -> String:
+	return "Tant qu'aucun allié n'est à moins de " + _value(_isolation_radius) + " m, Latika " \
+		+ "gagne +" + _value(_damage_percent) + "% de dégâts et +" + _value(_crit_percent) \
+		+ "% de [[CRIT_CHANCE]]."
+
+
 func _apply_bonus(latika: Entity) -> void:
 	for action_type: Utils.ActionType in _POWER_ACTIONS:
 		var power := StatModifier.new()

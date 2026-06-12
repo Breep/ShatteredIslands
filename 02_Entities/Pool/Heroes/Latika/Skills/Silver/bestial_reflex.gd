@@ -38,6 +38,12 @@ func apply(ctx: SkillContext) -> void:
 		latika.battle_callback_registry.register_oneshot(_cooldown, rearm, &"BestialReflexCooldown"))
 
 
+func get_description() -> String:
+	return "Quand ses PV passent sous " + _value(_hp_threshold_percent) + "%, se soigne de " \
+		+ _value(_heal_amount) + ", bondit en arrière et devient inciblable " \
+		+ _value(_untargetable_duration) + " s ([[COOLDOWN]] " + _value(_cooldown) + " s)."
+
+
 func _trigger(latika: Entity) -> void:
 	latika.heal.direct(latika, _heal_amount, &"BestialReflex")
 	_dash_back(latika)

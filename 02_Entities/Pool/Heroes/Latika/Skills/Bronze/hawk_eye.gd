@@ -33,3 +33,9 @@ func apply(ctx: SkillContext) -> void:
 		if source.global_position.distance_to(target.global_position) > _distance_threshold:
 			data[AutoAttackModifier.VarType.DAMAGE_MUL] += _far_damage_percent
 	latika.auto_attack_modifier_registry.register_modifier(modifier)
+
+
+func get_description() -> String:
+	return "+" + _value(_range_bonus) + " m de portée. Les ennemis à plus de " \
+		+ _value(_distance_threshold) + " m subissent +" + _value(_far_damage_percent) \
+		+ "% de dégâts de ses auto-attaques."

@@ -1,19 +1,16 @@
-[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://lathawkeyetrs"]
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://dj0p3spvty3aa"]
 
+[ext_resource type="Texture2D" uid="uid://dayao4gj672ua" path="res://02_Entities/Pool/Heroes/Latika/Skills/Bronze/skill_hawk_eye.svg" id="1_o8goa"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
-[ext_resource type="Script" uid="uid://lathawkeyeeff" path="res://02_Entities/Pool/Heroes/Latika/Skills/Bronze/hawk_eye.gd" id="2_eff"]
+[ext_resource type="Script" path="res://02_Entities/Pool/Heroes/Latika/Skills/Bronze/hawk_eye.gd" id="2_eff"]
 
 [sub_resource type="Resource" id="Resource_hawkeye"]
 script = ExtResource("2_eff")
-_range_bonus = 3.0
-_distance_threshold = 6.0
-_far_damage_percent = 30.0
-metadata/_custom_type_script = "uid://lathawkeyeeff"
 
 [resource]
 script = ExtResource("1_skill")
-skill_id = 0
 name = "Œil du Faucon"
 description = "+3 m de portée. Les ennemis à plus de 6 m subissent +30% de dégâts de Latika."
+portrait = ExtResource("1_o8goa")
 skill_effect = SubResource("Resource_hawkeye")
 metadata/_custom_type_script = "uid://dfby4merlgkep"
