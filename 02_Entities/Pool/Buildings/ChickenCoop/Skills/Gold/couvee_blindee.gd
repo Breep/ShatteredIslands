@@ -13,3 +13,8 @@ func apply(ctx: SkillContext) -> void:
 		Verbose.error("SE_CouveeBlindee: owner is not a ChickenCoop", Verbose.Category.ENTITY_MODULE)
 		return
 	coop.set_meta(ChickenCoop.META_SPAWN_BLOCK, _block)
+
+
+func get_description() -> String:
+	return "Les poulets invoqués par ce poulailler gagnent " + _value(_block) + " [[BLOCK]] " \
+		+ "à leur apparition."

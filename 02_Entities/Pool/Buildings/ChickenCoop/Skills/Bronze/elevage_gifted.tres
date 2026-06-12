@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://b8eeiyl1tbrdk"]
 
+[ext_resource type="Texture2D" uid="uid://clap0cxt7g75m" path="res://02_Entities/Pool/Buildings/ChickenCoop/Skills/Bronze/skill_elevage_gifted.svg" id="1_sabbg"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
 [ext_resource type="Script" uid="uid://c017thvbuqnsg" path="res://02_Entities/Pool/Buildings/ChickenCoop/Skills/Bronze/elevage_gifted.gd" id="2_eff"]
 
@@ -12,5 +13,6 @@ metadata/_custom_type_script = "uid://celevgift1eff7"
 script = ExtResource("1_skill")
 name = "Élevage gifted"
 description = "Rush : invoque 4 Poulets au début du combat."
+portrait = ExtResource("1_sabbg")
 skill_effect = SubResource("Resource_eg")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

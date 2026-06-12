@@ -16,3 +16,7 @@ func apply(ctx: SkillContext) -> void:
 		Verbose.error("SE_ProductionContinue: owner is not a ChickenCoop", Verbose.Category.ENTITY_MODULE)
 		return
 	coop.battle_callback_registry.register_periodic(PRODUCTION_TIMER_ID, _period, coop.summon_chicken, true)
+
+
+func get_description() -> String:
+	return "Invoque 1 poulet toutes les " + _value(_period) + " s."

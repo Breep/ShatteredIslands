@@ -14,3 +14,7 @@ func apply(ctx: SkillContext) -> void:
 		return
 	for i: int in _count:
 		coop.summon_chicken()
+
+
+func get_description() -> String:
+	return "Invoque d'un coup une horde de " + _value(_count) + " poulets."

@@ -16,3 +16,7 @@ func apply(ctx: SkillContext) -> void:
 		for i: int in _rush_count:
 			coop.summon_chicken()
 	)
+
+
+func get_description() -> String:
+	return "Au début du combat, invoque " + _value(_rush_count) + " poulets d'un coup."
