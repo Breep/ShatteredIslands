@@ -33,3 +33,10 @@ func apply(ctx: SkillContext) -> void:
 
 	if target.is_dead() and thief.has_method("notify_kill"):
 		thief.notify_kill()
+
+
+func get_description() -> String:
+	return "Se téléporte derrière sa cible et lui assène un coup critique garanti " \
+		+ "de " + _value(_crit_multiplier) + "× ses dégâts d'attaque ([[PHYSICAL_DAMAGE]]). " \
+		+ "Avec Dos exposé, dégâts accrus si la cible est sous " + _value(50) + "% PV. " \
+		+ "Avec Disparition, redevient invisible et regagne son [[MANA]] si la cible meurt."

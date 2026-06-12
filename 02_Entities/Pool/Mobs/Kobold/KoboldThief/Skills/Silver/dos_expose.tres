@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://cgi8f4hanb45e"]
 
+[ext_resource type="Texture2D" uid="uid://dxyqs67j6654e" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Skills/Silver/skill_dos_expose.svg" id="1_5gq0l"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
 [ext_resource type="Script" uid="uid://pg4bam42rtk2" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Skills/Silver/dos_expose.gd" id="2_eff"]
 
@@ -12,5 +13,6 @@ script = ExtResource("1_skill")
 skill_id = 2
 name = "Dos exposé"
 description = "Le Coup dans le dos inflige +25% dégâts physiques si la cible a moins de 50% PV."
+portrait = ExtResource("1_5gq0l")
 skill_effect = SubResource("Resource_e")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://3hv8cbj7yg6a"]
 
+[ext_resource type="Texture2D" uid="uid://ds18ehx03q6jw" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Skills/Passive/skill_shadow_step.svg" id="1_65tqx"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
 [ext_resource type="Script" uid="uid://pg4l64u3errj" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Skills/Passive/pas_de_l_ombre.gd" id="2_eff"]
 
@@ -12,5 +13,6 @@ script = ExtResource("1_skill")
 skill_id = 6
 name = "Pas de l'ombre"
 description = "Début du combat : devient Invisible jusqu'à sa première attaque ou son premier Ultimate."
+portrait = ExtResource("1_65tqx")
 skill_effect = SubResource("Resource_e")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

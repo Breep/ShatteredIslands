@@ -11,3 +11,8 @@ func apply(ctx: SkillContext) -> void:
 		if thief.has_method("enter_stealth"):
 			thief.enter_stealth()
 	)
+
+
+func get_description() -> String:
+	return "Au début du combat, devient invisible et inciblable jusqu'à sa " \
+		+ "première attaque ou son premier ultimate."

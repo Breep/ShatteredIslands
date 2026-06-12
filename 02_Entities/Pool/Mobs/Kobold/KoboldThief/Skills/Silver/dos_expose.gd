@@ -9,3 +9,8 @@ extends SkillEffect
 
 func apply(ctx: SkillContext) -> void:
 	ctx.entity.set_meta(KoboldThief.DOS_EXPOSE_META, _bonus)
+
+
+func get_description() -> String:
+	return "Renforce Coup dans le dos : +" + _value(_bonus * 100) + "% de " \
+		+ "[[PHYSICAL_DAMAGE]] bonus si la cible est sous " + _value(50) + "% de ses PV."

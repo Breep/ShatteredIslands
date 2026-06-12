@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://3hvv7sh3orju"]
 
+[ext_resource type="Texture2D" uid="uid://ck08dbc5y1w66" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Skills/Gold/skill_disparition.svg" id="1_pafhi"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
 [ext_resource type="Script" uid="uid://pg4a3msx5fqj" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Skills/Gold/disparition.gd" id="2_eff"]
 
@@ -12,5 +13,6 @@ script = ExtResource("1_skill")
 skill_id = 4
 name = "Disparition"
 description = "Kill : redevient Invisible et regagne son Mana max."
+portrait = ExtResource("1_pafhi")
 skill_effect = SubResource("Resource_e")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

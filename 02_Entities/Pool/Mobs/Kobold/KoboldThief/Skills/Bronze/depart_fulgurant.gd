@@ -12,3 +12,8 @@ func apply(ctx: SkillContext) -> void:
 	thief.battle_callback_registry.register_battle_start(&"DepartFulgurant", func() -> void:
 		thief.stats.mana = _mana
 	)
+
+
+func get_description() -> String:
+	return "Commence le combat avec " + _value(_mana) + " [[MANA]], " \
+		+ "déclenchant son ultimate presque immédiatement."

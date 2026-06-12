@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://diw2rgnc7haf7"
-path="res://.godot/imported/skill_goblin_protection.svg-531fe4dff3f26bf76c8e2aca4177ec12.ctex"
+uid="uid://ds18ehx03q6jw"
+path="res://.godot/imported/skill_shadow_step.svg-5a478e7c8d68b9aac405127a416df39b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Skills/skill_goblin_protection.svg"
-dest_files=["res://.godot/imported/skill_goblin_protection.svg-531fe4dff3f26bf76c8e2aca4177ec12.ctex"]
+source_file="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Skills/Passive/skill_shadow_step.svg"
+dest_files=["res://.godot/imported/skill_shadow_step.svg-5a478e7c8d68b9aac405127a416df39b.ctex"]
 
 [params]
 

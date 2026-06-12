@@ -18,3 +18,8 @@ func apply(ctx: SkillContext) -> void:
 		if is_instance_valid(target) and target.is_dead() and thief.has_method("notify_kill"):
 			thief.notify_kill()
 	thief.auto_attack_modifier_registry.register_modifier(modifier)
+
+
+func get_description() -> String:
+	return "À chaque élimination (cible tuée juste après une auto-attaque), " \
+		+ "redevient invisible et regagne tout son [[MANA]]."
