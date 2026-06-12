@@ -6,10 +6,10 @@
 script = ExtResource("1_es")
 _health_max = 1850.0
 _mana_regen = 4.4
-_attack_range = 10.1
-_attack_damage = 59.0
-_attack_speed = 2.2
-_movement_speed = 6.7
+_attack_range = 12.1
+_attack_damage = 54.0
+_attack_speed = 3.0
+_movement_speed = 4.7
 _crit_chance = 13.5
 _dodge = 13.5
 _m_resistances = Dictionary[int, float]({

@@ -507,6 +507,29 @@ func resolve_strike(hit_source: Entity, hit_target: Entity) -> float:
 	return damage_done
 
 
+# Applique UNIQUEMENT les effets on-hit additionnels de l'auto-attaque (riders posés
+# via AutoAttackModifier.additional_effect_callback : poison/lifesteal/... de cartes)
+# sur une cible, SANS infliger les dégâts d'auto-attaque ni lire l'AD. Utilisé par les
+# capacités qui "appliquent les effets on-hit de l'AA" (ex: ultimate Flèche du Prédateur).
+# damage_done = dégâts déjà infligés par la capacité, transmis aux riders qui scalent dessus.
+# Note : ré-exécute les modifiers persistants ; protéger l'appelant contre la ré-entrance.
+func apply_on_hit_effects(hit_source: Entity, hit_target: Entity, damage_done: float) -> void:
+	if not is_instance_valid(hit_source) or not is_instance_valid(hit_target):
+		return
+	var damage_modifiers_callbacks: Array[Callable] = []
+	var additional_callbacks: Array[Callable] = []
+	_consume_modifiers(damage_modifiers_callbacks, additional_callbacks)
+
+	for additional_callback in additional_callbacks:
+		additional_callback.call({
+			AutoAttackModifier.VarType.SOURCE: hit_source,
+			AutoAttackModifier.VarType.TARGET: hit_target,
+			AutoAttackModifier.VarType.POSITION: hit_target.global_position,
+			AutoAttackModifier.VarType.DAMAGE: damage_done,
+			AutoAttackModifier.VarType.PROJECTILE: null,
+		})
+
+
 func _consume_modifiers(damage_modifier_callbacks: Array[Callable], additional_callbacks: Array[Callable]) -> void:
 	for aa_modifier: AutoAttackModifier in _owner.auto_attack_modifier_registry.consume_all_modifiers():
 		if aa_modifier.additional_effect_callback.is_valid():

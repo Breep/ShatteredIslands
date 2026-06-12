@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://latwildhunttrs"]
+
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
+[ext_resource type="Script" uid="uid://latwildhunteff" path="res://02_Entities/Pool/Heroes/Latika/Skills/Bronze/wild_hunt.gd" id="2_eff"]
+
+[sub_resource type="Resource" id="Resource_wildhunt"]
+script = ExtResource("2_eff")
+_wolf_hp_percent = 25.0
+_wolf_ms_bonus = 1.5
+metadata/_custom_type_script = "uid://latwildhunteff"
+
+[resource]
+script = ExtResource("1_skill")
+skill_id = 1
+name = "Traque Sauvage"
+description = "Les loups de Latika gagnent +25% PV max et +1.5 m/s de vitesse de déplacement."
+skill_effect = SubResource("Resource_wildhunt")
+metadata/_custom_type_script = "uid://dfby4merlgkep"
