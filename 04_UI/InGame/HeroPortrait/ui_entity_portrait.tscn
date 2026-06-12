@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dfcy3dpkcvyx2" path="res://04_UI/_Themes/Data/Icons/Backgrounds/skill_passive_background.svg" id="3_xeyfs"]
 [ext_resource type="Texture2D" uid="uid://ds2dracb280n" path="res://02_Entities/Pool/Heroes/Latika/Skills/Passive/skill_target.svg" id="4_bkbtd"]
 [ext_resource type="Texture2D" uid="uid://carfsdb3rsrq6" path="res://04_UI/_Themes/Data/Icons/Backgrounds/skill_bronze_background.svg" id="4_p61mv"]
-[ext_resource type="Script" uid="uid://6c0iybheyu32" path="res://22_VFX/VFEZ-godot-main/vfez_material_2d.gd" id="4_qwwg1"]
+[ext_resource type="Script" uid="uid://dq0ub1oemlk0p" path="res://22_VFX/VFEZ-godot-main/vfez_material_2d.gd" id="4_qwwg1"]
 [ext_resource type="Texture2D" uid="uid://cexqu5b6xfn6l" path="res://04_UI/_Themes/Data/Icons/Backgrounds/skill_silver_background.svg" id="5_bkbtd"]
 [ext_resource type="Texture2D" uid="uid://d1e0ogx2plmkc" path="res://02_Entities/Pool/Heroes/Latika/Data/hero_portrait_latika.png" id="5_to4kj"]
 [ext_resource type="Texture2D" uid="uid://bmx7nnd8pibtg" path="res://04_UI/InGame/BuyingArea/PlayerPortrait/Data/Hexagone_frame.png" id="6_7oc7k"]

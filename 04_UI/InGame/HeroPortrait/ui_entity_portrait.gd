@@ -13,6 +13,8 @@ const _HOVER_SCALE := Vector2(1.1, 1.1)
 const _PRESS_SCALE := Vector2(0.92, 0.92)
 const _BUTTON_TWEEN_TIME: float = 0.08
 const _NO_SKILL_TEXT: String = "Compétence non disponible."
+# Placeholder BBCode (rouge) quand l'effet du skill ne fournit pas de description.
+const _NO_SKILL_DESC_TEXT: String = "[color=red]No description for this skill[/color]"
 const _PANEL_POP_TIME: float = 0.18
 const _PANEL_POP_SCALE := Vector2(0.92, 0.92)
 
@@ -224,16 +226,24 @@ func _unbind() -> void:
 func _show_desc(skill_type: Skill.Type) -> void:
 	_current_desc_type = skill_type
 	_showing_desc = true
+	# NB : on ne gère pas encore le déverrouillage héros (skill tree) — tout le
+	# monde est supposé avoir ses 5 skills.
 	var skill_comp: SkillComponent = _entity.skill if is_instance_valid(_entity) else null
 	var skill: Skill = skill_comp.roaster.get(skill_type) if skill_comp != null else null
-	var unlocked: bool = skill_comp.unlocked_skills.get(skill_type, false) if skill_comp != null else false
-	if skill != null and unlocked:
+	if skill != null:
 		_skill_name_label.text = skill.name
-		_skill_desc_label.text = skill.description
+		_skill_desc_label.text = _skill_desc_text(skill)
 	else:
 		_skill_name_label.text = ""
 		_skill_desc_label.text = _NO_SKILL_TEXT
 	_crossfade(_skill_desc_panel, _stats_panel)
+
+
+# Description du skill, tirée de son effet. Placeholder rouge si l'effet ne
+# fournit pas de texte (cas par défaut de SkillEffect.get_description()).
+func _skill_desc_text(skill: Skill) -> String:
+	var desc: String = skill.skill_effect.get_description() if skill.skill_effect != null else ""
+	return desc if not desc.is_empty() else _NO_SKILL_DESC_TEXT
 
 
 func _show_stats() -> void:
