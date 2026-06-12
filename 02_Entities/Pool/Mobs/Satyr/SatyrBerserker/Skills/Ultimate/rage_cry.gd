@@ -11,7 +11,7 @@ func apply(ctx: SkillContext) -> void:
 	var allies: Array[Entity] = _owner.target.get_targets(TargetComponent.MultipleTargettingStrategy.ALLIES, _radius)
 	
 	var mod := StatModifier.new()
-	mod.id = &"BloodLust"
+	mod.id = &"RageCry"
 	mod.stat_type = EntityStats.StatType.AS
 	mod.value = _as_bonus/100
 	
@@ -21,6 +21,11 @@ func apply(ctx: SkillContext) -> void:
 			entity.battle_callback_registry.register_oneshot(_as_length, func() -> void:
 				entity.stat_modifiers_registry.unregister_modifier(mod)
 			)
+
+
+func get_description() -> String:
+	return "Pousse un cri de rage : les alliés proches gagnent +" + _value(_as_bonus) \
+		+ "% de vitesse d'attaque pendant " + _value(_as_length) + " s."
 	
 	
 	

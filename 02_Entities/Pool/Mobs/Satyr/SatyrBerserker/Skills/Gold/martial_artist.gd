@@ -33,4 +33,9 @@ func apply(ctx: SkillContext) -> void:
 			
 			
 	_owner.auto_attack_modifier_registry.register_modifier(mod)
+
+
+func get_description() -> String:
+	return "Toutes les " + _value(_attack_number - 1) + " auto-attaques, double sa " \
+		+ "vitesse d'attaque (×" + _value(2) + ") puis la réinitialise, en alternance."
 	

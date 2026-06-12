@@ -12,3 +12,8 @@ func apply(ctx: SkillContext) -> void:
 	mod.stat_type = EntityStats.StatType.LIFESTEAL
 	mod.value = _base_lifesteal_amount_percent + _owner.progression.level * _scale_lifesteal_amount_percent
 	_owner.stat_modifiers_registry.register_modifier(mod)
+
+
+func get_description() -> String:
+	return "Gagne " + _value(_base_lifesteal_amount_percent) + "% de vol de vie, +" \
+		+ _value(_scale_lifesteal_amount_percent) + "% par niveau."

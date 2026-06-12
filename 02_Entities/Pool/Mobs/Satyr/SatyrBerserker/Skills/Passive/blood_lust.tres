@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://bdro3y6ufrav"]
 
+[ext_resource type="Texture2D" uid="uid://behfkuab83xma" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Skills/Passive/skill_blood_lust.svg" id="1_i7q0i"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_xjyli"]
 [ext_resource type="Script" uid="uid://wtkypqfetlrm" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Skills/Passive/blood_lust.gd" id="2_wqjew"]
 
@@ -11,5 +12,6 @@ metadata/_custom_type_script = "uid://wtkypqfetlrm"
 script = ExtResource("1_xjyli")
 skill_id = 6
 name = "Blood Lust"
+portrait = ExtResource("1_i7q0i")
 skill_effect = SubResource("Resource_i7q0i")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

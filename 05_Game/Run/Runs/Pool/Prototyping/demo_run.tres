@@ -20,5 +20,5 @@ metadata/_custom_type_script = "uid://ui2ybnvv0okd"
 script = ExtResource("1_run")
 id = &"demo_run"
 display_name = "Démo Run"
-confrontations = Array[ExtResource("2_conf")]([ExtResource("2_so0i1"), ExtResource("4_xcs54"), ExtResource("3_sy5jj"), ExtResource("5_i1u1o"), ExtResource("6_vm8v3")])
+confrontations = Array[ExtResource("2_conf")]([ExtResource("3_sy5jj"), ExtResource("2_so0i1"), ExtResource("4_xcs54"), ExtResource("5_i1u1o"), ExtResource("6_vm8v3")])
 rules = SubResource("Resource_tnro0")

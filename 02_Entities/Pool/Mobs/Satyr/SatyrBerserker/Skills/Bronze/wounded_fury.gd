@@ -26,5 +26,21 @@ func apply(ctx: SkillContext) -> void:
 			mod.value = _stat_bonus_per_hp_missing_percent * missing_hp_percent2 * 100 
 		_owner.stat_modifiers_registry.register_modifier(mod)
 		)
+
+
+func get_description() -> String:
+	var max_bonus: float = _stat_bonus_per_hp_missing_percent
+	if _stat_type != EntityStats.StatType.AS:
+		max_bonus *= 100.0
+	return "Convertit ses PV manquants en bonus de " + _stat_label() + " : plus il " \
+		+ "est blessé, plus le bonus grandit, jusqu'à " + _value(max_bonus) + " à l'agonie."
+
+
+func _stat_label() -> String:
+	match _stat_type:
+		EntityStats.StatType.AS: return "vitesse d'attaque"
+		EntityStats.StatType.AD: return "[[WARRIOR]]"
+		EntityStats.StatType.AP: return "puissance magique"
+		_: return "statistique"
 	
 	

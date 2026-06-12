@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://tw7nb65d1csy"]
 
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_ltmjn"]
+[ext_resource type="Texture2D" uid="uid://bodh46k12v6yk" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Skills/Ultimate/skill_rage_cry.svg" id="1_o73se"]
 [ext_resource type="Script" uid="uid://dbe4aqvstwsha" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Skills/Ultimate/rage_cry.gd" id="2_aer2u"]
 
 [sub_resource type="Resource" id="Resource_o73se"]
@@ -11,5 +12,6 @@ metadata/_custom_type_script = "uid://dbe4aqvstwsha"
 script = ExtResource("1_ltmjn")
 skill_id = 7
 name = "Rage Cry"
+portrait = ExtResource("1_o73se")
 skill_effect = SubResource("Resource_o73se")
 metadata/_custom_type_script = "uid://dfby4merlgkep"
