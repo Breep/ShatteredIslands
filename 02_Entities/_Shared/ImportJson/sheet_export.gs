@@ -3,9 +3,9 @@
  *
  * À coller dans l'éditeur Apps Script de la Sheet (Extensions > Apps Script),
  * puis recharger la feuille. Le menu "Godot Tools" propose :
- *   - "Exporter les stats (JSON)"  : génère le JSON à coller dans stats.json.
- *   - "Préparer le schéma + Latika" : migre les colonnes vers le nouveau schéma
- *                                     et ajoute une ligne exemple Latika.
+ *   - "Exporter les stats (JSON)"   : génère le JSON à coller dans stats.json.
+ *   - "Préparer le schéma + entités" : migre les colonnes vers le nouveau schéma
+ *                                      et ajoute une ligne (lvl 1) par entité.
  *
  * La migration est NON-destructive (renommages + ajouts uniquement, jamais de
  * suppression de colonne) et idempotente (relançable sans dégât). Annulable via
@@ -35,43 +35,65 @@ var GROUP_RENAMES = {
   'life_steals': 'm_lifesteals'
 };
 
+// Renommage de colonnes exactes : alias plus lisibles des 3 slots de dégâts de
+// m_resistances (même donnée en interne, juste un nom plus parlant).
+var COLUMN_RENAMES = {
+  'm_resistances.DAMAGE_PHYSICAL': 'armor',
+  'm_resistances.DAMAGE_MAGICAL': 'magic_resistance',
+  'm_resistances.DAMAGE_POISON': 'poison_resistance'
+};
+
 // Colonnes meta + Mono qui doivent exister (ajoutées en fin si absentes).
 var REQUIRED_COLUMNS = [
   'entity_id', 'desc_path', 'stats_dir', 'stats_prefix',
-  'attack_power', 'attack_range', 'movement_speed', 'scale',
+  'attack_power', 'attack_range', 'movement_speed', 'scale', 'aoe_size',
+  'armor', 'magic_resistance', 'poison_resistance',
   'crit_chance', 'crit_mult', 'dodge', 'lifesteal', 'crit_resistance', 'auto_attack_type'
 ];
 
-// Valeurs de la ligne exemple Latika (clés = en-têtes). Chiffres réels du lvl 1.
-var LATIKA_ROW = {
-  'entity_id': 'Latika',
-  'level': 1,
-  'desc_path': 'res://02_Entities/Pool/Heroes/Latika/latika_desc.tres',
-  'stats_dir': 'res://02_Entities/Pool/Heroes/Latika/Stats/',
-  'stats_prefix': 'latika',
-  'health_max': 1000,
-  'mana_max': 100,
-  'mana_regen': 2,
-  'attack_damage': 25,
-  'attack_speed': 0.5,
-  'attack_power': 10,
-  'attack_range': 5,
-  'movement_speed': 5,
-  'scale': 1,
-  'crit_chance': 5,
-  'crit_mult': 100,
-  'dodge': 5,
-  'lifesteal': 0,
-  'crit_resistance': 0,
-  'auto_attack_type': 'RANGED'
-};
+// Entités à pré-remplir (1 ligne lvl 1 chacune). aa = auto_attack_type
+// (MELEE = celles dont les .tres ont auto_attack_type = 1, RANGED sinon).
+// desc_path/stats_dir/stats_prefix : à renseigner UNIQUEMENT pour les exceptions
+// dont l'entity_id ne correspond pas au nom du dossier (auto-résolution KO).
+var ENTITIES = [
+  { id: 'Latika', aa: 'RANGED' },
+  { id: 'DarkKnight', aa: 'MELEE' },
+  { id: 'AegisBlade', aa: 'MELEE' },
+  {
+    id: 'ChickenBasic', aa: 'MELEE',
+    desc_path: 'res://02_Entities/Pool/Mobs/Chickens/Basic/Stats/chicken_entity_desc.tres',
+    stats_dir: 'res://02_Entities/Pool/Mobs/Chickens/Basic/Stats/'
+  },
+  { id: 'ChickenArdentCelestial', aa: 'RANGED' },
+  { id: 'ChickenAttack', aa: 'RANGED' },
+  { id: 'ChickenColossus', aa: 'MELEE' },
+  { id: 'ChickenEngineer', aa: 'MELEE' },
+  { id: 'ForestDrake', aa: 'RANGED' },
+  { id: 'SmallTreant', aa: 'MELEE' },
+  { id: 'IceGolem', aa: 'MELEE' },
+  { id: 'MoltenGolem', aa: 'MELEE' },
+  { id: 'PoisonGolem', aa: 'MELEE' },
+  { id: 'KoboldKnight', aa: 'MELEE' },
+  { id: 'KoboldThief', aa: 'MELEE' },
+  { id: 'KoboldWarrior', aa: 'MELEE' },
+  { id: 'Phoenix', aa: 'MELEE' },
+  { id: 'PhoenixEgg', aa: 'MELEE' },
+  { id: 'SatyrBerserker', aa: 'MELEE' },
+  { id: 'Vrock', aa: 'MELEE' },
+  { id: 'SkeletonDragon', aa: 'RANGED' },
+  { id: 'AegisTower', aa: 'MELEE' },
+  { id: 'ChickenCoop', aa: 'MELEE' },
+  { id: 'Sentinelle', aa: 'MELEE' },
+  { id: 'FireThrower', aa: 'MELEE' },
+  { id: 'GammaTurret', aa: 'RANGED' }
+];
 
 
 function onOpen() {
   SpreadsheetApp.getUi()
     .createMenu('Godot Tools')
     .addItem('Exporter les stats (JSON)', 'showStatsJson')
-    .addItem('Préparer le schéma + Latika', 'setupGodotSchema')
+    .addItem('Préparer le schéma + entités', 'setupGodotSchema')
     .addToUi();
 }
 
@@ -152,14 +174,16 @@ function setupGodotSchema() {
   var report = [];
   renameInHeader_(sheet, headerRow, 'hero_id', 'entity_id', report);
   renameGroups_(sheet, headerRow, report);
+  renameColumns_(sheet, headerRow, report);
   collapseCritResistances_(sheet, headerRow, report);
   addMissingColumns_(sheet, headerRow, report);
-  ensureLatikaRow_(sheet, headerRow, report);
+  ensureEntityRows_(sheet, headerRow, report);
 
   ui.alert(
     'Schéma préparé :\n\n' + (report.length ? report.join('\n') : 'Rien à changer.') +
     "\n\nÀ faire à la main : régler les lignes de formule des nouvelles colonnes, " +
-    "et supprimer les anciennes colonnes crit_resistances.* (l'importeur les ignore)."
+    "remplir les stats des entités ajoutées (lignes lvl 1), et supprimer les " +
+    "anciennes colonnes crit_resistances.* (l'importeur les ignore)."
   );
 }
 
@@ -183,6 +207,18 @@ function renameGroups_(sheet, headerRow, report) {
       var nh = GROUP_RENAMES[grp] + h.substring(dot);
       sheet.getRange(headerRow + 1, i + 1).setValue(nh);
       report.push(h + ' -> ' + nh);
+    }
+  }
+}
+
+// Renomme les colonnes exactes définies dans COLUMN_RENAMES (alias lisibles).
+function renameColumns_(sheet, headerRow, report) {
+  var headers = sheet.getDataRange().getValues()[headerRow];
+  for (var i = 0; i < headers.length; i++) {
+    var h = String(headers[i]).trim();
+    if (COLUMN_RENAMES[h] && headers.indexOf(COLUMN_RENAMES[h]) === -1) {
+      sheet.getRange(headerRow + 1, i + 1).setValue(COLUMN_RENAMES[h]);
+      report.push(h + ' -> ' + COLUMN_RENAMES[h]);
     }
   }
 }
@@ -215,24 +251,42 @@ function addMissingColumns_(sheet, headerRow, report) {
   }
 }
 
-function ensureLatikaRow_(sheet, headerRow, report) {
+// Ajoute une ligne (lvl 1) par entité absente : entity_id + auto_attack_type
+// (+ desc_path/stats_dir/stats_prefix pour les exceptions). Les stats restent
+// vides, à remplir avant import.
+function ensureEntityRows_(sheet, headerRow, report) {
   var values = sheet.getDataRange().getValues();
   var headers = values[headerRow];
   var idCol = headers.indexOf('entity_id');
   if (idCol === -1) return;
 
+  var present = {};
   for (var i = headerRow + 1; i < values.length; i++) {
-    if (String(values[i][idCol]).trim() === 'Latika') return; // déjà présente
+    var id = String(values[i][idCol]).trim();
+    if (id) present[id] = true;
   }
 
+  var colOf = {};
+  for (var c = 0; c < headers.length; c++) colOf[String(headers[c]).trim()] = c;
+
   var rowIndex = sheet.getLastRow() + 1;
-  for (var c = 0; c < headers.length; c++) {
-    var key = String(headers[c]).trim();
-    if (key in LATIKA_ROW) {
-      sheet.getRange(rowIndex, c + 1).setValue(LATIKA_ROW[key]);
+  var added = 0;
+  for (var e = 0; e < ENTITIES.length; e++) {
+    var ent = ENTITIES[e];
+    if (present[ent.id]) continue;
+
+    var rowData = { 'entity_id': ent.id, 'level': 1, 'auto_attack_type': ent.aa };
+    if (ent.desc_path) rowData['desc_path'] = ent.desc_path;
+    if (ent.stats_dir) rowData['stats_dir'] = ent.stats_dir;
+    if (ent.stats_prefix) rowData['stats_prefix'] = ent.stats_prefix;
+
+    for (var key in rowData) {
+      if (key in colOf) sheet.getRange(rowIndex, colOf[key] + 1).setValue(rowData[key]);
     }
+    rowIndex++;
+    added++;
   }
-  report.push('+ ligne exemple Latika (lvl 1)');
+  if (added > 0) report.push('+ ' + added + ' lignes entités (lvl 1)');
 }
 
 

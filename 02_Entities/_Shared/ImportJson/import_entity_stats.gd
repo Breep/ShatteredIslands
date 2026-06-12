@@ -40,6 +40,10 @@ const MONO_STATS: Dictionary = {
 	"dodge": EntityStats.StatType.DODGE,
 	"lifesteal": EntityStats.StatType.LIFESTEAL,
 	"crit_resistance": EntityStats.StatType.CRIT_RESISTANCE,
+	# Alias plus lisibles des 3 slots de dégâts de m_resistances.
+	"armor": EntityStats.StatType.ARMOR,
+	"magic_resistance": EntityStats.StatType.MAGIC_RESIST,
+	"poison_resistance": EntityStats.StatType.POISON_RESIST,
 }
 
 # Groupe JSON Multi (objet ActionType -> valeur) -> StatType.
@@ -109,6 +113,7 @@ func _process_entity(entity_id: String, entries: Array) -> bool:
 	var prefix: String = targets["stats_prefix"]
 
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(stats_dir))
+	_cleanup_old_level_files(stats_dir, prefix)
 
 	# L'import REMPLACE intégralement le dictionnaire stats du desc : il faut donc
 	# que le JSON contienne TOUS les niveaux voulus pour cette entité.
@@ -162,7 +167,7 @@ func _resolve_targets(entity_id: String, entries: Array) -> Dictionary:
 	if stats_dir.is_empty():
 		stats_dir = _derive_stats_dir(desc_path)
 	if prefix.is_empty():
-		prefix = _derive_prefix(stats_dir, entity_id)
+		prefix = _default_prefix(entity_id)
 
 	return {"desc_path": desc_path, "stats_dir": stats_dir, "stats_prefix": prefix}
 
@@ -268,23 +273,32 @@ func _derive_stats_dir(desc_path: String) -> String:
 	return base.path_join("Stats")
 
 
-# Préfixe déduit d'un fichier "<prefix>_lvl_NN.tres" existant ; sinon snake_case.
-# Robuste même quand le préfixe ne suit pas le nom de l'entité.
-func _derive_prefix(stats_dir: String, entity_id: String) -> String:
+# Convention de nommage unique (Pattern B) : <entity_snake>_stats.
+# Donne des fichiers <prefix>_lvl_NN.tres, ex. "kobold_knight_stats_lvl_01.tres".
+func _default_prefix(entity_id: String) -> String:
+	return entity_id.to_snake_case() + "_stats"
+
+
+# Supprime les fichiers de niveau (*_lvl_*.tres) qui ne suivent PAS le préfixe
+# courant : nettoie les anciens noms (Pattern A/C) pour ne garder que le Pattern B.
+# Les .tres sont versionnés (git) si besoin de récupération.
+func _cleanup_old_level_files(stats_dir: String, prefix: String) -> void:
+	var keep := prefix + "_lvl_"
 	var dir := DirAccess.open(stats_dir)
-	if dir != null:
-		dir.list_dir_begin()
-		var entry := dir.get_next()
-		while entry != "":
-			if not dir.current_is_dir() and entry.get_extension() == "tres":
-				var base := entry.get_basename()
-				var pos := base.rfind("_lvl_")
-				if pos > 0:
-					dir.list_dir_end()
-					return base.substr(0, pos)
-			entry = dir.get_next()
-		dir.list_dir_end()
-	return entity_id.to_snake_case()
+	if dir == null:
+		return
+	var to_delete: Array[String] = []
+	dir.list_dir_begin()
+	var entry := dir.get_next()
+	while entry != "":
+		if not dir.current_is_dir() and entry.get_extension() == "tres" \
+				and entry.find("_lvl_") != -1 and not entry.begins_with(keep):
+			to_delete.append(entry)
+		entry = dir.get_next()
+	dir.list_dir_end()
+	for fname: String in to_delete:
+		dir.remove(fname)
+		print("[ImportStats]   nettoyé (ancien nom) : %s" % fname)
 
 
 func _apply_entry(stats: EntityStats, entry: Dictionary, entity_id: String, level: int) -> void:
