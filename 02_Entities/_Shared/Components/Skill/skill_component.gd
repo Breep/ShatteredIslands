@@ -88,8 +88,16 @@ func _load_skills() -> void:
 
 func _apply_skills() -> void:
 	for skill_type: Skill.Type in roaster:
-		if skill_type == Skill.Type.ULTIMATE: continue
-		if unlocked_skills[skill_type] == false: continue
-		if roaster.get(skill_type) == null: continue
-		roaster[skill_type].skill_effect.apply(_skill_context)
- 
+		_apply_skill(skill_type)
+
+
+# Applique l'effet d'un tier déjà chargé dans le roaster. L'ultime est exclu
+# (déclenché à la demande via cast_ultimate). Seam réutilisé par les sous-classes
+# qui remplissent le roaster à chaud (cf. HeroSkillComponent).
+func _apply_skill(skill_type: Skill.Type) -> void:
+	if skill_type == Skill.Type.ULTIMATE: return
+	if unlocked_skills[skill_type] == false: return
+	var skill: Skill = roaster.get(skill_type)
+	if skill == null or skill.skill_effect == null: return
+	skill.skill_effect.apply(_skill_context)
+

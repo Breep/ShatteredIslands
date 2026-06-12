@@ -18,8 +18,6 @@ var state: PlayerState
 var hero: Entity
 var fighting_island: FightingIsland
 
-var skill_manager: SkillManager
-
 var _team: int # Current team of the player during this round
 var team: int:
 	get: return _team
@@ -136,8 +134,6 @@ func bind_to(party: Party) -> void:
 # ============================== Private functions ==============================
 func _init() -> void:
 	state = PlayerState.new()
-	skill_manager = SkillManager.new()
-	skill_manager.init(self)
 
 
 func _check_lvl_up() -> void:

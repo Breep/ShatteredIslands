@@ -30,8 +30,6 @@
 	#_player.player_name = "Breep"
 	#_player.name = "Player_proto"
 	## _player.hero_desc supprimé en Phase 3 (vit sur HeroSpec maintenant) — proto à reworker
-	#_player.skill_manager = SkillManager.new()
-	#_player.skill_manager.init(_player)
 	#add_child(_player)
 	#PlayerManager.players[multiplayer.get_unique_id()] = _player
 	#

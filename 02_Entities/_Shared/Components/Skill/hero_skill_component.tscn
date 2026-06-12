@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bhskcmp7aqx2v"]
+
+[ext_resource type="Script" path="res://02_Entities/_Shared/Components/Skill/hero_skill_component.gd" id="1_hsc"]
+
+[node name="HeroSkillComponent" type="Node" unique_id=3471829006]
+script = ExtResource("1_hsc")
