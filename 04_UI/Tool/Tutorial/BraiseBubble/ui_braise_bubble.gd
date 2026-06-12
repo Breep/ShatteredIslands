@@ -45,10 +45,10 @@ var _closing: bool = false
 
 
 #region ============================== Local nodes ==============================
-@onready var _panel: NinePatchRect = %Panel
+@onready var _panel: Panel = %Panel
 @onready var _portrait: TextureRect = %Portrait
 @onready var _name_label: Label = %NameLabel
-@onready var _text_label: RichTextLabel = %TextLabel
+@onready var _text_label: Label = %TextLabel
 @onready var _skip_button: BaseButton = %SkipButton
 @onready var _skip_label: Label = %SkipLabel
 @onready var _arrow_left: TextureRect = %ArrowLeft
@@ -81,6 +81,7 @@ func show_bubble(step: TutorialStep, p_target: Control = null, is_last: bool = f
 	_portrait.texture = step.portrait_texture if step.portrait_texture != null else _default_portrait
 	_name_label.text = step.speaker_name if step.speaker_name != "" else _default_speaker_name
 	_skip_label.text = "Fermer" if is_last else "Suivant"
+	_skip_button.visible = not step.hide_skip
 
 	_text_label.text = step.text
 	_text_label.visible_ratio = 0.0

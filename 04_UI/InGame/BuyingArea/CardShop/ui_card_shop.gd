@@ -360,6 +360,7 @@ func _on_close_button_pressed() -> void:
 
 func _on_refresh_button_pressed() -> void:
 	_refresh_button.disabled = true
+	Events.shop_refreshed.emit()
 	_card_shop.try_refresh_shop_cards()
 
 

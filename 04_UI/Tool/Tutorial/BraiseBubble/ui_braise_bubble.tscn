@@ -74,6 +74,7 @@ theme = ExtResource("4_8d78f")
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 7
 theme_override_font_sizes/font_size = 16
+autowrap_mode = 3
 text = "test text"
 
 [node name="ButtonRow" type="HBoxContainer" parent="Panel/Margin/HBox/Right" unique_id=2044570051]

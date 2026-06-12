@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://d1oxnd1g75rqh" path="res://04_UI/InGame/BuyingArea/CardShop/ui_card_shop.tscn" id="5_uishop"]
 [ext_resource type="Script" uid="uid://het037dux5qw" path="res://04_UI/Tool/DragCoordinator/drag_coordinator.gd" id="6_dragco"]
 [ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="15_theme"]
+[ext_resource type="PackedScene" uid="uid://bkh2sp5xq82gn" path="res://04_UI/Tool/Tutorial/tutorial_overlay.tscn" id="16_overlay"]
 
 [node name="CardShopHandProto" type="Node" unique_id=1979912402]
 script = ExtResource("1_proto")
@@ -35,6 +36,15 @@ offset_bottom = 600.0
 grow_vertical = 1
 _drag_coordinator = NodePath("../../DragCoordinator")
 _proto_mode = true
+
+[node name="TutorialOverlay" parent="UI" unique_id=1979912500 groups=["tutorial_overlay"] instance=ExtResource("16_overlay")]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ControlsLayer" type="Control" parent="UI" unique_id=1703991210]
 layout_mode = 3
@@ -87,5 +97,15 @@ text = "Refresh shop"
 layout_mode = 2
 text = "Vider la main"
 
+[node name="ForceBuyButton" type="Button" parent="UI/ControlsLayer/Panel/MarginContainer/VBoxContainer" unique_id=758187413]
+layout_mode = 2
+text = "Tuto: force achat slot 0 (BLOCKING)"
+
+[node name="TutoClearButton" type="Button" parent="UI/ControlsLayer/Panel/MarginContainer/VBoxContainer" unique_id=758187414]
+layout_mode = 2
+text = "Tuto: clear"
+
 [connection signal="pressed" from="UI/ControlsLayer/Panel/MarginContainer/VBoxContainer/RefreshShopButton" to="." method="_on_refresh_shop_button_pressed"]
 [connection signal="pressed" from="UI/ControlsLayer/Panel/MarginContainer/VBoxContainer/ClearHandButton" to="." method="_on_clear_hand_button_pressed"]
+[connection signal="pressed" from="UI/ControlsLayer/Panel/MarginContainer/VBoxContainer/ForceBuyButton" to="." method="_on_force_buy_button_pressed"]
+[connection signal="pressed" from="UI/ControlsLayer/Panel/MarginContainer/VBoxContainer/TutoClearButton" to="." method="_on_tuto_clear_button_pressed"]
