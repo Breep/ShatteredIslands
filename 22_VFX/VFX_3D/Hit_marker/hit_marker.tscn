@@ -196,11 +196,6 @@ upper_fade = 0.00485281
 lower_fade = 0.00309259
 cull_mask = 1048571
 
-[node name="DELETE BEFORE USE" type="CSGCylinder3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-visible = false
-radius = 3.0
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_qwyym")
