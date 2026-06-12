@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://c6wfwivgtnko6"]
+
+[ext_resource type="Texture2D" uid="uid://carfsdb3rsrq6" path="res://04_UI/_Themes/Data/Icons/Backgrounds/skill_bronze_background.svg" id="1_ds1or"]
+[ext_resource type="Texture2D" uid="uid://ds2dracb280n" path="res://02_Entities/Pool/Heroes/Latika/Skills/Passive/skill_target.svg" id="2_ptssa"]
+
+[node name="Control" type="PanelContainer" unique_id=1851691766]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 325.0
+offset_top = 203.0
+offset_right = -512.0
+offset_bottom = -356.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1506918107]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1959180087]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer" unique_id=1214839883]
+layout_mode = 2
+text = "Pick a skill"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=624050527]
+layout_mode = 2
+alignment = 1
+
+[node name="Skill1Container" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1015859936]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Skill1Container" unique_id=2080564716]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Skill1Container/MarginContainer" unique_id=221799625]
+layout_mode = 2
+
+[node name="SkillBackground" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/Skill1Container/MarginContainer/VBoxContainer" unique_id=887243375]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+texture = ExtResource("1_ds1or")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Skill1Container/MarginContainer/VBoxContainer/SkillBackground" unique_id=116142621]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="SkillIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/Skill1Container/MarginContainer/VBoxContainer/SkillBackground/MarginContainer" unique_id=1553536496]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_ptssa")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/Skill1Container/MarginContainer/VBoxContainer" unique_id=315792997]
+layout_mode = 2
+
+[node name="SkillName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Skill1Container/MarginContainer/VBoxContainer" unique_id=233355971]
+layout_mode = 2
+text = "Skill 1"
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/Skill1Container/MarginContainer/VBoxContainer" unique_id=116183016]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/Skill1Container/MarginContainer/VBoxContainer" unique_id=464014376]
+layout_mode = 2
