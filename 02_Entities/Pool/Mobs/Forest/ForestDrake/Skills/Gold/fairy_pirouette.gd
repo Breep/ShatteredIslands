@@ -18,5 +18,10 @@ func apply(ctx: SkillContext) -> void:
 			_can_do_pirouette = true
 		)
 	)
+
+
+func get_description() -> String:
+	return "Quand il subit des dégâts, devient inciblable pendant " + _value(_duration) \
+		+ " s, puis [[COOLDOWN]] de " + _value(_cd) + " s."
 	
 	

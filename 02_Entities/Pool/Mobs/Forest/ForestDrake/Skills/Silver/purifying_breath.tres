@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://40jbt70lfnym"]
 
+[ext_resource type="Texture2D" uid="uid://crqt4msedhn5a" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Skills/Silver/skill_purifying_breath.svg" id="1_62qbh"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_fs6cv"]
 [ext_resource type="Script" uid="uid://de46gmf6x3m2w" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Skills/Silver/purifying_breath.gd" id="2_u6ppu"]
 
@@ -11,5 +12,6 @@ metadata/_custom_type_script = "uid://de46gmf6x3m2w"
 script = ExtResource("1_fs6cv")
 skill_id = 2
 name = "Purifying Breath"
+portrait = ExtResource("1_62qbh")
 skill_effect = SubResource("Resource_62qbh")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

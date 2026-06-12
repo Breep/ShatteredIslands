@@ -16,3 +16,8 @@ func apply(ctx: SkillContext) -> void:
 		if entity == null or not is_instance_valid(entity): return
 		_owner.alterations.cleanse(entity, amount, &"Purifying Breath")
 	)
+
+
+func get_description() -> String:
+	return "Toutes les " + _value(_period) + " s, applique un [[CLEANSE]] de " \
+		+ _value(_cleanse_ap_ratio) + "% de sa puissance magique sur l'allié le plus affligé."

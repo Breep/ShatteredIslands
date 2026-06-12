@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://cj2esy7vun161"]
 
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_gwsyo"]
+[ext_resource type="Texture2D" uid="uid://bcjyahau2gwno" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Skills/Ultimate/skill_clearing_of_life.svg" id="1_qvye7"]
 [ext_resource type="Script" uid="uid://cmxv8yf4fef1q" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Skills/Ultimate/clearing_of_life.gd" id="2_2aa03"]
 
 [sub_resource type="Resource" id="Resource_qvye7"]
@@ -11,5 +12,6 @@ metadata/_custom_type_script = "uid://cmxv8yf4fef1q"
 script = ExtResource("1_gwsyo")
 skill_id = 7
 name = "Clearing Of Life"
+portrait = ExtResource("1_qvye7")
 skill_effect = SubResource("Resource_qvye7")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

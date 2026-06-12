@@ -19,3 +19,10 @@ func apply(ctx: SkillContext) -> void:
 		ClearingOfLife.Modifier.RADIUS: _radius,
 		ClearingOfLife.Modifier.DURATION: _duration
 	})
+
+
+func get_description() -> String:
+	return "Crée une zone de vie (rayon " + _value(_radius) + ") pendant " + _value(_duration) \
+		+ " s : toutes les " + _value(_period) + " s, soigne les alliés présents de " \
+		+ _value(_ad_ratio) + "% de ses dégâts d'attaque + " + _value(_ap_ratio) \
+		+ "% de sa puissance magique, et applique un [[CLEANSE]] de " + _value(_cleanse_value) + "."

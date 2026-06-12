@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://db3w0jk77j6u"]
 
+[ext_resource type="Texture2D" uid="uid://bo5h7s8jcc1o1" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Skills/Gold/skill_fairy_pirouette.svg" id="1_ntjdi"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_q0fwa"]
 [ext_resource type="Script" uid="uid://d3nxp5c01lwxe" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Skills/Gold/fairy_pirouette.gd" id="2_lvigj"]
 
@@ -12,5 +13,6 @@ metadata/_custom_type_script = "uid://d3nxp5c01lwxe"
 script = ExtResource("1_q0fwa")
 skill_id = 4
 name = "Fairy Pirouette"
+portrait = ExtResource("1_ntjdi")
 skill_effect = SubResource("Resource_ntjdi")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

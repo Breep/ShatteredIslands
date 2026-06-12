@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://m7dn7jdrcb81"]
 
+[ext_resource type="Texture2D" uid="uid://pweqauucmd04" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Skills/Passive/skill_benevolant_aggression.svg" id="1_3qbrp"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_77a8v"]
 [ext_resource type="Script" uid="uid://dnbroi4k65glv" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Skills/Passive/benevolent_aggression.gd" id="2_j5uyu"]
 
@@ -10,6 +11,8 @@ metadata/_custom_type_script = "uid://dnbroi4k65glv"
 [resource]
 script = ExtResource("1_77a8v")
 skill_id = 6
+name = "Aggression bienveillante"
 description = "Benevolent Aggression"
+portrait = ExtResource("1_3qbrp")
 skill_effect = SubResource("Resource_3qbrp")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

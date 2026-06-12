@@ -16,3 +16,8 @@ func apply(ctx: SkillContext) -> void:
 		if entity == null or not is_instance_valid(entity): return
 		_owner.heal.direct(entity, amount, &"Helping Hand")
 	)
+
+
+func get_description() -> String:
+	return "Toutes les " + _value(_period) + " s, soigne l'allié le plus bas en PV " \
+		+ "(lui compris) de " + _value(_heal_ap_ratio) + "% de sa puissance magique."
