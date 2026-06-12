@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://bygyhmyddskl3"]
 
+[ext_resource type="Texture2D" uid="uid://b2laflxpgikvp" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Skills/Bronze/skill_fire_sword.svg" id="1_87o7t"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
 [ext_resource type="Script" uid="uid://cq4sr48mglroy" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Skills/Bronze/lame_ardente.gd" id="2_eff"]
 
@@ -11,5 +12,6 @@ metadata/_custom_type_script = "uid://blameardente1e"
 script = ExtResource("1_skill")
 name = "Lame ardente"
 description = "Chaque attaque applique 6 stacks d'Ignite."
+portrait = ExtResource("1_87o7t")
 skill_effect = SubResource("Resource_e")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

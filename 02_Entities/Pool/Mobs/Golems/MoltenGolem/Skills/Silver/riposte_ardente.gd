@@ -16,3 +16,7 @@ func apply(ctx: SkillContext) -> void:
 			return
 		golem.alterations.inflict_condition_stacks(source, _stacks, Alteration.Type.IGNITE, &"Riposte ardente")
 	)
+
+
+func get_description() -> String:
+	return "Chaque auto-attaque subie applique " + _value(_stacks) + " stacks d'[[IGNITE]] à l'attaquant."

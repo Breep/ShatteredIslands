@@ -16,3 +16,7 @@ func apply(ctx: SkillContext) -> void:
 		if is_instance_valid(target):
 			golem.alterations.inflict_condition_stacks(target, _stacks, Alteration.Type.IGNITE, &"Lame ardente")
 	golem.auto_attack_modifier_registry.register_modifier(modifier)
+
+
+func get_description() -> String:
+	return "Chaque auto-attaque applique " + _value(_stacks) + " stacks d'[[IGNITE]] à la cible."

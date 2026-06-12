@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://oo50gehytehq"]
 
+[ext_resource type="Texture2D" uid="uid://diqhvd2g4g11n" path="res://02_Entities/Pool/Mobs/Golems/PoisonGolem/Skills/Passive/skill_nuage_mortuaire.svg" id="1_0jmyw"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
 [ext_resource type="Script" uid="uid://bhd0bxnq2lvb8" path="res://02_Entities/Pool/Mobs/Golems/PoisonGolem/Skills/Passive/nuage_mortuaire.gd" id="2_eff"]
 [ext_resource type="PackedScene" uid="uid://dt7pleqy5yx0o" path="res://02_Entities/Pool/Mobs/Golems/vfx/VFX_FirExplosion_Golem.tscn" id="2_m6634"]
@@ -14,5 +15,6 @@ script = ExtResource("1_skill")
 skill_id = 6
 name = "Nuage mortuaire"
 description = "À la mort, explose et inflige 90 stacks de Poison dans un rayon de 3 m."
+portrait = ExtResource("1_0jmyw")
 skill_effect = SubResource("Resource_e")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

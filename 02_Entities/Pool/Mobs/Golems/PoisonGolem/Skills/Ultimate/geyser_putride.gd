@@ -20,3 +20,8 @@ func apply(ctx: SkillContext) -> void:
 			if is_instance_valid(enemy):
 				golem.alterations.inflict_condition_stacks(enemy, _stacks, Alteration.Type.POISON, _IMPACT_ID)
 	, _IMPACT_ID)
+
+
+func get_description() -> String:
+	return "Bondit puis, à l'atterrissage, applique " + _value(_stacks) + " [[POISON_STACK]] " \
+		+ "à tous les ennemis proches."

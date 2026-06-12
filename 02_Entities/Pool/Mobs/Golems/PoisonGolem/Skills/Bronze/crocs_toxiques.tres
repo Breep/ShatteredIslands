@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://ccrocstox2res"]
 
+[ext_resource type="Texture2D" uid="uid://cvntogwhwdpwn" path="res://02_Entities/Pool/Mobs/Golems/PoisonGolem/Skills/Bronze/skill_crocs_toxiques.svg" id="1_k04gl"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
 [ext_resource type="Script" uid="uid://by0iicfoxkjmc" path="res://02_Entities/Pool/Mobs/Golems/PoisonGolem/Skills/Bronze/crocs_toxiques.gd" id="2_eff"]
 
@@ -11,5 +12,6 @@ metadata/_custom_type_script = "uid://bcrocstox1eff7"
 script = ExtResource("1_skill")
 name = "Crocs toxiques"
 description = "Chaque attaque applique 6 stacks de Poison."
+portrait = ExtResource("1_k04gl")
 skill_effect = SubResource("Resource_e")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

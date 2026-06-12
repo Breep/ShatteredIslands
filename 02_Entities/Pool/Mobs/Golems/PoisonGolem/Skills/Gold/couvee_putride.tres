@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://ccouvput2res7"]
 
+[ext_resource type="Texture2D" uid="uid://cltopgeimagc8" path="res://02_Entities/Pool/Mobs/Golems/_Shared/skill_golem_brood.svg" id="1_ctfmo"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
 [ext_resource type="Script" uid="uid://cjknvqd8u8oex" path="res://02_Entities/Pool/Mobs/Golems/_Shared/se_golem_brood.gd" id="2_eff"]
 
@@ -13,5 +14,6 @@ script = ExtResource("1_skill")
 skill_id = 4
 name = "Couvée putride"
 description = "À la mort, explose en 3 petits golems de poison de niveau 5."
+portrait = ExtResource("1_ctfmo")
 skill_effect = SubResource("Resource_e")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

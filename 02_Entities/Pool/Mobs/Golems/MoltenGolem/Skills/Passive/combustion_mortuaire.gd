@@ -20,6 +20,11 @@ func apply(ctx: SkillContext) -> void:
 	golem.death_modifiers_registry.register_modifier(modifier)
 
 
+func get_description() -> String:
+	return "À sa mort, explose et applique " + _value(_stacks) + " stacks d'[[IGNITE]] " \
+		+ "à tous les ennemis proches."
+
+
 func _play_death_vfx(golem: Entity) -> void:
 	if _death_vfx == null:
 		return
