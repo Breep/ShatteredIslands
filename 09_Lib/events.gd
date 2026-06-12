@@ -62,6 +62,18 @@ signal skill_selected(skill: Skill)
 func signal_skill_selected(skill: Skill) -> void:
 	skill_selected.emit(skill)
 
+# Un tier à choix (bronze/silver/gold) d'un héros vient d'être débloqué et attend
+# un choix joueur. Porté par le composant pour que la fenêtre de sélection (filtrée
+# sur le héros local) puisse s'ouvrir.
+signal hero_skill_unlocked(component: HeroSkillComponent, skill_type: Skill.Type)
+func signal_hero_skill_unlocked(component: HeroSkillComponent, skill_type: Skill.Type) -> void:
+	hero_skill_unlocked.emit(component, skill_type)
+
+# Le joueur a tranché un tier : skill posée dans le roaster du héros.
+signal hero_skill_chosen(component: HeroSkillComponent, skill_id: Skill.SkillID)
+func signal_hero_skill_chosen(component: HeroSkillComponent, skill_id: Skill.SkillID) -> void:
+	hero_skill_chosen.emit(component, skill_id)
+
 signal scene_switched(floating_island: FloatingIsland)
 func signal_scene_switched(floating_island: FloatingIsland) -> void:
 	scene_switched.emit(floating_island)

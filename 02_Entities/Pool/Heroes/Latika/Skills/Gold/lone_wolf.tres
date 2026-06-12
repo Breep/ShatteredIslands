@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c1sryi3j73o5n" path="res://02_Entities/Pool/Heroes/Latika/Skills/Gold/skill_lone_wolf.svg" id="1_mnwya"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
-[ext_resource type="Script" path="res://02_Entities/Pool/Heroes/Latika/Skills/Gold/lone_wolf.gd" id="2_eff"]
+[ext_resource type="Script" uid="uid://dsf40yoid0dn0" path="res://02_Entities/Pool/Heroes/Latika/Skills/Gold/lone_wolf.gd" id="2_eff"]
 
 [sub_resource type="Resource" id="Resource_lonewolf"]
 script = ExtResource("2_eff")

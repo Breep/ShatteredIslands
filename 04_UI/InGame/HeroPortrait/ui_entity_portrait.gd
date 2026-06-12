@@ -75,6 +75,18 @@ const _SKILLID_TO_TYPE: Dictionary[Skill.SkillID, Skill.Type] = {
 
 # 2e choix par tier : visibles uniquement pour les héros (2 skills par tier).
 const _SECONDARY_BUTTONS: Array[String] = ["BronzeButton2", "SilverButton2", "GoldButton2"]
+
+# SkillID des 2e candidats (héros) et tiers ouverts au choix.
+const _SECONDARY_IDS: Array[Skill.SkillID] = [Skill.SkillID.BRONZE2, Skill.SkillID.SILVER2, Skill.SkillID.GOLD2]
+const _CHOOSABLE_TYPES: Array[Skill.Type] = [Skill.Type.BRONZE, Skill.Type.SILVER, Skill.Type.GOLD]
+
+# États visuels d'un bouton skill : verrouillé (grisé, lisible), normal, en attente
+# de choix (héros — clignote), ou écarté (candidat non retenu d'un tier tranché —
+# grisé mais toujours lisible).
+enum _SkillState { NORMAL, LOCKED, PENDING, DISCARDED }
+const _LOCKED_MODULATE := Color(1.0, 1.0, 1.0, 0.35)
+const _BLINK_MIN_ALPHA: float = 0.25
+const _BLINK_TIME: float = 0.5
 #endregion
 
 #region ============================== Onready ==============================
@@ -85,6 +97,7 @@ const _SECONDARY_BUTTONS: Array[String] = ["BronzeButton2", "SilverButton2", "Go
 @onready var _skill_desc_panel: VBoxContainer = %SkillDescriptionContainer
 @onready var _skill_name_label: Label = %SkillNameLabel
 @onready var _skill_desc_label: RichTextLabel = %SkillDescriptionLabel
+@onready var _lock_skill_button: Button = %LockSkillButton
 @onready var _panel: Panel = %EntityDescriptionPanel
 @onready var _portrait_button: TextureButton = %PortraitButton
 @onready var _health_bar: ProgressBar = %HealthBar
@@ -96,6 +109,7 @@ var _entity: Entity = null
 var _stat_connections: Array[Dictionary] = [] # {sig, cb} branchés sur _entity.stats
 var _skill_buttons: Dictionary = {} # TextureButton -> {id, icon, skill}
 var _button_tweens: Dictionary = {} # TextureButton -> Tween (feedback hover/press)
+var _blink_tweens: Dictionary = {} # TextureButton -> Tween (clignotement tier pending)
 var _showing_desc: bool = false
 var _current_desc_btn: TextureButton = null
 var _fade_tween: Tween
@@ -109,19 +123,22 @@ var _last_entity_click_frame: int = -1
 #region ============================== Node base functions ==============================
 func _ready() -> void:
 	_collect_skill_buttons()
-	_set_secondary_visible(false)
+	_hide_secondary_buttons()
 	_apply_tooltips()
 	_show_stats_instant()
 	_close_panel_instant()
 	_portrait_button.pressed.connect(_on_portrait_button_pressed)
+	_lock_skill_button.hide()
+	_lock_skill_button.pressed.connect(_on_lock_skill_button_pressed)
 	Events.entity_clicked.connect(_on_events_entity_clicked)
 	Events.nothing_clicked.connect(_on_events_nothing_clicked)
+	Events.hero_skill_chosen.connect(_on_hero_skill_chosen)
 
 
 func _input(event: InputEvent) -> void:
 	if not (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT):
 		return
-	if _showing_desc and not _is_over_skill_button():
+	if _showing_desc and not _is_over_skill_button() and not _is_over_lock_button():
 		_show_stats()
 
 
@@ -212,13 +229,32 @@ func _bind_level() -> void:
 
 
 func _bind_skills() -> void:
-	var is_hero: bool = _entity.entity_desc is HeroDesc
-	_set_secondary_visible(is_hero)
+	var skill_comp: SkillComponent = _entity.skill
+	if skill_comp != null and not skill_comp.unlocked_skills_changed.is_connected(_on_unlocked_skills_changed):
+		skill_comp.unlocked_skills_changed.connect(_on_unlocked_skills_changed)
+	_refresh_skills()
+
+
+# (Re)calcule pour chaque bouton sa visibilité, son icône et son état visuel.
+# Appelé au bind et à chaque changement de déblocage/choix du héros bindé.
+func _refresh_skills() -> void:
+	var skill_comp: SkillComponent = _entity.skill
+	var hero_comp: HeroSkillComponent = skill_comp as HeroSkillComponent
 	for btn: TextureButton in _skill_buttons:
 		var data: Dictionary = _skill_buttons[btn]
-		var skill: Skill = _resolve_skill(data["id"], is_hero)
+		var id: Skill.SkillID = data["id"]
+		if not _is_button_shown(id, hero_comp):
+			_stop_blink(btn)
+			btn.hide()
+			data["skill"] = null
+			continue
+		var skill: Skill = _resolve_skill(id, hero_comp != null)
 		data["skill"] = skill
 		data["icon"].texture = skill.portrait if skill != null else null
+		btn.show()
+		_apply_skill_state(btn, _skill_state(id, hero_comp, skill_comp))
+	if _showing_desc and _current_desc_btn != null:
+		_update_lock_button(_current_desc_btn)
 
 
 # Héros : skills d'affichage dans HeroDesc.hero_skills (8 slots fins). Autres entités :
@@ -230,11 +266,55 @@ func _resolve_skill(id: Skill.SkillID, is_hero: bool) -> Skill:
 	return skill_comp.roaster.get(_SKILLID_TO_TYPE[id]) if skill_comp != null else null
 
 
-func _set_secondary_visible(is_visible: bool) -> void:
-	for btn_name: String in _SECONDARY_BUTTONS:
-		var btn: Control = get_node_or_null("%" + btn_name)
-		if btn != null:
-			btn.visible = is_visible
+# Mob : seulement les 5 boutons primaires. Héros : les 2 candidats d'un tier à choix
+# restent toujours affichés (le non-retenu sera grisé via _skill_state).
+func _is_button_shown(id: Skill.SkillID, hero_comp: HeroSkillComponent) -> bool:
+	var is_secondary: bool = id in _SECONDARY_IDS
+	if hero_comp == null:
+		return not is_secondary
+	if _SKILLID_TO_TYPE[id] in _CHOOSABLE_TYPES:
+		return true
+	return not is_secondary
+
+
+func _skill_state(id: Skill.SkillID, hero_comp: HeroSkillComponent, skill_comp: SkillComponent) -> _SkillState:
+	var type: Skill.Type = _SKILLID_TO_TYPE[id]
+	var unlocked: bool = skill_comp.unlocked_skills.get(type, true) if skill_comp != null else true
+	if not unlocked:
+		return _SkillState.LOCKED
+	if hero_comp != null and type in _CHOOSABLE_TYPES:
+		var chosen: Skill = hero_comp.get_chosen_skill(type)
+		if chosen == null:
+			return _SkillState.PENDING
+		return _SkillState.NORMAL if _resolve_skill(id, true) == chosen else _SkillState.DISCARDED
+	return _SkillState.NORMAL
+
+
+func _apply_skill_state(btn: TextureButton, state: _SkillState) -> void:
+	_stop_blink(btn)
+	match state:
+		_SkillState.LOCKED, _SkillState.DISCARDED:
+			btn.modulate = _LOCKED_MODULATE
+		_SkillState.PENDING:
+			btn.modulate = Color.WHITE
+			_start_blink(btn)
+		_:
+			btn.modulate = Color.WHITE
+
+
+func _start_blink(btn: TextureButton) -> void:
+	var tween: Tween = create_tween().set_loops()
+	tween.set_trans(Tween.TRANS_SINE)
+	tween.tween_property(btn, "modulate:a", _BLINK_MIN_ALPHA, _BLINK_TIME)
+	tween.tween_property(btn, "modulate:a", 1.0, _BLINK_TIME)
+	_blink_tweens[btn] = tween
+
+
+func _stop_blink(btn: TextureButton) -> void:
+	var prev: Variant = _blink_tweens.get(btn)
+	if prev is Tween and prev.is_valid():
+		prev.kill()
+	_blink_tweens.erase(btn)
 
 
 func _unbind() -> void:
@@ -251,6 +331,11 @@ func _unbind() -> void:
 			_entity.progression.level_changed.disconnect(_on_level_changed)
 		if _entity.died.is_connected(_on_entity_died):
 			_entity.died.disconnect(_on_entity_died)
+		if _entity.skill != null and _entity.skill.unlocked_skills_changed.is_connected(_on_unlocked_skills_changed):
+			_entity.skill.unlocked_skills_changed.disconnect(_on_unlocked_skills_changed)
+	for btn: TextureButton in _skill_buttons:
+		_stop_blink(btn)
+		btn.modulate = Color.WHITE
 	_stat_connections.clear()
 	_entity = null
 #endregion
@@ -266,7 +351,16 @@ func _show_desc(btn: TextureButton) -> void:
 	else:
 		_skill_name_label.text = ""
 		_skill_desc_label.text = _NO_SKILL_TEXT
+	_update_lock_button(btn)
 	_crossfade(_skill_desc_panel, _stats_panel)
+
+
+# Le bouton « lock » (re)propose le choix du tier décrit : visible seulement si ce
+# tier est encore en attente de choix sur le héros bindé.
+func _update_lock_button(btn: TextureButton) -> void:
+	var hero_comp: HeroSkillComponent = _entity.skill as HeroSkillComponent if is_instance_valid(_entity) else null
+	var type: Skill.Type = _SKILLID_TO_TYPE[_skill_buttons[btn]["id"]]
+	_lock_skill_button.visible = hero_comp != null and hero_comp.is_choice_pending(type)
 
 
 # Description du skill, tirée de son effet et passée au moteur de tokens des
@@ -365,6 +459,15 @@ func _collect_skill_buttons() -> void:
 		btn.button_up.connect(_on_button_up.bind(btn))
 
 
+# État initial (avant tout bind) : les 2e candidats restent cachés. Après bind,
+# c'est _refresh_skills qui pilote la visibilité au cas par cas.
+func _hide_secondary_buttons() -> void:
+	for btn_name: String in _SECONDARY_BUTTONS:
+		var btn: Control = get_node_or_null("%" + btn_name)
+		if btn != null:
+			btn.hide()
+
+
 func _is_over_skill_button() -> bool:
 	var mouse: Vector2 = get_global_mouse_position()
 	for btn: Control in _skill_buttons:
@@ -372,6 +475,10 @@ func _is_over_skill_button() -> bool:
 		if btn.get_global_rect().has_point(mouse):
 			return true
 	return false
+
+
+func _is_over_lock_button() -> bool:
+	return _lock_skill_button.visible and _lock_skill_button.get_global_rect().has_point(get_global_mouse_position())
 
 
 func _tween_button_scale(btn: Control, target: Vector2) -> void:
@@ -458,4 +565,22 @@ func _on_button_down(btn: Control) -> void:
 
 func _on_button_up(btn: Control) -> void:
 	_tween_button_scale(btn, _HOVER_SCALE)
+
+
+func _on_lock_skill_button_pressed() -> void:
+	if _current_desc_btn == null: return
+	var hero_comp: HeroSkillComponent = _entity.skill as HeroSkillComponent if is_instance_valid(_entity) else null
+	if hero_comp == null: return
+	var type: Skill.Type = _SKILLID_TO_TYPE[_skill_buttons[_current_desc_btn]["id"]]
+	hero_comp.request_choice(type)
+
+
+func _on_unlocked_skills_changed() -> void:
+	if is_instance_valid(_entity):
+		_refresh_skills()
+
+
+func _on_hero_skill_chosen(comp: HeroSkillComponent, _skill_id: Skill.SkillID) -> void:
+	if is_instance_valid(_entity) and _entity.skill == comp:
+		_refresh_skills()
 #endregion

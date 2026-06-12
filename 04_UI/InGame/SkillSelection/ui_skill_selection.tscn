@@ -2,8 +2,9 @@
 
 [ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="1_ds1or"]
 [ext_resource type="PackedScene" uid="uid://bm2o1ibop8nx8" path="res://04_UI/InGame/SkillSelection/SkillWindow/ui_skill_window.tscn" id="1_mng12"]
+[ext_resource type="Script" path="res://04_UI/InGame/SkillSelection/ui_skill_selection.gd" id="2_sksel"]
 
-[node name="Control" type="Control" unique_id=1143938517]
+[node name="UiSkillSelection" type="Control" unique_id=1143938517]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -13,6 +14,7 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_ds1or")
+script = ExtResource("2_sksel")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1506918107]
 layout_mode = 1
@@ -49,7 +51,9 @@ theme_override_constants/separation = 250
 alignment = 1
 
 [node name="UiSkillWindow" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1071241962 instance=ExtResource("1_mng12")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="UiSkillWindow2" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=819777810 instance=ExtResource("1_mng12")]
+unique_name_in_owner = true
 layout_mode = 2

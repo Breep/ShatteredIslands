@@ -7,10 +7,9 @@ class_name HeroSkillComponent
 extends SkillComponent
 
 #region ============================== Signals ==============================
-# Émis quand un tier devient sélectionnable (UI : ouvrir le choix) et quand le
-# joueur a tranché (UI : fermer / confirmer).
-signal skill_unlocked(skill_type: Skill.Type)
-signal skill_picked(skill_id: Skill.SkillID)
+# Le déblocage d'un tier et le choix joueur passent par le bus Events
+# (hero_skill_unlocked / hero_skill_chosen), cf. _request_pending_choices /
+# _on_skill_selected. Pratique pour une fenêtre globale filtrée sur le héros local.
 #endregion
 
 #region ============================== Constants ==============================
@@ -54,6 +53,26 @@ func get_tier_candidates(skill_type: Skill.Type) -> Array[Skill]:
 		if skill != null:
 			result.append(skill)
 	return result
+
+
+# True si le tier est débloqué (par niveau) mais pas encore choisi → l'UI doit
+# proposer le choix (et le portrait faire clignoter les candidats).
+func is_choice_pending(skill_type: Skill.Type) -> bool:
+	if not _TIER_SLOTS.has(skill_type): return false
+	return unlocked_skills.get(skill_type, false) and not _chosen.has(skill_type)
+
+
+# Skill retenue pour un tier à choix (null tant que non choisi).
+func get_chosen_skill(skill_type: Skill.Type) -> Skill:
+	return roaster.get(skill_type) if _chosen.has(skill_type) else null
+
+
+# Redemande l'ouverture de la fenêtre de choix pour un tier toujours en attente
+# (ex : le joueur avait fermé l'UI sans choisir). Contourne le garde anti-réémission
+# _pending utilisé par _request_pending_choices.
+func request_choice(skill_type: Skill.Type) -> void:
+	if is_choice_pending(skill_type):
+		Events.signal_hero_skill_unlocked(self, skill_type)
 #endregion
 
 #region ============================== Private functions ==============================
@@ -75,7 +94,7 @@ func _request_pending_choices() -> void:
 		if _chosen.has(skill_type): continue
 		if _pending[skill_type]: continue
 		_pending[skill_type] = true
-		skill_unlocked.emit(skill_type)
+		Events.signal_hero_skill_unlocked(self, skill_type)
 
 
 # La skill choisie appartient-elle bien à CE héros (comparaison par ressource, pas
@@ -111,5 +130,5 @@ func _on_skill_selected(skill: Skill) -> void:
 	_chosen[skill_type] = skill.skill_id
 	roaster[skill_type] = skill
 	_apply_skill(skill_type)
-	skill_picked.emit(skill.skill_id)
+	Events.signal_hero_skill_chosen(self, skill.skill_id)
 #endregion

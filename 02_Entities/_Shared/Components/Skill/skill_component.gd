@@ -100,4 +100,3 @@ func _apply_skill(skill_type: Skill.Type) -> void:
 	var skill: Skill = roaster.get(skill_type)
 	if skill == null or skill.skill_effect == null: return
 	skill.skill_effect.apply(_skill_context)
-
