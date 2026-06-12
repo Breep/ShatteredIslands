@@ -13,6 +13,7 @@ const CLEAVE_SCENE: PackedScene = preload("res://03_SpellsAndProjectiles/Spells/
 const GOBLIN_FOCUS_SCENE: PackedScene = preload("res://03_SpellsAndProjectiles/Spells/GoblinFocus/spell_goblin_focus.tscn")
 const CLEARING_OF_LIFE: PackedScene = preload("res://03_SpellsAndProjectiles/Spells/ClearingOfLife/spell_clearing_of_life.tscn")
 const FIRE_GROUND_SCENE: PackedScene = preload("res://03_SpellsAndProjectiles/Spells/FireGround/fire_ground.tscn")
+const PREDATOR_ARROW_SCENE: PackedScene = preload("res://03_SpellsAndProjectiles/Spells/PredatorArrow/predator_arrow.tscn")
 
 func _enter_tree() -> void:
 	if _owner == null: return
@@ -64,6 +65,7 @@ func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictiona
 		Spell.Type.GOBLIN_FOCUS: _cast_goblin_focus(target, spell_modifier)
 		Spell.Type.CLEARING_OF_LIFE: _cast_clearing_of_life(spell_modifier)
 		Spell.Type.FIRE_GROUND: _cast_fire_ground(spell_modifier)
+		Spell.Type.PREDATOR_ARROW: _cast_predator_arrow(target, spell_modifier)
 		_: Verbose.error("Unknown spell type [" + str(spell_type) + "]", Verbose.Category.ENTITY_MODULE)
 
 	_consume_after_action_modifiers(Utils.ActionCategory.SPELL, {
@@ -153,6 +155,15 @@ func _cast_clearing_of_life(spell_modifier: Dictionary) -> void:
 	var clearing_of_life: ClearingOfLife = CLEARING_OF_LIFE.instantiate()
 	clearing_of_life.init(_owner, spell_modifier)
 	_spawn_manager.spawn_spell(clearing_of_life)
+
+
+func _cast_predator_arrow(target: Entity, spell_modifier: Dictionary) -> void:
+	if target == null:
+		Verbose.error("_cast_predator_arrow() -> No target", Verbose.Category.ENTITY_MODULE)
+		return
+	var predator_arrow: PredatorArrow = PREDATOR_ARROW_SCENE.instantiate()
+	predator_arrow.init(_owner, target, spell_modifier)
+	_spawn_manager.spawn_spell(predator_arrow)
 
 
 func _cast_fire_ground(spell_modifier: Dictionary) -> void:
