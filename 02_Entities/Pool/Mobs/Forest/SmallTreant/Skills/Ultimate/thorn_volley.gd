@@ -26,3 +26,10 @@ func apply(ctx: SkillContext) -> void:
 
 	if _thorn_gain_on_cast > 0:
 		_owner.alterations.add_stack(Alteration.Type.THORN, _thorn_gain_on_cast)
+
+
+func get_description() -> String:
+	return "Inflige aux ennemis proches des [[PHYSICAL_DAMAGE]] égaux à " \
+		+ _value(_damage_per_thorn_percent) + "% de ses stacks de Thorn et les [[STUN]] " \
+		+ "pendant " + _value(_stun_duration) + " s, puis gagne " + _value(_thorn_gain_on_cast) \
+		+ " stacks de Thorn."

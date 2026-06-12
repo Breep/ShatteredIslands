@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://cregsap3res7t"]
 
+[ext_resource type="Texture2D" uid="uid://chbbwy6x8u3c1" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Skills/Silver/skill_regeneration_sap.svg" id="1_8fxqx"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
 [ext_resource type="Script" uid="uid://c0v14cgwvsh8" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Skills/Silver/regenerating_sap.gd" id="2_eff"]
 
@@ -13,5 +14,6 @@ script = ExtResource("1_skill")
 skill_id = 2
 name = "Sève régénérante"
 description = "Toutes les 12s, gagne un Shield égal à 25% × stacks de Thorn."
+portrait = ExtResource("1_8fxqx")
 skill_effect = SubResource("Resource_rs")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

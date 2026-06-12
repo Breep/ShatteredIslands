@@ -21,3 +21,8 @@ func apply(ctx: SkillContext) -> void:
 			ally.alterations.add_stack(Alteration.Type.THORN, transferred)
 
 	_owner.death_modifiers_registry.register_modifier(mod)
+
+
+func get_description() -> String:
+	return "À sa mort, transfère " + _value(_transfer_percent) + "% de ses stacks de " \
+		+ "Thorn à l'allié le plus proche."

@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://ddefstk2res7t"]
 
+[ext_resource type="Texture2D" uid="uid://deola2di0np15" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Skills/Bronze/skill_defensive_stacking.svg" id="1_a21xa"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
 [ext_resource type="Script" uid="uid://d3rfp68radaus" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Skills/Bronze/defensive_stacking.gd" id="2_eff"]
 
@@ -12,5 +13,6 @@ metadata/_custom_type_script = "uid://d3rfp68radaus"
 script = ExtResource("1_skill")
 name = "Empilement défensif"
 description = "Chaque fois qu'il subit une auto-attaque, 50% de chance de gagner +1 stack de Thorn."
+portrait = ExtResource("1_a21xa")
 skill_effect = SubResource("Resource_ds")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

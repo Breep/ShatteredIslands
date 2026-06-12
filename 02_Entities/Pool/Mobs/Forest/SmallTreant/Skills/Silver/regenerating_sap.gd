@@ -18,3 +18,8 @@ func apply(ctx: SkillContext) -> void:
 		if shield > 0:
 			_owner.alterations.add_stack(Alteration.Type.SHIELD, shield)
 	, true)
+
+
+func get_description() -> String:
+	return "Toutes les " + _value(_period) + " s, gagne un [[SHIELD]] égal à " \
+		+ _value(_shield_per_thorn_percent) + "% de ses stacks de Thorn."

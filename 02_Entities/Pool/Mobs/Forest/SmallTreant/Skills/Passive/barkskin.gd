@@ -16,3 +16,8 @@ func apply(ctx: SkillContext) -> void:
 		if stacks > 0:
 			_owner.alterations.add_stack(Alteration.Type.THORN, stacks)
 	)
+
+
+func get_description() -> String:
+	return "Au début du combat, gagne des stacks de Thorn égaux à " \
+		+ _value(_stacks_per_level_percent) + "% de son niveau."

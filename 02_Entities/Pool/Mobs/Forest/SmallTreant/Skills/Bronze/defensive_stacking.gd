@@ -20,3 +20,8 @@ func apply(ctx: SkillContext) -> void:
 		if not Utils.is_randomize_modifier_active(_gain_chance_percent, _owner.battle_id): return
 		_owner.alterations.add_stack(Alteration.Type.THORN, _thorn_gain)
 	)
+
+
+func get_description() -> String:
+	return "Quand il subit une auto-attaque, " + _value(_gain_chance_percent) + "% de " \
+		+ "chance de gagner " + _value(_thorn_gain) + " stack de Thorn."
