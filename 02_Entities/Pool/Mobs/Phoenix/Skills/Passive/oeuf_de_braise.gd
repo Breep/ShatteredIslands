@@ -16,6 +16,11 @@ func apply(ctx: SkillContext) -> void:
 	phoenix.death_modifiers_registry.register_modifier(modifier)
 
 
+func get_description() -> String:
+	return "À sa mort, laisse un Œuf de braise à l'endroit de sa chute, qui pourra le " \
+		+ "ressusciter."
+
+
 func _spawn_egg(phoenix: Entity) -> void:
 	var scene: PackedScene = load(_egg_scene_path)
 	if scene == null:

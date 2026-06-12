@@ -16,3 +16,8 @@ func apply(ctx: SkillContext) -> void:
 		for enemy: Entity in phoenix.target.get_targets(TargetComponent.MultipleTargettingStrategy.ENEMIES, _radius):
 			phoenix.alterations.inflict_condition_stacks(enemy, ignite, Alteration.Type.IGNITE, &"Cendres tenaces")
 	, true)
+
+
+func get_description() -> String:
+	return "Toutes les " + _value(_period) + " s, applique des stacks d'[[IGNITE]] égaux à " \
+		+ _value(_ap_ratio * 100) + "% de sa puissance magique aux ennemis proches."

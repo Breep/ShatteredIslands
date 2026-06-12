@@ -19,3 +19,8 @@ func apply(ctx: SkillContext) -> void:
 	modifier.stat_type = EntityStats.StatType.AP
 	modifier.value = _ap_bonus * float(resurrection_count + 1)
 	phoenix.stat_modifiers_registry.register_modifier(modifier)
+
+
+func get_description() -> String:
+	return "Gagne +" + _value(_ap_bonus) + " de puissance magique jusqu'à la fin du combat, " \
+		+ "et +" + _value(_ap_bonus) + " de plus à chaque renaissance (cumulatif)."

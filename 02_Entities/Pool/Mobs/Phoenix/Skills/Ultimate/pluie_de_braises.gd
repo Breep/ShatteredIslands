@@ -18,3 +18,9 @@ func apply(ctx: SkillContext) -> void:
 	var ap: float = phoenix.stats.get_stat(EntityStats.StatType.AP)
 	phoenix.damage.direct(target, ap * _damage_ratio, Utils.ActionType.DAMAGE_MAGICAL, &"Pluie de braises")
 	phoenix.alterations.inflict_condition_stacks(target, ap * _ignite_ratio, Alteration.Type.IGNITE, &"Pluie de braises")
+
+
+func get_description() -> String:
+	return "Inflige à la cible des [[MAGICAL_DAMAGE]] égaux à " + _value(_damage_ratio * 100) \
+		+ "% de sa puissance magique et lui applique des stacks d'[[IGNITE]] égaux à " \
+		+ _value(_ignite_ratio * 100) + "%."

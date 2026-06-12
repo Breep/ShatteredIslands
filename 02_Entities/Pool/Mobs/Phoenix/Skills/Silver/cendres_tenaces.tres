@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://cb34acm1jey5p"]
 
+[ext_resource type="Texture2D" uid="uid://cno5tm4antfo0" path="res://02_Entities/Pool/Mobs/Phoenix/Skills/Silver/skill_cendres_tenaces.svg" id="1_h7g2u"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
 [ext_resource type="Script" uid="uid://c3rxktwbl7uou" path="res://02_Entities/Pool/Mobs/Phoenix/Skills/Silver/cendres_tenaces.gd" id="2_eff"]
 
@@ -14,5 +15,6 @@ script = ExtResource("1_skill")
 skill_id = 2
 name = "Cendres tenaces"
 description = "Applique AP x 75% Ignite par seconde aux ennemis dans Area(3)."
+portrait = ExtResource("1_h7g2u")
 skill_effect = SubResource("Resource_e")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

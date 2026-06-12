@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://cb34acndm4ouc"]
 
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
+[ext_resource type="Texture2D" uid="uid://dmra7he358j88" path="res://02_Entities/Pool/Mobs/Phoenix/Skills/Bronze/skill_nid_ardent.svg" id="1_vofik"]
 [ext_resource type="Script" uid="uid://c3rxktwmpxja8" path="res://02_Entities/Pool/Mobs/Phoenix/Skills/Bronze/nid_ardent.gd" id="2_eff"]
 
 [sub_resource type="Resource" id="Resource_e"]
@@ -12,5 +13,6 @@ metadata/_custom_type_script = "uid://bphoenixnid1ef"
 script = ExtResource("1_skill")
 name = "Nid ardent"
 description = "Les attaques automatiques appliquent AP x 100% Ignite."
+portrait = ExtResource("1_vofik")
 skill_effect = SubResource("Resource_e")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

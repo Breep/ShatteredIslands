@@ -18,3 +18,8 @@ func apply(ctx: SkillContext) -> void:
 		var ignite: float = phoenix.stats.get_stat(EntityStats.StatType.AP) * _ap_ratio
 		phoenix.alterations.inflict_condition_stacks(target, ignite, Alteration.Type.IGNITE, &"Nid ardent")
 	phoenix.auto_attack_modifier_registry.register_modifier(modifier)
+
+
+func get_description() -> String:
+	return "Chaque auto-attaque applique des stacks d'[[IGNITE]] égaux à " \
+		+ _value(_ap_ratio * 100) + "% de sa puissance magique à la cible."
