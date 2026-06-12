@@ -120,8 +120,9 @@ func _server_try_buy_card_from_player_shop(player: Player, card_to_buy: Card) ->
 	if not card_to_buy in _cards_in_player_shop[player.id]:
 		Verbose.error("Peer." + str(player.id) + " tries to buy a card not displayed in his shop [" + card_to_buy.name + "]", Verbose.Category.CARD_SHOP)
 		return false
-	
-	if player.gold < 100: # TODO check gamerules for card price
+
+	var card_price: int = _game_rules.get_card_price(card_to_buy.rarity)
+	if player.gold < card_price:
 		Verbose.warn("Peer." + str(player.id) + " is not rich enough", Verbose.Category.CARD_SHOP)
 		return false
 
@@ -129,9 +130,10 @@ func _server_try_buy_card_from_player_shop(player: Player, card_to_buy: Card) ->
 		Verbose.warn("Peer." + str(player.id) + " hand is full [" + card_to_buy.name + "]", Verbose.Category.CARD_SHOP)
 		return false
 
+	# La carte est ajoutée à la main par la vue (UIHand.receive) côté drag-and-drop.
+	# Ici on ne fait que l'autorité économique : dé-track + débit.
 	_cards_in_player_shop[player.id].erase(card_to_buy)
-	player.hand.add_card(card_to_buy)
-	player.gold -= 100
+	player.gold -= card_price
 	return true
 
 
@@ -143,7 +145,7 @@ func _client_try_buy_card_from_player_shop(card: Card) -> bool:
 	
 	match _server_response:
 		ServerResponse.OK:
-			PlayerManager.get_local_player().hand.add_card(card)
+			# La main est alimentée par la vue (UIHand.receive), pas ici.
 			return true
 		ServerResponse.NOT_ENOUGHT_MONEY:
 			Verbose.warn("CardShopManager: Not enought money", Verbose.Category.CARD_SHOP)
@@ -171,7 +173,8 @@ func _ask_buy_card_from_player_shop(card_uid: int) -> void:
 		_answer_buy_card_from_player_shop.rpc_id(peer_id, ServerResponse.CARD_NOT_BUYABLE)
 		return
 	
-	if PlayerManager.players[peer_id].gold < 100: # TODO check gamerules for card price
+	var card_price: int = _game_rules.get_card_price(card_to_buy.rarity)
+	if PlayerManager.players[peer_id].gold < card_price:
 		Verbose.error("Peer." + str(peer_id) + " is not rich enough", Verbose.Category.CARD_SHOP)
 		_answer_buy_card_from_player_shop.rpc_id(peer_id, ServerResponse.NOT_ENOUGHT_MONEY)
 		return
@@ -181,9 +184,11 @@ func _ask_buy_card_from_player_shop(card_uid: int) -> void:
 		_answer_buy_card_from_player_shop.rpc_id(peer_id, ServerResponse.HAND_FULL)
 		return
 
+	# Côté serveur pour un client distant : pas de vue co-localisée, le manager
+	# alimente donc la main autoritaire du peer ici.
 	_cards_in_player_shop[peer_id].erase(card_to_buy)
 	PlayerManager.players[peer_id].hand.add_card(card_to_buy)
-	PlayerManager.players[peer_id].gold -= 100
+	PlayerManager.players[peer_id].gold -= card_price
 	_answer_buy_card_from_player_shop.rpc_id(peer_id, ServerResponse.OK)
 
 

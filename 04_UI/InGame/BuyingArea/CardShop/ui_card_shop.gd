@@ -66,9 +66,9 @@ var _sell_panel_shown: bool = false
 #region ============================== Node base functions ==============================
 func _ready() -> void:
 	for card_button: CardButton in _card_buttons:
-		# Connection permanente : c'est le coordinator qui empêche un nouveau drag
-		# pendant qu'un autre est en cours.
-		card_button.card_selected.connect(_on_card_shop_button_pressed)
+		# Le drag démarre au press ; un relâchement quasi instantané est arbitré en
+		# clic court (achat routé vers la main) par le coordinator.
+		card_button.card_drag_requested.connect(_on_card_shop_button_drag_requested)
 
 	if _drag_coordinator != null:
 		_drag_coordinator.register_container(self)
@@ -177,20 +177,26 @@ func can_supply(payload: CardPayload) -> bool:
 	return _card_shop == null or _card_shop.can_buy(payload.merged_card)
 
 
+# commit_supply : achat autoritaire awaité par le DragCoordinator AVANT
+# l'atterrissage de la carte dans la main. On délègue la transaction au domaine
+# (PlayerCardShop) qui attend la réponse serveur. Sans domaine (proto) : permis.
+func commit_supply(payload: CardPayload) -> bool:
+	if _card_shop == null:
+		return true
+	return await _card_shop.buy(payload.merged_card)
+
+
 # La carte du shop a été achetée : on délègue la facturation au domaine, puis on
 # retire la carte de l'affichage. La main possède la HoveringCard (atterrissage).
 func commit_removal(payload: CardPayload) -> void:
-	if _card_shop != null:
-		_card_shop.buy(payload.merged_card)
-	_displayed_cards.erase(payload.merged_card)
-	if _drag_source_button != null:
-		var slot: Control = _slot_for_button(_drag_source_button)
-		if slot != null:
-			slot.hide()
+	# Le débit + dé-track ont déjà eu lieu côté autorité (commit_supply). Ici on
+	# ne fait que vider le slot acheté.
+	var button: CardButton = _drag_source_button
 	_drag_source_button = null
 	_drag_source_card = null
 	card_bought.emit(payload.merged_card)
 	Events.card_bought.emit(payload.merged_card)
+	_retire_bought_slot(payload.merged_card, button)
 
 
 # Achat annulé (drop hors d'une cible valide, ou cible qui refuse) : la carte du
@@ -246,6 +252,17 @@ func _slot_for_button(btn: CardButton) -> Control:
 	if intermediate == null:
 		return null
 	return intermediate.get_parent() as Control
+
+
+# Retire une carte achetée de l'affichage (drag ou clic) : vide son slot et, si
+# plus aucune carte n'est affichée, déclenche un refresh gratuit automatique.
+func _retire_bought_slot(card: Card, button: CardButton) -> void:
+	_displayed_cards.erase(card)
+	var slot: Control = _slot_for_button(button)
+	if slot != null:
+		slot.hide()
+	if _displayed_cards.is_empty() and _card_shop != null:
+		_card_shop.refresh_for_free()
 
 
 func _begin_drag_from_shop(card: Card, source_button: CardButton) -> void:
@@ -329,7 +346,9 @@ func _set_sell_panel_value(refund_value: int) -> void:
 
 
 #region ============================== Callbacks ==============================
-func _on_card_shop_button_pressed(button: CardButton, card: Card) -> void:
+# Press sur une carte du shop : démarre le drag. Un relâchement quasi instantané
+# sera arbitré en clic court (achat routé vers la main) par le coordinator.
+func _on_card_shop_button_drag_requested(button: CardButton, card: Card) -> void:
 	if card == null:
 		return
 	_begin_drag_from_shop(card, button)

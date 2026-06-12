@@ -304,7 +304,7 @@ func _create_card_button(card: Card) -> CardButton:
 	btn.remove_shader()
 	btn.mouse_entered_card.connect(_on_card_button_mouse_entered)
 	btn.mouse_exited_card.connect(_on_card_button_mouse_exited)
-	btn.card_selected.connect(_on_card_button_selected)
+	btn.card_drag_requested.connect(_on_card_button_drag_requested)
 	_card_buttons[card.name] = btn
 	return btn
 
@@ -658,7 +658,7 @@ func _on_card_button_mouse_exited(card: Card) -> void:
 	_layout_all(_hover_layout_duration)
 
 
-func _on_card_button_selected(_button: CardButton, card: Card) -> void:
+func _on_card_button_drag_requested(_button: CardButton, card: Card) -> void:
 	_begin_drag_from_hand(card)
 
 

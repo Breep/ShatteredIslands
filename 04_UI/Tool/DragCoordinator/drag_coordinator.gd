@@ -24,6 +24,10 @@ extends Node
 #region ============================== Constants ==============================
 const _HOVER_LAYER: int = 128
 const _HOVER_Z_INDEX: int = 200
+# En-deçà de cette durée de drag, le relâchement d'un fournisseur (shop) est
+# traité comme un clic court : la carte est routée vers son receveur naturel (la
+# main) au lieu d'un drop spatial sous le curseur.
+const _CLICK_MAX_DURATION: float = 0.2
 #endregion
 
 
@@ -33,6 +37,7 @@ var _hover_layer: CanvasLayer
 var _hovering: HoveringCard
 var _payload: CardPayload
 var _origin: Object
+var _drag_start_msec: int = 0
 #endregion
 
 
@@ -91,6 +96,7 @@ func begin_drag(origin: Object, payload: CardPayload, visual_button: CardButton,
 	_origin = origin
 	_payload = payload
 	_hovering = hovering
+	_drag_start_msec = Time.get_ticks_msec()
 	set_process(true)
 	set_process_input(true)
 	for container: Object in _containers:
@@ -104,8 +110,7 @@ func _resolve_drop() -> void:
 	var hovering: HoveringCard = _hovering
 	var payload: CardPayload = _payload
 	var origin: Object = _origin
-	var mouse: Vector2 = get_viewport().get_mouse_position()
-	var target: Object = _find_target(mouse)
+	var elapsed: float = float(Time.get_ticks_msec() - _drag_start_msec) / 1000.0
 
 	# Reset l'état AVANT les callbacks de transfert (qui peuvent relancer un drag
 	# ou lancer des animations).
@@ -115,10 +120,24 @@ func _resolve_drop() -> void:
 	set_process(false)
 	set_process_input(false)
 
+	# Clic court depuis un fournisseur (le shop) : on ignore la position du curseur
+	# et on route vers le premier receveur capable d'accueillir la carte (la main).
+	# Le transfert passe par le flux normal → la carte atterrit avec l'animation de
+	# la main, comme un vrai drop. Sinon : drop spatial sous le curseur.
+	var is_quick_supply: bool = elapsed < _CLICK_MAX_DURATION and origin.has_method("can_supply")
+	var target: Object = _find_receiver(payload, origin) if is_quick_supply else _find_target(get_viewport().get_mouse_position())
+
 	if target == null or target == origin:
 		origin.return_to_origin(payload, hovering)
-	elif target.can_receive(payload) and target.receive(payload, hovering):
-		origin.commit_removal(payload)
+	elif target.can_receive(payload):
+		# Autorisation awaitée avant l'atterrissage : pour un achat, on attend la
+		# réponse autoritaire de l'origine (serveur) ; la HoveringCard flotte le
+		# temps de la réponse, puis atterrit (succès) ou revient (refus).
+		var supplied: bool = await _authorize_supply(origin, payload)
+		if supplied and target.receive(payload, hovering):
+			origin.commit_removal(payload)
+		else:
+			origin.return_to_origin(payload, hovering)
 	else:
 		origin.return_to_origin(payload, hovering)
 
@@ -128,10 +147,28 @@ func _resolve_drop() -> void:
 		container.on_drag_ended()
 
 
+# Si l'origine sait fournir (achat), on attend sa réponse autoritaire avant
+# d'autoriser le transfert. Une origine sans commit_supply (reorder dans la main,
+# vente vers le shop) est autorisée d'office.
+func _authorize_supply(origin: Object, payload: CardPayload) -> bool:
+	if origin != null and origin.has_method("commit_supply"):
+		return await origin.commit_supply(payload)
+	return true
+
+
 func _find_target(mouse_global: Vector2) -> Object:
 	for container: Object in _containers:
 		var zone: DropZone = container.get_drop_zone()
 		if zone != null and zone.contains_global(mouse_global):
+			return container
+	return null
+
+
+# Premier conteneur (hors origine) capable d'accueillir le payload. Utilisé pour
+# router un clic court vers sa destination naturelle (la main, pour un achat).
+func _find_receiver(payload: CardPayload, origin: Object) -> Object:
+	for container: Object in _containers:
+		if container != origin and container.can_receive(payload):
 			return container
 	return null
 #endregion

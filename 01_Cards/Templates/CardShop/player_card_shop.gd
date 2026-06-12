@@ -8,7 +8,6 @@ signal shop_refreshed(new_cards: Array[Card])
 
 signal shop_tried_to_refresh() # Used to notice UICardShop that it can reactivate its refresh button
 signal shop_tried_to_buy_random_card() # Used to notice UICardShop that it can reactivate its random button
-signal shop_tried_to_buy_card() # Used to notice UICardShop that it can reactivate its cards buttons
 
 # ============================== Public variables ==============================
 
@@ -39,34 +38,30 @@ func refresh_for_free() -> void:
 	await _refresh_shop_cards(true)
 
 
-# Try to buy a card for the player owner of this shop, It will ask the server for permission
+# Achat par clic court sur une carte du shop (ou achat programmatique). À la
+# différence du drag — où la vue pilote l'ajout en main pour l'atterrissage
+# visuel — ici on alimente directement la donnée de la main, et UIHand réagit
+# via card_added. Renvoie false si l'achat est refusé (or, dispo, main pleine).
 func try_buy_card(card: Card) -> bool:
 	Verbose.trace("PlayerCardShop.try_buy_card() | card=" + (card.name if card != null else "<null>") + " is_enabled=" + str(_is_enabled), Verbose.Category.CARD_SHOP)
-	if !_is_enabled:
+	if not _is_enabled:
 		Verbose.warn("Card shop is disabled", Verbose.Category.CARD_SHOP)
-		shop_tried_to_buy_card.emit()
-		return false
-
-	var card_price: int = 100
-	if player.gold < card_price:
-		Verbose.warn("Not enought gold to buy this card | " + card.name + "(" + str(player.gold) + "<" + str(card_price) + ")", Verbose.Category.CARD_SHOP)
-		if player == PlayerManager.get_local_player():
-			Events.insufficient_gold.emit()
-		shop_tried_to_buy_card.emit()
 		return false
 	if not cards_displayed.has(card):
 		Verbose.error("Can't buy this card [" + card.name + "]: it's not in the cards displayed in the shop", Verbose.Category.CARD_SHOP)
-		shop_tried_to_buy_card.emit()
+		return false
+	if player.gold < GameManager.game_rules.get_card_price(card.rarity):
+		Verbose.warn("Not enought gold to buy this card | " + card.name, Verbose.Category.CARD_SHOP)
+		if player == PlayerManager.get_local_player():
+			Events.insufficient_gold.emit()
 		return false
 
-	var buy_ok = await CardShopManager.try_buy_card_from_player_shop(player, card)
+	var buy_ok: bool = await CardShopManager.try_buy_card_from_player_shop(player, card)
 	Verbose.trace("PlayerCardShop.try_buy_card() | CardShopManager.try_buy_card_from_player_shop -> " + str(buy_ok), Verbose.Category.CARD_SHOP)
 	if buy_ok:
-		await _refresh_shop_cards(true)
+		player.hand.add_card(card)
 		card_bought.emit(card)
-
-	shop_tried_to_buy_card.emit()
-	return true
+	return buy_ok
 
 # ============================== REFRESH CARD SHOP ==============================
 
@@ -133,14 +128,25 @@ func sell(cards: Array[Card]) -> int:
 	return value
 
 
-# Vrai si le joueur peut s'offrir cette carte.
+# Vrai si le joueur peut s'offrir cette carte. Pré-check synchrone consommé par
+# UICardShop.can_supply ; la transaction réelle (autoritaire) passe par buy().
 func can_buy(card: Card) -> bool:
 	return player.gold >= GameManager.game_rules.get_card_price(card.rarity)
 
 
-# Débite l'or du joueur pour l'achat.
-func buy(card: Card) -> void:
-	player.gold -= GameManager.game_rules.get_card_price(card.rarity)
+# Achat autoritaire d'une carte draguée hors du shop. Awaité (via la vue) par le
+# DragCoordinator AVANT l'atterrissage visuel : on attend la réponse serveur
+# (dé-track + débit) avant de lâcher la carte dans la main. La donnée de la main
+# est alimentée par la vue (UIHand.receive) ; ici on ne gère que l'autorité
+# économique. Renvoie false si l'achat est refusé (carte plus dispo, or, etc.).
+func buy(card: Card) -> bool:
+	if not _is_enabled:
+		Verbose.warn("Card shop is disabled", Verbose.Category.CARD_SHOP)
+		return false
+	if not cards_displayed.has(card):
+		Verbose.error("Can't buy this card [" + card.name + "]: it's not in the cards displayed in the shop", Verbose.Category.CARD_SHOP)
+		return false
+	return await CardShopManager.try_buy_card_from_player_shop(player, card)
 
 
 # ============================== Private functions ==============================

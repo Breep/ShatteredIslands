@@ -6,7 +6,9 @@ extends Control
 
 # ============================== Signals ==============================
 
-signal card_selected(self_ref: CardButton, card: Card)
+# Émis au press : enclenche le drag. Un relâchement quasi instantané est arbitré
+# en clic court (achat direct) par le DragCoordinator, sinon c'est un drag normal.
+signal card_drag_requested(self_ref: CardButton, card: Card)
 signal mouse_entered_card(card: Card)
 signal mouse_exited_card(card: Card)
 
@@ -177,16 +179,12 @@ func _on_control_mouse_exited() -> void:
 
 func _on_control_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		card_selected.emit(self, card)
+		card_drag_requested.emit(self, card)
 	if not _hover_enabled: return
-	if event is InputEventMouseButton and event.pressed:
-		if event.button_index == MOUSE_BUTTON_LEFT:
-			#AudioManager.play_ui("button_click")
-			pass
-		elif event.button_index == MOUSE_BUTTON_RIGHT and _card != null:
-			var preview: UICardPreview = CARD_PREVIEW_SCENE.instantiate()
-			get_tree().root.add_child(preview)
-			preview.update_visual(_card)
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_RIGHT and _card != null:
+		var preview: UICardPreview = CARD_PREVIEW_SCENE.instantiate()
+		get_tree().root.add_child(preview)
+		preview.update_visual(_card)
 
 
 # Anime scale + lift + z-index pour faire ressortir la carte au survol.
