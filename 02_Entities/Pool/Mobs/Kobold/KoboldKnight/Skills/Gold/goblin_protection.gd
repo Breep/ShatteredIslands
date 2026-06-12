@@ -13,3 +13,8 @@ func apply(ctx: SkillContext) -> void:
 				_owner.alterations.inflict_condition_stacks(entity, shield_gain, Alteration.Type.SHIELD, &"Goblin Protection")
 				ShieldVfxSpawner.spawn_on(entity)
 	)
+
+
+func get_description() -> String:
+	return "Au début du combat, répartit " + _value(_total_shield) + " de [[SHIELD]] " \
+		+ "à parts égales entre tous les alliés."

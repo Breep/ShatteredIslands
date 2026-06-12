@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://ckd5py8va6t0c"]
 
+[ext_resource type="Texture2D" uid="uid://ccdos616ca5b3" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Skills/Silver/skill_rallying_banner.svg" id="1_3wns2"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_a080l"]
 [ext_resource type="Script" uid="uid://2kfj5jm0k0m2" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Skills/Silver/rallying_banner.gd" id="2_0p1y0"]
 
@@ -12,5 +13,6 @@ script = ExtResource("1_a080l")
 skill_id = 2
 name = "Rallying Banner"
 description = "Defense aura"
+portrait = ExtResource("1_3wns2")
 skill_effect = SubResource("Resource_3wns2")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

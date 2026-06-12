@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://h3r1xq1l04ls"]
 
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_nl2ho"]
+[ext_resource type="Texture2D" uid="uid://xrhfe2l2mswl" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Skills/Ultimate/skill_war_cry.svg" id="1_y8a6s"]
 [ext_resource type="Script" uid="uid://bc4xvbfs54uvd" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Skills/Ultimate/protector_warcry.gd" id="2_jill1"]
 
 [sub_resource type="Resource" id="Resource_y8a6s"]
@@ -11,5 +12,6 @@ metadata/_custom_type_script = "uid://bc4xvbfs54uvd"
 script = ExtResource("1_nl2ho")
 skill_id = 7
 name = "Protector Warcry"
+portrait = ExtResource("1_y8a6s")
 skill_effect = SubResource("Resource_y8a6s")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

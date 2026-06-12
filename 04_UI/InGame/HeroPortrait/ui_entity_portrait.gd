@@ -239,11 +239,14 @@ func _show_desc(skill_type: Skill.Type) -> void:
 	_crossfade(_skill_desc_panel, _stats_panel)
 
 
-# Description du skill, tirée de son effet. Placeholder rouge si l'effet ne
-# fournit pas de texte (cas par défaut de SkillEffect.get_description()).
+# Description du skill, tirée de son effet et passée au moteur de tokens des
+# tooltips ([[CLE]] + {{COLOR:...}}). Placeholder rouge si l'effet ne fournit pas
+# de texte (cas par défaut de SkillEffect.get_description()).
 func _skill_desc_text(skill: Skill) -> String:
 	var desc: String = skill.skill_effect.get_description() if skill.skill_effect != null else ""
-	return desc if not desc.is_empty() else _NO_SKILL_DESC_TEXT
+	if desc.is_empty():
+		return _NO_SKILL_DESC_TEXT
+	return TooltipManager.render_bbcode(desc)
 
 
 func _show_stats() -> void:

@@ -153,6 +153,75 @@ Seule différence, purement quantitative :
   Gold1+Gold2) + Passive + Ultimate
 - autres : **1 skill par tier**
 
+### Description d'un skill
+
+La description affichée dans la fiche perso (`UIEntityPortrait`,
+`%SkillDescriptionLabel`) vient de **l'effet**, pas du `Skill` :
+on surcharge `get_description() -> String` sur la sous-classe
+`SkillEffect` (le `.gd` de l'effet, à côté de `apply()`).
+
+```gdscript
+func get_description() -> String:
+	return "Au début du combat, répartit " + _value(_total_shield) \
+		+ " de [[SHIELD]] à parts égales entre tous les alliés."
+```
+
+Par défaut `SkillEffect.get_description()` renvoie `""` → l'UI affiche
+alors le placeholder rouge « No description for this skill ». Donc
+**tout effet sans surcharge = placeholder rouge** (utile pour repérer
+les trous).
+
+#### Le texte est rendu via les tokens des tooltips
+
+`UIEntityPortrait` passe la chaîne dans
+`TooltipManager.render_bbcode(...)` avant de l'afficher. Deux systèmes
+de tokens y sont résolus (en plus du BBCode standard `[b]`, `[i]`…) :
+
+- **`[[CLE]]`** → mot-clé coloré + lié au tooltip (ex. `[[SHIELD]]`,
+  `[[ARMOR]]`, `[[DEFENCE]]`, `[[STUN]]`, `[[POISON_DAMAGE]]`…).
+  La **liste exhaustive des clés** est le `SNIPPET_MAP` de
+  `04_UI/Tool/Tooltip/Manager/tooltip_manager.gd` ; les entrées de
+  dictionnaire correspondantes vivent dans
+  `04_UI/Tool/Tooltip/Dictionary/`. **Utilise un `[[CLE]]` dès qu'une
+  existe** pour la notion mentionnée (dégâts, shield, armor, statut…).
+  Pas de clé pour la notion (ex. `TAUNT`) → texte simple.
+- **`{{COLOR:NOM}}…{{/COLOR}}`** → span coloré. Les `NOM` sont les
+  couleurs de `TooltipTheme`
+  (`04_UI/Tool/Tooltip/Theme/tooltip_theme.gd`).
+
+#### Valeurs numériques → bleu clair via `_value()`
+
+Toute **valeur de design** (export var, ou nombre « magique » en dur
+comme le `×10` d'un multiplicateur) s'affiche en bleu clair. Helper
+mutualisé sur la base `SkillEffect` :
+
+```gdscript
+# SkillEffect._value(v) -> "{{COLOR:VALUE_COLOR}}<nombre propre>{{/COLOR}}"
+return "… égal à " + _value(10) + "× son [[ARMOR]]."
+```
+
+`_value` formate proprement (pas de `.0` superflu) et applique
+`VALUE_COLOR` (défini dans `TooltipTheme`). Ne hardcode jamais un
+nombre nu dans la description : passe-le par `_value()`.
+
+#### Effets paramétriques / partagés
+
+- L'effet a des `@export` (montant, `_stat_type`…) ? Construis la
+  description **dynamiquement** à partir d'eux (ex. `match _stat_type`
+  qui renvoie le bon `[[CLE]]`), pour qu'elle reste juste quelle que
+  soit la config du `.tres`.
+- Un `.tres` réutilise un script d'effet d'une **autre** entité (ex.
+  une passive mutualisée) ? La description se met sur ce **script
+  partagé** — d'où l'intérêt qu'elle soit dynamique.
+
+#### Récap pour ajouter une description
+
+1. Ouvrir le `.gd` de l'effet (la sous-classe `SkillEffect`).
+2. Surcharger `get_description()`, en FR, décrivant ce que fait `apply()`.
+3. `[[CLE]]` pour chaque notion ayant une entrée (cf. `SNIPPET_MAP`).
+4. `_value(x)` pour chaque valeur numérique.
+5. Si paramétrique : texte dynamique sur les `@export`.
+
 ---
 
 ## Categories

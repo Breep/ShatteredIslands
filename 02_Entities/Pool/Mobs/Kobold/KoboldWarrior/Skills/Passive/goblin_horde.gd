@@ -17,3 +17,23 @@ func apply(ctx: SkillContext) -> void:
 		mod.stat_type = _stat_type
 		_owner.stat_modifiers_registry.register_modifier(mod)
 		)
+
+
+func get_description() -> String:
+	return "Au début du combat, gagne " + _value(_amount_per_ally) + " " \
+		+ _stat_token() + " pour chaque allié vivant."
+
+
+# Token de dictionnaire correspondant à la stat boostée (pour la coloration et le
+# tooltip). Repli sur un libellé neutre si la stat n'a pas d'entrée dédiée.
+func _stat_token() -> String:
+	match _stat_type:
+		EntityStats.StatType.ARMOR: return "[[ARMOR]]"
+		EntityStats.StatType.MAGIC_RESIST: return "[[MR]]"
+		EntityStats.StatType.POISON_RESIST: return "[[POISON_RESISTANCE]]"
+		EntityStats.StatType.DODGE: return "[[DODGE]]"
+		EntityStats.StatType.SCALE: return "[[SCALE]]"
+		EntityStats.StatType.CRIT_CHANCE: return "[[CRIT_CHANCE]]"
+		EntityStats.StatType.CRIT_MULT: return "[[CRIT_MULTIPLIER]]"
+		EntityStats.StatType.AD: return "[[WARRIOR]]"
+		_: return "de statistique"

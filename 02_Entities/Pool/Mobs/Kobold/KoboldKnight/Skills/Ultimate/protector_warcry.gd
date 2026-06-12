@@ -8,4 +8,8 @@ func apply(ctx: SkillContext) -> void:
 		var shield_gain: float = (_owner.stats.armor * 10)
 		for entity in allies:
 			_owner.alterations.inflict_condition_stacks(entity, shield_gain, Alteration.Type.SHIELD, &"Goblin Protection")
+
+
+func get_description() -> String:
+	return "Accorde à tous les alliés un [[SHIELD]] égal à " + _value(10) + "× son [[ARMOR]]."
 	

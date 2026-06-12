@@ -25,6 +25,12 @@ func apply(ctx: SkillContext) -> void:
 	
 	
 
+func get_description() -> String:
+	return "Octroie " + _value(_defense_bonus) + " [[DEFENCE]] à tous les alliés, " \
+		+ "y compris ceux invoqués ensuite. À sa mort, accorde de nouveau " \
+		+ _value(_defense_bonus) + " [[DEFENCE]] aux alliés encore en vie."
+
+
 func _on_entity_spawned(entity: Entity) -> void:
 	if not is_instance_valid(entity): return
 	if entity.team != _owner.team: return
