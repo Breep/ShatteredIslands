@@ -1,11 +1,12 @@
 [gd_resource type="Resource" script_class="TavernEncounter" format=3 uid="uid://hbhicxdjtty4"]
 
 [ext_resource type="Script" uid="uid://b02max168665p" path="res://05_Game/Run/Encounters/tavern_encounter.gd" id="1_uc2rh"]
-[ext_resource type="Resource" uid="uid://bb7sjjnaqkj1v" path="res://05_Game/Run/Encounters/Pool/04_SkeletonDrake/04_skeleton_drake.tavern.tres" id="2_1v7ld"]
+[ext_resource type="Resource" uid="uid://dqagucwbv3j0f" path="res://05_Game/Run/Encounters/Pool/04_SkeletonDrake/04_skeleton_drake.tavern.tres" id="2_1v7ld"]
 
 [resource]
 script = ExtResource("1_uc2rh")
 tavern_formation = ExtResource("2_1v7ld")
 encounter_id = &"04_SkeletonDrake"
 display_name = "Skeleton Drake"
+music = "dooms_battle"
 metadata/_custom_type_script = "uid://b02max168665p"

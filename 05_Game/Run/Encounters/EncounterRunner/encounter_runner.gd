@@ -77,7 +77,10 @@ func _on_fighting_manager_fight_done(_fm: FightingManager, winner_teams_order: A
 func run_tavern(encounter: TavernEncounter, party: Party = null) -> void:
 	var island: BuyingIsland = await _setup_tavern(encounter, party)
 	if island == null: return
-	AudioManager.play_bgm("tavern_music")
+	if encounter.music != null and encounter.music != "":
+		AudioManager.play_bgm(encounter.music)
+	else:
+		AudioManager.play_bgm("tavern_music")
 	await tavern_phase_ended
 	island.queue_free()
 

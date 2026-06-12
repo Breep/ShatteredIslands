@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Confrontation" format=3]
+[gd_resource type="Resource" script_class="Confrontation" format=3 uid="uid://biyjqxyu742cx"]
 
 [ext_resource type="Script" uid="uid://cp06s2eytdhsh" path="res://05_Game/Run/Confrontations/confrontation.gd" id="1_eplr5"]
 [ext_resource type="Resource" uid="uid://hbhicxdjtty4" path="res://05_Game/Run/Encounters/Pool/04_SkeletonDrake/04_skeleton_drake.tavern_encounter.tres" id="2_tav"]

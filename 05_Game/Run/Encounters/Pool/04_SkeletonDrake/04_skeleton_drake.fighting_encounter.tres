@@ -10,5 +10,5 @@ island_scene = ExtResource("2_dsxql")
 formation_b = ExtResource("1_4j4ua")
 encounter_id = &"04_SkeletonDrake"
 display_name = "Skeleton Drake"
-music = "battle_drums"
+music = "epic_battle"
 metadata/_custom_type_script = "uid://dg13tr0kcjyll"

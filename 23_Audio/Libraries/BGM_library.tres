@@ -3,11 +3,15 @@
 [ext_resource type="Script" uid="uid://bnohfh6e2eq3" path="res://23_Audio/audio_lib.gd" id="1_774qr"]
 [ext_resource type="AudioStream" uid="uid://dcp8tj4uec56q" path="res://23_Audio/BGM/tavern music.mp3" id="1_aacct"]
 [ext_resource type="AudioStream" uid="uid://b2gq6jpdk0r06" path="res://23_Audio/BGM/battle_drums.wav" id="2_1pywy"]
+[ext_resource type="AudioStream" uid="uid://cpt2c02nu82nv" path="res://23_Audio/BGM/dooms_battle_no_copyright.mp3" id="3_g83vi"]
+[ext_resource type="AudioStream" uid="uid://d4mg170v3b0xg" path="res://23_Audio/BGM/epic_battle_music_no_copyright.mp3" id="4_3q1wn"]
 
 [resource]
 script = ExtResource("1_774qr")
 audio_database = Dictionary[String, AudioStream]({
 "battle_drums": ExtResource("2_1pywy"),
+"dooms_battle": ExtResource("3_g83vi"),
+"epic_battle": ExtResource("4_3q1wn"),
 "tavern_music": ExtResource("1_aacct")
 })
 metadata/_custom_type_script = "uid://bnohfh6e2eq3"
