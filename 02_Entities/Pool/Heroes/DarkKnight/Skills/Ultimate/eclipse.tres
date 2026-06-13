@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://cdkulttrs"]
 
+[ext_resource type="Texture2D" uid="uid://cq7rk7jas3n61" path="res://02_Entities/Pool/Heroes/DarkKnight/Skills/Ultimate/skill_eclipse.svg" id="1_55wgq"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
 [ext_resource type="Script" uid="uid://cdkskill02" path="res://02_Entities/Pool/Heroes/DarkKnight/Skills/Ultimate/eclipse.gd" id="2_eff"]
 
@@ -12,5 +13,6 @@ script = ExtResource("1_skill")
 skill_id = 7
 name = "Eclipse"
 description = "Unleashes all eclipse energy and triggers Shadow Blade 5 times in a burst (forced triggers)."
+portrait = ExtResource("1_55wgq")
 skill_effect = SubResource("Resource_eclipse")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

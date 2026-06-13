@@ -12,3 +12,7 @@ func apply(ctx: SkillContext) -> void:
 	if ctx.entity == null:
 		return
 	ctx.entity.set_meta(SE_ShadowBlade.META_PROJ_SIZE, Projectile.Size.BIG)
+
+
+func get_description() -> String:
+	return "Sa Lame d'Ombre déclenche de gros projectiles au lieu de petits."

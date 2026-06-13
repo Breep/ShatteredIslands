@@ -27,3 +27,8 @@ func apply(ctx: SkillContext) -> void:
 			if not is_instance_valid(target):
 				return
 			SE_ShadowBlade.perform_trigger(dk, target))
+
+
+func get_description() -> String:
+	return "Libère l'énergie de l'éclipse et déclenche " + _value(_base_triggers) \
+		+ " fois sa Lame d'Ombre en rafale."

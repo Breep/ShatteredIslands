@@ -12,3 +12,8 @@ func apply(ctx: SkillContext) -> void:
 	if ctx.entity == null:
 		return
 	ctx.entity.set_meta(SE_ShadowBlade.META_SHIELD_RATIO, _shield_ratio)
+
+
+func get_description() -> String:
+	return "Chaque déclenchement de sa Lame d'Ombre lui octroie un [[SHIELD]] égal à " \
+		+ _value(_shield_ratio) + "× ses dégâts d'attaque."
