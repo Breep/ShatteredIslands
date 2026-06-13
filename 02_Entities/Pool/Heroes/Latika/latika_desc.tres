@@ -51,7 +51,7 @@ hero_skills = Dictionary[int, ExtResource("2_psofn")]({
 7: ExtResource("7_ult")
 })
 name = "Latika"
-portrait = ExtResource("1_pxqef")
+portrait = ExtResource("2_q20ea")
 description = "L'Enfant des Loups — DPS distance / carry mono-cible. Dualité prédateur solitaire / chef de meute."
 preview_scene = ExtResource("5_prev")
 default_category = 0

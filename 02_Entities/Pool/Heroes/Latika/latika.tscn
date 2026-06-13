@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://dlatikadesc" path="res://02_Entities/Pool/Heroes/Latika/latika_desc.tres" id="2_44wrm"]
 [ext_resource type="PackedScene" uid="uid://bd2qh22vqambg" path="res://02_Entities/_Data/FantasyGirl/AssassinFemale/assassin_visual.tscn" id="3_44wrm"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://2xmw31o447pb" path="res://02_Entities/Pool/Heroes/Latika/latika_animation_tree.res" id="7_44wrm"]
-[ext_resource type="PackedScene" path="res://02_Entities/_Shared/Components/Skill/hero_skill_component.tscn" id="7_s202t"]
+[ext_resource type="PackedScene" uid="uid://bhskcmp7aqx2v" path="res://02_Entities/_Shared/Components/Skill/hero_skill_component.tscn" id="7_s202t"]
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="8_croh3"]
 [ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.tscn" id="8_q55dg"]
 
