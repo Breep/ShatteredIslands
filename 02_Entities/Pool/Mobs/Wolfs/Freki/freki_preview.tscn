@@ -1,12 +1,12 @@
-[gd_scene format=3 uid="uid://b1yg7a07pqljt"]
+[gd_scene format=3 uid="uid://omu8jd16f1jm"]
 
-[ext_resource type="PackedScene" uid="uid://bqhgeoo4krotn" path="res://02_Entities/Pool/Mobs/Vrock/vrock_visual.tscn" id="1_58mde"]
+[ext_resource type="PackedScene" uid="uid://brctx7lm2vvue" path="res://02_Entities/Pool/Mobs/Wolfs/Freki/freki_visual.tscn" id="1_dgr6y"]
 
-[node name="VrockPreview" type="Node3D" unique_id=1262653344]
+[node name="FrekiPreview" type="Node3D" unique_id=1262653344]
 
-[node name="Node3D" parent="." unique_id=518880957 instance=ExtResource("1_58mde")]
+[node name="Node3D" parent="." unique_id=518880957 instance=ExtResource("1_dgr6y")]
 
-[node name="Skeleton3D" parent="Node3D/VrockVisual" parent_id_path=PackedInt32Array(518880957, 33620102) index="1" unique_id=769758089]
+[node name="Skeleton3D" parent="Node3D/Unity_SK_Animals_Dog_01" parent_id_path=PackedInt32Array(518880957, 33620102) index="1" unique_id=769758089]
 bones/2/position = Vector3(0.003496599, 0.6691313, -0.2466678)
 bones/2/rotation = Quaternion(-0.0006434076, 5.2407387e-07, 5.2407387e-07, 0.9999998)
 bones/3/position = Vector3(-2.740738e-05, -0.0005783308, 0.01302559)
@@ -82,8 +82,8 @@ bones/73/rotation = Quaternion(0.0030148972, 0.0015218473, -0.45061845, 0.892710
 bones/74/rotation = Quaternion(-5.704764e-07, 1.1794097e-06, 0.44419158, 0.89593196)
 bones/75/rotation = Quaternion(-0.0032230557, -0.010271838, 0.0674708, 0.9976632)
 
-[node name="AnimationPlayer" parent="Node3D/VrockVisual" parent_id_path=PackedInt32Array(518880957, 33620102) index="2" unique_id=167105695]
+[node name="AnimationPlayer" parent="Node3D/Unity_SK_Animals_Dog_01" parent_id_path=PackedInt32Array(518880957, 33620102) index="2" unique_id=167105695]
 autoplay = &"synty_animals_library/standing_idle_01"
 
 [editable path="Node3D"]
-[editable path="Node3D/VrockVisual"]
+[editable path="Node3D/Unity_SK_Animals_Dog_01"]

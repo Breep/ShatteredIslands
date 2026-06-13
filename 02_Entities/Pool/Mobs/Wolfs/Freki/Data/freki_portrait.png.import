@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pwq4u4lpctrw"
-path="res://.godot/imported/vrock_portrait.png-fa875ee1979e289fa8f2ef6112b79fb0.ctex"
+uid="uid://dxw3rixkttfhc"
+path="res://.godot/imported/freki_portrait.png-72f3d54f900e56dfbaab0998b7a14219.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://02_Entities/Pool/Mobs/Vrock/Data/vrock_portrait.png"
-dest_files=["res://.godot/imported/vrock_portrait.png-fa875ee1979e289fa8f2ef6112b79fb0.ctex"]
+source_file="res://02_Entities/Pool/Mobs/Wolfs/Freki/Data/freki_portrait.png"
+dest_files=["res://.godot/imported/freki_portrait.png-72f3d54f900e56dfbaab0998b7a14219.ctex"]
 
 [params]
 

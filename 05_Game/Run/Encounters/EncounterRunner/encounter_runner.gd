@@ -45,7 +45,7 @@ func _setup_fighting(encounter: FightingEncounter, party_formation: FightingForm
 	island.set_active()
 	island.init_fight(fa, fb, 1, 2)
 	fighting_started.emit(island)
-	_select_local_hero_by_default()
+	Events.nothing_clicked.emit()
 	return island
 
 

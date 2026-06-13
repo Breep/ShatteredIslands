@@ -1,0 +1,61 @@
+[gd_resource type="Resource" script_class="EntityDesc" format=3 uid="uid://m13uvband6ge"]
+
+[ext_resource type="Texture2D" uid="uid://b47jonq8ue33h" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/Data/geri_portrait.png" id="1_txftl"]
+[ext_resource type="PackedScene" uid="uid://6ycc8wppru6v" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/geri_preview.tscn" id="2_g2ddy"]
+[ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="3_pfe8r"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="4_gqrcy"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="5_bgw67"]
+[ext_resource type="Resource" uid="uid://cjc3pgq5fgsa8" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/Stats/geri_stats_lvl_01.tres" id="6_p54kp"]
+[ext_resource type="Resource" uid="uid://b4php5ss8datu" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/Stats/geri_stats_lvl_02.tres" id="7_2lf75"]
+[ext_resource type="Resource" uid="uid://8y1pfdf1fsmq" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/Stats/geri_stats_lvl_03.tres" id="8_iedgk"]
+[ext_resource type="Resource" uid="uid://cddgwqfli57ql" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/Stats/geri_stats_lvl_04.tres" id="9_17sf8"]
+[ext_resource type="Resource" uid="uid://dmeag77gu26mh" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/Stats/geri_stats_lvl_05.tres" id="10_i51f1"]
+[ext_resource type="Resource" uid="uid://b8pjbb182y7gt" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/Stats/geri_stats_lvl_06.tres" id="11_mtolg"]
+[ext_resource type="Resource" uid="uid://ck17p4supm15e" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/Stats/geri_stats_lvl_07.tres" id="12_7malu"]
+[ext_resource type="Resource" uid="uid://b8ve1n8diropg" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/Stats/geri_stats_lvl_08.tres" id="13_06qjk"]
+[ext_resource type="Resource" uid="uid://c0komk3tih2k4" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/Stats/geri_stats_lvl_09.tres" id="14_dflxl"]
+[ext_resource type="Resource" uid="uid://dh11imrisoky0" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/Stats/geri_stats_lvl_10.tres" id="15_8h1yt"]
+[ext_resource type="Resource" uid="uid://ij7lrdlqxgp4" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/Stats/geri_stats_lvl_11.tres" id="16_n03xm"]
+[ext_resource type="Resource" uid="uid://consyad56q2er" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/Stats/geri_stats_lvl_12.tres" id="17_02nc5"]
+[ext_resource type="Resource" uid="uid://cq3ecue6sbhhq" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/Stats/geri_stats_lvl_13.tres" id="18_6wd5h"]
+[ext_resource type="Resource" uid="uid://bus512pn5k8pk" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/Stats/geri_stats_lvl_14.tres" id="19_xdlu1"]
+[ext_resource type="Resource" uid="uid://bnu6edglapsqu" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/Stats/geri_stats_lvl_15.tres" id="20_6pkkj"]
+[ext_resource type="Resource" uid="uid://bp0i51blh4lw4" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/Stats/geri_stats_lvl_16.tres" id="21_1cpe0"]
+[ext_resource type="Resource" uid="uid://m0isdax4egxf" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/Stats/geri_stats_lvl_17.tres" id="22_oac8u"]
+[ext_resource type="Resource" uid="uid://qwjn0p8coig7" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/Stats/geri_stats_lvl_18.tres" id="23_fxwji"]
+[ext_resource type="Resource" uid="uid://7lmjofup6n7i" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/Stats/geri_stats_lvl_19.tres" id="24_u0tt0"]
+[ext_resource type="Resource" uid="uid://k8p4yrivya80" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/Stats/geri_stats_lvl_20.tres" id="25_n846e"]
+
+[resource]
+script = ExtResource("3_pfe8r")
+name = "Geri"
+portrait = ExtResource("1_txftl")
+description = "Loup de Latika"
+scene_path = "res://02_Entities/Pool/Mobs/Wolfs/Geri/geri.tscn"
+preview_scene = ExtResource("2_g2ddy")
+default_category = 2
+stats = Dictionary[int, ExtResource("5_bgw67")]({
+1: ExtResource("6_p54kp"),
+2: ExtResource("7_2lf75"),
+3: ExtResource("8_iedgk"),
+4: ExtResource("9_17sf8"),
+5: ExtResource("10_i51f1"),
+6: ExtResource("11_mtolg"),
+7: ExtResource("12_7malu"),
+8: ExtResource("13_06qjk"),
+9: ExtResource("14_dflxl"),
+10: ExtResource("15_8h1yt"),
+11: ExtResource("16_n03xm"),
+12: ExtResource("17_02nc5"),
+13: ExtResource("18_6wd5h"),
+14: ExtResource("19_xdlu1"),
+15: ExtResource("20_6pkkj"),
+16: ExtResource("21_1cpe0"),
+17: ExtResource("22_oac8u"),
+18: ExtResource("23_fxwji"),
+19: ExtResource("24_u0tt0"),
+20: ExtResource("25_n846e")
+})
+aa_1_anim_base_duration = 1.0
+aa_2_anim_base_duration = 1.0
+aa_3_anim_base_duration = 1.0

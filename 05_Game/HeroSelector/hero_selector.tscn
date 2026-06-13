@@ -24,7 +24,7 @@
 [ext_resource type="Material" uid="uid://dhd4kj45npr4m" path="res://22_VFX/Shaders/Material/light_fenetre.tres" id="21_n20ns"]
 [ext_resource type="PackedScene" uid="uid://bsbbpkr8vpwu3" path="res://02_Entities/Pool/Heroes/Latika/latika_preview.tscn" id="22_l31ec"]
 [ext_resource type="PackedScene" uid="uid://k4dc5j8ecdxo" path="res://04_UI/InGame/HeroSelection/ui_hero_picking_screen.tscn" id="23_bnso8"]
-[ext_resource type="PackedScene" uid="uid://b1yg7a07pqljt" path="res://02_Entities/Pool/Mobs/Vrock/vrock_preview.tscn" id="23_l31ec"]
+[ext_resource type="PackedScene" uid="uid://b1yg7a07pqljt" path="res://02_Entities/Pool/Mobs/Wolfs/Vrock/vrock_preview.tscn" id="23_l31ec"]
 [ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://02_Entities/_Shared/hero_desc.gd" id="24_desc"]
 [ext_resource type="Resource" uid="uid://dlatikadesc" path="res://02_Entities/Pool/Heroes/Latika/latika_desc.tres" id="25_latika"]
 [ext_resource type="Script" uid="uid://db3l8qpq81uob" path="res://05_Game/HeroSelector/tavern_spot_light.gd" id="26_spot"]
