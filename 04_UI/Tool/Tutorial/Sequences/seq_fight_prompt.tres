@@ -7,7 +7,7 @@
 script = ExtResource("2_step")
 id = &"fight_prompt"
 text = "Clique ici lorsque tu seras prêt à combattre."
-target_unique_name = &"EndBuyingPhaseButton"
+target_unique_name = &"ContinueButton"
 validation_event = 5
 auto_advance_delay = 0.0
 popup_mode = 2

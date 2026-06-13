@@ -43,7 +43,10 @@ func _spawn(text: String, target: Control) -> void:
 	_current_bubble = _BUBBLE_SCENE.instantiate()
 	add_child(_current_bubble)
 	_current_bubble.closed.connect(_on_bubble_closed)
-	_current_bubble.show_bubble(text, target)
+	var step: TutorialStep = TutorialStep.new()
+	step.id = &"proto_bubble"
+	step.text = text
+	_current_bubble.show_bubble(step, target, true)
 
 
 func _hide_current() -> void:

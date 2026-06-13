@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dhtmkcomp0vfx1"]
+
+[ext_resource type="Script" path="res://02_Entities/_Shared/Components/HitMarker/hit_marker_component.gd" id="1_htmk"]
+
+[node name="HitMarkerComponent" type="Node"]
+script = ExtResource("1_htmk")

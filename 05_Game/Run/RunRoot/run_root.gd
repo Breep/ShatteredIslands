@@ -65,6 +65,7 @@ func _on_confrontation_ended() -> void:
 
 func _on_tavern_started(_island: BuyingIsland) -> void:
 	_ui_game.start_tavern_phase()
+	Events.tavern_phase_started.emit()
 
 
 func _on_tavern_phase_ended() -> void:
@@ -73,6 +74,7 @@ func _on_tavern_phase_ended() -> void:
 
 func _on_fighting_started(island: FightingIsland) -> void:
 	_ui_game.start_fighting_phase(island.get_fighting_area())
+	Events.fighting_phase_started.emit()
 
 
 func _on_fighting_phase_ended() -> void:

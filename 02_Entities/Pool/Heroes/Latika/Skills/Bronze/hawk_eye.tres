@@ -6,6 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_hawkeye"]
 script = ExtResource("2_eff")
+metadata/_custom_type_script = "uid://lathawkeyeeff"
 
 [resource]
 script = ExtResource("1_skill")

@@ -103,6 +103,13 @@ signal card_bought(card: Card)
 signal card_drawn()
 signal insufficient_gold()
 signal gold_gained(amount: int)
+signal shop_refreshed() ## The local shop was rerolled (tutorial validation).
+signal shop_opened() ## The local player opened the shop panel (tutorial validation).
+
+## Roguelite run phases (emitted by RunRoot). The TutorialManager hooks these
+## because the roguelite flow does NOT drive GameManager.game_state_changed.
+signal tavern_phase_started() ## A tavern/buying phase became active and its UI is up.
+signal fighting_phase_started() ## A fighting phase became active.
 
 # ============================ Manager =============================
 signal card_shop_init()

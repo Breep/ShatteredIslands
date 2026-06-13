@@ -13,6 +13,10 @@ enum ValidationEvent {
 	END_BUYING_PRESSED,
 	GAME_STATE_FIGHTING,
 	GAME_STATE_ENDING_ROUND,
+	## Appended after the originals so existing .tres integer references stay valid.
+	CARD_BOUGHT, ## Any card purchased from the shop (validation_filter unused here).
+	SHOP_REFRESHED, ## The player rerolled the shop.
+	OPEN_SHOP, ## The player opened the shop panel.
 }
 
 enum PopupMode {
@@ -65,6 +69,11 @@ enum PreferredArrowSide {
 ## Note: with BLOCKING/MODAL_DIMMED + no target + no validation_event + auto_advance_delay = 0,
 ## the only way out is the Skip button. Set auto_advance_delay > 0 or use a target to avoid dead-ends.
 @export var popup_mode: PopupMode = PopupMode.PASSIVE
+
+## Hides the bubble's Skip button. Use on forced steps where the only way out is
+## to perform the required action (e.g. buy the highlighted card). Pair with a
+## reachable validation_event so the step is never a dead-end.
+@export var hide_skip: bool = false
 
 ## Optional portrait shown on the left of the bubble. Leave null to fall back
 ## to the default portrait baked in the bubble scene.

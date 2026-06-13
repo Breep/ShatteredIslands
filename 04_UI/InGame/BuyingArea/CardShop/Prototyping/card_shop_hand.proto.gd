@@ -2,6 +2,11 @@
 # UIHand. Pas de gold, pas de PlayerCardShop, pas de serveur. Les cartes sont
 # tirées d'un ShopDeck (Resource) directement vers UICardShop.display_cards().
 # Drop dans la drop_zone de UIHand → tentative d'ajout local via Hand.add_card.
+#
+# Sert aussi à valider le tutoriel forcé : le bouton "force achat" présente une
+# étape BLOCKING (hole-punch sur le slot 0) pour vérifier que le drag d'achat
+# traverse bien le blocker. On simule le TutorialManager en validant l'étape sur
+# Events.card_bought.
 extends Node
 
 #region ============================== Export ==============================
@@ -15,6 +20,7 @@ extends Node
 @onready var _ui_hand: UIHand = %UIHand
 @onready var _ui_card_shop: UICardShop = %UICardShop
 @onready var _hand_count_label: Label = %HandCountLabel
+@onready var _overlay: TutorialOverlay = %TutorialOverlay
 
 var _hand: Hand
 var _rarity_chances: Dictionary[Card.Rarity, float] = {
@@ -35,6 +41,7 @@ func _ready() -> void:
 	_hand.has_changed.connect(_refresh_label)
 	_refresh_label()
 	_refresh_shop()
+	Events.card_bought.connect(_on_card_bought)
 #endregion
 
 
@@ -49,6 +56,31 @@ func _on_clear_hand_button_pressed() -> void:
 		var removed: Array[Card] = _hand.remove_card(card)
 		for r: Card in removed:
 			_shop_deck.add_card(r)
+
+
+func _on_force_buy_button_pressed() -> void:
+	var step: TutorialStep = TutorialStep.new()
+	step.id = &"proto_force_buy"
+	step.text = "Achète cette carte (drag vers ta main). Le reste est bloqué."
+	step.target_unique_name = &"CardContainer"
+	step.target_sub_name = &"VBoxContainer"
+	step.validation_event = TutorialStep.ValidationEvent.CARD_BOUGHT
+	step.popup_mode = TutorialStep.PopupMode.BLOCKING
+	step.hide_skip = true
+	step.highlight_target = true
+	step.highlight_padding = 8.0
+	step.auto_advance_delay = 0.0
+	_overlay.present_step(step, true)
+
+
+func _on_tuto_clear_button_pressed() -> void:
+	_overlay.clear()
+
+
+# Simule le TutorialManager : valide l'étape en cours dès qu'une carte est achetée.
+func _on_card_bought(_card: Card) -> void:
+	if _overlay.has_active_step():
+		_overlay.complete_current_step()
 #endregion
 
 

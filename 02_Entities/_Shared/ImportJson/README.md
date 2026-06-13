@@ -36,7 +36,7 @@ meta — type de courbe / Multiplicateur / Variable — au-dessus sont ignorées
 | `level` | chaque ligne | Niveau (entier ≥ 1). |
 | `desc_path` | optionnel | `res://...` vers l'`EntityDesc.tres` à mettre à jour. Auto si vide. |
 | `stats_dir` | optionnel | `res://...` du dossier où écrire les `.tres`. Auto si vide. |
-| `stats_prefix` | optionnel | Préfixe des fichiers (`latika` → `latika_lvl_01.tres`). Auto si vide. |
+| `stats_prefix` | optionnel | Préfixe des fichiers. Auto si vide = `<entity_snake>_stats` → `<prefix>_lvl_01.tres`. |
 
 **Auto-résolution** : si `desc_path` / `stats_dir` / `stats_prefix` sont vides,
 l'importeur les déduit de `entity_id` :
@@ -44,8 +44,10 @@ l'importeur les déduit de `entity_id` :
   puis l'unique resource dont le `script_class` finit par `Desc`
   (dans le dossier ou son sous-dossier `Stats/`).
 - `stats_dir` : le dossier du desc s'il s'appelle `Stats`, sinon `<dossier>/Stats/`.
-- `stats_prefix` : déduit d'un fichier `<prefix>_lvl_NN.tres` existant, sinon
-  `entity_id` en snake_case.
+- `stats_prefix` : toujours `<entity_id en snake_case>_stats` (convention unique,
+  ex. `kobold_knight_stats`). À l'import, les fichiers de niveau aux anciens noms
+  (`stats_lvl_NN.tres`, `latika_lvl_NN.tres`...) sont **supprimés** pour ne garder
+  que ce motif.
 
 Repli sur les colonnes explicites quand : le dossier ne porte pas le nom de
 l'entité, plusieurs `*Desc` cohabitent, ou l'entité n'existe pas encore sur disque.
@@ -54,8 +56,15 @@ que sur la 1re ligne de chaque entité.
 
 ### Colonnes Mono (une valeur par niveau)
 `health_max`, `mana_max`, `mana_regen`, `attack_damage`, `attack_speed`,
-`attack_power`, `attack_range`, `movement_speed`, `scale`, `crit_chance`,
+`attack_power`, `attack_range`, `movement_speed`, `scale`, `aoe_size`,
+`armor`, `magic_resistance`, `poison_resistance`, `crit_chance`,
 `crit_mult`, `dodge`, `lifesteal`, `crit_resistance`, `auto_attack_type` (`RANGED` ou `MELEE`).
+
+> `armor` / `magic_resistance` / `poison_resistance` sont des **alias** des 3 slots
+> de dégâts de `m_resistances` (PHYSICAL / MAGICAL / POISON) — même donnée en interne.
+> N'utilise QUE ces colonnes pour ces 3 slots (pas aussi `m_resistances.DAMAGE_*`,
+> ce serait un doublon). Le groupe `m_resistances.*` ne sert plus que pour les
+> autres ActionTypes (heal, stacks, status...).
 
 > `crit_resistance` est **une seule colonne** (valeur globale). L'ancien
 > `crit_resistances.<ActionType>` par type n'existe plus.
@@ -79,15 +88,18 @@ que sur la 1re ligne de chaque entité.
 
 ## Migration des colonnes (automatique)
 
-Le menu **Godot Tools > Préparer le schéma + Latika** applique automatiquement,
+Le menu **Godot Tools > Préparer le schéma + entités** applique automatiquement,
 dans la feuille active (non-destructif, annulable par Ctrl+Z, relançable) :
 
 - `hero_id` → `entity_id` ; ajout de `desc_path`, `stats_dir`, `stats_prefix`.
 - Ajout des Mono manquantes : `attack_power`, `attack_range`, `movement_speed`,
-  `scale`, `crit_chance`, `crit_mult`, `dodge`, `lifesteal`, `crit_resistance`,
-  `auto_attack_type` (colonnes ajoutées **en fin de feuille**).
+  `scale`, `aoe_size`, `crit_chance`, `crit_mult`, `dodge`, `lifesteal`,
+  `crit_resistance`, `auto_attack_type` (colonnes ajoutées **en fin de feuille**).
 - Renommage des groupes Multi (table ci-dessus).
-- Ajout d'une ligne exemple **Latika** (lvl 1) si absente.
+- Renommage des 3 slots de résistance dégâts : `m_resistances.DAMAGE_PHYSICAL` →
+  `armor`, `.DAMAGE_MAGICAL` → `magic_resistance`, `.DAMAGE_POISON` → `poison_resistance`.
+- Ajout d'une ligne (lvl 1) par entité absente, avec son `entity_id` et son
+  `auto_attack_type` (`ChickenBasic` reçoit en plus son `desc_path` explicite).
 
 Reste à faire à la main :
 - Régler les lignes de formule (Multiplicateur / Variable / courbe) des nouvelles

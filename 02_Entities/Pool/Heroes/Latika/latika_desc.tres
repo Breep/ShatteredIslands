@@ -29,23 +29,17 @@
 [ext_resource type="PackedScene" uid="uid://bsbbpkr8vpwu3" path="res://02_Entities/Pool/Heroes/Latika/latika_preview.tscn" id="5_prev"]
 [ext_resource type="Resource" uid="uid://dj0x3ox0qy3aa" path="res://02_Entities/Pool/Heroes/Latika/Skills/Passive/pack_leader.tres" id="6_pass"]
 [ext_resource type="Resource" uid="uid://latulttrs" path="res://02_Entities/Pool/Heroes/Latika/Skills/Ultimate/predator_arrow.tres" id="7_ult"]
-[ext_resource type="Resource" uid="uid://lathawkeyetrs" path="res://02_Entities/Pool/Heroes/Latika/Skills/Bronze/hawk_eye.tres" id="8_b1"]
-[ext_resource type="Resource" uid="uid://latwildhunttrs" path="res://02_Entities/Pool/Heroes/Latika/Skills/Bronze/wild_hunt.tres" id="9_b2"]
-[ext_resource type="Resource" uid="uid://latbeastreflextrs" path="res://02_Entities/Pool/Heroes/Latika/Skills/Silver/bestial_reflex.tres" id="10_s1"]
-[ext_resource type="Resource" uid="uid://latpackfurytrs" path="res://02_Entities/Pool/Heroes/Latika/Skills/Silver/pack_fury.tres" id="11_s2"]
-[ext_resource type="Resource" uid="uid://latlonewolftrs" path="res://02_Entities/Pool/Heroes/Latika/Skills/Gold/lone_wolf.tres" id="12_g1"]
-[ext_resource type="Resource" uid="uid://latbloodbondtrs" path="res://02_Entities/Pool/Heroes/Latika/Skills/Gold/blood_bond.tres" id="13_g2"]
+[ext_resource type="Resource" uid="uid://dj0p3spvty3aa" path="res://02_Entities/Pool/Heroes/Latika/Skills/Bronze/hawk_eye.tres" id="8_b1"]
+[ext_resource type="Resource" uid="uid://dsqxxw8ogfs1e" path="res://02_Entities/Pool/Heroes/Latika/Skills/Bronze/wild_hunt.tres" id="9_b2"]
+[ext_resource type="Resource" uid="uid://dtkwngsahs4nk" path="res://02_Entities/Pool/Heroes/Latika/Skills/Silver/bestial_reflex.tres" id="10_s1"]
+[ext_resource type="Resource" uid="uid://dsjpo46okks1e" path="res://02_Entities/Pool/Heroes/Latika/Skills/Silver/pack_fury.tres" id="11_s2"]
+[ext_resource type="Resource" uid="uid://dsf40yoid0s1e" path="res://02_Entities/Pool/Heroes/Latika/Skills/Gold/lone_wolf.tres" id="12_g1"]
+[ext_resource type="Resource" uid="uid://ce2ydmnp2xu3" path="res://02_Entities/Pool/Heroes/Latika/Skills/Gold/blood_bond.tres" id="13_g2"]
 
 [resource]
 script = ExtResource("1_hero")
 id = 2
 category = "Range / DPS"
-name = "Latika"
-portrait = ExtResource("2_q20ea")
-description = "L'Enfant des Loups — DPS distance / carry mono-cible. Dualité prédateur solitaire / chef de meute."
-preview_scene = ExtResource("5_prev")
-default_category = 0
-starting_companions = Array[ExtResource("1_desc")]([ExtResource("4_xkqml")])
 hero_skills = Dictionary[int, ExtResource("2_psofn")]({
 0: ExtResource("8_b1"),
 1: ExtResource("9_b2"),
@@ -56,13 +50,12 @@ hero_skills = Dictionary[int, ExtResource("2_psofn")]({
 6: ExtResource("6_pass"),
 7: ExtResource("7_ult")
 })
-skills = Dictionary[int, ExtResource("2_psofn")]({
-0: ExtResource("6_pass"),
-1: ExtResource("8_b1"),
-2: ExtResource("10_s1"),
-3: ExtResource("12_g1"),
-4: ExtResource("7_ult")
-})
+name = "Latika"
+portrait = ExtResource("1_pxqef")
+description = "L'Enfant des Loups — DPS distance / carry mono-cible. Dualité prédateur solitaire / chef de meute."
+preview_scene = ExtResource("5_prev")
+default_category = 0
+starting_companions = Array[ExtResource("1_desc")]([ExtResource("4_xkqml")])
 stats = Dictionary[int, ExtResource("2_es")]({
 1: ExtResource("3_l01"),
 2: ExtResource("3_l02"),
@@ -84,6 +77,13 @@ stats = Dictionary[int, ExtResource("2_es")]({
 18: ExtResource("3_l18"),
 19: ExtResource("3_l19"),
 20: ExtResource("3_l20")
+})
+skills = Dictionary[int, ExtResource("2_psofn")]({
+0: ExtResource("6_pass"),
+1: ExtResource("8_b1"),
+2: ExtResource("10_s1"),
+3: ExtResource("12_g1"),
+4: ExtResource("7_ult")
 })
 aa_1_release_normalized = 0.67
 aa_2_release_normalized = 0.67

@@ -58,6 +58,7 @@ func _on_continue_button_pressed() -> void:
 
 
 func _on_open_shop_button_pressed() -> void:
+	Events.shop_opened.emit()
 	_show_shop_panel()
 
 
