@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="5_8gr7v"]
 [ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.tscn" id="6_3htvw"]
 [ext_resource type="PackedScene" path="res://02_Entities/_Shared/Components/Skill/hero_skill_component.tscn" id="7_cgkcr"]
+[ext_resource type="PackedScene" uid="uid://bs1hrsa08utbt" path="res://02_Entities/_Shared/Components/LevelUpVfx/level_up_vfx_component.tscn" id="8_lvup"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rxegs"]
 radius = 0.63916016
@@ -290,6 +291,9 @@ _animation_tree = NodePath("../AnimationTree")
 _owner = NodePath("..")
 
 [node name="HeroSkillComponent" parent="." unique_id=-823138290 node_paths=PackedStringArray("_owner") instance=ExtResource("7_cgkcr")]
+_owner = NodePath("..")
+
+[node name="LevelUpVfxComponent" parent="." node_paths=PackedStringArray("_owner") instance=ExtResource("8_lvup")]
 _owner = NodePath("..")
 
 [editable path="Elf_Warrior"]
