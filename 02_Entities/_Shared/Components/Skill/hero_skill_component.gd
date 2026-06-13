@@ -73,6 +73,20 @@ func get_chosen_skill(skill_type: Skill.Type) -> Skill:
 func request_choice(skill_type: Skill.Type) -> void:
 	if is_choice_pending(skill_type):
 		Events.signal_hero_skill_unlocked(self, skill_type)
+
+
+# True si au moins un tier sélectionnable est débloqué mais pas encore choisi.
+func has_pending_choice() -> bool:
+	for skill_type: Skill.Type in _TIER_SLOTS:
+		if is_choice_pending(skill_type):
+			return true
+	return false
+
+
+# (Ré)ouvre la fenêtre de choix pour chaque tier encore en attente.
+func request_pending_choices() -> void:
+	for skill_type: Skill.Type in _TIER_SLOTS:
+		request_choice(skill_type)
 #endregion
 
 #region ============================== Private functions ==============================

@@ -2,7 +2,8 @@
 # du héros local se débloque, elle s'ouvre en peuplant ses vignettes avec les
 # candidats du tier ; le clic sur une vignette émet Events.skill_selected, le
 # HeroSkillComponent tranche, et hero_skill_chosen referme la fenêtre. Plusieurs
-# tiers débloqués d'un coup sont présentés un par un (file).
+# tiers débloqués d'un coup sont présentés un par un (file). Au retour en taverne,
+# tout tier resté en attente est rouvert (cf. _on_tavern_phase_started).
 class_name UISkillSelection
 extends Control
 
@@ -21,6 +22,7 @@ func _ready() -> void:
 	hide()
 	Events.hero_skill_unlocked.connect(_on_hero_skill_unlocked)
 	Events.hero_skill_chosen.connect(_on_hero_skill_chosen)
+	Events.tavern_phase_started.connect(_on_tavern_phase_started)
 #endregion
 
 #region ============================== Private functions ==============================
@@ -67,4 +69,14 @@ func _on_hero_skill_chosen(comp: HeroSkillComponent, _skill_id: Skill.SkillID) -
 	_current_comp = null
 	hide()
 	_present_next()
+
+
+# Au retour en taverne, on relance le choix de tout tier resté en attente.
+func _on_tavern_phase_started() -> void:
+	var local_player: Player = PlayerManager.get_local_player()
+	if local_player == null or not is_instance_valid(local_player.hero):
+		return
+	var comp: HeroSkillComponent = local_player.hero.skill as HeroSkillComponent
+	if comp != null:
+		comp.request_pending_choices()
 #endregion

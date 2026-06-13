@@ -54,7 +54,18 @@ func hide_card_shop() -> void:
 # ============================== Callbacks ==============================
 
 func _on_continue_button_pressed() -> void:
+	var hero_skill: HeroSkillComponent = _local_hero_skill()
+	if hero_skill != null and hero_skill.has_pending_choice():
+		hero_skill.request_pending_choices()
+		return
 	Events.signal_tavern_continue_pressed()
+
+
+func _local_hero_skill() -> HeroSkillComponent:
+	var local_player: Player = PlayerManager.get_local_player()
+	if local_player == null or not is_instance_valid(local_player.hero):
+		return null
+	return local_player.hero.skill as HeroSkillComponent
 
 
 func _on_open_shop_button_pressed() -> void:
