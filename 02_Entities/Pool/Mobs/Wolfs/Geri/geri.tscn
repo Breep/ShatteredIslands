@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://baj4au0ni12sm"]
 
 [ext_resource type="Script" uid="uid://btw6i3j85nx3n" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/geri.gd" id="1_f1ebe"]
-[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/Stats/geri_entity_desc.tres" id="2_ddaav"]
+[ext_resource type="Resource" uid="uid://m13uvband6ge" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/Stats/geri_entity_desc.tres" id="2_ddaav"]
 [ext_resource type="PackedScene" uid="uid://djcubi60gvgtu" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/geri_visual.tscn" id="3_5nbb8"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://c82dyq32f5nwx" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/geri_animation_tree.res" id="4_4jw1l"]
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="5_1leu0"]

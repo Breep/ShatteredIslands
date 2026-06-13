@@ -60,7 +60,7 @@ func remove_modifier(id: StringName) -> void:
 
 # Retire l'aura entière de tous les alliés et coupe la propagation aux futurs spawns.
 func clear() -> void:
-	for ally: Entity in _served.keys():
+	for ally in _served.keys():
 		if not is_instance_valid(ally): continue
 		for clone: Modifier in _served[ally].values():
 			if not is_instance_valid(clone): continue
