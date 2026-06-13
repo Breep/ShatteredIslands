@@ -23,8 +23,8 @@ normal_enabled = true
 normal_texture = ExtResource("6_rkx3y")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_l6bop"]
-radius = 0.47802734
-height = 2.484375
+radius = 0.9604492
+height = 2.7539063
 
 [node name="MoltenGolem" type="CharacterBody3D" unique_id=1400515487 node_paths=PackedStringArray("_health_bar_marker")]
 collision_layer = 16
@@ -228,7 +228,7 @@ parameters/switch_stunned_state/transition_request = "NotStunned"
 parameters/switch_stunned_state/current_index = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1784650220]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.225169, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3599346, 0)
 shape = SubResource("CapsuleShape3D_l6bop")
 
 [editable path="MoltenGolemVisual2"]

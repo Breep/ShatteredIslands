@@ -8,8 +8,8 @@
 [ext_resource type="AnimationNodeBlendTree" uid="uid://y5swvigse7ti" path="res://02_Entities/Pool/Mobs/Golems/golems_animation_tree.res" id="6_k5w84"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kntqg"]
-radius = 0.3227539
-height = 2.0908203
+radius = 0.8955078
+height = 2.9091797
 
 [node name="PoisonGolem" type="CharacterBody3D" unique_id=934610939 node_paths=PackedStringArray("_health_bar_marker")]
 collision_layer = 16
@@ -206,7 +206,7 @@ parameters/switch_stunned_state/transition_request = ""
 parameters/switch_stunned_state/current_index = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=969653623]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.82611704, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2352967, 0)
 shape = SubResource("CapsuleShape3D_kntqg")
 
 [editable path="PoisonGolem"]

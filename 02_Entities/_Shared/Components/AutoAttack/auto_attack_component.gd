@@ -172,8 +172,7 @@ func process_tick() -> void:
 
 	# En approche : check arrivée
 	if _is_approaching:
-		var distance: float = _owner.global_position.distance_to(_current_target.global_position)
-		if _owner.stats.attack_range <= 0 or distance <= _owner.stats.attack_range:
+		if _owner.is_target_in_attack_range(_current_target):
 			stop_approaching()
 			_trigger_attack(_current_target)
 		return
@@ -303,14 +302,8 @@ func _start_attack_tick_counter(interval_ticks: int) -> void:
 
 
 func _check_range_and_approach(target: Entity) -> bool:
-	var distance: float = _owner.global_position.distance_to(target.global_position)
-
-	# Infinite range (attack_range <= 0) - always in range
-	if _owner.stats.attack_range <= 0:
-		return true
-
-	# In range - can attack
-	if distance <= _owner.stats.attack_range:
+	# Portée (corps-à-corps pour le mélée) centralisée sur Entity.
+	if _owner.is_target_in_attack_range(target):
 		return true
 
 	# Out of range - try to approach

@@ -325,6 +325,46 @@ func get_collision_center() -> Vector3:
 	return global_position
 
 
+# Rayon horizontal (plan XZ) du corps de collision, mise à l'échelle du node incluse
+# (donc sensible au SCALE dès lors que celui-ci redimensionne l'entité, pas que le visuel).
+# Sert à la détection de portée corps-à-corps des auto-attaques mélée. On impose la
+# CapsuleShape3D comme shape de corps unique pour l'instant : tout autre type loggue
+# et renvoie 0.
+func get_body_radius() -> float:
+	for child in get_children():
+		if not child is CollisionShape3D:
+			continue
+		var collision_shape: CollisionShape3D = child
+		if collision_shape.shape == null:
+			continue
+		var shape_scale: Vector3 = collision_shape.global_transform.basis.get_scale()
+		var scale_xz: float = maxf(absf(shape_scale.x), absf(shape_scale.z))
+		if collision_shape.shape is CapsuleShape3D:
+			return (collision_shape.shape as CapsuleShape3D).radius * scale_xz
+		Verbose.warn("Entity [" + entity_name + "] : get_body_radius attend une CapsuleShape3D, type [" + collision_shape.shape.get_class() + "] non géré", Verbose.Category.ENTITY)
+		return 0.0
+	return 0.0
+
+
+# La cible est-elle à portée d'auto-attaque de cette entité ?
+# Ranged : distance centre-à-centre vs attack_range (≤ 0 = portée infinie).
+# Mélée : on tient compte des rayons de corps des DEUX entités — attack_range devient
+# l'allonge AU-DELÀ des corps. Sans ça, le body-block d'une grosse cible la rend
+# inatteignable : les centres ne peuvent jamais se rejoindre à moins de la somme des
+# rayons, donc un attack_range mélée plus petit que cette somme n'est jamais satisfait.
+func is_target_in_attack_range(target: Entity) -> bool:
+	if not is_instance_valid(target):
+		return false
+	var range_stat: float = stats.attack_range
+	var distance_sq: float = global_position.distance_squared_to(target.global_position)
+	if stats.auto_attack_type == EntityStats.AutoAttackType.MELEE:
+		var reach: float = get_body_radius() + target.get_body_radius() + maxf(range_stat, 0.0)
+		return distance_sq <= reach * reach
+	if range_stat <= 0.0:
+		return true
+	return distance_sq <= range_stat * range_stat
+
+
 func process_tick() -> void:
 	if movement != null:
 		movement.process_tick()
