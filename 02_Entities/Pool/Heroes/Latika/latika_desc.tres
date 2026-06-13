@@ -78,13 +78,6 @@ stats = Dictionary[int, ExtResource("2_es")]({
 19: ExtResource("3_l19"),
 20: ExtResource("3_l20")
 })
-skills = Dictionary[int, ExtResource("2_psofn")]({
-0: ExtResource("6_pass"),
-1: ExtResource("8_b1"),
-2: ExtResource("10_s1"),
-3: ExtResource("12_g1"),
-4: ExtResource("7_ult")
-})
 aa_1_release_normalized = 0.67
 aa_2_release_normalized = 0.67
 aa_3_release_normalized = 0.67

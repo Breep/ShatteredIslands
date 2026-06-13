@@ -17,6 +17,10 @@ extends Resource
 @export var hand: Hand
 @export var data_memory: NestedRegistry
 
+# Tiers à choix tranchés par le joueur (BRONZE/SILVER/GOLD → SkillID retenu).
+# Persisté avec la run ; rechargé par HeroSkillComponent à chaque spawn du héros.
+@export var chosen_skills: Dictionary[Skill.Type, Skill.SkillID] = {}
+
 # Identifiant stable de la source qui a ajouté cette entry au roaster (ex. le
 # name d'une carte, un id de skill). Vide = posé hors source identifiable
 # (héros initial, compagnon de départ…).

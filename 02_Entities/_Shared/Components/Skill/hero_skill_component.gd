@@ -28,6 +28,9 @@ var _pending: Dictionary[Skill.Type, bool] = {
 	Skill.Type.GOLD:   false,
 }
 var _chosen: Dictionary[Skill.Type, Skill.SkillID] = {}
+# Tiers à choix dont l'effet a déjà été appliqué (garde d'idempotence : un tier
+# peut être choisi avant ou après son déblocage par niveau, on applique une fois).
+var _applied: Dictionary[Skill.Type, bool] = {}
 #endregion
 
 #region ============================== Node base functions ==============================
@@ -100,6 +103,18 @@ func _load_skills() -> void:
 		return
 	roaster[Skill.Type.PASSIVE] = hero_desc.hero_skills.get(Skill.SkillID.PASSIVE)
 	roaster[Skill.Type.ULTIMATE] = hero_desc.hero_skills.get(Skill.SkillID.ULTIMATE)
+	_hydrate_chosen_from_entry(hero_desc)
+
+
+# Recharge les tiers déjà tranchés (run en cours) : pré-remplit _chosen + roaster
+# pour qu'ils soient appliqués par _apply_skills et ne soient pas re-proposés.
+func _hydrate_chosen_from_entry(hero_desc: HeroDesc) -> void:
+	if _owner.entry == null: return
+	for skill_type: Skill.Type in _owner.entry.chosen_skills:
+		var skill: Skill = hero_desc.hero_skills.get(_owner.entry.chosen_skills[skill_type])
+		if skill == null: continue
+		_chosen[skill_type] = skill.skill_id
+		roaster[skill_type] = skill
 
 
 func _request_pending_choices() -> void:
@@ -127,10 +142,28 @@ func _type_of(skill_id: Skill.SkillID) -> Variant:
 		if skill_id in _TIER_SLOTS[skill_type]:
 			return skill_type
 	return null
+
+
+# Override : pour les tiers à choix, applique l'effet au plus une fois (garde
+# _applied). Choix et déblocage par niveau peuvent arriver dans n'importe quel
+# ordre — le premier moment où le tier est à la fois choisi (roaster rempli) et
+# débloqué déclenche l'application ; les appels suivants sont absorbés.
+func _apply_skill(skill_type: Skill.Type) -> void:
+	if _TIER_SLOTS.has(skill_type):
+		if _applied.get(skill_type, false): return
+		if not unlocked_skills.get(skill_type, false): return
+		if roaster.get(skill_type) == null: return
+		_applied[skill_type] = true
+	super._apply_skill(skill_type)
 #endregion
 
 #region ============================== Callbacks ==============================
 func _on_unlocked_skills_changed() -> void:
+	# Un tier déjà choisi (hydraté depuis l'entry) qui se débloque seulement
+	# maintenant doit voir son effet appliqué ; _apply_skill est idempotent et
+	# ne fait rien pour les tiers non encore choisis (roaster null).
+	for skill_type: Skill.Type in _TIER_SLOTS:
+		_apply_skill(skill_type)
 	_request_pending_choices()
 
 
@@ -142,6 +175,8 @@ func _on_skill_selected(skill: Skill) -> void:
 	if not _owns(skill_type, skill): return # pick d'un autre héros
 	_pending[skill_type] = false
 	_chosen[skill_type] = skill.skill_id
+	if _owner.entry != null:
+		_owner.entry.chosen_skills[skill_type] = skill.skill_id
 	roaster[skill_type] = skill
 	_apply_skill(skill_type)
 	Events.signal_hero_skill_chosen(self, skill.skill_id)

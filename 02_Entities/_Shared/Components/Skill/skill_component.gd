@@ -38,6 +38,12 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
+	# Composant remplacé par un override (cf _enter_tree) : queue_free est différé,
+	# donc son _ready tourne quand même dans le flush. Ne rien charger/appliquer,
+	# sinon les skills de entity_desc seraient appliqués en double (ou des tiers à
+	# choix appliqués sans choix).
+	if _owner == null or _owner.skill != self:
+		return
 	super._ready()
 	_skill_context = SkillContext.create(_owner)
 	_owner.progression.level_changed.connect(_on_owner_progression_level_changed)
