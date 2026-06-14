@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://72f2hpoywkt6" path="res://04_UI/InGame/HeroSelection/HeroOverviewPanel/ui_hero_overview_panel.gd" id="1_w3h7f"]
 [ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="2_s1bc7"]
 [ext_resource type="Theme" uid="uid://d0qobfi4rit8a" path="res://04_UI/_Themes/label_main_menu_white.tres" id="3_ee7lt"]
-[ext_resource type="Texture2D" uid="uid://d1e0ogx2plmkc" path="res://02_Entities/Pool/Heroes/Latika/Data/hero_portrait_latika.png" id="3_s1bc7"]
+[ext_resource type="Texture2D" uid="uid://epdfjjie1s85" path="res://02_Entities/Pool/Heroes/Latika/Data/latika_portrait.png" id="3_yxnt6"]
 [ext_resource type="Texture2D" uid="uid://dfcy3dpkcvyx2" path="res://04_UI/_Themes/Data/Icons/Backgrounds/skill_passive_background.svg" id="4_dj7sv"]
 [ext_resource type="Texture2D" uid="uid://ds2dracb280n" path="res://02_Entities/Pool/Heroes/Latika/Skills/Passive/skill_target.svg" id="5_f8w6c"]
 [ext_resource type="Texture2D" uid="uid://carfsdb3rsrq6" path="res://04_UI/_Themes/Data/Icons/Backgrounds/skill_bronze_background.svg" id="7_k77oi"]
@@ -118,7 +118,7 @@ theme_override_constants/margin_bottom = 10
 unique_name_in_owner = true
 custom_minimum_size = Vector2(256, 256)
 layout_mode = 2
-texture = ExtResource("3_s1bc7")
+texture = ExtResource("3_yxnt6")
 expand_mode = 1
 stretch_mode = 5
 

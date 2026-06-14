@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://g4isbydrxh2l"
-path="res://.godot/imported/s1_pain.png-c04d0dd9066ecfbbcd3612058666db55.ctex"
+uid="uid://cq7rk7jas3n61"
+path="res://.godot/imported/skill_eclipse.svg-47c162eb62fefd9f1ddab9079e1a7147.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://02_Entities/Pool/Heroes/DarkKnight/Data/s1_pain.png"
-dest_files=["res://.godot/imported/s1_pain.png-c04d0dd9066ecfbbcd3612058666db55.ctex"]
+source_file="res://02_Entities/Pool/Heroes/DarkKnight/Skills/Ultimate/skill_eclipse.svg"
+dest_files=["res://.godot/imported/skill_eclipse.svg-47c162eb62fefd9f1ddab9079e1a7147.ctex"]
 
 [params]
 
@@ -38,3 +38,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

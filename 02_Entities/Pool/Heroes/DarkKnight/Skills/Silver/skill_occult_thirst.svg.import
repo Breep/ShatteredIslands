@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bs4ekryxkfoof"
-path="res://.godot/imported/passive.png-36a8e2c036588c38cb8d22fe1e6796fc.ctex"
+uid="uid://benidpq16sj2g"
+path="res://.godot/imported/skill_occult_thirst.svg-dd1a893d5a86e833698dcc7aef19a370.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://02_Entities/Pool/Heroes/DarkKnight/Data/passive.png"
-dest_files=["res://.godot/imported/passive.png-36a8e2c036588c38cb8d22fe1e6796fc.ctex"]
+source_file="res://02_Entities/Pool/Heroes/DarkKnight/Skills/Silver/skill_occult_thirst.svg"
+dest_files=["res://.godot/imported/skill_occult_thirst.svg-dd1a893d5a86e833698dcc7aef19a370.ctex"]
 
 [params]
 
@@ -38,3 +38,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

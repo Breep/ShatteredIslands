@@ -12,3 +12,7 @@ func apply(ctx: SkillContext) -> void:
 	if ctx.entity == null:
 		return
 	ctx.entity.set_meta(SE_ShadowBlade.META_CHANCE_BONUS, _chance_bonus)
+
+
+func get_description() -> String:
+	return "Augmente de +" + _value(_chance_bonus) + "% les chances de déclenchement de sa Lame d'Ombre."

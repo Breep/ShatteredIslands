@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://cdkb1trs"]
 
+[ext_resource type="Texture2D" uid="uid://0fcxsdfall5r" path="res://02_Entities/Pool/Heroes/DarkKnight/Skills/Bronze/skill_honed_shadow.svg" id="1_87aw0"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
 [ext_resource type="Script" uid="uid://cdkskill03" path="res://02_Entities/Pool/Heroes/DarkKnight/Skills/Bronze/honed_shadow.gd" id="2_eff"]
 
@@ -11,5 +12,6 @@ metadata/_custom_type_script = "uid://cdkskill03"
 script = ExtResource("1_skill")
 name = "Honed Shadow"
 description = "Shadow Blade trigger chance +5%."
+portrait = ExtResource("1_87aw0")
 skill_effect = SubResource("Resource_honedshadow")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

@@ -1,7 +1,7 @@
 class_name SE_ShadowBlade
 extends SkillEffect
 
-# Passive Shadow Blade: each auto-attack has a chance to trigger a deck-controlled
+# Passive Shadow Blade: each auto-attack has a chance to trigger a controlled
 # projectile (base: Nightfall) at the current target. perform_trigger() centralises
 # a trigger's effect — natural (chance roll) or forced by the ultimate — and talents
 # modulate it through meta set on the entity.
@@ -14,7 +14,6 @@ const META_ULT_EXTRA := &"dk_ult_extra"            # Gold2 Eclipse Storm
 const META_PROJ_SIZE := &"dk_proj_size"            # Gold1 Crushing Eclipse
 
 @export var _base_chance: float = 15.0
-
 
 func apply(ctx: SkillContext) -> void:
 	var dk: Entity = ctx.entity
@@ -37,6 +36,11 @@ func apply(ctx: SkillContext) -> void:
 			return
 		perform_trigger(source, target)
 	dk.auto_attack_modifier_registry.register_modifier(modifier)
+
+
+func get_description() -> String:
+	return "Chaque auto-attaque a " + _value(_base_chance) + "% de chances de déclencher " \
+		+ "un tir de projectile (Nightfall) sur sa cible courante."
 
 
 # A Shadow Blade trigger's effect. Static so the ultimate reuses it verbatim (forced

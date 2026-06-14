@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgch3sc5bbdxb"
-path="res://.godot/imported/b1_spark_of_light.jpeg-224ee5b35e29b0926388d09d69da4300.ctex"
+uid="uid://b58hyqdw2g60e"
+path="res://.godot/imported/skill_eclipse_storm.svg-07a30e9bb76d563ebc3624b7f9601104.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://02_Entities/Pool/Heroes/DarkKnight/Data/b1_spark_of_light.jpeg"
-dest_files=["res://.godot/imported/b1_spark_of_light.jpeg-224ee5b35e29b0926388d09d69da4300.ctex"]
+source_file="res://02_Entities/Pool/Heroes/DarkKnight/Skills/Gold/skill_eclipse_storm.svg"
+dest_files=["res://.godot/imported/skill_eclipse_storm.svg-07a30e9bb76d563ebc3624b7f9601104.ctex"]
 
 [params]
 
@@ -38,3 +38,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

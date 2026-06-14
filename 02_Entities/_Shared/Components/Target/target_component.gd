@@ -243,12 +243,11 @@ func get_targets(strategy: MultipleTargettingStrategy, radius: float = -1.0) -> 
 	return returned_entities
 
 
-## Check if entity is within attack range
+## La cible est-elle à portée d'auto-attaque de l'owner ? Délègue à Entity, qui porte la
+## logique géométrique centralisée (cf. Entity.is_target_in_attack_range — corps-à-corps
+## pour le mélée).
 func is_in_attack_range(entity: Entity) -> bool:
-	# -1 means unlimited range
-	if _owner.stats.attack_range < 0:
-		return true
-	return entity.global_position.distance_squared_to(_owner.global_position) <= _owner.stats.attack_range * _owner.stats.attack_range
+	return _owner.is_target_in_attack_range(entity)
 
 
 # ============================== Private functions ==============================
