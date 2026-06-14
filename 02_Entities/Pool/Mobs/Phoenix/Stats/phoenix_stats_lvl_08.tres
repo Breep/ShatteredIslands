@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="EntityStats" format=3 uid="uid://5q0v1dixp5ro"]
+
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="1_tcbvc"]
+
+[resource]
+script = ExtResource("1_tcbvc")
+_health_max = 3610.0
+_mana_max = 30.0
+_mana_regen = 3.0
+auto_attack_type = 1
+_attack_range = 1.5
+_attack_damage = 30.0
+_attack_speed = 0.9183769506373024
+_attack_power = 30.0
+magic_resistance = 27.476649250079017
+_crit_chance = 14.278045395879428
+_dodge = 2.0
+_m_crit_chances = Dictionary[int, float]({
+0: 0.0,
+1: 0.0
+})
+_m_resistances = Dictionary[int, float]({
+0: 0.0,
+1: 27.476649250079017,
+2: 0.0
+})

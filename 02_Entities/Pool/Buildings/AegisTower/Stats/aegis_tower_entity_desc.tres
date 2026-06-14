@@ -4,31 +4,31 @@
 [ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="1_ms22t"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="2_ncjog"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_88ouh"]
-[ext_resource type="Resource" uid="uid://bv561cgef0mdj" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegistower_stats_lvl_01.tres" id="4_5jh8m"]
-[ext_resource type="Resource" uid="uid://f11l6d5wgvd7" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegistower_stats_lvl_02.tres" id="5_vrwrd"]
-[ext_resource type="Resource" uid="uid://bsjwfciun1mto" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegistower_stats_lvl_03.tres" id="6_kcljr"]
-[ext_resource type="Resource" uid="uid://dxi23nxrxkde6" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegistower_stats_lvl_04.tres" id="7_p4nkr"]
-[ext_resource type="Resource" uid="uid://b537aqeqsmnn1" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegistower_stats_lvl_05.tres" id="8_yeoms"]
-[ext_resource type="Resource" uid="uid://n7bau7gq6adx" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegistower_stats_lvl_06.tres" id="9_o28de"]
-[ext_resource type="Resource" uid="uid://cvfgeko1p678y" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegistower_stats_lvl_07.tres" id="10_bm55v"]
-[ext_resource type="Resource" uid="uid://7b8055lnsqtc" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegistower_stats_lvl_08.tres" id="11_cexg7"]
-[ext_resource type="Resource" uid="uid://djcbon7sirqpg" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegistower_stats_lvl_09.tres" id="12_om0tq"]
-[ext_resource type="Resource" uid="uid://dt3whmw3gofm6" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegistower_stats_lvl_10.tres" id="13_whmc5"]
-[ext_resource type="Resource" uid="uid://c12rdmlwkkefg" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegistower_stats_lvl_11.tres" id="14_ge35m"]
-[ext_resource type="Resource" uid="uid://cjemh1o2mj7vl" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegistower_stats_lvl_12.tres" id="15_fvyfw"]
-[ext_resource type="Resource" uid="uid://c1nwyh60ob8m0" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegistower_stats_lvl_13.tres" id="16_yhbpc"]
-[ext_resource type="Resource" uid="uid://dx6fheox6mwpt" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegistower_stats_lvl_14.tres" id="17_r476t"]
-[ext_resource type="Resource" uid="uid://dj60xfxc6y3ic" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegistower_stats_lvl_15.tres" id="18_ipd3l"]
-[ext_resource type="Resource" uid="uid://ccfv7jv2kebhk" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegistower_stats_lvl_16.tres" id="19_5wha3"]
-[ext_resource type="Resource" uid="uid://c10gxjmt84hni" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegistower_stats_lvl_17.tres" id="20_tj4y7"]
-[ext_resource type="Resource" uid="uid://bde8j3grq0v5s" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegistower_stats_lvl_18.tres" id="21_psolh"]
-[ext_resource type="Resource" uid="uid://ch7ssl0y2owlo" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegistower_stats_lvl_19.tres" id="22_e8y0f"]
-[ext_resource type="Resource" uid="uid://di6450pr2uwij" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegistower_stats_lvl_20.tres" id="23_e8yk8"]
+[ext_resource type="Resource" uid="uid://b7edvu6cn52i3" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegis_tower_stats_lvl_01.tres" id="10_5oocd"]
+[ext_resource type="Resource" uid="uid://cjch2s8dt5dfn" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegis_tower_stats_lvl_02.tres" id="11_0tqdh"]
+[ext_resource type="Resource" uid="uid://682rrmmk5yds" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegis_tower_stats_lvl_03.tres" id="12_a3uib"]
+[ext_resource type="Resource" uid="uid://cdjuolc243a0n" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegis_tower_stats_lvl_04.tres" id="13_mcfpd"]
+[ext_resource type="Resource" uid="uid://bc62ayb75ng2i" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegis_tower_stats_lvl_05.tres" id="14_j8k06"]
+[ext_resource type="Resource" uid="uid://dtad8vtsrryfr" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegis_tower_stats_lvl_06.tres" id="15_ru6tx"]
+[ext_resource type="Resource" uid="uid://bbfd2ht1xt3xt" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegis_tower_stats_lvl_07.tres" id="16_jwufb"]
+[ext_resource type="Resource" uid="uid://wovixep5i104" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegis_tower_stats_lvl_08.tres" id="17_rvw8v"]
+[ext_resource type="Resource" uid="uid://l0ih52glnrqe" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegis_tower_stats_lvl_09.tres" id="18_hofu1"]
+[ext_resource type="Resource" uid="uid://d2fttm1cm4pwn" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegis_tower_stats_lvl_10.tres" id="19_aq76r"]
+[ext_resource type="Resource" uid="uid://ccedsq17lfoub" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegis_tower_stats_lvl_11.tres" id="20_6u4et"]
+[ext_resource type="Resource" uid="uid://bl0wbtol4yk1g" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegis_tower_stats_lvl_12.tres" id="21_mfs8b"]
+[ext_resource type="Resource" uid="uid://drq8lda8px5is" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegis_tower_stats_lvl_13.tres" id="22_08w8x"]
+[ext_resource type="Resource" uid="uid://casgojbf0di1c" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegis_tower_stats_lvl_14.tres" id="23_jo1kw"]
+[ext_resource type="Resource" uid="uid://db5nsos4q3o1p" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegis_tower_stats_lvl_15.tres" id="24_cmk0e"]
 [ext_resource type="Resource" uid="uid://bc5hw18srm4v5" path="res://02_Entities/Pool/Buildings/AegisTower/Skills/Passive/aegis_autonome.tres" id="24_pas"]
+[ext_resource type="Resource" uid="uid://bxryd3r3wqovd" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegis_tower_stats_lvl_16.tres" id="25_3vcwi"]
 [ext_resource type="Resource" uid="uid://cnoyau2res7" path="res://02_Entities/Pool/Buildings/AegisTower/Skills/Bronze/noyau_renforce.tres" id="25_bro"]
+[ext_resource type="Resource" uid="uid://huus7c6hobg" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegis_tower_stats_lvl_17.tres" id="26_j7cws"]
 [ext_resource type="Resource" uid="uid://da6t5m8nb45e" path="res://02_Entities/Pool/Buildings/AegisTower/Skills/Silver/reacteur_capacitif.tres" id="26_sil"]
 [ext_resource type="Resource" uid="uid://ctevc8wijcylw" path="res://02_Entities/Pool/Buildings/AegisTower/Skills/Gold/protocole_gardien.tres" id="27_gol"]
+[ext_resource type="Resource" uid="uid://dvve7rxcpw0xs" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegis_tower_stats_lvl_18.tres" id="27_xeno2"]
+[ext_resource type="Resource" uid="uid://do2d5nq80e6x1" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegis_tower_stats_lvl_19.tres" id="28_7rbfq"]
 [ext_resource type="Resource" uid="uid://cbastion2res7" path="res://02_Entities/Pool/Buildings/AegisTower/Skills/Ultimate/bastion_aegis.tres" id="28_ult"]
+[ext_resource type="Resource" uid="uid://cdqc6hbxnjcjy" path="res://02_Entities/Pool/Buildings/AegisTower/Stats/aegis_tower_stats_lvl_20.tres" id="29_mk185"]
 
 [resource]
 script = ExtResource("1_ms22t")
@@ -37,26 +37,26 @@ portrait = ExtResource("1_5oocd")
 scene_path = "res://02_Entities/Pool/Buildings/AegisTower/aegis_tower.tscn"
 default_category = 4
 stats = Dictionary[int, ExtResource("3_88ouh")]({
-1: ExtResource("4_5jh8m"),
-2: ExtResource("5_vrwrd"),
-3: ExtResource("6_kcljr"),
-4: ExtResource("7_p4nkr"),
-5: ExtResource("8_yeoms"),
-6: ExtResource("9_o28de"),
-7: ExtResource("10_bm55v"),
-8: ExtResource("11_cexg7"),
-9: ExtResource("12_om0tq"),
-10: ExtResource("13_whmc5"),
-11: ExtResource("14_ge35m"),
-12: ExtResource("15_fvyfw"),
-13: ExtResource("16_yhbpc"),
-14: ExtResource("17_r476t"),
-15: ExtResource("18_ipd3l"),
-16: ExtResource("19_5wha3"),
-17: ExtResource("20_tj4y7"),
-18: ExtResource("21_psolh"),
-19: ExtResource("22_e8y0f"),
-20: ExtResource("23_e8yk8")
+1: ExtResource("10_5oocd"),
+2: ExtResource("11_0tqdh"),
+3: ExtResource("12_a3uib"),
+4: ExtResource("13_mcfpd"),
+5: ExtResource("14_j8k06"),
+6: ExtResource("15_ru6tx"),
+7: ExtResource("16_jwufb"),
+8: ExtResource("17_rvw8v"),
+9: ExtResource("18_hofu1"),
+10: ExtResource("19_aq76r"),
+11: ExtResource("20_6u4et"),
+12: ExtResource("21_mfs8b"),
+13: ExtResource("22_08w8x"),
+14: ExtResource("23_jo1kw"),
+15: ExtResource("24_cmk0e"),
+16: ExtResource("25_3vcwi"),
+17: ExtResource("26_j7cws"),
+18: ExtResource("27_xeno2"),
+19: ExtResource("28_7rbfq"),
+20: ExtResource("29_mk185")
 })
 skills = Dictionary[int, ExtResource("2_ncjog")]({
 0: ExtResource("24_pas"),

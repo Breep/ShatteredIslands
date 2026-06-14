@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://cw2720gv02yqy"]
+
+[ext_resource type="Texture2D" uid="uid://dymubvrdnsn0c" path="res://03_SpellsAndProjectiles/Spells/FireGround/VFX/Textures/T_VFX_WindNoise1.png" id="2_r0k0v"]
+[ext_resource type="Shader" path="res://03_SpellsAndProjectiles/Spells/FireGround/VFX/Shaders/s_aura_circle.tres" id="16_dxilb"]
+
+[sub_resource type="Gradient" id="Gradient_ey21b"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kgjgj"]
+gradient = SubResource("Gradient_ey21b")
+fill_from = Vector2(0.25213677, 0)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="Gradient" id="Gradient_nfpgb"]
+offsets = PackedFloat32Array(0, 0.8)
+colors = PackedColorArray(0.66384095, 0.37650368, 0.09503902, 0, 0.9036484, 0.5112642, 0.31409553, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qhfph"]
+gradient = SubResource("Gradient_nfpgb")
+
+[sub_resource type="Gradient" id="Gradient_33kbw"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_oo7au"]
+gradient = SubResource("Gradient_33kbw")
+fill_from = Vector2(1, 0)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q0shp"]
+render_priority = 0
+shader = ExtResource("16_dxilb")
+shader_parameter/Enable_UVPolar_base = true
+shader_parameter/UVPolar_zoom = 1.0
+shader_parameter/UVPolar_repeat = 1.0
+shader_parameter/Velocity_vector = Vector2(-0.8, 0)
+shader_parameter/Noise_Texture = ExtResource("2_r0k0v")
+shader_parameter/Enable_UVPolar_Add = true
+shader_parameter/UVPolar_zoom_add = 1.0
+shader_parameter/UVPolar_repeat_add = 1.0
+shader_parameter/Add_Texture_Mask = SubResource("GradientTexture2D_kgjgj")
+shader_parameter/Enable_UVPolar = true
+shader_parameter/UVPolar_zoom2 = 1.0
+shader_parameter/UVPolar_repeat2 = 1.0
+shader_parameter/Multiply_Offset = Vector2(0, 0)
+shader_parameter/Multiply_Texture_Mask = SubResource("GradientTexture2D_oo7au")
+shader_parameter/Color_1D_gradient = SubResource("GradientTexture1D_qhfph")
+shader_parameter/Vanishing_value = 1.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ef00s"]
+size = Vector2(4, 4)
+
+[node name="VFX_Fire_Area" type="Node3D" unique_id=631661642]
+
+[node name="circle_aura" type="MeshInstance3D" parent="." unique_id=178992763]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0286024, 0.032566, 0)
+material_override = SubResource("ShaderMaterial_q0shp")
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_ef00s")
+skeleton = NodePath("../..")
