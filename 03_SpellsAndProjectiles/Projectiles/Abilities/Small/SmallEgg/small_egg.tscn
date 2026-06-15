@@ -16,7 +16,7 @@ radius = 0.4
 [node name="SmallEggProjectile" type="Area3D" unique_id=1470520974]
 monitoring = false
 script = ExtResource("1_i52ky")
-_chicken_chances = Array[float]([4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0])
+_chicken_chances = Array[float]([10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0, 17.0, 18.0, 19.0])
 _damage_per_summon = Array[float]([10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0, 17.0, 18.0, 20.0])
 trajectory = SubResource("Resource_yhd31")
 type = 6

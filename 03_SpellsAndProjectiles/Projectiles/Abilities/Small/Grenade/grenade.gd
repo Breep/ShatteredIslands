@@ -1,10 +1,10 @@
 # Grenade — projectile d'abilité à trajectoire en cloche dont le comportement
 # par défaut est une explosion AoE à l'impact : VFX d'explosion électrique +
-# dégâts magiques + stacks de vulnérabilité (magique) à tous les ennemis dans
-# un rayon autour du point d'impact.
+# dégâts magiques (ratio de l'AP du lanceur) + stacks de vulnérabilité (magique)
+# à tous les ennemis dans un rayon autour du point d'impact.
 #
-# Variables par-level : _damage, _vulnerability_stacks, _hit_radius sont des
-# Array @export indexées par level (résolu par ProjectileComponent +
+# Variables par-level : _damage_ratio, _vulnerability_stacks, _hit_radius sont
+# des Array @export indexées par level (résolu par ProjectileComponent +
 # LevelResolver, repris depuis _stats.level dans Projectile.init()).
 # L'attribution des actions (pour le pipeline damage / alterations) vient de
 # _stats.source_id, mis par l'émetteur (typiquement card_name côté carte).
@@ -14,7 +14,8 @@ extends Projectile
 const _EXPLOSION_VFX: PackedScene = preload("res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/Grenade/VFX/VFX_Explosion_Electric_B.tscn")
 const _EXPLOSION_LIFETIME: float = 3.0
 
-@export var _damage: Array[float] = []
+## Ratio de l'AP du lanceur infligé en dégâts magiques, par level.
+@export var _damage_ratio: Array[float] = []
 @export var _vulnerability_stacks: Array[float] = []
 ## Rayon (unités monde) de la zone d'explosion par level.
 @export var _hit_radius: Array[float] = []
@@ -34,7 +35,7 @@ func _aoe_explosion(cb_vars: Dictionary) -> void:
 	if not is_instance_valid(source): return
 	var impact_pos: Vector3 = cb_vars.get(ProjectileStats.VarType.POSITION, global_position)
 
-	var damage: float = value_at_level(_damage, level, 0.0)
+	var damage: float = value_at_level(_damage_ratio, level, 0.0) * source.stats.get_stat(EntityStats.StatType.AP)
 	var vulnerability_stacks: float = value_at_level(_vulnerability_stacks, level, 0.0)
 	var hit_radius: float = value_at_level(_hit_radius, level, 0.0) * _source.stats.aoe_size
 	var source_id: StringName = _stats.source_id if _stats != null else &""
