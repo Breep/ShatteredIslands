@@ -46,7 +46,14 @@ func present_step(step: TutorialStep, is_last: bool = false) -> void:
 	move_child(_current_bubble, get_child_count() - 1) # ensure bubble is rendered above the blocker
 	_current_bubble.closed.connect(_on_bubble_closed)
 	var target: Control = _resolve_target(step.target_unique_name, step.target_sub_name)
-	_apply_step_visuals(step, target)
+	var targets: Array[Control] = []
+	if target != null:
+		targets.append(target)
+	for extra_name: StringName in step.extra_target_unique_names:
+		var extra: Control = _resolve_target(extra_name, &"")
+		if extra != null:
+			targets.append(extra)
+	_apply_step_visuals(step, targets)
 	_current_bubble.show_bubble(step, target, is_last)
 
 
@@ -101,21 +108,21 @@ func _resolve_target(unique_name: StringName, sub_name: StringName = &"") -> Con
 
 
 ## Decides what the blocker should do for the given step:
-## - dim     : draw the spotlight (4 strips around the target rect)
-## - block   : swallow input outside the target rect
+## - dim     : draw the spotlight (full screen minus one hole per target)
+## - block   : swallow input outside the target rects
 ## MODAL_DIMMED is treated as BLOCKING + highlight_target = true (alias).
-func _apply_step_visuals(step: TutorialStep, target: Control) -> void:
+func _apply_step_visuals(step: TutorialStep, targets: Array[Control]) -> void:
 	var is_modal: bool = step.popup_mode == TutorialStep.PopupMode.MODAL_DIMMED
 	var dim: bool = step.highlight_target or is_modal
 	var block: bool = step.popup_mode == TutorialStep.PopupMode.BLOCKING or is_modal
 
-	Verbose.debug("Apply step visuals | dim=%s block=%s target=%s padding=%.1f | overlay_rect=%s blocker_rect=%s" % [dim, block, target.get_path() if target != null and is_instance_valid(target) else "null", step.highlight_padding, get_global_rect(), _blocker.get_global_rect()], Verbose.Category.TUTORIAL)
+	Verbose.debug("Apply step visuals | dim=%s block=%s targets=%d padding=%.1f" % [dim, block, targets.size(), step.highlight_padding], Verbose.Category.TUTORIAL)
 
 	if not dim and not block:
 		_hide_blocker()
 		return
 
-	_blocker.set_state(dim, block, target, step.highlight_padding)
+	_blocker.set_state(dim, block, targets, step.highlight_padding)
 	_kill_tween(_dim_tween)
 	_dim_tween = create_tween()
 	_dim_tween.tween_property(_blocker, "modulate:a", 1.0, _DIM_FADE_TIME)
@@ -126,7 +133,7 @@ func _hide_blocker() -> void:
 	_kill_tween(_dim_tween)
 	_dim_tween = create_tween()
 	_dim_tween.tween_property(_blocker, "modulate:a", 0.0, _DIM_FADE_TIME)
-	_dim_tween.tween_callback(func(): _blocker.set_state(false, false, null, 0.0))
+	_dim_tween.tween_callback(func(): _blocker.set_state(false, false, [] as Array[Control], 0.0))
 
 
 func _kill_tween(t: Tween) -> void:

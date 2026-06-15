@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="TutorialSequence" format=3 uid="uid://biagabct7egar"]
+
+[ext_resource type="Script" uid="uid://djpg3rddxno15" path="res://04_UI/Tool/Tutorial/Resource/tutorial_sequence.gd" id="1_seq"]
+[ext_resource type="Script" uid="uid://jooqjtqqt21" path="res://04_UI/Tool/Tutorial/Resource/tutorial_step.gd" id="2_step"]
+
+[sub_resource type="Resource" id="step_talent_choice"]
+script = ExtResource("2_step")
+id = &"talent_choice"
+text = "Tu as monté de niveau et débloqué un talent ! Choisis-en un parmi ces deux."
+target_unique_name = &"UiSkillWindow"
+extra_target_unique_names = Array[StringName]([&"UiSkillWindow2"])
+validation_event = 10
+auto_advance_delay = 0.0
+popup_mode = 0
+hide_skip = true
+highlight_target = true
+highlight_padding = 8.0
+
+[resource]
+script = ExtResource("1_seq")
+id = &"seq_talent_choice"
+steps = Array[ExtResource("2_step")]([SubResource("step_talent_choice")])

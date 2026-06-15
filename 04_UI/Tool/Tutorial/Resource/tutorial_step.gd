@@ -17,6 +17,7 @@ enum ValidationEvent {
 	CARD_BOUGHT, ## Any card purchased from the shop (validation_filter unused here).
 	SHOP_REFRESHED, ## The player rerolled the shop.
 	OPEN_SHOP, ## The player opened the shop panel.
+	HERO_SKILL_CHOSEN, ## The local hero picked a talent from the skill selection.
 }
 
 enum PopupMode {
@@ -56,6 +57,11 @@ enum PreferredArrowSide {
 ## and returns the first match. Empty = stay on the parent target.
 @export var target_sub_name: StringName
 
+## Extra Controls (by unique-name) to ALSO spotlight — each gets its own hole and
+## border. The bubble still anchors to target_unique_name. Use when a step must
+## highlight several elements at once (e.g. the two talent choices).
+@export var extra_target_unique_names: Array[StringName] = []
+
 @export var validation_event: ValidationEvent = ValidationEvent.NONE
 
 ## Optional discriminator passed alongside the validation event (e.g. furniture id).
@@ -74,6 +80,14 @@ enum PreferredArrowSide {
 ## to perform the required action (e.g. buy the highlighted card). Pair with a
 ## reachable validation_event so the step is never a dead-end.
 @export var hide_skip: bool = false
+
+## UI state the step guarantees before pointing at things, via Events.
+## ensure_shop_open: force the shop panel open (in case the player closed it).
+## ensure_shop_closed: force it closed (to clear the view, e.g. to click an enemy).
+## hide_hand: hide the player's hand while the step is active (auto-restored after).
+@export var ensure_shop_open: bool = false
+@export var ensure_shop_closed: bool = false
+@export var hide_hand: bool = false
 
 ## Optional portrait shown on the left of the bubble. Leave null to fall back
 ## to the default portrait baked in the bubble scene.
