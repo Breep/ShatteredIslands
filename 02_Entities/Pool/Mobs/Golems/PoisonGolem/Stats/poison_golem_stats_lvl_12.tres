@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="EntityStats" format=3 uid="uid://bshye7ohjet30"]
+
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="1_ltkod"]
+
+[resource]
+script = ExtResource("1_ltkod")
+_health_max = 6310.0
+_mana_max = 38.0
+_mana_regen = 3.0
+auto_attack_type = 1
+_attack_range = 2.2
+_attack_damage = 39.0
+_attack_speed = 0.7178340099607579
+_movement_speed = 4.5
+_attack_power = 51.1
+poison_resistance = 39.879253198304
+_crit_chance = 10.85
+_dodge = 3.0
+_m_crit_chances = Dictionary[int, float]({
+0: 0.0,
+1: 0.0
+})
+_m_resistances = Dictionary[int, float]({
+0: 0.0,
+1: 0.0,
+2: 39.879253198304
+})

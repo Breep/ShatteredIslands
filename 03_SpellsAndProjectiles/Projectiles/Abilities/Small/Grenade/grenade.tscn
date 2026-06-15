@@ -11,20 +11,21 @@ randomize_by = 0.4
 speed = 9.0
 metadata/_custom_type_script = "uid://dlww5csbnicq8"
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_grenade"]
-radius = 0.2
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jmgkn"]
+radius = 0.3
+height = 1.6582031
 
 [node name="GrenadeProjectile" type="Area3D" unique_id=1924700001]
 collision_layer = 2
 collision_mask = 16
 script = ExtResource("1_proj")
 _damage = Array[float]([20.0, 30.0, 40.0, 55.0, 70.0, 90.0, 110.0, 135.0, 165.0, 200.0])
-_vulnerability_stacks = Array[float]([5.0, 7.0, 9.0, 11.0, 15.0, 19.0, 23.0, 28.0, 33.0, 40.0])
+_vulnerability_stacks = Array[float]([5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0])
 _hit_radius = Array[float]([2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0])
 trajectory = SubResource("Resource_arc")
 type = 11
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=183932174]
-shape = SubResource("SphereShape3D_grenade")
+shape = SubResource("CapsuleShape3D_jmgkn")
 
 [node name="GrenadeVisual" parent="." unique_id=772538754 instance=ExtResource("3_vis")]

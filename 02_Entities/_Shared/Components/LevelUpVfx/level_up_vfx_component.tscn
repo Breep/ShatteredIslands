@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bs1hrsa08utbt"]
+
+[ext_resource type="Script" path="res://02_Entities/_Shared/Components/LevelUpVfx/level_up_vfx_component.gd" id="1_lvup"]
+
+[node name="LevelUpVfxComponent" type="Node"]
+script = ExtResource("1_lvup")

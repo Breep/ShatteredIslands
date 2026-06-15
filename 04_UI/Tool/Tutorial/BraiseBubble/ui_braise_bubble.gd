@@ -80,7 +80,7 @@ func show_bubble(step: TutorialStep, p_target: Control = null, is_last: bool = f
 
 	_portrait.texture = step.portrait_texture if step.portrait_texture != null else _default_portrait
 	_name_label.text = step.speaker_name if step.speaker_name != "" else _default_speaker_name
-	_skip_label.text = "Fermer" if is_last else "Suivant"
+	_skip_label.text = "D'accord" if is_last else "Suivant"
 	_skip_button.visible = not step.hide_skip
 
 	_text_label.text = step.text

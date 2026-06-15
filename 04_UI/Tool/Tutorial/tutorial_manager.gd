@@ -18,12 +18,9 @@ const _SEQUENCE_PATHS: Array[String] = [
 	"res://04_UI/Tool/Tutorial/Sequences/seq_end_of_round.tres",
 ]
 
-## The fight prompt is a state-less sequence: we fire it manually when the
-## local player runs out of gold OR when the BUYING phase has been going for
-## _FIGHT_PROMPT_DELAY seconds, whichever comes first. Once-per-session via
-## the standard _played_sequence_ids dedup.
-const _FIGHT_PROMPT_PATH: String = "res://04_UI/Tool/Tutorial/Sequences/seq_fight_prompt.tres"
-const _FIGHT_PROMPT_DELAY: float = 60.0
+## State-less sequence fired when the local hero first unlocks a talent tier
+## (level-up). Once-per-session via _played_sequence_ids.
+const _TALENT_CHOICE_PATH: String = "res://04_UI/Tool/Tutorial/Sequences/seq_talent_choice.tres"
 #endregion
 
 
@@ -38,26 +35,20 @@ var _auto_advance_timer: Timer
 var _overlay: TutorialOverlay
 var _pending_sequence: TutorialSequence
 
-var _fight_prompt_sequence: TutorialSequence
-var _fight_prompt_timer: Timer
-var _local_player_connected: Player
+var _talent_choice_sequence: TutorialSequence
+var _hand_hidden_by_tutorial: bool = false
 #endregion
 
 
 #region ============================== Node base functions ==============================
 func _ready() -> void:
 	_load_sequences()
-	_load_fight_prompt()
+	_load_talent_choice()
 
 	_auto_advance_timer = Timer.new()
 	_auto_advance_timer.one_shot = true
 	add_child(_auto_advance_timer)
 	_auto_advance_timer.timeout.connect(_on_auto_advance_timeout)
-
-	_fight_prompt_timer = Timer.new()
-	_fight_prompt_timer.one_shot = true
-	add_child(_fight_prompt_timer)
-	_fight_prompt_timer.timeout.connect(_on_fight_prompt_timer_timeout)
 
 	GameManager.game_state_changed.connect(_on_game_state_changed)
 	Events.entity_clicked.connect(_on_entity_clicked)
@@ -69,6 +60,8 @@ func _ready() -> void:
 	Events.tavern_continue_pressed.connect(_on_tavern_continue_pressed)
 	Events.tavern_phase_started.connect(_on_tavern_phase_started)
 	Events.fighting_phase_started.connect(_on_fighting_phase_started)
+	Events.hero_skill_unlocked.connect(_on_hero_skill_unlocked)
+	Events.hero_skill_chosen.connect(_on_hero_skill_chosen)
 
 	set_process(false)
 
@@ -100,11 +93,11 @@ func _load_sequences() -> void:
 		_sequences_by_state[seq.trigger_state] = seq
 
 
-func _load_fight_prompt() -> void:
-	if not ResourceLoader.exists(_FIGHT_PROMPT_PATH):
-		Verbose.warn("Fight prompt sequence not found: " + _FIGHT_PROMPT_PATH, Verbose.Category.TUTORIAL)
+func _load_talent_choice() -> void:
+	if not ResourceLoader.exists(_TALENT_CHOICE_PATH):
+		Verbose.warn("Talent choice sequence not found: " + _TALENT_CHOICE_PATH, Verbose.Category.TUTORIAL)
 		return
-	_fight_prompt_sequence = load(_FIGHT_PROMPT_PATH)
+	_talent_choice_sequence = load(_TALENT_CHOICE_PATH)
 
 
 func _try_resolve_overlay() -> bool:
@@ -149,6 +142,7 @@ func _advance_step() -> void:
 	var step: TutorialStep = _active_sequence.steps[_step_index]
 	var is_last: bool = _step_index == _active_sequence.steps.size() - 1
 	Verbose.debug("Step " + str(_step_index) + ": " + String(step.id) + (" (last)" if is_last else ""), Verbose.Category.TUTORIAL)
+	_apply_step_ui_side_effects(step)
 	_overlay.present_step(step, is_last)
 	if step.auto_advance_delay > 0.0:
 		_auto_advance_timer.wait_time = step.auto_advance_delay
@@ -157,8 +151,32 @@ func _advance_step() -> void:
 		_auto_advance_timer.stop()
 
 
+# Guarantees the game UI is in the state the step needs (shop open/closed, hand
+# hidden) before its bubble points at anything. Hand visibility is auto-restored
+# on the first step that doesn't ask to hide it, and on sequence end/abort.
+func _apply_step_ui_side_effects(step: TutorialStep) -> void:
+	if step.ensure_shop_open:
+		Events.tutorial_set_shop_open.emit(true)
+	elif step.ensure_shop_closed:
+		Events.tutorial_set_shop_open.emit(false)
+
+	if step.hide_hand:
+		Events.tutorial_set_hand_visible.emit(false)
+		_hand_hidden_by_tutorial = true
+	elif _hand_hidden_by_tutorial:
+		Events.tutorial_set_hand_visible.emit(true)
+		_hand_hidden_by_tutorial = false
+
+
+func _restore_hand_if_hidden() -> void:
+	if _hand_hidden_by_tutorial:
+		Events.tutorial_set_hand_visible.emit(true)
+		_hand_hidden_by_tutorial = false
+
+
 func _finish_sequence() -> void:
 	Verbose.debug("Sequence finished: " + String(_active_sequence.id), Verbose.Category.TUTORIAL)
+	_restore_hand_if_hidden()
 	_active_sequence = null
 	_step_index = -1
 	_auto_advance_timer.stop()
@@ -166,7 +184,7 @@ func _finish_sequence() -> void:
 
 func _abort_active_sequence() -> void:
 	_pending_sequence = null
-	_stop_fight_prompt_watch()
+	_restore_hand_if_hidden()
 	if _active_sequence == null: return
 	Verbose.debug("Aborting active sequence: " + String(_active_sequence.id), Verbose.Category.TUTORIAL)
 	_active_sequence = null
@@ -174,41 +192,6 @@ func _abort_active_sequence() -> void:
 	_auto_advance_timer.stop()
 	if _overlay != null and is_instance_valid(_overlay):
 		_overlay.clear()
-
-
-## Starts watching for the two fight-prompt triggers (gold reaches 0, or 30s
-## elapsed). Called when entering the BUYING state. Bails out if the prompt
-## has already played this session, since it's a once-per-session reminder.
-func _start_fight_prompt_watch() -> void:
-	if _fight_prompt_sequence == null: return
-	if _played_sequence_ids.has(_fight_prompt_sequence.id): return
-
-	_fight_prompt_timer.wait_time = _FIGHT_PROMPT_DELAY
-	_fight_prompt_timer.start()
-
-	var local: Player = PlayerManager.get_local_player()
-	if local == null: return
-	if not local.gold_changed.is_connected(_on_local_gold_changed):
-		local.gold_changed.connect(_on_local_gold_changed)
-	_local_player_connected = local
-
-
-func _stop_fight_prompt_watch() -> void:
-	_fight_prompt_timer.stop()
-	if _local_player_connected != null and is_instance_valid(_local_player_connected):
-		if _local_player_connected.gold_changed.is_connected(_on_local_gold_changed):
-			_local_player_connected.gold_changed.disconnect(_on_local_gold_changed)
-	_local_player_connected = null
-
-
-func _try_fire_fight_prompt() -> void:
-	if _fight_prompt_sequence == null: return
-	if _played_sequence_ids.has(_fight_prompt_sequence.id): return
-	# Never interrupt a running sequence (e.g. the forced buying onboarding, which
-	# spends the player's gold down to 0 and would otherwise trigger this prompt).
-	if _active_sequence != null: return
-	_stop_fight_prompt_watch()
-	_start_sequence(_fight_prompt_sequence)
 
 
 func _current_step() -> TutorialStep:
@@ -233,28 +216,13 @@ func _on_game_state_changed(new_state: int) -> void:
 		_abort_active_sequence()
 		return
 	match new_state:
-		GameManager.GameState.BUYING:
-			_start_fight_prompt_watch()
 		GameManager.GameState.FIGHTING:
-			_stop_fight_prompt_watch()
 			_validate_and_advance(TutorialStep.ValidationEvent.GAME_STATE_FIGHTING)
 		GameManager.GameState.ENDING_ROUND:
-			_stop_fight_prompt_watch()
 			_validate_and_advance(TutorialStep.ValidationEvent.GAME_STATE_ENDING_ROUND)
 
 	if _sequences_by_state.has(new_state):
 		_start_sequence(_sequences_by_state[new_state])
-
-
-func _on_local_gold_changed(_self_ref, new_gold: int) -> void:
-	if not Settings.is_tutorial_enabled(): return
-	if new_gold > 0: return
-	_try_fire_fight_prompt()
-
-
-func _on_fight_prompt_timer_timeout() -> void:
-	if not Settings.is_tutorial_enabled(): return
-	_try_fire_fight_prompt()
 
 
 func _on_entity_clicked(_entity) -> void:
@@ -303,17 +271,36 @@ func _on_tavern_continue_pressed() -> void:
 ## looked up in _sequences_by_state by their GameState trigger int.
 func _on_tavern_phase_started() -> void:
 	if not Settings.is_tutorial_enabled(): return
-	_start_fight_prompt_watch()
 	if _sequences_by_state.has(GameManager.GameState.BUYING):
 		_start_sequence(_sequences_by_state[GameManager.GameState.BUYING])
 
 
 func _on_fighting_phase_started() -> void:
 	if not Settings.is_tutorial_enabled(): return
-	_stop_fight_prompt_watch()
 	_validate_and_advance(TutorialStep.ValidationEvent.GAME_STATE_FIGHTING)
 	if _sequences_by_state.has(GameManager.GameState.FIGHTING):
 		_start_sequence(_sequences_by_state[GameManager.GameState.FIGHTING])
+
+
+## Talent onboarding: when the local hero unlocks its first talent tier (level-up),
+## present the talent-choice sequence highlighting the two choices. Once-per-session
+## via _played_sequence_ids, so it only fires on the very first unlock.
+func _on_hero_skill_unlocked(component, _skill_type) -> void:
+	if not Settings.is_tutorial_enabled(): return
+	if not _is_local_hero_skill(component): return
+	_start_sequence(_talent_choice_sequence)
+
+
+func _on_hero_skill_chosen(_component, _skill_id) -> void:
+	if not Settings.is_tutorial_enabled(): return
+	_validate_and_advance(TutorialStep.ValidationEvent.HERO_SKILL_CHOSEN)
+
+
+func _is_local_hero_skill(component) -> bool:
+	var local: Player = PlayerManager.get_local_player()
+	if local == null or not is_instance_valid(local.hero):
+		return false
+	return local.hero.skill == component
 
 
 func _on_step_completed(_step: TutorialStep) -> void:

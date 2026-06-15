@@ -39,7 +39,7 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 			return
 
 		if is_instance_valid(_orb_visual):
-			_orb_visual.launch_projectile(target, true)
+			_orb_visual.launch_projectile(target)
 
 		owner.alterations.inflict_condition_stacks(target, stacks, Alteration.Type.POISON, card_name)
 	)

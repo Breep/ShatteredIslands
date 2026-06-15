@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dr2axaqcdg5x3" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/chicken_colossus.tscn" id="4_bv8ag"]
 [ext_resource type="Script" uid="uid://bcak6iy1jjxko" path="res://05_Game/Run/SpawnSpecs/Concrete/mob_spec.gd" id="5_0m10x"]
 [ext_resource type="PackedScene" uid="uid://d1o2vt1qf1fdf" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenEngineer/chicken_engineer.tscn" id="5_lmc21"]
-[ext_resource type="PackedScene" uid="uid://xup3guwehhoc" path="res://02_Entities/Pool/Mobs/Chickens/Basic/chicken_basic.tscn" id="6_d2r7h"]
+[ext_resource type="PackedScene" uid="uid://xup3guwehhoc" path="res://02_Entities/Pool/Mobs/Chickens/ChickenBasic/chicken_basic.tscn" id="6_d2r7h"]
 [ext_resource type="Script" uid="uid://b24wp3uvfns8t" path="res://05_Game/Run/SpawnSpecs/prop_spec.gd" id="7_ws84g"]
 [ext_resource type="PackedScene" uid="uid://ufqa68rcl4eb" path="res://21_Props/Tavern/wooden_chair.tscn" id="8_h17jm"]
 [ext_resource type="Script" uid="uid://bj0ecq2d5vir5" path="res://05_Game/Run/SpawnSpecs/Concrete/hero_spawn_spec.gd" id="9_0kt8l"]

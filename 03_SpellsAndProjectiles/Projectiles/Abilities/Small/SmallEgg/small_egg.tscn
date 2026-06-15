@@ -11,13 +11,13 @@ destroy_on_ground = false
 metadata/_custom_type_script = "uid://dlww5csbnicq8"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_wxqup"]
-radius = 0.28020203
+radius = 0.4
 
 [node name="SmallEggProjectile" type="Area3D" unique_id=1470520974]
 monitoring = false
 script = ExtResource("1_i52ky")
 _chicken_chances = Array[float]([4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0])
-_damage_per_summon = Array[float]([1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 6.0])
+_damage_per_summon = Array[float]([10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0, 17.0, 18.0, 20.0])
 trajectory = SubResource("Resource_yhd31")
 type = 6
 metadata/_custom_type_script = "uid://dv8w8kb4xsqp3"
@@ -26,4 +26,3 @@ metadata/_custom_type_script = "uid://dv8w8kb4xsqp3"
 shape = SubResource("SphereShape3D_wxqup")
 
 [node name="SmallEggVisual" parent="." unique_id=148101033 instance=ExtResource("3_fp2cg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.09391433, -0.13169658, -0.18110693)

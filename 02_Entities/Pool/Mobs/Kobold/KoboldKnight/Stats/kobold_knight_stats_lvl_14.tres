@@ -4,20 +4,26 @@
 
 [resource]
 script = ExtResource("1_nv3y7")
-_health_max = 1380.0
-_mana_regen = 3.3
+_health_max = 8070.0
+_mana_max = 40.0
+_mana_regen = 3.0
 auto_attack_type = 1
 _attack_range = 1.5
-_attack_damage = 46.0
-_attack_speed = 1.15
-_movement_speed = 8.25
-_attack_power = 0.0
-_crit_resistance = 10.65
-armor = 4.3
-magic_resistance = 4.3
-poison_resistance = 4.3
+_attack_damage = 39.0
+_attack_speed = 1.3685603072772383
+_movement_speed = 4.5
+_attack_power = 55.900000000000006
+armor = 20.556229318461035
+magic_resistance = 20.556229318461035
+poison_resistance = 20.556229318461035
+_crit_chance = 13.2
+_dodge = 13.5
+_m_crit_chances = Dictionary[int, float]({
+0: 0.0,
+1: 0.0
+})
 _m_resistances = Dictionary[int, float]({
-0: 4.3,
-1: 4.3,
-2: 4.3
+0: 20.556229318461035,
+1: 20.556229318461035,
+2: 20.556229318461035
 })

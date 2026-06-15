@@ -13,6 +13,7 @@
 [sub_resource type="Resource" id="RoasterEntry_knight"]
 script = ExtResource("9_rstry")
 desc = ExtResource("3_7xefs")
+level = 2
 
 [sub_resource type="Resource" id="Resource_2b6ac"]
 script = ExtResource("2_chgbo")
@@ -23,6 +24,7 @@ transform = Transform3D(-0.10824226, 0, -0.99412453, 0, 1, 0, 0.99412453, 0, -0.
 [sub_resource type="Resource" id="RoasterEntry_thief"]
 script = ExtResource("9_rstry")
 desc = ExtResource("4_q7grv")
+level = 3
 
 [sub_resource type="Resource" id="Resource_0k6gi"]
 script = ExtResource("2_chgbo")
@@ -33,6 +35,7 @@ transform = Transform3D(-0.087520815, 0, 0.9961627, 0, 1, 0, -0.9961627, 0, -0.0
 [sub_resource type="Resource" id="RoasterEntry_warrior"]
 script = ExtResource("9_rstry")
 desc = ExtResource("5_7mwj6")
+level = 2
 
 [sub_resource type="Resource" id="Resource_uydp8"]
 script = ExtResource("2_chgbo")

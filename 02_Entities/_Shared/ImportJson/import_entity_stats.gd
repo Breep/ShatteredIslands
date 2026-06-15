@@ -112,8 +112,14 @@ func _process_entity(entity_id: String, entries: Array) -> bool:
 	var stats_dir: String = targets["stats_dir"]
 	var prefix: String = targets["stats_prefix"]
 
+	# Charger le desc AVANT d'écrire/supprimer : ses anciennes références sont
+	# encore valides, donc pas d'erreur de chargement de fichiers déjà supprimés.
+	var desc: EntityDesc = ResourceLoader.load(desc_path, "", ResourceLoader.CACHE_MODE_REPLACE)
+	if desc == null:
+		push_error("[ImportStats] %s : chargement EntityDesc échoué : %s" % [entity_id, desc_path])
+		return false
+
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(stats_dir))
-	_cleanup_old_level_files(stats_dir, prefix)
 
 	# L'import REMPLACE intégralement le dictionnaire stats du desc : il faut donc
 	# que le JSON contienne TOUS les niveaux voulus pour cette entité.
@@ -132,15 +138,14 @@ func _process_entity(entity_id: String, entries: Array) -> bool:
 			return false
 		stats_by_level[level] = ResourceLoader.load(path, "", ResourceLoader.CACHE_MODE_REPLACE)
 
-	var desc: EntityDesc = ResourceLoader.load(desc_path, "", ResourceLoader.CACHE_MODE_REPLACE)
-	if desc == null:
-		push_error("[ImportStats] %s : chargement EntityDesc échoué : %s" % [entity_id, desc_path])
-		return false
 	desc.stats = stats_by_level
 	var derr := ResourceSaver.save(desc, desc_path)
 	if derr != OK:
 		push_error("[ImportStats] %s : échec sauvegarde desc %s (err=%d)" % [entity_id, desc_path, derr])
 		return false
+
+	# Nettoyage des anciens noms APRÈS sauvegarde : le desc ne les référence plus.
+	_cleanup_old_level_files(stats_dir, prefix)
 
 	print("[ImportStats] %s : %d niveaux -> %s" % [entity_id, stats_by_level.size(), desc_path])
 	return true

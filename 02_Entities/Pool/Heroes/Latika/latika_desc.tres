@@ -5,26 +5,6 @@
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="2_es"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="2_psofn"]
 [ext_resource type="Texture2D" uid="uid://epdfjjie1s85" path="res://02_Entities/Pool/Heroes/Latika/Data/latika_portrait.png" id="2_q20ea"]
-[ext_resource type="Resource" uid="uid://dlatikastat01" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_01.tres" id="3_l01"]
-[ext_resource type="Resource" uid="uid://dlatikastat02" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_02.tres" id="3_l02"]
-[ext_resource type="Resource" uid="uid://dlatikastat03" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_03.tres" id="3_l03"]
-[ext_resource type="Resource" uid="uid://dlatikastat04" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_04.tres" id="3_l04"]
-[ext_resource type="Resource" uid="uid://dlatikastat05" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_05.tres" id="3_l05"]
-[ext_resource type="Resource" uid="uid://dlatikastat06" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_06.tres" id="3_l06"]
-[ext_resource type="Resource" uid="uid://dlatikastat07" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_07.tres" id="3_l07"]
-[ext_resource type="Resource" uid="uid://dlatikastat08" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_08.tres" id="3_l08"]
-[ext_resource type="Resource" uid="uid://dlatikastat1a" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_09.tres" id="3_l09"]
-[ext_resource type="Resource" uid="uid://dlatikastat10" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_10.tres" id="3_l10"]
-[ext_resource type="Resource" uid="uid://dlatikastat11" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_11.tres" id="3_l11"]
-[ext_resource type="Resource" uid="uid://dlatikastat12" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_12.tres" id="3_l12"]
-[ext_resource type="Resource" uid="uid://dlatikastat13" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_13.tres" id="3_l13"]
-[ext_resource type="Resource" uid="uid://dlatikastat14" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_14.tres" id="3_l14"]
-[ext_resource type="Resource" uid="uid://dlatikastat15" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_15.tres" id="3_l15"]
-[ext_resource type="Resource" uid="uid://dlatikastat16" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_16.tres" id="3_l16"]
-[ext_resource type="Resource" uid="uid://dlatikastat17" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_17.tres" id="3_l17"]
-[ext_resource type="Resource" uid="uid://dlatikastat18" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_18.tres" id="3_l18"]
-[ext_resource type="Resource" uid="uid://dlatikastat2a" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_19.tres" id="3_l19"]
-[ext_resource type="Resource" uid="uid://dlatikastat20" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_20.tres" id="3_l20"]
 [ext_resource type="Resource" uid="uid://bpmfs3a0llexn" path="res://02_Entities/Pool/Mobs/Wolfs/Vrock/Stats/vrock_entity_desc.tres" id="4_xkqml"]
 [ext_resource type="PackedScene" uid="uid://bsbbpkr8vpwu3" path="res://02_Entities/Pool/Heroes/Latika/latika_preview.tscn" id="5_prev"]
 [ext_resource type="Resource" uid="uid://dj0x3ox0qy3aa" path="res://02_Entities/Pool/Heroes/Latika/Skills/Passive/pack_leader.tres" id="6_pass"]
@@ -35,6 +15,26 @@
 [ext_resource type="Resource" uid="uid://dsjpo46okks1e" path="res://02_Entities/Pool/Heroes/Latika/Skills/Silver/pack_fury.tres" id="11_s2"]
 [ext_resource type="Resource" uid="uid://dsf40yoid0s1e" path="res://02_Entities/Pool/Heroes/Latika/Skills/Gold/lone_wolf.tres" id="12_g1"]
 [ext_resource type="Resource" uid="uid://ce2ydmnp2xu3" path="res://02_Entities/Pool/Heroes/Latika/Skills/Gold/blood_bond.tres" id="13_g2"]
+[ext_resource type="Resource" uid="uid://dt5o3jv0nba0e" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_stats_lvl_01.tres" id="16_gm1nv"]
+[ext_resource type="Resource" uid="uid://dbq4u13bv5kq8" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_stats_lvl_02.tres" id="17_guj3u"]
+[ext_resource type="Resource" uid="uid://bnlcw6xcj76ye" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_stats_lvl_03.tres" id="18_vwyix"]
+[ext_resource type="Resource" uid="uid://berjsm1s4yusl" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_stats_lvl_04.tres" id="19_vidcd"]
+[ext_resource type="Resource" uid="uid://btvut340apdms" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_stats_lvl_05.tres" id="20_p83pr"]
+[ext_resource type="Resource" uid="uid://dwqs5nhdrqmag" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_stats_lvl_06.tres" id="21_lig0v"]
+[ext_resource type="Resource" uid="uid://chxfrksj54r3o" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_stats_lvl_07.tres" id="22_7h13l"]
+[ext_resource type="Resource" uid="uid://bba6g5emube70" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_stats_lvl_08.tres" id="23_skfjg"]
+[ext_resource type="Resource" uid="uid://d1dt5vqmwdkqs" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_stats_lvl_09.tres" id="24_5o5kf"]
+[ext_resource type="Resource" uid="uid://c5grrao4x0sr2" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_stats_lvl_10.tres" id="25_b1mju"]
+[ext_resource type="Resource" uid="uid://bwbd21j5ntdu0" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_stats_lvl_11.tres" id="26_xvpot"]
+[ext_resource type="Resource" uid="uid://cnfu5ryfx4w0d" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_stats_lvl_12.tres" id="27_ek318"]
+[ext_resource type="Resource" uid="uid://7fks244voh51" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_stats_lvl_13.tres" id="28_y74sw"]
+[ext_resource type="Resource" uid="uid://bp8npkpokbvgx" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_stats_lvl_14.tres" id="29_epw5t"]
+[ext_resource type="Resource" uid="uid://dnqmbcineg20n" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_stats_lvl_15.tres" id="30_wk2rm"]
+[ext_resource type="Resource" uid="uid://dlphgaw3sbl5y" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_stats_lvl_16.tres" id="31_7nlek"]
+[ext_resource type="Resource" uid="uid://dwbmxeo5avoed" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_stats_lvl_17.tres" id="32_3ti47"]
+[ext_resource type="Resource" uid="uid://cil0ohj182kqo" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_stats_lvl_18.tres" id="33_j45jb"]
+[ext_resource type="Resource" uid="uid://dr567svn8vm8x" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_stats_lvl_19.tres" id="34_cu20e"]
+[ext_resource type="Resource" uid="uid://po6hgkfwiwk" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_stats_lvl_20.tres" id="35_6y8oq"]
 
 [resource]
 script = ExtResource("1_hero")
@@ -57,26 +57,26 @@ preview_scene = ExtResource("5_prev")
 default_category = 0
 starting_companions = Array[ExtResource("1_desc")]([ExtResource("4_xkqml")])
 stats = Dictionary[int, ExtResource("2_es")]({
-1: ExtResource("3_l01"),
-2: ExtResource("3_l02"),
-3: ExtResource("3_l03"),
-4: ExtResource("3_l04"),
-5: ExtResource("3_l05"),
-6: ExtResource("3_l06"),
-7: ExtResource("3_l07"),
-8: ExtResource("3_l08"),
-9: ExtResource("3_l09"),
-10: ExtResource("3_l10"),
-11: ExtResource("3_l11"),
-12: ExtResource("3_l12"),
-13: ExtResource("3_l13"),
-14: ExtResource("3_l14"),
-15: ExtResource("3_l15"),
-16: ExtResource("3_l16"),
-17: ExtResource("3_l17"),
-18: ExtResource("3_l18"),
-19: ExtResource("3_l19"),
-20: ExtResource("3_l20")
+1: ExtResource("16_gm1nv"),
+2: ExtResource("17_guj3u"),
+3: ExtResource("18_vwyix"),
+4: ExtResource("19_vidcd"),
+5: ExtResource("20_p83pr"),
+6: ExtResource("21_lig0v"),
+7: ExtResource("22_7h13l"),
+8: ExtResource("23_skfjg"),
+9: ExtResource("24_5o5kf"),
+10: ExtResource("25_b1mju"),
+11: ExtResource("26_xvpot"),
+12: ExtResource("27_ek318"),
+13: ExtResource("28_y74sw"),
+14: ExtResource("29_epw5t"),
+15: ExtResource("30_wk2rm"),
+16: ExtResource("31_7nlek"),
+17: ExtResource("32_3ti47"),
+18: ExtResource("33_j45jb"),
+19: ExtResource("34_cu20e"),
+20: ExtResource("35_6y8oq")
 })
 aa_1_release_normalized = 0.67
 aa_2_release_normalized = 0.67

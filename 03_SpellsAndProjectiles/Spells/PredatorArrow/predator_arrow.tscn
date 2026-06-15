@@ -1,33 +1,23 @@
 [gd_scene format=3 uid="uid://345wwyt8mywc"]
 
-[ext_resource type="Script" uid="uid://latpredatorspell" path="res://03_SpellsAndProjectiles/Spells/PredatorArrow/predator_arrow.gd" id="1_spell"]
+[ext_resource type="Script" uid="uid://345wwyt80yuj" path="res://03_SpellsAndProjectiles/Spells/PredatorArrow/predator_arrow.gd" id="1_spell"]
+[ext_resource type="PackedScene" uid="uid://b47o5rwev3ebj" path="res://03_SpellsAndProjectiles/Projectiles/AutoAttacks/Arrow/arrow_visual.tscn" id="2_s3273"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pa"]
 size = Vector3(1.5, 3, 30)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pa"]
-transparency = 1
-albedo_color = Color(1, 0.85, 0.4, 0.25)
-emission_enabled = true
-emission = Color(1, 0.8, 0.3, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_pa"]
-material = SubResource("StandardMaterial3D_pa")
-size = Vector3(0.4, 0.4, 30)
-
-[node name="PredatorArrowSpell" type="Node3D"]
+[node name="PredatorArrowSpell" type="Node3D" unique_id=2060981106]
 script = ExtResource("1_spell")
 
-[node name="HitZone" type="Area3D" parent="."]
+[node name="HitZone" type="Area3D" parent="." unique_id=484971093]
 unique_name_in_owner = true
 collision_layer = 0
 collision_mask = 16
 monitorable = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HitZone"]
+[node name="ArrowVisual" parent="HitZone" unique_id=377869126 instance=ExtResource("2_s3273")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitZone" unique_id=850861703]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15)
 shape = SubResource("BoxShape3D_pa")
-
-[node name="Beam" type="MeshInstance3D" parent="HitZone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -15)
-mesh = SubResource("BoxMesh_pa")

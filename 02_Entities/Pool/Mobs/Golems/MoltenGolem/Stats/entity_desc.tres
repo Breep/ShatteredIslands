@@ -4,31 +4,31 @@
 [ext_resource type="Texture2D" uid="uid://cp3ohrf0e3ojf" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Data/molten_golem_portrait.png" id="1_chkpw"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="2_hw6ev"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_72oiu"]
-[ext_resource type="Resource" uid="uid://cov3i74t1bh52" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/stats_lvl_01.tres" id="4_p7kdi"]
-[ext_resource type="Resource" uid="uid://pl3fyjkuxc67" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/stats_lvl_02.tres" id="5_ibbpk"]
-[ext_resource type="Resource" uid="uid://lonn003kpb02" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/stats_lvl_03.tres" id="6_0r85y"]
-[ext_resource type="Resource" uid="uid://bxm45d6tuin3s" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/stats_lvl_04.tres" id="7_chkpw"]
-[ext_resource type="Resource" uid="uid://d0omd5psxkhdg" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/stats_lvl_05.tres" id="8_216lt"]
-[ext_resource type="Resource" uid="uid://c56wrvr30ohl" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/stats_lvl_06.tres" id="9_slq7i"]
-[ext_resource type="Resource" uid="uid://3ycj4n6y7055" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/stats_lvl_07.tres" id="10_jowwm"]
-[ext_resource type="Resource" uid="uid://wu63nmwajxql" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/stats_lvl_08.tres" id="11_aqpw3"]
-[ext_resource type="Resource" uid="uid://b5x83jpqojssq" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/stats_lvl_09.tres" id="12_mpxdt"]
-[ext_resource type="Resource" uid="uid://dgle4ijltk8hs" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/stats_lvl_10.tres" id="13_tvl1t"]
-[ext_resource type="Resource" uid="uid://dgrn33lxb2nto" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/stats_lvl_11.tres" id="14_mvb6v"]
-[ext_resource type="Resource" uid="uid://1o74fy76u21f" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/stats_lvl_12.tres" id="15_2j1v6"]
-[ext_resource type="Resource" uid="uid://com6siwfa3tna" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/stats_lvl_13.tres" id="16_2n4o4"]
-[ext_resource type="Resource" uid="uid://cv6nuyux84ejo" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/stats_lvl_14.tres" id="17_vq0va"]
-[ext_resource type="Resource" uid="uid://c0i4qaeav2jme" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/stats_lvl_15.tres" id="18_hrls7"]
-[ext_resource type="Resource" uid="uid://dcpo7iq7pw1eq" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/stats_lvl_16.tres" id="19_fjsgp"]
-[ext_resource type="Resource" uid="uid://dyo38xpn4wi84" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/stats_lvl_17.tres" id="20_we1gu"]
-[ext_resource type="Resource" uid="uid://dlt7omuay34ms" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/stats_lvl_18.tres" id="21_04evu"]
-[ext_resource type="Resource" uid="uid://d4inw5kdyupki" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/stats_lvl_19.tres" id="22_5w1h5"]
-[ext_resource type="Resource" uid="uid://cs4bpmjy73kwo" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/stats_lvl_20.tres" id="23_q4qsx"]
+[ext_resource type="Resource" uid="uid://cpy04iwfr28pv" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/molten_golem_stats_lvl_01.tres" id="10_chkpw"]
+[ext_resource type="Resource" uid="uid://ci630iqsc88v8" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/molten_golem_stats_lvl_02.tres" id="11_216lt"]
+[ext_resource type="Resource" uid="uid://bhph08x5ugnuy" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/molten_golem_stats_lvl_03.tres" id="12_slq7i"]
+[ext_resource type="Resource" uid="uid://brmo6jwgmxx2t" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/molten_golem_stats_lvl_04.tres" id="13_jowwm"]
+[ext_resource type="Resource" uid="uid://bujvanmpg0uwt" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/molten_golem_stats_lvl_05.tres" id="14_aqpw3"]
+[ext_resource type="Resource" uid="uid://cnh2jnl7fpruu" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/molten_golem_stats_lvl_06.tres" id="15_mpxdt"]
+[ext_resource type="Resource" uid="uid://byovhvsakrp4i" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/molten_golem_stats_lvl_07.tres" id="16_tvl1t"]
+[ext_resource type="Resource" uid="uid://coja3a2hjkwpr" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/molten_golem_stats_lvl_08.tres" id="17_mvb6v"]
+[ext_resource type="Resource" uid="uid://cihp7qo2rafum" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/molten_golem_stats_lvl_09.tres" id="18_2j1v6"]
+[ext_resource type="Resource" uid="uid://dlrjbgi7ksdga" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/molten_golem_stats_lvl_10.tres" id="19_2n4o4"]
+[ext_resource type="Resource" uid="uid://bcl7r14t01qre" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/molten_golem_stats_lvl_11.tres" id="20_vq0va"]
+[ext_resource type="Resource" uid="uid://csky3m3y6udby" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/molten_golem_stats_lvl_12.tres" id="21_hrls7"]
+[ext_resource type="Resource" uid="uid://coiqh7yk45c6i" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/molten_golem_stats_lvl_13.tres" id="22_fjsgp"]
+[ext_resource type="Resource" uid="uid://b7633yhbkw7fr" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/molten_golem_stats_lvl_14.tres" id="23_we1gu"]
+[ext_resource type="Resource" uid="uid://fem0xl0jjdax" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/molten_golem_stats_lvl_15.tres" id="24_04evu"]
 [ext_resource type="Resource" uid="uid://4am0n8bv4m6g" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Skills/Passive/combustion_mortuaire.tres" id="24_pas"]
+[ext_resource type="Resource" uid="uid://bsqye5aj1n74p" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/molten_golem_stats_lvl_16.tres" id="25_5w1h5"]
 [ext_resource type="Resource" uid="uid://bygyhmyddskl3" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Skills/Bronze/lame_ardente.tres" id="25_bro"]
+[ext_resource type="Resource" uid="uid://bpx85m1yp6waw" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/molten_golem_stats_lvl_17.tres" id="26_q4qsx"]
 [ext_resource type="Resource" uid="uid://hqjtk5qdmipy" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Skills/Silver/riposte_ardente.tres" id="26_sil"]
+[ext_resource type="Resource" uid="uid://dyvk57iicfnd" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/molten_golem_stats_lvl_18.tres" id="27_3vasv"]
 [ext_resource type="Resource" uid="uid://ccouvinc2res7" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Skills/Gold/couvee_incandescente.tres" id="27_gol"]
+[ext_resource type="Resource" uid="uid://du5y236k6h73d" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/molten_golem_stats_lvl_19.tres" id="28_ot0lg"]
 [ext_resource type="Resource" uid="uid://jby4ac3jtehq" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Skills/Ultimate/nova_ignee.tres" id="28_ult"]
+[ext_resource type="Resource" uid="uid://pmmq6yra17do" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/molten_golem_stats_lvl_20.tres" id="29_4d8dg"]
 
 [resource]
 script = ExtResource("1_bnd22")
@@ -36,26 +36,26 @@ name = "Molten Golem"
 portrait = ExtResource("1_chkpw")
 scene_path = "res://02_Entities/Pool/Mobs/Golems/MoltenGolem/molten_golem.tscn"
 stats = Dictionary[int, ExtResource("3_72oiu")]({
-1: ExtResource("4_p7kdi"),
-2: ExtResource("5_ibbpk"),
-3: ExtResource("6_0r85y"),
-4: ExtResource("7_chkpw"),
-5: ExtResource("8_216lt"),
-6: ExtResource("9_slq7i"),
-7: ExtResource("10_jowwm"),
-8: ExtResource("11_aqpw3"),
-9: ExtResource("12_mpxdt"),
-10: ExtResource("13_tvl1t"),
-11: ExtResource("14_mvb6v"),
-12: ExtResource("15_2j1v6"),
-13: ExtResource("16_2n4o4"),
-14: ExtResource("17_vq0va"),
-15: ExtResource("18_hrls7"),
-16: ExtResource("19_fjsgp"),
-17: ExtResource("20_we1gu"),
-18: ExtResource("21_04evu"),
-19: ExtResource("22_5w1h5"),
-20: ExtResource("23_q4qsx")
+1: ExtResource("10_chkpw"),
+2: ExtResource("11_216lt"),
+3: ExtResource("12_slq7i"),
+4: ExtResource("13_jowwm"),
+5: ExtResource("14_aqpw3"),
+6: ExtResource("15_mpxdt"),
+7: ExtResource("16_tvl1t"),
+8: ExtResource("17_mvb6v"),
+9: ExtResource("18_2j1v6"),
+10: ExtResource("19_2n4o4"),
+11: ExtResource("20_vq0va"),
+12: ExtResource("21_hrls7"),
+13: ExtResource("22_fjsgp"),
+14: ExtResource("23_we1gu"),
+15: ExtResource("24_04evu"),
+16: ExtResource("25_5w1h5"),
+17: ExtResource("26_q4qsx"),
+18: ExtResource("27_3vasv"),
+19: ExtResource("28_ot0lg"),
+20: ExtResource("29_4d8dg")
 })
 skills = Dictionary[int, ExtResource("2_hw6ev")]({
 0: ExtResource("24_pas"),

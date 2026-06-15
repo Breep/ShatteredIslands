@@ -4,20 +4,26 @@
 
 [resource]
 script = ExtResource("1_iukcu")
-_health_max = 1200.0
+_health_max = 11470.0
+_mana_max = 45.0
+_mana_regen = 3.0
 auto_attack_type = 1
-_attack_range = 2.0
-_attack_damage = 38.0
-_attack_speed = 2.4000000000000004
-_movement_speed = 12.0
-_attack_power = 0.0
-armor = 7.0
-magic_resistance = 7.0
-poison_resistance = 0.5
-_crit_chance = 75.0
-_dodge = 10.0
+_attack_range = 1.5
+_attack_damage = 15.0
+_attack_speed = 1.4010006400394042
+_movement_speed = 4.0
+_attack_power = 43.0
+armor = 41.66440160881768
+magic_resistance = 24.99864096529061
+poison_resistance = 41.66440160881768
+_crit_chance = 35.31037650826658
+_dodge = 3.5
+_m_crit_chances = Dictionary[int, float]({
+0: 0.0,
+1: 0.0
+})
 _m_resistances = Dictionary[int, float]({
-0: 7.0,
-1: 7.0,
-2: 0.5
+0: 41.66440160881768,
+1: 24.99864096529061,
+2: 41.66440160881768
 })

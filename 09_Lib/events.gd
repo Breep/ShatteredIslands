@@ -111,5 +111,10 @@ signal shop_opened() ## The local player opened the shop panel (tutorial validat
 signal tavern_phase_started() ## A tavern/buying phase became active and its UI is up.
 signal fighting_phase_started() ## A fighting phase became active.
 
+## Tutorial-driven UI state requests (so a step can guarantee the shop is open
+## before pointing at a card, or hide the shop/hand while pointing at an enemy).
+signal tutorial_set_shop_open(should_open: bool)
+signal tutorial_set_hand_visible(is_visible: bool)
+
 # ============================ Manager =============================
 signal card_shop_init()

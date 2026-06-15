@@ -11,18 +11,7 @@
 [sub_resource type="Resource" id="RoasterEntry_treant1"]
 script = ExtResource("7_rstry")
 desc = ExtResource("3_hi3tt")
-
-[sub_resource type="Resource" id="RoasterEntry_treant2"]
-script = ExtResource("7_rstry")
-desc = ExtResource("3_hi3tt")
-
-[sub_resource type="Resource" id="RoasterEntry_treant3"]
-script = ExtResource("7_rstry")
-desc = ExtResource("3_hi3tt")
-
-[sub_resource type="Resource" id="RoasterEntry_treant4"]
-script = ExtResource("7_rstry")
-desc = ExtResource("3_hi3tt")
+level = 5
 
 [sub_resource type="Resource" id="Resource_oo4kk"]
 script = ExtResource("2_2bu5c")
@@ -30,17 +19,32 @@ entry = SubResource("RoasterEntry_treant1")
 display_label = "SmallTreant"
 transform = Transform3D(0.21638855, 0, -0.97630733, 0, 1, 0, 0.97630733, 0, 0.21638855, -3.8523378, 0, 6.681679)
 
+[sub_resource type="Resource" id="RoasterEntry_treant2"]
+script = ExtResource("7_rstry")
+desc = ExtResource("3_hi3tt")
+level = 6
+
 [sub_resource type="Resource" id="Resource_g28tn"]
 script = ExtResource("2_2bu5c")
 entry = SubResource("RoasterEntry_treant2")
 display_label = "SmallTreant2"
 transform = Transform3D(0.08190371, 0, -0.99664026, 0, 1, 0, 0.99664026, 0, 0.08190371, -7.9819317, 0, 3.5474482)
 
+[sub_resource type="Resource" id="RoasterEntry_treant3"]
+script = ExtResource("7_rstry")
+desc = ExtResource("3_hi3tt")
+level = 4
+
 [sub_resource type="Resource" id="Resource_q2kon"]
 script = ExtResource("2_2bu5c")
 entry = SubResource("RoasterEntry_treant3")
 display_label = "SmallTreant3"
 transform = Transform3D(-0.17737679, 0, -0.984143, 0, 1, 0, 0.984143, 0, -0.17737679, -8.040372, 0, -5.3795013)
+
+[sub_resource type="Resource" id="RoasterEntry_treant4"]
+script = ExtResource("7_rstry")
+desc = ExtResource("3_hi3tt")
+level = 5
 
 [sub_resource type="Resource" id="Resource_bvcg0"]
 script = ExtResource("2_2bu5c")

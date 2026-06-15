@@ -53,7 +53,7 @@ func get_description() -> String:
 
 # Déplace la marque de l'ancienne cible vers la nouvelle (no-op si identique).
 func _move_mark(latika: Entity, new_target: Entity) -> void:
-	var previous: Entity = latika.get_meta(META_MARKED_TARGET, null)
+	var previous = latika.get_meta(META_MARKED_TARGET, null)
 	if previous == new_target:
 		return
 	if is_instance_valid(previous):
