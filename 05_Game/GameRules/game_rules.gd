@@ -57,6 +57,8 @@ extends Resource
 @export var rare_price: int = 100
 @export var epic_price: int = 100
 @export var legendary_price: int = 100
+## Fraction du prix d'achat remboursée à la revente (0.9 = 90 %).
+@export var sell_value_ratio: float = 0.9
 
 @export_group("Oracle shop rules")
 @export var buy_xp_price: int = 50
@@ -172,13 +174,13 @@ func get_card_price(rarity: Card.Rarity) -> int:
 
 
 # Valeur de revente d'un lot de cartes. Une carte agrégée niveau N est composée
-# de N cartes empilées : on somme le prix de chacune. (Revente = prix d'achat
-# pour l'instant ; ajouter un ratio ici si la revente doit être décotée.)
+# de N cartes empilées : on somme le prix de chacune, puis on applique la décote
+# de revente (sell_value_ratio).
 func get_sell_value(cards: Array[Card]) -> int:
 	var total: int = 0
 	for card: Card in cards:
 		total += get_card_price(card.rarity)
-	return total
+	return floori(total * sell_value_ratio)
 
 
 func get_locked_rarities(family_level: int) -> Array[Card.Rarity]:

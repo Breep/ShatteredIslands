@@ -336,9 +336,10 @@ func _server_try_sell_card(player: Player, card: Card) -> bool:
 	if hand_card == null:
 		Verbose.warn("Peer." + str(player.id) + " tries to sell a card not in his hand [" + card.name + "]", Verbose.Category.CARD_SHOP)
 		return false
-	# Une carte agrégée niveau N = N cartes empilées : on rembourse N × prix.
+	# Une carte agrégée niveau N = N cartes empilées : remboursement décoté via
+	# get_sell_value (source unique de vérité partagée avec le drag-and-drop).
 	var removed: Array[Card] = player.hand.remove_card(hand_card)
-	player.gold += removed.size() * _game_rules.get_card_price(hand_card.rarity)
+	player.gold += _game_rules.get_sell_value(removed)
 	return true
 
 
@@ -366,9 +367,10 @@ func _ask_sell_card(card_design_id: String) -> void:
 		Verbose.warn("Peer." + str(peer_id) + " tries to sell a card not in his hand [" + card_design_id + "]", Verbose.Category.CARD_SHOP)
 		_answer_sell_card.rpc_id(peer_id, ServerResponse.CARD_NOT_OWNED)
 		return
-	# Une carte agrégée niveau N = N cartes empilées : on rembourse N × prix.
+	# Une carte agrégée niveau N = N cartes empilées : remboursement décoté via
+	# get_sell_value (source unique de vérité partagée avec le drag-and-drop).
 	var removed: Array[Card] = player.hand.remove_card(hand_card)
-	player.gold += removed.size() * _game_rules.get_card_price(hand_card.rarity)
+	player.gold += _game_rules.get_sell_value(removed)
 	_answer_sell_card.rpc_id(peer_id, ServerResponse.OK)
 
 
