@@ -2,32 +2,49 @@
 
 [ext_resource type="Script" uid="uid://flrydugnyfe7" path="res://05_Game/Run/SpawnSpecs/Concrete/acolyte_spawn_spec.gd" id="1_dn8eh"]
 [ext_resource type="Script" uid="uid://rj6clcd8f15a" path="res://05_Game/Run/SpawnSpecs/entity_spec.gd" id="2_2bu5c"]
-[ext_resource type="PackedScene" uid="uid://cafqrtw7iv7f8" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/small_treant.tscn" id="3_hi3tt"]
+[ext_resource type="Resource" uid="uid://duw0xcgf3d40a" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Stats/entity_desc.tres" id="3_hi3tt"]
 [ext_resource type="Script" uid="uid://bj0ecq2d5vir5" path="res://05_Game/Run/SpawnSpecs/Concrete/hero_spawn_spec.gd" id="4_xcl6x"]
 [ext_resource type="Script" uid="uid://b3ir321gjcqej" path="res://05_Game/Run/Formations/fighting_formation.gd" id="5_p085o"]
 [ext_resource type="Script" uid="uid://c78ccxnqy6c16" path="res://05_Game/Run/SpawnSpecs/spawn_point_spec.gd" id="6_fhjjj"]
+[ext_resource type="Script" uid="uid://dy31m54qprfhl" path="res://05_Game/Run/Party/roaster_entry.gd" id="7_rstry"]
+
+[sub_resource type="Resource" id="RoasterEntry_treant1"]
+script = ExtResource("7_rstry")
+desc = ExtResource("3_hi3tt")
+
+[sub_resource type="Resource" id="RoasterEntry_treant2"]
+script = ExtResource("7_rstry")
+desc = ExtResource("3_hi3tt")
+
+[sub_resource type="Resource" id="RoasterEntry_treant3"]
+script = ExtResource("7_rstry")
+desc = ExtResource("3_hi3tt")
+
+[sub_resource type="Resource" id="RoasterEntry_treant4"]
+script = ExtResource("7_rstry")
+desc = ExtResource("3_hi3tt")
 
 [sub_resource type="Resource" id="Resource_oo4kk"]
 script = ExtResource("2_2bu5c")
-scene = ExtResource("3_hi3tt")
+entry = SubResource("RoasterEntry_treant1")
 display_label = "SmallTreant"
 transform = Transform3D(0.21638855, 0, -0.97630733, 0, 1, 0, 0.97630733, 0, 0.21638855, -3.8523378, 0, 6.681679)
 
 [sub_resource type="Resource" id="Resource_g28tn"]
 script = ExtResource("2_2bu5c")
-scene = ExtResource("3_hi3tt")
+entry = SubResource("RoasterEntry_treant2")
 display_label = "SmallTreant2"
 transform = Transform3D(0.08190371, 0, -0.99664026, 0, 1, 0, 0.99664026, 0, 0.08190371, -7.9819317, 0, 3.5474482)
 
 [sub_resource type="Resource" id="Resource_q2kon"]
 script = ExtResource("2_2bu5c")
-scene = ExtResource("3_hi3tt")
+entry = SubResource("RoasterEntry_treant3")
 display_label = "SmallTreant3"
 transform = Transform3D(-0.17737679, 0, -0.984143, 0, 1, 0, 0.984143, 0, -0.17737679, -8.040372, 0, -5.3795013)
 
 [sub_resource type="Resource" id="Resource_bvcg0"]
 script = ExtResource("2_2bu5c")
-scene = ExtResource("3_hi3tt")
+entry = SubResource("RoasterEntry_treant4")
 display_label = "SmallTreant4"
 transform = Transform3D(-0.012775475, 0, -0.9999184, 0, 1, 0, 0.9999184, 0, -0.012775475, -3.8523378, 0, -7.1503725)
 

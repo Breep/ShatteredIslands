@@ -130,11 +130,12 @@ func _collect_props(formation: TavernFormation, container: Node3D) -> void:
 
 func _entity_to_mob_spec(entity: Entity) -> MobSpec:
 	var spec := MobSpec.new()
-	spec.scene = load(entity.scene_file_path)
 	spec.display_label = entity.name
 	spec.transform = entity.transform
-	if entity.override_base_stats != null:
-		spec.stats_override = entity.override_base_stats.duplicate(true)
+	if entity.entity_desc != null:
+		spec.entry = RoasterEntry.from_desc(entity.entity_desc)
+	else:
+		spec.scene = load(entity.scene_file_path)
 	return spec
 
 
