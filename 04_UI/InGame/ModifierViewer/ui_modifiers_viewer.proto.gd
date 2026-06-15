@@ -33,6 +33,8 @@ var _counter: int = 0
 
 #region ============================== Node base functions ==============================
 func _ready() -> void:
+	_viewer.top_level = false # le proto affiche le viewer inline, pas en popup flottant
+
 	_entity = Entity.new()
 	_entity.stat_modifiers_registry.update_base_stats(EntityStats.new())
 

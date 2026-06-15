@@ -21,7 +21,6 @@ var _flight_queued: bool = false
 
 func _ready() -> void:
 	super._ready()
-	fighting_state_changed.connect(_on_fighting_state_changed_roar)
 	ultimate_casted.connect(_on_ultimate_casted)
 	fighting_state_changed.connect(_on_fighting_state_changed_voice)
 	if _flight_ability != null:

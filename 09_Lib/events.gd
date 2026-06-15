@@ -51,6 +51,9 @@ func signal_nothing_clicked() -> void:
 
 signal floor_clicked(position: Vector3)
 
+# Clic sur une stat dans la fiche d'entité (UIEntityPortrait) : ouvre le viewer de modifiers.
+signal entity_stat_clicked(entity: Entity, stat_type: EntityStats.StatType)
+
 # ============================== DRAGGABLE ==============================
 
 signal entity_drag_started(entity: Entity)

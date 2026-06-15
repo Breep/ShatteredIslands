@@ -51,6 +51,14 @@ var _entity: Entity = null
 var _stat_type: EntityStats.StatType = EntityStats.StatType.AD
 #endregion
 
+#region ============================== Node base functions ==============================
+func _ready() -> void:
+	top_level = true # positionnement libre à la souris, hors layout du parent
+	hide()
+	resized.connect(_clamp_to_viewport) # la taille se finalise après l'ajout des lignes
+	Events.entity_stat_clicked.connect(_on_entity_stat_clicked)
+#endregion
+
 #region ============================== Public functions ==============================
 func bind(stat_type: EntityStats.StatType, entity: Entity) -> void:
 	if entity == null:
@@ -59,6 +67,7 @@ func bind(stat_type: EntityStats.StatType, entity: Entity) -> void:
 	_stat_type = stat_type
 	_entity = entity
 	refresh()
+	show()
 
 
 func refresh() -> void:
@@ -70,8 +79,7 @@ func refresh() -> void:
 	_add_row(
 		_load_icon(_STAT_ICONS.get(_stat_type, "")),
 		"Base " + _stat_name(_stat_type),
-		"%g" % registry.get_base_stat(_stat_type),
-		Color.WHITE)
+		_format_number(registry.get_base_stat(_stat_type)))
 	for modifier: StatModifier in registry.get_modifiers(_stat_type):
 		_add_row(_source_icon(modifier), str(modifier.id), _format_value(modifier), _value_color(modifier))
 
@@ -82,7 +90,7 @@ func clear() -> void:
 #endregion
 
 #region ============================== Private functions ==============================
-func _add_row(icon: Texture2D, label: String, value: String, value_color: Color) -> void:
+func _add_row(icon: Texture2D, label: String, value: String, value_color: Variant = null) -> void:
 	var row: UiModifierViewerRow = _ROW_SCENE.instantiate()
 	_modifier_list.add_child(row)
 	row.setup(icon, label, value, value_color)
@@ -113,9 +121,18 @@ func _load_icon(relative_path: String) -> Texture2D:
 
 
 func _format_value(modifier: StatModifier) -> String:
+	var sign_prefix: String = "+" if modifier.value >= 0.0 else ""
 	if modifier.calc_type == StatModifier.CalcType.MULT:
-		return "%+g%%" % (modifier.value * 100.0)
-	return "%+g" % modifier.value
+		return sign_prefix + _format_number(modifier.value * 100.0) + "%"
+	return sign_prefix + _format_number(modifier.value)
+
+
+# Entier => sans décimale ; sinon une décimale (str() + pad_decimals, %g n'existe
+# pas en GDScript).
+func _format_number(value: float) -> String:
+	if is_equal_approx(value, roundf(value)):
+		return str(roundi(value))
+	return str(value).pad_decimals(1)
 
 
 func _value_color(modifier: StatModifier) -> Color:
@@ -124,4 +141,20 @@ func _value_color(modifier: StatModifier) -> Color:
 	if modifier.value < 0.0:
 		return _MALUS_COLOR
 	return Color.WHITE
+
+
+# Garde le panel entièrement dans le viewport (décale vers le haut/gauche au besoin).
+func _clamp_to_viewport() -> void:
+	if not visible: return
+	var vp: Vector2 = get_viewport_rect().size
+	global_position = Vector2(
+		clampf(global_position.x, 0.0, maxf(0.0, vp.x - size.x)),
+		clampf(global_position.y, 0.0, maxf(0.0, vp.y - size.y)))
+#endregion
+
+#region ============================== Callbacks ==============================
+func _on_entity_stat_clicked(entity: Entity, stat_type: EntityStats.StatType) -> void:
+	bind(stat_type, entity)
+	global_position = get_global_mouse_position()
+	_clamp_to_viewport()
 #endregion

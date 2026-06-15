@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dfcy3dpkcvyx2" path="res://04_UI/_Themes/Data/Icons/Backgrounds/skill_passive_background.svg" id="3_xeyfs"]
 [ext_resource type="Texture2D" uid="uid://ds2dracb280n" path="res://02_Entities/Pool/Heroes/Latika/Skills/Passive/skill_target.svg" id="4_bkbtd"]
 [ext_resource type="Texture2D" uid="uid://carfsdb3rsrq6" path="res://04_UI/_Themes/Data/Icons/Backgrounds/skill_bronze_background.svg" id="4_p61mv"]
-[ext_resource type="Script" uid="uid://6c0iybheyu32" path="res://22_VFX/VFEZ-godot-main/vfez_material_2d.gd" id="4_qwwg1"]
+[ext_resource type="Script" uid="uid://dq0ub1oemlk0p" path="res://22_VFX/VFEZ-godot-main/vfez_material_2d.gd" id="4_qwwg1"]
 [ext_resource type="Texture2D" uid="uid://cexqu5b6xfn6l" path="res://04_UI/_Themes/Data/Icons/Backgrounds/skill_silver_background.svg" id="5_bkbtd"]
 [ext_resource type="Texture2D" uid="uid://bmx7nnd8pibtg" path="res://04_UI/InGame/BuyingArea/PlayerPortrait/Data/Hexagone_frame.png" id="6_7oc7k"]
 [ext_resource type="Texture2D" uid="uid://dh6gsh2ddl52l" path="res://02_Entities/Pool/Heroes/Latika/Skills/Bronze/skill_wild_hunt.svg" id="6_akk3c"]
@@ -36,6 +36,7 @@
 [ext_resource type="Script" uid="uid://bia26v50nwe6c" path="res://04_UI/UIButton/ui_button.gd" id="30_pr6f0"]
 [ext_resource type="Texture2D" uid="uid://bilq8c5d04x2v" path="res://04_UI/_Themes/Data/Icons/EntityStats/scale_colored.svg" id="31_h7ky1"]
 [ext_resource type="Texture2D" uid="uid://epdfjjie1s85" path="res://02_Entities/Pool/Heroes/Latika/Data/latika_portrait.png" id="33_1w027"]
+[ext_resource type="PackedScene" uid="uid://fly0qbnwyvaf" path="res://04_UI/InGame/ModifierViewer/ui_modifiers_viewer.tscn" id="37_gdv5j"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1w027"]
 bg_color = Color(0.5395219, 0.64106786, 0.42242658, 1)
@@ -67,6 +68,18 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gdv5j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p8qt6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wuqe2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ifcfc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_amshu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0xjnk"]
 
 [sub_resource type="Shader" id="Shader_gdv5j"]
 resource_name = "VFEZ2DPreview"
@@ -584,7 +597,6 @@ layout_mode = 2
 
 [node name="StatsContainer" type="VBoxContainer" parent="EntityDescriptionPanel/CorePanel/VBoxContainer/StatsSkillDescContainer" unique_id=1484502842]
 unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 
@@ -594,6 +606,7 @@ custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_vertical = 3
 focus_mode = 0
+mouse_default_cursor_shape = 2
 item_count = 4
 max_columns = 5
 same_column_width = true
@@ -618,6 +631,7 @@ custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_vertical = 3
 focus_mode = 0
+mouse_default_cursor_shape = 2
 item_count = 3
 max_columns = 5
 same_column_width = true
@@ -639,6 +653,7 @@ custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_vertical = 3
 focus_mode = 0
+mouse_default_cursor_shape = 2
 item_count = 2
 max_columns = 5
 same_column_width = true
@@ -657,6 +672,7 @@ custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_vertical = 3
 focus_mode = 0
+mouse_default_cursor_shape = 2
 item_count = 2
 max_columns = 5
 same_column_width = true
@@ -674,6 +690,7 @@ custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_vertical = 3
 focus_mode = 0
+mouse_default_cursor_shape = 2
 item_count = 4
 max_columns = 5
 same_column_width = true
@@ -694,6 +711,7 @@ item_3/selectable = false
 
 [node name="SkillDescriptionContainer" type="VBoxContainer" parent="EntityDescriptionPanel/CorePanel/VBoxContainer/StatsSkillDescContainer" unique_id=1864939956]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 
@@ -775,6 +793,22 @@ text = "1000/1000"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="HealthBarButton" type="Button" parent="EntityDescriptionPanel/HealthBar" unique_id=1331002843]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_gdv5j")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_p8qt6")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_wuqe2")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_ifcfc")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_amshu")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0xjnk")
+
 [node name="PortraitButton" type="TextureButton" parent="." unique_id=178563449]
 unique_name_in_owner = true
 layout_mode = 1
@@ -835,3 +869,11 @@ text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_lock_ = true
+
+[node name="UiModifiersViewer" parent="." unique_id=1139125158 instance=ExtResource("37_gdv5j")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 146.0
+offset_top = -112.0
+offset_right = 154.0
+offset_bottom = -104.0

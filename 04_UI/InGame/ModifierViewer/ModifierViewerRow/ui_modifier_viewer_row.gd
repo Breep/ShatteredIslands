@@ -12,9 +12,13 @@ extends HBoxContainer
 #endregion
 
 #region ============================== Public functions ==============================
-func setup(icon: Texture2D, label: String, value: String, value_color: Color = Color.WHITE) -> void:
+# value_color = null => on garde la couleur par défaut du thème (ligne de base).
+func setup(icon: Texture2D, label: String, value: String, value_color: Variant = null) -> void:
 	_icon.texture = icon
 	_name.text = label
 	_value.text = value
-	_value.add_theme_color_override("font_color", value_color)
+	if value_color is Color:
+		_value.add_theme_color_override("font_color", value_color)
+	else:
+		_value.remove_theme_color_override("font_color")
 #endregion
