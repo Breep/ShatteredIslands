@@ -24,6 +24,10 @@ func _ready() -> void:
 	fighting_state_changed.connect(_on_fighting_state_changed_voice)
 	if _flight_ability != null:
 		_flight_ability.flight_landing_impact.connect(_on_flight_landing_impact)
+	# A skipped/synchronous spawn settles us into the pre-fight IDLE during super._ready(),
+	# before the handler above is connected — so the IDLE emit is missed. Handle it here.
+	if fighting_state == FightingState.IDLE:
+		_schedule_welcome()
 
 
 func process_tick() -> void:
