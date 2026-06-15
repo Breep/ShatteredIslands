@@ -11,6 +11,7 @@ extends Node
 
 #region Signals
 signal flight_started
+signal flight_return_started   ## sweep is over, dragon commits to flying home — earliest "it'll land soon" cue
 signal flight_landing_impact   ## ground-contact frame — skills hook this for landing effects
 signal flight_landed
 #endregion
@@ -141,6 +142,9 @@ func abort_flight() -> void:
 	_anim.end_fly()
 	_set_combat_active(true)
 	_phase = Phase.IDLE
+	# Terminal for an abnormal end too (death / fight end mid-air): listeners that armed on
+	# flight_started (e.g. the camera zoom) get a single "flight over" event to unwind on.
+	flight_landed.emit()
 
 
 ## Driven every deterministic tick by SkeletonDragon.process_tick().
@@ -204,6 +208,7 @@ func _begin_fly_out() -> void:
 	_transit_from = _owner.global_position
 	_transit_to = _takeoff_position + Vector3.UP * _fly_altitude
 	_enter_phase(Phase.FLY_OUT, _travel_ticks(_transit_from, _transit_to))
+	flight_return_started.emit()
 
 
 func _begin_landing() -> void:
