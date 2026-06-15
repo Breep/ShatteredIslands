@@ -1,6 +1,11 @@
 class_name FightingArea
 extends Node3D
 
+# Position hors-écran où sont parquées les unités joueur non encore placées.
+# Elles sont spawnées normalement (mécanique SpawnManager inchangée) puis
+# déplacées ici ; UIRoasterList les ramène à la souris quand le joueur les place.
+const OFF_SCREEN_SPAWN_POSITION := Vector3(1000, 0, 1000)
+
 # ============================== Signals ==============================
 
 @warning_ignore("unused_signal")
@@ -131,6 +136,10 @@ func _spawn_specs(specs: Array[EntitySpec], team: int) -> void:
 			var entity := node as Entity
 			if entity != null:
 				entity.fight_role = _fight_role_for_spec(spec)
+				# Unité joueur non encore placée : parquée hors-écran. Le joueur la
+				# ramène sur le terrain via UIRoasterList (qui marque entry.placed).
+				if slot != PlayerState.Slot.NONE and spec.entry != null and not spec.entry.placed:
+					entity.global_position = OFF_SCREEN_SPAWN_POSITION
 				if entity.is_hero():
 					_heroes.append(entity)
 					# Lien runtime player -> instance de héros de cette scène.

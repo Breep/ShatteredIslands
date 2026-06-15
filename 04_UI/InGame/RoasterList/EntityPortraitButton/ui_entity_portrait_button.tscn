@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://cynrwmm6d4n6w"]
+
+[ext_resource type="Texture2D" uid="uid://epdfjjie1s85" path="res://02_Entities/Pool/Heroes/Latika/Data/latika_portrait.png" id="1_8g0sb"]
+[ext_resource type="Script" uid="uid://8iqejgcb4ugg" path="res://04_UI/InGame/RoasterList/EntityPortraitButton/ui_entity_portrait_button.gd" id="1_d15o5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d15o5"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 10
+
+[node name="UiEntityPortraitButton" type="Button" unique_id=584578202 node_paths=PackedStringArray("_portrait", "_button")]
+custom_minimum_size = Vector2(128, 128)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1792.0
+offset_bottom = -952.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_d15o5")
+_portrait = NodePath("MarginContainer/Portrait")
+_button = NodePath(".")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=145220927]
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Portrait" type="TextureRect" parent="MarginContainer" unique_id=2118110701]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("1_8g0sb")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Portrait" unique_id=204795633]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = -5
+theme_override_constants/margin_top = -5
+theme_override_constants/margin_right = -5
+theme_override_constants/margin_bottom = -5
+
+[node name="Panel" type="Panel" parent="MarginContainer/Portrait/MarginContainer" unique_id=334531543]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_d15o5")

@@ -12,6 +12,9 @@ signal dragged()
 signal dropped()
 # Team de la spawn zone survolée pendant le drag (1, 2…), ou -1 si hors zone.
 signal drop_zone_changed(team: int)
+# Émis uniquement pour les drags pilotés via begin_drag_at (UIRoasterList).
+# on_valid_zone = drop fait sur une zone d'équipe valide pour l'entité.
+signal drop_committed(on_valid_zone: bool)
 #endregion
 
 #region ============================== Constants ==============================
@@ -36,6 +39,10 @@ var _y_tween: Tween
 # Tracking du press en attente du seuil long press.
 var _press_pending: bool = false
 var _press_start_msec: int = 0
+
+# Drag piloté de l'extérieur (UIRoasterList) : pas de rollback auto au drop,
+# l'appelant décide du placement final via drop_committed.
+var _external_placement: bool = false
 
 # Repérage de la spawn zone survolée (raycast vertical sous l'entité).
 var _drop_ray: RayCast3D
@@ -109,6 +116,15 @@ func is_dragging() -> bool:
 
 func get_drop_zone() -> int:
 	return _current_drop_zone
+
+
+# Démarre un drag piloté de l'extérieur : téléporte l'entité à world_pos puis
+# lance le drag. Le drop n'auto-rollback pas ; l'appelant écoute drop_committed
+# pour valider la pose ou renvoyer l'entité ailleurs.
+func begin_drag_at(world_pos: Vector3) -> void:
+	_owner.global_position = world_pos
+	_external_placement = true
+	_start_drag()
 #endregion
 
 #region ============================== Private functions ==============================
@@ -144,7 +160,10 @@ func _stop_drag() -> void:
 	_is_dragging = false
 	set_process(false)
 
-	var rollback: bool = _should_rollback()
+	var on_valid_zone: bool = not _should_rollback()
+	# En mode externe (UIRoasterList) on ne rollback jamais : l'appelant gère le
+	# placement final (pose validée ou renvoi hors-écran) via drop_committed.
+	var rollback: bool = (not on_valid_zone) and not _external_placement
 	_clear_drop_zone()
 	Verbose.debug("Drag stopped on " + _owner.entity_name + (" (rollback)" if rollback else ""), Verbose.Category.ENTITY)
 
@@ -161,6 +180,10 @@ func _stop_drag() -> void:
 	dropped.emit()
 	Events.entity_drag_stopped.emit(_owner)
 	AudioManager.play_3d("thud", _owner.position)
+
+	if _external_placement:
+		_external_placement = false
+		drop_committed.emit(on_valid_zone)
 
 
 func _kill_y_tween() -> void:
