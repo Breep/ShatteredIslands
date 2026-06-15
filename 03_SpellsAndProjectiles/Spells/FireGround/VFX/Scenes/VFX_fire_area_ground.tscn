@@ -1,18 +1,18 @@
 [gd_scene format=3 uid="uid://cw2720gv02yqy"]
 
 [ext_resource type="Texture2D" uid="uid://dymubvrdnsn0c" path="res://03_SpellsAndProjectiles/Spells/FireGround/VFX/Textures/T_VFX_WindNoise1.png" id="2_r0k0v"]
-[ext_resource type="Shader" path="res://03_SpellsAndProjectiles/Spells/FireGround/VFX/Shaders/s_aura_circle.tres" id="16_dxilb"]
+[ext_resource type="Shader" uid="uid://d1ukjj55uwfvi" path="res://03_SpellsAndProjectiles/Spells/FireGround/VFX/Shaders/s_aura_circle.tres" id="16_dxilb"]
 
 [sub_resource type="Gradient" id="Gradient_ey21b"]
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_kgjgj"]
 gradient = SubResource("Gradient_ey21b")
-fill_from = Vector2(0.25213677, 0)
+fill_from = Vector2(0.37179488, 0)
 fill_to = Vector2(0, 0)
 
 [sub_resource type="Gradient" id="Gradient_nfpgb"]
 offsets = PackedFloat32Array(0, 0.8)
-colors = PackedColorArray(0.66384095, 0.37650368, 0.09503902, 0, 0.9036484, 0.5112642, 0.31409553, 1)
+colors = PackedColorArray(0.6636825, 0.11207495, 0.09320182, 0, 0.90382373, 0.29951698, 0.1428257, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_qhfph"]
 gradient = SubResource("Gradient_nfpgb")
@@ -22,7 +22,7 @@ gradient = SubResource("Gradient_nfpgb")
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_oo7au"]
 gradient = SubResource("Gradient_33kbw")
 fill_from = Vector2(1, 0)
-fill_to = Vector2(0, 0)
+fill_to = Vector2(0.60683763, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q0shp"]
 render_priority = 0
