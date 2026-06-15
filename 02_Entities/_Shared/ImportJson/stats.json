@@ -4889,7 +4889,7 @@
   {
 	"entity_id": "SatyrBerserker",
 	"level": 2,
-	"health_max": 730,
+	"health_max": 690,
 	"mana_max": 50,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -4916,7 +4916,7 @@
   {
 	"entity_id": "SatyrBerserker",
 	"level": 3,
-	"health_max": 960,
+	"health_max": 820,
 	"mana_max": 50,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -4943,7 +4943,7 @@
   {
 	"entity_id": "SatyrBerserker",
 	"level": 4,
-	"health_max": 1290,
+	"health_max": 990,
 	"mana_max": 50,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -4970,7 +4970,7 @@
   {
 	"entity_id": "SatyrBerserker",
 	"level": 5,
-	"health_max": 1720,
+	"health_max": 1200,
 	"mana_max": 50,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -4997,7 +4997,7 @@
   {
 	"entity_id": "SatyrBerserker",
 	"level": 6,
-	"health_max": 2250,
+	"health_max": 1450,
 	"mana_max": 50,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -5024,7 +5024,7 @@
   {
 	"entity_id": "SatyrBerserker",
 	"level": 7,
-	"health_max": 2880,
+	"health_max": 1740,
 	"mana_max": 50,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -5051,7 +5051,7 @@
   {
 	"entity_id": "SatyrBerserker",
 	"level": 8,
-	"health_max": 3610,
+	"health_max": 2070,
 	"mana_max": 50,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -5078,7 +5078,7 @@
   {
 	"entity_id": "SatyrBerserker",
 	"level": 9,
-	"health_max": 4440,
+	"health_max": 2440,
 	"mana_max": 50,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -5105,7 +5105,7 @@
   {
 	"entity_id": "SatyrBerserker",
 	"level": 10,
-	"health_max": 5370,
+	"health_max": 2850,
 	"mana_max": 50,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -5132,7 +5132,7 @@
   {
 	"entity_id": "SatyrBerserker",
 	"level": 11,
-	"health_max": 6400,
+	"health_max": 3300,
 	"mana_max": 50,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -5159,7 +5159,7 @@
   {
 	"entity_id": "SatyrBerserker",
 	"level": 12,
-	"health_max": 7530,
+	"health_max": 3790,
 	"mana_max": 50,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -5186,7 +5186,7 @@
   {
 	"entity_id": "SatyrBerserker",
 	"level": 13,
-	"health_max": 8760,
+	"health_max": 4320,
 	"mana_max": 50,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -5213,7 +5213,7 @@
   {
 	"entity_id": "SatyrBerserker",
 	"level": 14,
-	"health_max": 10090,
+	"health_max": 4890,
 	"mana_max": 50,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -5240,7 +5240,7 @@
   {
 	"entity_id": "SatyrBerserker",
 	"level": 15,
-	"health_max": 11520,
+	"health_max": 5500,
 	"mana_max": 50,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -5267,7 +5267,7 @@
   {
 	"entity_id": "SatyrBerserker",
 	"level": 16,
-	"health_max": 13050,
+	"health_max": 6150,
 	"mana_max": 50,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -5294,7 +5294,7 @@
   {
 	"entity_id": "SatyrBerserker",
 	"level": 17,
-	"health_max": 14680,
+	"health_max": 6840,
 	"mana_max": 50,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -5321,7 +5321,7 @@
   {
 	"entity_id": "SatyrBerserker",
 	"level": 18,
-	"health_max": 16410,
+	"health_max": 7570,
 	"mana_max": 50,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -5348,7 +5348,7 @@
   {
 	"entity_id": "SatyrBerserker",
 	"level": 19,
-	"health_max": 18240,
+	"health_max": 8340,
 	"mana_max": 50,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -5375,7 +5375,7 @@
   {
 	"entity_id": "SatyrBerserker",
 	"level": 20,
-	"health_max": 20170,
+	"health_max": 9150,
 	"mana_max": 50,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -6509,7 +6509,7 @@
   {
 	"entity_id": "MoltenGolem",
 	"level": 2,
-	"health_max": 810,
+	"health_max": 790,
 	"mana_max": 37,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -6536,7 +6536,7 @@
   {
 	"entity_id": "MoltenGolem",
 	"level": 3,
-	"health_max": 1000,
+	"health_max": 960,
 	"mana_max": 37,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -6563,7 +6563,7 @@
   {
 	"entity_id": "MoltenGolem",
 	"level": 4,
-	"health_max": 1270,
+	"health_max": 1210,
 	"mana_max": 37,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -6590,7 +6590,7 @@
   {
 	"entity_id": "MoltenGolem",
 	"level": 5,
-	"health_max": 1620,
+	"health_max": 1540,
 	"mana_max": 37,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -6617,7 +6617,7 @@
   {
 	"entity_id": "MoltenGolem",
 	"level": 6,
-	"health_max": 2050,
+	"health_max": 1950,
 	"mana_max": 37,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -6644,7 +6644,7 @@
   {
 	"entity_id": "MoltenGolem",
 	"level": 7,
-	"health_max": 2560,
+	"health_max": 2440,
 	"mana_max": 37,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -6671,7 +6671,7 @@
   {
 	"entity_id": "MoltenGolem",
 	"level": 8,
-	"health_max": 3150,
+	"health_max": 3010,
 	"mana_max": 37,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -6698,7 +6698,7 @@
   {
 	"entity_id": "MoltenGolem",
 	"level": 9,
-	"health_max": 3820,
+	"health_max": 3660,
 	"mana_max": 37,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -6725,7 +6725,7 @@
   {
 	"entity_id": "MoltenGolem",
 	"level": 10,
-	"health_max": 4570,
+	"health_max": 4390,
 	"mana_max": 37,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -6752,7 +6752,7 @@
   {
 	"entity_id": "MoltenGolem",
 	"level": 11,
-	"health_max": 5400,
+	"health_max": 5200,
 	"mana_max": 37,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -6779,7 +6779,7 @@
   {
 	"entity_id": "MoltenGolem",
 	"level": 12,
-	"health_max": 6310,
+	"health_max": 6090,
 	"mana_max": 37,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -6806,7 +6806,7 @@
   {
 	"entity_id": "MoltenGolem",
 	"level": 13,
-	"health_max": 7300,
+	"health_max": 7060,
 	"mana_max": 37,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -6833,7 +6833,7 @@
   {
 	"entity_id": "MoltenGolem",
 	"level": 14,
-	"health_max": 8370,
+	"health_max": 8110,
 	"mana_max": 37,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -6860,7 +6860,7 @@
   {
 	"entity_id": "MoltenGolem",
 	"level": 15,
-	"health_max": 9520,
+	"health_max": 9240,
 	"mana_max": 37,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -6887,7 +6887,7 @@
   {
 	"entity_id": "MoltenGolem",
 	"level": 16,
-	"health_max": 10750,
+	"health_max": 10450,
 	"mana_max": 37,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -6914,7 +6914,7 @@
   {
 	"entity_id": "MoltenGolem",
 	"level": 17,
-	"health_max": 12060,
+	"health_max": 11740,
 	"mana_max": 37,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -6941,7 +6941,7 @@
   {
 	"entity_id": "MoltenGolem",
 	"level": 18,
-	"health_max": 13450,
+	"health_max": 13110,
 	"mana_max": 37,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -6968,7 +6968,7 @@
   {
 	"entity_id": "MoltenGolem",
 	"level": 19,
-	"health_max": 14920,
+	"health_max": 14560,
 	"mana_max": 37,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -6995,7 +6995,7 @@
   {
 	"entity_id": "MoltenGolem",
 	"level": 20,
-	"health_max": 16470,
+	"health_max": 16090,
 	"mana_max": 37,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -7049,7 +7049,7 @@
   {
 	"entity_id": "PoisonGolem",
 	"level": 2,
-	"health_max": 710,
+	"health_max": 690,
 	"mana_max": 38,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -7076,7 +7076,7 @@
   {
 	"entity_id": "PoisonGolem",
 	"level": 3,
-	"health_max": 840,
+	"health_max": 800,
 	"mana_max": 38,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -7103,7 +7103,7 @@
   {
 	"entity_id": "PoisonGolem",
 	"level": 4,
-	"health_max": 1010,
+	"health_max": 950,
 	"mana_max": 38,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -7130,7 +7130,7 @@
   {
 	"entity_id": "PoisonGolem",
 	"level": 5,
-	"health_max": 1220,
+	"health_max": 1140,
 	"mana_max": 38,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -7157,7 +7157,7 @@
   {
 	"entity_id": "PoisonGolem",
 	"level": 6,
-	"health_max": 1470,
+	"health_max": 1370,
 	"mana_max": 38,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -7184,7 +7184,7 @@
   {
 	"entity_id": "PoisonGolem",
 	"level": 7,
-	"health_max": 1760,
+	"health_max": 1640,
 	"mana_max": 38,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -7211,7 +7211,7 @@
   {
 	"entity_id": "PoisonGolem",
 	"level": 8,
-	"health_max": 2090,
+	"health_max": 1950,
 	"mana_max": 38,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -7238,7 +7238,7 @@
   {
 	"entity_id": "PoisonGolem",
 	"level": 9,
-	"health_max": 2460,
+	"health_max": 2300,
 	"mana_max": 38,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -7265,7 +7265,7 @@
   {
 	"entity_id": "PoisonGolem",
 	"level": 10,
-	"health_max": 2870,
+	"health_max": 2690,
 	"mana_max": 38,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -7292,7 +7292,7 @@
   {
 	"entity_id": "PoisonGolem",
 	"level": 11,
-	"health_max": 3320,
+	"health_max": 3120,
 	"mana_max": 38,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -7319,7 +7319,7 @@
   {
 	"entity_id": "PoisonGolem",
 	"level": 12,
-	"health_max": 3810,
+	"health_max": 3590,
 	"mana_max": 38,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -7346,7 +7346,7 @@
   {
 	"entity_id": "PoisonGolem",
 	"level": 13,
-	"health_max": 4340,
+	"health_max": 4100,
 	"mana_max": 38,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -7373,7 +7373,7 @@
   {
 	"entity_id": "PoisonGolem",
 	"level": 14,
-	"health_max": 4910,
+	"health_max": 4650,
 	"mana_max": 38,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -7400,7 +7400,7 @@
   {
 	"entity_id": "PoisonGolem",
 	"level": 15,
-	"health_max": 5520,
+	"health_max": 5240,
 	"mana_max": 38,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -7427,7 +7427,7 @@
   {
 	"entity_id": "PoisonGolem",
 	"level": 16,
-	"health_max": 6170,
+	"health_max": 5870,
 	"mana_max": 38,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -7454,7 +7454,7 @@
   {
 	"entity_id": "PoisonGolem",
 	"level": 17,
-	"health_max": 6860,
+	"health_max": 6540,
 	"mana_max": 38,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -7481,7 +7481,7 @@
   {
 	"entity_id": "PoisonGolem",
 	"level": 18,
-	"health_max": 7590,
+	"health_max": 7250,
 	"mana_max": 38,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -7508,7 +7508,7 @@
   {
 	"entity_id": "PoisonGolem",
 	"level": 19,
-	"health_max": 8360,
+	"health_max": 8000,
 	"mana_max": 38,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -7535,7 +7535,7 @@
   {
 	"entity_id": "PoisonGolem",
 	"level": 20,
-	"health_max": 9170,
+	"health_max": 8790,
 	"mana_max": 38,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -7589,7 +7589,7 @@
   {
 	"entity_id": "KoboldKnight",
 	"level": 2,
-	"health_max": 490,
+	"health_max": 470,
 	"mana_max": 40,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -7616,7 +7616,7 @@
   {
 	"entity_id": "KoboldKnight",
 	"level": 3,
-	"health_max": 620,
+	"health_max": 580,
 	"mana_max": 40,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -7643,7 +7643,7 @@
   {
 	"entity_id": "KoboldKnight",
 	"level": 4,
-	"health_max": 790,
+	"health_max": 730,
 	"mana_max": 40,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -7670,7 +7670,7 @@
   {
 	"entity_id": "KoboldKnight",
 	"level": 5,
-	"health_max": 1000,
+	"health_max": 920,
 	"mana_max": 40,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -7697,7 +7697,7 @@
   {
 	"entity_id": "KoboldKnight",
 	"level": 6,
-	"health_max": 1250,
+	"health_max": 1150,
 	"mana_max": 40,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -7724,7 +7724,7 @@
   {
 	"entity_id": "KoboldKnight",
 	"level": 7,
-	"health_max": 1540,
+	"health_max": 1420,
 	"mana_max": 40,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -7751,7 +7751,7 @@
   {
 	"entity_id": "KoboldKnight",
 	"level": 8,
-	"health_max": 1870,
+	"health_max": 1730,
 	"mana_max": 40,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -7778,7 +7778,7 @@
   {
 	"entity_id": "KoboldKnight",
 	"level": 9,
-	"health_max": 2240,
+	"health_max": 2080,
 	"mana_max": 40,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -7805,7 +7805,7 @@
   {
 	"entity_id": "KoboldKnight",
 	"level": 10,
-	"health_max": 2650,
+	"health_max": 2470,
 	"mana_max": 40,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -7832,7 +7832,7 @@
   {
 	"entity_id": "KoboldKnight",
 	"level": 11,
-	"health_max": 3100,
+	"health_max": 2900,
 	"mana_max": 40,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -7859,7 +7859,7 @@
   {
 	"entity_id": "KoboldKnight",
 	"level": 12,
-	"health_max": 3590,
+	"health_max": 3370,
 	"mana_max": 40,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -7886,7 +7886,7 @@
   {
 	"entity_id": "KoboldKnight",
 	"level": 13,
-	"health_max": 4120,
+	"health_max": 3880,
 	"mana_max": 40,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -7913,7 +7913,7 @@
   {
 	"entity_id": "KoboldKnight",
 	"level": 14,
-	"health_max": 4690,
+	"health_max": 4430,
 	"mana_max": 40,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -7940,7 +7940,7 @@
   {
 	"entity_id": "KoboldKnight",
 	"level": 15,
-	"health_max": 5300,
+	"health_max": 5020,
 	"mana_max": 40,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -7967,7 +7967,7 @@
   {
 	"entity_id": "KoboldKnight",
 	"level": 16,
-	"health_max": 5950,
+	"health_max": 5650,
 	"mana_max": 40,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -7994,7 +7994,7 @@
   {
 	"entity_id": "KoboldKnight",
 	"level": 17,
-	"health_max": 6640,
+	"health_max": 6320,
 	"mana_max": 40,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -8021,7 +8021,7 @@
   {
 	"entity_id": "KoboldKnight",
 	"level": 18,
-	"health_max": 7370,
+	"health_max": 7030,
 	"mana_max": 40,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -8048,7 +8048,7 @@
   {
 	"entity_id": "KoboldKnight",
 	"level": 19,
-	"health_max": 8140,
+	"health_max": 7780,
 	"mana_max": 40,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",
@@ -8075,7 +8075,7 @@
   {
 	"entity_id": "KoboldKnight",
 	"level": 20,
-	"health_max": 8950,
+	"health_max": 8570,
 	"mana_max": 40,
 	"mana_regen": 3,
 	"auto_attack_type": "MELEE",

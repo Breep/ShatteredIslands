@@ -7,6 +7,8 @@ extends Node
 
 @onready var TOOLTIP_DATABASE: Array[TooltipDesc] = [
 	# --- A ---
+	load("res://04_UI/Tool/Tooltip/Dictionary/ad.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/ap.tres"),
 	load("res://04_UI/Tool/Tooltip/Dictionary/armor.tres"),
 	load("res://04_UI/Tool/Tooltip/Dictionary/attack.tres"),
 	
@@ -87,6 +89,8 @@ extends Node
 
 	# --- STATS OFFENSIVES ---
 	"WARRIOR":         "[color=%s][url=WARRIOR]attack[/url][/color]"                  % THEME.color_html("ATTACK_COLOR"),
+	"AD":              "[color=%s][url=AD]AD[/url][/color]"                           % THEME.color_html("ATTACK_COLOR"),
+	"AP":              "[color=%s][url=AP]AP[/url][/color]"                           % THEME.color_html("MAGICAL_COLOR"),
 	"CRIT_CHANCE":     "[color=%s][url=CRIT_CHANCE]crit chance[/url][/color]"         % THEME.color_html("STAT_COLOR"),
 	"CRIT_MULTIPLIER": "[color=%s][url=CRIT_MULTIPLIER]crit multiplier[/url][/color]" % THEME.color_html("STAT_COLOR"),
 
