@@ -91,6 +91,12 @@ func clear() -> void:
 	_is_active = false
 	_phase_ticks_remaining = 0
 	_current_tick = 0
+	fight_start_tick = 0
+	# Backing var écrit directement : éviter d'émettre fighting_phase_state_changed
+	# pendant le teardown (l'UI est en cours de libération). Sans ce reset, quitter
+	# en phase POSITIONING laisse l'état figé → au run suivant start() repose
+	# POSITIONING (valeur inchangée) → pas d'émission → AdvanceButton jamais affiché.
+	__fighting_phase_state = FightingPhaseState.UNDEF
 	set_physics_process(false)
 
 

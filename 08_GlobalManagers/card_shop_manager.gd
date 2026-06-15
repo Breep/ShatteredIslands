@@ -278,7 +278,7 @@ func _server_try_refresh_shop_for_player(player: Player, is_free: bool) -> Array
 	
 	for card_to_put_back in _cards_in_player_shop[player.id]:
 		shop_deck.add_card(card_to_put_back)
-	_cards_in_player_shop[player.id] = await _server_draw_n_cards(player, 3)
+	_cards_in_player_shop[player.id] = await _server_draw_n_cards(player, 4)
 	
 	return _cards_in_player_shop[player.id]
 

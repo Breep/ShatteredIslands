@@ -102,9 +102,6 @@ offset_bottom = 461.0
 unique_name_in_owner = true
 one_shot = true
 
-[node name="TutorialOverlay" parent="." unique_id=1461656292 groups=["tutorial_overlay"] instance=ExtResource("10_tutov")]
-layout_mode = 1
-
 [node name="UIPlayerInfo" parent="." unique_id=1134887515 instance=ExtResource("1_lw8yd")]
 unique_name_in_owner = true
 layout_mode = 1
@@ -119,3 +116,6 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+
+[node name="TutorialOverlay" parent="." unique_id=1461656292 groups=["tutorial_overlay"] instance=ExtResource("10_tutov")]
+layout_mode = 1

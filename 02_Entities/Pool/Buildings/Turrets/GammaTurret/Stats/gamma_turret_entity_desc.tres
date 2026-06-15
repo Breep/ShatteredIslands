@@ -4,31 +4,31 @@
 [ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="1_d24m6"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="2_0msfy"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_5dkom"]
-[ext_resource type="Resource" uid="uid://vkily3g6whes" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_lvl_01.tres" id="4_1a4g1"]
-[ext_resource type="Resource" uid="uid://dnus5q26ct6ku" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_lvl_02.tres" id="5_tc1sx"]
-[ext_resource type="Resource" uid="uid://dqnfetnx32isy" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_lvl_03.tres" id="6_0cp57"]
-[ext_resource type="Resource" uid="uid://caw6i7rb77u1" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_lvl_04.tres" id="7_650iu"]
-[ext_resource type="Resource" uid="uid://bs0qavf2is3e1" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_lvl_05.tres" id="8_qabvu"]
-[ext_resource type="Resource" uid="uid://dkrygndiohcaa" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_lvl_06.tres" id="9_yxbau"]
-[ext_resource type="Resource" uid="uid://n8e7me2djaag" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_lvl_07.tres" id="10_ueajq"]
-[ext_resource type="Resource" uid="uid://do5orbrmresav" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_lvl_08.tres" id="11_ntm51"]
-[ext_resource type="Resource" uid="uid://d0x8tgvhfym2m" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_lvl_09.tres" id="12_atwro"]
-[ext_resource type="Resource" uid="uid://cwu3btqhtn45s" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_lvl_10.tres" id="13_uw3sb"]
-[ext_resource type="Resource" uid="uid://bqqtnvg5lwag" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_lvl_11.tres" id="14_r377a"]
-[ext_resource type="Resource" uid="uid://cvwq1ahbuo3fx" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_lvl_12.tres" id="15_sptgg"]
-[ext_resource type="Resource" uid="uid://gtluexqbjhnf" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_lvl_13.tres" id="16_ekuxq"]
-[ext_resource type="Resource" uid="uid://biocxj5sng6c2" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_lvl_14.tres" id="17_ucm13"]
-[ext_resource type="Resource" uid="uid://77mu0ro6wdji" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_lvl_15.tres" id="18_5strv"]
-[ext_resource type="Resource" uid="uid://utc8w37vkyvm" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_lvl_16.tres" id="19_3re3c"]
-[ext_resource type="Resource" uid="uid://ur8rghakrek8" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_lvl_17.tres" id="20_6lw5w"]
-[ext_resource type="Resource" uid="uid://cojlaup3a2jvq" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_lvl_18.tres" id="21_h8ks4"]
-[ext_resource type="Resource" uid="uid://cf6503j8jnil0" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_lvl_19.tres" id="22_xtxb2"]
-[ext_resource type="Resource" uid="uid://cylx331fp8kak" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_lvl_20.tres" id="23_2hd4n"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_stats_lvl_01.tres" id="10_650iu"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_stats_lvl_02.tres" id="11_qabvu"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_stats_lvl_03.tres" id="12_yxbau"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_stats_lvl_04.tres" id="13_ueajq"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_stats_lvl_05.tres" id="14_ntm51"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_stats_lvl_06.tres" id="15_atwro"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_stats_lvl_07.tres" id="16_uw3sb"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_stats_lvl_08.tres" id="17_r377a"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_stats_lvl_09.tres" id="18_sptgg"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_stats_lvl_10.tres" id="19_ekuxq"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_stats_lvl_11.tres" id="20_ucm13"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_stats_lvl_12.tres" id="21_5strv"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_stats_lvl_13.tres" id="22_3re3c"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_stats_lvl_14.tres" id="23_6lw5w"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_stats_lvl_15.tres" id="24_h8ks4"]
 [ext_resource type="Resource" uid="uid://c1tgt5res8mqa" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Skills/Passive/tir_gamma.tres" id="24_pas"]
 [ext_resource type="Resource" uid="uid://b2cct6resk3wl" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Skills/Bronze/calibration_combo.tres" id="25_bro"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_stats_lvl_16.tres" id="25_xtxb2"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_stats_lvl_17.tres" id="26_2hd4n"]
 [ext_resource type="Resource" uid="uid://d3fgt7resm4xw" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Skills/Silver/focus_gamma.tres" id="26_sil"]
 [ext_resource type="Resource" uid="uid://c5crt8resoapq" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Skills/Gold/calibration_range.tres" id="27_gol"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_stats_lvl_18.tres" id="27_ydkpo"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_stats_lvl_19.tres" id="28_e3rn0"]
 [ext_resource type="Resource" uid="uid://b6rguaresh2xk" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Skills/Ultimate/rebond_gamma.tres" id="28_ult"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_stats_lvl_20.tres" id="29_rjekh"]
 
 [resource]
 script = ExtResource("1_d24m6")
@@ -37,26 +37,26 @@ portrait = ExtResource("1_650iu")
 scene_path = "res://02_Entities/Pool/Buildings/Turrets/GammaTurret/gamma_turret.tscn"
 default_category = 4
 stats = Dictionary[int, ExtResource("3_5dkom")]({
-1: ExtResource("4_1a4g1"),
-2: ExtResource("5_tc1sx"),
-3: ExtResource("6_0cp57"),
-4: ExtResource("7_650iu"),
-5: ExtResource("8_qabvu"),
-6: ExtResource("9_yxbau"),
-7: ExtResource("10_ueajq"),
-8: ExtResource("11_ntm51"),
-9: ExtResource("12_atwro"),
-10: ExtResource("13_uw3sb"),
-11: ExtResource("14_r377a"),
-12: ExtResource("15_sptgg"),
-13: ExtResource("16_ekuxq"),
-14: ExtResource("17_ucm13"),
-15: ExtResource("18_5strv"),
-16: ExtResource("19_3re3c"),
-17: ExtResource("20_6lw5w"),
-18: ExtResource("21_h8ks4"),
-19: ExtResource("22_xtxb2"),
-20: ExtResource("23_2hd4n")
+1: ExtResource("10_650iu"),
+2: ExtResource("11_qabvu"),
+3: ExtResource("12_yxbau"),
+4: ExtResource("13_ueajq"),
+5: ExtResource("14_ntm51"),
+6: ExtResource("15_atwro"),
+7: ExtResource("16_uw3sb"),
+8: ExtResource("17_r377a"),
+9: ExtResource("18_sptgg"),
+10: ExtResource("19_ekuxq"),
+11: ExtResource("20_ucm13"),
+12: ExtResource("21_5strv"),
+13: ExtResource("22_3re3c"),
+14: ExtResource("23_6lw5w"),
+15: ExtResource("24_h8ks4"),
+16: ExtResource("25_xtxb2"),
+17: ExtResource("26_2hd4n"),
+18: ExtResource("27_ydkpo"),
+19: ExtResource("28_e3rn0"),
+20: ExtResource("29_rjekh")
 })
 skills = Dictionary[int, ExtResource("2_0msfy")]({
 0: ExtResource("24_pas"),

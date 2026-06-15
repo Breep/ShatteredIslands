@@ -6,29 +6,29 @@
 [ext_resource type="Resource" uid="uid://bdro3y6ufrav" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Skills/Passive/blood_lust.tres" id="3_rlfoj"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="4_rxlx3"]
 [ext_resource type="Resource" uid="uid://tw7nb65d1csy" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Skills/Ultimate/rage_cry.tres" id="4_x6d7x"]
-[ext_resource type="Resource" uid="uid://cftxpmxavd6vk" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/stats_lvl_01.tres" id="5_8mm8k"]
 [ext_resource type="Resource" uid="uid://bd1ooyl8gwks1" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Skills/Bronze/wounded_fury_as.tres" id="5_rxlx3"]
 [ext_resource type="Resource" uid="uid://o5j26uoxgo27" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Skills/Silver/wounded_fury_ad.tres" id="6_8mm8k"]
-[ext_resource type="Resource" uid="uid://nmkkfb4pluye" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/stats_lvl_02.tres" id="6_70ybn"]
 [ext_resource type="Resource" uid="uid://cef1l4m2epig5" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Skills/Gold/martial_artist.tres" id="7_8mm8k"]
-[ext_resource type="Resource" uid="uid://c5vww51rbr33t" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/stats_lvl_03.tres" id="7_mxwl6"]
-[ext_resource type="Resource" uid="uid://br2rwovtna4m8" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/stats_lvl_04.tres" id="8_vwvuc"]
-[ext_resource type="Resource" uid="uid://cs2wvnujqgplx" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/stats_lvl_05.tres" id="9_0y4pw"]
-[ext_resource type="Resource" uid="uid://b5fv1464u0pvr" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/stats_lvl_06.tres" id="10_kda0x"]
-[ext_resource type="Resource" uid="uid://bxrexm0ne4lj2" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/stats_lvl_07.tres" id="11_5lsly"]
-[ext_resource type="Resource" uid="uid://2r2iw5npobrr" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/stats_lvl_08.tres" id="12_g7rqh"]
-[ext_resource type="Resource" uid="uid://bncjldrx8ow16" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/stats_lvl_09.tres" id="13_fo4jm"]
-[ext_resource type="Resource" uid="uid://fu6yrp74hdqm" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/stats_lvl_10.tres" id="14_2ejry"]
-[ext_resource type="Resource" uid="uid://doeh0jv4fxvqj" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/stats_lvl_11.tres" id="15_3idjn"]
-[ext_resource type="Resource" uid="uid://dpuiwfponx1x6" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/stats_lvl_12.tres" id="16_nuppu"]
-[ext_resource type="Resource" uid="uid://c6dmt5cgj78m4" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/stats_lvl_13.tres" id="17_2xdp5"]
-[ext_resource type="Resource" uid="uid://c77s6sxb1prly" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/stats_lvl_14.tres" id="18_664p7"]
-[ext_resource type="Resource" uid="uid://bup28pao3k7a0" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/stats_lvl_15.tres" id="19_w5ylj"]
-[ext_resource type="Resource" uid="uid://7dumdmbfxo6k" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/stats_lvl_16.tres" id="20_p3i4x"]
-[ext_resource type="Resource" uid="uid://dqg500oivcggx" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/stats_lvl_17.tres" id="21_265oc"]
-[ext_resource type="Resource" uid="uid://b2ftuajgbdcd7" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/stats_lvl_18.tres" id="22_hqjqb"]
-[ext_resource type="Resource" uid="uid://l06i7qh71uws" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/stats_lvl_19.tres" id="23_uil7e"]
-[ext_resource type="Resource" uid="uid://cyqg6kyullq3i" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/stats_lvl_20.tres" id="24_kwj27"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/satyr_berserker_stats_lvl_01.tres" id="10_70ybn"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/satyr_berserker_stats_lvl_02.tres" id="11_mxwl6"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/satyr_berserker_stats_lvl_03.tres" id="12_vwvuc"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/satyr_berserker_stats_lvl_04.tres" id="13_0y4pw"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/satyr_berserker_stats_lvl_05.tres" id="14_kda0x"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/satyr_berserker_stats_lvl_06.tres" id="15_5lsly"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/satyr_berserker_stats_lvl_07.tres" id="16_g7rqh"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/satyr_berserker_stats_lvl_08.tres" id="17_fo4jm"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/satyr_berserker_stats_lvl_09.tres" id="18_2ejry"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/satyr_berserker_stats_lvl_10.tres" id="19_3idjn"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/satyr_berserker_stats_lvl_11.tres" id="20_nuppu"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/satyr_berserker_stats_lvl_12.tres" id="21_2xdp5"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/satyr_berserker_stats_lvl_13.tres" id="22_664p7"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/satyr_berserker_stats_lvl_14.tres" id="23_w5ylj"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/satyr_berserker_stats_lvl_15.tres" id="24_p3i4x"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/satyr_berserker_stats_lvl_16.tres" id="25_265oc"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/satyr_berserker_stats_lvl_17.tres" id="26_hqjqb"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/satyr_berserker_stats_lvl_18.tres" id="27_uil7e"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/satyr_berserker_stats_lvl_19.tres" id="28_kwj27"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/satyr_berserker_stats_lvl_20.tres" id="29_3fbey"]
 
 [resource]
 script = ExtResource("1_5viap")
@@ -36,26 +36,26 @@ name = "Pan the Satyr"
 portrait = ExtResource("1_70ybn")
 scene_path = "res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/satyr_berserker.tscn"
 stats = Dictionary[int, ExtResource("4_rxlx3")]({
-1: ExtResource("5_8mm8k"),
-2: ExtResource("6_70ybn"),
-3: ExtResource("7_mxwl6"),
-4: ExtResource("8_vwvuc"),
-5: ExtResource("9_0y4pw"),
-6: ExtResource("10_kda0x"),
-7: ExtResource("11_5lsly"),
-8: ExtResource("12_g7rqh"),
-9: ExtResource("13_fo4jm"),
-10: ExtResource("14_2ejry"),
-11: ExtResource("15_3idjn"),
-12: ExtResource("16_nuppu"),
-13: ExtResource("17_2xdp5"),
-14: ExtResource("18_664p7"),
-15: ExtResource("19_w5ylj"),
-16: ExtResource("20_p3i4x"),
-17: ExtResource("21_265oc"),
-18: ExtResource("22_hqjqb"),
-19: ExtResource("23_uil7e"),
-20: ExtResource("24_kwj27")
+1: ExtResource("10_70ybn"),
+2: ExtResource("11_mxwl6"),
+3: ExtResource("12_vwvuc"),
+4: ExtResource("13_0y4pw"),
+5: ExtResource("14_kda0x"),
+6: ExtResource("15_5lsly"),
+7: ExtResource("16_g7rqh"),
+8: ExtResource("17_fo4jm"),
+9: ExtResource("18_2ejry"),
+10: ExtResource("19_3idjn"),
+11: ExtResource("20_nuppu"),
+12: ExtResource("21_2xdp5"),
+13: ExtResource("22_664p7"),
+14: ExtResource("23_w5ylj"),
+15: ExtResource("24_p3i4x"),
+16: ExtResource("25_265oc"),
+17: ExtResource("26_hqjqb"),
+18: ExtResource("27_uil7e"),
+19: ExtResource("28_kwj27"),
+20: ExtResource("29_3fbey")
 })
 skills = Dictionary[int, ExtResource("2_x6d7x")]({
 0: ExtResource("3_rlfoj"),

@@ -25,6 +25,11 @@
 [ext_resource type="Resource" uid="uid://qwjn0p8coig7" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/Stats/geri_stats_lvl_18.tres" id="23_fxwji"]
 [ext_resource type="Resource" uid="uid://7lmjofup6n7i" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/Stats/geri_stats_lvl_19.tres" id="24_u0tt0"]
 [ext_resource type="Resource" uid="uid://k8p4yrivya80" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/Stats/geri_stats_lvl_20.tres" id="25_n846e"]
+[ext_resource type="Resource" uid="uid://cjdmqmrisar3a" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/Skills/Passive/coordinated_hunt.tres" id="26_pas"]
+[ext_resource type="Resource" uid="uid://cjdm4pg3xgw3a" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/Skills/Bronze/predator_instinct.tres" id="27_bro"]
+[ext_resource type="Resource" uid="uid://cjdm6cp3qbxna" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/Skills/Silver/rending_bite.tres" id="28_sil"]
+[ext_resource type="Resource" uid="uid://cjdm4am01ilja" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/Skills/Gold/pack_alpha.tres" id="29_gol"]
+[ext_resource type="Resource" uid="uid://cjdnb7t27r5aa" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/Skills/Ultimate/war_cry.tres" id="30_ult"]
 
 [resource]
 script = ExtResource("3_pfe8r")
@@ -55,6 +60,13 @@ stats = Dictionary[int, ExtResource("5_bgw67")]({
 18: ExtResource("23_fxwji"),
 19: ExtResource("24_u0tt0"),
 20: ExtResource("25_n846e")
+})
+skills = Dictionary[int, ExtResource("4_gqrcy")]({
+0: ExtResource("26_pas"),
+1: ExtResource("27_bro"),
+2: ExtResource("28_sil"),
+3: ExtResource("29_gol"),
+4: ExtResource("30_ult")
 })
 aa_1_anim_base_duration = 1.0
 aa_2_anim_base_duration = 1.0

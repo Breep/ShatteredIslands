@@ -2,28 +2,44 @@
 
 [ext_resource type="Script" uid="uid://flrydugnyfe7" path="res://05_Game/Run/SpawnSpecs/Concrete/acolyte_spawn_spec.gd" id="1_1ejte"]
 [ext_resource type="Script" uid="uid://rj6clcd8f15a" path="res://05_Game/Run/SpawnSpecs/entity_spec.gd" id="2_chgbo"]
-[ext_resource type="PackedScene" uid="uid://bes7q2ujh87bk" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/kobold_knight.tscn" id="3_7xefs"]
-[ext_resource type="PackedScene" uid="uid://cux3b38ayhml8" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/kobold_thief.tscn" id="4_q7grv"]
-[ext_resource type="PackedScene" uid="uid://dolubo8wodahp" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/kobold_warrior.tscn" id="5_7mwj6"]
+[ext_resource type="Resource" uid="uid://dddkh5njmooe1" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Stats/kobold_knight_entity_desc.tres" id="3_7xefs"]
+[ext_resource type="Resource" uid="uid://c2yci33qfr5n8" path="res://02_Entities/Pool/Mobs/Kobold/KoboldThief/Stats/kobold_thief_entity_desc.tres" id="4_q7grv"]
+[ext_resource type="Resource" uid="uid://cpmwbvgin5fcg" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Stats/kobold_warrior_entity_desc.tres" id="5_7mwj6"]
 [ext_resource type="Script" uid="uid://bj0ecq2d5vir5" path="res://05_Game/Run/SpawnSpecs/Concrete/hero_spawn_spec.gd" id="6_uqeva"]
 [ext_resource type="Script" uid="uid://b3ir321gjcqej" path="res://05_Game/Run/Formations/fighting_formation.gd" id="7_lnii1"]
 [ext_resource type="Script" uid="uid://c78ccxnqy6c16" path="res://05_Game/Run/SpawnSpecs/spawn_point_spec.gd" id="8_l0acx"]
+[ext_resource type="Script" uid="uid://dy31m54qprfhl" path="res://05_Game/Run/Party/roaster_entry.gd" id="9_rstry"]
+
+[sub_resource type="Resource" id="RoasterEntry_knight"]
+script = ExtResource("9_rstry")
+desc = ExtResource("3_7xefs")
+level = 2
 
 [sub_resource type="Resource" id="Resource_2b6ac"]
 script = ExtResource("2_chgbo")
-scene = ExtResource("3_7xefs")
+entry = SubResource("RoasterEntry_knight")
 display_label = "KoboldKnight"
 transform = Transform3D(-0.10824226, 0, -0.99412453, 0, 1, 0, 0.99412453, 0, -0.10824226, -1.594621, -9.536743e-07, -4.0907087)
 
+[sub_resource type="Resource" id="RoasterEntry_thief"]
+script = ExtResource("9_rstry")
+desc = ExtResource("4_q7grv")
+level = 3
+
 [sub_resource type="Resource" id="Resource_0k6gi"]
 script = ExtResource("2_chgbo")
-scene = ExtResource("4_q7grv")
+entry = SubResource("RoasterEntry_thief")
 display_label = "Kobold_Thief"
 transform = Transform3D(-0.087520815, 0, 0.9961627, 0, 1, 0, -0.9961627, 0, -0.087520815, -9.118106, 0, -1.0740626)
 
+[sub_resource type="Resource" id="RoasterEntry_warrior"]
+script = ExtResource("9_rstry")
+desc = ExtResource("5_7mwj6")
+level = 2
+
 [sub_resource type="Resource" id="Resource_uydp8"]
 script = ExtResource("2_chgbo")
-scene = ExtResource("5_7mwj6")
+entry = SubResource("RoasterEntry_warrior")
 display_label = "Kobold_Warrior"
 transform = Transform3D(0.30546266, 0, -0.95220405, 0, 1, 0, 0.95220405, 0, 0.30546266, -4.1358094, 0, 4.313956)
 

@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="EntityStats" format=3 uid="uid://dfkm27wney1l4"]
+
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="1_1alsa"]
+
+[resource]
+script = ExtResource("1_1alsa")
+_health_max = 3440.0
+_mana_max = 35.0
+_mana_regen = 3.5
+_attack_range = 4.5
+_attack_damage = 30.0
+_attack_speed = 0.9851123317034368
+_movement_speed = 4.5
+_attack_power = 38.0
+armor = 15.368272297580948
+magic_resistance = 38.42068074395237
+poison_resistance = 23.052408446371423
+_crit_chance = 15.05904782547916
+_dodge = 14.5
+_m_crit_chances = Dictionary[int, float]({
+0: 0.0,
+1: 0.0
+})
+_m_resistances = Dictionary[int, float]({
+0: 15.368272297580948,
+1: 38.42068074395237,
+2: 23.052408446371423
+})

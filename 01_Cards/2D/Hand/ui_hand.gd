@@ -145,6 +145,11 @@ func _ready() -> void:
 	_hand_pivot_starting_position = _hand_pivot.position
 	if _drag_coordinator != null:
 		_drag_coordinator.register_container(self)
+	Events.tutorial_set_hand_visible.connect(_on_tutorial_set_hand_visible)
+
+
+func _on_tutorial_set_hand_visible(is_visible: bool) -> void:
+	visible = is_visible
 
 
 func _exit_tree() -> void:

@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dvr7815lw1k8b" path="res://02_Entities/Pool/Heroes/Latika/latika.tscn" id="3_rrp3o"]
 [ext_resource type="Resource" uid="uid://tkrmggge2pc" path="res://05_Game/Run/Formations/Pool/Prototyping/default_solo.fighting.tres" id="3_vtr74"]
 [ext_resource type="PackedScene" uid="uid://7s8lg5leu3go" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/chicken_ardent_celestial.tscn" id="4_vtr74"]
-[ext_resource type="PackedScene" uid="uid://xup3guwehhoc" path="res://02_Entities/Pool/Mobs/Chickens/Basic/chicken_basic.tscn" id="5_gmm5j"]
+[ext_resource type="PackedScene" uid="uid://xup3guwehhoc" path="res://02_Entities/Pool/Mobs/Chickens/ChickenBasic/chicken_basic.tscn" id="5_gmm5j"]
 
 [node name="TavernEncounter_proto" type="Node" unique_id=1516970662]
 script = ExtResource("1_proto")

@@ -141,7 +141,6 @@ func _spawn_entry_at(entry: RoasterEntry, target_transform: Transform3D, fallbac
 	_ctx.runtime_owner_player = owner if owner != null else PlayerManager.get_local_player()
 	_ctx.roaster = _party.get_roaster(slot)
 	var spec := EntitySpec.new()
-	spec.desc = entry.desc
 	spec.entry = entry
 	spec.transform = target_transform
 	spec.display_label = fallback_name

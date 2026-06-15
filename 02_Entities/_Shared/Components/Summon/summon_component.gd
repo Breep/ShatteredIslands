@@ -13,7 +13,7 @@ var _arena_zone_manager: ArenaZoneManager
 const SNAKE_BARREL_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/SnakeBarrel/snake_barrel.tscn")
 const SNAKE_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/Snake/snake.tscn")
 
-const CHICKEN_BASIC_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/Chickens/Basic/chicken_basic.tscn")
+const CHICKEN_BASIC_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/Chickens/ChickenBasic/chicken_basic.tscn")
 const CHICKEN_ATTACK_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/Chickens/Gifted//ChickenAttack/chicken_attack.tscn")
 const CHICKEN_POISON_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/Chickens/Gifted//ChickenPoison/chicken_poison.tscn")
 const CHICKEN_COLOSSUS_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/Chickens/Gifted//ChickenColossus/chicken_colossus.tscn")

@@ -19,6 +19,7 @@ func _ready() -> void:
 	_shop_main_control.hide()
 	_shop_main_control.modulate.a = 0.0
 	_open_shop_button.show()
+	Events.tutorial_set_shop_open.connect(_on_tutorial_set_shop_open)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -71,6 +72,15 @@ func _local_hero_skill() -> HeroSkillComponent:
 func _on_open_shop_button_pressed() -> void:
 	Events.shop_opened.emit()
 	_show_shop_panel()
+
+
+# Le tutoriel garantit l'état du shop avant de pointer un élément : ouvre-le s'il
+# doit l'être (cas où le joueur l'a fermé), ferme-le pour dégager la vue (clic ennemi).
+func _on_tutorial_set_shop_open(should_open: bool) -> void:
+	if should_open and not _shop_main_control.visible:
+		_show_shop_panel()
+	elif not should_open and _shop_main_control.visible:
+		_hide_shop_panel()
 
 
 var _shop_panel_tween: Tween

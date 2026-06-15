@@ -272,10 +272,10 @@ Registries : `auto_attack_modifier_registry`, `action_modifiers_registry`,
    markers et `_projectile_type` dans l'inspecteur
 5. **Résolution de spawn** (lue par `EntityDesc.resolve_scene`) :
    - non-héros : poser `scene_path` sur le `*_desc.tres` → chemin du
-     `<entity_name>.tscn`. Source de vérité unique, rien à enregistrer
-     ailleurs.
+	 `<entity_name>.tscn`. Source de vérité unique, rien à enregistrer
+	 ailleurs.
    - **héros** : `<entity_name>_preview.tscn`, entrée dans
-     `HeroDesc.HeroId` + `Shared.HERO_SCENES`
+	 `HeroDesc.HeroId` + `Shared.HERO_SCENES`
 6. Bootstrap stats : `Stats/<entity_name>_stat_builder.tres` → Generate
 7. Tester en isolation (proto scene si comportement visible, cf. règle
    `*.proto.tscn` du CLAUDE.md racine)

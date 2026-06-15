@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://85dbxj88x4wo" path="res://05_Game/Run/Confrontations/Pool/Colossus3/colossus3.confrontation.tres" id="2_qaqq0"]
 [ext_resource type="Resource" uid="uid://tkrmggge2pc" path="res://05_Game/Run/Formations/Pool/Prototyping/default_solo.fighting.tres" id="3_tdflf"]
 [ext_resource type="PackedScene" uid="uid://dvr7815lw1k8b" path="res://02_Entities/Pool/Heroes/Latika/latika.tscn" id="4_usodo"]
-[ext_resource type="PackedScene" uid="uid://xup3guwehhoc" path="res://02_Entities/Pool/Mobs/Chickens/Basic/chicken_basic.tscn" id="5_3ib71"]
+[ext_resource type="PackedScene" uid="uid://xup3guwehhoc" path="res://02_Entities/Pool/Mobs/Chickens/ChickenBasic/chicken_basic.tscn" id="5_3ib71"]
 
 [node name="ConfrontationRunnerProto" type="Node" unique_id=1933938655]
 script = ExtResource("1_0qt4w")

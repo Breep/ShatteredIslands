@@ -4,31 +4,31 @@
 [ext_resource type="Texture2D" uid="uid://jbu2mfjhcr4j" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Data/ice_golem_portrait.png" id="1_rtmhc"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="2_skill"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_stats"]
-[ext_resource type="Resource" uid="uid://cjg13qevmvhtn" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/stats_lvl_01.tres" id="4_01"]
-[ext_resource type="Resource" uid="uid://3rwrcf2rdwcg" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/stats_lvl_02.tres" id="5_02"]
-[ext_resource type="Resource" uid="uid://c8chhb0pea5fa" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/stats_lvl_03.tres" id="6_03"]
-[ext_resource type="Resource" uid="uid://b8gxmc4pcjleo" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/stats_lvl_04.tres" id="7_04"]
-[ext_resource type="Resource" uid="uid://bcm76ayarabi1" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/stats_lvl_05.tres" id="8_05"]
-[ext_resource type="Resource" uid="uid://bqhrpjso8ebss" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/stats_lvl_06.tres" id="9_06"]
-[ext_resource type="Resource" uid="uid://i1ymoiigwynl" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/stats_lvl_07.tres" id="10_07"]
-[ext_resource type="Resource" uid="uid://dpfj5ve8usvjf" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/stats_lvl_08.tres" id="11_08"]
-[ext_resource type="Resource" uid="uid://cm5n1740c565f" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/stats_lvl_09.tres" id="12_09"]
-[ext_resource type="Resource" uid="uid://c4em8hrje223p" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/stats_lvl_10.tres" id="13_10"]
-[ext_resource type="Resource" uid="uid://ca7bvet26kenl" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/stats_lvl_11.tres" id="14_11"]
-[ext_resource type="Resource" uid="uid://2cliostvyji3" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/stats_lvl_12.tres" id="15_12"]
-[ext_resource type="Resource" uid="uid://dsyf71yfd7t7b" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/stats_lvl_13.tres" id="16_13"]
-[ext_resource type="Resource" uid="uid://c57sehuouqeoc" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/stats_lvl_14.tres" id="17_14"]
-[ext_resource type="Resource" uid="uid://d2nf8j6f8i8hl" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/stats_lvl_15.tres" id="18_15"]
-[ext_resource type="Resource" uid="uid://bf54krgluxwtq" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/stats_lvl_16.tres" id="19_16"]
-[ext_resource type="Resource" uid="uid://den6ilu2xgm8y" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/stats_lvl_17.tres" id="20_17"]
-[ext_resource type="Resource" uid="uid://d0xddkbrusrqo" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/stats_lvl_18.tres" id="21_18"]
-[ext_resource type="Resource" uid="uid://ehtcy4xtsjiv" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/stats_lvl_19.tres" id="22_19"]
-[ext_resource type="Resource" uid="uid://ct2b2brajoyon" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/stats_lvl_20.tres" id="23_20"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/ice_golem_stats_lvl_01.tres" id="10_rtmhc"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/ice_golem_stats_lvl_02.tres" id="11_p4fpg"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/ice_golem_stats_lvl_03.tres" id="12_32gsc"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/ice_golem_stats_lvl_04.tres" id="13_m82ui"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/ice_golem_stats_lvl_05.tres" id="14_dbd0q"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/ice_golem_stats_lvl_06.tres" id="15_7beee"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/ice_golem_stats_lvl_07.tres" id="16_4t2sj"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/ice_golem_stats_lvl_08.tres" id="17_exbaf"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/ice_golem_stats_lvl_09.tres" id="18_xpotc"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/ice_golem_stats_lvl_10.tres" id="19_0brav"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/ice_golem_stats_lvl_11.tres" id="20_hwjex"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/ice_golem_stats_lvl_12.tres" id="21_f31dl"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/ice_golem_stats_lvl_13.tres" id="22_fuuf3"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/ice_golem_stats_lvl_14.tres" id="23_v4mig"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/ice_golem_stats_lvl_15.tres" id="24_boag6"]
 [ext_resource type="Resource" uid="uid://cfragment2res" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Skills/Passive/fragmentation.tres" id="24_pas"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/ice_golem_stats_lvl_16.tres" id="25_bhs67"]
 [ext_resource type="Resource" uid="uid://ccoupsgel2res" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Skills/Bronze/coups_gelants.tres" id="25_bro"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/ice_golem_stats_lvl_17.tres" id="26_p7k1p"]
 [ext_resource type="Resource" uid="uid://ccarapace2res" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Skills/Silver/carapace_cristalline.tres" id="26_sil"]
 [ext_resource type="Resource" uid="uid://ccouvgla2res7" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Skills/Gold/couvee_glacee.tres" id="27_gol"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/ice_golem_stats_lvl_18.tres" id="27_wcqj8"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/ice_golem_stats_lvl_19.tres" id="28_dsjnd"]
 [ext_resource type="Resource" uid="uid://8vot5d2gmipy" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Skills/Ultimate/saut_tellurique.tres" id="28_ult"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/ice_golem_stats_lvl_20.tres" id="29_ot117"]
 
 [resource]
 script = ExtResource("1_desc")
@@ -36,26 +36,26 @@ name = "Ice Golem"
 portrait = ExtResource("1_rtmhc")
 scene_path = "res://02_Entities/Pool/Mobs/Golems/IceGolem/ice_golem.tscn"
 stats = Dictionary[int, ExtResource("3_stats")]({
-1: ExtResource("4_01"),
-2: ExtResource("5_02"),
-3: ExtResource("6_03"),
-4: ExtResource("7_04"),
-5: ExtResource("8_05"),
-6: ExtResource("9_06"),
-7: ExtResource("10_07"),
-8: ExtResource("11_08"),
-9: ExtResource("12_09"),
-10: ExtResource("13_10"),
-11: ExtResource("14_11"),
-12: ExtResource("15_12"),
-13: ExtResource("16_13"),
-14: ExtResource("17_14"),
-15: ExtResource("18_15"),
-16: ExtResource("19_16"),
-17: ExtResource("20_17"),
-18: ExtResource("21_18"),
-19: ExtResource("22_19"),
-20: ExtResource("23_20")
+1: ExtResource("10_rtmhc"),
+2: ExtResource("11_p4fpg"),
+3: ExtResource("12_32gsc"),
+4: ExtResource("13_m82ui"),
+5: ExtResource("14_dbd0q"),
+6: ExtResource("15_7beee"),
+7: ExtResource("16_4t2sj"),
+8: ExtResource("17_exbaf"),
+9: ExtResource("18_xpotc"),
+10: ExtResource("19_0brav"),
+11: ExtResource("20_hwjex"),
+12: ExtResource("21_f31dl"),
+13: ExtResource("22_fuuf3"),
+14: ExtResource("23_v4mig"),
+15: ExtResource("24_boag6"),
+16: ExtResource("25_bhs67"),
+17: ExtResource("26_p7k1p"),
+18: ExtResource("27_wcqj8"),
+19: ExtResource("28_dsjnd"),
+20: ExtResource("29_ot117")
 })
 skills = Dictionary[int, ExtResource("2_skill")]({
 0: ExtResource("24_pas"),

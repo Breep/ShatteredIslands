@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="EntityStats" format=3 uid="uid://usac3idad3k7"]
+
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="1_2slar"]
+
+[resource]
+script = ExtResource("1_2slar")
+_health_max = 6320.0
+_mana_max = 35.0
+_mana_regen = 3.7
+_attack_range = 4.5
+_attack_damage = 38.0
+_attack_speed = 1.099745473761062
+_movement_speed = 4.5
+_attack_power = 46.0
+armor = 16.444983454768828
+magic_resistance = 41.11245863692207
+poison_resistance = 24.66747518215324
+_crit_chance = 16.236700653653408
+_dodge = 15.5
+_m_crit_chances = Dictionary[int, float]({
+0: 0.0,
+1: 0.0
+})
+_m_resistances = Dictionary[int, float]({
+0: 16.444983454768828,
+1: 41.11245863692207,
+2: 24.66747518215324
+})

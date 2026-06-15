@@ -4,20 +4,26 @@
 
 [resource]
 script = ExtResource("1_kp34w")
-_health_max = 1620.0
-_mana_regen = 3.7
+_health_max = 13150.0
+_mana_max = 40.0
+_mana_regen = 3.0
 auto_attack_type = 1
 _attack_range = 1.5
-_attack_damage = 54.0
-_attack_speed = 1.35
-_movement_speed = 9.25
-_attack_power = 0.0
-_crit_resistance = 10.85
-armor = 4.7
-magic_resistance = 4.7
-poison_resistance = 4.7
+_attack_damage = 47.0
+_attack_speed = 1.4889627245545294
+_movement_speed = 4.5
+_attack_power = 75.9
+armor = 21.561487031584655
+magic_resistance = 21.561487031584655
+poison_resistance = 21.561487031584655
+_crit_chance = 14.8
+_dodge = 14.5
+_m_crit_chances = Dictionary[int, float]({
+0: 0.0,
+1: 0.0
+})
 _m_resistances = Dictionary[int, float]({
-0: 4.7,
-1: 4.7,
-2: 4.7
+0: 21.561487031584655,
+1: 21.561487031584655,
+2: 21.561487031584655
 })

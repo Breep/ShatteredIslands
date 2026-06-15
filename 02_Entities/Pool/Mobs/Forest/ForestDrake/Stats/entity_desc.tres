@@ -6,29 +6,29 @@
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_qrmea"]
 [ext_resource type="Resource" uid="uid://m7dn7jdrcb81" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Skills/Passive/benevolent_aggression.tres" id="3_rsrlv"]
 [ext_resource type="Resource" uid="uid://d3gotr83ml84w" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Skills/Bronze/helping_hand.tres" id="4_qrmea"]
-[ext_resource type="Resource" uid="uid://cxyohapv38on7" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/stats_lvl_01.tres" id="4_yg6ig"]
-[ext_resource type="Resource" uid="uid://dyx1qc623xx6k" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/stats_lvl_02.tres" id="5_i4e5c"]
 [ext_resource type="Resource" uid="uid://40jbt70lfnym" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Skills/Silver/purifying_breath.tres" id="5_yg6ig"]
-[ext_resource type="Resource" uid="uid://ct6ixjbk1q627" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/stats_lvl_03.tres" id="6_7dhjw"]
 [ext_resource type="Resource" uid="uid://db3w0jk77j6u" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Skills/Gold/fairy_pirouette.tres" id="6_i4e5c"]
 [ext_resource type="Resource" uid="uid://cj2esy7vun161" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Skills/Ultimate/clearing_of_life.tres" id="7_7dhjw"]
-[ext_resource type="Resource" uid="uid://bumajtb74hv2p" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/stats_lvl_04.tres" id="7_kc8f1"]
-[ext_resource type="Resource" uid="uid://72ngyneawhju" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/stats_lvl_05.tres" id="8_mb8u7"]
-[ext_resource type="Resource" uid="uid://qmuwrlvu8rbw" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/stats_lvl_06.tres" id="9_r8y24"]
-[ext_resource type="Resource" uid="uid://b32v48wlbsl7n" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/stats_lvl_07.tres" id="10_ppj35"]
-[ext_resource type="Resource" uid="uid://q1ff3da1urau" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/stats_lvl_08.tres" id="11_2awkr"]
-[ext_resource type="Resource" uid="uid://13b6tb1egk6p" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/stats_lvl_09.tres" id="12_imxrc"]
-[ext_resource type="Resource" uid="uid://dy0s0ecsrbby3" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/stats_lvl_10.tres" id="13_y4c5g"]
-[ext_resource type="Resource" uid="uid://cfvrwbrbiyv1k" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/stats_lvl_11.tres" id="14_ax86l"]
-[ext_resource type="Resource" uid="uid://d0kx1nw8hurcw" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/stats_lvl_12.tres" id="15_juo7b"]
-[ext_resource type="Resource" uid="uid://dr0eevsc3upv3" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/stats_lvl_13.tres" id="16_tlutc"]
-[ext_resource type="Resource" uid="uid://be8dlglsjyxv8" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/stats_lvl_14.tres" id="17_ejcw0"]
-[ext_resource type="Resource" uid="uid://c31071fer0dac" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/stats_lvl_15.tres" id="18_igo2r"]
-[ext_resource type="Resource" uid="uid://da5j47gdw5pbb" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/stats_lvl_16.tres" id="19_ursja"]
-[ext_resource type="Resource" uid="uid://ps2k77an33xs" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/stats_lvl_17.tres" id="20_wpafi"]
-[ext_resource type="Resource" uid="uid://dmhy0t2tyao6t" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/stats_lvl_18.tres" id="21_icbuc"]
-[ext_resource type="Resource" uid="uid://2nrvh7ov7sib" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/stats_lvl_19.tres" id="22_3uru6"]
-[ext_resource type="Resource" uid="uid://cuuo67x6hxcg6" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/stats_lvl_20.tres" id="23_cy1gy"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/forest_drake_stats_lvl_01.tres" id="10_kc8f1"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/forest_drake_stats_lvl_02.tres" id="11_mb8u7"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/forest_drake_stats_lvl_03.tres" id="12_r8y24"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/forest_drake_stats_lvl_04.tres" id="13_ppj35"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/forest_drake_stats_lvl_05.tres" id="14_2awkr"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/forest_drake_stats_lvl_06.tres" id="15_imxrc"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/forest_drake_stats_lvl_07.tres" id="16_y4c5g"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/forest_drake_stats_lvl_08.tres" id="17_ax86l"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/forest_drake_stats_lvl_09.tres" id="18_juo7b"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/forest_drake_stats_lvl_10.tres" id="19_tlutc"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/forest_drake_stats_lvl_11.tres" id="20_ejcw0"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/forest_drake_stats_lvl_12.tres" id="21_igo2r"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/forest_drake_stats_lvl_13.tres" id="22_ursja"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/forest_drake_stats_lvl_14.tres" id="23_wpafi"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/forest_drake_stats_lvl_15.tres" id="24_icbuc"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/forest_drake_stats_lvl_16.tres" id="25_3uru6"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/forest_drake_stats_lvl_17.tres" id="26_cy1gy"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/forest_drake_stats_lvl_18.tres" id="27_76sbc"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/forest_drake_stats_lvl_19.tres" id="28_p5n7j"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/forest_drake_stats_lvl_20.tres" id="29_bdh81"]
 
 [resource]
 script = ExtResource("1_s5na4")
@@ -36,26 +36,26 @@ name = "Forest dragon"
 portrait = ExtResource("1_kc8f1")
 scene_path = "res://02_Entities/Pool/Mobs/Forest/ForestDrake/forest_drake.tscn"
 stats = Dictionary[int, ExtResource("3_qrmea")]({
-1: ExtResource("4_yg6ig"),
-2: ExtResource("5_i4e5c"),
-3: ExtResource("6_7dhjw"),
-4: ExtResource("7_kc8f1"),
-5: ExtResource("8_mb8u7"),
-6: ExtResource("9_r8y24"),
-7: ExtResource("10_ppj35"),
-8: ExtResource("11_2awkr"),
-9: ExtResource("12_imxrc"),
-10: ExtResource("13_y4c5g"),
-11: ExtResource("14_ax86l"),
-12: ExtResource("15_juo7b"),
-13: ExtResource("16_tlutc"),
-14: ExtResource("17_ejcw0"),
-15: ExtResource("18_igo2r"),
-16: ExtResource("19_ursja"),
-17: ExtResource("20_wpafi"),
-18: ExtResource("21_icbuc"),
-19: ExtResource("22_3uru6"),
-20: ExtResource("23_cy1gy")
+1: ExtResource("10_kc8f1"),
+2: ExtResource("11_mb8u7"),
+3: ExtResource("12_r8y24"),
+4: ExtResource("13_ppj35"),
+5: ExtResource("14_2awkr"),
+6: ExtResource("15_imxrc"),
+7: ExtResource("16_y4c5g"),
+8: ExtResource("17_ax86l"),
+9: ExtResource("18_juo7b"),
+10: ExtResource("19_tlutc"),
+11: ExtResource("20_ejcw0"),
+12: ExtResource("21_igo2r"),
+13: ExtResource("22_ursja"),
+14: ExtResource("23_wpafi"),
+15: ExtResource("24_icbuc"),
+16: ExtResource("25_3uru6"),
+17: ExtResource("26_cy1gy"),
+18: ExtResource("27_76sbc"),
+19: ExtResource("28_p5n7j"),
+20: ExtResource("29_bdh81")
 })
 skills = Dictionary[int, ExtResource("2_rsrlv")]({
 0: ExtResource("3_rsrlv"),

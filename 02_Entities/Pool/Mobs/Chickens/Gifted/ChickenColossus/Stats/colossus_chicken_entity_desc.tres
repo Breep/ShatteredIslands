@@ -3,30 +3,30 @@
 [ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="1_bteoc"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="2_amy3b"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_jyrfj"]
-[ext_resource type="Resource" uid="uid://qfakrywr1cgy" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/colossus_chicken_stats_lvl_01.tres" id="4_cb45n"]
-[ext_resource type="Resource" uid="uid://cefl6ynroaks1" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/colossus_chicken_stats_lvl_02.tres" id="5_rb8d8"]
-[ext_resource type="Resource" uid="uid://h421g6vyquou" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/colossus_chicken_stats_lvl_03.tres" id="6_qaolf"]
-[ext_resource type="Resource" uid="uid://c0andonumk7e3" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/colossus_chicken_stats_lvl_04.tres" id="7_mw144"]
-[ext_resource type="Resource" uid="uid://dn78opq78e4et" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/colossus_chicken_stats_lvl_05.tres" id="8_koyqs"]
-[ext_resource type="Resource" uid="uid://bqwoldh1qccrs" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/colossus_chicken_stats_lvl_06.tres" id="9_lk52j"]
-[ext_resource type="Resource" uid="uid://beal4fj3d5vsr" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/colossus_chicken_stats_lvl_07.tres" id="10_nqm3k"]
-[ext_resource type="Resource" uid="uid://cisy2pclrljs5" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/colossus_chicken_stats_lvl_08.tres" id="11_l26up"]
-[ext_resource type="Resource" uid="uid://bs1jxwbgtkp7b" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/colossus_chicken_stats_lvl_09.tres" id="12_45cpv"]
-[ext_resource type="Resource" uid="uid://teo3itirh7nm" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/colossus_chicken_stats_lvl_10.tres" id="13_x54to"]
-[ext_resource type="Resource" uid="uid://dg2o0875dygkk" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/colossus_chicken_stats_lvl_11.tres" id="14_yvgpg"]
-[ext_resource type="Resource" uid="uid://bog0sjwqdwnya" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/colossus_chicken_stats_lvl_12.tres" id="15_0k7dt"]
-[ext_resource type="Resource" uid="uid://o87icbksei5q" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/colossus_chicken_stats_lvl_13.tres" id="16_8yq3s"]
-[ext_resource type="Resource" uid="uid://bqlfqtvns41ho" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/colossus_chicken_stats_lvl_14.tres" id="17_5yvew"]
-[ext_resource type="Resource" uid="uid://bctm5opwbeal1" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/colossus_chicken_stats_lvl_15.tres" id="18_4edm0"]
-[ext_resource type="Resource" uid="uid://2hlemxr6gtrq" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/colossus_chicken_stats_lvl_16.tres" id="19_ikbgv"]
-[ext_resource type="Resource" uid="uid://druv88rw13ke" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/colossus_chicken_stats_lvl_17.tres" id="20_acwx1"]
-[ext_resource type="Resource" uid="uid://bovyi1wf1yp5e" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/colossus_chicken_stats_lvl_18.tres" id="21_sdw43"]
-[ext_resource type="Resource" uid="uid://backy4rf0tnup" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/colossus_chicken_stats_lvl_19.tres" id="22_1tv4e"]
-[ext_resource type="Resource" uid="uid://d3y84jiec557j" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/colossus_chicken_stats_lvl_20.tres" id="23_gnj67"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/chicken_colossus_stats_lvl_01.tres" id="9_t8cg8"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/chicken_colossus_stats_lvl_02.tres" id="10_dw5sf"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/chicken_colossus_stats_lvl_03.tres" id="11_jacn3"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/chicken_colossus_stats_lvl_04.tres" id="12_7ktg7"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/chicken_colossus_stats_lvl_05.tres" id="13_p7kpq"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/chicken_colossus_stats_lvl_06.tres" id="14_pu2n4"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/chicken_colossus_stats_lvl_07.tres" id="15_1u5i0"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/chicken_colossus_stats_lvl_08.tres" id="16_8w1wx"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/chicken_colossus_stats_lvl_09.tres" id="17_8xoum"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/chicken_colossus_stats_lvl_10.tres" id="18_g18g2"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/chicken_colossus_stats_lvl_11.tres" id="19_4m40y"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/chicken_colossus_stats_lvl_12.tres" id="20_45dsc"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/chicken_colossus_stats_lvl_13.tres" id="21_42qg5"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/chicken_colossus_stats_lvl_14.tres" id="22_inarm"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/chicken_colossus_stats_lvl_15.tres" id="23_awvhg"]
 [ext_resource type="Resource" uid="uid://cphsj0xnsijhp" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Skills/Passive/plumage_epineux.tres" id="24_pas"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/chicken_colossus_stats_lvl_16.tres" id="24_xxsn3"]
 [ext_resource type="Resource" uid="uid://cglxkd661khfn" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Skills/Bronze/garde_de_meute.tres" id="25_bro"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/chicken_colossus_stats_lvl_17.tres" id="25_hitcm"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/chicken_colossus_stats_lvl_18.tres" id="26_df0jk"]
 [ext_resource type="Resource" uid="uid://b36yx63fntehq" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Skills/Silver/parade_epineuse.tres" id="26_sil"]
 [ext_resource type="Resource" uid="uid://btfyvd7wf2b4m" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Skills/Gold/dernier_gloussement.tres" id="27_gol"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/chicken_colossus_stats_lvl_19.tres" id="27_tvu81"]
+[ext_resource type="Resource" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Stats/chicken_colossus_stats_lvl_20.tres" id="28_irydq"]
 [ext_resource type="Resource" uid="uid://c4h4dximbl3vy" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Skills/Ultimate/cocotte_rempart.tres" id="28_ult"]
 
 [resource]
@@ -36,26 +36,26 @@ description = "BOK BOK"
 scene_path = "res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/chicken_colossus.tscn"
 default_category = 1
 stats = Dictionary[int, ExtResource("3_jyrfj")]({
-1: ExtResource("4_cb45n"),
-2: ExtResource("5_rb8d8"),
-3: ExtResource("6_qaolf"),
-4: ExtResource("7_mw144"),
-5: ExtResource("8_koyqs"),
-6: ExtResource("9_lk52j"),
-7: ExtResource("10_nqm3k"),
-8: ExtResource("11_l26up"),
-9: ExtResource("12_45cpv"),
-10: ExtResource("13_x54to"),
-11: ExtResource("14_yvgpg"),
-12: ExtResource("15_0k7dt"),
-13: ExtResource("16_8yq3s"),
-14: ExtResource("17_5yvew"),
-15: ExtResource("18_4edm0"),
-16: ExtResource("19_ikbgv"),
-17: ExtResource("20_acwx1"),
-18: ExtResource("21_sdw43"),
-19: ExtResource("22_1tv4e"),
-20: ExtResource("23_gnj67")
+1: ExtResource("9_t8cg8"),
+2: ExtResource("10_dw5sf"),
+3: ExtResource("11_jacn3"),
+4: ExtResource("12_7ktg7"),
+5: ExtResource("13_p7kpq"),
+6: ExtResource("14_pu2n4"),
+7: ExtResource("15_1u5i0"),
+8: ExtResource("16_8w1wx"),
+9: ExtResource("17_8xoum"),
+10: ExtResource("18_g18g2"),
+11: ExtResource("19_4m40y"),
+12: ExtResource("20_45dsc"),
+13: ExtResource("21_42qg5"),
+14: ExtResource("22_inarm"),
+15: ExtResource("23_awvhg"),
+16: ExtResource("24_xxsn3"),
+17: ExtResource("25_hitcm"),
+18: ExtResource("26_df0jk"),
+19: ExtResource("27_tvu81"),
+20: ExtResource("28_irydq")
 })
 skills = Dictionary[int, ExtResource("2_amy3b")]({
 0: ExtResource("24_pas"),

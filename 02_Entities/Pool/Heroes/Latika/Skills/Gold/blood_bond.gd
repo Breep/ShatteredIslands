@@ -32,7 +32,7 @@ func apply(ctx: SkillContext) -> void:
 		Verbose.error("SE_BloodBond: null owner", Verbose.Category.ENTITY_MODULE)
 		return
 
-	_recruit_pack(ctx.roaster)
+	_recruit_pack(ctx.roaster, latika.progression.level)
 
 	# Boxed pour vivre par instance (la resource SkillEffect peut être partagée).
 	var pack: Array[Entity] = []
@@ -71,13 +71,14 @@ func get_description() -> String:
 # Recrute la meute nommée dans le roaster du joueur. Idempotent : Latika rejoue apply()
 # à chaque (ré)apparition, mais le roaster persiste — la présence d'entries marquées
 # PACK_SOURCE signale un recrutement déjà fait, on ne double pas.
-func _recruit_pack(roaster: Roaster) -> void:
+func _recruit_pack(roaster: Roaster, level: int) -> void:
 	if roaster == null:
 		return
 	if not roaster.get_by_source(PACK_SOURCE).is_empty():
 		return
 	for desc: EntityDesc in _recruited_pack:
-		roaster.add_acolyte(desc, PACK_SOURCE)
+		var roaster_entry: RoasterEntry = roaster.add_acolyte(desc, PACK_SOURCE)
+		roaster_entry.level = level
 
 
 # Retrouve les loups de Latika sur la zone : acolytes Vrock dont le summoner est Latika.

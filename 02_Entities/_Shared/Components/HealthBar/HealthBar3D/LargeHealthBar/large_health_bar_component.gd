@@ -14,7 +14,7 @@ func _ready() -> void:
 	if _mana_bar and _mana_bar.material:
 		_mana_bar.material = _mana_bar.material.duplicate()
 
-	if _owner == null or not _owner.is_hero():
+	if _owner == null:
 		return
 
 	var stats := _owner.stats
@@ -22,7 +22,8 @@ func _ready() -> void:
 	stats.mana_changed.connect(_on_mana_changed)
 	stats.mana_max_changed.connect(_on_mana_max_changed)
 
-	_player_name_label.text = _owner.entity_name
+	if _owner.is_hero():
+		_player_name_label.text = _owner.entity_name
 #endregion
 
 

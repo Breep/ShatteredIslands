@@ -2,27 +2,43 @@
 
 [ext_resource type="Script" uid="uid://flrydugnyfe7" path="res://05_Game/Run/SpawnSpecs/Concrete/acolyte_spawn_spec.gd" id="1_71wse"]
 [ext_resource type="Script" uid="uid://rj6clcd8f15a" path="res://05_Game/Run/SpawnSpecs/entity_spec.gd" id="2_thg24"]
-[ext_resource type="PackedScene" uid="uid://73oqc1k27od6" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/molten_golem.tscn" id="3_1httl"]
-[ext_resource type="PackedScene" uid="uid://btqko5dh71wxi" path="res://02_Entities/Pool/Mobs/SkeletonDragon/skeleton_dragon.tscn" id="4_wtf10"]
+[ext_resource type="Resource" uid="uid://cmb6yb1ubj80r" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/entity_desc.tres" id="3_1httl"]
+[ext_resource type="Resource" uid="uid://u5ir3c4mxsrj" path="res://02_Entities/Pool/Mobs/SkeletonDragon/Stats/entity_desc.tres" id="4_wtf10"]
 [ext_resource type="Script" uid="uid://bj0ecq2d5vir5" path="res://05_Game/Run/SpawnSpecs/Concrete/hero_spawn_spec.gd" id="5_heobd"]
 [ext_resource type="Script" uid="uid://b3ir321gjcqej" path="res://05_Game/Run/Formations/fighting_formation.gd" id="6_5ssx6"]
 [ext_resource type="Script" uid="uid://c78ccxnqy6c16" path="res://05_Game/Run/SpawnSpecs/spawn_point_spec.gd" id="7_kjw46"]
+[ext_resource type="Script" uid="uid://dy31m54qprfhl" path="res://05_Game/Run/Party/roaster_entry.gd" id="8_rstry"]
+
+[sub_resource type="Resource" id="RoasterEntry_molten1"]
+script = ExtResource("8_rstry")
+desc = ExtResource("3_1httl")
+level = 7
 
 [sub_resource type="Resource" id="Resource_g1f6y"]
 script = ExtResource("2_thg24")
-scene = ExtResource("3_1httl")
+entry = SubResource("RoasterEntry_molten1")
 display_label = "MoltenGolem"
 transform = Transform3D(0.54170823, 0, -0.8405666, 0, 1, 0, 0.8405666, 0, 0.54170823, -2.502654, 0, 4.9681244)
 
+[sub_resource type="Resource" id="RoasterEntry_molten2"]
+script = ExtResource("8_rstry")
+desc = ExtResource("3_1httl")
+level = 7
+
 [sub_resource type="Resource" id="Resource_cnm83"]
 script = ExtResource("2_thg24")
-scene = ExtResource("3_1httl")
+entry = SubResource("RoasterEntry_molten2")
 display_label = "MoltenGolem2"
 transform = Transform3D(0.100135975, 0, -0.9949738, 0, 1, 0, 0.9949738, 0, 0.100135975, -3.5966673, 0, -6.286557)
 
+[sub_resource type="Resource" id="RoasterEntry_dragon"]
+script = ExtResource("8_rstry")
+desc = ExtResource("4_wtf10")
+level = 10
+
 [sub_resource type="Resource" id="Resource_lc5hh"]
 script = ExtResource("2_thg24")
-scene = ExtResource("4_wtf10")
+entry = SubResource("RoasterEntry_dragon")
 display_label = "SkeletonDragon"
 transform = Transform3D(0.04597326, 0, -0.9989427, 0, 1, 0, 0.9989427, 0, 0.04597326, -8.4147005, 0, -0.60113525)
 

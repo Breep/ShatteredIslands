@@ -5,7 +5,6 @@
 class_name RunRoot
 extends Node3D
 
-const MAIN_MENU_SCENE_PATH := "res://05_Game/MainMenu/main_menu.tscn"
 const RUN_WIN_PLAYER_PLACE := 1
 
 signal run_finished
@@ -83,4 +82,4 @@ func _on_fighting_phase_ended() -> void:
 
 func _on_result_leave_requested() -> void:
 	GameManager.clear_save()
-	get_tree().change_scene_to_file(MAIN_MENU_SCENE_PATH)
+	GlobalGameManager.return_to_main_menu()
