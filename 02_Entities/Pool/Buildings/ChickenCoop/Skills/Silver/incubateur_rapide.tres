@@ -6,6 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_ir"]
 script = ExtResource("2_eff")
+_period = 5.0
 metadata/_custom_type_script = "uid://cincubrap1eff7"
 
 [resource]
