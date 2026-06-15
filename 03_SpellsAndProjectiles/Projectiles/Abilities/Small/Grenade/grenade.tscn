@@ -11,8 +11,9 @@ randomize_by = 0.4
 speed = 9.0
 metadata/_custom_type_script = "uid://dlww5csbnicq8"
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_grenade"]
-radius = 0.2
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jmgkn"]
+radius = 0.3
+height = 1.6582031
 
 [node name="GrenadeProjectile" type="Area3D" unique_id=1924700001]
 collision_layer = 2
@@ -25,6 +26,6 @@ trajectory = SubResource("Resource_arc")
 type = 11
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=183932174]
-shape = SubResource("SphereShape3D_grenade")
+shape = SubResource("CapsuleShape3D_jmgkn")
 
 [node name="GrenadeVisual" parent="." unique_id=772538754 instance=ExtResource("3_vis")]
