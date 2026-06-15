@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_e5xql")
-_health_max = 2880.0
+_health_max = 3100.0
 _mana_max = 45.0
 _mana_regen = 3.5
 auto_attack_type = 1

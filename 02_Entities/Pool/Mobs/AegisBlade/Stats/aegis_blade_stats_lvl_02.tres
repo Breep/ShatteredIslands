@@ -6,16 +6,17 @@
 script = ExtResource("1_mjo0v")
 _health_max = 680.0
 _mana_max = 45.0
-_mana_regen = 3.1
+_mana_regen = 3.0
 auto_attack_type = 1
-_attack_range = 0.1
+_attack_range = 1.5
 _attack_damage = 15.0
-_attack_speed = 0.1
-_movement_speed = 0.0
+_attack_speed = 0.7093929340763728
+_movement_speed = 4.0
 _attack_power = 17.0
 armor = 25.545177444479563
 magic_resistance = 15.327106466687738
 poison_resistance = 25.545177444479563
+_crit_chance = 20.19860385419959
 _dodge = 0.5
 _m_crit_chances = Dictionary[int, float]({
 0: 0.0,

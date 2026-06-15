@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_bpmq8")
-_health_max = 1290.0
+_health_max = 1510.0
 _mana_max = 45.0
 _mana_regen = 3.4000000000000004
 auto_attack_type = 1

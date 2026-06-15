@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_ucrtp")
-_health_max = 6160.0
+_health_max = 6360.0
 _mana_max = 50.0
 _mana_regen = 3.6
 _attack_range = 7.0

@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_kdtng")
-_health_max = 11520.0
+_health_max = 11740.0
 _mana_max = 45.0
 _mana_regen = 3.9
 auto_attack_type = 1
