@@ -13,22 +13,6 @@
 [ext_resource type="Script" uid="uid://c78ccxnqy6c16" path="res://05_Game/Run/SpawnSpecs/spawn_point_spec.gd" id="11_w44nj"]
 [ext_resource type="Script" uid="uid://dy31m54qprfhl" path="res://05_Game/Run/Party/roaster_entry.gd" id="12_rstry"]
 
-[sub_resource type="Resource" id="RoasterEntry_treant1"]
-script = ExtResource("12_rstry")
-desc = ExtResource("4_ycdwx")
-
-[sub_resource type="Resource" id="RoasterEntry_treant2"]
-script = ExtResource("12_rstry")
-desc = ExtResource("4_ycdwx")
-
-[sub_resource type="Resource" id="RoasterEntry_treant3"]
-script = ExtResource("12_rstry")
-desc = ExtResource("4_ycdwx")
-
-[sub_resource type="Resource" id="RoasterEntry_treant4"]
-script = ExtResource("12_rstry")
-desc = ExtResource("4_ycdwx")
-
 [sub_resource type="Resource" id="Resource_0t8hl"]
 script = ExtResource("1_2ei67")
 scene = ExtResource("2_o783d")
@@ -77,11 +61,21 @@ scene = ExtResource("2_o783d")
 display_label = "AcolyteSpawnPoint08"
 transform = Transform3D(-0.5129272, 0, 0.8584321, 0, 1, 0, -0.8584321, 0, -0.5129272, 4.6870756, 0.5007801, -1.5109103)
 
+[sub_resource type="Resource" id="RoasterEntry_treant1"]
+script = ExtResource("12_rstry")
+desc = ExtResource("4_ycdwx")
+level = 5
+
 [sub_resource type="Resource" id="Resource_v877l"]
 script = ExtResource("5_1xeep")
 entry = SubResource("RoasterEntry_treant1")
 display_label = "SmallTreant"
 transform = Transform3D(0.31897596, 0, -0.9477628, 0, 1, 0, 0.9477628, 0, 0.31897596, -2.5864415, 0.6110034, 2.5178504)
+
+[sub_resource type="Resource" id="RoasterEntry_treant2"]
+script = ExtResource("12_rstry")
+desc = ExtResource("4_ycdwx")
+level = 6
 
 [sub_resource type="Resource" id="Resource_u0h5i"]
 script = ExtResource("5_1xeep")
@@ -89,11 +83,21 @@ entry = SubResource("RoasterEntry_treant2")
 display_label = "SmallTreant2"
 transform = Transform3D(-0.059358537, 0, -0.9982367, 0, 1, 0, 0.9982367, 0, -0.059358537, -5.3266697, 0.6110034, -0.15650144)
 
+[sub_resource type="Resource" id="RoasterEntry_treant3"]
+script = ExtResource("12_rstry")
+desc = ExtResource("4_ycdwx")
+level = 4
+
 [sub_resource type="Resource" id="Resource_rkns3"]
 script = ExtResource("5_1xeep")
 entry = SubResource("RoasterEntry_treant3")
 display_label = "SmallTreant3"
 transform = Transform3D(0.27107093, 0, -0.9625594, 0, 1, 0, 0.9625594, 0, 0.27107093, -4.59319, 0.6110034, 1.9561926)
+
+[sub_resource type="Resource" id="RoasterEntry_treant4"]
+script = ExtResource("12_rstry")
+desc = ExtResource("4_ycdwx")
+level = 5
 
 [sub_resource type="Resource" id="Resource_k0oyb"]
 script = ExtResource("5_1xeep")

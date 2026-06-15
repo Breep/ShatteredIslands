@@ -13,14 +13,7 @@
 [sub_resource type="Resource" id="RoasterEntry_ice"]
 script = ExtResource("9_rstry")
 desc = ExtResource("3_bakjv")
-
-[sub_resource type="Resource" id="RoasterEntry_molten"]
-script = ExtResource("9_rstry")
-desc = ExtResource("4_7tog1")
-
-[sub_resource type="Resource" id="RoasterEntry_poison"]
-script = ExtResource("9_rstry")
-desc = ExtResource("5_rv77b")
+level = 7
 
 [sub_resource type="Resource" id="Resource_gjr2k"]
 script = ExtResource("2_t7j13")
@@ -28,11 +21,21 @@ entry = SubResource("RoasterEntry_ice")
 display_label = "IceGolem"
 transform = Transform3D(0.3703305, 0, -0.92890006, 0, 1, 0, 0.92890006, 0, 0.3703305, -2.747178, 0, 5.90839)
 
+[sub_resource type="Resource" id="RoasterEntry_molten"]
+script = ExtResource("9_rstry")
+desc = ExtResource("4_7tog1")
+level = 7
+
 [sub_resource type="Resource" id="Resource_ahopr"]
 script = ExtResource("2_t7j13")
 entry = SubResource("RoasterEntry_molten")
 display_label = "MoltenGolem"
 transform = Transform3D(0.19212803, 0, -0.98136985, 0, 1, 0, 0.98136985, 0, 0.19212803, -7.9567738, 0, -0.759326)
+
+[sub_resource type="Resource" id="RoasterEntry_poison"]
+script = ExtResource("9_rstry")
+desc = ExtResource("5_rv77b")
+level = 7
 
 [sub_resource type="Resource" id="Resource_jchp5"]
 script = ExtResource("2_t7j13")

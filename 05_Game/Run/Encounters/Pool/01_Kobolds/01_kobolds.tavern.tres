@@ -15,18 +15,6 @@
 [ext_resource type="Script" uid="uid://c78ccxnqy6c16" path="res://05_Game/Run/SpawnSpecs/spawn_point_spec.gd" id="13_ls0a8"]
 [ext_resource type="Script" uid="uid://dy31m54qprfhl" path="res://05_Game/Run/Party/roaster_entry.gd" id="14_rstry"]
 
-[sub_resource type="Resource" id="RoasterEntry_knight"]
-script = ExtResource("14_rstry")
-desc = ExtResource("4_osann")
-
-[sub_resource type="Resource" id="RoasterEntry_thief"]
-script = ExtResource("14_rstry")
-desc = ExtResource("6_tdi6i")
-
-[sub_resource type="Resource" id="RoasterEntry_warrior"]
-script = ExtResource("14_rstry")
-desc = ExtResource("7_5uhi1")
-
 [sub_resource type="Resource" id="Resource_4llt4"]
 script = ExtResource("1_nsql8")
 scene = ExtResource("2_76ej1")
@@ -75,17 +63,32 @@ scene = ExtResource("2_76ej1")
 display_label = "AcolyteSpawnPoint08"
 transform = Transform3D(-0.5129272, 0, 0.8584321, 0, 1, 0, -0.8584321, 0, -0.5129272, 4.6870756, 0.5007801, -1.5109103)
 
+[sub_resource type="Resource" id="RoasterEntry_knight"]
+script = ExtResource("14_rstry")
+desc = ExtResource("4_osann")
+level = 2
+
 [sub_resource type="Resource" id="Resource_e001b"]
 script = ExtResource("5_lkqdl")
 entry = SubResource("RoasterEntry_knight")
 display_label = "KoboldKnight"
 transform = Transform3D(-0.007382727, 0, -0.99997276, 0, 1, 0, 0.99997276, 0, -0.007382727, -2.3658962, 0.5270095, 0.3797772)
 
+[sub_resource type="Resource" id="RoasterEntry_thief"]
+script = ExtResource("14_rstry")
+desc = ExtResource("6_tdi6i")
+level = 3
+
 [sub_resource type="Resource" id="Resource_1g0n1"]
 script = ExtResource("5_lkqdl")
 entry = SubResource("RoasterEntry_thief")
 display_label = "Kobold_Thief"
 transform = Transform3D(0.24750637, 0, 0.96888626, 0, 1, 0, -0.96888626, 0, 0.24750637, -6.0299387, 0.25505173, -3.6339064)
+
+[sub_resource type="Resource" id="RoasterEntry_warrior"]
+script = ExtResource("14_rstry")
+desc = ExtResource("7_5uhi1")
+level = 2
 
 [sub_resource type="Resource" id="Resource_7qry0"]
 script = ExtResource("5_lkqdl")
