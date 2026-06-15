@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://bm1ic5ai2cmv4" path="res://04_UI/Menu/MainMenu/auto_tween.gd" id="8_ymyx8"]
 [ext_resource type="PackedScene" uid="uid://b3pdqtw0g262b" path="res://04_UI/Menu/SettingsMenu/ui_game_settings.tscn" id="9_stngs"]
 [ext_resource type="PackedScene" uid="uid://di7eyuedvo17p" path="res://04_UI/InGame/PauseMenu/ui_pause_menu.tscn" id="10_pmenu"]
+[ext_resource type="PackedScene" uid="uid://b8lqk3rvled01" path="res://04_UI/Menu/Leaderboard/ui_leaderboard.tscn" id="11_ldbrd"]
 
 [node name="UIMainMenu" type="Control" node_paths=PackedStringArray("_play_button", "_tutorial_check_box")]
 layout_mode = 3
@@ -49,6 +50,11 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "SETTINGS
 "
+
+[node name="Leaderboard2" parent="VBoxContainer" instance=ExtResource("4_iu3pk")]
+layout_mode = 2
+size_flags_vertical = 3
+text = "LEADERBOARD"
 
 [node name="TutorialCheckBox" type="CheckBox" parent="."]
 layout_mode = 1
@@ -97,4 +103,9 @@ layout_mode = 1
 show_settings = false
 show_back_to_main_menu = false
 
+[node name="Leaderboard" parent="." instance=ExtResource("11_ldbrd")]
+unique_name_in_owner = true
+layout_mode = 1
+
 [connection signal="pressed" from="VBoxContainer/Settings2" to="." method="_on_settings_2_pressed"]
+[connection signal="pressed" from="VBoxContainer/Leaderboard2" to="." method="_on_leaderboard_button_pressed"]

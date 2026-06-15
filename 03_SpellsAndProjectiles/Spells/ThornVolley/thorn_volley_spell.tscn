@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://b5e1ceyu6nqtw"]
+
+[ext_resource type="Script" uid="uid://dfkhq0uorahwu" path="res://03_SpellsAndProjectiles/Spells/ThornVolley/thorn_volley_spell.gd" id="1_tv"]
+[ext_resource type="PackedScene" uid="uid://btvspellvfx01" path="res://03_SpellsAndProjectiles/Spells/ThornVolley/VFX/Scenes/VFX_thorn_volley.tscn" id="2_tvvfx"]
+
+[node name="ThornVolley" type="Node3D" unique_id=38013354]
+script = ExtResource("1_tv")
+
+[node name="ThornVisual" type="Node3D" parent="." unique_id=1487398154]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+
+[node name="VFX_Thorn_Volley" parent="ThornVisual" unique_id=980266337 instance=ExtResource("2_tvvfx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)

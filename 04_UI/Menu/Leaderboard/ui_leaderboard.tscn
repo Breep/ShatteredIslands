@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://b8lqk3rvled01"]
+
+[ext_resource type="Script" uid="uid://capwsfidpuhsa" path="res://04_UI/Menu/Leaderboard/ui_leaderboard.gd" id="1"]
+[ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="2_2vekf"]
+
+[node name="UILeaderboard" type="Control" unique_id=538790870]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="Dim" type="ColorRect" parent="." unique_id=831850589]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="Panel" type="Panel" parent="." unique_id=1917354052]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -300.0
+offset_right = 400.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_2vekf")
+
+[node name="Margin" type="MarginContainer" parent="Panel" unique_id=243440518]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBox" type="VBoxContainer" parent="Panel/Margin" unique_id=1954783166]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="Panel/Margin/VBox" unique_id=529471401]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "LEADERBOARD"
+horizontal_alignment = 1
+
+[node name="Header" type="HBoxContainer" parent="Panel/Margin/VBox" unique_id=2088468060]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="H0" type="Label" parent="Panel/Margin/VBox/Header" unique_id=469047856]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "#"
+
+[node name="H1" type="Label" parent="Panel/Margin/VBox/Header" unique_id=1527647936]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+text = "Pseudo"
+
+[node name="H2" type="Label" parent="Panel/Margin/VBox/Header" unique_id=737149443]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+text = "Héros"
+
+[node name="H3" type="Label" parent="Panel/Margin/VBox/Header" unique_id=1078648006]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+text = "Vaincues"
+
+[node name="H4" type="Label" parent="Panel/Margin/VBox/Header" unique_id=1050511465]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "Temps"
+
+[node name="Scroll" type="ScrollContainer" parent="Panel/Margin/VBox" unique_id=188990563]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="EntriesContainer" type="VBoxContainer" parent="Panel/Margin/VBox/Scroll" unique_id=1381467416]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="EmptyLabel" type="Label" parent="Panel/Margin/VBox" unique_id=874554837]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Aucune run enregistrée pour l'instant."
+horizontal_alignment = 1
+
+[node name="CloseButton" type="Button" parent="Panel/Margin/VBox" unique_id=372395741]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Fermer"
+
+[connection signal="pressed" from="Panel/Margin/VBox/CloseButton" to="." method="_on_close_button_pressed"]

@@ -7,6 +7,8 @@ extends Node
 
 @onready var TOOLTIP_DATABASE: Array[TooltipDesc] = [
 	# --- A ---
+	load("res://04_UI/Tool/Tooltip/Dictionary/ad.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/ap.tres"),
 	load("res://04_UI/Tool/Tooltip/Dictionary/armor.tres"),
 	load("res://04_UI/Tool/Tooltip/Dictionary/attack.tres"),
 	
@@ -64,6 +66,8 @@ extends Node
 	load("res://04_UI/Tool/Tooltip/Dictionary/scale.tres"),
 	
 	# --- T / V / W ---
+	load("res://04_UI/Tool/Tooltip/Dictionary/taunt.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/thorn.tres"),
 	load("res://04_UI/Tool/Tooltip/Dictionary/true_damage.tres"),
 	load("res://04_UI/Tool/Tooltip/Dictionary/vulnerability.tres"),
 	load("res://04_UI/Tool/Tooltip/Dictionary/weakness.tres")
@@ -86,6 +90,8 @@ extends Node
 
 	# --- STATS OFFENSIVES ---
 	"WARRIOR":         "[color=%s][url=WARRIOR]attack[/url][/color]"                  % THEME.color_html("ATTACK_COLOR"),
+	"AD":              "[color=%s][url=AD]AD[/url][/color]"                           % THEME.color_html("ATTACK_COLOR"),
+	"AP":              "[color=%s][url=AP]AP[/url][/color]"                           % THEME.color_html("MAGICAL_COLOR"),
 	"CRIT_CHANCE":     "[color=%s][url=CRIT_CHANCE]crit chance[/url][/color]"         % THEME.color_html("STAT_COLOR"),
 	"CRIT_MULTIPLIER": "[color=%s][url=CRIT_MULTIPLIER]crit multiplier[/url][/color]" % THEME.color_html("STAT_COLOR"),
 
@@ -96,12 +102,14 @@ extends Node
 	"REGEN":        "[color=%s][url=REGEN]regen[/url][/color]"               % THEME.color_html("REGEN_COLOR"),
 	"SHIELD":       "[color=%s][url=SHIELD]shield[/url][/color]"             % THEME.color_html("SHIELD_COLOR"),
 	"BLOCK":        "[color=%s][url=BLOCK]block[/url][/color]"               % THEME.color_html("BLOCK_COLOR"),
+	"THORN":        "[color=%s][url=THORN]thorn[/url][/color]"               % THEME.color_html("THORN_COLOR"),
 
 	# --- EFFETS / STATUS ---
 	"STUN":          "[color=%s][url=STUN]stun[/url][/color]"                   % THEME.color_html("STAT_COLOR"),
 	"WEAKNESS":      "[color=%s][url=WEAKNESS]weakness[/url][/color]"           % THEME.color_html("DEBUFF_COLOR"),
 	"STRENGTH":      "[color=%s][url=STRENGTH]strength[/url][/color]"           % THEME.color_html("DEBUFF_COLOR"),
 	"VULNERABILITY": "[color=%s][url=VULNERABILITY]vulnerability[/url][/color]" % THEME.color_html("DEBUFF_COLOR"),
+	"TAUNT":         "[color=%s][url=TAUNT]taunt[/url][/color]"                 % THEME.color_html("TAUNT_COLOR"),
 	"CLEANSE":       "[color=%s][url=CLEANSE]cleanse[/url][/color]"             % THEME.color_html("SERENITY_COLOR"),
 	"DISPELL":       "[color=%s][url=DISPELL]dispell[/url][/color]"             % THEME.color_html("DISPELL_COLOR"),
 	"EXECUTE":       "[color=%s][url=EXECUTE]execute[/url][/color]"             % THEME.color_html("FIRE_COLOR"),

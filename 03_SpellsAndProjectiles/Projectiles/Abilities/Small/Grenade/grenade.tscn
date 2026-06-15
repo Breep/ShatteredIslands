@@ -19,9 +19,9 @@ height = 1.6582031
 collision_layer = 2
 collision_mask = 16
 script = ExtResource("1_proj")
-_damage = Array[float]([20.0, 30.0, 40.0, 55.0, 70.0, 90.0, 110.0, 135.0, 165.0, 200.0])
+_damage_ratio = Array[float]([0.4, 0.6, 0.9, 1.2, 1.5, 1.9, 2.3, 2.7, 3.2, 3.7])
 _vulnerability_stacks = Array[float]([5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0])
-_hit_radius = Array[float]([2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0])
+_hit_radius = Array[float]([2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5])
 trajectory = SubResource("Resource_arc")
 type = 11
 

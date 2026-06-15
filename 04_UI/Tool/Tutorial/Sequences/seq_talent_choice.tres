@@ -8,6 +8,7 @@ script = ExtResource("2_step")
 id = &"talent_choice"
 text = "Tu as monté de niveau et débloqué un talent ! Choisis-en un parmi ces deux."
 target_unique_name = &"UiSkillWindow"
+target_sub_name = &"SkillContainer"
 extra_target_unique_names = Array[StringName]([&"UiSkillWindow2"])
 validation_event = 10
 auto_advance_delay = 0.0
@@ -15,6 +16,7 @@ popup_mode = 0
 hide_skip = true
 highlight_target = true
 highlight_padding = 8.0
+screen_anchor = 1
 
 [resource]
 script = ExtResource("1_seq")

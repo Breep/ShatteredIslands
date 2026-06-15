@@ -104,6 +104,7 @@ popup_mode = 0
 hide_skip = true
 ensure_shop_closed = true
 hide_hand = true
+screen_anchor = 1
 
 [sub_resource type="Resource" id="step_show_spells"]
 script = ExtResource("2_step")
@@ -117,6 +118,7 @@ hide_hand = true
 ensure_shop_closed = true
 highlight_target = true
 highlight_padding = 8.0
+screen_anchor = 1
 
 [sub_resource type="Resource" id="step_launch_fight"]
 script = ExtResource("2_step")

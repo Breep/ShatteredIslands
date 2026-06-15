@@ -88,7 +88,7 @@ func _on_global_viewer_selected(viewer: UIBDSViewer) -> void:
 	if viewer == null:
 		_rebuild_hero_bds_viewers(null)
 		return
-	var hero: Entity = _viewer_to_hero.get(viewer)
+	var hero = _viewer_to_hero.get(viewer)
 	if hero == null: return
 	_rebuild_hero_bds_viewers(hero)
 
