@@ -895,7 +895,6 @@ bones/12/rotation = Quaternion(1.5295967e-07, -0.4917123, 1.5807893e-07, 0.87075
 bones/12/scale = Vector3(0.99999994, 1, 0.99999994)
 
 [node name="ChickenColossus" type="MeshInstance3D" parent="Skeleton3D" unique_id=1839562433]
-transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_ykqu3")
 mesh = SubResource("ArrayMesh_ln18q")
 skin = SubResource("Skin_utmen")
