@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/SmallHealthBar/small_health_bar_component.tscn" id="3_glgkk"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://dg3kavrat1vul" path="res://02_Entities/Pool/Mobs/Wolfs/Vrock/vrock_animation_tree.res" id="3_w4u18"]
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="4_mh4ck"]
+[ext_resource type="PackedScene" uid="uid://bs1hrsa08utbt" path="res://02_Entities/_Shared/Components/LevelUpVfx/level_up_vfx_component.tscn" id="7_4wtd5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g1k0y"]
 radius = 0.3671875
@@ -227,6 +228,9 @@ _owner = NodePath("..")
 
 [node name="SmallHealthBarComponent" parent="." unique_id=1628734826 node_paths=PackedStringArray("_spawn", "_owner") instance=ExtResource("3_glgkk")]
 _spawn = NodePath("../VrockVisual/HealthBarSpawnMarker")
+_owner = NodePath("..")
+
+[node name="LevelUpVfxComponent" parent="." unique_id=1939496515 node_paths=PackedStringArray("_owner") instance=ExtResource("7_4wtd5")]
 _owner = NodePath("..")
 
 [editable path="VrockVisual"]

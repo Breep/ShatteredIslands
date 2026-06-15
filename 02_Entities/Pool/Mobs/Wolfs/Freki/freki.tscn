@@ -6,6 +6,7 @@
 [ext_resource type="AnimationNodeBlendTree" uid="uid://beq4ve0ehlown" path="res://02_Entities/Pool/Mobs/Wolfs/Freki/freki_animation_tree.res" id="4_dwviy"]
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="5_uxhk6"]
 [ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/SmallHealthBar/small_health_bar_component.tscn" id="6_fp6oc"]
+[ext_resource type="PackedScene" uid="uid://bs1hrsa08utbt" path="res://02_Entities/_Shared/Components/LevelUpVfx/level_up_vfx_component.tscn" id="7_vppri"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g1k0y"]
 radius = 0.52490234
@@ -121,6 +122,9 @@ _owner = NodePath("..")
 
 [node name="SmallHealthBarComponent" parent="." unique_id=1628734826 node_paths=PackedStringArray("_spawn", "_owner") instance=ExtResource("6_fp6oc")]
 _spawn = NodePath("../FrekiVisual/HealthBarSpawnMarker")
+_owner = NodePath("..")
+
+[node name="LevelUpVfxComponent" parent="." unique_id=1583610453 node_paths=PackedStringArray("_owner") instance=ExtResource("7_vppri")]
 _owner = NodePath("..")
 
 [editable path="FrekiVisual"]

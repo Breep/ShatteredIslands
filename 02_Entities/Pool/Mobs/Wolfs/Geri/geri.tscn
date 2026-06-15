@@ -6,6 +6,7 @@
 [ext_resource type="AnimationNodeBlendTree" uid="uid://c82dyq32f5nwx" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/geri_animation_tree.res" id="4_4jw1l"]
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="5_1leu0"]
 [ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/SmallHealthBar/small_health_bar_component.tscn" id="6_m2vxm"]
+[ext_resource type="PackedScene" uid="uid://bs1hrsa08utbt" path="res://02_Entities/_Shared/Components/LevelUpVfx/level_up_vfx_component.tscn" id="7_vdx04"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g1k0y"]
 radius = 0.3125
@@ -19,11 +20,17 @@ entity_name = "Geri"
 category = 2
 entity_desc = ExtResource("2_ddaav")
 _visual_3d = NodePath("GeriVisual")
-_health_bar_marker = NodePath("HealthBarSpawnMarker")
-_attack_spawn_marker = NodePath("ProjectileSpawnMarker")
+_health_bar_marker = NodePath("GeriVisual/HealthBarSpawnMarker")
+_attack_spawn_marker = NodePath("GeriVisual/ProjectileSpawnMarker")
 metadata/_custom_type_script = "uid://cpih8vqoolap4"
 
 [node name="GeriVisual" parent="." unique_id=518880957 instance=ExtResource("3_5nbb8")]
+
+[node name="HealthBarSpawnMarker" type="Marker3D" parent="GeriVisual" unique_id=1109750416]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.132942, 0)
+
+[node name="ProjectileSpawnMarker" type="Marker3D" parent="GeriVisual" unique_id=1925712423]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.716996, -0.8038692)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1125220947]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.35538352, 0.019683838)
@@ -114,14 +121,11 @@ _animation_tree = NodePath("../AnimationTree")
 _owner = NodePath("..")
 
 [node name="SmallHealthBarComponent" parent="." unique_id=1628734826 node_paths=PackedStringArray("_spawn", "_owner") instance=ExtResource("6_m2vxm")]
-_spawn = NodePath("../HealthBarSpawnMarker")
+_spawn = NodePath("../GeriVisual/HealthBarSpawnMarker")
 _owner = NodePath("..")
 
-[node name="HealthBarSpawnMarker" type="Marker3D" parent="." unique_id=1109750416]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.132942, 0)
-
-[node name="ProjectileSpawnMarker" type="Marker3D" parent="." unique_id=1925712423]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.716996, -0.8038692)
+[node name="LevelUpVfxComponent" parent="." unique_id=1656011998 node_paths=PackedStringArray("_owner") instance=ExtResource("7_vdx04")]
+_owner = NodePath("..")
 
 [editable path="GeriVisual"]
 [editable path="GeriVisual/Unity_SK_Animals_Dog_01"]
