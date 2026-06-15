@@ -3,7 +3,7 @@ extends Node3D
 
 # ============================== Enums ==============================
 
-enum Distance { CLOSE, MIDDLE, FAR, VERY_FAR }
+enum Distance { CLOSE, MIDDLE, FAR, VERY_FAR, DRAGON_FLIGHT }
 enum Transition { TWEEN, LERP, INSTANT }
 
 # ============================== Local node ==============================
@@ -29,6 +29,14 @@ enum Transition { TWEEN, LERP, INSTANT }
 @export var _far_rotation: Vector3 = Vector3(0, 90, 60)
 @export var _very_far_position: Vector3 = Vector3(72.5, 0, 0)
 @export var _very_far_rotation: Vector3 = Vector3(0, 90, 70)
+## Cinematic framing for the dragon's flight: pulled out, and flatter than the others so the
+## arena reads more side-on and the dragon sits near the horizon (same euler convention as the
+## presets above — tune in the inspector to taste).
+@export var _dragon_flight_position: Vector3 = Vector3(45, 0, 0)
+@export var _dragon_flight_rotation: Vector3 = Vector3(0, 90, 20)
+## Head-tilt for the dragon view: pitches the camera itself up in place (degrees, + = looks
+## higher, toward the dragon / sky), on top of the neutral aim. Undone on restore.
+@export var _dragon_flight_camera_tilt: float = 7.0
 
 @export var _intro_duration: float = 4.0
 @export var _lerp_speed: float = 5.0
@@ -50,6 +58,11 @@ enum Transition { TWEEN, LERP, INSTANT }
 
 # ============================== Private variables ==============================
 
+# The locally-current camera, exposed so presentation code (e.g. the dragon flight zoom)
+# can drive whichever camera the local player is looking through, without coupling to the
+# island that owns it. Maintained by set_active() / set_inactive().
+static var _active: CenterPointCamera
+
 var _is_active: bool = false
 var _rotating := false
 var _free_fly: bool = false
@@ -57,6 +70,14 @@ var _camera_local_transform: Transform3D
 var _lerping: bool = false
 var _lerp_target_position: Vector3
 var _lerp_target_rotation: Vector3
+
+# Snapshot + tween for push_distance() / restore() — event framings (e.g. the dragon flight)
+# that ease to a preset and later hand the camera back exactly as they found it.
+var _has_pushed_pose: bool = false
+var _pushed_position: Vector3
+var _pushed_center_rotation: Vector3
+var _pushed_camera_rotation: Vector3
+var _event_tween: Tween
 
 # ============================== Node base functions ==============================
 
@@ -81,15 +102,22 @@ func _process(delta: float) -> void:
 
 # ============================== Public functions ==============================
 
+static func active() -> CenterPointCamera:
+	return _active
+
+
 func set_active() -> void:
 	if _is_active: return
 	_is_active = true
+	_active = self
 	_camera.make_current()
 
 
 func set_inactive() -> void:
 	if not _is_active: return
 	_is_active = false
+	if _active == self:
+		_active = null
 
 
 func play_intro() -> void:
@@ -114,14 +142,48 @@ func go_to(distance: Distance, transition: Transition = Transition.TWEEN) -> voi
 			_camera.position = target_position
 			_center_point.rotation_degrees = target_rotation
 
+
+## Snapshot the current framing, ease to `distance`'s preset (position + angle), and let a later
+## restore() return to that snapshot — for event framings (e.g. the dragon's flight) that must
+## hand the camera back exactly as they found it. `duration` is the eased travel time (seconds).
+func push_distance(distance: Distance, duration: float) -> void:
+	_pushed_position = _camera.position
+	_pushed_center_rotation = _center_point.rotation_degrees
+	_pushed_camera_rotation = _camera.rotation_degrees
+	_has_pushed_pose = true
+	var pose: Array = _pose_for(distance)
+	var target_camera_rotation: Vector3 = _pushed_camera_rotation
+	target_camera_rotation.x += pose[2] # head tilt (degrees) over the neutral aim, 0 for plain presets
+	_tween_event(pose[0], pose[1], target_camera_rotation, duration)
+
+
+func restore(duration: float) -> void:
+	if not _has_pushed_pose: return
+	_has_pushed_pose = false
+	_tween_event(_pushed_position, _pushed_center_rotation, _pushed_camera_rotation, duration)
+
 # ============================== Private functions ==============================
 
+func _tween_event(target_position: Vector3, target_center_rotation: Vector3, target_camera_rotation: Vector3, duration: float) -> void:
+	if _event_tween != null and _event_tween.is_valid():
+		_event_tween.kill()
+	_lerping = false # don't let a pending distance-lerp fight the event framing
+	_event_tween = create_tween().set_parallel(true)
+	_event_tween.tween_property(_camera, "position", target_position, duration) \
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	_event_tween.tween_property(_center_point, "rotation_degrees", target_center_rotation, duration) \
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	_event_tween.tween_property(_camera, "rotation_degrees", target_camera_rotation, duration) \
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+# pose[2] = camera head-tilt in degrees (event framings only); plain presets carry 0.
 func _pose_for(distance: Distance) -> Array:
 	match distance:
-		Distance.MIDDLE: return [_middle_position, _middle_rotation]
-		Distance.FAR: return [_far_position, _far_rotation]
-		Distance.VERY_FAR: return [_very_far_position, _very_far_rotation]
-		_: return [_close_position, _close_rotation]
+		Distance.MIDDLE: return [_middle_position, _middle_rotation, 0.0]
+		Distance.FAR: return [_far_position, _far_rotation, 0.0]
+		Distance.VERY_FAR: return [_very_far_position, _very_far_rotation, 0.0]
+		Distance.DRAGON_FLIGHT: return [_dragon_flight_position, _dragon_flight_rotation, _dragon_flight_camera_tilt]
+		_: return [_close_position, _close_rotation, 0.0]
 
 
 func _tween_to(target_position: Vector3, target_rotation: Vector3) -> Tween:

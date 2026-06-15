@@ -11,6 +11,7 @@ extends Node
 
 #region Signals
 signal flight_started
+signal flight_return_started   ## sweep is over, dragon commits to flying home — earliest "it'll land soon" cue
 signal flight_landing_impact   ## ground-contact frame — skills hook this for landing effects
 signal flight_landed
 #endregion
@@ -143,6 +144,9 @@ func abort_flight() -> void:
 	_anim.end_fly()
 	_set_combat_active(true)
 	_phase = Phase.IDLE
+	# Terminal for an abnormal end too (death / fight end mid-air): listeners that armed on
+	# flight_started (e.g. the camera zoom) get a single "flight over" event to unwind on.
+	flight_landed.emit()
 
 
 ## Driven every deterministic tick by SkeletonDragon.process_tick().
@@ -206,6 +210,7 @@ func _begin_fly_out() -> void:
 	_transit_from = _owner.global_position
 	_transit_to = _takeoff_position + Vector3.UP * _fly_altitude
 	_enter_phase(Phase.FLY_OUT, _travel_ticks(_transit_from, _transit_to))
+	flight_return_started.emit()
 
 
 func _begin_landing() -> void:
@@ -299,14 +304,23 @@ func _face_heading(heading: Vector3) -> void:
 	_owner.global_transform.basis = _owner.global_transform.basis.orthonormalized().slerp(desired, _FLY_TURN_WEIGHT)
 
 
-# Enemy-backline frame at flight altitude, from the arena geometry. Falls back to a frame
-# ahead of the takeoff pose when no arena info is available.
+# Own-backline frame at flight altitude: the enemy-backline frame mirrored across the arena
+# centre, so the dragon sweeps its OWN back edge (opposite side) facing the other way. This is
+# a front/back symmetry — the lateral sweep axis (world X) is left untouched. Falls back to a
+# frame at the takeoff pose, facing the own side, when no arena info is available.
 func _compute_back_frame() -> Transform3D:
 	var ctx: EntityContext = _owner.get_context()
 	var azm: ArenaZoneManager = ctx.arena_zone_manager if ctx != null else null
 	if azm != null:
-		return azm.get_enemy_back_frame(_owner.team, _back_inset, _fly_altitude)
-	var fwd: Vector3 = -(Basis(Vector3.UP, _takeoff_yaw).z)
+		var enemy_frame: Transform3D = azm.get_enemy_back_frame(_owner.team, _back_inset, _fly_altitude)
+		# Reflect the back edge through the arena centre (Z only); flip the depth axis so the
+		# arc still bows toward the wall behind the dragon, now the own-side wall.
+		var pivot_z: float = azm.get_center_zone_center().z
+		var origin: Vector3 = enemy_frame.origin
+		origin.z = 2.0 * pivot_z - origin.z
+		var basis := Basis(Vector3.RIGHT, Vector3.UP, Vector3(0.0, 0.0, -enemy_frame.basis.z.z))
+		return Transform3D(basis, origin)
+	var fwd: Vector3 = Basis(Vector3.UP, _takeoff_yaw).z # mirror of the enemy heading → faces the own side
 	var origin: Vector3 = _takeoff_position + Vector3.UP * _fly_altitude
 	# basis.z = -fwd so -basis.z = fwd → the arc bulges forward, like the arena frame.
 	return Transform3D(Basis(fwd.cross(Vector3.UP).normalized(), Vector3.UP, -fwd), origin)

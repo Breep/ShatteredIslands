@@ -7,11 +7,11 @@
 [ext_resource type="Resource" path="res://05_Game/Run/Encounters/Pool/02a_Satyrs/02a_satyrs.confrontation.tres" id="3_sy5jj"]
 [ext_resource type="Resource" path="res://05_Game/Run/Encounters/Pool/02b_Treants/02b_treants.confrontation.tres" id="4_xcs54"]
 [ext_resource type="Resource" path="res://05_Game/Run/Encounters/Pool/03_Golems/03_golems.confrontation.tres" id="5_i1u1o"]
-[ext_resource type="Resource" path="res://05_Game/Run/Encounters/Pool/04_SkeletonDrake/04_skeleton_drake.confrontation.tres" id="6_vm8v3"]
+[ext_resource type="Resource" uid="uid://biyjqxyu742cx" path="res://05_Game/Run/Encounters/Pool/04_SkeletonDrake/04_skeleton_drake.confrontation.tres" id="6_vm8v3"]
 
 [sub_resource type="Resource" id="Resource_tnro0"]
 script = ExtResource("3_errrn")
-gold_starting_run = 1020
+gold_starting_run = 5020
 gold_per_confrontation = 600
 interest_gold_threshold = 20
 interest_max = 100
@@ -21,5 +21,5 @@ metadata/_custom_type_script = "uid://ui2ybnvv0okd"
 script = ExtResource("1_run")
 id = &"demo_run"
 display_name = "Démo Run"
-confrontations = Array[ExtResource("2_conf")]([ExtResource("2_so0i1"), ExtResource("3_sy5jj"), ExtResource("4_xcs54"), ExtResource("5_i1u1o"), ExtResource("6_vm8v3")])
+confrontations = Array[ExtResource("2_conf")]([ExtResource("6_vm8v3"), ExtResource("3_sy5jj"), ExtResource("4_xcs54"), ExtResource("5_i1u1o"), ExtResource("2_so0i1")])
 rules = SubResource("Resource_tnro0")
