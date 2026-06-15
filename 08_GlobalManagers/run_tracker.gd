@@ -1,11 +1,10 @@
 extends Node
 
 # Greffon de suivi de run : écoute le bus d'événements pour chronométrer une run
-# (temps mural, du début de la 1ère taverne jusqu'à la fin de run) et compter les
-# rencontres (combats) traversées. Ne pilote rien — l'écran de résultat appelle
-# freeze() à la fin de run, lit le temps / le score et publie vers le Leaderboard.
-# Comme seules les runs terminées sont enregistrées, "rencontres traversées" au
-# moment du freeze == "rencontres vaincues".
+# (temps mural, du début de la 1ère phase jusqu'à la fin de run) et compter les
+# rencontres VAINCUES (signal confrontation_resolved, won=true). Ne pilote rien —
+# l'écran de résultat appelle freeze() à la fin de run, lit le temps / le score et
+# publie vers le Leaderboard.
 
 #region ============================== Private variables ==============================
 var _running: bool = false
@@ -21,6 +20,7 @@ var _hero_name: String = ""
 func _ready() -> void:
 	Events.tavern_phase_started.connect(_on_tavern_phase_started)
 	Events.fighting_phase_started.connect(_on_fighting_phase_started)
+	Events.confrontation_resolved.connect(_on_confrontation_resolved)
 #endregion
 
 
@@ -85,9 +85,13 @@ func _on_tavern_phase_started() -> void:
 
 func _on_fighting_phase_started() -> void:
 	_start_if_needed()
-	if _frozen:
+
+
+func _on_confrontation_resolved(won: bool) -> void:
+	if not _running or _frozen:
 		return
-	_encounters += 1
+	if won:
+		_encounters += 1
 #endregion
 
 

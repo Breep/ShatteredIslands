@@ -30,6 +30,8 @@ func run(the_run: Run, party: Party) -> void:
 		if confrontation == null:
 			break
 		var result: ConfrontationResult = await _confrontation_runner.run(confrontation, party)
+		if result != null:
+			Events.confrontation_resolved.emit(result.outcome == ConfrontationResult.Outcome.WIN)
 		if rules != null and result != null:
 			_apply_confrontation_payout(rules, confrontation, result)
 		the_run.advance()

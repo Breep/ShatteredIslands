@@ -13,13 +13,16 @@ _attack_damage = 23.0
 _attack_speed = 0.0
 _movement_speed = 0.0
 _attack_power = 29.5
+armor = 17.167037876912218
+magic_resistance = 17.167037876912218
+poison_resistance = 17.167037876912218
 _crit_chance = 10.0
 _m_crit_chances = Dictionary[int, float]({
 0: 0.0,
 1: 0.0
 })
 _m_resistances = Dictionary[int, float]({
-0: 0.0,
-1: 0.0,
-2: 0.0
+0: 17.167037876912218,
+1: 17.167037876912218,
+2: 17.167037876912218
 })
