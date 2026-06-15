@@ -4,13 +4,13 @@ extends CardEffect
 ## Guerrier / Colossus — toutes les X attaques, inflige un bonus de dégâts
 ## physiques égal à un pourcentage des PV max de la cible.
 
-@export var _attack_number: int
+@export var _attack_number: Array[int]
 @export var _hp_percent: Array[float]
 
 func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 	var owner: Entity = ctx.entity_owner
 	var hp_pct: float = _hp_percent[card_lvl - 1]
-	var atk_threshold: int = _attack_number
+	var atk_threshold: int = _attack_number[card_lvl - 1]
 	var state := {&"count": 0, &"proc_active": false}
 
 	var aa_mod := AutoAttackModifier.new()
@@ -42,5 +42,5 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return "Toutes les " + str(_attack_number) + " attaques, inflige " \
+	return "Toutes les " + str(_attack_number[card_lvl - 1]) + " attaques, inflige " \
 		+ str(_hp_percent[card_lvl - 1]) + "% des PV max de la cible en [[PHYSICAL_DAMAGE]] bonus."

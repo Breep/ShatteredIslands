@@ -3,6 +3,7 @@
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme_old.tres" id="1_d6lbr"]
 [ext_resource type="Script" uid="uid://cu3cexueftpj4" path="res://04_UI/InGame/Result/ui_result.gd" id="2_5fo44"]
 [ext_resource type="Texture2D" uid="uid://xhyj0k42ilb3" path="res://04_UI/_Themes/Data/panel_tileable_20px_border_only.png" id="3_tu3tx"]
+[ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="3_vhwco"]
 [ext_resource type="Texture2D" uid="uid://db2m1yw0asd6l" path="res://04_UI/_Themes/Data/cross.png" id="4_hguj7"]
 [ext_resource type="Script" uid="uid://bia26v50nwe6c" path="res://04_UI/UIButton/ui_button.gd" id="ui_btn"]
 
@@ -34,7 +35,7 @@ theme = ExtResource("1_d6lbr")
 script = ExtResource("2_5fo44")
 
 [node name="Control" type="Control" parent="." unique_id=13397793]
-custom_minimum_size = Vector2(500, 300)
+custom_minimum_size = Vector2(800, 400)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -48,6 +49,7 @@ offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme = ExtResource("3_vhwco")
 
 [node name="MainPanel" type="Panel" parent="Control" unique_id=1116643807]
 layout_mode = 1
@@ -82,9 +84,11 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 theme_override_font_sizes/font_size = 23
-text = "I'm sorry they are better than you.
-You loose.
-You'll do better next time, probably ?"
+text = "FÉLICITATIONS !
+
+Vous avez triomphé de la démo de Shattered Islands.
+
+La prochaine fois, vous ferez encore mieux... probablement."
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
@@ -171,6 +175,17 @@ offset_bottom = 45.0
 grow_horizontal = 0
 mouse_filter = 2
 
+[node name="CloseButton" type="Button" parent="Control/ClosePanel" unique_id=385051010]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xymv4")
+script = ExtResource("ui_btn")
+
 [node name="TextureRect" type="TextureRect" parent="Control/ClosePanel" unique_id=1501320047]
 layout_mode = 1
 anchors_preset = 8
@@ -189,21 +204,10 @@ texture = ExtResource("4_hguj7")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="CloseButton" type="Button" parent="Control/ClosePanel" unique_id=385051010]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_default_cursor_shape = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_xymv4")
-script = ExtResource("ui_btn")
-
 [node name="ConfirmPanel" type="Panel" parent="Control" unique_id=1199396325]
 unique_name_in_owner = true
 visible = false
-custom_minimum_size = Vector2(200, 100)
+custom_minimum_size = Vector2(400, 150)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -272,6 +276,7 @@ text = "NO"
 script = ExtResource("ui_btn")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=505299927]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

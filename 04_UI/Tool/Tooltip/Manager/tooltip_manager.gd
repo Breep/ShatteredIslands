@@ -64,6 +64,7 @@ extends Node
 	load("res://04_UI/Tool/Tooltip/Dictionary/scale.tres"),
 	
 	# --- T / V / W ---
+	load("res://04_UI/Tool/Tooltip/Dictionary/thorn.tres"),
 	load("res://04_UI/Tool/Tooltip/Dictionary/true_damage.tres"),
 	load("res://04_UI/Tool/Tooltip/Dictionary/vulnerability.tres"),
 	load("res://04_UI/Tool/Tooltip/Dictionary/weakness.tres")
@@ -96,6 +97,7 @@ extends Node
 	"REGEN":        "[color=%s][url=REGEN]regen[/url][/color]"               % THEME.color_html("REGEN_COLOR"),
 	"SHIELD":       "[color=%s][url=SHIELD]shield[/url][/color]"             % THEME.color_html("SHIELD_COLOR"),
 	"BLOCK":        "[color=%s][url=BLOCK]block[/url][/color]"               % THEME.color_html("BLOCK_COLOR"),
+	"THORN":        "[color=%s][url=THORN]thorn[/url][/color]"               % THEME.color_html("THORN_COLOR"),
 
 	# --- EFFETS / STATUS ---
 	"STUN":          "[color=%s][url=STUN]stun[/url][/color]"                   % THEME.color_html("STAT_COLOR"),

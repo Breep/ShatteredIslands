@@ -48,6 +48,8 @@ func _spawn_golems(dragon: SkeletonDragon) -> void:
 		dragon.summon.summon_entity(Entity.EntityType.MOLTEN_GOLEM, SpawnLocationConfig.create_exact(pos), {})
 	context.spawn_manager.entity_spawned.disconnect(capture)
 
+	AudioManager.play_sfx("dragon_voice_golem")
+
 	_match_golem_levels(dragon, golems)
 
 	# Keep the dragon sweeping (Vol fracassant) until this brood is wiped out. The flight

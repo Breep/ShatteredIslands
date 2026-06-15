@@ -5,16 +5,16 @@
 [resource]
 script = ExtResource("1_utnj8")
 _health_max = 3830.0
-_mana_max = 45.0
+_mana_max = 32.0
 _mana_regen = 3.6
 auto_attack_type = 1
 _attack_range = 1.7
 _attack_damage = 50.0
 _attack_speed = 0.9183769506373024
 _attack_power = 52.0
-armor = 27.476649250079017
-magic_resistance = 27.476649250079017
-poison_resistance = 27.476649250079017
+armor = 31.14020248342289
+magic_resistance = 31.14020248342289
+poison_resistance = 31.14020248342289
 _crit_chance = 14.278045395879428
 _dodge = 10.0
 _m_crit_chances = Dictionary[int, float]({
@@ -22,7 +22,7 @@ _m_crit_chances = Dictionary[int, float]({
 1: 0.0
 })
 _m_resistances = Dictionary[int, float]({
-0: 27.476649250079017,
-1: 27.476649250079017,
-2: 27.476649250079017
+0: 31.14020248342289,
+1: 31.14020248342289,
+2: 31.14020248342289
 })

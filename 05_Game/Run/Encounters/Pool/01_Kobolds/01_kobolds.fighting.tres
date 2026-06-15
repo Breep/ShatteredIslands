@@ -35,7 +35,6 @@ transform = Transform3D(-0.087520815, 0, 0.9961627, 0, 1, 0, -0.9961627, 0, -0.0
 [sub_resource type="Resource" id="RoasterEntry_warrior"]
 script = ExtResource("9_rstry")
 desc = ExtResource("5_7mwj6")
-level = 2
 
 [sub_resource type="Resource" id="Resource_uydp8"]
 script = ExtResource("2_chgbo")

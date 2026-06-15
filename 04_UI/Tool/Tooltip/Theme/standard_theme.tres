@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ctng6xf3suweb" path="res://01_Cards/Pool/Families/Icons/storm_caller.png" id="3_0gl0c"]
 [ext_resource type="Texture2D" uid="uid://b78s362n5bu6" path="res://01_Cards/Pool/Families/Icons/warrior.png" id="4_51tpr"]
 [ext_resource type="Texture2D" uid="uid://cwqdngpmbcnck" path="res://01_Cards/Pool/Families/Icons/poison.png" id="5_t0qtx"]
+[ext_resource type="Texture2D" uid="uid://bpa37k5g3a6rr" path="res://04_UI/_Themes/Data/Icons/AlterationsIcons/thorn_stroke.svg" id="7_thorn"]
 [ext_resource type="Script" uid="uid://dgukdre62e5bf" path="res://04_UI/Tool/Tooltip/Theme/tooltip_theme.gd" id="6_fouw8"]
 
 [resource]
@@ -27,6 +28,7 @@ POISON_DAMAGE_ICON = ExtResource("5_t0qtx")
 SHIELD_ICON = ExtResource("5_t0qtx")
 POISON_STACK_ICON = ExtResource("5_t0qtx")
 IGNITE_ICON = ExtResource("5_t0qtx")
+THORN_ICON = ExtResource("7_thorn")
 DEFENCE_ICON = ExtResource("5_t0qtx")
 STAT_ICON = ExtResource("5_t0qtx")
 CC_ICON = ExtResource("5_t0qtx")

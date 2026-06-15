@@ -14,6 +14,13 @@ extends SkillEffect
 func apply(ctx: SkillContext) -> void:
 	var _owner: Entity = ctx.entity
 
+	if _owner.spell != null:
+		_owner.spell.cast_spell(null, Spell.Type.THORN_VOLLEY, {
+			Spell.ThornVolleyModifier.POSITION: _owner.global_position,
+			Spell.ThornVolleyModifier.RADIUS: _radius,
+			Spell.ThornVolleyModifier.DURATION: 1.0,
+		})
+
 	var thorn: float = _owner.alterations.get_stacks(Alteration.Type.THORN)
 	var damage: float = thorn * _damage_per_thorn_percent / 100.0
 

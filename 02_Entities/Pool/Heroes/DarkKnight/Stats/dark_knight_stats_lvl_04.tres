@@ -5,16 +5,16 @@
 [resource]
 script = ExtResource("1_bpmq8")
 _health_max = 1510.0
-_mana_max = 45.0
+_mana_max = 32.0
 _mana_regen = 3.4000000000000004
 auto_attack_type = 1
 _attack_range = 1.7
 _attack_damage = 24.0
 _attack_speed = 0.7574185586804946
 _attack_power = 26.0
-armor = 23.317766166719345
-magic_resistance = 23.317766166719345
-poison_resistance = 23.317766166719345
+armor = 26.426801655615257
+magic_resistance = 26.426801655615257
+poison_resistance = 26.426801655615257
 _crit_chance = 11.852030263919618
 _dodge = 9.0
 _m_crit_chances = Dictionary[int, float]({
@@ -22,7 +22,7 @@ _m_crit_chances = Dictionary[int, float]({
 1: 0.0
 })
 _m_resistances = Dictionary[int, float]({
-0: 23.317766166719345,
-1: 23.317766166719345,
-2: 23.317766166719345
+0: 26.426801655615257,
+1: 26.426801655615257,
+2: 26.426801655615257
 })

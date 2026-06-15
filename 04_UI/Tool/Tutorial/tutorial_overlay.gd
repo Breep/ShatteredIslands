@@ -50,7 +50,7 @@ func present_step(step: TutorialStep, is_last: bool = false) -> void:
 	if target != null:
 		targets.append(target)
 	for extra_name: StringName in step.extra_target_unique_names:
-		var extra: Control = _resolve_target(extra_name, &"")
+		var extra: Control = _resolve_target(extra_name, step.target_sub_name)
 		if extra != null:
 			targets.append(extra)
 	_apply_step_visuals(step, targets)
