@@ -2,8 +2,8 @@ class_name EngineerShieldThrow
 extends CardEffect
 
 ## Engineer — quand le shield a absorbé un seuil de dégâts cumulés, lance un
-## bouclier qui inflige des dégâts magiques et rebondit entre les ennemis,
-## regénérant du shield par cible touchée.
+## bouclier qui inflige des dégâts magiques (ratio de l'AP du porteur) et rebondit
+## entre les ennemis, regénérant du shield par cible touchée.
 
 @export var _threshold: Array[float]
 @export var _damage: Array[float]
@@ -35,7 +35,9 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 			if hit_target == null or not is_instance_valid(hit_target):
 				return
 			if damage > 0:
-				owner.damage.direct(hit_target, damage, Utils.ActionType.DAMAGE_MAGICAL, card_name)
+				owner.damage.direct(hit_target,
+					damage * owner.stats.get_stat(EntityStats.StatType.AP),
+					Utils.ActionType.DAMAGE_MAGICAL, card_name)
 			if shield_return > 0:
 				owner.alterations.inflict_condition_stacks(owner, shield_return, Alteration.Type.SHIELD, card_name)
 		)
@@ -70,8 +72,9 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 func get_description(card_lvl: int) -> String:
 	var s: String = str(_threshold[card_lvl - 1]).pad_decimals(0)
-	var d: String = str(_damage[card_lvl - 1]).pad_decimals(0)
+	var d: String = str(_damage[card_lvl - 1] * 100.0).pad_decimals(0)
 	var b: String = str(_bounces[card_lvl - 1]).pad_decimals(1)
 	var sr: String = str(_shield_return[card_lvl - 1]).pad_decimals(0)
 	return "Après avoir absorbé " + s + " dégâts avec le [[SHIELD]], lance un bouclier : " \
-		+ d + " [[MAGICAL_DAMAGE]], " + b + " rebonds, génère " + sr + " [[SHIELD]] par ennemi touché."
+		+ d + "% de sa puissance magique en [[MAGICAL_DAMAGE]], " + b + " rebonds, génère " \
+		+ sr + " [[SHIELD]] par ennemi touché."

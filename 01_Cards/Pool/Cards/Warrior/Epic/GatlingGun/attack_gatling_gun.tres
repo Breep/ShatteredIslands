@@ -8,7 +8,7 @@
 script = ExtResource("2_7uy84")
 _attack_speed_min = Array[float]([-10.0, -20.0, -30.0])
 _attack_speed_max = Array[float]([60.0, 120.0, 150.0])
-_duration = 30.0
+_duration = 60.0
 metadata/_custom_type_script = "uid://huymddyommss"
 
 [resource]
