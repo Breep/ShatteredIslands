@@ -37,7 +37,8 @@ func _validate() -> bool:
 # exportés de l'Entity — invalide sur les PlaceHolderScriptInstance de l'éditeur.
 # Spec sans scène : marker Node3D vide.
 func _instantiate_spec_into(spec: SpawnSpec, container: Node, edited_root: Node) -> bool:
-	var node: Node = spec.scene.instantiate() if spec.scene != null else Node3D.new()
+	var packed: PackedScene = _resolve_spec_scene(spec)
+	var node: Node = packed.instantiate() if packed != null else Node3D.new()
 	container.add_child(node)
 	if node is Node3D:
 		(node as Node3D).transform = spec.transform
@@ -46,3 +47,13 @@ func _instantiate_spec_into(spec: SpawnSpec, container: Node, edited_root: Node)
 	if edited_root != null:
 		node.owner = edited_root
 	return true
+
+
+# EntitySpec : scène résolue depuis la desc de l'entry (modèle unifié), repli sur
+# le champ `scene` (markers / props / specs legacy sans entry).
+func _resolve_spec_scene(spec: SpawnSpec) -> PackedScene:
+	if spec is EntitySpec:
+		var es: EntitySpec = spec as EntitySpec
+		if es.entry != null and es.entry.desc != null:
+			return EntityDesc.resolve_scene(es.entry.desc)
+	return spec.scene

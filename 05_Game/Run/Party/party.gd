@@ -109,7 +109,6 @@ func _on_roaster_entry_added(entry: RoasterEntry) -> void:
 		return  # garde-fou : 1 entry = 1 spec
 	var spec := EntitySpec.new()
 	spec.entry = entry
-	spec.desc = entry.desc
 	spec.transform = Transform3D(Basis.from_euler(Vector3(0, PI / 2, 0)), _find_free_spawn_position())
 	formation.entity_specs.append(spec)
 	entry_added.emit(entry)

@@ -105,13 +105,15 @@ func _spawn_specs(specs: Array[EntitySpec], team: int) -> void:
 			ctx.fighting_state = Entity.FightingState.IDLE
 			ctx.display_mode = Entity.DisplayMode.FIGHTING_PHASE
 			# Owner runtime résolu en remontant l'entry à son Roaster (Party.find_slot_of).
-			# Signal "spec joueur" = entry présente (créée à partir d'une RoasterEntry).
-			# Fallback marker class + local player pour compat legacy / solo.
-			if spec.entry != null or spec is HeroSpec or spec is AcolyteSpec:
-				var slot: PlayerState.Slot = PlayerState.Slot.NONE
-				var party: Party = GameManager.run_context.party if GameManager.run_context != null else null
-				if spec.entry != null and party != null:
-					slot = party.find_slot_of(spec.entry)
+			# Dans le modèle unifié toute spec porte une entry ; le "spec joueur" se
+			# distingue par un slot résolu (entry rattachée à un roaster). Les ennemis
+			# ont une entry autonome → slot NONE. Fallback marker class + local player
+			# pour compat legacy / solo.
+			var party: Party = GameManager.run_context.party if GameManager.run_context != null else null
+			var slot: PlayerState.Slot = PlayerState.Slot.NONE
+			if spec.entry != null and party != null:
+				slot = party.find_slot_of(spec.entry)
+			if slot != PlayerState.Slot.NONE or spec is HeroSpec or spec is AcolyteSpec:
 				var owner: Player = PlayerManager.get_player_by_slot(slot)
 				ctx.runtime_owner_player = owner if owner != null else local_player
 				ctx.roaster = party.get_roaster(slot) if party != null else null

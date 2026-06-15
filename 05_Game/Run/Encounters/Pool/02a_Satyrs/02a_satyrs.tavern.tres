@@ -3,15 +3,28 @@
 [ext_resource type="Script" uid="uid://flrydugnyfe7" path="res://05_Game/Run/SpawnSpecs/Concrete/acolyte_spawn_spec.gd" id="1_aj6pb"]
 [ext_resource type="PackedScene" uid="uid://v8f1a76nj0ui" path="res://05_Game/Run/SpawnSpecs/SpawnPoints/AcolyteSpawn/acolyte_spawn_point.tscn" id="2_ugpxx"]
 [ext_resource type="Script" uid="uid://rj6clcd8f15a" path="res://05_Game/Run/SpawnSpecs/entity_spec.gd" id="3_n2von"]
-[ext_resource type="PackedScene" uid="uid://di0hhdfbpptu6" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/satyr_berserker.tscn" id="4_ic488"]
+[ext_resource type="Resource" uid="uid://dknkdso30roqe" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Stats/entity_desc.tres" id="4_ic488"]
 [ext_resource type="Script" uid="uid://bcak6iy1jjxko" path="res://05_Game/Run/SpawnSpecs/Concrete/mob_spec.gd" id="5_uk12g"]
-[ext_resource type="PackedScene" uid="uid://422k2gp3h5wg" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/forest_drake.tscn" id="6_ykhef"]
+[ext_resource type="Resource" uid="uid://chlhtpwl6nsgw" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/Stats/entity_desc.tres" id="6_ykhef"]
 [ext_resource type="Script" uid="uid://bj0ecq2d5vir5" path="res://05_Game/Run/SpawnSpecs/Concrete/hero_spawn_spec.gd" id="7_3hn63"]
 [ext_resource type="PackedScene" uid="uid://mcgg11jy8uh1" path="res://05_Game/Run/SpawnSpecs/SpawnPoints/HeroSpawn/hero_spawn_point.tscn" id="8_ddlnn"]
 [ext_resource type="Script" uid="uid://b24wp3uvfns8t" path="res://05_Game/Run/SpawnSpecs/prop_spec.gd" id="9_nrf60"]
 [ext_resource type="PackedScene" uid="uid://dghajk42luw8y" path="res://21_Props/Tavern/table_round_large_2.tscn" id="10_ehp4b"]
 [ext_resource type="Script" uid="uid://d2ixo16r26ppd" path="res://05_Game/Run/Formations/tavern_formation.gd" id="11_fo5u3"]
 [ext_resource type="Script" uid="uid://c78ccxnqy6c16" path="res://05_Game/Run/SpawnSpecs/spawn_point_spec.gd" id="12_6yv2h"]
+[ext_resource type="Script" uid="uid://dy31m54qprfhl" path="res://05_Game/Run/Party/roaster_entry.gd" id="13_rstry"]
+
+[sub_resource type="Resource" id="RoasterEntry_satyr1"]
+script = ExtResource("13_rstry")
+desc = ExtResource("4_ic488")
+
+[sub_resource type="Resource" id="RoasterEntry_satyr2"]
+script = ExtResource("13_rstry")
+desc = ExtResource("4_ic488")
+
+[sub_resource type="Resource" id="RoasterEntry_drake"]
+script = ExtResource("13_rstry")
+desc = ExtResource("6_ykhef")
 
 [sub_resource type="Resource" id="Resource_y3a2g"]
 script = ExtResource("1_aj6pb")
@@ -63,19 +76,19 @@ transform = Transform3D(-0.5129272, 0, 0.8584321, 0, 1, 0, -0.8584321, 0, -0.512
 
 [sub_resource type="Resource" id="Resource_btrav"]
 script = ExtResource("5_uk12g")
-scene = ExtResource("4_ic488")
+entry = SubResource("RoasterEntry_satyr1")
 display_label = "Satyr"
 transform = Transform3D(0.5613903, 0, -0.8275512, 0, 1, 0, 0.8275512, 0, 0.5613903, -2.418238, 0.5966253, 1.7734206)
 
 [sub_resource type="Resource" id="Resource_xv5nc"]
 script = ExtResource("5_uk12g")
-scene = ExtResource("4_ic488")
+entry = SubResource("RoasterEntry_satyr2")
 display_label = "Satyr2"
 transform = Transform3D(-0.46391454, 0, -0.88587993, 0, 1, 0, 0.88587993, 0, -0.46391454, -2.5800295, 0.5966253, -1.3754265)
 
 [sub_resource type="Resource" id="Resource_pkeps"]
 script = ExtResource("5_uk12g")
-scene = ExtResource("6_ykhef")
+entry = SubResource("RoasterEntry_drake")
 display_label = "ForestDrake"
 transform = Transform3D(0.045607075, 0, -0.9989595, 0, 1, 0, 0.9989595, 0, 0.045607075, -3.5671115, 2.5803738, 0.46425468)
 
