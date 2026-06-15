@@ -54,8 +54,18 @@
 [ext_resource type="AudioStream" uid="uid://bobdvn771d2fw" path="res://03_SpellsAndProjectiles/Projectiles/Abilities/Big/Meteor/SFX/meteor_hit_ground.wav" id="52_tmlfr"]
 [ext_resource type="AudioStream" uid="uid://bsy1ps5ni6bdl" path="res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/SmallEgg/SFX/egg_crack_01.wav" id="53_tmlfr"]
 [ext_resource type="AudioStream" uid="uid://bk8px5f26ad5f" path="res://23_Audio/SFX/Misc/chicken_bok_bok_01.wav" id="54_1825h"]
+[ext_resource type="AudioStream" uid="uid://b4b2eussl2sf8" path="res://23_Audio/SFX/Deaths/sfx_wolf_die.mp3" id="56_ixahq"]
+[ext_resource type="AudioStream" uid="uid://d00wtop1733el" path="res://23_Audio/SFX/Deaths/sfx_wolf_howl.mp3" id="57_v180h"]
+[ext_resource type="AudioStream" uid="uid://5lwvsxnu8hil" path="res://23_Audio/SFX/Deaths/sfx_female_hurt.mp3" id="58_ytsb2"]
+[ext_resource type="AudioStream" uid="uid://cr3foceo1cjsr" path="res://23_Audio/SFX/Deaths/sfx_golem_collapse.wav" id="59_eb8l1"]
 [ext_resource type="AudioStream" uid="uid://tk2rh4p2powo" path="res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/Grenade/SFX/grenade electric_.wav" id="60_grenade"]
+[ext_resource type="AudioStream" uid="uid://tq8vepb5fvht" path="res://23_Audio/SFX/Deaths/satyr_die.wav" id="60_i0bwi"]
+[ext_resource type="AudioStream" uid="uid://npv2s0oty7iy" path="res://23_Audio/SFX/Deaths/kobold_die_03.wav" id="61_eu8wc"]
 [ext_resource type="AudioStream" uid="uid://dxyp1f1icp55" path="res://23_Audio/SFX/LvlUp/lvlup.wav" id="61_lvlup"]
+[ext_resource type="AudioStream" uid="uid://cloqbqlxbmosr" path="res://23_Audio/SFX/Deaths/kobold_die_02.wav" id="62_4hs6q"]
+[ext_resource type="AudioStream" uid="uid://0aa7x2ued4ng" path="res://23_Audio/SFX/Deaths/kobold_die_01.wav" id="63_r4wo4"]
+[ext_resource type="AudioStream" uid="uid://btphmpojqi25g" path="res://23_Audio/SFX/Deaths/forest_drake_die.wav" id="64_3m1ih"]
+[ext_resource type="AudioStream" uid="uid://bj3burh0l54ei" path="res://23_Audio/SFX/Deaths/chicken_die.wav" id="65_v180h"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2l36p"]
 playback_mode = 1
@@ -97,6 +107,7 @@ audio_database = Dictionary[String, AudioStream]({
 "card_shuffle_01": ExtResource("39_5xkph"),
 "card_shuffle_02": ExtResource("40_wklle"),
 "chicken_bok_bok_01": ExtResource("54_1825h"),
+"chicken_die": ExtResource("65_v180h"),
 "coin_01": ExtResource("41_yb8pa"),
 "crowd_cheer": ExtResource("43_7x372"),
 "crowd_cheer_small": ExtResource("46_wklle"),
@@ -106,11 +117,17 @@ audio_database = Dictionary[String, AudioStream]({
 "error_01": ExtResource("31_lpnxr"),
 "error_02": ExtResource("32_8dyf0"),
 "fanfar_trumpet": ExtResource("44_5xkph"),
+"female_hurt": ExtResource("58_ytsb2"),
 "fire_ball_projectile": ExtResource("10_cqn3a"),
+"forest_drake_die": ExtResource("64_3m1ih"),
 "gold_gained": ExtResource("19_gold"),
+"golem_collapse": ExtResource("59_eb8l1"),
 "grenade_explosion": ExtResource("60_grenade"),
 "hero_locked": ExtResource("6_2l36p"),
 "insufficient_gold": ExtResource("21_nogold"),
+"kobold_die_01": ExtResource("63_r4wo4"),
+"kobold_die_02": ExtResource("62_4hs6q"),
+"kobold_die_03": ExtResource("61_eu8wc"),
 "large_boulder_hit_wall": ExtResource("49_8fdcl"),
 "large_boulder_rolling": ExtResource("50_f0eap"),
 "latika_walk": ExtResource("3_walk"),
@@ -121,6 +138,7 @@ audio_database = Dictionary[String, AudioStream]({
 "meteor_impact": ExtResource("12_gb7ch"),
 "resurrection": ExtResource("13_lhb5h"),
 "sad_trumpet": ExtResource("45_wklle"),
+"satyr_die": ExtResource("60_i0bwi"),
 "slash_01": ExtResource("22_7ai4g"),
 "spotlight": ExtResource("42_ohub1"),
 "start_fight": ExtResource("8_ulois"),
@@ -131,6 +149,8 @@ audio_database = Dictionary[String, AudioStream]({
 "thud_3": ExtResource("27_p4cwr"),
 "ui_family_portrait_requested": ExtResource("7_ro30m"),
 "whoosh": ExtResource("14_5spcc"),
-"window_appear": ExtResource("18_wndw")
+"window_appear": ExtResource("18_wndw"),
+"wolf_die": ExtResource("56_ixahq"),
+"wolf_howl": ExtResource("57_v180h")
 })
 metadata/_custom_type_script = "uid://bnohfh6e2eq3"

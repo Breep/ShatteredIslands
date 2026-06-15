@@ -61,3 +61,8 @@ func _register_base_stat_modifier(mod_id: StringName, stat_type: EntityStats.Sta
 	if action_type != -1:
 		mod.action_type = action_type as Utils.ActionType
 	stat_modifiers_registry.register_modifier(mod)
+
+
+func _on_died() -> void:
+	super._on_died()
+	AudioManager.play_3d("chicken_die", global_position)

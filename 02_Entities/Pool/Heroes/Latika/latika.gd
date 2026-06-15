@@ -44,3 +44,8 @@ func _scan_pack() -> Array[Entity]:
 		if _is_a_wolf_entity(ally):
 			pack.append(ally)
 	return pack
+
+
+func _on_died() -> void:
+	super._on_died()
+	AudioManager.play_3d("women_hurt", global_position)

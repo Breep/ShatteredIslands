@@ -5,12 +5,12 @@
 [ext_resource type="Resource" uid="uid://ywjip7ib5c8i" path="res://02_Entities/Pool/Mobs/Wolfs/Freki/Stats/freki_entity_desc.tres" id="3_desc0"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://beq4ve0ehlown" path="res://02_Entities/Pool/Mobs/Wolfs/Freki/freki_animation_tree.res" id="4_dwviy"]
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="5_uxhk6"]
-[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/SmallHealthBar/small_health_bar_component.tscn" id="6_fp6oc"]
+[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.tscn" id="7_omi01"]
 [ext_resource type="PackedScene" uid="uid://bs1hrsa08utbt" path="res://02_Entities/_Shared/Components/LevelUpVfx/level_up_vfx_component.tscn" id="7_vppri"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g1k0y"]
-radius = 0.52490234
-height = 1.4607391
+radius = 0.5366211
+height = 1.6249008
 
 [node name="Freki" type="CharacterBody3D" unique_id=1302613586 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_attack_spawn_marker")]
 collision_layer = 16
@@ -33,7 +33,7 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.716996, -0.8038692)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1125220947]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.52070767, 0.033943176)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.52070767, -0.048137665)
 shape = SubResource("CapsuleShape3D_g1k0y")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=1886362167]
@@ -56,7 +56,7 @@ parameters/scale_attack/scale = 1.0
 parameters/one_shot_idle_standing_neutral/active = false
 parameters/one_shot_idle_standing_neutral/internal_active = false
 parameters/one_shot_idle_standing_neutral/request = 0
-parameters/scale_ultimate/scale = 1.0
+parameters/scale_ultimate/scale = 3.0
 parameters/scale_idle_standing_neutral_var/scale = 1.0
 parameters/one_shot_sitting/active = false
 parameters/one_shot_sitting/internal_active = false
@@ -120,11 +120,11 @@ parameters/switch_stunned_state/current_index = 0
 _animation_tree = NodePath("../AnimationTree")
 _owner = NodePath("..")
 
-[node name="SmallHealthBarComponent" parent="." unique_id=1628734826 node_paths=PackedStringArray("_spawn", "_owner") instance=ExtResource("6_fp6oc")]
-_spawn = NodePath("../FrekiVisual/HealthBarSpawnMarker")
+[node name="LevelUpVfxComponent" parent="." unique_id=1583610453 node_paths=PackedStringArray("_owner") instance=ExtResource("7_vppri")]
 _owner = NodePath("..")
 
-[node name="LevelUpVfxComponent" parent="." unique_id=1583610453 node_paths=PackedStringArray("_owner") instance=ExtResource("7_vppri")]
+[node name="LargeHealthBarComponent" parent="." unique_id=1823590462 node_paths=PackedStringArray("_spawn", "_owner") instance=ExtResource("7_omi01")]
+_spawn = NodePath("../FrekiVisual/HealthBarSpawnMarker")
 _owner = NodePath("..")
 
 [editable path="FrekiVisual"]

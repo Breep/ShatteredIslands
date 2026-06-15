@@ -126,10 +126,4 @@ material_override = SubResource("StandardMaterial3D_arpl1")
 [node name="SK_Animal_Dog_Wolf_01" parent="Unity_SK_Animals_Dog_01/Skeleton3D" index="25" unique_id=1625613442]
 material_override = SubResource("StandardMaterial3D_n3oui")
 
-[node name="HealthBarSpawnMarker" type="Marker3D" parent="Unity_SK_Animals_Dog_01" unique_id=1130036551]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.132942, 0)
-
-[node name="ProjectileSpawnMarker" type="Marker3D" parent="Unity_SK_Animals_Dog_01" unique_id=686307857]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.027648e-08, 0.716996, 0.8038692)
-
 [editable path="Unity_SK_Animals_Dog_01"]
