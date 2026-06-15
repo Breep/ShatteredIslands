@@ -15,6 +15,7 @@ var _flight_queued: bool = false
 func _ready() -> void:
 	super._ready()
 	fighting_state_changed.connect(_on_fighting_state_changed_roar)
+	ultimate_casted.connect(_on_ultimate_casted)
 
 
 func process_tick() -> void:
@@ -65,3 +66,12 @@ func _on_fighting_state_changed_roar(new_state: FightingState) -> void:
 	if anim != null:
 		anim.play_roar()
 	AudioManager.play_3d("dragon_roar", global_position)
+
+
+func _on_ultimate_casted() -> void:
+	AudioManager.play_3d("dragon_breathing_fire", global_position)
+
+
+func _on_died() -> void:
+	super._on_died()
+	AudioManager.play_3d("skeleton_drake_die", global_position)

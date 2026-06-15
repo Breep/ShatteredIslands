@@ -124,6 +124,8 @@ func trigger_flight() -> void:
 	_anim.begin_takeoff()
 	_enter_phase(Phase.TAKING_OFF, _to_ticks(_anim.takeoff_length()))
 	flight_started.emit()
+	AudioManager.play_3d("dragon_wings_flapping", _owner.global_position)
+	AudioManager.play_3d("dragon_roar_01", _owner.global_position)
 
 
 ## Called by the Ash Brood gold talent with its freshly-spawned golems: the dragon keeps

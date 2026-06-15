@@ -48,4 +48,4 @@ func _scan_pack() -> Array[Entity]:
 
 func _on_died() -> void:
 	super._on_died()
-	AudioManager.play_3d("women_hurt", global_position)
+	AudioManager.play_3d("female_hurt", global_position)
