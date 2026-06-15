@@ -16,5 +16,5 @@ transform = Transform3D(-3.3484852e-08, 2.8097123e-08, 1, 0.6427873, 0.7660441, 
 
 [node name="Camera3D" type="Camera3D" parent="CenterPoint" unique_id=1198164968]
 unique_name_in_owner = true
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 35, 0, 0)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 35, 0, 0)
 fov = 35.0
