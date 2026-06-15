@@ -1,0 +1,67 @@
+[gd_resource type="Resource" script_class="EntityDesc" format=3 uid="uid://7crqqe7t8nhe"]
+
+[ext_resource type="Texture2D" uid="uid://cm42mlidv6e45" path="res://02_Entities/Pool/Mobs/AegisBlade/Data/aegis_blade_portrait.png" id="1_3f8uw"]
+[ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="1_tcmu6"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="2_geb1f"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_2eb21"]
+[ext_resource type="Resource" uid="uid://dgxbbq0tmi5lq" path="res://02_Entities/Pool/Mobs/AegisBlade/Stats/aegis_blade_stats_lvl_01.tres" id="4_gn1s5"]
+[ext_resource type="Resource" uid="uid://do0kd5jdn01dr" path="res://02_Entities/Pool/Mobs/AegisBlade/Stats/aegis_blade_stats_lvl_02.tres" id="5_ahwym"]
+[ext_resource type="Resource" uid="uid://d17esmntw0mmq" path="res://02_Entities/Pool/Mobs/AegisBlade/Stats/aegis_blade_stats_lvl_03.tres" id="6_q61yq"]
+[ext_resource type="Resource" uid="uid://d1f20ky8gjppv" path="res://02_Entities/Pool/Mobs/AegisBlade/Stats/aegis_blade_stats_lvl_04.tres" id="7_3f8uw"]
+[ext_resource type="Resource" uid="uid://b42m2s3k1t5g5" path="res://02_Entities/Pool/Mobs/AegisBlade/Stats/aegis_blade_stats_lvl_05.tres" id="8_8q24b"]
+[ext_resource type="Resource" uid="uid://u0g4b58s4vtm" path="res://02_Entities/Pool/Mobs/AegisBlade/Stats/aegis_blade_stats_lvl_06.tres" id="9_7iuae"]
+[ext_resource type="Resource" uid="uid://betx5lc5ayy8b" path="res://02_Entities/Pool/Mobs/AegisBlade/Stats/aegis_blade_stats_lvl_07.tres" id="10_i77th"]
+[ext_resource type="Resource" uid="uid://s5qllohyyutn" path="res://02_Entities/Pool/Mobs/AegisBlade/Stats/aegis_blade_stats_lvl_08.tres" id="11_nesyh"]
+[ext_resource type="Resource" uid="uid://duyqdjh7njc7l" path="res://02_Entities/Pool/Mobs/AegisBlade/Stats/aegis_blade_stats_lvl_09.tres" id="12_nr7bv"]
+[ext_resource type="Resource" uid="uid://c31jp76okprue" path="res://02_Entities/Pool/Mobs/AegisBlade/Stats/aegis_blade_stats_lvl_10.tres" id="13_pf8x1"]
+[ext_resource type="Resource" uid="uid://dbintnfe1hewx" path="res://02_Entities/Pool/Mobs/AegisBlade/Stats/aegis_blade_stats_lvl_11.tres" id="14_fxt4n"]
+[ext_resource type="Resource" uid="uid://cghu2suxpmlcl" path="res://02_Entities/Pool/Mobs/AegisBlade/Stats/aegis_blade_stats_lvl_12.tres" id="15_nkgq5"]
+[ext_resource type="Resource" uid="uid://b0t53yingan2p" path="res://02_Entities/Pool/Mobs/AegisBlade/Stats/aegis_blade_stats_lvl_13.tres" id="16_xbnle"]
+[ext_resource type="Resource" uid="uid://copi4ssaysqyu" path="res://02_Entities/Pool/Mobs/AegisBlade/Stats/aegis_blade_stats_lvl_14.tres" id="17_3pvs2"]
+[ext_resource type="Resource" uid="uid://b83ra26mqn4cb" path="res://02_Entities/Pool/Mobs/AegisBlade/Stats/aegis_blade_stats_lvl_15.tres" id="18_1n83g"]
+[ext_resource type="Resource" uid="uid://d2uuu5phg132s" path="res://02_Entities/Pool/Mobs/AegisBlade/Stats/aegis_blade_stats_lvl_16.tres" id="19_5tjqr"]
+[ext_resource type="Resource" uid="uid://gpl6xuy54rik" path="res://02_Entities/Pool/Mobs/AegisBlade/Stats/aegis_blade_stats_lvl_17.tres" id="20_dyi68"]
+[ext_resource type="Resource" uid="uid://b06rdybh23ppt" path="res://02_Entities/Pool/Mobs/AegisBlade/Stats/aegis_blade_stats_lvl_18.tres" id="21_kjttd"]
+[ext_resource type="Resource" uid="uid://dfr6gjvyr8kea" path="res://02_Entities/Pool/Mobs/AegisBlade/Stats/aegis_blade_stats_lvl_19.tres" id="22_ke2jf"]
+[ext_resource type="Resource" uid="uid://bmjb32col5550" path="res://02_Entities/Pool/Mobs/AegisBlade/Stats/aegis_blade_stats_lvl_20.tres" id="23_wndgn"]
+[ext_resource type="Resource" uid="uid://coiprbpkhciw7" path="res://02_Entities/Pool/Mobs/AegisBlade/Skills/Passive/aegis_active.tres" id="24_pas"]
+[ext_resource type="Resource" uid="uid://cfilprot2res7" path="res://02_Entities/Pool/Mobs/AegisBlade/Skills/Bronze/fil_protecteur.tres" id="25_bro"]
+[ext_resource type="Resource" uid="uid://c3hlvk1uv4m6g" path="res://02_Entities/Pool/Mobs/AegisBlade/Skills/Silver/entaille_protectrice.tres" id="26_sil"]
+[ext_resource type="Resource" uid="uid://cserment2res7" path="res://02_Entities/Pool/Mobs/AegisBlade/Skills/Gold/serment_de_rempart.tres" id="27_gol"]
+[ext_resource type="Resource" uid="uid://cfrappe2res7" path="res://02_Entities/Pool/Mobs/AegisBlade/Skills/Ultimate/frappe_de_rempart.tres" id="28_ult"]
+
+[resource]
+script = ExtResource("1_tcmu6")
+name = "Aegis Blade"
+portrait = ExtResource("1_3f8uw")
+scene_path = "res://02_Entities/Pool/Mobs/AegisBlade/aegis_blade.tscn"
+default_category = 1
+stats = Dictionary[int, ExtResource("3_2eb21")]({
+1: ExtResource("4_gn1s5"),
+2: ExtResource("5_ahwym"),
+3: ExtResource("6_q61yq"),
+4: ExtResource("7_3f8uw"),
+5: ExtResource("8_8q24b"),
+6: ExtResource("9_7iuae"),
+7: ExtResource("10_i77th"),
+8: ExtResource("11_nesyh"),
+9: ExtResource("12_nr7bv"),
+10: ExtResource("13_pf8x1"),
+11: ExtResource("14_fxt4n"),
+12: ExtResource("15_nkgq5"),
+13: ExtResource("16_xbnle"),
+14: ExtResource("17_3pvs2"),
+15: ExtResource("18_1n83g"),
+16: ExtResource("19_5tjqr"),
+17: ExtResource("20_dyi68"),
+18: ExtResource("21_kjttd"),
+19: ExtResource("22_ke2jf"),
+20: ExtResource("23_wndgn")
+})
+skills = Dictionary[int, ExtResource("2_geb1f")]({
+0: ExtResource("24_pas"),
+1: ExtResource("25_bro"),
+2: ExtResource("26_sil"),
+3: ExtResource("27_gol"),
+4: ExtResource("28_ult")
+})

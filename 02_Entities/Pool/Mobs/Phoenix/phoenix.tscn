@@ -1,0 +1,127 @@
+[gd_scene format=3 uid="uid://b6qq70la5cewg"]
+
+[ext_resource type="Script" uid="uid://d05ookpir5mho" path="res://02_Entities/Pool/Mobs/Phoenix/phoenix.gd" id="1_nflm6"]
+[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.tscn" id="3_gjp7p"]
+[ext_resource type="Script" uid="uid://dcqln53e2uvek" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.gd" id="4_lewpa"]
+[ext_resource type="AnimationNodeBlendTree" uid="uid://cr51ggnb0u010" path="res://02_Entities/Pool/Mobs/Chickens/chicken_animation_tree.res" id="4_qrjbe"]
+[ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://05_Game/Run/SpawnSpecs/SpawnPoints/SpawnPoint/spawn_point.tscn" id="5_rp842"]
+[ext_resource type="PackedScene" uid="uid://cbaehmba0yu1e" path="res://02_Entities/Pool/Mobs/Phoenix/phoenix_visual.tscn" id="5_uybm6"]
+[ext_resource type="Resource" uid="uid://34k1ljotkiup" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/entity_desc.tres" id="9_desc"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x7yny"]
+radius = 0.30566406
+height = 1.5097656
+
+[node name="Phoenix" type="CharacterBody3D" unique_id=2109615854 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker")]
+collision_layer = 16
+collision_mask = 25
+script = ExtResource("1_nflm6")
+entity_name = "Phoenix"
+category = 2
+entity_desc = ExtResource("9_desc")
+_visual_3d = NodePath("PhoenixVisual")
+_health_bar_marker = NodePath("PhoenixVisual/HealthBarSpawnMarker")
+
+[node name="LargeHealthBarComponent" parent="." unique_id=1823590462 node_paths=PackedStringArray("_spawn", "_owner") instance=ExtResource("3_gjp7p")]
+_spawn = NodePath("../PhoenixVisual/HealthBarSpawnMarker")
+_owner = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1928783995]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75244224, 0)
+shape = SubResource("CapsuleShape3D_x7yny")
+
+[node name="AnimationComponent" type="Node" parent="." unique_id=986746104 node_paths=PackedStringArray("_animation_tree", "_owner")]
+script = ExtResource("4_lewpa")
+_animation_tree = NodePath("../AnimationTree")
+_owner = NodePath("..")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=2080904651]
+root_node = NodePath("../PhoenixVisual/Node3D")
+tree_root = ExtResource("4_qrjbe")
+anim_player = NodePath("../PhoenixVisual/Node3D/AnimationPlayer")
+parameters/switch_moving/current_state = ""
+parameters/switch_moving/transition_request = ""
+parameters/switch_moving/current_index = -1
+parameters/scale_dance/scale = 1.0
+parameters/scale_die/scale = 1.0
+parameters/scale_idle_standing_neutral/scale = 1.0
+parameters/one_shot_attack/active = false
+parameters/one_shot_attack/internal_active = false
+parameters/one_shot_attack/request = 0
+parameters/one_shot_ultimate/active = false
+parameters/one_shot_ultimate/internal_active = false
+parameters/one_shot_ultimate/request = 0
+parameters/scale_attack/scale = 1.0
+parameters/one_shot_idle_standing_neutral/active = false
+parameters/one_shot_idle_standing_neutral/internal_active = false
+parameters/one_shot_idle_standing_neutral/request = 0
+parameters/scale_ultimate/scale = 1.0
+parameters/scale_idle_standing_neutral_var/scale = 1.0
+parameters/one_shot_sitting/active = false
+parameters/one_shot_sitting/internal_active = false
+parameters/one_shot_sitting/request = 0
+parameters/switch_entity_life_state/current_state = "Dead"
+parameters/switch_entity_life_state/transition_request = ""
+parameters/switch_entity_life_state/current_index = 0
+parameters/scale_walk/scale = 1.0
+parameters/scale_run/scale = 1.0
+parameters/switch_attack/current_state = ""
+parameters/switch_attack/transition_request = ""
+parameters/switch_attack/current_index = -1
+parameters/scale_stunned/scale = 1.0
+parameters/seek_stunned/seek_request = -1.0
+parameters/scale_idle_standing_aggresive/scale = 1.0
+parameters/scale_idle_standing_aggresive_var/scale = 1.0
+parameters/seek_idle_standing_aggresive/seek_request = -1.0
+parameters/switch_entity_mode/current_state = "Editor"
+parameters/switch_entity_mode/transition_request = ""
+parameters/switch_entity_mode/current_index = 0
+parameters/seek_idle_standing_neutral/seek_request = -1.0
+parameters/one_shot_idle_standing_aggresive/active = false
+parameters/one_shot_idle_standing_aggresive/internal_active = false
+parameters/one_shot_idle_standing_aggresive/request = 0
+parameters/seek_idle_sitting_chair/seek_request = -1.0
+parameters/scale_idle_sitting_chair/scale = 1.0
+parameters/scale_idle_sitting_chair_var/scale = 1.0
+parameters/seek_idle_sitting_floor/seek_request = -1.0
+parameters/seek_dance/seek_request = -1.0
+parameters/one_shot_idle_sitting_chair/active = false
+parameters/one_shot_idle_sitting_chair/internal_active = false
+parameters/one_shot_idle_sitting_chair/request = 0
+parameters/scale_idle_sitting_floor/scale = 1.0
+parameters/scale_idle_sitting_floor_var/scale = 1.0
+parameters/scale_attack_2/scale = 1.0
+parameters/scale_hit_1/scale = 1.0
+parameters/scale_attack_3/scale = 1.0
+parameters/switch_main/current_state = ""
+parameters/switch_main/transition_request = ""
+parameters/switch_main/current_index = -1
+parameters/switch_idle/current_state = ""
+parameters/switch_idle/transition_request = ""
+parameters/switch_idle/current_index = -1
+parameters/scale_drag/scale = 1.0
+parameters/scale_land/scale = 1.0
+parameters/one_shot_land/active = false
+parameters/one_shot_land/internal_active = false
+parameters/one_shot_land/request = 0
+parameters/one_shot_hit/active = false
+parameters/one_shot_hit/internal_active = false
+parameters/one_shot_hit/request = 0
+parameters/scale_attack_1/scale = 1.0
+parameters/switch_positioning/current_state = ""
+parameters/switch_positioning/transition_request = ""
+parameters/switch_positioning/current_index = -1
+parameters/switch_stunned_state/current_state = ""
+parameters/switch_stunned_state/transition_request = ""
+parameters/switch_stunned_state/current_index = -1
+
+[node name="AASpawnPoint" parent="." unique_id=1596130037 instance=ExtResource("5_rp842")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.00037944317, 0.38287425, -0.5151825)
+
+[node name="PhoenixVisual" parent="." unique_id=142901617 instance=ExtResource("5_uybm6")]
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0, 0, 0)
+
+[node name="HealthBarSpawnMarker" type="Marker3D" parent="PhoenixVisual" unique_id=1354833977]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0.95944023, 0)
+
+[editable path="PhoenixVisual"]

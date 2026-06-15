@@ -73,6 +73,7 @@ extends Resource
 @export var MANA_COLOR: Color = Color(0, 0, 255, 1) #Blue
 @export var SCALE_COLOR: Color = Color("948e7e")
 @export var BLOCK_COLOR: Color = Color("328767")
+@export var VALUE_COLOR: Color = Color("87CEFA")     # LightSkyBlue (valeurs numériques)
 @export var DEFAULT_COLOR: Color = Color.WHITE
 
 # ============================== FUNCTIONS ==============================

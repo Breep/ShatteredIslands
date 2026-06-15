@@ -11,6 +11,9 @@ extends Control
 func _ready() -> void:
 	visibility_changed.connect(_emit_window_opened_if_visible)
 	_play_button.pressed.connect(_on_play_button_pressed)
+	if _tutorial_check_box != null:
+		_tutorial_check_box.set_pressed_no_signal(Settings.is_tutorial_enabled())
+		_tutorial_check_box.toggled.connect(_on_tutorial_check_box_toggled)
 	if visible:
 		Events.ui_window_opened.emit()
 

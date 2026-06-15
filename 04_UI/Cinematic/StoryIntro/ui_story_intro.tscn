@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene format=3]
 
-[ext_resource type="Script" path="res://04_UI/Cinematic/StoryIntro/ui_story_intro.gd" id="1_intro"]
-[ext_resource type="FontFile" uid="uid://cvfku6uge3mvi" path="res://20_Data/font/Super Trend.ttf" id="2_font"]
-[ext_resource type="Script" path="res://04_UI/Cinematic/StoryIntro/Resource/story_beat.gd" id="3_beat"]
-[ext_resource type="Resource" path="res://04_UI/Cinematic/StoryIntro/Beats/beat_01_crystal.tres" id="4_b1"]
-[ext_resource type="Resource" path="res://04_UI/Cinematic/StoryIntro/Beats/beat_02_turtle.tres" id="5_b2"]
-[ext_resource type="Resource" path="res://04_UI/Cinematic/StoryIntro/Beats/beat_03_tavern.tres" id="6_b3"]
+[ext_resource type="Script" uid="uid://bff7ndwwb3kk4" path="res://04_UI/Cinematic/StoryIntro/ui_story_intro.gd" id="1_intro"]
+[ext_resource type="FontFile" uid="uid://cvfku6uge3mvi" path="res://04_UI/_Themes/Fonts/Super Trend.ttf" id="2_font"]
+[ext_resource type="Script" uid="uid://do3c63due4ld" path="res://04_UI/Cinematic/StoryIntro/Resource/story_beat.gd" id="3_beat"]
+[ext_resource type="Resource" uid="uid://bbs5agx3y7kas" path="res://04_UI/Cinematic/StoryIntro/Beats/beat_01_crystal.tres" id="4_b1"]
+[ext_resource type="Resource" uid="uid://cb1lnvg5x2h2p" path="res://04_UI/Cinematic/StoryIntro/Beats/beat_02_turtle.tres" id="5_b2"]
+[ext_resource type="Resource" uid="uid://p20r6jiupnm3" path="res://04_UI/Cinematic/StoryIntro/Beats/beat_03_tavern.tres" id="6_b3"]
 [ext_resource type="Script" uid="uid://bia26v50nwe6c" path="res://04_UI/UIButton/ui_button.gd" id="ui_btn"]
 
 [node name="UIStoryIntro" type="Control"]

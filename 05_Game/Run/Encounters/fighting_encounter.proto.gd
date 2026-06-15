@@ -7,8 +7,6 @@ extends Node
 @export_group("Proto Inputs")
 @export var _fighting_encounter: FightingEncounter
 @export var _default_player_formation: FightingFormation
-@export var _hero_scenes: Array[PackedScene] = []
-@export var _acolyte_scenes: Array[PackedScene] = []
 
 @onready var _start_button: Button = %StartButton
 @onready var _reload_button: Button = %ReloadButton
@@ -31,7 +29,8 @@ func _ready() -> void:
 	await _encounter_runner.ready
 
 	var party: Party = Party.new()
-	party.formation = _default_player_formation.populate_with(_hero_scenes, _acolyte_scenes)
+	# Proto à retravailler : FightingFormation.populate_with() a été supprimé.
+	#party.formation = _default_player_formation.populate_with(party, _hero_scenes, _acolyte_scenes)
 
 	await _encounter_runner.setup_fighting(_fighting_encounter, party.formation)
 

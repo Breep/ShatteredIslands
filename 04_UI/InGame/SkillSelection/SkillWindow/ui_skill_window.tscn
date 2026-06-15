@@ -1,0 +1,103 @@
+[gd_scene format=3 uid="uid://bm2o1ibop8nx8"]
+
+[ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="1_7tfbr"]
+[ext_resource type="Script" uid="uid://dp3uxgl1mqg8d" path="res://04_UI/InGame/SkillSelection/SkillWindow/ui_skill_window.gd" id="2_epe4f"]
+[ext_resource type="Texture2D" uid="uid://carfsdb3rsrq6" path="res://04_UI/_Themes/Data/Icons/Backgrounds/skill_bronze_background.svg" id="2_qg3pm"]
+[ext_resource type="Texture2D" uid="uid://ds2dracb280n" path="res://02_Entities/Pool/Heroes/Latika/Skills/Passive/skill_target.svg" id="3_epe4f"]
+
+[node name="UiSkillWindow" type="Control" unique_id=1071241962]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_7tfbr")
+script = ExtResource("2_epe4f")
+
+[node name="SkillContainer" type="PanelContainer" parent="." unique_id=503971715]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -104.0
+offset_top = -154.0
+offset_right = 104.0
+offset_bottom = 154.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+
+[node name="MarginContainer" type="MarginContainer" parent="SkillContainer" unique_id=9198984]
+custom_minimum_size = Vector2(200, 300)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SkillContainer/MarginContainer" unique_id=1253243599]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="SkillBackground" type="TextureRect" parent="SkillContainer/MarginContainer/VBoxContainer" unique_id=415199919]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+mouse_default_cursor_shape = 2
+texture = ExtResource("2_qg3pm")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="SkillContainer/MarginContainer/VBoxContainer/SkillBackground" unique_id=382331602]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="SkillIcon" type="TextureRect" parent="SkillContainer/MarginContainer/VBoxContainer/SkillBackground/MarginContainer" unique_id=2114447374]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_epe4f")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HSeparator" type="HSeparator" parent="SkillContainer/MarginContainer/VBoxContainer" unique_id=997133278]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="SkillName" type="Label" parent="SkillContainer/MarginContainer/VBoxContainer" unique_id=1849043701]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Skill 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="SkillContainer/MarginContainer/VBoxContainer" unique_id=1471371837]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="SkillDescription" type="RichTextLabel" parent="SkillContainer/MarginContainer/VBoxContainer" unique_id=1715664811]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 1
+bbcode_enabled = true
+text = " Lorem ipsum dolor sit amet, [color=violet]consectetur[/color] adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing [shake]nec[/shake], ultricies sed, dolor. Cras elementum ultrices diam. [rainbow]Maecenas[/rainbow] ligula massa, varius a, semper congue, [wave]euismod[/wave] non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat."

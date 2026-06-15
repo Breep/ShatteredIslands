@@ -4,16 +4,17 @@ extends Resource
 # ============================== Enum ==============================
 
 enum Type {
-	UNDEF,
-	WARRIOR,
-	ENGINEER,
-	ARDENT_CELESTIAL,
-	STORM_CALLER,
-	LIGHT,
-	COLOSSUS,
-	POISON,
-	CHICKEN_LORD,
-	NECROSIS,
+	UNDEF = 0,
+	WARRIOR = 1,
+	ENGINEER = 2,
+	ARDENT_CELESTIAL = 3,
+	STORM_CALLER = 4,
+	LIGHT = 5,
+	COLOSSUS = 6,
+	POISON = 7,
+	CHICKEN_LORD = 8,
+	NECROSIS = 9,
+	PROTOTYPING = 100
 }
 
 # ============================== Constant ==============================
@@ -28,11 +29,15 @@ const COLORS = {
 	Type.COLOSSUS: Color(0.737, 0.379, 0.087), # Orange
 	Type.CHICKEN_LORD: Color(0.673, 0.504, 0.032, 1.0), # Yellow
 	Type.NECROSIS: Color(0.518, 0.148, 0.681, 1.0), # Purple
+	Type.PROTOTYPING: Color(0.621, 0.0, 0.547, 1.0), # Purple
 }
 
 # ============================== Exports ==============================
 
-@export var cards: Array[Card] # ALL cards in this game of this family type
+@export var common_cards: Array[Card]
+@export var rare_cards: Array[Card]
+@export var epic_cards: Array[Card]
+@export var legendary_cards: Array[Card]
 @export var icon: Texture2D
 @export var family_name: String
 @export var family_type: Type
@@ -41,9 +46,13 @@ const COLORS = {
 
 # ============================== Public variables ==============================
 
-var lvl: int # Current level of the family (number of cards in the player deck affiliated with this family)
+var lvl: int # Current level of the family (number of cards in the player hand affiliated with this family)
+var cards: Array[Card] # ALL cards in this game of this family type
 
 # ============================== Public functions ==============================
+
+func get_cards() -> Array[Card]:
+	return common_cards + rare_cards + epic_cards + legendary_cards
 
 func get_description() -> String: # Virtual
 	return "Virtual family shouldn't be instanciated"

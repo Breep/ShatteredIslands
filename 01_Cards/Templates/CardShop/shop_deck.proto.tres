@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="ShopDeck" format=3 uid="uid://cmq4qbn1jck17"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_phtlr"]
+[ext_resource type="Resource" path="res://01_Cards/Pool/Cards/Warrior/Common/BurningStrike/warrior_burning_strike.tres" id="2"]
+[ext_resource type="Resource" path="res://01_Cards/Pool/Cards/Warrior/Common/DiamondSword/attack_diamond_sword.tres" id="3"]
+[ext_resource type="Resource" path="res://01_Cards/Pool/Cards/Warrior/Common/Executioner/attack_executioner.tres" id="4"]
+[ext_resource type="Resource" path="res://01_Cards/Pool/Cards/Warrior/Common/HealingCrossbow/attack_healing_crossbow.tres" id="5"]
+[ext_resource type="Resource" path="res://01_Cards/Pool/Cards/Colossus/Common/BoulderThrow/colossus_boulder_throw.tres" id="6"]
+[ext_resource type="Resource" path="res://01_Cards/Pool/Cards/Colossus/Common/TitansVigor/colossus_titans_vigor.tres" id="7"]
+[ext_resource type="Resource" path="res://01_Cards/Pool/Cards/Engineer/Common/EnergyBarrier/engineer_energy_barrier.tres" id="8"]
+[ext_resource type="Resource" path="res://01_Cards/Pool/Cards/Engineer/Common/ShieldRush/engineer_shield_rush.tres" id="9"]
+[ext_resource type="Resource" path="res://01_Cards/Pool/Cards/ChickenLord/Common/NinjaChicken/chickenlord_ninja_chicken.tres" id="10"]
+[ext_resource type="Resource" path="res://01_Cards/Pool/Cards/ArdentCelestial/Common/Meteor/ardent_celestial_meteor.tres" id="11"]
+[ext_resource type="Resource" path="res://01_Cards/Pool/Cards/Warrior/Rare/BladeRush/attack_blade_rush.tres" id="12"]
+[ext_resource type="Resource" path="res://01_Cards/Pool/Cards/Colossus/Rare/BearStrength/colossus_bear_strength.tres" id="13"]
+[ext_resource type="Resource" path="res://01_Cards/Pool/Cards/Engineer/Rare/GammaTurret/engineer_gamma_turret.tres" id="14"]
+[ext_resource type="Resource" path="res://01_Cards/Pool/Cards/ChickenLord/Rare/FlockSynergy/chickenlord_flock_synergy.tres" id="15"]
+[ext_resource type="Resource" path="res://01_Cards/Pool/Cards/ArdentCelestial/Rare/CullingBeam/ardent_celestial_culling_beam.tres" id="16"]
+[ext_resource type="Resource" path="res://01_Cards/Pool/Cards/Warrior/Epic/GatlingGun/attack_gatling_gun.tres" id="17"]
+[ext_resource type="Resource" path="res://01_Cards/Pool/Cards/Colossus/Epic/StoneCarapace/colossus_stone_carapace.tres" id="18"]
+[ext_resource type="Resource" path="res://01_Cards/Pool/Cards/Engineer/Epic/ShieldThrow/engineer_shield_throw.tres" id="19"]
+[ext_resource type="Resource" path="res://01_Cards/Pool/Cards/ChickenLord/Epic/YinYang/chickenlord_yin_yang.tres" id="20"]
+[ext_resource type="Resource" path="res://01_Cards/Pool/Cards/Warrior/Legendary/RussianRoulette/attack_russian_roulette.tres" id="21"]
+[ext_resource type="Resource" path="res://01_Cards/Pool/Cards/Colossus/Legendary/Resurrection/colossus_resurrection.tres" id="22"]
+[ext_resource type="Resource" path="res://01_Cards/Pool/Cards/ChickenLord/Legendary/UndyingBrood/chickenlord_undying_brood.tres" id="23"]
+[ext_resource type="Resource" path="res://01_Cards/Pool/Cards/ArdentCelestial/Legendary/AstralBarrage/ardent_celestial_astral_barrage.tres" id="24"]
+[ext_resource type="Script" uid="uid://cq8l8mwv8k27y" path="res://01_Cards/Templates/Deck/shop_deck.gd" id="25_hq4pm"]
+
+[resource]
+script = ExtResource("25_hq4pm")
+_unique_card_catalogs = Array[ExtResource("1_phtlr")]([ExtResource("2"), ExtResource("3"), ExtResource("4"), ExtResource("5"), ExtResource("6"), ExtResource("7"), ExtResource("8"), ExtResource("9"), ExtResource("10"), ExtResource("11"), ExtResource("12"), ExtResource("13"), ExtResource("14"), ExtResource("15"), ExtResource("16"), ExtResource("17"), ExtResource("18"), ExtResource("19"), ExtResource("20"), ExtResource("21"), ExtResource("22"), ExtResource("23"), ExtResource("24")])
+_rarity_card_numbers = Dictionary[int, int]({
+0: 10,
+1: 6,
+2: 4,
+3: 4
+})
+metadata/_custom_type_script = "uid://cq8l8mwv8k27y"

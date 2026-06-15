@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://sjin8of5pcs2"]
+
+[ext_resource type="Script" uid="uid://c3vd2j0u7h1u0" path="res://01_Cards/Pool/Cards/Prototyping/Projectiles/ProjectileNumber/card_projectile_number.proto.gd" id="1_4tt5w"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_aa6og"]
+
+[sub_resource type="Resource" id="Resource_ym5vn"]
+script = ExtResource("1_4tt5w")
+metadata/_custom_type_script = "uid://c3vd2j0u7h1u0"
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_bvl2y"]
+
+[resource]
+script = ExtResource("1_aa6og")
+name = &"proto proj numb"
+picture = SubResource("PlaceholderTexture2D_bvl2y")
+families = Array[int]([1])
+_card_effect = SubResource("Resource_ym5vn")
+points = Dictionary[int, int]({
+0: 1
+})
+_lvl = 5
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

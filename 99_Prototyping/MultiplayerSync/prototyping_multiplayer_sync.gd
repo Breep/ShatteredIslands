@@ -182,7 +182,6 @@ func _init_players() -> void:
 		# player.hero_desc supprimé en Phase 3 (vit sur HeroSpec maintenant) — proto à reworker
 		player.hero = _heroes[i]
 		player.hero.entity_name = player.player_name
-		player.skill_manager = SkillManager.new()
 		_players.append(player)
 		add_child(player)
 
@@ -194,12 +193,11 @@ func _add_player_cards() -> void:
 	]
 
 	for i: int in _players.size():
-		_players[i].skill_manager.init(_players[i])
 		var card_uid: int = 0
 		for card: Card in players_cards[i]:
 			card.uid = card_uid
 			card_uid += 1
-			_players[i].deck.add_card(card)
+			_players[i].hand.add_card(card)
 
 
 func _setup_sync_debug_panel() -> void:

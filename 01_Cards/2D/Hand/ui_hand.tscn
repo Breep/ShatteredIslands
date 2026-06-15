@@ -1,0 +1,190 @@
+[gd_scene format=3 uid="uid://cmy7daws5mc0v"]
+
+[ext_resource type="PackedScene" uid="uid://c2psjj8133op3" path="res://01_Cards/2D/CardButton/card_button.tscn" id="1_card"]
+[ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="1_gj04k"]
+[ext_resource type="Script" uid="uid://bi1y3f5bsadr0" path="res://01_Cards/2D/Hand/ui_hand.gd" id="2_script"]
+[ext_resource type="Script" uid="uid://bgm4mv022wemj" path="res://04_UI/Tool/DropZone/drop_zone.gd" id="3_dropzone"]
+[ext_resource type="Script" uid="uid://bia26v50nwe6c" path="res://04_UI/UIButton/ui_button.gd" id="4_022ej"]
+
+[node name="UIHand" type="Control" unique_id=77925465 node_paths=PackedStringArray("_drop_zone", "_hand_pivot", "_editor_preview_root", "_hide_show_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_gj04k")
+script = ExtResource("2_script")
+_card_button_scene = ExtResource("1_card")
+_hover_spread_amount = 30.0
+_drop_zone = NodePath("DropZone")
+_hand_pivot = NodePath("HandPivot")
+_editor_preview_root = NodePath("HandPivot/_EditorPreview")
+_hide_show_button = NodePath("HideShowButton")
+
+[node name="DropZone" type="Control" parent="." unique_id=699235962]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 285.0
+offset_top = -329.0
+offset_right = -295.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+script = ExtResource("3_dropzone")
+
+[node name="HandPivot" type="Control" parent="." unique_id=109951534]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_top = -150.0
+offset_bottom = -150.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="_EditorPreview" type="Control" parent="HandPivot" unique_id=2120272582]
+layout_mode = 1
+anchors_preset = 0
+
+[node name="Card1" parent="HandPivot/_EditorPreview" unique_id=2034696892 instance=ExtResource("1_card")]
+layout_mode = 1
+offset_left = -354.36
+offset_top = 82.74
+offset_right = -354.36
+offset_bottom = 82.74
+rotation = -0.4593
+scale = Vector2(0.5, 0.5)
+
+[node name="Card2" parent="HandPivot/_EditorPreview" unique_id=1855468504 instance=ExtResource("1_card")]
+layout_mode = 1
+offset_left = -257.87
+offset_top = 42.74
+offset_right = -257.87
+offset_bottom = 42.74
+rotation = -0.328
+scale = Vector2(0.5, 0.5)
+
+[node name="Card3" parent="HandPivot/_EditorPreview" unique_id=1976295263 instance=ExtResource("1_card")]
+layout_mode = 1
+offset_left = -156.5
+offset_top = 15.41
+offset_right = -156.5
+offset_bottom = 15.41
+rotation = -0.1968
+scale = Vector2(0.5, 0.5)
+
+[node name="Card4" parent="HandPivot/_EditorPreview" unique_id=304247677 instance=ExtResource("1_card")]
+layout_mode = 1
+offset_left = -52.46
+offset_top = 1.72
+offset_right = -52.46
+offset_bottom = 1.72
+rotation = -0.0656
+scale = Vector2(0.5, 0.5)
+
+[node name="Card5" parent="HandPivot/_EditorPreview" unique_id=1010053505 instance=ExtResource("1_card")]
+layout_mode = 1
+offset_left = 52.46
+offset_top = 1.72
+offset_right = 52.46
+offset_bottom = 1.72
+rotation = 0.0656
+scale = Vector2(0.5, 0.5)
+
+[node name="Card6" parent="HandPivot/_EditorPreview" unique_id=1410529412 instance=ExtResource("1_card")]
+layout_mode = 1
+offset_left = 156.5
+offset_top = 15.41
+offset_right = 156.5
+offset_bottom = 15.41
+rotation = 0.1968
+scale = Vector2(0.5, 0.5)
+
+[node name="Card7" parent="HandPivot/_EditorPreview" unique_id=617487931 instance=ExtResource("1_card")]
+layout_mode = 1
+offset_left = 257.87
+offset_top = 42.74
+offset_right = 257.87
+offset_bottom = 42.74
+rotation = 0.328
+scale = Vector2(0.5, 0.5)
+
+[node name="Card8" parent="HandPivot/_EditorPreview" unique_id=304716912 instance=ExtResource("1_card")]
+layout_mode = 1
+offset_left = 354.36
+offset_top = 82.74
+offset_right = 354.36
+offset_bottom = 82.74
+rotation = 0.4593
+scale = Vector2(0.5, 0.5)
+
+[node name="HideShowButton" type="Button" parent="." unique_id=100419919]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = -30.0
+offset_right = 25.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Masquer Deck"
+icon_alignment = 1
+script = ExtResource("4_022ej")
+metadata/_custom_type_script = "uid://bia26v50nwe6c"
+
+[node name="CardCounterLabel" type="RichTextLabel" parent="HideShowButton" unique_id=265136323]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_right = 144.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "8/8"
+vertical_alignment = 1
+
+[node name="WarningHandFullLabel" type="RichTextLabel" parent="." unique_id=979415560]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -400.0
+offset_right = 20.0
+offset_bottom = -320.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/default_color = Color(0.9555171, 0.36586156, 0.33205357, 1)
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/normal_font_size = 42
+bbcode_enabled = true
+text = "[shake]La main est complète !"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="HideShowButton" to="." method="_on_hide_show_button_pressed"]

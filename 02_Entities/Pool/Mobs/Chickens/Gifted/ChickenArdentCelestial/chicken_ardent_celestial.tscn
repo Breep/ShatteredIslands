@@ -1,78 +1,35 @@
 [gd_scene format=3 uid="uid://7s8lg5leu3go"]
 
 [ext_resource type="Script" uid="uid://bmhr7p8uul8cw" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/chicken_ardent_celestial.gd" id="1_qvw4t"]
-[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="2_bh56c"]
-[ext_resource type="Script" uid="uid://bk603mav6k516" path="res://02_Entities/Pool/Mobs/Chickens/chicken_animator.gd" id="3_pnknb"]
-[ext_resource type="AnimationNodeBlendTree" path="res://02_Entities/_Shared/Animations/default_blendtree.tres" id="4_18d2a"]
+[ext_resource type="Resource" uid="uid://djaob0oam5pk0" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/Stats/chicken_entity_desc.tres" id="2_2soxq"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://05_Game/Run/SpawnSpecs/SpawnPoints/SpawnPoint/spawn_point.tscn" id="5_1sg7w"]
 [ext_resource type="PackedScene" uid="uid://b3oqyj5b00c" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/chicken_ardent_celestial_visual.tscn" id="5_kooec"]
-[ext_resource type="Script" path="res://02_Entities/_Shared/Components/Animation/entity_animation_player.gd" id="7_t5xk3"]
-[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/Components/HealthBar/SmallHealthBar/small_health_bar_component.tscn" id="8_kravp"]
-
-[sub_resource type="Resource" id="Resource_asoqs"]
-script = ExtResource("2_bh56c")
-_health_max = 50.0
-_attack_range = 10.0
-_attack_damage = 10.0
-_attack_speed = 1.0
-metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+[ext_resource type="AnimationNodeBlendTree" uid="uid://cr51ggnb0u010" path="res://02_Entities/Pool/Mobs/Chickens/chicken_animation_tree.res" id="6_tas02"]
+[ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="7_40sg2"]
+[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/SmallHealthBar/small_health_bar_component.tscn" id="8_kravp"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x7yny"]
-radius = 0.421875
+radius = 0.28027344
 height = 0.84375
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_asoqs"]
 radius = 50.0
 
-[node name="ChickenArdentCelestial" type="CharacterBody3D" unique_id=2109615854 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_health_bar", "custom_animation_component")]
+[node name="ChickenArdentCelestial" type="CharacterBody3D" unique_id=2109615854 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_attack_spawn_marker")]
 collision_layer = 16
-collision_mask = 0
+collision_mask = 25
 script = ExtResource("1_qvw4t")
 entity_name = "Chicken Ardent"
-custom_base_stats = SubResource("Resource_asoqs")
+category = 1
+entity_desc = ExtResource("2_2soxq")
 _visual_3d = NodePath("ChickenArdentCelestialVisual")
 _health_bar_marker = NodePath("ChickenArdentCelestialVisual/HealthBarSpawnMarker")
-_health_bar = NodePath("HealthBar")
-custom_animation_component = NodePath("AnimationComponent")
+_attack_spawn_marker = NodePath("ChickenArdentCelestialVisual/ProjectileSpawnMarker")
+_projectile_type = 7
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1928783995]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41943443, 0)
 shape = SubResource("CapsuleShape3D_x7yny")
-
-[node name="AnimationComponent" type="Node" parent="." unique_id=986746104 node_paths=PackedStringArray("_animation_tree", "_animation_player", "_entity_owner", "_owner")]
-script = ExtResource("3_pnknb")
-_animation_tree = NodePath("../AnimationTree")
-_animation_player = NodePath("../ChickenArdentCelestialVisual/AnimationPlayer")
-_entity_owner = NodePath("..")
-_owner = NodePath("..")
-
-[node name="AnimationTree" type="AnimationTree" parent="." unique_id=2080904651]
-root_node = NodePath("../ChickenArdentCelestialVisual")
-tree_root = ExtResource("4_18d2a")
-anim_player = NodePath("../ChickenArdentCelestialVisual/AnimationPlayer")
-parameters/transition_fighting/current_state = "Idle"
-parameters/transition_fighting/transition_request = ""
-parameters/transition_fighting/current_index = 0
-parameters/scale_dance/scale = 1.0
-parameters/scale_die/scale = 1.0
-parameters/scale_idle/scale = 1.0
-parameters/one_shot_attack/active = false
-parameters/one_shot_attack/internal_active = false
-parameters/one_shot_attack/request = 0
-parameters/scale_run/scale = 1.0
-parameters/one_shot_ultimate/active = false
-parameters/one_shot_ultimate/internal_active = false
-parameters/one_shot_ultimate/request = 0
-parameters/scale_attack/scale = 1.0
-parameters/scale_walk/scale = 1.0
-parameters/scale_ultimate/scale = 1.0
-parameters/scale_idle_var/scale = -1.0
-parameters/transition_global/current_state = "Fighting"
-parameters/transition_global/transition_request = ""
-parameters/transition_global/current_index = 1
-parameters/one_shot_idle/active = false
-parameters/one_shot_idle/internal_active = false
-parameters/one_shot_idle/request = 0
 
 [node name="AASpawnPoint" parent="." unique_id=1596130037 instance=ExtResource("5_1sg7w")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.00037944317, 0.38287425, -0.5151825)
@@ -80,24 +37,28 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.00037944317, 0.382874
 [node name="ChickenArdentCelestialVisual" parent="." unique_id=142901617 instance=ExtResource("5_kooec")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
-[node name="Skeleton3D" parent="ChickenArdentCelestialVisual" index="0" unique_id=416118163]
-bones/1/position = Vector3(0, 0.05001341, 0.025282245)
-bones/1/rotation = Quaternion(-0.7071025, 0.70710254, -0.0024811202, -0.0024662456)
-bones/4/rotation = Quaternion(-0.28071657, 0.006914267, -0.035062663, 0.9591252)
-bones/7/position = Vector3(0.06718646, -0.0814189, 0.02682318)
-bones/7/rotation = Quaternion(2.456009e-06, -0.7315755, 1.8024717e-05, 0.68176043)
-bones/8/rotation = Quaternion(0.99228764, -1.4785061e-06, -0.12395699, 1.4444552e-05)
-bones/9/rotation = Quaternion(4.963403e-08, -0.592977, -2.3661875e-07, 0.8052194)
-bones/10/position = Vector3(0.06718645, 0.08142003, 0.026819764)
-bones/10/rotation = Quaternion(-1.7211834e-05, -0.7315755, -3.080219e-06, 0.68176043)
-bones/11/rotation = Quaternion(0.99228764, 1.6088267e-06, -0.123956986, -1.4428272e-05)
-bones/12/rotation = Quaternion(4.203856e-08, -0.59297705, 2.371251e-07, 0.8052195)
-
-[node name="AnimationPlayer" parent="ChickenArdentCelestialVisual" index="1" unique_id=777400876]
-script = ExtResource("7_t5xk3")
+[node name="Skeleton3D" parent="ChickenArdentCelestialVisual/Node3D" parent_id_path=PackedInt32Array(142901617, 22277641) index="0" unique_id=416118163]
+bones/1/position = Vector3(0, 0.047381032, 0.025282245)
+bones/1/rotation = Quaternion(-0.7071016, 0.7071016, 0.0027074562, 0.002722331)
+bones/1/scale = Vector3(1, 1, 1.0026101)
+bones/2/rotation = Quaternion(0.8344415, -5.6795907e-06, -0.5510966, 8.903665e-06)
+bones/3/rotation = Quaternion(0.96720886, 8.184627e-08, 0.2539824, -3.0418073e-07)
+bones/4/rotation = Quaternion(-5.536811e-08, 0.0072078905, -2.113779e-09, 0.9999741)
+bones/5/rotation = Quaternion(-3.773232e-06, 0.9361406, -9.886281e-06, 0.35162592)
+bones/7/position = Vector3(0.06718646, -0.0814189, 0.026344845)
+bones/7/rotation = Quaternion(2.7037765e-06, -0.7286475, 1.8201396e-05, 0.68488896)
+bones/8/rotation = Quaternion(0.9932081, -1.5955072e-06, -0.11635132, 1.4483898e-05)
+bones/9/rotation = Quaternion(4.0781124e-08, -0.60039806, -2.2802033e-07, 0.79970133)
+bones/10/position = Vector3(0.06718645, 0.08142003, 0.02634143)
+bones/10/rotation = Quaternion(-1.7054314e-05, -0.7286475, -2.8190655e-06, 0.68488896)
+bones/11/rotation = Quaternion(0.9932081, 1.7259488e-06, -0.116351314, -1.4468617e-05)
+bones/12/rotation = Quaternion(1.5295967e-07, -0.4917123, 1.5807893e-07, 0.8707578)
 
 [node name="HealthBarSpawnMarker" type="Marker3D" parent="ChickenArdentCelestialVisual" unique_id=431386149]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 1.5, 0)
+
+[node name="ProjectileSpawnMarker" type="Marker3D" parent="ChickenArdentCelestialVisual" unique_id=848649524]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.408142e-08, 0.639551, 0.6186193)
 
 [node name="ImpactArea3D" type="Area3D" parent="." unique_id=468927367]
 unique_name_in_owner = true
@@ -109,8 +70,92 @@ monitorable = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ImpactArea3D" unique_id=905481165]
 shape = SubResource("CylinderShape3D_asoqs")
 
-[node name="HealthBar" parent="." unique_id=1628734826 node_paths=PackedStringArray("_owner_entity", "_info_panel_spawn") instance=ExtResource("8_kravp")]
-_owner_entity = NodePath("..")
-_info_panel_spawn = NodePath("../ChickenArdentCelestialVisual/HealthBarSpawnMarker")
+[node name="HealthBar" parent="." unique_id=1628734826 node_paths=PackedStringArray("_spawn", "_owner") instance=ExtResource("8_kravp")]
+_spawn = NodePath("../ChickenArdentCelestialVisual/HealthBarSpawnMarker")
+_owner = NodePath("..")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=2080904651]
+root_node = NodePath("../ChickenArdentCelestialVisual/Node3D")
+tree_root = ExtResource("6_tas02")
+anim_player = NodePath("../ChickenArdentCelestialVisual/Node3D/AnimationPlayer")
+parameters/switch_moving/current_state = "Walk"
+parameters/switch_moving/transition_request = ""
+parameters/switch_moving/current_index = 0
+parameters/scale_dance/scale = 1.0
+parameters/scale_die/scale = 1.0
+parameters/scale_idle_standing_neutral/scale = 1.0
+parameters/one_shot_attack/active = false
+parameters/one_shot_attack/internal_active = false
+parameters/one_shot_attack/request = 0
+parameters/one_shot_ultimate/active = false
+parameters/one_shot_ultimate/internal_active = false
+parameters/one_shot_ultimate/request = 0
+parameters/scale_attack/scale = 1.0
+parameters/one_shot_idle_standing_neutral/active = false
+parameters/one_shot_idle_standing_neutral/internal_active = false
+parameters/one_shot_idle_standing_neutral/request = 0
+parameters/scale_ultimate/scale = 1.0
+parameters/scale_idle_standing_neutral_var/scale = 1.0
+parameters/one_shot_sitting/active = false
+parameters/one_shot_sitting/internal_active = false
+parameters/one_shot_sitting/request = 0
+parameters/switch_entity_life_state/current_state = "Alive"
+parameters/switch_entity_life_state/transition_request = ""
+parameters/switch_entity_life_state/current_index = 1
+parameters/scale_walk/scale = 1.0
+parameters/scale_run/scale = 1.0
+parameters/switch_attack/current_state = "Attack1"
+parameters/switch_attack/transition_request = ""
+parameters/switch_attack/current_index = 0
+parameters/scale_stunned/scale = 1.0
+parameters/seek_stunned/seek_request = -1.0
+parameters/scale_idle_standing_aggresive/scale = 1.0
+parameters/scale_idle_standing_aggresive_var/scale = 1.0
+parameters/seek_idle_standing_aggresive/seek_request = -1.0
+parameters/switch_entity_mode/current_state = "InGame"
+parameters/switch_entity_mode/transition_request = ""
+parameters/switch_entity_mode/current_index = 1
+parameters/seek_idle_standing_neutral/seek_request = -1.0
+parameters/one_shot_idle_standing_aggresive/active = false
+parameters/one_shot_idle_standing_aggresive/internal_active = false
+parameters/one_shot_idle_standing_aggresive/request = 0
+parameters/seek_idle_sitting_chair/seek_request = -1.0
+parameters/scale_idle_sitting_chair/scale = 1.0
+parameters/scale_idle_sitting_chair_var/scale = 1.0
+parameters/seek_idle_sitting_floor/seek_request = -1.0
+parameters/seek_dance/seek_request = -1.0
+parameters/one_shot_idle_sitting_chair/active = false
+parameters/one_shot_idle_sitting_chair/internal_active = false
+parameters/one_shot_idle_sitting_chair/request = 0
+parameters/scale_idle_sitting_floor/scale = 1.0
+parameters/scale_idle_sitting_floor_var/scale = 1.0
+parameters/scale_attack_2/scale = 1.0
+parameters/scale_hit_1/scale = 1.0
+parameters/scale_attack_3/scale = 1.0
+parameters/switch_main/current_state = "Idle"
+parameters/switch_main/transition_request = ""
+parameters/switch_main/current_index = 0
+parameters/switch_idle/current_state = "StandingNeutral"
+parameters/switch_idle/transition_request = ""
+parameters/switch_idle/current_index = 0
+parameters/scale_drag/scale = 1.0
+parameters/scale_land/scale = 1.0
+parameters/one_shot_land/active = false
+parameters/one_shot_land/internal_active = false
+parameters/one_shot_land/request = 0
+parameters/one_shot_hit/active = false
+parameters/one_shot_hit/internal_active = false
+parameters/one_shot_hit/request = 0
+parameters/scale_attack_1/scale = 1.0
+parameters/switch_positioning/current_state = "Off"
+parameters/switch_positioning/transition_request = ""
+parameters/switch_positioning/current_index = 0
+parameters/switch_stunned_state/current_state = "NotStunned"
+parameters/switch_stunned_state/transition_request = ""
+parameters/switch_stunned_state/current_index = 0
+
+[node name="AnimationComponent" parent="." unique_id=73205791 node_paths=PackedStringArray("_animation_tree", "_owner") instance=ExtResource("7_40sg2")]
+_animation_tree = NodePath("../AnimationTree")
+_owner = NodePath("..")
 
 [editable path="ChickenArdentCelestialVisual"]

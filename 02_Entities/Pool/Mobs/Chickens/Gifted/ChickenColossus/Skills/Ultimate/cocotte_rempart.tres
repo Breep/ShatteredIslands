@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://c4h4dximbl3vy"]
+
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
+[ext_resource type="Script" uid="uid://bvnujb4ibs5kj" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Skills/Ultimate/cocotte_rempart.gd" id="2_eff"]
+
+[sub_resource type="Resource" id="Resource_e"]
+script = ExtResource("2_eff")
+metadata/_custom_type_script = "uid://bcocotterem1ef"
+
+[resource]
+script = ExtResource("1_skill")
+skill_id = 7
+name = "Cocotte rempart"
+description = "Gagne 25 Thorn."
+skill_effect = SubResource("Resource_e")
+metadata/_custom_type_script = "uid://dfby4merlgkep"

@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="EntityStats" format=3 uid="uid://8y1pfdf1fsmq"]
+
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="1_c4fvc"]
+
+[resource]
+script = ExtResource("1_c4fvc")
+_health_max = 600.0
+auto_attack_type = 1
+_attack_range = 1.8
+_attack_damage = 14.0
+_attack_speed = 1.2
+_movement_speed = 6.0
+_attack_power = 0.0
+armor = 1.0
+magic_resistance = 1.0
+poison_resistance = 0.5
+_crit_chance = 15.0
+_dodge = 10.0
+_m_resistances = Dictionary[int, float]({
+0: 1.0,
+1: 1.0,
+2: 0.5
+})

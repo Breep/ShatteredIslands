@@ -11,16 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://dvuq5n41nak3u" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/ArenaZoneManager/arena_zone_manager.tscn" id="9_8iy5v"]
 [ext_resource type="PackedScene" uid="uid://dibux7uwcsatj" path="res://06_FloatingIsland/FightingIsland/FightingArea/SpawnArea/spawn_area.tscn" id="10_zones"]
 [ext_resource type="Script" uid="uid://b0otuknba6ddv" path="res://06_FloatingIsland/FightingIsland/FightingArea/floor_area.gd" id="11_8hv54"]
+[ext_resource type="Shader" uid="uid://ds4pwge5dhl7r" path="res://06_FloatingIsland/FightingIsland/FightingArea/fighting_area.proto.gdshader" id="11_yv518"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_team"]
-size = Vector3(12.5, 0.1, 25)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_team1"]
-transparency = 1
-albedo_color = Color(0.368627, 0.529412, 1, 0.392157)
-
-[sub_resource type="BoxMesh" id="BoxMesh_team1"]
-material = SubResource("StandardMaterial3D_team1")
 size = Vector3(12.5, 0.1, 25)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_team2"]
@@ -29,6 +22,29 @@ albedo_color = Color(0.823701, 0.0889347, 0.335772, 0.392157)
 
 [sub_resource type="BoxMesh" id="BoxMesh_team2"]
 material = SubResource("StandardMaterial3D_team2")
+size = Vector3(12.5, 0.1, 25)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b3ulj"]
+render_priority = 0
+shader = ExtResource("11_yv518")
+shader_parameter/dash_color = Color(0.15500173, 0.101498, 0.15138113, 1)
+shader_parameter/bg_color = Color(0, 0, 0, 0)
+shader_parameter/speed = 0.5000001564625993
+shader_parameter/thickness = 0.0150000007125
+shader_parameter/dash_frequency = 20.0
+shader_parameter/corner_radius = 0.0999999977648
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_owbkj"]
+material = SubResource("ShaderMaterial_b3ulj")
+size = Vector2(12, 24.5)
+center_offset = Vector3(0, 0.1, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_team1"]
+transparency = 1
+albedo_color = Color(0.368627, 0.529412, 1, 0.392157)
+
+[sub_resource type="BoxMesh" id="BoxMesh_team1"]
+material = SubResource("StandardMaterial3D_team1")
 size = Vector3(12.5, 0.1, 25)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_center"]
@@ -51,6 +67,12 @@ size = Vector3(25, 1, 25)
 [sub_resource type="BoxShape3D" id="BoxShape3D_8iy5v"]
 size = Vector3(20, 5, 10)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_yv518"]
+size = Vector3(2.3232422, 9.508728, 30.281006)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_owbkj"]
+size = Vector3(29.652344, 9.508728, 3.1503906)
+
 [node name="FightingArea" type="Node3D" unique_id=2072382245 node_paths=PackedStringArray("_spawn_manager", "_fighting_manager", "_entity_manager", "_arena_zone_manager", "_team_zones", "_center_zone", "_full_arena_zone")]
 script = ExtResource("1_t74of")
 _spawn_manager = NodePath("SpawnManager")
@@ -58,8 +80,8 @@ _fighting_manager = NodePath("FightingManager")
 _entity_manager = NodePath("EntityManager")
 _arena_zone_manager = NodePath("ArenaZoneManager")
 _team_zones = {
-1: NodePath("SpawnArea1"),
-2: NodePath("SpawnArea2")
+1: NodePath("SpawnArea2"),
+2: NodePath("SpawnArea1")
 }
 _center_zone = NodePath("CenterArea")
 _full_arena_zone = NodePath("FullArea")
@@ -91,33 +113,44 @@ _spells_node = NodePath("../Spells")
 
 [node name="ArenaZoneManager" parent="." unique_id=641704685 instance=ExtResource("9_8iy5v")]
 
-[node name="SpawnArea1" parent="." unique_id=1845299317 node_paths=PackedStringArray("_visual_to_be_destroyed") instance=ExtResource("10_zones")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.25, 0, 0)
-collision_layer = 4
-monitoring = false
-monitorable = false
-team = 1
-_visual_to_be_destroyed = NodePath("MeshInstance3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnArea1" unique_id=642937565]
-shape = SubResource("BoxShape3D_team")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SpawnArea1" unique_id=204698748]
-mesh = SubResource("BoxMesh_team1")
-
-[node name="SpawnArea2" parent="." unique_id=1249680439 node_paths=PackedStringArray("_visual_to_be_destroyed") instance=ExtResource("10_zones")]
+[node name="SpawnArea1" parent="." unique_id=1249680439 node_paths=PackedStringArray("_highlight_visual_debug", "_highlight_zone") instance=ExtResource("10_zones")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.25, 0, 0)
 collision_layer = 4
 monitoring = false
 monitorable = false
-team = 2
-_visual_to_be_destroyed = NodePath("MeshInstance3D")
+team = 1
+_highlight_visual_debug = NodePath("DebugMesh")
+_highlight_zone = NodePath("ZoneMarker")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnArea2" unique_id=1015911688]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnArea1" unique_id=1015911688]
 shape = SubResource("BoxShape3D_team")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SpawnArea2" unique_id=386571952]
+[node name="DebugMesh" type="MeshInstance3D" parent="SpawnArea1" unique_id=386571952]
+layers = 8
 mesh = SubResource("BoxMesh_team2")
+
+[node name="ZoneMarker" type="MeshInstance3D" parent="SpawnArea1" unique_id=1679149486]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+mesh = SubResource("PlaneMesh_owbkj")
+
+[node name="SpawnArea2" parent="." unique_id=1845299317 node_paths=PackedStringArray("_highlight_visual_debug", "_highlight_zone") instance=ExtResource("10_zones")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.25, 0, 0)
+collision_layer = 4
+monitoring = false
+monitorable = false
+team = 2
+_highlight_visual_debug = NodePath("DebugMesh")
+_highlight_zone = NodePath("ZoneMarker")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnArea2" unique_id=642937565]
+shape = SubResource("BoxShape3D_team")
+
+[node name="DebugMesh" type="MeshInstance3D" parent="SpawnArea2" unique_id=204698748]
+layers = 8
+mesh = SubResource("BoxMesh_team1")
+
+[node name="ZoneMarker" type="MeshInstance3D" parent="SpawnArea2" unique_id=216857022]
+mesh = SubResource("PlaneMesh_owbkj")
 
 [node name="CenterArea" type="Area3D" parent="." unique_id=1978970165]
 
@@ -130,7 +163,7 @@ shape = SubResource("BoxShape3D_center")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FullArea" unique_id=35235616]
 shape = SubResource("BoxShape3D_full")
 
-[node name="Floor" type="StaticBody3D" parent="." unique_id=989301573]
+[node name="Floor" type="Area3D" parent="." unique_id=2042668678 groups=["GROUND"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 collision_layer = 8
 script = ExtResource("11_8hv54")
@@ -159,3 +192,23 @@ collision_mask = 16
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ScannerArea3D" unique_id=1351499465]
 shape = SubResource("BoxShape3D_8iy5v")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=538808466 groups=["WALL"]]
+collision_mask = 0
+input_ray_pickable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=791618610]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.55042, 0.15762329, -1.9622803)
+shape = SubResource("BoxShape3D_yv518")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D" unique_id=2132482930]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.679305, 0.15762329, -1.9622803)
+shape = SubResource("BoxShape3D_yv518")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Area3D" unique_id=895726604]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14735508, 0.15762329, 15.000687)
+shape = SubResource("BoxShape3D_owbkj")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="Area3D" unique_id=1076264221]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14735508, 0.15762329, -15.1921215)
+shape = SubResource("BoxShape3D_owbkj")

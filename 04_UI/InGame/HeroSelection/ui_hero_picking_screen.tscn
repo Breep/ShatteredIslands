@@ -1,12 +1,11 @@
 [gd_scene format=3 uid="uid://k4dc5j8ecdxo"]
 
+[ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="1_58vwt"]
 [ext_resource type="Script" uid="uid://ftwn66cpwnyp" path="res://04_UI/InGame/HeroSelection/ui_hero_picking_screen.gd" id="1_r4a5p"]
-[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme.tres" id="2_5jgqs"]
-[ext_resource type="PackedScene" uid="uid://dmfkigo1trjd0" path="res://04_UI/Tool/Countdown/ui_countdown.tscn" id="2_r4a5p"]
-[ext_resource type="Theme" uid="uid://d0qobfi4rit8a" path="res://04_UI/Menu/MainMenu/label_main_menu_white.tres" id="3_58vwt"]
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme_old.tres" id="2_5jgqs"]
+[ext_resource type="Theme" uid="uid://d0qobfi4rit8a" path="res://04_UI/_Themes/label_main_menu_white.tres" id="3_58vwt"]
 [ext_resource type="PackedScene" uid="uid://b6lyxftbneqy" path="res://04_UI/InGame/HeroSelection/ui_hero_portrait_button.tscn" id="4_kexe1"]
 [ext_resource type="PackedScene" uid="uid://ddugcksbtixea" path="res://04_UI/InGame/HeroSelection/HeroOverviewPanel/ui_hero_overview_panel.tscn" id="5_bveri"]
-[ext_resource type="Theme" uid="uid://djwauvkpnr27d" path="res://04_UI/Menu/MainMenu/normal_button2.tres" id="5_gfisa"]
 [ext_resource type="Script" uid="uid://bq2jprj2y5yr6" path="res://04_UI/Menu/MainMenu/button_main_ui.gd" id="6_58vwt"]
 
 [node name="UIHeroPickingScreen" type="Control" unique_id=1036202486]
@@ -17,6 +16,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme = ExtResource("1_58vwt")
 script = ExtResource("1_r4a5p")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=438495776]
@@ -30,182 +30,175 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.20511743, 0.20511743, 0.20511743, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1633013550]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1558687894]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1633013550]
+layout_mode = 2
 mouse_filter = 2
 
-[node name="TitlePanel" type="Control" parent="VBoxContainer" unique_id=696895657]
+[node name="TitleContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer" unique_id=371357846]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.1
 mouse_filter = 2
 theme = ExtResource("2_5jgqs")
 
-[node name="Label" type="Label" parent="VBoxContainer/TitlePanel" unique_id=10377477]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TitleContainer" unique_id=10377477]
+layout_mode = 2
 theme = ExtResource("3_58vwt")
 theme_override_constants/shadow_offset_y = 11
 theme_override_font_sizes/font_size = 90
-text = "Hero picking phase"
+text = "Hero selection"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ScreenCenter" type="Control" parent="VBoxContainer" unique_id=1994071954]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1470096572]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.9
 mouse_filter = 2
+theme_override_constants/separation = 25
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScreenCenter" unique_id=579737196]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="Panel" type="Control" parent="VBoxContainer/ScreenCenter/VBoxContainer" unique_id=1660792581]
+[node name="HeroListContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1517579776]
+custom_minimum_size = Vector2(432, 932)
 layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.9
-mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel" unique_id=1470096572]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="AllHeroesPanel" type="Control" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel/HBoxContainer" unique_id=179889437]
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_filter = 2
-theme = ExtResource("2_5jgqs")
-
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel/HBoxContainer/AllHeroesPanel" unique_id=2075673633]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel/HBoxContainer/AllHeroesPanel/MarginContainer" unique_id=1346105498]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel/HBoxContainer/AllHeroesPanel/MarginContainer/VBoxContainer" unique_id=66705917]
+[node name="HeroesListScroller" type="ScrollContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/HeroListContainer" unique_id=66705917]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.8
 mouse_filter = 2
 
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel/HBoxContainer/AllHeroesPanel/MarginContainer/VBoxContainer/ScrollContainer" unique_id=924015199]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/HeroListContainer/HeroesListScroller" unique_id=847183476]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HeroGridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/HeroListContainer/HeroesListScroller/MarginContainer" unique_id=924015199]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
-columns = 4
+columns = 3
 
-[node name="HeroPortraitButton" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel/HBoxContainer/AllHeroesPanel/MarginContainer/VBoxContainer/ScrollContainer/GridContainer" unique_id=541327720 instance=ExtResource("4_kexe1")]
+[node name="HeroPortraitButton" parent="MarginContainer/VBoxContainer/HBoxContainer/HeroListContainer/HeroesListScroller/MarginContainer/HeroGridContainer" unique_id=541327720 instance=ExtResource("4_kexe1")]
 layout_mode = 2
 
-[node name="HeroPortraitButton2" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel/HBoxContainer/AllHeroesPanel/MarginContainer/VBoxContainer/ScrollContainer/GridContainer" unique_id=1170486420 instance=ExtResource("4_kexe1")]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="HeroPortraitButton3" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel/HBoxContainer/AllHeroesPanel/MarginContainer/VBoxContainer/ScrollContainer/GridContainer" unique_id=399609744 instance=ExtResource("4_kexe1")]
+[node name="HeroPortraitButton2" parent="MarginContainer/VBoxContainer/HBoxContainer/HeroListContainer/HeroesListScroller/MarginContainer/HeroGridContainer" unique_id=1170486420 instance=ExtResource("4_kexe1")]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="HeroPortraitButton4" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel/HBoxContainer/AllHeroesPanel/MarginContainer/VBoxContainer/ScrollContainer/GridContainer" unique_id=476201692 instance=ExtResource("4_kexe1")]
+[node name="HeroPortraitButton3" parent="MarginContainer/VBoxContainer/HBoxContainer/HeroListContainer/HeroesListScroller/MarginContainer/HeroGridContainer" unique_id=399609744 instance=ExtResource("4_kexe1")]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="HeroPortraitButton5" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel/HBoxContainer/AllHeroesPanel/MarginContainer/VBoxContainer/ScrollContainer/GridContainer" unique_id=2041814539 instance=ExtResource("4_kexe1")]
+[node name="HeroPortraitButton4" parent="MarginContainer/VBoxContainer/HBoxContainer/HeroListContainer/HeroesListScroller/MarginContainer/HeroGridContainer" unique_id=476201692 instance=ExtResource("4_kexe1")]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="HeroPortraitButton6" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel/HBoxContainer/AllHeroesPanel/MarginContainer/VBoxContainer/ScrollContainer/GridContainer" unique_id=422129360 instance=ExtResource("4_kexe1")]
+[node name="HeroPortraitButton5" parent="MarginContainer/VBoxContainer/HBoxContainer/HeroListContainer/HeroesListScroller/MarginContainer/HeroGridContainer" unique_id=2041814539 instance=ExtResource("4_kexe1")]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="HeroPortraitButton7" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel/HBoxContainer/AllHeroesPanel/MarginContainer/VBoxContainer/ScrollContainer/GridContainer" unique_id=1543962645 instance=ExtResource("4_kexe1")]
+[node name="HeroPortraitButton6" parent="MarginContainer/VBoxContainer/HBoxContainer/HeroListContainer/HeroesListScroller/MarginContainer/HeroGridContainer" unique_id=422129360 instance=ExtResource("4_kexe1")]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="HeroPortraitButton8" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel/HBoxContainer/AllHeroesPanel/MarginContainer/VBoxContainer/ScrollContainer/GridContainer" unique_id=556827058 instance=ExtResource("4_kexe1")]
+[node name="HeroPortraitButton7" parent="MarginContainer/VBoxContainer/HBoxContainer/HeroListContainer/HeroesListScroller/MarginContainer/HeroGridContainer" unique_id=1543962645 instance=ExtResource("4_kexe1")]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel/HBoxContainer/AllHeroesPanel/MarginContainer/VBoxContainer" unique_id=147462608]
+[node name="HeroPortraitButton8" parent="MarginContainer/VBoxContainer/HBoxContainer/HeroListContainer/HeroesListScroller/MarginContainer/HeroGridContainer" unique_id=556827058 instance=ExtResource("4_kexe1")]
 layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.2
-theme_override_constants/margin_left = 60
-theme_override_constants/margin_right = 60
+mouse_filter = 2
 
-[node name="LockHeroButton" type="Button" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel/HBoxContainer/AllHeroesPanel/MarginContainer/VBoxContainer/MarginContainer" unique_id=237389695]
-unique_name_in_owner = true
+[node name="HeroPortraitButton9" parent="MarginContainer/VBoxContainer/HBoxContainer/HeroListContainer/HeroesListScroller/MarginContainer/HeroGridContainer" unique_id=563825061 instance=ExtResource("4_kexe1")]
 layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.2
-theme = ExtResource("5_gfisa")
-theme_override_constants/outline_size = 65
-theme_override_font_sizes/font_size = 50
-script = ExtResource("6_58vwt")
+mouse_filter = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel/HBoxContainer/AllHeroesPanel/MarginContainer/VBoxContainer/MarginContainer/LockHeroButton" unique_id=1512148131]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("3_58vwt")
-theme_override_font_sizes/font_size = 64
-text = "Confirm Selection"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="HeroPortraitButton10" parent="MarginContainer/VBoxContainer/HBoxContainer/HeroListContainer/HeroesListScroller/MarginContainer/HeroGridContainer" unique_id=2113671407 instance=ExtResource("4_kexe1")]
+layout_mode = 2
+mouse_filter = 2
 
-[node name="UiHeroOverviewPanel" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel/HBoxContainer" unique_id=1139851784 instance=ExtResource("5_bveri")]
-unique_name_in_owner = true
+[node name="HeroPortraitButton11" parent="MarginContainer/VBoxContainer/HBoxContainer/HeroListContainer/HeroesListScroller/MarginContainer/HeroGridContainer" unique_id=904611968 instance=ExtResource("4_kexe1")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HeroPortraitButton12" parent="MarginContainer/VBoxContainer/HBoxContainer/HeroListContainer/HeroesListScroller/MarginContainer/HeroGridContainer" unique_id=2134038307 instance=ExtResource("4_kexe1")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HeroPortraitButton13" parent="MarginContainer/VBoxContainer/HBoxContainer/HeroListContainer/HeroesListScroller/MarginContainer/HeroGridContainer" unique_id=1545520672 instance=ExtResource("4_kexe1")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HeroPortraitButton14" parent="MarginContainer/VBoxContainer/HBoxContainer/HeroListContainer/HeroesListScroller/MarginContainer/HeroGridContainer" unique_id=1590730724 instance=ExtResource("4_kexe1")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HeroPortraitButton15" parent="MarginContainer/VBoxContainer/HBoxContainer/HeroListContainer/HeroesListScroller/MarginContainer/HeroGridContainer" unique_id=942303660 instance=ExtResource("4_kexe1")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HeroPortraitButton16" parent="MarginContainer/VBoxContainer/HBoxContainer/HeroListContainer/HeroesListScroller/MarginContainer/HeroGridContainer" unique_id=591409281 instance=ExtResource("4_kexe1")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HeroPortraitButton17" parent="MarginContainer/VBoxContainer/HBoxContainer/HeroListContainer/HeroesListScroller/MarginContainer/HeroGridContainer" unique_id=503204407 instance=ExtResource("4_kexe1")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HeroPortraitButton18" parent="MarginContainer/VBoxContainer/HBoxContainer/HeroListContainer/HeroesListScroller/MarginContainer/HeroGridContainer" unique_id=656660719 instance=ExtResource("4_kexe1")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HeroPortraitButton19" parent="MarginContainer/VBoxContainer/HBoxContainer/HeroListContainer/HeroesListScroller/MarginContainer/HeroGridContainer" unique_id=1501134409 instance=ExtResource("4_kexe1")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HeroPortraitButton20" parent="MarginContainer/VBoxContainer/HBoxContainer/HeroListContainer/HeroesListScroller/MarginContainer/HeroGridContainer" unique_id=1186182919 instance=ExtResource("4_kexe1")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MiddleContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1346105498]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="Countdown" parent="." unique_id=1346832548 instance=ExtResource("2_r4a5p")]
+[node name="Empty" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer/MiddleContainer" unique_id=1451605800]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/MiddleContainer" unique_id=1637526344]
+layout_mode = 2
+
+[node name="LockHeroButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/MiddleContainer/CenterContainer" unique_id=237389695]
 unique_name_in_owner = true
-visible = false
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.08
-anchor_bottom = 0.08
-offset_top = 57.6
-offset_bottom = 57.6
-grow_vertical = 1
+custom_minimum_size = Vector2(300, 80)
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+theme_override_font_sizes/font_size = 50
+text = "Lock Hero"
+script = ExtResource("6_58vwt")
+
+[node name="UiHeroOverviewPanel" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1139851784 instance=ExtResource("5_bveri")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(432, 0)
+layout_mode = 2
 mouse_filter = 2
 
-[connection signal="pressed" from="VBoxContainer/ScreenCenter/VBoxContainer/Panel/HBoxContainer/AllHeroesPanel/MarginContainer/VBoxContainer/MarginContainer/LockHeroButton" to="." method="_on_lock_hero_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/MiddleContainer/CenterContainer/LockHeroButton" to="." method="_on_lock_hero_button_pressed"]

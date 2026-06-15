@@ -85,6 +85,7 @@ folder_colors={
 [global_group]
 
 WALL=""
+GROUND=""
 
 [gui]
 

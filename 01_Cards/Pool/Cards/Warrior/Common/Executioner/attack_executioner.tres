@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://beeed262tuj8g"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_card"]
+[ext_resource type="Script" uid="uid://ui8sdxejlnuk" path="res://01_Cards/Pool/Cards/Warrior/Common/Executioner/attack_executioner.gd" id="2_eff"]
+
+[sub_resource type="Resource" id="Resource_exec"]
+script = ExtResource("2_eff")
+_bonus_percent = Array[float]([25.0, 30.0, 35.0, 40.0, 50.0])
+_hp_threshold = Array[float]([25.0, 25.0, 25.0, 25.0, 25.0])
+
+[resource]
+script = ExtResource("1_card")
+name = "Executioner"
+families = Array[int]([1])
+_card_effect = SubResource("Resource_exec")
+points = Dictionary[int, int]({
+1: 1
+})

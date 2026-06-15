@@ -10,7 +10,7 @@ func _init() -> void:
 	polarity = Polarity.BUFF
 	id = &"Block"
 	display_color = Color.WHITE_SMOKE
-	icon = preload("res://02_Entities/_Shared/Components/Alterations/AlterationIcon/Icons/block_icon.png")
+	icon = preload("res://04_UI/_Themes/Data/Icons/AlterationsIcons/block_stroke.svg")
 
 
 ## Attempt to consume 1 block stack against an incoming damage instance.

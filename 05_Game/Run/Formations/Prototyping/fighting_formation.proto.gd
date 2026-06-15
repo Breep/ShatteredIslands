@@ -12,7 +12,8 @@ func _ready() -> void:
 		printerr("No island set")
 		return
 	
-	island.init_fight(left_formation.mirrored(), right_formation, 1, 2)
+	# mirrored() supprimé : la formation gauche n'est plus miroir-ée ici.
+	island.init_fight(left_formation, right_formation, 1, 2)
 	island.set_active()
 	GlobalFightingManager.start()
 	

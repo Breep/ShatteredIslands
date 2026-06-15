@@ -1,0 +1,134 @@
+[gd_scene format=3 uid="uid://dqrhym1sskng8"]
+
+[ext_resource type="Script" uid="uid://dgdcjemlrm0a7" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/gamma_turret.gd" id="1_7mgti"]
+[ext_resource type="PackedScene" uid="uid://b43dafam0s6e5" path="res://02_Entities/_Data/GammaTurret/turret_gamma_visual.tscn" id="2_b6mp1"]
+[ext_resource type="Resource" uid="uid://c0f6bo3f0tuw3" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats/gamma_turret_entity_desc.tres" id="2_gwi2y"]
+[ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="4_f6l0l"]
+[ext_resource type="AnimationNodeBlendTree" uid="uid://bgn1jefe4malv" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/gamma_turret_animation_tree.res" id="4_gwi2y"]
+[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.tscn" id="5_rc10y"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b6mp1"]
+size = Vector3(1.1337891, 3.104004, 1.2070313)
+
+[node name="Turret" type="CharacterBody3D" unique_id=1412979628 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_attack_spawn_marker")]
+collision_layer = 16
+collision_mask = 25
+script = ExtResource("1_7mgti")
+entity_name = "Gamma Turret"
+category = 4
+entity_desc = ExtResource("2_gwi2y")
+_visual_3d = NodePath("turret_gamma")
+_health_bar_marker = NodePath("turret_gamma/HealthBarMarker")
+_attack_spawn_marker = NodePath("turret_gamma/AAMarker")
+_projectile_type = 9
+
+[node name="turret_gamma" parent="." unique_id=1872700829 instance=ExtResource("2_b6mp1")]
+
+[node name="canon droit" parent="turret_gamma/Node3D/Base canon" parent_id_path=PackedInt32Array(1872700829, 21799283) index="0" unique_id=500556116]
+transform = Transform3D(-6.84261e-08, 1.2338486e-07, 0.76141965, 0.32799995, -1.2338485e-07, 1.5884451e-07, 9.2538635e-08, 0.43733335, -2.1481931e-07, -0.012836187, 0.0047268686, -5.6725145e-05)
+
+[node name="canon gauche" parent="turret_gamma/Node3D/Base canon" parent_id_path=PackedInt32Array(1872700829, 21799283) index="1" unique_id=1503903117]
+transform = Transform3D(-6.84261e-08, 1.2338486e-07, 0.76141965, 0.32799995, -1.2338485e-07, 1.5884451e-07, 9.2538635e-08, 0.43733335, -2.1481931e-07, -0.012836218, -0.00435971, -5.6724548e-05)
+
+[node name="AnimationPlayer" parent="turret_gamma/Node3D" parent_id_path=PackedInt32Array(1872700829, 1013222324) index="5" unique_id=1657834120]
+autoplay = &"idle"
+
+[node name="HealthBarMarker" type="Marker3D" parent="turret_gamma" unique_id=1319748275]
+transform = Transform3D(0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0, 4.1077375, 0)
+
+[node name="AAMarker" type="Marker3D" parent="turret_gamma" unique_id=238641138]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7683716e-07, 0.78222144, -0.31611562)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1281618970]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4352162, 0)
+shape = SubResource("BoxShape3D_b6mp1")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1985525116]
+root_node = NodePath("../turret_gamma")
+tree_root = ExtResource("4_gwi2y")
+anim_player = NodePath("../turret_gamma/AnimationPlayer")
+parameters/switch_moving/current_state = ""
+parameters/switch_moving/transition_request = "Walk"
+parameters/switch_moving/current_index = -1
+parameters/scale_dance/scale = 1.0
+parameters/scale_die/scale = 1.0
+parameters/scale_idle_standing_neutral/scale = 1.0
+parameters/one_shot_attack/active = false
+parameters/one_shot_attack/internal_active = false
+parameters/one_shot_attack/request = 0
+parameters/one_shot_ultimate/active = false
+parameters/one_shot_ultimate/internal_active = false
+parameters/one_shot_ultimate/request = 0
+parameters/scale_attack/scale = 1.0
+parameters/one_shot_idle_standing_neutral/active = false
+parameters/one_shot_idle_standing_neutral/internal_active = false
+parameters/one_shot_idle_standing_neutral/request = 0
+parameters/scale_ultimate/scale = 1.0
+parameters/scale_idle_standing_neutral_var/scale = 1.0
+parameters/one_shot_sitting/active = false
+parameters/one_shot_sitting/internal_active = false
+parameters/one_shot_sitting/request = 0
+parameters/switch_entity_life_state/current_state = "Alive"
+parameters/switch_entity_life_state/transition_request = ""
+parameters/switch_entity_life_state/current_index = 1
+parameters/scale_walk/scale = 1.0
+parameters/scale_run/scale = 1.0
+parameters/switch_attack/current_state = ""
+parameters/switch_attack/transition_request = "Attack1"
+parameters/switch_attack/current_index = -1
+parameters/scale_stunned/scale = 1.0
+parameters/seek_stunned/seek_request = -1.0
+parameters/scale_idle_standing_aggresive/scale = 1.0
+parameters/scale_idle_standing_aggresive_var/scale = 1.0
+parameters/seek_idle_standing_aggresive/seek_request = -1.0
+parameters/switch_entity_mode/current_state = "InGame"
+parameters/switch_entity_mode/transition_request = ""
+parameters/switch_entity_mode/current_index = 1
+parameters/seek_idle_standing_neutral/seek_request = -1.0
+parameters/one_shot_idle_standing_aggresive/active = false
+parameters/one_shot_idle_standing_aggresive/internal_active = false
+parameters/one_shot_idle_standing_aggresive/request = 0
+parameters/seek_idle_sitting_chair/seek_request = -1.0
+parameters/scale_idle_sitting_chair/scale = 1.0
+parameters/scale_idle_sitting_chair_var/scale = 1.0
+parameters/seek_idle_sitting_floor/seek_request = -1.0
+parameters/seek_dance/seek_request = -1.0
+parameters/one_shot_idle_sitting_chair/active = false
+parameters/one_shot_idle_sitting_chair/internal_active = false
+parameters/one_shot_idle_sitting_chair/request = 0
+parameters/scale_idle_sitting_floor/scale = 1.0
+parameters/scale_idle_sitting_floor_var/scale = 1.0
+parameters/scale_attack_2/scale = 1.0
+parameters/scale_hit_1/scale = 1.0
+parameters/scale_attack_3/scale = 1.0
+parameters/switch_main/current_state = "Idle"
+parameters/switch_main/transition_request = ""
+parameters/switch_main/current_index = 0
+parameters/switch_idle/current_state = "StandingNeutral"
+parameters/switch_idle/transition_request = ""
+parameters/switch_idle/current_index = 0
+parameters/scale_drag/scale = 1.0
+parameters/scale_land/scale = 1.0
+parameters/one_shot_land/active = false
+parameters/one_shot_land/internal_active = false
+parameters/one_shot_land/request = 0
+parameters/one_shot_hit/active = false
+parameters/one_shot_hit/internal_active = false
+parameters/one_shot_hit/request = 0
+parameters/scale_attack_1/scale = 1.0
+parameters/switch_positioning/current_state = "Off"
+parameters/switch_positioning/transition_request = ""
+parameters/switch_positioning/current_index = 0
+parameters/switch_stunned_state/current_state = "NotStunned"
+parameters/switch_stunned_state/transition_request = ""
+parameters/switch_stunned_state/current_index = 0
+
+[node name="AnimationComponent" parent="." unique_id=73205791 node_paths=PackedStringArray("_animation_tree", "_owner") instance=ExtResource("4_f6l0l")]
+_animation_tree = NodePath("../AnimationTree")
+_owner = NodePath("..")
+
+[node name="LargeHealthBarComponent" parent="." unique_id=1823590462 node_paths=PackedStringArray("_spawn", "_owner") instance=ExtResource("5_rc10y")]
+_spawn = NodePath("../turret_gamma/HealthBarMarker")
+_owner = NodePath("..")
+
+[editable path="turret_gamma"]

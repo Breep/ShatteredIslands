@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://c4altricooba"]
 
 [ext_resource type="Script" uid="uid://bta4n1f0vqnlv" path="res://02_Entities/_Shared/Components/Alterations/AlterationIcon/alteration_icon.gd" id="1_script"]
-[ext_resource type="Texture2D" uid="uid://bfqjobifdq86a" path="res://02_Entities/_Shared/Components/Alterations/AlterationIcon/Icons/ignite_icon.png" id="2_kqqdc"]
+[ext_resource type="Texture2D" uid="uid://dv6lhc7rwbn3q" path="res://04_UI/_Themes/Data/Icons/AlterationsIcons/ignite_stroke.svg" id="2_kqqdc"]
 
 [node name="AlterationIcon" type="Control" unique_id=1181080459]
-custom_minimum_size = Vector2(16, 16)
+custom_minimum_size = Vector2(20, 20)
 layout_mode = 3
 anchors_preset = 0
 mouse_filter = 2
@@ -12,7 +12,8 @@ script = ExtResource("1_script")
 
 [node name="Texture" type="TextureRect" parent="." unique_id=1729109266]
 unique_name_in_owner = true
-modulate = Color(1, 1, 1, 0.43400002)
+modulate = Color(1, 1, 1, 0.6)
+texture_filter = 4
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -33,7 +34,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/outline_size = 4
-theme_override_font_sizes/font_size = 9
-text = "125"
+theme_override_font_sizes/font_size = 8
+text = "12"
 horizontal_alignment = 1
 vertical_alignment = 2

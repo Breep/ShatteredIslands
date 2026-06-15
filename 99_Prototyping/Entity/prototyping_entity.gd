@@ -15,6 +15,9 @@ var _entities: Array[Entity]
 @onready var _family_managers_check_button: CheckButton = %FamilyManagersCheckButton
 @onready var _manual_mode_check_button: CheckButton = %ManualModeCheckButton
 
+@onready var _trigger_flight_button: Button = $"Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/TriggerFlightButton"
+@onready var _cast_ultimate_button: Button = $"Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/CastUltimateButton"
+
 # Manual mode : quand actif, un clic gauche court sur une entité la passe en
 # contrôle joueur (PlayerController). Les autres entités restent ou repassent
 # en AUTO. Une seule entité à la fois est contrôlée.
@@ -30,12 +33,17 @@ func _ready() -> void:
 	_adopt_pre_placed_entities()
 
 	_center_point_camera.set_active()
-	_fighting_manager.init(_spawn_manager, 42)
+	_fighting_manager.init(_spawn_manager, 1) # match the entities' battle_id so their seeded RNG is used
 
 	_auto_attack_check_button.button_pressed = _auto_attack_enabled
 	_family_managers_check_button.button_pressed = _family_managers_enabled
 	_manual_mode_check_button.button_pressed = _manual_mode_enabled
 	_apply_settings_to_entities()
+
+	# Dragon-only commands: only show them when a Skeleton Dragon is in the scene.
+	var has_dragon: bool = _entities.any(func(e: Entity) -> bool: return e is SkeletonDragon)
+	_trigger_flight_button.visible = has_dragon
+	_cast_ultimate_button.visible = has_dragon
 
 
 func _apply_settings_to_entities() -> void:
@@ -49,7 +57,7 @@ func _apply_settings_to_entities() -> void:
 
 # Les entités posées en éditeur (enfants statiques de _entities_node) sont
 # adoptées par le SpawnManager : elles gardent leur position, leurs overrides
-# (@export _override_base_stats, _override_custom_deck, etc.) et leur state
+# (@export _override_base_stats, _override_custom_hand, etc.) et leur state
 # d'éditeur. Le SpawnManager leur attribue juste un UID et les enregistre.
 func _adopt_pre_placed_entities() -> void:
 	for child in _entities_node.get_children():
@@ -57,6 +65,10 @@ func _adopt_pre_placed_entities() -> void:
 		var entity: Entity = child
 		var ctx: EntityContext = entity.get_context()
 		ctx.spawn_manager = _spawn_manager
+		# get_context() pose entity_owner = self (destiné aux summons enfants).
+		# Pour l'adoption d'une entité racine on l'écrase à null sinon
+		# entity.summoner = entity et la chaîne summoner boucle à l'infini.
+		ctx.entity_owner = null
 		_spawn_manager.adopt_entity(entity, ctx)
 		_entities.append(entity)
 
@@ -66,6 +78,18 @@ func _on_start_fight_button_pressed() -> void:
 	_apply_settings_to_entities()
 	GlobalFightingManager.start()
 	_fighting_manager.request_phase_advance()
+
+
+func _on_trigger_flight_button_pressed() -> void:
+	for entity in _entities:
+		if is_instance_valid(entity) and entity.has_method("start_flight"):
+			entity.start_flight()
+
+
+func _on_cast_ultimate_button_pressed() -> void:
+	for entity in _entities:
+		if is_instance_valid(entity) and entity.skill != null:
+			entity.skill.cast_ultimate()
 
 
 func _on_stop_fight_button_pressed() -> void:

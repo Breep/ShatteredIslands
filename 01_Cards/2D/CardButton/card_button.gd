@@ -6,7 +6,11 @@ extends Control
 
 # ============================== Signals ==============================
 
-signal card_selected(self_ref: CardButton, card: Card)
+# Émis au press : enclenche le drag. Un relâchement quasi instantané est arbitré
+# en clic court (achat direct) par le DragCoordinator, sinon c'est un drag normal.
+signal card_drag_requested(self_ref: CardButton, card: Card)
+signal mouse_entered_card(card: Card)
+signal mouse_exited_card(card: Card)
 
 # ============================== Constants ==============================
 
@@ -40,6 +44,8 @@ var _current_rot_x: float
 var _current_rot_y: float
 
 var _is_focused: bool = false
+var _hover_enabled: bool = true
+var _hover_audio_enabled: bool = false
 var _card_tween: Tween
 var _canvas_base_position: Vector2
 var _canvas_base_scale: Vector2
@@ -76,7 +82,7 @@ func play_appear_animation(delay: float = 0.0) -> void:
 	_card_tween = create_tween().set_ease(Tween.EASE_OUT)
 	if delay > 0.0:
 		_card_tween.tween_interval(delay)
-	_card_tween.tween_callback(func(): AudioManager.play_ui("card_drawn"))
+	#_card_tween.tween_callback(func(): AudioManager.play_ui("card_drawn"))
 	_card_tween.tween_property(self, "modulate:a", 1.0, _APPEAR_DURATION).set_trans(Tween.TRANS_SINE)
 	_card_tween.parallel().tween_property(_canvas_group, "scale", _canvas_base_scale, _APPEAR_DURATION).set_trans(Tween.TRANS_BACK)
 
@@ -87,6 +93,19 @@ func remove_shader() -> void:
 func set_locked(locked: bool) -> void:
 	_canvas_group.self_modulate = Color(0.333, 0.333, 0.333, 1.0)
 	#_card_layout.set_locked(locked)
+
+
+# Désactive le survol (hover scale/lift + 3D shader tracking + son hover) et
+# bloque les clics. Les signaux mouse_entered_card / mouse_exited_card restent
+# émis pour que l'extérieur (UIHand) puisse piloter sa propre logique de hover.
+func set_hover_enabled(enabled: bool) -> void:
+	_hover_enabled = enabled
+	if not enabled and _is_focused:
+		_on_control_mouse_exited()
+
+
+func set_hover_audio_enabled(enabled: bool) -> void:
+	_hover_audio_enabled = enabled
 
 # ============================== Node base functions ==============================
 
@@ -107,6 +126,7 @@ func _process(delta: float) -> void:
 	_animation_3d_rotate(delta)
 
 func _input(event: InputEvent) -> void:
+	if not _hover_enabled: return
 	if event is InputEventMouseMotion and _is_focused:
 		_update_rotation_target()
 
@@ -139,13 +159,18 @@ func _animation_reset_3d_rotation() -> void:
 
 
 func _on_control_mouse_entered() -> void:
+	mouse_entered_card.emit(_card)
+	if not _hover_enabled: return
 	_is_focused = true
 	_card_layout.mouse_entered()
 	_animate_hover(true)
-	AudioManager.play_ui("card_drawn")
+	if _hover_audio_enabled:
+		AudioManager.play_ui("card_drawn")
 
 
 func _on_control_mouse_exited() -> void:
+	mouse_exited_card.emit(_card)
+	if not _is_focused: return
 	_is_focused = false
 	_animation_reset_3d_rotation()
 	_card_layout.mouse_exited()
@@ -153,14 +178,13 @@ func _on_control_mouse_exited() -> void:
 
 
 func _on_control_gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.pressed:
-		if event.button_index == MOUSE_BUTTON_LEFT:
-			AudioManager.play_ui("button_click")
-			card_selected.emit(self, card)
-		elif event.button_index == MOUSE_BUTTON_RIGHT and _card != null:
-			var preview: UICardPreview = CARD_PREVIEW_SCENE.instantiate()
-			get_tree().root.add_child(preview)
-			preview.update_visual(_card)
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		card_drag_requested.emit(self, card)
+	if not _hover_enabled: return
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_RIGHT and _card != null:
+		var preview: UICardPreview = CARD_PREVIEW_SCENE.instantiate()
+		get_tree().root.add_child(preview)
+		preview.update_visual(_card)
 
 
 # Anime scale + lift + z-index pour faire ressortir la carte au survol.

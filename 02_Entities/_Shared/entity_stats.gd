@@ -7,39 +7,40 @@ extends Resource
 #region ============================== Enum ==============================
 enum StatType {
 	# --- Mono pure ---
-	HEALTH_MAX,
-	HEALTH,
-	MANA_MAX,
-	MANA,
-	MANA_REGEN,
-	AD,
-	AS,
-	AP,
-	AR,
-	MS,
-	SCALE,
-	CRIT_RESISTANCE,
+	HEALTH_MAX = 0,
+	HEALTH = 1,
+	MANA_MAX = 2,
+	MANA = 3,
+	MANA_REGEN = 4,
+	AD = 5,
+	AS = 6,
+	AP = 7,
+	AR = 8,
+	MS = 9,
+	SCALE = 10,
+	CRIT_RESISTANCE = 11,
+	AOE_SIZE = 12,
 
 	# --- Mono avec Multi sœur (lookup composite) ---
-	CRIT_CHANCE,
-	CRIT_MULT,
-	DODGE,
-	LIFESTEAL,
+	CRIT_CHANCE = 13,
+	CRIT_MULT = 14,
+	DODGE = 15,
+	LIFESTEAL = 16,
 
 	# --- Mono alias vers M_RESISTANCE[action] ---
-	ARMOR,
-	MAGIC_RESIST,
-	POISON_RESIST,
+	ARMOR = 17,
+	MAGIC_RESIST = 18,
+	POISON_RESIST = 19,
 
 	# --- Multi only ---
-	M_POWER,
-	M_FRAGILITY,
-	M_RESISTANCE,
-	M_EXPOSURE,
-	M_CRIT_CHANCE,
-	M_CRIT_MULT,
-	M_DODGE,
-	M_LIFESTEAL,
+	M_POWER = 20,
+	M_FRAGILITY = 21,
+	M_RESISTANCE = 22,
+	M_EXPOSURE = 23,
+	M_CRIT_CHANCE = 24,
+	M_CRIT_MULT = 25,
+	M_DODGE = 26,
+	M_LIFESTEAL = 27,
 }
 
 enum AutoAttackType {RANGED, MELEE}
@@ -61,10 +62,6 @@ const RESISTANCE_ALIASES: Dictionary[StatType, Utils.ActionType] = {
 	StatType.MAGIC_RESIST:  Utils.ActionType.DAMAGE_MAGICAL,
 	StatType.POISON_RESIST: Utils.ActionType.DAMAGE_POISON,
 }
-#endregion
-
-#region ============================== Signals ==============================
-signal has_been_reset()
 #endregion
 
 #region ============================== Health ==============================
@@ -196,6 +193,18 @@ var scale: float:
 		if value == _scale: return
 		_scale = value
 		scale_changed.emit(_scale)
+#endregion
+
+#region ============================== AoE Size ==============================
+signal aoe_size_changed(new_aoe_size: float)
+## Multiplicateur de taille des zones d'effet (AoE) émises par l'entité (1.0 = taille normale).
+@export var _aoe_size: float = 1.0
+var aoe_size: float:
+	get: return _aoe_size
+	set(value):
+		if value == _aoe_size: return
+		_aoe_size = value
+		aoe_size_changed.emit(_aoe_size)
 #endregion
 
 #region ============================== Protection ==============================
@@ -336,6 +345,7 @@ func get_stat(stat_type: StatType, action_type: Utils.ActionType = Utils.ActionT
 		StatType.AR:              return _attack_range
 		StatType.MS:              return _movement_speed
 		StatType.SCALE:           return _scale
+		StatType.AOE_SIZE:        return _aoe_size
 		StatType.CRIT_RESISTANCE: return _crit_resistance
 		StatType.CRIT_CHANCE:     return _crit_chance
 		StatType.CRIT_MULT:       return _crit_mult
@@ -394,6 +404,7 @@ func update_stat(stat_type: StatType, value: float, action_type: Utils.ActionTyp
 		StatType.AR:              attack_range = value
 		StatType.MS:              movement_speed = value
 		StatType.SCALE:           scale = value
+		StatType.AOE_SIZE:        aoe_size = value
 		StatType.CRIT_RESISTANCE: crit_resistance = value
 		StatType.CRIT_CHANCE:     crit_chance = value
 		StatType.CRIT_MULT:       crit_mult = value

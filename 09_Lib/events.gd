@@ -36,6 +36,7 @@ func signal_player_lost_a_fight(player: Player) -> void:
 # ============================== CLICKABLE ==============================
 
 signal entity_clicked(entity: Entity)
+signal entity_alt_clicked(entity: Entity)
 signal entity_right_clicked(entity: Entity)
 signal furniture_clicked(furniture: Furniture)
 func signal_clickable_cliked(clickable: Node3D) -> void:
@@ -50,11 +51,28 @@ func signal_nothing_clicked() -> void:
 
 signal floor_clicked(position: Vector3)
 
+# ============================== DRAGGABLE ==============================
+
+signal entity_drag_started(entity: Entity)
+signal entity_drag_stopped(entity: Entity)
+
 # ============================== UI ==============================
 
-signal ui_skill_picked(skill_id: Skill.SkillID)
-func signal_ui_skill_picked(skill_id: Skill.SkillID) -> void:
-	ui_skill_picked.emit(skill_id)
+signal skill_selected(skill: Skill)
+func signal_skill_selected(skill: Skill) -> void:
+	skill_selected.emit(skill)
+
+# Un tier à choix (bronze/silver/gold) d'un héros vient d'être débloqué et attend
+# un choix joueur. Porté par le composant pour que la fenêtre de sélection (filtrée
+# sur le héros local) puisse s'ouvrir.
+signal hero_skill_unlocked(component: HeroSkillComponent, skill_type: Skill.Type)
+func signal_hero_skill_unlocked(component: HeroSkillComponent, skill_type: Skill.Type) -> void:
+	hero_skill_unlocked.emit(component, skill_type)
+
+# Le joueur a tranché un tier : skill posée dans le roaster du héros.
+signal hero_skill_chosen(component: HeroSkillComponent, skill_id: Skill.SkillID)
+func signal_hero_skill_chosen(component: HeroSkillComponent, skill_id: Skill.SkillID) -> void:
+	hero_skill_chosen.emit(component, skill_id)
 
 signal scene_switched(floating_island: FloatingIsland)
 func signal_scene_switched(floating_island: FloatingIsland) -> void:
@@ -85,6 +103,13 @@ signal card_bought(card: Card)
 signal card_drawn()
 signal insufficient_gold()
 signal gold_gained(amount: int)
+signal shop_refreshed() ## The local shop was rerolled (tutorial validation).
+signal shop_opened() ## The local player opened the shop panel (tutorial validation).
+
+## Roguelite run phases (emitted by RunRoot). The TutorialManager hooks these
+## because the roguelite flow does NOT drive GameManager.game_state_changed.
+signal tavern_phase_started() ## A tavern/buying phase became active and its UI is up.
+signal fighting_phase_started() ## A fighting phase became active.
 
 # ============================ Manager =============================
 signal card_shop_init()

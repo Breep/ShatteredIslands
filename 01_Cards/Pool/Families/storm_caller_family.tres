@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Family" format=3 uid="uid://djjcx0kdvmr5f"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_kkrq8"]
+[ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://01_Cards/Templates/family.gd" id="2_ad662"]
+[ext_resource type="Texture2D" uid="uid://ctng6xf3suweb" path="res://01_Cards/Pool/Families/Icons/storm_caller.png" id="2_xw4lb"]
+
+[resource]
+script = ExtResource("2_ad662")
+icon = ExtResource("2_xw4lb")
+family_name = "Storm"
+family_type = 4
+color = Color(0.266667, 0.827451, 0.733333, 1)
+metadata/_custom_type_script = "uid://d3wk3nm7f672j"

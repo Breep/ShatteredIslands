@@ -27,30 +27,51 @@ enum Type {
 	FAMILY = 17,
 	DRAGGABLE = 18,
 	CONTROLLER = 19,
+	PROGRESSION = 20,
+	SKILL = 21,
+	AURA = 22,
+	HIT_MARKER = 23,
 }
 
-static var ENTITY_COMPONENT_SCENES: Dictionary[EntityComponent.Type, PackedScene] = {
-	Type.MOVEMENT:             load("res://02_Entities/_Shared/Components/Movement/movement_component.tscn"),
-	Type.TARGET:               load("res://02_Entities/_Shared/Components/Target/target_component.tscn"),
-	Type.ALTERATIONS:          load("res://02_Entities/_Shared/Components/Alterations/alterations_component.tscn"),
-	Type.DAMAGE:               load("res://02_Entities/_Shared/Components/Damage/damage_component.tscn"),
-	Type.HEAL:                 load("res://02_Entities/_Shared/Components/Heal/heal_component.tscn"),
-	Type.PROJECTILE:           load("res://02_Entities/_Shared/Components/Projectile/projectile_component.tscn"),
-	Type.SPELL:                load("res://02_Entities/_Shared/Components/Spell/spell_component.tscn"),
-	Type.SUMMON:               load("res://02_Entities/_Shared/Components/Summon/summon_component.tscn"),
-	Type.AUTO_ATTACK:          load("res://02_Entities/_Shared/Components/AutoAttack/auto_attack_component.tscn"),
-	Type.LABEL_POPUP:          load("res://02_Entities/_Shared/Components/Popup/label_popup_component.tscn"),
-	Type.ANIMATION:            load("res://02_Entities/_Shared/Components/Animation/animation_component.tscn"),
-	Type.SPAWN_ANIMATION:      load("res://02_Entities/_Shared/Components/SpawnAnimation/spawn_animation_component.tscn"),
-	Type.CLICKABLE:            load("res://02_Entities/_Shared/Components/Clickable/clickable_component.tscn"),
-	Type.DESPAWN_ANIMATION:    load("res://02_Entities/_Shared/Components/DespawnAnimation/despawn_animation_component.tscn"),
-	Type.DISPLAY_MODE:         load("res://02_Entities/_Shared/Components/DisplayMode/display_mode_module.tscn"),
-	Type.DECK_HOLDER:          load("res://02_Entities/_Shared/Components/DeckHolder/deck_holder_component.tscn"),
-	Type.FAMILY:               load("res://02_Entities/_Shared/Components/Family/family_module.tscn"),
-	Type.DRAGGABLE:            load("res://02_Entities/_Shared/Components/Draggable/draggable_component.tscn"),
-	Type.CONTROLLER:           load("res://02_Entities/_Shared/Components/Controller/entity_controller.tscn"),
-	Type.MANA:                 load("res://02_Entities/_Shared/Components/Mana/mana_component.tscn")
+# Chemins (String) volontairement dans un const, et non des load() dans un static var :
+# un initialiseur de static var s'exécute au chargement de la classe, y compris dans
+# l'éditeur, et déclenchait un load() cyclique (chaque scène porte un script qui
+# extends EntityComponent) qui faisait crasher l'éditeur lors des hot-reloads.
+# Les scènes sont chargées paresseusement et mises en cache via _scene_for().
+const _SCENE_PATHS := {
+	Type.MOVEMENT:             "res://02_Entities/_Shared/Components/Movement/movement_component.tscn",
+	Type.TARGET:               "res://02_Entities/_Shared/Components/Target/target_component.tscn",
+	Type.ALTERATIONS:          "res://02_Entities/_Shared/Components/Alterations/alterations_component.tscn",
+	Type.DAMAGE:               "res://02_Entities/_Shared/Components/Damage/damage_component.tscn",
+	Type.HEAL:                 "res://02_Entities/_Shared/Components/Heal/heal_component.tscn",
+	Type.PROJECTILE:           "res://02_Entities/_Shared/Components/Projectile/projectile_component.tscn",
+	Type.SPELL:                "res://02_Entities/_Shared/Components/Spell/spell_component.tscn",
+	Type.SUMMON:               "res://02_Entities/_Shared/Components/Summon/summon_component.tscn",
+	Type.AUTO_ATTACK:          "res://02_Entities/_Shared/Components/AutoAttack/auto_attack_component.tscn",
+	Type.LABEL_POPUP:          "res://02_Entities/_Shared/Components/Popup/label_popup_component.tscn",
+	Type.ANIMATION:            "res://02_Entities/_Shared/Components/Animation/animation_component.tscn",
+	Type.SPAWN_ANIMATION:      "res://02_Entities/_Shared/Components/SpawnAnimation/spawn_animation_component.tscn",
+	Type.CLICKABLE:            "res://02_Entities/_Shared/Components/Clickable/clickable_component.tscn",
+	Type.DESPAWN_ANIMATION:    "res://02_Entities/_Shared/Components/DespawnAnimation/despawn_animation_component.tscn",
+	Type.DISPLAY_MODE:         "res://02_Entities/_Shared/Components/DisplayMode/display_mode_module.tscn",
+	Type.DECK_HOLDER:          "res://02_Entities/_Shared/Components/DeckHolder/deck_holder_component.tscn",
+	Type.FAMILY:               "res://02_Entities/_Shared/Components/Family/family_module.tscn",
+	Type.DRAGGABLE:            "res://02_Entities/_Shared/Components/Draggable/draggable_component.tscn",
+	Type.CONTROLLER:           "res://02_Entities/_Shared/Components/Controller/entity_controller.tscn",
+	Type.MANA:                 "res://02_Entities/_Shared/Components/Mana/mana_component.tscn",
+	Type.PROGRESSION:          "res://02_Entities/_Shared/Components/Progression/progression_component.tscn",
+	Type.SKILL:                "res://02_Entities/_Shared/Components/Skill/skill_component.tscn",
+	Type.AURA:                 "res://02_Entities/_Shared/Components/Aura/aura_component.tscn",
+	Type.HIT_MARKER:           "res://02_Entities/_Shared/Components/HitMarker/hit_marker_component.tscn",
 }
+
+static var _scene_cache: Dictionary[Type, PackedScene] = {}
+
+
+static func _scene_for(component_type: Type) -> PackedScene:
+	if not _scene_cache.has(component_type):
+		_scene_cache[component_type] = load(_SCENE_PATHS[component_type])
+	return _scene_cache[component_type]
 
 static var _global_dodge_number: int = 0
 static var _crit_check_number: int = -1
@@ -64,7 +85,7 @@ static func add(component_type: Type, entity_owner: Entity) -> void:
 	# Type.keys()[i] indexerait par position dans l'array, ce qui casse dès qu'on retire un membre.
 	var type_name: String = str(Type.find_key(component_type))
 	Verbose.trace("Instantiating '" + type_name + "' on '" + entity_owner.name + "'", Verbose.Category.ENTITY_MODULE)
-	var component: EntityComponent = ENTITY_COMPONENT_SCENES[component_type].instantiate()
+	var component: EntityComponent = _scene_for(component_type).instantiate()
 	if component == null:
 		Verbose.error("Can't instantiate '" + type_name + "'", Verbose.Category.ENTITY_MODULE)
 		return

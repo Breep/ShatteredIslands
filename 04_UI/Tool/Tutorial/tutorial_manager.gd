@@ -62,7 +62,13 @@ func _ready() -> void:
 	GameManager.game_state_changed.connect(_on_game_state_changed)
 	Events.entity_clicked.connect(_on_entity_clicked)
 	Events.furniture_clicked.connect(_on_furniture_clicked)
-	Events.ui_skill_picked.connect(_on_ui_skill_picked)
+	Events.skill_selected.connect(_on_skill_selected)
+	Events.card_bought.connect(_on_card_bought)
+	Events.shop_refreshed.connect(_on_shop_refreshed)
+	Events.shop_opened.connect(_on_shop_opened)
+	Events.tavern_continue_pressed.connect(_on_tavern_continue_pressed)
+	Events.tavern_phase_started.connect(_on_tavern_phase_started)
+	Events.fighting_phase_started.connect(_on_fighting_phase_started)
 
 	set_process(false)
 
@@ -198,6 +204,9 @@ func _stop_fight_prompt_watch() -> void:
 func _try_fire_fight_prompt() -> void:
 	if _fight_prompt_sequence == null: return
 	if _played_sequence_ids.has(_fight_prompt_sequence.id): return
+	# Never interrupt a running sequence (e.g. the forced buying onboarding, which
+	# spends the player's gold down to 0 and would otherwise trigger this prompt).
+	if _active_sequence != null: return
 	_stop_fight_prompt_watch()
 	_start_sequence(_fight_prompt_sequence)
 
@@ -263,9 +272,48 @@ func _on_furniture_clicked(furniture) -> void:
 	_validate_and_advance(TutorialStep.ValidationEvent.FURNITURE_CLICKED, filter)
 
 
-func _on_ui_skill_picked(_skill_id) -> void:
+func _on_skill_selected(_skill: Skill) -> void:
 	if not Settings.is_tutorial_enabled(): return
 	_validate_and_advance(TutorialStep.ValidationEvent.UI_SKILL_PICKED)
+
+
+func _on_card_bought(_card) -> void:
+	if not Settings.is_tutorial_enabled(): return
+	_validate_and_advance(TutorialStep.ValidationEvent.CARD_BOUGHT)
+
+
+func _on_shop_refreshed() -> void:
+	if not Settings.is_tutorial_enabled(): return
+	_validate_and_advance(TutorialStep.ValidationEvent.SHOP_REFRESHED)
+
+
+func _on_shop_opened() -> void:
+	if not Settings.is_tutorial_enabled(): return
+	_validate_and_advance(TutorialStep.ValidationEvent.OPEN_SHOP)
+
+
+func _on_tavern_continue_pressed() -> void:
+	if not Settings.is_tutorial_enabled(): return
+	_validate_and_advance(TutorialStep.ValidationEvent.END_BUYING_PRESSED)
+
+
+## Roguelite flow entry points. The run is driven by RunRoot/EncounterRunner,
+## which never fire GameManager.game_state_changed — so we trigger the buying and
+## fighting sequences from these global phase events instead. Sequences are still
+## looked up in _sequences_by_state by their GameState trigger int.
+func _on_tavern_phase_started() -> void:
+	if not Settings.is_tutorial_enabled(): return
+	_start_fight_prompt_watch()
+	if _sequences_by_state.has(GameManager.GameState.BUYING):
+		_start_sequence(_sequences_by_state[GameManager.GameState.BUYING])
+
+
+func _on_fighting_phase_started() -> void:
+	if not Settings.is_tutorial_enabled(): return
+	_stop_fight_prompt_watch()
+	_validate_and_advance(TutorialStep.ValidationEvent.GAME_STATE_FIGHTING)
+	if _sequences_by_state.has(GameManager.GameState.FIGHTING):
+		_start_sequence(_sequences_by_state[GameManager.GameState.FIGHTING])
 
 
 func _on_step_completed(_step: TutorialStep) -> void:

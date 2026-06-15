@@ -2,7 +2,7 @@ class_name FamilyManager
 extends Node
 
 var _owner: Entity # Ref to owner entity
-var level: int = 0 # Family level (0-4), computed from deck or overridden via prototyping
+var level: int = 0 # Family level (0-4), computed from hand or overridden via prototyping
 
 func _ready() -> void:
 	if _owner == null:

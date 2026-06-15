@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://dsjpo46okks1e"]
+
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
+[ext_resource type="Texture2D" uid="uid://jty237scx2jg" path="res://02_Entities/Pool/Heroes/Latika/Skills/Silver/skill_fury_of_the_pack.svg" id="1_wviqt"]
+[ext_resource type="Script" uid="uid://dsjpo46okkdn0" path="res://02_Entities/Pool/Heroes/Latika/Skills/Silver/pack_fury.gd" id="2_eff"]
+
+[sub_resource type="Resource" id="Resource_packfury"]
+script = ExtResource("2_eff")
+metadata/_custom_type_script = "uid://latpackfuryeff"
+
+[resource]
+script = ExtResource("1_skill")
+skill_id = 3
+name = "Furie de la Meute"
+description = "Les attaques de tous les acolytes de Latika infligent 1 stack de Vulnerability."
+portrait = ExtResource("1_wviqt")
+skill_effect = SubResource("Resource_packfury")
+metadata/_custom_type_script = "uid://dfby4merlgkep"

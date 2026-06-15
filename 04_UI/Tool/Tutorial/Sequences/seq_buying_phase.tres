@@ -3,61 +3,113 @@
 [ext_resource type="Script" uid="uid://djpg3rddxno15" path="res://04_UI/Tool/Tutorial/Resource/tutorial_sequence.gd" id="1_seq"]
 [ext_resource type="Script" uid="uid://jooqjtqqt21" path="res://04_UI/Tool/Tutorial/Resource/tutorial_step.gd" id="2_step"]
 
-[sub_resource type="Resource" id="step_buy_cards"]
+[sub_resource type="Resource" id="step_open_shop"]
 script = ExtResource("2_step")
-id = &"buy_cards"
-text = "Achète des cartes pour te renforcer."
-target_unique_name = &"CardContainer"
-auto_advance_delay = 10.0
+id = &"open_shop"
+text = "Ouvre la boutique pour découvrir tes cartes."
+target_unique_name = &"OpenShopButton"
+validation_event = 9
+auto_advance_delay = 0.0
+popup_mode = 1
+hide_skip = true
 highlight_target = true
 
-[sub_resource type="Resource" id="step_gold"]
+[sub_resource type="Resource" id="step_show_gold"]
 script = ExtResource("2_step")
-id = &"buy_gold"
-text = "Les cartes coûtent des golds. Tu peux consulter tes golds à tout moment ici."
+id = &"show_gold"
+text = "Voici ton or. Les cartes en coûtent — garde un œil dessus."
 target_unique_name = &"PlayerGoldHBox"
-auto_advance_delay = 10.0
+validation_event = 0
+auto_advance_delay = 0.0
 highlight_target = true
 preferred_arrow_side = 3
 
-[sub_resource type="Resource" id="step_card_level"]
+[sub_resource type="Resource" id="step_buy_attack"]
 script = ExtResource("2_step")
-id = &"buy_card_level"
-text = "Les étoiles indiquent le niveau de la carte. Achète plusieurs fois la même pour la monter."
+id = &"buy_attack"
+text = "Prends cette carte : elle renforce ton offensive — ses attaques infligent Ignite."
 target_unique_name = &"CardContainer"
-target_sub_name = &"CurrentLevelContainer"
-auto_advance_delay = 10.0
+target_sub_name = &"VBoxContainer"
+validation_event = 7
+auto_advance_delay = 0.0
+popup_mode = 1
+hide_skip = true
 highlight_target = true
+highlight_padding = 8.0
 
-[sub_resource type="Resource" id="step_card_rarity"]
+[sub_resource type="Resource" id="step_buy_defense"]
 script = ExtResource("2_step")
-id = &"buy_card_rarity"
-text = "Les runes lumineuses sur le contour indiquent la rareté de la carte."
+id = &"buy_defense"
+text = "Celle-ci pour la défense : tes attaques te soignent."
 target_unique_name = &"CardContainer"
-target_sub_name = &"Runes"
-auto_advance_delay = 10.0
+target_sub_name = &"VBoxContainer2"
+validation_event = 7
+auto_advance_delay = 0.0
+popup_mode = 1
+hide_skip = true
 highlight_target = true
+highlight_padding = 8.0
 
-[sub_resource type="Resource" id="step_card_family"]
+[sub_resource type="Resource" id="step_buy_combo"]
 script = ExtResource("2_step")
-id = &"buy_card_family"
-text = "L'icône au centre représente la famille. Cumuler des cartes de la même famille renforce ses effets."
+id = &"buy_combo"
+text = "Et le combo : elle augmente ta vitesse d'attaque."
 target_unique_name = &"CardContainer"
-target_sub_name = &"FamilyIcon"
-auto_advance_delay = 10.0
+target_sub_name = &"VBoxContainer3"
+validation_event = 7
+auto_advance_delay = 0.0
+popup_mode = 1
+hide_skip = true
 highlight_target = true
 highlight_padding = 8.0
 
 [sub_resource type="Resource" id="step_reroll"]
 script = ExtResource("2_step")
-id = &"buy_reroll"
-text = "Pas convaincu ? Tu peux reroll le shop contre de l'or."
+id = &"reroll"
+text = "Rien d'autre d'intéressant ici. Reroll la boutique pour voir de nouvelles cartes."
 target_unique_name = &"RefreshButton"
-auto_advance_delay = 10.0
+validation_event = 8
+auto_advance_delay = 0.0
+popup_mode = 1
+hide_skip = true
+highlight_target = true
+
+[sub_resource type="Resource" id="step_upgrade_attack"]
+script = ExtResource("2_step")
+id = &"upgrade_attack"
+text = "La carte Attaque est revenue ! Rachète-la pour l'améliorer. Tu peux la monter jusqu'au niveau 5."
+target_unique_name = &"CardContainer"
+target_sub_name = &"VBoxContainer"
+validation_event = 7
+auto_advance_delay = 0.0
+popup_mode = 1
+hide_skip = true
+highlight_target = true
+highlight_padding = 8.0
+
+[sub_resource type="Resource" id="step_click_unit"]
+script = ExtResource("2_step")
+id = &"click_unit"
+text = "Clique sur ton unité pour découvrir ce qu'elle fait."
+target_unique_name = &""
+validation_event = 1
+auto_advance_delay = 0.0
+popup_mode = 0
+hide_skip = true
+
+[sub_resource type="Resource" id="step_launch_fight"]
+script = ExtResource("2_step")
+id = &"launch_fight"
+text = "Tu sais tout ! Lance le combat quand tu es prêt, en bas à droite."
+target_unique_name = &"ContinueButton"
+validation_event = 4
+auto_advance_delay = 0.0
+popup_mode = 1
+hide_skip = true
 highlight_target = true
 
 [resource]
 script = ExtResource("1_seq")
 id = &"seq_buying_phase"
 trigger_state = 3
-steps = Array[ExtResource("2_step")]([SubResource("step_buy_cards"), SubResource("step_gold"), SubResource("step_card_level"), SubResource("step_card_rarity"), SubResource("step_card_family"), SubResource("step_reroll")])
+steps = Array[ExtResource("2_step")]([SubResource("step_open_shop"), SubResource("step_show_gold"), SubResource("step_buy_attack"), SubResource("step_buy_defense"), SubResource("step_buy_combo"), SubResource("step_reroll"), SubResource("step_upgrade_attack"), SubResource("step_click_unit"), SubResource("step_launch_fight")])

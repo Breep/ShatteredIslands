@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://dce1dwqiusp4k"]
+
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_an3rh"]
+[ext_resource type="Texture2D" uid="uid://cp6xnbuhro7em" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Skills/Bronze/skill_critical_eye.svg" id="1_kcjgy"]
+[ext_resource type="Script" uid="uid://qfwlyv1vw864" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/Skills/Bronze/critical_eye.gd" id="2_csgxl"]
+
+[sub_resource type="Resource" id="Resource_1l2re"]
+script = ExtResource("2_csgxl")
+
+[resource]
+script = ExtResource("1_an3rh")
+name = "Critical eye"
+portrait = ExtResource("1_kcjgy")
+skill_effect = SubResource("Resource_1l2re")
+metadata/_custom_type_script = "uid://dfby4merlgkep"

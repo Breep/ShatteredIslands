@@ -1,9 +1,11 @@
 [gd_scene format=3 uid="uid://cmstx61h3h6ar"]
 
+[ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="1_0f0xt"]
 [ext_resource type="Script" uid="uid://cc7c0q2xebkyp" path="res://04_UI/InGame/BuyingArea/ui_buying_area.gd" id="1_5o5p6"]
-[ext_resource type="Theme" uid="uid://lkjmyhig2cx7" path="res://04_UI/Menu/MainMenu/normal_button2_reverse.tres" id="3_g27vj"]
+[ext_resource type="Theme" uid="uid://lkjmyhig2cx7" path="res://04_UI/_Themes/normal_button2_reverse.tres" id="3_g27vj"]
 [ext_resource type="PackedScene" uid="uid://d1oxnd1g75rqh" path="res://04_UI/InGame/BuyingArea/CardShop/ui_card_shop.tscn" id="4_dsp03"]
 [ext_resource type="Script" uid="uid://bq2jprj2y5yr6" path="res://04_UI/Menu/MainMenu/button_main_ui.gd" id="4_q862y"]
+[ext_resource type="Script" uid="uid://bia26v50nwe6c" path="res://04_UI/UIButton/ui_button.gd" id="6_gcy4p"]
 
 [node name="UIBuyingArea" type="Control" unique_id=511739105]
 layout_mode = 3
@@ -13,119 +15,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme = ExtResource("1_0f0xt")
 script = ExtResource("1_5o5p6")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=491080204]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/separation = 0
-
-[node name="TopPanel" type="Control" parent="VBoxContainer" unique_id=1858436685]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.1
-mouse_filter = 2
-
-[node name="MiddlePanel" type="Control" parent="VBoxContainer" unique_id=1562612862]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.8
-mouse_filter = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MiddlePanel" unique_id=1607969467]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -4.0
-offset_right = 4.0
-grow_horizontal = 2
-grow_vertical = 0
-scale = Vector2(0.8, 0.8)
-mouse_filter = 2
-
-[node name="LeftPanel" type="Control" parent="VBoxContainer/MiddlePanel/HBoxContainer" unique_id=1308111667]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.1
-mouse_filter = 2
-
-[node name="MiddlePanel" type="Control" parent="VBoxContainer/MiddlePanel/HBoxContainer" unique_id=480098466]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.8
-mouse_filter = 2
-
-[node name="CardShop" parent="VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel" unique_id=1333080452 instance=ExtResource("4_dsp03")]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 7
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -397.0
-offset_bottom = 103.0
-grow_vertical = 0
-scale = Vector2(1.5, 1.5)
-pivot_offset = Vector2(350, 500)
-
-[node name="RightPanel" type="Control" parent="VBoxContainer/MiddlePanel/HBoxContainer" unique_id=706755013]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.1
-mouse_filter = 2
-
-[node name="BottomPanel" type="Control" parent="VBoxContainer" unique_id=1918040738]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.1
-mouse_filter = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/BottomPanel" unique_id=1820141269]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 25
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/BottomPanel/MarginContainer" unique_id=1774202482]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Control2" type="Control" parent="VBoxContainer/BottomPanel/MarginContainer/HBoxContainer" unique_id=821390632]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.4
-mouse_filter = 2
-
-[node name="BottomLeftEmpty" type="Control" parent="VBoxContainer/BottomPanel/MarginContainer/HBoxContainer" unique_id=250462639]
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_filter = 2
-
-[node name="BottomRightEmpty" type="Control" parent="VBoxContainer/BottomPanel/MarginContainer/HBoxContainer" unique_id=405071881]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_filter = 2
-
-[node name="Control" type="Control" parent="VBoxContainer/BottomPanel/MarginContainer/HBoxContainer" unique_id=588925238]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.4
-mouse_filter = 2
 
 [node name="ContinueButton" type="Button" parent="." unique_id=2014871033]
 unique_name_in_owner = true
@@ -139,4 +30,46 @@ theme = ExtResource("3_g27vj")
 text = "Continuer"
 script = ExtResource("4_q862y")
 
+[node name="OpenShopButton" type="Button" parent="." unique_id=1143858210]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 1421.0
+offset_top = 24.0
+offset_right = 1621.0
+offset_bottom = 87.0
+text = "Open SHOP"
+script = ExtResource("6_gcy4p")
+metadata/_custom_type_script = "uid://bia26v50nwe6c"
+
+[node name="ShopMainControl" type="Control" parent="." unique_id=209122779]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Background" type="ColorRect" parent="ShopMainControl" unique_id=529713156]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.21960784, 0.21960784, 0.21960784, 0.78431374)
+
+[node name="CardShop" parent="ShopMainControl/Background" unique_id=1333080452 instance=ExtResource("4_dsp03")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = -341.0
+offset_top = -370.0
+offset_right = 359.0
+offset_bottom = 130.0
+scale = Vector2(1.23, 1.23)
+pivot_offset = Vector2(350, 500)
+
 [connection signal="pressed" from="ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="OpenShopButton" to="." method="_on_open_shop_button_pressed"]

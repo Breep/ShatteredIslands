@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://kxiy1l64qcho"]
+
+[ext_resource type="PackedScene" uid="uid://crd40ycge6qp1" path="res://03_SpellsAndProjectiles/Projectiles/Abilities/Big/Meteor/VFX/VFX_Fire_ball_standar.tscn" id="1_3wdf0"]
+
+[node name="MeteorVisual" type="Node3D" unique_id=539238532]
+
+[node name="VFX_FireBall" parent="." unique_id=1614966912 instance=ExtResource("1_3wdf0")]

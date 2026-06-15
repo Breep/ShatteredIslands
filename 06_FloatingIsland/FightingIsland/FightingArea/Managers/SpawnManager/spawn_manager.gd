@@ -41,7 +41,11 @@ func get_projectiles() -> Array[Projectile]:
 
 # ============================== Public functions (Spawning) ==============================
 
-func spawn_entity(entity: Entity, global_transform: Transform3D, context: EntityContext = null, type := Entity.EntityType.HERO) -> void:
+# `local_space` : quand true, `spawn_transform` est interprété en coordonnées
+# locales relatives à `_entities_node` — c'est le cas des formations (EntitySpec),
+# pour que la rotation/orientation de l'island se propage aux entités. Les summons
+# runtime passent des positions monde déjà résolues → restent en global (false).
+func spawn_entity(entity: Entity, spawn_transform: Transform3D, context: EntityContext = null, type := Entity.EntityType.HERO, local_space: bool = false) -> void:
 	if entity == null: return
 
 	entity.uid = _entity_counter
@@ -50,7 +54,10 @@ func spawn_entity(entity: Entity, global_transform: Transform3D, context: Entity
 	if context != null:
 		entity.apply_context(context)
 	_entities_node.add_child(entity)
-	entity.global_transform = global_transform
+	if local_space:
+		entity.transform = spawn_transform
+	else:
+		entity.global_transform = spawn_transform
 	_active_entities.append(entity)
 
 	entity_spawned.emit(entity)
@@ -102,18 +109,31 @@ func spawn_spell(spell: Spell) -> void:
 	_spells_node.add_child(spell)
 
 
-func spawn_projectile(source: Entity, target: Entity, type: Projectile.Type, spawn_node: Node3D, stats: ProjectileStats) -> void:
+## Spawn a transient, purely-cosmetic VFX scene at a world position (no gameplay).
+## Auto-frees after `lifetime` seconds — the raw pack scenes don't free themselves.
+func spawn_vfx(scene: PackedScene, position: Vector3, lifetime: float = 3.0) -> Node3D:
+	if scene == null: return null
+	var vfx: Node3D = scene.instantiate() as Node3D
+	if vfx == null: return null
+	_spells_node.add_child(vfx)
+	vfx.global_position = position
+	if lifetime > 0.0:
+		get_tree().create_timer(lifetime).timeout.connect(vfx.queue_free)
+	return vfx
+
+
+func spawn_projectile(source: Entity, target: Entity, type: Projectile.Type, spawn_node: Node3D, stats: ProjectileStats, spawn_offset: Vector3 = Vector3.ZERO) -> void:
 	var scene: PackedScene = Shared.PROJECTILE_SCENES[type]
 	if not scene: return
-	
+
 	var proj: Projectile = scene.instantiate()
 	proj.name = "Proj_" + str(_projectile_counter)
 	proj.uid = _projectile_counter
 	_projectile_counter += 1
-	
+
 	proj.init(source, target, stats)
 	_projectiles_node.add_child(proj)
-	proj.global_position = spawn_node.global_position
+	proj.global_position = spawn_node.global_position + spawn_offset
 	proj.init_trajectory()
 	_active_projectiles.append(proj)
 	

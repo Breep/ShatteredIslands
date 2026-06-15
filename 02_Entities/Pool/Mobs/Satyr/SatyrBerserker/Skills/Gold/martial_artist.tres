@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://cef1l4m2epig5"]
+
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_bsw6w"]
+[ext_resource type="Texture2D" uid="uid://c7a28kbyi7y8r" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Skills/Gold/skill_martial_artist.svg" id="1_x4oyi"]
+[ext_resource type="Script" uid="uid://bf7xmo1qxavje" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/Skills/Gold/martial_artist.gd" id="2_mov8v"]
+
+[sub_resource type="Resource" id="Resource_x4oyi"]
+script = ExtResource("2_mov8v")
+metadata/_custom_type_script = "uid://bf7xmo1qxavje"
+
+[resource]
+script = ExtResource("1_bsw6w")
+skill_id = 4
+name = "Martial Artist"
+description = "Martial Artist"
+portrait = ExtResource("1_x4oyi")
+skill_effect = SubResource("Resource_x4oyi")
+metadata/_custom_type_script = "uid://dfby4merlgkep"

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bi3poqdyeuvvn"]
+
+[ext_resource type="Script" uid="uid://dgvvtc0pea5d1" path="res://02_Entities/_Shared/Components/Progression/progression_component.gd" id="1_besa5"]
+
+[node name="LevelComponent" type="Node" unique_id=371052781]
+script = ExtResource("1_besa5")

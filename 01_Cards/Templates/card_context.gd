@@ -1,27 +1,22 @@
 class_name CardContext
 extends RefCounted
 
-## Context object passed to HeroUpgrade.apply_card() — gives cards access to
-## all registries they need without coupling directly to Hero internals.
+## Context object passed to CardEffect.apply() / revert() — donne aux cartes
+## l'accès au porteur de la carte. Tout le reste de l'entité (registres,
+## composants) est accessible via `entity_owner`.
+##
+## `roaster` est posé depuis entity_owner.roaster : non-null quand le porteur
+## est un héros (seul cas où une carte peut muter le roaster de son joueur),
+## null sinon. Les CardEffect qui mutent le roaster doivent gérer le cas null
+## (warn et skip), pas crasher.
 
-var hero: Entity
-var stat_modifiers: EntityStatModifiersRegistry
-var action_modifiers: ActionModifiersRegistry
-var auto_attack_modifiers: AutoAttackModifierRegistry
-var battle_callbacks: BattleCallbackRegistry
-
+var entity_owner: Entity
+var roaster: Roaster
 
 static func create(
-		p_hero: Entity,
-		p_stat_modifiers: EntityStatModifiersRegistry,
-		p_action_modifiers: ActionModifiersRegistry,
-		p_auto_attack_modifiers: AutoAttackModifierRegistry,
-		p_battle_callbacks: BattleCallbackRegistry,
+		p_entity_owner: Entity,
 ) -> CardContext:
 	var ctx := CardContext.new()
-	ctx.hero = p_hero
-	ctx.stat_modifiers = p_stat_modifiers
-	ctx.action_modifiers = p_action_modifiers
-	ctx.auto_attack_modifiers = p_auto_attack_modifiers
-	ctx.battle_callbacks = p_battle_callbacks
+	ctx.entity_owner = p_entity_owner
+	ctx.roaster = p_entity_owner.roaster if p_entity_owner != null else null
 	return ctx

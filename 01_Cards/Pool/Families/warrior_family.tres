@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="Family" format=3 uid="uid://cbmvayb0bb72n"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_4dvmk"]
+[ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://01_Cards/Templates/family.gd" id="2_m6yig"]
+[ext_resource type="Resource" uid="uid://cwarchickcal1" path="res://01_Cards/Pool/Cards/Warrior/Common/ChickenCaller/attack_chicken_caller.tres" id="3_chick"]
+[ext_resource type="Resource" uid="uid://bhogu6m1synt8" path="res://01_Cards/Pool/Cards/Warrior/Common/DiamondSword/attack_diamond_sword.tres" id="4_sword"]
+[ext_resource type="Resource" uid="uid://beeed262tuj8g" path="res://01_Cards/Pool/Cards/Warrior/Common/Executioner/attack_executioner.tres" id="5_exec"]
+[ext_resource type="Resource" uid="uid://cj6hexnvedxmb" path="res://01_Cards/Pool/Cards/Warrior/Common/FightBack/attack_fight_back.tres" id="6_fight"]
+[ext_resource type="Resource" uid="uid://qm75h7gw2hgn" path="res://01_Cards/Pool/Cards/Warrior/Common/HealingCrossbow/attack_healing_crossbow.tres" id="7_cross"]
+[ext_resource type="Resource" uid="uid://cacburnstrk1" path="res://01_Cards/Pool/Cards/Warrior/Common/BurningStrike/warrior_burning_strike.tres" id="8_burn"]
+[ext_resource type="Resource" uid="uid://7i4uh3v4xxba" path="res://01_Cards/Pool/Cards/Warrior/Common/CrushingBlow/warrior_crushing_blow.tres" id="9_crush"]
+[ext_resource type="Resource" uid="uid://ccombatshld1" path="res://01_Cards/Pool/Cards/Warrior/Common/CombatShield/warrior_combat_shield.tres" id="10_combat"]
+[ext_resource type="Resource" uid="uid://bed8ryk1aoplg" path="res://01_Cards/Pool/Cards/Warrior/Rare/AdaptiveTactics/attack_adaptive_tactics.tres" id="11_adapt"]
+[ext_resource type="Resource" uid="uid://b76twqciou5cu" path="res://01_Cards/Pool/Cards/Warrior/Rare/BladeRush/attack_blade_rush.tres" id="12_blade"]
+[ext_resource type="Resource" uid="uid://beeapdilsdvlg" path="res://01_Cards/Pool/Cards/Warrior/Rare/WarBanner/attack_war_banner.tres" id="13_banner"]
+[ext_resource type="Resource" uid="uid://3vjmnbpyyjyk" path="res://01_Cards/Pool/Cards/Warrior/Epic/GatlingGun/attack_gatling_gun.tres" id="14_gatling"]
+[ext_resource type="Resource" uid="uid://beeob3mkruqyg" path="res://01_Cards/Pool/Cards/Warrior/Epic/Overdrive/attack_overdrive.tres" id="15_overdrive"]
+[ext_resource type="Resource" uid="uid://b1hnvijka2dfw" path="res://01_Cards/Pool/Cards/Warrior/Legendary/RussianRoulette/attack_russian_roulette.tres" id="16_roulette"]
+[ext_resource type="Texture2D" uid="uid://b78s362n5bu6" path="res://01_Cards/Pool/Families/Icons/warrior.png" id="17_icon"]
+
+[resource]
+script = ExtResource("2_m6yig")
+common_cards = Array[ExtResource("1_4dvmk")]([ExtResource("3_chick"), ExtResource("4_sword"), ExtResource("5_exec"), ExtResource("6_fight"), ExtResource("7_cross"), ExtResource("8_burn"), ExtResource("9_crush"), ExtResource("10_combat")])
+rare_cards = Array[ExtResource("1_4dvmk")]([ExtResource("11_adapt"), ExtResource("12_blade"), ExtResource("13_banner")])
+epic_cards = Array[ExtResource("1_4dvmk")]([ExtResource("14_gatling"), ExtResource("15_overdrive")])
+legendary_cards = Array[ExtResource("1_4dvmk")]([ExtResource("16_roulette")])
+icon = ExtResource("17_icon")
+family_name = "Warrior"
+family_type = 1
+color = Color(0.299547, 0.299547, 0.299547, 1)
+metadata/_custom_type_script = "uid://d3wk3nm7f672j"

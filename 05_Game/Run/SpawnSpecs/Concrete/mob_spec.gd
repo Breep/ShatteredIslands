@@ -1,5 +1,6 @@
-# Spec d'un mob/NPC présent dans une formation de taverne (narratif, pas de combat).
-# Marker typé — toutes les données héritent d'EntitySpec.
+# Marker spec : un mob/NPC narratif en taverne (pas de combat). Toutes les
+# données vivent sur EntitySpec. La sous-classe existe pour la compat des
+# .tres legacy et le typage tooling.
 @tool
 class_name MobSpec
 extends EntitySpec

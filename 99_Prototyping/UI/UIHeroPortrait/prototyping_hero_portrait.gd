@@ -30,8 +30,6 @@
 	#_player.player_name = "Breep"
 	#_player.name = "Player_proto"
 	## _player.hero_desc supprimé en Phase 3 (vit sur HeroSpec maintenant) — proto à reworker
-	#_player.skill_manager = SkillManager.new()
-	#_player.skill_manager.init(_player)
 	#add_child(_player)
 	#PlayerManager.players[multiplayer.get_unique_id()] = _player
 	#
@@ -57,6 +55,6 @@
 #
 #
 #func _on_add_card_pressed() -> void:
-	#var cards: Array[Card] = _shop_deck.draw_n_cards(1, _player.deck)
-	#_player.deck.add_card(cards[0])
-	#_cards_viewer.update_content(_player.deck.get_active_deck())
+	#var cards: Array[Card] = _shop_deck.draw_n_cards(1, _player.hand)
+	#_player.hand.add_card(cards[0])
+	#_cards_viewer.update_content(_player.hand.get_active_deck())

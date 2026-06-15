@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://c77b0act7ye6o"]
+
+[ext_resource type="Material" uid="uid://bqgyuv826kgy" path="res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/FireBall/Visual/fire_ball.tres" id="2_jyle7"]
+[ext_resource type="ArrayMesh" uid="uid://d3ha0fhlgaamq" path="res://22_VFX/VFX_3D/Import/Firebolt/fireball_shell_mesh.obj" id="3_sjlfm"]
+[ext_resource type="Material" uid="uid://dxpjm0adafggu" path="res://22_VFX/VFX_3D/Import/Firebolt/fireball_fire_particles_mat.tres" id="4_a7knp"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_5c74i"]
+radius = 0.4
+height = 0.8
+
+[sub_resource type="Gradient" id="Gradient_oa1um"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_d5ev2"]
+gradient = SubResource("Gradient_oa1um")
+
+[sub_resource type="Curve" id="Curve_sq6bp"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.4, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.8), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_0dalw"]
+curve = SubResource("Curve_sq6bp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lvrrl"]
+lifetime_randomness = 0.4
+emission_shape = 1
+emission_sphere_radius = 0.15
+direction = Vector3(0, 0, -1)
+spread = 20.0
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+gravity = Vector3(0, 1, 0)
+scale_min = 1.5
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_0dalw")
+color_ramp = SubResource("GradientTexture1D_d5ev2")
+anim_speed_min = 0.1
+anim_speed_max = 0.1
+anim_offset_max = 1.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_6lh4h"]
+size = Vector2(0.5, 0.5)
+
+[node name="Fireball" type="Node3D" unique_id=985001319]
+
+[node name="Core" type="MeshInstance3D" parent="." unique_id=1203630984]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0, 0)
+material_override = ExtResource("2_jyle7")
+cast_shadow = 0
+mesh = SubResource("SphereMesh_5c74i")
+
+[node name="FireballShellMesh" type="MeshInstance3D" parent="." unique_id=1532607707]
+unique_name_in_owner = true
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0, 0)
+material_override = ExtResource("2_jyle7")
+cast_shadow = 0
+mesh = ExtResource("3_sjlfm")
+
+[node name="FireTrail" type="GPUParticles3D" parent="FireballShellMesh" unique_id=801844964]
+unique_name_in_owner = true
+transform = Transform3D(5, 0, 0, 0, -2.1855695e-07, 5, 0, -5, -2.1855695e-07, 0, -0.65, 2.84124e-08)
+visible = false
+material_override = ExtResource("4_a7knp")
+cast_shadow = 0
+amount = 16
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_lvrrl")
+draw_pass_1 = SubResource("QuadMesh_6lh4h")

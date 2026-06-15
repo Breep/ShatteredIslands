@@ -1,0 +1,83 @@
+[gd_resource type="Resource" script_class="HeroDesc" format=3 uid="uid://pjwj2qg04h56"]
+
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_1git3"]
+[ext_resource type="Texture2D" uid="uid://br7bggyypq4te" path="res://02_Entities/Pool/Heroes/DarkKnight/Data/dark_knight_portrait.png" id="2_4g173"]
+[ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://02_Entities/_Shared/hero_desc.gd" id="2_7xng1"]
+[ext_resource type="PackedScene" uid="uid://cv2yc4lljarhh" path="res://02_Entities/Pool/Heroes/DarkKnight/dark_knight_preview.tscn" id="2_u5c3u"]
+[ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="3_u5c3u"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="4_4g173"]
+[ext_resource type="Resource" uid="uid://br28t2xr5g7pk" path="res://02_Entities/Pool/Heroes/DarkKnight/Stats/stats_lvl_01.tres" id="5_2st45"]
+[ext_resource type="Resource" uid="uid://bof7edyxa726n" path="res://02_Entities/Pool/Heroes/DarkKnight/Stats/stats_lvl_02.tres" id="6_j0ud8"]
+[ext_resource type="Resource" uid="uid://d0khufdv3x30y" path="res://02_Entities/Pool/Heroes/DarkKnight/Stats/stats_lvl_03.tres" id="7_cd2ad"]
+[ext_resource type="Resource" uid="uid://f15lkl6ldnhi" path="res://02_Entities/Pool/Heroes/DarkKnight/Stats/stats_lvl_04.tres" id="8_ym1fi"]
+[ext_resource type="Resource" uid="uid://b4e6c6vnhmibc" path="res://02_Entities/Pool/Heroes/DarkKnight/Stats/stats_lvl_05.tres" id="9_ykt5x"]
+[ext_resource type="Resource" uid="uid://dx2pbx3gbea05" path="res://02_Entities/Pool/Heroes/DarkKnight/Stats/stats_lvl_06.tres" id="10_00o7v"]
+[ext_resource type="Resource" uid="uid://bk7vwfjq4nova" path="res://02_Entities/Pool/Heroes/DarkKnight/Stats/stats_lvl_07.tres" id="11_r6ql6"]
+[ext_resource type="Resource" uid="uid://bfy4rynkv5l02" path="res://02_Entities/Pool/Heroes/DarkKnight/Stats/stats_lvl_08.tres" id="12_fk037"]
+[ext_resource type="Resource" uid="uid://chkindjxn2gk3" path="res://02_Entities/Pool/Heroes/DarkKnight/Stats/stats_lvl_09.tres" id="13_yw2rb"]
+[ext_resource type="Resource" uid="uid://dlxeboma5riso" path="res://02_Entities/Pool/Heroes/DarkKnight/Stats/stats_lvl_10.tres" id="14_7pjoy"]
+[ext_resource type="Resource" uid="uid://bi1ehm4o1t4gy" path="res://02_Entities/Pool/Heroes/DarkKnight/Stats/stats_lvl_11.tres" id="15_j3c0p"]
+[ext_resource type="Resource" uid="uid://c4fpysjmwpftw" path="res://02_Entities/Pool/Heroes/DarkKnight/Stats/stats_lvl_12.tres" id="16_7ihhh"]
+[ext_resource type="Resource" uid="uid://cbnoyvotaoe8m" path="res://02_Entities/Pool/Heroes/DarkKnight/Stats/stats_lvl_13.tres" id="17_qimm3"]
+[ext_resource type="Resource" uid="uid://bom4w1fnlgkxj" path="res://02_Entities/Pool/Heroes/DarkKnight/Stats/stats_lvl_14.tres" id="18_rcpym"]
+[ext_resource type="Resource" uid="uid://cqf3iiyd31ckv" path="res://02_Entities/Pool/Heroes/DarkKnight/Stats/stats_lvl_15.tres" id="19_2t0de"]
+[ext_resource type="Resource" uid="uid://c08qma12dv0tm" path="res://02_Entities/Pool/Heroes/DarkKnight/Stats/stats_lvl_16.tres" id="20_lywxp"]
+[ext_resource type="Resource" uid="uid://crqrpqbgk53p" path="res://02_Entities/Pool/Heroes/DarkKnight/Stats/stats_lvl_17.tres" id="21_ok2n4"]
+[ext_resource type="Resource" uid="uid://ctn2qbhawwq45" path="res://02_Entities/Pool/Heroes/DarkKnight/Stats/stats_lvl_18.tres" id="22_cyi5f"]
+[ext_resource type="Resource" uid="uid://d3unm5uuxaxt7" path="res://02_Entities/Pool/Heroes/DarkKnight/Stats/stats_lvl_19.tres" id="23_t4xip"]
+[ext_resource type="Resource" uid="uid://cgkb63a50qupk" path="res://02_Entities/Pool/Heroes/DarkKnight/Stats/stats_lvl_20.tres" id="24_xxgnk"]
+[ext_resource type="Resource" uid="uid://cdkpassivetrs" path="res://02_Entities/Pool/Heroes/DarkKnight/Skills/Passive/shadow_blade.tres" id="25_pass"]
+[ext_resource type="Resource" uid="uid://cdkulttrs" path="res://02_Entities/Pool/Heroes/DarkKnight/Skills/Ultimate/eclipse.tres" id="26_ult"]
+[ext_resource type="Resource" uid="uid://cdkb1trs" path="res://02_Entities/Pool/Heroes/DarkKnight/Skills/Bronze/honed_shadow.tres" id="27_b1"]
+[ext_resource type="Resource" uid="uid://cdkb2trs" path="res://02_Entities/Pool/Heroes/DarkKnight/Skills/Bronze/eclipse_guard.tres" id="28_b2"]
+[ext_resource type="Resource" uid="uid://cdks1trs" path="res://02_Entities/Pool/Heroes/DarkKnight/Skills/Silver/occult_thirst.tres" id="29_s1"]
+[ext_resource type="Resource" uid="uid://cdks2trs" path="res://02_Entities/Pool/Heroes/DarkKnight/Skills/Silver/amplified_shard.tres" id="30_s2"]
+[ext_resource type="Resource" uid="uid://cdkg2trs" path="res://02_Entities/Pool/Heroes/DarkKnight/Skills/Gold/eclipse_storm.tres" id="31_g2"]
+[ext_resource type="Resource" uid="uid://cdkg1trs" path="res://02_Entities/Pool/Heroes/DarkKnight/Skills/Gold/crushing_eclipse.tres" id="32_g1"]
+
+[resource]
+script = ExtResource("2_7xng1")
+id = 1
+category = "Melee / DPS"
+hero_skills = Dictionary[int, ExtResource("1_1git3")]({
+0: ExtResource("27_b1"),
+1: ExtResource("28_b2"),
+2: ExtResource("29_s1"),
+3: ExtResource("30_s2"),
+4: ExtResource("32_g1"),
+5: ExtResource("31_g2"),
+6: ExtResource("25_pass"),
+7: ExtResource("26_ult")
+})
+name = "Dark Knight"
+portrait = ExtResource("2_4g173")
+preview_scene = ExtResource("2_u5c3u")
+default_category = 0
+stats = Dictionary[int, ExtResource("4_4g173")]({
+1: ExtResource("5_2st45"),
+2: ExtResource("6_j0ud8"),
+3: ExtResource("7_cd2ad"),
+4: ExtResource("8_ym1fi"),
+5: ExtResource("9_ykt5x"),
+6: ExtResource("10_00o7v"),
+7: ExtResource("11_r6ql6"),
+8: ExtResource("12_fk037"),
+9: ExtResource("13_yw2rb"),
+10: ExtResource("14_7pjoy"),
+11: ExtResource("15_j3c0p"),
+12: ExtResource("16_7ihhh"),
+13: ExtResource("17_qimm3"),
+14: ExtResource("18_rcpym"),
+15: ExtResource("19_2t0de"),
+16: ExtResource("20_lywxp"),
+17: ExtResource("21_ok2n4"),
+18: ExtResource("22_cyi5f"),
+19: ExtResource("23_t4xip"),
+20: ExtResource("24_xxgnk")
+})
+aa_1_release_normalized = 0.33
+aa_2_release_normalized = 0.31
+aa_3_release_normalized = 0.38
+aa_1_anim_base_duration = 1.166
+aa_2_anim_base_duration = 1.233
+aa_3_anim_base_duration = 1.333

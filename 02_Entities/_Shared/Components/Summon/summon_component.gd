@@ -1,6 +1,12 @@
 class_name SummonComponent
 extends EntityComponent
 
+# Rayon (en unités monde) de spread ajouté par entité supplémentaire quand
+# un count > 1 est résolu (cf. ActionModifier.VarType.COUNT). count=1 →
+# rayon 0 (spawn pile au point indiqué). count=N → rayon = const × (N-1),
+# avec les entités réparties sur un cercle horizontal (plan XZ).
+const SPREAD_RADIUS_PER_EXTRA: float = 0.5
+
 var _spawn_manager: SpawnManager
 var _arena_zone_manager: ArenaZoneManager
 
@@ -20,10 +26,11 @@ const PROTO_SHIELD_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/Pro
 const FORTIFICATION_DRONE_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/FortificationDrone/fortification_drone.tscn")
 const AEGIS_BLADE_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/AegisBlade/aegis_blade.tscn")
 const DEFLECTION_SHIELD: PackedScene = preload("res://02_Entities/Pool/Mobs/DeflectionShield/deflection_shield.tscn")
-const GAMMA_TURRET: PackedScene = preload("res://02_Entities/Pool/Mobs/GammaTurret/gamma_turret.tscn")
+const GAMMA_TURRET: PackedScene = preload("res://02_Entities/Pool/Buildings/Turrets/GammaTurret/gamma_turret.tscn")
 
 const TREX_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/TRex/trex.tscn")
 const CHICKEN_EGG_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/ChickenEgg/chicken_egg.tscn")
+const MOLTEN_GOLEM_SCENE: PackedScene = preload("res://02_Entities/Pool/Mobs/Golems/MoltenGolem/molten_golem.tscn")
 
 func _enter_tree() -> void:
 	if _owner == null: return
@@ -68,31 +75,52 @@ func summon_entity(entity_type: Entity.EntityType, spawn_config: SpawnLocationCo
 
 	var spawn_position := spawn_config.resolve(_arena_zone_manager)
 
+	# Phase pré-action : on passe COUNT=1 dans la dict ; les ActionModifier
+	# SUMMON peuvent le muter via leur before_action_logic_callback
+	# (ex: "20% de chance de summon 2 au lieu d'1"). Clampé >= 1 côté lecture.
 	var modifiers_data: Dictionary = _consume_before_action_modifiers(Utils.ActionCategory.SUMMON, {
 		ActionModifier.VarType.ENTITY_TYPE: entity_type,
 		ActionModifier.VarType.ENTITY_MODIFIER: entity_modifier,
+		ActionModifier.VarType.COUNT: 1,
 	})
 	entity_modifier = modifiers_data.get(ActionModifier.VarType.ENTITY_MODIFIER, entity_modifier)
 	entity_type = modifiers_data.get(ActionModifier.VarType.ENTITY_TYPE, entity_type)
+	var count: int = maxi(1, modifiers_data.get(ActionModifier.VarType.COUNT, 1))
 
-	match entity_type:
-		Entity.EntityType.SNAKE_BARREL: _summon_snake_barrel(spawn_position, entity_modifier)
-		Entity.EntityType.SNAKE: _summon_snake(spawn_position, entity_modifier)
-		Entity.EntityType.CHICKEN: _summon_chicken(spawn_position, entity_modifier)
-		Entity.EntityType.PROTO_SHIELD: _summon_proto_shield(spawn_position, entity_modifier)
-		Entity.EntityType.FORTIFICATION_DRONE: _summon_fortification_drone(spawn_position, entity_modifier)
-		Entity.EntityType.AEGIS_BLADE: _summon_aegis_blade(spawn_position, entity_modifier)
-		Entity.EntityType.DEFLECTION_SHIELD: _summon_deflection_shield(spawn_position, entity_modifier)
-		Entity.EntityType.TREX: _summon_trex(spawn_position, entity_modifier)
-		Entity.EntityType.CHICKEN_EGG: _summon_chicken_egg(spawn_position, entity_modifier)
-		Entity.EntityType.GAMMA_TURRET: _summon_gamma_turret(spawn_position, entity_modifier)
+	for i in count:
+		var spawn_pos: Vector3 = spawn_position + _compute_spread_offset(i, count)
+		match entity_type:
+			Entity.EntityType.SNAKE_BARREL: _summon_snake_barrel(spawn_pos, entity_modifier)
+			Entity.EntityType.SNAKE: _summon_snake(spawn_pos, entity_modifier)
+			Entity.EntityType.CHICKEN: _summon_chicken(spawn_pos, entity_modifier)
+			Entity.EntityType.PROTO_SHIELD: _summon_proto_shield(spawn_pos, entity_modifier)
+			Entity.EntityType.FORTIFICATION_DRONE: _summon_fortification_drone(spawn_pos, entity_modifier)
+			Entity.EntityType.AEGIS_BLADE: _summon_aegis_blade(spawn_pos, entity_modifier)
+			Entity.EntityType.DEFLECTION_SHIELD: _summon_deflection_shield(spawn_pos, entity_modifier)
+			Entity.EntityType.TREX: _summon_trex(spawn_pos, entity_modifier)
+			Entity.EntityType.CHICKEN_EGG: _summon_chicken_egg(spawn_pos, entity_modifier)
+			Entity.EntityType.MOLTEN_GOLEM: _summon_molten_golem(spawn_pos, entity_modifier)
 
+	# Phase post-action : on remonte COUNT pour que les after-callbacks
+	# puissent réagir au batch complet (ex: "gagne 5 mana par summon").
 	_consume_after_action_modifiers(Utils.ActionCategory.SUMMON, {
 		ActionModifier.VarType.ENTITY_TYPE: entity_type,
 		ActionModifier.VarType.ENTITY_MODIFIER: entity_modifier,
+		ActionModifier.VarType.COUNT: count,
 	})
 
 # ============================== Private functions ==============================
+
+# Offset horizontal de spawn pour la i-ème entité sur N quand un count > 1
+# est résolu. N=1 → ZERO. N>=2 → répartition uniforme sur un cercle XZ de
+# rayon proportionnel à (N-1), pour éviter l'overlap visuel des entités.
+func _compute_spread_offset(index: int, count: int) -> Vector3:
+	if count <= 1:
+		return Vector3.ZERO
+	var radius: float = SPREAD_RADIUS_PER_EXTRA * float(count - 1)
+	var angle: float = TAU * float(index) / float(count)
+	return Vector3(cos(angle) * radius, 0.0, sin(angle) * radius)
+
 
 func _summon_snake_barrel(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
 	var snake_barrel: SnakeBarrel = SNAKE_BARREL_SCENE.instantiate()
@@ -108,6 +136,11 @@ func _summon_snake(spawn_position: Vector3, _entity_modifier: Dictionary) -> voi
 	_spawn_manager.spawn_entity(snake, Transform3D(Basis(), spawn_position), _owner.get_context(), Entity.EntityType.SNAKE)
 
 
+func _summon_molten_golem(spawn_position: Vector3, _entity_modifier: Dictionary) -> void:
+	var golem: MoltenGolem = MOLTEN_GOLEM_SCENE.instantiate()
+	_spawn_manager.spawn_entity(golem, Transform3D(Basis(), spawn_position), _owner.get_context(), Entity.EntityType.MOLTEN_GOLEM)
+
+
 func _summon_chicken(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
 	var chicken: Chicken
 	var base_hp: float = entity_modifier.get(Chicken.BaseStatsModifier.HP, 50)
@@ -115,24 +148,19 @@ func _summon_chicken(spawn_position: Vector3, entity_modifier: Dictionary) -> vo
 	var base_armor: float = entity_modifier.get(Chicken.BaseStatsModifier.ARMOR, 0)
 	var base_crit_chance: float = entity_modifier.get(Chicken.BaseStatsModifier.CRIT_CHANCE, 5)
 	var base_crit_multi: float = entity_modifier.get(Chicken.BaseStatsModifier.CRIT_MULTI, 100)
-	
+
 	var chicken_type: Chicken.Type = entity_modifier.get("Type", Chicken.Type.BASIC)
 	match chicken_type:
 		Chicken.Type.BASIC: chicken = CHICKEN_BASIC_SCENE.instantiate()
-		Chicken.Type.GIFTED_ATTACK: 
+		Chicken.Type.GIFTED_ATTACK:
 			chicken = CHICKEN_ATTACK_SCENE.instantiate()
-			var attack_damage: float = entity_modifier.get("ad", 10)
-			var attack_speed: float = entity_modifier.get("as", 10)
-			(chicken as ChickenAttack).init(attack_damage, attack_speed)
-		Chicken.Type.GIFTED_POISON: 
+		Chicken.Type.GIFTED_POISON:
 			chicken = CHICKEN_POISON_SCENE.instantiate()
 			var poison_stack_ratio: float = entity_modifier.get("ratio", 0)
 			var stacks_number: int = entity_modifier.get("number", 1)
 			(chicken as ChickenPoison).init(poison_stack_ratio, stacks_number)
 		Chicken.Type.GIFTED_COLOSSUS:
 			chicken = CHICKEN_COLOSSUS_SCENE.instantiate()
-			var health_max_ratio: float = entity_modifier.get("hpmax", 0)
-			(chicken as ChickenColossus).init(health_max_ratio)
 		Chicken.Type.GIFTED_LIGHT:
 			chicken = CHICKEN_LIGHT_SCENE.instantiate()
 			var ratio_regen: float = entity_modifier.get("ratio_regen", 0)
@@ -140,20 +168,14 @@ func _summon_chicken(spawn_position: Vector3, entity_modifier: Dictionary) -> vo
 			(chicken as ChickenLight).init(ratio_regen, heal_strength_modifier)
 		Chicken.Type.GIFTED_ENGINEER:
 			chicken = CHICKEN_ENGINEER_SCENE.instantiate()
-			var shield_per_attack: int = entity_modifier.get("shield_per_attack", 0)
-			var bonus_spawn: int = entity_modifier.get("bonus_spawn", 0)
-			var shield_strength_inherited: float = entity_modifier.get("shield_strength_inherited", 0)
-			(chicken as ChickenShield).init(bonus_spawn, shield_per_attack, shield_strength_inherited)
 		Chicken.Type.GIFTED_ARDENT_CELESTIAL:
 			chicken = CHICKEN_ARDENT_CELESTIAL_SCENE.instantiate()
-			var ignite_stacks: int = entity_modifier.get("ignite_stacks", 0)
-			(chicken as ChickenArdentCelestial).init(ignite_stacks)
 		Chicken.Type.GIFTED_STORM_CALLER:
 			chicken = CHICKEN_STORM_CALLER.instantiate()
 			var crit_chance: float = entity_modifier.get("crit_chance", 0)
 			var crit_mult: float = entity_modifier.get("crit_mult", 0)
 			(chicken as ChickenStormCaller).init(crit_chance, crit_mult)
-			
+
 	chicken.set_base_stats(base_hp, base_ad, base_armor, base_crit_chance, base_crit_multi)
 	_spawn_manager.spawn_entity(chicken, Transform3D(Basis(), spawn_position), _owner.get_context(), Entity.EntityType.CHICKEN)
 
@@ -176,14 +198,8 @@ func _summon_fortification_drone(spawn_position: Vector3, entity_modifier: Dicti
 	_spawn_manager.spawn_entity(fortification_drone, Transform3D(Basis(), spawn_position), _owner.get_context())
 
 
-func _summon_aegis_blade(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
+func _summon_aegis_blade(spawn_position: Vector3, _entity_modifier: Dictionary) -> void:
 	var aegis_blade: AegisBlade = AEGIS_BLADE_SCENE.instantiate()
-	var attack_damage: float = entity_modifier.get(AegisBlade.Modifier.AD, 0)
-	var attack_speed: float = entity_modifier.get(AegisBlade.Modifier.AS, 1)
-	var shield_ad_max: float = entity_modifier.get(AegisBlade.Modifier.SHIELD_AD_MAX, 0)
-	var shield_ad_tau: float = entity_modifier.get(AegisBlade.Modifier.SHIELD_AD_TAU, 1)
-	var damage_as_shield_ratio: float = entity_modifier.get(AegisBlade.Modifier.DAMAGE_AS_SHIELD, 0)
-	aegis_blade.init(attack_damage, attack_speed, shield_ad_max, shield_ad_tau, damage_as_shield_ratio)
 	_spawn_manager.spawn_entity(aegis_blade, Transform3D(Basis(), spawn_position), _owner.get_context())
 
 
@@ -195,16 +211,9 @@ func _summon_trex(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
 	trex.init(gifted_spawn_period, gifted_spawn_number, hp_bonus)
 	_spawn_manager.spawn_entity(trex, Transform3D(Basis(), spawn_position), _owner.get_context())
 
- 
-func _summon_chicken_egg(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
-	var egg: ChickenEgg = CHICKEN_EGG_SCENE.instantiate()
-	var hatch_time: float = entity_modifier.get(ChickenEgg.Modifier.HATCH_TIME, 3.0)
-	var chicken_type: Chicken.Type = entity_modifier.get(ChickenEgg.Modifier.CHICKEN_TYPE, Chicken.Type.BASIC)
-	var chicken_modifiers: Dictionary = entity_modifier.get(ChickenEgg.Modifier.CHICKEN_MODIFIERS, {})
-	var hatch_modifiers: Array[HatchModifier] = entity_modifier.get(ChickenEgg.Modifier.HATCH_MODIFIERS, [] as Array[HatchModifier])
-	var opt_scale: float = entity_modifier.get(ChickenEgg.Modifier.SCALE, 1)
-	egg.init(hatch_time, chicken_type, chicken_modifiers, hatch_modifiers, opt_scale)
-	_spawn_manager.spawn_entity(egg, Transform3D(Basis(), spawn_position), _owner.get_context(), Entity.EntityType.CHICKEN_EGG)
+
+func _summon_chicken_egg(_spawn_position: Vector3, _entity_modifier: Dictionary) -> void:
+	pass
 
 
 func _summon_deflection_shield(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
@@ -214,15 +223,8 @@ func _summon_deflection_shield(spawn_position: Vector3, entity_modifier: Diction
 	var respawn_timer: float = entity_modifier.get(DeflectionShield.Modifier.RESPAWN_TIMER, -1.0)
 	deflection_shield.init(blocked_projectiles, shield_per_block, respawn_timer)
 	_spawn_manager.spawn_entity(deflection_shield, Transform3D(Basis(), spawn_position), _owner.get_context())
-	
-	
-func _summon_gamma_turret(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
+
+
+func _summon_gamma_turret(spawn_position: Vector3, _entity_modifier: Dictionary) -> void:
 	var gamma_turret: GammaTurret = GAMMA_TURRET.instantiate()
-	var shield: float = entity_modifier.get(GammaTurret.Modifier.TURRET_SHIELD, 30)
-	var ad: float = entity_modifier.get(GammaTurret.Modifier.TURRET_AD, 5)
-	var attack_speed: float = entity_modifier.get(GammaTurret.Modifier.TURRET_AS, 1.0)
-	var hp: int = entity_modifier.get(GammaTurret.Modifier.TURRET_HP, 1)
-	var master: Entity = entity_modifier.get(GammaTurret.Modifier.MASTER)
-	var respawn_timer: float = entity_modifier.get(GammaTurret.Modifier.RESPAWN_TIMER, -1.0)
-	gamma_turret.init(shield, ad, attack_speed, hp, master, respawn_timer)
 	_spawn_manager.spawn_entity(gamma_turret, Transform3D(Basis(), spawn_position), _owner.get_context())

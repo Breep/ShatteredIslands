@@ -7,7 +7,9 @@
 # - run_*    : setup + démarrage + await fin. Utilisé par ConfrontationRunner.
 #
 # Convention combat : la Party joue toujours côté A (override de formation_a).
-# Côté A = team 1, mirrored. Côté B = team 2, as-authored.
+# Côté A = team 1. Côté B = team 2. Aucune transformation appliquée : les
+# positions stockées dans party.formation sont posées par le joueur lui-même
+# en phase de placement (cf. snapshot POSITIONING→COUNTDOWN dans FightingArea).
 class_name EncounterRunner
 extends Node
 
@@ -23,7 +25,7 @@ var _last_fight_winner_team: int = -1
 
 
 #region ============================== Fighting ==============================
-func setup_fighting(encounter: FightingEncounter, party_formation: FightingFormation = null) -> FightingIsland:
+func _setup_fighting(encounter: FightingEncounter, party_formation: FightingFormation = null) -> FightingIsland:
 	if encounter == null:
 		Verbose.error("EncounterRunner.setup_fighting: encounter null", Verbose.Category.ENCOUNTER_RUNNER)
 		return null
@@ -41,20 +43,25 @@ func setup_fighting(encounter: FightingEncounter, party_formation: FightingForma
 	get_tree().root.add_child.call_deferred(island)
 	await island.ready
 	island.set_active()
-	island.init_fight(fa.mirrored(), fb, 1, 2)
+	island.init_fight(fa, fb, 1, 2)
 	fighting_started.emit(island)
+	Events.nothing_clicked.emit()
 	return island
 
 
 func run_fighting(encounter: FightingEncounter, party_formation: FightingFormation = null) -> bool:
 	_last_fight_winner_team = -1
-	var island: FightingIsland = await setup_fighting(encounter, party_formation)
+	var island: FightingIsland = await _setup_fighting(encounter, party_formation)
 	if island == null: return false
 
 	var fm: FightingManager = island.get_fighting_area().fighting_manager
 	fm.fight_done.connect(_on_fighting_manager_fight_done, CONNECT_ONE_SHOT)
-
+	
 	GlobalFightingManager.start()
+	
+	if not encounter.music.is_empty():
+		AudioManager.play_bgm(encounter.music, 3)
+	
 	await GlobalFightingManager.all_fights_are_over
 	island.queue_free()
 	fighting_phase_ended.emit()
@@ -67,11 +74,13 @@ func _on_fighting_manager_fight_done(_fm: FightingManager, winner_teams_order: A
 
 
 #region ============================== Tavern ==============================
-
-
 func run_tavern(encounter: TavernEncounter, party: Party = null) -> void:
 	var island: BuyingIsland = await _setup_tavern(encounter, party)
 	if island == null: return
+	if encounter.music != null and encounter.music != "":
+		AudioManager.play_bgm(encounter.music)
+	else:
+		AudioManager.play_bgm("tavern_music")
 	await tavern_phase_ended
 	island.queue_free()
 
@@ -80,28 +89,31 @@ func _setup_tavern(encounter: TavernEncounter, party: Party = null) -> BuyingIsl
 	if encounter == null:
 		Verbose.error("EncounterRunner._setup_tavern: encounter null", Verbose.Category.ENCOUNTER_RUNNER)
 		return null
-	
+
 	var buying_island: BuyingIsland = BUYING_ISLAND_SCENE.instantiate()
 	get_tree().root.add_child.call_deferred(buying_island)
 	await buying_island.ready
-	
-	var hero_spec: HeroSpec = null
-	var acolyte_specs: Array[AcolyteSpec] = []
-	if party != null:
-		var heroe_specs: Array[HeroSpec] = party.get_hero_specs()
-		if not heroe_specs.is_empty():
-			hero_spec = heroe_specs[0]
-		acolyte_specs = party.get_acolyte_specs()
-	
-	buying_island.start_buying_phase_from_encounter(encounter, hero_spec, acolyte_specs) # TODO Adapter ça pour accepter plusieurs héros
+
+	buying_island.start_buying_phase_from_encounter(encounter, party)
 	buying_island.set_active()
 	# Relay du signal naturel de l'île vers tavern_phase_ended pour que run_tavern
 	# (et toute proto qui émet directement tavern_phase_ended) partage le même await.
 	buying_island.phase_ended.connect(_on_buying_island_phase_ended, CONNECT_ONE_SHOT)
 	tavern_started.emit(buying_island)
+	_select_local_hero_by_default()
 	return buying_island
 
 
 func _on_buying_island_phase_ended() -> void:
 	tavern_phase_ended.emit()
 #endregion
+
+
+# Sélectionne le héros du joueur local par défaut à l'entrée d'une scène
+# (taverne ou combat) : émet entity_clicked comme si le joueur l'avait cliqué,
+# ouvrant sa fiche d'entrée.
+func _select_local_hero_by_default() -> void:
+	var local_player: Player = PlayerManager.get_local_player()
+	if local_player == null: return
+	if not is_instance_valid(local_player.hero): return
+	Events.entity_clicked.emit(local_player.hero)

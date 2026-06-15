@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cm28003uvgxmm"]
+
+[ext_resource type="Script" uid="uid://die4w3p7k7htt" path="res://02_Entities/_Shared/Components/Skill/skill_component.gd" id="1_wkmtp"]
+
+[node name="SkillComponent" type="Node" unique_id=2088423674]
+script = ExtResource("1_wkmtp")

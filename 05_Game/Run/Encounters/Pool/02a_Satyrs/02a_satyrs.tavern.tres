@@ -1,0 +1,100 @@
+[gd_resource type="Resource" script_class="TavernFormation" format=3 uid="uid://r3krwu6lsb3d"]
+
+[ext_resource type="Script" uid="uid://flrydugnyfe7" path="res://05_Game/Run/SpawnSpecs/Concrete/acolyte_spawn_spec.gd" id="1_aj6pb"]
+[ext_resource type="PackedScene" uid="uid://v8f1a76nj0ui" path="res://05_Game/Run/SpawnSpecs/SpawnPoints/AcolyteSpawn/acolyte_spawn_point.tscn" id="2_ugpxx"]
+[ext_resource type="Script" uid="uid://rj6clcd8f15a" path="res://05_Game/Run/SpawnSpecs/entity_spec.gd" id="3_n2von"]
+[ext_resource type="PackedScene" uid="uid://di0hhdfbpptu6" path="res://02_Entities/Pool/Mobs/Satyr/SatyrBerserker/satyr_berserker.tscn" id="4_ic488"]
+[ext_resource type="Script" uid="uid://bcak6iy1jjxko" path="res://05_Game/Run/SpawnSpecs/Concrete/mob_spec.gd" id="5_uk12g"]
+[ext_resource type="PackedScene" uid="uid://422k2gp3h5wg" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/forest_drake.tscn" id="6_ykhef"]
+[ext_resource type="Script" uid="uid://bj0ecq2d5vir5" path="res://05_Game/Run/SpawnSpecs/Concrete/hero_spawn_spec.gd" id="7_3hn63"]
+[ext_resource type="PackedScene" uid="uid://mcgg11jy8uh1" path="res://05_Game/Run/SpawnSpecs/SpawnPoints/HeroSpawn/hero_spawn_point.tscn" id="8_ddlnn"]
+[ext_resource type="Script" uid="uid://b24wp3uvfns8t" path="res://05_Game/Run/SpawnSpecs/prop_spec.gd" id="9_nrf60"]
+[ext_resource type="PackedScene" uid="uid://dghajk42luw8y" path="res://21_Props/Tavern/table_round_large_2.tscn" id="10_ehp4b"]
+[ext_resource type="Script" uid="uid://d2ixo16r26ppd" path="res://05_Game/Run/Formations/tavern_formation.gd" id="11_fo5u3"]
+[ext_resource type="Script" uid="uid://c78ccxnqy6c16" path="res://05_Game/Run/SpawnSpecs/spawn_point_spec.gd" id="12_6yv2h"]
+
+[sub_resource type="Resource" id="Resource_y3a2g"]
+script = ExtResource("1_aj6pb")
+scene = ExtResource("2_ugpxx")
+display_label = "AcolyteSpawnPoint01"
+transform = Transform3D(0.07910284, 0, 0.99686646, 0, 1, 0, -0.99686646, 0, 0.07910284, 3.1106496, 0.5007801, 1.2845821)
+
+[sub_resource type="Resource" id="Resource_8h44m"]
+script = ExtResource("1_aj6pb")
+scene = ExtResource("2_ugpxx")
+display_label = "AcolyteSpawnPoint02"
+transform = Transform3D(-0.5121478, 0, 0.8588973, 0, 1, 0, -0.8588973, 0, -0.5121478, 2.962507, 0.5007801, -0.4523034)
+
+[sub_resource type="Resource" id="Resource_kbheg"]
+script = ExtResource("1_aj6pb")
+scene = ExtResource("2_ugpxx")
+display_label = "AcolyteSpawnPoint03"
+transform = Transform3D(0.55042243, 0, 0.8348863, 0, 1, 0, -0.8348863, 0, 0.55042243, 3.174803, 0.5007801, 3.3629322)
+
+[sub_resource type="Resource" id="Resource_mfq6c"]
+script = ExtResource("1_aj6pb")
+scene = ExtResource("2_ugpxx")
+display_label = "AcolyteSpawnPoint04"
+transform = Transform3D(-0.77073574, 0, 0.637155, 0, 1, 0, -0.637155, 0, -0.77073574, 2.7138078, 0.5007801, -1.7932396)
+
+[sub_resource type="Resource" id="Resource_s0udc"]
+script = ExtResource("1_aj6pb")
+scene = ExtResource("2_ugpxx")
+display_label = "AcolyteSpawnPoint05"
+transform = Transform3D(0.36154318, 0, 0.93235534, 0, 1, 0, -0.93235534, 0, 0.36154318, 5.2365108, 0.5007801, 3.2348413)
+
+[sub_resource type="Resource" id="Resource_vg6wg"]
+script = ExtResource("1_aj6pb")
+scene = ExtResource("2_ugpxx")
+display_label = "AcolyteSpawnPoint06"
+transform = Transform3D(0.07910284, 0, 0.99686646, 0, 1, 0, -0.99686646, 0, 0.07910284, 4.96877, 0.5007801, 1.4659142)
+
+[sub_resource type="Resource" id="Resource_y70ro"]
+script = ExtResource("1_aj6pb")
+scene = ExtResource("2_ugpxx")
+display_label = "AcolyteSpawnPoint07"
+transform = Transform3D(-0.25768936, 0, 0.96622777, 0, 1, 0, -0.96622777, 0, -0.25768936, 4.5884867, 0.50077987, -0.19130683)
+
+[sub_resource type="Resource" id="Resource_frhp4"]
+script = ExtResource("1_aj6pb")
+scene = ExtResource("2_ugpxx")
+display_label = "AcolyteSpawnPoint08"
+transform = Transform3D(-0.5129272, 0, 0.8584321, 0, 1, 0, -0.8584321, 0, -0.5129272, 4.6870756, 0.5007801, -1.5109103)
+
+[sub_resource type="Resource" id="Resource_btrav"]
+script = ExtResource("5_uk12g")
+scene = ExtResource("4_ic488")
+display_label = "Satyr"
+transform = Transform3D(0.5613903, 0, -0.8275512, 0, 1, 0, 0.8275512, 0, 0.5613903, -2.418238, 0.5966253, 1.7734206)
+
+[sub_resource type="Resource" id="Resource_xv5nc"]
+script = ExtResource("5_uk12g")
+scene = ExtResource("4_ic488")
+display_label = "Satyr2"
+transform = Transform3D(-0.46391454, 0, -0.88587993, 0, 1, 0, 0.88587993, 0, -0.46391454, -2.5800295, 0.5966253, -1.3754265)
+
+[sub_resource type="Resource" id="Resource_pkeps"]
+script = ExtResource("5_uk12g")
+scene = ExtResource("6_ykhef")
+display_label = "ForestDrake"
+transform = Transform3D(0.045607075, 0, -0.9989595, 0, 1, 0, 0.9989595, 0, 0.045607075, -3.5671115, 2.5803738, 0.46425468)
+
+[sub_resource type="Resource" id="Resource_ffevw"]
+script = ExtResource("7_3hn63")
+scene = ExtResource("8_ddlnn")
+display_label = "HeroSpawnPoint"
+transform = Transform3D(-0.046199843, 0, 0.99893224, 0, 1, 0, -0.99893224, 0, -0.046199843, 2.0192084, 0.4951489, 0.277668)
+
+[sub_resource type="Resource" id="Resource_ib4ul"]
+script = ExtResource("9_nrf60")
+scene = ExtResource("10_ehp4b")
+display_label = "table_round_large2"
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17980719, 0.5686108, 0.104300976)
+
+[resource]
+script = ExtResource("11_fo5u3")
+entity_specs = Array[ExtResource("3_n2von")]([SubResource("Resource_btrav"), SubResource("Resource_xv5nc"), SubResource("Resource_pkeps")])
+hero_spawn_specs = Array[ExtResource("7_3hn63")]([SubResource("Resource_ffevw")])
+acolyte_spawn_specs = Array[ExtResource("1_aj6pb")]([SubResource("Resource_y3a2g"), SubResource("Resource_8h44m"), SubResource("Resource_kbheg"), SubResource("Resource_mfq6c"), SubResource("Resource_s0udc"), SubResource("Resource_vg6wg"), SubResource("Resource_y70ro"), SubResource("Resource_frhp4")])
+prop_specs = Array[ExtResource("9_nrf60")]([SubResource("Resource_ib4ul")])
+id = "02a_Satyrs"

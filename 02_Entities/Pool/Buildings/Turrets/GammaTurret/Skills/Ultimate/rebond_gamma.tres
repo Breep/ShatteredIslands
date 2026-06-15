@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://b6rguaresh2xk"]
+
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
+[ext_resource type="Script" uid="uid://b7rg5dwm2hxk" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Skills/Ultimate/rebond_gamma.gd" id="2_eff"]
+
+[sub_resource type="Resource" id="Resource_rg"]
+script = ExtResource("2_eff")
+metadata/_custom_type_script = "uid://b7rg5dwm2hxk"
+
+[resource]
+script = ExtResource("1_skill")
+skill_id = 7
+name = "Rebond Gamma"
+description = "Toutes les AA gagnent +2 bounce pendant 4 sec."
+skill_effect = SubResource("Resource_rg")
+metadata/_custom_type_script = "uid://dfby4merlgkep"

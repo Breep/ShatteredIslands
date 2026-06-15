@@ -1,0 +1,66 @@
+[gd_resource type="Resource" script_class="EntityStatsBuilder" format=3 uid="uid://dnw60w1n3kyi6"]
+
+[ext_resource type="Script" uid="uid://58307hvsc6op" path="res://10_Tool/EntityStatsBuilder/entity_stats_builder.gd" id="1_bmfpf"]
+[ext_resource type="Script" uid="uid://brthobm35g70u" path="res://10_Tool/EntityStatsBuilder/stat_growth_rule.gd" id="1_nf612"]
+
+[sub_resource type="Resource" id="Resource_jnsj8"]
+script = ExtResource("1_nf612")
+base = 5.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_h2qmb"]
+script = ExtResource("1_nf612")
+base = 7.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_juvxq"]
+script = ExtResource("1_nf612")
+base = 1.5
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_nf612"]
+script = ExtResource("1_nf612")
+base = 5.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_h4wpj"]
+script = ExtResource("1_nf612")
+base = 100.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_t8t7w"]
+script = ExtResource("1_nf612")
+base = 800.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_yvnxf"]
+script = ExtResource("1_nf612")
+base = 20.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_lq3ph"]
+script = ExtResource("1_nf612")
+base = 2.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_y77gq"]
+script = ExtResource("1_nf612")
+base = 1.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[resource]
+script = ExtResource("1_bmfpf")
+output_dir = "res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Stats"
+stats_file_prefix = "gamma_turret"
+desc_file_name = "gamma_turret_entity_desc"
+entity_name = "Gamma Turret"
+health_max = SubResource("Resource_t8t7w")
+mana_max = SubResource("Resource_yvnxf")
+mana_regen = SubResource("Resource_lq3ph")
+attack_damage = SubResource("Resource_jnsj8")
+attack_speed = SubResource("Resource_juvxq")
+attack_range = SubResource("Resource_h2qmb")
+scale = SubResource("Resource_y77gq")
+crit_chance = SubResource("Resource_nf612")
+crit_mult = SubResource("Resource_h4wpj")
+metadata/_custom_type_script = "uid://58307hvsc6op"

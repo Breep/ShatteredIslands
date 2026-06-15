@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://baxstke5i0khe"]
 
 [ext_resource type="Script" uid="uid://dfrc6epjmo848" path="res://04_UI/InGame/BuyingArea/PlayerPortrait/ui_player_life.gd" id="1_2sxk0"]
-[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme.tres" id="1_5din3"]
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme_old.tres" id="1_5din3"]
 [ext_resource type="Texture2D" uid="uid://dl132mivg8ol4" path="res://20_Data/Assets/Card/ICONS/HP.png" id="1_f264h"]
 [ext_resource type="Texture2D" uid="uid://sex75jj3yj3x" path="res://20_Data/Assets/Buying_area/UI/empty_heart.png" id="2_5din3"]
 [ext_resource type="Texture2D" uid="uid://cia42t0jcdkfg" path="res://20_Data/Assets/Card/ICONS/HP color.png" id="3_2sxk0"]

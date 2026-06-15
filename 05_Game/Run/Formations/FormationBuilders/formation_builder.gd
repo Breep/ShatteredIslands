@@ -32,15 +32,17 @@ func _validate() -> bool:
 #endregion
 
 
+# Pose éditeur (PAS de spawn runtime) : on instancie la scène telle quelle et on
+# la place. spec.spawn_into() est du code runtime qui touche des membres non
+# exportés de l'Entity — invalide sur les PlaceHolderScriptInstance de l'éditeur.
+# Spec sans scène : marker Node3D vide.
 func _instantiate_spec_into(spec: SpawnSpec, container: Node, edited_root: Node) -> bool:
-	var node: Node = spec.spawn_into(container)
-	if node == null:
-		# Pas de scène attachée au spec : marker vide pour l'éditeur
-		node = Node3D.new()
-		container.add_child(node)
+	var node: Node = spec.scene.instantiate() if spec.scene != null else Node3D.new()
+	container.add_child(node)
+	if node is Node3D:
 		(node as Node3D).transform = spec.transform
-		if spec.display_label != "":
-			node.name = spec.display_label
+	if spec.display_label != "":
+		node.name = spec.display_label
 	if edited_root != null:
 		node.owner = edited_root
 	return true

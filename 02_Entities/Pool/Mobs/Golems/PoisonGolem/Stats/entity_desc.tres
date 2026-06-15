@@ -1,0 +1,66 @@
+[gd_resource type="Resource" script_class="EntityDesc" format=3 uid="uid://dirq82wxfetcs"]
+
+[ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="1_desc"]
+[ext_resource type="Texture2D" uid="uid://mjjcfn1nsnya" path="res://02_Entities/Pool/Mobs/Golems/PoisonGolem/Data/poison_golem_portrait.png" id="1_tenuv"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="2_skill"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_stats"]
+[ext_resource type="Resource" uid="uid://tywjnnwswgpy" path="res://02_Entities/Pool/Mobs/Golems/PoisonGolem/Stats/stats_lvl_01.tres" id="4_01"]
+[ext_resource type="Resource" uid="uid://bphahqwddrgw0" path="res://02_Entities/Pool/Mobs/Golems/PoisonGolem/Stats/stats_lvl_02.tres" id="5_02"]
+[ext_resource type="Resource" uid="uid://8u1p8c4otev3" path="res://02_Entities/Pool/Mobs/Golems/PoisonGolem/Stats/stats_lvl_03.tres" id="6_03"]
+[ext_resource type="Resource" uid="uid://dl6j7bl1ip8k8" path="res://02_Entities/Pool/Mobs/Golems/PoisonGolem/Stats/stats_lvl_04.tres" id="7_04"]
+[ext_resource type="Resource" uid="uid://cg8jjrmx2t3be" path="res://02_Entities/Pool/Mobs/Golems/PoisonGolem/Stats/stats_lvl_05.tres" id="8_05"]
+[ext_resource type="Resource" uid="uid://dv2df3i8bar1" path="res://02_Entities/Pool/Mobs/Golems/PoisonGolem/Stats/stats_lvl_06.tres" id="9_06"]
+[ext_resource type="Resource" uid="uid://c4nxtmwacmh51" path="res://02_Entities/Pool/Mobs/Golems/PoisonGolem/Stats/stats_lvl_07.tres" id="10_07"]
+[ext_resource type="Resource" uid="uid://kglslk57m7x5" path="res://02_Entities/Pool/Mobs/Golems/PoisonGolem/Stats/stats_lvl_08.tres" id="11_08"]
+[ext_resource type="Resource" uid="uid://bf0l6ngmbyl4a" path="res://02_Entities/Pool/Mobs/Golems/PoisonGolem/Stats/stats_lvl_09.tres" id="12_09"]
+[ext_resource type="Resource" uid="uid://dkqraokah6cro" path="res://02_Entities/Pool/Mobs/Golems/PoisonGolem/Stats/stats_lvl_10.tres" id="13_10"]
+[ext_resource type="Resource" uid="uid://b837vclxgsjac" path="res://02_Entities/Pool/Mobs/Golems/PoisonGolem/Stats/stats_lvl_11.tres" id="14_11"]
+[ext_resource type="Resource" uid="uid://bigc2d0hb15pe" path="res://02_Entities/Pool/Mobs/Golems/PoisonGolem/Stats/stats_lvl_12.tres" id="15_12"]
+[ext_resource type="Resource" uid="uid://dff6cu8pql1uu" path="res://02_Entities/Pool/Mobs/Golems/PoisonGolem/Stats/stats_lvl_13.tres" id="16_13"]
+[ext_resource type="Resource" uid="uid://d2waf4dgdsdwo" path="res://02_Entities/Pool/Mobs/Golems/PoisonGolem/Stats/stats_lvl_14.tres" id="17_14"]
+[ext_resource type="Resource" uid="uid://b3gpfdj0eu8nn" path="res://02_Entities/Pool/Mobs/Golems/PoisonGolem/Stats/stats_lvl_15.tres" id="18_15"]
+[ext_resource type="Resource" uid="uid://blb7gm6li3o5k" path="res://02_Entities/Pool/Mobs/Golems/PoisonGolem/Stats/stats_lvl_16.tres" id="19_16"]
+[ext_resource type="Resource" uid="uid://dbgglx5v4ush6" path="res://02_Entities/Pool/Mobs/Golems/PoisonGolem/Stats/stats_lvl_17.tres" id="20_17"]
+[ext_resource type="Resource" uid="uid://c3pxrr2hpkdm8" path="res://02_Entities/Pool/Mobs/Golems/PoisonGolem/Stats/stats_lvl_18.tres" id="21_18"]
+[ext_resource type="Resource" uid="uid://cwya415guup4u" path="res://02_Entities/Pool/Mobs/Golems/PoisonGolem/Stats/stats_lvl_19.tres" id="22_19"]
+[ext_resource type="Resource" uid="uid://mlmh3kshfyj7" path="res://02_Entities/Pool/Mobs/Golems/PoisonGolem/Stats/stats_lvl_20.tres" id="23_20"]
+[ext_resource type="Resource" uid="uid://oo50gehytehq" path="res://02_Entities/Pool/Mobs/Golems/PoisonGolem/Skills/Passive/nuage_mortuaire.tres" id="24_pas"]
+[ext_resource type="Resource" uid="uid://ccrocstox2res" path="res://02_Entities/Pool/Mobs/Golems/PoisonGolem/Skills/Bronze/crocs_toxiques.tres" id="25_bro"]
+[ext_resource type="Resource" uid="uid://hqjs5l5jmipy" path="res://02_Entities/Pool/Mobs/Golems/PoisonGolem/Skills/Silver/riposte_toxique.tres" id="26_sil"]
+[ext_resource type="Resource" uid="uid://ccouvput2res7" path="res://02_Entities/Pool/Mobs/Golems/PoisonGolem/Skills/Gold/couvee_putride.tres" id="27_gol"]
+[ext_resource type="Resource" uid="uid://x786o823740a" path="res://02_Entities/Pool/Mobs/Golems/PoisonGolem/Skills/Ultimate/geyser_putride.tres" id="28_ult"]
+
+[resource]
+script = ExtResource("1_desc")
+name = "Poison Golem"
+portrait = ExtResource("1_tenuv")
+scene_path = "res://02_Entities/Pool/Mobs/Golems/PoisonGolem/poison_golem.tscn"
+stats = Dictionary[int, ExtResource("3_stats")]({
+1: ExtResource("4_01"),
+2: ExtResource("5_02"),
+3: ExtResource("6_03"),
+4: ExtResource("7_04"),
+5: ExtResource("8_05"),
+6: ExtResource("9_06"),
+7: ExtResource("10_07"),
+8: ExtResource("11_08"),
+9: ExtResource("12_09"),
+10: ExtResource("13_10"),
+11: ExtResource("14_11"),
+12: ExtResource("15_12"),
+13: ExtResource("16_13"),
+14: ExtResource("17_14"),
+15: ExtResource("18_15"),
+16: ExtResource("19_16"),
+17: ExtResource("20_17"),
+18: ExtResource("21_18"),
+19: ExtResource("22_19"),
+20: ExtResource("23_20")
+})
+skills = Dictionary[int, ExtResource("2_skill")]({
+0: ExtResource("24_pas"),
+1: ExtResource("25_bro"),
+2: ExtResource("26_sil"),
+3: ExtResource("27_gol"),
+4: ExtResource("28_ult")
+})

@@ -61,22 +61,34 @@ class StatModifierDictionary extends Resource:
 		_recompute_stats()
 
 
-	func auto_cleanup() -> void:
+	# Tous les modifiers stockés pour cette stat (toutes action_types confondues
+	# pour les multi-stats). Utilisé par SummonModifiersRegistry pour itérer.
+	func get_all_modifiers() -> Array[StatModifier]:
+		var result: Array[StatModifier] = []
 		if EntityStats.is_multi_stat(_stat_type):
 			for action_type: Utils.ActionType in _modifiers_per_action_type.keys():
-				for modifier: StatModifier in _modifiers_per_action_type[action_type].values().duplicate():
-					if modifier.auto_cleanup:
-						Verbose.debug("Auto cleaning | " + modifier.id, Verbose.Category.STAT_MODIFIER)
-						_modifiers_per_action_type[action_type].erase(modifier.id)
+				for modifier: StatModifier in _modifiers_per_action_type[action_type].values():
+					result.append(modifier)
 		else:
-			for modifier: StatModifier in _modifiers.values().duplicate():
-				if modifier.auto_cleanup:
-					Verbose.debug("Auto cleaning | " + modifier.id, Verbose.Category.STAT_MODIFIER)
-					_modifiers.erase(modifier.id)
+			for modifier: StatModifier in _modifiers.values():
+				result.append(modifier)
+		return result
+
+
+	# Valeur du modifier d'id donné pour cette stat (0.0 s'il n'existe pas).
+	func get_modifier_value(id: StringName, action_type: Utils.ActionType) -> float:
+		var modifier: StatModifier
+		if EntityStats.is_multi_stat(_stat_type):
+			modifier = _modifiers_per_action_type[action_type].get(id)
+		else:
+			modifier = _modifiers.get(id)
+		return modifier.value if modifier != null else 0.0
 
 	# ============================== Private functions ==============================
 
 	func _recompute_stats() -> void:
+		if _entity_base_stats_ref == null:
+			return # TODO A virer avec le refacto des modifiers registry
 		Verbose.trace("_recompute_stats()", Verbose.Category.STAT_MODIFIER)
 		if EntityStats.is_multi_stat(_stat_type):
 			_recompute_multiple_stats()
@@ -123,7 +135,7 @@ var _stats_modifiers_dictionaries: Dictionary[EntityStats.StatType, StatModifier
 
 # ============================== Node base functions ==============================
 
-func _init(_base_stats: EntityStats, current_stats: EntityStats) -> void:
+func _init(stats: EntityStats) -> void:
 	# Mono pure (single)
 	_stats_modifiers_dictionaries[EntityStats.StatType.HEALTH_MAX] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.MANA_MAX] = StatModifierDictionary.new()
@@ -134,6 +146,7 @@ func _init(_base_stats: EntityStats, current_stats: EntityStats) -> void:
 	_stats_modifiers_dictionaries[EntityStats.StatType.AR] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.MS] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.SCALE] = StatModifierDictionary.new()
+	_stats_modifiers_dictionaries[EntityStats.StatType.AOE_SIZE] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.CRIT_RESISTANCE] = StatModifierDictionary.new()
 
 	# Mono avec Multi sœur (single)
@@ -152,16 +165,18 @@ func _init(_base_stats: EntityStats, current_stats: EntityStats) -> void:
 	_stats_modifiers_dictionaries[EntityStats.StatType.M_RESISTANCE] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.M_EXPOSURE] = StatModifierDictionary.new()
 
-	_entity_base_stats = _base_stats
-	_entity_stats = current_stats
-	_entity_stats.auto_attack_type = _entity_base_stats.auto_attack_type
-	_entity_base_stats.has_been_reset.connect(_on_entity_base_stats_has_been_reset)
-	for stat_type: EntityStats.StatType in _stats_modifiers_dictionaries.keys():
-		_stats_modifiers_dictionaries[stat_type].setup(stat_type, _entity_stats, _entity_base_stats)
-		_stats_modifiers_dictionaries[stat_type].recompute_stats()
-	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
+	_entity_stats = stats
 
 # ============================== Public functions ==============================
+
+func update_base_stats(base_stats: EntityStats) -> void:
+	if base_stats == null:
+		Verbose.warn("No base stats for entity - Using default base stats", Verbose.Category.STAT_MODIFIER)
+		base_stats = EntityStats.new()
+	_entity_base_stats = base_stats
+	_entity_stats.auto_attack_type = base_stats.auto_attack_type
+	recompute_all()
+	_entity_stats.reset_from_self()
 
 func register_modifier(stat_modifier: StatModifier) -> void:
 	_normalize_alias(stat_modifier)
@@ -189,10 +204,31 @@ func remove_modifier(stat_type: EntityStats.StatType, id: String, action_type: U
 	unregister_modifier(dummy)
 
 
+# Valeur courante du modifier d'id donné sur une stat (résout les alias ARMOR/MR/PR).
+# Retourne 0.0 si aucun modifier de cet id n'est appliqué.
+func get_modifier_value(stat_type: EntityStats.StatType, id: StringName, action_type: Utils.ActionType = Utils.ActionType.DAMAGE_PHYSICAL) -> float:
+	var resolved: Dictionary = EntityStats.resolve_alias(stat_type)
+	if not resolved.is_empty():
+		stat_type = resolved["stat_type"]
+		action_type = resolved["action_type"]
+	if not _stats_modifiers_dictionaries.has(stat_type):
+		return 0.0
+	return _stats_modifiers_dictionaries[stat_type].get_modifier_value(id, action_type)
+
+
 func recompute_all() -> void:
 	for stat_type: EntityStats.StatType in _stats_modifiers_dictionaries.keys():
 		_stats_modifiers_dictionaries[stat_type].setup(stat_type, _entity_stats, _entity_base_stats)
 		_stats_modifiers_dictionaries[stat_type].recompute_stats()
+
+
+# Tous les StatModifier stockés, toutes stats confondues. Utilisé par
+# SummonModifiersRegistry.apply_to pour cloner et propager vers les summons.
+func get_all_modifiers() -> Array[StatModifier]:
+	var result: Array[StatModifier] = []
+	for smd: StatModifierDictionary in _stats_modifiers_dictionaries.values():
+		result.append_array(smd.get_all_modifiers())
+	return result
 
 # ============================== Private functions ==============================
 
@@ -202,21 +238,3 @@ func _normalize_alias(stat_modifier: StatModifier) -> void:
 	if resolved.is_empty(): return
 	stat_modifier.stat_type = resolved["stat_type"]
 	stat_modifier.action_type = resolved["action_type"]
-
-
-func _auto_cleanup_all() -> void:
-	for smd: StatModifierDictionary in _stats_modifiers_dictionaries.values():
-		smd.auto_cleanup()
-		smd.recompute_stats()
-
-# ============================== Callbacks ==============================
-
-func _on_entity_base_stats_has_been_reset() -> void:
-	for smd: StatModifierDictionary in _stats_modifiers_dictionaries.values():
-		smd.recompute_stats()
-
-
-func _on_game_manager_game_state_changed(game_state: GameManager.GameState) -> void:
-	match game_state:
-		GameManager.GameState.ENDING_ROUND:
-			_auto_cleanup_all()

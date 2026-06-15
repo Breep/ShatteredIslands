@@ -33,6 +33,12 @@ var _card: Card
 
 var _base_intensity: float = 1.0
 
+# Tracks le précédent (name, lvl) appliqué pour ne flasher que sur changement
+# réel. Sinon _on_hand_changed (qui itère TOUTES les cartes à chaque modif de
+# main) déclencherait flash_residual sur chaque carte à chaque add/release.
+var _previous_card_name: StringName = &""
+var _previous_card_lvl: int = 0
+
 func _ready() -> void:
 	if _rune_glow_tools.material != null:
 		_rune_glow_tools.material = _rune_glow_tools.material.duplicate()
@@ -77,8 +83,15 @@ func _update_card_layout(card: Card) -> void:
 	if card == null:
 		Verbose.error("Trying to update a <null> card", Verbose.Category.CARD_LAYOUT)
 		return
+	
+	# Flash uniquement sur un changement réel (nouveau design ou level up).
+	# Empêche le clignotement de toutes les cartes à chaque modif de main.
+	var should_flash: bool = card.name != _previous_card_name or card.lvl != _previous_card_lvl
+	_previous_card_name = card.name
+	_previous_card_lvl = card.lvl
+	
 	_card_name_label.text = card.name
-	_card_desc_label.text_raw = card.player_upgrade.get_description(card.lvl)
+	_card_desc_label.text_raw = card.get_description()
 	_card_portrait_texture.texture = card.picture
 	_rune_glow_tools.set_rarity(card.rarity)
 	
@@ -88,7 +101,8 @@ func _update_card_layout(card: Card) -> void:
 		Card.Rarity.EPIC: _base_intensity = 2.0
 		Card.Rarity.LEGENDARY: _base_intensity = 2.0
 	_rune_glow_tools.intensity_override = _base_intensity
-	_rune_glow_tools.flash_residual(1, 1)
+	if should_flash:
+		_rune_glow_tools.flash_residual(1, 1)
 	
 	
 	_update_aura(card.rarity)

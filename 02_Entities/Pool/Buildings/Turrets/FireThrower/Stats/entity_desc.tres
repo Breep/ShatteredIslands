@@ -1,0 +1,67 @@
+[gd_resource type="Resource" script_class="EntityDesc" format=3 uid="uid://b0t2j5enr1m7m"]
+
+[ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="1_d38ms"]
+[ext_resource type="Texture2D" uid="uid://b6kg02t17pcc" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Data/flamme_thrower_portrait.png" id="1_lyflw"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="2_jkyec"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_nnba6"]
+[ext_resource type="Resource" uid="uid://cprp7yxi6v71l" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Stats/stats_lvl_01.tres" id="4_qagur"]
+[ext_resource type="Resource" uid="uid://byei78n7k8hw0" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Stats/stats_lvl_02.tres" id="5_nyu3a"]
+[ext_resource type="Resource" uid="uid://ff5dnkmmtjnb" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Stats/stats_lvl_03.tres" id="6_qqog3"]
+[ext_resource type="Resource" uid="uid://depe5h8rg2pef" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Stats/stats_lvl_04.tres" id="7_lyflw"]
+[ext_resource type="Resource" uid="uid://bkucsntvqt73y" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Stats/stats_lvl_05.tres" id="8_jsa3f"]
+[ext_resource type="Resource" uid="uid://bu6lu4on4llb0" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Stats/stats_lvl_06.tres" id="9_rww0j"]
+[ext_resource type="Resource" uid="uid://bm4nnfvcxjvoq" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Stats/stats_lvl_07.tres" id="10_bhjwq"]
+[ext_resource type="Resource" uid="uid://dngnlabjkdhti" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Stats/stats_lvl_08.tres" id="11_k056u"]
+[ext_resource type="Resource" uid="uid://2lvaxicxdt6l" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Stats/stats_lvl_09.tres" id="12_sphlk"]
+[ext_resource type="Resource" uid="uid://cp32em2p2oixt" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Stats/stats_lvl_10.tres" id="13_2uefn"]
+[ext_resource type="Resource" uid="uid://bbbvigacrneah" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Stats/stats_lvl_11.tres" id="14_ybupw"]
+[ext_resource type="Resource" uid="uid://texru5kc7tie" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Stats/stats_lvl_12.tres" id="15_bmolw"]
+[ext_resource type="Resource" uid="uid://c4occtr3e6aym" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Stats/stats_lvl_13.tres" id="16_355xk"]
+[ext_resource type="Resource" uid="uid://bk7u8gi0yxgqc" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Stats/stats_lvl_14.tres" id="17_an148"]
+[ext_resource type="Resource" uid="uid://doewdypekeax5" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Stats/stats_lvl_15.tres" id="18_nfs1a"]
+[ext_resource type="Resource" uid="uid://ujvy0antito0" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Stats/stats_lvl_16.tres" id="19_sv44r"]
+[ext_resource type="Resource" uid="uid://inmk60of8f42" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Stats/stats_lvl_17.tres" id="20_f100j"]
+[ext_resource type="Resource" uid="uid://bsv0r2o8iwsui" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Stats/stats_lvl_18.tres" id="21_x3rr6"]
+[ext_resource type="Resource" uid="uid://b3oci7f0u4u56" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Stats/stats_lvl_19.tres" id="22_aiw83"]
+[ext_resource type="Resource" uid="uid://cj4i1flgdoe3q" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Stats/stats_lvl_20.tres" id="23_xfurl"]
+[ext_resource type="Resource" uid="uid://dnaplm1res7k2" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Skills/Silver/napalm.tres" id="24_napalm"]
+[ext_resource type="Resource" uid="uid://dsqjinymc66qu" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Skills/Passive/bruleur_directionnel.tres" id="25_pas"]
+[ext_resource type="Resource" uid="uid://c30igfeptx36t" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Skills/Bronze/buse_large.tres" id="26_bro"]
+[ext_resource type="Resource" uid="uid://b5e1uyagq5bf0" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Skills/Gold/fournaise_controlee.tres" id="27_gol"]
+[ext_resource type="Resource" uid="uid://c2urchfres8h0" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Skills/Ultimate/surchauffe.tres" id="28_ult"]
+
+[resource]
+script = ExtResource("1_d38ms")
+name = "Fire Thrower Turret"
+portrait = ExtResource("1_lyflw")
+scene_path = "res://02_Entities/Pool/Buildings/Turrets/FireThrower/turret_firethrower.tscn"
+default_category = 4
+stats = Dictionary[int, ExtResource("3_nnba6")]({
+1: ExtResource("4_qagur"),
+2: ExtResource("5_nyu3a"),
+3: ExtResource("6_qqog3"),
+4: ExtResource("7_lyflw"),
+5: ExtResource("8_jsa3f"),
+6: ExtResource("9_rww0j"),
+7: ExtResource("10_bhjwq"),
+8: ExtResource("11_k056u"),
+9: ExtResource("12_sphlk"),
+10: ExtResource("13_2uefn"),
+11: ExtResource("14_ybupw"),
+12: ExtResource("15_bmolw"),
+13: ExtResource("16_355xk"),
+14: ExtResource("17_an148"),
+15: ExtResource("18_nfs1a"),
+16: ExtResource("19_sv44r"),
+17: ExtResource("20_f100j"),
+18: ExtResource("21_x3rr6"),
+19: ExtResource("22_aiw83"),
+20: ExtResource("23_xfurl")
+})
+skills = Dictionary[int, ExtResource("2_jkyec")]({
+0: ExtResource("25_pas"),
+1: ExtResource("26_bro"),
+2: ExtResource("24_napalm"),
+3: ExtResource("27_gol"),
+4: ExtResource("28_ult")
+})

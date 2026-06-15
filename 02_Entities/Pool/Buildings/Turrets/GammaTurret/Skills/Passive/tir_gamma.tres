@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://c1tgt5res8mqa"]
+
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
+[ext_resource type="Script" uid="uid://c8tg4mxa1rqp" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Skills/Passive/tir_gamma.gd" id="2_eff"]
+
+[sub_resource type="Resource" id="Resource_tg"]
+script = ExtResource("2_eff")
+_bonus_ad_percent = 500.0
+metadata/_custom_type_script = "uid://c8tg4mxa1rqp"
+
+[resource]
+script = ExtResource("1_skill")
+skill_id = 6
+name = "Tir Gamma"
+description = "Combo : toutes les 4 attaques, le projectile inflige +500% AD en dégâts physiques."
+skill_effect = SubResource("Resource_tg")
+metadata/_custom_type_script = "uid://dfby4merlgkep"

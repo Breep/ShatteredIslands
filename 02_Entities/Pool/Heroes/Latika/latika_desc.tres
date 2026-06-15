@@ -1,7 +1,10 @@
-[gd_resource type="Resource" script_class="EntityDesc" format=3 uid="uid://dlatikadesc"]
+[gd_resource type="Resource" script_class="HeroDesc" format=3 uid="uid://dlatikadesc"]
 
 [ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="1_desc"]
+[ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://02_Entities/_Shared/hero_desc.gd" id="1_hero"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="2_es"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="2_psofn"]
+[ext_resource type="Texture2D" uid="uid://epdfjjie1s85" path="res://02_Entities/Pool/Heroes/Latika/Data/latika_portrait.png" id="2_q20ea"]
 [ext_resource type="Resource" uid="uid://dlatikastat01" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_01.tres" id="3_l01"]
 [ext_resource type="Resource" uid="uid://dlatikastat02" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_02.tres" id="3_l02"]
 [ext_resource type="Resource" uid="uid://dlatikastat03" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_03.tres" id="3_l03"]
@@ -22,11 +25,37 @@
 [ext_resource type="Resource" uid="uid://dlatikastat18" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_18.tres" id="3_l18"]
 [ext_resource type="Resource" uid="uid://dlatikastat2a" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_19.tres" id="3_l19"]
 [ext_resource type="Resource" uid="uid://dlatikastat20" path="res://02_Entities/Pool/Heroes/Latika/Stats/latika_lvl_20.tres" id="3_l20"]
+[ext_resource type="Resource" uid="uid://bpmfs3a0llexn" path="res://02_Entities/Pool/Mobs/Wolfs/Vrock/Stats/vrock_entity_desc.tres" id="4_xkqml"]
+[ext_resource type="PackedScene" uid="uid://bsbbpkr8vpwu3" path="res://02_Entities/Pool/Heroes/Latika/latika_preview.tscn" id="5_prev"]
+[ext_resource type="Resource" uid="uid://dj0x3ox0qy3aa" path="res://02_Entities/Pool/Heroes/Latika/Skills/Passive/pack_leader.tres" id="6_pass"]
+[ext_resource type="Resource" uid="uid://latulttrs" path="res://02_Entities/Pool/Heroes/Latika/Skills/Ultimate/predator_arrow.tres" id="7_ult"]
+[ext_resource type="Resource" uid="uid://dj0p3spvty3aa" path="res://02_Entities/Pool/Heroes/Latika/Skills/Bronze/hawk_eye.tres" id="8_b1"]
+[ext_resource type="Resource" uid="uid://dsqxxw8ogfs1e" path="res://02_Entities/Pool/Heroes/Latika/Skills/Bronze/wild_hunt.tres" id="9_b2"]
+[ext_resource type="Resource" uid="uid://dtkwngsahs4nk" path="res://02_Entities/Pool/Heroes/Latika/Skills/Silver/bestial_reflex.tres" id="10_s1"]
+[ext_resource type="Resource" uid="uid://dsjpo46okks1e" path="res://02_Entities/Pool/Heroes/Latika/Skills/Silver/pack_fury.tres" id="11_s2"]
+[ext_resource type="Resource" uid="uid://dsf40yoid0s1e" path="res://02_Entities/Pool/Heroes/Latika/Skills/Gold/lone_wolf.tres" id="12_g1"]
+[ext_resource type="Resource" uid="uid://ce2ydmnp2xu3" path="res://02_Entities/Pool/Heroes/Latika/Skills/Gold/blood_bond.tres" id="13_g2"]
 
 [resource]
-script = ExtResource("1_desc")
+script = ExtResource("1_hero")
+id = 2
+category = "Range / DPS"
+hero_skills = Dictionary[int, ExtResource("2_psofn")]({
+0: ExtResource("8_b1"),
+1: ExtResource("9_b2"),
+2: ExtResource("10_s1"),
+3: ExtResource("11_s2"),
+4: ExtResource("12_g1"),
+5: ExtResource("13_g2"),
+6: ExtResource("6_pass"),
+7: ExtResource("7_ult")
+})
 name = "Latika"
+portrait = ExtResource("2_q20ea")
 description = "L'Enfant des Loups — DPS distance / carry mono-cible. Dualité prédateur solitaire / chef de meute."
+preview_scene = ExtResource("5_prev")
+default_category = 0
+starting_companions = Array[ExtResource("1_desc")]([ExtResource("4_xkqml")])
 stats = Dictionary[int, ExtResource("2_es")]({
 1: ExtResource("3_l01"),
 2: ExtResource("3_l02"),
@@ -49,4 +78,10 @@ stats = Dictionary[int, ExtResource("2_es")]({
 19: ExtResource("3_l19"),
 20: ExtResource("3_l20")
 })
-metadata/_custom_type_script = "uid://dkrea5xbc4y8q"
+aa_1_release_normalized = 0.67
+aa_2_release_normalized = 0.67
+aa_3_release_normalized = 0.67
+aa_1_anim_base_duration = 5.0
+aa_2_anim_base_duration = 5.0
+aa_3_anim_base_duration = 5.0
+metadata/_custom_type_script = "uid://dtcjta70luxvr"

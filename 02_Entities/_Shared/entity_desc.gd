@@ -11,7 +11,25 @@ extends Resource
 @export var portrait: CompressedTexture2D
 @export_multiline var description: String
 
+# Scène entité runtime — JAMAIS posée en éditeur (cycle de dépendance : la scene
+# embarque un script qui référence ce desc). Le seul cas où ce champ est posé
+# directement est une desc transient construite à la volée (cf.
+# FightingFormation._make_transient_entry) — le resolver la respecte en priorité.
+var scene: PackedScene
+## Chemin de la scène entité runtime, source de vérité pour tous les non-héros.
+## Stocké en String (et non PackedScene) pour casser le cycle de dépendance
+## desc → scene → desc : un String n'est pas suivi au chargement. Résolu
+## paresseusement par resolve_scene() via load(), dont le cache ResourceLoader
+## évite tout rechargement. Les héros passent par Shared.HERO_SCENES (clé HeroId).
+@export_file("*.tscn") var scene_path: String
+## Lightweight visual-only scene (mesh + AnimationPlayer, no Entity logic) used
+## by selection/presentation screens.
+@export var preview_scene: PackedScene
+@export var default_category: Entity.Category = Entity.Category.MOB
+@export var starting_companions: Array[EntityDesc]
+
 @export var stats: Dictionary[int, EntityStats]
+@export var skills: Dictionary[Skill.Type, Skill]
 
 @export_group("Auto-Attack timing")
 ## Fraction of the AA cycle (1/AS) occupied by the attack animation.
@@ -26,3 +44,19 @@ extends Resource
 @export var aa_1_anim_base_duration: float = 3.26
 @export var aa_2_anim_base_duration: float = 3.26
 @export var aa_3_anim_base_duration: float = 3.26
+
+
+# Résout la PackedScene à instancier pour une desc. Ordre de priorité : champ
+# runtime `scene` (cas transient FightingFormation), puis HERO_SCENES par HeroId
+# pour les héros, puis `scene_path` chargé via load() pour tout le reste.
+# Retourne null si non résolu (l'appelant doit gérer / warn).
+static func resolve_scene(desc: EntityDesc) -> PackedScene:
+	if desc == null:
+		return null
+	if desc.scene != null:
+		return desc.scene
+	if desc is HeroDesc:
+		return Shared.HERO_SCENES.get((desc as HeroDesc).id)
+	if desc.scene_path != "":
+		return load(desc.scene_path)
+	return null

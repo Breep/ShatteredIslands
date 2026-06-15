@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://cfwhr6jn83vls"]
+
+[ext_resource type="Texture2D" uid="uid://snw4eq4audvg" path="res://02_Entities/Pool/Buildings/ChickenCoop/Skills/Silver/skill_incubateur_rapide.svg" id="1_7itie"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
+[ext_resource type="Script" uid="uid://c7lb3osxbjr1o" path="res://02_Entities/Pool/Buildings/ChickenCoop/Skills/Silver/incubateur_rapide.gd" id="2_eff"]
+
+[sub_resource type="Resource" id="Resource_ir"]
+script = ExtResource("2_eff")
+metadata/_custom_type_script = "uid://cincubrap1eff7"
+
+[resource]
+script = ExtResource("1_skill")
+skill_id = 2
+name = "Incubateur rapide"
+description = "Le Passif devient : toutes les 4s, invoque 1 Poulet."
+portrait = ExtResource("1_7itie")
+skill_effect = SubResource("Resource_ir")
+metadata/_custom_type_script = "uid://dfby4merlgkep"

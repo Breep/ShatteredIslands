@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://ce2ydmnp2xu3"]
+
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
+[ext_resource type="Texture2D" uid="uid://by11x2e6rpn8o" path="res://02_Entities/Pool/Heroes/Latika/Skills/Gold/blood_link.svg" id="1_xh7fb"]
+[ext_resource type="Script" uid="uid://ce2ydmnp2iip" path="res://02_Entities/Pool/Heroes/Latika/Skills/Gold/blood_bond.gd" id="2_eff"]
+[ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="3_desc"]
+[ext_resource type="Resource" uid="uid://m13uvband6ge" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/Stats/geri_entity_desc.tres" id="4_geri"]
+[ext_resource type="Resource" uid="uid://ywjip7ib5c8i" path="res://02_Entities/Pool/Mobs/Wolfs/Freki/Stats/freki_entity_desc.tres" id="5_freki"]
+
+[sub_resource type="Resource" id="Resource_bloodbond"]
+script = ExtResource("2_eff")
+_recruited_pack = Array[ExtResource("3_desc")]([ExtResource("4_geri"), ExtResource("5_freki")])
+metadata/_custom_type_script = "uid://latbloodbondeff"
+
+[resource]
+script = ExtResource("1_skill")
+skill_id = 5
+name = "Lien du Sang"
+description = "Sköll et Hati rejoignent la meute. Tant que les 3 loups sont vivants : +20% AS et +25% dégâts pour Latika et ses loups."
+portrait = ExtResource("1_xh7fb")
+skill_effect = SubResource("Resource_bloodbond")
+metadata/_custom_type_script = "uid://dfby4merlgkep"

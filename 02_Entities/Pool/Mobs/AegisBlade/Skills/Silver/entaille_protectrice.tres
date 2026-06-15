@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://c3hlvk1uv4m6g"]
+
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
+[ext_resource type="Script" uid="uid://du5f63b4xkjmc" path="res://02_Entities/Pool/Mobs/AegisBlade/Skills/Silver/entaille_protectrice.gd" id="2_eff"]
+
+[sub_resource type="Resource" id="Resource_ep"]
+script = ExtResource("2_eff")
+metadata/_custom_type_script = "uid://bentaille1eff7"
+
+[resource]
+script = ExtResource("1_skill")
+skill_id = 2
+name = "Entaille protectrice"
+description = "Combo 4 : inflige AD x 150% dégâts physiques et convertit 50% des dégâts en Shield donné à l'allié le plus blessé."
+skill_effect = SubResource("Resource_ep")
+metadata/_custom_type_script = "uid://dfby4merlgkep"

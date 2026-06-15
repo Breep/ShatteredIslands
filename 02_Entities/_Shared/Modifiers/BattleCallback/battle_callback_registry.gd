@@ -19,6 +19,7 @@ class TickEffect:
 	var is_running: bool = false
 
 class OneShotEffect:
+	var id: StringName
 	var ticks_left: int
 	var callback: Callable
 #endregion
@@ -81,8 +82,24 @@ func unregister(id: StringName) -> void:
 			break
 
 
-func register_oneshot(delay: float, callback: Callable) -> void:
+# Retire toutes les inscriptions (start / end / periodic) portant cet id. Utilisé
+# par le revert des cartes pour défaire ce que apply_card a inscrit.
+func unregister_all(id: StringName) -> void:
+	unregister(id)
+	for i in range(_battle_start_callbacks.size() - 1, -1, -1):
+		if _battle_start_callbacks[i][&"id"] == id:
+			_battle_start_callbacks.remove_at(i)
+	for i in range(_battle_end_callbacks.size() - 1, -1, -1):
+		if _battle_end_callbacks[i][&"id"] == id:
+			_battle_end_callbacks.remove_at(i)
+	for i in range(_oneshots.size() - 1, -1, -1):
+		if _oneshots[i].id == id:
+			_oneshots.remove_at(i)
+
+
+func register_oneshot(delay: float, callback: Callable, id: StringName = &"") -> void:
 	var effect := OneShotEffect.new()
+	effect.id = id
 	effect.ticks_left = _to_ticks(delay)
 	effect.callback = callback
 	_oneshots.append(effect)
@@ -92,14 +109,14 @@ func process_tick() -> void:
 	for effect in _periodic_effects:
 		if not effect.is_running:
 			continue
-
+	
 		effect.ticks_left -= 1
-
+	
 		if effect.ticks_left <= 0:
 			effect.callback.call()
 			# On réinitialise avec la période exacte (déterminisme parfait)
 			effect.ticks_left = effect.period_ticks
-
+	
 	var fired: Array[OneShotEffect] = []
 	for effect in _oneshots:
 		effect.ticks_left -= 1

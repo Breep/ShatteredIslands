@@ -1,0 +1,127 @@
+[gd_scene format=3 uid="uid://baj4au0ni12sm"]
+
+[ext_resource type="Script" uid="uid://btw6i3j85nx3n" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/geri.gd" id="1_f1ebe"]
+[ext_resource type="Resource" uid="uid://m13uvband6ge" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/Stats/geri_entity_desc.tres" id="2_ddaav"]
+[ext_resource type="PackedScene" uid="uid://djcubi60gvgtu" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/geri_visual.tscn" id="3_5nbb8"]
+[ext_resource type="AnimationNodeBlendTree" uid="uid://c82dyq32f5nwx" path="res://02_Entities/Pool/Mobs/Wolfs/Geri/geri_animation_tree.res" id="4_4jw1l"]
+[ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="5_1leu0"]
+[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/SmallHealthBar/small_health_bar_component.tscn" id="6_m2vxm"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g1k0y"]
+radius = 0.3125
+height = 1.0626831
+
+[node name="Geri" type="CharacterBody3D" unique_id=1302613586 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_attack_spawn_marker")]
+collision_layer = 16
+collision_mask = 17
+script = ExtResource("1_f1ebe")
+entity_name = "Geri"
+category = 2
+entity_desc = ExtResource("2_ddaav")
+_visual_3d = NodePath("GeriVisual")
+_health_bar_marker = NodePath("HealthBarSpawnMarker")
+_attack_spawn_marker = NodePath("ProjectileSpawnMarker")
+metadata/_custom_type_script = "uid://cpih8vqoolap4"
+
+[node name="GeriVisual" parent="." unique_id=518880957 instance=ExtResource("3_5nbb8")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1125220947]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.35538352, 0.019683838)
+shape = SubResource("CapsuleShape3D_g1k0y")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1886362167]
+root_node = NodePath("../GeriVisual/Unity_SK_Animals_Dog_01")
+tree_root = ExtResource("4_4jw1l")
+anim_player = NodePath("../GeriVisual/Unity_SK_Animals_Dog_01/AnimationPlayer")
+parameters/switch_moving/current_state = "Walk"
+parameters/switch_moving/transition_request = ""
+parameters/switch_moving/current_index = 0
+parameters/scale_dance/scale = 1.0
+parameters/scale_die/scale = 1.0
+parameters/scale_idle_standing_neutral/scale = 1.0
+parameters/one_shot_attack/active = false
+parameters/one_shot_attack/internal_active = false
+parameters/one_shot_attack/request = 0
+parameters/one_shot_ultimate/active = false
+parameters/one_shot_ultimate/internal_active = false
+parameters/one_shot_ultimate/request = 0
+parameters/scale_attack/scale = 1.0
+parameters/one_shot_idle_standing_neutral/active = false
+parameters/one_shot_idle_standing_neutral/internal_active = false
+parameters/one_shot_idle_standing_neutral/request = 0
+parameters/scale_ultimate/scale = 1.0
+parameters/scale_idle_standing_neutral_var/scale = 1.0
+parameters/one_shot_sitting/active = false
+parameters/one_shot_sitting/internal_active = false
+parameters/one_shot_sitting/request = 0
+parameters/switch_entity_life_state/current_state = "Alive"
+parameters/switch_entity_life_state/transition_request = ""
+parameters/switch_entity_life_state/current_index = 1
+parameters/scale_walk/scale = 1.0
+parameters/scale_run/scale = 1.0
+parameters/switch_attack/current_state = ""
+parameters/switch_attack/transition_request = ""
+parameters/switch_attack/current_index = -1
+parameters/scale_stunned/scale = 1.0
+parameters/seek_stunned/seek_request = -1.0
+parameters/scale_idle_standing_aggresive/scale = 1.0
+parameters/scale_idle_standing_aggresive_var/scale = 1.0
+parameters/seek_idle_standing_aggresive/seek_request = -1.0
+parameters/switch_entity_mode/current_state = "Editor"
+parameters/switch_entity_mode/transition_request = ""
+parameters/switch_entity_mode/current_index = 0
+parameters/seek_idle_standing_neutral/seek_request = -1.0
+parameters/one_shot_idle_standing_aggresive/active = false
+parameters/one_shot_idle_standing_aggresive/internal_active = false
+parameters/one_shot_idle_standing_aggresive/request = 0
+parameters/seek_idle_sitting_chair/seek_request = -1.0
+parameters/scale_idle_sitting_chair/scale = 1.0
+parameters/scale_idle_sitting_chair_var/scale = 1.0
+parameters/seek_idle_sitting_floor/seek_request = -1.0
+parameters/seek_dance/seek_request = -1.0
+parameters/one_shot_idle_sitting_chair/active = false
+parameters/one_shot_idle_sitting_chair/internal_active = false
+parameters/one_shot_idle_sitting_chair/request = 0
+parameters/scale_idle_sitting_floor/scale = 1.0
+parameters/scale_idle_sitting_floor_var/scale = 1.0
+parameters/scale_attack_2/scale = 1.0
+parameters/scale_hit_1/scale = 2.0
+parameters/scale_attack_3/scale = 1.0
+parameters/switch_main/current_state = "Idle"
+parameters/switch_main/transition_request = ""
+parameters/switch_main/current_index = 0
+parameters/switch_idle/current_state = "Standing"
+parameters/switch_idle/transition_request = ""
+parameters/switch_idle/current_index = 0
+parameters/scale_drag/scale = 1.0
+parameters/scale_land/scale = 2.0
+parameters/one_shot_land/active = false
+parameters/one_shot_land/internal_active = false
+parameters/one_shot_land/request = 0
+parameters/one_shot_hit/active = false
+parameters/one_shot_hit/internal_active = false
+parameters/one_shot_hit/request = 0
+parameters/scale_attack_1/scale = 1.0
+parameters/switch_positioning/current_state = "Off"
+parameters/switch_positioning/transition_request = ""
+parameters/switch_positioning/current_index = 0
+parameters/switch_stunned_state/current_state = "NotStunned"
+parameters/switch_stunned_state/transition_request = ""
+parameters/switch_stunned_state/current_index = 0
+
+[node name="AnimationComponent" parent="." unique_id=73205791 node_paths=PackedStringArray("_animation_tree", "_owner") instance=ExtResource("5_1leu0")]
+_animation_tree = NodePath("../AnimationTree")
+_owner = NodePath("..")
+
+[node name="SmallHealthBarComponent" parent="." unique_id=1628734826 node_paths=PackedStringArray("_spawn", "_owner") instance=ExtResource("6_m2vxm")]
+_spawn = NodePath("../HealthBarSpawnMarker")
+_owner = NodePath("..")
+
+[node name="HealthBarSpawnMarker" type="Marker3D" parent="." unique_id=1109750416]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.132942, 0)
+
+[node name="ProjectileSpawnMarker" type="Marker3D" parent="." unique_id=1925712423]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.716996, -0.8038692)
+
+[editable path="GeriVisual"]
+[editable path="GeriVisual/Unity_SK_Animals_Dog_01"]

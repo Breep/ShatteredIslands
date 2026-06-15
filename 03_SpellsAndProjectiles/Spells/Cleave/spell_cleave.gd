@@ -34,6 +34,6 @@ func _ready() -> void:
 		damage += _target_hpmax_percent * entity.stats.health_max / 100.0
 		_owner.damage.direct(entity, damage, Utils.ActionType.DAMAGE_PHYSICAL, &"Cleave")
 
-	AudioManager.play_3d("whoosh", _owner.position)
+	AudioManager.play_3d("slash_01", _owner.position)
 	await get_tree().create_timer(1.0).timeout
 	queue_free()

@@ -24,6 +24,8 @@ func run(the_run: Run, party: Party) -> void:
 
 	the_run.current_index = 0
 	while not the_run.is_finished():
+		var player_roaster: Roaster = party.roasters.get(PlayerState.Slot.PLAYER_1)
+		player_roaster.hero.level = rules.tmp_hero_levels[the_run.current_index]
 		var confrontation: Confrontation = the_run.get_current()
 		if confrontation == null:
 			break

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://dt8bhpsnta7oo"]
+
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_hn13p"]
+[ext_resource type="Texture2D" uid="uid://diw2rgnc7haf7" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Skills/Gold/skill_goblin_protection.svg" id="1_l3txr"]
+[ext_resource type="Script" uid="uid://cfay07ad7wuxv" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Skills/Gold/goblin_protection.gd" id="2_o0mrr"]
+
+[sub_resource type="Resource" id="Resource_l3txr"]
+script = ExtResource("2_o0mrr")
+metadata/_custom_type_script = "uid://cfay07ad7wuxv"
+
+[resource]
+script = ExtResource("1_hn13p")
+skill_id = 4
+name = "Goblin Protection"
+portrait = ExtResource("1_l3txr")
+skill_effect = SubResource("Resource_l3txr")
+metadata/_custom_type_script = "uid://dfby4merlgkep"

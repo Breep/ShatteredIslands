@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://u3efia3larnh"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_2wu1f"]
+[ext_resource type="Resource" uid="uid://bpmfs3a0llexn" path="res://02_Entities/Pool/Mobs/Wolfs/Vrock/Stats/vrock_entity_desc.tres" id="1_lwx5u"]
+[ext_resource type="Script" uid="uid://0xcknvx0htlp" path="res://01_Cards/Pool/Cards/Prototyping/HireAcolyte/card_acolyte.proto.gd" id="2_nfy7g"]
+
+[sub_resource type="Resource" id="Resource_35idg"]
+script = ExtResource("2_nfy7g")
+acolyte_desc = ExtResource("1_lwx5u")
+metadata/_custom_type_script = "uid://0xcknvx0htlp"
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_mfcl2"]
+
+[resource]
+script = ExtResource("1_2wu1f")
+name = &"AcolyteProto"
+picture = SubResource("PlaceholderTexture2D_mfcl2")
+families = Array[int]([1])
+_card_effect = SubResource("Resource_35idg")
+points = Dictionary[int, int]({
+1: 1
+})
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

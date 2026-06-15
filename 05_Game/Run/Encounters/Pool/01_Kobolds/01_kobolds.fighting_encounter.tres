@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="FightingEncounter" format=3 uid="uid://cyg03imoj310t"]
+
+[ext_resource type="Resource" uid="uid://bd246qypepyky" path="res://05_Game/Run/Encounters/Pool/01_Kobolds/01_kobolds.fighting.tres" id="1_d2kvm"]
+[ext_resource type="PackedScene" uid="uid://0x5u0h623yxt" path="res://06_FloatingIsland/FightingIsland/Pool/ArchIsland/arch_island.tscn" id="2_jlycu"]
+[ext_resource type="Script" uid="uid://dg13tr0kcjyll" path="res://05_Game/Run/Encounters/fighting_encounter.gd" id="3_h8i72"]
+
+[resource]
+script = ExtResource("3_h8i72")
+island_scene = ExtResource("2_jlycu")
+formation_b = ExtResource("1_d2kvm")
+encounter_id = &"01_Kobolds"
+display_name = "Kobolds"
+music = "battle_drums"
+metadata/_custom_type_script = "uid://dg13tr0kcjyll"

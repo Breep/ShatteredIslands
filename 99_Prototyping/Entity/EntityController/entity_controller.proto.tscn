@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dp4x7wkxd6i2q"]
 
 [ext_resource type="Script" uid="uid://bhylo5w46jmwa" path="res://99_Prototyping/Entity/EntityController/entity_controller.proto.gd" id="1_hsjxk"]
-[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme.tres" id="1_n8l2h"]
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme_old.tres" id="1_n8l2h"]
 [ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://04_UI/Tool/Misc/hover_boost_button.gd" id="2_ta2cq"]
 [ext_resource type="Script" uid="uid://bfrk08fr5vuck" path="res://99_Prototyping/Entity/EntityController/entity_controller_ui.proto.gd" id="2_x177y"]
 

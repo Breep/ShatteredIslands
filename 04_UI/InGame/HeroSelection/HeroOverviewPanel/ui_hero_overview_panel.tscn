@@ -1,29 +1,59 @@
 [gd_scene format=3 uid="uid://ddugcksbtixea"]
 
 [ext_resource type="Script" uid="uid://72f2hpoywkt6" path="res://04_UI/InGame/HeroSelection/HeroOverviewPanel/ui_hero_overview_panel.gd" id="1_w3h7f"]
-[ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/Menu/MainMenu/panel_main_menu.tres" id="2_s1bc7"]
-[ext_resource type="Theme" uid="uid://d0qobfi4rit8a" path="res://04_UI/Menu/MainMenu/label_main_menu_white.tres" id="3_ee7lt"]
-[ext_resource type="Texture2D" uid="uid://dagqv7cd1gdn1" path="res://04_UI/_Themes/Data/Separator/plant.png" id="3_rp41f"]
-[ext_resource type="Texture2D" uid="uid://bg6pifa7ua0v0" path="res://20_Data/Heroes/Portraits/dummy_default.png" id="5_5cpim"]
-[ext_resource type="Texture2D" uid="uid://cia42t0jcdkfg" path="res://20_Data/Assets/Card/ICONS/HP color.png" id="5_rp41f"]
-[ext_resource type="Script" uid="uid://l74isl50g3g1" path="res://04_UI/InGame/HeroPortrait/InGamePlayerViewer/ui_statistic_container.gd" id="6_nhrae"]
-[ext_resource type="Texture2D" uid="uid://nxj6jw2phtcp" path="res://20_Data/Assets/Card/ICONS/MANA color.png" id="7_wvgek"]
-[ext_resource type="Texture2D" uid="uid://c3ruvqyjokopc" path="res://20_Data/Assets/Card/ICONS/dodge.png" id="8_5cpim"]
-[ext_resource type="Texture2D" uid="uid://bxd1jnaci6olo" path="res://20_Data/Assets/Card/ICONS/ATTACK color.png" id="9_0noyl"]
-[ext_resource type="Texture2D" uid="uid://dlac4nmdbamph" path="res://20_Data/Assets/Card/ICONS/attack_speed.png" id="10_71p6x"]
-[ext_resource type="Texture2D" uid="uid://cawoo43ethscj" path="res://20_Data/Assets/Card/ICONS/critic.png" id="11_nhrae"]
-[ext_resource type="Script" uid="uid://1gejr0p47gwr" path="res://04_UI/InGame/HeroPortrait/InGamePlayerViewer/ui_hero_skills_container.gd" id="13_vk7pi"]
+[ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="2_s1bc7"]
+[ext_resource type="Theme" uid="uid://d0qobfi4rit8a" path="res://04_UI/_Themes/label_main_menu_white.tres" id="3_ee7lt"]
+[ext_resource type="Texture2D" uid="uid://epdfjjie1s85" path="res://02_Entities/Pool/Heroes/Latika/Data/latika_portrait.png" id="3_yxnt6"]
+[ext_resource type="Texture2D" uid="uid://dfcy3dpkcvyx2" path="res://04_UI/_Themes/Data/Icons/Backgrounds/skill_passive_background.svg" id="4_dj7sv"]
+[ext_resource type="Texture2D" uid="uid://ds2dracb280n" path="res://02_Entities/Pool/Heroes/Latika/Skills/Passive/skill_target.svg" id="5_f8w6c"]
+[ext_resource type="Texture2D" uid="uid://carfsdb3rsrq6" path="res://04_UI/_Themes/Data/Icons/Backgrounds/skill_bronze_background.svg" id="7_k77oi"]
+[ext_resource type="Texture2D" uid="uid://dayao4gj672ua" path="res://02_Entities/Pool/Heroes/Latika/Skills/Bronze/skill_hawk_eye.svg" id="8_cwdgx"]
+[ext_resource type="Texture2D" uid="uid://dh6gsh2ddl52l" path="res://02_Entities/Pool/Heroes/Latika/Skills/Bronze/skill_wild_hunt.svg" id="9_dhsef"]
+[ext_resource type="Texture2D" uid="uid://cexqu5b6xfn6l" path="res://04_UI/_Themes/Data/Icons/Backgrounds/skill_silver_background.svg" id="10_7ngho"]
+[ext_resource type="Texture2D" uid="uid://dd1f2yw8yk0tf" path="res://02_Entities/Pool/Heroes/Latika/Skills/Silver/skill_bestial_reflex.svg" id="11_ibsbi"]
+[ext_resource type="Texture2D" uid="uid://cqi38wk48ksg6" path="res://04_UI/_Themes/Data/Icons/Backgrounds/skill_gold_background.svg" id="12_vdrql"]
+[ext_resource type="Texture2D" uid="uid://by11x2e6rpn8o" path="res://02_Entities/Pool/Heroes/Latika/Skills/Gold/blood_link.svg" id="13_5k1wg"]
+[ext_resource type="Texture2D" uid="uid://isvymof3movr" path="res://04_UI/_Themes/Data/Icons/Backgrounds/skill_ultimate_background.svg" id="14_6t0n0"]
 [ext_resource type="Script" uid="uid://ddn8p84mlkyr0" path="res://04_UI/Tool/HexGridContainer/hex_grid_container.gd" id="14_q0qm1"]
-[ext_resource type="PackedScene" uid="uid://c7jrogdsytaah" path="res://04_UI/Tool/HexButton/hex_button.tscn" id="19_kt0us"]
+[ext_resource type="Texture2D" uid="uid://e6guwivvf6ln" path="res://02_Entities/Pool/Heroes/Latika/Skills/Ultimate/skill_predator_arrow.svg" id="15_3v8ym"]
+[ext_resource type="Texture2D" uid="uid://b6rimvk88hn24" path="res://04_UI/_Themes/Data/Icons/EntityStats/attack_damage_colored.svg" id="16_k55yb"]
+[ext_resource type="Texture2D" uid="uid://cu78qhut5ecvk" path="res://04_UI/_Themes/Data/Icons/EntityStats/health_max_colored.svg" id="16_yxnt6"]
+[ext_resource type="Texture2D" uid="uid://d2kybwt3oan51" path="res://04_UI/_Themes/Data/Icons/EntityStats/attack_speed_colored.svg" id="17_yxnt6"]
+[ext_resource type="Texture2D" uid="uid://bvw264c6finmi" path="res://04_UI/_Themes/Data/Icons/EntityStats/attack_power_colored.svg" id="18_6502f"]
+[ext_resource type="Texture2D" uid="uid://dyk4gkh6vx61y" path="res://04_UI/_Themes/Data/Icons/EntityStats/attack_range_colored.svg" id="19_4h2mb"]
+[ext_resource type="Texture2D" uid="uid://b13krllsainfs" path="res://04_UI/_Themes/Data/Icons/EntityStats/armor_colored.svg" id="20_vru87"]
+[ext_resource type="Texture2D" uid="uid://cglkmf7fsuq1w" path="res://04_UI/_Themes/Data/Icons/EntityStats/magic_resist_colored.svg" id="21_1l6fq"]
+[ext_resource type="Texture2D" uid="uid://d0tbxj0ryk1jh" path="res://04_UI/_Themes/Data/Icons/EntityStats/poison_resist_colored.svg" id="22_cum77"]
+[ext_resource type="Texture2D" uid="uid://whmow6k6ww3r" path="res://04_UI/_Themes/Data/Icons/EntityStats/crit_chance_colored.svg" id="23_ufbtq"]
+[ext_resource type="Texture2D" uid="uid://cse0se2yh4m70" path="res://04_UI/_Themes/Data/Icons/EntityStats/crit_mult_colored.svg" id="24_aombb"]
+[ext_resource type="Texture2D" uid="uid://b10t6bod6w58w" path="res://04_UI/_Themes/Data/Icons/EntityStats/mana_max_colored.svg" id="25_sqtx3"]
+[ext_resource type="Texture2D" uid="uid://c06llh5l1a3h7" path="res://04_UI/_Themes/Data/Icons/EntityStats/mana_regen_colored.svg" id="26_c5sde"]
+[ext_resource type="Texture2D" uid="uid://bo3c1wt2f1wbn" path="res://04_UI/_Themes/Data/Icons/EntityStats/move_speed_colored.svg" id="27_5jloe"]
+[ext_resource type="Texture2D" uid="uid://dsdkh6xhg03q4" path="res://04_UI/_Themes/Data/Icons/EntityStats/dodge_colored.svg" id="28_elsxu"]
+[ext_resource type="Texture2D" uid="uid://cmtsqmy038iqr" path="res://04_UI/_Themes/Data/Icons/EntityStats/life_steal_colored.svg" id="29_8qkl2"]
+[ext_resource type="Texture2D" uid="uid://bilq8c5d04x2v" path="res://04_UI/_Themes/Data/Icons/EntityStats/scale_colored.svg" id="30_8o2nd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s1bc7"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="UiHeroOverviewPanel" type="Control" unique_id=1696511393]
 layout_mode = 3
-anchor_right = 0.423
-anchor_bottom = 4.582
-offset_right = -0.296021
-offset_bottom = -0.13623
+anchor_right = 0.22500001
+anchor_bottom = 1.802
+offset_right = -3.0517578e-05
+offset_bottom = -0.16003418
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_s1bc7")
 script = ExtResource("1_w3h7f")
 
 [node name="HeroOverViewPanel" type="Panel" parent="." unique_id=1295740656]
@@ -34,7 +64,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
-theme = ExtResource("2_s1bc7")
 
 [node name="MarginContainer" type="MarginContainer" parent="HeroOverViewPanel" unique_id=1950482746]
 unique_name_in_owner = true
@@ -44,10 +73,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 30
-theme_override_constants/margin_bottom = 30
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
 [node name="ScrollContainer" type="ScrollContainer" parent="HeroOverViewPanel/MarginContainer" unique_id=655006858]
 layout_mode = 2
@@ -67,410 +96,531 @@ theme_override_constants/separation = 10
 [node name="HeroNameLabel" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" unique_id=955870059]
 unique_name_in_owner = true
 layout_mode = 2
-theme = ExtResource("3_ee7lt")
 theme_override_font_sizes/font_size = 45
-text = "[Hero's name]"
+text = "Latika"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Separator" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" unique_id=464510366]
-custom_minimum_size = Vector2(0, 30)
+[node name="HSeparator" type="HSeparator" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" unique_id=106260315]
 layout_mode = 2
-texture = ExtResource("3_rp41f")
-expand_mode = 1
-stretch_mode = 5
 
 [node name="PortraitCenterContainer" type="CenterContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" unique_id=1970576248]
 layout_mode = 2
 
-[node name="HeroPortrait" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/PortraitCenterContainer" unique_id=357284297]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 150)
+[node name="MarginContainer" type="MarginContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/PortraitCenterContainer" unique_id=2090214757]
 layout_mode = 2
-texture = ExtResource("5_5cpim")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="MarginContainer" type="MarginContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/PortraitCenterContainer/HeroPortrait" unique_id=1162500865]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = -3
-theme_override_constants/margin_top = -3
-theme_override_constants/margin_right = -3
-theme_override_constants/margin_bottom = -3
-
-[node name="SkinChoice" type="HBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" unique_id=1763488763]
-layout_mode = 2
-alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkinChoice" unique_id=1965057575]
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("5_5cpim")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="TextureRect2" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkinChoice" unique_id=824032361]
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("5_5cpim")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="TextureRect3" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkinChoice" unique_id=976331005]
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("5_5cpim")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Separator2" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" unique_id=633709580]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-texture = ExtResource("3_rp41f")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="StatsContainer" type="Control" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" unique_id=262652530 node_paths=PackedStringArray("_max_health_label", "_mana_regen_label", "_dodge_label", "_ad_label", "_attack_speed_label", "_crit_chance_label")]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 200)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.3
-script = ExtResource("6_nhrae")
-_max_health_label = NodePath("MarginContainer/HeroStatsContainer/HealthPanel/HBoxContainer/MaxHealthLabel")
-_mana_regen_label = NodePath("MarginContainer/HeroStatsContainer/ManaPanel/HBoxContainer/ManaRegenLabel")
-_dodge_label = NodePath("MarginContainer/HeroStatsContainer/DodgePanel/HBoxContainer/DodgeLabel")
-_ad_label = NodePath("MarginContainer/HeroStatsContainer/AttackPanel/HBoxContainer/AttackLabel")
-_attack_speed_label = NodePath("MarginContainer/HeroStatsContainer/AttackSpeedPanel/HBoxContainer/AttackSpeedLabel")
-_crit_chance_label = NodePath("MarginContainer/HeroStatsContainer/CriticPanel/HBoxContainer/CriticLabel")
-
-[node name="MarginContainer" type="MarginContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer" unique_id=278642658]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="HeroStatsContainer" type="GridContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer" unique_id=234110527]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/h_separation = 0
-theme_override_constants/v_separation = 0
-columns = 3
-
-[node name="HealthPanel" type="Control" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer" unique_id=1869316547]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/HealthPanel" unique_id=1689777743]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/HealthPanel/HBoxContainer" unique_id=580071413]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.5
-
-[node name="Icon" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/HealthPanel/HBoxContainer/CenterContainer" unique_id=244970269]
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("5_rp41f")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="MaxHealthLabel" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/HealthPanel/HBoxContainer" unique_id=1479403516]
+[node name="HeroPortrait" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/PortraitCenterContainer/MarginContainer" unique_id=357284297]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(256, 256)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-theme = ExtResource("3_ee7lt")
-theme_override_font_sizes/font_size = 30
-text = "1000"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ManaPanel" type="Control" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer" unique_id=607032357]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/ManaPanel" unique_id=1283048135]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/ManaPanel/HBoxContainer" unique_id=794145066]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.5
-
-[node name="Icon" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/ManaPanel/HBoxContainer/CenterContainer" unique_id=1509168209]
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("7_wvgek")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="ManaRegenLabel" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/ManaPanel/HBoxContainer" unique_id=183510439]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-theme = ExtResource("3_ee7lt")
-theme_override_font_sizes/font_size = 30
-text = "3.7"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="DodgePanel" type="Control" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer" unique_id=1478814593]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/DodgePanel" unique_id=340941076]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/DodgePanel/HBoxContainer" unique_id=1024860857]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.5
-
-[node name="Icon" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/DodgePanel/HBoxContainer/CenterContainer" unique_id=203550076]
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("8_5cpim")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="DodgeLabel" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/DodgePanel/HBoxContainer" unique_id=2131652821]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-theme = ExtResource("3_ee7lt")
-theme_override_font_sizes/font_size = 30
-text = "20"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="AttackPanel" type="Control" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer" unique_id=567277465]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/AttackPanel" unique_id=731925458]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/AttackPanel/HBoxContainer" unique_id=1814275407]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.5
-
-[node name="Icon" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/AttackPanel/HBoxContainer/CenterContainer" unique_id=665727131]
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("9_0noyl")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="AttackLabel" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/AttackPanel/HBoxContainer" unique_id=1172000630]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-theme = ExtResource("3_ee7lt")
-theme_override_font_sizes/font_size = 30
-text = "22"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="AttackSpeedPanel" type="Control" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer" unique_id=271660370]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/AttackSpeedPanel" unique_id=806145807]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/AttackSpeedPanel/HBoxContainer" unique_id=86439958]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.5
-
-[node name="Icon" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/AttackSpeedPanel/HBoxContainer/CenterContainer" unique_id=1099143444]
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("10_71p6x")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="AttackSpeedLabel" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/AttackSpeedPanel/HBoxContainer" unique_id=1690549319]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-theme = ExtResource("3_ee7lt")
-theme_override_font_sizes/font_size = 30
-text = "0.5"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CriticPanel" type="Control" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer" unique_id=1500612996]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/CriticPanel" unique_id=401168971]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/CriticPanel/HBoxContainer" unique_id=442909941]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.5
-
-[node name="Icon" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/CriticPanel/HBoxContainer/CenterContainer" unique_id=46852541]
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("11_nhrae")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="CriticLabel" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsContainer/MarginContainer/HeroStatsContainer/CriticPanel/HBoxContainer" unique_id=407789837]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-theme = ExtResource("3_ee7lt")
-theme_override_font_sizes/font_size = 30
-text = "15"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Separator5" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" unique_id=265848666]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-texture = ExtResource("3_rp41f")
+texture = ExtResource("3_yxnt6")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="HeroSkillsContainer" type="Control" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" unique_id=1296549165 node_paths=PackedStringArray("_skill_buttons")]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 400)
-layout_mode = 2
-script = ExtResource("13_vk7pi")
-_skill_buttons = {
-0: NodePath("HexGridContainer/Bronze1Button"),
-1: NodePath("HexGridContainer/Bronze2Button"),
-2: NodePath("HexGridContainer/Silver1Button"),
-3: NodePath("HexGridContainer/Silver2Button"),
-4: NodePath("HexGridContainer/Gold1Button"),
-5: NodePath("HexGridContainer/Gold2Button"),
-6: NodePath("HexGridContainer/PassiveButton"),
-7: NodePath("HexGridContainer/UltimateButton")
-}
-
-[node name="HexGridContainer" type="Container" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/HeroSkillsContainer" unique_id=1396445561]
+[node name="MarginContainer" type="MarginContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/PortraitCenterContainer/MarginContainer/HeroPortrait" unique_id=133508057]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = -10
+theme_override_constants/margin_top = -10
+theme_override_constants/margin_right = -10
+theme_override_constants/margin_bottom = -10
+
+[node name="Panel" type="Panel" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/PortraitCenterContainer/MarginContainer/HeroPortrait/MarginContainer" unique_id=1519423917]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_s1bc7")
+
+[node name="CategoryLabel" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" unique_id=1642555528]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 7
+theme_override_font_sizes/font_size = 32
+text = "Range / DPS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" unique_id=1312298204]
+layout_mode = 2
+
+[node name="SkillsContainer" type="MarginContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" unique_id=810982574]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkillsContainer" unique_id=1290872220]
+layout_mode = 2
+alignment = 1
+
+[node name="PassiveControl" type="CenterContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer" unique_id=774516375]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PassiveButton" type="TextureButton" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/PassiveControl" unique_id=1794266993]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("4_dj7sv")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/PassiveControl/PassiveButton" unique_id=2214]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PassiveIcon" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/PassiveControl/PassiveButton/MarginContainer" unique_id=795945920]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("5_f8w6c")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer" unique_id=36704295]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = -16
+
+[node name="BronzeControl" type="MarginContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/HBoxContainer" unique_id=163766486]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HexGridContainer" type="Container" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/HBoxContainer/BronzeControl" unique_id=412380858]
+layout_mode = 2
 script = ExtResource("14_q0qm1")
-columns = 4
-cell_size = Vector2(175, 175)
-gap = Vector2(8, 0)
+columns = 1
+cell_size = Vector2(64, 64)
 metadata/_custom_type_script = "uid://ddn8p84mlkyr0"
 
-[node name="PassiveButton" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/HeroSkillsContainer/HexGridContainer" unique_id=969233741 instance=ExtResource("19_kt0us")]
+[node name="BronzeButton" type="TextureButton" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/HBoxContainer/BronzeControl/HexGridContainer" unique_id=997043529]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("7_k77oi")
+ignore_texture_size = true
+stretch_mode = 5
 
-[node name="Bronze1Button" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/HeroSkillsContainer/HexGridContainer" unique_id=1526916687 instance=ExtResource("19_kt0us")]
-layout_mode = 2
+[node name="MarginContainer" type="MarginContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/HBoxContainer/BronzeControl/HexGridContainer/BronzeButton" unique_id=1671634020]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
-[node name="Silver1Button" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/HeroSkillsContainer/HexGridContainer" unique_id=591058962 instance=ExtResource("19_kt0us")]
+[node name="BronzeIcon" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/HBoxContainer/BronzeControl/HexGridContainer/BronzeButton/MarginContainer" unique_id=348730634]
+unique_name_in_owner = true
 layout_mode = 2
-
-[node name="Gold1Button" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/HeroSkillsContainer/HexGridContainer" unique_id=427206767 instance=ExtResource("19_kt0us")]
-layout_mode = 2
-
-[node name="UltimateButton" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/HeroSkillsContainer/HexGridContainer" unique_id=842813303 instance=ExtResource("19_kt0us")]
-layout_mode = 2
-
-[node name="Bronze2Button" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/HeroSkillsContainer/HexGridContainer" unique_id=1121349548 instance=ExtResource("19_kt0us")]
-layout_mode = 2
-
-[node name="Silver2Button" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/HeroSkillsContainer/HexGridContainer" unique_id=21210922 instance=ExtResource("19_kt0us")]
-layout_mode = 2
-
-[node name="Gold2Button" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/HeroSkillsContainer/HexGridContainer" unique_id=1397217358 instance=ExtResource("19_kt0us")]
-layout_mode = 2
-
-[node name="Separator6" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" unique_id=384309520]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-texture = ExtResource("3_rp41f")
+mouse_filter = 2
+texture = ExtResource("8_cwdgx")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="BronzeButton2" type="TextureButton" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/HBoxContainer/BronzeControl/HexGridContainer" unique_id=1420405309]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("7_k77oi")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/HBoxContainer/BronzeControl/HexGridContainer/BronzeButton2" unique_id=573551899]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="BronzeIcon2" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/HBoxContainer/BronzeControl/HexGridContainer/BronzeButton2/MarginContainer" unique_id=1714815578]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("9_dhsef")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SilverControl" type="MarginContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/HBoxContainer" unique_id=960939695]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HexGridContainer" type="Container" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/HBoxContainer/SilverControl" unique_id=1005556164]
+layout_mode = 2
+script = ExtResource("14_q0qm1")
+columns = 1
+cell_size = Vector2(64, 64)
+metadata/_custom_type_script = "uid://ddn8p84mlkyr0"
+
+[node name="SilverButton" type="TextureButton" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/HBoxContainer/SilverControl/HexGridContainer" unique_id=379859854]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("10_7ngho")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/HBoxContainer/SilverControl/HexGridContainer/SilverButton" unique_id=1896782150]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="SilverIcon" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/HBoxContainer/SilverControl/HexGridContainer/SilverButton/MarginContainer" unique_id=1335366440]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("11_ibsbi")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SilverButton2" type="TextureButton" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/HBoxContainer/SilverControl/HexGridContainer" unique_id=1307634335]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("10_7ngho")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/HBoxContainer/SilverControl/HexGridContainer/SilverButton2" unique_id=845021762]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="SilverIcon2" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/HBoxContainer/SilverControl/HexGridContainer/SilverButton2/MarginContainer" unique_id=157719082]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("9_dhsef")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GoldControl" type="MarginContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/HBoxContainer" unique_id=848964566]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HexGridContainer" type="Container" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/HBoxContainer/GoldControl" unique_id=1929267188]
+layout_mode = 2
+script = ExtResource("14_q0qm1")
+columns = 1
+cell_size = Vector2(64, 64)
+metadata/_custom_type_script = "uid://ddn8p84mlkyr0"
+
+[node name="GoldButton" type="TextureButton" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/HBoxContainer/GoldControl/HexGridContainer" unique_id=1510717654]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("12_vdrql")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/HBoxContainer/GoldControl/HexGridContainer/GoldButton" unique_id=1266825450]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="GoldIcon" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/HBoxContainer/GoldControl/HexGridContainer/GoldButton/MarginContainer" unique_id=1697854373]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("13_5k1wg")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GoldButton2" type="TextureButton" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/HBoxContainer/GoldControl/HexGridContainer" unique_id=65146651]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("12_vdrql")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/HBoxContainer/GoldControl/HexGridContainer/GoldButton2" unique_id=902680085]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="GoldIcon2" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/HBoxContainer/GoldControl/HexGridContainer/GoldButton2/MarginContainer" unique_id=255053109]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("9_dhsef")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="UltimateControl" type="CenterContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer" unique_id=931998170]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="UltimateButton" type="TextureButton" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/UltimateControl" unique_id=593599784]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("14_6t0n0")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/UltimateControl/UltimateButton" unique_id=355754773]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="UltimateIcon" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/SkillsContainer/HBoxContainer/UltimateControl/UltimateButton/MarginContainer" unique_id=6947083]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("15_3v8ym")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HSeparator3" type="HSeparator" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" unique_id=2035462567]
+layout_mode = 2
+
+[node name="StatsSkillDescContainer" type="MarginContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" unique_id=1022314690]
+layout_mode = 2
+
+[node name="StatsContainer" type="VBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsSkillDescContainer" unique_id=1026108602]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="LifeStat" type="ItemList" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsSkillDescContainer/StatsContainer" unique_id=916381249]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+focus_mode = 0
+item_count = 1
+max_columns = 0
+same_column_width = true
+fixed_column_width = 50
+fixed_icon_size = Vector2i(32, 32)
+item_0/text = "0"
+item_0/icon = ExtResource("16_yxnt6")
+
+[node name="AttackStats" type="ItemList" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsSkillDescContainer/StatsContainer" unique_id=1331960658]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 0
+item_count = 4
+max_columns = 5
+same_column_width = true
+fixed_column_width = 75
+fixed_icon_size = Vector2i(32, 32)
+item_0/text = "0"
+item_0/icon = ExtResource("16_k55yb")
+item_0/selectable = false
+item_1/text = "0"
+item_1/icon = ExtResource("17_yxnt6")
+item_1/selectable = false
+item_2/text = "0"
+item_2/icon = ExtResource("18_6502f")
+item_2/selectable = false
+item_3/text = "0"
+item_3/icon = ExtResource("19_4h2mb")
+item_3/selectable = false
+
+[node name="DefenseStats" type="ItemList" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsSkillDescContainer/StatsContainer" unique_id=1475520548]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 0
+item_count = 3
+max_columns = 5
+same_column_width = true
+fixed_column_width = 75
+fixed_icon_size = Vector2i(32, 32)
+item_0/text = "0"
+item_0/icon = ExtResource("20_vru87")
+item_0/selectable = false
+item_1/text = "0"
+item_1/icon = ExtResource("21_1l6fq")
+item_1/selectable = false
+item_2/text = "0"
+item_2/icon = ExtResource("22_cum77")
+item_2/selectable = false
+
+[node name="CriticStats" type="ItemList" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsSkillDescContainer/StatsContainer" unique_id=1095799477]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 0
+item_count = 2
+max_columns = 5
+same_column_width = true
+fixed_column_width = 75
+fixed_icon_size = Vector2i(32, 32)
+item_0/text = "0"
+item_0/icon = ExtResource("23_ufbtq")
+item_0/selectable = false
+item_1/text = "0"
+item_1/icon = ExtResource("24_aombb")
+item_1/selectable = false
+
+[node name="ManaStats" type="ItemList" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsSkillDescContainer/StatsContainer" unique_id=1838647154]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 0
+item_count = 2
+max_columns = 5
+same_column_width = true
+fixed_column_width = 75
+fixed_icon_size = Vector2i(32, 32)
+item_0/text = "0"
+item_0/icon = ExtResource("25_sqtx3")
+item_1/text = "0"
+item_1/icon = ExtResource("26_c5sde")
+item_1/selectable = false
+
+[node name="MiscStats" type="ItemList" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsSkillDescContainer/StatsContainer" unique_id=911599151]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 0
+item_count = 4
+max_columns = 5
+same_column_width = true
+fixed_column_width = 75
+fixed_icon_size = Vector2i(32, 32)
+item_0/text = "0"
+item_0/icon = ExtResource("27_5jloe")
+item_0/selectable = false
+item_1/text = "0"
+item_1/icon = ExtResource("28_elsxu")
+item_1/selectable = false
+item_2/text = "0"
+item_2/icon = ExtResource("29_8qkl2")
+item_2/selectable = false
+item_3/text = "0"
+item_3/icon = ExtResource("30_8o2nd")
+item_3/selectable = false
+
+[node name="SkillDescriptionContainer" type="VBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsSkillDescContainer" unique_id=1794471571]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="SkillNameLabel" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsSkillDescContainer/SkillDescriptionContainer" unique_id=1682258105]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.47843137, 0.6392157, 1, 1)
+text = "Skill name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsSkillDescContainer/SkillDescriptionContainer" unique_id=769898320]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="SkillDescriptionLabel" type="RichTextLabel" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/StatsSkillDescContainer/SkillDescriptionContainer/MarginContainer" unique_id=2046337150]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = " Lorem ipsum dolor sit amet, [color=violet]consectetur[/color] adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing [shake]nec[/shake], ultricies sed, dolor. Cras elementum ultrices diam. [rainbow]Maecenas[/rainbow] ligula massa, varius a, semper congue, [wave]euismod[/wave] non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat."
+
+[node name="HSeparator4" type="HSeparator" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" unique_id=2058459631]
+layout_mode = 2
 
 [node name="LoreLabel" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" unique_id=743652924]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme = ExtResource("3_ee7lt")
-theme_override_font_sizes/font_size = 24
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 18
 text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas leo in pede. Praesent blandit odio eu enim. Pellentesque sed dui ut augue blandit sodales. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam nibh. Mauris ac mauris sed pede pellentesque fermentum. Maecenas adipiscing ante non diam sodales hendrerit.
 Ut velit mauris, egestas sed, gravida nec, ornare ut, mi. Aenean ut orci vel massa suscipit pulvinar. Nulla sollicitudin. Fusce varius, ligula non tempus aliquam, nunc turpis ullamcorper nibh, in tempus sapien eros vitae ligula. Pellentesque rhoncus nunc et augue. Integer id felis. Curabitur aliquet pellentesque diam. Integer quis metus vitae elit lobortis egestas. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi vel erat non mauris convallis vehicula. Nulla et sapien. Integer tortor tellus, aliquam faucibus, convallis id, congue eu, quam. Mauris ullamcorper felis vitae erat. Proin feugiat, augue non elementum posuere, metus purus iaculis lectus, et tristique ligula justo vitae magna.
 
 Aliquam convallis sollicitudin purus. Praesent aliquam, enim at fermentum mollis, ligula massa adipiscing nisl, ac euismod nibh nisl eu lectus. Fusce vulputate sem at sapien. Vivamus leo. Aliquam euismod libero eu enim. Nulla nec felis sed leo placerat imperdiet. Aenean suscipit nulla in justo. Suspendisse cursus rutrum augue. Nulla tincidunt tincidunt mi. Curabitur iaculis, lorem vel rhoncus faucibus, felis magna fermentum augue, et ultricies lacus lorem varius purus. Curabitur eu amet."
-horizontal_alignment = 3
-vertical_alignment = 3
 autowrap_mode = 2

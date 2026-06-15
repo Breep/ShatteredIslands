@@ -1,15 +1,12 @@
 class_name HealthBarComponent
 extends EntityComponent
 
-## Shared Hero/NPC info-panel base class. Drives the health/shield/block/grid
-## bars on the main bar, the taunt 3D visual, and a dynamic container of
+## Shared info-panel base class, marker-agnostic. Drives the health/shield/block/grid
+## bars on the main bar, the taunt/invulnerable visuals, and a dynamic container of
 ## AlterationIcon widgets (populated from the owner's alterations via
 ## the aggregate `alteration_changed` signal — no per-type wiring required).
-
-#region ============================== Export ==============================
-@export_group("External Nodes")
-@export var _spawn: Marker3D
-#endregion
+## The screen-pinned Boss bar extends this directly; the per-entity bars that follow
+## a 3D marker extend HealthBar3DComponent.
 
 #region ============================== Onready ==============================
 @onready var _health_bar: ColorRect = %HealthBar
@@ -17,21 +14,24 @@ extends EntityComponent
 @onready var _grid_bar: ColorRect = %GridBar
 @onready var _block_bar: ColorRect = %BlockBar
 
+# Custom-display state visuals — only present in the LargeHealthBar scene.
+@onready var _metal_bar: ColorRect = get_node_or_null("%MetalBar")
+@onready var _taunt_shield_icon: TextureRect = get_node_or_null("%TauntShieldIcon")
+
 @onready var _debug_values: Control = %DebugValues
 @onready var _health_label: Label = %HealthLabel
 @onready var _shield_label: Label = %ShieldLabel
 @onready var _level_label: Label = %LevelLabel
 
 @onready var _alterations_container: Container = %AlterationsContainer
-
-@onready var _main_control: Control = %MainControl
 #endregion
 
-const TAUNT_VISUAL_SCENE: PackedScene = preload("res://02_Entities/_Shared/Components/HealthBar/Data/taunt_status_visual.tscn")
 const ALTERATION_ICON_SCENE: PackedScene = preload("res://02_Entities/_Shared/Components/Alterations/AlterationIcon/alteration_icon.tscn")
+const ICONS_PER_ROW: int = 4
 
-var _taunt_visual: Node3D
 var _alteration_icons: Dictionary[Alteration.Type, AlterationIcon] = {}
+# Insertion order of active icons; drives the bottom-up row stacking layout.
+var _icon_order: Array[Alteration.Type] = []
 
 
 #region ============================== Node base functions ==============================
@@ -50,6 +50,8 @@ func _ready() -> void:
 		_shield_bar.material = _shield_bar.material.duplicate()
 	if _grid_bar and _grid_bar.material:
 		_grid_bar.material = _grid_bar.material.duplicate()
+	if _metal_bar and _metal_bar.material:
+		_metal_bar.material = _metal_bar.material.duplicate()
 
 	var stats := _owner.stats
 	var am := _owner.alterations
@@ -57,6 +59,7 @@ func _ready() -> void:
 	_update_health_bar(stats.health, stats.health_max)
 	_update_shield_bar(am.shield_stacks, stats.health_max)
 	_update_block_bar(am.block_stacks)
+	_update_level_value(_owner.progression.level)
 
 	for alteration_type: Alteration.Type in Alteration.Type.values():
 		_refresh_icon_for(alteration_type)
@@ -64,24 +67,17 @@ func _ready() -> void:
 	stats.health_changed.connect(_on_health_changed)
 	stats.health_max_changed.connect(_on_health_max_changed)
 	am.alteration_changed.connect(_on_alteration_changed)
-	am.taunted_changed.connect(_update_taunt_visual)
+	am.taunted_changed.connect(_update_taunt_shield_icon)
+	am.invulnerable_changed.connect(_update_invulnerable_overlay)
+	_owner.progression.level_changed.connect(_on_owner_progression_level_changed)
 
 	if _debug_values != null:
 		_debug_values.visible = DebugHealthBarOverlay.is_visible()
-	if _level_label != null:
-		_level_label.visible = DebugHealthBarOverlay.is_visible()
 	DebugHealthBarOverlay.register(_on_debug_overlay_toggled)
 
 
 func _exit_tree() -> void:
 	DebugHealthBarOverlay.unregister(_on_debug_overlay_toggled)
-
-
-func _process(_delta: float) -> void:
-	var camera := get_viewport().get_camera_3d()
-	var tracked := _get_tracked_spawn()
-	if camera != null and tracked != null:
-		_main_control.position = camera.unproject_position(tracked.global_position) - Vector2(_main_control.size.x / 2, 0)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -108,14 +104,6 @@ func setup_grid_bar(small_block: int, big_block: int) -> void:
 		_grid_bar.material.set_shader_parameter("Step_Y_Height", 1)
 	else:
 		_grid_bar.material.set_shader_parameter("Step_Y_Height", 0)
-#endregion
-
-
-#region ============================== Virtual hooks ==============================
-## Marker tracked in _process to project the panel on screen.
-## Heroes override to toggle between fight/tavern markers via apply_display_mode.
-func _get_tracked_spawn() -> Marker3D:
-	return _spawn
 #endregion
 
 
@@ -152,23 +140,25 @@ func _update_block_bar(new_value: float) -> void:
 	_block_bar.visible = new_value > 0
 
 
-func _update_taunt_visual(is_active: bool, _duration: float, _infinite: bool) -> void:
-	if is_active and is_instance_valid(_spawn):
-		_taunt_visual = TAUNT_VISUAL_SCENE.instantiate()
-		_spawn.add_child(_taunt_visual)
-	elif not is_active and is_instance_valid(_taunt_visual):
-		_taunt_visual.queue_free()
+## Gold metallic sheen over the whole bar while the owner is invulnerable.
+func _update_invulnerable_overlay(is_active: bool, _duration: float, _infinite: bool) -> void:
+	if _metal_bar == null: return
+	_metal_bar.visible = is_active
 
 
+## 2D shield badge on the left of the bar while the owner is taunted,
+## complementing the 3D taunt marker.
+func _update_taunt_shield_icon(is_active: bool, _duration: float, _infinite: bool) -> void:
+	if _taunt_shield_icon == null: return
+	_taunt_shield_icon.visible = is_active
+
+
+## Allies (party side, PARTY_TEAM_ID) get a green bar, everyone else red.
 func _set_health_bar_color_by_team() -> void:
 	if not _health_bar or not _health_bar.material or not _owner:
 		return
-	var local_player: Player = PlayerManager.get_local_player()
-	var health_color: Color
-	if local_player == null or _owner.team == local_player.team:
-		health_color = Color.LIME_GREEN
-	else:
-		health_color = Color.INDIAN_RED
+	var is_ally: bool = _owner.team == EncounterRunner.PARTY_TEAM_ID
+	var health_color: Color = Color.LIME_GREEN if is_ally else Color.INDIAN_RED
 	_health_bar.material.set_shader_parameter("HealthColor", health_color)
 
 
@@ -187,14 +177,54 @@ func _refresh_icon_for(alteration_type: Alteration.Type) -> void:
 	if _is_alteration_active(alteration):
 		if existing == null:
 			existing = ALTERATION_ICON_SCENE.instantiate() as AlterationIcon
-			_alterations_container.add_child(existing)
-			existing.bind(alteration)
 			_alteration_icons[alteration_type] = existing
+			_icon_order.append(alteration_type)
+			_rebuild_icon_rows()
+			existing.bind(alteration)
 		existing.set_value(_alteration_display_value(alteration))
 	elif existing != null:
-		existing.queue_free()
 		_alteration_icons.erase(alteration_type)
+		_icon_order.erase(alteration_type)
+		if existing.get_parent() != null:
+			existing.get_parent().remove_child(existing)
+		existing.queue_free()
+		_rebuild_icon_rows()
 
+
+## Re-lay the active icons into rows of ICONS_PER_ROW, stacked bottom-up:
+## the oldest row stays pinned at the bottom (next to the bar) and newer rows
+## are added above it, so adding an icon never shifts the existing ones down.
+func _rebuild_icon_rows() -> void:
+	if _alterations_container == null: return
+
+	# Detach icons from their current rows (without freeing them), then drop
+	# the now-empty row containers.
+	for icon: AlterationIcon in _alteration_icons.values():
+		if icon.get_parent() != null:
+			icon.get_parent().remove_child(icon)
+	for row: Node in _alterations_container.get_children():
+		row.free()
+
+	# Chunk icons in insertion order; chunk 0 (oldest) must render at the bottom,
+	# so rows are added to the VBox newest-first (VBox lays children top to bottom).
+	var rows: Array[HBoxContainer] = []
+	var i: int = 0
+	while i < _icon_order.size():
+		var row := HBoxContainer.new()
+		row.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+		row.add_theme_constant_override("separation", 2)
+		for j: int in range(i, mini(i + ICONS_PER_ROW, _icon_order.size())):
+			row.add_child(_alteration_icons[_icon_order[j]])
+		rows.append(row)
+		i += ICONS_PER_ROW
+
+	for k: int in range(rows.size() - 1, -1, -1):
+		_alterations_container.add_child(rows[k])
+
+
+func _update_level_value(level: int) -> void:
+	if _level_label != null:
+		_level_label.text = str(level)
 
 static func _is_alteration_active(alteration: Alteration) -> bool:
 	if alteration is StackAlteration:
@@ -240,6 +270,8 @@ func _on_alteration_changed(alteration_type: Alteration.Type, _payload: Variant)
 func _on_debug_overlay_toggled(is_visible: bool) -> void:
 	if _debug_values != null:
 		_debug_values.visible = is_visible
-	if _level_label != null:
-		_level_label.visible = is_visible
+
+
+func _on_owner_progression_level_changed(level: int) -> void:
+	_update_level_value(level)
 #endregion

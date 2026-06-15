@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://coel8gd25rira"]
+
+[ext_resource type="Script" uid="uid://c128r2s3vwo6p" path="res://03_SpellsAndProjectiles/Spells/GoblinFocus/spell_goblin_focus.gd" id="1_ay233"]
+[ext_resource type="PackedScene" uid="uid://bxqb2r5cdt3gw" path="res://22_VFX/VFX_3D/VFX/Scenes/VFX_Darkness_projectile.tscn" id="2_ryiw6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ay233"]
+size = Vector3(1.3726131, 1.3867188, 1.4317017)
+
+[node name="GoblinFocusProjectile" type="Area3D" unique_id=1758999821]
+collision_layer = 2
+collision_mask = 16
+script = ExtResource("1_ay233")
+
+[node name="GoblinFocusVisual" parent="." unique_id=317708016 instance=ExtResource("2_ryiw6")]
+transform = Transform3D(4, 0, 0, 0, 2.666, 0, 0, 0, 2.666, 0, 0, 0)
+
+[node name="GoblinFocusHitBox" type="CollisionShape3D" parent="." unique_id=370180917]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -0.007334411, 0.04336548, -0.28371233)
+shape = SubResource("BoxShape3D_ay233")
+
+[node name="DespawnTimer" type="Timer" parent="." unique_id=1862889816]
+unique_name_in_owner = true
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://dcouvbli2res7"]
+
+[ext_resource type="Texture2D" uid="uid://cpo5y4fu1mfle" path="res://02_Entities/Pool/Buildings/ChickenCoop/Skills/Gold/skill_couvee_blindee.svg" id="1_2fnar"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
+[ext_resource type="Script" uid="uid://ccouvbli1eff7" path="res://02_Entities/Pool/Buildings/ChickenCoop/Skills/Gold/couvee_blindee.gd" id="2_eff"]
+
+[sub_resource type="Resource" id="Resource_cb"]
+script = ExtResource("2_eff")
+metadata/_custom_type_script = "uid://ccouvbli1eff7"
+
+[resource]
+script = ExtResource("1_skill")
+skill_id = 4
+name = "Couvée blindée"
+description = "Les Poulets invoqués par ce Poulailler gagnent 3 Block à leur apparition."
+portrait = ExtResource("1_2fnar")
+skill_effect = SubResource("Resource_cb")
+metadata/_custom_type_script = "uid://dfby4merlgkep"

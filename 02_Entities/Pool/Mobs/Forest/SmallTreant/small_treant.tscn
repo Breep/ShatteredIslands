@@ -1,0 +1,136 @@
+[gd_scene format=3 uid="uid://cafqrtw7iv7f8"]
+
+[ext_resource type="Script" uid="uid://brj7ewv22oir6" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/small_treant.gd" id="1_qlm5q"]
+[ext_resource type="PackedScene" uid="uid://m1xr4qo8pn35" path="res://02_Entities/_Data/StumpEnt/stump_ent.tscn" id="2_g65g8"]
+[ext_resource type="Resource" uid="uid://duw0xcgf3d40a" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Stats/entity_desc.tres" id="2_m1bbj"]
+[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.tscn" id="3_b5y8s"]
+[ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="4_m1bbj"]
+[ext_resource type="AnimationNodeBlendTree" uid="uid://bgulhwin6paat" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/small_treant_animation_tree.res" id="6_5ct5u"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_5ct5u"]
+height = 1.2209473
+radius = 0.32861328
+
+[node name="SmallTreant" type="CharacterBody3D" unique_id=103145645 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker")]
+collision_layer = 16
+collision_mask = 25
+script = ExtResource("1_qlm5q")
+entity_name = "Small Treant"
+entity_desc = ExtResource("2_m1bbj")
+_visual_3d = NodePath("StumpEnt")
+_health_bar_marker = NodePath("StumpEnt/HealthBarMarker")
+level = 7
+
+[node name="StumpEnt" parent="." unique_id=793666288 instance=ExtResource("2_g65g8")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="Skeleton3D" parent="StumpEnt" index="0" unique_id=2077769949]
+bones/1/position = Vector3(0.23859444, 6.7588306e-17, 4.1385898e-33)
+bones/3/rotation = Quaternion(-3.0616122e-17, 5.686204e-20, -0.0018572554, 0.9999983)
+bones/6/rotation = Quaternion(-0.0014452073, -0.009534937, -0.578223, 0.81582177)
+bones/7/rotation = Quaternion(0.14946353, 0.98876727, 2.5146831e-09, 2.5356328e-09)
+bones/8/rotation = Quaternion(-0.6222062, 0.6809534, -0.27033523, -0.27582747)
+bones/9/rotation = Quaternion(-0.011241937, -0.0059473105, -0.5805248, 0.81414324)
+bones/10/rotation = Quaternion(0.14946355, 0.98876727, 2.3158977e-09, 1.478159e-10)
+bones/11/rotation = Quaternion(-0.2757203, 0.26791736, 0.68124586, 0.6229789)
+bones/12/rotation = Quaternion(-0.011152214, -0.0011946666, -0.5795119, 0.8148866)
+bones/13/rotation = Quaternion(0.14946355, 0.98876727, 6.2205148e-09, 2.2592523e-09)
+bones/15/rotation = Quaternion(-0.0012986372, -0.00501091, -0.57735205, 0.8164789)
+bones/16/rotation = Quaternion(0.14946355, 0.98876727, -1.5032368e-09, -1.5704318e-09)
+
+[node name="HealthBarMarker" type="Marker3D" parent="StumpEnt" unique_id=1257428452]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.203794, 0)
+
+[node name="LargeHealthBarComponent" parent="." unique_id=1823590462 node_paths=PackedStringArray("_spawn", "_owner") instance=ExtResource("3_b5y8s")]
+_spawn = NodePath("../StumpEnt/HealthBarMarker")
+_owner = NodePath("..")
+
+[node name="AnimationComponent" parent="." unique_id=73205791 node_paths=PackedStringArray("_animation_tree", "_owner") instance=ExtResource("4_m1bbj")]
+_animation_tree = NodePath("../AnimationTree")
+_owner = NodePath("..")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1190688844]
+root_node = NodePath("../StumpEnt")
+tree_root = ExtResource("6_5ct5u")
+anim_player = NodePath("../StumpEnt/AnimationPlayer")
+parameters/switch_moving/current_state = "Run"
+parameters/switch_moving/transition_request = ""
+parameters/switch_moving/current_index = 1
+parameters/scale_dance/scale = 1.0
+parameters/scale_die/scale = 1.0
+parameters/scale_idle_standing_neutral/scale = 1.0
+parameters/one_shot_attack/active = false
+parameters/one_shot_attack/internal_active = false
+parameters/one_shot_attack/request = 0
+parameters/one_shot_ultimate/active = false
+parameters/one_shot_ultimate/internal_active = false
+parameters/one_shot_ultimate/request = 0
+parameters/scale_attack/scale = 1.0
+parameters/one_shot_idle_standing_neutral/active = false
+parameters/one_shot_idle_standing_neutral/internal_active = false
+parameters/one_shot_idle_standing_neutral/request = 0
+parameters/scale_ultimate/scale = 1.0
+parameters/scale_idle_standing_neutral_var/scale = 1.0
+parameters/one_shot_sitting/active = false
+parameters/one_shot_sitting/internal_active = false
+parameters/one_shot_sitting/request = 0
+parameters/switch_entity_life_state/current_state = "Alive"
+parameters/switch_entity_life_state/transition_request = ""
+parameters/switch_entity_life_state/current_index = 1
+parameters/scale_walk/scale = 1.0
+parameters/scale_run/scale = 1.0
+parameters/switch_attack/current_state = "Attack3"
+parameters/switch_attack/transition_request = ""
+parameters/switch_attack/current_index = 2
+parameters/scale_stunned/scale = 1.0
+parameters/seek_stunned/seek_request = -1.0
+parameters/scale_idle_standing_aggresive/scale = 1.0
+parameters/scale_idle_standing_aggresive_var/scale = 1.0
+parameters/seek_idle_standing_aggresive/seek_request = -1.0
+parameters/switch_entity_mode/current_state = "InGame"
+parameters/switch_entity_mode/transition_request = ""
+parameters/switch_entity_mode/current_index = 1
+parameters/seek_idle_standing_neutral/seek_request = -1.0
+parameters/one_shot_idle_standing_aggresive/active = false
+parameters/one_shot_idle_standing_aggresive/internal_active = false
+parameters/one_shot_idle_standing_aggresive/request = 0
+parameters/seek_idle_sitting_chair/seek_request = -1.0
+parameters/scale_idle_sitting_chair/scale = 1.0
+parameters/scale_idle_sitting_chair_var/scale = 1.0
+parameters/seek_idle_sitting_floor/seek_request = -1.0
+parameters/seek_dance/seek_request = -1.0
+parameters/one_shot_idle_sitting_chair/active = false
+parameters/one_shot_idle_sitting_chair/internal_active = false
+parameters/one_shot_idle_sitting_chair/request = 0
+parameters/scale_idle_sitting_floor/scale = 1.0
+parameters/scale_idle_sitting_floor_var/scale = 1.0
+parameters/scale_attack_2/scale = 1.0
+parameters/scale_hit_1/scale = 1.0
+parameters/scale_attack_3/scale = 1.0
+parameters/switch_main/current_state = "Idle"
+parameters/switch_main/transition_request = ""
+parameters/switch_main/current_index = 0
+parameters/switch_idle/current_state = ""
+parameters/switch_idle/transition_request = ""
+parameters/switch_idle/current_index = -1
+parameters/scale_drag/scale = 1.0
+parameters/scale_land/scale = 1.0
+parameters/one_shot_land/active = false
+parameters/one_shot_land/internal_active = false
+parameters/one_shot_land/request = 0
+parameters/one_shot_hit/active = false
+parameters/one_shot_hit/internal_active = false
+parameters/one_shot_hit/request = 0
+parameters/scale_attack_1/scale = 1.0
+parameters/switch_positioning/current_state = "Off"
+parameters/switch_positioning/transition_request = ""
+parameters/switch_positioning/current_index = 0
+parameters/switch_stunned_state/current_state = "NotStunned"
+parameters/switch_stunned_state/transition_request = ""
+parameters/switch_stunned_state/current_index = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1396318133]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.58532715, 0)
+shape = SubResource("CylinderShape3D_5ct5u")
+
+[editable path="StumpEnt"]

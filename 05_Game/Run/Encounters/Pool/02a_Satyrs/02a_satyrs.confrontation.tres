@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Confrontation" format=3]
+
+[ext_resource type="Script" uid="uid://cp06s2eytdhsh" path="res://05_Game/Run/Confrontations/confrontation.gd" id="1_eplr5"]
+[ext_resource type="Resource" uid="uid://cku3wwilf4n0c" path="res://05_Game/Run/Encounters/Pool/02a_Satyrs/02a_satyrs.tavern_encounter.tres" id="2_tav"]
+[ext_resource type="Resource" uid="uid://dviymoos11ydr" path="res://05_Game/Run/Encounters/Pool/02a_Satyrs/02a_satyrs.fighting_encounter.tres" id="3_fig"]
+
+[resource]
+script = ExtResource("1_eplr5")
+id = &"02a_Satyrs"
+display_name = "Satyrs"
+tavern_encounter = ExtResource("2_tav")
+fighting_encounter = ExtResource("3_fig")
+metadata/_custom_type_script = "uid://cp06s2eytdhsh"

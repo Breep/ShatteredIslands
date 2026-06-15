@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://bthnvol5res7t"]
+
+[ext_resource type="Texture2D" uid="uid://da3tm6w0w7e21" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Skills/Ultimate/skill_thorn_volley.svg" id="1_bpb8i"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
+[ext_resource type="Script" uid="uid://bl4dosourgutl" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/Skills/Ultimate/thorn_volley.gd" id="2_eff"]
+
+[sub_resource type="Resource" id="Resource_tv"]
+script = ExtResource("2_eff")
+metadata/_custom_type_script = "uid://bl4dosourgutl"
+
+[resource]
+script = ExtResource("1_skill")
+skill_id = 7
+name = "Salve épineuse"
+description = "Inflige (150% × stacks de Thorn) PHYSICAL_DAMAGE et applique Stun 2s aux ennemis adjacents. Gagne +15 stacks de Thorn après l'effet."
+portrait = ExtResource("1_bpb8i")
+skill_effect = SubResource("Resource_tv")
+metadata/_custom_type_script = "uid://dfby4merlgkep"

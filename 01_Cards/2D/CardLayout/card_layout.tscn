@@ -1,38 +1,39 @@
 [gd_scene format=3 uid="uid://l4hi6dgs8lvg"]
 
 [ext_resource type="Script" uid="uid://dbdgpnlir03dy" path="res://01_Cards/2D/CardLayout/card_layout.gd" id="1_2an10"]
-[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme.tres" id="1_ru7cc"]
-[ext_resource type="Texture2D" uid="uid://yekknulevsvb" path="res://01_Cards/Descriptions/Cards/Poison/Common/PoisonFlask/portrait_poison_flask.png" id="3_mt3v6"]
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme_old.tres" id="1_ru7cc"]
 [ext_resource type="Script" uid="uid://6c0iybheyu32" path="res://22_VFX/VFEZ-godot-main/vfez_material_2d.gd" id="5_m3odx"]
 [ext_resource type="Texture2D" uid="uid://0djydjl344rv" path="res://03_SpellsAndProjectiles/Spells/Lightning/Lightning/Visual/Textures/floor_mark_texture.png" id="8_augoc"]
 [ext_resource type="Texture2D" uid="uid://caed4hfn4vvxm" path="res://20_Data/Texture/Kenney2/light_02.png" id="9_6hlmk"]
-[ext_resource type="Texture2D" uid="uid://cwqdngpmbcnck" path="res://01_Cards/Descriptions/Families/Icons/poison.png" id="9_mt3v6"]
+[ext_resource type="Texture2D" uid="uid://cwqdngpmbcnck" path="res://01_Cards/Pool/Families/Icons/poison.png" id="9_mt3v6"]
 [ext_resource type="Shader" uid="uid://bfo68wf8rrok4" path="res://01_Cards/2D/CardLayout/Data/Shaders/runes/rune_glow.gdshader" id="9_p8v2y"]
 [ext_resource type="Texture2D" uid="uid://dr28dlr3rssnu" path="res://01_Cards/2D/CardLayout/Data/StandardCard/ct_rune_mask.png" id="10_p8v2y"]
 [ext_resource type="Script" uid="uid://dp2f1iwp38m0k" path="res://01_Cards/2D/CardLayout/Data/Shaders/runes/rune_glow tools.gd" id="11_7ajba"]
 [ext_resource type="Script" uid="uid://bd3srw4twda5w" path="res://04_UI/Tool/SmartTextLabel/ui_smart_text_label.gd" id="11_pjbj4"]
 [ext_resource type="Texture2D" uid="uid://hump1edscxip" path="res://01_Cards/2D/CardLayout/Data/StandardCard/ct_frame.png" id="12_k2vus"]
 [ext_resource type="Texture2D" uid="uid://vii43ab2auyg" path="res://01_Cards/2D/CardLayout/Data/StandardCard/ct_bottom.png" id="13_78cks"]
-[ext_resource type="FontFile" uid="uid://bdgqiedfa6ld2" path="res://20_Data/font/Nunito-ExtraBold.ttf" id="13_p31bt"]
+[ext_resource type="FontFile" uid="uid://bdgqiedfa6ld2" path="res://04_UI/_Themes/Fonts/Nunito-ExtraBold.ttf" id="13_p31bt"]
 [ext_resource type="Texture2D" uid="uid://dn4cx5jpgh7ae" path="res://01_Cards/2D/CardLayout/Data/StandardCard/Stars/ct_level_star_1.png" id="14_78cks"]
-[ext_resource type="Texture2D" uid="uid://b7ix0d8jwrexg" path="res://01_Cards/2D/CardLayout/Data/StandardCard/ct_illustration_mask.png" id="14_xw5tp"]
 [ext_resource type="Texture2D" uid="uid://bwrwv8bs17m0i" path="res://01_Cards/2D/CardLayout/Data/StandardCard/Stars/ct_level_star_2.png" id="15_xw5tp"]
 [ext_resource type="Texture2D" uid="uid://8bgksnhwv0j" path="res://01_Cards/2D/CardLayout/Data/StandardCard/Stars/ct_level_star_3.png" id="16_ejxcv"]
 [ext_resource type="Texture2D" uid="uid://co7lwsbaa1h8b" path="res://01_Cards/2D/CardLayout/Data/StandardCard/ct_frame_illustration.png" id="16_n6ysl"]
 [ext_resource type="Texture2D" uid="uid://btvd8un55vke6" path="res://01_Cards/2D/CardLayout/Data/StandardCard/ct_title_banner.png" id="17_ejxcv"]
+[ext_resource type="Texture2D" uid="uid://d20dxq57xv74r" path="res://01_Cards/2D/CardLayout/Data/StandardCard/ct_illustration_mask_full.png" id="17_hk667"]
 [ext_resource type="Texture2D" uid="uid://bp5u3lmsc8fm2" path="res://01_Cards/2D/CardLayout/Data/StandardCard/Stars/ct_level_star_4.png" id="17_p8v2y"]
 [ext_resource type="Texture2D" uid="uid://odtrh6khih2s" path="res://01_Cards/2D/CardLayout/Data/StandardCard/Stars/ct_level_star_5.png" id="18_7ajba"]
+[ext_resource type="Texture2D" uid="uid://calhfni5uquof" path="res://01_Cards/Pool/Families/Backgrounds/chicken_lord_background.jpeg" id="18_hk667"]
 [ext_resource type="Texture2D" uid="uid://bp08djuu2g0pr" path="res://01_Cards/2D/CardLayout/Data/StandardCard/ct_level_flag.png" id="18_p8v2y"]
 [ext_resource type="Texture2D" uid="uid://ifaj1br6koel" path="res://01_Cards/2D/CardLayout/Data/StandardCard/ct_family_frame.png" id="19_7ajba"]
+[ext_resource type="Texture2D" uid="uid://04wy1x4ux68" path="res://01_Cards/Pool/Families/Backgrounds/colossus_background.jpeg" id="19_hk667"]
 [ext_resource type="Shader" uid="uid://bquiydhxqegb5" path="res://01_Cards/2D/CardLayout/Data/Shaders/curve_text.gdshader" id="21_xw5tp"]
 [ext_resource type="Texture2D" uid="uid://bxktk2p3m3g2" path="res://01_Cards/2D/CardLayout/Data/StandardCard/card_full_mask.png" id="25_7ajba"]
-[ext_resource type="FontFile" uid="uid://cvfku6uge3mvi" path="res://20_Data/font/Super Trend.ttf" id="27_hk667"]
+[ext_resource type="FontFile" uid="uid://cvfku6uge3mvi" path="res://04_UI/_Themes/Fonts/Super Trend.ttf" id="27_hk667"]
 [ext_resource type="Shader" uid="uid://ces5qqkirl131" path="res://01_Cards/2D/CardLayout/Data/Shaders/card_aura.gdshader" id="30_aura"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_aura"]
 shader = ExtResource("30_aura")
 shader_parameter/aura_texture = ExtResource("9_6hlmk")
-shader_parameter/aura_color = Color(1, 0.85, 0.2, 1)
+shader_parameter/aura_color = Color(0.87058824, 0.5921569, 0.23137255, 1)
 shader_parameter/intensity = 1.686000080085
 shader_parameter/base_scale = 1.41000006371512
 shader_parameter/pulse_speed = 1.2
@@ -44,7 +45,7 @@ shader_parameter/edge_fade = 0.15
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_augoc"]
 shader = ExtResource("9_p8v2y")
-shader_parameter/glow_color = Color(0.553, 0.282, 0.957, 1)
+shader_parameter/glow_color = Color(1, 0.64705884, 0, 1)
 shader_parameter/intensity_multiplier = 1.0
 shader_parameter/glow_mode = 1
 shader_parameter/animation_speed = 1.0
@@ -134,7 +135,7 @@ shader_parameter/use_color_shadow = false
 shader_parameter/use_color_greyscale = false
 shader_parameter/use_color_shine = false
 shader_parameter/use_alpha_mask = true
-shader_parameter/alpha_mask_texture = ExtResource("14_xw5tp")
+shader_parameter/alpha_mask_texture = ExtResource("17_hk667")
 shader_parameter/alpha_mask_scale = Vector2(1, 1)
 shader_parameter/alpha_mask_offset = Vector2(0, 0)
 shader_parameter/alpha_mask_power = 1.0
@@ -209,7 +210,7 @@ grow_vertical = 2
 texture = ExtResource("10_p8v2y")
 expand_mode = 1
 script = ExtResource("11_7ajba")
-current_rarity = 2
+current_rarity = 3
 current_mode = 1
 speed_override = 1.0
 
@@ -228,7 +229,19 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_mt3v6")
+texture = ExtResource("18_hk667")
+expand_mode = 1
+
+[node name="CardPortraitBackground" type="TextureRect" parent="." unique_id=1126265025]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_6cxer")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("19_hk667")
 expand_mode = 1
 
 [node name="CardIllustrationFrame" type="TextureRect" parent="." unique_id=1387730004]

@@ -42,7 +42,8 @@ enum EntityType {
 	DEFLECTION_SHIELD,
 	GAMMA_TURRET,
 	TREX,
-	CHICKEN_EGG
+	CHICKEN_EGG,
+	MOLTEN_GOLEM
 }
 #endregion
 
@@ -72,10 +73,10 @@ enum EntityType {
 @export var _spawn_manager: SpawnManager
 @export var _arena_zone_manager: ArenaZoneManager
 @export_subgroup("Overrides")
-@export var _override_base_stats: EntityStats
-@export var _override_custom_deck: PlayerDeck
-@export var _override_data_memory: Dictionary
-@export var _override_family_levels: Dictionary[Family.Type, int] = {}
+@export var override_base_stats: EntityStats
+@export var override_custom_hand: Hand
+@export var override_data_memory: Dictionary
+@export var override_family_levels: Dictionary[Family.Type, int] = {}
 @export_subgroup("Behaviour")
 @export var auto_attack_enabled: bool = true
 @export var family_managers_enabled: bool = true
@@ -84,11 +85,23 @@ enum EntityType {
 
 #region ============================== Constants ==============================
 const TICKS_PER_SECOND: int = 60
+## Cap appliqué aux bonus de level cumulés sur summons/acolytes/buildings
+## via les *_modifiers_registry.register_level_bonus(). Aligné sur le
+## @export_range de `level` et sur la couverture de ProgressionComponent.DEFAULT_LEVEL_REFS.
+const MAX_LEVEL: int = 20
 #endregion
 
 var uid: int = -1 # Multiplayer ID of the entity
 var stats: EntityStats
 var summoner: Entity # Set via apply_context si l'entité a été invoquée par une autre
+# Roaster du joueur propriétaire. Posé au spawn pour les héros uniquement
+# (sert de source pour CardContext quand le héros joue une carte qui mute le
+# roaster). null pour acolytes/summons/buildings/mobs.
+var roaster: Roaster
+# RoasterEntry dont cette Entity est l'instance runtime. Posée au spawn par
+# EntitySpec.spawn_into. Sert au snapshot de positions (POSITIONING→COUNTDOWN)
+# et à toute logique qui doit remonter de l'entité vers sa donnée persistante.
+var entry: RoasterEntry
 
 #region ============================== Components ==============================
 var damage: DamageComponent
@@ -112,6 +125,10 @@ var deck_holder: DeckHolderComponent
 var family: FamilyComponent
 var mana: ManaComponent
 var health_bar: HealthBarComponent
+var progression: ProgressionComponent
+var skill: SkillComponent
+var aura: AuraComponent
+var hit_marker: HitMarkerComponent
 
 var _auto_loaded_components: Array[EntityComponent.Type] = [
 	EntityComponent.Type.DAMAGE,
@@ -130,7 +147,12 @@ var _auto_loaded_components: Array[EntityComponent.Type] = [
 	EntityComponent.Type.CLICKABLE,
 	EntityComponent.Type.DRAGGABLE,
 	EntityComponent.Type.CONTROLLER,
-	EntityComponent.Type.MANA
+	EntityComponent.Type.MANA,
+	EntityComponent.Type.PROGRESSION,
+	EntityComponent.Type.SKILL,
+	EntityComponent.Type.DECK_HOLDER,
+	EntityComponent.Type.AURA,
+	EntityComponent.Type.HIT_MARKER
 ]
 
 #var display_mode: DisplayMode = DisplayMode.PREVIEW
@@ -143,6 +165,10 @@ var action_modifiers_registry: ActionModifiersRegistry
 var stat_modifiers_registry: EntityStatModifiersRegistry
 var death_modifiers_registry: DeathModifiersRegistry
 var battle_callback_registry: BattleCallbackRegistry
+var summon_modifiers_registry: SummonModifiersRegistry
+var acolyte_modifiers_registry: AcolyteModifiersRegistry
+var building_modifiers_registry: BuildingModifiersRegistry
+var projectile_modifiers_registry: ProjectileModifiersRegistry
 #endregion
 
 ##region ============================== Context ============================== 
@@ -152,7 +178,7 @@ var spawn_manager: SpawnManager:
 #endregion
 
 #region ============================== Private variables ==============================
-var _base_stats: EntityStats
+
 
 # Spawn system # TODO Checker que'est-ce que ça fait ici plutôt que dans le spawn component ?
 var _original_fighting_state: FightingState = FightingState.UNDEF
@@ -170,6 +196,11 @@ var life_state: LifeState:
 		if value != _life_state:
 			_life_state = value
 			life_state_changed.emit(_life_state)
+
+## Quand true, l'entité morte ne disparaît pas (pas de despawn) et n'élimine pas
+## son équipe : elle attend une résurrection (ex: légendaire Colossus). Posé/retiré
+## par l'effet de carte qui gère la renaissance.
+var can_revive: bool = false
 
 signal fighting_state_changed(new_fighting_state: FightingState)
 var _fighting_state: FightingState = FightingState.UNDEF
@@ -202,28 +233,26 @@ func is_hero() -> bool: return category == Category.HERO
 func _init() -> void:
 	# Stats
 	stats = EntityStats.new()
-	_base_stats = EntityStats.new()
-
+	
 	# Default Modifier Registries
 	auto_attack_modifier_registry = AutoAttackModifierRegistry.new()
 	action_modifiers_registry = ActionModifiersRegistry.new()
 	death_modifiers_registry = DeathModifiersRegistry.new()
+	stat_modifiers_registry = EntityStatModifiersRegistry.new(stats)
+	summon_modifiers_registry = SummonModifiersRegistry.new()
+	acolyte_modifiers_registry = AcolyteModifiersRegistry.new()
+	building_modifiers_registry = BuildingModifiersRegistry.new()
+	projectile_modifiers_registry = ProjectileModifiersRegistry.new()
 	Verbose.trace("Entity [" + entity_name + "_" + str(uid) + "] init", Verbose.Category.ENTITY)
 
 
 func _enter_tree() -> void:
 	Verbose.trace("Entity [" + entity_name + "_" + str(uid) + "] enter_tree", Verbose.Category.ENTITY)
-	if _override_base_stats != null:
-		Verbose.debug("Entity [" + entity_name + "] using custom_base_stats", Verbose.Category.ENTITY)
-		_base_stats = _override_base_stats
-		_base_stats.reset_from_self()
-	stat_modifiers_registry = EntityStatModifiersRegistry.new(_base_stats, stats)
-	stats.reset_from_self()
-
+	
 	_auto_load_components()
-
+	
 	battle_callback_registry = BattleCallbackRegistry.new()
-
+	
 	if is_hero() and data_memory == null:
 		data_memory = NestedRegistry.new()
 
@@ -257,6 +286,11 @@ func _ready() -> void:
 	# Connect module interdependencies
 	_connect_module_dependencies()
 
+	match category:
+		Category.SUMMON: _apply_inherited_summon_modifiers()
+		Category.ACOLYTE: _apply_inherited_acolyte_modifiers()
+		Category.BUILDING: _apply_inherited_building_modifiers()
+
 	_start_spawn()
 
 
@@ -289,6 +323,46 @@ func get_collision_center() -> Vector3:
 
 	# Fallback to global position if no collision shape found
 	return global_position
+
+
+# Rayon horizontal (plan XZ) du corps de collision, mise à l'échelle du node incluse
+# (donc sensible au SCALE dès lors que celui-ci redimensionne l'entité, pas que le visuel).
+# Sert à la détection de portée corps-à-corps des auto-attaques mélée. On impose la
+# CapsuleShape3D comme shape de corps unique pour l'instant : tout autre type loggue
+# et renvoie 0.
+func get_body_radius() -> float:
+	for child in get_children():
+		if not child is CollisionShape3D:
+			continue
+		var collision_shape: CollisionShape3D = child
+		if collision_shape.shape == null:
+			continue
+		var shape_scale: Vector3 = collision_shape.global_transform.basis.get_scale()
+		var scale_xz: float = maxf(absf(shape_scale.x), absf(shape_scale.z))
+		if collision_shape.shape is CapsuleShape3D:
+			return (collision_shape.shape as CapsuleShape3D).radius * scale_xz
+		Verbose.warn("Entity [" + entity_name + "] : get_body_radius attend une CapsuleShape3D, type [" + collision_shape.shape.get_class() + "] non géré", Verbose.Category.ENTITY)
+		return 0.0
+	return 0.0
+
+
+# La cible est-elle à portée d'auto-attaque de cette entité ?
+# Ranged : distance centre-à-centre vs attack_range (≤ 0 = portée infinie).
+# Mélée : on tient compte des rayons de corps des DEUX entités — attack_range devient
+# l'allonge AU-DELÀ des corps. Sans ça, le body-block d'une grosse cible la rend
+# inatteignable : les centres ne peuvent jamais se rejoindre à moins de la somme des
+# rayons, donc un attack_range mélée plus petit que cette somme n'est jamais satisfait.
+func is_target_in_attack_range(target: Entity) -> bool:
+	if not is_instance_valid(target):
+		return false
+	var range_stat: float = stats.attack_range
+	var distance_sq: float = global_position.distance_squared_to(target.global_position)
+	if stats.auto_attack_type == EntityStats.AutoAttackType.MELEE:
+		var reach: float = get_body_radius() + target.get_body_radius() + maxf(range_stat, 0.0)
+		return distance_sq <= reach * reach
+	if range_stat <= 0.0:
+		return true
+	return distance_sq <= range_stat * range_stat
 
 
 func process_tick() -> void:
@@ -325,21 +399,39 @@ func apply_context(context: EntityContext) -> void:
 	_spawn_manager = context.spawn_manager
 	_arena_zone_manager = context.arena_zone_manager
 
-	# Si le contexte porte un entity_owner (cas summon-via-summon_component), il devient
-	# notre summoner et nous enregistre dans son BDS registry pour l'action meter.
-	# Pour les heroes/specs, entity_owner est null → on reste sans summoner.
+	# Si le contexte porte un entity_owner, il devient notre summoner. Cas couverts :
+	# - summon-via-summon_component (cat = SUMMON) → register dans le BDS registry
+	#   du summoner pour que l'action meter compte le summon.
+	# - acolyte/building spawné depuis le Roaster (cat = ACOLYTE/BUILDING) → on
+	#   ferme la chaîne sur le héros propriétaire pour le SummonModifiersRegistry,
+	#   mais on n'inscrit PAS au BDS (un acolyte n'est pas un summon de gameplay).
+	# Pour heroes/mobs/antagonists/etc., entity_owner est null → pas de summoner.
 	if context.entity_owner != null:
 		summoner = context.entity_owner
-		summoner.bds_registry.register_summon(self)
+		if summoner.bds_registry != null and is_summoned():
+			summoner.bds_registry.register_summon(self)
 
-	projectile.connect_to_spawn_manager(_spawn_manager)
-	spell.connect_to_spawn_manager(_spawn_manager)
-	summon.connect_to_spawn_manager(_spawn_manager)
-	target.connect_to_spawn_manager(_spawn_manager)
-	
-	summon.connect_to_arena_zone_manager(_arena_zone_manager)
+	# Composants potentiellement encore null si apply_context est appelé avant
+	# add_child (cf SpawnManager.spawn_entity). Les guards évitent le crash ;
+	# _enter_tree rejouera _connect_components_to_managers une fois auto-loaded.
+	_connect_components_to_managers()
 
 	Verbose.debug("Entity [" + entity_name + "] received fighting_state [" + str(FightingState.keys()[context.fighting_state]) + "] from context", Verbose.Category.ENTITY)
+
+
+# Câble les composants au spawn_manager / arena_zone_manager. Idempotent et
+# null-safe : peut être appelé plusieurs fois (avant et après auto-loading).
+func _connect_components_to_managers() -> void:
+	if _spawn_manager == null: return
+	if projectile != null:
+		projectile.connect_to_spawn_manager(_spawn_manager)
+	if spell != null:
+		spell.connect_to_spawn_manager(_spawn_manager)
+	if summon != null:
+		summon.connect_to_spawn_manager(_spawn_manager)
+		summon.connect_to_arena_zone_manager(_arena_zone_manager)
+	if target != null:
+		target.connect_to_spawn_manager(_spawn_manager)
 
 
 func connect_to_fighting_area(fighting_area_ref: FightingArea) -> void:
@@ -411,6 +503,70 @@ func get_card_context() -> CardContext:
 #endregion
 
 # ============================== Private functions ==============================
+
+#region ============================== Summon modifiers ==============================
+# Remonte la chaîne summoner et apply le summon_modifiers_registry de chaque
+# ancêtre sur cette entité (clone + register). Snapshot au moment du spawn :
+# les modifiers ajoutés à un ancêtre après ce point ne se propageront pas
+# aux summons déjà nés.
+func _apply_inherited_summon_modifiers() -> void:
+	var visited: Array[Entity] = []
+	var ancestor: Entity = summoner
+	var total_level_bonus: int = 0
+	while ancestor != null:
+		if ancestor in visited:
+			Verbose.error("Cycle in summoner chain for [" + entity_name + "] at [" + ancestor.entity_name + "]", Verbose.Category.ENTITY)
+			return
+		visited.append(ancestor)
+		if ancestor.summon_modifiers_registry != null:
+			ancestor.summon_modifiers_registry.apply_to(self, ancestor)
+			total_level_bonus += ancestor.summon_modifiers_registry.get_total_level_bonus()
+		ancestor = ancestor.summoner
+	_apply_inherited_level_bonus(total_level_bonus)
+
+
+func _apply_inherited_acolyte_modifiers() -> void:
+	var visited: Array[Entity] = []
+	var ancestor: Entity = summoner
+	var total_level_bonus: int = 0
+	while ancestor != null:
+		if ancestor in visited:
+			Verbose.error("Cycle in summoner chain for [" + entity_name + "] at [" + ancestor.entity_name + "]", Verbose.Category.ENTITY)
+			return
+		visited.append(ancestor)
+		if ancestor.acolyte_modifiers_registry != null:
+			ancestor.acolyte_modifiers_registry.apply_to(self, ancestor)
+			total_level_bonus += ancestor.acolyte_modifiers_registry.get_total_level_bonus()
+		ancestor = ancestor.summoner
+	_apply_inherited_level_bonus(total_level_bonus)
+
+
+func _apply_inherited_building_modifiers() -> void:
+	var visited: Array[Entity] = []
+	var ancestor: Entity = summoner
+	var total_level_bonus: int = 0
+	while ancestor != null:
+		if ancestor in visited:
+			Verbose.error("Cycle in summoner chain for [" + entity_name + "] at [" + ancestor.entity_name + "]", Verbose.Category.ENTITY)
+			return
+		visited.append(ancestor)
+		if ancestor.building_modifiers_registry != null:
+			ancestor.building_modifiers_registry.apply_to(self, ancestor)
+			total_level_bonus += ancestor.building_modifiers_registry.get_total_level_bonus()
+		ancestor = ancestor.summoner
+	_apply_inherited_level_bonus(total_level_bonus)
+
+
+# Applique un bonus de level cumulé (sommé sur la chaîne summoner via les
+# *_modifiers_registry.get_total_level_bonus()). Push sur progression.level
+# pour déclencher le recompute des base stats via _handle_level_up().
+func _apply_inherited_level_bonus(bonus: int) -> void:
+	if bonus <= 0: return
+	var new_level: int = clampi(level + bonus, 1, MAX_LEVEL)
+	level = new_level
+	if progression != null:
+		progression.level = new_level
+#endregion
 
 #region ============================== Spawn system ==============================
 func _start_spawn() -> void:
@@ -486,6 +642,11 @@ func _on_stats_health_changed(new_health: float) -> void:
 
 
 func _on_stats_scale_changed(new_scale: float) -> void:
+	# Un scale <= 0 rend le visuel invisible tout en gardant la collision active :
+	# symptôme silencieux d'une stat SCALE mal renseignée. On log et on n'applique pas.
+	if new_scale <= 0.0:
+		Verbose.warn("Entity [" + entity_name + "] scale <= 0 ignoré (donnée SCALE invalide)", Verbose.Category.ENTITY)
+		return
 	if is_instance_valid(_visual_3d):
 		_visual_3d.scale = Vector3(new_scale, new_scale, new_scale)
 
@@ -496,9 +657,11 @@ func _on_died() -> void:
 	life_state = LifeState.DEAD
 	_state_machine.stop_combat_modules()
 
-	for action_modifier in death_modifiers_registry.consume_all_modifiers():
-		if action_modifier.after_action_logic_callback.is_valid():
-			action_modifier.after_action_logic_callback.call({})
+	for death_modifier in death_modifiers_registry.consume_all_modifiers():
+		if death_modifier.after_action_logic_callback.is_valid():
+			death_modifier.after_action_logic_callback.call({})
+	
+	collision_layer = 0
 
 
 func _on_resurrected() -> void:

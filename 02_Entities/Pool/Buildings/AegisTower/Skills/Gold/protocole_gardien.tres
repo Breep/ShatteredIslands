@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://ctevc8wijcylw"]
+
+[ext_resource type="Texture2D" uid="uid://dpk45wkh5o3cu" path="res://02_Entities/Pool/Buildings/AegisTower/Skills/Gold/skill_protocole_gardien.svg" id="1_nkdva"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
+[ext_resource type="Script" uid="uid://cgd3p4qtdfosk" path="res://02_Entities/Pool/Buildings/AegisTower/Skills/Gold/protocole_gardien.gd" id="2_eff"]
+
+[sub_resource type="Resource" id="Resource_pg"]
+script = ExtResource("2_eff")
+metadata/_custom_type_script = "uid://bprotocole1eff7"
+
+[resource]
+script = ExtResource("1_skill")
+skill_id = 4
+name = "Protocole gardien"
+description = "La première fois qu'un héros allié passe sous 35% HP, la Tour lui donne AP x 250% Shield."
+portrait = ExtResource("1_nkdva")
+skill_effect = SubResource("Resource_pg")
+metadata/_custom_type_script = "uid://dfby4merlgkep"

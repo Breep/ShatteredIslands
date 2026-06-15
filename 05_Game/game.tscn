@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bbn7yt4y0lu6q" path="res://05_Game/SceneSwitcher/scene_switcher.tscn" id="3_vifcx"]
 [ext_resource type="PackedScene" uid="uid://drcuyohos0doa" path="res://06_FloatingIsland/FightingIsland/fighting_island.tscn" id="5_vifcx"]
 [ext_resource type="PackedScene" uid="uid://7u3ksm0e4v61" path="res://06_FloatingIsland/BuyingIsland/buying_island.tscn" id="6_flgk0"]
-[ext_resource type="PackedScene" uid="uid://cbd5jq0bp7fef" path="res://05_Game/HeroSelector/HeroSelector.tscn" id="8_xfil1"]
+[ext_resource type="PackedScene" uid="uid://cbd5jq0bp7fef" path="res://05_Game/HeroSelector/hero_selector.tscn" id="8_xfil1"]
 [ext_resource type="Environment" uid="uid://cghu0yr6lj5i2" path="res://21_Props/DefaultBattleIsland/Arch_island/world_environment.tres" id="9_7gi1t"]
 [ext_resource type="PackedScene" uid="uid://dv3kwc5eeyuk2" path="res://04_UI/InGame/Game/ui_game.tscn" id="9_kul4i"]
 

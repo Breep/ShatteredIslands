@@ -285,6 +285,9 @@ func _cleanup() -> void:
 func _on_entity_died(entity: Entity) -> void:
 	if _fight_ended: return
 	if entity == null: return
+	# L'entité peut renaître : elle reste dans le roster pour ne pas terminer le
+	# combat prématurément pendant la fenêtre de résurrection.
+	if entity.can_revive: return
 	if not _alive_by_team.has(entity.team): return
 	_alive_by_team[entity.team][entity.fight_role].erase(entity)  # erase is idempotent
 	_check_fight_over()

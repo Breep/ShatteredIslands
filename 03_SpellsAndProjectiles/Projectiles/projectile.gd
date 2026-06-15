@@ -7,29 +7,56 @@ signal target_hit(entity: Entity, gpos: Vector3)
 const TICKS_PER_SECOND: int = 60
 ## Squared hit radius in world units (~0.63 unit radius). Adjust per projectile if needed.
 const HIT_DISTANCE_SQ: float = 0.4
+## Level max applicable à n'importe quel projectile. Le level résolu côté
+## composant est clampé dans [1, MAX_LEVEL]. Les sous-classes peuvent
+## déclarer leurs Array @export par-level avec moins d'entrées : la lecture
+## via value_at_level() clampe l'index sur la taille effective de l'array.
+const MAX_LEVEL: int = 10
 
 # === ENUMS ===
 enum Type {
-	SHADOW_BOLT,
-	VENOMOUS_DART,
-	SNAKE,
-	COSMIC_BOLT,
-	SHIELD_THROW,
-	POISON_FLASK,
-	SMALL_EGG,
-	FIRE_BALL,
-	BULLET,
-	GAMMA_TURRET,
-	ARROW,
+	SHADOW_BOLT = 0,
+	VENOMOUS_DART = 1,
+	SNAKE = 2,
+	COSMIC_BOLT = 3,
+	SHIELD_THROW = 4,
+	POISON_FLASK = 5,
+	SMALL_EGG = 6,
+	FIRE_BALL = 7,
+	BULLET = 8,
+	GAMMA_TURRET = 9,
+	ARROW = 10,
+	GRENADE = 11,
+	BOULDER = 12,
+	METEOR = 13,
+	NIGHTFALL = 14,
+}
+
+enum Category {
+	ABILITY_PROJECTILE,
+	AUTO_ATTACK_PROJECTILE,
+}
+
+enum Size {
+	SMALL,
+	BIG
 }
 
 # === EXPORTS ===
 @export var trajectory: ProjectileTrajectory
 @export var lifetime_max: float = 6.0
+@export var type: Type= Type.SHADOW_BOLT
+@export var size: Size = Size.SMALL
+@export var category: Category = Category.ABILITY_PROJECTILE
 
 var uid: int = -1
 
 # === RUNTIME ===
+# Level résolu au lancement (cf. ProjectileComponent + LevelResolver). Sert
+# aux sous-classes pour indexer leurs Array @export par-level via
+# value_at_level(). Repris depuis _stats.level dans init().
+var level: int = 1
+
 var _source: Entity
 var _target: Entity
 var _stats: ProjectileStats
@@ -53,11 +80,27 @@ func get_source() -> Entity:
 
 
 ## Must be called before adding to scene tree.
+## Les stats sont supposées déjà "bakées" par le composant émetteur
+## (ProjectileComponent.projectile_attack) : on_hit/on_spawn callbacks issus
+## des modifiers de la source y sont déjà accumulés. Le projectile lui-même
+## n'interroge plus le registre de modifiers — ce qui évite la ré-entrée
+## quand plusieurs projectiles sont spawnés en un tir (count modifier).
 func init(p_source: Entity, p_target: Entity, p_stats: ProjectileStats) -> Projectile:
 	_source = p_source
 	_target = p_target
 	_stats = p_stats
+	level = p_stats.level if p_stats != null else 1
 	return self
+
+
+# Accès indexé safe à une Array @export par-level. Clamp l'index dans les
+# bornes de l'array et renvoie `default` si l'array est vide (= projectile
+# non configuré pour ce stat). Convention : level 1 → index 0.
+static func value_at_level(arr: Array, p_level: int, default: Variant = 0.0) -> Variant:
+	if arr.is_empty():
+		return default
+	var idx: int = clampi(p_level - 1, 0, arr.size() - 1)
+	return arr[idx]
 
 
 func _ready() -> void:

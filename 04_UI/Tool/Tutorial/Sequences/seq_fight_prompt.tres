@@ -1,20 +1,18 @@
-[gd_resource type="Resource" script_class="TutorialSequence" load_steps=4 format=3]
+[gd_resource type="Resource" script_class="TutorialSequence" format=3 uid="uid://casao36oijnmb"]
 
-[ext_resource type="Script" path="res://04_UI/Tool/Tutorial/Resource/tutorial_sequence.gd" id="1_seq"]
-[ext_resource type="Script" path="res://04_UI/Tool/Tutorial/Resource/tutorial_step.gd" id="2_step"]
+[ext_resource type="Script" uid="uid://djpg3rddxno15" path="res://04_UI/Tool/Tutorial/Resource/tutorial_sequence.gd" id="1_seq"]
+[ext_resource type="Script" uid="uid://jooqjtqqt21" path="res://04_UI/Tool/Tutorial/Resource/tutorial_step.gd" id="2_step"]
 
 [sub_resource type="Resource" id="step_fight_prompt"]
 script = ExtResource("2_step")
 id = &"fight_prompt"
 text = "Clique ici lorsque tu seras prêt à combattre."
-target_unique_name = &"EndBuyingPhaseButton"
+target_unique_name = &"ContinueButton"
 validation_event = 5
-validation_filter = &""
 auto_advance_delay = 0.0
 popup_mode = 2
 
 [resource]
 script = ExtResource("1_seq")
 id = &"seq_fight_prompt"
-trigger_state = 0
 steps = Array[ExtResource("2_step")]([SubResource("step_fight_prompt")])

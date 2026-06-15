@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://b2cct6resk3wl"]
+
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
+[ext_resource type="Script" uid="uid://b3cc7kna2dwl" path="res://02_Entities/Pool/Buildings/Turrets/GammaTurret/Skills/Bronze/calibration_combo.gd" id="2_eff"]
+
+[sub_resource type="Resource" id="Resource_cc"]
+script = ExtResource("2_eff")
+metadata/_custom_type_script = "uid://b3cc7kna2dwl"
+
+[resource]
+script = ExtResource("1_skill")
+name = "Calibration"
+description = "Le Tir Gamma devient combo 3."
+skill_effect = SubResource("Resource_cc")
+metadata/_custom_type_script = "uid://dfby4merlgkep"

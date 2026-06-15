@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b7uung05infs2"]
 
-[ext_resource type="FontFile" uid="uid://dgaako73a24kh" path="res://20_Data/font/rimouski sb.ttf" id="1_t02g7"]
+[ext_resource type="FontFile" uid="uid://dgaako73a24kh" path="res://04_UI/_Themes/Fonts/rimouski sb.ttf" id="1_t02g7"]
 [ext_resource type="Script" uid="uid://d1ikna8cew0nn" path="res://04_UI/3D/DamagePopup/damage_popup.gd" id="2_oq443"]
 
 [node name="PopUp" type="Node3D" node_paths=PackedStringArray("label3d")]

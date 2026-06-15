@@ -1,0 +1,213 @@
+[gd_scene format=3 uid="uid://bicegolemsc17"]
+
+[ext_resource type="Script" uid="uid://bicegolem1gd7" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/ice_golem.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://b1icegolemxx0" path="res://02_Entities/_Data/Golem/IceGolem/ice_golem.tscn" id="2_visual"]
+[ext_resource type="Resource" uid="uid://cicegolemdsc7" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/entity_desc.tres" id="3_desc"]
+[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.tscn" id="4_hb"]
+[ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="5_anim"]
+[ext_resource type="AnimationNodeBlendTree" uid="uid://y5swvigse7ti" path="res://02_Entities/Pool/Mobs/Golems/golems_animation_tree.res" id="6_2prfe"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pqchb"]
+radius = 0.87109375
+height = 2.9335938
+
+[node name="IceGolem" type="CharacterBody3D" unique_id=863006387 node_paths=PackedStringArray("_health_bar_marker")]
+collision_layer = 16
+collision_mask = 25
+script = ExtResource("1_script")
+entity_name = "Ice Golem"
+entity_desc = ExtResource("3_desc")
+_health_bar_marker = NodePath("IceGolem/HealthBarMarker3D")
+
+[node name="IceGolem" parent="." unique_id=788845283 instance=ExtResource("2_visual")]
+
+[node name="Skeleton3D" parent="IceGolem/Node3D" parent_id_path=PackedInt32Array(788845283, 1148553213) index="0" unique_id=568249234]
+bones/1/position = Vector3(-0.028096866, 1.0100219, 0.04962813)
+bones/1/rotation = Quaternion(-0.01956312, -0.12359109, -0.01978701, 0.9919431)
+bones/2/position = Vector3(0.32333314, -0.18574253, 0.119572476)
+bones/2/rotation = Quaternion(-0.29913005, 0.1914494, 0.21320584, 0.91017133)
+bones/3/position = Vector3(0.0070879124, -0.25753272, -0.04873482)
+bones/3/rotation = Quaternion(0.43328398, -0.019359589, -0.13235585, 0.89127564)
+bones/4/position = Vector3(-0.017690772, -0.46057984, 0.022513619)
+bones/4/rotation = Quaternion(-0.06098771, 0.031849597, 0.027057972, 0.9972633)
+bones/5/position = Vector3(-0.31237882, -0.22026518, 0.06271886)
+bones/5/rotation = Quaternion(0.94865286, -0.16686554, 0.093214326, 0.2520413)
+bones/6/position = Vector3(-0.011187371, 0.24085292, 0.039771285)
+bones/6/rotation = Quaternion(0.40005463, -0.009650186, -0.07873045, 0.9130525)
+bones/7/position = Vector3(0.012189255, 0.46075645, -0.022537079)
+bones/7/rotation = Quaternion(-0.089627884, -0.051022694, -0.049836587, 0.99341834)
+bones/8/position = Vector3(0.018109143, 0.2979913, 0.10970525)
+bones/8/rotation = Quaternion(0.329386, 0.034224875, 0.0030118232, 0.9435701)
+bones/9/position = Vector3(-0.010974727, 0.39864078, -0.092356935)
+bones/9/rotation = Quaternion(-0.34921488, 0.14496177, -0.026604362, 0.9253795)
+bones/10/position = Vector3(0.00058957515, -0.10523269, -0.0037551105)
+bones/10/rotation = Quaternion(0.36111522, -0.013792516, 0.024597928, 0.9320947)
+bones/11/position = Vector3(0.039629098, -0.044746093, 0.057605058)
+bones/11/rotation = Quaternion(0.22621934, 0.02568023, 0.01369838, 0.9736416)
+bones/12/position = Vector3(-0.03962929, -0.04474701, 0.057604104)
+bones/12/rotation = Quaternion(0.22146803, 0.029226532, -0.037482187, 0.9740087)
+bones/13/position = Vector3(0.039629098, -0.044746093, 0.057605058)
+bones/13/rotation = Quaternion(0.07088574, 0.2438863, 0.3130568, 0.9151449)
+bones/14/position = Vector3(-0.039629474, -0.044750214, 0.05760452)
+bones/14/rotation = Quaternion(0.3130607, 0.9151388, 0.07089963, 0.24390039)
+bones/15/position = Vector3(0.039628908, -0.04475006, 0.057605132)
+bones/15/rotation = Quaternion(-0.2288387, 0.048103087, 0.86907196, -0.43592757)
+bones/16/position = Vector3(-0.039629474, -0.044750214, 0.05760452)
+bones/16/rotation = Quaternion(0.4358908, 0.8690884, -0.04813458, -0.22883986)
+bones/17/position = Vector3(0.39552042, -0.079513304, -0.25436422)
+bones/17/rotation = Quaternion(-0.45132083, 0.09355633, -0.369433, 0.80689275)
+bones/18/position = Vector3(0.27627215, -0.124825776, 0.04843472)
+bones/18/rotation = Quaternion(0.07593508, -0.17870325, -0.23085503, 0.9534176)
+bones/19/position = Vector3(0.41238678, 0.03425125, 0.00086343766)
+bones/19/rotation = Quaternion(0.011464093, 0.12704763, 0.11270948, 0.98540556)
+bones/20/position = Vector3(0.017369995, -0.0458297, 0.098533556)
+bones/20/rotation = Quaternion(0.31849062, 0.3945109, -0.06438573, 0.8595228)
+bones/21/position = Vector3(0.001887741, 0.0051137544, 0.12257038)
+bones/21/rotation = Quaternion(-0.0030810738, 0.14952967, -0.001349134, 0.98875153)
+bones/22/position = Vector3(-0.0004839325, 0.0020326234, 0.12034113)
+bones/22/rotation = Quaternion(0.006666521, 0.106702775, -0.0007408066, 0.9942684)
+bones/23/position = Vector3(0.1659027, 0.009659195, 0.07768917)
+bones/23/rotation = Quaternion(-0.29234272, 0.5335215, -0.57654524, 0.54542303)
+bones/24/position = Vector3(-0.0024629973, -0.0020542336, 0.08975556)
+bones/24/rotation = Quaternion(-0.69566995, 0.079559825, 0.07917744, 0.70953834)
+bones/25/position = Vector3(-0.000102844235, -0.11845558, -0.0017800522)
+bones/25/rotation = Quaternion(0.0025781202, -0.00038060237, 0.02517972, 0.9996796)
+bones/26/position = Vector3(0.1753368, 0.04260727, 0.001548996)
+bones/26/rotation = Quaternion(-0.4183851, 0.57981527, -0.61779636, 0.32725492)
+bones/27/position = Vector3(0.0018018341, -0.0016579533, 0.09683494)
+bones/27/rotation = Quaternion(-0.69207335, 0.13231581, 0.13838205, 0.6959723)
+bones/28/position = Vector3(-0.0027524566, -0.11763579, -0.004317684)
+bones/28/rotation = Quaternion(-0.0047866674, -0.0037469682, 0.10513849, 0.994439)
+bones/29/position = Vector3(0.16135734, 0.036291733, -0.08243008)
+bones/29/rotation = Quaternion(-0.4606642, 0.64593905, -0.5566601, 0.24633494)
+bones/30/position = Vector3(0.0062490846, 0.004535999, 0.09084061)
+bones/30/rotation = Quaternion(-0.6830912, 0.24694768, 0.16682325, 0.6667633)
+bones/31/position = Vector3(0.00077545166, -0.10736702, -0.0010660362)
+bones/31/rotation = Quaternion(0.0035105238, -0.0017668385, 0.18051946, 0.98356354)
+bones/32/position = Vector3(-0.41649702, -0.07849225, -0.23661907)
+bones/32/rotation = Quaternion(0.84989595, 0.40172476, 0.08866482, 0.3292913)
+bones/33/position = Vector3(-0.28194886, 0.08577538, -0.07411189)
+bones/33/rotation = Quaternion(-0.021755692, -0.043267876, -0.19915779, 0.9787701)
+bones/34/position = Vector3(-0.4123849, -0.034253616, -0.0008630991)
+bones/34/rotation = Quaternion(-0.1889511, 0.09982206, 0.022323266, 0.97664464)
+bones/35/position = Vector3(-0.017369881, 0.045830306, -0.098533385)
+bones/35/rotation = Quaternion(0.3183172, 0.39298522, -0.064826764, 0.86025244)
+bones/36/position = Vector3(-0.0018887329, -0.0051135253, -0.12257011)
+bones/36/rotation = Quaternion(-0.0032616071, 0.14778654, -0.0012933407, 0.9890131)
+bones/37/position = Vector3(0.0004854965, -0.002032013, -0.120340765)
+bones/37/rotation = Quaternion(0.006479869, 0.10495319, -0.00071983045, 0.9944558)
+bones/38/position = Vector3(-0.16590248, -0.009658966, -0.07768938)
+bones/38/rotation = Quaternion(-0.29404148, 0.53183895, -0.5757588, 0.5469815)
+bones/39/position = Vector3(0.0024623107, 0.0020544815, -0.08975529)
+bones/39/rotation = Quaternion(-0.6961206, 0.07750359, 0.07707007, 0.70955586)
+bones/40/position = Vector3(0.00010345459, 0.11845524, 0.0017791557)
+bones/40/rotation = Quaternion(0.0022765815, -0.00033604083, 0.022235269, 0.99975014)
+bones/41/position = Vector3(-0.17533515, -0.04260704, -0.0015486908)
+bones/41/rotation = Quaternion(-0.35036442, 0.6131383, -0.603464, 0.3703208)
+bones/42/position = Vector3(-0.0018003845, 0.0016578388, -0.09683613)
+bones/42/rotation = Quaternion(-0.6923711, 0.13036624, 0.13624278, 0.696466)
+bones/43/position = Vector3(0.0027510833, 0.11763535, 0.0043170545)
+bones/43/rotation = Quaternion(-0.0046531246, -0.0036424391, 0.102202974, 0.9947461)
+bones/44/position = Vector3(-0.16135624, -0.036292113, 0.0824304)
+bones/44/rotation = Quaternion(-0.39388856, 0.68402785, -0.5354461, 0.3004253)
+bones/45/position = Vector3(-0.00624794, -0.00453578, -0.09084137)
+bones/45/rotation = Quaternion(-0.68387264, 0.24491838, 0.16483174, 0.6672059)
+bones/46/position = Vector3(-0.0007752228, 0.10736771, 0.0010659504)
+bones/46/rotation = Quaternion(0.0034536426, -0.0017383914, 0.17760101, 0.984095)
+
+[node name="HealthBarMarker3D" type="Marker3D" parent="IceGolem" unique_id=880144415]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.7625046, 0)
+
+[node name="LargeHealthBarComponent" parent="." unique_id=348310564 node_paths=PackedStringArray("_spawn", "_owner") instance=ExtResource("4_hb")]
+_spawn = NodePath("../IceGolem/HealthBarMarker3D")
+_owner = NodePath("..")
+
+[node name="AnimationComponent" parent="." unique_id=400051653 node_paths=PackedStringArray("_animation_tree", "_owner") instance=ExtResource("5_anim")]
+_animation_tree = NodePath("../AnimationTree")
+_owner = NodePath("..")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1180401390]
+root_node = NodePath("../IceGolem/Node3D")
+tree_root = ExtResource("6_2prfe")
+anim_player = NodePath("../IceGolem/Node3D/AnimationPlayer")
+parameters/switch_moving/current_state = "Run"
+parameters/switch_moving/transition_request = ""
+parameters/switch_moving/current_index = 1
+parameters/scale_dance/scale = 1.0
+parameters/scale_die/scale = 1.0
+parameters/scale_idle_standing_neutral/scale = 1.0
+parameters/one_shot_attack/active = false
+parameters/one_shot_attack/internal_active = false
+parameters/one_shot_attack/request = 0
+parameters/one_shot_ultimate/active = false
+parameters/one_shot_ultimate/internal_active = false
+parameters/one_shot_ultimate/request = 0
+parameters/scale_attack/scale = 1.0
+parameters/one_shot_idle_standing_neutral/active = false
+parameters/one_shot_idle_standing_neutral/internal_active = false
+parameters/one_shot_idle_standing_neutral/request = 0
+parameters/scale_ultimate/scale = 1.0
+parameters/scale_idle_standing_neutral_var/scale = 1.0
+parameters/one_shot_sitting/active = false
+parameters/one_shot_sitting/internal_active = false
+parameters/one_shot_sitting/request = 0
+parameters/switch_entity_life_state/current_state = "Alive"
+parameters/switch_entity_life_state/transition_request = ""
+parameters/switch_entity_life_state/current_index = 1
+parameters/scale_walk/scale = 1.0
+parameters/scale_run/scale = 1.0
+parameters/switch_attack/current_state = "Attack3"
+parameters/switch_attack/transition_request = ""
+parameters/switch_attack/current_index = 2
+parameters/scale_stunned/scale = 1.0
+parameters/seek_stunned/seek_request = -1.0
+parameters/scale_idle_standing_aggresive/scale = 1.0
+parameters/scale_idle_standing_aggresive_var/scale = 1.0
+parameters/seek_idle_standing_aggresive/seek_request = -1.0
+parameters/switch_entity_mode/current_state = "InGame"
+parameters/switch_entity_mode/transition_request = ""
+parameters/switch_entity_mode/current_index = 1
+parameters/seek_idle_standing_neutral/seek_request = -1.0
+parameters/one_shot_idle_standing_aggresive/active = false
+parameters/one_shot_idle_standing_aggresive/internal_active = false
+parameters/one_shot_idle_standing_aggresive/request = 0
+parameters/seek_idle_sitting_chair/seek_request = -1.0
+parameters/scale_idle_sitting_chair/scale = 1.0
+parameters/scale_idle_sitting_chair_var/scale = 1.0
+parameters/seek_idle_sitting_floor/seek_request = -1.0
+parameters/seek_dance/seek_request = -1.0
+parameters/one_shot_idle_sitting_chair/active = false
+parameters/one_shot_idle_sitting_chair/internal_active = false
+parameters/one_shot_idle_sitting_chair/request = 0
+parameters/scale_idle_sitting_floor/scale = 1.0
+parameters/scale_idle_sitting_floor_var/scale = 1.0
+parameters/scale_attack_2/scale = 1.0
+parameters/scale_hit_1/scale = 1.0
+parameters/scale_attack_3/scale = 1.0
+parameters/switch_main/current_state = "Idle"
+parameters/switch_main/transition_request = ""
+parameters/switch_main/current_index = 0
+parameters/switch_idle/current_state = "StandingNeutral"
+parameters/switch_idle/transition_request = ""
+parameters/switch_idle/current_index = 0
+parameters/scale_drag/scale = 1.0
+parameters/scale_land/scale = 1.0
+parameters/one_shot_land/active = false
+parameters/one_shot_land/internal_active = false
+parameters/one_shot_land/request = 0
+parameters/one_shot_hit/active = false
+parameters/one_shot_hit/internal_active = false
+parameters/one_shot_hit/request = 0
+parameters/scale_attack_1/scale = 1.0
+parameters/switch_positioning/current_state = "Off"
+parameters/switch_positioning/transition_request = ""
+parameters/switch_positioning/current_index = 0
+parameters/switch_stunned_state/current_state = "NotStunned"
+parameters/switch_stunned_state/transition_request = ""
+parameters/switch_stunned_state/current_index = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1974346637]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2475038, 0)
+shape = SubResource("CapsuleShape3D_pqchb")
+
+[editable path="IceGolem"]

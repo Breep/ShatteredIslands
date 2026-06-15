@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://dj0x3ox0qy3aa"]
+
+[ext_resource type="Texture2D" uid="uid://ds2dracb280n" path="res://02_Entities/Pool/Heroes/Latika/Skills/Passive/skill_target.svg" id="1_m4xvg"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
+[ext_resource type="Script" uid="uid://dj0x3ox0qymvv" path="res://02_Entities/Pool/Heroes/Latika/Skills/Passive/pack_leader.gd" id="2_eff"]
+
+[sub_resource type="Resource" id="Resource_packleader"]
+script = ExtResource("2_eff")
+metadata/_custom_type_script = "uid://latpassiveeff"
+
+[resource]
+script = ExtResource("1_skill")
+skill_id = 6
+name = "Chef de Meute"
+description = "Latika commence le combat avec un loup acolyte permanent. Son auto-attaque marque sa cible : les alliés infligent +20% de dégâts à la cible marquée."
+portrait = ExtResource("1_m4xvg")
+skill_effect = SubResource("Resource_packleader")
+metadata/_custom_type_script = "uid://dfby4merlgkep"

@@ -1,0 +1,114 @@
+[gd_resource type="Resource" script_class="EntityStatsBuilder" format=3 uid="uid://mbq486ktgtbk"]
+
+[ext_resource type="Script" uid="uid://58307hvsc6op" path="res://10_Tool/EntityStatsBuilder/entity_stats_builder.gd" id="1_r33xp"]
+[ext_resource type="Script" uid="uid://brthobm35g70u" path="res://10_Tool/EntityStatsBuilder/stat_growth_rule.gd" id="1_taeb5"]
+
+[sub_resource type="Resource" id="Resource_2j33o"]
+script = ExtResource("1_taeb5")
+base = 3.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_d2hhr"]
+script = ExtResource("1_taeb5")
+type = 1
+base = 20.0
+slope = 1.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_afn8h"]
+script = ExtResource("1_taeb5")
+base = 20.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_2blwu"]
+script = ExtResource("1_taeb5")
+base = 1.2
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_5488a"]
+script = ExtResource("1_taeb5")
+base = 1.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_4lplw"]
+script = ExtResource("1_taeb5")
+base = 5.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_egyb0"]
+script = ExtResource("1_taeb5")
+base = 100.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_4lbw1"]
+script = ExtResource("1_taeb5")
+base = 10.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_3m51l"]
+script = ExtResource("1_taeb5")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_lm364"]
+script = ExtResource("1_taeb5")
+type = 1
+base = 600.0
+slope = 20.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_h2ner"]
+script = ExtResource("1_taeb5")
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_vt5lo"]
+script = ExtResource("1_taeb5")
+base = 5.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_hvqtc"]
+script = ExtResource("1_taeb5")
+base = 25.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_8ij7h"]
+script = ExtResource("1_taeb5")
+base = 2.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_gjvev"]
+script = ExtResource("1_taeb5")
+base = 3.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_5okmt"]
+script = ExtResource("1_taeb5")
+base = 5.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[sub_resource type="Resource" id="Resource_1fxuj"]
+script = ExtResource("1_taeb5")
+base = 1.0
+metadata/_custom_type_script = "uid://brthobm35g70u"
+
+[resource]
+script = ExtResource("1_r33xp")
+output_dir = "res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats"
+health_max = SubResource("Resource_lm364")
+mana_max = SubResource("Resource_hvqtc")
+mana_regen = SubResource("Resource_8ij7h")
+attack_damage = SubResource("Resource_d2hhr")
+attack_speed = SubResource("Resource_5488a")
+attack_range = SubResource("Resource_2blwu")
+attack_power = SubResource("Resource_afn8h")
+movement_speed = SubResource("Resource_gjvev")
+scale = SubResource("Resource_1fxuj")
+crit_chance = SubResource("Resource_4lplw")
+crit_mult = SubResource("Resource_egyb0")
+dodge = SubResource("Resource_3m51l")
+lifesteal = SubResource("Resource_h2ner")
+crit_resistance = SubResource("Resource_4lbw1")
+armor = SubResource("Resource_2j33o")
+magic_resistance = SubResource("Resource_vt5lo")
+poison_resistance = SubResource("Resource_5okmt")
+auto_attack_type = 1
+metadata/_custom_type_script = "uid://58307hvsc6op"

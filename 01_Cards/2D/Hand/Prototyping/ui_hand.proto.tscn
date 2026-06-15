@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://b5xhdpqru1nce"]
+
+[ext_resource type="Script" uid="uid://cwmg6p7vhhafn" path="res://01_Cards/2D/Hand/Prototyping/ui_hand.proto.gd" id="1_proto"]
+[ext_resource type="Resource" uid="uid://cmq4qbn1jck17" path="res://01_Cards/Templates/CardShop/shop_deck.proto.tres" id="2_cpusk"]
+[ext_resource type="PackedScene" uid="uid://cmy7daws5mc0v" path="res://01_Cards/2D/Hand/ui_hand.tscn" id="4_uihand"]
+[ext_resource type="Script" path="res://04_UI/Tool/DragCoordinator/drag_coordinator.gd" id="5_dragco"]
+[ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="14_theme"]
+
+[node name="UIHandProto" type="Node" unique_id=1673542739]
+script = ExtResource("1_proto")
+_shop_deck = ExtResource("2_cpusk")
+
+[node name="DragCoordinator" type="Node" parent="." unique_id=1673542740]
+script = ExtResource("5_dragco")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1963235380]
+
+[node name="UIHand" parent="UI" unique_id=605653940 node_paths=PackedStringArray("_drag_coordinator") instance=ExtResource("4_uihand")]
+unique_name_in_owner = true
+_preview_offset = Vector2(250, -380)
+_drag_coordinator = NodePath("../../DragCoordinator")
+
+[node name="ControlsLayer" type="Control" parent="UI" unique_id=820977286]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("14_theme")
+
+[node name="Panel" type="Panel" parent="UI/ControlsLayer" unique_id=1372519730]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -260.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 240.0
+grow_horizontal = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/ControlsLayer/Panel" unique_id=1009594522]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ControlsLayer/Panel/MarginContainer" unique_id=1868920759]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="CountLabel" type="Label" parent="UI/ControlsLayer/Panel/MarginContainer/VBoxContainer" unique_id=563489535]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0 / 15"
+horizontal_alignment = 1
+
+[node name="AddButton" type="Button" parent="UI/ControlsLayer/Panel/MarginContainer/VBoxContainer" unique_id=1886608239]
+layout_mode = 2
+text = "Ajouter une carte"
+
+[node name="RemoveButton" type="Button" parent="UI/ControlsLayer/Panel/MarginContainer/VBoxContainer" unique_id=1175960815]
+layout_mode = 2
+text = "Retirer la dernière"
+
+[node name="ClearButton" type="Button" parent="UI/ControlsLayer/Panel/MarginContainer/VBoxContainer" unique_id=1976608314]
+layout_mode = 2
+text = "Vider la main"
+
+[connection signal="pressed" from="UI/ControlsLayer/Panel/MarginContainer/VBoxContainer/AddButton" to="." method="_on_add_button_pressed"]
+[connection signal="pressed" from="UI/ControlsLayer/Panel/MarginContainer/VBoxContainer/RemoveButton" to="." method="_on_remove_button_pressed"]
+[connection signal="pressed" from="UI/ControlsLayer/Panel/MarginContainer/VBoxContainer/ClearButton" to="." method="_on_clear_button_pressed"]

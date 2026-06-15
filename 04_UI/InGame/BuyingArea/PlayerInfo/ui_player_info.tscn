@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://c25ls8pp84qld"]
 
-[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme.tres" id="1_rdqgw"]
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://04_UI/_Themes/main_theme_old.tres" id="1_rdqgw"]
 [ext_resource type="Script" uid="uid://ogolctpkdab6" path="res://04_UI/InGame/BuyingArea/PlayerInfo/ui_player_info.gd" id="2_jb4gq"]
-[ext_resource type="Theme" uid="uid://d0qobfi4rit8a" path="res://04_UI/Menu/MainMenu/label_main_menu_white.tres" id="3_urdar"]
+[ext_resource type="Theme" uid="uid://d0qobfi4rit8a" path="res://04_UI/_Themes/label_main_menu_white.tres" id="3_urdar"]
 [ext_resource type="Texture2D" uid="uid://bbcbah5ifbsrw" path="res://04_UI/_Themes/Data/coin.png" id="4_jb4gq"]
 
 [node name="UIPlayerInfo" type="Control" unique_id=1401182090]

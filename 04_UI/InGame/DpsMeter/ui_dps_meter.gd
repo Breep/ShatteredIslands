@@ -44,12 +44,14 @@ func _first_clear_all() -> void:
 
 func _connect_heroes() -> void:
 	for hero: Entity in _heroes:
+		if not is_instance_valid(hero): return
 		if not hero.bds_registry.new_bds_added.is_connected(_on_new_bds_added):
 			hero.bds_registry.new_bds_added.connect(_on_new_bds_added)
 
 
 func _disconnect_heroes() -> void:
 	for hero: Entity in _heroes:
+		if not is_instance_valid(hero): return
 		if hero.bds_registry.new_bds_added.is_connected(_on_new_bds_added):
 			hero.bds_registry.new_bds_added.disconnect(_on_new_bds_added)
 

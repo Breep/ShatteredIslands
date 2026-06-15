@@ -70,6 +70,7 @@ var _current_target: Entity = null
 var _attack_interval_ticks: int = TICKS_PER_SECOND # base cooldown in ticks
 var _ticks_remaining: int = 0 # countdown to next attack
 var _is_stunned: bool = false # loop paused while stunned
+var _is_paused: bool = false # loop suspended by an external channel (e.g. flight)
 
 # ============================== Node base functions ==============================
 
@@ -137,7 +138,22 @@ func get_current_target() -> Entity:
 
 ## Called every tick by Entity.process_tick() (deterministic, fixed 1/60s step).
 ## Drives both the in-flight attack counters and the periodic cooldown loop.
+## Suspend/resume the auto-attack loop from an external channel that takes control
+## of the entity (e.g. the Skeleton Dragon's "Vol fracassant" flight, future channels…).
+## Pausing DROPS any in-progress swing through the shared _cancel_attack() (like the
+## stun path) — so no delayed impact lands while suspended. Resuming PRIMES an
+## immediate attack (_ticks_remaining = 0): the channels using this want to re-engage
+## at once (e.g. aerial enrage starting), unlike a stun which re-arms a full cooldown.
+func set_paused(paused: bool) -> void:
+	_is_paused = paused
+	if paused:
+		_cancel_attack()
+	else:
+		_ticks_remaining = 0
+
+
 func process_tick() -> void:
+	if _is_paused: return # suspended by an external channel (see set_paused), like a stun
 	if _is_stunned: return
 	if not _owner.is_alive(): return
 
@@ -156,8 +172,7 @@ func process_tick() -> void:
 
 	# En approche : check arrivée
 	if _is_approaching:
-		var distance: float = _owner.global_position.distance_to(_current_target.global_position)
-		if _owner.stats.attack_range <= 0 or distance <= _owner.stats.attack_range:
+		if _owner.is_target_in_attack_range(_current_target):
 			stop_approaching()
 			_trigger_attack(_current_target)
 		return
@@ -229,6 +244,7 @@ func _is_target_valid(target: Entity) -> bool:
 	if not is_instance_valid(target): return false
 	if target.is_queued_for_deletion(): return false
 	if target.is_dead(): return false
+	if target.alterations.has_state(Alteration.Type.UNTARGETABLE) : return false
 	return true
 
 
@@ -286,14 +302,8 @@ func _start_attack_tick_counter(interval_ticks: int) -> void:
 
 
 func _check_range_and_approach(target: Entity) -> bool:
-	var distance: float = _owner.global_position.distance_to(target.global_position)
-
-	# Infinite range (attack_range <= 0) - always in range
-	if _owner.stats.attack_range <= 0:
-		return true
-
-	# In range - can attack
-	if distance <= _owner.stats.attack_range:
+	# Portée (corps-à-corps pour le mélée) centralisée sur Entity.
+	if _owner.is_target_in_attack_range(target):
 		return true
 
 	# Out of range - try to approach
@@ -450,6 +460,67 @@ func _prepare_projectile_stats() -> ProjectileStats:
 	)
 
 	return projectile_stats
+
+
+# Résout un impact d'auto-attaque COMPLET sur une cible donnée, instantané :
+# damage_modifiers (Executioner, RussianRoulette…) + dégâts + effets additionnels
+# (poison, ignite, shield…). Utilisé pour les frappes secondaires type cleave.
+# Le projectile transmis aux callbacks est null (une frappe cleave ne rebondit pas).
+# Note : ré-exécute les modifiers persistants ; protéger l'appelant contre la
+# ré-entrance (un effet de cleave ne doit pas se re-cleaver lui-même).
+func resolve_strike(hit_source: Entity, hit_target: Entity) -> float:
+	if not is_instance_valid(hit_source) or not is_instance_valid(hit_target):
+		return 0.0
+	var damage_modifiers_callbacks: Array[Callable] = []
+	var additional_callbacks: Array[Callable] = []
+	_consume_modifiers(damage_modifiers_callbacks, additional_callbacks)
+
+	var mod := {
+		AutoAttackModifier.VarType.SOURCE: hit_source,
+		AutoAttackModifier.VarType.TARGET: hit_target,
+		AutoAttackModifier.VarType.DAMAGE_ADD: 0,
+		AutoAttackModifier.VarType.DAMAGE_MUL: 100,
+	}
+	for damage_modifiers_callback in damage_modifiers_callbacks:
+		damage_modifiers_callback.call(mod)
+
+	var add: float = mod[AutoAttackModifier.VarType.DAMAGE_ADD]
+	var mul: float = mod[AutoAttackModifier.VarType.DAMAGE_MUL]
+	var damage: float = (_owner.stats.attack_damage + add) * (mul / 100.0)
+	var damage_done: float = hit_source.damage.direct(hit_target, damage, Utils.ActionType.DAMAGE_PHYSICAL, &"auto_attack")
+
+	for additional_callback in additional_callbacks:
+		additional_callback.call({
+			AutoAttackModifier.VarType.SOURCE: hit_source,
+			AutoAttackModifier.VarType.TARGET: hit_target,
+			AutoAttackModifier.VarType.POSITION: hit_target.global_position,
+			AutoAttackModifier.VarType.DAMAGE: damage_done,
+			AutoAttackModifier.VarType.PROJECTILE: null,
+		})
+	return damage_done
+
+
+# Applique UNIQUEMENT les effets on-hit additionnels de l'auto-attaque (riders posés
+# via AutoAttackModifier.additional_effect_callback : poison/lifesteal/... de cartes)
+# sur une cible, SANS infliger les dégâts d'auto-attaque ni lire l'AD. Utilisé par les
+# capacités qui "appliquent les effets on-hit de l'AA" (ex: ultimate Flèche du Prédateur).
+# damage_done = dégâts déjà infligés par la capacité, transmis aux riders qui scalent dessus.
+# Note : ré-exécute les modifiers persistants ; protéger l'appelant contre la ré-entrance.
+func apply_on_hit_effects(hit_source: Entity, hit_target: Entity, damage_done: float) -> void:
+	if not is_instance_valid(hit_source) or not is_instance_valid(hit_target):
+		return
+	var damage_modifiers_callbacks: Array[Callable] = []
+	var additional_callbacks: Array[Callable] = []
+	_consume_modifiers(damage_modifiers_callbacks, additional_callbacks)
+
+	for additional_callback in additional_callbacks:
+		additional_callback.call({
+			AutoAttackModifier.VarType.SOURCE: hit_source,
+			AutoAttackModifier.VarType.TARGET: hit_target,
+			AutoAttackModifier.VarType.POSITION: hit_target.global_position,
+			AutoAttackModifier.VarType.DAMAGE: damage_done,
+			AutoAttackModifier.VarType.PROJECTILE: null,
+		})
 
 
 func _consume_modifiers(damage_modifier_callbacks: Array[Callable], additional_callbacks: Array[Callable]) -> void:

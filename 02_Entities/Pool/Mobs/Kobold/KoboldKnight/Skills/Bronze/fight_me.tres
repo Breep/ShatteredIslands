@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://5rufecknsbju"]
+
+[ext_resource type="Texture2D" uid="uid://d2emp5pe6i82n" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Skills/Bronze/skill_fight_me.svg" id="1_etiia"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_ne6rh"]
+[ext_resource type="Script" uid="uid://quyskbl8c4ng" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/Skills/Bronze/fight_me.gd" id="2_4a4qe"]
+
+[sub_resource type="Resource" id="Resource_4a4qe"]
+script = ExtResource("2_4a4qe")
+metadata/_custom_type_script = "uid://quyskbl8c4ng"
+
+[resource]
+script = ExtResource("1_ne6rh")
+name = "Fight Me"
+description = "Taunt"
+portrait = ExtResource("1_etiia")
+skill_effect = SubResource("Resource_4a4qe")
+metadata/_custom_type_script = "uid://dfby4merlgkep"

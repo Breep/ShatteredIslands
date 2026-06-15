@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="FightingEncounter" format=3 uid="uid://b02t4f0e2b7hw"]
+
+[ext_resource type="Resource" uid="uid://bme1eabtuxjq" path="res://05_Game/Run/Encounters/Pool/04_SkeletonDrake/04_skeleton_drake.fighting.tres" id="1_4j4ua"]
+[ext_resource type="Script" uid="uid://dg13tr0kcjyll" path="res://05_Game/Run/Encounters/fighting_encounter.gd" id="1_dtkbw"]
+[ext_resource type="PackedScene" uid="uid://0x5u0h623yxt" path="res://06_FloatingIsland/FightingIsland/Pool/ArchIsland/arch_island.tscn" id="2_dsxql"]
+
+[resource]
+script = ExtResource("1_dtkbw")
+island_scene = ExtResource("2_dsxql")
+formation_b = ExtResource("1_4j4ua")
+encounter_id = &"04_SkeletonDrake"
+display_name = "Skeleton Drake"
+music = "epic_battle"
+metadata/_custom_type_script = "uid://dg13tr0kcjyll"

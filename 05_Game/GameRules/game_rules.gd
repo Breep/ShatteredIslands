@@ -146,6 +146,41 @@ func family_point_to_xp_max(point: int) -> int:
 	elif point >= family_level_points[3] and point < family_level_points[4]: return family_level_points[4] - family_level_points[3]
 	else: return 0
 
+# Chances de pioche par rareté pour un niveau donné (réutilise la table
+# drop_rates_by_family_level comme table « par niveau »). Le niveau est clampé
+# dans les bornes de la table.
+func get_rarity_chances(level: int) -> Dictionary[Card.Rarity, float]:
+	var result: Dictionary[Card.Rarity, float] = {}
+	var keys: Array = drop_rates_by_family_level.keys()
+	if keys.is_empty():
+		return result
+	keys.sort()
+	var clamped: int = clampi(level, keys[0], keys[keys.size() - 1])
+	var raw: Dictionary = drop_rates_by_family_level[clamped]
+	for rarity: Card.Rarity in raw:
+		result[rarity] = float(raw[rarity])
+	return result
+
+
+func get_card_price(rarity: Card.Rarity) -> int:
+	match rarity:
+		Card.Rarity.COMMON: return common_price
+		Card.Rarity.RARE: return rare_price
+		Card.Rarity.EPIC: return epic_price
+		Card.Rarity.LEGENDARY: return legendary_price
+	return common_price
+
+
+# Valeur de revente d'un lot de cartes. Une carte agrégée niveau N est composée
+# de N cartes empilées : on somme le prix de chacune. (Revente = prix d'achat
+# pour l'instant ; ajouter un ratio ici si la revente doit être décotée.)
+func get_sell_value(cards: Array[Card]) -> int:
+	var total: int = 0
+	for card: Card in cards:
+		total += get_card_price(card.rarity)
+	return total
+
+
 func get_locked_rarities(family_level: int) -> Array[Card.Rarity]:
 	if family_level < 0 or family_level > card_rarities_locked_by_level.size():
 		return []

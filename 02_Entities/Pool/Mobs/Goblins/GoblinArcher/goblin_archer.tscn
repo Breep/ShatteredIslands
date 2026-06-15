@@ -1,0 +1,177 @@
+[gd_scene format=3 uid="uid://bynburu5tlkgc"]
+
+[ext_resource type="Script" uid="uid://djo5msd40bxq" path="res://02_Entities/Pool/Mobs/Goblins/GoblinArcher/goblin_archer.gd" id="1_sjdat"]
+[ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="2_boaaa"]
+[ext_resource type="PackedScene" uid="uid://5ccditks7xar" path="res://02_Entities/_Data/Goblins/all_goblins.tscn" id="2_ovu33"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="3_2lmyn"]
+[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.tscn" id="3_bfpeu"]
+[ext_resource type="AnimationNodeBlendTree" uid="uid://xjiuc10pv21c" path="res://02_Entities/Pool/Mobs/Goblins/GoblinArcher/goblin_archer_animatrion_tree.res" id="4_dhx74"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="4_r6t07"]
+[ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="7_r6t07"]
+
+[sub_resource type="Resource" id="Resource_y4yvn"]
+script = ExtResource("2_boaaa")
+name = "archer1"
+description = "archer"
+metadata/_custom_type_script = "uid://dkrea5xbc4y8q"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bfpeu"]
+radius = 0.32958984
+height = 1.7062988
+
+[node name="GoblinArcher" type="CharacterBody3D" unique_id=1163203318 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_attack_spawn_marker")]
+collision_layer = 16
+collision_mask = 25
+script = ExtResource("1_sjdat")
+entity_name = "Goby l'archer"
+entity_desc = SubResource("Resource_y4yvn")
+_visual_3d = NodePath("AllGoblinVisual")
+_health_bar_marker = NodePath("AllGoblinVisual/HealthBarMarker")
+_attack_spawn_marker = NodePath("AllGoblinVisual/AAspawnmarker")
+_projectile_type = 10
+metadata/_custom_type_script = "uid://cpih8vqoolap4"
+
+[node name="AllGoblinVisual" parent="." unique_id=433263620 instance=ExtResource("2_ovu33")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="GeneralSkeleton" parent="AllGoblinVisual" index="0" unique_id=264105535]
+bones/9/rotation = Quaternion(2.0185068e-17, 0.52131337, 0.8533654, 1.9993156e-17)
+bones/31/rotation = Quaternion(-0.036348324, 0.15220593, 0.22998704, 0.9605301)
+bones/43/rotation = Quaternion(-0.00047969824, 5.526506e-06, -1.0341784e-05, 0.9999999)
+bones/44/rotation = Quaternion(0, 1, 0, 0)
+bones/49/rotation = Quaternion(0, 1, 0, 0)
+
+[node name="SM_Chr_BeastTamer_01" parent="AllGoblinVisual/GeneralSkeleton" index="2" unique_id=1668388993]
+visible = true
+
+[node name="SM_Chr_Ranger_01" parent="AllGoblinVisual/GeneralSkeleton" index="9" unique_id=181341796]
+visible = false
+
+[node name="SM_Chr_Attach_Hood_01" parent="AllGoblinVisual/GeneralSkeleton" index="14" unique_id=1695378337]
+visible = true
+
+[node name="Skeleton3D" parent="AllGoblinVisual/GeneralSkeleton/LeftHandAttachment/Bow" parent_id_path=PackedInt32Array(433263620, 526129373) index="0" unique_id=2143212340]
+bones/1/position = Vector3(0, 0, -0.11986062)
+
+[node name="ArrowAttachment" parent="AllGoblinVisual/GeneralSkeleton/LeftHandAttachment/Bow/Skeleton3D" index="2" unique_id=1924204569]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.11986062)
+
+[node name="SM_Wep_Shield_01" parent="AllGoblinVisual/GeneralSkeleton/ShieldAttachment" parent_id_path=PackedInt32Array(433263620, 1828555638) index="0" unique_id=1821283942]
+visible = false
+
+[node name="RightHandWeaponAttachment" parent="AllGoblinVisual/GeneralSkeleton" index="19" unique_id=1743821847]
+visible = true
+
+[node name="SM_Wep_Axe_02" parent="AllGoblinVisual/GeneralSkeleton/RightHandWeaponAttachment" index="0" unique_id=1050349439]
+visible = false
+
+[node name="SM_Chr_Attach_Backpack_01" parent="AllGoblinVisual/GeneralSkeleton/BackPackAttachment" parent_id_path=PackedInt32Array(433263620, 801280550) index="1" unique_id=251234928]
+visible = false
+
+[node name="SM_Chr_Attach_Mask_01" parent="AllGoblinVisual/GeneralSkeleton/FaceAttachment" parent_id_path=PackedInt32Array(433263620, 538487173) index="2" unique_id=1196135152]
+visible = true
+
+[node name="SM_Chr_Attach_Eye_Patch_01" parent="AllGoblinVisual/GeneralSkeleton/FaceAttachment" parent_id_path=PackedInt32Array(433263620, 538487173) index="3" unique_id=1046000516]
+visible = true
+
+[node name="SM_Chr_Attach_Wolf_01" parent="AllGoblinVisual/GeneralSkeleton/FaceAttachment" parent_id_path=PackedInt32Array(433263620, 538487173) index="6" unique_id=2053600072]
+visible = false
+
+[node name="HealthBarMarker" type="Marker3D" parent="AllGoblinVisual" unique_id=179970257]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1072268, 0)
+
+[node name="HeroSimpleInfoPanel2d" parent="AllGoblinVisual" unique_id=358992180 instance=ExtResource("3_bfpeu")]
+
+[node name="AAspawnmarker" type="Marker3D" parent="AllGoblinVisual" unique_id=209130784]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1830777, 1.3456783, 1.0083058)
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=424222653]
+root_node = NodePath("../AllGoblinVisual")
+tree_root = ExtResource("4_dhx74")
+anim_player = NodePath("../AllGoblinVisual/AnimationPlayer")
+parameters/switch_moving/current_state = ""
+parameters/switch_moving/transition_request = ""
+parameters/switch_moving/current_index = -1
+parameters/scale_dance/scale = 1.0
+parameters/scale_die/scale = 1.0
+parameters/scale_idle_standing_neutral/scale = 1.0
+parameters/one_shot_attack/active = false
+parameters/one_shot_attack/internal_active = false
+parameters/one_shot_attack/request = 0
+parameters/one_shot_ultimate/active = false
+parameters/one_shot_ultimate/internal_active = false
+parameters/one_shot_ultimate/request = 0
+parameters/scale_attack/scale = 1.0
+parameters/one_shot_idle_standing_neutral/active = false
+parameters/one_shot_idle_standing_neutral/internal_active = false
+parameters/one_shot_idle_standing_neutral/request = 0
+parameters/scale_ultimate/scale = 2.5
+parameters/scale_idle_standing_neutral_var/scale = 1.0
+parameters/one_shot_sitting/active = false
+parameters/one_shot_sitting/internal_active = false
+parameters/one_shot_sitting/request = 0
+parameters/switch_entity_life_state/current_state = "Alive"
+parameters/switch_entity_life_state/transition_request = ""
+parameters/switch_entity_life_state/current_index = 1
+parameters/scale_walk/scale = 1.0
+parameters/scale_run/scale = 1.0
+parameters/switch_attack/current_state = "Attack1"
+parameters/switch_attack/transition_request = ""
+parameters/switch_attack/current_index = 0
+parameters/scale_stunned/scale = 1.0
+parameters/seek_stunned/seek_request = -1.0
+parameters/scale_idle_standing_aggresive/scale = 1.0
+parameters/scale_idle_standing_aggresive_var/scale = 1.0
+parameters/seek_idle_standing_aggresive/seek_request = -1.0
+parameters/switch_entity_mode/current_state = "Editor"
+parameters/switch_entity_mode/transition_request = ""
+parameters/switch_entity_mode/current_index = 0
+parameters/seek_idle_standing_neutral/seek_request = -1.0
+parameters/one_shot_idle_standing_aggresive/active = false
+parameters/one_shot_idle_standing_aggresive/internal_active = false
+parameters/one_shot_idle_standing_aggresive/request = 0
+parameters/seek_idle_sitting_chair/seek_request = -1.0
+parameters/scale_idle_sitting_chair/scale = 1.0
+parameters/scale_idle_sitting_chair_var/scale = 1.0
+parameters/seek_idle_sitting_floor/seek_request = -1.0
+parameters/seek_dance/seek_request = -1.0
+parameters/one_shot_idle_sitting_chair/active = false
+parameters/one_shot_idle_sitting_chair/internal_active = false
+parameters/one_shot_idle_sitting_chair/request = 0
+parameters/scale_idle_sitting_floor/scale = 1.0
+parameters/scale_idle_sitting_floor_var/scale = 1.0
+parameters/scale_attack_2/scale = 1.0
+parameters/scale_hit_1/scale = 1.0
+parameters/scale_attack_3/scale = 1.0
+parameters/switch_main/current_state = "Idle"
+parameters/switch_main/transition_request = ""
+parameters/switch_main/current_index = 0
+parameters/switch_idle/current_state = "StandingNeutral"
+parameters/switch_idle/transition_request = ""
+parameters/switch_idle/current_index = 0
+parameters/scale_drag/scale = 1.0
+parameters/scale_land/scale = 1.0
+parameters/one_shot_land/active = false
+parameters/one_shot_land/internal_active = false
+parameters/one_shot_land/request = 0
+parameters/one_shot_hit/active = false
+parameters/one_shot_hit/internal_active = false
+parameters/one_shot_hit/request = 0
+parameters/scale_attack_1/scale = 1.0
+parameters/switch_positioning/current_state = "Off"
+parameters/switch_positioning/transition_request = ""
+parameters/switch_positioning/current_index = 0
+parameters/switch_stunned_state/current_state = "NotStunned"
+parameters/switch_stunned_state/transition_request = ""
+parameters/switch_stunned_state/current_index = 0
+
+[node name="AnimationComponent" parent="." unique_id=73205791 node_paths=PackedStringArray("_animation_tree", "_owner") instance=ExtResource("7_r6t07")]
+_animation_tree = NodePath("../AnimationTree")
+_owner = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1328449742]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90650976, 0)
+shape = SubResource("CapsuleShape3D_bfpeu")
+
+[editable path="AllGoblinVisual"]
+[editable path="AllGoblinVisual/GeneralSkeleton/LeftHandAttachment/Bow"]

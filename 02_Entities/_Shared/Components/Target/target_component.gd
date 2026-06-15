@@ -38,6 +38,7 @@ enum TargettingStrategy {
 	RANDOM_ALLY, # Random ally except self (can be null)
 	RANDOM_ALLY_INCLUDING_SELF, # Random ally
 	RANDOM_HERO_ALLY, # Random Hero ally
+	RANDOM_BUILDING_ALLY, # Random ally whose category is BUILDING (can be null)
 	
 	# ------- LOWEST HP (Absolute) -------
 	LOWEST_HP_ENEMY, # Enemy with lowest current HP (absolute)
@@ -46,6 +47,7 @@ enum TargettingStrategy {
 	# ------- LOWEST HP % -------
 	LOWEST_HP_PERCENT_ALLY, # Ally with lowest HP percentage, excluding self
 	LOWEST_HP_PERCENT_HERO_ALLY, # Hero ally with lowest HP percentage
+	LOWEST_HP_PERCENT_ALLY_INCLUDING_SELF, # Lowest HP percent ally including self
 
 	# ------- PRIORITIZE SUMMONS -------
 	CLOSEST_ENEMY_SUMMON, # Closest enemy summon, falls back to closest enemy if none
@@ -53,6 +55,7 @@ enum TargettingStrategy {
 	# ------- MISC -------
 	HIGHEST_SHIELD_ENEMIES_HERO, # highest amount of shield among heroes enemies (can be null)
 	HIGHEST_SHIELD_ALLIES_HERO, # highest amount of shield among heroes allies (can be null)
+	HIGHEST_ALLY_DEBUFF_STACK, # highest ally debuff stacked
 }
 
 enum MultipleTargettingStrategy {
@@ -152,6 +155,7 @@ func get_target(targetting_strategy: TargettingStrategy) -> Entity:
 		TargettingStrategy.RANDOM_ALLY: return _get_random(_allies, _owner)
 		TargettingStrategy.RANDOM_ALLY_INCLUDING_SELF: return _get_random(_allies, null)
 		TargettingStrategy.RANDOM_HERO_ALLY: return _get_random(_ally_heroes, null)
+		TargettingStrategy.RANDOM_BUILDING_ALLY: return _get_random_building_ally()
 		
 		# --- HP ---
 		TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF: return _get_lowest_hp(_allies, null)
@@ -167,6 +171,7 @@ func get_target(targetting_strategy: TargettingStrategy) -> Entity:
 
 		# --- LOWEST HP % (Ally) ---
 		TargettingStrategy.LOWEST_HP_PERCENT_ALLY: return _get_lowest_hp_percent(_allies, _owner)
+		TargettingStrategy.LOWEST_HP_PERCENT_ALLY_INCLUDING_SELF: return _get_lowest_hp_percent(_allies, null)
 		TargettingStrategy.LOWEST_HP_PERCENT_HERO_ALLY: return _get_lowest_hp_percent(_ally_heroes, null)
 
 		# --- PRIORITIZE SUMMONS ---
@@ -175,6 +180,9 @@ func get_target(targetting_strategy: TargettingStrategy) -> Entity:
 		# --- SHIELD ---
 		TargettingStrategy.HIGHEST_SHIELD_ENEMIES_HERO: return _get_highest_shield(_enemy_heroes, _owner, true)
 		TargettingStrategy.HIGHEST_SHIELD_ALLIES_HERO: return _get_highest_shield(_ally_heroes, null)
+		
+		# --- DEBUFF STACKS ---
+		TargettingStrategy.HIGHEST_ALLY_DEBUFF_STACK: return _get_highest_debuff_stacks(_ally_heroes, null)
 		
 	push_error("TargetComponent: Undef strategy for the TargetComponent")
 	return null
@@ -214,42 +222,32 @@ func get_target_from(from_pos: Vector3, targetting_from_strategy: TargettingFrom
 
 
 func get_targets(strategy: MultipleTargettingStrategy, radius: float = -1.0) -> Array[Entity]:
+	var source: Array[Entity]
+	match strategy:
+		MultipleTargettingStrategy.ALL: source = _entities
+		MultipleTargettingStrategy.ALLIES: source = _allies
+		MultipleTargettingStrategy.ENEMIES: source = _enemies
+		_:
+			printerr("TargetComponent: Unknown strategy")
+			var empty: Array[Entity]
+			return empty
+
+	var alive: Array[Entity] = _get_alive_entities(source)
 	if radius <= 0:
-		match strategy:
-			MultipleTargettingStrategy.ALL: return _entities.duplicate()
-			MultipleTargettingStrategy.ALLIES: return _allies.duplicate()
-			MultipleTargettingStrategy.ENEMIES: return _enemies.duplicate()
-	else:
-		var returned_entities: Array[Entity]
-		match strategy:
-			MultipleTargettingStrategy.ALL:
-				for entity in _entities:
-					if entity == null: continue
-					if entity.global_position.distance_to(_owner.global_position) <= radius:
-						returned_entities.append(entity)
-			MultipleTargettingStrategy.ALLIES:
-				for entity in _allies:
-					if entity == null: continue
-					if entity.global_position.distance_to(_owner.global_position) <= radius:
-						returned_entities.append(entity)
-			MultipleTargettingStrategy.ENEMIES:
-				for entity in _enemies:
-					if entity == null: continue
-					if entity.global_position.distance_to(_owner.global_position) <= radius:
-						returned_entities.append(entity)
-		return returned_entities
-	
-	printerr("TargetComponent: Unknown strategy")
-	var empty: Array[Entity]
-	return empty
+		return alive
+
+	var returned_entities: Array[Entity]
+	for entity in alive:
+		if entity.global_position.distance_to(_owner.global_position) <= radius:
+			returned_entities.append(entity)
+	return returned_entities
 
 
-## Check if entity is within attack range
+## La cible est-elle à portée d'auto-attaque de l'owner ? Délègue à Entity, qui porte la
+## logique géométrique centralisée (cf. Entity.is_target_in_attack_range — corps-à-corps
+## pour le mélée).
 func is_in_attack_range(entity: Entity) -> bool:
-	# -1 means unlimited range
-	if _owner.stats.attack_range < 0:
-		return true
-	return entity.global_position.distance_squared_to(_owner.global_position) <= _owner.stats.attack_range * _owner.stats.attack_range
+	return _owner.is_target_in_attack_range(entity)
 
 
 # ============================== Private functions ==============================
@@ -290,6 +288,21 @@ func _get_highest_shield(entities: Array[Entity], excluded_entity: Entity, prior
 	
 	return highest_shield_entity
 
+
+func _get_highest_debuff_stacks(entities: Array[Entity], excluded_entity: Entity, prioritize_taunted: bool = false) -> Entity:
+	var candidates := _filter_candidates(entities, excluded_entity, prioritize_taunted)
+	if candidates.is_empty():
+		return null
+	
+	var highest_stacked = candidates[0]
+	
+	for entity in candidates:
+		if entity != _owner:
+			if entity.alterations.get_debuff_stacks() > highest_stacked.alterations.get_debuff_stacks():
+				highest_stacked = entity
+	
+	return highest_stacked
+	
 
 func _get_alive_entities(entities: Array[Entity]) -> Array[Entity]:
 	var alive_entities: Array[Entity]
@@ -448,6 +461,14 @@ func _get_random(entities: Array[Entity], excluded_entity: Entity, prioritize_ta
 	
 	_random_target_number += 1
 	return Utils.pick_random(candidates, _owner.battle_id, "random_target_" + str(_random_target_number))
+
+
+func _get_random_building_ally() -> Entity:
+	var buildings: Array[Entity] = []
+	for ally in _allies:
+		if is_instance_valid(ally) and ally.category == Entity.Category.BUILDING:
+			buildings.append(ally)
+	return _get_random(buildings, _owner)
 
 
 func _get_array_without_untargetable_targets(entities: Array[Entity]) -> Array[Entity]:
