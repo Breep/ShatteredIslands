@@ -131,9 +131,11 @@ func _server_try_buy_card_from_player_shop(player: Player, card_to_buy: Card) ->
 		return false
 
 	# La carte est ajoutée à la main par la vue (UIHand.receive) côté drag-and-drop.
-	# Ici on ne fait que l'autorité économique : dé-track + débit.
+	# Ici on ne fait que l'autorité économique : dé-track + débit. On fige aussi le
+	# niveau autoritaire sur l'instance que la vue ajoutera juste après.
 	_cards_in_player_shop[player.id].erase(card_to_buy)
 	player.gold -= card_price
+	_enforce_card_lvl_from_hand(player, card_to_buy)
 	return true
 
 
@@ -187,6 +189,7 @@ func _ask_buy_card_from_player_shop(card_uid: int) -> void:
 	# Côté serveur pour un client distant : pas de vue co-localisée, le manager
 	# alimente donc la main autoritaire du peer ici.
 	_cards_in_player_shop[peer_id].erase(card_to_buy)
+	_enforce_card_lvl_from_hand(PlayerManager.players[peer_id], card_to_buy)
 	PlayerManager.players[peer_id].hand.add_card(card_to_buy)
 	PlayerManager.players[peer_id].gold -= card_price
 	_answer_buy_card_from_player_shop.rpc_id(peer_id, ServerResponse.OK)
@@ -376,6 +379,18 @@ func _answer_sell_card(server_response: ServerResponse) -> void:
 	_answer_for_selling_request_received.emit()
 
 # ========== Tools
+
+# Garde-fou autoritaire : le niveau d'une carte achetée doit TOUJOURS dériver de
+# la main au moment de l'achat (niveau en main + 1), jamais d'un niveau périmé
+# porté par la carte affichée du shop. Sans ça, vendre une carte puis racheter
+# son slot encore gonflé donnerait la carte à un niveau indu. La branche level-up
+# de Deck.add_card ignore déjà ce niveau (incrément +1) ; ce garde-fou couvre la
+# branche « carte absente de la main », seule porte de l'exploit.
+func _enforce_card_lvl_from_hand(player: Player, card: Card) -> void:
+	if player == null or player.hand == null or card == null:
+		return
+	card.lvl = player.hand.get_card_lvl(card) + 1
+
 
 func _get_card_in_array(uid: int, cards: Array[Card]) -> Card:
 	for card in cards:

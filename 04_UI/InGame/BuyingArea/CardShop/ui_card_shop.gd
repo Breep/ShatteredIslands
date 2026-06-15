@@ -89,6 +89,7 @@ func _ready() -> void:
 		return
 
 	_card_shop.shop_refreshed.connect(_on_card_shop_shop_refreshed)
+	_card_shop.card_releveled.connect(_on_card_shop_card_releveled)
 	_card_shop.card_bought.connect(_on_card_shop_card_bought)
 	_card_shop.shop_tried_to_refresh.connect(_on_card_shop_shop_tried_to_refresh)
 	_card_shop.shop_tried_to_buy_random_card.connect(_on_card_shop_shop_tried_to_buy_random_card)
@@ -244,6 +245,17 @@ func _update_shop_cards_displayed_visual(cards: Array[Card]) -> void:
 		btn.play_appear_animation(i * _APPEAR_STAGGER)
 
 
+# Met à jour le visuel d'UN seul slot dont le niveau dérivé a changé (vente /
+# achat d'un même design). Pas d'anim d'apparition ni de shuffle : on ne touche
+# que le label de la carte concernée. No-op si la carte n'est plus affichée
+# (ex : slot déjà retiré après un achat).
+func _relevel_displayed_card(card: Card) -> void:
+	var index: int = _displayed_cards.find(card)
+	if index < 0 or index >= _card_buttons.size():
+		return
+	_card_buttons[index].update_visual(card)
+
+
 # Remonte de 2 niveaux : CardButton → Control intermédiaire → VBoxContainer slot.
 func _slot_for_button(btn: CardButton) -> Control:
 	if btn == null:
@@ -356,6 +368,10 @@ func _on_card_shop_button_drag_requested(button: CardButton, card: Card) -> void
 
 func _on_card_shop_shop_refreshed(new_cards: Array[Card]) -> void:
 	_update_shop_cards_displayed_visual(new_cards)
+
+
+func _on_card_shop_card_releveled(card: Card) -> void:
+	_relevel_displayed_card(card)
 
 
 func _on_card_shop_card_bought(card: Card) -> void:
