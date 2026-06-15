@@ -18,10 +18,10 @@ drop_rates_by_family_level = Dictionary[int, Dictionary]({
 3: 0
 },
 1: {
-0: 25,
-1: 25,
-2: 25,
-3: 25
+0: 80,
+1: 12,
+2: 6,
+3: 2
 },
 2: {
 0: 88,
