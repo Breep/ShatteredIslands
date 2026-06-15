@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_mgosh")
-_health_max = 15100.0
+_health_max = 6050.0
 _mana_max = 36.0
 _mana_regen = 3.0
 auto_attack_type = 1

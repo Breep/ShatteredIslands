@@ -40,6 +40,17 @@ enum PreferredArrowSide {
 	TOP = 3,
 	BOTTOM = 4,
 }
+
+## Forces the bubble to a fixed screen position instead of anchoring next to the
+## target (no arrow). AUTO = normal target-relative placement. Use when the target
+## is awkward to point at or the bubble would overlap content (e.g. the talent
+## cards, or the entity sheet at the bottom).
+enum ScreenAnchor {
+	AUTO = 0,
+	RIGHT_CENTER = 1,
+	CENTER = 2,
+	BOTTOM_CENTER = 3,
+}
 #endregion
 
 
@@ -113,4 +124,8 @@ enum PreferredArrowSide {
 ## IF there's room; otherwise it falls back to AUTO. Useful for elements where
 ## the auto pick lands awkwardly (e.g. gold display in a corner).
 @export var preferred_arrow_side: PreferredArrowSide = PreferredArrowSide.AUTO
+
+## Pins the bubble to a fixed screen spot (no arrow), overriding target-relative
+## placement. AUTO keeps the normal behavior.
+@export var screen_anchor: ScreenAnchor = ScreenAnchor.AUTO
 #endregion

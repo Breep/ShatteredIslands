@@ -7,7 +7,7 @@
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_mwtu6"]
 height = 1.5239258
-radius = 0.43652344
+radius = 0.6464844
 
 [node name="ChickenCoop" type="CharacterBody3D" unique_id=1423893998 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker")]
 collision_layer = 16
@@ -24,11 +24,11 @@ _spawn = NodePath("../ChickenCoopVisual/HealthBar")
 _owner = NodePath("..")
 
 [node name="ChickenCoopVisual" parent="." unique_id=1427570308 instance=ExtResource("1_07g4a")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0.2090885)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.47916484)
 
 [node name="HealthBar" type="Marker3D" parent="ChickenCoopVisual" unique_id=1402058070]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.66080916, -0.25977564)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1658068250]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03397274, 0.7380371, -0.272008)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03397274, 0.7380371, -0.06723255)
 shape = SubResource("CylinderShape3D_mwtu6")

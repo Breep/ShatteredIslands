@@ -189,6 +189,13 @@ func _position_bubble() -> void:
 	_hide_all_arrows()
 	var viewport_size: Vector2 = get_viewport_rect().size
 	var bubble_size: Vector2 = size
+
+	# A fixed screen anchor overrides target-relative placement (no arrow).
+	var anchor: int = _step.screen_anchor if _step != null else 0
+	if anchor != TutorialStep.ScreenAnchor.AUTO:
+		global_position = _anchor_position(anchor, bubble_size, viewport_size)
+		return
+
 	if _target == null or not is_instance_valid(_target):
 		var pos := Vector2(
 			(viewport_size.x - bubble_size.x) * 0.5,
@@ -203,6 +210,16 @@ func _position_bubble() -> void:
 	var pos: Vector2 = _compute_position(side, target_rect, bubble_size, viewport_size)
 	global_position = pos
 	_show_arrow(side)
+
+
+func _anchor_position(anchor: int, bubble_size: Vector2, viewport_size: Vector2) -> Vector2:
+	match anchor:
+		TutorialStep.ScreenAnchor.RIGHT_CENTER:
+			return Vector2(viewport_size.x - bubble_size.x - SCREEN_MARGIN * 2.0, (viewport_size.y - bubble_size.y) * 0.5)
+		TutorialStep.ScreenAnchor.BOTTOM_CENTER:
+			return Vector2((viewport_size.x - bubble_size.x) * 0.5, viewport_size.y - bubble_size.y - SCREEN_MARGIN * 4.0)
+		_:
+			return Vector2((viewport_size.x - bubble_size.x) * 0.5, (viewport_size.y - bubble_size.y) * 0.5)
 
 
 func _pick_side(target_rect: Rect2, bubble_size: Vector2, viewport_size: Vector2, preferred: int = 0) -> ArrowSide:

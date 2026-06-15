@@ -5,24 +5,24 @@
 [resource]
 script = ExtResource("1_jnhkk")
 _health_max = 3200.0
-_mana_max = 50.0
+_mana_max = 35.0
 _mana_regen = 3.4
-_attack_range = 7.0
+_attack_range = 8.0
 _attack_damage = 52.0
-_attack_speed = 1.31282811614773
+_attack_speed = 1.406601553015425
 _movement_speed = 5.5
 _attack_power = 50.0
-armor = 18.317766166719345
-magic_resistance = 18.317766166719345
-poison_resistance = 18.317766166719345
-_crit_chance = 10.8
+armor = 21.981319400063217
+magic_resistance = 21.981319400063217
+poison_resistance = 21.981319400063217
+_crit_chance = 16.200000000000003
 _dodge = 14.0
 _m_crit_chances = Dictionary[int, float]({
 0: 0.0,
 1: 0.0
 })
 _m_resistances = Dictionary[int, float]({
-0: 18.317766166719345,
-1: 18.317766166719345,
-2: 18.317766166719345
+0: 21.981319400063217,
+1: 21.981319400063217,
+2: 21.981319400063217
 })

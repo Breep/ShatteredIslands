@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dtm8ojrywh5xi"
+path="res://.godot/imported/dragon voice m'affontre dans ma demeure.wav-13dbd4663ef7a4870799fc9bd84b3bbf.sample"
+
+[deps]
+
+source_file="res://02_Entities/Pool/Mobs/SkeletonDragon/SFX/dragon voice m'affontre dans ma demeure.wav"
+dest_files=["res://.godot/imported/dragon voice m'affontre dans ma demeure.wav-13dbd4663ef7a4870799fc9bd84b3bbf.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

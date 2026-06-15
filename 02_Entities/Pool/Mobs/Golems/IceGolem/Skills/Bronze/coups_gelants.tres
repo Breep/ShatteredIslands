@@ -7,6 +7,7 @@
 [sub_resource type="Resource" id="Resource_e"]
 script = ExtResource("2_eff")
 _chance_percent = 20.0
+_stun_duration = 0.7
 metadata/_custom_type_script = "uid://bcoupsgel1eff7"
 
 [resource]

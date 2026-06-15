@@ -7,6 +7,7 @@
 
 [sub_resource type="Resource" id="Resource_e"]
 script = ExtResource("2_eff")
+_stun_duration = 1.5
 _death_vfx = ExtResource("2_o0iev")
 metadata/_custom_type_script = "uid://bfragment1eff7"
 

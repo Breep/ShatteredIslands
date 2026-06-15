@@ -14,6 +14,7 @@ const GOBLIN_FOCUS_SCENE: PackedScene = preload("res://03_SpellsAndProjectiles/S
 const CLEARING_OF_LIFE: PackedScene = preload("res://03_SpellsAndProjectiles/Spells/ClearingOfLife/spell_clearing_of_life.tscn")
 const FIRE_GROUND_SCENE: PackedScene = preload("res://03_SpellsAndProjectiles/Spells/FireGround/fire_ground.tscn")
 const PREDATOR_ARROW_SCENE: PackedScene = preload("res://03_SpellsAndProjectiles/Spells/PredatorArrow/predator_arrow.tscn")
+const THORN_VOLLEY_SCENE: PackedScene = preload("res://03_SpellsAndProjectiles/Spells/ThornVolley/thorn_volley_spell.tscn")
 
 func _enter_tree() -> void:
 	if _owner == null: return
@@ -66,6 +67,7 @@ func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictiona
 		Spell.Type.CLEARING_OF_LIFE: _cast_clearing_of_life(spell_modifier)
 		Spell.Type.FIRE_GROUND: _cast_fire_ground(spell_modifier)
 		Spell.Type.PREDATOR_ARROW: _cast_predator_arrow(target, spell_modifier)
+		Spell.Type.THORN_VOLLEY: _cast_thorn_volley(spell_modifier)
 		_: Verbose.error("Unknown spell type [" + str(spell_type) + "]", Verbose.Category.ENTITY_MODULE)
 
 	_consume_after_action_modifiers(Utils.ActionCategory.SPELL, {
@@ -175,3 +177,12 @@ func _cast_fire_ground(spell_modifier: Dictionary) -> void:
 	var tick_period: float = spell_modifier.get(Spell.FireGroundModifier.TICK_PERIOD, 1.0)
 	fire_ground.init(_owner, pos, radius, duration, ignite_per_tick, tick_period)
 	_spawn_manager.spawn_spell(fire_ground)
+
+
+func _cast_thorn_volley(spell_modifier: Dictionary) -> void:
+	var thorn_volley: ThornVolleySpell = THORN_VOLLEY_SCENE.instantiate()
+	var pos: Vector3 = spell_modifier.get(Spell.ThornVolleyModifier.POSITION, _owner.global_position)
+	var radius: float = spell_modifier.get(Spell.ThornVolleyModifier.RADIUS, 3.0)
+	var duration: float = spell_modifier.get(Spell.ThornVolleyModifier.DURATION, 1.0)
+	thorn_volley.init(pos, radius, duration)
+	_spawn_manager.spawn_spell(thorn_volley)
