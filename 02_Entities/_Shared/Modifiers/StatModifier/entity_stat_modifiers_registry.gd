@@ -75,6 +75,19 @@ class StatModifierDictionary extends Resource:
 		return result
 
 
+	# Modifiers appliqués pour une action donnée. Pour une mono stat, action_type
+	# est ignoré (pas de sens). Utilisé par UiModifiersViewer.
+	func get_modifiers(action_type: Utils.ActionType) -> Array[StatModifier]:
+		var result: Array[StatModifier] = []
+		if EntityStats.is_multi_stat(_stat_type):
+			for modifier: StatModifier in _modifiers_per_action_type[action_type].values():
+				result.append(modifier)
+		else:
+			for modifier: StatModifier in _modifiers.values():
+				result.append(modifier)
+		return result
+
+
 	# Valeur du modifier d'id donné pour cette stat (0.0 s'il n'existe pas).
 	func get_modifier_value(id: StringName, action_type: Utils.ActionType) -> float:
 		var modifier: StatModifier
@@ -229,6 +242,25 @@ func get_all_modifiers() -> Array[StatModifier]:
 	for smd: StatModifierDictionary in _stats_modifiers_dictionaries.values():
 		result.append_array(smd.get_all_modifiers())
 	return result
+
+# Modifiers appliqués sur une stat donnée (résout les alias ARMOR/MR/PR vers
+# M_RESISTANCE[action]). Pour une mono stat, action_type est ignoré.
+func get_modifiers(stat_type: EntityStats.StatType, action_type: Utils.ActionType = Utils.ActionType.DAMAGE_PHYSICAL) -> Array[StatModifier]:
+	var resolved: Dictionary = EntityStats.resolve_alias(stat_type)
+	if not resolved.is_empty():
+		stat_type = resolved["stat_type"]
+		action_type = resolved["action_type"]
+	if not _stats_modifiers_dictionaries.has(stat_type):
+		Verbose.error("Cannot get modifiers for stat type " + str(stat_type) + " because it is not managed by the registry", Verbose.Category.STAT_MODIFIER)
+		return []
+	return _stats_modifiers_dictionaries[stat_type].get_modifiers(action_type)
+
+
+# Valeur de base (avant modifiers) d'une stat. get_stat résout lui-même les alias.
+func get_base_stat(stat_type: EntityStats.StatType, action_type: Utils.ActionType = Utils.ActionType.DAMAGE_PHYSICAL) -> float:
+	if _entity_base_stats == null:
+		return 0.0
+	return _entity_base_stats.get_stat(stat_type, action_type)
 
 # ============================== Private functions ==============================
 

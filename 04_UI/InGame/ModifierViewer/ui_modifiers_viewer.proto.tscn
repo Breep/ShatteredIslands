@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://b1mvq3wcv8pra"]
+
+[ext_resource type="Script" uid="uid://cd7b24rgxs5bf" path="res://04_UI/InGame/ModifierViewer/ui_modifiers_viewer.proto.gd" id="1_proto"]
+[ext_resource type="PackedScene" uid="uid://fly0qbnwyvaf" path="res://04_UI/InGame/ModifierViewer/ui_modifiers_viewer.tscn" id="2_viewer"]
+
+[node name="UiModifierViewerProto" type="Control" unique_id=100000001]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_proto")
+
+[node name="Margin" type="MarginContainer" parent="." unique_id=100000002]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Main" type="HBoxContainer" parent="Margin" unique_id=100000003]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Left" type="VBoxContainer" parent="Margin/Main" unique_id=100000004]
+custom_minimum_size = Vector2(260, 0)
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="Margin/Main/Left" unique_id=100000005]
+layout_mode = 2
+text = "Modifier Viewer — choisis une stat, empile des modifiers, observe le viewer."
+autowrap_mode = 2
+
+[node name="StatOption" type="OptionButton" parent="Margin/Main/Left" unique_id=100000006]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="AddFlatButton" type="Button" parent="Margin/Main/Left" unique_id=100000007]
+unique_name_in_owner = true
+layout_mode = 2
+text = "+ Modifier flat (+10)"
+
+[node name="AddMultButton" type="Button" parent="Margin/Main/Left" unique_id=100000008]
+unique_name_in_owner = true
+layout_mode = 2
+text = "+ Modifier mult (+25%)"
+
+[node name="ClearButton" type="Button" parent="Margin/Main/Left" unique_id=100000009]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Vider les modifiers"
+
+[node name="RefreshButton" type="Button" parent="Margin/Main/Left" unique_id=100000010]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Refresh"
+
+[node name="Right" type="VBoxContainer" parent="Margin/Main" unique_id=100000011]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="UiModifiersViewer" parent="Margin/Main/Right" instance=ExtResource("2_viewer")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
