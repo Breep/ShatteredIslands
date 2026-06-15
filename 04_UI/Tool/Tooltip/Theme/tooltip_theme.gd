@@ -31,6 +31,7 @@ extends Resource
 @export var POISON_STACK_ICON: CompressedTexture2D
 @export var IGNITE_ICON: CompressedTexture2D
 @export var THORN_ICON: CompressedTexture2D
+@export var TAUNT_ICON: CompressedTexture2D
 
 @export_subgroup("Mechanics & Stats")
 @export var DEFENCE_ICON: CompressedTexture2D # Pour Armor, MR, Shield
@@ -68,6 +69,7 @@ extends Resource
 @export var DEBUFF_COLOR: Color = Color("DA70D6")    # Orchid (Debuffs/Faiblesses)
 @export var SHIELD_COLOR: Color = Color("895a24ff")    # LightCyan (Bouclier spécifique)
 @export var THORN_COLOR: Color = Color("8B4513")     # SaddleBrown (épines, cf. ThornAlteration)
+@export var TAUNT_COLOR: Color = Color("DC143C")     # Crimson (provocation, cf. TauntAlteration)
 @export var COOLDOWN_COLOR: Color = Color("87CEEB")  # Skyblue
 @export var REGEN_COLOR: Color = Color("7fdf4dff")  # Skyblue
 @export var DISPELL_COLOR: Color = Color("af23d4ff")  

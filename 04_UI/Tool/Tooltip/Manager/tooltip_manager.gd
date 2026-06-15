@@ -66,6 +66,7 @@ extends Node
 	load("res://04_UI/Tool/Tooltip/Dictionary/scale.tres"),
 	
 	# --- T / V / W ---
+	load("res://04_UI/Tool/Tooltip/Dictionary/taunt.tres"),
 	load("res://04_UI/Tool/Tooltip/Dictionary/thorn.tres"),
 	load("res://04_UI/Tool/Tooltip/Dictionary/true_damage.tres"),
 	load("res://04_UI/Tool/Tooltip/Dictionary/vulnerability.tres"),
@@ -108,6 +109,7 @@ extends Node
 	"WEAKNESS":      "[color=%s][url=WEAKNESS]weakness[/url][/color]"           % THEME.color_html("DEBUFF_COLOR"),
 	"STRENGTH":      "[color=%s][url=STRENGTH]strength[/url][/color]"           % THEME.color_html("DEBUFF_COLOR"),
 	"VULNERABILITY": "[color=%s][url=VULNERABILITY]vulnerability[/url][/color]" % THEME.color_html("DEBUFF_COLOR"),
+	"TAUNT":         "[color=%s][url=TAUNT]taunt[/url][/color]"                 % THEME.color_html("TAUNT_COLOR"),
 	"CLEANSE":       "[color=%s][url=CLEANSE]cleanse[/url][/color]"             % THEME.color_html("SERENITY_COLOR"),
 	"DISPELL":       "[color=%s][url=DISPELL]dispell[/url][/color]"             % THEME.color_html("DISPELL_COLOR"),
 	"EXECUTE":       "[color=%s][url=EXECUTE]execute[/url][/color]"             % THEME.color_html("FIRE_COLOR"),
