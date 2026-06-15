@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_dyrtk")
 _health_max = 790.0
-_mana_max = 30.0
+_mana_max = 45.0
 _mana_regen = 3.0
 auto_attack_type = 1
 _attack_range = 0.01

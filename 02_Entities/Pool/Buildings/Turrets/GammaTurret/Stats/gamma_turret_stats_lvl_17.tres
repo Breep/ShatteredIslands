@@ -12,13 +12,14 @@ _attack_damage = 13.0
 _attack_speed = 2.0610507151735935
 _movement_speed = 0.0
 _attack_power = 13.0
+armor = 21.33285337622486
 _crit_chance = 14.4
 _m_crit_chances = Dictionary[int, float]({
 0: 0.0,
 1: 0.0
 })
 _m_resistances = Dictionary[int, float]({
-0: 0.0,
+0: 21.33285337622486,
 1: 0.0,
 2: 0.0
 })
