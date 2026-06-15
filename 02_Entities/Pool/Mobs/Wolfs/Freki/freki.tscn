@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bp3m5fik8rjjn"]
 
 [ext_resource type="Script" uid="uid://crdena5vypssf" path="res://02_Entities/Pool/Mobs/Wolfs/Freki/freki.gd" id="1_0myf1"]
-[ext_resource type="Resource" uid="uid://ywjip7ib5c8i" path="res://02_Entities/Pool/Mobs/Wolfs/Freki/Stats/freki_entity_desc.tres" id="3_desc0"]
 [ext_resource type="PackedScene" uid="uid://brctx7lm2vvue" path="res://02_Entities/Pool/Mobs/Wolfs/Freki/freki_visual.tscn" id="2_wpk23"]
+[ext_resource type="Resource" uid="uid://ywjip7ib5c8i" path="res://02_Entities/Pool/Mobs/Wolfs/Freki/Stats/freki_entity_desc.tres" id="3_desc0"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://beq4ve0ehlown" path="res://02_Entities/Pool/Mobs/Wolfs/Freki/freki_animation_tree.res" id="4_dwviy"]
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="5_uxhk6"]
 [ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/SmallHealthBar/small_health_bar_component.tscn" id="6_fp6oc"]
@@ -24,7 +24,6 @@ _attack_spawn_marker = NodePath("FrekiVisual/ProjectileSpawnMarker")
 metadata/_custom_type_script = "uid://cpih8vqoolap4"
 
 [node name="FrekiVisual" parent="." unique_id=518880957 instance=ExtResource("2_wpk23")]
-transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0, 0, 0)
 
 [node name="HealthBarSpawnMarker" type="Marker3D" parent="FrekiVisual" unique_id=1109750416]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.132942, 0)

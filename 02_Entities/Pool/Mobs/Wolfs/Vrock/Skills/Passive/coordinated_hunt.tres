@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://cgiyqe53nng77"]
+
+[ext_resource type="Texture2D" uid="uid://3yu2uqlduatr" path="res://02_Entities/Pool/Mobs/Wolfs/_Shared/Passive/skill_coordinated_hunt.svg" id="1_icon"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
+[ext_resource type="Script" uid="uid://cku8qjs5ui714" path="res://02_Entities/Pool/Mobs/Wolfs/_Shared/Passive/se_wolf_coordinated_hunt.gd" id="2_eff"]
+
+[sub_resource type="Resource" id="Resource_e"]
+script = ExtResource("2_eff")
+_damage_percent = 10.0
+_resist_percent = 10.0
+metadata/_custom_type_script = "uid://bwolf0coordhnt"
+
+[resource]
+script = ExtResource("1_skill")
+skill_id = 6
+name = "Traque Coordonnée"
+description = "Synergise avec la cible marquée par Latika : vitesse en chasse, dégâts et résistance en mêlée."
+portrait = ExtResource("1_icon")
+skill_effect = SubResource("Resource_e")
+metadata/_custom_type_script = "uid://dfby4merlgkep"
