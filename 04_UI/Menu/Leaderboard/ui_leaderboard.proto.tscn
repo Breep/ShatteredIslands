@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://c2lqk3rvledpr"]
+
+[ext_resource type="Script" uid="uid://bas40xlpta234" path="res://04_UI/Menu/Leaderboard/ui_leaderboard.proto.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://b8lqk3rvled01" path="res://04_UI/Menu/Leaderboard/ui_leaderboard.tscn" id="2"]
+
+[node name="UILeaderboardProto" type="Control" unique_id=842781477]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="Buttons" type="VBoxContainer" parent="." unique_id=198499215]
+layout_mode = 1
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 280.0
+offset_bottom = 240.0
+theme_override_constants/separation = 10
+
+[node name="AddFixedButton" type="Button" parent="Buttons" unique_id=1711553980]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Ajouter entrée fixe"
+
+[node name="AddRandomButton" type="Button" parent="Buttons" unique_id=33713514]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Ajouter entrée aléatoire"
+
+[node name="ClearButton" type="Button" parent="Buttons" unique_id=1585198975]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Vider le classement"
+
+[node name="OpenButton" type="Button" parent="Buttons" unique_id=367742979]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Ouvrir la popup"
+
+[node name="UILeaderboard" parent="." unique_id=335632806 instance=ExtResource("2")]
+unique_name_in_owner = true
+layout_mode = 1
