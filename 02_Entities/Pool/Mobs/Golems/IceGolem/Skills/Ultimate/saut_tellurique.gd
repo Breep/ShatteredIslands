@@ -20,6 +20,7 @@ func apply(ctx: SkillContext) -> void:
 	golem.battle_callback_registry.register_oneshot(_impact_delay, func() -> void:
 		if not is_instance_valid(golem) or golem.is_dead(): return
 		_spawn_impact_vfx(golem)
+		AudioManager.play_3d("smash_ground", golem.global_position)
 		for enemy: Entity in golem.target.get_targets(TargetComponent.MultipleTargettingStrategy.ENEMIES, _radius):
 			if not is_instance_valid(enemy):
 				continue
