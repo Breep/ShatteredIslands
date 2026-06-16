@@ -21,6 +21,10 @@ var _flight_queued: bool = false
 
 func _ready() -> void:
 	super._ready()
+	# 5 segments = paliers 80/60/40/20 % du passif Vol fracassant (SE_ShatteringFlight) :
+	# les démarcations de la boss bar matérialisent les seuils de proc du passif.
+	if health_bar is BossHealthBarComponent:
+		(health_bar as BossHealthBarComponent).setup_phases(5)
 	ultimate_casted.connect(_on_ultimate_casted)
 	fighting_state_changed.connect(_on_fighting_state_changed_voice)
 	if _flight_ability != null:
@@ -83,6 +87,7 @@ func _on_fighting_state_changed_voice(new_state: FightingState) -> void:
 	if anim != null:
 		anim.play_roar()
 	AudioManager.play_3d("dragon_roar", global_position)
+	_schedule_taunt()
 
 
 func _on_ultimate_casted() -> void:
@@ -92,7 +97,6 @@ func _on_ultimate_casted() -> void:
 func _on_died() -> void:
 	super._on_died()
 	AudioManager.play_3d("skeleton_drake_die", global_position)
-	_schedule_taunt()
 
 
 # Welcome the players a few seconds after arriving on the island — but only while still

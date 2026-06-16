@@ -10,12 +10,19 @@ extends HealthBarComponent
 
 @onready var _boss_name_label: RichTextLabel = %BossNameLabel
 
+# Remembered so the dividers can be recomputed on every health_max change: the grid
+# works in absolute HP, but the caller asks in phases — and health_max may land after
+# this _ready (late stat init) or move at runtime (max-HP buffs).
+var _phase_count: int = 1
+
 
 #region ============================== Node base functions ==============================
 func _ready() -> void:
 	super._ready()
-	if _owner != null and _boss_name_label != null:
-		_boss_name_label.text = _owner.entity_name
+	if _owner != null:
+		if _boss_name_label != null:
+			_boss_name_label.text = _owner.entity_name
+		_owner.stats.health_max_changed.connect(func(_new_max: float) -> void: _apply_phases())
 #endregion
 
 
@@ -26,13 +33,20 @@ func set_boss_name(boss_name: String) -> void:
 
 
 ## Slice the bar into `phase_count` equal segments using the grid bar's big-step
-## divider. Recompute after changing the boss' max health.
+## divider. The dividers re-derive themselves on every health_max change.
 func setup_phases(phase_count: int) -> void:
+	_phase_count = phase_count
+	_apply_phases()
+#endregion
+
+
+#region ============================== Private API ==============================
+func _apply_phases() -> void:
 	if _grid_bar == null or _grid_bar.material == null:
 		return
-	if phase_count <= 1 or _owner == null:
+	if _phase_count <= 1 or _owner == null or _owner.stats.health_max <= 0.0:
 		_grid_bar.material.set_shader_parameter("ShowGrid", false)
 		return
-	var hp_per_phase: int = int(_owner.stats.health_max / float(phase_count))
+	var hp_per_phase: int = int(_owner.stats.health_max / float(_phase_count))
 	setup_grid_bar(0, hp_per_phase)
 #endregion
