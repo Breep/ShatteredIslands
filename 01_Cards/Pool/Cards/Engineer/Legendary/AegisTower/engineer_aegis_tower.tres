@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_effect"]
 script = ExtResource("3_effect")
-_building_level = Array[int]([1, 2, 3])
+_building_level = Array[int]([3, 5, 7])
 _building_desc = ExtResource("2_desc")
 metadata/_custom_type_script = "uid://caeg1stwr3lgnd"
 
@@ -17,6 +17,7 @@ script = ExtResource("1_card")
 name = &"Aegis Tower"
 picture = SubResource("PlaceholderTexture2D_aegis")
 families = Array[int]([2])
+rarity = 3
 _card_effect = SubResource("Resource_effect")
 points = Dictionary[int, int]({
 2: 5

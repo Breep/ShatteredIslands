@@ -8,7 +8,7 @@
 script = ExtResource("2_lbecd")
 _period = Array[float]([1.0, 1.0, 1.0])
 _hp_percent = Array[float]([1.0, 2.0, 3.0])
-_radius = Array[float]([6.0, 6.0, 6.0])
+_radius = Array[float]([4.0, 4.0, 4.0])
 metadata/_custom_type_script = "uid://wi6p7asrxwbi"
 
 [resource]

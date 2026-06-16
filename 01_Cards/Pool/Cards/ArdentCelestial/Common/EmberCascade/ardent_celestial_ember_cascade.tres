@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_ember"]
 script = ExtResource("2_eff")
-_chance_per_stack = Array[float]([5.0, 6.0, 7.0, 8.0, 10.0])
+_chance_per_stack = Array[float]([4.0, 5.0, 6.0, 7.0, 8.0])
 
 [resource]
 script = ExtResource("1_card")

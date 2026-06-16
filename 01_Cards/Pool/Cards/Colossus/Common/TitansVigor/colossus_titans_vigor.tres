@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_vigor"]
 script = ExtResource("2_eff")
-_max_hp_increase = Array[float]([100.0, 150.0, 200.0, 250.0, 350.0])
+_max_hp_increase = Array[float]([150.0, 300.0, 450.0, 600.0, 750.0])
 _heal_percent = Array[float]([2.0, 3.0, 4.0, 5.0, 7.0])
 _heal_period = Array[float]([2.0, 2.0, 2.0, 2.0, 2.0])
 metadata/_custom_type_script = "uid://daqnwg11wal35"

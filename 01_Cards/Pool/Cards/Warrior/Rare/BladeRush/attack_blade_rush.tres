@@ -5,8 +5,8 @@
 
 [sub_resource type="Resource" id="Resource_v6egr"]
 script = ExtResource("1_jm0ul")
-_damage_increase = Array[float]([40.0, 60.0, 80.0, 100.0, 120.0])
-_duration = Array[float]([6.0, 6.0, 6.0, 6.0, 6.0])
+_damage_increase = Array[float]([60.0, 80.0, 100.0, 120.0, 150.0])
+_duration = Array[float]([10.0, 10.0, 10.0, 10.0, 10.0])
 metadata/_custom_type_script = "uid://bd4dbqvvv4j0o"
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_fy27u"]

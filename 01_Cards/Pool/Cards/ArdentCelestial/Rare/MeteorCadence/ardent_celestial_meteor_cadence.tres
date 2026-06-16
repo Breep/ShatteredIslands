@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_cad"]
 script = ExtResource("2_eff")
-_projectiles_per_meteor = Array[int]([7, 6, 5, 4, 3])
+_projectiles_per_meteor = Array[int]([8, 7, 6, 5, 4])
 
 [resource]
 script = ExtResource("1_card")

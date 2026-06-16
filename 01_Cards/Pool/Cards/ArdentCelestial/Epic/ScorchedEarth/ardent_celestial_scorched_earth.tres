@@ -9,7 +9,7 @@ script = ExtResource("2_eff")
 _ignite_per_tick = Array[float]([5.0, 7.0, 10.0])
 _duration = Array[float]([3.0, 3.0, 3.0])
 _radius = Array[float]([1.0, 1.5, 2.0])
-_tick_period = 1.2
+_tick_period = 1.3
 
 [resource]
 script = ExtResource("1_card")
