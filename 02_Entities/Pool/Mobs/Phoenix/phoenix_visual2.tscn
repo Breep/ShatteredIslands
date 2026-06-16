@@ -337,6 +337,7 @@ _data = {
 [node name="PhoenixVisual" type="Node3D" unique_id=408536472]
 
 [node name="Node3D" type="Node3D" parent="." unique_id=579091035]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 
 [node name="Skeleton3D" type="Skeleton3D" parent="Node3D" unique_id=1910356123]
 bones/0/name = "b_Root"

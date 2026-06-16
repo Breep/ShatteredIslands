@@ -4,11 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://ch1op75byvev2"
-valid=false
+path="res://.godot/imported/selector_2.blend-80d3cdfc4f053bb9991a49119a32d92a.scn"
 
 [deps]
 
 source_file="res://20_Data/Blender/Map/Contour/selector_2.blend"
+dest_files=["res://.godot/imported/selector_2.blend-80d3cdfc4f053bb9991a49119a32d92a.scn"]
 
 [params]
 

@@ -3,13 +3,12 @@
 [ext_resource type="Script" uid="uid://d05ookpir5mho" path="res://02_Entities/Pool/Mobs/Phoenix/phoenix.gd" id="1_nflm6"]
 [ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.tscn" id="3_gjp7p"]
 [ext_resource type="Script" uid="uid://dcqln53e2uvek" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.gd" id="4_lewpa"]
-[ext_resource type="AnimationNodeBlendTree" uid="uid://cr51ggnb0u010" path="res://02_Entities/Pool/Mobs/Chickens/chicken_animation_tree.res" id="4_qrjbe"]
-[ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://05_Game/Run/SpawnSpecs/SpawnPoints/SpawnPoint/spawn_point.tscn" id="5_rp842"]
-[ext_resource type="PackedScene" uid="uid://cbaehmba0yu1e" path="res://02_Entities/Pool/Mobs/Phoenix/phoenix_visual.tscn" id="5_uybm6"]
+[ext_resource type="AnimationNodeBlendTree" uid="uid://ykuuh1w18m6h" path="res://02_Entities/Pool/Mobs/Phoenix/phoenix_animation.res" id="5_gjp7p"]
+[ext_resource type="PackedScene" uid="uid://b5u6exdbgwsd6" path="res://02_Entities/Pool/Mobs/Phoenix/phoenix_visual2.tscn" id="6_gjp7p"]
 [ext_resource type="Resource" uid="uid://34k1ljotkiup" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/entity_desc.tres" id="9_desc"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x7yny"]
-radius = 0.4609375
+radius = 0.33007813
 height = 2.3457031
 
 [node name="Phoenix" type="CharacterBody3D" unique_id=2109615854 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker")]
@@ -20,10 +19,10 @@ entity_name = "Phoenix"
 category = 2
 entity_desc = ExtResource("9_desc")
 _visual_3d = NodePath("PhoenixVisual")
-_health_bar_marker = NodePath("PhoenixVisual/HealthBarSpawnMarker")
+_health_bar_marker = NodePath("PhoenixVisual/HealthBarMarker")
 
 [node name="LargeHealthBarComponent" parent="." unique_id=1823590462 node_paths=PackedStringArray("_spawn", "_owner") instance=ExtResource("3_gjp7p")]
-_spawn = NodePath("../PhoenixVisual/HealthBarSpawnMarker")
+_spawn = NodePath("../PhoenixVisual/HealthBarMarker")
 _owner = NodePath("..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1928783995]
@@ -37,11 +36,11 @@ _owner = NodePath("..")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=2080904651]
 root_node = NodePath("../PhoenixVisual/Node3D")
-tree_root = ExtResource("4_qrjbe")
+tree_root = ExtResource("5_gjp7p")
 anim_player = NodePath("../PhoenixVisual/Node3D/AnimationPlayer")
-parameters/switch_moving/current_state = ""
+parameters/switch_moving/current_state = "Walk"
 parameters/switch_moving/transition_request = ""
-parameters/switch_moving/current_index = -1
+parameters/switch_moving/current_index = 0
 parameters/scale_dance/scale = 1.0
 parameters/scale_die/scale = 1.0
 parameters/scale_idle_standing_neutral/scale = 1.0
@@ -60,14 +59,14 @@ parameters/scale_idle_standing_neutral_var/scale = 1.0
 parameters/one_shot_sitting/active = false
 parameters/one_shot_sitting/internal_active = false
 parameters/one_shot_sitting/request = 0
-parameters/switch_entity_life_state/current_state = "Dead"
+parameters/switch_entity_life_state/current_state = "Alive"
 parameters/switch_entity_life_state/transition_request = ""
-parameters/switch_entity_life_state/current_index = 0
+parameters/switch_entity_life_state/current_index = 1
 parameters/scale_walk/scale = 1.0
 parameters/scale_run/scale = 1.0
-parameters/switch_attack/current_state = ""
+parameters/switch_attack/current_state = "Attack1"
 parameters/switch_attack/transition_request = ""
-parameters/switch_attack/current_index = -1
+parameters/switch_attack/current_index = 0
 parameters/scale_stunned/scale = 1.0
 parameters/seek_stunned/seek_request = -1.0
 parameters/scale_idle_standing_aggresive/scale = 1.0
@@ -93,12 +92,12 @@ parameters/scale_idle_sitting_floor_var/scale = 1.0
 parameters/scale_attack_2/scale = 1.0
 parameters/scale_hit_1/scale = 1.0
 parameters/scale_attack_3/scale = 1.0
-parameters/switch_main/current_state = ""
+parameters/switch_main/current_state = "Idle"
 parameters/switch_main/transition_request = ""
-parameters/switch_main/current_index = -1
-parameters/switch_idle/current_state = ""
+parameters/switch_main/current_index = 0
+parameters/switch_idle/current_state = "StandingNeutral"
 parameters/switch_idle/transition_request = ""
-parameters/switch_idle/current_index = -1
+parameters/switch_idle/current_index = 0
 parameters/scale_drag/scale = 1.0
 parameters/scale_land/scale = 1.0
 parameters/one_shot_land/active = false
@@ -108,20 +107,108 @@ parameters/one_shot_hit/active = false
 parameters/one_shot_hit/internal_active = false
 parameters/one_shot_hit/request = 0
 parameters/scale_attack_1/scale = 1.0
-parameters/switch_positioning/current_state = ""
-parameters/switch_positioning/transition_request = ""
-parameters/switch_positioning/current_index = -1
-parameters/switch_stunned_state/current_state = ""
+parameters/switch_positioning/current_state = "Off"
+parameters/switch_positioning/transition_request = "Off"
+parameters/switch_positioning/current_index = 0
+parameters/switch_stunned_state/current_state = "NotStunned"
 parameters/switch_stunned_state/transition_request = ""
-parameters/switch_stunned_state/current_index = -1
+parameters/switch_stunned_state/current_index = 0
 
-[node name="AASpawnPoint" parent="." unique_id=1596130037 instance=ExtResource("5_rp842")]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.00037944317, 0.38287425, -0.5151825)
+[node name="PhoenixVisual" parent="." unique_id=408536472 instance=ExtResource("6_gjp7p")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.40890104, 0)
 
-[node name="PhoenixVisual" parent="." unique_id=142901617 instance=ExtResource("5_uybm6")]
-transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0, 0, 0)
+[node name="Skeleton3D" parent="PhoenixVisual/Node3D" parent_id_path=PackedInt32Array(408536472, 579091035) index="0" unique_id=1910356123]
+bones/0/position = Vector3(-0.040131364, 0.13849702, -0.0002948539)
+bones/0/rotation = Quaternion(1.0121209e-05, -4.4335246e-07, -0.003014593, 0.99999547)
+bones/1/rotation = Quaternion(0, -1.1102231e-15, 0.3752798, 0.92691165)
+bones/2/rotation = Quaternion(3.552719e-15, 0, 0.32114765, 0.9470292)
+bones/3/rotation = Quaternion(-3.108627e-15, 8.881792e-16, -0.1028797, 0.9946938)
+bones/4/rotation = Quaternion(-2.562504e-07, 3.7025654e-09, -0.18504015, 0.98273104)
+bones/5/rotation = Quaternion(-0.0026102155, 0.004696738, -0.48895454, 0.87229276)
+bones/6/rotation = Quaternion(-2.0000011e-06, 0, -0.075627856, 0.9971361)
+bones/7/rotation = Quaternion(-0.2605664, 0.9370554, -0.0898045, 0.21440072)
+bones/8/rotation = Quaternion(0.22516319, -0.004276919, 0.9376945, -0.26459864)
+bones/9/rotation = Quaternion(2.0002426e-06, -1.7053026e-13, 0.9485302, 0.31668678)
+bones/10/rotation = Quaternion(0.08598246, 0.9650905, -0.037009962, 0.24461764)
+bones/11/rotation = Quaternion(-0.17753577, 0.066415936, 0.14276867, 0.9714356)
+bones/12/rotation = Quaternion(0.09529993, -0.08760918, 0.37998322, 0.91589046)
+bones/13/rotation = Quaternion(0.11768742, 0.045517918, 0.15595281, 0.9796717)
+bones/14/rotation = Quaternion(0.24462277, -0.03701037, 0.96508914, 0.085982814)
+bones/15/rotation = Quaternion(0.17753476, 0.06641794, -0.1427696, 0.9714355)
+bones/16/rotation = Quaternion(-0.09529796, -0.08761121, -0.37998283, 0.91589075)
+bones/17/rotation = Quaternion(-0.11768636, 0.04551489, -0.15595211, 0.9796721)
+bones/18/rotation = Quaternion(2.8421713e-14, -1.0658143e-14, 0.97122395, -0.23816809)
+bones/19/rotation = Quaternion(-5.7731606e-15, -2.8421713e-14, 0.1163912, 0.9932035)
+bones/20/rotation = Quaternion(-5.0293103e-14, 5.684342e-14, 0.15390094, 0.98808634)
+bones/21/rotation = Quaternion(0.17607278, -0.7393339, 0.64670885, -0.06443241)
+bones/22/rotation = Quaternion(0.0085938005, -0.23805271, 0.035038408, 0.97058207)
+bones/23/rotation = Quaternion(0.0033579262, -0.15949996, 0.02078296, 0.9869734)
+bones/24/rotation = Quaternion(-0.035682153, 0.020795887, 0.98077095, -0.19074288)
+bones/25/rotation = Quaternion(-0.0027429373, -0.012337395, 0.20690976, 0.97827846)
+bones/26/rotation = Quaternion(2.4202862e-14, 0, 0.16393897, 0.9864705)
+bones/27/rotation = Quaternion(-0.001041001, 9.605247e-05, 0.99829394, 0.058379613)
+bones/28/rotation = Quaternion(0.70639414, 0.031367633, 0.023280347, 0.7067401)
+bones/29/rotation = Quaternion(0.00018042185, -0.0887222, 0.008576995, 0.99601954)
+bones/30/rotation = Quaternion(0.001162898, 0.3073387, -0.0016344776, 0.9515981)
+bones/31/rotation = Quaternion(3.0788593e-05, 0.23684181, -0.00075238536, 0.97154796)
+bones/32/rotation = Quaternion(-0.00033269028, 0.14131998, 0.0009772074, 0.9899635)
+bones/33/rotation = Quaternion(-0.00027363957, -0.32227492, 0.00060422556, 0.9466459)
+bones/34/rotation = Quaternion(-0.0007155672, -0.0007604453, 0.37567395, 0.9267513)
+bones/35/rotation = Quaternion(0.0019516341, 0.0049901395, 0.20719825, 0.9782843)
+bones/36/rotation = Quaternion(0.991004, 0.13372514, 0.0052045924, 0.001310986)
+bones/37/rotation = Quaternion(-0.0007170588, -0.00075995445, 0.37720975, 0.9261273)
+bones/38/rotation = Quaternion(-3.5527133e-15, 2.0261569e-14, 0.2035749, 0.97905934)
+bones/39/rotation = Quaternion(-5.3290742e-14, -1.4210865e-14, 0.13408004, 0.99097055)
+bones/40/rotation = Quaternion(0.6538538, 0.38566333, 0.25218078, 0.6001199)
+bones/41/rotation = Quaternion(-0.00063481234, -0.19751155, 0.040412012, 0.97946703)
+bones/42/rotation = Quaternion(0.0005418448, -0.17866011, 0.0029834094, 0.98390627)
+bones/43/rotation = Quaternion(0.0012330258, -0.21000898, 0.005740443, 0.9776818)
+bones/44/rotation = Quaternion(0.0009040276, 0.090360165, -0.009963376, 0.9958589)
+bones/45/rotation = Quaternion(0.00024200004, 0.39869797, -0.000556, 0.9170821)
+bones/46/rotation = Quaternion(0.5906122, 0.24756953, 0.38871595, 0.6624097)
+bones/47/rotation = Quaternion(0.02003156, -0.19526452, -0.057921592, 0.9788338)
+bones/48/rotation = Quaternion(-0.003167866, -0.19979253, -0.015533343, 0.97971004)
+bones/49/rotation = Quaternion(8.674256e-05, -0.17339526, 0.00049407687, 0.9848522)
+bones/50/rotation = Quaternion(-0.0005351933, 0.08737717, 0.006101592, 0.9961565)
+bones/51/rotation = Quaternion(-0.00023047403, 0.39063022, 0.00054352666, 0.92054754)
+bones/52/rotation = Quaternion(0.8312714, -0.2762187, -0.04562855, 0.48021784)
+bones/53/rotation = Quaternion(0.006091671, 0.22971173, -0.025800716, 0.9728976)
+bones/54/rotation = Quaternion(0.001133794, 0.28308675, -0.0038402937, 0.95908606)
+bones/55/rotation = Quaternion(-0.00053620164, 0.1981516, 0.0026523434, 0.9801677)
+bones/56/rotation = Quaternion(-0.00021005927, 0.086985424, 0.0024100007, 0.9962067)
+bones/57/rotation = Quaternion(0.5486841, 0.017345324, -0.22168852, 0.8059151)
+bones/58/rotation = Quaternion(-0.0043599955, 0.15675063, 0.027458213, 0.9872469)
+bones/59/rotation = Quaternion(-0.00039031781, 0.28743252, 0.0013005821, 0.95780003)
+bones/60/rotation = Quaternion(0.0014220482, 0.17330252, -0.008081142, 0.98483455)
+bones/61/rotation = Quaternion(0.00074014097, 0.041474957, -0.017816665, 0.99898046)
+bones/62/rotation = Quaternion(-0.12824816, 0.14182715, 0.38876745, 0.9012754)
+bones/63/rotation = Quaternion(0.0061207595, -0.18846966, 0.15835805, 0.9692081)
+bones/64/rotation = Quaternion(-0.08573007, -0.03224413, 0.07526104, 0.99294835)
+bones/65/rotation = Quaternion(0.03531797, -0.12823704, 0.42276955, 0.89642286)
+bones/66/rotation = Quaternion(0.02485058, 0.17008369, 0.13096824, 0.9763716)
+bones/67/rotation = Quaternion(0.1838079, 0.15296988, 0.07212981, 0.9683038)
+bones/68/rotation = Quaternion(0.79253757, -0.53266096, 0.24854952, 0.16241822)
+bones/69/rotation = Quaternion(0.20785591, 0.13127965, -0.52177805, 0.81688994)
+bones/70/rotation = Quaternion(-0.5537455, 0.53119206, 0.46634564, 0.44013938)
+bones/71/rotation = Quaternion(0.056527775, -0.19139352, -0.13459143, 0.97059685)
+bones/72/rotation = Quaternion(0.13451296, -0.30307224, 0.23164767, 0.91454524)
+bones/73/rotation = Quaternion(-0.057493184, -0.11390434, 0.29281068, 0.94761926)
+bones/74/rotation = Quaternion(0.018668002, -0.26453996, -0.06483164, 0.962012)
+bones/75/rotation = Quaternion(0.0028769686, -0.3033546, -0.07042744, 0.9502672)
+bones/76/rotation = Quaternion(0.070161864, -0.079040796, 0.6857572, 0.72011584)
+bones/77/rotation = Quaternion(-0.018208768, -0.24473356, 0.0009890595, 0.96941894)
+bones/78/rotation = Quaternion(-0.0059678764, -0.21506433, -0.0269765, 0.97620904)
+bones/79/rotation = Quaternion(0.456564, 0.49484172, 0.5032768, -0.54165804)
+bones/80/rotation = Quaternion(-0.06570861, -0.13794586, 0.12134149, 0.9807801)
+bones/81/rotation = Quaternion(-0.016590245, -0.10619352, -0.6643925, 0.739615)
+bones/82/rotation = Quaternion(0.008631244, -0.14179163, 0.060737047, 0.98799384)
+bones/83/rotation = Quaternion(0.0074107097, -0.26379356, 0.028130038, 0.9641405)
+bones/84/rotation = Quaternion(-0.049198024, -0.33246672, -0.17628641, 0.9251857)
+bones/85/rotation = Quaternion(-0.16303332, -0.11689792, -0.3059203, 0.93068135)
+bones/86/rotation = Quaternion(0.02331245, -0.29069272, -0.011913949, 0.9564583)
+bones/87/rotation = Quaternion(0.015107759, -0.36755165, -0.023034157, 0.92959505)
 
-[node name="HealthBarSpawnMarker" type="Marker3D" parent="PhoenixVisual" unique_id=1354833977]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0.95944023, 0)
+[node name="HealthBarMarker" type="Marker3D" parent="PhoenixVisual" unique_id=540898425]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4724843, 0)
 
 [editable path="PhoenixVisual"]
