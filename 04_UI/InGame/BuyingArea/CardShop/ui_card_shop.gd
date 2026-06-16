@@ -97,6 +97,10 @@ func _ready() -> void:
 	_refresh_button.pressed.connect(_on_refresh_button_pressed, CONNECT_ONE_SHOT)
 	_random_card_button.pressed.connect(_on_random_card_button_pressed, CONNECT_ONE_SHOT)
 
+	# Refresh gratuit automatique à la fin de chaque combat : le joueur retrouve un
+	# shop neuf en entrant dans la taverne suivante (flux roguelite).
+	Events.confrontation_resolved.connect(_on_confrontation_resolved)
+
 	_card_shop.refresh_for_free()
 
 
@@ -368,6 +372,13 @@ func _on_card_shop_button_drag_requested(button: CardButton, card: Card) -> void
 
 func _on_card_shop_shop_refreshed(new_cards: Array[Card]) -> void:
 	_update_shop_cards_displayed_visual(new_cards)
+
+
+# Fin de combat (roguelite) : reroll gratuit du shop pour la taverne suivante.
+func _on_confrontation_resolved(_won: bool) -> void:
+	if _card_shop == null:
+		return
+	_card_shop.refresh_for_free()
 
 
 func _on_card_shop_card_releveled(card: Card) -> void:
