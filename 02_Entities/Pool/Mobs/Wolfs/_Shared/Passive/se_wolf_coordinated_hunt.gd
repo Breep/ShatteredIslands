@@ -53,10 +53,7 @@ func get_description() -> String:
 
 # Cible courante marquée par Latika (la maîtresse est le summoner du loup).
 func _marked_target(wolf: Entity) -> Entity:
-	var latika: Entity = wolf.summoner
-	if not is_instance_valid(latika):
-		return null
-	return latika.get_meta(SE_PackLeader.META_MARKED_TARGET, null)
+	return SE_PackLeader.get_marked_target(wolf.summoner)
 
 
 func _set_ms(wolf: Entity, active: bool, state: Array[bool]) -> void:
