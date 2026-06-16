@@ -18,26 +18,16 @@ mouse_filter = 2
 theme = ExtResource("1_0f0xt")
 script = ExtResource("1_5o5p6")
 
-[node name="ContinueButton" type="Button" parent="." unique_id=2014871033]
+[node name="OpenShopButton" type="Button" parent="." unique_id=1143858210]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.832
-anchor_top = 0.861
-anchor_right = 0.97
-anchor_bottom = 0.95800006
+offset_left = 1596.0
+offset_top = 809.0
+offset_right = 1846.0
+offset_bottom = 909.0
 theme = ExtResource("3_g27vj")
-text = "Continuer"
-script = ExtResource("4_q862y")
-
-[node name="OpenShopButton" type="Button" parent="." unique_id=1143858210]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 1421.0
-offset_top = 24.0
-offset_right = 1621.0
-offset_bottom = 87.0
-text = "Open SHOP"
+text = "Shop"
 script = ExtResource("6_gcy4p")
 metadata/_custom_type_script = "uid://bia26v50nwe6c"
 
@@ -65,7 +55,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.21960784, 0.21960784, 0.21960784, 0.78431374)
+color = Color(0.22091639, 0.22091639, 0.22091639, 0)
 
 [node name="CardShop" parent="ShopMainControl/ShopCanvasLayer" unique_id=1333080452 instance=ExtResource("4_dsp03")]
 unique_name_in_owner = true
@@ -77,5 +67,19 @@ offset_bottom = 130.0
 scale = Vector2(1.23, 1.23)
 pivot_offset = Vector2(350, 500)
 
-[connection signal="pressed" from="ContinueButton" to="." method="_on_continue_button_pressed"]
+[node name="ContinueButton" type="Button" parent="." unique_id=2014871033]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.832
+anchor_top = 0.861
+anchor_right = 0.97
+anchor_bottom = 0.95800006
+offset_right = -14.959961
+offset_bottom = -4.76001
+theme = ExtResource("3_g27vj")
+text = "Combattre"
+script = ExtResource("4_q862y")
+
 [connection signal="pressed" from="OpenShopButton" to="." method="_on_open_shop_button_pressed"]
+[connection signal="pressed" from="ContinueButton" to="." method="_on_continue_button_pressed"]

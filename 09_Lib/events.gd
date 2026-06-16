@@ -119,6 +119,9 @@ signal confrontation_resolved(won: bool) ## A confrontation's fight ended (emitt
 ## before pointing at a card, or hide the shop/hand while pointing at an enemy).
 signal tutorial_set_shop_open(should_open: bool)
 signal tutorial_set_hand_visible(is_visible: bool)
+## Locks shop card buying during a tutorial step (the shop lives on a CanvasLayer
+## above the tutorial blocker, so it can't be gated by the overlay).
+signal tutorial_set_shop_interactable(is_interactable: bool)
 
 ## The unit-placement UI (roaster list) just opened — units need placing on the
 ## field. The TutorialManager hooks this to show the placement help.

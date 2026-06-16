@@ -42,6 +42,7 @@ var _pending_sequence: TutorialSequence
 var _talent_choice_sequence: TutorialSequence
 var _unit_placement_sequence: TutorialSequence
 var _hand_hidden_by_tutorial: bool = false
+var _shop_locked_by_tutorial: bool = false
 #endregion
 
 
@@ -184,16 +185,28 @@ func _apply_step_ui_side_effects(step: TutorialStep) -> void:
 		Events.tutorial_set_hand_visible.emit(true)
 		_hand_hidden_by_tutorial = false
 
+	# Shop buying is locked on block_interaction steps (the shop is on a CanvasLayer
+	# above the blocker, so it must be gated at the shop level).
+	if step.block_interaction:
+		Events.tutorial_set_shop_interactable.emit(false)
+		_shop_locked_by_tutorial = true
+	elif _shop_locked_by_tutorial:
+		Events.tutorial_set_shop_interactable.emit(true)
+		_shop_locked_by_tutorial = false
 
-func _restore_hand_if_hidden() -> void:
+
+func _restore_ui_if_overridden() -> void:
 	if _hand_hidden_by_tutorial:
 		Events.tutorial_set_hand_visible.emit(true)
 		_hand_hidden_by_tutorial = false
+	if _shop_locked_by_tutorial:
+		Events.tutorial_set_shop_interactable.emit(true)
+		_shop_locked_by_tutorial = false
 
 
 func _finish_sequence() -> void:
 	Verbose.debug("Sequence finished: " + String(_active_sequence.id), Verbose.Category.TUTORIAL)
-	_restore_hand_if_hidden()
+	_restore_ui_if_overridden()
 	_active_sequence = null
 	_step_index = -1
 	_auto_advance_timer.stop()
@@ -201,7 +214,7 @@ func _finish_sequence() -> void:
 
 func _abort_active_sequence() -> void:
 	_pending_sequence = null
-	_restore_hand_if_hidden()
+	_restore_ui_if_overridden()
 	if _active_sequence == null: return
 	Verbose.debug("Aborting active sequence: " + String(_active_sequence.id), Verbose.Category.TUTORIAL)
 	_active_sequence = null

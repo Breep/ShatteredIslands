@@ -51,6 +51,28 @@ grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
 
+[node name="CardCounterLabel" type="RichTextLabel" parent="HandPivot" unique_id=265136323]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.834
+anchor_top = 0.1
+anchor_right = 0.917
+anchor_bottom = 0.151
+offset_left = 442.55994
+offset_top = -146.09998
+offset_right = 546.0
+offset_bottom = -135.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.40142572
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "8/8"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="_EditorPreview" type="Control" parent="HandPivot" unique_id=2120272582]
 layout_mode = 1
 anchors_preset = 0
@@ -127,41 +149,6 @@ offset_bottom = 82.74
 rotation = 0.4593
 scale = Vector2(0.5, 0.5)
 
-[node name="HideShowButton" type="Button" parent="." unique_id=100419919]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(120, 40)
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -25.0
-offset_top = -30.0
-offset_right = 25.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "Masquer Deck"
-icon_alignment = 1
-script = ExtResource("4_022ej")
-metadata/_custom_type_script = "uid://bia26v50nwe6c"
-
-[node name="CardCounterLabel" type="RichTextLabel" parent="HideShowButton" unique_id=265136323]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 10.0
-offset_right = 144.0
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_font_sizes/normal_font_size = 24
-bbcode_enabled = true
-text = "8/8"
-vertical_alignment = 1
-
 [node name="WarningHandFullLabel" type="RichTextLabel" parent="." unique_id=979415560]
 unique_name_in_owner = true
 visible = false
@@ -186,5 +173,46 @@ bbcode_enabled = true
 text = "[shake]La main est complète !"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="WarningNotEnoughGoldLabel" type="RichTextLabel" parent="." unique_id=979415561]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -490.0
+offset_right = 20.0
+offset_bottom = -410.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/default_color = Color(0.9555171, 0.36586156, 0.33205357, 1)
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/normal_font_size = 42
+bbcode_enabled = true
+text = "[shake]Pas assez d'or !"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HideShowButton" type="Button" parent="." unique_id=100419919]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.859
+anchor_right = 0.859
+offset_left = -194.66003
+offset_top = 751.0
+offset_right = -74.660034
+offset_bottom = 791.0
+text = "Masquer Main"
+icon_alignment = 1
+script = ExtResource("4_022ej")
+metadata/_custom_type_script = "uid://bia26v50nwe6c"
 
 [connection signal="pressed" from="HideShowButton" to="." method="_on_hide_show_button_pressed"]

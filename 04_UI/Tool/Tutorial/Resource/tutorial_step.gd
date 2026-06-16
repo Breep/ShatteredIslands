@@ -104,6 +104,11 @@ enum ScreenAnchor {
 ## field stays readable for placement; the dim returns when the drag ends.
 @export var dim_off_while_dragging: bool = false
 
+## Highlights the target but blocks input ON it too (no hole pass-through). Use for
+## purely-informational steps that point at an interactive element the player must
+## NOT use yet (e.g. showing a card's rarity before the dedicated buy step).
+@export var block_interaction: bool = false
+
 ## Optional portrait shown on the left of the bubble. Leave null to fall back
 ## to the default portrait baked in the bubble scene.
 @export var portrait_texture: Texture2D

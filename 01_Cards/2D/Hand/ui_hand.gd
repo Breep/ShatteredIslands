@@ -90,11 +90,16 @@ signal card_clicked(card: Card)
 @export_group("HideShow")
 @export var _hide_show_duration: float = 0.5
 @export var _hide_offset_y: float = 350.0
+## Descente propre du bouton (séparée du panneau) pour qu'il accompagne la main
+## tout en restant atteignable : à garder < hauteur visible sous le bouton,
+## sinon il sort de l'écran et le deck ne peut plus être rouvert.
+@export var _hide_button_offset_y: float = 250.0
 #endregion
 
 #region ============================== Internals ==============================
 @onready var _card_counter_label: RichTextLabel = %CardCounterLabel
 @onready var _warning_hand_full_label: RichTextLabel = %WarningHandFullLabel
+@onready var _warning_not_enough_gold_label: RichTextLabel = %WarningNotEnoughGoldLabel
 
 #region ============================== Private vars ==============================
 var _hand: Hand
@@ -127,6 +132,7 @@ var _hand_pivot_starting_position: Vector2
 var _card_flash_tweens: Dictionary[StringName, Tween] = {}
 var _counter_flash_tween: Tween
 var _hand_full_warning_tween: Tween
+var _not_enough_gold_warning_tween: Tween
 
 # Nom de la carte qui vient d'être droppée : on ignore le mouse_entered qu'elle
 # va recevoir au prochain frame (le rect du nouveau bouton contient déjà la
@@ -143,9 +149,11 @@ func _ready() -> void:
 		_editor_preview_root.queue_free()
 		_editor_preview_root = null
 	_hand_pivot_starting_position = _hand_pivot.position
+	_hide_show_button_starting_position = _hide_show_button.position
 	if _drag_coordinator != null:
 		_drag_coordinator.register_container(self)
 	Events.tutorial_set_hand_visible.connect(_on_tutorial_set_hand_visible)
+	Events.insufficient_gold.connect(_on_insufficient_gold)
 
 
 func _on_tutorial_set_hand_visible(is_visible: bool) -> void:
@@ -499,6 +507,11 @@ func _kill_refusal_tweens() -> void:
 	_hand_full_warning_tween = null
 	if _warning_hand_full_label != null:
 		_warning_hand_full_label.visible = false
+	if _not_enough_gold_warning_tween != null and _not_enough_gold_warning_tween.is_valid():
+		_not_enough_gold_warning_tween.kill()
+	_not_enough_gold_warning_tween = null
+	if _warning_not_enough_gold_label != null:
+		_warning_not_enough_gold_label.visible = false
 
 
 func _start_preview_timer(card: Card) -> void:
@@ -680,6 +693,10 @@ func _on_drop_landing_finished(dropped_btn: CardButton) -> void:
 		dropped_btn.z_index = 0
 
 
+func _on_insufficient_gold() -> void:
+	_show_not_enough_gold_warning()
+
+
 func _on_hand_card_addition_refused(card: Card, reason: Hand.RefusalReason) -> void:
 	match reason:
 		Hand.RefusalReason.CARD_ALREADY_MAXED_OUT:
@@ -741,12 +758,35 @@ func _show_hand_full_warning() -> void:
 func _hide_hand_full_warning() -> void:
 	if _warning_hand_full_label != null:
 		_warning_hand_full_label.visible = false
+
+
+# Avertissement « pas assez d'or » (émis par le shop via Events.insufficient_gold).
+# Slot dédié, empilé au-dessus du warning « main pleine » : les deux peuvent
+# s'afficher en même temps sans se recouvrir.
+func _show_not_enough_gold_warning() -> void:
+	if _warning_not_enough_gold_label == null:
+		return
+	if _not_enough_gold_warning_tween != null and _not_enough_gold_warning_tween.is_valid():
+		_not_enough_gold_warning_tween.kill()
+	_warning_not_enough_gold_label.visible = true
+	_warning_not_enough_gold_label.modulate.a = 0.0
+	_not_enough_gold_warning_tween = create_tween()
+	_not_enough_gold_warning_tween.tween_property(_warning_not_enough_gold_label, "modulate:a", 1.0, 0.2)
+	_not_enough_gold_warning_tween.tween_interval(2.0)
+	_not_enough_gold_warning_tween.tween_property(_warning_not_enough_gold_label, "modulate:a", 0.0, 0.3)
+	_not_enough_gold_warning_tween.tween_callback(_hide_not_enough_gold_warning)
+
+
+func _hide_not_enough_gold_warning() -> void:
+	if _warning_not_enough_gold_label != null:
+		_warning_not_enough_gold_label.visible = false
 #endregion
 
 
 #region ============================== Hide / Show ==============================
 var _hide_show_tween: Tween
 var _is_visible: bool = true
+var _hide_show_button_starting_position: Vector2
 
 
 # Masque le deck (même effet qu'un appui sur le bouton Masquer/Afficher quand le
@@ -769,10 +809,13 @@ func _set_deck_visible(visible: bool) -> void:
 	_hide_show_tween.set_ease(Tween.EASE_OUT)
 	if visible:
 		_hide_show_tween.tween_property(_hand_pivot, "position", _hand_pivot_starting_position, _hide_show_duration)
+		_hide_show_tween.parallel().tween_property(_hide_show_button, "position", _hide_show_button_starting_position, _hide_show_duration)
 		_hide_show_button.text = "Masquer Deck"
 	else:
 		var hidden_position: Vector2 = _hand_pivot_starting_position + Vector2(0, _hide_offset_y)
+		var hidden_button_position: Vector2 = _hide_show_button_starting_position + Vector2(0, _hide_button_offset_y)
 		_hide_show_tween.tween_property(_hand_pivot, "position", hidden_position, _hide_show_duration)
+		_hide_show_tween.parallel().tween_property(_hide_show_button, "position", hidden_button_position, _hide_show_duration)
 		_hide_show_button.text = "Afficher Deck"
 	_is_visible = visible
 

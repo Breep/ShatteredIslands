@@ -37,6 +37,7 @@ var input_blocking: bool = false
 var _pulse_phase: float = 0.0
 var _target_ctrls: Array[Control] = []
 var _target_padding: float = 0.0
+var _block_through_holes: bool = false ## When true, input is blocked even inside the holes (highlight stays purely visual).
 #endregion
 
 
@@ -97,6 +98,8 @@ func _draw() -> void:
 func _has_point(point: Vector2) -> bool:
 	if not input_blocking:
 		return false
+	if _block_through_holes:
+		return true
 	if target_rects.is_empty():
 		return true
 	var global_p: Vector2 = get_global_transform() * point
@@ -108,11 +111,12 @@ func _has_point(point: Vector2) -> bool:
 
 
 #region ============================== Public functions ==============================
-func set_state(p_dim: bool, p_block: bool, p_targets: Array[Control], p_padding: float = 0.0) -> void:
+func set_state(p_dim: bool, p_block: bool, p_targets: Array[Control], p_padding: float = 0.0, p_block_through_holes: bool = false) -> void:
 	dim_active = p_dim
 	input_blocking = p_block
 	_target_ctrls = p_targets
 	_target_padding = p_padding
+	_block_through_holes = p_block_through_holes
 	mouse_filter = Control.MOUSE_FILTER_STOP if p_block else Control.MOUSE_FILTER_IGNORE
 	visible = p_dim or p_block
 	_refresh_target_rects()

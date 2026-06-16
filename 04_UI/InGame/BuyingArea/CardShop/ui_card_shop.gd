@@ -43,6 +43,7 @@ var _local_player: Player
 
 var _is_active: bool = true
 var _is_locked: bool
+var _tutorial_locked: bool = false # Le tutoriel interdit l'achat (étape info sur une carte).
 
 # Cartes actuellement affichées dans les slots. Source de vérité côté UI (proto)
 # ou copie locale alimentée par shop_refreshed (mode normal).
@@ -69,6 +70,8 @@ func _ready() -> void:
 		# Le drag démarre au press ; un relâchement quasi instantané est arbitré en
 		# clic court (achat routé vers la main) par le coordinator.
 		card_button.card_drag_requested.connect(_on_card_shop_button_drag_requested)
+
+	Events.tutorial_set_shop_interactable.connect(_on_tutorial_set_shop_interactable)
 
 	if _drag_coordinator != null:
 		_drag_coordinator.register_container(self)
@@ -207,6 +210,10 @@ func commit_removal(payload: CardPayload) -> void:
 # Achat annulé (drop hors d'une cible valide, ou cible qui refuse) : la carte du
 # shop revient à son slot.
 func return_to_origin(_payload: CardPayload, hovering: HoveringCard) -> void:
+	# Le seul motif de refus côté shop est l'or : si la carte draguée n'est pas
+	# abordable, on signale le manque d'or (warning + SFX) comme sur le clic.
+	if _card_shop != null and _drag_source_card != null and not _card_shop.can_buy(_drag_source_card):
+		Events.insufficient_gold.emit()
 	var src_button: CardButton = _drag_source_button
 	var target_global: Vector2 = src_button.global_position if src_button != null else hovering.global_position
 	var target_scale: Vector2 = src_button.scale if src_button != null else hovering.get_card_button().scale
@@ -365,9 +372,15 @@ func _set_sell_panel_value(refund_value: int) -> void:
 # Press sur une carte du shop : démarre le drag. Un relâchement quasi instantané
 # sera arbitré en clic court (achat routé vers la main) par le coordinator.
 func _on_card_shop_button_drag_requested(button: CardButton, card: Card) -> void:
+	if _tutorial_locked:
+		return
 	if card == null:
 		return
 	_begin_drag_from_shop(card, button)
+
+
+func _on_tutorial_set_shop_interactable(is_interactable: bool) -> void:
+	_tutorial_locked = not is_interactable
 
 
 func _on_card_shop_shop_refreshed(new_cards: Array[Card]) -> void:

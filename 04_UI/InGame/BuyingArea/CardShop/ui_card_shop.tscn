@@ -484,7 +484,7 @@ stretch_mode = 5
 
 [node name="RefreshButton" type="Button" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow" unique_id=1835826845]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(150, 0)
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme = ExtResource("6_f251f")

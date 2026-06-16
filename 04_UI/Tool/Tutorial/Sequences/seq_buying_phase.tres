@@ -52,10 +52,24 @@ ensure_shop_open = true
 highlight_target = true
 highlight_padding = 8.0
 
+[sub_resource type="Resource" id="step_card_rarity"]
+script = ExtResource("2_step")
+id = &"card_rarity"
+text = "Wow ! Regarde, son contour est bleu : c'est une carte rare ! Pour les plus chanceux, il existe des cartes encore plus rares... il paraît même que certains ont déjà eu des cartes légendaires !"
+target_unique_name = &"CardContainer"
+target_sub_name = &"VBoxContainer3"
+validation_event = 0
+auto_advance_delay = 0.0
+popup_mode = 1
+ensure_shop_open = true
+highlight_target = true
+highlight_padding = 8.0
+block_interaction = true
+
 [sub_resource type="Resource" id="step_buy_combo"]
 script = ExtResource("2_step")
 id = &"buy_combo"
-text = "Et le combo : elle augmente ta vitesse d'attaque. Plus de soins et plus d'ignite ! "
+text = "Et le combo : elle augmente ta vitesse d'attaque. Plus de soins et plus d'ignite !"
 target_unique_name = &"CardContainer"
 target_sub_name = &"VBoxContainer3"
 validation_event = 7
@@ -92,6 +106,15 @@ ensure_shop_open = true
 highlight_target = true
 highlight_padding = 8.0
 
+[sub_resource type="Resource" id="step_sell_card"]
+script = ExtResource("2_step")
+id = &"sell_card"
+text = "Besoin d'or ? Tu peux revendre une carte : glisse-la depuis ta main vers la boutique pour récupérer quelques pièces."
+validation_event = 0
+auto_advance_delay = 0.0
+ensure_shop_open = true
+screen_anchor = 1
+
 [sub_resource type="Resource" id="step_click_unit"]
 script = ExtResource("2_step")
 id = &"click_unit"
@@ -118,14 +141,13 @@ screen_anchor = 1
 [sub_resource type="Resource" id="step_launch_fight"]
 script = ExtResource("2_step")
 id = &"launch_fight"
-text = "Maintenant tu es prêt. Lance le combat losque tu sera prêt pour vivre ta première aventure !"
+text = "Achète un maximum de cartes avant la bataille, les adversaires kobold sont coriaces ! Quand tu es prêt, lance le combat pour vivre ta première aventure."
 target_unique_name = &"ContinueButton"
 validation_event = 4
 auto_advance_delay = 0.0
-highlight_target = true
 
 [resource]
 script = ExtResource("1_seq")
 id = &"seq_buying_phase"
 trigger_state = 3
-steps = Array[ExtResource("2_step")]([SubResource("step_open_shop"), SubResource("step_show_gold"), SubResource("step_buy_attack"), SubResource("step_buy_defense"), SubResource("step_buy_combo"), SubResource("step_reroll"), SubResource("step_upgrade_attack"), SubResource("step_click_unit"), SubResource("step_show_spells"), SubResource("step_launch_fight")])
+steps = Array[ExtResource("2_step")]([SubResource("step_open_shop"), SubResource("step_show_gold"), SubResource("step_buy_attack"), SubResource("step_buy_defense"), SubResource("step_card_rarity"), SubResource("step_buy_combo"), SubResource("step_reroll"), SubResource("step_upgrade_attack"), SubResource("step_sell_card"), SubResource("step_click_unit"), SubResource("step_show_spells"), SubResource("step_launch_fight")])
