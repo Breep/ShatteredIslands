@@ -7,9 +7,12 @@
 script = ExtResource("2_eff")
 _execute_threshold = Array[float]([9.0, 11.0, 13.0, 15.0, 20.0])
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_p7g41"]
+
 [resource]
 script = ExtResource("1_card")
 name = "Culling Beam"
+picture = SubResource("PlaceholderTexture2D_p7g41")
 families = Array[int]([3])
 rarity = 1
 _card_effect = SubResource("Resource_cull")
