@@ -5,9 +5,9 @@ extends Control
 @export_group("Levels")
 @export var _level_icons: Array[TextureRect]
 
-@export_group("Families")
-@onready var _family_icon: TextureRect = %FamilyIcon
-@export var _family_background: ColorRect
+@onready var _family_icon_main: TextureRect = %FamilyIconMain
+@onready var _family_token_secondary: ColorRect = %FamilyTokenSecondary
+@onready var _family_icon_secondary: TextureRect = %FamilyIconSecondary
 
 @export_group("Level markers")
 @export var level1_texture: Texture2D
@@ -106,7 +106,12 @@ func _update_card_layout(card: Card) -> void:
 	
 	
 	_update_aura(card.rarity)
-	_family_icon.texture = Shared.FAMILIES[card.families[0]].icon
+	_family_icon_main.texture = Shared.FAMILIES[card.families[0]].icon
+	if card.families.size() >= 2:
+		_family_token_secondary.show()
+		_family_icon_secondary.texture = Shared.FAMILIES[card.families[1]].icon
+	else:
+		_family_token_secondary.hide()
 	
 	for i in 5:
 		_level_icons[i].hide()
