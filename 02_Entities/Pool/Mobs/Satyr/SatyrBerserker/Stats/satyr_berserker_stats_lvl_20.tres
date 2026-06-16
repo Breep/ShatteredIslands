@@ -4,12 +4,12 @@
 
 [resource]
 script = ExtResource("1_yenep")
-_health_max = 9130.0
+_health_max = 9100.0
 _mana_max = 50.0
 _mana_regen = 3.0
 auto_attack_type = 1
 _attack_range = 1.8
-_attack_damage = 58.0
+_attack_damage = 56.0
 _attack_speed = 1.6517685895939431
 _attack_power = 50.0
 armor = 15.388050365951171

@@ -4,12 +4,12 @@
 
 [resource]
 script = ExtResource("1_kmyu6")
-_health_max = 4870.0
+_health_max = 4840.0
 _mana_max = 50.0
 _mana_regen = 3.0
 auto_attack_type = 1
 _attack_range = 1.8
-_attack_damage = 46.0
+_attack_damage = 44.0
 _attack_speed = 1.466327298348083
 _attack_power = 38.0
 armor = 14.389360522922724

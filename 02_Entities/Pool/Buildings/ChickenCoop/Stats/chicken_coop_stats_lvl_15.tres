@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_ntvqo")
-_health_max = 5300.0
+_health_max = 5500.0
 _mana_max = 45.0
 _mana_regen = 3.0
 auto_attack_type = 1

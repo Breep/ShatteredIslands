@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_1ram5")
-_health_max = 1190.0
+_health_max = 1170.0
 _mana_max = 35.0
 _mana_regen = 3.2
 _attack_damage = 20.0
