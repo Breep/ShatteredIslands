@@ -5,13 +5,14 @@
 
 [sub_resource type="Resource" id="Resource_bd"]
 script = ExtResource("2_eff")
-_ap_ignite_ratio = 0.5
+_ap_ignite_ratio = 0.8
+_flame_range = 4.4
 metadata/_custom_type_script = "uid://b1ruldireff7a3"
 
 [resource]
 script = ExtResource("1_skill")
 skill_id = 6
 name = "Brûleur directionnel"
-description = "Toutes les 1s, inflige 4 + AP x 25% dégâts magiques et applique AP x 20% Ignite dans un cône frontal."
+description = "Toutes les 1s, applique AP x 80% Ignite dans un cône frontal."
 skill_effect = SubResource("Resource_bd")
 metadata/_custom_type_script = "uid://dfby4merlgkep"
