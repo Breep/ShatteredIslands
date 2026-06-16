@@ -136,8 +136,11 @@ func _summon_snake(spawn_position: Vector3, _entity_modifier: Dictionary) -> voi
 	_spawn_manager.spawn_entity(snake, Transform3D(Basis(), spawn_position), _owner.get_context(), Entity.EntityType.SNAKE)
 
 
-func _summon_molten_golem(spawn_position: Vector3, _entity_modifier: Dictionary) -> void:
+func _summon_molten_golem(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
 	var golem: MoltenGolem = MOLTEN_GOLEM_SCENE.instantiate()
+	# Set the level before spawn_entity (i.e. before add_child / _ready) so the golem's
+	# skill tiers unlock at the right level — see MoltenGolem.Modifier.LEVEL.
+	golem.level = entity_modifier.get(MoltenGolem.Modifier.LEVEL, golem.level)
 	_spawn_manager.spawn_entity(golem, Transform3D(Basis(), spawn_position), _owner.get_context(), Entity.EntityType.MOLTEN_GOLEM)
 
 
