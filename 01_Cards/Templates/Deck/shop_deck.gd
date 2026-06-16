@@ -91,13 +91,16 @@ func remove_card(card: Card) -> void:
 
 # Pioche `count` cartes en respectant les % de chance par rareté. Pas de doublon
 # de design dans une même pioche. Les cartes piochées sont retirées du pool.
-func draw(count: int, rarity_chances: Dictionary[Card.Rarity, float]) -> Array[Card]:
+# `exclude_names` (optionnel) : noms de design à ne jamais piocher pour ce draw
+# (ex. cartes déjà au niveau max chez le joueur).
+func draw(count: int, rarity_chances: Dictionary[Card.Rarity, float], exclude_names: Array[StringName] = []) -> Array[Card]:
 	if is_tutorial and _tutorial_draw_index < _TUTORIAL_DRAWS.size():
-		return _tutorial_draw(count, rarity_chances)
+		return _tutorial_draw(count, rarity_chances, exclude_names)
 
 	Verbose.trace("Draw cards (drop rates: " + str(rarity_chances) + ")", Verbose.Category.CARD_SHOP)
 	var drawn: Array[Card] = []
 	var drawn_names: Array[StringName] = []
+	drawn_names.append_array(exclude_names)
 	for _i in count:
 		var card: Card = _draw_random(rarity_chances, drawn_names)
 		if card == null:
@@ -186,12 +189,13 @@ const _TUTORIAL_DRAWS: Array = [
 var _tutorial_draw_index: int = 0
 
 
-func _tutorial_draw(count: int, rarity_chances: Dictionary[Card.Rarity, float]) -> Array[Card]:
+func _tutorial_draw(count: int, rarity_chances: Dictionary[Card.Rarity, float], exclude_names: Array[StringName] = []) -> Array[Card]:
 	var script: Array = _TUTORIAL_DRAWS[_tutorial_draw_index]
 	_tutorial_draw_index += 1
 
 	var drawn: Array[Card] = []
 	var drawn_names: Array[StringName] = []
+	drawn_names.append_array(exclude_names)
 	for i in count:
 		var forced_name: String = script[i] if i < script.size() else ""
 		var card: Card = null
