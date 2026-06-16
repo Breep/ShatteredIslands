@@ -6,6 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_o73se"]
 script = ExtResource("2_aer2u")
+_as_bonus = 45.0
 metadata/_custom_type_script = "uid://dbe4aqvstwsha"
 
 [resource]
