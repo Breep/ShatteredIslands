@@ -66,13 +66,9 @@
 [ext_resource type="AudioStream" uid="uid://dcjhrifxl2abr" path="res://02_Entities/Pool/Mobs/SkeletonDragon/SFX/dragon_firetbreath_variation1_.wav" id="63_dfire"]
 [ext_resource type="AudioStream" uid="uid://0aa7x2ued4ng" path="res://23_Audio/SFX/Deaths/kobold_die_01.wav" id="63_r4wo4"]
 [ext_resource type="AudioStream" uid="uid://btphmpojqi25g" path="res://23_Audio/SFX/Deaths/forest_drake_die.wav" id="64_3m1ih"]
-[ext_resource type="AudioStream" uid="uid://crdhqicf4m0xl" path="res://02_Entities/Pool/Mobs/SkeletonDragon/SFX/dragon voice bienvenue.wav" id="64_dwelc"]
-[ext_resource type="AudioStream" uid="uid://dtm8ojrywh5xi" path="res://02_Entities/Pool/Mobs/SkeletonDragon/SFX/dragon voice m'affontre dans ma demeure.wav" id="65_ddeme"]
 [ext_resource type="AudioStream" uid="uid://d00wtop1733el" path="res://23_Audio/SFX/Misc/sfx_wolf_howl.mp3" id="65_eb8l1"]
 [ext_resource type="AudioStream" uid="uid://bj3burh0l54ei" path="res://23_Audio/SFX/Deaths/chicken_die.wav" id="65_v180h"]
-[ext_resource type="AudioStream" uid="uid://dgnqprlklhugc" path="res://02_Entities/Pool/Mobs/SkeletonDragon/SFX/dragon voice - golem.wav" id="66_dgolm"]
 [ext_resource type="AudioStream" uid="uid://utf61f4mcva4" path="res://23_Audio/SFX/Deaths/tree_falling.wav" id="66_i0bwi"]
-[ext_resource type="AudioStream" uid="uid://cmyxmka8f10kd" path="res://02_Entities/Pool/Mobs/SkeletonDragon/SFX/dragon voice hahaha.wav" id="67_dhaha"]
 [ext_resource type="AudioStream" uid="uid://cglrtn6d0s23l" path="res://23_Audio/SFX/Deaths/sfx_skeleton_drake_die.mp3" id="67_eu8wc"]
 [ext_resource type="AudioStream" uid="uid://cch1i16vmpwpq" path="res://23_Audio/SFX/Misc/dragon_breathing_fire.mp3" id="68_i0bwi"]
 [ext_resource type="AudioStream" uid="uid://bngtn48ej7tfp" path="res://23_Audio/SFX/Misc/dragon_wings_flapping.mp3" id="69_4hs6q"]
@@ -129,10 +125,6 @@ audio_database = Dictionary[String, AudioStream]({
 "dragon_firebreath": ExtResource("63_dfire"),
 "dragon_roar": ExtResource("62_droar"),
 "dragon_roar_01": ExtResource("70_r4wo4"),
-"dragon_voice_bienvenue": ExtResource("64_dwelc"),
-"dragon_voice_demeure": ExtResource("65_ddeme"),
-"dragon_voice_golem": ExtResource("66_dgolm"),
-"dragon_voice_hahaha": ExtResource("67_dhaha"),
 "dragon_wings_flapping": ExtResource("69_4hs6q"),
 "egg_crack_01": ExtResource("53_tmlfr"),
 "egg_hit": ExtResource("11_2p1kq"),
