@@ -109,6 +109,24 @@ func summon_entity(entity_type: Entity.EntityType, spawn_config: SpawnLocationCo
 		ActionModifier.VarType.COUNT: count,
 	})
 
+
+# Vrai si `entity` descend (directement ou non) du propriétaire dans la chaîne
+# de summoners. Couvre les summons-de-summons (poulets d'un poulailler, etc.),
+# là où un simple `entity.summoner == owner` ne verrait que le premier maillon.
+func is_summoner_of(entity: Entity) -> bool:
+	if entity == null or not is_instance_valid(entity):
+		return false
+	var visited: Array[Entity] = []
+	var ancestor: Entity = entity.summoner
+	while ancestor != null:
+		if ancestor == _owner:
+			return true
+		if ancestor in visited:
+			return false
+		visited.append(ancestor)
+		ancestor = ancestor.summoner
+	return false
+
 # ============================== Private functions ==============================
 
 # Offset horizontal de spawn pour la i-ème entité sur N quand un count > 1
@@ -136,8 +154,11 @@ func _summon_snake(spawn_position: Vector3, _entity_modifier: Dictionary) -> voi
 	_spawn_manager.spawn_entity(snake, Transform3D(Basis(), spawn_position), _owner.get_context(), Entity.EntityType.SNAKE)
 
 
-func _summon_molten_golem(spawn_position: Vector3, _entity_modifier: Dictionary) -> void:
+func _summon_molten_golem(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
 	var golem: MoltenGolem = MOLTEN_GOLEM_SCENE.instantiate()
+	# Set the level before spawn_entity (i.e. before add_child / _ready) so the golem's
+	# skill tiers unlock at the right level — see MoltenGolem.Modifier.LEVEL.
+	golem.level = entity_modifier.get(MoltenGolem.Modifier.LEVEL, golem.level)
 	_spawn_manager.spawn_entity(golem, Transform3D(Basis(), spawn_position), _owner.get_context(), Entity.EntityType.MOLTEN_GOLEM)
 
 

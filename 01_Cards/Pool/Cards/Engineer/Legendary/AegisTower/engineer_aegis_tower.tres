@@ -17,7 +17,6 @@ script = ExtResource("1_card")
 name = &"Aegis Tower"
 picture = SubResource("PlaceholderTexture2D_aegis")
 families = Array[int]([2])
-rarity = 3
 _card_effect = SubResource("Resource_effect")
 points = Dictionary[int, int]({
 2: 5

@@ -116,6 +116,7 @@ bones/46/position = Vector3(-0.0007746887, 0.107367516, 0.0010660744)
 bones/46/rotation = Quaternion(1.8626487e-09, -2.3841858e-07, 4.016329e-08, 1)
 
 [node name="HealthBarMarker3D" type="Marker3D" parent="PoisonGolem" unique_id=1270261959]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8091812, 0)
 
 [node name="LargeHealthBarComponent" parent="." unique_id=1489577420 node_paths=PackedStringArray("_spawn", "_owner") instance=ExtResource("4_hb")]
 _spawn = NodePath("../PoisonGolem/HealthBarMarker3D")

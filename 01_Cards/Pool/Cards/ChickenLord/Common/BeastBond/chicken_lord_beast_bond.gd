@@ -22,13 +22,13 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 	var per_summon: float = _resist_per_summon[card_lvl - 1]
 
 	_on_entity_detected = func(entity: Entity) -> void:
-		if not _is_owned_summon(entity, owner): return
+		if not (is_instance_valid(entity) and entity.is_summoned() and owner.summon.is_summoner_of(entity)): return
 		entity.died.connect(func() -> void: _refresh(owner, per_summon, card_name), CONNECT_ONE_SHOT)
 		_refresh(owner, per_summon, card_name)
 	owner.target.new_entity_detected.connect(_on_entity_detected)
 
 	for ally in owner.target.get_targets(TargetComponent.MultipleTargettingStrategy.ALLIES):
-		if _is_owned_summon(ally, owner):
+		if is_instance_valid(ally) and ally.is_summoned() and owner.summon.is_summoner_of(ally):
 			ally.died.connect(func() -> void: _refresh(owner, per_summon, card_name), CONNECT_ONE_SHOT)
 
 	_refresh(owner, per_summon, card_name)
@@ -55,14 +55,10 @@ func _refresh(owner: Entity, per_summon: float, card_name: StringName) -> void:
 		owner.stat_modifiers_registry.register_modifier(mod)
 
 
-func _is_owned_summon(entity: Entity, owner: Entity) -> bool:
-	return entity != null and is_instance_valid(entity) and entity.is_summoned() and entity.summoner == owner
-
-
 func _count_living_summons(owner: Entity) -> int:
 	var count: int = 0
 	for ally in owner.target.get_targets(TargetComponent.MultipleTargettingStrategy.ALLIES):
-		if _is_owned_summon(ally, owner):
+		if is_instance_valid(ally) and ally.is_summoned() and owner.summon.is_summoner_of(ally):
 			count += 1
 	return count
 

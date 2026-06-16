@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://by2lfscbv0p4e"]
+
+[ext_resource type="Shader" uid="uid://drntwugn4sunp" path="res://22_VFX/VFX_3D/Explosion/shaders/s_multi_vanishing_ds.tres" id="1_osvef"]
+[ext_resource type="Texture2D" uid="uid://b585jaayrgxpo" path="res://22_VFX/VFX_3D/Explosion/textures/T_multiple_waves2.jpg" id="2_wn5v7"]
+[ext_resource type="Script" uid="uid://bya77ps2cns5w" path="res://02_Entities/Pool/Mobs/Golems/vfx/vfx_landing_golem.gd" id="3_script"]
+
+[sub_resource type="Gradient" id="Gradient_1b5yr"]
+offsets = PackedFloat32Array(0.170569, 0.394649, 0.608696)
+colors = PackedColorArray(4, 1.5, 0.1, 1, 0.892858, 0.334822, 0.0223214, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rnusi"]
+gradient = SubResource("Gradient_1b5yr")
+use_hdr = true
+
+[sub_resource type="Gradient" id="Gradient_rb65s"]
+offsets = PackedFloat32Array(0.214047, 0.35786, 0.809365, 1)
+colors = PackedColorArray(2, 1, 0, 1, 0.28, 0.207, 0.19, 1, 0.326954, 0.244384, 0.22515, 1, 0.28, 0.207, 0.19, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1oro0"]
+gradient = SubResource("Gradient_rb65s")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ifsum"]
+render_priority = 0
+shader = ExtResource("1_osvef")
+shader_parameter/Linear_Color_1D = SubResource("GradientTexture1D_1oro0")
+shader_parameter/Alpha_Texture = ExtResource("2_wn5v7")
+shader_parameter/ProximityFade = 0.5
+shader_parameter/Emission_color_1D = SubResource("GradientTexture1D_rnusi")
+
+[sub_resource type="Curve" id="Curve_h12eo"]
+_data = [Vector2(0, 0), 0.0, 0.912611, 0, 0, Vector2(0.996825, 1), 0.776552, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_e6rtc"]
+texture_mode = 1
+curve = SubResource("Curve_h12eo")
+
+[sub_resource type="Curve" id="Curve_t2i2u"]
+_data = [Vector2(0, 0.843868), 0.0, 0.0663708, 0, 0, Vector2(1, 0.301517), -0.986094, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_jwixl"]
+curve = SubResource("Curve_t2i2u")
+
+[sub_resource type="Curve" id="Curve_vofs4"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.671302), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_c11i7"]
+curve = SubResource("Curve_vofs4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_04wyu"]
+particle_flag_align_y = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.0
+emission_ring_radius = 0.1
+emission_ring_inner_radius = 0.1
+emission_ring_cone_angle = 90.0
+spread = 0.0
+radial_velocity_min = 20.0
+radial_velocity_max = 25.0
+radial_velocity_curve = SubResource("CurveTexture_jwixl")
+gravity = Vector3(0, 0, 0)
+scale_min = 5.0
+scale_max = 7.0
+scale_curve = SubResource("CurveTexture_c11i7")
+alpha_curve = SubResource("CurveTexture_e6rtc")
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_y1igf"]
+size = Vector2(0.6, 1)
+center_offset = Vector3(0, 0.4, 0)
+
+[node name="LandingGolem" type="Node3D" unique_id=1456112342]
+script = ExtResource("3_script")
+
+[node name="streaks2" type="GPUParticles3D" parent="." unique_id=1497646358]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.247797, 0)
+material_override = SubResource("ShaderMaterial_ifsum")
+cast_shadow = 0
+emitting = false
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_04wyu")
+draw_pass_1 = SubResource("QuadMesh_y1igf")

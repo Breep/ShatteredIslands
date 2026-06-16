@@ -3,11 +3,13 @@
 [ext_resource type="Texture2D" uid="uid://chnmsowbxek0m" path="res://02_Entities/Pool/Mobs/Golems/PoisonGolem/Skills/Ultimate/skill_geyser_putride.svg" id="1_m0d30"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
 [ext_resource type="Script" uid="uid://bqv3h7jc60mtr" path="res://02_Entities/Pool/Mobs/Golems/PoisonGolem/Skills/Ultimate/geyser_putride.gd" id="2_eff"]
+[ext_resource type="PackedScene" uid="uid://by2lfscbv0p4e" path="res://02_Entities/Pool/Mobs/Golems/vfx/VFX_landing_golem.tscn" id="3_vfx"]
 
 [sub_resource type="Resource" id="Resource_e"]
 script = ExtResource("2_eff")
 _stacks = 60.0
 _radius = 5.0
+_impact_vfx = ExtResource("3_vfx")
 metadata/_custom_type_script = "uid://bgeyserput1eff"
 
 [resource]

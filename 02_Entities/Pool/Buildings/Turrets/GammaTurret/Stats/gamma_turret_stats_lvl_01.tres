@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_p1el7")
-_health_max = 550.0
+_health_max = 750.0
 _mana_max = 30.0
 _mana_regen = 3.0
 _attack_range = 14.0

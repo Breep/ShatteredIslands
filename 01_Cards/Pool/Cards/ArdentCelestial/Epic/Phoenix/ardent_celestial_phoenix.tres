@@ -7,7 +7,7 @@
 
 [sub_resource type="Resource" id="Resource_effect"]
 script = ExtResource("3_effect")
-_acolyte_level = Array[int]([1, 2, 3])
+_acolyte_level = Array[int]([3, 5, 7])
 _acolyte_desc = ExtResource("2_desc")
 metadata/_custom_type_script = "uid://cph03n1xardc7e"
 

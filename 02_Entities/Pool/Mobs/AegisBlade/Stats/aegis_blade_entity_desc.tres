@@ -65,3 +65,9 @@ skills = Dictionary[int, ExtResource("2_geb1f")]({
 3: ExtResource("27_gol"),
 4: ExtResource("28_ult")
 })
+aa_1_release_normalized = 0.55
+aa_2_release_normalized = 0.55
+aa_3_release_normalized = 0.55
+aa_1_anim_base_duration = 1.5
+aa_2_anim_base_duration = 1.5
+aa_3_anim_base_duration = 1.5
