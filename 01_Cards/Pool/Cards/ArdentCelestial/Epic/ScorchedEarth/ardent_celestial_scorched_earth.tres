@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_card"]
 [ext_resource type="Script" uid="uid://pcjcpieki048" path="res://01_Cards/Pool/Cards/ArdentCelestial/Epic/ScorchedEarth/ardent_celestial_scorched_earth.gd" id="2_eff"]
+[ext_resource type="Texture2D" uid="uid://dafxdbb3phirk" path="res://01_Cards/Pool/Cards/ArdentCelestial/Epic/ScorchedEarth/ardent_celestial_scorched_earth.png" id="2_lsfc1"]
 
 [sub_resource type="Resource" id="Resource_scorch"]
 script = ExtResource("2_eff")
@@ -10,12 +11,10 @@ _duration = Array[float]([3.0, 3.0, 3.0])
 _radius = Array[float]([1.0, 1.5, 2.0])
 _tick_period = 1.2
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_rx8vd"]
-
 [resource]
 script = ExtResource("1_card")
 name = "Scorched Earth"
-picture = SubResource("PlaceholderTexture2D_rx8vd")
+picture = ExtResource("2_lsfc1")
 families = Array[int]([3])
 rarity = 2
 _card_effect = SubResource("Resource_scorch")

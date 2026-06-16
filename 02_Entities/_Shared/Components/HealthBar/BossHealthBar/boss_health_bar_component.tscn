@@ -140,6 +140,7 @@ outline_color = Color(0, 0, 0, 1)
 script = ExtResource("1_boss")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1927344942]
+layer = 0
 
 [node name="MainControl" type="Control" parent="CanvasLayer" unique_id=1296904205]
 unique_name_in_owner = true

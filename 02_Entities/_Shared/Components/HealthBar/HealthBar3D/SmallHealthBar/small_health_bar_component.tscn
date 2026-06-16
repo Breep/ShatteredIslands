@@ -117,6 +117,7 @@ outline_color = Color(0, 0, 0, 1)
 script = ExtResource("1_wiwv7")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=841210394]
+layer = 0
 
 [node name="MainControl" type="Control" parent="CanvasLayer" unique_id=563598768]
 unique_name_in_owner = true

@@ -2,17 +2,16 @@
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_card"]
 [ext_resource type="Script" uid="uid://bsrcc0ekof05q" path="res://01_Cards/Pool/Cards/ChickenLord/Epic/Reinforcements/chickenlord_reinforcements.gd" id="2_eff"]
+[ext_resource type="Texture2D" uid="uid://cbkxbh4m25kll" path="res://01_Cards/Pool/Cards/ChickenLord/Epic/Reinforcements/chickenlord_reinforcements.png" id="2_ijp4u"]
 
 [sub_resource type="Resource" id="Resource_reinf"]
 script = ExtResource("2_eff")
 _chance = Array[float]([20.0, 30.0, 40.0])
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_81s1x"]
-
 [resource]
 script = ExtResource("1_card")
 name = "Reinforcements"
-picture = SubResource("PlaceholderTexture2D_81s1x")
+picture = ExtResource("2_ijp4u")
 families = Array[int]([8])
 rarity = 2
 _card_effect = SubResource("Resource_reinf")

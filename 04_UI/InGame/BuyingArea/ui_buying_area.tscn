@@ -51,7 +51,13 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Background" type="ColorRect" parent="ShopMainControl" unique_id=529713156]
+[node name="ShopCanvasLayer" type="CanvasLayer" parent="ShopMainControl" unique_id=529713157]
+unique_name_in_owner = true
+layer = 1
+visible = false
+
+[node name="Background" type="ColorRect" parent="ShopMainControl/ShopCanvasLayer" unique_id=529713156]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -61,7 +67,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.21960784, 0.21960784, 0.21960784, 0.78431374)
 
-[node name="CardShop" parent="ShopMainControl/Background" unique_id=1333080452 instance=ExtResource("4_dsp03")]
+[node name="CardShop" parent="ShopMainControl/ShopCanvasLayer" unique_id=1333080452 instance=ExtResource("4_dsp03")]
 unique_name_in_owner = true
 layout_mode = 1
 offset_left = -341.0

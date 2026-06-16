@@ -40,7 +40,7 @@ func apply(ctx: SkillContext) -> void:
 	# Co-op : la mort de Latika n'est pas synonyme de défaite. On retire la marque
 	# pour ne pas laisser un ennemi amplifié sans marqueuse en vie.
 	latika.died.connect(func(_self_ref: Entity) -> void:
-		var marked: Entity = latika.get_meta(META_MARKED_TARGET, null)
+		var marked: Entity = get_marked_target(latika)
 		if is_instance_valid(marked):
 			_clear_mark(marked)
 		latika.set_meta(META_MARKED_TARGET, null))
@@ -51,9 +51,20 @@ func get_description() -> String:
 		+ "% de dégâts. La marque suit son focus (une seule cible à la fois)."
 
 
+# Lecture sûre de la cible marquée : null si la clé meta est absente ou si la cible a
+# été libérée (ennemi mort). NB: get_meta(name, null) NE protège PAS du cas "clé absente"
+# — côté moteur un défaut null équivaut à "aucun défaut" → erreur. D'où le has_meta
+# explicite, et la validation d'instance pour ne jamais renvoyer un objet libéré.
+static func get_marked_target(latika: Entity) -> Entity:
+	if not is_instance_valid(latika) or not latika.has_meta(META_MARKED_TARGET):
+		return null
+	var marked: Variant = latika.get_meta(META_MARKED_TARGET)
+	return marked if marked is Entity and is_instance_valid(marked) else null
+
+
 # Déplace la marque de l'ancienne cible vers la nouvelle (no-op si identique).
 func _move_mark(latika: Entity, new_target: Entity) -> void:
-	var previous = latika.get_meta(META_MARKED_TARGET, null)
+	var previous: Entity = get_marked_target(latika)
 	if previous == new_target:
 		return
 	if is_instance_valid(previous):

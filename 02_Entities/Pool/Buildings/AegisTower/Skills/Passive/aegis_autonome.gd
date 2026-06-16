@@ -40,9 +40,8 @@ func _summon_linked_blade(tower: AegisTower) -> void:
 	for blade: Entity in spawned:
 		if not is_instance_valid(blade):
 			continue
-		# Niveau hérité de la Tour.
-		if blade.progression != null and tower.progression != null:
-			blade.progression.level = tower.progression.level
+		# Niveau hérité de la Tour : géré par l'héritage de la chaîne summon
+		# (Entity._apply_inherited_summon_modifiers ancre la blade sur la Tour).
 		# Lien de mort : la blade meurt avec la Tour.
 		tower.died.connect(func(_self_ref: Entity) -> void:
 			if is_instance_valid(blade) and blade.is_alive():
