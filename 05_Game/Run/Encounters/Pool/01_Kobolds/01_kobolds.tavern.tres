@@ -83,7 +83,7 @@ level = 3
 script = ExtResource("5_lkqdl")
 entry = SubResource("RoasterEntry_thief")
 display_label = "Kobold_Thief"
-transform = Transform3D(-0.248, 0, -0.969, 0, 1, 0, -0.969, 0, 0.248, -6.03, 0.255, -3.634)
+transform = Transform3D(-0.248, 0, -0.969, 0, 1, 0, 0.969, 0, -0.248, -6.03, 0.255, -3.634)
 
 [sub_resource type="Resource" id="RoasterEntry_warrior"]
 script = ExtResource("14_rstry")
