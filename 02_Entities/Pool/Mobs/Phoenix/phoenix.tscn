@@ -9,8 +9,8 @@
 [ext_resource type="Resource" uid="uid://34k1ljotkiup" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/entity_desc.tres" id="9_desc"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x7yny"]
-radius = 0.30566406
-height = 1.5097656
+radius = 0.4609375
+height = 2.3457031
 
 [node name="Phoenix" type="CharacterBody3D" unique_id=2109615854 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker")]
 collision_layer = 16
@@ -27,7 +27,7 @@ _spawn = NodePath("../PhoenixVisual/HealthBarSpawnMarker")
 _owner = NodePath("..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1928783995]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75244224, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8623055, 0)
 shape = SubResource("CapsuleShape3D_x7yny")
 
 [node name="AnimationComponent" type="Node" parent="." unique_id=986746104 node_paths=PackedStringArray("_animation_tree", "_owner")]

@@ -9,11 +9,11 @@ _mana_max = 42.0
 _mana_regen = 3.0
 _attack_range = 7.0
 _attack_damage = 46.0
-_attack_speed = 1.7371231786469508
+_attack_speed = 1.9852836327393728
 _movement_speed = 6.0
 _attack_power = 70.9
 armor = 15.09304092210926
-_crit_chance = 14.8
+_crit_chance = 18.5
 _dodge = 16.5
 _m_crit_chances = Dictionary[int, float]({
 0: 0.0,
