@@ -509,10 +509,18 @@ func get_card_context() -> CardContext:
 # ancêtre sur cette entité (clone + register). Snapshot au moment du spawn :
 # les modifiers ajoutés à un ancêtre après ce point ne se propageront pas
 # aux summons déjà nés.
+#
+# Niveau : un summon naît au niveau de son ancre — le premier ancêtre non-summon
+# en remontant la chaîne (poulailler, tour, héros…) — auquel s'ajoute le bonus de
+# chaîne complet. On vise l'ancre plutôt que le summoner direct car un maillon
+# summon intermédiaire a déjà le bonus de chaîne dans son propre niveau : le
+# prendre comme base le compterait deux fois.
 func _apply_inherited_summon_modifiers() -> void:
 	var visited: Array[Entity] = []
 	var ancestor: Entity = summoner
 	var total_level_bonus: int = 0
+	var base_level: int = level
+	var base_level_found: bool = false
 	while ancestor != null:
 		if ancestor in visited:
 			Verbose.error("Cycle in summoner chain for [" + entity_name + "] at [" + ancestor.entity_name + "]", Verbose.Category.ENTITY)
@@ -521,8 +529,11 @@ func _apply_inherited_summon_modifiers() -> void:
 		if ancestor.summon_modifiers_registry != null:
 			ancestor.summon_modifiers_registry.apply_to(self, ancestor)
 			total_level_bonus += ancestor.summon_modifiers_registry.get_total_level_bonus()
+		if not base_level_found and ancestor.category != Category.SUMMON:
+			base_level = ancestor.progression.level if ancestor.progression != null else ancestor.level
+			base_level_found = true
 		ancestor = ancestor.summoner
-	_apply_inherited_level_bonus(total_level_bonus)
+	_set_inherited_level(base_level + total_level_bonus)
 
 
 func _apply_inherited_acolyte_modifiers() -> void:
@@ -560,12 +571,23 @@ func _apply_inherited_building_modifiers() -> void:
 # Applique un bonus de level cumulé (sommé sur la chaîne summoner via les
 # *_modifiers_registry.get_total_level_bonus()). Push sur progression.level
 # pour déclencher le recompute des base stats via _handle_level_up().
+# Utilisé par les acolytes / buildings : ils ajoutent au niveau propre issu de
+# leur entry roaster (≠ summons, qui posent un niveau absolu via _set_inherited_level).
 func _apply_inherited_level_bonus(bonus: int) -> void:
 	if bonus <= 0: return
 	var new_level: int = clampi(level + bonus, 1, MAX_LEVEL)
 	level = new_level
 	if progression != null:
 		progression.level = new_level
+
+
+# Pose le niveau absolu d'un summon (niveau de l'ancre + bonus de chaîne),
+# clampé. Push sur progression.level pour déclencher le recompute des base stats.
+func _set_inherited_level(new_level: int) -> void:
+	var clamped: int = clampi(new_level, 1, MAX_LEVEL)
+	level = clamped
+	if progression != null:
+		progression.level = clamped
 #endregion
 
 #region ============================== Spawn system ==============================

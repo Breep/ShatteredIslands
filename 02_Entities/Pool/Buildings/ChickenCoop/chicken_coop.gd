@@ -38,9 +38,9 @@ func _summon_and_capture(spawn_cfg: SpawnLocationConfig, mods: Dictionary) -> Ar
 func _apply_coop_rules(chicken: Entity) -> void:
 	if not is_instance_valid(chicken) or not (chicken is Chicken):
 		return
-	# "Production continue" : les poulets héritent du niveau du poulailler.
-	if chicken.progression != null and progression != null:
-		chicken.progression.level = progression.level
+	# "Production continue" (poulets au niveau du poulailler) est désormais géré
+	# par l'héritage de niveau de la chaîne summon (Entity._apply_inherited_summon_modifiers),
+	# qui ancre le niveau de base du poulet sur le poulailler et y ajoute les bonus de chaîne.
 	# Talent "Couvée blindée" : block à l'apparition.
 	var block: float = get_meta(META_SPAWN_BLOCK, 0.0)
 	if block > 0.0:
