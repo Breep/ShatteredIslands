@@ -10,9 +10,12 @@ _duration = Array[float]([2.0, 3.0, 4.0])
 _radius = Array[float]([1.0, 1.5, 2.0])
 _tick_period = 1.2
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_rx8vd"]
+
 [resource]
 script = ExtResource("1_card")
 name = "Scorched Earth"
+picture = SubResource("PlaceholderTexture2D_rx8vd")
 families = Array[int]([3])
 rarity = 2
 _card_effect = SubResource("Resource_scorch")

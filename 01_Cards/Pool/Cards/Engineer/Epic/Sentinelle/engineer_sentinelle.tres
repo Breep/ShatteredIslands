@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Card" format=3 uid="uid://3gus2oy5w7ip"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_card"]
-[ext_resource type="Resource" uid="uid://caplw345lqegg" path="res://02_Entities/Pool/Buildings/Sentinelle/Stats/entity_desc.tres" id="2_desc"]
+[ext_resource type="Resource" uid="uid://b7n1ebbasrurx" path="res://02_Entities/Pool/Buildings/Sentinelle/Stats/entity_desc.tres" id="2_desc"]
 [ext_resource type="Script" uid="uid://bdoo2dejx67jg" path="res://01_Cards/Pool/Cards/Engineer/Epic/Sentinelle/engineer_sentinelle.gd" id="3_effect"]
 
 [sub_resource type="Resource" id="Resource_effect"]

@@ -20,11 +20,11 @@
 [ext_resource type="Texture2D" uid="uid://btvd8un55vke6" path="res://01_Cards/2D/CardLayout/Data/StandardCard/ct_title_banner.png" id="17_ejxcv"]
 [ext_resource type="Texture2D" uid="uid://d20dxq57xv74r" path="res://01_Cards/2D/CardLayout/Data/StandardCard/ct_illustration_mask_full.png" id="17_hk667"]
 [ext_resource type="Texture2D" uid="uid://bp5u3lmsc8fm2" path="res://01_Cards/2D/CardLayout/Data/StandardCard/Stars/ct_level_star_4.png" id="17_p8v2y"]
+[ext_resource type="Texture2D" uid="uid://btw6s2e7utx4k" path="res://01_Cards/Pool/Families/Backgrounds/neutral_background.png" id="18_5obkk"]
 [ext_resource type="Texture2D" uid="uid://odtrh6khih2s" path="res://01_Cards/2D/CardLayout/Data/StandardCard/Stars/ct_level_star_5.png" id="18_7ajba"]
-[ext_resource type="Texture2D" uid="uid://calhfni5uquof" path="res://01_Cards/Pool/Families/Backgrounds/chicken_lord_background.jpeg" id="18_hk667"]
 [ext_resource type="Texture2D" uid="uid://bp08djuu2g0pr" path="res://01_Cards/2D/CardLayout/Data/StandardCard/ct_level_flag.png" id="18_p8v2y"]
 [ext_resource type="Texture2D" uid="uid://ifaj1br6koel" path="res://01_Cards/2D/CardLayout/Data/StandardCard/ct_family_frame.png" id="19_7ajba"]
-[ext_resource type="Texture2D" uid="uid://04wy1x4ux68" path="res://01_Cards/Pool/Families/Backgrounds/colossus_background.jpeg" id="19_hk667"]
+[ext_resource type="Texture2D" uid="uid://c7apxtrdfsvs2" path="res://01_Cards/Pool/Cards/ArdentCelestial/Common/Meteor/ardent_celestial_meteor.png" id="19_77f0v"]
 [ext_resource type="Shader" uid="uid://bquiydhxqegb5" path="res://01_Cards/2D/CardLayout/Data/Shaders/curve_text.gdshader" id="21_xw5tp"]
 [ext_resource type="Material" uid="uid://dad48e6irkubb" path="res://01_Cards/2D/CardLayout/Data/Shaders/family_background.tres" id="23_5obkk"]
 [ext_resource type="Texture2D" uid="uid://bxktk2p3m3g2" path="res://01_Cards/2D/CardLayout/Data/StandardCard/card_full_mask.png" id="25_7ajba"]
@@ -221,18 +221,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("13_78cks")
 
-[node name="CardPortraitTextureRect" type="TextureRect" parent="." unique_id=1308609123]
-unique_name_in_owner = true
-material = SubResource("ShaderMaterial_6cxer")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("18_hk667")
-expand_mode = 1
-
 [node name="CardPortraitBackground" type="TextureRect" parent="." unique_id=1126265025]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_6cxer")
@@ -242,7 +230,19 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("19_hk667")
+texture = ExtResource("18_5obkk")
+expand_mode = 1
+
+[node name="CardPortraitTextureRect" type="TextureRect" parent="." unique_id=1308609123]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_6cxer")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("19_77f0v")
 expand_mode = 1
 
 [node name="CardIllustrationFrame" type="TextureRect" parent="." unique_id=1387730004]

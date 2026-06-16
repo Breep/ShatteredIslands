@@ -127,8 +127,6 @@ func _format_value(modifier: StatModifier) -> String:
 	return sign_prefix + _format_number(modifier.value)
 
 
-# Entier => sans décimale ; sinon une décimale (str() + pad_decimals, %g n'existe
-# pas en GDScript).
 func _format_number(value: float) -> String:
 	if is_equal_approx(value, roundf(value)):
 		return str(roundi(value))

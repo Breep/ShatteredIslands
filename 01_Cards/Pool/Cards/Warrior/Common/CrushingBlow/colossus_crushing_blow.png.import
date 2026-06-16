@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxss3ukecvweq"
-path="res://.godot/imported/colossus_tainted_blood.jpg.png-a54c74e5596c969ced85162d005b3228.ctex"
+uid="uid://bvpnk3aj30d1g"
+path="res://.godot/imported/colossus_crushing_blow.png-f5f4748259345e1d4b5d8e0f07333770.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://01_Cards/Pool/Cards/Colossus/Common/TaintedBlood/colossus_tainted_blood.jpg.png"
-dest_files=["res://.godot/imported/colossus_tainted_blood.jpg.png-a54c74e5596c969ced85162d005b3228.ctex"]
+source_file="res://01_Cards/Pool/Cards/Warrior/Common/CrushingBlow/colossus_crushing_blow.png"
+dest_files=["res://.godot/imported/colossus_crushing_blow.png-f5f4748259345e1d4b5d8e0f07333770.ctex"]
 
 [params]
 

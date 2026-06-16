@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cj4772cp82kn7"
-path="res://.godot/imported/engineer_evasive_barrier.png-e2ea828719f103b0767b01ee732200aa.ctex"
+uid="uid://dht4enlksdnhj"
+path="res://.godot/imported/colossus_reactive_plating.png-ff925e20eb9cedaf15208a63213f8c9d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://01_Cards/Pool/Cards/Engineer/Common/EvasiveBarrier/engineer_evasive_barrier.png"
-dest_files=["res://.godot/imported/engineer_evasive_barrier.png-e2ea828719f103b0767b01ee732200aa.ctex"]
+source_file="res://01_Cards/Pool/Cards/Engineer/Common/ReactivePlating/colossus_reactive_plating.png"
+dest_files=["res://.godot/imported/colossus_reactive_plating.png-ff925e20eb9cedaf15208a63213f8c9d.ctex"]
 
 [params]
 

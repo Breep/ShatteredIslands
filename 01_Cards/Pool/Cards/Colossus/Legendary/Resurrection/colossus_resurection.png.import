@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfh4hie68jo4t"
-path="res://.godot/imported/attack_blade_rush.png-0df49ad5608cc4dc8c786e768d0df508.ctex"
+uid="uid://c1jlojisrrg7i"
+path="res://.godot/imported/colossus_resurection.png-0ecdd064603030dd1879d9914ae7b347.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://01_Cards/Pool/Cards/Warrior/Rare/BladeRush/attack_blade_rush.png"
-dest_files=["res://.godot/imported/attack_blade_rush.png-0df49ad5608cc4dc8c786e768d0df508.ctex"]
+source_file="res://01_Cards/Pool/Cards/Colossus/Legendary/Resurrection/colossus_resurection.png"
+dest_files=["res://.godot/imported/colossus_resurection.png-0ecdd064603030dd1879d9914ae7b347.ctex"]
 
 [params]
 

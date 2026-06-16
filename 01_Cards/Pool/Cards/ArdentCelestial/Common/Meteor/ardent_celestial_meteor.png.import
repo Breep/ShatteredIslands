@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvt3bjt0pngjx"
-path="res://.godot/imported/engineer_shield_throw.png-7019e8ff024bc25873da29575675a57d.ctex"
+uid="uid://c7apxtrdfsvs2"
+path="res://.godot/imported/ardent_celestial_meteor.png-36b8d8f490d89dc0b0c1b4116509dd0d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://01_Cards/Pool/Cards/Engineer/Epic/ShieldThrow/engineer_shield_throw.png"
-dest_files=["res://.godot/imported/engineer_shield_throw.png-7019e8ff024bc25873da29575675a57d.ctex"]
+source_file="res://01_Cards/Pool/Cards/ArdentCelestial/Common/Meteor/ardent_celestial_meteor.png"
+dest_files=["res://.godot/imported/ardent_celestial_meteor.png-36b8d8f490d89dc0b0c1b4116509dd0d.ctex"]
 
 [params]
 

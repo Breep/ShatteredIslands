@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="Card" format=3 uid="uid://cht4oknx08jc7"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_card"]
+[ext_resource type="Texture2D" uid="uid://ch7hp0d0jucc7" path="res://01_Cards/Pool/Cards/Colossus/Common/TitansVigor/colossus_titans_vigor.png" id="2_3lfp3"]
 [ext_resource type="Script" uid="uid://daqnwg11wal35" path="res://01_Cards/Pool/Cards/Colossus/Common/TitansVigor/colossus_titans_vigor.gd" id="2_eff"]
 
 [sub_resource type="Resource" id="Resource_vigor"]
@@ -13,6 +14,7 @@ metadata/_custom_type_script = "uid://daqnwg11wal35"
 [resource]
 script = ExtResource("1_card")
 name = "Titan's Vigor"
+picture = ExtResource("2_3lfp3")
 families = Array[int]([6])
 _card_effect = SubResource("Resource_vigor")
 points = Dictionary[int, int]({

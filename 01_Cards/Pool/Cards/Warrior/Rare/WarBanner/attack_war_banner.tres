@@ -7,9 +7,12 @@
 script = ExtResource("2_eff")
 _as_percent = Array[float]([7.0, 11.0, 15.0, 19.0, 23.0])
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_2yr64"]
+
 [resource]
 script = ExtResource("1_card")
 name = "War Banner"
+picture = SubResource("PlaceholderTexture2D_2yr64")
 families = Array[int]([1])
 rarity = 1
 _card_effect = SubResource("Resource_banner")

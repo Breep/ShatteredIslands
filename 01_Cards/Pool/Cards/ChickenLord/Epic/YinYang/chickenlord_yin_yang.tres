@@ -10,9 +10,12 @@ _vulnerable_chance = Array[float]([25.0, 35.0, 50.0])
 _strength_stacks = Array[float]([1.0, 1.0, 2.0])
 _vulnerable_stacks = Array[float]([1.0, 1.0, 2.0])
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_uyr4w"]
+
 [resource]
 script = ExtResource("1_card")
 name = &"Yin & Yang"
+picture = SubResource("PlaceholderTexture2D_uyr4w")
 families = Array[int]([8])
 rarity = 2
 _card_effect = SubResource("Resource_yy")

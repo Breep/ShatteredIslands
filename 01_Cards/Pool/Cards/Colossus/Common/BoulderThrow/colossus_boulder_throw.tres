@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="Card" format=3 uid="uid://cqbouldthrw01"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_card"]
+[ext_resource type="Texture2D" uid="uid://yjspi0pym7l" path="res://01_Cards/Pool/Cards/Colossus/Common/BoulderThrow/colossus_boulder_throw.png" id="2_62qld"]
 [ext_resource type="Script" uid="uid://lv3nlvmiyldm" path="res://01_Cards/Pool/Cards/Colossus/Common/BoulderThrow/colossus_boulder_throw.gd" id="2_eff"]
 
 [sub_resource type="Resource" id="Resource_boulder"]
@@ -11,6 +12,7 @@ _period = Array[float]([5.0, 10.0, 10.0, 10.0, 10.0])
 [resource]
 script = ExtResource("1_card")
 name = "Boulder Throw"
+picture = ExtResource("2_62qld")
 families = Array[int]([6])
 _card_effect = SubResource("Resource_boulder")
 points = Dictionary[int, int]({

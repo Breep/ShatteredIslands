@@ -8,9 +8,12 @@ script = ExtResource("2_eff")
 _bonus_percent = Array[float]([25.0, 30.0, 35.0, 40.0, 50.0])
 _hp_threshold = Array[float]([33.0, 33.0, 33.0, 33.0, 33.0])
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_sdk8b"]
+
 [resource]
 script = ExtResource("1_card")
 name = "Executioner"
+picture = SubResource("PlaceholderTexture2D_sdk8b")
 families = Array[int]([1])
 _card_effect = SubResource("Resource_exec")
 points = Dictionary[int, int]({

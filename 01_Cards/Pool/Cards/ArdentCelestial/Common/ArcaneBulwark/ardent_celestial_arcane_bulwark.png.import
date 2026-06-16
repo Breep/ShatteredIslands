@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://tuwewl8ngbqu"
-path="res://.godot/imported/diamond_skin.png-28bef95e571b5f2ff1a25d638c0567e3.ctex"
+uid="uid://cjccchh56wh5c"
+path="res://.godot/imported/ardent_celestial_arcane_bulwark.png-df92d62bf075aa463ed207c5c4dd896d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://01_Cards/Pool/Cards/ArdentCelestial/Common/DiamondSkin/diamond_skin.png"
-dest_files=["res://.godot/imported/diamond_skin.png-28bef95e571b5f2ff1a25d638c0567e3.ctex"]
+source_file="res://01_Cards/Pool/Cards/ArdentCelestial/Common/ArcaneBulwark/ardent_celestial_arcane_bulwark.png"
+dest_files=["res://.godot/imported/ardent_celestial_arcane_bulwark.png-df92d62bf075aa463ed207c5c4dd896d.ctex"]
 
 [params]
 

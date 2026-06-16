@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://doxm2j6oomuw" path="res://01_Cards/Pool/Cards/Colossus/Legendary/Resurrection/colossus_resurrection.gd" id="1_hxys7"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_xkn16"]
-[ext_resource type="Texture2D" uid="uid://btsavc4kievdf" path="res://01_Cards/Pool/Cards/Colossus/Legendary/Resurrection/colosse.png" id="2_colos"]
+[ext_resource type="Texture2D" uid="uid://c1jlojisrrg7i" path="res://01_Cards/Pool/Cards/Colossus/Legendary/Resurrection/colossus_resurection.png" id="2_bxda6"]
 
 [sub_resource type="Resource" id="Resource_4356u"]
 script = ExtResource("1_hxys7")
@@ -15,7 +15,7 @@ metadata/_custom_type_script = "uid://doxm2j6oomuw"
 [resource]
 script = ExtResource("1_xkn16")
 name = "Resurrection"
-picture = ExtResource("2_colos")
+picture = ExtResource("2_bxda6")
 families = Array[int]([6])
 rarity = 3
 _card_effect = SubResource("Resource_4356u")

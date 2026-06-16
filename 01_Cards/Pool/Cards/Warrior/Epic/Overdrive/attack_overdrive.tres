@@ -8,9 +8,12 @@ script = ExtResource("2_eff")
 _bounce_count = Array[int]([1, 2, 3])
 _cleave_targets = Array[int]([1, 2, 3])
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_bpoyw"]
+
 [resource]
 script = ExtResource("1_card")
 name = "Overdrive"
+picture = SubResource("PlaceholderTexture2D_bpoyw")
 families = Array[int]([1])
 rarity = 2
 _card_effect = SubResource("Resource_over")

@@ -8,9 +8,12 @@ script = ExtResource("2_eff")
 _range_bonus = Array[float]([1.0, 2.0, 3.0, 4.0, 5.0])
 _lifesteal_bonus = Array[float]([1.0, 2.0, 3.0, 4.0, 5.0])
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_31tpq"]
+
 [resource]
 script = ExtResource("1_card")
 name = "Adaptive Tactics"
+picture = SubResource("PlaceholderTexture2D_31tpq")
 families = Array[int]([1])
 rarity = 1
 _card_effect = SubResource("Resource_adapt")

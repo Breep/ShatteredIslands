@@ -7,9 +7,12 @@
 script = ExtResource("2_eff")
 _chance = Array[float]([3.0, 4.0, 5.0, 6.0, 7.0])
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_p2e7r"]
+
 [resource]
 script = ExtResource("1_card")
 name = "Chicken Caller"
+picture = SubResource("PlaceholderTexture2D_p2e7r")
 families = Array[int]([1, 8])
 _card_effect = SubResource("Resource_chick")
 points = Dictionary[int, int]({

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cako6w8xbx5bt"
-path="res://.godot/imported/engineer_energy_shield.png-fb29365ca5844a61a5c63a6b2d0a69ea.ctex"
+uid="uid://b03nqxrhi8grl"
+path="res://.godot/imported/colossus_stone_carapace.png-a461e783681c137178156dcb982f6fa9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://01_Cards/Pool/Cards/Engineer/Common/EnergyBarrier/engineer_energy_shield.png"
-dest_files=["res://.godot/imported/engineer_energy_shield.png-fb29365ca5844a61a5c63a6b2d0a69ea.ctex"]
+source_file="res://01_Cards/Pool/Cards/Colossus/Epic/StoneCarapace/colossus_stone_carapace.png"
+dest_files=["res://.godot/imported/colossus_stone_carapace.png-a461e783681c137178156dcb982f6fa9.ctex"]
 
 [params]
 
