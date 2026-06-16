@@ -5,6 +5,10 @@ extends Node
 
 signal card_bought(card: Card)
 signal shop_refreshed(new_cards: Array[Card])
+## Émis quand le niveau dérivé d'UNE carte déjà affichée change (la main a été
+## modifiée pour ce design : vente, achat, level up). Permet à l'UI de rafraîchir
+## ce seul slot sans rejouer un refresh complet (anim d'apparition + shuffle).
+signal card_releveled(card: Card)
 
 signal shop_tried_to_refresh() # Used to notice UICardShop that it can reactivate its refresh button
 signal shop_tried_to_buy_random_card() # Used to notice UICardShop that it can reactivate its random button
@@ -24,6 +28,10 @@ var player: Player:
 # ============================== private variables ==============================
 
 var _is_enabled: bool = true
+
+# Garde-fou : les signaux de la main ne sont connectés qu'une fois (refresh_shop
+# est appelé à chaque rafraîchissement, on ne veut pas empiler les connexions).
+var _hand_signals_connected: bool = false
 
 # ============================== Node base functions ==============================
 
@@ -157,15 +165,50 @@ func _adapt_cards_lvl_to_player() -> void:
 		card.lvl = player.hand.get_card_lvl(card) + 1
 
 
+func _ensure_hand_signals_connected() -> void:
+	if _hand_signals_connected or player == null or player.hand == null:
+		return
+	player.hand.card_added.connect(_on_hand_card_changed)
+	player.hand.card_removed.connect(_on_hand_card_changed)
+	player.hand.card_upgraded.connect(_on_hand_card_upgraded)
+	_hand_signals_connected = true
+
+
+# La main a changé pour ce design (ajout / retrait / vente). On re-dérive le
+# niveau des cartes du shop portant ce nom : ça corrige à la fois la donnée
+# (la carte achetée portera le bon niveau) et le visuel (via card_releveled).
+func _relevel_displayed_cards_named(card_name: StringName) -> void:
+	for card in cards_displayed:
+		if card.name != card_name:
+			continue
+		var new_lvl: int = player.hand.get_card_lvl(card) + 1
+		if card.lvl == new_lvl:
+			continue
+		card.lvl = new_lvl
+		card_releveled.emit(card)
+
+
 func _refresh_shop_cards(is_free: bool) -> void:
 	Verbose.trace("PlayerCardShop._refresh_shop_cards() | is_free=" + str(is_free) + " player=" + (player.player_name if player != null else "<null>"), Verbose.Category.CARD_SHOP)
 	if player.hand == null:
 		Verbose.error("Can't update shop cards, there is no player_deck", Verbose.Category.CARD_SHOP)
 		return
 
+	_ensure_hand_signals_connected()
 	cards_displayed = await CardShopManager.try_refresh_shop_for_player(player, is_free)
 	Verbose.trace("PlayerCardShop._refresh_shop_cards() | CardShopManager returned " + str(cards_displayed.size()) + " cards", Verbose.Category.CARD_SHOP)
 	if cards_displayed.is_empty():
 		Verbose.warn("PlayerCardShop._refresh_shop_cards() | CardShopManager returned 0 cards", Verbose.Category.CARD_SHOP)
 	_adapt_cards_lvl_to_player()
 	shop_refreshed.emit(cards_displayed)
+
+# ============================== Callbacks ==============================
+
+func _on_hand_card_changed(card: Card) -> void:
+	if card != null:
+		_relevel_displayed_cards_named(card.name)
+
+
+func _on_hand_card_upgraded(card: Card, _prev_lvl: int) -> void:
+	if card != null:
+		_relevel_displayed_cards_named(card.name)

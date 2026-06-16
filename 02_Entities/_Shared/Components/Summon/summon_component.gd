@@ -143,13 +143,15 @@ func _summon_molten_golem(spawn_position: Vector3, _entity_modifier: Dictionary)
 
 func _summon_chicken(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
 	var chicken: Chicken
-	var base_hp: float = entity_modifier.get(Chicken.BaseStatsModifier.HP, 50)
-	var base_ad: float = entity_modifier.get(Chicken.BaseStatsModifier.AD, 10)
-	var base_armor: float = entity_modifier.get(Chicken.BaseStatsModifier.ARMOR, 0)
-	var base_crit_chance: float = entity_modifier.get(Chicken.BaseStatsModifier.CRIT_CHANCE, 5)
-	var base_crit_multi: float = entity_modifier.get(Chicken.BaseStatsModifier.CRIT_MULTI, 100)
 
-	var chicken_type: Chicken.Type = entity_modifier.get("Type", Chicken.Type.BASIC)
+	# Sans type imposé par l'appelant, on tire un poulet au hasard parmi la roster de base.
+	# Le RNG (déterministe) n'est consommé que dans ce cas, pour ne pas désynchroniser les
+	# spawns qui forcent déjà un type (ex. ChickenLord).
+	var chicken_type: Chicken.Type
+	if entity_modifier.has("Type"):
+		chicken_type = entity_modifier["Type"]
+	else:
+		chicken_type = _random_chicken_type()
 	match chicken_type:
 		Chicken.Type.BASIC: chicken = CHICKEN_BASIC_SCENE.instantiate()
 		Chicken.Type.GIFTED_ATTACK:
@@ -176,8 +178,19 @@ func _summon_chicken(spawn_position: Vector3, entity_modifier: Dictionary) -> vo
 			var crit_mult: float = entity_modifier.get("crit_mult", 0)
 			(chicken as ChickenStormCaller).init(crit_chance, crit_mult)
 
-	chicken.set_base_stats(base_hp, base_ad, base_armor, base_crit_chance, base_crit_multi)
 	_spawn_manager.spawn_entity(chicken, Transform3D(Basis(), spawn_position), _owner.get_context(), Entity.EntityType.CHICKEN)
+
+
+# Roster de poulets tirables par défaut (déterministe via le RNG de combat).
+func _random_chicken_type() -> Chicken.Type:
+	var types: Array[Chicken.Type] = [
+		Chicken.Type.BASIC,
+		Chicken.Type.GIFTED_ATTACK,
+		Chicken.Type.GIFTED_COLOSSUS,
+		Chicken.Type.GIFTED_ARDENT_CELESTIAL,
+		Chicken.Type.GIFTED_ENGINEER,
+	]
+	return Utils.pick_random(types, _owner.battle_id, "random_chicken_type")
 
 
 func _summon_proto_shield(spawn_position: Vector3, entity_modifier: Dictionary) -> void:

@@ -113,6 +113,7 @@ signal shop_opened() ## The local player opened the shop panel (tutorial validat
 ## because the roguelite flow does NOT drive GameManager.game_state_changed.
 signal tavern_phase_started() ## A tavern/buying phase became active and its UI is up.
 signal fighting_phase_started() ## A fighting phase became active.
+signal confrontation_resolved(won: bool) ## A confrontation's fight ended (emitted by GameRunner). won = the party won it.
 
 ## Tutorial-driven UI state requests (so a step can guarantee the shop is open
 ## before pointing at a card, or hide the shop/hand while pointing at an enemy).

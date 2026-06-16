@@ -7,6 +7,7 @@ extends CardEffect
 
 @export var _threshold: Array[float]
 @export var _damage: Array[float]
+@export var _damage_ratio: Array[float]
 @export var _shield_return: Array[float]
 @export var _bounces: Array[float]
 
@@ -19,6 +20,7 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 	var owner: Entity = ctx.entity_owner
 	var threshold: int = int(_threshold[card_lvl - 1])
 	var damage: float = _damage[card_lvl - 1]
+	var damage_ratio: float = _damage_ratio[card_lvl - 1]
 	var shield_return: float = _shield_return[card_lvl - 1]
 	var bounce: float = _bounces[card_lvl - 1]
 	var state := {ACCUMULATED_LOSS: 0, LAST_SHIELD: 0}
@@ -34,10 +36,10 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 			var hit_target: Entity = cb_vars[ProjectileStats.VarType.TARGET]
 			if hit_target == null or not is_instance_valid(hit_target):
 				return
-			if damage > 0:
-				owner.damage.direct(hit_target,
-					damage * owner.stats.get_stat(EntityStats.StatType.AP),
-					Utils.ActionType.DAMAGE_MAGICAL, card_name)
+			var total_damage: float = damage \
+				+ damage_ratio * owner.stats.get_stat(EntityStats.StatType.AP)
+			if total_damage > 0:
+				owner.damage.direct(hit_target, total_damage, Utils.ActionType.DAMAGE_MAGICAL, card_name)
 			if shield_return > 0:
 				owner.alterations.inflict_condition_stacks(owner, shield_return, Alteration.Type.SHIELD, card_name)
 		)
@@ -72,9 +74,10 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 func get_description(card_lvl: int) -> String:
 	var s: String = str(_threshold[card_lvl - 1]).pad_decimals(0)
-	var d: String = str(_damage[card_lvl - 1] * 100.0).pad_decimals(0)
+	var d: String = str(_damage[card_lvl - 1]).pad_decimals(0)
+	var dr: String = str(_damage_ratio[card_lvl - 1] * 100.0).pad_decimals(0)
 	var b: String = str(_bounces[card_lvl - 1]).pad_decimals(1)
 	var sr: String = str(_shield_return[card_lvl - 1]).pad_decimals(0)
 	return "Après avoir absorbé " + s + " dégâts avec le [[SHIELD]], lance un bouclier : " \
-		+ d + "% de sa puissance magique en [[MAGICAL_DAMAGE]], " + b + " rebonds, génère " \
-		+ sr + " [[SHIELD]] par ennemi touché."
+		+ d + " + " + dr + "% de sa puissance magique en [[MAGICAL_DAMAGE]], " + b \
+		+ " rebonds, génère " + sr + " [[SHIELD]] par ennemi touché."

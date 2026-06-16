@@ -2,7 +2,7 @@
 # sur aucune unité : il déclenche ses callbacks on_hit sur chaque ennemi
 # traversé, et n'est détruit qu'au contact d'un mur (groupe WALL) ou en fin
 # de vie. Sa taille — donc sa hitbox — est liée à aoe_size de la source.
-# Les dégâts physiques infligés sont un ratio de l'AD du lanceur.
+# Les dégâts physiques infligés sont une part flat + un ratio de l'AD du lanceur.
 class_name Boulder
 extends Projectile
 
@@ -13,7 +13,9 @@ const _JUMP_DURATION: float = 0.12
 
 # === EXPORTS ===
 @export var _stun_durations: Array[float] = []
-## Ratio de l'AD du lanceur infligé en dégâts physiques, par level.
+## Dégâts physiques flat infligés par ennemi traversé, par level.
+@export var _damages: Array[float] = []
+## Ratio de l'AD du lanceur ajouté aux dégâts physiques, par level.
 @export var _damage_ratios: Array[float] = []
 ## Rayon de roulement (unités monde) servant à convertir la vitesse linéaire
 ## en vitesse angulaire du visuel. Mis à l'échelle par aoe_size au runtime.
@@ -47,9 +49,9 @@ func _default_hit(cb_vars: Dictionary) -> void:
 	if not is_instance_valid(target): return
 	_source.alterations.inflict_status(target, Alteration.Type.STUN,
 			value_at_level(_stun_durations, level, 0.0), &"boulder")
-	_source.damage.direct(target,
-			value_at_level(_damage_ratios, level, 0.0) * _source.stats.get_stat(EntityStats.StatType.AD),
-			Utils.ActionType.DAMAGE_PHYSICAL, &"boulder")
+	var damage: float = value_at_level(_damages, level, 0.0) \
+			+ value_at_level(_damage_ratios, level, 0.0) * _source.stats.get_stat(EntityStats.StatType.AD)
+	_source.damage.direct(target, damage, Utils.ActionType.DAMAGE_PHYSICAL, &"boulder")
 
 
 func _destroy() -> void:
