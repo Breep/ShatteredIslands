@@ -6,11 +6,12 @@
 [sub_resource type="Resource" id="Resource_bl"]
 script = ExtResource("2_eff")
 _flat_damage = 10.0
+_ap_damage_ratio = 0.6
 metadata/_custom_type_script = "uid://c1uselrgeff3c5"
 
 [resource]
 script = ExtResource("1_skill")
 name = "Buse large"
-description = "Les flammes infligent aussi 4 + AP x 25% dégâts magiques."
+description = "Les flammes infligent aussi 10 + AP x 60% dégâts magiques."
 skill_effect = SubResource("Resource_bl")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

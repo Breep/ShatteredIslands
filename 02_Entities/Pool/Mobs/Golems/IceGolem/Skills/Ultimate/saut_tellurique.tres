@@ -3,11 +3,13 @@
 [ext_resource type="Texture2D" uid="uid://35vql5shbujj" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Skills/Ultimate/skill_saut_tellurique.svg" id="1_bl7pb"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
 [ext_resource type="Script" uid="uid://b1ki5nncje0kh" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Skills/Ultimate/saut_tellurique.gd" id="2_eff"]
+[ext_resource type="PackedScene" uid="uid://by2lfscbv0p4e" path="res://02_Entities/Pool/Mobs/Golems/vfx/VFX_landing_golem.tscn" id="3_vfx"]
 
 [sub_resource type="Resource" id="Resource_e"]
 script = ExtResource("2_eff")
 _stun_duration = 2.0
 _radius = 5.0
+_impact_vfx = ExtResource("3_vfx")
 metadata/_custom_type_script = "uid://bsauttellu1eff"
 
 [resource]

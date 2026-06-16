@@ -12,9 +12,8 @@ _attack_damage = 63.2
 _attack_speed = 1.0451624068376264
 _attack_power = 63.2
 _crit_resistance = 5.0
-armor = 37.42453324894
-magic_resistance = 37.42453324894
-poison_resistance = 37.42453324894
+armor = 52.394346548516
+magic_resistance = 74.84906649788
 _crit_chance = 15.697173274258
 _dodge = 3.0
 _m_crit_chances = Dictionary[int, float]({
@@ -22,7 +21,7 @@ _m_crit_chances = Dictionary[int, float]({
 1: 0.0
 })
 _m_resistances = Dictionary[int, float]({
-0: 37.42453324894,
-1: 37.42453324894,
-2: 37.42453324894
+0: 52.394346548516,
+1: 74.84906649788,
+2: 0.0
 })

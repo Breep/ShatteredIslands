@@ -37,6 +37,11 @@ func _spawn_golems(dragon: SkeletonDragon) -> void:
 		Verbose.warn("SE_AshBrood: missing spawn/arena manager", Verbose.Category.ENTITY_MODULE)
 		return
 
+	# Golems are born at the dragon's level: passing it at spawn (vs. bumping it afterwards)
+	# lets their skill tiers — including the Couvée Gold that splits them on death — unlock
+	# during _ready instead of being skipped at the default level.
+	var dragon_level: int = dragon.progression.level if dragon.progression != null else dragon.level
+
 	# spawn_entity emits entity_spawned synchronously, so capturing around the calls below
 	# collects exactly the golems this brood spawned (used to know when it is wiped out).
 	var golems: Array[Entity] = []
@@ -45,27 +50,13 @@ func _spawn_golems(dragon: SkeletonDragon) -> void:
 	for corner: Vector2 in _CORNERS:
 		var pos: Vector3 = context.arena_zone_manager.get_arena_corner(corner.x, corner.y, _corner_inset)
 		context.spawn_manager.spawn_vfx(_SPAWN_VFX, pos)
-		dragon.summon.summon_entity(Entity.EntityType.MOLTEN_GOLEM, SpawnLocationConfig.create_exact(pos), {})
+		dragon.summon.summon_entity(Entity.EntityType.MOLTEN_GOLEM, SpawnLocationConfig.create_exact(pos), {MoltenGolem.Modifier.LEVEL: dragon_level})
 	context.spawn_manager.entity_spawned.disconnect(capture)
 
 	AudioManager.play_sfx("dragon_voice_golem")
-
-	_match_golem_levels(dragon, golems)
 
 	# Keep the dragon sweeping (Vol fracassant) until this brood is wiped out. The flight
 	# ability polls the list each tick, so a golem freed without a death signal still releases it.
 	var ability: ShatteringFlightAbility = dragon.get_flight_ability()
 	if ability != null:
 		ability.hold_flight_for(golems)
-
-
-# Bring each golem up to the dragon's level (setting progression.level recomputes its base stats).
-func _match_golem_levels(dragon: SkeletonDragon, golems: Array[Entity]) -> void:
-	var dragon_level: int = dragon.progression.level if dragon.progression != null else dragon.level
-	for golem: Entity in golems:
-		if not is_instance_valid(golem):
-			continue
-		if golem.progression != null:
-			golem.progression.level = dragon_level
-		else:
-			golem.level = dragon_level
