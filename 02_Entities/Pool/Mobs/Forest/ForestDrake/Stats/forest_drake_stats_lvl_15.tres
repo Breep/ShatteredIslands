@@ -7,7 +7,6 @@ script = ExtResource("1_hqnih")
 _health_max = 7190.0
 _mana_max = 35.0
 _mana_regen = 3.7
-_attack_range = 4.5
 _attack_damage = 40.0
 _attack_speed = 1.12528124241234
 _movement_speed = 4.5

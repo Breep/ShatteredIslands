@@ -7,7 +7,8 @@
 
 [sub_resource type="Resource" id="Resource_e"]
 script = ExtResource("2_eff")
-_stacks = 45.0
+_stacks = 30.0
+_radius = 2.5
 _death_vfx = ExtResource("2_m6634")
 metadata/_custom_type_script = "uid://bnuagemort1eff"
 

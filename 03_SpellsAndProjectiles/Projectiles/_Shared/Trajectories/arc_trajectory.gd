@@ -50,9 +50,10 @@ func update(logic_pos: Vector3, delta: float) -> Vector3:
 	if _projectile and logic_pos.distance_squared_to(look_point) > 0.01:
 		_projectile.look_at(look_point)
 
-	# Fin d'arc au sol (non-guidé / cible perdue) : destruction optionnelle.
+	# Fin d'arc au sol (non-guidé / cible perdue) : le projectile décide quoi
+	# faire (destruction par défaut, ou réaction custom comme une explosion).
 	if _t >= 1.0 and not _is_homing() and destroy_on_ground and is_instance_valid(_projectile):
-		_projectile.queue_free()
+		_projectile.on_reached_ground()
 	return logic_pos
 
 

@@ -4,9 +4,9 @@
 
 [resource]
 script = ExtResource("1_maom7")
-_health_max = 950.0
+_health_max = 880.0
 _mana_max = 38.0
-_mana_regen = 3.0
+_mana_regen = 2.9
 auto_attack_type = 1
 _attack_range = 2.2
 _attack_damage = 23.0

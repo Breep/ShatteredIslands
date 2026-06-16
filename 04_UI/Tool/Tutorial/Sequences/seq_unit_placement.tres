@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="TutorialSequence" format=3 uid="uid://drvegwboxiyit"]
+
+[ext_resource type="Script" uid="uid://djpg3rddxno15" path="res://04_UI/Tool/Tutorial/Resource/tutorial_sequence.gd" id="1_seq"]
+[ext_resource type="Script" uid="uid://jooqjtqqt21" path="res://04_UI/Tool/Tutorial/Resource/tutorial_step.gd" id="2_step"]
+
+[sub_resource type="Resource" id="step_place_units"]
+script = ExtResource("2_step")
+id = &"place_units"
+text = "Place tes unités sur le terrain : glisse-les depuis cette fenêtre vers la zone de combat."
+target_unique_name = &"UiRoasterList"
+target_sub_name = &"PanelContainer"
+validation_event = 0
+auto_advance_delay = 0.0
+popup_mode = 0
+highlight_target = true
+highlight_padding = 8.0
+screen_anchor = 1
+dim_off_while_dragging = true
+
+[resource]
+script = ExtResource("1_seq")
+id = &"seq_unit_placement"
+steps = Array[ExtResource("2_step")]([SubResource("step_place_units")])

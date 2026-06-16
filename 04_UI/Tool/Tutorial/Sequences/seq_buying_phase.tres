@@ -17,9 +17,8 @@ highlight_target = true
 [sub_resource type="Resource" id="step_show_gold"]
 script = ExtResource("2_step")
 id = &"show_gold"
-text = "Voici ton or. Les cartes en coûtent — garde un œil dessus."
+text = "Voici ton or. Les cartes coûtent 100 Golds — garde un œil dessus."
 target_unique_name = &"PlayerGoldHBox"
-validation_event = 0
 auto_advance_delay = 0.0
 popup_mode = 1
 highlight_target = true
@@ -28,7 +27,7 @@ preferred_arrow_side = 3
 [sub_resource type="Resource" id="step_buy_attack"]
 script = ExtResource("2_step")
 id = &"buy_attack"
-text = "Prends cette carte : elle renforce ton offensive — ses attaques infligent Ignite."
+text = "Prends cette carte : elle renforce ton attaque, elles infligent maintenant: Ignite. Un puissant effet de dégât sur la durée ! "
 target_unique_name = &"CardContainer"
 target_sub_name = &"VBoxContainer"
 validation_event = 7
@@ -56,7 +55,7 @@ highlight_padding = 8.0
 [sub_resource type="Resource" id="step_buy_combo"]
 script = ExtResource("2_step")
 id = &"buy_combo"
-text = "Et le combo : elle augmente ta vitesse d'attaque."
+text = "Et le combo : elle augmente ta vitesse d'attaque. Plus de soins et plus d'ignite ! "
 target_unique_name = &"CardContainer"
 target_sub_name = &"VBoxContainer3"
 validation_event = 7
@@ -97,10 +96,8 @@ highlight_padding = 8.0
 script = ExtResource("2_step")
 id = &"click_unit"
 text = "Clique sur un ennemi pour ouvrir sa fiche."
-target_unique_name = &""
 validation_event = 1
 auto_advance_delay = 0.0
-popup_mode = 0
 hide_skip = true
 ensure_shop_closed = true
 hide_hand = true
@@ -111,11 +108,9 @@ script = ExtResource("2_step")
 id = &"show_spells"
 text = "Et voici tous ses sorts. Survole-les pour voir ce qu'ils font — tu peux inspecter n'importe quelle unité comme ça."
 target_unique_name = &"SkillsContainer"
-validation_event = 0
 auto_advance_delay = 0.0
-popup_mode = 0
-hide_hand = true
 ensure_shop_closed = true
+hide_hand = true
 highlight_target = true
 highlight_padding = 8.0
 screen_anchor = 1
@@ -123,11 +118,10 @@ screen_anchor = 1
 [sub_resource type="Resource" id="step_launch_fight"]
 script = ExtResource("2_step")
 id = &"launch_fight"
-text = "Maintenant tu es prêt. Lance le combat pour vivre ta première aventure !"
+text = "Maintenant tu es prêt. Lance le combat losque tu sera prêt pour vivre ta première aventure !"
 target_unique_name = &"ContinueButton"
 validation_event = 4
 auto_advance_delay = 0.0
-popup_mode = 0
 highlight_target = true
 
 [resource]

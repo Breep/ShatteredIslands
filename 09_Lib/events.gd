@@ -120,5 +120,13 @@ signal confrontation_resolved(won: bool) ## A confrontation's fight ended (emitt
 signal tutorial_set_shop_open(should_open: bool)
 signal tutorial_set_hand_visible(is_visible: bool)
 
+## The unit-placement UI (roaster list) just opened — units need placing on the
+## field. The TutorialManager hooks this to show the placement help.
+signal unit_placement_started()
+
+## The fight actually starts (countdown), after placement. The TutorialManager
+## shows the combat-info sequence here so it doesn't clash with placement help.
+signal combat_started()
+
 # ============================ Manager =============================
 signal card_shop_init()

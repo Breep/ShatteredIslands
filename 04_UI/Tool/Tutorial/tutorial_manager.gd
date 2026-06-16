@@ -21,6 +21,10 @@ const _SEQUENCE_PATHS: Array[String] = [
 ## State-less sequence fired when the local hero first unlocks a talent tier
 ## (level-up). Once-per-session via _played_sequence_ids.
 const _TALENT_CHOICE_PATH: String = "res://04_UI/Tool/Tutorial/Sequences/seq_talent_choice.tres"
+
+## State-less sequence fired the first time the unit-placement UI opens (first
+## combat positioning). Once-per-session via _played_sequence_ids.
+const _UNIT_PLACEMENT_PATH: String = "res://04_UI/Tool/Tutorial/Sequences/seq_unit_placement.tres"
 #endregion
 
 
@@ -36,6 +40,7 @@ var _overlay: TutorialOverlay
 var _pending_sequence: TutorialSequence
 
 var _talent_choice_sequence: TutorialSequence
+var _unit_placement_sequence: TutorialSequence
 var _hand_hidden_by_tutorial: bool = false
 #endregion
 
@@ -44,6 +49,7 @@ var _hand_hidden_by_tutorial: bool = false
 func _ready() -> void:
 	_load_sequences()
 	_load_talent_choice()
+	_load_unit_placement()
 
 	_auto_advance_timer = Timer.new()
 	_auto_advance_timer.one_shot = true
@@ -62,6 +68,10 @@ func _ready() -> void:
 	Events.fighting_phase_started.connect(_on_fighting_phase_started)
 	Events.hero_skill_unlocked.connect(_on_hero_skill_unlocked)
 	Events.hero_skill_chosen.connect(_on_hero_skill_chosen)
+	Events.unit_placement_started.connect(_on_unit_placement_started)
+	Events.combat_started.connect(_on_combat_started)
+	Events.entity_drag_started.connect(_on_entity_drag_started)
+	Events.entity_drag_stopped.connect(_on_entity_drag_stopped)
 
 	set_process(false)
 
@@ -98,6 +108,13 @@ func _load_talent_choice() -> void:
 		Verbose.warn("Talent choice sequence not found: " + _TALENT_CHOICE_PATH, Verbose.Category.TUTORIAL)
 		return
 	_talent_choice_sequence = load(_TALENT_CHOICE_PATH)
+
+
+func _load_unit_placement() -> void:
+	if not ResourceLoader.exists(_UNIT_PLACEMENT_PATH):
+		Verbose.warn("Unit placement sequence not found: " + _UNIT_PLACEMENT_PATH, Verbose.Category.TUTORIAL)
+		return
+	_unit_placement_sequence = load(_UNIT_PLACEMENT_PATH)
 
 
 func _try_resolve_overlay() -> bool:
@@ -278,6 +295,12 @@ func _on_tavern_phase_started() -> void:
 func _on_fighting_phase_started() -> void:
 	if not Settings.is_tutorial_enabled(): return
 	_validate_and_advance(TutorialStep.ValidationEvent.GAME_STATE_FIGHTING)
+
+
+## The combat-info sequence is deferred to the actual fight start (countdown) so it
+## doesn't clash with the unit-placement help shown during positioning.
+func _on_combat_started() -> void:
+	if not Settings.is_tutorial_enabled(): return
 	if _sequences_by_state.has(GameManager.GameState.FIGHTING):
 		_start_sequence(_sequences_by_state[GameManager.GameState.FIGHTING])
 
@@ -294,6 +317,24 @@ func _on_hero_skill_unlocked(component, _skill_type) -> void:
 func _on_hero_skill_chosen(_component, _skill_id) -> void:
 	if not Settings.is_tutorial_enabled(): return
 	_validate_and_advance(TutorialStep.ValidationEvent.HERO_SKILL_CHOSEN)
+
+
+## First combat: the placement UI just opened — show how to drag units onto the field.
+func _on_unit_placement_started() -> void:
+	if not Settings.is_tutorial_enabled(): return
+	_start_sequence(_unit_placement_sequence)
+
+
+func _on_entity_drag_started(_entity) -> void:
+	var step: TutorialStep = _current_step()
+	if step != null and step.dim_off_while_dragging and _overlay != null:
+		_overlay.set_highlight_visible(false)
+
+
+func _on_entity_drag_stopped(_entity) -> void:
+	var step: TutorialStep = _current_step()
+	if step != null and step.dim_off_while_dragging and _overlay != null:
+		_overlay.set_highlight_visible(true)
 
 
 func _is_local_hero_skill(component) -> bool:

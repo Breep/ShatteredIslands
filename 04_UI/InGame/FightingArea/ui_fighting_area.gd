@@ -79,6 +79,7 @@ func _on_gfm_fighting_phase_state_changed(fighting_phase_state: GlobalFightingMa
 			_advance_button.hide()
 			_ui_roaster_list.close()
 			_ui_countdown.start(int(GameManager.game_rules.duration_fighting_countdown), "FIGHT")
+			Events.combat_started.emit()
 		GlobalFightingManager.FightingPhaseState.CELEBRATION:
 			_advance_button.text = "NEXT"
 			_advance_button.disabled = false
@@ -111,4 +112,5 @@ func _on_advance_button_pressed() -> void:
 func _on_intro_timer_timeout() -> void:
 	if _ui_roaster_list.has_unplaced():
 		_ui_roaster_list.open()
+		Events.unit_placement_started.emit()
 	_advance_button.show()

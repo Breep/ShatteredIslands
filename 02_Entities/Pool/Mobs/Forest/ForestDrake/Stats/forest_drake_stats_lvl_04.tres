@@ -7,7 +7,6 @@ script = ExtResource("1_otyuw")
 _health_max = 920.0
 _mana_max = 35.0
 _mana_regen = 3.2
-_attack_range = 4.5
 _attack_damage = 18.0
 _attack_speed = 0.7574185586804946
 _movement_speed = 4.5

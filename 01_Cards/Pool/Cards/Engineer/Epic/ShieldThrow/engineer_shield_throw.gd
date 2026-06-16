@@ -73,11 +73,5 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	var s: String = str(_threshold[card_lvl - 1]).pad_decimals(0)
-	var d: String = str(_damage[card_lvl - 1]).pad_decimals(0)
-	var dr: String = str(_damage_ratio[card_lvl - 1] * 100.0).pad_decimals(0)
-	var b: String = str(_bounces[card_lvl - 1]).pad_decimals(1)
-	var sr: String = str(_shield_return[card_lvl - 1]).pad_decimals(0)
-	return "Après avoir absorbé " + s + " dégâts avec le [[SHIELD]], lance un bouclier : " \
-		+ d + " + " + dr + "% de sa puissance magique en [[MAGICAL_DAMAGE]], " + b \
-		+ " rebonds, génère " + sr + " [[SHIELD]] par ennemi touché."
+	return "Lance un bouclier de niveau " + str(card_lvl) \
+		+ ". Inflige des [[MAGICAL_DAMAGE]] et rebondit."
