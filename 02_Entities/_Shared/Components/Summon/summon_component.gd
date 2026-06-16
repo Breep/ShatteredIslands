@@ -109,6 +109,24 @@ func summon_entity(entity_type: Entity.EntityType, spawn_config: SpawnLocationCo
 		ActionModifier.VarType.COUNT: count,
 	})
 
+
+# Vrai si `entity` descend (directement ou non) du propriétaire dans la chaîne
+# de summoners. Couvre les summons-de-summons (poulets d'un poulailler, etc.),
+# là où un simple `entity.summoner == owner` ne verrait que le premier maillon.
+func is_summoner_of(entity: Entity) -> bool:
+	if entity == null or not is_instance_valid(entity):
+		return false
+	var visited: Array[Entity] = []
+	var ancestor: Entity = entity.summoner
+	while ancestor != null:
+		if ancestor == _owner:
+			return true
+		if ancestor in visited:
+			return false
+		visited.append(ancestor)
+		ancestor = ancestor.summoner
+	return false
+
 # ============================== Private functions ==============================
 
 # Offset horizontal de spawn pour la i-ème entité sur N quand un count > 1

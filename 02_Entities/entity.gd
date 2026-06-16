@@ -607,6 +607,13 @@ func _on_spawn_finished() -> void:
 #region ============================== Auto loading ==============================
 func _auto_load_components() -> void:
 	for ect: EntityComponent.Type in _auto_loaded_components:
+		# Les buildings sont statiques : pas de MovementComponent. Sans lui, l'approche
+		# de l'auto-attaque échoue proprement (cf. AutoAttackComponent "fixed turret"),
+		# donc plus de translation parasite ni de dérive par dépénétration. L'orientation
+		# de tir reste gérée par l'auto-attaque / les skills (look_at direct), pas par le
+		# mouvement.
+		if ect == EntityComponent.Type.MOVEMENT and category == Category.BUILDING:
+			continue
 		EntityComponent.add(ect, self)
 
 func _connect_module_dependencies() -> void:

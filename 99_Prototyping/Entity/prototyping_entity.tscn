@@ -28,7 +28,6 @@
 [ext_resource type="PackedScene" uid="uid://jcwiqcnilmtk" path="res://02_Entities/Pool/Mobs/Wolfs/Vrock/vrock.tscn" id="17_rnrfd"]
 [ext_resource type="Environment" uid="uid://cghu0yr6lj5i2" path="res://21_Props/DefaultBattleIsland/Arch_island/world_environment.tres" id="18_ko5bb"]
 [ext_resource type="PackedScene" uid="uid://dp4x7wkxd6i2q" path="res://99_Prototyping/Entity/EntityController/entity_controller.proto.tscn" id="19_x0odd"]
-[ext_resource type="PackedScene" uid="uid://btqko5dh71wxi" path="res://02_Entities/Pool/Mobs/SkeletonDragon/skeleton_dragon.tscn" id="28_58hbo"]
 
 [sub_resource type="Resource" id="Resource_xqnte"]
 script = ExtResource("6_jbcul")
@@ -70,7 +69,6 @@ unique_name_in_owner = true
 
 [node name="Latika2" parent="Node3D/Entities" unique_id=1941835210 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("3_os118")]
 transform = Transform3D(-0.2632837, 0, 0.96471834, 0, 1.0000001, 0, -0.96471834, 0, -0.2632837, 3.662788, 9.536744e-07, 0.110419974)
-level = 20
 team = 1
 battle_id = 1
 _spawn_manager = NodePath("../../SpawnManager")
@@ -112,13 +110,6 @@ _arena_zone_manager = NodePath("../../ArenaZoneManager")
 transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, 1.8293419, 0.05598975, 2.7767484)
 team = 1
 battle_id = 1
-_spawn_manager = NodePath("../../SpawnManager")
-_arena_zone_manager = NodePath("../../ArenaZoneManager")
-
-[node name="SkeletonDragon" parent="Node3D/Entities" unique_id=434739176 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("28_58hbo")]
-transform = Transform3D(0.9999999, 0, 0, 0, 1.0000001, 0, 0, 0, 0.9999999, -2.685705, 0, 8.06334)
-level = 7
-team = 2
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
 
@@ -372,7 +363,7 @@ visible = false
 unique_name_in_owner = true
 
 [node name="ArchIsland" parent="Node3D" unique_id=1045725859 instance=ExtResource("17_ko5bb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1199169, 0, -0.008602141)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12698792, -1.192093e-07, -0.007304429)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2134323998]
 environment = ExtResource("18_ko5bb")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvrs16xxav5u7"
-path="res://.godot/imported/attack_fight_back.png-3a4541a1800457b86a4826feb18b2025.ctex"
+uid="uid://b8gckt2irdul1"
+path="res://.godot/imported/chickenlord_flock_synergy.png-26f2676bcc2cac04d8888b2800a521c2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://01_Cards/Pool/Cards/Warrior/Common/FightBack/attack_fight_back.png"
-dest_files=["res://.godot/imported/attack_fight_back.png-3a4541a1800457b86a4826feb18b2025.ctex"]
+source_file="res://01_Cards/Pool/Cards/ChickenLord/Rare/FlockSynergy/chickenlord_flock_synergy.png"
+dest_files=["res://.godot/imported/chickenlord_flock_synergy.png-26f2676bcc2cac04d8888b2800a521c2.ctex"]
 
 [params]
 

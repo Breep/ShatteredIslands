@@ -78,10 +78,7 @@ stats = Dictionary[int, ExtResource("2_es")]({
 19: ExtResource("34_cu20e"),
 20: ExtResource("35_6y8oq")
 })
-aa_1_release_normalized = 0.67
-aa_2_release_normalized = 0.67
-aa_3_release_normalized = 0.67
-aa_1_anim_base_duration = 5.0
-aa_2_anim_base_duration = 5.0
-aa_3_anim_base_duration = 5.0
+aa_1_anim_base_duration = 3.2
+aa_2_anim_base_duration = 3.2
+aa_3_anim_base_duration = 3.2
 metadata/_custom_type_script = "uid://dtcjta70luxvr"

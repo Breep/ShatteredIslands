@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1e67csr3rjgk"
-path="res://.godot/imported/attack_diamond_sword.png-830da0198f8ae5c96abdfbbf8b313f46.ctex"
+uid="uid://crtg8s4hln6tr"
+path="res://.godot/imported/glowrabo.png-390d1e403086a46a988a6a601a35d029.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://01_Cards/Pool/Cards/Warrior/Common/DiamondSword/attack_diamond_sword.png"
-dest_files=["res://.godot/imported/attack_diamond_sword.png-830da0198f8ae5c96abdfbbf8b313f46.ctex"]
+source_file="res://02_Entities/_Data/Phoenix/Texture/glowrabo.png"
+dest_files=["res://.godot/imported/glowrabo.png-390d1e403086a46a988a6a601a35d029.ctex"]
 
 [params]
 

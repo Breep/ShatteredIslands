@@ -2,7 +2,135 @@
 
 [ext_resource type="PackedScene" uid="uid://do5bslbv5ulo0" path="res://21_Props/DefaultBattleIsland/Arch_island/props_arena_sword.tscn" id="1_355p2"]
 
+[sub_resource type="Animation" id="Animation_eojsh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4obkh"]
+_data = {
+&"RESET": SubResource("Animation_eojsh")
+}
+
+[sub_resource type="Animation" id="Animation_r4hpd"]
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.20000002, 0.33333334, 0.50000006, 0.6000001, 0.7000001, 0.80000013, 0.90000015, 1.2666667, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.1308997, 0, 0.5061455), Vector3(0.424115, 0, 0.49741885), Vector3(0.86219263, 0, 0.47996554), Vector3(-1.0611602, -0.40142572, 0.56199604), Vector3(-3.991568, -0.6632251, -1.1693707), Vector3(-4.146902, -0.56199604, -0.9250245), Vector3(-4.007276, 0.06981317, -0.56199604), Vector3(-0.3944444, 0, 0.7417649), Vector3(3.4714599, 0, -1.0384709), Vector3(0.50265485, 0, -1.6720254), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.03330001, 0.06666667, 0.39999998, 0.50000006, 0.6000001, 0.7000001, 0.80000013, 0.8500001, 0.90000015, 1.1, 1.3000001, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1.4903228, -0.48917037), Vector3(0.9305954, 0.9811094, -0.48917037), Vector3(0.27460194, 2.1145191, 0.0036169887), Vector3(-1.092, 3.586, 0.102), Vector3(-1.3458633, 2.7879944, -0.604153), Vector3(-0.9800068, 2.574, -0.851), Vector3(-3.93437, 5.2355027, -1.4911673), Vector3(0, 3.4231427, 3.8564825), Vector3(1.9180505, 2.9710793, 1.1826624), Vector3(0, 2.8208473, -1.4911673), Vector3(-0.5716796, 3.2957232, -1.4911673), Vector3(0.338, 0.872, -0.138), Vector3(0, 1.49, -0.489)]
+}
+
+[sub_resource type="Animation" id="Animation_4obkh"]
+resource_name = "attack_2"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.060826764, 0.11523403, 0.33950138, 0.62459546, 0.73333335, 0.8095362, 0.8965552, 0.98368347, 1.2666667, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1.49, -0.489), Vector3(-0.142, 0.996, -0.489), Vector3(0.3929919, 2.1248124, -0.5973121), Vector3(1.4506611, 4.3206577, -1.3557248), Vector3(1.51, 6.121, -1.847), Vector3(1.51, 4.246, -1.847), Vector3(0.027, 2.826, 2.828), Vector3(-1.741, 2.007, -0.529), Vector3(-1.741, 2.007, -0.55), Vector3(0.34025395, 2.007, 0.624508), Vector3(-0.024, 1.622, -1.217), Vector3(-0.02404201, 2.007, -1.0668677)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.060166657, 0.11523403, 0.20021875, 0.33950138, 0.5, 0.73333335, 0.777034, 0.8095362, 0.9, 0.98368347, 1.2666667, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 2.07053, 0.5946036, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.24958208, -0.013962634, -0.101229094), Vector3(0.23658048, -0.23578387, -0.21659002), Vector3(0.029670598, -0.2687807, -0.64053583), Vector3(-2.469641, -0.23561946, 0.6091199), Vector3(-3.8030725, 0.51487213, 0.98262036), Vector3(-3.2323499, 0.51487213, 0.98262036), Vector3(-2.1934662, -1.1955414, 0.6132702), Vector3(-3.111922, -3.1887167, 2.347468), Vector3(-3.4924037, -5.4401913, 1.1780972), Vector3(-3.6826446, -6.0021873, 1.1780972), Vector3(-1.3962634, -0.108210415, -0.108210415), Vector3(-0.19024089, 0, 0), Vector3(-2.1380284, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_iqyfd"]
+length = 2.8333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.076170176, 0.15451665, 0.304, 0.43333334, 0.83842707, 0.87176037, 0.9050938, 0.9384272, 0.9717605, 1.0050938, 1.0384271, 1.0717604, 1.1050937, 1.138427, 1.1717606, 1.2050939, 1.2384272, 1.2717605, 1.3050938, 1.336021, 1.3693542, 1.3706667, 1.404, 1.4373333, 1.4706666, 1.504, 1.5373333, 1.5706668, 1.6040001, 1.6373334, 1.6706667, 1.704, 1.7373333, 1.7706666, 1.8039999, 1.8373334, 1.8706667, 1.904, 1.9296453, 1.9629786, 1.9963119, 2.0296452, 2.0629787, 2.096312, 2.1296453, 2.1629786, 2.196312, 2.2296453, 2.2629786, 2.2706666, 2.3378594, 2.404, 2.504, 2.704, 2.8333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1.49, -0.489), Vector3(0, 0.562, -0.282), Vector3(0, 1.63, 1.969), Vector3(0, 1.64, 0.27), Vector3(0, 3.062, -1.055), Vector3(0, 4.838, -2.603), Vector3(0, 4.8692837, -2.6469448), Vector3(0, 4.9005675, -2.6908896), Vector3(0, 4.9318514, -2.7348344), Vector3(0, 4.9631352, -2.7787793), Vector3(0, 4.994419, -2.822724), Vector3(0, 5.025703, -2.866669), Vector3(0, 5.056987, -2.9106138), Vector3(0, 5.088271, -2.9545586), Vector3(0, 5.119555, -2.9985034), Vector3(0, 5.150839, -3.0424483), Vector3(0, 5.1821227, -3.086393), Vector3(0, 5.2134066, -3.1303377), Vector3(0, 5.2446904, -3.1742826), Vector3(0, 5.2759743, -3.2182274), Vector3(0, 5.305, -3.259), Vector3(0, 1, 0.939), Vector3(0, 1, 0.939), Vector3(0, 1, 0.939), Vector3(0, 1, 0.939), Vector3(0, 1, 0.939), Vector3(0, 1, 0.939), Vector3(0, 1, 0.939), Vector3(0, 1, 0.939), Vector3(0, 1, 0.939), Vector3(0, 1, 0.939), Vector3(0, 1, 0.939), Vector3(0, 1, 0.939), Vector3(0, 1, 0.939), Vector3(0, 1, 0.939), Vector3(0, 1, 0.939), Vector3(0, 1, 0.939), Vector3(0, 1, 0.939), Vector3(0, 1, 0.939), Vector3(0, 1, 0.939), Vector3(0, 1.0205265, 0.92384946), Vector3(0, 1.0410532, 0.90869886), Vector3(0, 1.0615797, 0.8935483), Vector3(0, 1.0821064, 0.8783977), Vector3(0, 1.1026329, 0.86324716), Vector3(0, 1.1231595, 0.8480966), Vector3(0, 1.143686, 0.832946), Vector3(0, 1.1642127, 0.8177954), Vector3(0, 1.1847392, 0.80264485), Vector3(0, 1.2052658, 0.7874943), Vector3(0, 1.21, 0.784), Vector3(0, 2.1097388, -1.2544703), Vector3(0, 1.8, -1.759), Vector3(0, 2.048, -1.138), Vector3(0, 1.271, 0.002), Vector3(0, 1.49, -0.489)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.08258968, 0.12462818, 0.23733336, 0.34509808, 0.48510227, 0.6373334, 0.8340746, 1.1801047, 1.3373334, 1.3706667, 1.404, 1.4373333, 1.4706666, 1.504, 1.5373333, 1.5706668, 1.6040001, 1.6373334, 1.6706667, 1.704, 1.7373333, 1.7706666, 1.8039999, 1.8373334, 1.8706667, 1.904, 1.9308045, 2.004, 2.0706666, 2.1373334, 2.201164, 2.2695117, 2.3407073, 2.3976638, 2.504, 2.704, 2.8333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1.802501, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.26529005, 0, 0), Vector3(0.1575334, 0, 0), Vector3(-0.37350047, 0, 0), Vector3(0.30623543, 0, 0), Vector3(0.43109632, 0, 0), Vector3(0.6457718, 0, 3.562217), Vector3(0.6459355, 0, 6.1841545), Vector3(0.6457718, 0, 12.724764), Vector3(0.6457718, 0, 20.94395), Vector3(0.6457718, 0, 0), Vector3(0.6457718, 0, 0), Vector3(0.6457718, 0, 0), Vector3(0.6457718, 0, 0), Vector3(0.6457718, 0, 0), Vector3(0.6457718, 0, 0), Vector3(0.6457718, 0, 0), Vector3(0.6457718, 0, 0), Vector3(0.6457718, 0, 0), Vector3(0.6457718, 0, 0), Vector3(0.6457718, 0, 0), Vector3(0.6457718, 0, 0), Vector3(0.6457718, 0, 0), Vector3(0.6457718, 0, 0), Vector3(0.6457718, 0, 0), Vector3(0.6457718, 0, 0), Vector3(0.6457718, 0, 0), Vector3(0.6457718, 0, 0), Vector3(0.6457718, 0, -0.37524578), Vector3(0.6457718, 0, 0.56199604), Vector3(0.6457718, 0, -0.37524578), Vector3(0.6457718, 0, 0.56199604), Vector3(0.6457718, 0, -0.37524578), Vector3(-2.5900686, 0, 0), Vector3(-3.3510323, 0, 0), Vector3(-3.8449605, 0, 0), Vector3(0.26703537, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iqyfd"]
+_data = {
+&"attack_1": SubResource("Animation_r4hpd"),
+&"attack_2": SubResource("Animation_4obkh"),
+&"ultimate": SubResource("Animation_iqyfd")
+}
+
 [node name="AegisBladeVisual" type="Node3D" unique_id=687254709]
 
-[node name="sword" parent="." unique_id=1966000435 instance=ExtResource("1_355p2")]
-transform = Transform3D(-2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0, 0, 0.5, 0.17724717, 1.7755485, 0)
+[node name="Node3D" type="Node3D" parent="." unique_id=1325352786]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
+
+[node name="sword" parent="Node3D" unique_id=1966000435 instance=ExtResource("1_355p2")]
+transform = Transform3D(-2.1855692e-08, 0.50000006, -2.1855694e-08, 0, -2.1855696e-08, -0.5, -0.49999994, -2.1855696e-08, 9.553427e-16, 0.14488494, 0.008600712, 2.7943456)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node3D" unique_id=103077910]
+libraries/ = SubResource("AnimationLibrary_4obkh")
+libraries/blade_anim = SubResource("AnimationLibrary_iqyfd")

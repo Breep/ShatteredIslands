@@ -18,6 +18,7 @@ const _PORTRAIT_BUTTON: PackedScene = preload("res://04_UI/InGame/HeroSelection/
 
 @onready var _hero_grid: GridContainer = %HeroGridContainer
 @onready var _overview_panel: UIHeroOverviewPanel = %UiHeroOverviewPanel
+@onready var _lock_hero_button: Button = %LockHeroButton
 
 # ============================== Private vars ==============================
 
@@ -60,4 +61,6 @@ func _on_portrait_button_selected(hero: HeroDesc) -> void:
 func _on_lock_hero_button_pressed() -> void:
 	if _selected_hero == null:
 		return
+	# Verrouillage définitif : on ne peut pas re-locker pendant la transition vers le Run.
+	_lock_hero_button.disabled = true
 	hero_locked.emit(_selected_hero)

@@ -1,0 +1,49 @@
+[gd_resource type="AnimationNodeBlendTree" format=3 uid="uid://dije2iqttthi4"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_782l2"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_782l2"]
+animation = &"Combat_Stun"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hm1g2"]
+animation = &"Idle_Stealth"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mgehl"]
+animation = &"Emote_Roar"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rh33s"]
+animation = &"Jump_End"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_mgehl"]
+fadein_time = 0.2
+fadeout_time = 0.2
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_rh33s"]
+fadein_time = 0.1
+fadeout_time = 0.2
+break_loop_at_end = true
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_xhbwf"]
+fadein_time = 0.2
+fadeout_time = 0.2
+break_loop_at_end = true
+
+[resource]
+nodes/output/position = Vector2(840, 160)
+nodes/anim_idle/node = SubResource("AnimationNodeAnimation_hm1g2")
+nodes/anim_idle/position = Vector2(-380, 160)
+nodes/one_shot_spawn/node = SubResource("AnimationNodeOneShot_xhbwf")
+nodes/one_shot_spawn/position = Vector2(-100, 160)
+nodes/one_shot_dazed/node = SubResource("AnimationNodeOneShot_mgehl")
+nodes/one_shot_dazed/position = Vector2(140, 160)
+nodes/anim_spawn/node = SubResource("AnimationNodeAnimation_rh33s")
+nodes/anim_spawn/position = Vector2(-360, 420)
+nodes/anim_dazed/node = SubResource("AnimationNodeAnimation_782l2")
+nodes/anim_dazed/position = Vector2(-100, 500)
+nodes/one_shot_selected/node = SubResource("AnimationNodeOneShot_rh33s")
+nodes/one_shot_selected/position = Vector2(520, 140)
+nodes/anim_selected/node = SubResource("AnimationNodeAnimation_mgehl")
+nodes/anim_selected/position = Vector2(140, 480)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_782l2")
+nodes/TimeScale/position = Vector2(340, 460)
+node_connections = [&"output", 0, &"one_shot_selected", &"one_shot_spawn", 0, &"anim_idle", &"one_shot_spawn", 1, &"anim_spawn", &"one_shot_dazed", 0, &"one_shot_spawn", &"one_shot_dazed", 1, &"anim_dazed", &"one_shot_selected", 0, &"one_shot_dazed", &"one_shot_selected", 1, &"TimeScale", &"TimeScale", 0, &"anim_selected"]

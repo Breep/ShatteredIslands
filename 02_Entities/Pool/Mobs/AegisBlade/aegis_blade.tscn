@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://dc124wncshpne" path="res://02_Entities/Pool/Mobs/AegisBlade/aegis_blade_visual.tscn" id="2_wshi8"]
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://10_Tool/QuickAnims/anim_hovering_module.tscn" id="3_1nowg"]
 [ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://10_Tool/QuickAnims/anim_rotating_module.tscn" id="4_wkl4h"]
+[ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="5_i8gi4"]
+[ext_resource type="AnimationNodeBlendTree" uid="uid://c5jbgen84p2gt" path="res://02_Entities/Pool/Mobs/AegisBlade/aegis_blade_animation_tree.res" id="7_dxtu3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3daqv"]
 height = 4.6591797
@@ -23,15 +25,102 @@ _health_bar_marker = NodePath("AegisBladeVisual/HealthBarSpawnMarker")
 _spawn = NodePath("../AegisBladeVisual/HealthBarSpawnMarker")
 _owner = NodePath("..")
 
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=205154112]
+root_node = NodePath("../AegisBladeVisual/Node3D")
+tree_root = ExtResource("7_dxtu3")
+anim_player = NodePath("../AegisBladeVisual/Node3D/AnimationPlayer")
+parameters/switch_moving/current_state = ""
+parameters/switch_moving/transition_request = ""
+parameters/switch_moving/current_index = -1
+parameters/scale_dance/scale = 1.0
+parameters/scale_die/scale = 1.0
+parameters/scale_idle_standing_neutral/scale = 1.0
+parameters/one_shot_attack/active = false
+parameters/one_shot_attack/internal_active = false
+parameters/one_shot_attack/request = 0
+parameters/one_shot_ultimate/active = false
+parameters/one_shot_ultimate/internal_active = false
+parameters/one_shot_ultimate/request = 0
+parameters/scale_attack/scale = 1.0
+parameters/one_shot_idle_standing_neutral/active = false
+parameters/one_shot_idle_standing_neutral/internal_active = false
+parameters/one_shot_idle_standing_neutral/request = 0
+parameters/scale_ultimate/scale = 1.0
+parameters/scale_idle_standing_neutral_var/scale = 1.0
+parameters/one_shot_sitting/active = false
+parameters/one_shot_sitting/internal_active = false
+parameters/one_shot_sitting/request = 0
+parameters/switch_entity_life_state/current_state = "Alive"
+parameters/switch_entity_life_state/transition_request = ""
+parameters/switch_entity_life_state/current_index = 1
+parameters/scale_walk/scale = 1.0
+parameters/scale_run/scale = 1.0
+parameters/switch_attack/current_state = "Attack2"
+parameters/switch_attack/transition_request = ""
+parameters/switch_attack/current_index = 1
+parameters/scale_stunned/scale = 1.0
+parameters/seek_stunned/seek_request = -1.0
+parameters/scale_idle_standing_aggresive/scale = 1.0
+parameters/scale_idle_standing_aggresive_var/scale = 1.0
+parameters/seek_idle_standing_aggresive/seek_request = -1.0
+parameters/switch_entity_mode/current_state = "Editor"
+parameters/switch_entity_mode/transition_request = ""
+parameters/switch_entity_mode/current_index = 0
+parameters/seek_idle_standing_neutral/seek_request = -1.0
+parameters/one_shot_idle_standing_aggresive/active = false
+parameters/one_shot_idle_standing_aggresive/internal_active = false
+parameters/one_shot_idle_standing_aggresive/request = 0
+parameters/seek_idle_sitting_chair/seek_request = -1.0
+parameters/scale_idle_sitting_chair/scale = 1.0
+parameters/scale_idle_sitting_chair_var/scale = 1.0
+parameters/seek_idle_sitting_floor/seek_request = -1.0
+parameters/seek_dance/seek_request = -1.0
+parameters/one_shot_idle_sitting_chair/active = false
+parameters/one_shot_idle_sitting_chair/internal_active = false
+parameters/one_shot_idle_sitting_chair/request = 0
+parameters/scale_idle_sitting_floor/scale = 1.0
+parameters/scale_idle_sitting_floor_var/scale = 1.0
+parameters/scale_attack_2/scale = 1.0
+parameters/scale_hit_1/scale = 1.0
+parameters/scale_attack_3/scale = 1.0
+parameters/switch_main/current_state = ""
+parameters/switch_main/transition_request = ""
+parameters/switch_main/current_index = -1
+parameters/switch_idle/current_state = ""
+parameters/switch_idle/transition_request = ""
+parameters/switch_idle/current_index = -1
+parameters/scale_drag/scale = 1.0
+parameters/scale_land/scale = 1.0
+parameters/one_shot_land/active = false
+parameters/one_shot_land/internal_active = false
+parameters/one_shot_land/request = 0
+parameters/one_shot_hit/active = false
+parameters/one_shot_hit/internal_active = false
+parameters/one_shot_hit/request = 0
+parameters/scale_attack_1/scale = 1.0
+parameters/switch_positioning/current_state = ""
+parameters/switch_positioning/transition_request = ""
+parameters/switch_positioning/current_index = -1
+parameters/switch_stunned_state/current_state = "NotStunned"
+parameters/switch_stunned_state/transition_request = ""
+parameters/switch_stunned_state/current_index = 0
+
+[node name="AnimationComponent" parent="." unique_id=73205791 node_paths=PackedStringArray("_animation_tree", "_owner") instance=ExtResource("5_i8gi4")]
+_animation_tree = NodePath("../AnimationTree")
+_owner = NodePath("..")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=95730264]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.179685, 0)
 shape = SubResource("CapsuleShape3D_3daqv")
 
 [node name="AegisBladeVisual" parent="." unique_id=687254709 instance=ExtResource("2_wshi8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.498354, 0)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.25, 0)
+
+[node name="Node3D" parent="AegisBladeVisual" index="0" unique_id=1325352786]
+transform = Transform3D(1.0000004, 0, 0, 0, 0.999999, 0, 0, 0, 0.99999905, 0, 0, 0)
 
 [node name="HealthBarSpawnMarker" type="Marker3D" parent="AegisBladeVisual" unique_id=267396309]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.068697, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.0023508, 0)
 
 [node name="AnimHoveringModule" parent="AegisBladeVisual" unique_id=114301541 node_paths=PackedStringArray("_owner") instance=ExtResource("3_1nowg")]
 _owner = NodePath("..")
@@ -43,3 +132,5 @@ _owner = NodePath("..")
 _rot_axis = 1
 _rot_period = 4.0
 _rot_max = 10.0
+
+[editable path="AegisBladeVisual"]
