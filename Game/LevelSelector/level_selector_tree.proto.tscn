@@ -40,7 +40,6 @@ unique_name_in_owner = true
 script = ExtResource("2_paths")
 start_pad = 65.0
 end_pad = 65.0
-curve_strength = 0.16
 
 [node name="IslandsRoot" type="Node2D" parent="WorldViewport/World" unique_id=1155365045]
 unique_name_in_owner = true
