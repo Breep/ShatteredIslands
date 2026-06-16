@@ -177,6 +177,16 @@ func create_tooltip(key: StringName) -> Tooltip:
 func render_bbcode(text: String, icon_size: int = 0) -> String:
 	return _render_bbcode(text, icon_size)
 
+
+## Liste canonique des définitions de mots-clés (réutilisée par le glossaire joueur).
+func get_descriptions() -> Array[TooltipDesc]:
+	return TOOLTIP_DATABASE
+
+
+## Texture d'icône du thème pour une clé donnée (ex: "SHIELD_ICON"). DEFAULT_ICON sinon.
+func get_icon(icon_key: String) -> Texture2D:
+	return THEME.icon(icon_key)
+
 # ============================== Private functions ==============================
 
 func _build_cache():
