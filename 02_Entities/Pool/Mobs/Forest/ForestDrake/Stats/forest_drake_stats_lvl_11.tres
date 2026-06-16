@@ -7,7 +7,6 @@ script = ExtResource("1_27veb")
 _health_max = 4070.0
 _mana_max = 35.0
 _mana_regen = 3.5
-_attack_range = 4.5
 _attack_damage = 32.0
 _attack_speed = 1.015888308335967
 _movement_speed = 4.5
