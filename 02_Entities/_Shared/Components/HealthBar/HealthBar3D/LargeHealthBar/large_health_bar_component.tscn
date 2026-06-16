@@ -269,6 +269,7 @@ script = ExtResource("1_fqydh")
 metadata/_custom_type_script = "uid://c1dw0hnr57wx6"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1509485072]
+layer = 0
 
 [node name="MainControl" type="Control" parent="CanvasLayer" unique_id=659756604]
 unique_name_in_owner = true
