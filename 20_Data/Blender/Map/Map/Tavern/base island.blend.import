@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://7wydq5g685hr"
-path="res://.godot/imported/base island.blend-252608d4a1038920e4b8f69884ab49ae.scn"
+valid=false
 
 [deps]
 
 source_file="res://20_Data/Blender/Map/Map/Tavern/base island.blend"
-dest_files=["res://.godot/imported/base island.blend-252608d4a1038920e4b8f69884ab49ae.scn"]
 
 [params]
 

@@ -41,7 +41,7 @@ _subresources={
 "animations": {
 "Take 001": {
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://02_Entities/_Data/_Animations/Default/Animations/damage.res",
+"save_to_file/fallback_path": "res://02_Entities/_Data/_Animations/Default/Animations/damage_1.res",
 "save_to_file/keep_custom_tracks": "",
 "save_to_file/path": "uid://cfrvia6dbyvrk",
 "settings/loop_mode": 0,
