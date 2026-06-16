@@ -32,6 +32,10 @@ func run(the_run: Run, party: Party) -> void:
 		var result: ConfrontationResult = await _confrontation_runner.run(confrontation, party)
 		if result != null:
 			Events.confrontation_resolved.emit(result.outcome == ConfrontationResult.Outcome.WIN)
+			if result.outcome == ConfrontationResult.Outcome.WIN:
+				AudioManager.play_sfx("crowd_cheer_small", -5)
+			else:
+				AudioManager.play_sfx("crowd_booing", -10)
 		if rules != null and result != null:
 			_apply_confrontation_payout(rules, confrontation, result)
 		the_run.advance()
