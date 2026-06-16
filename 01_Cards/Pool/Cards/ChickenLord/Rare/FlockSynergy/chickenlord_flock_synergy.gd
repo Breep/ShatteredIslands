@@ -24,7 +24,7 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 			s.stat_modifiers_registry.register_modifier(_make_mod(ap_id, EntityStats.StatType.AP, n * ap_per))
 
 	_on_detected = func(e: Entity) -> void:
-		if not _is_owned_summon(e, owner): return
+		if not (is_instance_valid(e) and e.is_summoned() and owner.summon.is_summoner_of(e)): return
 		e.died.connect(func() -> void: refresh.call(), CONNECT_ONE_SHOT | CONNECT_DEFERRED)
 		refresh.call()
 	owner.target.new_entity_detected.connect(_on_detected)
@@ -54,14 +54,10 @@ func _make_mod(id: StringName, stat: EntityStats.StatType, value: float) -> Stat
 	return mod
 
 
-func _is_owned_summon(e: Entity, owner: Entity) -> bool:
-	return e != null and is_instance_valid(e) and e.is_summoned() and e.summoner == owner
-
-
 func _living_summons(owner: Entity) -> Array[Entity]:
 	var result: Array[Entity] = []
 	for ally in owner.target.get_targets(TargetComponent.MultipleTargettingStrategy.ALLIES):
-		if _is_owned_summon(ally, owner):
+		if is_instance_valid(ally) and ally.is_summoned() and owner.summon.is_summoner_of(ally):
 			result.append(ally)
 	return result
 

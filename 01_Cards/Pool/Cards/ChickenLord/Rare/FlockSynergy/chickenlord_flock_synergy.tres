@@ -12,7 +12,6 @@ _ap_per_summon = Array[float]([3.0, 6.0, 9.0, 12.0, 15.0])
 script = ExtResource("1_card")
 name = "Flock Synergy"
 families = Array[int]([8])
-rarity = 1
 _card_effect = SubResource("Resource_flock")
 points = Dictionary[int, int]({
 8: 2
