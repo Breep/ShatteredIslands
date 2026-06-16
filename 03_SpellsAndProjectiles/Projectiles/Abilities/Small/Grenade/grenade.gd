@@ -32,6 +32,20 @@ func _ready() -> void:
 	super._ready()
 
 
+## Impact-sol sans avoir touché d'ennemi en vol : on explose quand même au point
+## de chute. Si la grenade a déjà touché un ennemi, comportement par défaut
+## (destruction) — l'explosion a déjà eu lieu via le hit.
+func on_reached_ground() -> void:
+	if not _hit_history.is_empty():
+		super.on_reached_ground()
+		return
+	_aoe_explosion({
+		ProjectileStats.VarType.SOURCE: _source,
+		ProjectileStats.VarType.POSITION: global_position,
+	})
+	queue_free()
+
+
 func _aoe_explosion(cb_vars: Dictionary) -> void:
 	var source: Entity = cb_vars.get(ProjectileStats.VarType.SOURCE)
 	if not is_instance_valid(source): return
