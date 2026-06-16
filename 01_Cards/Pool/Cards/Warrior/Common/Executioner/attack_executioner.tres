@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="Card" format=3 uid="uid://beeed262tuj8g"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_card"]
+[ext_resource type="Texture2D" uid="uid://cjoeufibesmrw" path="res://01_Cards/Pool/Cards/Warrior/Common/Executioner/warrior_executioner.png" id="2_15lb8"]
 [ext_resource type="Script" uid="uid://ui8sdxejlnuk" path="res://01_Cards/Pool/Cards/Warrior/Common/Executioner/attack_executioner.gd" id="2_eff"]
 
 [sub_resource type="Resource" id="Resource_exec"]
@@ -8,12 +9,10 @@ script = ExtResource("2_eff")
 _bonus_percent = Array[float]([25.0, 30.0, 35.0, 40.0, 50.0])
 _hp_threshold = Array[float]([33.0, 33.0, 33.0, 33.0, 33.0])
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_sdk8b"]
-
 [resource]
 script = ExtResource("1_card")
 name = "Executioner"
-picture = SubResource("PlaceholderTexture2D_sdk8b")
+picture = ExtResource("2_15lb8")
 families = Array[int]([1])
 _card_effect = SubResource("Resource_exec")
 points = Dictionary[int, int]({
