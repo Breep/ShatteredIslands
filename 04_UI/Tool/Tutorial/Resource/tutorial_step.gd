@@ -100,6 +100,10 @@ enum ScreenAnchor {
 @export var ensure_shop_closed: bool = false
 @export var hide_hand: bool = false
 
+## Fades the spotlight dim out while the player is dragging an entity, so the
+## field stays readable for placement; the dim returns when the drag ends.
+@export var dim_off_while_dragging: bool = false
+
 ## Optional portrait shown on the left of the bubble. Leave null to fall back
 ## to the default portrait baked in the bubble scene.
 @export var portrait_texture: Texture2D

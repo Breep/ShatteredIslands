@@ -75,6 +75,15 @@ func clear() -> void:
 
 func has_active_step() -> bool:
 	return _current_step != null
+
+
+## Fades the dim/spotlight in or out without ending the current step. Used to clear
+## the view while the player drags an entity onto the field, then restore it.
+func set_highlight_visible(is_visible: bool) -> void:
+	if _blocker == null: return
+	_kill_tween(_dim_tween)
+	_dim_tween = create_tween()
+	_dim_tween.tween_property(_blocker, "modulate:a", 1.0 if is_visible else 0.0, _DIM_FADE_TIME)
 #endregion
 
 
