@@ -73,5 +73,6 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return "Lance un bouclier de niveau " + str(card_lvl) \
+	return "[[SMALL_PROJECTILE]]\n" \
+		+ "Lance un bouclier de niveau " + str(card_lvl) \
 		+ ". Inflige des [[MAGICAL_DAMAGE]] et rebondit."

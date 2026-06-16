@@ -34,4 +34,5 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return "Toutes les " + str(_period[card_lvl - 1]) + "s, lance un rocher sur un ennemi."
+	return "[[BIG_PROJECTILE]][[ICON:COOLDOWN]] " + str(_period[card_lvl - 1]) + " s\n" \
+		+ "Rocher niv " + str(_level_bonus[card_lvl - 1]) + " inflige des [[PHYSICAL_DAMAGE]] et [[STUN]]"

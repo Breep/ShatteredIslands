@@ -50,6 +50,7 @@ func _is_owned_summon(e: Entity, owner: Entity) -> bool:
 
 
 func get_description(card_lvl: int) -> String:
-	return "À l'apparition d'un summon, " + str(_strength_chance[card_lvl - 1]) \
-		+ "% d'appliquer " + str(_strength_stacks[card_lvl - 1]) + " [[STRENGTH]] aux alliés. À la mort d'un summon, " \
-		+ str(_vulnerable_chance[card_lvl - 1]) + "% d'appliquer " + str(_vulnerable_stacks[card_lvl - 1]) + " [[VULNERABILITY]] aux ennemis."
+	return "[[SUMMON]] créé : " + str(_strength_chance[card_lvl - 1]) + "% → " \
+		+ str(_strength_stacks[card_lvl - 1]) + " [[STRENGTH]]\n" \
+		+ "[[SUMMON]] mort : " + str(_vulnerable_chance[card_lvl - 1]) + "% → " \
+		+ str(_vulnerable_stacks[card_lvl - 1]) + " [[VULNERABILITY]]"

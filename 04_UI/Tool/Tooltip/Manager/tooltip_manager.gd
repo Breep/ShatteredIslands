@@ -2,12 +2,17 @@ extends Node
 
 # ============================== Configuration ==============================
 
+## Taille (px) des icônes inline insérées via le token [[ICON:CLE]].
+const _ICON_SIZE: int = 20
+
 @onready var TOOLTIP_SCENE = load("res://04_UI/Tool/Tooltip/ui_tooltip.tscn")
 @onready var THEME: TooltipTheme = load("res://04_UI/Tool/Tooltip/Theme/standard_theme.tres")
 
 @onready var TOOLTIP_DATABASE: Array[TooltipDesc] = [
 	# --- A ---
 	load("res://04_UI/Tool/Tooltip/Dictionary/ad.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/big_projectile.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/small_projectile.tres"),
 	load("res://04_UI/Tool/Tooltip/Dictionary/ap.tres"),
 	load("res://04_UI/Tool/Tooltip/Dictionary/armor.tres"),
 	load("res://04_UI/Tool/Tooltip/Dictionary/attack.tres"),
@@ -126,7 +131,11 @@ extends Node
 
 	# --- AUTRE ---
 	"COOLDOWN": "[color=%s][url=COOLDOWN]cooldown[/url][/color]"    % THEME.color_html("STAT_COLOR"),
-	"MANA":     "[color=%s][url=MANA]mana[/url][/color]"            % THEME.color_html("MANA_COLOR")
+	"MANA":     "[color=%s][url=MANA]mana[/url][/color]"            % THEME.color_html("MANA_COLOR"),
+
+	# --- PROJECTILES ---
+	"SMALL_PROJECTILE": "[color=%s][url=SMALL_PROJECTILE]small projectile[/url][/color]" % THEME.color_html("SMALL_PROJECTILE_COLOR"),
+	"BIG_PROJECTILE":   "[color=%s][url=BIG_PROJECTILE]big projectile[/url][/color]"     % THEME.color_html("BIG_PROJECTILE_COLOR")
 }
 
 var _all_scene_tooltips: Array[Tooltip] 
@@ -163,8 +172,10 @@ func create_tooltip(key: StringName) -> Tooltip:
 	return t
 
 
-func render_bbcode(text: String) -> String:
-	return _render_bbcode(text)
+## icon_size : taille (px) des icônes inline [[ICON:CLE]]. 0 = défaut (_ICON_SIZE).
+## Passe-lui la taille de police du label appelant pour que l'icône suive le texte.
+func render_bbcode(text: String, icon_size: int = 0) -> String:
+	return _render_bbcode(text, icon_size)
 
 # ============================== Private functions ==============================
 
@@ -177,8 +188,18 @@ func _build_cache():
 		_tooltips[d.key] = {"name": title, "icon": icon, "description": desc}
 
 
-func _render_bbcode(text: String) -> String:
+func _render_bbcode(text: String, icon_size: int = 0) -> String:
 	var out := text
+	var px: int = icon_size if icon_size > 0 else _ICON_SIZE
+
+	# 0) Replace icon tokens like [[ICON:COOLDOWN]] -> inline image (clé -> CLE_ICON du thème)
+	var ri := RegEx.new()
+	ri.compile("\\[\\[ICON:(\\w+)\\]\\]")
+	for m in ri.search_all(out):
+		var icon_name := m.get_string(1)
+		var tex := THEME.icon(icon_name + "_ICON")
+		if tex != null and not tex.resource_path.is_empty():
+			out = out.replace("[[ICON:%s]]" % icon_name, "[img=%d]%s[/img]" % [px, tex.resource_path])
 
 	# 1) Replace snippet tokens like [[POISON_STACK]]
 	var r := RegEx.new()
