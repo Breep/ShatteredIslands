@@ -44,3 +44,8 @@ func notify_kill() -> void:
 	enter_stealth()
 	if stats != null:
 		stats.mana = stats.mana_max
+
+
+func _on_died() -> void:
+	super._on_died()
+	AudioManager.play_3d("kobold_die_02", global_position)

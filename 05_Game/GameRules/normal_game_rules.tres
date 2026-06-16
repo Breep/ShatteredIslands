@@ -18,28 +18,46 @@ drop_rates_by_family_level = Dictionary[int, Dictionary]({
 3: 0
 },
 1: {
-0: 25,
-1: 25,
-2: 25,
-3: 25
+0: 97,
+1: 3,
+2: 0,
+3: 0
 },
 2: {
-0: 88,
-1: 9,
-2: 3,
+0: 94,
+1: 5,
+2: 1,
 3: 0
 },
 3: {
-0: 84,
+0: 90,
 1: 8,
-2: 5,
-3: 3
+2: 2,
+3: 0
 },
 4: {
-0: 81,
-1: 8,
-2: 7,
-3: 4
+0: 86,
+1: 10,
+2: 4,
+3: 0
+},
+5: {
+0: 82,
+1: 12,
+2: 6,
+3: 0
+},
+6: {
+0: 78,
+1: 14,
+2: 8,
+3: 0
+},
+7: {
+0: 73,
+1: 15,
+2: 9,
+3: 3
 }
 })
 gold_earned_per_round = 450
@@ -62,5 +80,5 @@ xp_per_levels = Dictionary[int, int]({
 10: 100
 })
 duration_buying_phase = 9999.0
-duration_fighting_normal = 40.0
+duration_fighting_normal = 600.0
 duration_fighting_special = 25.0

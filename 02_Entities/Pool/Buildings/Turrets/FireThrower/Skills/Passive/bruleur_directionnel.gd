@@ -5,6 +5,8 @@ extends SkillEffect
 # stacks d'Ignite à tous les ennemis présents dans la hitbox des flammes (collision shape
 # de l'Area3D). De base le passif ne fait QUE de l'Ignite. Le talent "Buse large" active en
 # plus des dégâts magiques, dont les valeurs sont posées en meta par SE_BuseLarge.
+# La tourelle pivote en continu (toutes les _aim_period s) pour garder son cône braqué
+# sur l'ennemi le plus proche.
 
 const META_BUSE_FLAT := &"firethrower_buse_flat"
 const META_BUSE_AP_RATIO := &"firethrower_buse_ap_ratio"
@@ -12,6 +14,8 @@ const META_BUSE_AP_RATIO := &"firethrower_buse_ap_ratio"
 @export var _tick_period: float = 1.0
 @export var _flame_area_name: StringName = &"Area3D"
 @export var _ap_ignite_ratio: float = 0.20
+## Période (s) de réorientation du cône vers l'ennemi le plus proche.
+@export var _aim_period: float = 0.1
 
 
 func apply(ctx: SkillContext) -> void:
@@ -22,6 +26,17 @@ func apply(ctx: SkillContext) -> void:
 	turret.battle_callback_registry.register_periodic(&"BruleurDirectionnel", _tick_period, func() -> void:
 		_burn_tick(turret)
 	, true)
+	turret.battle_callback_registry.register_periodic(&"BruleurDirectionnelAim", _aim_period, func() -> void:
+		_aim_at_closest(turret)
+	, true)
+
+
+# Pivote la tourelle vers l'ennemi le plus proche (y only) pour que son cône le suive.
+func _aim_at_closest(turret: TurretFireThrower) -> void:
+	var closest: Entity = turret.target.get_target(TargetComponent.TargettingStrategy.CLOSEST_ENEMY)
+	if not is_instance_valid(closest):
+		return
+	turret.look_at_target_y_only(closest.get_collision_center())
 
 
 func _burn_tick(turret: TurretFireThrower) -> void:

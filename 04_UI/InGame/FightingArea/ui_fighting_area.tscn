@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dmfkigo1trjd0" path="res://04_UI/Tool/Countdown/ui_countdown.tscn" id="3_ie0xi"]
 [ext_resource type="Theme" uid="uid://lkjmyhig2cx7" path="res://04_UI/_Themes/normal_button2_reverse.tres" id="5_omkkk"]
 [ext_resource type="Script" uid="uid://bq2jprj2y5yr6" path="res://04_UI/Menu/MainMenu/button_main_ui.gd" id="5_qg6fi"]
+[ext_resource type="PackedScene" uid="uid://c6g7l3w1yh45c" path="res://04_UI/InGame/RoasterList/ui_roaster_list.tscn" id="7_4d810"]
 [ext_resource type="PackedScene" uid="uid://ygk0snmo5oj" path="res://02_Entities/_Shared/EntityStatsViewer/entity_stats_viewer.tscn" id="7_omkkk"]
 
 [node name="UIFightingArea" type="Control" unique_id=1289468176]
@@ -58,4 +59,22 @@ offset_left = 50.0
 offset_top = 25.0
 offset_right = 1870.0
 offset_bottom = 1055.0
+grow_horizontal = 1
+grow_vertical = 1
 mouse_filter = 2
+
+[node name="UiRoasterList" parent="." unique_id=1245268600 instance=ExtResource("7_4d810")]
+layout_mode = 1
+anchors_preset = 4
+anchor_left = 0.0
+anchor_right = 0.0
+offset_left = 20.0
+offset_right = 20.0
+grow_horizontal = 1
+
+[node name="IntroTimer" type="Timer" parent="." unique_id=1201309751]
+unique_name_in_owner = true
+wait_time = 4.0
+one_shot = true
+
+[connection signal="timeout" from="IntroTimer" to="." method="_on_intro_timer_timeout"]

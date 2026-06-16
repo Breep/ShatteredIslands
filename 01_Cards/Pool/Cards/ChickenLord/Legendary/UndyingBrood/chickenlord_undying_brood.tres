@@ -8,9 +8,12 @@ script = ExtResource("2_eff")
 _respawn_chance = Array[float]([25.0, 35.0, 40.0])
 _hp_percent = Array[float]([50.0, 50.0, 50.0])
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_62gta"]
+
 [resource]
 script = ExtResource("1_card")
 name = "Undying Brood"
+picture = SubResource("PlaceholderTexture2D_62gta")
 families = Array[int]([8])
 rarity = 3
 _card_effect = SubResource("Resource_undying")

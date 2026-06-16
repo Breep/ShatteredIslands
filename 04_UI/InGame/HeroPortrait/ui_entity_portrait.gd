@@ -102,6 +102,8 @@ const _BLINK_TIME: float = 0.5
 @onready var _portrait_button: TextureButton = %PortraitButton
 @onready var _health_bar: ProgressBar = %HealthBar
 @onready var _health_label: Label = %HealthLabel
+@onready var _health_bar_button: Button = %HealthBarButton
+@onready var _modifiers_viewer: UiModifiersViewer = %UiModifiersViewer
 #endregion
 
 #region ============================== Private variables ==============================
@@ -118,6 +120,9 @@ var _panel_tween: Tween
 # Frame du dernier entity_clicked : sert à NE PAS fermer la fiche quand le clic qui
 # atteint _unhandled_input correspond en fait à la sélection d'une autre entité.
 var _last_entity_click_frame: int = -1
+# Le clic « dans le vide » courant a servi à fermer le modifiers viewer (sur le press
+# via nothing_clicked) => on ignore son release pour ne pas fermer la fiche en plus.
+var _viewer_dismissed_this_click: bool = false
 #endregion
 
 #region ============================== Node base functions ==============================
@@ -125,6 +130,8 @@ func _ready() -> void:
 	_collect_skill_buttons()
 	_hide_secondary_buttons()
 	_apply_tooltips()
+	_connect_stat_clicks()
+	_health_bar_button.pressed.connect(_on_health_bar_button_pressed)
 	_show_stats_instant()
 	_close_panel_instant()
 	_portrait_button.pressed.connect(_on_portrait_button_pressed)
@@ -148,8 +155,16 @@ func _input(event: InputEvent) -> void:
 # si un entity_clicked survient la même frame, c'est une re-sélection => on garde
 # ouvert. Le deferred s'exécute après tous les _unhandled_input + l'émission du
 # signal, donc l'ordre d'appel des handlers n'a pas d'importance.
+# Priorité : le modifiers viewer se ferme avant la fiche (un clic dans le vide ne
+# ferme qu'une couche à la fois).
 func _unhandled_input(event: InputEvent) -> void:
 	if not (event is InputEventMouseButton and not event.pressed and event.button_index == MOUSE_BUTTON_LEFT):
+		return
+	if _viewer_dismissed_this_click:
+		_viewer_dismissed_this_click = false
+		return
+	if _modifiers_viewer.visible:
+		_modifiers_viewer.hide()
 		return
 	if _panel_open:
 		_maybe_close_panel.call_deferred()
@@ -191,6 +206,12 @@ func _apply_tooltips() -> void:
 		for i: int in entries.size():
 			if i < list.item_count:
 				list.set_item_tooltip(i, entries[i]["name"])
+
+
+func _connect_stat_clicks() -> void:
+	for list_name: String in _STAT_LISTS:
+		var list: ItemList = get_node("%" + list_name)
+		list.item_clicked.connect(_on_stat_item_clicked.bind(list_name))
 
 
 func _bind_stats() -> void:
@@ -518,6 +539,11 @@ func _on_events_entity_clicked(entity: Entity) -> void:
 
 
 func _on_events_nothing_clicked() -> void:
+	# 1er clic dans le vide : on ne ferme que le modifiers viewer (la fiche reste).
+	if _modifiers_viewer.visible:
+		_modifiers_viewer.hide()
+		_viewer_dismissed_this_click = true
+		return
 	hide()
 
 
@@ -530,6 +556,19 @@ func _on_portrait_button_pressed() -> void:
 
 func _on_stat_changed(value: float, list: ItemList, idx: int) -> void:
 	_set_item_value(list, idx, value)
+
+
+func _on_stat_item_clicked(index: int, _at_position: Vector2, mouse_button_index: int, list_name: String) -> void:
+	if mouse_button_index != MOUSE_BUTTON_LEFT: return
+	if not is_instance_valid(_entity): return
+	var entries: Array = _STAT_LISTS[list_name]
+	if index < 0 or index >= entries.size(): return
+	Events.entity_stat_clicked.emit(_entity, entries[index]["stat"])
+
+
+func _on_health_bar_button_pressed() -> void:
+	if not is_instance_valid(_entity): return
+	Events.entity_stat_clicked.emit(_entity, EntityStats.StatType.HEALTH_MAX)
 
 
 func _on_health_changed(new_health: float) -> void:

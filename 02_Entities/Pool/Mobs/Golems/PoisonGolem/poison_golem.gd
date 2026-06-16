@@ -11,3 +11,8 @@ func _ready() -> void:
 	super._ready()
 	if _animation_tree != null:
 		_animation_tree.set("parameters/one_shot_land/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+
+
+func _on_died() -> void:
+	super._on_died()
+	AudioManager.play_3d("golem_collapse", global_position)

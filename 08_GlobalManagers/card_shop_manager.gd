@@ -131,9 +131,11 @@ func _server_try_buy_card_from_player_shop(player: Player, card_to_buy: Card) ->
 		return false
 
 	# La carte est ajoutée à la main par la vue (UIHand.receive) côté drag-and-drop.
-	# Ici on ne fait que l'autorité économique : dé-track + débit.
+	# Ici on ne fait que l'autorité économique : dé-track + débit. On fige aussi le
+	# niveau autoritaire sur l'instance que la vue ajoutera juste après.
 	_cards_in_player_shop[player.id].erase(card_to_buy)
 	player.gold -= card_price
+	_enforce_card_lvl_from_hand(player, card_to_buy)
 	return true
 
 
@@ -187,6 +189,7 @@ func _ask_buy_card_from_player_shop(card_uid: int) -> void:
 	# Côté serveur pour un client distant : pas de vue co-localisée, le manager
 	# alimente donc la main autoritaire du peer ici.
 	_cards_in_player_shop[peer_id].erase(card_to_buy)
+	_enforce_card_lvl_from_hand(PlayerManager.players[peer_id], card_to_buy)
 	PlayerManager.players[peer_id].hand.add_card(card_to_buy)
 	PlayerManager.players[peer_id].gold -= card_price
 	_answer_buy_card_from_player_shop.rpc_id(peer_id, ServerResponse.OK)
@@ -278,7 +281,7 @@ func _server_try_refresh_shop_for_player(player: Player, is_free: bool) -> Array
 	
 	for card_to_put_back in _cards_in_player_shop[player.id]:
 		shop_deck.add_card(card_to_put_back)
-	_cards_in_player_shop[player.id] = await _server_draw_n_cards(player, 3)
+	_cards_in_player_shop[player.id] = await _server_draw_n_cards(player, 4)
 	
 	return _cards_in_player_shop[player.id]
 
@@ -333,9 +336,10 @@ func _server_try_sell_card(player: Player, card: Card) -> bool:
 	if hand_card == null:
 		Verbose.warn("Peer." + str(player.id) + " tries to sell a card not in his hand [" + card.name + "]", Verbose.Category.CARD_SHOP)
 		return false
-	# Une carte agrégée niveau N = N cartes empilées : on rembourse N × prix.
+	# Une carte agrégée niveau N = N cartes empilées : remboursement décoté via
+	# get_sell_value (source unique de vérité partagée avec le drag-and-drop).
 	var removed: Array[Card] = player.hand.remove_card(hand_card)
-	player.gold += removed.size() * _game_rules.get_card_price(hand_card.rarity)
+	player.gold += _game_rules.get_sell_value(removed)
 	return true
 
 
@@ -363,9 +367,10 @@ func _ask_sell_card(card_design_id: String) -> void:
 		Verbose.warn("Peer." + str(peer_id) + " tries to sell a card not in his hand [" + card_design_id + "]", Verbose.Category.CARD_SHOP)
 		_answer_sell_card.rpc_id(peer_id, ServerResponse.CARD_NOT_OWNED)
 		return
-	# Une carte agrégée niveau N = N cartes empilées : on rembourse N × prix.
+	# Une carte agrégée niveau N = N cartes empilées : remboursement décoté via
+	# get_sell_value (source unique de vérité partagée avec le drag-and-drop).
 	var removed: Array[Card] = player.hand.remove_card(hand_card)
-	player.gold += removed.size() * _game_rules.get_card_price(hand_card.rarity)
+	player.gold += _game_rules.get_sell_value(removed)
 	_answer_sell_card.rpc_id(peer_id, ServerResponse.OK)
 
 
@@ -376,6 +381,18 @@ func _answer_sell_card(server_response: ServerResponse) -> void:
 	_answer_for_selling_request_received.emit()
 
 # ========== Tools
+
+# Garde-fou autoritaire : le niveau d'une carte achetée doit TOUJOURS dériver de
+# la main au moment de l'achat (niveau en main + 1), jamais d'un niveau périmé
+# porté par la carte affichée du shop. Sans ça, vendre une carte puis racheter
+# son slot encore gonflé donnerait la carte à un niveau indu. La branche level-up
+# de Deck.add_card ignore déjà ce niveau (incrément +1) ; ce garde-fou couvre la
+# branche « carte absente de la main », seule porte de l'exploit.
+func _enforce_card_lvl_from_hand(player: Player, card: Card) -> void:
+	if player == null or player.hand == null or card == null:
+		return
+	card.lvl = player.hand.get_card_lvl(card) + 1
+
 
 func _get_card_in_array(uid: int, cards: Array[Card]) -> Card:
 	for card in cards:

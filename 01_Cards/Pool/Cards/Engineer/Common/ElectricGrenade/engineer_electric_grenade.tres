@@ -7,9 +7,12 @@
 script = ExtResource("2_eff")
 _period = Array[float]([7.0, 7.0, 7.0, 7.0, 7.0, 0.0])
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_t7qcu"]
+
 [resource]
 script = ExtResource("1_card")
 name = "Electric Grenade"
+picture = SubResource("PlaceholderTexture2D_t7qcu")
 families = Array[int]([2])
 _card_effect = SubResource("Resource_grenade")
 points = Dictionary[int, int]({

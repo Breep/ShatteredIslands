@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cw5f3m1p8raq2" path="res://02_Entities/_Shared/Components/HealthBar/BossHealthBar/boss_health_bar_component.tscn" id="8_qe6da"]
 [ext_resource type="Script" uid="uid://n0ydac247uxr" path="res://02_Entities/Pool/Mobs/SkeletonDragon/breath_vfx_controller.gd" id="9_jg7m6"]
 [ext_resource type="Script" uid="uid://betofvpdh41wr" path="res://02_Entities/Pool/Mobs/SkeletonDragon/devastating_breath_ability.gd" id="11_1dxyi"]
+[ext_resource type="Script" uid="uid://dtxtpcykbj30q" path="res://02_Entities/Pool/Mobs/SkeletonDragon/dragon_flight_camera_zoom.gd" id="12_dfczm"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jg7m6"]
 radius = 2.859375
@@ -244,16 +245,16 @@ transform = Transform3D(0.9921515, 0.0440785, -0.117007814, -0.10942753, 0.75884
 shape = SubResource("CapsuleShape3D_jg7m6")
 
 [node name="ik_foot_f_l" parent="SkeletalDragonVisual/root/ik_foot_root" parent_id_path=PackedInt32Array(1358678233, 1234273656) index="0" unique_id=889725756]
-transform = Transform3D(-0.0635607, 0.9944335, 0.08403444, 0.14989936, 0.09276254, -0.98433983, -0.98665565, -0.049968623, -0.15496105, 0.5903115, -0.5927464, 0.15605411)
+transform = Transform3D(-0.063560694, 0.9944335, 0.084034435, 0.14989935, 0.09276254, -0.9843397, -0.98665553, -0.049968623, -0.15496103, 0.5903115, -0.5927464, 0.15605411)
 
 [node name="ik_foot_f_r" parent="SkeletalDragonVisual/root/ik_foot_root" parent_id_path=PackedInt32Array(1358678233, 1234273656) index="1" unique_id=1887194801]
-transform = Transform3D(-0.0635605, 0.99443346, 0.08403365, -0.14989872, -0.09276169, 0.98434, 0.9866555, 0.04996862, 0.1549604, -0.5908546, -0.59274626, 0.15605451)
+transform = Transform3D(-0.06356049, 0.99443334, 0.08403365, -0.14989871, -0.09276168, 0.98434, 0.98665535, 0.04996861, 0.1549604, -0.5908546, -0.59274626, 0.15605451)
 
 [node name="ik_foot_b_l" parent="SkeletalDragonVisual/root/ik_foot_root" parent_id_path=PackedInt32Array(1358678233, 1234273656) index="2" unique_id=1335928782]
-transform = Transform3D(0.969511, 0.044749763, -0.24092734, 0.23529679, 0.1045906, 0.9662794, 0.06843954, -0.9935079, 0.09087226, 0.54952586, 0.96267265, 0.14263445)
+transform = Transform3D(0.969511, 0.044749755, -0.24092731, 0.23529679, 0.104590595, 0.96627927, 0.06843954, -0.9935078, 0.09087224, 0.54952586, 0.96267265, 0.14263445)
 
 [node name="ik_foot_b_r" parent="SkeletalDragonVisual/root/ik_foot_root" parent_id_path=PackedInt32Array(1358678233, 1234273656) index="3" unique_id=1666923042]
-transform = Transform3D(0.9695111, 0.044749677, -0.24092625, -0.2352957, -0.10459096, -0.9662793, -0.06843944, 0.99350804, -0.09087266, -0.5495261, 0.9626724, 0.14263457)
+transform = Transform3D(0.9695112, 0.044749677, -0.24092625, -0.23529573, -0.10459096, -0.9662793, -0.06843945, 0.99350804, -0.09087266, -0.5495261, 0.9626724, 0.14263457)
 
 [node name="HealthBarMarker" type="Marker3D" parent="SkeletalDragonVisual" unique_id=292615107]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.275872, 0)
@@ -388,6 +389,10 @@ metadata/_custom_type_script = "uid://n0ydac247uxr"
 script = ExtResource("11_1dxyi")
 _owner = NodePath("..")
 metadata/_custom_type_script = "uid://betofvpdh41wr"
+
+[node name="DragonFlightCameraZoom" type="Node" parent="." unique_id=1104769729 node_paths=PackedStringArray("_flight_ability")]
+script = ExtResource("12_dfczm")
+_flight_ability = NodePath("../ShatteringFlightAbility")
 
 [editable path="SkeletalDragonVisual"]
 [editable path="SkeletalDragonVisual/root/Skeleton3D/BoneAttachment3D/VFX_Flamethrower_Anime_A"]

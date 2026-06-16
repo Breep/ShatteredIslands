@@ -4,20 +4,23 @@
 
 [resource]
 script = ExtResource("1_hyobd")
-_health_max = 1740.0
-_mana_regen = 3.9000000000000004
+_health_max = 8850.0
+_mana_max = 42.0
+_mana_regen = 3.0
 auto_attack_type = 1
-_attack_range = 1.5
-_attack_damage = 58.0
-_attack_speed = 1.4500000000000002
-_movement_speed = 9.75
-_attack_power = 0.0
-_crit_resistance = 10.95
-armor = 4.9
-magic_resistance = 4.9
-poison_resistance = 4.9
+_attack_range = 1.7
+_attack_damage = 56.0
+_attack_speed = 1.6696003466439997
+_attack_power = 87.1
+armor = 21.98292909421596
+_crit_chance = 19.5
+_dodge = 12.0
+_m_crit_chances = Dictionary[int, float]({
+0: 0.0,
+1: 0.0
+})
 _m_resistances = Dictionary[int, float]({
-0: 4.9,
-1: 4.9,
-2: 4.9
+0: 21.98292909421596,
+1: 0.0,
+2: 0.0
 })

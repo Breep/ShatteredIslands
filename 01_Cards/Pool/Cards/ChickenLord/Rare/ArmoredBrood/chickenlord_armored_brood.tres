@@ -5,11 +5,14 @@
 
 [sub_resource type="Resource" id="Resource_armored"]
 script = ExtResource("2_eff")
-_block_amount = Array[float]([10.0, 15.0, 20.0, 25.0, 35.0])
+_block_amount = Array[float]([1.0, 2.0, 3.0, 4.0, 5.0])
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_x60vf"]
 
 [resource]
 script = ExtResource("1_card")
 name = "Armored Brood"
+picture = SubResource("PlaceholderTexture2D_x60vf")
 families = Array[int]([8])
 rarity = 1
 _card_effect = SubResource("Resource_armored")

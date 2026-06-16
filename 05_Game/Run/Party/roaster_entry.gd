@@ -17,6 +17,13 @@ extends Resource
 @export var hand: Hand
 @export var data_memory: NestedRegistry
 
+# Vrai une fois que le joueur a posé l'unité sur le terrain (via UIRoasterList).
+# Collant et sérialisé : une unité placée le reste aux confrontations suivantes
+# (sa position est mémorisée sur l'EntitySpec au snapshot POSITIONING→COUNTDOWN).
+# Toute nouvelle entry démarre non placée → doit être posée avant que le combat
+# puisse être lancé.
+@export var placed: bool = false
+
 # Tiers à choix tranchés par le joueur (BRONZE/SILVER/GOLD → SkillID retenu).
 # Persisté avec la run ; rechargé par HeroSkillComponent à chaque spawn du héros.
 @export var chosen_skills: Dictionary[Skill.Type, Skill.SkillID] = {}

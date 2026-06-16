@@ -17,23 +17,24 @@ highlight_target = true
 [sub_resource type="Resource" id="step_show_gold"]
 script = ExtResource("2_step")
 id = &"show_gold"
-text = "Voici ton or. Les cartes en coûtent — garde un œil dessus."
+text = "Voici ton or. Les cartes coûtent 100 Golds — garde un œil dessus."
 target_unique_name = &"PlayerGoldHBox"
-validation_event = 0
 auto_advance_delay = 0.0
+popup_mode = 1
 highlight_target = true
 preferred_arrow_side = 3
 
 [sub_resource type="Resource" id="step_buy_attack"]
 script = ExtResource("2_step")
 id = &"buy_attack"
-text = "Prends cette carte : elle renforce ton offensive — ses attaques infligent Ignite."
+text = "Prends cette carte : elle renforce ton attaque, elles infligent maintenant: Ignite. Un puissant effet de dégât sur la durée ! "
 target_unique_name = &"CardContainer"
 target_sub_name = &"VBoxContainer"
 validation_event = 7
 auto_advance_delay = 0.0
 popup_mode = 1
 hide_skip = true
+ensure_shop_open = true
 highlight_target = true
 highlight_padding = 8.0
 
@@ -47,19 +48,21 @@ validation_event = 7
 auto_advance_delay = 0.0
 popup_mode = 1
 hide_skip = true
+ensure_shop_open = true
 highlight_target = true
 highlight_padding = 8.0
 
 [sub_resource type="Resource" id="step_buy_combo"]
 script = ExtResource("2_step")
 id = &"buy_combo"
-text = "Et le combo : elle augmente ta vitesse d'attaque."
+text = "Et le combo : elle augmente ta vitesse d'attaque. Plus de soins et plus d'ignite ! "
 target_unique_name = &"CardContainer"
 target_sub_name = &"VBoxContainer3"
 validation_event = 7
 auto_advance_delay = 0.0
 popup_mode = 1
 hide_skip = true
+ensure_shop_open = true
 highlight_target = true
 highlight_padding = 8.0
 
@@ -72,6 +75,7 @@ validation_event = 8
 auto_advance_delay = 0.0
 popup_mode = 1
 hide_skip = true
+ensure_shop_open = true
 highlight_target = true
 
 [sub_resource type="Resource" id="step_upgrade_attack"]
@@ -84,32 +88,44 @@ validation_event = 7
 auto_advance_delay = 0.0
 popup_mode = 1
 hide_skip = true
+ensure_shop_open = true
 highlight_target = true
 highlight_padding = 8.0
 
 [sub_resource type="Resource" id="step_click_unit"]
 script = ExtResource("2_step")
 id = &"click_unit"
-text = "Clique sur ton unité pour découvrir ce qu'elle fait."
-target_unique_name = &""
+text = "Clique sur un ennemi pour ouvrir sa fiche."
 validation_event = 1
 auto_advance_delay = 0.0
-popup_mode = 0
 hide_skip = true
+ensure_shop_closed = true
+hide_hand = true
+screen_anchor = 1
+
+[sub_resource type="Resource" id="step_show_spells"]
+script = ExtResource("2_step")
+id = &"show_spells"
+text = "Et voici tous ses sorts. Survole-les pour voir ce qu'ils font — tu peux inspecter n'importe quelle unité comme ça."
+target_unique_name = &"SkillsContainer"
+auto_advance_delay = 0.0
+ensure_shop_closed = true
+hide_hand = true
+highlight_target = true
+highlight_padding = 8.0
+screen_anchor = 1
 
 [sub_resource type="Resource" id="step_launch_fight"]
 script = ExtResource("2_step")
 id = &"launch_fight"
-text = "Tu sais tout ! Lance le combat quand tu es prêt, en bas à droite."
+text = "Maintenant tu es prêt. Lance le combat losque tu sera prêt pour vivre ta première aventure !"
 target_unique_name = &"ContinueButton"
 validation_event = 4
 auto_advance_delay = 0.0
-popup_mode = 1
-hide_skip = true
 highlight_target = true
 
 [resource]
 script = ExtResource("1_seq")
 id = &"seq_buying_phase"
 trigger_state = 3
-steps = Array[ExtResource("2_step")]([SubResource("step_open_shop"), SubResource("step_show_gold"), SubResource("step_buy_attack"), SubResource("step_buy_defense"), SubResource("step_buy_combo"), SubResource("step_reroll"), SubResource("step_upgrade_attack"), SubResource("step_click_unit"), SubResource("step_launch_fight")])
+steps = Array[ExtResource("2_step")]([SubResource("step_open_shop"), SubResource("step_show_gold"), SubResource("step_buy_attack"), SubResource("step_buy_defense"), SubResource("step_buy_combo"), SubResource("step_reroll"), SubResource("step_upgrade_attack"), SubResource("step_click_unit"), SubResource("step_show_spells"), SubResource("step_launch_fight")])

@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="AlterationIconConfig" format=3]
+[gd_resource type="Resource" script_class="AlterationIconConfig" format=3 uid="uid://vyyl0moejpa2"]
 
-[ext_resource type="Script" path="res://02_Entities/_Shared/Components/Alterations/AlterationIcon/alteration_icon_config.gd" id="1_ntt3l"]
+[ext_resource type="Script" uid="uid://cy5pvutd2n1kk" path="res://02_Entities/_Shared/Components/Alterations/AlterationIcon/alteration_icon_config.gd" id="1_ntt3l"]
 
 [resource]
 script = ExtResource("1_ntt3l")

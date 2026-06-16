@@ -1,28 +1,21 @@
-# Spec décrivant une Entity (héros, acolyte, mob, antagonist, ...) à instancier.
-# Porte le placement (transform) + un override de level/stats + éventuellement
-# une référence vers une RoasterEntry (côté joueur, lien vers l'inventaire).
-#
-# Source de la scene : `scene` (legacy/override) en priorité, sinon
-# EntityDesc.resolve_scene(desc) qui interroge Shared.
-# Quand `entry` est non-null (cas joueur), level/hand/data_memory de l'entry
-# écrasent ceux de la scene au spawn — ils sont la source canonique.
+# Spec décrivant une Entity à instancier dans une formation : une RoasterEntry
+# (l'identité — desc, level, hand, mémoire) + un placement (transform) + la
+# logique de spawn. La RoasterEntry est la source unique des méta-données ;
+# joueur comme ennemi en portent une (côté ennemi, l'entry est autonome et non
+# rattachée à un roaster). La scène est résolue via EntityDesc.resolve_scene(entry.desc),
+# avec repli sur le champ `scene` hérité (markers / specs legacy sans entry).
 @tool
 class_name EntitySpec
 extends SpawnSpec
 
-@export var desc: EntityDesc
-@export_range(1, 20) var level: int = 1
-@export var stats_override: EntityStats = null
-
-# Référence vers l'entrée roaster correspondante. Nullable :
-# - rempli côté joueur (les specs sont générées depuis le roaster ou liées
-#   manuellement à une entry)
-# - null côté ennemi (mob/antagoniste préconstruit en .tres)
+# RoasterEntry portant l'identité de l'entité (desc, level, hand, data_memory).
+# Côté joueur : référence l'entry du roaster (cf. Party). Côté ennemi : entry
+# autonome, distinguée du joueur par Party.find_slot_of(entry) == NONE.
 @export var entry: RoasterEntry
 
 
 func spawn_into(parent: Node, ctx: EntityContext = null) -> Node:
-	var packed: PackedScene = scene if scene != null else EntityDesc.resolve_scene(desc)
+	var packed: PackedScene = _resolve_scene()
 	if packed == null:
 		return null
 
@@ -46,7 +39,7 @@ func spawn_into(parent: Node, ctx: EntityContext = null) -> Node:
 	if entity.category == Entity.Category.HERO and ctx != null:
 		entity.roaster = ctx.roaster
 
-	# Méta-data canoniques depuis l'entry (joueur) ou la scene (ennemi).
+	# Méta-data canoniques depuis l'entry (toujours présente dans le modèle unifié).
 	if entry != null:
 		entity.level = entry.level
 		if entry.data_memory != null:
@@ -71,9 +64,17 @@ func spawn_into(parent: Node, ctx: EntityContext = null) -> Node:
 
 
 # Catégorie posée sur l'entité au spawn. Override par les specs concrètes typées
-# (AcolyteSpec, AntagonistSpec, BuildingSpec). Si une `desc` est fournie, on
-# utilise sa default_category ; sinon MOB par défaut.
+# (AcolyteSpec, AntagonistSpec, BuildingSpec). Sinon dérivée de la desc de
+# l'entry, MOB par défaut.
 func get_entity_category() -> Entity.Category:
-	if desc != null:
-		return desc.default_category
+	if entry != null and entry.desc != null:
+		return entry.desc.default_category
 	return Entity.Category.MOB
+
+
+# Source de la scène : priorité à la desc de l'entry (source canonique), repli
+# sur le champ `scene` hérité (markers / specs legacy sans entry).
+func _resolve_scene() -> PackedScene:
+	if entry != null and entry.desc != null:
+		return EntityDesc.resolve_scene(entry.desc)
+	return scene

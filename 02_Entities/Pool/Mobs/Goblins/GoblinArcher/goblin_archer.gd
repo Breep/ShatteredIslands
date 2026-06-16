@@ -96,7 +96,7 @@ func cast_ultimate() -> void:
 	super.cast_ultimate()
 	await get_tree().create_timer(1).timeout
 	spell.cast_spell(target.get_target(TargetComponent.TargettingStrategy.LOWEST_HP_PERCENT_ENEMY), Spell.Type.GOBLIN_FOCUS, {
-		GoblinFocus.Modifier.DAMAGE: 60.0,
+		GoblinFocus.Modifier.DAMAGE: _goblin_focus_damage,
 		GoblinFocus.Modifier.STACK_TYPE: Alteration.Type.VULNERABILITY,
-		GoblinFocus.Modifier.STACK_NUMBER: 10
+		GoblinFocus.Modifier.STACK_NUMBER: _goblin_focus_vulnerability_stacks
 	})

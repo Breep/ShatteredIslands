@@ -1,10 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cfireground001"]
+[gd_scene format=3 uid="uid://dxfptq5chqaea"]
 
-[ext_resource type="Script" path="res://03_SpellsAndProjectiles/Spells/FireGround/fire_ground.gd" id="1_fg"]
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_fg"]
-radius = 1.0
-height = 1.0
+[ext_resource type="Script" uid="uid://ofh6viu15ih" path="res://03_SpellsAndProjectiles/Spells/FireGround/fire_ground.gd" id="1_fg"]
+[ext_resource type="PackedScene" uid="uid://cw2720gv02yqy" path="res://03_SpellsAndProjectiles/Spells/FireGround/VFX/Scenes/VFX_fire_area_ground.tscn" id="2_06r1x"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fg"]
 transparency = 1
@@ -13,29 +10,31 @@ emission_enabled = true
 emission = Color(1, 0.5, 0.1, 1)
 emission_energy_multiplier = 2.0
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_fg"]
-top_radius = 1.0
-bottom_radius = 1.0
-height = 0.2
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_fg"]
+height = 2.616211
+radius = 1.0
 
-[node name="FireGround" type="Node3D"]
+[node name="FireGround" type="Node3D" unique_id=364204491]
 script = ExtResource("1_fg")
 
-[node name="FireVisual" type="MeshInstance3D" parent="."]
+[node name="FireVisual" type="MeshInstance3D" parent="." unique_id=142207285]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 material_override = SubResource("StandardMaterial3D_fg")
 cast_shadow = 0
-mesh = SubResource("CylinderMesh_fg")
 
-[node name="AreaOfEffect" type="Area3D" parent="."]
+[node name="VFX_Fire_Area" parent="FireVisual" unique_id=631661642 instance=ExtResource("2_06r1x")]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, -0.1, 0)
+
+[node name="AreaOfEffect" type="Area3D" parent="." unique_id=1042304156]
 unique_name_in_owner = true
 collision_layer = 0
 collision_mask = 16
 monitorable = false
 
-[node name="AreaOfEffectCollisionShape3D" type="CollisionShape3D" parent="AreaOfEffect"]
+[node name="AreaOfEffectCollisionShape3D" type="CollisionShape3D" parent="AreaOfEffect" unique_id=1112776125]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.80810547, 0)
 shape = SubResource("CylinderShape3D_fg")
 
 [connection signal="body_entered" from="AreaOfEffect" to="." method="_on_area_of_effect_body_entered"]

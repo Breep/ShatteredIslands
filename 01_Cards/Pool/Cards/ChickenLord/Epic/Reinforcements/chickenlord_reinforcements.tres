@@ -7,9 +7,12 @@
 script = ExtResource("2_eff")
 _chance = Array[float]([20.0, 30.0, 40.0])
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_81s1x"]
+
 [resource]
 script = ExtResource("1_card")
 name = "Reinforcements"
+picture = SubResource("PlaceholderTexture2D_81s1x")
 families = Array[int]([8])
 rarity = 2
 _card_effect = SubResource("Resource_reinf")

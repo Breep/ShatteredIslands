@@ -7,8 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.tscn" id="4_snime"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://c8d25ik68uqcr" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/forest_drake_animation.res" id="6_snime"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_wqgwj"]
-radius = 1.0084918
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_snime"]
+radius = 0.64501953
+height = 2.9553223
 
 [node name="ForestDrake" type="CharacterBody3D" unique_id=1600538521 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_attack_spawn_marker")]
 collision_layer = 16
@@ -242,7 +243,7 @@ parameters/switch_stunned_state/transition_request = ""
 parameters/switch_stunned_state/current_index = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=92803751]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.491724, 0)
-shape = SubResource("SphereShape3D_wqgwj")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1935062, -0.31307873)
+shape = SubResource("CapsuleShape3D_snime")
 
 [editable path="ForestDrakeVisual"]

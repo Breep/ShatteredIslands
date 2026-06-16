@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://fly0qbnwyvaf"]
+
+[ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="1_b6wme"]
+[ext_resource type="Script" uid="uid://bn50vkeqmaw5k" path="res://04_UI/InGame/ModifierViewer/ui_modifiers_viewer.gd" id="2_rdbjl"]
+[ext_resource type="PackedScene" uid="uid://cgamasi8bd2l2" path="res://04_UI/InGame/ModifierViewer/ModifierViewerRow/ui_modifier_viewer_row.tscn" id="3_iq8ul"]
+
+[node name="UiModifiersViewer" type="PanelContainer" unique_id=1139125158]
+custom_minimum_size = Vector2(318, 204)
+offset_right = 318.0
+offset_bottom = 204.0
+theme = ExtResource("1_b6wme")
+script = ExtResource("2_rdbjl")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=498685847]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="ScrollContainer" unique_id=591865837]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ModifierList" type="VBoxContainer" parent="ScrollContainer/Margin" unique_id=1441328180]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 2
+
+[node name="Row1" parent="ScrollContainer/Margin/ModifierList" unique_id=815274477 instance=ExtResource("3_iq8ul")]
+layout_mode = 2
+
+[node name="Row2" parent="ScrollContainer/Margin/ModifierList" unique_id=406348986 instance=ExtResource("3_iq8ul")]
+layout_mode = 2
+
+[node name="Row3" parent="ScrollContainer/Margin/ModifierList" unique_id=1661091765 instance=ExtResource("3_iq8ul")]
+layout_mode = 2
+
+[node name="Row4" parent="ScrollContainer/Margin/ModifierList" unique_id=235081833 instance=ExtResource("3_iq8ul")]
+layout_mode = 2
+
+[node name="Row5" parent="ScrollContainer/Margin/ModifierList" unique_id=517063729 instance=ExtResource("3_iq8ul")]
+layout_mode = 2
+
+[node name="Row6" parent="ScrollContainer/Margin/ModifierList" unique_id=2053898275 instance=ExtResource("3_iq8ul")]
+layout_mode = 2

@@ -17,6 +17,7 @@ enum ValidationEvent {
 	CARD_BOUGHT, ## Any card purchased from the shop (validation_filter unused here).
 	SHOP_REFRESHED, ## The player rerolled the shop.
 	OPEN_SHOP, ## The player opened the shop panel.
+	HERO_SKILL_CHOSEN, ## The local hero picked a talent from the skill selection.
 }
 
 enum PopupMode {
@@ -39,6 +40,17 @@ enum PreferredArrowSide {
 	TOP = 3,
 	BOTTOM = 4,
 }
+
+## Forces the bubble to a fixed screen position instead of anchoring next to the
+## target (no arrow). AUTO = normal target-relative placement. Use when the target
+## is awkward to point at or the bubble would overlap content (e.g. the talent
+## cards, or the entity sheet at the bottom).
+enum ScreenAnchor {
+	AUTO = 0,
+	RIGHT_CENTER = 1,
+	CENTER = 2,
+	BOTTOM_CENTER = 3,
+}
 #endregion
 
 
@@ -55,6 +67,11 @@ enum PreferredArrowSide {
 ## set, the resolver descends from `target_unique_name` via find_child(owned=false)
 ## and returns the first match. Empty = stay on the parent target.
 @export var target_sub_name: StringName
+
+## Extra Controls (by unique-name) to ALSO spotlight — each gets its own hole and
+## border. The bubble still anchors to target_unique_name. Use when a step must
+## highlight several elements at once (e.g. the two talent choices).
+@export var extra_target_unique_names: Array[StringName] = []
 
 @export var validation_event: ValidationEvent = ValidationEvent.NONE
 
@@ -74,6 +91,18 @@ enum PreferredArrowSide {
 ## to perform the required action (e.g. buy the highlighted card). Pair with a
 ## reachable validation_event so the step is never a dead-end.
 @export var hide_skip: bool = false
+
+## UI state the step guarantees before pointing at things, via Events.
+## ensure_shop_open: force the shop panel open (in case the player closed it).
+## ensure_shop_closed: force it closed (to clear the view, e.g. to click an enemy).
+## hide_hand: hide the player's hand while the step is active (auto-restored after).
+@export var ensure_shop_open: bool = false
+@export var ensure_shop_closed: bool = false
+@export var hide_hand: bool = false
+
+## Fades the spotlight dim out while the player is dragging an entity, so the
+## field stays readable for placement; the dim returns when the drag ends.
+@export var dim_off_while_dragging: bool = false
 
 ## Optional portrait shown on the left of the bubble. Leave null to fall back
 ## to the default portrait baked in the bubble scene.
@@ -99,4 +128,8 @@ enum PreferredArrowSide {
 ## IF there's room; otherwise it falls back to AUTO. Useful for elements where
 ## the auto pick lands awkwardly (e.g. gold display in a corner).
 @export var preferred_arrow_side: PreferredArrowSide = PreferredArrowSide.AUTO
+
+## Pins the bubble to a fixed screen spot (no arrow), overriding target-relative
+## placement. AUTO keeps the normal behavior.
+@export var screen_anchor: ScreenAnchor = ScreenAnchor.AUTO
 #endregion

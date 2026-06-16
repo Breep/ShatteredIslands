@@ -7,6 +7,7 @@ extends Control
 
 @onready var _play_menu: UIPlayMenu = %PlayMenu
 @onready var _game_settings: UIGameSettings = %GameSettings
+@onready var _leaderboard: UILeaderboard = %Leaderboard
 
 func _ready() -> void:
 	visibility_changed.connect(_emit_window_opened_if_visible)
@@ -31,10 +32,17 @@ func _input(event: InputEvent) -> void:
 	elif _game_settings.visible:
 		_game_settings.hide()
 		get_viewport().set_input_as_handled()
+	elif _leaderboard.visible:
+		_leaderboard.hide()
+		get_viewport().set_input_as_handled()
 
 
 func _on_play_button_pressed() -> void:
 	_play_menu.show()
+
+
+func _on_leaderboard_button_pressed() -> void:
+	_leaderboard.open()
 
 func _on_settings_2_pressed() -> void:
 	_game_settings.show()

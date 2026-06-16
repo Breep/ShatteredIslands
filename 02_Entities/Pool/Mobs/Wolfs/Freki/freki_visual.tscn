@@ -13,9 +13,9 @@ albedo_texture = ExtResource("3_aavlo")
 [node name="Node3D" type="Node3D" unique_id=518880957]
 
 [node name="Unity_SK_Animals_Dog_01" parent="." unique_id=33620102 instance=ExtResource("1_pkeve")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-1.33, 0, -2.0082443e-07, 0, 1.33, 0, 2.0082443e-07, 0, -1.33, 0, 0, 0)
 
-[node name="Skeleton3D" parent="Unity_SK_Animals_Dog_01" index="1" unique_id=2009817079]
+[node name="Skeleton3D" parent="Unity_SK_Animals_Dog_01" index="1" unique_id=1387892936]
 bones/2/position = Vector3(0, 0.6764799, -0.24666874)
 bones/2/rotation = Quaternion(0, 0, 0, 1)
 bones/3/position = Vector3(0, -0.00066752, 0.01302807)
@@ -120,16 +120,10 @@ bones/80/position = Vector3(-0.10592922, 0.04376553, 0.3595437)
 bones/80/rotation = Quaternion(0, 0, 0, 1)
 bones/81/position = Vector3(0.10592922, 0.04376553, 0.3595437)
 
-[node name="SK_Animal_Dog_Husky_01" parent="Unity_SK_Animals_Dog_01/Skeleton3D" index="13" unique_id=2001462419]
+[node name="SK_Animal_Dog_Husky_01" parent="Unity_SK_Animals_Dog_01/Skeleton3D" index="13" unique_id=2056769348]
 material_override = SubResource("StandardMaterial3D_arpl1")
 
-[node name="SK_Animal_Dog_Wolf_01" parent="Unity_SK_Animals_Dog_01/Skeleton3D" index="25" unique_id=770556620]
+[node name="SK_Animal_Dog_Wolf_01" parent="Unity_SK_Animals_Dog_01/Skeleton3D" index="25" unique_id=1625613442]
 material_override = SubResource("StandardMaterial3D_n3oui")
-
-[node name="HealthBarSpawnMarker" type="Marker3D" parent="Unity_SK_Animals_Dog_01" unique_id=1130036551]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.132942, 0)
-
-[node name="ProjectileSpawnMarker" type="Marker3D" parent="Unity_SK_Animals_Dog_01" unique_id=686307857]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.027648e-08, 0.716996, 0.8038692)
 
 [editable path="Unity_SK_Animals_Dog_01"]

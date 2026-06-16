@@ -2,28 +2,44 @@
 
 [ext_resource type="Script" uid="uid://flrydugnyfe7" path="res://05_Game/Run/SpawnSpecs/Concrete/acolyte_spawn_spec.gd" id="1_kwr6e"]
 [ext_resource type="Script" uid="uid://rj6clcd8f15a" path="res://05_Game/Run/SpawnSpecs/entity_spec.gd" id="2_t7j13"]
-[ext_resource type="PackedScene" uid="uid://bicegolemsc17" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/ice_golem.tscn" id="3_bakjv"]
-[ext_resource type="PackedScene" uid="uid://73oqc1k27od6" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/molten_golem.tscn" id="4_7tog1"]
-[ext_resource type="PackedScene" uid="uid://c4qymxraauxg5" path="res://02_Entities/Pool/Mobs/Golems/PoisonGolem/poison_golem.tscn" id="5_rv77b"]
+[ext_resource type="Resource" uid="uid://cicegolemdsc7" path="res://02_Entities/Pool/Mobs/Golems/IceGolem/Stats/entity_desc.tres" id="3_bakjv"]
+[ext_resource type="Resource" uid="uid://cmb6yb1ubj80r" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/Stats/entity_desc.tres" id="4_7tog1"]
+[ext_resource type="Resource" uid="uid://dirq82wxfetcs" path="res://02_Entities/Pool/Mobs/Golems/PoisonGolem/Stats/entity_desc.tres" id="5_rv77b"]
 [ext_resource type="Script" uid="uid://bj0ecq2d5vir5" path="res://05_Game/Run/SpawnSpecs/Concrete/hero_spawn_spec.gd" id="6_o5ug4"]
 [ext_resource type="Script" uid="uid://b3ir321gjcqej" path="res://05_Game/Run/Formations/fighting_formation.gd" id="7_h3s6a"]
 [ext_resource type="Script" uid="uid://c78ccxnqy6c16" path="res://05_Game/Run/SpawnSpecs/spawn_point_spec.gd" id="8_oocej"]
+[ext_resource type="Script" uid="uid://dy31m54qprfhl" path="res://05_Game/Run/Party/roaster_entry.gd" id="9_rstry"]
+
+[sub_resource type="Resource" id="RoasterEntry_ice"]
+script = ExtResource("9_rstry")
+desc = ExtResource("3_bakjv")
+level = 7
 
 [sub_resource type="Resource" id="Resource_gjr2k"]
 script = ExtResource("2_t7j13")
-scene = ExtResource("3_bakjv")
+entry = SubResource("RoasterEntry_ice")
 display_label = "IceGolem"
 transform = Transform3D(0.3703305, 0, -0.92890006, 0, 1, 0, 0.92890006, 0, 0.3703305, -2.747178, 0, 5.90839)
 
+[sub_resource type="Resource" id="RoasterEntry_molten"]
+script = ExtResource("9_rstry")
+desc = ExtResource("4_7tog1")
+level = 7
+
 [sub_resource type="Resource" id="Resource_ahopr"]
 script = ExtResource("2_t7j13")
-scene = ExtResource("4_7tog1")
+entry = SubResource("RoasterEntry_molten")
 display_label = "MoltenGolem"
 transform = Transform3D(0.19212803, 0, -0.98136985, 0, 1, 0, 0.98136985, 0, 0.19212803, -7.9567738, 0, -0.759326)
 
+[sub_resource type="Resource" id="RoasterEntry_poison"]
+script = ExtResource("9_rstry")
+desc = ExtResource("5_rv77b")
+level = 7
+
 [sub_resource type="Resource" id="Resource_jchp5"]
 script = ExtResource("2_t7j13")
-scene = ExtResource("5_rv77b")
+entry = SubResource("RoasterEntry_poison")
 display_label = "PoisonGolem"
 transform = Transform3D(-0.021256559, 0, -0.99977404, 0, 1, 0, 0.99977404, 0, -0.021256559, -2.6284523, 0, -6.761171)
 

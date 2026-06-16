@@ -186,6 +186,13 @@ func _on_hit(hit_target: Entity) -> void:
 		queue_free()
 
 
+## Appelé par la trajectoire quand la course se termine au sol (mode non-guidé
+## ou cible perdue). Comportement par défaut : se détruire. Les sous-classes
+## peuvent override pour réagir à l'impact-sol (ex. explosion).
+func on_reached_ground() -> void:
+	queue_free()
+
+
 func retarget(new_target: Entity) -> void:
 	if new_target == null or not is_instance_valid(new_target):
 		return

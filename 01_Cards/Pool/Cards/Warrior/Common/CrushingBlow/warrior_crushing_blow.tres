@@ -2,16 +2,18 @@
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_card"]
 [ext_resource type="Script" uid="uid://nfpb7klktjr4" path="res://01_Cards/Pool/Cards/Warrior/Common/CrushingBlow/warrior_crushing_blow.gd" id="2_eff"]
+[ext_resource type="Texture2D" uid="uid://bvpnk3aj30d1g" path="res://01_Cards/Pool/Cards/Warrior/Common/CrushingBlow/colossus_crushing_blow.png" id="2_wsnnh"]
 
 [sub_resource type="Resource" id="Resource_crush"]
 script = ExtResource("2_eff")
-_attack_number = 5
-_hp_percent = Array[float]([3.0, 4.0, 5.0, 6.0, 7.0])
+_attack_number = Array[int]([5, 5, 5, 5, 5])
+_hp_percent = Array[float]([2.0, 2.5, 3.0, 3.5, 4.0])
 metadata/_custom_type_script = "uid://nfpb7klktjr4"
 
 [resource]
 script = ExtResource("1_card")
 name = "Crushing Blow"
+picture = ExtResource("2_wsnnh")
 families = Array[int]([6, 1])
 _card_effect = SubResource("Resource_crush")
 points = Dictionary[int, int]({

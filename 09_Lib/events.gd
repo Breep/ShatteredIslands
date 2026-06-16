@@ -51,6 +51,9 @@ func signal_nothing_clicked() -> void:
 
 signal floor_clicked(position: Vector3)
 
+# Clic sur une stat dans la fiche d'entité (UIEntityPortrait) : ouvre le viewer de modifiers.
+signal entity_stat_clicked(entity: Entity, stat_type: EntityStats.StatType)
+
 # ============================== DRAGGABLE ==============================
 
 signal entity_drag_started(entity: Entity)
@@ -110,6 +113,20 @@ signal shop_opened() ## The local player opened the shop panel (tutorial validat
 ## because the roguelite flow does NOT drive GameManager.game_state_changed.
 signal tavern_phase_started() ## A tavern/buying phase became active and its UI is up.
 signal fighting_phase_started() ## A fighting phase became active.
+signal confrontation_resolved(won: bool) ## A confrontation's fight ended (emitted by GameRunner). won = the party won it.
+
+## Tutorial-driven UI state requests (so a step can guarantee the shop is open
+## before pointing at a card, or hide the shop/hand while pointing at an enemy).
+signal tutorial_set_shop_open(should_open: bool)
+signal tutorial_set_hand_visible(is_visible: bool)
+
+## The unit-placement UI (roaster list) just opened — units need placing on the
+## field. The TutorialManager hooks this to show the placement help.
+signal unit_placement_started()
+
+## The fight actually starts (countdown), after placement. The TutorialManager
+## shows the combat-info sequence here so it doesn't clash with placement help.
+signal combat_started()
 
 # ============================ Manager =============================
 signal card_shop_init()

@@ -7,7 +7,6 @@
 [ext_resource type="Shader" uid="uid://dncf64el86tmc" path="res://02_Entities/_Shared/Components/HealthBar/Shaders/character_shield_bar.gdshader" id="3_shield"]
 [ext_resource type="Shader" uid="uid://dav4yd3tlk03a" path="res://22_VFX/VFX_2D/UI/block_bar.gdshader" id="4_block"]
 [ext_resource type="Shader" uid="uid://bk6a2rmxlibvg" path="res://02_Entities/_Shared/Components/HealthBar/Shaders/character_level_frame.gdshader" id="5_lvl"]
-[ext_resource type="LabelSettings" uid="uid://bk10uxsgaj4p5" path="res://02_Entities/_Shared/Components/HealthBar/Data/debug_label.tres" id="6_dbg"]
 [ext_resource type="Texture2D" uid="uid://cc1t8fkok04ex" path="res://04_UI/_Themes/Data/Icons/AlterationsIcons/taunt.png" id="7_taunt"]
 [ext_resource type="Texture2D" uid="uid://bw7vjs5rujv38" path="res://02_Entities/_Shared/Components/HealthBar/BossHealthBar/Ressource/SPR_FantasyMenus_Crest_Greeble_Dragonhead_01_Gold.png" id="8_2lh2a"]
 
@@ -101,6 +100,14 @@ outline_color = Color(0, 0, 0, 1)
 shadow_size = 7
 shadow_color = Color(0, 0, 0, 0.79)
 shadow_offset = Vector2(3, 3)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2lh2a"]
+font_size = 38
+outline_size = 15
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(5, 5)
 
 [sub_resource type="LabelSettings" id="LabelSettings_shield"]
 font_color = Color(0.9416784, 0.84232056, 0, 1)
@@ -223,8 +230,6 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -600.0
-offset_bottom = -36.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -292,7 +297,7 @@ offset_bottom = 6.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "5000"
-label_settings = ExtResource("6_dbg")
+label_settings = SubResource("LabelSettings_2lh2a")
 horizontal_alignment = 1
 vertical_alignment = 1
 

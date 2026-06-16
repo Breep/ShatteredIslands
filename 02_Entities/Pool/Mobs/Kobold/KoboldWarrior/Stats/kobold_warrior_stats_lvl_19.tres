@@ -4,20 +4,23 @@
 
 [resource]
 script = ExtResource("1_vfwy1")
-_health_max = 1680.0
-_mana_regen = 3.8
+_health_max = 8040.0
+_mana_max = 42.0
+_mana_regen = 3.0
 auto_attack_type = 1
-_attack_range = 1.5
-_attack_damage = 56.0
-_attack_speed = 1.4
-_movement_speed = 9.5
-_attack_power = 0.0
-_crit_resistance = 10.9
-armor = 4.8
-magic_resistance = 4.8
-poison_resistance = 4.8
+_attack_range = 1.7
+_attack_damage = 54.0
+_attack_speed = 1.641936597271782
+_attack_power = 81.4
+armor = 21.77775591666576
+_crit_chance = 19.0
+_dodge = 11.5
+_m_crit_chances = Dictionary[int, float]({
+0: 0.0,
+1: 0.0
+})
 _m_resistances = Dictionary[int, float]({
-0: 4.8,
-1: 4.8,
-2: 4.8
+0: 21.77775591666576,
+1: 0.0,
+2: 0.0
 })

@@ -25,6 +25,11 @@
 [ext_resource type="Resource" uid="uid://iueh8vpbf0fd" path="res://02_Entities/Pool/Mobs/Wolfs/Freki/Stats/freki_stats_lvl_18.tres" id="23_6q2ym"]
 [ext_resource type="Resource" uid="uid://dthrppv5rv5bc" path="res://02_Entities/Pool/Mobs/Wolfs/Freki/Stats/freki_stats_lvl_19.tres" id="24_we6qs"]
 [ext_resource type="Resource" uid="uid://b57xp4l2na8dy" path="res://02_Entities/Pool/Mobs/Wolfs/Freki/Stats/freki_stats_lvl_20.tres" id="25_i4blb"]
+[ext_resource type="Resource" uid="uid://bv5g3mt3wgyaa" path="res://02_Entities/Pool/Mobs/Wolfs/Freki/Skills/Passive/coordinated_hunt.tres" id="30_chunt"]
+[ext_resource type="Resource" uid="uid://bv5t6cf83lyab" path="res://02_Entities/Pool/Mobs/Wolfs/Freki/Skills/Bronze/predator_instinct.tres" id="31_pinst"]
+[ext_resource type="Resource" uid="uid://bv5vslf1xmjac" path="res://02_Entities/Pool/Mobs/Wolfs/Freki/Skills/Silver/rending_bite.tres" id="32_rbite"]
+[ext_resource type="Resource" uid="uid://bv5tqidc5afad" path="res://02_Entities/Pool/Mobs/Wolfs/Freki/Skills/Gold/pack_alpha.tres" id="33_alpha"]
+[ext_resource type="Resource" uid="uid://bv51opfjfs5ae" path="res://02_Entities/Pool/Mobs/Wolfs/Freki/Skills/Ultimate/war_cry.tres" id="34_wcry"]
 
 [resource]
 script = ExtResource("3_fvegq")
@@ -55,6 +60,13 @@ stats = Dictionary[int, ExtResource("5_dcio6")]({
 18: ExtResource("23_6q2ym"),
 19: ExtResource("24_we6qs"),
 20: ExtResource("25_i4blb")
+})
+skills = Dictionary[int, ExtResource("4_nwsh0")]({
+0: ExtResource("30_chunt"),
+1: ExtResource("31_pinst"),
+2: ExtResource("32_rbite"),
+3: ExtResource("33_alpha"),
+4: ExtResource("34_wcry")
 })
 aa_1_anim_base_duration = 1.0
 aa_2_anim_base_duration = 1.0

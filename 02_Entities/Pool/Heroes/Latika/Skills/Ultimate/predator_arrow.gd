@@ -2,10 +2,10 @@ class_name SE_PredatorArrow
 extends SkillEffect
 
 # Ultimate "Flèche du Prédateur" : libère un trait perçant en ligne droite vers
-# l'ennemi le plus proche, traversant tous les ennemis sur son chemin pour _damage
-# dégâts physiques. Sort autonome (cf. PredatorArrow) — aucun lien avec l'auto-attaque.
+# l'ennemi le plus proche, traversant tous les ennemis sur son chemin pour des dégâts
+# physiques égaux à un ratio de l'AD du lanceur (cf. PredatorArrow).
 
-@export var _damage: float = 50.0
+@export var _damage_ratio: float = 5.0
 
 
 func apply(ctx: SkillContext) -> void:
@@ -18,11 +18,13 @@ func apply(ctx: SkillContext) -> void:
 	if not is_instance_valid(aim):
 		return
 
+	var damage: float = latika.stats.get_stat(EntityStats.StatType.AD) * _damage_ratio
 	latika.spell.cast_spell(aim, Spell.Type.PREDATOR_ARROW, {
-		PredatorArrow.Modifier.DAMAGE: _damage,
+		PredatorArrow.Modifier.DAMAGE: damage,
 	})
 
 
 func get_description() -> String:
 	return "Décoche un trait perçant vers l'ennemi le plus proche, traversant tous les " \
-		+ "ennemis sur sa trajectoire pour " + _value(_damage) + " de [[PHYSICAL_DAMAGE]]."
+		+ "ennemis sur sa trajectoire, infligeant " + _value(_damage_ratio * 100.0) \
+		+ "% de ses dégâts d'attaque en [[PHYSICAL_DAMAGE]]."

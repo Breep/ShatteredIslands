@@ -407,6 +407,7 @@ alignment = 2
 
 [node name="RandomCardButton" type="Button" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow" unique_id=1122589120]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 mouse_default_cursor_shape = 2

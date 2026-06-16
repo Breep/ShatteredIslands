@@ -11,3 +11,4 @@ func _init() -> void:
 	polarity = Polarity.BUFF
 	id = &"Untargetable"
 	display_color = Color.LAVENDER
+	icon = preload("res://04_UI/_Themes/Data/Icons/AlterationsIcons/untargetable.svg")

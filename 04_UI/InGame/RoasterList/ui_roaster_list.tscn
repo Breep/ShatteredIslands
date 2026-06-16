@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://c6g7l3w1yh45c"]
+
+[ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="1_58hu5"]
+[ext_resource type="PackedScene" uid="uid://cynrwmm6d4n6w" path="res://04_UI/InGame/RoasterList/EntityPortraitButton/ui_entity_portrait_button.tscn" id="1_q1k4k"]
+[ext_resource type="Script" uid="uid://wbgdv0juu5gg" path="res://04_UI/InGame/RoasterList/ui_roaster_list.gd" id="2_rbs86"]
+
+[node name="UiRoasterList" type="Control" unique_id=1245268600]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_58hu5")
+script = ExtResource("2_rbs86")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1974113530]
+custom_minimum_size = Vector2(145, 750)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -403.0
+offset_right = 145.0
+offset_bottom = 347.0
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=73950044]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer" unique_id=7553472]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/ScrollContainer" unique_id=2084009902]
+layout_mode = 2
+
+[node name="UiEntityPortraitButton" parent="PanelContainer/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1621467115 instance=ExtResource("1_q1k4k")]
+layout_mode = 2
+
+[node name="UiEntityPortraitButton2" parent="PanelContainer/MarginContainer/ScrollContainer/VBoxContainer" unique_id=584578202 instance=ExtResource("1_q1k4k")]
+layout_mode = 2
+
+[node name="UiEntityPortraitButton3" parent="PanelContainer/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1921301122 instance=ExtResource("1_q1k4k")]
+layout_mode = 2
+
+[node name="UiEntityPortraitButton4" parent="PanelContainer/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1543291562 instance=ExtResource("1_q1k4k")]
+layout_mode = 2
+
+[node name="UiEntityPortraitButton5" parent="PanelContainer/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1328796621 instance=ExtResource("1_q1k4k")]
+layout_mode = 2
+
+[node name="UiEntityPortraitButton6" parent="PanelContainer/MarginContainer/ScrollContainer/VBoxContainer" unique_id=153887483 instance=ExtResource("1_q1k4k")]
+layout_mode = 2

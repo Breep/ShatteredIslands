@@ -4,23 +4,23 @@
 
 [resource]
 script = ExtResource("1_ig4xj")
-_health_max = 1200.0
+_health_max = 1820.0
 _mana_max = 30.0
 _mana_regen = 3.0
 auto_attack_type = 1
 _attack_range = 1.5
-_attack_damage = 40.0
-_movement_speed = 7.5
-_attack_power = 0.0
-_crit_resistance = 0.5
-armor = 4.0
-magic_resistance = 4.0
-poison_resistance = 4.0
-_crit_chance = 20.0
-_crit_mult = 120.0
-_dodge = 15.0
+_attack_damage = 38.0
+_attack_speed = 1.6788898309344882
+_movement_speed = 6.0
+_attack_power = 43.0
+_crit_chance = 22.5
+_dodge = 17.5
+_m_crit_chances = Dictionary[int, float]({
+0: 0.0,
+1: 0.0
+})
 _m_resistances = Dictionary[int, float]({
-0: 4.0,
-1: 4.0,
-2: 4.0
+0: 0.0,
+1: 0.0,
+2: 0.0
 })

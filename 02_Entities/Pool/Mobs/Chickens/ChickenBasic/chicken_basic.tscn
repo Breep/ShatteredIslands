@@ -1,0 +1,136 @@
+[gd_scene format=3 uid="uid://xup3guwehhoc"]
+
+[ext_resource type="Script" uid="uid://l4sahik8i4w1" path="res://02_Entities/Pool/Mobs/Chickens/ChickenBasic/chicken_basic.gd" id="1_t2vws"]
+[ext_resource type="Resource" uid="uid://dy8c5d1swpce1" path="res://02_Entities/Pool/Mobs/Chickens/ChickenBasic/Stats/chicken_entity_desc.tres" id="2_unxfj"]
+[ext_resource type="PackedScene" uid="uid://ctj0phpdgq5iu" path="res://02_Entities/Pool/Mobs/Chickens/ChickenBasic/chicken_basic_visual.tscn" id="3_awods"]
+[ext_resource type="AnimationNodeBlendTree" uid="uid://cr51ggnb0u010" path="res://02_Entities/Pool/Mobs/Chickens/chicken_animation_tree.res" id="3_n43b8"]
+[ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="5_unxfj"]
+[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/SmallHealthBar/small_health_bar_component.tscn" id="8_5weh6"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x7yny"]
+radius = 0.16455078
+height = 0.7753906
+
+[node name="Chicken" type="CharacterBody3D" unique_id=2109615854 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker")]
+collision_layer = 16
+collision_mask = 25
+script = ExtResource("1_t2vws")
+entity_name = "Basic chicken"
+category = 1
+entity_desc = ExtResource("2_unxfj")
+_visual_3d = NodePath("ChickenVisual")
+_health_bar_marker = NodePath("ChickenVisual/HealthBarSpawnPoint")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1928783995]
+transform = Transform3D(1, 0, 6.3573026e-08, 0, 1, 0, -6.3573026e-08, 0, 1, 0, 0.41943443, 0)
+shape = SubResource("CapsuleShape3D_x7yny")
+
+[node name="ChickenVisual" parent="." unique_id=530887194 instance=ExtResource("3_awods")]
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0, 0, 0)
+
+[node name="Skeleton3D" parent="ChickenVisual" index="0" unique_id=416118163]
+animate_physical_bones = false
+bones/1/position = Vector3(0, 0.051001944, 0.025282245)
+bones/1/rotation = Quaternion(-0.7070928, 0.70709276, -0.004456257, -0.0044413824)
+bones/4/rotation = Quaternion(-0.27632844, 0.0069235847, -0.03451457, 0.9604184)
+bones/7/position = Vector3(0.06718646, -0.0814189, 0.026928771)
+bones/7/rotation = Quaternion(2.5599636e-06, -0.7326775, 1.821146e-05, 0.680576)
+bones/8/rotation = Quaternion(0.99191564, -1.4331903e-06, -0.12689929, 1.4429092e-05)
+bones/9/rotation = Quaternion(5.306003e-08, -0.59009045, -2.3994193e-07, 0.80733716)
+bones/10/position = Vector3(0.06718645, 0.08142003, 0.026925355)
+bones/10/rotation = Quaternion(-1.7073704e-05, -0.7326775, -2.9252656e-06, 0.680576)
+bones/11/rotation = Quaternion(0.99191564, 1.5634623e-06, -0.12689929, -1.4412425e-05)
+bones/12/rotation = Quaternion(3.9661945e-08, -0.5900904, 2.3934825e-07, 0.80733716)
+
+[node name="HealthBarSpawnPoint" type="Marker3D" parent="ChickenVisual" unique_id=1542741370]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 1.2658772, 0)
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=2080904651]
+root_node = NodePath("../ChickenVisual")
+tree_root = ExtResource("3_n43b8")
+anim_player = NodePath("../ChickenVisual/AnimationPlayer")
+parameters/switch_moving/current_state = "Run"
+parameters/switch_moving/transition_request = ""
+parameters/switch_moving/current_index = 1
+parameters/scale_dance/scale = 1.0
+parameters/scale_die/scale = 1.0
+parameters/scale_idle_standing_neutral/scale = 1.0
+parameters/one_shot_attack/active = false
+parameters/one_shot_attack/internal_active = false
+parameters/one_shot_attack/request = 0
+parameters/one_shot_ultimate/active = false
+parameters/one_shot_ultimate/internal_active = false
+parameters/one_shot_ultimate/request = 0
+parameters/scale_attack/scale = 1.0
+parameters/one_shot_idle_standing_neutral/active = false
+parameters/one_shot_idle_standing_neutral/internal_active = false
+parameters/one_shot_idle_standing_neutral/request = 0
+parameters/scale_ultimate/scale = 1.0
+parameters/scale_idle_standing_neutral_var/scale = 1.0
+parameters/one_shot_sitting/active = false
+parameters/one_shot_sitting/internal_active = false
+parameters/one_shot_sitting/request = 0
+parameters/switch_entity_life_state/current_state = "Alive"
+parameters/switch_entity_life_state/transition_request = ""
+parameters/switch_entity_life_state/current_index = 1
+parameters/scale_walk/scale = 1.0
+parameters/scale_run/scale = 1.0
+parameters/switch_attack/current_state = "Attack1"
+parameters/switch_attack/transition_request = ""
+parameters/switch_attack/current_index = 0
+parameters/scale_stunned/scale = 1.0
+parameters/seek_stunned/seek_request = -1.0
+parameters/scale_idle_standing_aggresive/scale = 1.0
+parameters/scale_idle_standing_aggresive_var/scale = 1.0
+parameters/seek_idle_standing_aggresive/seek_request = -1.0
+parameters/switch_entity_mode/current_state = "InGame"
+parameters/switch_entity_mode/transition_request = ""
+parameters/switch_entity_mode/current_index = 1
+parameters/seek_idle_standing_neutral/seek_request = -1.0
+parameters/one_shot_idle_standing_aggresive/active = false
+parameters/one_shot_idle_standing_aggresive/internal_active = false
+parameters/one_shot_idle_standing_aggresive/request = 0
+parameters/seek_idle_sitting_chair/seek_request = -1.0
+parameters/scale_idle_sitting_chair/scale = 1.0
+parameters/scale_idle_sitting_chair_var/scale = 1.0
+parameters/seek_idle_sitting_floor/seek_request = -1.0
+parameters/seek_dance/seek_request = -1.0
+parameters/one_shot_idle_sitting_chair/active = false
+parameters/one_shot_idle_sitting_chair/internal_active = false
+parameters/one_shot_idle_sitting_chair/request = 0
+parameters/scale_idle_sitting_floor/scale = 1.0
+parameters/scale_idle_sitting_floor_var/scale = 1.0
+parameters/scale_attack_2/scale = 1.0
+parameters/scale_hit_1/scale = 1.0
+parameters/scale_attack_3/scale = 1.0
+parameters/switch_main/current_state = "Idle"
+parameters/switch_main/transition_request = ""
+parameters/switch_main/current_index = 0
+parameters/switch_idle/current_state = "StandingNeutral"
+parameters/switch_idle/transition_request = ""
+parameters/switch_idle/current_index = 0
+parameters/scale_drag/scale = 1.0
+parameters/scale_land/scale = 1.0
+parameters/one_shot_land/active = false
+parameters/one_shot_land/internal_active = false
+parameters/one_shot_land/request = 0
+parameters/one_shot_hit/active = false
+parameters/one_shot_hit/internal_active = false
+parameters/one_shot_hit/request = 0
+parameters/scale_attack_1/scale = 1.0
+parameters/switch_positioning/current_state = "Off"
+parameters/switch_positioning/transition_request = ""
+parameters/switch_positioning/current_index = 0
+parameters/switch_stunned_state/current_state = "NotStunned"
+parameters/switch_stunned_state/transition_request = ""
+parameters/switch_stunned_state/current_index = 0
+
+[node name="HealthBar" parent="." unique_id=1628734826 node_paths=PackedStringArray("_spawn", "_owner") instance=ExtResource("8_5weh6")]
+_spawn = NodePath("../ChickenVisual/HealthBarSpawnPoint")
+_owner = NodePath("..")
+
+[node name="AnimationComponent" parent="." unique_id=73205791 node_paths=PackedStringArray("_animation_tree", "_owner") instance=ExtResource("5_unxfj")]
+_animation_tree = NodePath("../AnimationTree")
+_owner = NodePath("..")
+
+[editable path="ChickenVisual"]

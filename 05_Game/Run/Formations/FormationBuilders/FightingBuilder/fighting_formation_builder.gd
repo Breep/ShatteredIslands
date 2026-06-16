@@ -102,11 +102,12 @@ func _collect_spawns_into(target_array: Array, container: Node3D, spec_type: Var
 
 func _entity_to_spec(entity: Entity) -> EntitySpec:
 	var spec := EntitySpec.new()
-	spec.scene = load(entity.scene_file_path)
 	spec.display_label = entity.name
 	spec.transform = entity.transform
-	if entity.override_base_stats != null:
-		spec.stats_override = entity.override_base_stats.duplicate(true)
+	if entity.entity_desc != null:
+		spec.entry = RoasterEntry.from_desc(entity.entity_desc)
+	else:
+		spec.scene = load(entity.scene_file_path)
 	return spec
 
 

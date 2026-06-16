@@ -7,9 +7,12 @@
 script = ExtResource("2_eff")
 _level_bonus = Array[int]([1, 2, 3, 4, 5])
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_vmi7w"]
+
 [resource]
 script = ExtResource("1_card")
 name = "Blueprint Upgrade"
+picture = SubResource("PlaceholderTexture2D_vmi7w")
 families = Array[int]([2])
 rarity = 1
 _card_effect = SubResource("Resource_eff")

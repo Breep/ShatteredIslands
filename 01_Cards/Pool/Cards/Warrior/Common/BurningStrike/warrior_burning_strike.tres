@@ -5,12 +5,15 @@
 
 [sub_resource type="Resource" id="Resource_burn"]
 script = ExtResource("2_eff")
-_chance = Array[float]([50.0, 50.0, 50.0, 50.0, 50.0])
+_chance = Array[float]([35.0, 35.0, 35.0, 35.0, 35.0])
 _ignite_stacks = Array[float]([9.0, 11.0, 13.0, 15.0, 20.0])
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_vueam"]
 
 [resource]
 script = ExtResource("1_card")
 name = "Burning Strike"
+picture = SubResource("PlaceholderTexture2D_vueam")
 families = Array[int]([3, 1])
 _card_effect = SubResource("Resource_burn")
 points = Dictionary[int, int]({

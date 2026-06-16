@@ -1,6 +1,11 @@
 class_name FightingArea
 extends Node3D
 
+# Position hors-écran où sont parquées les unités joueur non encore placées.
+# Elles sont spawnées normalement (mécanique SpawnManager inchangée) puis
+# déplacées ici ; UIRoasterList les ramène à la souris quand le joueur les place.
+const OFF_SCREEN_SPAWN_POSITION := Vector3(1000, 0, 1000)
+
 # ============================== Signals ==============================
 
 @warning_ignore("unused_signal")
@@ -105,13 +110,15 @@ func _spawn_specs(specs: Array[EntitySpec], team: int) -> void:
 			ctx.fighting_state = Entity.FightingState.IDLE
 			ctx.display_mode = Entity.DisplayMode.FIGHTING_PHASE
 			# Owner runtime résolu en remontant l'entry à son Roaster (Party.find_slot_of).
-			# Signal "spec joueur" = entry présente (créée à partir d'une RoasterEntry).
-			# Fallback marker class + local player pour compat legacy / solo.
-			if spec.entry != null or spec is HeroSpec or spec is AcolyteSpec:
-				var slot: PlayerState.Slot = PlayerState.Slot.NONE
-				var party: Party = GameManager.run_context.party if GameManager.run_context != null else null
-				if spec.entry != null and party != null:
-					slot = party.find_slot_of(spec.entry)
+			# Dans le modèle unifié toute spec porte une entry ; le "spec joueur" se
+			# distingue par un slot résolu (entry rattachée à un roaster). Les ennemis
+			# ont une entry autonome → slot NONE. Fallback marker class + local player
+			# pour compat legacy / solo.
+			var party: Party = GameManager.run_context.party if GameManager.run_context != null else null
+			var slot: PlayerState.Slot = PlayerState.Slot.NONE
+			if spec.entry != null and party != null:
+				slot = party.find_slot_of(spec.entry)
+			if slot != PlayerState.Slot.NONE or spec is HeroSpec or spec is AcolyteSpec:
 				var owner: Player = PlayerManager.get_player_by_slot(slot)
 				ctx.runtime_owner_player = owner if owner != null else local_player
 				ctx.roaster = party.get_roaster(slot) if party != null else null
@@ -129,6 +136,10 @@ func _spawn_specs(specs: Array[EntitySpec], team: int) -> void:
 			var entity := node as Entity
 			if entity != null:
 				entity.fight_role = _fight_role_for_spec(spec)
+				# Unité joueur non encore placée : parquée hors-écran. Le joueur la
+				# ramène sur le terrain via UIRoasterList (qui marque entry.placed).
+				if slot != PlayerState.Slot.NONE and spec.entry != null and not spec.entry.placed:
+					entity.global_position = OFF_SCREEN_SPAWN_POSITION
 				if entity.is_hero():
 					_heroes.append(entity)
 					# Lien runtime player -> instance de héros de cette scène.

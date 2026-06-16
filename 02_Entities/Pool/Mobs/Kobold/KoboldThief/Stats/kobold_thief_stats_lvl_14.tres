@@ -4,24 +4,23 @@
 
 [resource]
 script = ExtResource("1_x5trx")
-_health_max = 1380.0
+_health_max = 2660.0
 _mana_max = 30.0
-_mana_regen = 3.3
+_mana_regen = 3.0
 auto_attack_type = 1
 _attack_range = 1.5
-_attack_damage = 46.0
-_attack_speed = 1.15
-_movement_speed = 8.25
-_attack_power = 0.0
-_crit_resistance = 0.65
-armor = 4.3
-magic_resistance = 4.3
-poison_resistance = 4.3
-_crit_chance = 20.0
-_crit_mult = 120.0
-_dodge = 15.0
+_attack_damage = 44.0
+_attack_speed = 1.8247470763696512
+_movement_speed = 6.0
+_attack_power = 55.900000000000006
+_crit_chance = 24.75
+_dodge = 18.5
+_m_crit_chances = Dictionary[int, float]({
+0: 0.0,
+1: 0.0
+})
 _m_resistances = Dictionary[int, float]({
-0: 4.3,
-1: 4.3,
-2: 4.3
+0: 0.0,
+1: 0.0,
+2: 0.0
 })

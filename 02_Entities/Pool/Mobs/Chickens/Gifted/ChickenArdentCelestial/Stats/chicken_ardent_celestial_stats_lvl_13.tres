@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="EntityStats" format=3 uid="uid://nmu7ch7qruui"]
+
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="1_7vafo"]
+
+[resource]
+script = ExtResource("1_7vafo")
+_health_max = 350.0
+_mana_max = 42.0
+_mana_regen = 3.0
+_attack_damage = 30.0
+_attack_speed = 1.5566428021354808
+_movement_speed = 6.0
+_attack_power = 58.4
+magic_resistance = 14.181858200892304
+_crit_chance = 12.8
+_dodge = 15.0
+_m_crit_chances = Dictionary[int, float]({
+0: 0.0,
+1: 0.0
+})
+_m_resistances = Dictionary[int, float]({
+0: 0.0,
+1: 14.181858200892304,
+2: 0.0
+})

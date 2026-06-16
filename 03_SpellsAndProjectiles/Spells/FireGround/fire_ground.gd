@@ -27,6 +27,9 @@ func init(source: Entity, spawn_pos: Vector3, radius: float, duration: float, ig
 
 
 func _ready() -> void:
+	# La position d'impact du projectile peut être à hauteur du corps touché : on
+	# plaque la zone au sol pour qu'elle ne flotte pas au-dessus des monstres.
+	_spawn_pos.y = 0.0
 	global_position = _spawn_pos
 
 	# Rayon de la zone (duplique la shape pour ne pas contaminer les autres instances).
