@@ -122,6 +122,15 @@ signal tutorial_set_hand_visible(is_visible: bool)
 ## Locks shop card buying during a tutorial step (the shop lives on a CanvasLayer
 ## above the tutorial blocker, so it can't be gated by the overlay).
 signal tutorial_set_shop_interactable(is_interactable: bool)
+## Keeps the entity sheet open during a tutorial step: while locked, clicking in
+## the void no longer closes it (so the player can inspect an enemy's skills
+## without the sheet vanishing on a stray click).
+signal tutorial_set_entity_sheet_locked(is_locked: bool)
+
+## The player pressed Continue during the first tavern while still holding unspent
+## gold. The TutorialManager answers by showing a reminder bubble; a second press
+## launches the fight anyway.
+signal tavern_unspent_gold_reminder()
 
 ## The unit-placement UI (roaster list) just opened — units need placing on the
 ## field. The TutorialManager hooks this to show the placement help.
