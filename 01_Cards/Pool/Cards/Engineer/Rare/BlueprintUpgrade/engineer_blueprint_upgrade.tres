@@ -1,18 +1,17 @@
 [gd_resource type="Resource" script_class="Card" format=3 uid="uid://c23mytt6luv7a"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_card"]
+[ext_resource type="Texture2D" uid="uid://dcvxeto5ycnda" path="res://01_Cards/Pool/Cards/Engineer/Rare/BlueprintUpgrade/engineer_blueprint.png" id="2_2d6mu"]
 [ext_resource type="Script" uid="uid://dpvecl44j5p6x" path="res://01_Cards/Pool/Cards/Engineer/Rare/BlueprintUpgrade/engineer_blueprint_upgrade.gd" id="2_eff"]
 
 [sub_resource type="Resource" id="Resource_eff"]
 script = ExtResource("2_eff")
 _level_bonus = Array[int]([1, 2, 3, 4, 5])
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_vmi7w"]
-
 [resource]
 script = ExtResource("1_card")
 name = "Amélioration des Plans"
-picture = SubResource("PlaceholderTexture2D_vmi7w")
+picture = ExtResource("2_2d6mu")
 families = Array[int]([2])
 rarity = 1
 _card_effect = SubResource("Resource_eff")
