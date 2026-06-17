@@ -47,5 +47,5 @@ func _make_hp_mod(id: StringName, value: float) -> StatModifier:
 
 
 func get_description(card_lvl: int) -> String:
-	return "Impact [[ABILITY_PROJECTILE]] : +" \
-		+ _value(_hp_per_hit[card_lvl - 1]) + " [[HP]] max pour le combat."
+	return "[[ABILITY_PROJECTILE]] : +" \
+		+ _value(_hp_per_hit[card_lvl - 1]) + " [[HP]] max par cible touché"
