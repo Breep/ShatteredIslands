@@ -4,15 +4,16 @@
 
 [resource]
 script = ExtResource("1_ifvbs")
-_health_max = 800.0
+_health_max = 850.0
 _mana_max = 30.0
 _mana_regen = 3.0
 auto_attack_type = 1
 _attack_range = 1.5
 _attack_damage = 28.0
-_attack_speed = 1.3545177444479564
+_attack_speed = 1.4391751034759537
 _movement_speed = 6.0
 _attack_power = 25.5
+armor = 8.583518938456109
 _crit_chance = 18.75
 _dodge = 16.5
 _m_crit_chances = Dictionary[int, float]({
@@ -20,7 +21,7 @@ _m_crit_chances = Dictionary[int, float]({
 1: 0.0
 })
 _m_resistances = Dictionary[int, float]({
-0: 0.0,
+0: 8.583518938456109,
 1: 0.0,
 2: 0.0
 })

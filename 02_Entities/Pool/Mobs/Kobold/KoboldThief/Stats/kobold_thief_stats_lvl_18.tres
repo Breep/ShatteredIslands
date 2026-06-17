@@ -4,15 +4,16 @@
 
 [resource]
 script = ExtResource("1_nxlr1")
-_health_max = 4040.0
+_health_max = 4090.0
 _mana_max = 30.0
 _mana_regen = 3.0
 auto_attack_type = 1
 _attack_range = 1.5
 _attack_damage = 52.0
-_attack_speed = 1.9852836327393728
+_attack_speed = 2.1093638597855833
 _movement_speed = 6.0
 _attack_power = 75.9
+armor = 10.780743515792327
 _crit_chance = 27.75
 _dodge = 19.5
 _m_crit_chances = Dictionary[int, float]({
@@ -20,7 +21,7 @@ _m_crit_chances = Dictionary[int, float]({
 1: 0.0
 })
 _m_resistances = Dictionary[int, float]({
-0: 0.0,
+0: 10.780743515792327,
 1: 0.0,
 2: 0.0
 })
