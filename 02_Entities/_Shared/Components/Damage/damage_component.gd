@@ -4,6 +4,11 @@ extends EntityComponent
 # Component-based damage module: handles both outgoing (direct/direct_percent)
 # and incoming (take/take_percent) damage.
 
+## Action ids whose damage bypasses the dodge roll (e.g. periodic DoT ticks).
+## Temporary action-id filter: to be replaced by an explicit "can_be_dodged"
+## flag when the dodge pipeline is reworked.
+const _DODGE_EXEMPT_ACTION_IDS: Array[StringName] = [&"Ignite Periodic"]
+
 func _enter_tree() -> void:
 	if _owner == null: return
 	if _owner.damage != null and _owner.damage != self:
@@ -49,7 +54,7 @@ func take(damage: float, damage_type: Utils.ActionType, is_critical: bool, actio
 		if is_critical:
 			damage *= _get_crit_resistance_multiplier(damage_type)
 		damage = _owner.alterations.get_shield_reduced_damage(damage, damage_type)
-		if _is_dodged(damage_type, source):
+		if _can_be_dodged(action_id) and _is_dodged(damage_type, source):
 			_owner.action_dodged.emit(source, damage_type, damage, is_critical)
 			return 0
 		_handle_thorn(source, action_id)
@@ -82,6 +87,10 @@ func _handle_life_steal(damage_done: float, damage_type: Utils.ActionType) -> vo
 	var amount: float = damage_done * life_steal / 100.0
 	if amount >= 1:
 		_owner.heal.direct(_owner, amount, &"Life Steal")
+
+
+func _can_be_dodged(action_id: StringName) -> bool:
+	return action_id not in _DODGE_EXEMPT_ACTION_IDS
 
 
 func _is_blocked(damage_type: Utils.ActionType) -> bool:

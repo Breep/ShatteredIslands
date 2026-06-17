@@ -1,22 +1,10 @@
-[gd_resource type="Resource" script_class="TutorialSequence" format=3 uid="uid://d18u53q5q8iu5"]
+[gd_resource type="Resource" script_class="TutorialSequence" load_steps=3 format=3]
 
-[ext_resource type="Script" uid="uid://djpg3rddxno15" path="res://04_UI/Tool/Tutorial/Resource/tutorial_sequence.gd" id="1_seq"]
-[ext_resource type="Script" uid="uid://jooqjtqqt21" path="res://04_UI/Tool/Tutorial/Resource/tutorial_step.gd" id="2_step"]
-
-[sub_resource type="Resource" id="step_auto_combat"]
-script = ExtResource("2_step")
-id = &"fight_auto"
-text = "Le combat est automatique. Regarde ton héros se battre !"
-auto_advance_delay = 5.0
-
-[sub_resource type="Resource" id="step_ultimate"]
-script = ExtResource("2_step")
-id = &"fight_ultimate"
-text = "Les unités activent leur ultime quand la jauge est pleine."
-auto_advance_delay = 5.0
+[ext_resource type="Script" path="res://04_UI/Tool/Tutorial/Resource/tutorial_sequence.gd" id="1_seq"]
+[ext_resource type="Script" path="res://04_UI/Tool/Tutorial/Resource/tutorial_step.gd" id="2_step"]
 
 [resource]
 script = ExtResource("1_seq")
 id = &"seq_fighting_phase"
 trigger_state = 4
-steps = Array[ExtResource("2_step")]([SubResource("step_auto_combat"), SubResource("step_ultimate")])
+steps = Array[ExtResource("2_step")]([])

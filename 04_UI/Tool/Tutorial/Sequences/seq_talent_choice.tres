@@ -16,7 +16,6 @@ popup_mode = 0
 hide_skip = true
 highlight_target = true
 highlight_padding = 8.0
-screen_anchor = 1
 
 [resource]
 script = ExtResource("1_seq")

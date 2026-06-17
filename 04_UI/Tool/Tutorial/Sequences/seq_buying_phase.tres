@@ -128,7 +128,6 @@ hide_hand = true
 lock_entity_sheet = true
 highlight_target = true
 highlight_padding = 8.0
-screen_anchor = 1
 
 [sub_resource type="Resource" id="step_launch_fight"]
 script = ExtResource("2_step")
