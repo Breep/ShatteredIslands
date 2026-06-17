@@ -8,6 +8,10 @@ const ROT_SPEED: float = 4
 
 var _card: Card
 
+# Une pression a été reçue sur le preview : on attend son relâchement pour fermer,
+# afin d'absorber les deux events (cf. _input).
+var _dismissing: bool = false
+
 var _angle_x_max: float = 15.0
 var _angle_y_max: float = 15.0
 var _target_rot_x: float
@@ -38,9 +42,21 @@ func _process(delta: float) -> void:
 	_animation_3d_rotate(delta)
 
 
+# Le preview est modal : tout clic le ferme. On consomme la pression ET le
+# relâchement (free déféré au release) pour que ce même clic n'atteigne pas le
+# _unhandled_input derrière — sinon le panneau du card shop, qui se ferme sur le
+# relâchement gauche, se fermerait en même temps que le preview.
+# Le release qui ouvre le preview (clic droit) n'est jamais vu en pression ici :
+# `_dismissing` reste faux, donc il ne déclenche pas une fermeture immédiate.
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.pressed:
-		queue_free()
+	if event is InputEventMouseButton:
+		var mb := event as InputEventMouseButton
+		if mb.pressed:
+			_dismissing = true
+			get_viewport().set_input_as_handled()
+		elif _dismissing:
+			get_viewport().set_input_as_handled()
+			queue_free()
 	elif event is InputEventMouseMotion:
 		_update_rotation_target()
 
