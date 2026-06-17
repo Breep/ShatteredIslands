@@ -1,18 +1,17 @@
 [gd_resource type="Resource" script_class="Card" format=3 uid="uid://beeapdilsdvlg"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_card"]
+[ext_resource type="Texture2D" uid="uid://dl5u1m7a0lpdr" path="res://01_Cards/Pool/Cards/Warrior/Rare/WarBanner/warrior_war_banner.png" id="2_6nq51"]
 [ext_resource type="Script" uid="uid://csmgh3iqu5t3" path="res://01_Cards/Pool/Cards/Warrior/Rare/WarBanner/attack_war_banner.gd" id="2_eff"]
 
 [sub_resource type="Resource" id="Resource_banner"]
 script = ExtResource("2_eff")
 _as_percent = Array[float]([7.0, 11.0, 15.0, 19.0, 25.0])
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_2yr64"]
-
 [resource]
 script = ExtResource("1_card")
 name = "War Banner"
-picture = SubResource("PlaceholderTexture2D_2yr64")
+picture = ExtResource("2_6nq51")
 families = Array[int]([1])
 rarity = 1
 _card_effect = SubResource("Resource_banner")
