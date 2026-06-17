@@ -99,7 +99,8 @@ func _rebuild() -> void:
 		var button: UIEntityPortraitButton = PORTRAIT_BUTTON_SCENE.instantiate()
 		_list.add_child(button)
 		button.setup(entry)
-		button.selected.connect(_on_entry_selected)
+		button.pressed_down.connect(_on_entry_pressed)
+		button.released.connect(_on_entry_released)
 
 
 # Non placées d'abord, ordre du roaster préservé dans chaque groupe.
@@ -161,7 +162,8 @@ func _disconnect_roaster() -> void:
 
 # ============================== Callbacks ==============================
 
-func _on_entry_selected(entry: RoasterEntry) -> void:
+# Appui sur le portrait : ramène l'entité sous la souris et démarre son drag.
+func _on_entry_pressed(entry: RoasterEntry) -> void:
 	if entry == null or entry.placed:
 		return
 	var entity: Entity = _find_entity(entry)
@@ -173,6 +175,16 @@ func _on_entry_selected(entry: RoasterEntry) -> void:
 		return
 	entity.draggable.drop_committed.connect(_on_drop_committed.bind(entry), CONNECT_ONE_SHOT)
 	entity.draggable.begin_drag_at(_mouse_ground_position())
+
+
+# Relâchement du bouton : on lâche le drag en cours (drop). Le placement final est
+# résolu par _on_drop_committed (via drop_committed émis dans le stop du drag).
+func _on_entry_released(entry: RoasterEntry) -> void:
+	if entry == null:
+		return
+	var entity: Entity = _find_entity(entry)
+	if entity != null and entity.draggable != null and entity.draggable.is_dragging():
+		entity.draggable.end_drag()
 
 
 func _on_drop_committed(on_valid_zone: bool, entry: RoasterEntry) -> void:
