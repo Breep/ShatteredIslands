@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://cglxkd661khfn"]
 
+[ext_resource type="Texture2D" uid="uid://bh7oa8sdtospa" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Skills/Bronze/skill_garde_de_meute.svg" id="1_8kghr"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
 [ext_resource type="Script" uid="uid://bmonh17c6easr" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Skills/Bronze/garde_de_meute.gd" id="2_eff"]
 
@@ -11,5 +12,6 @@ metadata/_custom_type_script = "uid://bgardemeute1ef"
 script = ExtResource("1_skill")
 name = "Garde de meute"
 description = "Applique Taunt (permanent)."
+portrait = ExtResource("1_8kghr")
 skill_effect = SubResource("Resource_e")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://btfyvd7wf2b4m"]
 
+[ext_resource type="Texture2D" uid="uid://beg7adpkn0xp3" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Skills/Gold/skill_dernier_gloussement.svg" id="1_mw10w"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
 [ext_resource type="Script" uid="uid://csnr3dshkxpc4" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Skills/Gold/dernier_gloussement.gd" id="2_eff"]
 
@@ -12,5 +13,6 @@ script = ExtResource("1_skill")
 skill_id = 4
 name = "Dernier gloussement"
 description = "Mort : les alliés dans Area(4) gagnent 1 Thorn."
+portrait = ExtResource("1_mw10w")
 skill_effect = SubResource("Resource_e")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

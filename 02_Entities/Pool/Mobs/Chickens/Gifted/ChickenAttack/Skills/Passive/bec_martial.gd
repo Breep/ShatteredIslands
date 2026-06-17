@@ -33,3 +33,8 @@ func _arm_combo(chicken: Entity) -> void:
 	modifier.damage_modifier_callback = func(data: Dictionary) -> void:
 		data[AutoAttackModifier.VarType.DAMAGE_MUL] += _damage_mult_bonus
 	chicken.auto_attack_modifier_registry.register_modifier(modifier)
+
+
+func get_description() -> String:
+	return "Toutes les " + _value(_combo_period) + " attaques, la suivante inflige +" \
+		+ _value(_damage_mult_bonus) + "% de [[PHYSICAL_DAMAGE]]."

@@ -16,3 +16,8 @@ func apply(ctx: SkillContext) -> void:
 		return
 	var damage: float = chicken.stats.get_stat(EntityStats.StatType.AD) * _ad_mult
 	chicken.damage.direct(target, damage, Utils.ActionType.DAMAGE_PHYSICAL, &"Charge dorée")
+
+
+func get_description() -> String:
+	return "Bondit sur sa cible et lui inflige des [[PHYSICAL_DAMAGE]] égaux à " \
+		+ _value(_ad_mult) + "× son [[AD]]."

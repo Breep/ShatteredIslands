@@ -11,3 +11,7 @@ func apply(ctx: SkillContext) -> void:
 	var building: Entity = chicken.target.get_target(TargetComponent.TargettingStrategy.RANDOM_BUILDING_ALLY)
 	if is_instance_valid(building):
 		building.stats.mana += _mana
+
+
+func get_description() -> String:
+	return "À son apparition, donne +" + _value(_mana) + " [[MANA]] à un bâtiment allié aléatoire."

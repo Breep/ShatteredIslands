@@ -10,3 +10,8 @@ extends SkillEffect
 func apply(ctx: SkillContext) -> void:
 	var chicken: Entity = ctx.entity
 	chicken.set_meta(SE_CometeBasseCour.THRESHOLD_META, _hp_threshold)
+
+
+func get_description() -> String:
+	return "Sa Comète de basse-cour se déclenche désormais dès " + _value(_hp_threshold * 100.0) \
+		+ "% de ses PV."

@@ -13,3 +13,7 @@ func apply(ctx: SkillContext) -> void:
 	modifier.stat_type = EntityStats.StatType.AD
 	modifier.value = _ad_bonus
 	chicken.stat_modifiers_registry.register_modifier(modifier)
+
+
+func get_description() -> String:
+	return "Gagne +" + _value(_ad_bonus) + " d'[[AD]]."

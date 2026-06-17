@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://beee63ilsuam6"]
 
+[ext_resource type="Texture2D" uid="uid://cpemq556etcrj" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenAttack/Skills/Bronze/skill_frenesie_courte.svg" id="1_8hvjg"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
 [ext_resource type="Script" uid="uid://bwarfren1eff7" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenAttack/Skills/Bronze/frenesie_courte.gd" id="2_eff"]
 
@@ -11,5 +12,6 @@ metadata/_custom_type_script = "uid://bwarfren1eff7"
 script = ExtResource("1_skill")
 name = "Frénésie courte"
 description = "Gagne +20 AD."
+portrait = ExtResource("1_8hvjg")
 skill_effect = SubResource("Resource_e")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

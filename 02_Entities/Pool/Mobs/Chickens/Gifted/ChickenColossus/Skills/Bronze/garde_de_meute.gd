@@ -8,3 +8,7 @@ extends SkillEffect
 func apply(ctx: SkillContext) -> void:
 	var chicken: Entity = ctx.entity
 	chicken.alterations.inflict_status(chicken, Alteration.Type.TAUNT, 0.0, &"Garde de meute")
+
+
+func get_description() -> String:
+	return "À son apparition, gagne [[TAUNT]] pour forcer les ennemis à le cibler."

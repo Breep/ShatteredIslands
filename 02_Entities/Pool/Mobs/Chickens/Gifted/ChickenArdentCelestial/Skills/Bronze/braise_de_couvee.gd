@@ -18,3 +18,8 @@ func apply(ctx: SkillContext) -> void:
 		var ignite: float = chicken.stats.get_stat(EntityStats.StatType.AP) * _ap_ignite_ratio
 		chicken.alterations.inflict_condition_stacks(target, ignite, Alteration.Type.IGNITE, &"Braise de couvée")
 	chicken.auto_attack_modifier_registry.register_modifier(modifier)
+
+
+func get_description() -> String:
+	return "À chaque attaque, applique [[IGNITE]] égal à " + _value(_ap_ignite_ratio) \
+		+ "× son [[AP]] à la cible."

@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://oxwnft17tb4m"]
 
+[ext_resource type="Texture2D" uid="uid://b2m1xgo2ua2pe" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenEngineer/Skills/Bronze/skill_cablage_leger.svg" id="1_psi3b"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
 [ext_resource type="Script" uid="uid://cyn81j4ry4syk" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenEngineer/Skills/Bronze/cablage_leger.gd" id="2_eff"]
 
@@ -11,5 +12,6 @@ metadata/_custom_type_script = "uid://bcablageleg1ef7"
 script = ExtResource("1_skill")
 name = "Câblage léger"
 description = "Spawn : donne 20 Shield à l'allié le plus blessé."
+portrait = ExtResource("1_psi3b")
 skill_effect = SubResource("Resource_e")
 metadata/_custom_type_script = "uid://dfby4merlgkep"
