@@ -133,6 +133,18 @@ enum ScreenAnchor {
 ## (e.g. small icons). 0 = pixel-perfect on the Control's transformed rect.
 @export var highlight_padding: float = 0.0
 
+## Fixed screen-space rectangle to spotlight, on top of any Control target. Use
+## to highlight something that isn't a Control (e.g. a 3D enemy that always sits
+## at the same screen spot). Empty (zero size) = no fixed highlight.
+## NOTE: these are absolute screen pixels — assumes a fixed camera/resolution.
+@export var highlight_screen_rect: Rect2 = Rect2()
+
+## Restricts shop buying to a single card slot while this step is active (the
+## other slots are locked). -1 = no restriction. Use on buy steps that point at
+## one specific card so the player can't purchase the others. The shop gates this
+## itself (it lives on a CanvasLayer above the tutorial blocker).
+@export var shop_only_slot: int = -1
+
 ## Forces the bubble to a specific side relative to the target. AUTO uses the
 ## first side with enough screen space. When set, the chosen side is honored
 ## IF there's room; otherwise it falls back to AUTO. Useful for elements where

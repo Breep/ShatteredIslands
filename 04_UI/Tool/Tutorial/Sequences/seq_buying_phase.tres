@@ -37,6 +37,7 @@ hide_skip = true
 ensure_shop_open = true
 highlight_target = true
 highlight_padding = 8.0
+shop_only_slot = 0
 
 [sub_resource type="Resource" id="step_buy_defense"]
 script = ExtResource("2_step")
@@ -51,6 +52,7 @@ hide_skip = true
 ensure_shop_open = true
 highlight_target = true
 highlight_padding = 8.0
+shop_only_slot = 1
 
 [sub_resource type="Resource" id="step_buy_combo"]
 script = ExtResource("2_step")
@@ -65,6 +67,7 @@ hide_skip = true
 ensure_shop_open = true
 highlight_target = true
 highlight_padding = 8.0
+shop_only_slot = 2
 
 [sub_resource type="Resource" id="step_reroll"]
 script = ExtResource("2_step")
@@ -91,6 +94,7 @@ hide_skip = true
 ensure_shop_open = true
 highlight_target = true
 highlight_padding = 8.0
+shop_only_slot = 0
 
 [sub_resource type="Resource" id="step_sell_card"]
 script = ExtResource("2_step")
@@ -111,6 +115,7 @@ hide_skip = true
 ensure_shop_closed = true
 hide_hand = true
 lock_entity_sheet = true
+highlight_screen_rect = Rect2(1145, 262, 155, 268)
 screen_anchor = 1
 
 [sub_resource type="Resource" id="step_show_spells"]

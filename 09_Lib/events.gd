@@ -122,6 +122,9 @@ signal tutorial_set_hand_visible(is_visible: bool)
 ## Locks shop card buying during a tutorial step (the shop lives on a CanvasLayer
 ## above the tutorial blocker, so it can't be gated by the overlay).
 signal tutorial_set_shop_interactable(is_interactable: bool)
+## Restricts shop buying to a single card slot during a tutorial step (-1 = no
+## restriction). Same rationale as above: the shop gates this itself.
+signal tutorial_set_shop_only_slot(slot: int)
 ## Keeps the entity sheet open during a tutorial step: while locked, clicking in
 ## the void no longer closes it (so the player can inspect an enemy's skills
 ## without the sheet vanishing on a stray click).

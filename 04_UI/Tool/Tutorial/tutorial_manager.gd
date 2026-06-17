@@ -50,6 +50,7 @@ var _unit_placement_sequence: TutorialSequence
 var _gold_reminder_step: TutorialStep
 var _hand_hidden_by_tutorial: bool = false
 var _shop_locked_by_tutorial: bool = false
+var _shop_slot_restricted_by_tutorial: bool = false
 var _entity_sheet_locked_by_tutorial: bool = false
 #endregion
 
@@ -211,6 +212,14 @@ func _apply_step_ui_side_effects(step: TutorialStep) -> void:
 		Events.tutorial_set_shop_interactable.emit(true)
 		_shop_locked_by_tutorial = false
 
+	# Restricts buying to a single card slot (the other slots stay locked).
+	if step.shop_only_slot >= 0:
+		Events.tutorial_set_shop_only_slot.emit(step.shop_only_slot)
+		_shop_slot_restricted_by_tutorial = true
+	elif _shop_slot_restricted_by_tutorial:
+		Events.tutorial_set_shop_only_slot.emit(-1)
+		_shop_slot_restricted_by_tutorial = false
+
 	# The entity sheet is kept open (immune to void-click close) while the step asks
 	# the player to inspect a unit. Auto-restored on the first step that doesn't.
 	if step.lock_entity_sheet:
@@ -228,6 +237,9 @@ func _restore_ui_if_overridden() -> void:
 	if _shop_locked_by_tutorial:
 		Events.tutorial_set_shop_interactable.emit(true)
 		_shop_locked_by_tutorial = false
+	if _shop_slot_restricted_by_tutorial:
+		Events.tutorial_set_shop_only_slot.emit(-1)
+		_shop_slot_restricted_by_tutorial = false
 	if _entity_sheet_locked_by_tutorial:
 		Events.tutorial_set_entity_sheet_locked.emit(false)
 		_entity_sheet_locked_by_tutorial = false
