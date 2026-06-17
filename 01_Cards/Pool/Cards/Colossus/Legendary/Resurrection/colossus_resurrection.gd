@@ -77,9 +77,9 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	var hp: String = str(_hp_max_revive[card_lvl - 1])
-	var size: String = str(_size_increase[card_lvl - 1])
-	var damage: String = str(_damage_percent[card_lvl - 1])
-	var delay: String = str(_time_before_revive[card_lvl - 1])
+	var hp: String = _value(_hp_max_revive[card_lvl - 1])
+	var size: String = _value(_size_increase[card_lvl - 1])
+	var damage: String = _value(_damage_percent[card_lvl - 1])
+	var delay: String = _value(_time_before_revive[card_lvl - 1])
 
 	return "Ressuscite après " + delay + "s avec " + hp + "% PV" + "Explose et inflige " + damage + "% des PV max en [[PHYSICAL_DAMAGE]] dans une zone.\n" \

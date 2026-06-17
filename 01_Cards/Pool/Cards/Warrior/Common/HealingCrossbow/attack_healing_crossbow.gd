@@ -31,5 +31,5 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return "Attaque : " + str(_chance[card_lvl - 1]) + "% chance de soigner " \
-		+ str(_heal_amount[card_lvl - 1]) + " PV à l'allié le plus en danger"
+	return "Attaque : " + _value(_chance[card_lvl - 1]) + "% chance de soigner " \
+		+ _value(_heal_amount[card_lvl - 1]) + " PV à l'allié le plus en danger"

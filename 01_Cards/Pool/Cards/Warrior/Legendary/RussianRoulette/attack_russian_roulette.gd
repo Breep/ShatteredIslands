@@ -29,5 +29,5 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return "Les auto-attaques infligent entre " + str(_min_percent[card_lvl - 1]) + "% et " \
-		+ str(_max_percent[card_lvl - 1]) + "% de leurs dégâts (aléatoire)."
+	return "Les auto-attaques infligent entre " + _value(_min_percent[card_lvl - 1]) + "% et " \
+		+ _value(_max_percent[card_lvl - 1]) + "% de leurs dégâts (aléatoire)."

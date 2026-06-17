@@ -45,5 +45,5 @@ func revert(ctx: CardContext, _card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return "Mort de [[SUMMON]] : " + str(_respawn_chance[card_lvl - 1]) + "% de chance qu'il réapparaisse " \
-		+ str(RESPAWN_DELAY) + "s plus tard au même endroit avec " + str(_hp_percent[card_lvl - 1]) + "% PV."
+	return "Mort de [[SUMMON]] : " + _value(_respawn_chance[card_lvl - 1]) + "% de chance qu'il réapparaisse " \
+		+ _value(RESPAWN_DELAY) + "s plus tard au même endroit avec " + _value(_hp_percent[card_lvl - 1]) + "% PV."

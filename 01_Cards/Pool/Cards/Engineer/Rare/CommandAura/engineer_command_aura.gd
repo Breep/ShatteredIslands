@@ -67,5 +67,5 @@ func _count_living_buildings(owner: Entity) -> int:
 
 
 func get_description(card_lvl: int) -> String:
-	return "Aura : +" + str(_armor_per_building[card_lvl - 1]) + " armure et +" \
-		+ str(_ap_per_building[card_lvl - 1]) + " [[AP]] par bâtiment allié en vie."
+	return "Aura : +" + _value(_armor_per_building[card_lvl - 1]) + " armure et +" \
+		+ _value(_ap_per_building[card_lvl - 1]) + " [[AP]] par bâtiment allié en vie."

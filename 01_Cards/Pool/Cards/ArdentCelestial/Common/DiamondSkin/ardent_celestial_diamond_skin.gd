@@ -22,4 +22,4 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return "Le héros gagne " + str(_magical_resistances[card_lvl - 1]) + " de résistance aux [[MAGICAL_DAMAGE]]."
+	return "Le héros gagne " + _value(_magical_resistances[card_lvl - 1]) + " de résistance aux [[MAGICAL_DAMAGE]]."

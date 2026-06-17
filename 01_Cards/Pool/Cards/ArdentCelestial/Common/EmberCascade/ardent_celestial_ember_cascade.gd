@@ -34,5 +34,5 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return "Application d'[[IGNITE]] : " + str(_chance_per_stack[card_lvl - 1]) \
-		+ "% chance de déclencher un [[SMALL_PROJECTILE]] ou [[BIG_PROJECTILE]]"
+	return "Application d'[[IGNITE]] : " + _value(_chance_per_stack[card_lvl - 1]) \
+		+ "% chance de déclencher un [[ABILITY_PROJECTILE]]"

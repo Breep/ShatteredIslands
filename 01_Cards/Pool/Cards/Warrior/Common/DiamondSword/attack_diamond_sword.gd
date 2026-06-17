@@ -21,4 +21,4 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return "Augmente l'[[AD]] de " + str(_damage[card_lvl - 1]) + "."
+	return "Augmente l'[[AD]] de " + _value(_damage[card_lvl - 1]) + "."

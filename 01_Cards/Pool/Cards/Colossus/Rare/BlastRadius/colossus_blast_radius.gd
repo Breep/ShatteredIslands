@@ -25,5 +25,5 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return "Aura : +" + str(int(round(_aoe_mult[card_lvl - 1] * 100))) \
+	return "Aura : +" + _value(int(round(_aoe_mult[card_lvl - 1] * 100))) \
 		+ "% de taille des zones d'effet (AoE) pour l'équipe."

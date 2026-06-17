@@ -39,6 +39,6 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return "Augmente les PV max de " + str(_max_hp_increase[card_lvl - 1]) \
-		+ ". Toutes les " + str(_heal_period[card_lvl - 1]) + "s, soigne " \
-		+ str(_heal_percent[card_lvl - 1]) + "% des PV perdus."
+	return "Augmente les PV max de " + _value(_max_hp_increase[card_lvl - 1]) \
+		+ ". Toutes les " + _value(_heal_period[card_lvl - 1]) + "s, soigne " \
+		+ _value(_heal_percent[card_lvl - 1]) + "% des PV perdus."

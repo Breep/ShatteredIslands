@@ -48,5 +48,5 @@ func _update_ad_modifier(owner: Entity, hp_to_ad_percent: float, card_name: Stri
 
 
 func get_description(card_lvl: int) -> String:
-	return "Réduit la vitesse d'attaque de " + str(_as_reduction[card_lvl - 1]) \
-		+ "%. Convertit " + str(_hp_to_ad_percents[card_lvl - 1]) + "% des PV max en [[AD]]."
+	return "Réduit la vitesse d'attaque de " + _value(_as_reduction[card_lvl - 1]) \
+		+ "%. Convertit " + _value(_hp_to_ad_percents[card_lvl - 1]) + "% des PV max en [[AD]]."

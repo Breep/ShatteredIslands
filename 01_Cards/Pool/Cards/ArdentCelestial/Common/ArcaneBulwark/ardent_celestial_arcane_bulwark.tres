@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_card"]
 [ext_resource type="Script" uid="uid://clekgv52tyf1n" path="res://01_Cards/Pool/Cards/ArdentCelestial/Common/ArcaneBulwark/ardent_celestial_arcane_bulwark.gd" id="2_eff"]
-[ext_resource type="Texture2D" uid="uid://cjccchh56wh5c" path="res://01_Cards/Pool/Cards/ArdentCelestial/Common/ArcaneBulwark/ardent_celestial_arcane_bulwark.png" id="2_t50vn"]
+[ext_resource type="Texture2D" uid="uid://3ipedhvdxulp" path="res://01_Cards/Pool/Cards/ArdentCelestial/Common/ArcaneBulwark/ardent_celestial_arcane_bulwark.png" id="2_t50vn"]
 
 [sub_resource type="Resource" id="Resource_arcane"]
 script = ExtResource("2_eff")

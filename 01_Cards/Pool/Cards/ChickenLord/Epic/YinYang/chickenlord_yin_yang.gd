@@ -46,7 +46,7 @@ func revert(ctx: CardContext, _card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return "[[SUMMON]] créé : " + str(_strength_chance[card_lvl - 1]) + "% → " \
-		+ str(_strength_stacks[card_lvl - 1]) + " [[STRENGTH]]\n" \
-		+ "[[SUMMON]] mort : " + str(_vulnerable_chance[card_lvl - 1]) + "% → " \
-		+ str(_vulnerable_stacks[card_lvl - 1]) + " [[VULNERABILITY]]"
+	return "[[SUMMON]] créé : " + _value(_strength_chance[card_lvl - 1]) + "% → " \
+		+ _value(_strength_stacks[card_lvl - 1]) + " [[STRENGTH]]\n" \
+		+ "[[SUMMON]] mort : " + _value(_vulnerable_chance[card_lvl - 1]) + "% → " \
+		+ _value(_vulnerable_stacks[card_lvl - 1]) + " [[VULNERABILITY]]"

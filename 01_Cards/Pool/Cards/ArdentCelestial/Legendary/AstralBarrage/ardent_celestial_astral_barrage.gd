@@ -21,4 +21,4 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return "Tire +" + str(_extra_projectiles[card_lvl - 1]) + " projectile(s) d'abilité par tir."
+	return "Tire +" + _value(_extra_projectiles[card_lvl - 1]) + " [[ABILITY_PROJECTILE]] par tir."

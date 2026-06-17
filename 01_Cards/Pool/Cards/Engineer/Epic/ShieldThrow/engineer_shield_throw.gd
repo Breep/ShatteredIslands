@@ -37,6 +37,6 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return "[[SMALL_PROJECTILE]][[ICON:COOLDOWN]] " + str(_period[card_lvl - 1]) + " s\n" \
-		+ "Lance un bouclier niv " + str(card_lvl) \
+	return "[[SMALL_PROJECTILE]][[ICON:COOLDOWN]] " + _value(_period[card_lvl - 1]) + " s\n" \
+		+ "Lance un bouclier niv " + _value(card_lvl) \
 		+ " : [[MAGICAL_DAMAGE]], rebondit et régénère du [[SHIELD]]."

@@ -30,4 +30,4 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return str(_chance[card_lvl - 1]) + "% de chance d'invoquer un [[SUMMON]] supplémentaire."
+	return _value(_chance[card_lvl - 1]) + "% de chance d'invoquer un [[SUMMON]] supplémentaire."
