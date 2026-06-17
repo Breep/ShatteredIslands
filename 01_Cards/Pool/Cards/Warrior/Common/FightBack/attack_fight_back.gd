@@ -17,6 +17,7 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 	dodge_mod.calc_type = StatModifier.CalcType.ADD
 	dodge_mod.value = _increase_dodge[card_lvl - 1]
 	dodge_mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
+	dodge_mod.tags = [StatModifier.TagType.CARD]
 	owner.stat_modifiers_registry.register_modifier(dodge_mod)
 
 	var base_dodge: float = _increase_dodge[card_lvl - 1]
