@@ -6,13 +6,16 @@
 
 [sub_resource type="Resource" id="Resource_bestialreflex"]
 script = ExtResource("2_eff")
+_heal_amount = 600.0
+_dash_distance = 2.0
+_cooldown = 18.0
 metadata/_custom_type_script = "uid://latbeastreflexeff"
 
 [resource]
 script = ExtResource("1_skill")
 skill_id = 2
 name = "Réflexe Bestial"
-description = "Sous 30% PV : soigne 1000 HP, dash arrière, devient inciblable pendant 2 s. Cooldown 15 s."
+description = "Sous 30% PV : soigne 600 HP, dash arrière, devient inciblable pendant 2 s. Cooldown 18 s."
 portrait = ExtResource("1_y3c4k")
 skill_effect = SubResource("Resource_bestialreflex")
 metadata/_custom_type_script = "uid://dfby4merlgkep"
