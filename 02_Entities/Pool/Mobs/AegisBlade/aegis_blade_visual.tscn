@@ -88,7 +88,62 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.060166657, 0.11523403, 0.20021875, 0.33950138, 0.5, 0.73333335, 0.777034, 0.8095362, 0.9, 0.98368347, 1.2666667, 1.4, 1.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 2.07053, 0.5946036, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(-0.24958208, -0.013962634, -0.101229094), Vector3(0.23658048, -0.23578387, -0.21659002), Vector3(0.029670598, -0.2687807, -0.64053583), Vector3(-2.469641, -0.23561946, 0.6091199), Vector3(-3.8030725, 0.51487213, 0.98262036), Vector3(-3.2323499, 0.51487213, 0.98262036), Vector3(-2.1934662, -1.1955414, 0.6132702), Vector3(-3.111922, -3.1887167, 2.347468), Vector3(-3.4924037, -5.4401913, 1.1780972), Vector3(-3.6826446, -6.0021873, 1.1780972), Vector3(-1.3962634, -0.108210415, -0.108210415), Vector3(-0.19024089, 0, 0), Vector3(-2.1380284, 0, 0)]
+"values": [Vector3(0, 0, 0), Vector3(-0.24958208, -0.013962634, -0.101229094), Vector3(0.23658048, -0.23578387, -0.21659002), Vector3(0.029670598, -0.2687807, -0.64053583), Vector3(-2.469641, -0.23561946, 0.6091199), Vector3(-3.8030725, 0.51487213, 0.98262036), Vector3(-3.2323499, 0.51487213, 0.98262036), Vector3(-2.1934662, -1.1955414, 0.6132702), Vector3(-3.111922, -3.1887167, 2.347468), Vector3(-3.4924037, -5.4401913, 1.1780972), Vector3(-3.6826446, -6.0021873, 1.1780972), Vector3(-1.3962634, -0.108210415, -0.108210415), Vector3(-0.19024089, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_1n503"]
+resource_name = "death"
+length = 1.8666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.6333333, 0.76666665, 0.8666667, 0.9666667, 1.0333333, 1.1, 1.1666666, 1.1999999, 1.2333333, 1.2666667, 1.4, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1.49, -0.489), Vector3(0, 3.226, -3.505), Vector3(0, 7.2285585, -0.489), Vector3(-0.11, 7.255, -0.499), Vector3(0.096, 7.307, -0.422), Vector3(-0.13, 7.29, -0.669), Vector3(0.116, 7.352, -0.242), Vector3(-0.16, 7.29, -0.669), Vector3(0.186, 7.352, -0.242), Vector3(-0.175, 7.29, -0.669), Vector3(0.366, 7.352, -0.242), Vector3(0, 8.103, -0.639), Vector3(0, 8.103, -0.639), Vector3(0, 1.569, -0.578)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.6333333, 1.4, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-2.7785642, 0, 0), Vector3(-7.9011054, 0, 0), Vector3(-7.9011054, 0, 0), Vector3(-11.316715, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_sqmi4"]
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.6333333, 0.8, 0.93333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1.49, -0.489), Vector3(0, 3.226, -3.505), Vector3(0, 7.2285585, -0.489), Vector3(0, 8.103, -0.639), Vector3(0, 1.569, -0.578)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.6333333, 0.8, 0.93333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-2.7785642, 0, 0), Vector3(-7.9011054, 0, 0), Vector3(-8.573057, 0, 0), Vector3(-11.316715, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_iqyfd"]
@@ -122,6 +177,8 @@ tracks/1/keys = {
 _data = {
 &"attack_1": SubResource("Animation_r4hpd"),
 &"attack_2": SubResource("Animation_4obkh"),
+&"death": SubResource("Animation_1n503"),
+&"death2": SubResource("Animation_sqmi4"),
 &"ultimate": SubResource("Animation_iqyfd")
 }
 
