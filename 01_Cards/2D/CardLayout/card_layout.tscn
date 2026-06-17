@@ -223,6 +223,7 @@ texture = ExtResource("13_78cks")
 
 [node name="CardPortraitBackground" type="TextureRect" parent="." unique_id=1126265025]
 unique_name_in_owner = true
+modulate = Color(0.3403393, 0.34033933, 0.3403393, 1)
 material = SubResource("ShaderMaterial_6cxer")
 layout_mode = 1
 anchors_preset = 15
