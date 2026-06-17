@@ -12,7 +12,7 @@ _ap_per_building = Array[float]([10.0, 15.0, 20.0, 25.0, 30.0])
 
 [resource]
 script = ExtResource("1_card")
-name = "Command Aura"
+name = "Aura de Commandement"
 picture = SubResource("PlaceholderTexture2D_f2mpn")
 families = Array[int]([2])
 rarity = 1

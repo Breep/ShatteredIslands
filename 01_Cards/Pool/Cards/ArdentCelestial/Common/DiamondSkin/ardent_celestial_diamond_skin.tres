@@ -11,7 +11,7 @@ metadata/_custom_type_script = "uid://i240pr1or385"
 
 [resource]
 script = ExtResource("1_qg2ct")
-name = "Diamond Skin"
+name = "Peau de Diamant"
 picture = ExtResource("2_vcjc7")
 families = Array[int]([3])
 _card_effect = SubResource("Resource_4nyf3")

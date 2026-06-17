@@ -14,7 +14,7 @@ metadata/_custom_type_script = "uid://c6m6ts47svtcq"
 
 [resource]
 script = ExtResource("1_d2t3j")
-name = &"Flame thrower turret"
+name = &"Tourelle Lance-Flammes"
 picture = SubResource("PlaceholderTexture2D_vshby")
 families = Array[int]([2, 3])
 _card_effect = SubResource("Resource_nxde2")

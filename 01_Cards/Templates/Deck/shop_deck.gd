@@ -181,9 +181,9 @@ func _roll_rarity(rarity_chances: Dictionary[Card.Rarity, float]) -> Card.Rarity
 # éditer _TUTORIAL_DRAWS (un nom vide "" = slot rempli aléatoirement comme d'hab).
 
 const _TUTORIAL_DRAWS: Array = [
-	["Burning Strike", "Healing Crossbow", "War Banner"],
-	["Phoenix Brood", "Beast Bond", "Electric Grenade"],
-	["Burning Strike", "Meteor", "Chicken Coop"],
+	["Frappe Ardente", "Arbalète de Soin", "Bannière de Guerre"],
+	["Couvée du Phénix", "Lien Bestial", "Grenade Électrique"],
+	["Frappe Ardente", "Météore", "Poulailler"],
 ]
 
 var _tutorial_draw_index: int = 0

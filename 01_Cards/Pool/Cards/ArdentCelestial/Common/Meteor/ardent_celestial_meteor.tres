@@ -11,7 +11,7 @@ _period = Array[float]([6.0, 6.0, 6.0, 6.0, 6.0])
 
 [resource]
 script = ExtResource("1_card")
-name = "Meteor"
+name = "Météore"
 picture = ExtResource("2_k1y1e")
 families = Array[int]([3])
 _card_effect = SubResource("Resource_meteor")

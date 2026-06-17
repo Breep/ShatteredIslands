@@ -8,7 +8,7 @@ script = ExtResource("2_eff")
 
 [resource]
 script = ExtResource("1_card")
-name = "Nightfall"
+name = "Crépuscule"
 families = Array[int]([9])
 _card_effect = SubResource("Resource_nightfall")
 points = Dictionary[int, int]({

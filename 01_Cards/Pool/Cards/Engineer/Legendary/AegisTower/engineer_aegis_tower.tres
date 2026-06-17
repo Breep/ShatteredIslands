@@ -14,7 +14,7 @@ metadata/_custom_type_script = "uid://caeg1stwr3lgnd"
 
 [resource]
 script = ExtResource("1_card")
-name = &"Aegis Tower"
+name = &"Tour Égide"
 picture = SubResource("PlaceholderTexture2D_aegis")
 families = Array[int]([2])
 rarity = 3

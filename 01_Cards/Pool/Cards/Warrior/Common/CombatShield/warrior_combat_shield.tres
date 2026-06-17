@@ -12,7 +12,7 @@ _shield_amount = Array[float]([35.0, 40.0, 45.0, 50.0, 70.0])
 
 [resource]
 script = ExtResource("1_card")
-name = "Combat Shield"
+name = "Bouclier de Combat"
 picture = SubResource("PlaceholderTexture2D_8jdsk")
 families = Array[int]([2, 1])
 _card_effect = SubResource("Resource_combat")

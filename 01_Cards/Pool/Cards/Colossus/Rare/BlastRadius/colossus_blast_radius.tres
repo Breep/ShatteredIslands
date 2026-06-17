@@ -10,7 +10,7 @@ _aoe_mult = Array[float]([0.5, 1.0, 1.5, 2.0, 2.5])
 
 [resource]
 script = ExtResource("1_card")
-name = "Blast Radius"
+name = "Rayon d'Explosion"
 picture = ExtResource("2_tqbpp")
 families = Array[int]([6])
 rarity = 1

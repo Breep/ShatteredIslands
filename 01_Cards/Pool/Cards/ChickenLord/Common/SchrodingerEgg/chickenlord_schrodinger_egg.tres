@@ -12,7 +12,7 @@ _period = Array[float]([4.0, 4.0, 4.0, 4.0, 4.0])
 
 [resource]
 script = ExtResource("1_card")
-name = "Schrodinger Egg"
+name = "Œuf de Schrödinger"
 picture = SubResource("PlaceholderTexture2D_5guid")
 families = Array[int]([8])
 _card_effect = SubResource("Resource_egg")

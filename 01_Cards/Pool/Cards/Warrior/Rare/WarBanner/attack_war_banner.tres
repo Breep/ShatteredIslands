@@ -11,7 +11,7 @@ _as_percent = Array[float]([7.0, 11.0, 15.0, 19.0, 25.0])
 
 [resource]
 script = ExtResource("1_card")
-name = "War Banner"
+name = "Bannière de Guerre"
 picture = SubResource("PlaceholderTexture2D_2yr64")
 families = Array[int]([1])
 rarity = 1

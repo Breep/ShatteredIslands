@@ -13,7 +13,7 @@ _tick_period = 1.3
 
 [resource]
 script = ExtResource("1_card")
-name = "Scorched Earth"
+name = "Terre Brûlée"
 picture = ExtResource("2_lsfc1")
 families = Array[int]([3])
 rarity = 2

@@ -13,7 +13,7 @@ metadata/_custom_type_script = "uid://dkgdt80bfilx7"
 
 [resource]
 script = ExtResource("1_3rfj7")
-name = "Evasive Barrier"
+name = "Barrière Évasive"
 picture = SubResource("PlaceholderTexture2D_mumw6")
 families = Array[int]([2])
 _card_effect = SubResource("Resource_st557")

@@ -11,7 +11,7 @@ _inherit_percent = Array[float]([60.0, 70.0, 80.0, 90.0, 100.0])
 
 [resource]
 script = ExtResource("1_card")
-name = "Ninja Chicken"
+name = "Poule Ninja"
 picture = ExtResource("2_ads0y")
 families = Array[int]([8])
 _card_effect = SubResource("Resource_ninja")

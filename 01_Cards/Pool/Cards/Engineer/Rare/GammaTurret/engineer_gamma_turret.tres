@@ -15,7 +15,7 @@ metadata/_custom_type_script = "uid://bgqhnwocc7fga"
 
 [resource]
 script = ExtResource("3_ipb14")
-name = &"Gamma turret"
+name = &"Tourelle Gamma"
 picture = SubResource("PlaceholderTexture2D_sxork")
 families = Array[int]([2])
 rarity = 1

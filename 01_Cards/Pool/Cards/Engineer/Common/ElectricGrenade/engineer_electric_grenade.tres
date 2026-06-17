@@ -11,7 +11,7 @@ _period = Array[float]([4.0, 4.0, 4.0, 4.0, 4.0])
 
 [resource]
 script = ExtResource("1_card")
-name = "Electric Grenade"
+name = "Grenade Électrique"
 picture = SubResource("PlaceholderTexture2D_t7qcu")
 families = Array[int]([2])
 _card_effect = SubResource("Resource_grenade")

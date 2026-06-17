@@ -10,7 +10,7 @@ _level_bonus = Array[int]([1, 2, 3, 4, 5])
 
 [resource]
 script = ExtResource("1_card")
-name = "Brood Command"
+name = "Commandement de la Couvée"
 picture = ExtResource("2_au7cu")
 families = Array[int]([8])
 rarity = 1

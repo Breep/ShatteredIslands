@@ -11,7 +11,7 @@ _level_bonus = Array[int]([1, 2, 3, 4, 5])
 
 [resource]
 script = ExtResource("1_card")
-name = "Blueprint Upgrade"
+name = "Amélioration des Plans"
 picture = SubResource("PlaceholderTexture2D_vmi7w")
 families = Array[int]([2])
 rarity = 1

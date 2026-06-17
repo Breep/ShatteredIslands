@@ -19,8 +19,8 @@ extends Control
 
 # ============================== Constants ==============================
 
-# Au-delà de ce solde, le 1er Continue de la 1re taverne déclenche un rappel
-# "il te reste de l'or" au lieu de lancer le combat (une carte coûte 100).
+# À partir de ce solde (une carte coûte 100), le 1er Continue de la 1re taverne
+# déclenche un rappel "il te reste de l'or" au lieu de lancer le combat.
 const _UNSPENT_GOLD_THRESHOLD: int = 100
 
 # ============================== Private variables ==============================
@@ -95,7 +95,7 @@ func _should_remind_unspent_gold() -> bool:
 	if not Settings.is_tutorial_enabled(): return false
 	var local_player: Player = PlayerManager.get_local_player()
 	if local_player == null: return false
-	return local_player.gold > _UNSPENT_GOLD_THRESHOLD
+	return local_player.gold >= _UNSPENT_GOLD_THRESHOLD
 
 
 func _local_hero_skill() -> HeroSkillComponent:

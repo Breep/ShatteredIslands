@@ -13,7 +13,7 @@ metadata/_custom_type_script = "uid://dm1x0oi152gfo"
 
 [resource]
 script = ExtResource("1_adgwi")
-name = "Evasive Growth"
+name = "Croissance Évasive"
 picture = ExtResource("1_ka6c0")
 families = Array[int]([6])
 _card_effect = SubResource("Resource_evasive")

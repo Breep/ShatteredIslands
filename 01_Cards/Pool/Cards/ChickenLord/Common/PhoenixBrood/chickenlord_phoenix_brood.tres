@@ -11,7 +11,7 @@ _ignite_stacks = Array[float]([15.0, 15.0, 15.0, 15.0, 15.0])
 
 [resource]
 script = ExtResource("1_card")
-name = "Phoenix Brood"
+name = "Couvée du Phénix"
 picture = ExtResource("2_ja3fp")
 families = Array[int]([8, 3])
 _card_effect = SubResource("Resource_phoenix")

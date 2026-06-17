@@ -12,7 +12,7 @@ metadata/_custom_type_script = "uid://dghxcic5r32g3"
 
 [resource]
 script = ExtResource("1_8w70h")
-name = "Tainted Blood"
+name = "Sang Corrompu"
 picture = ExtResource("2_k2ej8")
 families = Array[int]([6])
 _card_effect = SubResource("Resource_f8k5s")

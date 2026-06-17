@@ -13,7 +13,7 @@ metadata/_custom_type_script = "uid://uiyqfsgg1lfo"
 
 [resource]
 script = ExtResource("1_5mypg")
-name = "Fight Back"
+name = "Riposte"
 picture = ExtResource("2_31vmm")
 families = Array[int]([1])
 _card_effect = SubResource("Resource_ov13x")
