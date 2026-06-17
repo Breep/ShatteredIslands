@@ -25,6 +25,12 @@ const _TALENT_CHOICE_PATH: String = "res://04_UI/Tool/Tutorial/Sequences/seq_tal
 ## State-less sequence fired the first time the unit-placement UI opens (first
 ## combat positioning). Once-per-session via _played_sequence_ids.
 const _UNIT_PLACEMENT_PATH: String = "res://04_UI/Tool/Tutorial/Sequences/seq_unit_placement.tres"
+
+## Standalone step (not a sequence) shown when the player tries to leave the first
+## tavern with unspent gold. Presented over the active buying step's bubble; a
+## second Continue press both launches the fight and closes it via the normal
+## END_BUYING_PRESSED validation.
+const _GOLD_REMINDER_PATH: String = "res://04_UI/Tool/Tutorial/Steps/step_unspent_gold.tres"
 #endregion
 
 
@@ -41,8 +47,10 @@ var _pending_sequence: TutorialSequence
 
 var _talent_choice_sequence: TutorialSequence
 var _unit_placement_sequence: TutorialSequence
+var _gold_reminder_step: TutorialStep
 var _hand_hidden_by_tutorial: bool = false
 var _shop_locked_by_tutorial: bool = false
+var _entity_sheet_locked_by_tutorial: bool = false
 #endregion
 
 
@@ -51,6 +59,7 @@ func _ready() -> void:
 	_load_sequences()
 	_load_talent_choice()
 	_load_unit_placement()
+	_load_gold_reminder()
 
 	_auto_advance_timer = Timer.new()
 	_auto_advance_timer.one_shot = true
@@ -71,6 +80,7 @@ func _ready() -> void:
 	Events.hero_skill_chosen.connect(_on_hero_skill_chosen)
 	Events.unit_placement_started.connect(_on_unit_placement_started)
 	Events.combat_started.connect(_on_combat_started)
+	Events.tavern_unspent_gold_reminder.connect(_on_tavern_unspent_gold_reminder)
 	Events.entity_drag_started.connect(_on_entity_drag_started)
 	Events.entity_drag_stopped.connect(_on_entity_drag_stopped)
 
@@ -116,6 +126,13 @@ func _load_unit_placement() -> void:
 		Verbose.warn("Unit placement sequence not found: " + _UNIT_PLACEMENT_PATH, Verbose.Category.TUTORIAL)
 		return
 	_unit_placement_sequence = load(_UNIT_PLACEMENT_PATH)
+
+
+func _load_gold_reminder() -> void:
+	if not ResourceLoader.exists(_GOLD_REMINDER_PATH):
+		Verbose.warn("Gold reminder step not found: " + _GOLD_REMINDER_PATH, Verbose.Category.TUTORIAL)
+		return
+	_gold_reminder_step = load(_GOLD_REMINDER_PATH)
 
 
 func _try_resolve_overlay() -> bool:
@@ -194,6 +211,15 @@ func _apply_step_ui_side_effects(step: TutorialStep) -> void:
 		Events.tutorial_set_shop_interactable.emit(true)
 		_shop_locked_by_tutorial = false
 
+	# The entity sheet is kept open (immune to void-click close) while the step asks
+	# the player to inspect a unit. Auto-restored on the first step that doesn't.
+	if step.lock_entity_sheet:
+		Events.tutorial_set_entity_sheet_locked.emit(true)
+		_entity_sheet_locked_by_tutorial = true
+	elif _entity_sheet_locked_by_tutorial:
+		Events.tutorial_set_entity_sheet_locked.emit(false)
+		_entity_sheet_locked_by_tutorial = false
+
 
 func _restore_ui_if_overridden() -> void:
 	if _hand_hidden_by_tutorial:
@@ -202,6 +228,9 @@ func _restore_ui_if_overridden() -> void:
 	if _shop_locked_by_tutorial:
 		Events.tutorial_set_shop_interactable.emit(true)
 		_shop_locked_by_tutorial = false
+	if _entity_sheet_locked_by_tutorial:
+		Events.tutorial_set_entity_sheet_locked.emit(false)
+		_entity_sheet_locked_by_tutorial = false
 
 
 func _finish_sequence() -> void:
@@ -293,6 +322,18 @@ func _on_shop_opened() -> void:
 func _on_tavern_continue_pressed() -> void:
 	if not Settings.is_tutorial_enabled(): return
 	_validate_and_advance(TutorialStep.ValidationEvent.END_BUYING_PRESSED)
+
+
+## First-tavern safety net: the player pressed Continue with unspent gold. We show
+## the reminder bubble over the current buying step (its hide_skip leaves the real
+## Continue button as the only way forward). A second press emits
+## tavern_continue_pressed, which both launches the fight and — via the still-active
+## END_BUYING_PRESSED step — closes this bubble through the normal advance path.
+func _on_tavern_unspent_gold_reminder() -> void:
+	if not Settings.is_tutorial_enabled(): return
+	if _gold_reminder_step == null: return
+	if not _try_resolve_overlay(): return
+	_overlay.present_step(_gold_reminder_step, false)
 
 
 ## Roguelite flow entry points. The run is driven by RunRoot/EncounterRunner,

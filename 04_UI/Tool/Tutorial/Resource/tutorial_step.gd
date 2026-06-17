@@ -100,6 +100,11 @@ enum ScreenAnchor {
 @export var ensure_shop_closed: bool = false
 @export var hide_hand: bool = false
 
+## Keeps the entity sheet open while this step is active: clicks in the void won't
+## close it. Use on steps that ask the player to inspect a unit's sheet/skills, so
+## a stray click doesn't dismiss the very thing the step is pointing at.
+@export var lock_entity_sheet: bool = false
+
 ## Fades the spotlight dim out while the player is dragging an entity, so the
 ## field stays readable for placement; the dim returns when the drag ends.
 @export var dim_off_while_dragging: bool = false

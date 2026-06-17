@@ -52,20 +52,6 @@ ensure_shop_open = true
 highlight_target = true
 highlight_padding = 8.0
 
-[sub_resource type="Resource" id="step_card_rarity"]
-script = ExtResource("2_step")
-id = &"card_rarity"
-text = "Wow ! Regarde, son contour est bleu : c'est une carte rare ! Pour les plus chanceux, il existe des cartes encore plus rares... il paraît même que certains ont déjà eu des cartes légendaires !"
-target_unique_name = &"CardContainer"
-target_sub_name = &"VBoxContainer3"
-validation_event = 0
-auto_advance_delay = 0.0
-popup_mode = 1
-ensure_shop_open = true
-highlight_target = true
-highlight_padding = 8.0
-block_interaction = true
-
 [sub_resource type="Resource" id="step_buy_combo"]
 script = ExtResource("2_step")
 id = &"buy_combo"
@@ -124,16 +110,18 @@ auto_advance_delay = 0.0
 hide_skip = true
 ensure_shop_closed = true
 hide_hand = true
+lock_entity_sheet = true
 screen_anchor = 1
 
 [sub_resource type="Resource" id="step_show_spells"]
 script = ExtResource("2_step")
 id = &"show_spells"
-text = "Et voici tous ses sorts. Survole-les pour voir ce qu'ils font — tu peux inspecter n'importe quelle unité comme ça."
+text = "Et voici tous ses sorts. Clique dessus pour voir ce qu'ils font — tu peux inspecter n'importe quelle unité comme ça."
 target_unique_name = &"SkillsContainer"
 auto_advance_delay = 0.0
 ensure_shop_closed = true
 hide_hand = true
+lock_entity_sheet = true
 highlight_target = true
 highlight_padding = 8.0
 screen_anchor = 1
@@ -150,4 +138,4 @@ auto_advance_delay = 0.0
 script = ExtResource("1_seq")
 id = &"seq_buying_phase"
 trigger_state = 3
-steps = Array[ExtResource("2_step")]([SubResource("step_open_shop"), SubResource("step_show_gold"), SubResource("step_buy_attack"), SubResource("step_buy_defense"), SubResource("step_card_rarity"), SubResource("step_buy_combo"), SubResource("step_reroll"), SubResource("step_upgrade_attack"), SubResource("step_sell_card"), SubResource("step_click_unit"), SubResource("step_show_spells"), SubResource("step_launch_fight")])
+steps = Array[ExtResource("2_step")]([SubResource("step_open_shop"), SubResource("step_show_gold"), SubResource("step_buy_attack"), SubResource("step_buy_defense"), SubResource("step_buy_combo"), SubResource("step_reroll"), SubResource("step_upgrade_attack"), SubResource("step_sell_card"), SubResource("step_click_unit"), SubResource("step_show_spells"), SubResource("step_launch_fight")])

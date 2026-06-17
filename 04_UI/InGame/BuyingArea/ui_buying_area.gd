@@ -17,9 +17,19 @@ extends Control
 @onready var _shop_overlay_bg: ColorRect = %Background
 @onready var _open_shop_button: Button = %OpenShopButton
 
+# ============================== Constants ==============================
+
+# Au-delà de ce solde, le 1er Continue de la 1re taverne déclenche un rappel
+# "il te reste de l'or" au lieu de lancer le combat (une carte coûte 100).
+const _UNSPENT_GOLD_THRESHOLD: int = 100
+
 # ============================== Private variables ==============================
 
 var _is_active: bool
+# Nombre de taverne ouvertes depuis le lancement (le rappel d'or ne vise que la 1re).
+var _tavern_count: int = 0
+# Le rappel d'or a déjà été montré : le prochain Continue lance le combat.
+var _gold_reminder_acknowledged: bool = false
 
 
 #region ============================== Node base functions ==============================
@@ -42,6 +52,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func set_active() -> void:
 	if _is_active: return
 	_is_active = true
+	_tavern_count += 1
 	show()
 	show_card_shop()
 
@@ -68,7 +79,23 @@ func _on_continue_button_pressed() -> void:
 	if hero_skill != null and hero_skill.has_pending_choice():
 		hero_skill.request_pending_choices()
 		return
+	if _should_remind_unspent_gold():
+		_gold_reminder_acknowledged = true
+		Events.tavern_unspent_gold_reminder.emit()
+		return
 	Events.signal_tavern_continue_pressed()
+
+
+# Filet de sécurité de la 1re taverne : rappelle au joueur qu'il a de l'or à
+# dépenser avant de lancer le combat. Une seule fois, et seulement si le tutoriel
+# est actif (sinon il afficherait un rappel sans bulle et bloquerait le 1er clic).
+func _should_remind_unspent_gold() -> bool:
+	if _gold_reminder_acknowledged: return false
+	if _tavern_count != 1: return false
+	if not Settings.is_tutorial_enabled(): return false
+	var local_player: Player = PlayerManager.get_local_player()
+	if local_player == null: return false
+	return local_player.gold > _UNSPENT_GOLD_THRESHOLD
 
 
 func _local_hero_skill() -> HeroSkillComponent:

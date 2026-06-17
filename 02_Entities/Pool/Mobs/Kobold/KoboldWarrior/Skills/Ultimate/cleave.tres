@@ -7,6 +7,8 @@
 [sub_resource type="Resource" id="Resource_wehw2"]
 script = ExtResource("2_gjc0g")
 
+_damage_target_hpmax_percent = 8.0
+_damage_self_ad_percent = 180.0
 [resource]
 script = ExtResource("1_nxcy8")
 skill_id = 7
