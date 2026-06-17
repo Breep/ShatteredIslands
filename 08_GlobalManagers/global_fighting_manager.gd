@@ -122,6 +122,7 @@ func set_speed_multiplier(multiplier: int) -> void:
 	for fm in _current_active_fighting_managers:
 		if is_instance_valid(fm):
 			fm.set_tick_multiplier(_speed_multiplier)
+	Engine.time_scale = multiplier
 
 
 func start() -> void:
