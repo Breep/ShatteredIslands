@@ -96,7 +96,6 @@ highlight_padding = 8.0
 script = ExtResource("2_step")
 id = &"sell_card"
 text = "Besoin d'or ? Tu peux revendre une carte : glisse-la depuis ta main vers la boutique pour récupérer quelques pièces."
-validation_event = 0
 auto_advance_delay = 0.0
 ensure_shop_open = true
 screen_anchor = 1
