@@ -74,8 +74,3 @@ func _on_fighting_state_changed_roar(new_state: FightingState) -> void:
 
 func _on_ultimate_casted() -> void:
 	AudioManager.play_3d("dragon_breathing_fire", global_position)
-
-
-func _on_died() -> void:
-	super._on_died()
-	AudioManager.play_3d("skeleton_drake_die", global_position)
