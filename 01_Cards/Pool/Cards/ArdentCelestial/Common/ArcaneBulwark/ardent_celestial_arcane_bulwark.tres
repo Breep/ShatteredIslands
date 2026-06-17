@@ -10,7 +10,7 @@ _hp_per_hit = Array[float]([15.0, 20.0, 25.0, 30.0, 40.0])
 
 [resource]
 script = ExtResource("1_card")
-name = "Arcane Bulwark"
+name = "Rempart Arcanique"
 picture = ExtResource("2_t50vn")
 families = Array[int]([6, 3])
 _card_effect = SubResource("Resource_arcane")

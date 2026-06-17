@@ -11,7 +11,7 @@ _hp_threshold = Array[float]([40.0, 40.0, 40.0, 40.0, 40.0])
 
 [resource]
 script = ExtResource("1_card")
-name = "Executioner"
+name = "Bourreau"
 picture = ExtResource("2_15lb8")
 families = Array[int]([1])
 _card_effect = SubResource("Resource_exec")

@@ -11,7 +11,7 @@ _hp_percent = Array[float]([50.0, 50.0, 50.0])
 
 [resource]
 script = ExtResource("1_card")
-name = "Undying Brood"
+name = "Couvée Immortelle"
 picture = ExtResource("2_qv2hk")
 families = Array[int]([8])
 rarity = 3

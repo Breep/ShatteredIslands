@@ -13,7 +13,7 @@ metadata/_custom_type_script = "uid://wi6p7asrxwbi"
 
 [resource]
 script = ExtResource("1_3comy")
-name = "Vital Pulse"
+name = "Pulsation Vitale"
 picture = ExtResource("1_sqh4a")
 families = Array[int]([6])
 rarity = 2

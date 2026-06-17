@@ -12,7 +12,7 @@ _max_percent = Array[int]([166, 199, 300])
 
 [resource]
 script = ExtResource("1_template")
-name = "Russian Roulette"
+name = "Roulette Russe"
 picture = SubResource("PlaceholderTexture2D_ik5f7")
 families = Array[int]([1])
 rarity = 3

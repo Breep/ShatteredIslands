@@ -11,7 +11,7 @@ metadata/_custom_type_script = "uid://ds443ic7ub0i7"
 
 [resource]
 script = ExtResource("1_card")
-name = "Beast Bond"
+name = "Lien Bestial"
 picture = ExtResource("2_eei0y")
 families = Array[int]([6, 8])
 _card_effect = SubResource("Resource_bond")

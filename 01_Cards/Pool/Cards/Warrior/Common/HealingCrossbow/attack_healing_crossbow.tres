@@ -12,7 +12,7 @@ metadata/_custom_type_script = "uid://cixnliius7d48"
 
 [resource]
 script = ExtResource("1_ckkh8")
-name = "Healing Crossbow"
+name = "Arbalète de Soin"
 picture = ExtResource("2_yapp5")
 families = Array[int]([1])
 _card_effect = SubResource("Resource_kjnav")

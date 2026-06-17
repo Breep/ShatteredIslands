@@ -11,7 +11,7 @@ _period = Array[float]([6.0, 6.0, 6.0, 6.0, 6.0])
 
 [resource]
 script = ExtResource("1_card")
-name = "Boulder Throw"
+name = "Jet de Rocher"
 picture = ExtResource("2_62qld")
 families = Array[int]([6])
 _card_effect = SubResource("Resource_boulder")

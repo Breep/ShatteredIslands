@@ -10,7 +10,7 @@ _extra_projectiles = Array[int]([1, 2, 3])
 
 [resource]
 script = ExtResource("1_card")
-name = "Astral Barrage"
+name = "Déluge Astral"
 picture = ExtResource("2_3abs5")
 families = Array[int]([3])
 rarity = 3

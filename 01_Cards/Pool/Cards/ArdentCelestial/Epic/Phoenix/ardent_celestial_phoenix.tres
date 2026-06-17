@@ -13,7 +13,7 @@ metadata/_custom_type_script = "uid://cph03n1xardc7e"
 
 [resource]
 script = ExtResource("1_card")
-name = &"Phoenix"
+name = &"Phénix"
 picture = ExtResource("3_hwinm")
 families = Array[int]([3])
 rarity = 2

@@ -13,7 +13,7 @@ metadata/_custom_type_script = "uid://daqnwg11wal35"
 
 [resource]
 script = ExtResource("1_card")
-name = "Titan's Vigor"
+name = "Vigueur du Titan"
 picture = ExtResource("2_3lfp3")
 families = Array[int]([6])
 _card_effect = SubResource("Resource_vigor")

@@ -11,7 +11,7 @@ metadata/_custom_type_script = "uid://c0l28wvs8lw87"
 
 [resource]
 script = ExtResource("1_laa5u")
-name = "Diamond Sword"
+name = "Épée de Diamant"
 picture = ExtResource("2_owdh2")
 families = Array[int]([1])
 _card_effect = SubResource("Resource_re7yq")

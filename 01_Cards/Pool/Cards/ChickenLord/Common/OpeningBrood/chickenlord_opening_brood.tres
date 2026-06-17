@@ -10,7 +10,7 @@ _chicken_count = Array[int]([2, 3, 4, 5, 7])
 
 [resource]
 script = ExtResource("1_card")
-name = "Opening Brood"
+name = "Couvée Initiale"
 picture = ExtResource("2_j5gj1")
 families = Array[int]([8])
 _card_effect = SubResource("Resource_opening")

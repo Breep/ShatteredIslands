@@ -14,7 +14,7 @@ metadata/_custom_type_script = "uid://doxm2j6oomuw"
 
 [resource]
 script = ExtResource("1_xkn16")
-name = "Resurrection"
+name = "Résurrection"
 picture = ExtResource("2_bxda6")
 families = Array[int]([6])
 rarity = 3

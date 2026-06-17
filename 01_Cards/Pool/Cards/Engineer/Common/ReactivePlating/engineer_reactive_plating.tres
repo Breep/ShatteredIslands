@@ -11,7 +11,7 @@ _hp_max_percent = Array[float]([1.5, 1.5, 1.5, 1.5, 1.5])
 
 [resource]
 script = ExtResource("1_card")
-name = "Reactive Plating"
+name = "Blindage Réactif"
 picture = ExtResource("2_l60mr")
 families = Array[int]([2, 6])
 _card_effect = SubResource("Resource_eff")

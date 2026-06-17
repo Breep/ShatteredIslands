@@ -10,7 +10,7 @@ _projectiles_per_meteor = Array[int]([8, 7, 6, 5, 4])
 
 [resource]
 script = ExtResource("1_card")
-name = "Meteor Cadence"
+name = "Cadence Météorique"
 picture = ExtResource("2_lliwk")
 families = Array[int]([3])
 rarity = 1

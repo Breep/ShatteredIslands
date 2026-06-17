@@ -14,7 +14,7 @@ metadata/_custom_type_script = "uid://huymddyommss"
 
 [resource]
 script = ExtResource("1_rxnni")
-name = "Gatling Gun"
+name = "Mitrailleuse Gatling"
 picture = SubResource("PlaceholderTexture2D_nr7tf")
 families = Array[int]([1])
 rarity = 2

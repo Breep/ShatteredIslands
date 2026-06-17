@@ -10,7 +10,7 @@ _chance = Array[float]([20.0, 30.0, 40.0])
 
 [resource]
 script = ExtResource("1_card")
-name = "Reinforcements"
+name = "Renforts"
 picture = ExtResource("2_ijp4u")
 families = Array[int]([8])
 rarity = 2

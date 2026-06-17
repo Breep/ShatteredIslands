@@ -13,7 +13,7 @@ metadata/_custom_type_script = "uid://ldmia5mvuk4x"
 
 [resource]
 script = ExtResource("1_fxxdn")
-name = "Energy Barrier"
+name = "Barrière d'Énergie"
 picture = SubResource("PlaceholderTexture2D_ivfmj")
 families = Array[int]([2])
 _card_effect = SubResource("Resource_w1q6s")

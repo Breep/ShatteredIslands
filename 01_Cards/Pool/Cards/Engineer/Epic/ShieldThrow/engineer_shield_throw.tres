@@ -12,7 +12,7 @@ metadata/_custom_type_script = "uid://cpitkii24654s"
 
 [resource]
 script = ExtResource("1_bdsoc")
-name = "Shield Throw"
+name = "Lancer de Bouclier"
 picture = SubResource("PlaceholderTexture2D_bh7y6")
 families = Array[int]([2])
 rarity = 2

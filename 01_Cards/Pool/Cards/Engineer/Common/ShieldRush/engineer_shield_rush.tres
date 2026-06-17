@@ -12,7 +12,7 @@ metadata/_custom_type_script = "uid://bre033jc30lr7"
 
 [resource]
 script = ExtResource("1_aeacc")
-name = "Shield Rush"
+name = "Charge au Bouclier"
 picture = SubResource("PlaceholderTexture2D_xmsyk")
 families = Array[int]([2])
 _card_effect = SubResource("Resource_t7xpg")

@@ -13,7 +13,7 @@ metadata/_custom_type_script = "uid://bd4dbqvvv4j0o"
 
 [resource]
 script = ExtResource("2_lr76t")
-name = "Blade Rush"
+name = "Ruée des Lames"
 picture = SubResource("PlaceholderTexture2D_fy27u")
 families = Array[int]([1])
 rarity = 1
