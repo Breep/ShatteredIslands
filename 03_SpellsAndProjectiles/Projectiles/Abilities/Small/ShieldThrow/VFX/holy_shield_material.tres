@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" format=3]
 
-[ext_resource type="Shader" uid="uid://bfsurtxccex6f" path="res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/ShieldThrow/holy_shield.gdshader" id="1_shader"]
+[ext_resource type="Shader" uid="uid://bfsurtxccex6f" path="res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/ShieldThrow/VFX/holy_shield.gdshader" id="1_shader"]
 [ext_resource type="Texture2D" uid="uid://ci4ug1pvvix66" path="res://20_Data/Texture_MAp_shields.png" id="2_texture"]
 
 [resource]

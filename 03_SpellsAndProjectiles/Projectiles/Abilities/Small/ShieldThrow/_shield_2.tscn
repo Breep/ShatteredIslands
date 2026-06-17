@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://c44vj0qoeccrc"]
 
-[ext_resource type="Material" path="res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/ShieldThrow/holy_shield_material.tres" id="1_cyc6v"]
+[ext_resource type="Material" path="res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/ShieldThrow/VFX/holy_shield_material.tres" id="1_cyc6v"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_umcxd"]
 resource_name = "shield_texture_map"
