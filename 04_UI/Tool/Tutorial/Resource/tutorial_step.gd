@@ -154,4 +154,9 @@ enum ScreenAnchor {
 ## Pins the bubble to a fixed screen spot (no arrow), overriding target-relative
 ## placement. AUTO keeps the normal behavior.
 @export var screen_anchor: ScreenAnchor = ScreenAnchor.AUTO
+
+## Pixel offset added to the bubble's final computed position (after side/anchor
+## placement). Use to nudge the bubble off an element it slightly overlaps without
+## switching its side. Positive x = right, positive y = down.
+@export var bubble_offset: Vector2 = Vector2.ZERO
 #endregion
