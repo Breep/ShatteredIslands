@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c1goibqlf12t3" path="res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/ShieldThrow/shield_throw_visual.tscn" id="1_827r1"]
 [ext_resource type="Script" uid="uid://dky1clxj0r0wo" path="res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/ShieldThrow/shield_throw_projectile.gd" id="1_x5v4l"]
 [ext_resource type="Script" uid="uid://xr3esthqo6re" path="res://03_SpellsAndProjectiles/Projectiles/_Shared/Trajectories/straight_trajectory.gd" id="2_h42ot"]
+[ext_resource type="AudioStream" uid="uid://c31xlprggkiix" path="res://23_Audio/SFX/Attacks/sfx_small_hit.mp3" id="3_evtkk"]
 
 [sub_resource type="Resource" id="Resource_632w7"]
 script = ExtResource("2_h42ot")
@@ -21,6 +22,7 @@ _shield_return = Array[float]([7.0, 11.0, 15.0, 19.0, 23.0, 27.0, 31.0, 35.0, 39
 _bounces = Array[float]([1.5, 2.5, 4.0, 5.0, 6.0, 6.5, 7.0, 7.5, 8.0, 8.5])
 trajectory = SubResource("Resource_632w7")
 type = 4
+_on_hit_sfx = ExtResource("3_evtkk")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=212256128]
 shape = SubResource("SphereShape3D_x5v4l")
