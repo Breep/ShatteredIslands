@@ -122,17 +122,18 @@ func _resolve_target(unique_name: StringName, sub_name: StringName = &"") -> Con
 ## MODAL_DIMMED is treated as BLOCKING + highlight_target = true (alias).
 func _apply_step_visuals(step: TutorialStep, targets: Array[Control]) -> void:
 	var is_modal: bool = step.popup_mode == TutorialStep.PopupMode.MODAL_DIMMED
-	var dim: bool = step.highlight_target or is_modal
+	var has_screen_rect: bool = step.highlight_screen_rect.size != Vector2.ZERO
+	var dim: bool = step.highlight_target or is_modal or has_screen_rect
 	# block_interaction forces a full input block even on the highlighted target.
 	var block: bool = step.popup_mode == TutorialStep.PopupMode.BLOCKING or is_modal or step.block_interaction
 
-	Verbose.debug("Apply step visuals | dim=%s block=%s through=%s targets=%d padding=%.1f" % [dim, block, step.block_interaction, targets.size(), step.highlight_padding], Verbose.Category.TUTORIAL)
+	Verbose.debug("Apply step visuals | dim=%s block=%s through=%s targets=%d padding=%.1f screen_rect=%s" % [dim, block, step.block_interaction, targets.size(), step.highlight_padding, step.highlight_screen_rect], Verbose.Category.TUTORIAL)
 
 	if not dim and not block:
 		_hide_blocker()
 		return
 
-	_blocker.set_state(dim, block, targets, step.highlight_padding, step.block_interaction)
+	_blocker.set_state(dim, block, targets, step.highlight_padding, step.block_interaction, step.highlight_screen_rect)
 	_kill_tween(_dim_tween)
 	_dim_tween = create_tween()
 	_dim_tween.tween_property(_blocker, "modulate:a", 1.0, _DIM_FADE_TIME)

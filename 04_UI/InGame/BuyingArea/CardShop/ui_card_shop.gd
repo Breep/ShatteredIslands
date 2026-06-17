@@ -44,6 +44,7 @@ var _local_player: Player
 var _is_active: bool = true
 var _is_locked: bool
 var _tutorial_locked: bool = false # Le tutoriel interdit l'achat (étape info sur une carte).
+var _tutorial_only_slot: int = -1 # Le tutoriel n'autorise l'achat que de ce slot (-1 = aucun verrou).
 
 # Cartes actuellement affichées dans les slots. Source de vérité côté UI (proto)
 # ou copie locale alimentée par shop_refreshed (mode normal).
@@ -72,6 +73,7 @@ func _ready() -> void:
 		card_button.card_drag_requested.connect(_on_card_shop_button_drag_requested)
 
 	Events.tutorial_set_shop_interactable.connect(_on_tutorial_set_shop_interactable)
+	Events.tutorial_set_shop_only_slot.connect(_on_tutorial_set_shop_only_slot)
 
 	if _drag_coordinator != null:
 		_drag_coordinator.register_container(self)
@@ -378,6 +380,8 @@ func _set_sell_panel_value(refund_value: int) -> void:
 func _on_card_shop_button_drag_requested(button: CardButton, card: Card) -> void:
 	if _tutorial_locked:
 		return
+	if _tutorial_only_slot >= 0 and _card_buttons.find(button) != _tutorial_only_slot:
+		return
 	if card == null:
 		return
 	_begin_drag_from_shop(card, button)
@@ -385,6 +389,10 @@ func _on_card_shop_button_drag_requested(button: CardButton, card: Card) -> void
 
 func _on_tutorial_set_shop_interactable(is_interactable: bool) -> void:
 	_tutorial_locked = not is_interactable
+
+
+func _on_tutorial_set_shop_only_slot(slot: int) -> void:
+	_tutorial_only_slot = slot
 
 
 func _on_card_shop_shop_refreshed(new_cards: Array[Card]) -> void:

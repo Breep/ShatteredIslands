@@ -10,6 +10,7 @@ const _ICON_SIZE: int = 20
 
 @onready var TOOLTIP_DATABASE: Array[TooltipDesc] = [
 	# --- A ---
+	load("res://04_UI/Tool/Tooltip/Dictionary/acolyte.tres"),
 	load("res://04_UI/Tool/Tooltip/Dictionary/ad.tres"),
 	load("res://04_UI/Tool/Tooltip/Dictionary/big_projectile.tres"),
 	load("res://04_UI/Tool/Tooltip/Dictionary/small_projectile.tres"),
@@ -19,6 +20,7 @@ const _ICON_SIZE: int = 20
 	
 	# --- B ---
 	load("res://04_UI/Tool/Tooltip/Dictionary/block.tres"),
+	load("res://04_UI/Tool/Tooltip/Dictionary/building.tres"),
 	
 	# --- C ---
 	load("res://04_UI/Tool/Tooltip/Dictionary/chickenlord_family.tres"),
@@ -35,7 +37,10 @@ const _ICON_SIZE: int = 20
 	
 	# --- E ---
 	load("res://04_UI/Tool/Tooltip/Dictionary/execute.tres"),
-	
+
+	# --- H ---
+	load("res://04_UI/Tool/Tooltip/Dictionary/hp.tres"),
+
 	# --- I ---
 	load("res://04_UI/Tool/Tooltip/Dictionary/ignite_stack.tres"), # Attention: Ton fichier s'appelle encore "_stack" ici
 	
@@ -92,6 +97,7 @@ const _ICON_SIZE: int = 20
 	"DEFENCE":           "[color=%s][url=DEFENCE]defence[/url][/color]"                     % THEME.color_html("DEFENCE_COLOR"),
 	"POISON_RESISTANCE": "[color=%s][url=POISON_RESISTANCE]poison resistance[/url][/color]" % THEME.color_html("POISON_COLOR"),
 	"SCALE":             "[color=%s][url=SCALE]scale[/url][/color]"                         % THEME.color_html("SCALE_COLOR"),
+	"HP":                "[color=%s][url=HP]HP[/url][/color]"                               % THEME.color_html("LIFE_COLOR"),
 
 	# --- STATS OFFENSIVES ---
 	"WARRIOR":         "[color=%s][url=WARRIOR]attack[/url][/color]"                  % THEME.color_html("ATTACK_COLOR"),
@@ -123,6 +129,8 @@ const _ICON_SIZE: int = 20
 	"METEOR":       "[color=%s][url=METEOR]meteor[/url][/color]"             % THEME.color_html("METEOR_COLOR"),
 	"RANK":         "[color=%s][url=RANK]rank[/url][/color]"                 % THEME.color_html("LIGHTNING_COLOR"),
 	"SUMMON":       "[color=%s][url=SUMMON]summon[/url][/color]"             % THEME.color_html("NECRO_COLOR"),
+	"ACOLYTE":      "[color=%s][url=ACOLYTE]acolyte[/url][/color]"           % THEME.color_html("SERENITY_COLOR"),
+	"BUILDING":     "[color=%s][url=BUILDING]building[/url][/color]"         % THEME.color_html("DEFENCE_COLOR"),
 	"LIGHTNING":    "[color=%s][url=LIGHTNING]lightning[/url][/color]"       % THEME.color_html("LIGHTNING_COLOR"),
 	"LIGHT":        "[color=%s][url=LIGHT]serenity[/url][/color]"            % THEME.color_html("SERENITY_COLOR"),
 	"CHICKEN_LORD": "[color=%s][url=CHICKEN_LORD]chicken-lord[/url][/color]" % THEME.color_html("CHICKEN_COLOR"),
