@@ -82,4 +82,5 @@ func get_description(card_lvl: int) -> String:
 	var damage: String = _value(_damage_percent[card_lvl - 1])
 	var delay: String = _value(_time_before_revive[card_lvl - 1])
 
-	return "Ressuscite après " + delay + "s avec " + hp + "% PV" + "Explose et inflige " + damage + "% des PV max en [[PHYSICAL_DAMAGE]] dans une zone.\n" \
+	return "Mort : ressuscite après " + delay + "s à " + hp + "% [[HP]], explose pour " + damage \
+		+ "% des PV max en [[PHYSICAL_DAMAGE]] en zone et gagne +" + size + "% de [[SCALE]]."
