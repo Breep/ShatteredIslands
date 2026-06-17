@@ -154,6 +154,7 @@ func _ready() -> void:
 		_drag_coordinator.register_container(self)
 	Events.tutorial_set_hand_visible.connect(_on_tutorial_set_hand_visible)
 	Events.insufficient_gold.connect(_on_insufficient_gold)
+	Events.shop_opened.connect(_on_events_shop_opened)
 
 
 func _on_tutorial_set_hand_visible(is_visible: bool) -> void:
@@ -706,6 +707,10 @@ func _on_hand_card_addition_refused(card: Card, reason: Hand.RefusalReason) -> v
 			AudioManager.play_ui("error_02")
 			_flash_counter_red()
 			_show_hand_full_warning()
+
+
+func _on_events_shop_opened() -> void:
+	_set_deck_visible(true)
 
 
 # Flash rouge → blanc sur le bouton de la carte refusée. Tracker par-carte
