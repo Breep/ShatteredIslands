@@ -25,4 +25,4 @@ func revert(ctx: CardContext, _card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return "Les [[SUMMON]] gagnent " + _value(_block_amount[card_lvl - 1]) + " [[BLOCK]] à l'apparition."
+	return "[[SUMMON]] : " + _value(_block_amount[card_lvl - 1]) + " [[BLOCK]] à l'apparition."

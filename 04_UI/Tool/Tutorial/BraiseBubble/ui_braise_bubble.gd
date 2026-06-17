@@ -189,11 +189,12 @@ func _position_bubble() -> void:
 	_hide_all_arrows()
 	var viewport_size: Vector2 = get_viewport_rect().size
 	var bubble_size: Vector2 = size
+	var offset: Vector2 = _step.bubble_offset if _step != null else Vector2.ZERO
 
 	# A fixed screen anchor overrides target-relative placement (no arrow).
 	var anchor: int = _step.screen_anchor if _step != null else 0
 	if anchor != TutorialStep.ScreenAnchor.AUTO:
-		global_position = _anchor_position(anchor, bubble_size, viewport_size)
+		global_position = _anchor_position(anchor, bubble_size, viewport_size) + offset
 		return
 
 	if _target == null or not is_instance_valid(_target):
@@ -201,14 +202,14 @@ func _position_bubble() -> void:
 			(viewport_size.x - bubble_size.x) * 0.5,
 			viewport_size.y - bubble_size.y - SCREEN_MARGIN * 4.0
 		)
-		global_position = pos
+		global_position = pos + offset
 		return
 
 	var target_rect: Rect2 = _target.get_global_rect()
 	var preferred: int = _step.preferred_arrow_side if _step != null else 0
 	var side: ArrowSide = _pick_side(target_rect, bubble_size, viewport_size, preferred)
 	var pos: Vector2 = _compute_position(side, target_rect, bubble_size, viewport_size)
-	global_position = pos
+	global_position = pos + offset
 	_show_arrow(side)
 
 

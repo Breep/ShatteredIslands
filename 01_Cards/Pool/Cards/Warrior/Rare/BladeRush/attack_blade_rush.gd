@@ -31,5 +31,5 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return "Au début du combat, augmente l'[[AD]] de " + _value(_damage_increase[card_lvl - 1]) \
+	return "Début de combat : +" + _value(_damage_increase[card_lvl - 1]) + " [[AD]]" \
 		+ " pendant " + _value(_duration[card_lvl - 1]) + "s."
