@@ -102,6 +102,18 @@ func _process(_delta: float) -> void:
 #endregion
 
 
+#region ============================== Public functions ==============================
+## Clears all per-session tutorial state so sequences replay on a fresh game.
+## Called by MainMenu on (re)entry. The overlay lives in UIPersistant and is freed
+## on scene change, so we drop our cached reference and let it re-resolve when the
+## next sequence starts.
+func reset_session() -> void:
+	_abort_active_sequence()
+	_played_sequence_ids.clear()
+	_overlay = null
+#endregion
+
+
 #region ============================== Private functions ==============================
 func _load_sequences() -> void:
 	for path in _SEQUENCE_PATHS:
@@ -276,6 +288,11 @@ func _validate_and_advance(event: TutorialStep.ValidationEvent, filter: StringNa
 	if step == null: return
 	if step.validation_event != event: return
 	if step.validation_filter != &"" and step.validation_filter != filter: return
+	# The overlay lives in UIPersistant and is freed on scene change; a stale
+	# active sequence can outlive it. Drop the dead sequence instead of crashing.
+	if _overlay == null or not is_instance_valid(_overlay):
+		_abort_active_sequence()
+		return
 	_auto_advance_timer.stop()
 	_overlay.complete_current_step()
 #endregion
