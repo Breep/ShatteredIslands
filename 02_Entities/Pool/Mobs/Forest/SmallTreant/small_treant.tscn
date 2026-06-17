@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.tscn" id="3_b5y8s"]
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="4_m1bbj"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://bgulhwin6paat" path="res://02_Entities/Pool/Mobs/Forest/SmallTreant/small_treant_animation_tree.res" id="6_5ct5u"]
+[ext_resource type="PackedScene" uid="uid://c8wd5y3nplk2r" path="res://02_Entities/_Shared/Components/Sound/Default/default_sound_component.tscn" id="7_ojyvj"]
+[ext_resource type="AudioStream" uid="uid://utf61f4mcva4" path="res://23_Audio/SFX/Deaths/tree_falling.wav" id="8_iol52"]
+[ext_resource type="AudioStream" uid="uid://c31xlprggkiix" path="res://23_Audio/SFX/Attacks/sfx_small_hit.mp3" id="9_pc3tl"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_5ct5u"]
 height = 1.2209473
@@ -131,5 +134,11 @@ parameters/switch_stunned_state/current_index = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1396318133]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.58532715, 0)
 shape = SubResource("CylinderShape3D_5ct5u")
+
+[node name="SoundComponent" parent="." unique_id=1633355492 node_paths=PackedStringArray("_owner") instance=ExtResource("7_ojyvj")]
+_death_sound = ExtResource("8_iol52")
+_death_sound_db = -10.0
+_auto_attack_sound = ExtResource("9_pc3tl")
+_owner = NodePath("..")
 
 [editable path="StumpEnt"]

@@ -6,6 +6,9 @@
 [ext_resource type="AnimationNodeBlendTree" uid="uid://b5k2nn7vuunu6" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/kobold_warrior_animation_tree.res" id="4_nys6j"]
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="4_vbc5d"]
 [ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.tscn" id="5_gp4m4"]
+[ext_resource type="PackedScene" uid="uid://c8wd5y3nplk2r" path="res://02_Entities/_Shared/Components/Sound/Default/default_sound_component.tscn" id="7_6ivet"]
+[ext_resource type="AudioStream" uid="uid://npv2s0oty7iy" path="res://23_Audio/SFX/Deaths/kobold_die_03.wav" id="8_4hhnn"]
+[ext_resource type="AudioStream" uid="uid://bnp057r5qd576" path="res://23_Audio/SFX/Attacks/sfx_sword_slash_02.wav" id="9_k2mnw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6ivet"]
 radius = 0.39404297
@@ -199,7 +202,7 @@ bones/87/rotation = Quaternion(-1.1597072e-21, 6.0655168e-24, 0.0062424103, 0.99
 transform = Transform3D(0.49105147, -0.7819626, 0.38393104, 0.48234755, -0.1229346, -0.867311, 0.725403, 0.6110824, 0.31681055, -0.6139921, -0.006902501, 0.9445673)
 
 [node name="weapon_r" parent="Kobold_Warrior/Node3D/root/Skeleton3D/weapon_r" index="0" unique_id=79621620]
-transform = Transform3D(0.49105155, 0.4823478, 0.7254026, -0.78196234, -0.12293444, 0.6110827, 0.38393134, -0.8673105, 0.31681067, -0.08476112, -0.12620789, -0.037208576)
+transform = Transform3D(0.49105155, 0.48234776, 0.72540253, -0.78196234, -0.12293443, 0.6110826, 0.38393134, -0.86731046, 0.31681064, -0.08476112, -0.12620789, -0.037208576)
 
 [node name="ik_foot_l" parent="Kobold_Warrior/Node3D/root/ik_foot_root" parent_id_path=PackedInt32Array(1221184477, 1703512408) index="0" unique_id=1978195203]
 transform = Transform3D(-0.0039539314, -0.4029144, -0.91522896, 0.03047596, 0.91476244, -0.40284067, 0.99952763, -0.029485289, 0.0086622955, 0.15587926, 0.11546648, 0.10487576)
@@ -208,7 +211,7 @@ transform = Transform3D(-0.0039539314, -0.4029144, -0.91522896, 0.03047596, 0.91
 transform = Transform3D(-0.0039539356, -0.40291765, -0.9152278, -0.030476147, -0.9147612, 0.40284392, -0.99952745, 0.02948544, -0.008662473, -0.15587923, 0.11546648, 0.10487569)
 
 [node name="ik_hand_gun" parent="Kobold_Warrior/Node3D/root/ik_hand_root" parent_id_path=PackedInt32Array(1221184477, 820561868) index="0" unique_id=1641656949]
-transform = Transform3D(0.4910515, -0.78196234, 0.38393113, 0.4823476, -0.12293441, -0.8673105, 0.72540265, 0.61108255, 0.31681052, -0.6139921, -0.006902572, 0.9445671)
+transform = Transform3D(0.49105147, -0.7819624, 0.3839311, 0.48234758, -0.122934416, -0.8673105, 0.72540265, 0.61108255, 0.3168105, -0.6139921, -0.006902572, 0.9445671)
 
 [node name="ik_hand_l" parent="Kobold_Warrior/Node3D/root/ik_hand_root/ik_hand_gun" index="0" unique_id=1515466890]
 transform = Transform3D(-0.51773727, -0.76796734, 0.37705997, -0.76796776, 0.22293128, -0.6004392, 0.37705922, -0.60043967, -0.705194, 0.6030033, -0.9602375, 0.47146106)
@@ -306,6 +309,11 @@ shape = SubResource("CapsuleShape3D_6ivet")
 
 [node name="LargeHealthBarComponent" parent="." unique_id=1823590462 node_paths=PackedStringArray("_spawn", "_owner") instance=ExtResource("5_gp4m4")]
 _spawn = NodePath("../Kobold_Warrior/HealthMarker3D")
+_owner = NodePath("..")
+
+[node name="SoundComponent" parent="." unique_id=136150780 node_paths=PackedStringArray("_owner") instance=ExtResource("7_6ivet")]
+_death_sound = ExtResource("8_4hhnn")
+_auto_attack_sound = ExtResource("9_k2mnw")
 _owner = NodePath("..")
 
 [editable path="Kobold_Warrior"]
