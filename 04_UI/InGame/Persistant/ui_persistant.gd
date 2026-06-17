@@ -26,6 +26,10 @@ func bind_to_local_player(player: Player) -> void:
 	_ui_hand.bind(player.hand)
 
 
+func show_hand() -> void:
+	_ui_hand.set_auto_peek_enabled(true)
+
+
 func hide_hand() -> void:
 	_ui_hand.hide_deck()
 

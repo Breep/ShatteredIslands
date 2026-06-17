@@ -108,6 +108,7 @@ signal insufficient_gold()
 signal gold_gained(amount: int)
 signal shop_refreshed() ## The local shop was rerolled (tutorial validation).
 signal shop_opened() ## The local player opened the shop panel (tutorial validation).
+signal shop_closed() ## The local player closed the shop panel.
 
 ## Roguelite run phases (emitted by RunRoot). The TutorialManager hooks these
 ## because the roguelite flow does NOT drive GameManager.game_state_changed.

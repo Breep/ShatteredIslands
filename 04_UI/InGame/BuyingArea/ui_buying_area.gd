@@ -131,6 +131,7 @@ func _show_shop_panel() -> void:
 
 
 func _hide_shop_panel() -> void:
+	Events.shop_closed.emit()
 	if _shop_panel_tween != null and _shop_panel_tween.is_valid():
 		_shop_panel_tween.kill()
 	_shop_panel_tween = create_tween()

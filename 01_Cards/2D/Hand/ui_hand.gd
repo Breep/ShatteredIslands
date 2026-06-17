@@ -85,15 +85,18 @@ signal card_clicked(card: Card)
 @export_group("Internal")
 @export var _hand_pivot: Control
 @export var _editor_preview_root: Control
-@export var _hide_show_button: Button
 
 @export_group("HideShow")
 @export var _hide_show_duration: float = 0.5
+## Glissement vers le bas en mode entièrement masqué (combat / hors tavern) : la
+## main sort complètement de l'écran.
 @export var _hide_offset_y: float = 350.0
-## Descente propre du bouton (séparée du panneau) pour qu'il accompagne la main
-## tout en restant atteignable : à garder < hauteur visible sous le bouton,
-## sinon il sort de l'écran et le deck ne peut plus être rouvert.
-@export var _hide_button_offset_y: float = 250.0
+## Glissement vers le bas en mode replié (tavern, souris hors zone) : plus court
+## que _hide_offset_y pour laisser dépasser le haut des cartes du milieu.
+@export var _peek_offset_y: float = 250.0
+## Zone basse (Control positionné dans l'éditeur) qui, survolée shop fermé,
+## redéploie la main repliée.
+@export var _show_hand_zone: DropZone
 #endregion
 
 #region ============================== Internals ==============================
@@ -149,12 +152,12 @@ func _ready() -> void:
 		_editor_preview_root.queue_free()
 		_editor_preview_root = null
 	_hand_pivot_starting_position = _hand_pivot.position
-	_hide_show_button_starting_position = _hide_show_button.position
 	if _drag_coordinator != null:
 		_drag_coordinator.register_container(self)
 	Events.tutorial_set_hand_visible.connect(_on_tutorial_set_hand_visible)
 	Events.insufficient_gold.connect(_on_insufficient_gold)
 	Events.shop_opened.connect(_on_events_shop_opened)
+	Events.shop_closed.connect(_on_events_shop_closed)
 
 
 func _on_tutorial_set_hand_visible(is_visible: bool) -> void:
@@ -710,7 +713,15 @@ func _on_hand_card_addition_refused(card: Card, reason: Hand.RefusalReason) -> v
 
 
 func _on_events_shop_opened() -> void:
-	_set_deck_visible(true)
+	_shop_open = true
+	if _auto_peek_enabled:
+		_update_auto_peek()
+
+
+func _on_events_shop_closed() -> void:
+	_shop_open = false
+	if _auto_peek_enabled:
+		_update_auto_peek()
 
 
 # Flash rouge → blanc sur le bouton de la carte refusée. Tracker par-carte
@@ -789,40 +800,78 @@ func _hide_not_enough_gold_warning() -> void:
 
 
 #region ============================== Hide / Show ==============================
+## Position verticale de la main :
+## - SHOWN  : déployée (position de base).
+## - PEEK   : repliée mais le haut des cartes du milieu reste visible (tavern, souris hors zone).
+## - HIDDEN : entièrement hors écran (combat / hors tavern).
+enum DeckPos { SHOWN, PEEK, HIDDEN }
+
 var _hide_show_tween: Tween
-var _is_visible: bool = true
-var _hide_show_button_starting_position: Vector2
+var _deck_pos: DeckPos = DeckPos.SHOWN
+# Mode auto (tavern) : la main se replie/déploie selon la souris et l'état du
+# shop. Désactivé en combat → main entièrement masquée (HIDDEN), sans peek.
+var _auto_peek_enabled: bool = false
+var _shop_open: bool = false
 
 
-# Masque le deck (même effet qu'un appui sur le bouton Masquer/Afficher quand le
-# deck est visible). No-op s'il est déjà masqué.
+func _process(_delta: float) -> void:
+	if _auto_peek_enabled:
+		_update_auto_peek()
+
+
+# Active le mode auto (tavern) : la main démarre repliée puis suit la souris.
+# Le désactiver (combat) masque entièrement la main et fige cet état.
+func set_auto_peek_enabled(enabled: bool) -> void:
+	_auto_peek_enabled = enabled
+	if enabled:
+		_shop_open = false
+		_set_deck_pos(DeckPos.PEEK)
+	else:
+		_set_deck_pos(DeckPos.HIDDEN)
+
+
+# Masque entièrement la main (combat / hors tavern) et coupe le mode auto.
 func hide_deck() -> void:
-	_set_deck_visible(false)
+	set_auto_peek_enabled(false)
 
 
-func _on_hide_show_button_pressed() -> void:
-	_set_deck_visible(not _is_visible)
-
-
-func _set_deck_visible(visible: bool) -> void:
-	if visible == _is_visible:
+# Règle de visibilité auto (tavern) :
+# - shop ouvert (ou drag en cours) → main forcée déployée ;
+# - sinon hystérésis souris : reste déployée tant que la souris est dans la zone
+#   de drop, se replie (peek) dès qu'elle en sort, se redéploie quand elle entre
+#   dans la ShowHandZone.
+func _update_auto_peek() -> void:
+	if _shop_open or _drag_active:
+		_set_deck_pos(DeckPos.SHOWN)
 		return
+	var mouse: Vector2 = get_global_mouse_position()
+	if _deck_pos == DeckPos.SHOWN:
+		if not _zone_contains(_drop_zone, mouse):
+			_set_deck_pos(DeckPos.PEEK)
+	elif _zone_contains(_show_hand_zone, mouse):
+		_set_deck_pos(DeckPos.SHOWN)
+
+
+func _zone_contains(zone: DropZone, global_pos: Vector2) -> bool:
+	return zone != null and zone.contains_global(global_pos)
+
+
+func _set_deck_pos(pos: DeckPos) -> void:
+	if pos == _deck_pos:
+		return
+	_deck_pos = pos
 	if _hide_show_tween != null and _hide_show_tween.is_valid():
 		_hide_show_tween.kill()
+	var target: Vector2 = _hand_pivot_starting_position
+	match pos:
+		DeckPos.PEEK:
+			target += Vector2(0.0, 200)
+		DeckPos.HIDDEN:
+			target += Vector2(0.0, _hide_offset_y)
 	_hide_show_tween = create_tween()
 	_hide_show_tween.set_trans(Tween.TRANS_EXPO)
 	_hide_show_tween.set_ease(Tween.EASE_OUT)
-	if visible:
-		_hide_show_tween.tween_property(_hand_pivot, "position", _hand_pivot_starting_position, _hide_show_duration)
-		_hide_show_tween.parallel().tween_property(_hide_show_button, "position", _hide_show_button_starting_position, _hide_show_duration)
-		_hide_show_button.text = "Masquer Deck"
-	else:
-		var hidden_position: Vector2 = _hand_pivot_starting_position + Vector2(0, _hide_offset_y)
-		var hidden_button_position: Vector2 = _hide_show_button_starting_position + Vector2(0, _hide_button_offset_y)
-		_hide_show_tween.tween_property(_hand_pivot, "position", hidden_position, _hide_show_duration)
-		_hide_show_tween.parallel().tween_property(_hide_show_button, "position", hidden_button_position, _hide_show_duration)
-		_hide_show_button.text = "Afficher Deck"
-	_is_visible = visible
+	_hide_show_tween.tween_property(_hand_pivot, "position", target, _hide_show_duration)
 
 
 func _update_counter() -> void:
