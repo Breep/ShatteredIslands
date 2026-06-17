@@ -38,4 +38,4 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 func get_description(card_lvl: int) -> String:
 	return "[[SMALL_PROJECTILE]][[ICON:COOLDOWN]] " + str(_period[card_lvl - 1]) + " s\n" \
-		+ "Œuf niv " + str(_level_bonus[card_lvl - 1]) + " : [[PHYSICAL_DAMAGE]] selon vos invocations, peut éclore en poussin"
+		+ "Œuf niv " + str(_level_bonus[card_lvl - 1]) + " : [[PHYSICAL_DAMAGE]] par [[SUMMON]], peut éclore en poussin"

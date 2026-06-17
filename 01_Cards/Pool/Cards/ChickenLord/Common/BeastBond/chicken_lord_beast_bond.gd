@@ -65,4 +65,4 @@ func _count_living_summons(owner: Entity) -> int:
 
 func get_description(card_lvl: int) -> String:
 	return "Augmente les résistances de " + str(_resist_per_summon[card_lvl - 1]) \
-		+ " par summon allié en vie.\nDébloque : Colosse Surdoué."
+		+ " par [[SUMMON]] allié en vie.\nDébloque : Colosse Surdoué."

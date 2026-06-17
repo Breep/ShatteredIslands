@@ -63,5 +63,5 @@ func _living_summons(owner: Entity) -> Array[Entity]:
 
 
 func get_description(card_lvl: int) -> String:
-	return "Les summons gagnent +" + str(_ad_per_summon[card_lvl - 1]) + " [[AD]] et +" \
-		+ str(_ap_per_summon[card_lvl - 1]) + " [[AP]] par summon allié vivant."
+	return "Les [[SUMMON]] gagnent +" + str(_ad_per_summon[card_lvl - 1]) + " [[AD]] et +" \
+		+ str(_ap_per_summon[card_lvl - 1]) + " [[AP]] par [[SUMMON]] allié vivant."

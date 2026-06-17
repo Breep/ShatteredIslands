@@ -47,4 +47,4 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 func get_description(card_lvl: int) -> String:
 	return "+" + str(_dodge_increase[card_lvl - 1]) + " [[DODGE]]\n" \
-		+ "Summons : +" + str(_inherit_percent[card_lvl - 1]) + "% de l'esquive du héros"
+		+ "[[SUMMON]] : +" + str(_inherit_percent[card_lvl - 1]) + "% de l'esquive du héros"
