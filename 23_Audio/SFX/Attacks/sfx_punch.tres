@@ -1,0 +1,13 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://b617fe4tcarns"]
+
+[ext_resource type="AudioStream" uid="uid://dtfn42u0q7j6w" path="res://23_Audio/SFX/Attacks/sfx_punch_01.mp3" id="1_6husu"]
+[ext_resource type="AudioStream" uid="uid://u4myykpfn8wy" path="res://23_Audio/SFX/Attacks/sfx_punch_02.mp3" id="2_wsoyv"]
+[ext_resource type="AudioStream" uid="uid://dxc666cnospmh" path="res://23_Audio/SFX/Attacks/sfx_punch_03.mp3" id="3_5i28a"]
+[ext_resource type="AudioStream" uid="uid://c3mo0iao770gs" path="res://23_Audio/SFX/Attacks/sfx_punch_04.mp3" id="4_fvoyd"]
+
+[resource]
+streams_count = 4
+stream_0/stream = ExtResource("1_6husu")
+stream_1/stream = ExtResource("2_wsoyv")
+stream_2/stream = ExtResource("3_5i28a")
+stream_3/stream = ExtResource("4_fvoyd")

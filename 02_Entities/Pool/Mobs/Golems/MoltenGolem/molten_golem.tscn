@@ -11,7 +11,7 @@
 [ext_resource type="AnimationNodeBlendTree" uid="uid://y5swvigse7ti" path="res://02_Entities/Pool/Mobs/Golems/golems_animation_tree.res" id="9_mo2ch"]
 [ext_resource type="PackedScene" uid="uid://c8wd5y3nplk2r" path="res://02_Entities/_Shared/Components/Sound/Default/default_sound_component.tscn" id="10_r40na"]
 [ext_resource type="AudioStream" uid="uid://cr3foceo1cjsr" path="res://23_Audio/SFX/Deaths/sfx_golem_collapse.wav" id="11_ug2v5"]
-[ext_resource type="AudioStream" uid="uid://buyji6lfbbf11" path="res://23_Audio/SFX/Attacks/sfx_golem_hit_clip.wav" id="12_mqvcd"]
+[ext_resource type="AudioStream" uid="uid://b617fe4tcarns" path="res://23_Audio/SFX/Attacks/sfx_punch.tres" id="12_r40na"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_molten"]
 resource_name = "M_MoltenGolem"
@@ -236,7 +236,7 @@ shape = SubResource("CapsuleShape3D_l6bop")
 
 [node name="SoundComponent" parent="." unique_id=1594389018 node_paths=PackedStringArray("_owner") instance=ExtResource("10_r40na")]
 _death_sound = ExtResource("11_ug2v5")
-_auto_attack_sound = ExtResource("12_mqvcd")
+_auto_attack_sound = ExtResource("12_r40na")
 _owner = NodePath("..")
 
 [editable path="MoltenGolemVisual2"]

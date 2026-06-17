@@ -8,7 +8,7 @@
 [ext_resource type="AnimationNodeBlendTree" uid="uid://y5swvigse7ti" path="res://02_Entities/Pool/Mobs/Golems/golems_animation_tree.res" id="6_k5w84"]
 [ext_resource type="PackedScene" uid="uid://c8wd5y3nplk2r" path="res://02_Entities/_Shared/Components/Sound/Default/default_sound_component.tscn" id="7_arvy6"]
 [ext_resource type="AudioStream" uid="uid://cr3foceo1cjsr" path="res://23_Audio/SFX/Deaths/sfx_golem_collapse.wav" id="8_gb2m7"]
-[ext_resource type="AudioStream" uid="uid://buyji6lfbbf11" path="res://23_Audio/SFX/Attacks/sfx_golem_hit_clip.wav" id="9_rim31"]
+[ext_resource type="AudioStream" uid="uid://b617fe4tcarns" path="res://23_Audio/SFX/Attacks/sfx_punch.tres" id="9_arvy6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kntqg"]
 radius = 0.8955078
@@ -215,7 +215,7 @@ shape = SubResource("CapsuleShape3D_kntqg")
 
 [node name="SoundComponent" parent="." unique_id=1433313932 node_paths=PackedStringArray("_owner") instance=ExtResource("7_arvy6")]
 _death_sound = ExtResource("8_gb2m7")
-_auto_attack_sound = ExtResource("9_rim31")
+_auto_attack_sound = ExtResource("9_arvy6")
 _owner = NodePath("..")
 
 [editable path="PoisonGolem"]
