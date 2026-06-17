@@ -53,3 +53,11 @@ func on_upgrade(ctx: CardContext, card_name: StringName, prev_lvl: int, new_lvl:
 func get_description(_card_lvl: int) -> String:
 	push_warning("[CardEffect] call virtual get_description()")
 	return ""
+
+
+# Formate une valeur numérique pour les descriptions de carte : nombre propre
+# (sans .0 superflu), en gras avec contour noir. Équivalent du _value de
+# SkillEffect, mais avec le style bbcode des cartes.
+func _value(v: float) -> String:
+	var num: String = str(int(v)) if is_equal_approx(v, roundf(v)) else str(snappedf(v, 0.1))
+	return "[color=black][b][outline_size=0][outline_color=black]%s[/outline_color][/outline_size][/b][/color]" % num

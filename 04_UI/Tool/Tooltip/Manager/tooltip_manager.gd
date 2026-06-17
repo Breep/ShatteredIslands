@@ -10,6 +10,7 @@ const _ICON_SIZE: int = 20
 
 @onready var TOOLTIP_DATABASE: Array[TooltipDesc] = [
 	# --- A ---
+	load("res://04_UI/Tool/Tooltip/Dictionary/ability_projectile.tres"),
 	load("res://04_UI/Tool/Tooltip/Dictionary/acolyte.tres"),
 	load("res://04_UI/Tool/Tooltip/Dictionary/ad.tres"),
 	load("res://04_UI/Tool/Tooltip/Dictionary/big_projectile.tres"),
@@ -85,65 +86,66 @@ const _ICON_SIZE: int = 20
 
 @onready var SNIPPET_MAP: Dictionary[String, String] = {
 	# --- DEGATS ---
-	"PHYSICAL_DAMAGE": "[color=%s][url=PHYSICAL_DAMAGE]physical damage[/url][/color]" % THEME.color_html("PHYSICAL_COLOR"),
-	"MAGICAL_DAMAGE":  "[color=%s][url=MAGICAL_DAMAGE]magical damage[/url][/color]"   % THEME.color_html("MAGICAL_COLOR"),
-	"POISON_DAMAGE":   "[color=%s][url=POISON_DAMAGE]poison damage[/url][/color]"     % THEME.color_html("POISON_COLOR"),
-	"TRUE_DAMAGE":     "[color=%s][url=TRUE_DAMAGE]true damage[/url][/color]"         % THEME.color_html("TRUE_COLOR"),
+	"PHYSICAL_DAMAGE": _keyword("PHYSICAL_DAMAGE", "PHYSICAL DAMAGE", "PHYSICAL_COLOR"),
+	"MAGICAL_DAMAGE":  _keyword("MAGICAL_DAMAGE", "MAGICAL DAMAGE", "MAGICAL_COLOR"),
+	"POISON_DAMAGE":   _keyword("POISON_DAMAGE", "POISON DAMAGE", "POISON_COLOR"),
+	"TRUE_DAMAGE":     _keyword("TRUE_DAMAGE", "TRUE DAMAGE", "TRUE_COLOR"),
 
 	# --- ENGINEER ---
-	"ARMOR":             "[color=%s][url=ARMOR]armor[/url][/color]"                         % THEME.color_html("DEFENCE_COLOR"),
-	"MR":                "[color=%s][url=MR]magic resistance[/url][/color]"                 % THEME.color_html("MAGICAL_COLOR"),
-	"DODGE":             "[color=%s][url=DODGE]dodge[/url][/color]"                         % THEME.color_html("STAT_COLOR"),
-	"DEFENCE":           "[color=%s][url=DEFENCE]defence[/url][/color]"                     % THEME.color_html("DEFENCE_COLOR"),
-	"POISON_RESISTANCE": "[color=%s][url=POISON_RESISTANCE]poison resistance[/url][/color]" % THEME.color_html("POISON_COLOR"),
-	"SCALE":             "[color=%s][url=SCALE]scale[/url][/color]"                         % THEME.color_html("SCALE_COLOR"),
-	"HP":                "[color=%s][url=HP]HP[/url][/color]"                               % THEME.color_html("LIFE_COLOR"),
+	"ARMOR":             _keyword("ARMOR", "ARMOR", "DEFENCE_COLOR"),
+	"MR":                _keyword("MR", "MAGIC RESISTANCE", "MAGICAL_COLOR"),
+	"DODGE":             _keyword("DODGE", "DODGE", "STAT_COLOR"),
+	"DEFENCE":           _keyword("DEFENCE", "DEFENCE", "DEFENCE_COLOR"),
+	"POISON_RESISTANCE": _keyword("POISON_RESISTANCE", "POISON RESISTANCE", "POISON_COLOR"),
+	"SCALE":             _keyword("SCALE", "SCALE", "SCALE_COLOR"),
+	"HP":                _keyword("HP", "HP", "LIFE_COLOR"),
 
 	# --- STATS OFFENSIVES ---
-	"WARRIOR":         "[color=%s][url=WARRIOR]attack[/url][/color]"                  % THEME.color_html("ATTACK_COLOR"),
-	"AD":              "[color=%s][url=AD]AD[/url][/color]"                           % THEME.color_html("ATTACK_COLOR"),
-	"AP":              "[color=%s][url=AP]AP[/url][/color]"                           % THEME.color_html("MAGICAL_COLOR"),
-	"CRIT_CHANCE":     "[color=%s][url=CRIT_CHANCE]crit chance[/url][/color]"         % THEME.color_html("STAT_COLOR"),
-	"CRIT_MULTIPLIER": "[color=%s][url=CRIT_MULTIPLIER]crit multiplier[/url][/color]" % THEME.color_html("STAT_COLOR"),
+	"WARRIOR":         _keyword("WARRIOR", "ATTACK", "ATTACK_COLOR"),
+	"AD":              _keyword("AD", "AD", "ATTACK_COLOR"),
+	"AP":              _keyword("AP", "AP", "MAGICAL_COLOR"),
+	"CRIT_CHANCE":     _keyword("CRIT_CHANCE", "CRIT CHANCE", "STAT_COLOR"),
+	"CRIT_MULTIPLIER": _keyword("CRIT_MULTIPLIER", "CRIT MULTIPLIER", "STAT_COLOR"),
 
 	# --- STACKS ---
-	"POISON_STACK": "[color=%s][url=POISON_STACK]poison stack[/url][/color]" % THEME.color_html("POISON_COLOR"),
-	"IGNITE":       "[color=%s][url=IGNITE]ignite[/url][/color]"             % THEME.color_html("FIRE_COLOR"),
-	"NECROSIS":     "[color=%s][url=NECROSIS]necrosis[/url][/color]"         % THEME.color_html("NECRO_COLOR"),
-	"REGEN":        "[color=%s][url=REGEN]regen[/url][/color]"               % THEME.color_html("REGEN_COLOR"),
-	"SHIELD":       "[color=%s][url=SHIELD]shield[/url][/color]"             % THEME.color_html("SHIELD_COLOR"),
-	"BLOCK":        "[color=%s][url=BLOCK]block[/url][/color]"               % THEME.color_html("BLOCK_COLOR"),
-	"THORN":        "[color=%s][url=THORN]thorn[/url][/color]"               % THEME.color_html("THORN_COLOR"),
+	"POISON_STACK": _keyword("POISON_STACK", "POISON STACK", "POISON_COLOR"),
+	"IGNITE":       _keyword("IGNITE", "IGNITE", "FIRE_COLOR"),
+	"NECROSIS":     _keyword("NECROSIS", "NECROSIS", "NECRO_COLOR"),
+	"REGEN":        _keyword("REGEN", "REGEN", "REGEN_COLOR"),
+	"SHIELD":       _keyword("SHIELD", "SHIELD", "SHIELD_COLOR"),
+	"BLOCK":        _keyword("BLOCK", "BLOCK", "BLOCK_COLOR"),
+	"THORN":        _keyword("THORN", "THORN", "THORN_COLOR"),
 
 	# --- EFFETS / STATUS ---
-	"STUN":          "[color=%s][url=STUN]stun[/url][/color]"                   % THEME.color_html("STAT_COLOR"),
-	"WEAKNESS":      "[color=%s][url=WEAKNESS]weakness[/url][/color]"           % THEME.color_html("DEBUFF_COLOR"),
-	"STRENGTH":      "[color=%s][url=STRENGTH]strength[/url][/color]"           % THEME.color_html("DEBUFF_COLOR"),
-	"VULNERABILITY": "[color=%s][url=VULNERABILITY]vulnerability[/url][/color]" % THEME.color_html("DEBUFF_COLOR"),
-	"TAUNT":         "[color=%s][url=TAUNT]taunt[/url][/color]"                 % THEME.color_html("TAUNT_COLOR"),
-	"CLEANSE":       "[color=%s][url=CLEANSE]cleanse[/url][/color]"             % THEME.color_html("SERENITY_COLOR"),
-	"DISPELL":       "[color=%s][url=DISPELL]dispell[/url][/color]"             % THEME.color_html("DISPELL_COLOR"),
-	"EXECUTE":       "[color=%s][url=EXECUTE]execute[/url][/color]"             % THEME.color_html("FIRE_COLOR"),
+	"STUN":          _keyword("STUN", "STUN", "STAT_COLOR"),
+	"WEAKNESS":      _keyword("WEAKNESS", "WEAKNESS", "DEBUFF_COLOR"),
+	"STRENGTH":      _keyword("STRENGTH", "STRENGTH", "DEBUFF_COLOR"),
+	"VULNERABILITY": _keyword("VULNERABILITY", "VULNERABILITY", "DEBUFF_COLOR"),
+	"TAUNT":         _keyword("TAUNT", "TAUNT", "TAUNT_COLOR"),
+	"CLEANSE":       _keyword("CLEANSE", "CLEANSE", "SERENITY_COLOR"),
+	"DISPELL":       _keyword("DISPELL", "DISPELL", "DISPELL_COLOR"),
+	"EXECUTE":       _keyword("EXECUTE", "EXECUTE", "FIRE_COLOR"),
 
 	# --- FAMILLE / PASSIV ---
-	"METEOR":       "[color=%s][url=METEOR]meteor[/url][/color]"             % THEME.color_html("METEOR_COLOR"),
-	"RANK":         "[color=%s][url=RANK]rank[/url][/color]"                 % THEME.color_html("LIGHTNING_COLOR"),
-	"SUMMON":       "[color=%s][url=SUMMON]summon[/url][/color]"             % THEME.color_html("NECRO_COLOR"),
-	"ACOLYTE":      "[color=%s][url=ACOLYTE]acolyte[/url][/color]"           % THEME.color_html("SERENITY_COLOR"),
-	"BUILDING":     "[color=%s][url=BUILDING]building[/url][/color]"         % THEME.color_html("DEFENCE_COLOR"),
-	"LIGHTNING":    "[color=%s][url=LIGHTNING]lightning[/url][/color]"       % THEME.color_html("LIGHTNING_COLOR"),
-	"LIGHT":        "[color=%s][url=LIGHT]serenity[/url][/color]"            % THEME.color_html("SERENITY_COLOR"),
-	"CHICKEN_LORD": "[color=%s][url=CHICKEN_LORD]chicken-lord[/url][/color]" % THEME.color_html("CHICKEN_COLOR"),
-	"COLOSSUS":     "[color=%s][url=COLOSSUS]life[/url][/color]"             % THEME.color_html("LIFE_COLOR"),
-	"NECRO":        "[color=%s][url=NECRO]necro[/url][/color]"               % THEME.color_html("NECRO_COLOR"),
+	"METEOR":       _keyword("METEOR", "METEOR", "METEOR_COLOR"),
+	"RANK":         _keyword("RANK", "RANK", "LIGHTNING_COLOR"),
+	"SUMMON":       _keyword("SUMMON", "SUMMON", "NECRO_COLOR"),
+	"ACOLYTE":      _keyword("ACOLYTE", "ACOLYTE", "SERENITY_COLOR"),
+	"BUILDING":     _keyword("BUILDING", "BUILDING", "DEFENCE_COLOR"),
+	"LIGHTNING":    _keyword("LIGHTNING", "LIGHTNING", "LIGHTNING_COLOR"),
+	"LIGHT":        _keyword("LIGHT", "SERENITY", "SERENITY_COLOR"),
+	"CHICKEN_LORD": _keyword("CHICKEN_LORD", "CHICKEN-LORD", "CHICKEN_COLOR"),
+	"COLOSSUS":     _keyword("COLOSSUS", "LIFE", "LIFE_COLOR"),
+	"NECRO":        _keyword("NECRO", "NECRO", "NECRO_COLOR"),
 
 	# --- AUTRE ---
-	"COOLDOWN": "[color=%s][url=COOLDOWN]cooldown[/url][/color]"    % THEME.color_html("STAT_COLOR"),
-	"MANA":     "[color=%s][url=MANA]mana[/url][/color]"            % THEME.color_html("MANA_COLOR"),
+	"COOLDOWN": _keyword("COOLDOWN", "COOLDOWN", "STAT_COLOR"),
+	"MANA":     _keyword("MANA", "MANA", "MANA_COLOR"),
 
 	# --- PROJECTILES ---
-	"SMALL_PROJECTILE": "[color=%s][url=SMALL_PROJECTILE]small projectile[/url][/color]" % THEME.color_html("SMALL_PROJECTILE_COLOR"),
-	"BIG_PROJECTILE":   "[color=%s][url=BIG_PROJECTILE]big projectile[/url][/color]"     % THEME.color_html("BIG_PROJECTILE_COLOR")
+	"SMALL_PROJECTILE":   _keyword("SMALL_PROJECTILE", "SMALL PROJECTILE", "SMALL_PROJECTILE_COLOR"),
+	"BIG_PROJECTILE":     _keyword("BIG_PROJECTILE", "BIG PROJECTILE", "BIG_PROJECTILE_COLOR"),
+	"ABILITY_PROJECTILE": _keyword("ABILITY_PROJECTILE", "ABILITY PROJECTILE", "ABILITY_PROJECTILE_COLOR")
 }
 
 var _all_scene_tooltips: Array[Tooltip] 
@@ -196,6 +198,14 @@ func get_icon(icon_key: String) -> Texture2D:
 	return THEME.icon(icon_key)
 
 # ============================== Private functions ==============================
+
+## Construit le bbcode d'un mot-clé cliquable : couleur de famille, gras, contour
+## de la même couleur, et libellé en capitales. key = id [url] (résolu par les
+## tooltips), label = texte affiché, color_name = clé couleur du thème.
+func _keyword(key: String, label: String, color_name: String) -> String:
+	var c := THEME.color_html(color_name)
+	return "[color=%s][url=%s][b][outline_size=3][outline_color=%s]%s[/outline_color][/outline_size][/b][/url][/color]" % [c, key, c, label]
+
 
 func _build_cache():
 	_tooltips.clear()

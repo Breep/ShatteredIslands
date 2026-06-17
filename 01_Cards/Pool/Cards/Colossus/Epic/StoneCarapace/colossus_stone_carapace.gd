@@ -35,5 +35,5 @@ func revert(ctx: CardContext, _card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return "Quand le héros est touché, " + str(_chance[card_lvl - 1]) \
-		+ "% de chance d'appliquer [[STUN]] " + str(_stun_duration[card_lvl - 1]) + "s à l'attaquant."
+	return "Quand le héros est touché, " + _value(_chance[card_lvl - 1]) \
+		+ "% de chance d'appliquer [[STUN]] " + _value(_stun_duration[card_lvl - 1]) + "s à l'attaquant."

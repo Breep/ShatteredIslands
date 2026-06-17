@@ -35,5 +35,5 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return "+" + str(_dodge_increase[card_lvl - 1]) + " [[DODGE]]\n" \
-		+ "Dodge : applique " + str(_ignite_stacks[card_lvl - 1]) + " [[IGNITE]] à l'attaquant"
+	return "+" + _value(_dodge_increase[card_lvl - 1]) + " [[DODGE]]\n" \
+		+ "Dodge : applique " + _value(_ignite_stacks[card_lvl - 1]) + " [[IGNITE]] à l'attaquant"

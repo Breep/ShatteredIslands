@@ -19,4 +19,4 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return "Au début du combat, invoque " + str(_chicken_count[card_lvl - 1]) + " [[SUMMON]] poulet(s)."
+	return "Au début du combat, invoque " + _value(_chicken_count[card_lvl - 1]) + " [[SUMMON]] poulet(s)."

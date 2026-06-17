@@ -60,6 +60,6 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return "Si le héros est à distance : +" + str(_bounce_count[card_lvl - 1]) \
+	return "Si le héros est à distance : +" + _value(_bounce_count[card_lvl - 1]) \
 		+ " rebond(s) d'auto-attaque. Si au corps-à-corps : la frappe touche +" \
-		+ str(_cleave_targets[card_lvl - 1]) + " cible(s) proche(s) avec tous ses effets (cleave)."
+		+ _value(_cleave_targets[card_lvl - 1]) + " cible(s) proche(s) avec tous ses effets (cleave)."

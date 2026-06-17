@@ -22,5 +22,5 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return "Génère " + str(_shield_amount[card_lvl - 1]) + " [[SHIELD]] toutes les " \
-		+ str(_period[card_lvl - 1]) + "s."
+	return "Génère " + _value(_shield_amount[card_lvl - 1]) + " [[SHIELD]] toutes les " \
+		+ _value(_period[card_lvl - 1]) + "s."

@@ -39,5 +39,5 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return "Augmente la vitesse d'attaque de " + str(_attack_speed_min[card_lvl - 1]) \
-		+ "% jusqu'à " + str(_attack_speed_max[card_lvl - 1]) + "% sur " + str(_duration) + "s."
+	return "Augmente la vitesse d'attaque de " + _value(_attack_speed_min[card_lvl - 1]) \
+		+ "% jusqu'à " + _value(_attack_speed_max[card_lvl - 1]) + "% sur " + _value(_duration) + "s."

@@ -21,4 +21,4 @@ func revert(ctx: CardContext, _card_name: StringName, card_lvl: int) -> void:
 
 func get_description(card_lvl: int) -> String:
 	return "Provoque les ennemis ([[TAUNT]]) et augmente la [[DEFENCE]] de " \
-		+ str(_defense[card_lvl - 1]) + "."
+		+ _value(_defense[card_lvl - 1]) + "."

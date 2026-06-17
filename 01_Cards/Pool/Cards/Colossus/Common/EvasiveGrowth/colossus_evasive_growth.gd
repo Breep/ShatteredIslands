@@ -64,6 +64,6 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return "+" + str(_increase_dodge[card_lvl - 1]) + " [[DODGE]]\n" \
-		+ "Dodge : +" + str(_hp_per_dodge[card_lvl - 1]) + " PV max, -" \
-		+ str(_dodge_reductions[card_lvl - 1]) + " [[DODGE]]"
+	return "+" + _value(_increase_dodge[card_lvl - 1]) + " [[DODGE]]\n" \
+		+ "Dodge : +" + _value(_hp_per_dodge[card_lvl - 1]) + " PV max, -" \
+		+ _value(_dodge_reductions[card_lvl - 1]) + " [[DODGE]]"

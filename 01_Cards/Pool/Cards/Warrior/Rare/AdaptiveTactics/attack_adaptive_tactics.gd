@@ -31,5 +31,5 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return "Héros Distance: +" + str(_range_bonus[card_lvl - 1]) + " portée\n" \
-		+ "Héros Mêlée: +" + str(_lifesteal_bonus[card_lvl - 1]) + "% vol de vie"
+	return "Héros Distance: +" + _value(_range_bonus[card_lvl - 1]) + " portée\n" \
+		+ "Héros Mêlée: +" + _value(_lifesteal_bonus[card_lvl - 1]) + "% vol de vie"
