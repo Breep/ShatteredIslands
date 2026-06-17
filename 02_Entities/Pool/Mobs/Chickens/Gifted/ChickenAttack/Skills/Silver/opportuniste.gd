@@ -20,3 +20,8 @@ func apply(ctx: SkillContext) -> void:
 		if target.stats.health / target.stats.health_max <= _hp_threshold:
 			data[AutoAttackModifier.VarType.DAMAGE_MUL] += _bonus_percent
 	chicken.auto_attack_modifier_registry.register_modifier(modifier)
+
+
+func get_description() -> String:
+	return "Inflige +" + _value(_bonus_percent) + "% de dégâts aux ennemis sous " \
+		+ _value(_hp_threshold * 100.0) + "% de leurs PV."

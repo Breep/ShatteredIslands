@@ -6,13 +6,21 @@
 [ext_resource type="AnimationNodeBlendTree" uid="uid://cv35qdloi5xv6" path="res://02_Entities/Pool/Heroes/DarkKnight/dark_knight_animation_tree.res" id="3_u48vt"]
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="5_8gr7v"]
 [ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.tscn" id="6_3htvw"]
-[ext_resource type="PackedScene" path="res://02_Entities/_Shared/Components/Skill/hero_skill_component.tscn" id="7_cgkcr"]
-[ext_resource type="PackedScene" uid="uid://bs1hrsa08utbt" path="res://02_Entities/_Shared/Components/LevelUpVfx/level_up_vfx_component.tscn" id="8_lvup"]
 [ext_resource type="PackedScene" uid="uid://bhskcmp7aqx2v" path="res://02_Entities/_Shared/Components/Skill/hero_skill_component.tscn" id="7_cgkcr"]
+[ext_resource type="PackedScene" uid="uid://bs1hrsa08utbt" path="res://02_Entities/_Shared/Components/LevelUpVfx/level_up_vfx_component.tscn" id="8_lvup"]
+[ext_resource type="PackedScene" uid="uid://c8wd5y3nplk2r" path="res://02_Entities/_Shared/Components/Sound/Default/default_sound_component.tscn" id="9_5ebqm"]
+[ext_resource type="AudioStream" uid="uid://5lwvsxnu8hil" path="res://23_Audio/SFX/Deaths/sfx_female_hurt.mp3" id="10_a06ov"]
+[ext_resource type="AudioStream" uid="uid://cusg1a0cjnofh" path="res://23_Audio/SFX/Attacks/sword_slash_01.wav" id="11_5ebqm"]
+[ext_resource type="AudioStream" uid="uid://bnp057r5qd576" path="res://23_Audio/SFX/Attacks/sfx_sword_slash_02.wav" id="12_iijtn"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rxegs"]
 radius = 0.63916016
 height = 2.1262207
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_jv58a"]
+streams_count = 2
+stream_0/stream = ExtResource("11_5ebqm")
+stream_1/stream = ExtResource("12_iijtn")
 
 [node name="DarkKnight" type="CharacterBody3D" unique_id=1015131150 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_attack_spawn_marker")]
 collision_layer = 16
@@ -296,9 +304,13 @@ _owner = NodePath("..")
 [node name="HeroSkillComponent" parent="." unique_id=-823138290 node_paths=PackedStringArray("_owner") instance=ExtResource("7_cgkcr")]
 _owner = NodePath("..")
 
-[node name="LevelUpVfxComponent" parent="." node_paths=PackedStringArray("_owner") instance=ExtResource("8_lvup")]
+[node name="LevelUpVfxComponent" parent="." unique_id=1273774644 node_paths=PackedStringArray("_owner") instance=ExtResource("8_lvup")]
 _owner = NodePath("..")
 
-[editable path="Elf_Warrior"]
+[node name="SoundComponent" parent="." unique_id=2089056297 node_paths=PackedStringArray("_owner") instance=ExtResource("9_5ebqm")]
+_death_sound = ExtResource("10_a06ov")
+_auto_attack_sound = SubResource("AudioStreamRandomizer_jv58a")
+_owner = NodePath("..")
+
 [editable path="DarkKnightVisual"]
 [editable path="DarkKnightVisual/Elf_Warrior"]

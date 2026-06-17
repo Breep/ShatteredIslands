@@ -11,3 +11,7 @@ func apply(ctx: SkillContext) -> void:
 	var ally: Entity = chicken.target.get_target(TargetComponent.TargettingStrategy.RANDOM_ALLY)
 	if is_instance_valid(ally):
 		ally.alterations.add_stack(Alteration.Type.THORN, _thorn, chicken, &"Plumage épineux")
+
+
+func get_description() -> String:
+	return "À son apparition, donne " + _value(_thorn) + " [[THORN]] à un allié aléatoire."

@@ -78,4 +78,11 @@ func _on_ultimate_casted() -> void:
 
 func _on_died() -> void:
 	super._on_died()
-	AudioManager.play_3d("skeleton_drake_die", global_position)
+	Engine.time_scale = 0.5
+	get_tree().create_timer(2)
+	Engine.time_scale = 1
+
+
+
+
+ 

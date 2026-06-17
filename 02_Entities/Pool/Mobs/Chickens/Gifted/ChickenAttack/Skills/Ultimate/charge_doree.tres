@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://beebvymnffmx7"]
 
+[ext_resource type="Texture2D" uid="uid://dhqfhcx6q3hk5" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenAttack/Skills/Ultimate/skill_charge_doree.svg" id="1_25ywe"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
 [ext_resource type="Script" uid="uid://b5147hvwh64sp" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenAttack/Skills/Ultimate/charge_doree.gd" id="2_eff"]
 
@@ -12,5 +13,6 @@ script = ExtResource("1_skill")
 skill_id = 7
 name = "Charge dorée"
 description = "Bondit sur la cible et inflige AD x 250% dégâts physiques."
+portrait = ExtResource("1_25ywe")
 skill_effect = SubResource("Resource_e")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

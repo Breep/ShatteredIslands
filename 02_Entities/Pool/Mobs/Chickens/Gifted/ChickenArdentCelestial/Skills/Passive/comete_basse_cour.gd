@@ -60,3 +60,10 @@ func _explode(chicken: Entity) -> void:
 	for enemy: Entity in chicken.target.get_targets(TargetComponent.MultipleTargettingStrategy.ENEMIES, _radius):
 		chicken.alterations.inflict_condition_stacks(enemy, ignite, Alteration.Type.IGNITE, &"Comète de basse-cour")
 	chicken.stats.health = 0
+
+
+func get_description() -> String:
+	return "La première fois qu'il passe sous " + _value(_hp_threshold * 100.0) \
+		+ "% de ses PV, il se rue sur un ennemi et explose, infligeant [[IGNITE]] égal à " \
+		+ _value(_ap_ignite_ratio) + "× son [[AP]] aux ennemis dans un rayon de " \
+		+ _value(_radius) + ", puis meurt."

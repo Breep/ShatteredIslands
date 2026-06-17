@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_fxxdn"]
 [ext_resource type="Script" uid="uid://ldmia5mvuk4x" path="res://01_Cards/Pool/Cards/Engineer/Common/EnergyBarrier/engineer_energy_barrier.gd" id="2_rfirt"]
+[ext_resource type="Texture2D" uid="uid://r0p6bhfwbc57" path="res://01_Cards/Pool/Cards/Engineer/Common/EnergyBarrier/engineer_energy_barrier.png" id="2_v8nn3"]
 
 [sub_resource type="Resource" id="Resource_w1q6s"]
 script = ExtResource("2_rfirt")
@@ -9,12 +10,10 @@ _shield_amount = Array[float]([20.0, 25.0, 30.0, 40.0, 50.0])
 _period = Array[float]([1.0, 1.0, 1.0, 1.0, 1.0])
 metadata/_custom_type_script = "uid://ldmia5mvuk4x"
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ivfmj"]
-
 [resource]
 script = ExtResource("1_fxxdn")
 name = "Barrière d'Énergie"
-picture = SubResource("PlaceholderTexture2D_ivfmj")
+picture = ExtResource("2_v8nn3")
 families = Array[int]([2])
 _card_effect = SubResource("Resource_w1q6s")
 points = Dictionary[int, int]({

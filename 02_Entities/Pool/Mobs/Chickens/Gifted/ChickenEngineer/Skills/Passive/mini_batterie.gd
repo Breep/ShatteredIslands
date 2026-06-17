@@ -16,3 +16,7 @@ func apply(ctx: SkillContext) -> void:
 		if is_instance_valid(ally):
 			chicken.alterations.inflict_condition_stacks(ally, _shield, Alteration.Type.SHIELD, &"Mini-batterie")
 	chicken.auto_attack_modifier_registry.register_modifier(modifier)
+
+
+func get_description() -> String:
+	return "À chaque attaque, donne " + _value(_shield) + " [[SHIELD]] à l'allié le plus blessé."

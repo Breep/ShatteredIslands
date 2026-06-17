@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="Card" format=3 uid="uid://b26g0mf54dxwf"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_card"]
+[ext_resource type="Texture2D" uid="uid://cso2aj6s46yon" path="res://01_Cards/Pool/Cards/ChickenLord/Common/SchrodingerEgg/52_-_Schrodinger_Egg.png" id="2_326o6"]
 [ext_resource type="Script" uid="uid://b26g0mf54d0kh" path="res://01_Cards/Pool/Cards/ChickenLord/Common/SchrodingerEgg/chickenlord_schrodinger_egg.gd" id="2_eff"]
 
 [sub_resource type="Resource" id="Resource_egg"]
@@ -8,12 +9,10 @@ script = ExtResource("2_eff")
 _level_bonus = Array[int]([1, 2, 3, 4, 5])
 _period = Array[float]([4.0, 4.0, 4.0, 4.0, 4.0])
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_5guid"]
-
 [resource]
 script = ExtResource("1_card")
 name = "Œuf de Schrödinger"
-picture = SubResource("PlaceholderTexture2D_5guid")
+picture = ExtResource("2_326o6")
 families = Array[int]([8])
 _card_effect = SubResource("Resource_egg")
 points = Dictionary[int, int]({

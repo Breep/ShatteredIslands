@@ -8,8 +8,3 @@ func _ready() -> void:
 
 func _on_ultimate_casted() -> void:
 	AudioManager.play_3d("wolf_howl", global_position)
-
-
-func _on_died() -> void:
-	AudioManager.play_3d("wolf_die", global_position)
-	super._on_died()

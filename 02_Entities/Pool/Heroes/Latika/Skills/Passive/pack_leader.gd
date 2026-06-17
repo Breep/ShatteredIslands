@@ -59,7 +59,7 @@ static func get_marked_target(latika: Entity) -> Entity:
 	if not is_instance_valid(latika) or not latika.has_meta(META_MARKED_TARGET):
 		return null
 	var marked: Variant = latika.get_meta(META_MARKED_TARGET)
-	return marked if marked is Entity and is_instance_valid(marked) else null
+	return marked if is_instance_valid(marked) and marked is Entity else null
 
 
 # Déplace la marque de l'ancienne cible vers la nouvelle (no-op si identique).

@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="3_lsflu"]
 [ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.tscn" id="4_snime"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://c8d25ik68uqcr" path="res://02_Entities/Pool/Mobs/Forest/ForestDrake/forest_drake_animation.res" id="6_snime"]
+[ext_resource type="PackedScene" uid="uid://c8wd5y3nplk2r" path="res://02_Entities/_Shared/Components/Sound/Default/default_sound_component.tscn" id="7_ee7qv"]
+[ext_resource type="AudioStream" uid="uid://btphmpojqi25g" path="res://23_Audio/SFX/Deaths/forest_drake_die.wav" id="8_sxd3r"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_snime"]
 radius = 0.64501953
@@ -245,5 +247,9 @@ parameters/switch_stunned_state/current_index = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=92803751]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1935062, -0.31307873)
 shape = SubResource("CapsuleShape3D_snime")
+
+[node name="SoundComponent" parent="." unique_id=1451588073 node_paths=PackedStringArray("_owner") instance=ExtResource("7_ee7qv")]
+_death_sound = ExtResource("8_sxd3r")
+_owner = NodePath("..")
 
 [editable path="ForestDrakeVisual"]

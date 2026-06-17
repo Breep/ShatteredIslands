@@ -155,6 +155,21 @@ func play_3d(sound_name: String, position: Vector3, pitch: float = 1.0) -> void:
 	player.global_position = position
 	player.finished.connect(player.queue_free)
 	player.play()
+
+
+# Joue un AudioStream fourni directement (sans passer par la lib) en 3D positionnel.
+# Utilisé par les composants qui portent déjà leur propre stream (ex. SoundComponent).
+func play_audiostream_3d(stream: AudioStream, position: Vector3, volume_db: float = 0.0) -> void:
+	if stream == null:
+		return
+	var player := _sfx_3d_template.duplicate() as AudioStreamPlayer3D
+	player.stream = stream
+	player.volume_db = volume_db
+	player.pitch_scale = randf_range(1.0 - _PITCH_VARIATION, 1.0 + _PITCH_VARIATION)
+	add_child(player)
+	player.global_position = position
+	player.finished.connect(player.queue_free)
+	player.play()
 #endregion
 
 #region ============================== Private functions ==============================

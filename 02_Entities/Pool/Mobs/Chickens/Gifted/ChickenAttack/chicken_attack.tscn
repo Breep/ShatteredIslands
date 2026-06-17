@@ -4,8 +4,11 @@
 [ext_resource type="AnimationNodeBlendTree" uid="uid://cr51ggnb0u010" path="res://02_Entities/Pool/Mobs/Chickens/chicken_animation_tree.res" id="3_qq8ce"]
 [ext_resource type="PackedScene" uid="uid://hjl28rgq6dw3" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenAttack/chicken_attack_visual.tscn" id="6_15sm5"]
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="6_qq8ce"]
+[ext_resource type="PackedScene" uid="uid://c8wd5y3nplk2r" path="res://02_Entities/_Shared/Components/Sound/Default/default_sound_component.tscn" id="7_nafgf"]
 [ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/SmallHealthBar/small_health_bar_component.tscn" id="8_0ng8s"]
+[ext_resource type="AudioStream" uid="uid://bj3burh0l54ei" path="res://23_Audio/SFX/Deaths/chicken_die.wav" id="8_kf6t0"]
 [ext_resource type="Resource" uid="uid://cj02h587bksl7" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenAttack/Stats/attack_chicken_entity_desc.tres" id="9_desc"]
+[ext_resource type="AudioStream" uid="uid://bk8px5f26ad5f" path="res://23_Audio/SFX/Misc/chicken_bok_bok_01.wav" id="10_nsmdv"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x7yny"]
 radius = 0.23095703
@@ -111,17 +114,17 @@ parameters/switch_stunned_state/current_index = 0
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="ChickenAttackVisual" index="0" unique_id=416118163]
-bones/1/position = Vector3(0, 0.048808683, 0.025282245)
-bones/1/rotation = Quaternion(-0.70710677, 0.70710677, -3.0511106e-05, -1.5636506e-05)
-bones/4/rotation = Quaternion(0.13370097, 0.0065096193, 0.019578578, 0.990807)
-bones/7/position = Vector3(0.06718646, -0.0814189, 0.027111303)
-bones/7/rotation = Quaternion(2.3170526e-06, -0.7347202, 1.8084016e-05, 0.67837024)
-bones/8/rotation = Quaternion(0.991114, -1.3388976e-06, -0.13301536, 1.439653e-05)
-bones/9/rotation = Quaternion(4.5463345e-08, -0.59647983, -2.3256997e-07, 0.80262816)
-bones/10/position = Vector3(0.06718645, 0.08142003, 0.027107887)
-bones/10/rotation = Quaternion(-1.7252998e-05, -0.7347202, -3.111651e-06, 0.67837024)
-bones/11/rotation = Quaternion(0.991114, 1.4690643e-06, -0.13301536, -1.4379061e-05)
-bones/12/rotation = Quaternion(4.4930424e-08, -0.59647983, 2.3441524e-07, 0.80262816)
+bones/1/position = Vector3(0, 0.050341435, 0.025282245)
+bones/1/rotation = Quaternion(-0.7071001, 0.70710003, -0.0031001193, -0.0030852437)
+bones/4/rotation = Quaternion(-5.5368112e-08, 0.007207891, -2.1137831e-09, 0.999974)
+bones/7/position = Vector3(0.06718646, -0.0814189, 0.026846794)
+bones/7/rotation = Quaternion(2.1824526e-06, -0.7344798, 1.792019e-05, 0.67863053)
+bones/8/rotation = Quaternion(0.99118537, -1.3471148e-06, -0.13248271, 1.4399389e-05)
+bones/9/rotation = Quaternion(5.070117e-08, -0.5920788, -2.3765412e-07, 0.8058802)
+bones/10/position = Vector3(0.06718645, 0.08142003, 0.026843378)
+bones/10/rotation = Quaternion(-1.7395116e-05, -0.7344798, -3.2685487e-06, 0.67863053)
+bones/11/rotation = Quaternion(0.99118537, 1.4772908e-06, -0.1324827, -1.4381989e-05)
+bones/12/rotation = Quaternion(4.1298378e-08, -0.5920788, 2.378179e-07, 0.8058802)
 
 [node name="HealthBarSpawnMarker" type="Marker3D" parent="ChickenAttackVisual" unique_id=2130578056]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 1.0023811, 0)
@@ -135,6 +138,11 @@ _owner = NodePath("..")
 
 [node name="AnimationComponent" parent="." unique_id=73205791 node_paths=PackedStringArray("_animation_tree", "_owner") instance=ExtResource("6_qq8ce")]
 _animation_tree = NodePath("../AnimationTree")
+_owner = NodePath("..")
+
+[node name="SoundComponent" parent="." unique_id=1943282223 node_paths=PackedStringArray("_owner") instance=ExtResource("7_nafgf")]
+_death_sound = ExtResource("8_kf6t0")
+_spawn_sound = ExtResource("10_nsmdv")
 _owner = NodePath("..")
 
 [editable path="ChickenAttackVisual"]

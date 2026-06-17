@@ -7,8 +7,8 @@
 
 [sub_resource type="Resource" id="Resource_e"]
 script = ExtResource("2_eff")
-_radius = 5.0
 _stacks = 40.0
+_radius = 5.0
 _death_vfx = ExtResource("3_vfx")
 metadata/_custom_type_script = "uid://bcombmort1eff7"
 

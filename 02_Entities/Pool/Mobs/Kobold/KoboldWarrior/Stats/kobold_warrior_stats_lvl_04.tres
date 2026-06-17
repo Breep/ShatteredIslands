@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_oss3y")
-_health_max = 700.0
+_health_max = 740.0
 _mana_max = 42.0
 _mana_regen = 3.0
 auto_attack_type = 1
@@ -12,6 +12,7 @@ _attack_range = 1.7
 _attack_damage = 22.0
 _attack_speed = 0.9555023590097282
 _attack_power = 19.9
+armor = 7.772588722239782
 _crit_chance = 11.5
 _dodge = 8.0
 _m_crit_chances = Dictionary[int, float]({
@@ -19,7 +20,7 @@ _m_crit_chances = Dictionary[int, float]({
 1: 0.0
 })
 _m_resistances = Dictionary[int, float]({
-0: 0.0,
+0: 7.772588722239782,
 1: 0.0,
 2: 0.0
 })

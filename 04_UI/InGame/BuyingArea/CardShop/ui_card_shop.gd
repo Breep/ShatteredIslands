@@ -105,6 +105,8 @@ func _ready() -> void:
 	# Refresh gratuit automatique à la fin de chaque combat : le joueur retrouve un
 	# shop neuf en entrant dans la taverne suivante (flux roguelite).
 	Events.confrontation_resolved.connect(_on_confrontation_resolved)
+	Events.tavern_phase_started.connect(_on_events_tavern_phase_started) ## A tavern/buying phase became active and its UI is up.
+	Events.fighting_phase_started.connect(_on_events_fighting_phase_started) ## A fighting phase became active.
 
 	_card_shop.refresh_for_free()
 
@@ -117,7 +119,7 @@ func _exit_tree() -> void:
 
 #region ============================== Public functions ==============================
 func set_active() -> void:
-	if _is_active or _is_locked: return
+	if _is_active: return
 	_is_active = true
 	show()
 
@@ -165,6 +167,8 @@ func on_drag_ended() -> void:
 # domaine (PlayerCardShop) ; sans domaine (proto) la vente est toujours permise.
 func can_receive(payload: CardPayload) -> bool:
 	if payload.origin == self:
+		return false
+	if _is_locked:
 		return false
 	return _card_shop == null or _card_shop.can_sell(payload.source_cards)
 
@@ -434,4 +438,14 @@ func _on_refresh_button_pressed() -> void:
 func _on_random_card_button_pressed() -> void:
 	_random_card_button.disabled = true
 	_card_shop.try_buy_random_card()
+
+
+func _on_events_tavern_phase_started() -> void:
+	_is_locked = false
+
+
+func _on_events_fighting_phase_started() -> void:
+	_is_locked = true
+
+
 #endregion

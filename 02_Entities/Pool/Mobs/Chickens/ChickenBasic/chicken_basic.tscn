@@ -5,7 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://ctj0phpdgq5iu" path="res://02_Entities/Pool/Mobs/Chickens/ChickenBasic/chicken_basic_visual.tscn" id="3_awods"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://cr51ggnb0u010" path="res://02_Entities/Pool/Mobs/Chickens/chicken_animation_tree.res" id="3_n43b8"]
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="5_unxfj"]
+[ext_resource type="PackedScene" uid="uid://c8wd5y3nplk2r" path="res://02_Entities/_Shared/Components/Sound/Default/default_sound_component.tscn" id="7_343vq"]
 [ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/SmallHealthBar/small_health_bar_component.tscn" id="8_5weh6"]
+[ext_resource type="AudioStream" uid="uid://bj3burh0l54ei" path="res://23_Audio/SFX/Deaths/chicken_die.wav" id="8_bnb2f"]
+[ext_resource type="AudioStream" uid="uid://c31xlprggkiix" path="res://23_Audio/SFX/Attacks/sfx_small_hit.mp3" id="8_ya6yp"]
+[ext_resource type="AudioStream" uid="uid://bk8px5f26ad5f" path="res://23_Audio/SFX/Misc/chicken_bok_bok_01.wav" id="9_bnb2f"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x7yny"]
 radius = 0.16455078
@@ -30,17 +34,17 @@ transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0, 0
 
 [node name="Skeleton3D" parent="ChickenVisual" index="0" unique_id=416118163]
 animate_physical_bones = false
-bones/1/position = Vector3(0, 0.051001944, 0.025282245)
-bones/1/rotation = Quaternion(-0.7070928, 0.70709276, -0.004456257, -0.0044413824)
-bones/4/rotation = Quaternion(-0.27632844, 0.0069235847, -0.03451457, 0.9604184)
-bones/7/position = Vector3(0.06718646, -0.0814189, 0.026928771)
-bones/7/rotation = Quaternion(2.5599636e-06, -0.7326775, 1.821146e-05, 0.680576)
-bones/8/rotation = Quaternion(0.99191564, -1.4331903e-06, -0.12689929, 1.4429092e-05)
-bones/9/rotation = Quaternion(5.306003e-08, -0.59009045, -2.3994193e-07, 0.80733716)
-bones/10/position = Vector3(0.06718645, 0.08142003, 0.026925355)
-bones/10/rotation = Quaternion(-1.7073704e-05, -0.7326775, -2.9252656e-06, 0.680576)
-bones/11/rotation = Quaternion(0.99191564, 1.5634623e-06, -0.12689929, -1.4412425e-05)
-bones/12/rotation = Quaternion(3.9661945e-08, -0.5900904, 2.3934825e-07, 0.80733716)
+bones/1/position = Vector3(0, 0.050613053, 0.025282245)
+bones/1/rotation = Quaternion(-0.7070973, 0.70709723, -0.003677763, -0.0036628877)
+bones/4/rotation = Quaternion(-0.27819848, 0.006919635, -0.034748152, 0.95987004)
+bones/7/position = Vector3(0.06718646, -0.0814189, 0.02688723)
+bones/7/rotation = Quaternion(2.3786938e-06, -0.73225784, 1.7996528e-05, 0.6810275)
+bones/8/rotation = Quaternion(0.99206305, -1.4510186e-06, -0.12574196, 1.4435187e-05)
+bones/9/rotation = Quaternion(5.1712387e-08, -0.5912268, -2.3863495e-07, 0.8065054)
+bones/10/position = Vector3(0.06718645, 0.08142003, 0.026883816)
+bones/10/rotation = Quaternion(-1.7268003e-05, -0.73225784, -3.128088e-06, 0.6810275)
+bones/11/rotation = Quaternion(0.99206305, 1.5813097e-06, -0.12574196, -1.4418674e-05)
+bones/12/rotation = Quaternion(4.059694e-08, -0.5912269, 2.3847406e-07, 0.8065053)
 
 [node name="HealthBarSpawnPoint" type="Marker3D" parent="ChickenVisual" unique_id=1542741370]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 1.2658772, 0)
@@ -131,6 +135,12 @@ _owner = NodePath("..")
 
 [node name="AnimationComponent" parent="." unique_id=73205791 node_paths=PackedStringArray("_animation_tree", "_owner") instance=ExtResource("5_unxfj")]
 _animation_tree = NodePath("../AnimationTree")
+_owner = NodePath("..")
+
+[node name="SoundComponent" parent="." unique_id=1792203452 node_paths=PackedStringArray("_owner") instance=ExtResource("7_343vq")]
+_death_sound = ExtResource("8_bnb2f")
+_auto_attack_sound = ExtResource("8_ya6yp")
+_spawn_sound = ExtResource("9_bnb2f")
 _owner = NodePath("..")
 
 [editable path="ChickenVisual"]

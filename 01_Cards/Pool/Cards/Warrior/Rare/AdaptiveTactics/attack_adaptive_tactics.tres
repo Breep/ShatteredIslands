@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="Card" format=3 uid="uid://bed8ryk1aoplg"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_card"]
+[ext_resource type="Texture2D" uid="uid://dm4wn6ryp07y4" path="res://01_Cards/Pool/Cards/Warrior/Rare/AdaptiveTactics/warrior_adaptive_tactics.png" id="2_8vs5c"]
 [ext_resource type="Script" uid="uid://dhsg4jkqp32o4" path="res://01_Cards/Pool/Cards/Warrior/Rare/AdaptiveTactics/attack_adaptive_tactics.gd" id="2_eff"]
 
 [sub_resource type="Resource" id="Resource_adapt"]
@@ -8,12 +9,10 @@ script = ExtResource("2_eff")
 _range_bonus = Array[float]([1.5, 3.0, 4.5, 6.0, 7.5])
 _lifesteal_bonus = Array[float]([3.0, 5.0, 7.0, 9.0, 11.0])
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_31tpq"]
-
 [resource]
 script = ExtResource("1_card")
 name = "Tactiques Adaptatives"
-picture = SubResource("PlaceholderTexture2D_31tpq")
+picture = ExtResource("2_8vs5c")
 families = Array[int]([1])
 rarity = 1
 _card_effect = SubResource("Resource_adapt")
