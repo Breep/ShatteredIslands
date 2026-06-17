@@ -6,13 +6,15 @@
 
 [sub_resource type="Resource" id="Resource_eclipseguard"]
 script = ExtResource("2_eff")
+_ad_ratio = 0.5
+_ap_ratio = 0.5
 metadata/_custom_type_script = "uid://cdkskill04"
 
 [resource]
 script = ExtResource("1_skill")
 skill_id = 1
 name = "Eclipse Guard"
-description = "When Shadow Blade triggers, the Dark Knight gains a Shield equal to 300% of his AD."
+description = "When Shadow Blade triggers, the Dark Knight gains a Shield equal to 50% of his AD + 50% of his AP."
 portrait = ExtResource("1_p1nyk")
 skill_effect = SubResource("Resource_eclipseguard")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

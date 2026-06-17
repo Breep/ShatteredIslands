@@ -5,6 +5,8 @@
 
 [sub_resource type="Resource" id="Resource_e"]
 script = ExtResource("2_eff")
+_radius = 5.0
+_ap_ratio = 0.5
 metadata/_custom_type_script = "uid://bsentrayon1eff"
 
 [resource]
