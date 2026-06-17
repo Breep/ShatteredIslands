@@ -79,6 +79,7 @@ expand_margin_right = 4.0
 
 [resource]
 Button/fonts/font = ExtResource("2_iyfkc")
+Button/styles/focus = SubResource("StyleBoxFlat_iyfkc")
 Button/styles/hover = SubResource("StyleBoxFlat_iyfkc")
 Button/styles/hover_pressed = SubResource("StyleBoxFlat_hw28s")
 Button/styles/normal = SubResource("StyleBoxFlat_iy36y")

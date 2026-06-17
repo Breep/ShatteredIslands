@@ -865,7 +865,7 @@ func _set_deck_pos(pos: DeckPos) -> void:
 	var target: Vector2 = _hand_pivot_starting_position
 	match pos:
 		DeckPos.PEEK:
-			target += Vector2(0.0, 200)
+			target += Vector2(0.0, _peek_offset_y)
 		DeckPos.HIDDEN:
 			target += Vector2(0.0, _hide_offset_y)
 	_hide_show_tween = create_tween()

@@ -20,7 +20,7 @@ _hover_spread_amount = 30.0
 _drop_zone = NodePath("DropZone")
 _hand_pivot = NodePath("HandPivot")
 _editor_preview_root = NodePath("HandPivot/_EditorPreview")
-_peek_offset_y = 230.0
+_peek_offset_y = 200.0
 _show_hand_zone = NodePath("ShowHandZone")
 
 [node name="DropZone" type="Control" parent="." unique_id=699235962]

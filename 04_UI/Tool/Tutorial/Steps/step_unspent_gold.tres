@@ -5,10 +5,9 @@
 [resource]
 script = ExtResource("1_step")
 id = &"unspent_gold"
-text = "Attends ! Il te reste de l'or à dépenser. Pense à acheter des cartes avant de partir au combat — ou reclique sur « Continuer » pour lancer la bataille malgré tout."
+text = "Attends ! Il te reste de l'or à dépenser. Pense à acheter des cartes avant de partir au combat."
 target_unique_name = &"PlayerGoldHBox"
 auto_advance_delay = 0.0
-hide_skip = true
 highlight_target = true
 highlight_padding = 8.0
 preferred_arrow_side = 3

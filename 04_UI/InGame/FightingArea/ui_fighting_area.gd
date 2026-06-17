@@ -1,6 +1,12 @@
 class_name UIFightingArea
 extends Control
 
+# ============================== Constants ==============================
+
+# Multiplicateurs de vitesse de combat (ticks logiques par frame physique),
+# alignés par index sur _speed_buttons (boutons x1 / x2 / x4 / x8).
+const _TICK_MULTIPLIERS: Array[int] = [1, 2, 4, 8]
+
 # ============================== Local nodes ==============================
 
 @onready var _ui_countdown: UICountdown = %Countdown
@@ -10,10 +16,14 @@ extends Control
 
 @onready var _intro_timer: Timer = %IntroTimer
 
+@onready var _speed_buttons: Array[Button] = [%SpeedX1, %SpeedX2, %SpeedX4, %SpeedX8]
+
 # ============================== Private variables ==============================
 
 var _is_active: bool = false
 var _fighting_area: FightingArea = null
+# Groupe radio des boutons de vitesse : un seul actif à la fois.
+var _speed_button_group: ButtonGroup
 
 # ============================== Node base functions ==============================
 
@@ -21,6 +31,7 @@ func _ready() -> void:
 	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)
 	_advance_button.pressed.connect(_on_advance_button_pressed)
 	_ui_roaster_list.placement_changed.connect(_on_roaster_placement_changed)
+	_setup_speed_buttons()
 	_advance_button.hide()
 	_ui_roaster_list.hide()
 	hide()
@@ -38,6 +49,7 @@ func update_content(fighting_area: FightingArea) -> void:
 func set_active() -> void:
 	if _is_active: return
 	_is_active = true
+	_reset_speed()
 	_intro_timer.start()
 	_advance_button.hide()
 	_ui_dps_meter.hide()
@@ -47,6 +59,7 @@ func set_active() -> void:
 func set_inactive() -> void:
 	if not _is_active: return
 	_is_active = false
+	_reset_speed()
 	hide()
 
 # ============================== Private functions ==============================
@@ -67,6 +80,31 @@ func _local_roaster() -> Roaster:
 func _refresh_ready_gate() -> void:
 	_advance_button.disabled = _ui_roaster_list.has_unplaced()
 
+
+# Met les boutons de vitesse en mode radio (un seul actif) et branche chacun sur
+# son multiplicateur de ticks.
+func _setup_speed_buttons() -> void:
+	_speed_button_group = ButtonGroup.new()
+	for i: int in _speed_buttons.size():
+		var btn: Button = _speed_buttons[i]
+		btn.toggle_mode = true
+		btn.button_group = _speed_button_group
+		btn.pressed.connect(_on_speed_button_pressed.bind(_TICK_MULTIPLIERS[i]))
+
+
+# Revient à x1 : vitesse de combat normale + bouton x1 sélectionné. Setter de
+# button_pressed n'émet pas `pressed`, donc pas de rappel récursif.
+func _reset_speed() -> void:
+	if not _speed_buttons.is_empty():
+		_speed_buttons[0].button_pressed = true
+	_apply_tick_multiplier(1)
+
+
+# Applique la vitesse au GlobalFightingManager : il pilote l'horloge de phase
+# partagée et la propage aux FMs (phase + combat synchrones).
+func _apply_tick_multiplier(multiplier: int) -> void:
+	GlobalFightingManager.set_speed_multiplier(multiplier)
+
 # ============================== Callbacks ==============================
 
 func _on_gfm_fighting_phase_state_changed(fighting_phase_state: GlobalFightingManager.FightingPhaseState) -> void:
@@ -81,6 +119,7 @@ func _on_gfm_fighting_phase_state_changed(fighting_phase_state: GlobalFightingMa
 			_ui_countdown.start(int(GameManager.game_rules.duration_fighting_countdown), "FIGHT")
 			Events.combat_started.emit()
 		GlobalFightingManager.FightingPhaseState.CELEBRATION:
+			_reset_speed()
 			_advance_button.text = "NEXT"
 			_advance_button.disabled = false
 			_advance_button.show()
@@ -114,3 +153,7 @@ func _on_intro_timer_timeout() -> void:
 		_ui_roaster_list.open()
 		Events.unit_placement_started.emit()
 	_advance_button.show()
+
+
+func _on_speed_button_pressed(multiplier: int) -> void:
+	_apply_tick_multiplier(multiplier)

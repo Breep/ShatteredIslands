@@ -51,6 +51,10 @@ var _is_active: bool = false
 var _fight_ended: bool = false # Guard against late entity_spawned callbacks after stop
 var _local_phase: LocalPhase = LocalPhase.UNDEF
 var _pending_winner_teams_order: Array[int]
+# Nombre de ticks logiques joués par frame physique. >1 = combat accéléré sans
+# toucher Engine.time_scale : chaque tick reste identique (déterminisme préservé),
+# on en avance simplement davantage par seconde réelle.
+var _tick_multiplier: int = 1
 
 var _spawn_manager: SpawnManager
 #endregion
@@ -65,7 +69,15 @@ func _exit_tree() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	if not _is_active: return
+	# _tick_multiplier ticks par frame physique. Re-vérifie _is_active à chaque
+	# itération : une mort peut terminer le combat en cours de frame (via
+	# _signal_local_fight_done), on doit alors stopper net.
+	for _i: int in _tick_multiplier:
+		if not _is_active: return
+		_tick_once()
+
+
+func _tick_once() -> void:
 	# Sort by uid to guarantee identical processing order on all clients (determinism)
 	var entities: Array[Entity] = _spawn_manager.get_entities()
 	entities.sort_custom(func(a: Entity, b: Entity) -> bool: return a.uid < b.uid)
@@ -145,6 +157,13 @@ func start_celebration() -> void:
 	_disconnect_all()
 	_cleanup()
 	phase_changed.emit(self, _local_phase)
+
+
+# Règle la vitesse du combat : nombre de ticks logiques joués par frame physique
+# (1 = vitesse normale). N'altère PAS Engine.time_scale, donc UI/animations/audio
+# restent à vitesse réelle et le déterminisme du combat est préservé.
+func set_tick_multiplier(multiplier: int) -> void:
+	_tick_multiplier = maxi(1, multiplier)
 
 
 # Avance la phase bloquante courante. Appelée par l'UI sur clic READY (POSITIONING)
