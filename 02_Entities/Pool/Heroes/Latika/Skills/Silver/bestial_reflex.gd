@@ -11,7 +11,7 @@ extends SkillEffect
 @export var _dash_distance: float = 4.0
 @export var _dash_speed: float = 20.0
 @export var _untargetable_duration: float = 2.0
-@export var _cooldown: float = 15.0
+@export var _cooldown: float = 15
 
 
 func apply(ctx: SkillContext) -> void:
@@ -58,6 +58,10 @@ func _trigger(latika: Entity) -> void:
 # Dash de retraite : s'éloigne de l'ennemi le plus proche (à plat), sinon recule
 # selon l'orientation courante.
 func _dash_back(latika: Entity) -> void:
+	#TODO Trouver un moyen plus prore d'accèder au centre de l'arène
+	var arena_center: Vector3 = latika._arena_zone_manager.get_center_zone_center()
+	if latika.global_position.distance_to(arena_center) > 10: # TODO Trouver un dash plus approprié dans ce cas plutôt que de l'annuler
+		return
 	var away: Vector3
 	var enemy: Entity = latika.target.get_target(TargetComponent.TargettingStrategy.CLOSEST_ENEMY)
 	if is_instance_valid(enemy):
