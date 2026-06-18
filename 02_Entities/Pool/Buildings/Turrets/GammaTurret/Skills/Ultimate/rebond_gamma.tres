@@ -5,6 +5,7 @@
 
 [sub_resource type="Resource" id="Resource_rg"]
 script = ExtResource("2_eff")
+_bonus_bounces = 3.0
 metadata/_custom_type_script = "uid://b7rg5dwm2hxk"
 
 [resource]
