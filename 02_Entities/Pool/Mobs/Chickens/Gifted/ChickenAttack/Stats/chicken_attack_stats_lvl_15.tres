@@ -4,11 +4,11 @@
 
 [resource]
 script = ExtResource("1_vxfk1")
-_health_max = 390.0
+_health_max = 4310.0
 _mana_max = 42.0
 _mana_regen = 3.0
 _attack_range = 7.0
-_attack_damage = 40.0
+_attack_damage = 432.0
 _attack_speed = 1.8680008533858723
 _movement_speed = 6.0
 _attack_power = 55.6

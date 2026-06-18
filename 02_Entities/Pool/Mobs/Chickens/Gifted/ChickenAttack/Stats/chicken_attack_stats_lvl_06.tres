@@ -4,11 +4,11 @@
 
 [resource]
 script = ExtResource("1_gl835")
-_health_max = 210.0
+_health_max = 710.0
 _mana_max = 42.0
 _mana_regen = 3.0
 _attack_range = 7.0
-_attack_damage = 22.0
+_attack_damage = 72.0
 _attack_speed = 1.3545177444479564
 _movement_speed = 6.0
 _attack_power = 20.5
