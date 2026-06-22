@@ -4,11 +4,11 @@
 
 [resource]
 script = ExtResource("1_ka7cl")
-_health_max = 230.0
+_health_max = 950.0
 _mana_max = 42.0
 _mana_regen = 3.0
 _attack_range = 7.0
-_attack_damage = 24.0
+_attack_damage = 96.0
 _attack_speed = 1.4307658882914165
 _movement_speed = 6.0
 _attack_power = 23.6

@@ -4,10 +4,10 @@
 
 [resource]
 script = ExtResource("1_egy0m")
-_health_max = 270.0
+_health_max = 1550.0
 _mana_max = 42.0
 _mana_regen = 3.0
-_attack_damage = 26.0
+_attack_damage = 154.0
 _attack_speed = 1.466633583770577
 _movement_speed = 6.0
 _attack_power = 42.4
