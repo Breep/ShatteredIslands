@@ -1,0 +1,198 @@
+[gd_scene format=3 uid="uid://bbd0ffteqslgl"]
+
+[ext_resource type="Script" uid="uid://2ttobyi6evjd" path="res://99_Prototyping/Multiplayer/multiplayer_battle.proto.gd" id="0_proto"]
+[ext_resource type="PackedScene" uid="uid://0x5u0h623yxt" path="res://06_FloatingIsland/FightingIsland/Pool/ArchIsland/arch_island.tscn" id="1_n66ua"]
+[ext_resource type="PackedScene" uid="uid://dvr7815lw1k8b" path="res://02_Entities/Pool/Heroes/Latika/latika.tscn" id="2_d22gy"]
+[ext_resource type="PackedScene" uid="uid://jcwiqcnilmtk" path="res://02_Entities/Pool/Mobs/Wolfs/Vrock/vrock.tscn" id="3_got8n"]
+[ext_resource type="PackedScene" uid="uid://dolubo8wodahp" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/kobold_warrior.tscn" id="4_y6pee"]
+
+[node name="MultiplayerBattle_proto" type="Node" unique_id=1295461838 node_paths=PackedStringArray("_arch_island", "_team1", "_team2", "_ip_field", "_port_field", "_status_label", "_host_section", "_sync_period_label", "_sync_period_slider", "_client_section", "_delay_label", "_delay_slider", "_reconnect_delay_field")]
+script = ExtResource("0_proto")
+_arch_island = NodePath("ArchIsland")
+_team1 = NodePath("ArchIsland/Team1")
+_team2 = NodePath("ArchIsland/Team2")
+_ip_field = NodePath("UI/Panel/Margin/VBox/ConnSection/IpField")
+_port_field = NodePath("UI/Panel/Margin/VBox/ConnSection/PortRow/PortField")
+_status_label = NodePath("UI/Panel/Margin/VBox/ConnSection/StatusLabel")
+_host_section = NodePath("UI/Panel/Margin/VBox/HostSection")
+_sync_period_label = NodePath("UI/Panel/Margin/VBox/HostSection/SyncPeriodLabel")
+_sync_period_slider = NodePath("UI/Panel/Margin/VBox/HostSection/SyncPeriodSlider")
+_client_section = NodePath("UI/Panel/Margin/VBox/ClientSection")
+_delay_label = NodePath("UI/Panel/Margin/VBox/ClientSection/DelayLabel")
+_delay_slider = NodePath("UI/Panel/Margin/VBox/ClientSection/DelaySlider")
+_reconnect_delay_field = NodePath("UI/Panel/Margin/VBox/ClientSection/RecoRow/ReconnectDelayField")
+
+[node name="ArchIsland" parent="." unique_id=969626414 instance=ExtResource("1_n66ua")]
+
+[node name="Team1" type="Node3D" parent="ArchIsland" unique_id=1836481531]
+
+[node name="Latika" parent="ArchIsland/Team1" unique_id=1380299710 instance=ExtResource("2_d22gy")]
+transform = Transform3D(-0.999875, 0, 0.015812127, 0, 1, 0, -0.015812127, 0, -0.999875, -0.38895416, 0, -4.635195)
+
+[node name="Vrock" parent="ArchIsland/Team1" unique_id=1686838520 instance=ExtResource("3_got8n")]
+transform = Transform3D(-0.97185826, 0, 0.2355663, 0, 1, 0, -0.2355663, 0, -0.97185826, 1.346669, 1.9073486e-06, -2.513546)
+
+[node name="Team2" type="Node3D" parent="ArchIsland" unique_id=2044914086]
+
+[node name="Kobold_Warrior" parent="ArchIsland/Team2" unique_id=779171238 instance=ExtResource("4_y6pee")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.1130714, 0, 6.067046)
+
+[node name="Kobold_Warrior2" parent="ArchIsland/Team2" unique_id=574566547 instance=ExtResource("4_y6pee")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9465747, 0, 5.957568)
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=72501105]
+
+[node name="Panel" type="PanelContainer" parent="UI" unique_id=2054419232]
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 312.0
+offset_bottom = 560.0
+
+[node name="Margin" type="MarginContainer" parent="UI/Panel" unique_id=161853124]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBox" type="VBoxContainer" parent="UI/Panel/Margin" unique_id=1185138242]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="ConnSection" type="VBoxContainer" parent="UI/Panel/Margin/VBox" unique_id=105338452]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="ConnTitle" type="Label" parent="UI/Panel/Margin/VBox/ConnSection" unique_id=1779727402]
+layout_mode = 2
+text = "— Connexion —"
+horizontal_alignment = 1
+
+[node name="IpField" type="LineEdit" parent="UI/Panel/Margin/VBox/ConnSection" unique_id=1612189552]
+layout_mode = 2
+text = "127.0.0.1"
+placeholder_text = "IP"
+
+[node name="PortRow" type="HBoxContainer" parent="UI/Panel/Margin/VBox/ConnSection" unique_id=93657581]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/Panel/Margin/VBox/ConnSection/PortRow" unique_id=1120148716]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+text = "Port"
+
+[node name="PortField" type="SpinBox" parent="UI/Panel/Margin/VBox/ConnSection/PortRow" unique_id=1020202346]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1024.0
+max_value = 65535.0
+value = 4242.0
+
+[node name="ConnRow" type="HBoxContainer" parent="UI/Panel/Margin/VBox/ConnSection" unique_id=2091124368]
+layout_mode = 2
+
+[node name="HostButton" type="Button" parent="UI/Panel/Margin/VBox/ConnSection/ConnRow" unique_id=1140790986]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Host"
+
+[node name="ConnectButton" type="Button" parent="UI/Panel/Margin/VBox/ConnSection/ConnRow" unique_id=808109221]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Connect"
+
+[node name="StatusLabel" type="Label" parent="UI/Panel/Margin/VBox/ConnSection" unique_id=43477607]
+layout_mode = 2
+text = "Idle"
+autowrap_mode = 2
+
+[node name="HostSection" type="VBoxContainer" parent="UI/Panel/Margin/VBox" unique_id=833479652]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="SyncTitle" type="Label" parent="UI/Panel/Margin/VBox/HostSection" unique_id=1386722861]
+layout_mode = 2
+text = "— Sync (host) —"
+horizontal_alignment = 1
+
+[node name="SyncPeriodLabel" type="Label" parent="UI/Panel/Margin/VBox/HostSection" unique_id=375829937]
+layout_mode = 2
+text = "Sync period: 100 ms"
+
+[node name="SyncPeriodSlider" type="HSlider" parent="UI/Panel/Margin/VBox/HostSection" unique_id=1252258134]
+custom_minimum_size = Vector2(260, 0)
+layout_mode = 2
+min_value = 10.0
+max_value = 1000.0
+step = 10.0
+value = 100.0
+
+[node name="FightTitle" type="Label" parent="UI/Panel/Margin/VBox/HostSection" unique_id=1971275823]
+layout_mode = 2
+text = "— Combat —"
+horizontal_alignment = 1
+
+[node name="FightRow" type="HBoxContainer" parent="UI/Panel/Margin/VBox/HostSection" unique_id=1328479115]
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="UI/Panel/Margin/VBox/HostSection/FightRow" unique_id=795227073]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Start fight"
+
+[node name="ResetButton" type="Button" parent="UI/Panel/Margin/VBox/HostSection/FightRow" unique_id=1679438030]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Reset (all)"
+
+[node name="ClientSection" type="VBoxContainer" parent="UI/Panel/Margin/VBox" unique_id=2126461016]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="DelayTitle" type="Label" parent="UI/Panel/Margin/VBox/ClientSection" unique_id=1741810035]
+layout_mode = 2
+text = "— Latence (client) —"
+horizontal_alignment = 1
+
+[node name="DelayLabel" type="Label" parent="UI/Panel/Margin/VBox/ClientSection" unique_id=1162764603]
+layout_mode = 2
+text = "Reader delay: 0 ms"
+
+[node name="DelaySlider" type="HSlider" parent="UI/Panel/Margin/VBox/ClientSection" unique_id=1529822342]
+custom_minimum_size = Vector2(260, 0)
+layout_mode = 2
+max_value = 2000.0
+step = 10.0
+
+[node name="DiscoTitle" type="Label" parent="UI/Panel/Margin/VBox/ClientSection" unique_id=763279598]
+layout_mode = 2
+text = "— Déconnexion —"
+horizontal_alignment = 1
+
+[node name="RecoRow" type="HBoxContainer" parent="UI/Panel/Margin/VBox/ClientSection" unique_id=1031362022]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/Panel/Margin/VBox/ClientSection/RecoRow" unique_id=260678404]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+text = "Reco après (s)"
+
+[node name="ReconnectDelayField" type="SpinBox" parent="UI/Panel/Margin/VBox/ClientSection/RecoRow" unique_id=1281403162]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 30.0
+value = 2.0
+
+[node name="SimDiscoButton" type="Button" parent="UI/Panel/Margin/VBox/ClientSection" unique_id=1843113839]
+layout_mode = 2
+text = "Simuler déco/reco"
+
+[connection signal="pressed" from="UI/Panel/Margin/VBox/ConnSection/ConnRow/HostButton" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="UI/Panel/Margin/VBox/ConnSection/ConnRow/ConnectButton" to="." method="_on_connect_pressed"]
+[connection signal="value_changed" from="UI/Panel/Margin/VBox/HostSection/SyncPeriodSlider" to="." method="_on_sync_period_changed"]
+[connection signal="pressed" from="UI/Panel/Margin/VBox/HostSection/FightRow/StartButton" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="UI/Panel/Margin/VBox/HostSection/FightRow/ResetButton" to="." method="_on_reset_pressed"]
+[connection signal="value_changed" from="UI/Panel/Margin/VBox/ClientSection/DelaySlider" to="." method="_on_delay_changed"]
+[connection signal="pressed" from="UI/Panel/Margin/VBox/ClientSection/SimDiscoButton" to="." method="_on_simulate_disconnect_pressed"]

@@ -52,6 +52,17 @@ More specific vocabulary lives in folder-level CLAUDE.md files
 - Keep headers short: 1–3 lines. Not a full documentation, just enough
   for someone opening the file to understand "what is this".
 
+### Prefer the editor
+- Always prefer doing things in the Godot editor when possible. Scene
+  structure, node layout, UI (Controls, containers, anchors), signal
+  connections, exported references, resources — these belong in `.tscn` /
+  `.tres`, not built imperatively in code.
+- Do NOT build UI by code (no `Button.new()` / `add_child()` walls). Lay the
+  nodes out in the scene, expose them with `@onready`/`@export` and keep the
+  script for behavior only.
+- Scripts wire and react; the editor describes structure. If a thing can be
+  configured in the inspector, configure it there rather than in `_ready()`.
+
 ## Prototyping scenes (mandatory for visible systems)
 
 When adding a new component or system with visible or tactile behavior
