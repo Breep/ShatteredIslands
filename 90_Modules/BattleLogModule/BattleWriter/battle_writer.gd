@@ -43,6 +43,12 @@ func get_current_logs() -> Array[Dictionary]:
 	return new_logs
 
 
+# Index absolu du prochain log à diffuser = position de départ du batch que
+# get_current_logs() va renvoyer. Sert au séquençage côté client (catch-up).
+func get_sent_count() -> int:
+	return _last_log_index_sent
+
+
 func get_all_logs() -> Array[Dictionary]:
 	return _battle_logs
 
@@ -193,6 +199,7 @@ func _on_gfm_fighting_phase_state_changed(state: GlobalFightingManager.FightingP
 			_is_recording = false
 			Verbose.trace("Recording stopped | total écrits ce combat = %d" % _battle_logs.size(), Verbose.Category.BATTLE_WRITER)
 			_battle_logs.clear()
+			_last_log_index_sent = 0 # repart de 0 pour le prochain combat
 
 
 func _on_fighting_area_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.Type, projectile: Projectile, gpos: Vector3) -> void:
