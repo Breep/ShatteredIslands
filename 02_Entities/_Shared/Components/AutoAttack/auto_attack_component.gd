@@ -153,6 +153,9 @@ func set_paused(paused: bool) -> void:
 
 
 func process_tick() -> void:
+	# Boucle de décision/exécution d'auto-attaque = simulation : serveur uniquement.
+	# Côté client, les auto-attaques sont rejouées par le BattleReader (pas simulées localement).
+	if not multiplayer.is_server(): return
 	if _is_paused: return # suspended by an external channel (see set_paused), like a stun
 	if _is_stunned: return
 	if not _owner.is_alive(): return

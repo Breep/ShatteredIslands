@@ -35,5 +35,9 @@ func _on_mana_tick_timer_timeout() -> void:
 	_owner.stats.mana += inc
 	
 	if _owner.stats.mana >= _owner.stats.mana_max:
-		_owner.skill.cast_ultimate()
+		# Le cast d'ultimate est une action sortante : serveur uniquement, rejouée
+		# côté client par le BattleReader. Garde de sink — le tick de mana passe déjà
+		# par battle_callback (serveur only), mais le cast reste protégé en propre.
+		if multiplayer.is_server():
+			_owner.skill.cast_ultimate()
 		_owner.stats.mana -= _owner.stats.mana_max

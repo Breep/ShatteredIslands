@@ -373,7 +373,9 @@ func process_tick() -> void:
 	if alterations != null:
 		alterations.process_tick()
 	spawn.process_tick()
-	if battle_callback_registry != null:
+	# Effets périodiques (timers de cartes/familles, tick de mana…) = simulation :
+	# serveur uniquement. Le client les rejoue via le BattleReader, il ne les tire pas.
+	if battle_callback_registry != null and multiplayer.is_server():
 		battle_callback_registry.process_tick()
 #endregion
 

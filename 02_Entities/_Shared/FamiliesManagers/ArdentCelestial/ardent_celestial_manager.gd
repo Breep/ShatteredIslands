@@ -16,7 +16,6 @@ func _ready() -> void:
 
 func start() -> void:
 	Verbose.debug("ArdentCelestialManager start", Verbose.Category.FAMILY_MANAGER)
-	_register_meteor_spell_modifier()
 	_add_stack_modifiers()
 	_ardent_celestial_stats.titans_protection_accumulated_hp = 0.0
 
@@ -25,34 +24,6 @@ func stop() -> void:
 	_ardent_celestial_stats.titans_protection_accumulated_hp = 0.0
 	_meteor_queues.clear()
 	_meteor_scheduled.clear()
-
-
-#region ========== MODIFIER: Meteor Spell Modifier ==========
-## Registers a persistent SPELL ActionModifier that intercepts ALL METEOR casts.
-## Automatically injects damage_percent, radius, on_hit_callbacks, on_cast_callbacks
-## from ardent_celestial_stats. Any caller only needs cast_spell(target, METEOR, {}).
-func _register_meteor_spell_modifier() -> void:
-	var modifier := ActionModifier.new()
-	modifier.id = &"ArdentCelestial Meteor"
-	modifier.action_type = Utils.ActionCategory.SPELL
-	modifier.is_one_time_effect = false
-	modifier.before_action_logic_callback = func(cb_vars: Dictionary) -> void:
-		if cb_vars.get(ActionModifier.VarType.SPELL_TYPE) != Spell.Type.METEOR:
-			return
-		var sm: Dictionary = cb_vars[ActionModifier.VarType.SPELL_MODIFIER]
-		if not sm.has(Meteor.Modifier.DAMAGE_PERCENT):
-			sm[Meteor.Modifier.DAMAGE_PERCENT] = _ardent_celestial_stats.meteor_damage_percent[level]
-		if not sm.has(Meteor.Modifier.DAMAGE_FLAT):
-			sm[Meteor.Modifier.DAMAGE_FLAT] = _ardent_celestial_stats.meteor_damage_flat[level]
-		if not sm.has(Meteor.Modifier.RADIUS):
-			sm[Meteor.Modifier.RADIUS] = _ardent_celestial_stats.meteor_radius
-		# On_hit et on_cast : on merge les callbacks de la famille avec ceux déjà présents
-		var existing_on_hit: Array = sm.get(Meteor.Modifier.ON_HIT_CALLBACKS, [])
-		sm[Meteor.Modifier.ON_HIT_CALLBACKS] = existing_on_hit + _ardent_celestial_stats.meteor_on_hit_callbacks
-		var existing_on_cast: Array = sm.get(Meteor.Modifier.ON_CAST_CALLBACKS, [])
-		sm[Meteor.Modifier.ON_CAST_CALLBACKS] = existing_on_cast + _ardent_celestial_stats.meteor_on_cast_callbacks
-	_owner.action_modifiers_registry.register_modifier(modifier)
-#endregion
 
 
 #region ========== PASSIVE: Celestial Passive ==========

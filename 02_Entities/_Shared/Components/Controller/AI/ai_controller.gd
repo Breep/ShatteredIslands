@@ -60,6 +60,9 @@ func disable() -> void:
 
 #region ============================== Private functions ==============================
 func _make_decision() -> void:
+	# Décision = simulation : serveur uniquement. Le client ne choisit aucune cible,
+	# il rejoue les actions de combat via le BattleReader.
+	if not multiplayer.is_server(): return
 	if _owner.auto_attack == null or _owner.target == null:
 		return
 
