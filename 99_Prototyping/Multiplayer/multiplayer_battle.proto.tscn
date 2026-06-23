@@ -5,6 +5,16 @@
 [ext_resource type="PackedScene" uid="uid://dvr7815lw1k8b" path="res://02_Entities/Pool/Heroes/Latika/latika.tscn" id="2_d22gy"]
 [ext_resource type="PackedScene" uid="uid://jcwiqcnilmtk" path="res://02_Entities/Pool/Mobs/Wolfs/Vrock/vrock.tscn" id="3_got8n"]
 [ext_resource type="PackedScene" uid="uid://dolubo8wodahp" path="res://02_Entities/Pool/Mobs/Kobold/KoboldWarrior/kobold_warrior.tscn" id="4_y6pee"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="4_yo5kc"]
+[ext_resource type="Resource" uid="uid://c88cqm481bhcu" path="res://01_Cards/Pool/Cards/Engineer/Common/ShieldRush/engineer_shield_rush.tres" id="5_gepbn"]
+[ext_resource type="Script" uid="uid://nkraydv4mdse" path="res://01_Cards/Templates/Deck/hand.gd" id="6_8co65"]
+
+[sub_resource type="Resource" id="Resource_b5iue"]
+script = ExtResource("6_8co65")
+_cards = Dictionary[StringName, ExtResource("4_yo5kc")]({
+&"dazdazd": ExtResource("5_gepbn")
+})
+metadata/_custom_type_script = "uid://nkraydv4mdse"
 
 [node name="MultiplayerBattle_proto" type="Node" unique_id=1295461838 node_paths=PackedStringArray("_arch_island", "_team1", "_team2", "_ip_field", "_port_field", "_status_label", "_host_section", "_sync_period_label", "_sync_period_slider", "_client_section", "_delay_label", "_delay_slider", "_reconnect_delay_field")]
 script = ExtResource("0_proto")
@@ -28,6 +38,7 @@ _reconnect_delay_field = NodePath("UI/Panel/Margin/VBox/ClientSection/RecoRow/Re
 
 [node name="Latika" parent="ArchIsland/Team1" unique_id=1380299710 instance=ExtResource("2_d22gy")]
 transform = Transform3D(-0.999875, 0, 0.015812127, 0, 1, 0, -0.015812127, 0, -0.999875, -0.38895416, 0, -4.635195)
+override_custom_hand = SubResource("Resource_b5iue")
 
 [node name="Vrock" parent="ArchIsland/Team1" unique_id=1686838520 instance=ExtResource("3_got8n")]
 transform = Transform3D(-0.97185826, 0, 0.2355663, 0, 1, 0, -0.2355663, 0, -0.97185826, 1.346669, 1.9073486e-06, -2.513546)

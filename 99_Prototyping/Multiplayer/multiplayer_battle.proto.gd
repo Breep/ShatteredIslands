@@ -228,6 +228,7 @@ func _build_formation_from(container: Node3D, fighting_area: FightingArea) -> Fi
 		spec.transform = to_fighting_area * entity.global_transform
 		if entity.entity_desc != null:
 			spec.entry = RoasterEntry.from_desc(entity.entity_desc)
+			spec.entry.hand = entity.override_custom_hand
 		elif entity.scene_file_path != "":
 			spec.scene = load(entity.scene_file_path)
 		formation.entity_specs.append(spec)
