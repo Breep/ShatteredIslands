@@ -684,7 +684,7 @@ func _on_stats_scale_changed(new_scale: float) -> void:
 
 
 func _on_died() -> void:
-	Verbose.debug("Entity [" + entity_name + "] died", Verbose.Category.ENTITY)
+	Verbose.debug("DIED uid=" + str(uid) + " [" + entity_name + "] (health=" + str(stats.health) + ")", Verbose.Category.ENTITY)
 
 	life_state = LifeState.DEAD
 	_state_machine.stop_combat_modules()

@@ -88,6 +88,10 @@ func _tick_once() -> void:
 	for projectile in projectiles:
 		projectile.process_tick()
 	current_tick += 1
+	# Fin de combat évaluée À LA FRONTIÈRE DE TICK (et non en synchrone dans `died`) :
+	# tout le tick — coup fatal + ses logs (action_received, life steal…) — est écrit
+	# et flushé avant que la transition CELEBRATION ne stoppe l'enregistrement.
+	_check_fight_over()
 #endregion
 
 #region ============================== Public functions ==============================
@@ -309,7 +313,10 @@ func _on_entity_died(entity: Entity) -> void:
 	if entity.can_revive: return
 	if not _alive_by_team.has(entity.team): return
 	_alive_by_team[entity.team][entity.fight_role].erase(entity)  # erase is idempotent
-	_check_fight_over()
+	# Pas de _check_fight_over() ici : la mort survient en plein milieu d'une action
+	# (health -= damage, avant que l'action n'émette son propre log). On évalue la
+	# fin de combat à la frontière de tick (_tick_once) pour ne pas couper
+	# l'enregistrement/le flush au milieu du coup fatal.
 
 
 func _on_entity_resurrected(entity: Entity) -> void:

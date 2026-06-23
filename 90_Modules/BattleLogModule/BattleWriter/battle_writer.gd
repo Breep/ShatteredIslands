@@ -106,8 +106,6 @@ func _log_action_done(source: Entity, target: Entity, action_type: Utils.ActionT
 
 
 func _log_action_received(receiver: Entity, source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
-	Verbose.trace("_log_interaction_received() | " + str(receiver) + " | " + str(source), Verbose.Category.BATTLE_WRITER)
-	
 	if not is_instance_valid(receiver):
 		Verbose.warn("_log_action_done() -> receiver invalid", Verbose.Category.BATTLE_WRITER)
 		return
@@ -179,6 +177,11 @@ func _log_projectile_target_hit(target: Entity, gpos: Vector3, projectile_uid: i
 func _append_log(data: Dictionary) -> void:
 	if not _is_recording: return
 	_battle_logs.append(data)
+	Verbose.trace("WRITE [%s] src=%s tgt=%s rcv=%s id=%s val=%s crit=%s @tick=%s" % [
+		data.get("type", "?"), data.get("source", "-"), data.get("target", "-"),
+		data.get("receiver", "-"), data.get("id", "-"), data.get("value", "-"),
+		data.get("critical", "-"), data.get("tick", "-")
+	], Verbose.Category.BATTLE_WRITER)
 
 # ============================== Callbacks ==============================
 
@@ -188,6 +191,7 @@ func _on_gfm_fighting_phase_state_changed(state: GlobalFightingManager.FightingP
 			_is_recording = true
 		GlobalFightingManager.FightingPhaseState.CELEBRATION:
 			_is_recording = false
+			Verbose.trace("Recording stopped | total écrits ce combat = %d" % _battle_logs.size(), Verbose.Category.BATTLE_WRITER)
 			_battle_logs.clear()
 
 

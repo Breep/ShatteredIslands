@@ -54,6 +54,8 @@ func _on_gfm_fighting_phase_state_changed(state: GlobalFightingManager.FightingP
 	match state:
 		GlobalFightingManager.FightingPhaseState.NORMAL:
 			_start_playback()
+		GlobalFightingManager.FightingPhaseState.CELEBRATION:
+			Verbose.trace("CELEBRATION (client) | applied=%d total=%d undrained=%d (on continue de drainer)" % [_current_index, _battle_logs.size(), _battle_logs.size() - _current_index], Verbose.Category.BATTLE_READER)
 		# CELEBRATION : on NE stoppe PAS le playback. Le serveur flush ses derniers logs
 		# (les kills de fin de combat) à SON passage en CELEBRATION, qui arrive APRÈS le
 		# nôtre. Il faut continuer à drainer jusqu'à all_fights_are_over, sinon la fin du
@@ -61,6 +63,11 @@ func _on_gfm_fighting_phase_state_changed(state: GlobalFightingManager.FightingP
 
 
 func _on_gfm_all_fights_are_over() -> void:
+	# Diagnostic clé : undrained > 0 → des logs reçus du serveur n'ont jamais été
+	# appliqués (on a coupé/clear trop tôt). undrained == 0 mais combat tronqué →
+	# le serveur ne les a pas envoyés (gap writer/sync), pas un souci reader.
+	var undrained: int = _battle_logs.size() - _current_index
+	Verbose.trace("all_fights_are_over | applied=%d total=%d undrained=%d" % [_current_index, _battle_logs.size(), undrained], Verbose.Category.BATTLE_READER)
 	_is_playing = false
 	_battle_logs.clear()
 	_current_index = 0
@@ -73,11 +80,17 @@ func _start_playback() -> void:
 
 
 func _apply_log(battle_log: Dictionary) -> void:
-	match String(battle_log.get("type", "")):
+	var type: String = String(battle_log.get("type", ""))
+	Verbose.trace("APPLY [%s] src=%s tgt=%s rcv=%s id=%s val=%s crit=%s @tick=%s" % [
+		type, battle_log.get("source", "-"), battle_log.get("target", "-"),
+		battle_log.get("receiver", "-"), battle_log.get("id", "-"), battle_log.get("value", "-"),
+		battle_log.get("critical", "-"), battle_log.get("tick", "-")
+	], Verbose.Category.BATTLE_READER)
+	match type:
 		"auto_attack": _apply_auto_attack(battle_log)
 		"action_done": _apply_action_done(battle_log)
 		"action_received": _apply_interaction_received(battle_log)
-		_: pass # types non rejoués dans cette passe (projectile/entity_spawned/spell…)
+		_: Verbose.trace("SKIP type non rejoué [%s]" % type, Verbose.Category.BATTLE_READER)
 
 # ============================== Logs applied ==============================
 
@@ -85,7 +98,6 @@ func _apply_auto_attack(battle_log: Dictionary) -> void:
 	var source: Entity = _entity_signal_relay.get_entity(battle_log.get("source", -1))
 	var target: Entity = _entity_signal_relay.get_entity(battle_log.get("target", -1))
 	if source == null or target == null: return
-	Verbose.trace("Auto-attack: " + str(source.uid) + "->" + str(target.uid), Verbose.Category.BATTLE_READER)
 	source.auto_attack.execute_auto_attack(target)
 
 
@@ -116,10 +128,6 @@ func _apply_interaction_received(battle_log: Dictionary) -> void:
 	var action_id: StringName = battle_log.get("id", &"Unknown action")
 	var value: float = battle_log.get("value", 0.0)
 	var is_critical: bool = battle_log.get("critical", false)
-
-	Verbose.trace("Interaction received: " + str(source_id) + "->" + str(receiver.uid) + " | " \
-			+ str(Utils.ActionType.keys()[action_type]) + " | " + str(action_id) + " | " \
-			+ str(value) + " | " + str(is_critical), Verbose.Category.BATTLE_READER)
 	_map_interaction(receiver, source, action_type, action_id, value, is_critical)
 
 # ============================== Action/Interaction Mapping ==============================
