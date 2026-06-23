@@ -1,8 +1,9 @@
 class_name DamageComponent
 extends EntityComponent
 
-# Component-based damage module: handles both outgoing (direct/direct_percent)
-# and incoming (take/take_percent) damage.
+# Component-based damage module, organised in the direct/take/apply layering
+# (cf. ../CLAUDE.md): direct/direct_percent (outgoing emitter pipeline) →
+# take/take_percent (defensive resolution) → apply (bare shared mutation).
 
 ## Action ids whose damage bypasses the dodge roll (e.g. periodic DoT ticks).
 ## Temporary action-id filter: to be replaced by an explicit "can_be_dodged"
@@ -61,10 +62,7 @@ func take(damage: float, damage_type: Utils.ActionType, is_critical: bool, actio
 		if _is_blocked(damage_type):
 			_owner.action_blocked.emit(source, damage_type, damage)
 			return 0
-	_owner.stats.health -= damage
-	_owner.damage_taken.emit(damage, damage_type, is_critical, false)
-	_owner.action_received.emit(source, damage_type, action_id, damage, is_critical)
-	return damage
+	return apply(damage, damage_type, is_critical, action_id, source)
 
 
 func take_percent(damage_percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.ActionType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
@@ -78,6 +76,16 @@ func take_percent(damage_percent: float, percent_modifier: Utils.PercentModifier
 			hp = _owner.stats.health_max - _owner.stats.health
 	var damage: float = hp * damage_percent / 100.0
 	return take(damage, damage_type, is_critical, action_id, source)
+
+
+## APPLY — mute directement les PV. La valeur est déjà résolue (résistance, crit,
+## shield, dodge, block tranchés en amont) : zéro check, zéro RNG. Unique point
+## d'application, partagé serveur (fin de `take`) + client (BattleReader/replay).
+func apply(damage: float, damage_type: Utils.ActionType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
+	_owner.stats.health -= damage
+	_owner.damage_taken.emit(damage, damage_type, is_critical, false)
+	_owner.action_received.emit(source, damage_type, action_id, damage, is_critical)
+	return damage
 
 
 # ============================== Private functions ==============================

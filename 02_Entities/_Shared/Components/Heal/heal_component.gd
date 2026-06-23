@@ -1,6 +1,10 @@
 class_name HealComponent
 extends EntityComponent
 
+# Component-based heal module, organised in the direct/take/apply layering
+# (cf. ../CLAUDE.md): direct/direct_percent (outgoing emitter pipeline) →
+# take (defensive resolution) → apply (bare shared mutation).
+
 func _enter_tree() -> void:
 	if _owner == null: return
 	if _owner.heal != null and _owner.heal != self:
@@ -59,6 +63,14 @@ func take(heal_amount: float, is_critical: bool, action_id: StringName, source: 
 		if _is_dodged(Utils.ActionType.UTILITY_HEAL, source):
 			_owner.action_dodged.emit(source, Utils.ActionType.UTILITY_HEAL, heal_amount, is_critical)
 			return 0
+	return apply(heal_amount, is_critical, action_id, source)
+
+
+## APPLY — mute directement les PV. La valeur est déjà résolue (power, crit, dodge
+## tranchés en amont) : zéro check, zéro RNG. Unique point d'application, partagé
+## serveur (fin de `take`) + client (BattleReader/replay). L'overheal est clampé
+## par le setter de `health`, d'où le calcul du soin effectif.
+func apply(heal_amount: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
 	var initial_health: float = _owner.stats.health
 	if heal_amount > 0:
 		_owner.stats.health += heal_amount
