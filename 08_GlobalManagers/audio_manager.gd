@@ -13,9 +13,9 @@ const _GOLD_SOUND_SPACING: float = 0.08
 # Volumes par défaut appliqués au démarrage (linéaire 0.0 → 1.0).
 # Forcés en code car l'éditeur Godot resauve default_bus_layout.tres tout seul
 # quand on touche au panel Audio, écrasant nos valeurs.
-const _DEFAULT_SFX_VOLUME: float = 1.0
-const _DEFAULT_UI_VOLUME: float = 0.8
-const _DEFAULT_BGM_VOLUME: float = 0.15
+const _DEFAULT_SFX_VOLUME: float = 0.0 # 1.0
+const _DEFAULT_UI_VOLUME: float = 0.0 # 0.8
+const _DEFAULT_BGM_VOLUME: float = 0.0 # 0.15
 #endregion
 
 #region ============================== Private vars ==============================

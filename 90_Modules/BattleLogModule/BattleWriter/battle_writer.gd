@@ -24,6 +24,7 @@ func _ready() -> void:
 	_fighting_area.projectile_spawned.connect(_on_fighting_area_projectile_spawned)
 	_fighting_area.entity_spawned.connect(_on_fighting_area_entity_spawned)
 	_fighting_area.projectile_target_hit.connect(_on_fighting_area_projectile_target_hit)
+	_fighting_area.auto_attack_launched.connect(_on_fighting_area_auto_attack_launched)
 
 
 func _input(event: InputEvent) -> void:
@@ -125,6 +126,17 @@ func _log_action_received(receiver: Entity, source: Entity, action_type: Utils.A
 	_append_log(entry)
 
 
+func _log_auto_attack(source: Entity, target: Entity) -> void:
+	if not is_instance_valid(source) or not is_instance_valid(target): return
+	var entry = _create_base_entry()
+	entry.merge({
+		"type": "auto_attack",
+		"source": source.uid,
+		"target": target.uid
+	})
+	_append_log(entry)
+
+
 func _log_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.Type, gpos: Vector3, projectile_uid: int) -> void:
 	if not is_instance_valid(source) or not is_instance_valid(target): return
 	var entry = _create_base_entry()
@@ -202,3 +214,8 @@ func _on_fighting_area_action_done(source: Entity, target: Entity, action_type: 
 func _on_fighting_area_projectile_target_hit(target: Entity, gpos: Vector3, projectile_uid: int) -> void:
 	if not multiplayer.is_server(): return # Only the server writes battle logs
 	_log_projectile_target_hit(target, gpos, projectile_uid)
+
+
+func _on_fighting_area_auto_attack_launched(source: Entity, target: Entity) -> void:
+	if not multiplayer.is_server(): return # Only the server writes battle logs
+	_log_auto_attack(source, target)

@@ -22,6 +22,8 @@ signal entity_died(victim: Entity)
 signal entity_spawned(entity: Entity, entity_type: Entity.EntityType, gpos: Vector3)
 @warning_ignore("unused_signal")
 signal projectile_target_hit(target: Entity, gpos: Vector3, projectile_uid: int)
+@warning_ignore("unused_signal")
+signal auto_attack_launched(source: Entity, target: Entity)
 
 # ============================== Network Export variables ==============================
 
@@ -43,9 +45,9 @@ var spawn_manager: SpawnManager:
 var fighting_manager: FightingManager:
 	get: return _fighting_manager
 
-@export var _entity_manager: EntityManager
-var entity_manager: EntityManager:
-	get: return _entity_manager
+@export var _entity_signal_relay: EntitySignalRelay
+var entity_signal_relay: EntitySignalRelay:
+	get: return _entity_signal_relay
 
 @export var _fighting_event_registry: FightingEventRegistry
 var fighting_event_registry: FightingEventRegistry:
@@ -72,7 +74,7 @@ func _ready() -> void:
 func init_fight(left_formation: FightingFormation, right_formation: FightingFormation, left_team: int, right_team: int) -> void:
 	_current_battle_id = 42
 	_heroes.clear()
-	_entity_manager.clear()
+	_entity_signal_relay.clear()
 
 	if _arena_zone_manager != null:
 		_arena_zone_manager.init(_team_zones, _current_battle_id, _center_zone, _full_arena_zone)
@@ -170,8 +172,8 @@ func _ready_checks() -> bool:
 		printerr("FightingArea: No FightingManager")
 		return false
 
-	if _entity_manager == null:
-		printerr("FightingArea: No EntityManager")
+	if _entity_signal_relay == null:
+		printerr("FightingArea: No EntitySignalRelay")
 		return false
 
 	return true

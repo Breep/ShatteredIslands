@@ -48,7 +48,7 @@ func _on_entity_died(victim: Entity) -> void:
 		if fighting_event.on_entity_died_callback.is_valid():
 			var cb_vars := {
 				FightingEvent.VarType.FIGHTING_AREA: _fighting_area,
-				FightingEvent.VarType.ENTITIES: _fighting_area.entity_manager.entities.values(),
+				FightingEvent.VarType.ENTITIES: _fighting_area.entity_signal_relay.entities.values(),
 				FightingEvent.VarType.VICTIM: victim,
 				FightingEvent.VarType.EVENT_OWNER: fighting_event.owner
 			}

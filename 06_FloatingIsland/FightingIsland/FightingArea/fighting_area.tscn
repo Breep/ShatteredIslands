@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c66yw4go2ykwa"]
 
 [ext_resource type="Script" uid="uid://cd8u3lm3xa8c4" path="res://06_FloatingIsland/FightingIsland/FightingArea/fighting_area.gd" id="1_t74of"]
-[ext_resource type="PackedScene" uid="uid://pyrw8lacvly2" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/EntityManager/entity_manager.tscn" id="2_wtb7j"]
+[ext_resource type="PackedScene" uid="uid://pyrw8lacvly2" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/EntitySignalRelay/entity_signal_relay.tscn" id="2_wtb7j"]
 [ext_resource type="PackedScene" uid="uid://c0l0roxttdtlp" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/FightingManager/fighting_manager.tscn" id="3_yyfcp"]
 [ext_resource type="PackedScene" uid="uid://dnt0yj1cs67ko" path="res://90_Modules/BattleLogModule/BattleLogSynchronizer/battle_log_synchronizer.tscn" id="4_327ee"]
 [ext_resource type="PackedScene" uid="uid://do44qn4g8pq5j" path="res://06_FloatingIsland/FightingIsland/FightingArea/Managers/Events/fighting_event_registry.tscn" id="4_w72k1"]
@@ -73,11 +73,11 @@ size = Vector3(2.3232422, 9.508728, 30.281006)
 [sub_resource type="BoxShape3D" id="BoxShape3D_owbkj"]
 size = Vector3(29.652344, 9.508728, 3.1503906)
 
-[node name="FightingArea" type="Node3D" unique_id=2072382245 node_paths=PackedStringArray("_spawn_manager", "_fighting_manager", "_entity_manager", "_arena_zone_manager", "_team_zones", "_center_zone", "_full_arena_zone")]
+[node name="FightingArea" type="Node3D" unique_id=2072382245 node_paths=PackedStringArray("_spawn_manager", "_fighting_manager", "_entity_signal_relay", "_arena_zone_manager", "_team_zones", "_center_zone", "_full_arena_zone")]
 script = ExtResource("1_t74of")
 _spawn_manager = NodePath("SpawnManager")
 _fighting_manager = NodePath("FightingManager")
-_entity_manager = NodePath("EntityManager")
+_entity_signal_relay = NodePath("EntitySignalRelay")
 _arena_zone_manager = NodePath("ArenaZoneManager")
 _team_zones = {
 1: NodePath("SpawnArea2"),
@@ -86,9 +86,8 @@ _team_zones = {
 _center_zone = NodePath("CenterArea")
 _full_arena_zone = NodePath("FullArea")
 
-[node name="EntityManager" parent="." unique_id=1828737280 node_paths=PackedStringArray("_fighting_area", "_scanner_area") instance=ExtResource("2_wtb7j")]
+[node name="EntitySignalRelay" parent="." unique_id=1828737280 node_paths=PackedStringArray("_fighting_area") instance=ExtResource("2_wtb7j")]
 _fighting_area = NodePath("..")
-_scanner_area = NodePath("../ScannerArea3D")
 
 [node name="FightingManager" parent="." unique_id=588752297 instance=ExtResource("3_yyfcp")]
 
@@ -102,8 +101,8 @@ _battle_reader = NodePath("../BattleReader")
 [node name="BattleWriter" parent="." unique_id=464563403 node_paths=PackedStringArray("_fighting_area") instance=ExtResource("8_7oplh")]
 _fighting_area = NodePath("..")
 
-[node name="BattleReader" parent="." unique_id=750019197 node_paths=PackedStringArray("_entity_manager") instance=ExtResource("6_w72k1")]
-_entity_manager = NodePath("../EntityManager")
+[node name="BattleReader" parent="." unique_id=750019197 node_paths=PackedStringArray("_entity_signal_relay") instance=ExtResource("6_w72k1")]
+_entity_signal_relay = NodePath("../EntitySignalRelay")
 
 [node name="SpawnManager" parent="." unique_id=1829480780 node_paths=PackedStringArray("_fighting_area", "_entities_node", "_projectiles_node", "_spells_node") instance=ExtResource("5_xgsbs")]
 _fighting_area = NodePath("..")
@@ -185,13 +184,6 @@ shape = SubResource("BoxShape3D_floor")
 
 [node name="CharacterSynchronizer" type="MultiplayerSpawner" parent="." unique_id=126086143]
 spawn_path = NodePath("../Characters")
-
-[node name="ScannerArea3D" type="Area3D" parent="." unique_id=1453503564]
-collision_layer = 0
-collision_mask = 16
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ScannerArea3D" unique_id=1351499465]
-shape = SubResource("BoxShape3D_8iy5v")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=538808466 groups=["WALL"]]
 collision_mask = 0

@@ -15,6 +15,7 @@ signal damage_taken(damage: float, damage_type: Utils.ActionType, is_critical: b
 signal heal_taken(heal_amount: float, is_critical: bool)
 signal stack_taken(stack_type: Alteration.Type, stack_number: float, is_critical: bool)
 signal auto_attack_completed() # TODO: A virer
+signal auto_attack_launched(target: Entity) # Swing déclenché (serveur) → loggé pour replay client
 signal spell_casted(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary)
 signal spawn_completed()
 signal resurrected()

@@ -206,6 +206,17 @@ func stop_approaching() -> void:
 	_current_phase = AttackPhase.COOLDOWN
 
 
+## Replay client d'un swing d'auto-attaque (log AUTO_ATTACK rejoué par le BattleReader).
+## VISUEL PUR : oriente vers la cible et déclenche l'anim/son via attack_started — aucun
+## dégât, aucun projectile, aucune décision. Les dégâts arrivent par le log action_received.
+func execute_auto_attack(target: Entity) -> void:
+	if not is_instance_valid(target): return
+	if _owner != null:
+		_owner.look_at_target_y_only(target.global_position)
+	_calculate_attack_timings(_attack_interval_ticks)
+	attack_started.emit(float(_lock_ticks) / float(TICKS_PER_SECOND))
+
+
 # ============================== Private functions ==============================
 
 func _advance_active_attack() -> void:
@@ -233,6 +244,9 @@ func _trigger_attack(target: Entity) -> bool:
 
 	if _owner != null:
 		_owner.look_at_target_y_only(target.global_position)
+
+	# Swing engagé : on le logge (serveur) pour que le client le rejoue (execute_auto_attack).
+	_owner.auto_attack_launched.emit(target)
 
 	_current_phase = AttackPhase.ATTACKING
 
