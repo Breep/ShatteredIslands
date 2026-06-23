@@ -11,7 +11,7 @@ func apply(ctx: SkillContext) -> void:
 	var chicken: Entity = ctx.entity
 	var enemy: Entity = chicken.target.get_target(TargetComponent.TargettingStrategy.CLOSEST_ENEMY)
 	if is_instance_valid(enemy):
-		chicken.alterations.inflict_condition_stacks(enemy, _ignite, Alteration.Type.IGNITE, &"Traînée céleste")
+		chicken.alterations.direct_stack(enemy, _ignite, Alteration.Type.IGNITE, &"Traînée céleste")
 
 
 func get_description() -> String:

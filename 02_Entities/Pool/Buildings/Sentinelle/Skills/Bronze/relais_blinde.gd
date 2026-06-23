@@ -18,7 +18,7 @@ func apply(ctx: SkillContext) -> void:
 		if allies.is_empty():
 			return
 		for ally: Entity in allies:
-			sentinelle.alterations.inflict_condition_stacks(ally, _regen, Alteration.Type.REGEN, &"Relais blindé")
+			sentinelle.alterations.direct_stack(ally, _regen, Alteration.Type.REGEN, &"Relais blindé")
 		if sentinelle.has_method("flash_beams_to"):
 			sentinelle.flash_beams_to(allies)
 	, true)

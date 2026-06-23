@@ -6,6 +6,12 @@ extends EntityComponent
 ## process_tick is delegated to each instance. Hot-path consumers
 ## (damage pipeline) read `shield_alteration`, `block_alteration`,
 ## `thorn_alteration` directly — everything else goes through the generic API.
+##
+## Norme direct/take/apply (cf. ../CLAUDE.md) : le gameplay n'appelle QUE les
+## `direct_*` (couche émettrice). Les `take_*` sont déclenchés par `direct_*`
+## (résolution serveur). Les `apply_*` sont la mutation partagée serveur+client :
+## appelés UNIQUEMENT par la queue de `take_*` (serveur) et le BattleReader
+## (client) — jamais depuis un skill/carte.
 
 const TICKS_PER_SECOND: int = Alteration.TICKS_PER_SECOND
 
@@ -175,20 +181,27 @@ const NET_COUNTERPART: Dictionary[Alteration.Type, Alteration.Type] = {
 }
 
 
-## Add stacks to a StackAlteration. `mod` may carry DURATION (Regen). Strength/
-## Weakness and Defense/Vulnerability net against their counterpart first.
-func add_stack(alteration_type: Alteration.Type, amount: float, source: Entity = null, action_id: StringName = &"", mod: Dictionary = {}) -> float:
+## APPLY — mute directement les stacks. `delta` signé : > 0 ajoute, < 0 retire.
+## Aucune résolution (dodge/résistance) : la valeur reçue est déjà résolue, donc
+## c'est l'unique point appelé aussi bien par `take_stack` (fin de résolution)
+## que par le serveur (auto-buff direct) et le BattleReader (replay).
+## `mod` peut porter DURATION (Regen). Strength/Weakness et Defense/Vulnerability
+## se neutralisent avec leur contrepartie avant d'accumuler.
+func apply_stack(alteration_type: Alteration.Type, delta: float, source: Entity = null, action_id: StringName = &"", mod: Dictionary = {}) -> float:
 	var alteration: StackAlteration = _alterations.get(alteration_type) as StackAlteration
 	if alteration == null:
-		Verbose.error("add_stack: no StackAlteration for type [" + str(alteration_type) + "]", Verbose.Category.ENTITY_MODULE)
+		Verbose.error("apply_stack: no StackAlteration for type [" + str(alteration_type) + "]", Verbose.Category.ENTITY_MODULE)
 		return 0.0
 
-	if amount > 0 and NET_COUNTERPART.has(alteration_type):
-		amount = _cancel_counterpart(alteration_type, amount)
-		if amount <= 0:
+	if delta < 0:
+		return alteration.remove_stack(-delta, mod)
+
+	if delta > 0 and NET_COUNTERPART.has(alteration_type):
+		delta = _cancel_counterpart(alteration_type, delta)
+		if delta <= 0:
 			return alteration.stacks
 
-	return alteration.add_stack(amount, source, action_id, mod)
+	return alteration.add_stack(delta, source, action_id, mod)
 
 
 ## Remove up to `amount` stacks from the opposing alteration; returns the surplus
@@ -200,15 +213,6 @@ func _cancel_counterpart(alteration_type: Alteration.Type, amount: float) -> flo
 	if cancel > 0:
 		counterpart.remove_stack(cancel)
 	return amount - cancel
-
-
-## Remove stacks from a StackAlteration. `mod` may carry ACTION_TYPE for typed stacks.
-func remove_stack(alteration_type: Alteration.Type, amount: float, mod: Dictionary = {}) -> float:
-	var alteration: StackAlteration = _alterations.get(alteration_type) as StackAlteration
-	if alteration == null:
-		Verbose.error("remove_stack: no StackAlteration for type [" + str(alteration_type) + "]", Verbose.Category.ENTITY_MODULE)
-		return 0.0
-	return alteration.remove_stack(amount, mod)
 
 
 func get_stacks(alteration_type: Alteration.Type) -> float:
@@ -291,11 +295,11 @@ func _adjust_typed_stat(stat_type: EntityStats.StatType, action_type: Utils.Acti
 	return new_value
 
 
-## Apply a TimedAlteration. `duration == -1` → infinite.
-func apply_timed(alteration_type: Alteration.Type, duration: float) -> void:
+## Apply a TimedAlteration. `duration == -1` → infinite. Privé : passe par apply_status.
+func _apply_timed(alteration_type: Alteration.Type, duration: float) -> void:
 	var alteration: TimedAlteration = _alterations.get(alteration_type) as TimedAlteration
 	if alteration == null:
-		Verbose.error("apply_timed: no TimedAlteration for type [" + str(alteration_type) + "]", Verbose.Category.ENTITY_MODULE)
+		Verbose.error("_apply_timed: no TimedAlteration for type [" + str(alteration_type) + "]", Verbose.Category.ENTITY_MODULE)
 		return
 	alteration.apply(duration)
 
@@ -316,11 +320,11 @@ func get_remaining_time(alteration_type: Alteration.Type) -> float:
 	return alteration.time_left if alteration != null else 0.0
 
 
-## Apply a StateAlteration (on/off, no duration).
-func apply_state(alteration_type: Alteration.Type) -> void:
+## Apply a StateAlteration (on/off, no duration). Privé : passe par apply_status.
+func _apply_state(alteration_type: Alteration.Type) -> void:
 	var alteration: StateAlteration = _alterations.get(alteration_type) as StateAlteration
 	if alteration == null:
-		Verbose.error("apply_state: no StateAlteration for type [" + str(alteration_type) + "]", Verbose.Category.ENTITY_MODULE)
+		Verbose.error("_apply_state: no StateAlteration for type [" + str(alteration_type) + "]", Verbose.Category.ENTITY_MODULE)
 		return
 	alteration.apply()
 
@@ -336,13 +340,14 @@ func has_state(alteration_type: Alteration.Type) -> bool:
 	return alteration != null and alteration.is_active
 
 
-## Generic status dispatcher — routes to apply_timed or apply_state based on type.
-## Used by take_status() so the sender API accepts both flavors.
-func apply_status(alteration_type: Alteration.Type, duration: float) -> void:
+## APPLY (statuts) — dispatcher générique vers timed/state selon le type.
+## Unique point d'application des statuts : appelé par take_status (fin de
+## résolution), par le serveur (auto-statut direct) et par le BattleReader.
+func apply_status(alteration_type: Alteration.Type, duration: float = -1.0) -> void:
 	if Alteration.is_state_type(alteration_type):
-		apply_state(alteration_type)
+		_apply_state(alteration_type)
 	else:
-		apply_timed(alteration_type, duration)
+		_apply_timed(alteration_type, duration)
 
 
 func has_status(alteration_type: Alteration.Type) -> bool:
@@ -354,7 +359,7 @@ func has_status(alteration_type: Alteration.Type) -> bool:
 
 #region ============================== Outgoing actions ==============================
 ## Apply stacks to a target through the action pipeline (power/fragility, crit, action modifiers).
-func inflict_condition_stacks(target: Entity, value: float, stack_type: Alteration.Type, action_id: StringName, duration: float = 5.0) -> float:
+func direct_stack(target: Entity, value: float, stack_type: Alteration.Type, action_id: StringName, duration: float = 5.0) -> float:
 	if is_instance_valid(target) == null: return 0
 
 	var base_value: float = value * _get_power_fragility_multiplier(Alteration.to_action(stack_type))
@@ -371,7 +376,7 @@ func inflict_condition_stacks(target: Entity, value: float, stack_type: Alterati
 	value = modifiers_data[ActionModifier.VarType.STACK_VALUE]
 	duration = modifiers_data[ActionModifier.VarType.DURATION]
 
-	var stacks_inflicted: float = target.alterations.take_condition_stacks(value, stack_type, crit_data["is_critical"], action_id, _owner, duration)
+	var stacks_inflicted: float = target.alterations.take_stack(value, stack_type, crit_data["is_critical"], action_id, _owner, duration)
 
 	_consume_after_action_modifiers(Utils.ActionCategory.STACK, {
 		ActionModifier.VarType.STACK_VALUE: stacks_inflicted,
@@ -386,7 +391,7 @@ func inflict_condition_stacks(target: Entity, value: float, stack_type: Alterati
 
 
 ## Apply a TimedAlteration / StateAlteration to a target through the action pipeline.
-func inflict_status(target: Entity, status_type: Alteration.Type, duration: float, action_id: StringName) -> float:
+func direct_status(target: Entity, status_type: Alteration.Type, duration: float, action_id: StringName) -> float:
 	if not is_instance_valid(target): return 0
 	var value: float = duration * _get_power_fragility_multiplier(Alteration.to_action(status_type))
 	var actual_duration: float = target.alterations.take_status(status_type, value, action_id, _owner)
@@ -396,7 +401,7 @@ func inflict_status(target: Entity, status_type: Alteration.Type, duration: floa
 
 
 ## Remove debuff stacks from a target (server-only).
-func cleanse(target: Entity, value: float, action_id: StringName) -> float:
+func direct_cleanse(target: Entity, value: float, action_id: StringName) -> float:
 	if not is_instance_valid(target): return 0
 	if not multiplayer.is_server(): return 0
 
@@ -412,7 +417,7 @@ func cleanse(target: Entity, value: float, action_id: StringName) -> float:
 
 
 ## Remove buff stacks from a target (server-only).
-func dispell(target: Entity, value: float, action_id: StringName) -> float:
+func direct_dispell(target: Entity, value: float, action_id: StringName) -> float:
 	if not is_instance_valid(target): return 0
 	if not multiplayer.is_server(): return 0
 
@@ -434,7 +439,7 @@ const _DISPELL_PACK_SIZE: int = 2
 
 
 ## Receive condition stacks from a source. Applies dodge / resistance / invulnerability / death gates.
-func take_condition_stacks(stacks_number: float, stack_type: Alteration.Type, is_critical: bool, action_id: StringName, source: Entity = null, duration: float = 5.0) -> float:
+func take_stack(stacks_number: float, stack_type: Alteration.Type, is_critical: bool, action_id: StringName, source: Entity = null, duration: float = 5.0) -> float:
 	if _owner.is_dead(): return 0
 	if has_state(Alteration.Type.INVULNERABLE) and Alteration.is_negative(stack_type): return 0
 	if multiplayer.is_server():
@@ -447,7 +452,7 @@ func take_condition_stacks(stacks_number: float, stack_type: Alteration.Type, is
 	if stack_type == Alteration.Type.REGEN:
 		mod[Alteration.ModifierType.DURATION] = int(duration)
 
-	add_stack(stack_type, stacks_number, source, action_id, mod)
+	apply_stack(stack_type, stacks_number, source, action_id, mod)
 	_owner.stack_taken.emit(stack_type, stacks_number, is_critical)
 	_owner.action_received.emit(source, Alteration.to_action(stack_type), action_id, stacks_number, is_critical)
 	Verbose.trace("Stack received [" + str(stacks_number) + "]", Verbose.Category.ACTION_RECEIVER_MODULE)
@@ -488,13 +493,13 @@ func take_cleanse(value: float, is_critical: bool, action_id: StringName, source
 		match stack_chosen:
 			Alteration.Type.IGNITE:
 				to_remove = min(to_remove, ignite_stacks)
-				remove_stack(Alteration.Type.IGNITE, to_remove)
+				apply_stack(Alteration.Type.IGNITE, -to_remove)
 			Alteration.Type.POISON:
 				to_remove = min(to_remove, poison_stacks)
-				remove_stack(Alteration.Type.POISON, to_remove)
+				apply_stack(Alteration.Type.POISON, -to_remove)
 			Alteration.Type.NECROSIS:
 				to_remove = min(to_remove, necrosis_stacks)
-				remove_stack(Alteration.Type.NECROSIS, to_remove)
+				apply_stack(Alteration.Type.NECROSIS, -to_remove)
 		remaining -= to_remove
 		removed += to_remove
 
@@ -521,10 +526,10 @@ func take_dispell(value: float, is_critical: bool, action_id: StringName, source
 		match stack_chosen:
 			Alteration.Type.SHIELD:
 				to_remove = min(to_remove, shield_stacks)
-				remove_stack(Alteration.Type.SHIELD, to_remove)
+				apply_stack(Alteration.Type.SHIELD, -to_remove)
 			Alteration.Type.REGEN:
 				to_remove = min(to_remove, regen_stacks)
-				remove_stack(Alteration.Type.REGEN, to_remove)
+				apply_stack(Alteration.Type.REGEN, -to_remove)
 		remaining -= to_remove
 		removed += to_remove
 

@@ -8,15 +8,15 @@ extends CardEffect
 func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 	var owner: Entity = ctx.entity_owner
 	if owner.alterations == null: return
-	owner.alterations.add_stack(Alteration.Type.DEFENSE, _defense[card_lvl - 1])
-	owner.alterations.inflict_status(owner, Alteration.Type.TAUNT, -1, card_name)
+	owner.alterations.apply_stack(Alteration.Type.DEFENSE, _defense[card_lvl - 1])
+	owner.alterations.direct_status(owner, Alteration.Type.TAUNT, -1, card_name)
 
 
 func revert(ctx: CardContext, _card_name: StringName, card_lvl: int) -> void:
 	var owner: Entity = ctx.entity_owner
 	if owner.alterations == null: return
 	owner.alterations.cancel_state(Alteration.Type.TAUNT)
-	owner.alterations.remove_stack(Alteration.Type.DEFENSE, _defense[card_lvl - 1])
+	owner.alterations.apply_stack(Alteration.Type.DEFENSE, -_defense[card_lvl - 1])
 
 
 func get_description(card_lvl: int) -> String:

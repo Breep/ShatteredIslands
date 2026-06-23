@@ -14,7 +14,7 @@ func apply(ctx: SkillContext) -> void:
 			return
 		if not is_instance_valid(source):
 			return
-		golem.alterations.inflict_condition_stacks(source, _stacks, Alteration.Type.IGNITE, &"Riposte ardente")
+		golem.alterations.direct_stack(source, _stacks, Alteration.Type.IGNITE, &"Riposte ardente")
 	)
 
 

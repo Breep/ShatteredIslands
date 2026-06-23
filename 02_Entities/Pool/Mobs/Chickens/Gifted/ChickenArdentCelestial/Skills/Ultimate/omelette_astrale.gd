@@ -14,7 +14,7 @@ func apply(ctx: SkillContext) -> void:
 	if not is_instance_valid(target):
 		return
 	var ignite: float = chicken.stats.get_stat(EntityStats.StatType.AP) * _ap_ignite_ratio
-	chicken.alterations.inflict_condition_stacks(target, ignite, Alteration.Type.IGNITE, &"Omelette astrale")
+	chicken.alterations.direct_stack(target, ignite, Alteration.Type.IGNITE, &"Omelette astrale")
 
 
 func get_description() -> String:

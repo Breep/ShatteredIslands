@@ -14,7 +14,7 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 	_on_detected = func(e: Entity) -> void:
 		if not (is_instance_valid(e) and e.is_summoned() and owner.summon.is_summoner_of(e)): return
 		if e.alterations != null:
-			e.alterations.add_stack(Alteration.Type.BLOCK, block)
+			owner.alterations.direct_stack(e, block, Alteration.Type.BLOCK, card_name)
 	owner.target.new_entity_detected.connect(_on_detected)
 
 

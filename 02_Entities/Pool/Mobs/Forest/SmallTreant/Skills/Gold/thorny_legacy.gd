@@ -18,7 +18,7 @@ func apply(ctx: SkillContext) -> void:
 		if transferred <= 0: return
 		var ally: Entity = _owner.target.get_target(TargetComponent.TargettingStrategy.CLOSEST_ALLY)
 		if is_instance_valid(ally):
-			ally.alterations.add_stack(Alteration.Type.THORN, transferred)
+			_owner.alterations.direct_stack(ally, transferred, Alteration.Type.THORN, &"Thorny Legacy")
 
 	_owner.death_modifiers_registry.register_modifier(mod)
 

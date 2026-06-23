@@ -21,7 +21,7 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 		var target: Entity = cb_vars[AutoAttackModifier.VarType.TARGET]
 		if target == null or not is_instance_valid(target): return
 		if not Utils.is_randomize_modifier_active(chance, owner.battle_id): return
-		owner.alterations.inflict_condition_stacks(target, ignite, Alteration.Type.IGNITE, card_name)
+		owner.alterations.direct_stack(target, ignite, Alteration.Type.IGNITE, card_name)
 
 	owner.battle_callback_registry.register_battle_start(card_name, func() -> void:
 		owner.auto_attack_modifier_registry.register_modifier(aa_mod)

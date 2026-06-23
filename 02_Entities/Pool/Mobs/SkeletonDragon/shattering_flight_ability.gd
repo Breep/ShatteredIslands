@@ -356,8 +356,8 @@ func _set_combat_active(active: bool) -> void:
 		_owner.alterations.cancel_state(Alteration.Type.UNTARGETABLE)
 		_unregister_mana_cut()
 	else:
-		_owner.alterations.apply_state(Alteration.Type.INVULNERABLE)
-		_owner.alterations.apply_state(Alteration.Type.UNTARGETABLE)
+		_owner.alterations.direct_status(_owner, Alteration.Type.INVULNERABLE, -1.0, &"ShatteringFlight")
+		_owner.alterations.direct_status(_owner, Alteration.Type.UNTARGETABLE, -1.0, &"ShatteringFlight")
 		_register_mana_cut()
 
 

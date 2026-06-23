@@ -47,7 +47,7 @@ func get_description() -> String:
 func _trigger(latika: Entity) -> void:
 	latika.heal.direct(latika, _heal_amount, &"BestialReflex")
 	_dash_back(latika)
-	latika.alterations.apply_state(Alteration.Type.UNTARGETABLE)
+	latika.alterations.direct_status(latika, Alteration.Type.UNTARGETABLE, -1.0, &"BestialReflex")
 	var clear_untargetable := func() -> void:
 		if is_instance_valid(latika):
 			latika.alterations.cancel_state(Alteration.Type.UNTARGETABLE)

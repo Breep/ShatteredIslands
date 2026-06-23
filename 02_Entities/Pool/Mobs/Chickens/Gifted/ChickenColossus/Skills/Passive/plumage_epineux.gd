@@ -10,7 +10,7 @@ func apply(ctx: SkillContext) -> void:
 	var chicken: Entity = ctx.entity
 	var ally: Entity = chicken.target.get_target(TargetComponent.TargettingStrategy.RANDOM_ALLY)
 	if is_instance_valid(ally):
-		ally.alterations.add_stack(Alteration.Type.THORN, _thorn, chicken, &"Plumage épineux")
+		chicken.alterations.direct_stack(ally, _thorn, Alteration.Type.THORN, &"Plumage épineux")
 
 
 func get_description() -> String:

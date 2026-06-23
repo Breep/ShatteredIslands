@@ -18,7 +18,7 @@ func _ready() -> void:
 		var target: Entity = cb_vars[AutoAttackModifier.VarType.TARGET]
 		if target == null or target.is_queued_for_deletion(): return
 		if Utils.is_randomize_modifier_active(_poison_stack_ratio*100, battle_id):
-			alterations.inflict_condition_stacks(target, _stacks_number, Alteration.Type.POISON, "Chicken")
+			alterations.direct_stack(target, _stacks_number, Alteration.Type.POISON, "Chicken")
 		
 	auto_attack_modifier_registry.register_modifier(mod)
 	super._ready()

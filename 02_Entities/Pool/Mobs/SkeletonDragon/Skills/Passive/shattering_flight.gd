@@ -49,7 +49,7 @@ func apply(ctx: SkillContext) -> void:
 	)
 
 	dragon.battle_callback_registry.register_periodic(&"ShatteringFlightStrength", _strength_tick_period, func() -> void:
-		dragon.alterations.add_stack(Alteration.Type.STRENGTH, _strength_per_tick, dragon, &"ShatteringFlight")
+		dragon.alterations.direct_stack(dragon, _strength_per_tick, Alteration.Type.STRENGTH, &"ShatteringFlight")
 	, true)
 
 

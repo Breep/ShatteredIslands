@@ -36,4 +36,4 @@ func _on_enemy_died(victim: Entity) -> void:
 	
 	var targets: Array[Entity] = victim.target.get_targets(TargetComponent.MultipleTargettingStrategy.ALLIES, _radius)
 	for target in targets:
-		target.alterations.take_condition_stacks(poison_stacks, Alteration.Type.POISON, false, "Contagion")
+		target.alterations.take_stack(poison_stacks, Alteration.Type.POISON, false, "Contagion")

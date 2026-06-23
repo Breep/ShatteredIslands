@@ -23,7 +23,7 @@ func apply(ctx: SkillContext) -> void:
 		var target: Entity = data.get(AutoAttackModifier.VarType.TARGET)
 		if not is_instance_valid(source) or not is_instance_valid(target):
 			return
-		source.alterations.inflict_condition_stacks(
+		source.alterations.direct_stack(
 			target, _vulnerability_stacks, Alteration.Type.VULNERABILITY, &"PackFuryVulnerability")
 	latika.acolyte_modifiers_registry.auto_attack_modifier_registry.register_modifier(aa_mod)
 

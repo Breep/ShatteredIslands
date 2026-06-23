@@ -12,7 +12,7 @@ func apply(ctx: SkillContext) -> void:
 	
 	for entity in allies:
 		if not is_instance_valid(entity): continue
-		entity.alterations.add_stack(Alteration.Type.DEFENSE, _defense_bonus, _owner, &"RallyingBanner")
+		_owner.alterations.direct_stack(entity, _defense_bonus, Alteration.Type.DEFENSE, &"RallyingBanner")
 		
 	var mod := DeathModifier.new()
 	mod.id = &"Rallying Banner"
@@ -20,7 +20,7 @@ func apply(ctx: SkillContext) -> void:
 		var remaining_allies: Array[Entity] = _owner.target.get_targets(TargetComponent.MultipleTargettingStrategy.ALLIES)
 		for entity in remaining_allies: #TODO remaining entities empty
 			if not is_instance_valid(entity): continue
-			entity.alterations.add_stack(Alteration.Type.DEFENSE, _defense_bonus, null, &"RallyingBanner")
+			_owner.alterations.direct_stack(entity, _defense_bonus, Alteration.Type.DEFENSE, &"RallyingBanner")
 	_owner.death_modifiers_registry.register_modifier(mod)
 	
 	
@@ -34,4 +34,4 @@ func get_description() -> String:
 func _on_entity_spawned(entity: Entity) -> void:
 	if not is_instance_valid(entity): return
 	if entity.team != _owner.team: return
-	entity.alterations.add_stack(Alteration.Type.DEFENSE, _defense_bonus, _owner, &"RallyingBanner")
+	_owner.alterations.direct_stack(entity, _defense_bonus, Alteration.Type.DEFENSE, &"RallyingBanner")

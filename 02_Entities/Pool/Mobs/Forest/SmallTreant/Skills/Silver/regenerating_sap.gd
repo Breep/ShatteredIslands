@@ -16,7 +16,7 @@ func apply(ctx: SkillContext) -> void:
 		var thorn: float = _owner.alterations.get_stacks(Alteration.Type.THORN)
 		var shield: float = thorn * _shield_per_thorn_percent / 100.0
 		if shield > 0:
-			_owner.alterations.add_stack(Alteration.Type.SHIELD, shield)
+			_owner.alterations.direct_stack(_owner, shield, Alteration.Type.SHIELD, &"Regenerating Sap")
 	, true)
 
 

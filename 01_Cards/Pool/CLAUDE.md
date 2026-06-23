@@ -337,7 +337,7 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 	owner.battle_callbacks.register_periodic(card_name, period, func() -> void:
 		var enemy := owner.target.get_target(TargetComponent.TargettingStrategy.RANDOM_ENEMY)
 		if enemy == null: return
-		owner.alterations.inflict_condition_stacks(enemy, stacks, Alteration.Type.POISON, card_name)
+		owner.alterations.direct_stack(enemy, stacks, Alteration.Type.POISON, card_name)
 	)
 
 

@@ -25,5 +25,5 @@ func apply(ctx: SkillContext) -> void:
 		var ratio: float = blade.get_meta(META_CONVERT_RATIO, _convert_ratio)
 		var ally: Entity = blade.target.get_target(TargetComponent.TargettingStrategy.LOWEST_HP_PERCENT_ALLY_INCLUDING_SELF)
 		if is_instance_valid(ally):
-			blade.alterations.inflict_condition_stacks(ally, damage * ratio, Alteration.Type.SHIELD, &"Aegis active")
+			blade.alterations.direct_stack(ally, damage * ratio, Alteration.Type.SHIELD, &"Aegis active")
 	blade.auto_attack_modifier_registry.register_modifier(modifier)

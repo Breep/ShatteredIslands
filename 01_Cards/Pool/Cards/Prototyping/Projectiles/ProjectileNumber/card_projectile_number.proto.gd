@@ -19,7 +19,7 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 	mod.on_hit_callback = func(cb_vars: Dictionary) -> void:
 		var target = cb_vars.get(ProjectileModifier.VarType.TARGET)
 		if not is_instance_valid(target): return
-		owner.alterations.inflict_condition_stacks(target, 1, Alteration.Type.POISON, "proto poison")
+		owner.alterations.direct_stack(target, 1, Alteration.Type.POISON, "proto poison")
 	owner.projectile_modifiers_registry.register_modifier(mod)
 
 

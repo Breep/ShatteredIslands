@@ -39,8 +39,8 @@ func _apply_thorn(owner: Entity, base: float, pct: float, card_name: StringName)
 	
 	for building: Entity in buildings:
 		if is_instance_valid(building):
-			building.alterations.add_stack(Alteration.Type.THORN, thorn_value, owner, card_name)
-	owner.alterations.add_stack(Alteration.Type.THORN, thorn_value, owner, card_name)
+			owner.alterations.direct_stack(building, thorn_value, Alteration.Type.THORN, card_name)
+	owner.alterations.direct_stack(owner, thorn_value, Alteration.Type.THORN, card_name)
 
 
 

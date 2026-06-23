@@ -10,7 +10,7 @@ func apply(ctx: SkillContext) -> void:
 	var chicken: Entity = ctx.entity
 	var ally: Entity = chicken.target.get_target(TargetComponent.TargettingStrategy.LOWEST_HP_PERCENT_ALLY_INCLUDING_SELF)
 	if is_instance_valid(ally):
-		chicken.alterations.inflict_condition_stacks(ally, _shield, Alteration.Type.SHIELD, &"Câblage léger")
+		chicken.alterations.direct_stack(ally, _shield, Alteration.Type.SHIELD, &"Câblage léger")
 
 
 func get_description() -> String:

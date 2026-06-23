@@ -47,7 +47,7 @@ extends Entity
 	## auto_attack_periodic._attack_strategy = TargetComponent.TargettingStrategy.CLOSEST_ENEMY_SUMMON
 	#super._ready()
 	#if is_instance_valid(_master):
-		#alterations.add_stack(Alteration.Type.SHIELD, _shield, _master, &"Gamma Turret")
+		#alterations.apply_stack(Alteration.Type.SHIELD, _shield, _master, &"Gamma Turret")
 #
 #
 #func _on_master_died() -> void:
@@ -74,7 +74,7 @@ extends Entity
 #
 #func _on_resurrected() -> void:
 	#super._on_resurrected()
-	#alterations.add_stack(Alteration.Type.SHIELD, _shield, summoner, &"Gamma Turret")
+	#alterations.apply_stack(Alteration.Type.SHIELD, _shield, summoner, &"Gamma Turret")
 	#var tween := create_tween().set_parallel()
 	#tween.tween_property(_visual_3d, "position:y", 2.8, 0.8) \
 		#.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)

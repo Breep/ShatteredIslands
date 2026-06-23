@@ -16,7 +16,7 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 		if not (is_instance_valid(e) and e.is_summoned() and owner.summon.is_summoner_of(e)): return
 		var ally: Entity = owner.target.get_target(TargetComponent.TargettingStrategy.RANDOM_ALLY_INCLUDING_SELF)
 		if ally != null and is_instance_valid(ally) and ally.alterations != null:
-			ally.alterations.add_stack(Alteration.Type.BLOCK, block)
+			owner.alterations.direct_stack(ally, block, Alteration.Type.BLOCK, card_name)
 	owner.target.new_entity_detected.connect(_on_detected)
 
 

@@ -58,7 +58,7 @@ func _explode(chicken: Entity) -> void:
 
 	var ignite: float = chicken.stats.get_stat(EntityStats.StatType.AP) * _ap_ignite_ratio
 	for enemy: Entity in chicken.target.get_targets(TargetComponent.MultipleTargettingStrategy.ENEMIES, _radius):
-		chicken.alterations.inflict_condition_stacks(enemy, ignite, Alteration.Type.IGNITE, &"Comète de basse-cour")
+		chicken.alterations.direct_stack(enemy, ignite, Alteration.Type.IGNITE, &"Comète de basse-cour")
 	chicken.stats.health = 0
 
 

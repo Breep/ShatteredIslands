@@ -14,7 +14,7 @@ func apply(ctx: SkillContext) -> void:
 	modifier.additional_effect_callback = func(data: Dictionary) -> void:
 		var target: Entity = data.get(AutoAttackModifier.VarType.TARGET)
 		if is_instance_valid(target):
-			golem.alterations.inflict_condition_stacks(target, _stacks, Alteration.Type.POISON, &"Crocs toxiques")
+			golem.alterations.direct_stack(target, _stacks, Alteration.Type.POISON, &"Crocs toxiques")
 	golem.auto_attack_modifier_registry.register_modifier(modifier)
 
 

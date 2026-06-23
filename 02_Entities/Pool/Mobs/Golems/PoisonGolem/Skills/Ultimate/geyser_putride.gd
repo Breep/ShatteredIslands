@@ -21,7 +21,7 @@ func apply(ctx: SkillContext) -> void:
 		AudioManager.play_3d("smash_ground", golem.global_position)
 		for enemy: Entity in golem.target.get_targets(TargetComponent.MultipleTargettingStrategy.ENEMIES, _radius):
 			if is_instance_valid(enemy):
-				golem.alterations.inflict_condition_stacks(enemy, _stacks, Alteration.Type.POISON, _IMPACT_ID)
+				golem.alterations.direct_stack(enemy, _stacks, Alteration.Type.POISON, _IMPACT_ID)
 	, _IMPACT_ID)
 
 

@@ -23,7 +23,7 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 	var ignite: float = _ignite_stacks[card_lvl - 1]
 	_on_dodged = func(source: Entity, _action_type: Utils.ActionType, _value: float, _is_critical: bool) -> void:
 		if not is_instance_valid(source) or source == owner: return
-		owner.alterations.inflict_condition_stacks(source, ignite, Alteration.Type.IGNITE, card_name)
+		owner.alterations.direct_stack(source, ignite, Alteration.Type.IGNITE, card_name)
 	owner.action_dodged.connect(_on_dodged)
 
 

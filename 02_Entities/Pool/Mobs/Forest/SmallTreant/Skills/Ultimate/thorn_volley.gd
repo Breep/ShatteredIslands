@@ -29,10 +29,10 @@ func apply(ctx: SkillContext) -> void:
 		if not is_instance_valid(enemy): continue
 		if damage > 0:
 			_owner.damage.direct(enemy, damage, Utils.ActionType.DAMAGE_PHYSICAL, &"Thorn Volley")
-		_owner.alterations.inflict_status(enemy, Alteration.Type.STUN, _stun_duration, &"Thorn Volley")
+		_owner.alterations.direct_status(enemy, Alteration.Type.STUN, _stun_duration, &"Thorn Volley")
 
 	if _thorn_gain_on_cast > 0:
-		_owner.alterations.add_stack(Alteration.Type.THORN, _thorn_gain_on_cast)
+		_owner.alterations.direct_stack(_owner, _thorn_gain_on_cast, Alteration.Type.THORN, &"Thorn Volley")
 
 
 func get_description() -> String:

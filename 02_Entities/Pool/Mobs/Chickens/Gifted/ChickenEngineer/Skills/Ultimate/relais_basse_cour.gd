@@ -21,7 +21,7 @@ func apply(ctx: SkillContext) -> void:
 			best = ally
 	if is_instance_valid(best):
 		var shield: float = chicken.stats.get_stat(EntityStats.StatType.AP) * _ap_ratio
-		chicken.alterations.inflict_condition_stacks(best, shield, Alteration.Type.SHIELD, &"Relais de basse-cour")
+		chicken.alterations.direct_stack(best, shield, Alteration.Type.SHIELD, &"Relais de basse-cour")
 
 
 func get_description() -> String:

@@ -10,7 +10,7 @@ func apply(ctx: SkillContext) -> void:
 			var allies: Array[Entity] = _owner.target.get_targets(TargetComponent.MultipleTargettingStrategy.ALLIES)
 			var shield_gain: float = _total_shield/(allies.size())
 			for entity in allies:
-				_owner.alterations.inflict_condition_stacks(entity, shield_gain, Alteration.Type.SHIELD, &"Goblin Protection")
+				_owner.alterations.direct_stack(entity, shield_gain, Alteration.Type.SHIELD, &"Goblin Protection")
 				ShieldVfxSpawner.spawn_on(entity)
 	)
 

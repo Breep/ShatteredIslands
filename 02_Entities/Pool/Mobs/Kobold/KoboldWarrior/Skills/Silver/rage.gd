@@ -20,6 +20,6 @@ func _on_stats_health_changed(_new_health: float, entity_owner: Entity) -> void:
 	if _rage_triggered: return
 	if entity_owner.stats.health < entity_owner.stats.health_max * _hp_threshold_percent / 100.0:
 		entity_owner._visual_3d.scale = Vector3(2, 2, 2) # TODO à changer
-		entity_owner.alterations.inflict_condition_stacks(entity_owner, _force_flat, Alteration.Type.STRENGTH, &"Rage")
+		entity_owner.alterations.direct_stack(entity_owner, _force_flat, Alteration.Type.STRENGTH, &"Rage")
 		_rage_triggered = true
 		entity_owner.stats.health_changed.disconnect(_on_stats_health_changed)

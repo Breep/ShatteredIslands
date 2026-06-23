@@ -14,7 +14,7 @@ func apply(ctx: SkillContext) -> void:
 	modifier.id = &"DernierGloussement"
 	modifier.after_action_logic_callback = func(_cb_vars: Dictionary) -> void:
 		for ally: Entity in chicken.target.get_targets(TargetComponent.MultipleTargettingStrategy.ALLIES, _radius):
-			ally.alterations.add_stack(Alteration.Type.THORN, _thorn, chicken, &"Dernier gloussement")
+			chicken.alterations.direct_stack(ally, _thorn, Alteration.Type.THORN, &"Dernier gloussement")
 	chicken.death_modifiers_registry.register_modifier(modifier)
 
 

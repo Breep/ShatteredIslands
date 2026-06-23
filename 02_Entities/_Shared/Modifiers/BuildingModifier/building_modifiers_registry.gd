@@ -73,13 +73,14 @@ func apply_to(target: Entity, source_ancestor: Entity) -> void:
 		clone.id = _derive_id(original.id, source_ancestor)
 		target.death_modifiers_registry.register_modifier(clone)
 
-	# Alterations (stacks) : appliquées directement sur le building cible. La
-	# référence `target` est disponible ici → pas de problème de capture de
-	# closure (contrairement aux battle_callbacks, cf. TODO ci-dessous).
-	if target.alterations != null:
-		for grant: Dictionary in _alteration_grants.values():
+	# Alterations (stacks) : le grant est émis par l'ancêtre source (le héros qui
+	# porte la carte) vers le building → on passe par direct_stack pour traverser
+	# le pipeline (résolution serveur + log + replay), jamais par apply_stack.
+	if source_ancestor != null and source_ancestor.alterations != null:
+		for grant_id: StringName in _alteration_grants:
+			var grant: Dictionary = _alteration_grants[grant_id]
 			var amount: float = grant["flat"] + target.stats.health_max * grant["pct"] / 100.0
-			target.alterations.add_stack(grant["type"], amount)
+			source_ancestor.alterations.direct_stack(target, amount, grant["type"], grant_id)
 
 	# TODO BattleCallback : voir SummonModifiersRegistry, même limite.
 

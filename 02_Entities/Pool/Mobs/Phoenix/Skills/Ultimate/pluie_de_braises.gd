@@ -17,7 +17,7 @@ func apply(ctx: SkillContext) -> void:
 		return
 	var ap: float = phoenix.stats.get_stat(EntityStats.StatType.AP)
 	phoenix.damage.direct(target, ap * _damage_ratio, Utils.ActionType.DAMAGE_MAGICAL, &"Pluie de braises")
-	phoenix.alterations.inflict_condition_stacks(target, ap * _ignite_ratio, Alteration.Type.IGNITE, &"Pluie de braises")
+	phoenix.alterations.direct_stack(target, ap * _ignite_ratio, Alteration.Type.IGNITE, &"Pluie de braises")
 
 
 func get_description() -> String:

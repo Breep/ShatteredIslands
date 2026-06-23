@@ -4,7 +4,7 @@ extends SkillEffect
 
 func apply(ctx: SkillContext) -> void:
 	var _owner = ctx.entity
-	_owner.alterations.inflict_status(_owner, Alteration.Type.TAUNT, -1, &"FightMe")
+	_owner.alterations.direct_status(_owner, Alteration.Type.TAUNT, -1, &"FightMe")
 
 
 func get_description() -> String:

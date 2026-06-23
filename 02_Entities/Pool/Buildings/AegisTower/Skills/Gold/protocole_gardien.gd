@@ -52,7 +52,7 @@ func _on_ally_health_changed(new_health: float, tower: AegisTower, ally: Entity,
 
 	triggered[0] = true
 	var shield: float = tower.stats.get_stat(EntityStats.StatType.AP) * _ap_ratio
-	tower.alterations.inflict_condition_stacks(ally, shield, Alteration.Type.SHIELD, &"Protocole gardien")
+	tower.alterations.direct_stack(ally, shield, Alteration.Type.SHIELD, &"Protocole gardien")
 	_disconnect_health_changed_callbacks(connections)
 
 

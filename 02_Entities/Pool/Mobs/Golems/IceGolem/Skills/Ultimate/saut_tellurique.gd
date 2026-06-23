@@ -25,7 +25,7 @@ func apply(ctx: SkillContext) -> void:
 			if not is_instance_valid(enemy):
 				continue
 			golem.damage.direct(enemy, _damage, Utils.ActionType.DAMAGE_PHYSICAL, _IMPACT_ID)
-			golem.alterations.inflict_status(enemy, Alteration.Type.STUN, _stun_duration, _IMPACT_ID)
+			golem.alterations.direct_status(enemy, Alteration.Type.STUN, _stun_duration, _IMPACT_ID)
 	, _IMPACT_ID)
 
 

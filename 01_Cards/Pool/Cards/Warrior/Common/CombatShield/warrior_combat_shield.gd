@@ -21,7 +21,7 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 		if not Utils.is_randomize_modifier_active(chance, owner.battle_id): return
 		var ally: Entity = owner.target.get_target(TargetComponent.TargettingStrategy.RANDOM_ALLY_INCLUDING_SELF)
 		if ally == null or not is_instance_valid(ally): return
-		owner.alterations.inflict_condition_stacks(ally, shield_amount, Alteration.Type.SHIELD, card_name)
+		owner.alterations.direct_stack(ally, shield_amount, Alteration.Type.SHIELD, card_name)
 
 	owner.battle_callback_registry.register_battle_start(card_name, func() -> void:
 		owner.auto_attack_modifier_registry.register_modifier(aa_mod)

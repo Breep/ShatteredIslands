@@ -55,5 +55,5 @@ func _apply_breath_ignite(dragon: SkeletonDragon, enemy: Entity) -> void:
 	for i in _tick_count:
 		dragon.battle_callback_registry.register_oneshot(_tick_interval * i, func() -> void:
 			if is_instance_valid(enemy):
-				dragon.alterations.inflict_condition_stacks(enemy, _ignite_stacks_per_tick, Alteration.Type.IGNITE, &"DevastatingBreath")
+				dragon.alterations.direct_stack(enemy, _ignite_stacks_per_tick, Alteration.Type.IGNITE, &"DevastatingBreath")
 		)

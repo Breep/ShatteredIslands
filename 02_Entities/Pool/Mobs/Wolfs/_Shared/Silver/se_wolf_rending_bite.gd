@@ -30,9 +30,9 @@ func apply(ctx: SkillContext) -> void:
 		if count[0] < _attack_period:
 			return
 		count[0] = 0
-		source.alterations.inflict_condition_stacks(
+		source.alterations.direct_stack(
 			target, _vulnerability_stacks, Alteration.Type.VULNERABILITY, &"WolfRendingBiteVuln")
-		source.alterations.inflict_condition_stacks(
+		source.alterations.direct_stack(
 			target, _weakness_stacks, Alteration.Type.WEAKNESS, &"WolfRendingBiteWeak")
 	wolf.auto_attack_modifier_registry.register_modifier(aa_mod)
 

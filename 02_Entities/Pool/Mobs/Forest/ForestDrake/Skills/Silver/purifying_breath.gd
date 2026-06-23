@@ -14,7 +14,7 @@ func apply(ctx: SkillContext) -> void:
 		var entity: Entity = _owner.target.get_target(TargetComponent.TargettingStrategy.HIGHEST_ALLY_DEBUFF_STACK)
 		
 		if entity == null or not is_instance_valid(entity): return
-		_owner.alterations.cleanse(entity, amount, &"Purifying Breath")
+		_owner.alterations.direct_cleanse(entity, amount, &"Purifying Breath")
 	)
 
 

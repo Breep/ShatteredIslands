@@ -14,7 +14,7 @@ func apply(ctx: SkillContext) -> void:
 	phoenix.battle_callback_registry.register_periodic(&"CendresTenaces", _period, func() -> void:
 		var ignite: float = phoenix.stats.get_stat(EntityStats.StatType.AP) * _ap_ratio
 		for enemy: Entity in phoenix.target.get_targets(TargetComponent.MultipleTargettingStrategy.ENEMIES, _radius):
-			phoenix.alterations.inflict_condition_stacks(enemy, ignite, Alteration.Type.IGNITE, &"Cendres tenaces")
+			phoenix.alterations.direct_stack(enemy, ignite, Alteration.Type.IGNITE, &"Cendres tenaces")
 	, true)
 
 

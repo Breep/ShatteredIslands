@@ -30,9 +30,9 @@ func apply(ctx: SkillContext) -> void:
 		var shield: float = _shield + _ap_ratio * sentinelle.stats.get_stat(EntityStats.StatType.AP)
 		var self_share: float = sentinelle.get_meta(SELF_SHARE_META, 0.0)
 		for ally: Entity in allies:
-			sentinelle.alterations.inflict_condition_stacks(ally, shield, Alteration.Type.SHIELD, &"Rayon protecteur")
+			sentinelle.alterations.direct_stack(ally, shield, Alteration.Type.SHIELD, &"Rayon protecteur")
 			if self_share > 0.0:
-				sentinelle.alterations.take_condition_stacks(shield * self_share, Alteration.Type.SHIELD, false, &"Prisme stable")
+				sentinelle.alterations.take_stack(shield * self_share, Alteration.Type.SHIELD, false, &"Prisme stable")
 		if sentinelle.has_method("flash_beams_to"):
 			sentinelle.flash_beams_to(allies)
 	, true)

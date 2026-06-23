@@ -18,7 +18,7 @@ func apply(ctx: SkillContext) -> void:
 	tower.battle_callback_registry.register_battle_start(&"NoyauRenforce", func() -> void:
 		for ally: Entity in tower.target.get_targets(TargetComponent.MultipleTargettingStrategy.ALLIES, _radius):
 			if is_instance_valid(ally) and ally.category == Entity.Category.BUILDING:
-				ally.alterations.add_stack(Alteration.Type.DEFENSE, _defense, tower, &"Noyau renforcé")
+				tower.alterations.direct_stack(ally, _defense, Alteration.Type.DEFENSE, &"Noyau renforcé")
 				buffed.append(ally)
 	)
 	# À la mort de la Tour : on annule le buff en ajoutant autant de Vulnerability
@@ -26,7 +26,7 @@ func apply(ctx: SkillContext) -> void:
 	tower.died.connect(func(_self_ref: Entity) -> void:
 		for ally: Entity in buffed:
 			if is_instance_valid(ally):
-				ally.alterations.add_stack(Alteration.Type.VULNERABILITY, _defense, tower, &"Noyau renforcé")
+				tower.alterations.direct_stack(ally, _defense, Alteration.Type.VULNERABILITY, &"Noyau renforcé")
 	)
 
 

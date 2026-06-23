@@ -16,7 +16,7 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 		if allies.is_empty(): return
 		var shield_distribution: Array[float] = Utils.get_randf_distribution(amount, allies.size(), owner.battle_id)
 		for i in allies.size():
-			owner.alterations.inflict_condition_stacks(allies[i], shield_distribution[i], Alteration.Type.SHIELD, card_name)
+			owner.alterations.direct_stack(allies[i], shield_distribution[i], Alteration.Type.SHIELD, card_name)
 			ShieldVfxSpawner.spawn_on(allies[i])
 	)
 

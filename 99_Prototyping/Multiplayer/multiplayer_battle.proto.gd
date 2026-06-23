@@ -55,7 +55,9 @@ var _last_port := 4242
 func _ready() -> void:
 	_setup_window()
 
-	GameManager.init()
+	# Init minimal : juste les game_rules (durées de phase pour le GFM), sans
+	# charger tout le pool de familles/cartes/entités.
+	GameManager.init_light()
 
 	multiplayer.connected_to_server.connect(_on_connected_to_server)
 	multiplayer.connection_failed.connect(_on_connection_failed)

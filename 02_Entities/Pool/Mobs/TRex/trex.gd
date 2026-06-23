@@ -34,7 +34,7 @@ func _ready() -> void:
 	stat_modifiers_registry.register_modifier(mod)
 
 	if alterations != null:
-		alterations.add_stack(Alteration.Type.DEFENSE, 15.0)
+		alterations.direct_stack(self, 15.0, Alteration.Type.DEFENSE, &"Ancestral Gauge")
 
 	if _primal_shake_period > 0:
 		battle_callback_registry.register_periodic("Primal Shake", _primal_shake_period, func() -> void:

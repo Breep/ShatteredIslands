@@ -88,7 +88,7 @@ func _serrated_arrow_application() -> void:
 		var target_: Entity = cb_vars.get(AutoAttackModifier.VarType.TARGET)
 		if not is_instance_valid(target_):  return
 		if not Utils.is_randomize_modifier_active(_serrated_arrow_chance, battle_id): return
-		alterations.inflict_condition_stacks(target_, _serrated_arrow_stack_number, _serrated_arrow_stack_type, &"SerratedArrow")
+		alterations.direct_stack(target_, _serrated_arrow_stack_number, _serrated_arrow_stack_type, &"SerratedArrow")
 	auto_attack_modifier_registry.register_modifier(mod)
 		
 		

@@ -10,7 +10,7 @@ func apply(ctx: SkillContext) -> void:
 	
 	_owner.damage_taken.connect(func(_a, _b, _c, _d) -> void:
 		if not _can_do_pirouette: return
-		_owner.alterations.inflict_status(_owner, Alteration.Type.UNTARGETABLE, _duration, &"Fairy Pirouette")
+		_owner.alterations.direct_status(_owner, Alteration.Type.UNTARGETABLE, _duration, &"Fairy Pirouette")
 		_can_do_pirouette = false
 		
 		_owner.battle_callback_registry.register_oneshot(_cd, func()-> void:

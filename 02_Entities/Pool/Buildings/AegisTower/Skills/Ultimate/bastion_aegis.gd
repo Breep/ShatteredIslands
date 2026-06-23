@@ -17,7 +17,7 @@ func apply(ctx: SkillContext) -> void:
 	var shield: float = tower.stats.get_stat(EntityStats.StatType.AP) * _ap_ratio
 	for ally: Entity in tower.target.get_targets(TargetComponent.MultipleTargettingStrategy.ALLIES, _radius):
 		if is_instance_valid(ally):
-			tower.alterations.inflict_condition_stacks(ally, shield, Alteration.Type.SHIELD, &"Bastion Aegis")
+			tower.alterations.direct_stack(ally, shield, Alteration.Type.SHIELD, &"Bastion Aegis")
 
 
 func get_description() -> String:

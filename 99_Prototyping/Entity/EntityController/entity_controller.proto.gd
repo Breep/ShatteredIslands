@@ -255,7 +255,7 @@ func _on_inflict_condition_button_pressed() -> void:
 	_refresh_target()
 	
 	if _target == null:
-		printerr("EntityController: No target selected for inflict_condition_stacks")
+		printerr("EntityController: No target selected for direct_stack")
 		return
 	
 	var condition_text: String = _inflict_condition_edit.text.strip_edges()
@@ -274,8 +274,8 @@ func _on_inflict_condition_button_pressed() -> void:
 	var duration: float = 5.0 if parts.size() < 2 else parts[1].strip_edges().to_float()
 	var action_id: StringName = &"test_inflict_condition"
 
-	entity_owner.alterations.inflict_condition_stacks(_target, stacks_number, stack_type, action_id, duration)
-	print("DEBUG: inflict_condition_stacks called - Target: ", _target.entity_name, " | Type: ", Alteration.Type.keys()[stack_type], " | Stacks: ", stacks_number, " | Duration: ", duration)
+	entity_owner.alterations.direct_stack(_target, stacks_number, stack_type, action_id, duration)
+	print("DEBUG: direct_stack called - Target: ", _target.entity_name, " | Type: ", Alteration.Type.keys()[stack_type], " | Stacks: ", stacks_number, " | Duration: ", duration)
 
 
 func _on_cleanse_button_pressed() -> void:
@@ -293,7 +293,7 @@ func _on_cleanse_button_pressed() -> void:
 	var value: float = cleanse_text.to_float()
 	var action_id: StringName = &"test_cleanse"
 	
-	entity_owner.alterations.cleanse(_target, value, action_id)
+	entity_owner.alterations.direct_cleanse(_target, value, action_id)
 	print("DEBUG: cleanse called - Target: ", _target.entity_name, " | Value: ", value)
 
 
@@ -312,7 +312,7 @@ func _on_dispell_button_pressed() -> void:
 	var value: float = dispell_text.to_float()
 	var action_id: StringName = &"test_dispell"
 	
-	entity_owner.alterations.dispell(_target, value, action_id)
+	entity_owner.alterations.direct_dispell(_target, value, action_id)
 	print("DEBUG: dispell called - Target: ", _target.entity_name, " | Value: ", value)
 
 
@@ -782,7 +782,7 @@ func _on_inflict_status_button_pressed() -> void:
 	var status_duration: float = status_text.to_float()
 	var action_id: StringName = &"test_inflict_status"
 
-	entity_owner.alterations.inflict_status(_target, status_type, status_duration, action_id)
+	entity_owner.alterations.direct_status(_target, status_type, status_duration, action_id)
 	print("DEBUG: inflict_status called - Target: ", _target.entity_name, " | Type: ", Alteration.Type.keys()[status_type], " | Duration: ", status_duration)
 
 

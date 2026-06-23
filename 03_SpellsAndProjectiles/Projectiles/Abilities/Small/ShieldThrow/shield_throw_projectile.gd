@@ -48,4 +48,4 @@ func _on_shield_hit(cb_vars: Dictionary) -> void:
 	if damage > 0.0:
 		source.damage.direct(target, damage, Utils.ActionType.DAMAGE_MAGICAL, source_id)
 	if shield_return > 0.0:
-		source.alterations.inflict_condition_stacks(source, shield_return, Alteration.Type.SHIELD, source_id)
+		source.alterations.direct_stack(source, shield_return, Alteration.Type.SHIELD, source_id)

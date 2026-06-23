@@ -25,7 +25,7 @@ func apply(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 		if not is_instance_valid(target): return
 		var source: Entity = cb_vars.get(AutoAttackModifier.VarType.SOURCE)
 		if not is_instance_valid(source): return
-		source.alterations.inflict_condition_stacks(target, 10, Alteration.Type.POISON, &"prout")
+		source.alterations.direct_stack(target, 10, Alteration.Type.POISON, &"prout")
 	owner.summon_modifiers_registry.auto_attack_modifier_registry.register_modifier(aa_mod)
 
 

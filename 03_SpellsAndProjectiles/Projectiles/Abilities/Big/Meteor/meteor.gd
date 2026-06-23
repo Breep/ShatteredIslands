@@ -46,7 +46,7 @@ func _default_hit(cb_vars: Dictionary) -> void:
 	if not is_instance_valid(target): return
 	var damage: float = target.stats.health_max * value_at_level(_damage_percents, level, 0.0) / 100.0
 	_source.damage.direct(target, damage, Utils.ActionType.DAMAGE_MAGICAL, &"meteor")
-	_source.alterations.inflict_condition_stacks(target,
+	_source.alterations.direct_stack(target,
 			value_at_level(_ignite_stacks, level, 0.0), Alteration.Type.IGNITE, &"meteor")
 
 

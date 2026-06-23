@@ -55,7 +55,7 @@ func _on_body_entered(body: Node3D) -> void:
 	
 	if entity.team != _owner.team:
 		_owner.damage.direct(entity, _damage, Utils.ActionType.DAMAGE_PHYSICAL, &"GoblinFocus")
-		_owner.alterations.inflict_condition_stacks(entity, _stack_number, _stack_type, &"GoblinFocus")
+		_owner.alterations.direct_stack(entity, _stack_number, _stack_type, &"GoblinFocus")
 		
 
 

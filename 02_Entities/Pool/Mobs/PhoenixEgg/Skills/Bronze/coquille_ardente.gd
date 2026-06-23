@@ -14,5 +14,5 @@ func apply(ctx: SkillContext) -> void:
 	egg.battle_callback_registry.register_periodic(&"CoquilleArdente", _period, func() -> void:
 		var ignite: float = egg.stats.get_stat(EntityStats.StatType.AP) * _ap_ratio
 		for enemy: Entity in egg.target.get_targets(TargetComponent.MultipleTargettingStrategy.ENEMIES, _radius):
-			egg.alterations.inflict_condition_stacks(enemy, ignite, Alteration.Type.IGNITE, &"Coquille ardente")
+			egg.alterations.direct_stack(enemy, ignite, Alteration.Type.IGNITE, &"Coquille ardente")
 	, true)

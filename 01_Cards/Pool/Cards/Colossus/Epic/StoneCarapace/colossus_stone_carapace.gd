@@ -24,7 +24,7 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 		if not is_instance_valid(source) or source == owner: return
 		if action_type not in DAMAGE_TYPES: return
 		if not Utils.is_randomize_modifier_active(chance, owner.battle_id): return
-		owner.alterations.inflict_status(source, Alteration.Type.STUN, stun_duration, card_name)
+		owner.alterations.direct_status(source, Alteration.Type.STUN, stun_duration, card_name)
 	owner.action_received.connect(_on_received)
 
 

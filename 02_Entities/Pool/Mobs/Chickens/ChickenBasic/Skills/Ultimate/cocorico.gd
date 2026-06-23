@@ -8,7 +8,7 @@ extends SkillEffect
 
 func apply(ctx: SkillContext) -> void:
 	var chicken: Entity = ctx.entity
-	chicken.alterations.add_stack(Alteration.Type.BLOCK, _block, chicken, &"Cocorico")
+	chicken.alterations.direct_stack(chicken, _block, Alteration.Type.BLOCK, &"Cocorico")
 
 
 func get_description() -> String:

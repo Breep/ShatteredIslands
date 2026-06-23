@@ -27,14 +27,14 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 		if Utils.is_randomize_modifier_active(s_chance, owner.battle_id):
 			for ally in owner.target.get_targets(TargetComponent.MultipleTargettingStrategy.ALLIES):
 				if ally != null and is_instance_valid(ally) and ally.alterations != null:
-					ally.alterations.add_stack(Alteration.Type.STRENGTH, s_stacks)
+					owner.alterations.direct_stack(ally, s_stacks, Alteration.Type.STRENGTH, card_name)
 		# Mort → Vulnerability aux ennemis.
 		e.died.connect(func() -> void:
 			if not is_instance_valid(owner): return
 			if not Utils.is_randomize_modifier_active(v_chance, owner.battle_id): return
 			for enemy in owner.target.get_targets(TargetComponent.MultipleTargettingStrategy.ENEMIES):
 				if enemy != null and is_instance_valid(enemy) and enemy.alterations != null:
-					enemy.alterations.add_stack(Alteration.Type.VULNERABILITY, v_stacks)
+					owner.alterations.direct_stack(enemy, v_stacks, Alteration.Type.VULNERABILITY, card_name)
 		, CONNECT_ONE_SHOT)
 	owner.target.new_entity_detected.connect(_on_detected)
 

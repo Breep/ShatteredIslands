@@ -38,5 +38,5 @@ func _arm_combo(blade: AegisBlade) -> void:
 			return
 		var ally: Entity = blade.target.get_target(TargetComponent.TargettingStrategy.LOWEST_HP_PERCENT_ALLY_INCLUDING_SELF)
 		if is_instance_valid(ally):
-			blade.alterations.inflict_condition_stacks(ally, damage * _convert_ratio, Alteration.Type.SHIELD, &"Entaille protectrice")
+			blade.alterations.direct_stack(ally, damage * _convert_ratio, Alteration.Type.SHIELD, &"Entaille protectrice")
 	blade.auto_attack_modifier_registry.register_modifier(modifier)

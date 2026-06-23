@@ -14,7 +14,7 @@ func apply(ctx: SkillContext) -> void:
 	modifier.additional_effect_callback = func(_data: Dictionary) -> void:
 		var ally: Entity = chicken.target.get_target(TargetComponent.TargettingStrategy.LOWEST_HP_PERCENT_ALLY_INCLUDING_SELF)
 		if is_instance_valid(ally):
-			chicken.alterations.inflict_condition_stacks(ally, _shield, Alteration.Type.SHIELD, &"Mini-batterie")
+			chicken.alterations.direct_stack(ally, _shield, Alteration.Type.SHIELD, &"Mini-batterie")
 	chicken.auto_attack_modifier_registry.register_modifier(modifier)
 
 

@@ -17,7 +17,7 @@ func apply(ctx: SkillContext) -> void:
 			return
 		if not Utils.is_randomize_modifier_active(_chance_percent, golem.battle_id):
 			return
-		golem.alterations.inflict_status(source, Alteration.Type.STUN, _stun_duration, &"Carapace cristalline")
+		golem.alterations.direct_status(source, Alteration.Type.STUN, _stun_duration, &"Carapace cristalline")
 	)
 
 

@@ -36,4 +36,4 @@ func _on_impact(cb_vars: Dictionary) -> void:
 
 	var debuff: Alteration.Type = Utils.pick_random(
 		[Alteration.Type.WEAKNESS, Alteration.Type.VULNERABILITY], source.battle_id, "Nightfall")
-	source.alterations.inflict_condition_stacks(target, stacks, debuff, &"Nightfall")
+	source.alterations.direct_stack(target, stacks, debuff, &"Nightfall")

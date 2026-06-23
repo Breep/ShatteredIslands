@@ -18,15 +18,13 @@ var simulated_delay_ms: int = 0
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	if multiplayer.is_server():
-		queue_free()
-		return # Only clients read battle logs
 	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)
 	GlobalFightingManager.all_fights_are_over.connect(_on_gfm_all_fights_are_over)
 
 
 func _process(_delta: float) -> void:
-	return
+	if multiplayer.is_server():
+		return # Only clients read battle logs
 	#if not _is_playing or _current_index >= _battle_logs.size(): return
 	# Tick-based playback would use GlobalFightingManager.fight_start_tick
 	# and FightingManager.current_tick instead of wall-clock time
@@ -171,11 +169,11 @@ func _map_interaction(receiver: Entity, source: Entity, action_type: Utils.Actio
 		Utils.ActionType.UTILITY_HEAL: receiver.heal.take(value, is_critical, action_id, source)
 		Utils.ActionType.UTILITY_CLEANSE: receiver.alterations.take_cleanse(value, is_critical, action_id, source)
 		Utils.ActionType.UTILITY_DISPELL: receiver.alterations.take_dispell(value, is_critical, action_id, source)
-		Utils.ActionType.STACK_SHIELD: receiver.alterations.take_condition_stacks(value, Alteration.Type.SHIELD, is_critical, action_id, source)
-		Utils.ActionType.STACK_IGNITE: receiver.alterations.take_condition_stacks(value, Alteration.Type.IGNITE, is_critical, action_id, source)
-		Utils.ActionType.STACK_POISON: receiver.alterations.take_condition_stacks(value, Alteration.Type.POISON, is_critical, action_id, source)
-		Utils.ActionType.STACK_REGEN: receiver.alterations.take_condition_stacks(value, Alteration.Type.REGEN, is_critical, action_id, source)
-		Utils.ActionType.STACK_NECROSIS: receiver.alterations.take_condition_stacks(value, Alteration.Type.NECROSIS, is_critical, action_id, source)
+		Utils.ActionType.STACK_SHIELD: receiver.alterations.take_stack(value, Alteration.Type.SHIELD, is_critical, action_id, source)
+		Utils.ActionType.STACK_IGNITE: receiver.alterations.take_stack(value, Alteration.Type.IGNITE, is_critical, action_id, source)
+		Utils.ActionType.STACK_POISON: receiver.alterations.take_stack(value, Alteration.Type.POISON, is_critical, action_id, source)
+		Utils.ActionType.STACK_REGEN: receiver.alterations.take_stack(value, Alteration.Type.REGEN, is_critical, action_id, source)
+		Utils.ActionType.STACK_NECROSIS: receiver.alterations.take_stack(value, Alteration.Type.NECROSIS, is_critical, action_id, source)
 		Utils.ActionType.STATUS_STUN: receiver.alterations.take_status(Alteration.Type.STUN, value, action_id, source)
 		Utils.ActionType.STATUS_TAUNT: receiver.alterations.take_status(Alteration.Type.TAUNT, value, action_id, source)
 		Utils.ActionType.STATUS_SILENCE: receiver.alterations.take_status(Alteration.Type.SILENCE, value, action_id, source)

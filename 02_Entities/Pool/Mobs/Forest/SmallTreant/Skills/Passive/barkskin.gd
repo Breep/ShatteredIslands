@@ -14,7 +14,7 @@ func apply(ctx: SkillContext) -> void:
 		if not is_instance_valid(_owner): return
 		var stacks: float = _owner.progression.level * _stacks_per_level_percent / 100.0
 		if stacks > 0:
-			_owner.alterations.add_stack(Alteration.Type.THORN, stacks)
+			_owner.alterations.direct_stack(_owner, stacks, Alteration.Type.THORN, &"Barkskin")
 	)
 
 

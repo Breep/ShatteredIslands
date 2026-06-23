@@ -24,7 +24,7 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 	action_mod.is_one_time_effect = false
 	action_mod.after_action_logic_callback = func(_cb_vars: Dictionary) -> void:
 		if not is_instance_valid(owner): return
-		owner.alterations.inflict_condition_stacks(owner, shield_amount, Alteration.Type.SHIELD, card_name)
+		owner.alterations.direct_stack(owner, shield_amount, Alteration.Type.SHIELD, card_name)
 	owner.action_modifiers_registry.register_modifier(action_mod)
 
 

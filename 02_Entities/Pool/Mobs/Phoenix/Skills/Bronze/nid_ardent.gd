@@ -16,7 +16,7 @@ func apply(ctx: SkillContext) -> void:
 		if not is_instance_valid(target):
 			return
 		var ignite: float = phoenix.stats.get_stat(EntityStats.StatType.AP) * _ap_ratio
-		phoenix.alterations.inflict_condition_stacks(target, ignite, Alteration.Type.IGNITE, &"Nid ardent")
+		phoenix.alterations.direct_stack(target, ignite, Alteration.Type.IGNITE, &"Nid ardent")
 	phoenix.auto_attack_modifier_registry.register_modifier(modifier)
 
 

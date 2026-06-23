@@ -19,7 +19,7 @@ func apply(ctx: SkillContext) -> void:
 			return
 		if not Utils.is_randomize_modifier_active(_chance_percent, golem.battle_id):
 			return
-		golem.alterations.inflict_status(target, Alteration.Type.STUN, _stun_duration, &"Coups gelants")
+		golem.alterations.direct_status(target, Alteration.Type.STUN, _stun_duration, &"Coups gelants")
 	golem.auto_attack_modifier_registry.register_modifier(modifier)
 
 

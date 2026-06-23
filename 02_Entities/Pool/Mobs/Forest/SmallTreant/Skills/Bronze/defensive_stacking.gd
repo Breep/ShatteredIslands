@@ -18,7 +18,7 @@ func apply(ctx: SkillContext) -> void:
 		if action_id != &"auto_attack": return
 		if action_type != Utils.ActionType.DAMAGE_PHYSICAL: return
 		if not Utils.is_randomize_modifier_active(_gain_chance_percent, _owner.battle_id): return
-		_owner.alterations.add_stack(Alteration.Type.THORN, _thorn_gain)
+		_owner.alterations.direct_stack(_owner, _thorn_gain, Alteration.Type.THORN, &"Defensive Stacking")
 	)
 
 

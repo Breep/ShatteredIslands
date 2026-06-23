@@ -36,6 +36,6 @@ func apply_passive() -> void:
 	_owner.stat_modifiers_registry.register_modifier(scale_mod)
 
 	if _owner.alterations != null:
-		_owner.alterations.add_stack(Alteration.Type.DEFENSE, DEFENCE_FLAT[level - 1])
+		_owner.alterations.direct_stack(_owner, DEFENCE_FLAT[level - 1], Alteration.Type.DEFENSE, &"Colossus Passive Defense")
 
 #endregion

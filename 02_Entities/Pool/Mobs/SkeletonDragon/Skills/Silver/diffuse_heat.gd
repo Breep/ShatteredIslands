@@ -13,7 +13,7 @@ func apply(ctx: SkillContext) -> void:
 	owner.battle_callback_registry.register_periodic(&"DiffuseHeat", _period, func() -> void:
 		for enemy: Entity in owner.target.get_targets(TargetComponent.MultipleTargettingStrategy.ENEMIES):
 			if is_instance_valid(enemy):
-				owner.alterations.inflict_condition_stacks(enemy, _ignite_stacks, Alteration.Type.IGNITE, &"DiffuseHeat")
+				owner.alterations.direct_stack(enemy, _ignite_stacks, Alteration.Type.IGNITE, &"DiffuseHeat")
 	, true)
 
 

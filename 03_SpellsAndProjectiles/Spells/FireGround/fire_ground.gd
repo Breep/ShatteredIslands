@@ -61,7 +61,7 @@ func _on_tick() -> void:
 		return
 	for enemy in _enemies:
 		if enemy == null or not is_instance_valid(enemy) or enemy.is_queued_for_deletion(): continue
-		_source.alterations.inflict_condition_stacks(enemy, _ignite_per_tick, Alteration.Type.IGNITE, &"Fire Ground")
+		_source.alterations.direct_stack(enemy, _ignite_per_tick, Alteration.Type.IGNITE, &"Fire Ground")
 
 
 func _on_area_of_effect_body_entered(body: Node3D) -> void:

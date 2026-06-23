@@ -24,7 +24,7 @@ func enter_stealth() -> void:
 	if alterations == null:
 		return
 	if not alterations.has_state(Alteration.Type.UNTARGETABLE):
-		alterations.inflict_status(self, Alteration.Type.UNTARGETABLE, 0.0, &"Pas de l'ombre")
+		alterations.direct_status(self, Alteration.Type.UNTARGETABLE, 0.0, &"Pas de l'ombre")
 	_is_stealthed = true
 
 

@@ -161,6 +161,13 @@ func init() -> void:
 	#_active_families.append(_FAMILIES_REF[Family.Type.NECROSIS])
 
 
+# Init minimal (protos / scènes de test) : charge uniquement les game_rules,
+# nécessaires au GlobalFightingManager (durées de phase), SANS dérouler le pool
+# de familles → cartes → entités qui charge toute la base en cascade.
+func init_light() -> void:
+	_game_rules = load("res://05_Game/GameRules/normal_game_rules.tres")
+
+
 # Hérité du modèle PvP (last man standing). En roguelite la fin de run est
 # pilotée par RunRoot via la complétion des confrontations, pas ici.
 func is_end_of_game() -> bool:

@@ -22,7 +22,7 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 		var source: Entity = cb_vars.get(AutoAttackModifier.VarType.SOURCE)
 		if not is_instance_valid(target) or not is_instance_valid(source): return
 		if not Utils.is_randomize_modifier_active(chance, source.battle_id): return
-		source.alterations.inflict_condition_stacks(target, ignite, Alteration.Type.IGNITE, card_name)
+		source.alterations.direct_stack(target, ignite, Alteration.Type.IGNITE, card_name)
 	owner.summon_modifiers_registry.auto_attack_modifier_registry.register_modifier(aa_mod)
 
 

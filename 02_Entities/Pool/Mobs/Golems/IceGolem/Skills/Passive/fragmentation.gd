@@ -18,7 +18,7 @@ func apply(ctx: SkillContext) -> void:
 		_play_death_vfx(golem)
 		for enemy: Entity in golem.target.get_targets(TargetComponent.MultipleTargettingStrategy.ENEMIES, _radius):
 			golem.damage.direct(enemy, _damage, Utils.ActionType.DAMAGE_PHYSICAL, &"Fragmentation")
-			golem.alterations.inflict_status(enemy, Alteration.Type.STUN, _stun_duration, &"Fragmentation")
+			golem.alterations.direct_status(enemy, Alteration.Type.STUN, _stun_duration, &"Fragmentation")
 	golem.death_modifiers_registry.register_modifier(modifier)
 
 

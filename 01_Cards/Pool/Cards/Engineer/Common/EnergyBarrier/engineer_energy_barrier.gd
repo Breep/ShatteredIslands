@@ -13,7 +13,7 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 
 	owner.battle_callback_registry.register_periodic(card_name, period, func() -> void:
 		if not is_instance_valid(owner): return
-		owner.alterations.inflict_condition_stacks(owner, amount, Alteration.Type.SHIELD, card_name)
+		owner.alterations.direct_stack(owner, amount, Alteration.Type.SHIELD, card_name)
 	)
 
 

@@ -44,7 +44,7 @@ func _ready() -> void:
 		for entity in allies:
 			if entity == null or not is_instance_valid(entity): return
 			_owner.heal.direct(entity, amount, &"Clearing Of Life")
-			_owner.alterations.cleanse(entity, _cleanse_value, &"Clearing Of Life")
+			_owner.alterations.direct_cleanse(entity, _cleanse_value, &"Clearing Of Life")
 			, true
 	)
 	_owner.battle_callback_registry.register_oneshot(_duration, func() -> void:

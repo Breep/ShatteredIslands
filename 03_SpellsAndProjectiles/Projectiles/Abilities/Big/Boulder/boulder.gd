@@ -47,7 +47,7 @@ func _ready() -> void:
 func _default_hit(cb_vars: Dictionary) -> void:
 	var target: Entity = cb_vars.get(ProjectileStats.VarType.TARGET)
 	if not is_instance_valid(target): return
-	_source.alterations.inflict_status(target, Alteration.Type.STUN,
+	_source.alterations.direct_status(target, Alteration.Type.STUN,
 			value_at_level(_stun_durations, level, 0.0), &"boulder")
 	var damage: float = value_at_level(_damages, level, 0.0) \
 			+ value_at_level(_damage_ratios, level, 0.0) * _source.stats.get_stat(EntityStats.StatType.AD)

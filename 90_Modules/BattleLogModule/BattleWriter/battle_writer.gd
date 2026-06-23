@@ -17,9 +17,6 @@ var _is_recording: bool = false
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	if not multiplayer.is_server():
-		queue_free()
-		return # Only the server writes battle logs
 	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)
 	
 	_fighting_area.action_done.connect(_on_fighting_area_action_done)
@@ -183,20 +180,25 @@ func _on_gfm_fighting_phase_state_changed(state: GlobalFightingManager.FightingP
 
 
 func _on_fighting_area_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.Type, projectile: Projectile, gpos: Vector3) -> void:
+	if not multiplayer.is_server(): return # Only the server writes battle logs
 	_log_projectile_spawned(source, target, projectile_type, gpos, projectile.uid)
 
 
 func _on_fighting_area_entity_spawned(entity: Entity, entity_type: Entity.EntityType, gpos: Vector3) -> void:
+	if not multiplayer.is_server(): return # Only the server writes battle logs
 	_log_entity_spawned(entity, entity_type, gpos)
 
 
 func _on_fighting_area_action_received(receiver: Entity, source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
+	if not multiplayer.is_server(): return # Only the server writes battle logs
 	_log_action_received(receiver, source, action_type, action_id, value, is_critical)
 
 
 func _on_fighting_area_action_done(source: Entity, target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
+	if not multiplayer.is_server(): return # Only the server writes battle logs
 	_log_action_done(source, target, action_type, action_id, value, is_critical)
 
 
 func _on_fighting_area_projectile_target_hit(target: Entity, gpos: Vector3, projectile_uid: int) -> void:
+	if not multiplayer.is_server(): return # Only the server writes battle logs
 	_log_projectile_target_hit(target, gpos, projectile_uid)

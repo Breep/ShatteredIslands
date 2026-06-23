@@ -100,6 +100,6 @@ func _burn_tick(turret: TurretFireThrower) -> void:
 			continue
 		if not enemies.has(enemy):
 			continue
-		turret.alterations.inflict_condition_stacks(enemy, ignite_stacks, Alteration.Type.IGNITE, &"Brûleur directionnel")
+		turret.alterations.direct_stack(enemy, ignite_stacks, Alteration.Type.IGNITE, &"Brûleur directionnel")
 		if buse_active:
 			turret.damage.direct(enemy, buse_damage, Utils.ActionType.DAMAGE_MAGICAL, &"Buse large")

@@ -13,7 +13,7 @@ func apply(ctx: SkillContext) -> void:
 	modifier.after_action_logic_callback = func(_cb_vars: Dictionary) -> void:
 		var ally: Entity = chicken.target.get_target(TargetComponent.TargettingStrategy.CLOSEST_ALLY)
 		if is_instance_valid(ally):
-			ally.alterations.add_stack(Alteration.Type.BLOCK, _block, chicken, &"Petite horde")
+			chicken.alterations.direct_stack(ally, _block, Alteration.Type.BLOCK, &"Petite horde")
 	chicken.death_modifiers_registry.register_modifier(modifier)
 
 

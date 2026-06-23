@@ -44,4 +44,4 @@ func _apply_coop_rules(chicken: Entity) -> void:
 	# Talent "Couvée blindée" : block à l'apparition.
 	var block: float = get_meta(META_SPAWN_BLOCK, 0.0)
 	if block > 0.0:
-		chicken.alterations.add_stack(Alteration.Type.BLOCK, block, self, &"Couvée blindée")
+		self.alterations.direct_stack(chicken, block, Alteration.Type.BLOCK, &"Couvée blindée")

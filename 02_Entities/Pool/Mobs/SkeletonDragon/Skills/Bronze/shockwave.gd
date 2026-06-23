@@ -28,10 +28,7 @@ func apply(ctx: SkillContext) -> void:
 
 	ability.flight_landing_impact.connect(func() -> void:
 		_shed_debuffs(dragon)
-		dragon.alterations.add_stack(
-			Alteration.Type.REGEN, _regen_stacks, dragon, &"Shockwave",
-			{Alteration.ModifierType.DURATION: _regen_duration}
-		)
+		dragon.alterations.direct_stack(dragon, _regen_stacks, Alteration.Type.REGEN, &"Shockwave", _regen_duration)
 	)
 
 
@@ -45,4 +42,4 @@ func _shed_debuffs(dragon: SkeletonDragon) -> void:
 	for debuff: Alteration.Type in _DAMAGE_DEBUFFS:
 		var stacks: float = dragon.alterations.get_stacks(debuff)
 		if stacks > 0.0:
-			dragon.alterations.remove_stack(debuff, stacks * _debuff_removal_ratio)
+			dragon.alterations.apply_stack(debuff, -(stacks * _debuff_removal_ratio))

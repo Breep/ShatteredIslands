@@ -58,10 +58,10 @@ static func perform_trigger(dk: Entity, target: Entity) -> void:
 	if shield_ad_ratio > 0.0 or shield_ap_ratio > 0.0:
 		var shield: float = dk.stats.attack_damage * shield_ad_ratio \
 			+ dk.stats.get_stat(EntityStats.StatType.AP) * shield_ap_ratio
-		dk.alterations.inflict_condition_stacks(dk, shield, Alteration.Type.SHIELD, &"Eclipse Guard")
+		dk.alterations.direct_stack(dk, shield, Alteration.Type.SHIELD, &"Eclipse Guard")
 
 	if dk.get_meta(META_APPLY_WEAKNESS, false):
-		dk.alterations.inflict_condition_stacks(target, 1.0, Alteration.Type.WEAKNESS, &"Occult Thirst")
+		dk.alterations.direct_stack(target, 1.0, Alteration.Type.WEAKNESS, &"Occult Thirst")
 
 	if dk.get_meta(META_APPLY_VULN, false):
-		dk.alterations.inflict_condition_stacks(target, 1.0, Alteration.Type.VULNERABILITY, &"Amplified Shard")
+		dk.alterations.direct_stack(target, 1.0, Alteration.Type.VULNERABILITY, &"Amplified Shard")
