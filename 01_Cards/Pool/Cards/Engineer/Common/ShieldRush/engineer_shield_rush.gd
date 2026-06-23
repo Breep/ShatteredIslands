@@ -26,5 +26,5 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return "Au début du combat, génère " + str(_shield_amount[card_lvl - 1]) \
-		+ " [[SHIELD]] répartis entre tous les alliés."
+	return "Début de combat : " + _value(_shield_amount[card_lvl - 1]) \
+		+ " [[SHIELD]] répartis sur l'équipe."

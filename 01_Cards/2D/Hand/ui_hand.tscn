@@ -4,9 +4,8 @@
 [ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="1_gj04k"]
 [ext_resource type="Script" uid="uid://bi1y3f5bsadr0" path="res://01_Cards/2D/Hand/ui_hand.gd" id="2_script"]
 [ext_resource type="Script" uid="uid://bgm4mv022wemj" path="res://04_UI/Tool/DropZone/drop_zone.gd" id="3_dropzone"]
-[ext_resource type="Script" uid="uid://bia26v50nwe6c" path="res://04_UI/UIButton/ui_button.gd" id="4_022ej"]
 
-[node name="UIHand" type="Control" unique_id=77925465 node_paths=PackedStringArray("_drop_zone", "_hand_pivot", "_editor_preview_root", "_hide_show_button")]
+[node name="UIHand" type="Control" unique_id=77925465 node_paths=PackedStringArray("_drop_zone", "_hand_pivot", "_editor_preview_root", "_show_hand_zone")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,7 +20,8 @@ _hover_spread_amount = 30.0
 _drop_zone = NodePath("DropZone")
 _hand_pivot = NodePath("HandPivot")
 _editor_preview_root = NodePath("HandPivot/_EditorPreview")
-_hide_show_button = NodePath("HideShowButton")
+_peek_offset_y = 200.0
+_show_hand_zone = NodePath("ShowHandZone")
 
 [node name="DropZone" type="Control" parent="." unique_id=699235962]
 layout_mode = 1
@@ -37,6 +37,22 @@ grow_vertical = 0
 mouse_filter = 2
 script = ExtResource("3_dropzone")
 
+[node name="ShowHandZone" type="Control" parent="." unique_id=1074496773]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 669.0
+offset_top = -116.0
+offset_right = -651.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+script = ExtResource("3_dropzone")
+_debug_color = Color(0.67058825, 0.13725491, 0.40392157, 0.7490196)
+_debug_border_color = Color(0.95287424, 0.5210015, 0.6432913, 0.6)
+
 [node name="HandPivot" type="Control" parent="." unique_id=109951534]
 unique_name_in_owner = true
 layout_mode = 1
@@ -50,6 +66,28 @@ offset_bottom = -150.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
+
+[node name="CardCounterLabel" type="RichTextLabel" parent="HandPivot" unique_id=265136323]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.834
+anchor_top = 0.1
+anchor_right = 0.917
+anchor_bottom = 0.151
+offset_left = 442.55994
+offset_top = -146.09998
+offset_right = 546.0
+offset_bottom = -135.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.40142572
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "8/8"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="_EditorPreview" type="Control" parent="HandPivot" unique_id=2120272582]
 layout_mode = 1
@@ -127,41 +165,6 @@ offset_bottom = 82.74
 rotation = 0.4593
 scale = Vector2(0.5, 0.5)
 
-[node name="HideShowButton" type="Button" parent="." unique_id=100419919]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(120, 40)
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -25.0
-offset_top = -30.0
-offset_right = 25.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "Masquer Deck"
-icon_alignment = 1
-script = ExtResource("4_022ej")
-metadata/_custom_type_script = "uid://bia26v50nwe6c"
-
-[node name="CardCounterLabel" type="RichTextLabel" parent="HideShowButton" unique_id=265136323]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 10.0
-offset_right = 144.0
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_font_sizes/normal_font_size = 24
-bbcode_enabled = true
-text = "8/8"
-vertical_alignment = 1
-
 [node name="WarningHandFullLabel" type="RichTextLabel" parent="." unique_id=979415560]
 unique_name_in_owner = true
 visible = false
@@ -187,4 +190,27 @@ text = "[shake]La main est complète !"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="pressed" from="HideShowButton" to="." method="_on_hide_show_button_pressed"]
+[node name="WarningNotEnoughGoldLabel" type="RichTextLabel" parent="." unique_id=979415561]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -490.0
+offset_right = 20.0
+offset_bottom = -410.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/default_color = Color(0.9555171, 0.36586156, 0.33205357, 1)
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/normal_font_size = 42
+bbcode_enabled = true
+text = "[shake]Pas assez d'or !"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -6,6 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_e"]
 script = ExtResource("2_eff")
+_crit_multiplier = 2.5
 metadata/_custom_type_script = "uid://bthiefcoup1eff7"
 
 [resource]

@@ -40,6 +40,6 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return "À l'impact, les projectiles d'abilité laissent un sol enflammé " \
-		+ str(_duration[card_lvl - 1]) + "s : " + str(_ignite_per_tick[card_lvl - 1]) \
+	return "À l'impact, les [[ABILITY_PROJECTILE]] laissent un sol enflammé " \
+		+ _value(_duration[card_lvl - 1]) + "s : " + _value(_ignite_per_tick[card_lvl - 1]) \
 		+ " [[IGNITE]]/s aux ennemis dans la zone."

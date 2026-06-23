@@ -27,11 +27,17 @@ func _ready() -> void:
 
 # ============================== Private functions ==============================
 
+## Les icônes inline sont un peu plus grandes que la police pour rester lisibles.
+const _ICON_FONT_RATIO: float = 1.2
+
+
 func _generate_text() -> void:
+	# Les icônes inline ([[ICON:CLE]]) sont dimensionnées sur la police de ce label.
+	var icon_size: int = int(round(get_theme_font_size("normal_font_size") * _ICON_FONT_RATIO))
 	if text_raw.is_empty():
-		text = TooltipManager.render_bbcode(text)
+		text = TooltipManager.render_bbcode(text, icon_size)
 	else:
-		text = TooltipManager.render_bbcode(text_raw)
+		text = TooltipManager.render_bbcode(text_raw, icon_size)
 
 # ============================== Callbacks ==============================
 

@@ -22,4 +22,4 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return "Augmente le niveau des projectiles d'abilité de +" + str(_level_bonus[card_lvl - 1]) + "."
+	return "Augmente le niveau des [[ABILITY_PROJECTILE]] de +" + _value(_level_bonus[card_lvl - 1]) + "."

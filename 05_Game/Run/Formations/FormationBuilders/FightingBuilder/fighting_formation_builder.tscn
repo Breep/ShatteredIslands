@@ -2,9 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cykyn5glkuf72" path="res://05_Game/Run/Formations/FormationBuilders/FightingBuilder/fighting_formation_builder.gd" id="1_axvc8"]
 [ext_resource type="PackedScene" uid="uid://0x5u0h623yxt" path="res://06_FloatingIsland/FightingIsland/Pool/ArchIsland/arch_island.tscn" id="1_hjxwm"]
-[ext_resource type="Resource" uid="uid://bd246qypepyky" path="res://05_Game/Run/Encounters/Pool/01_Kobolds/01_kobolds.fighting.tres" id="2_4bsc6"]
-[ext_resource type="PackedScene" uid="uid://73oqc1k27od6" path="res://02_Entities/Pool/Mobs/Golems/MoltenGolem/molten_golem.tscn" id="4_obr3a"]
-[ext_resource type="PackedScene" uid="uid://btqko5dh71wxi" path="res://02_Entities/Pool/Mobs/SkeletonDragon/skeleton_dragon.tscn" id="5_yv51n"]
+[ext_resource type="Resource" uid="uid://b62b67re4xdkl" path="res://05_Game/Run/Encounters/Pool/02b_Treants/02b_treants.fighting.tres" id="2_4bsc6"]
 
 [node name="FightingFormationBuilder" type="Node3D" unique_id=1239562922 node_paths=PackedStringArray("_entities_node", "_player_hero_spawns_node", "_player_acolyte_spawns_node")]
 script = ExtResource("1_axvc8")
@@ -12,21 +10,31 @@ _entities_node = NodePath("Entities")
 _player_hero_spawns_node = NodePath("PlayerSpawns/HeroSpawns")
 _player_acolyte_spawns_node = NodePath("PlayerSpawns/AcolyteSpawns")
 formation_to_load = ExtResource("2_4bsc6")
-output_dir = "res://05_Game/Run/Formations/Pool/"
-formation_id = "04_SkeletonDrake"
 
 [node name="ArchIsland" parent="." unique_id=796314808 instance=ExtResource("1_hjxwm")]
 
 [node name="Entities" type="Node3D" parent="." unique_id=622259169]
 
-[node name="MoltenGolem" parent="Entities" unique_id=1400515487 instance=ExtResource("4_obr3a")]
-transform = Transform3D(0.54170823, 0, -0.8405666, 0, 1, 0, 0.8405666, 0, 0.54170823, -2.502654, 0, 4.9681244)
+[node name="KoboldKnight" type="Node3D" parent="Entities" unique_id=302786514]
+transform = Transform3D(-0.10824226, 0, -0.99412453, 0, 1, 0, 0.99412453, 0, -0.10824226, -1.594621, -9.536743e-07, -4.0907087)
 
-[node name="MoltenGolem2" parent="Entities" unique_id=762818532 instance=ExtResource("4_obr3a")]
-transform = Transform3D(0.100135975, 0, -0.9949738, 0, 1, 0, 0.9949738, 0, 0.100135975, -3.5966673, 0, -6.286557)
+[node name="Kobold_Thief" type="Node3D" parent="Entities" unique_id=1931178472]
+transform = Transform3D(0.088, 0, -0.996, 0, 1, 0, 0.996, 0, 0.088, -9.118, 0, -1.074)
 
-[node name="SkeletonDragon" parent="Entities" unique_id=434739176 instance=ExtResource("5_yv51n")]
-transform = Transform3D(0.04597326, 0, -0.9989427, 0, 1, 0, 0.9989427, 0, 0.04597326, -8.4147005, 0, -0.60113525)
+[node name="Kobold_Warrior" type="Node3D" parent="Entities" unique_id=1068672119]
+transform = Transform3D(0.30546266, 0, -0.95220405, 0, 1, 0, 0.95220405, 0, 0.30546266, -4.1358094, 0, 4.313956)
+
+[node name="SmallTreant" type="Node3D" parent="Entities" unique_id=143633874]
+transform = Transform3D(0.21638855, 0, -0.97630733, 0, 1, 0, 0.97630733, 0, 0.21638855, -3.8523378, 0, 6.681679)
+
+[node name="SmallTreant2" type="Node3D" parent="Entities" unique_id=1412372286]
+transform = Transform3D(0.08190371, 0, -0.99664026, 0, 1, 0, 0.99664026, 0, 0.08190371, -7.9819317, 0, 3.5474482)
+
+[node name="SmallTreant3" type="Node3D" parent="Entities" unique_id=808127568]
+transform = Transform3D(-0.17737679, 0, -0.984143, 0, 1, 0, 0.984143, 0, -0.17737679, -8.040372, 0, -5.3795013)
+
+[node name="SmallTreant4" type="Node3D" parent="Entities" unique_id=503683705]
+transform = Transform3D(-0.012775475, 0, -0.9999184, 0, 1, 0, 0.9999184, 0, -0.012775475, -3.8523378, 0, -7.1503725)
 
 [node name="PlayerSpawns" type="Node3D" parent="." unique_id=1894573214]
 

@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://bhskcmp7aqx2v" path="res://02_Entities/_Shared/Components/Skill/hero_skill_component.tscn" id="7_s202t"]
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="8_croh3"]
 [ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.tscn" id="8_q55dg"]
+[ext_resource type="PackedScene" uid="uid://c8wd5y3nplk2r" path="res://02_Entities/_Shared/Components/Sound/Default/default_sound_component.tscn" id="9_q55dg"]
+[ext_resource type="AudioStream" uid="uid://5lwvsxnu8hil" path="res://23_Audio/SFX/Deaths/sfx_female_hurt.mp3" id="10_44wrm"]
 
 [sub_resource type="Animation" id="Animation_44wrm"]
 resource_name = "Pull_Start_2"
@@ -124,7 +126,7 @@ category = 0
 entity_desc = ExtResource("2_44wrm")
 _visual_3d = NodePath("Assassin")
 _health_bar_marker = NodePath("Assassin/HealthBarSpawnMarker")
-_attack_spawn_marker = NodePath("Assassin/ProjectileSpawnMarker")
+_attack_spawn_marker = NodePath("Assassin/Node3D/GeneralSkeleton/BoneAttachment3D/Bows/Node3D/Skeleton3D/SpringBoneSimulator3D/SM_Wep_Arrow_01/AttackSpawnMarker")
 _projectile_type = 10
 
 [node name="Assassin" parent="." unique_id=2129501433 instance=ExtResource("3_44wrm")]
@@ -231,24 +233,18 @@ bones/81/rotation = Quaternion(0.5603773, 0.50851834, 0.42451274, 0.49716732)
 transform = Transform3D(-0.34046096, 0.23974699, -0.9091798, -0.3175109, -0.9394619, -0.12883388, -0.88502717, 0.24481153, 0.3959724, 0.25239342, 0.9619409, -0.006908033)
 
 [node name="Skeleton3D" parent="Assassin/Node3D/GeneralSkeleton/BoneAttachment3D/Bows/Node3D" parent_id_path=PackedInt32Array(2129501433, 1114585055, 634688933) index="0" unique_id=1785260784]
-bones/1/position = Vector3(-1.027588e-09, 0.7270281, 9.136567e-05)
-bones/2/rotation = Quaternion(0.21643963, 0, 0, 0.976296)
-bones/3/rotation = Quaternion(-0.21643963, 0, 0, 0.976296)
+bones/0/rotation = Quaternion(-5.885586e-05, 0, 0, 1)
 
 [node name="SpringBoneSimulator3D" parent="Assassin/Node3D/GeneralSkeleton/BoneAttachment3D/Bows/Node3D/Skeleton3D" index="3" unique_id=1652232414]
-transform = Transform3D(1, 0, 0, 0, 1, -1.3315805e-07, 0, 1.3315805e-07, 1, -1.027588e-09, 0.7270281, 9.1462476e-05)
+transform = Transform3D(1, 0, 0, 0, 1, 0.00011771172, 0, -0.00011771172, 1, 0, 0, 0)
+
+[node name="AttackSpawnMarker" type="Marker3D" parent="Assassin/Node3D/GeneralSkeleton/BoneAttachment3D/Bows/Node3D/Skeleton3D/SpringBoneSimulator3D/SM_Wep_Arrow_01" parent_id_path=PackedInt32Array(2129501433, 1114585055, 1902731416) index="1" unique_id=764923209]
 
 [node name="AnimationPlayer" parent="Assassin/Node3D/GeneralSkeleton/BoneAttachment3D/Bows" parent_id_path=PackedInt32Array(2129501433, 1114585055) index="1" unique_id=2129225046]
 libraries/attaque = SubResource("AnimationLibrary_3k7hp")
 
-[node name="ProjectileSpawnMarker" type="Marker3D" parent="Assassin" unique_id=1326685210]
-transform = Transform3D(-0.9950919, 0, -0.098955125, 0, 1, 0, 0.098955125, 0, -0.9950919, -0.21317631, 1.4468175, 0.8725844)
-
 [node name="HealthBarSpawnMarker" type="Marker3D" parent="Assassin" unique_id=1077360074]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4, 0)
-
-[node name="HealthBarSpawnMarkerTavern" type="Marker3D" parent="Assassin" unique_id=533953781]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5209526, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=448635789]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.84680724, 0)
@@ -346,6 +342,10 @@ _spawn = NodePath("../Assassin/HealthBarSpawnMarker")
 _owner = NodePath("..")
 
 [node name="HeroSkillComponent" parent="." unique_id=-823138290 node_paths=PackedStringArray("_owner") instance=ExtResource("7_s202t")]
+_owner = NodePath("..")
+
+[node name="SoundComponent" parent="." unique_id=1333002677 node_paths=PackedStringArray("_owner") instance=ExtResource("9_q55dg")]
+_death_sound = ExtResource("10_44wrm")
 _owner = NodePath("..")
 
 [editable path="Assassin"]

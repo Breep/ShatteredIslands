@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_gur35")
 _health_max = 8780.0
-_mana_max = 24.0
+_mana_max = 32.0
 _mana_regen = 3.0
 _attack_range = 9.0
 _attack_damage = 40.8

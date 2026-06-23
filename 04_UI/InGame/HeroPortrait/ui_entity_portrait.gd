@@ -123,6 +123,9 @@ var _last_entity_click_frame: int = -1
 # Le clic « dans le vide » courant a servi à fermer le modifiers viewer (sur le press
 # via nothing_clicked) => on ignore son release pour ne pas fermer la fiche en plus.
 var _viewer_dismissed_this_click: bool = false
+# Verrouillée par le tutoriel : un clic dans le vide ne ferme ni la fiche ni le
+# panneau de description (le joueur doit pouvoir inspecter les sorts sans la perdre).
+var _sheet_locked: bool = false
 #endregion
 
 #region ============================== Node base functions ==============================
@@ -140,6 +143,7 @@ func _ready() -> void:
 	Events.entity_clicked.connect(_on_events_entity_clicked)
 	Events.nothing_clicked.connect(_on_events_nothing_clicked)
 	Events.hero_skill_chosen.connect(_on_hero_skill_chosen)
+	Events.tutorial_set_entity_sheet_locked.connect(_on_tutorial_set_entity_sheet_locked)
 
 
 func _input(event: InputEvent) -> void:
@@ -165,6 +169,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if _modifiers_viewer.visible:
 		_modifiers_viewer.hide()
+		return
+	if _sheet_locked:
 		return
 	if _panel_open:
 		_maybe_close_panel.call_deferred()
@@ -544,6 +550,8 @@ func _on_events_nothing_clicked() -> void:
 		_modifiers_viewer.hide()
 		_viewer_dismissed_this_click = true
 		return
+	if _sheet_locked:
+		return
 	hide()
 
 
@@ -622,4 +630,8 @@ func _on_unlocked_skills_changed() -> void:
 func _on_hero_skill_chosen(comp: HeroSkillComponent, _skill_id: Skill.SkillID) -> void:
 	if is_instance_valid(_entity) and _entity.skill == comp:
 		_refresh_skills()
+
+
+func _on_tutorial_set_entity_sheet_locked(is_locked: bool) -> void:
+	_sheet_locked = is_locked
 #endregion

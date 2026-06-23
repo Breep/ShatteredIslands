@@ -100,9 +100,19 @@ enum ScreenAnchor {
 @export var ensure_shop_closed: bool = false
 @export var hide_hand: bool = false
 
+## Keeps the entity sheet open while this step is active: clicks in the void won't
+## close it. Use on steps that ask the player to inspect a unit's sheet/skills, so
+## a stray click doesn't dismiss the very thing the step is pointing at.
+@export var lock_entity_sheet: bool = false
+
 ## Fades the spotlight dim out while the player is dragging an entity, so the
 ## field stays readable for placement; the dim returns when the drag ends.
 @export var dim_off_while_dragging: bool = false
+
+## Highlights the target but blocks input ON it too (no hole pass-through). Use for
+## purely-informational steps that point at an interactive element the player must
+## NOT use yet (e.g. showing a card's rarity before the dedicated buy step).
+@export var block_interaction: bool = false
 
 ## Optional portrait shown on the left of the bubble. Leave null to fall back
 ## to the default portrait baked in the bubble scene.
@@ -123,6 +133,18 @@ enum ScreenAnchor {
 ## (e.g. small icons). 0 = pixel-perfect on the Control's transformed rect.
 @export var highlight_padding: float = 0.0
 
+## Fixed screen-space rectangle to spotlight, on top of any Control target. Use
+## to highlight something that isn't a Control (e.g. a 3D enemy that always sits
+## at the same screen spot). Empty (zero size) = no fixed highlight.
+## NOTE: these are absolute screen pixels — assumes a fixed camera/resolution.
+@export var highlight_screen_rect: Rect2 = Rect2()
+
+## Restricts shop buying to a single card slot while this step is active (the
+## other slots are locked). -1 = no restriction. Use on buy steps that point at
+## one specific card so the player can't purchase the others. The shop gates this
+## itself (it lives on a CanvasLayer above the tutorial blocker).
+@export var shop_only_slot: int = -1
+
 ## Forces the bubble to a specific side relative to the target. AUTO uses the
 ## first side with enough screen space. When set, the chosen side is honored
 ## IF there's room; otherwise it falls back to AUTO. Useful for elements where
@@ -132,4 +154,9 @@ enum ScreenAnchor {
 ## Pins the bubble to a fixed screen spot (no arrow), overriding target-relative
 ## placement. AUTO keeps the normal behavior.
 @export var screen_anchor: ScreenAnchor = ScreenAnchor.AUTO
+
+## Pixel offset added to the bubble's final computed position (after side/anchor
+## placement). Use to nudge the bubble off an element it slightly overlaps without
+## switching its side. Positive x = right, positive y = down.
+@export var bubble_offset: Vector2 = Vector2.ZERO
 #endregion

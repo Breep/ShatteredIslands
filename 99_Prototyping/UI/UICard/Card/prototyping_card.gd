@@ -1,5 +1,12 @@
 extends Control
 
+const RARITY_COLORS: Dictionary[Card.Rarity, Color] = {
+	Card.Rarity.COMMON: Color.LIGHT_GRAY,
+	Card.Rarity.RARE: Color.LIGHT_SKY_BLUE,
+	Card.Rarity.EPIC: Color.MEDIUM_PURPLE,
+	Card.Rarity.LEGENDARY: Color.ORANGE,
+}
+
 # ============================== Exports ==============================
 
 @export var _families: Array[Family]
@@ -54,10 +61,11 @@ func _on_family_selected(index: int) -> void:
 		_current_cards.assign(_extra_cards)
 	else:
 		var family: Family = _families[index]
-		_current_cards.assign(family.cards)
+		_current_cards.assign(family.get_cards())
 
 	for card in _current_cards:
-		_card_list.add_item(card.name)
+		var item_index: int = _card_list.add_item(card.name)
+		_card_list.set_item_custom_fg_color(item_index, RARITY_COLORS[card.rarity])
 
 	if _card_list.item_count > 0:
 		_card_list.select(0)

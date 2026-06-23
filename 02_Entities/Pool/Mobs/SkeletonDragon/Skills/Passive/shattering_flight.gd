@@ -6,9 +6,14 @@ extends SkillEffect
 # magical damage to every enemy on the landing's ground-contact frame.
 # A high-water mark (count of crossed thresholds) means: crossing several at once flies
 # only once, and healing back up then re-crossing never re-triggers an already-passed one.
+# It also gains Strength stacks at a fixed cadence, ramping its outgoing damage over the fight.
 
 @export var _thresholds_percent: Array[float] = [80.0, 60.0, 40.0, 20.0]
 @export var _landing_damage: float = 100.0
+## Stacks de [[STRENGTH]] gagnés à chaque palier de temps (cumulatif sur le combat).
+@export var _strength_per_tick: float = 1.0
+## Intervalle (s) entre deux gains de [[STRENGTH]].
+@export var _strength_tick_period: float = 1.0
 
 func apply(ctx: SkillContext) -> void:
 	var dragon: SkeletonDragon = ctx.entity as SkeletonDragon
@@ -43,11 +48,16 @@ func apply(ctx: SkillContext) -> void:
 				dragon.damage.direct(enemy, _landing_damage, Utils.ActionType.DAMAGE_MAGICAL, &"ShatteringFlight")
 	)
 
+	dragon.battle_callback_registry.register_periodic(&"ShatteringFlightStrength", _strength_tick_period, func() -> void:
+		dragon.alterations.add_stack(Alteration.Type.STRENGTH, _strength_per_tick, dragon, &"ShatteringFlight")
+	, true)
+
 
 func get_description() -> String:
 	return "Quand ses PV franchissent un nouveau palier (" + _palier_list() + "), s'envole " \
 		+ "puis, à l'atterrissage, inflige " + _value(_landing_damage) + " de [[MAGICAL_DAMAGE]] " \
-		+ "à tous les ennemis."
+		+ "à tous les ennemis. Gagne " + _value(_strength_per_tick) + " [[STRENGTH]] toutes les " \
+		+ _value(_strength_tick_period) + " s."
 
 
 func _palier_list() -> String:

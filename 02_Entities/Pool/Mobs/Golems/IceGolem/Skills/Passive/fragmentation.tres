@@ -9,6 +9,7 @@
 script = ExtResource("2_eff")
 _damage = 150.0
 _stun_duration = 1.2
+_radius = 5.0
 _death_vfx = ExtResource("2_o0iev")
 metadata/_custom_type_script = "uid://bfragment1eff7"
 

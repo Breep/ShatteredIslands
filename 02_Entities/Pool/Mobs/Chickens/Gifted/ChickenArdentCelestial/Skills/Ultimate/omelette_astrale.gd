@@ -15,3 +15,7 @@ func apply(ctx: SkillContext) -> void:
 		return
 	var ignite: float = chicken.stats.get_stat(EntityStats.StatType.AP) * _ap_ignite_ratio
 	chicken.alterations.inflict_condition_stacks(target, ignite, Alteration.Type.IGNITE, &"Omelette astrale")
+
+
+func get_description() -> String:
+	return "Applique [[IGNITE]] égal à " + _value(_ap_ignite_ratio) + "× son [[AP]] à sa cible."

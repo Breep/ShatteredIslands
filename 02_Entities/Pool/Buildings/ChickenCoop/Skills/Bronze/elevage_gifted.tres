@@ -6,7 +6,6 @@
 
 [sub_resource type="Resource" id="Resource_eg"]
 script = ExtResource("2_eff")
-_rush_count = 2
 metadata/_custom_type_script = "uid://celevgift1eff7"
 
 [resource]

@@ -4,15 +4,15 @@
 
 [resource]
 script = ExtResource("1_xyluf")
-_health_max = 900.0
+_health_max = 950.0
 _mana_max = 42.0
 _mana_regen = 3.0
 auto_attack_type = 1
 _attack_range = 1.7
-_attack_damage = 26.0
+_attack_damage = 24.0
 _attack_speed = 1.0320613321863774
 _attack_power = 22.6
-armor = 16.437751649736402
+armor = 8.218875824868201
 _crit_chance = 12.0
 _dodge = 8.0
 _m_crit_chances = Dictionary[int, float]({
@@ -20,7 +20,7 @@ _m_crit_chances = Dictionary[int, float]({
 1: 0.0
 })
 _m_resistances = Dictionary[int, float]({
-0: 16.437751649736402,
+0: 8.218875824868201,
 1: 0.0,
 2: 0.0
 })

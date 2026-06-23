@@ -6,24 +6,43 @@ extends Control
 # ============================== Local nodes ==============================
 
 @onready var _ui_card_shop: UICardShop = %CardShop
-@onready var _shop_main_control: Control = %ShopMainControl
+# Le shop (voile + cartes) vit sous ce CanvasLayer, rendu/input AU-DESSUS de la
+# main — qui sinon le recouvre (ordre BuyingArea < Persistant dans ui_game) et
+# bloquait le bas du bouton refresh. Le voile (%Background) est placé SOUS les
+# cartes dans CE MÊME layer : les cartes (matériau additif) doivent l'avoir
+# directement derrière elles pour composer correctement. Le CanvasLayer
+# découplant ces nœuds de l'arbre Control, on pilote leur visibilité
+# (_shop_canvas_layer.visible) et leur fondu (modulate) à la main.
+@onready var _shop_canvas_layer: CanvasLayer = %ShopCanvasLayer
+@onready var _shop_overlay_bg: ColorRect = %Background
 @onready var _open_shop_button: Button = %OpenShopButton
+
+# ============================== Constants ==============================
+
+# À partir de ce solde (une carte coûte 100), le 1er Continue de la 1re taverne
+# déclenche un rappel "il te reste de l'or" au lieu de lancer le combat.
+const _UNSPENT_GOLD_THRESHOLD: int = 100
 
 # ============================== Private variables ==============================
 
 var _is_active: bool
+# Nombre de taverne ouvertes depuis le lancement (le rappel d'or ne vise que la 1re).
+var _tavern_count: int = 0
+# Le rappel d'or a déjà été montré : le prochain Continue lance le combat.
+var _gold_reminder_acknowledged: bool = false
 
 
 #region ============================== Node base functions ==============================
 func _ready() -> void:
-	_shop_main_control.hide()
-	_shop_main_control.modulate.a = 0.0
+	_shop_canvas_layer.visible = false
+	_shop_overlay_bg.modulate.a = 0.0
+	_ui_card_shop.modulate.a = 0.0
 	_open_shop_button.show()
 	Events.tutorial_set_shop_open.connect(_on_tutorial_set_shop_open)
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not _shop_main_control.visible:
+	if not _shop_canvas_layer.visible:
 		return
 	if event is InputEventMouseButton and not event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		_hide_shop_panel()
@@ -33,6 +52,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func set_active() -> void:
 	if _is_active: return
 	_is_active = true
+	_tavern_count += 1
 	show()
 	show_card_shop()
 
@@ -59,7 +79,23 @@ func _on_continue_button_pressed() -> void:
 	if hero_skill != null and hero_skill.has_pending_choice():
 		hero_skill.request_pending_choices()
 		return
+	if _should_remind_unspent_gold():
+		_gold_reminder_acknowledged = true
+		Events.tavern_unspent_gold_reminder.emit()
+		return
 	Events.signal_tavern_continue_pressed()
+
+
+# Filet de sécurité de la 1re taverne : rappelle au joueur qu'il a de l'or à
+# dépenser avant de lancer le combat. Une seule fois, et seulement si le tutoriel
+# est actif (sinon il afficherait un rappel sans bulle et bloquerait le 1er clic).
+func _should_remind_unspent_gold() -> bool:
+	if _gold_reminder_acknowledged: return false
+	if _tavern_count != 1: return false
+	if not Settings.is_tutorial_enabled(): return false
+	var local_player: Player = PlayerManager.get_local_player()
+	if local_player == null: return false
+	return local_player.gold >= _UNSPENT_GOLD_THRESHOLD
 
 
 func _local_hero_skill() -> HeroSkillComponent:
@@ -77,9 +113,9 @@ func _on_open_shop_button_pressed() -> void:
 # Le tutoriel garantit l'état du shop avant de pointer un élément : ouvre-le s'il
 # doit l'être (cas où le joueur l'a fermé), ferme-le pour dégager la vue (clic ennemi).
 func _on_tutorial_set_shop_open(should_open: bool) -> void:
-	if should_open and not _shop_main_control.visible:
+	if should_open and not _shop_canvas_layer.visible:
 		_show_shop_panel()
-	elif not should_open and _shop_main_control.visible:
+	elif not should_open and _shop_canvas_layer.visible:
 		_hide_shop_panel()
 
 
@@ -87,16 +123,19 @@ var _shop_panel_tween: Tween
 func _show_shop_panel() -> void:
 	if _shop_panel_tween != null and _shop_panel_tween.is_valid():
 		_shop_panel_tween.kill()
-	_shop_main_control.show()
+	_shop_canvas_layer.visible = true
 	_shop_panel_tween = create_tween()
-	_shop_panel_tween.tween_property(_shop_main_control, "modulate:a", 1.0, 0.25)
+	_shop_panel_tween.tween_property(_shop_overlay_bg, "modulate:a", 1.0, 0.25)
+	_shop_panel_tween.parallel().tween_property(_ui_card_shop, "modulate:a", 1.0, 0.25)
 	_shop_panel_tween.tween_callback(_open_shop_button.hide)
 
 
 func _hide_shop_panel() -> void:
+	Events.shop_closed.emit()
 	if _shop_panel_tween != null and _shop_panel_tween.is_valid():
 		_shop_panel_tween.kill()
 	_shop_panel_tween = create_tween()
-	_shop_panel_tween.tween_property(_shop_main_control, "modulate:a", 0.0, 0.25)
-	_shop_panel_tween.tween_callback(_shop_main_control.hide)
+	_shop_panel_tween.tween_property(_shop_overlay_bg, "modulate:a", 0.0, 0.25)
+	_shop_panel_tween.parallel().tween_property(_ui_card_shop, "modulate:a", 0.0, 0.25)
+	_shop_panel_tween.tween_callback(func() -> void: _shop_canvas_layer.visible = false)
 	_shop_panel_tween.tween_callback(_open_shop_button.show)

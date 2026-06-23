@@ -5,7 +5,7 @@
 
 [sub_resource type="Resource" id="Resource_tg"]
 script = ExtResource("2_eff")
-_bonus_ad_percent = 500.0
+_bonus_ad_percent = 700.0
 metadata/_custom_type_script = "uid://c8tg4mxa1rqp"
 
 [resource]

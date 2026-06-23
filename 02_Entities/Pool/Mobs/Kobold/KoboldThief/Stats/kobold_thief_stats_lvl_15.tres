@@ -4,15 +4,16 @@
 
 [resource]
 script = ExtResource("1_5ecum")
-_health_max = 2980.0
+_health_max = 3010.0
 _mana_max = 30.0
 _mana_regen = 3.0
 auto_attack_type = 1
 _attack_range = 1.5
 _attack_damage = 46.0
-_attack_speed = 1.8680008533858723
+_attack_speed = 1.984750906722489
 _movement_speed = 6.0
 _attack_power = 60.6
+armor = 10.41610040220442
 _crit_chance = 25.500000000000004
 _dodge = 18.5
 _m_crit_chances = Dictionary[int, float]({
@@ -20,7 +21,7 @@ _m_crit_chances = Dictionary[int, float]({
 1: 0.0
 })
 _m_resistances = Dictionary[int, float]({
-0: 0.0,
+0: 10.41610040220442,
 1: 0.0,
 2: 0.0
 })

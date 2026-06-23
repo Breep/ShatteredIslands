@@ -53,6 +53,9 @@ var _fighting_phase_state: FightingPhaseState:
 
 var __prototyping = false
 var _is_active: bool = false
+# Vitesse de combat : ticks logiques joués par frame physique (1 = normal).
+# Appliqué à l'horloge de phase ci-dessous ET propagé aux FMs actifs.
+var _speed_multiplier: int = 1
 var _phase_ticks_remaining: int = 0
 var _current_tick: int = 0
 
@@ -71,11 +74,15 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	if not _is_active: return
-	_current_tick += 1
-	_phase_ticks_remaining -= 1
-	if _phase_ticks_remaining <= 0:
-		_advance_phase()
+	# _speed_multiplier ticks par frame physique : compresse l'horloge de phase
+	# d'autant. Re-vérifie _is_active à chaque itération (une transition de phase
+	# peut désactiver le tick en cours de frame).
+	for _i: int in _speed_multiplier:
+		if not _is_active: return
+		_current_tick += 1
+		_phase_ticks_remaining -= 1
+		if _phase_ticks_remaining <= 0:
+			_advance_phase()
 #endregion
 
 #region ============================== Public functions ==============================
@@ -92,12 +99,30 @@ func clear() -> void:
 	_phase_ticks_remaining = 0
 	_current_tick = 0
 	fight_start_tick = 0
+	_speed_multiplier = 1
 	# Backing var écrit directement : éviter d'émettre fighting_phase_state_changed
 	# pendant le teardown (l'UI est en cours de libération). Sans ce reset, quitter
 	# en phase POSITIONING laisse l'état figé → au run suivant start() repose
 	# POSITIONING (valeur inchangée) → pas d'émission → AdvanceButton jamais affiché.
 	__fighting_phase_state = FightingPhaseState.UNDEF
 	set_physics_process(false)
+
+
+# Règle la vitesse globale du combat : nombre de ticks logiques par frame
+# physique (1 = normal). Applique le même facteur à l'horloge de phase ET à
+# chaque FightingManager actif, pour que phase et combat restent synchrones. Ne
+# touche PAS Engine.time_scale : un combat à xN se déroule à l'identique de x1,
+# simplement plus vite (déterminisme préservé).
+#
+# /!\ Local uniquement. En réseau le GFM est piloté par le serveur ("server is
+# ahead of time" + playback) ; changer ce facteur côté client désynchroniserait
+# du flux de ticks serveur. À synchroniser via le serveur avant usage en coop.
+func set_speed_multiplier(multiplier: int) -> void:
+	_speed_multiplier = maxi(1, multiplier)
+	for fm in _current_active_fighting_managers:
+		if is_instance_valid(fm):
+			fm.set_tick_multiplier(_speed_multiplier)
+	Engine.time_scale = multiplier
 
 
 func start() -> void:
@@ -170,6 +195,7 @@ func _on_fighting_phase_state_changed(new_fighting_phase_state: FightingPhaseSta
 			Verbose.debug("[State=NORMAL] (" + str(duration) + "s)", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
 			for fighting_manager in _current_active_fighting_managers:
 				if not is_instance_valid(fighting_manager): continue
+				fighting_manager.set_tick_multiplier(_speed_multiplier)
 				fighting_manager.start_fighting()
 
 		FightingPhaseState.SPECIAL:

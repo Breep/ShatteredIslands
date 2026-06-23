@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_3vx61")
-_health_max = 1520.0
+_health_max = 1500.0
 _mana_max = 35.0
 _mana_regen = 3.3
 _attack_damage = 22.0

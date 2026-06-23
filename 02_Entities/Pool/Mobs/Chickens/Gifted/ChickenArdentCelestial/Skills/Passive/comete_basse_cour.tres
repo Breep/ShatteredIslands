@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://ccometebc2res"]
 
+[ext_resource type="Texture2D" uid="uid://8untypknjwe3" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/Skills/Passive/skill_comete_basse_cour.svg" id="1_1utod"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
 [ext_resource type="Script" uid="uid://bvxkiu02xkjmc" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/Skills/Passive/comete_basse_cour.gd" id="2_eff"]
 
@@ -12,5 +13,6 @@ script = ExtResource("1_skill")
 skill_id = 6
 name = "Comète de basse-cour"
 description = "Sous 35% PV (1ère fois) : se rue sur l'ennemi le plus proche, explose (AP x 200% Ignite dans Area(3)) et meurt."
+portrait = ExtResource("1_1utod")
 skill_effect = SubResource("Resource_e")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

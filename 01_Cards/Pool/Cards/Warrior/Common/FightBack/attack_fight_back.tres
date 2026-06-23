@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="Card" format=3 uid="uid://cj6hexnvedxmb"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_5mypg"]
+[ext_resource type="Texture2D" uid="uid://c7obchxqlumsw" path="res://01_Cards/Pool/Cards/Warrior/Common/FightBack/warrior_fight_back.png" id="2_31vmm"]
 [ext_resource type="Script" uid="uid://uiyqfsgg1lfo" path="res://01_Cards/Pool/Cards/Warrior/Common/FightBack/attack_fight_back.gd" id="2_sn1ql"]
 
 [sub_resource type="Resource" id="Resource_ov13x"]
@@ -10,12 +11,10 @@ _increase_attack_damage = Array[float]([1.0, 2.0, 3.0, 4.0, 5.0])
 _dodge_reductions = Array[float]([0.4, 0.4, 0.4, 0.4, 0.4])
 metadata/_custom_type_script = "uid://uiyqfsgg1lfo"
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_b43uk"]
-
 [resource]
 script = ExtResource("1_5mypg")
-name = "Fight Back"
-picture = SubResource("PlaceholderTexture2D_b43uk")
+name = "Riposte"
+picture = ExtResource("2_31vmm")
 families = Array[int]([1])
 _card_effect = SubResource("Resource_ov13x")
 points = Dictionary[int, int]({

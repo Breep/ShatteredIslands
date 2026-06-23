@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.tscn" id="4_hb"]
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="5_anim"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://y5swvigse7ti" path="res://02_Entities/Pool/Mobs/Golems/golems_animation_tree.res" id="6_k5w84"]
+[ext_resource type="PackedScene" uid="uid://c8wd5y3nplk2r" path="res://02_Entities/_Shared/Components/Sound/Default/default_sound_component.tscn" id="7_arvy6"]
+[ext_resource type="AudioStream" uid="uid://cr3foceo1cjsr" path="res://23_Audio/SFX/Deaths/sfx_golem_collapse.wav" id="8_gb2m7"]
+[ext_resource type="AudioStream" uid="uid://b617fe4tcarns" path="res://23_Audio/SFX/Attacks/sfx_punch.tres" id="9_arvy6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kntqg"]
 radius = 0.8955078
@@ -209,5 +212,10 @@ parameters/switch_stunned_state/current_index = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=969653623]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2352967, 0)
 shape = SubResource("CapsuleShape3D_kntqg")
+
+[node name="SoundComponent" parent="." unique_id=1433313932 node_paths=PackedStringArray("_owner") instance=ExtResource("7_arvy6")]
+_death_sound = ExtResource("8_gb2m7")
+_auto_attack_sound = ExtResource("9_arvy6")
+_owner = NodePath("..")
 
 [editable path="PoisonGolem"]

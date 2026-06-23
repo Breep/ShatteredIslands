@@ -1,20 +1,19 @@
 [gd_resource type="Resource" script_class="Card" format=3 uid="uid://b76twqciou5cu"]
 
 [ext_resource type="Script" uid="uid://bd4dbqvvv4j0o" path="res://01_Cards/Pool/Cards/Warrior/Rare/BladeRush/attack_blade_rush.gd" id="1_jm0ul"]
+[ext_resource type="Texture2D" uid="uid://bvi8786ti6v38" path="res://01_Cards/Pool/Cards/Warrior/Rare/BladeRush/warrior_blade_rush.png" id="2_jqpjg"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="2_lr76t"]
 
 [sub_resource type="Resource" id="Resource_v6egr"]
 script = ExtResource("1_jm0ul")
-_damage_increase = Array[float]([40.0, 60.0, 80.0, 100.0, 120.0])
-_duration = Array[float]([6.0, 6.0, 6.0, 6.0, 6.0])
+_damage_increase = Array[float]([60.0, 80.0, 100.0, 120.0, 150.0])
+_duration = Array[float]([10.0, 10.0, 10.0, 10.0, 10.0])
 metadata/_custom_type_script = "uid://bd4dbqvvv4j0o"
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_fy27u"]
 
 [resource]
 script = ExtResource("2_lr76t")
-name = "Blade Rush"
-picture = SubResource("PlaceholderTexture2D_fy27u")
+name = "Ruée des Lames"
+picture = ExtResource("2_jqpjg")
 families = Array[int]([1])
 rarity = 1
 _card_effect = SubResource("Resource_v6egr")

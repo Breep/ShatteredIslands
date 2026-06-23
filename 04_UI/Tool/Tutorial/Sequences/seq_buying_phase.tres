@@ -37,6 +37,7 @@ hide_skip = true
 ensure_shop_open = true
 highlight_target = true
 highlight_padding = 8.0
+shop_only_slot = 0
 
 [sub_resource type="Resource" id="step_buy_defense"]
 script = ExtResource("2_step")
@@ -51,11 +52,12 @@ hide_skip = true
 ensure_shop_open = true
 highlight_target = true
 highlight_padding = 8.0
+shop_only_slot = 1
 
 [sub_resource type="Resource" id="step_buy_combo"]
 script = ExtResource("2_step")
 id = &"buy_combo"
-text = "Et le combo : elle augmente ta vitesse d'attaque. Plus de soins et plus d'ignite ! "
+text = "Et le combo : elle augmente ta vitesse d'attaque. Plus de soins et plus d'ignite !"
 target_unique_name = &"CardContainer"
 target_sub_name = &"VBoxContainer3"
 validation_event = 7
@@ -65,6 +67,7 @@ hide_skip = true
 ensure_shop_open = true
 highlight_target = true
 highlight_padding = 8.0
+shop_only_slot = 2
 
 [sub_resource type="Resource" id="step_reroll"]
 script = ExtResource("2_step")
@@ -91,41 +94,26 @@ hide_skip = true
 ensure_shop_open = true
 highlight_target = true
 highlight_padding = 8.0
+shop_only_slot = 0
 
-[sub_resource type="Resource" id="step_click_unit"]
+[sub_resource type="Resource" id="step_sell_card"]
 script = ExtResource("2_step")
-id = &"click_unit"
-text = "Clique sur un ennemi pour ouvrir sa fiche."
-validation_event = 1
+id = &"sell_card"
+text = "Besoin d'or ? Tu peux revendre une carte : glisse-la depuis ta main vers la boutique pour récupérer quelques pièces."
 auto_advance_delay = 0.0
-hide_skip = true
-ensure_shop_closed = true
-hide_hand = true
-screen_anchor = 1
-
-[sub_resource type="Resource" id="step_show_spells"]
-script = ExtResource("2_step")
-id = &"show_spells"
-text = "Et voici tous ses sorts. Survole-les pour voir ce qu'ils font — tu peux inspecter n'importe quelle unité comme ça."
-target_unique_name = &"SkillsContainer"
-auto_advance_delay = 0.0
-ensure_shop_closed = true
-hide_hand = true
-highlight_target = true
-highlight_padding = 8.0
+ensure_shop_open = true
 screen_anchor = 1
 
 [sub_resource type="Resource" id="step_launch_fight"]
 script = ExtResource("2_step")
 id = &"launch_fight"
-text = "Maintenant tu es prêt. Lance le combat losque tu sera prêt pour vivre ta première aventure !"
+text = "Achète un maximum de cartes avant la bataille, les adversaires kobold sont coriaces ! Quand tu es prêt, lance le combat pour vivre ta première aventure."
 target_unique_name = &"ContinueButton"
 validation_event = 4
 auto_advance_delay = 0.0
-highlight_target = true
 
 [resource]
 script = ExtResource("1_seq")
 id = &"seq_buying_phase"
 trigger_state = 3
-steps = Array[ExtResource("2_step")]([SubResource("step_open_shop"), SubResource("step_show_gold"), SubResource("step_buy_attack"), SubResource("step_buy_defense"), SubResource("step_buy_combo"), SubResource("step_reroll"), SubResource("step_upgrade_attack"), SubResource("step_click_unit"), SubResource("step_show_spells"), SubResource("step_launch_fight")])
+steps = Array[ExtResource("2_step")]([SubResource("step_open_shop"), SubResource("step_show_gold"), SubResource("step_buy_attack"), SubResource("step_buy_defense"), SubResource("step_buy_combo"), SubResource("step_reroll"), SubResource("step_upgrade_attack"), SubResource("step_sell_card"), SubResource("step_launch_fight")])

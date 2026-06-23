@@ -4,14 +4,14 @@
 
 [resource]
 script = ExtResource("1_l2sj5")
-_health_max = 7720.0
+_health_max = 16540.0
 _mana_max = 30.0
 _mana_regen = 3.0
 _attack_range = 14.0
 _attack_damage = 13.5
 _attack_speed = 2.0889627245545292
 _movement_speed = 0.0
-_attack_power = 13.5
+_attack_power = 15.5
 armor = 21.561487031584655
 _crit_chance = 14.8
 _m_crit_chances = Dictionary[int, float]({

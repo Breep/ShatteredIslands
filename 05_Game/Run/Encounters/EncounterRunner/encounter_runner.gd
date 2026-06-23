@@ -81,6 +81,7 @@ func run_tavern(encounter: TavernEncounter, party: Party = null) -> void:
 		AudioManager.play_bgm(encounter.music)
 	else:
 		AudioManager.play_bgm("tavern_music")
+	Events.nothing_clicked.emit()
 	await tavern_phase_ended
 	island.queue_free()
 

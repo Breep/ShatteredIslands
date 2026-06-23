@@ -125,6 +125,14 @@ func begin_drag_at(world_pos: Vector3) -> void:
 	_owner.global_position = world_pos
 	_external_placement = true
 	_start_drag()
+
+
+# Termine un drag piloté de l'extérieur (UIRoasterList) sans passer par le
+# release souris de _unhandled_input : le press étant capturé par le bouton
+# portrait (GUI), c'est lui qui consomme l'event de relâchement.
+func end_drag() -> void:
+	if _is_dragging:
+		_stop_drag()
 #endregion
 
 #region ============================== Private functions ==============================

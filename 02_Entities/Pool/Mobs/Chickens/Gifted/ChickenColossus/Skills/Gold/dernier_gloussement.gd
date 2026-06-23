@@ -16,3 +16,8 @@ func apply(ctx: SkillContext) -> void:
 		for ally: Entity in chicken.target.get_targets(TargetComponent.MultipleTargettingStrategy.ALLIES, _radius):
 			ally.alterations.add_stack(Alteration.Type.THORN, _thorn, chicken, &"Dernier gloussement")
 	chicken.death_modifiers_registry.register_modifier(modifier)
+
+
+func get_description() -> String:
+	return "À sa mort, les alliés dans un rayon de " + _value(_radius) + " gagnent " \
+		+ _value(_thorn) + " [[THORN]]."

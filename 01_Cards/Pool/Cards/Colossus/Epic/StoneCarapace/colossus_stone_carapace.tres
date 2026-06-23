@@ -11,7 +11,7 @@ _stun_duration = Array[float]([2.0, 2.0, 2.0])
 
 [resource]
 script = ExtResource("1_card")
-name = "Stone Carapace"
+name = "Carapace de Pierre"
 picture = ExtResource("2_xgg8r")
 families = Array[int]([6])
 rarity = 2

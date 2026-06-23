@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_h86p3")
-_health_max = 4760.0
+_health_max = 4740.0
 _mana_max = 35.0
 _mana_regen = 3.6
 _attack_damage = 34.0

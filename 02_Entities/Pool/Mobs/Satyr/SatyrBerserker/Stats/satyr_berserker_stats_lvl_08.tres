@@ -4,12 +4,12 @@
 
 [resource]
 script = ExtResource("1_yp8qc")
-_health_max = 2050.0
+_health_max = 2460.0
 _mana_max = 50.0
 _mana_regen = 3.0
 auto_attack_type = 1
 _attack_range = 1.8
-_attack_damage = 34.0
+_attack_damage = 30.0
 _attack_speed = 1.2245026008497364
 _attack_power = 26.0
 armor = 12.82243631670354

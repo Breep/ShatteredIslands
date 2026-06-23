@@ -109,7 +109,7 @@ func _construct_shop_deck(families: Array[Family], rules: GameRules) -> void:
 func _server_draw_n_cards(player: Player, number_of_cards_to_draw: int) -> Array[Card]:
 	Verbose.trace("_server_draw_n_cards() | " + player.player_name + " | " + str(number_of_cards_to_draw), Verbose.Category.CARD_SHOP)
 	if not _is_ready: await _shop_deck_shuffled
-	var cards_drawn = shop_deck.draw(number_of_cards_to_draw, _game_rules.get_rarity_chances(player.lvl))
+	var cards_drawn = shop_deck.draw(number_of_cards_to_draw, _game_rules.get_rarity_chances(player.lvl), _maxed_card_names(player))
 
 	return cards_drawn
 
@@ -208,7 +208,7 @@ func _server_try_buy_random_card_for_player(player: Player) -> Card:
 	if player.gold < 90:
 		Verbose.warn("CardShopManager: (" + player.player_name + ") Not enought money", Verbose.Category.CARD_SHOP)
 		return null
-	var cards: Array[Card] = shop_deck.draw(1, _game_rules.get_rarity_chances(player.lvl))
+	var cards: Array[Card] = shop_deck.draw(1, _game_rules.get_rarity_chances(player.lvl), _maxed_card_names(player))
 	if cards.is_empty():
 		Verbose.warn("CardShopManager: (" + player.player_name + ") No more random card from the server", Verbose.Category.CARD_SHOP)
 		return null
@@ -245,7 +245,7 @@ func _ask_buy_random_card_from_all() -> void:
 	if player.gold < 90:
 		_answer_buy_random_card_from_all(-1, ServerResponse.NOT_ENOUGHT_MONEY)
 		return
-	var cards: Array[Card] = shop_deck.draw(1, _game_rules.get_rarity_chances(player.lvl))
+	var cards: Array[Card] = shop_deck.draw(1, _game_rules.get_rarity_chances(player.lvl), _maxed_card_names(player))
 	if cards.is_empty():
 		_answer_buy_random_card_from_all.rpc_id(peer_id, -1, ServerResponse.CARD_NOT_BUYABLE)
 		return
@@ -399,3 +399,15 @@ func _get_card_in_array(uid: int, cards: Array[Card]) -> Card:
 		if card.uid == uid:
 			return card
 	return null
+
+
+# Noms de design des cartes déjà au niveau max dans la main du joueur : on les
+# exclut des pioches du shop, elles ne peuvent plus monter de niveau.
+func _maxed_card_names(player: Player) -> Array[StringName]:
+	var names: Array[StringName] = []
+	if player == null or player.hand == null:
+		return names
+	for card: Card in player.hand.get_cards_raw():
+		if card != null and card.is_max_level():
+			names.append(card.name)
+	return names

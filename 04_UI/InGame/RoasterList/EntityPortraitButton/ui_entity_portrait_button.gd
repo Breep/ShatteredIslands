@@ -1,12 +1,14 @@
 ## Bouton portrait d'une RoasterEntry dans UIRoasterList. Cliquable tant que
-## l'unité n'est pas placée ; grisé/désactivé une fois posée. Émet `selected`
-## sur button_down (press maintenu) pour enchaîner sur le drag de l'entité.
+## l'unité n'est pas placée ; grisé/désactivé une fois posée. Émet `pressed_down`
+## à l'appui et `released` au relâchement, pour piloter directement le drag de
+## l'entité (drag lancé sur l'appui, drop sur le relâchement du bouton).
 class_name UIEntityPortraitButton
 extends Control
 
 # ============================== Signals ==============================
 
-signal selected(entry: RoasterEntry)
+signal pressed_down(entry: RoasterEntry)
+signal released(entry: RoasterEntry)
 
 # ============================== Local nodes ==============================
 
@@ -22,6 +24,7 @@ var _entry: RoasterEntry
 
 func _ready() -> void:
 	_button.button_down.connect(_on_button_down)
+	_button.button_up.connect(_on_button_up)
 
 # ============================== Public functions ==============================
 
@@ -41,4 +44,8 @@ func set_placed(placed: bool) -> void:
 func _on_button_down() -> void:
 	if _button.disabled:
 		return
-	selected.emit(_entry)
+	pressed_down.emit(_entry)
+
+
+func _on_button_up() -> void:
+	released.emit(_entry)

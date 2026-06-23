@@ -43,6 +43,8 @@ var _local_player: Player
 
 var _is_active: bool = true
 var _is_locked: bool
+var _tutorial_locked: bool = false # Le tutoriel interdit l'achat (étape info sur une carte).
+var _tutorial_only_slot: int = -1 # Le tutoriel n'autorise l'achat que de ce slot (-1 = aucun verrou).
 
 # Cartes actuellement affichées dans les slots. Source de vérité côté UI (proto)
 # ou copie locale alimentée par shop_refreshed (mode normal).
@@ -69,6 +71,9 @@ func _ready() -> void:
 		# Le drag démarre au press ; un relâchement quasi instantané est arbitré en
 		# clic court (achat routé vers la main) par le coordinator.
 		card_button.card_drag_requested.connect(_on_card_shop_button_drag_requested)
+
+	Events.tutorial_set_shop_interactable.connect(_on_tutorial_set_shop_interactable)
+	Events.tutorial_set_shop_only_slot.connect(_on_tutorial_set_shop_only_slot)
 
 	if _drag_coordinator != null:
 		_drag_coordinator.register_container(self)
@@ -97,6 +102,12 @@ func _ready() -> void:
 	_refresh_button.pressed.connect(_on_refresh_button_pressed, CONNECT_ONE_SHOT)
 	_random_card_button.pressed.connect(_on_random_card_button_pressed, CONNECT_ONE_SHOT)
 
+	# Refresh gratuit automatique à la fin de chaque combat : le joueur retrouve un
+	# shop neuf en entrant dans la taverne suivante (flux roguelite).
+	Events.confrontation_resolved.connect(_on_confrontation_resolved)
+	Events.tavern_phase_started.connect(_on_events_tavern_phase_started) ## A tavern/buying phase became active and its UI is up.
+	Events.fighting_phase_started.connect(_on_events_fighting_phase_started) ## A fighting phase became active.
+
 	_card_shop.refresh_for_free()
 
 
@@ -108,7 +119,7 @@ func _exit_tree() -> void:
 
 #region ============================== Public functions ==============================
 func set_active() -> void:
-	if _is_active or _is_locked: return
+	if _is_active: return
 	_is_active = true
 	show()
 
@@ -157,6 +168,8 @@ func on_drag_ended() -> void:
 func can_receive(payload: CardPayload) -> bool:
 	if payload.origin == self:
 		return false
+	if _is_locked:
+		return false
 	return _card_shop == null or _card_shop.can_sell(payload.source_cards)
 
 
@@ -203,6 +216,10 @@ func commit_removal(payload: CardPayload) -> void:
 # Achat annulé (drop hors d'une cible valide, ou cible qui refuse) : la carte du
 # shop revient à son slot.
 func return_to_origin(_payload: CardPayload, hovering: HoveringCard) -> void:
+	# Le seul motif de refus côté shop est l'or : si la carte draguée n'est pas
+	# abordable, on signale le manque d'or (warning + SFX) comme sur le clic.
+	if _card_shop != null and _drag_source_card != null and not _card_shop.can_buy(_drag_source_card):
+		Events.insufficient_gold.emit()
 	var src_button: CardButton = _drag_source_button
 	var target_global: Vector2 = src_button.global_position if src_button != null else hovering.global_position
 	var target_scale: Vector2 = src_button.scale if src_button != null else hovering.get_card_button().scale
@@ -361,13 +378,32 @@ func _set_sell_panel_value(refund_value: int) -> void:
 # Press sur une carte du shop : démarre le drag. Un relâchement quasi instantané
 # sera arbitré en clic court (achat routé vers la main) par le coordinator.
 func _on_card_shop_button_drag_requested(button: CardButton, card: Card) -> void:
+	if _tutorial_locked:
+		return
+	if _tutorial_only_slot >= 0 and _card_buttons.find(button) != _tutorial_only_slot:
+		return
 	if card == null:
 		return
 	_begin_drag_from_shop(card, button)
 
 
+func _on_tutorial_set_shop_interactable(is_interactable: bool) -> void:
+	_tutorial_locked = not is_interactable
+
+
+func _on_tutorial_set_shop_only_slot(slot: int) -> void:
+	_tutorial_only_slot = slot
+
+
 func _on_card_shop_shop_refreshed(new_cards: Array[Card]) -> void:
 	_update_shop_cards_displayed_visual(new_cards)
+
+
+# Fin de combat (roguelite) : reroll gratuit du shop pour la taverne suivante.
+func _on_confrontation_resolved(_won: bool) -> void:
+	if _card_shop == null:
+		return
+	_card_shop.refresh_for_free()
 
 
 func _on_card_shop_card_releveled(card: Card) -> void:
@@ -402,4 +438,14 @@ func _on_refresh_button_pressed() -> void:
 func _on_random_card_button_pressed() -> void:
 	_random_card_button.disabled = true
 	_card_shop.try_buy_random_card()
+
+
+func _on_events_tavern_phase_started() -> void:
+	_is_locked = false
+
+
+func _on_events_fighting_phase_started() -> void:
+	_is_locked = true
+
+
 #endregion

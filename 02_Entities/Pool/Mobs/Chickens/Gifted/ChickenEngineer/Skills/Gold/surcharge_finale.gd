@@ -16,3 +16,8 @@ func apply(ctx: SkillContext) -> void:
 			var shield: float = chicken.stats.get_stat(EntityStats.StatType.AP) * _ap_ratio
 			chicken.alterations.inflict_condition_stacks(ally, shield, Alteration.Type.SHIELD, &"Surcharge finale")
 	chicken.death_modifiers_registry.register_modifier(modifier)
+
+
+func get_description() -> String:
+	return "À sa mort, donne [[SHIELD]] égal à " + _value(_ap_ratio) \
+		+ "× son [[AP]] à l'allié le plus blessé."

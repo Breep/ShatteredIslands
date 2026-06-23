@@ -67,7 +67,6 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	var hp: String = str(_hp_percent[card_lvl - 1]).pad_decimals(1)
-	return "Toutes les " + str(_period[card_lvl - 1]) + "s, inflige " + hp \
-		+ "% des PV max en [[PHYSICAL_DAMAGE]] aux ennemis dans un rayon de " \
-		+ str(_radius[card_lvl - 1]) + "m."
+	return "Toutes les " + _value(_period[card_lvl - 1]) + "s : " + _value(_hp_percent[card_lvl - 1]) \
+		+ "% des PV max en [[PHYSICAL_DAMAGE]] aux ennemis (" \
+		+ _value(_radius[card_lvl - 1]) + "m)."

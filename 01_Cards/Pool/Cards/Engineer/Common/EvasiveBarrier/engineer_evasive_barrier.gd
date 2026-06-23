@@ -38,5 +38,5 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return "Augmente le [[DODGE]] de " + str(_dodge_increase[card_lvl - 1]) \
-		+ ". Génère " + str(_shield_gain[card_lvl - 1]) + " [[SHIELD]] à chaque esquive."
+	return "+" + _value(_dodge_increase[card_lvl - 1]) + " [[DODGE]]\n" \
+		+ "Dodge : " + _value(_shield_gain[card_lvl - 1]) + " [[SHIELD]]"

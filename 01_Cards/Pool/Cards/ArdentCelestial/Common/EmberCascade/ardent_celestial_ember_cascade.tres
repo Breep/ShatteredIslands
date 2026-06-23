@@ -2,17 +2,16 @@
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_card"]
 [ext_resource type="Script" uid="uid://bsopnhd7asmml" path="res://01_Cards/Pool/Cards/ArdentCelestial/Common/EmberCascade/ardent_celestial_ember_cascade.gd" id="2_eff"]
+[ext_resource type="Texture2D" uid="uid://dpllk3yn0foya" path="res://01_Cards/Pool/Cards/ArdentCelestial/Common/EmberCascade/ardent_celestial_ember_cascade.png" id="2_m58j5"]
 
 [sub_resource type="Resource" id="Resource_ember"]
 script = ExtResource("2_eff")
-_chance_per_stack = Array[float]([5.0, 6.0, 7.0, 8.0, 10.0])
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_bhtpp"]
+_chance_per_stack = Array[float]([4.0, 5.0, 6.0, 7.0, 8.0])
 
 [resource]
 script = ExtResource("1_card")
-name = "Ember Cascade"
-picture = SubResource("PlaceholderTexture2D_bhtpp")
+name = "Cascade de Braises"
+picture = ExtResource("2_m58j5")
 families = Array[int]([3])
 _card_effect = SubResource("Resource_ember")
 points = Dictionary[int, int]({

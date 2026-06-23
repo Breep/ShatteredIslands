@@ -4,15 +4,16 @@
 
 [resource]
 script = ExtResource("1_n2cev")
-_health_max = 3680.0
+_health_max = 3710.0
 _mana_max = 30.0
 _mana_regen = 3.0
 auto_attack_type = 1
 _attack_range = 1.5
 _attack_damage = 50.0
-_attack_speed = 1.9480676202314584
+_attack_speed = 2.0698218464959246
 _movement_speed = 6.0
 _attack_power = 70.6
+armor = 10.66642668811243
 _crit_chance = 27.0
 _dodge = 19.0
 _m_crit_chances = Dictionary[int, float]({
@@ -20,7 +21,7 @@ _m_crit_chances = Dictionary[int, float]({
 1: 0.0
 })
 _m_resistances = Dictionary[int, float]({
-0: 0.0,
+0: 10.66642668811243,
 1: 0.0,
 2: 0.0
 })

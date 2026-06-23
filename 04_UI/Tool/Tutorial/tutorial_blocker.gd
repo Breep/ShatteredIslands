@@ -37,6 +37,8 @@ var input_blocking: bool = false
 var _pulse_phase: float = 0.0
 var _target_ctrls: Array[Control] = []
 var _target_padding: float = 0.0
+var _block_through_holes: bool = false ## When true, input is blocked even inside the holes (highlight stays purely visual).
+var _static_rect: Rect2 = Rect2() ## Optional fixed screen-space hole, added on top of the Control targets.
 #endregion
 
 
@@ -97,6 +99,8 @@ func _draw() -> void:
 func _has_point(point: Vector2) -> bool:
 	if not input_blocking:
 		return false
+	if _block_through_holes:
+		return true
 	if target_rects.is_empty():
 		return true
 	var global_p: Vector2 = get_global_transform() * point
@@ -108,11 +112,13 @@ func _has_point(point: Vector2) -> bool:
 
 
 #region ============================== Public functions ==============================
-func set_state(p_dim: bool, p_block: bool, p_targets: Array[Control], p_padding: float = 0.0) -> void:
+func set_state(p_dim: bool, p_block: bool, p_targets: Array[Control], p_padding: float = 0.0, p_block_through_holes: bool = false, p_static_rect: Rect2 = Rect2()) -> void:
 	dim_active = p_dim
 	input_blocking = p_block
 	_target_ctrls = p_targets
 	_target_padding = p_padding
+	_block_through_holes = p_block_through_holes
+	_static_rect = p_static_rect
 	mouse_filter = Control.MOUSE_FILTER_STOP if p_block else Control.MOUSE_FILTER_IGNORE
 	visible = p_dim or p_block
 	_refresh_target_rects()
@@ -135,6 +141,8 @@ func _refresh_target_rects() -> void:
 		if _target_padding != 0.0:
 			r = r.grow(_target_padding)
 		target_rects.append(r)
+	if _static_rect.size != Vector2.ZERO:
+		target_rects.append(_static_rect)
 
 
 # Returns the parts of `rect` lying outside `hole`, as up to 4 sub-rects.

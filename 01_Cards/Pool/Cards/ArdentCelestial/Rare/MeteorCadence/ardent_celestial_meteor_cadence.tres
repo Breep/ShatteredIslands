@@ -2,14 +2,16 @@
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_card"]
 [ext_resource type="Script" uid="uid://77gdkcbnbjki" path="res://01_Cards/Pool/Cards/ArdentCelestial/Rare/MeteorCadence/ardent_celestial_meteor_cadence.gd" id="2_eff"]
+[ext_resource type="Texture2D" uid="uid://b3crtjiuxswr3" path="res://01_Cards/Pool/Cards/ArdentCelestial/Rare/MeteorCadence/ardent_celestial_meteor_cadence.png" id="2_lliwk"]
 
 [sub_resource type="Resource" id="Resource_cad"]
 script = ExtResource("2_eff")
-_projectiles_per_meteor = Array[int]([7, 6, 5, 4, 3])
+_projectiles_per_meteor = Array[int]([8, 7, 6, 5, 4])
 
 [resource]
 script = ExtResource("1_card")
-name = "Meteor Cadence"
+name = "Cadence Météorique"
+picture = ExtResource("2_lliwk")
 families = Array[int]([3])
 rarity = 1
 _card_effect = SubResource("Resource_cad")

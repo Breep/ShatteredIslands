@@ -52,5 +52,5 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return "Toutes les " + str(_period[card_lvl - 1]) + "s, inflige " \
-		+ str(_lost_hp_percent[card_lvl - 1]) + "% des PV perdus en [[POISON_STACK]] à un ennemi."
+	return "Toutes les " + _value(_period[card_lvl - 1]) + "s : " \
+		+ _value(_lost_hp_percent[card_lvl - 1]) + "% des PV perdus en [[POISON_STACK]] à un ennemi."

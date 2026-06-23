@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_d2t3j"]
 [ext_resource type="Resource" uid="uid://b0t2j5enr1m7m" path="res://02_Entities/Pool/Buildings/Turrets/FireThrower/Stats/entity_desc.tres" id="1_nxde2"]
 [ext_resource type="Script" uid="uid://c6m6ts47svtcq" path="res://01_Cards/Pool/Cards/Engineer/Common/FlameThrowerTurret/engineer_flame_thrower_turret.gd" id="1_vshby"]
+[ext_resource type="Texture2D" uid="uid://d2e3cqmpbcoin" path="res://01_Cards/Pool/Cards/Engineer/Common/FlameThrowerTurret/engineer_flame_thrower.png" id="3_nxde2"]
 
 [sub_resource type="Resource" id="Resource_nxde2"]
 script = ExtResource("1_vshby")
@@ -10,12 +11,10 @@ _turret_level = Array[int]([1, 2, 3, 4, 5])
 _turret_desc = ExtResource("1_nxde2")
 metadata/_custom_type_script = "uid://c6m6ts47svtcq"
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_vshby"]
-
 [resource]
 script = ExtResource("1_d2t3j")
-name = &"Flame thrower turret"
-picture = SubResource("PlaceholderTexture2D_vshby")
+name = &"Tourelle Lance-Flammes"
+picture = ExtResource("3_nxde2")
 families = Array[int]([2, 3])
 _card_effect = SubResource("Resource_nxde2")
 points = Dictionary[int, int]({

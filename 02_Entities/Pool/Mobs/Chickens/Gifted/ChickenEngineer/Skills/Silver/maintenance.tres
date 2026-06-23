@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://dgu0ox3ka8r1s"]
 
+[ext_resource type="Texture2D" uid="uid://q6bhmtas0h63" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenEngineer/Skills/Silver/skill_maintenance.svg" id="1_fkw1c"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
 [ext_resource type="Script" uid="uid://c2t72twu5pf8h" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenEngineer/Skills/Silver/maintenance.gd" id="2_eff"]
 
@@ -12,5 +13,6 @@ script = ExtResource("1_skill")
 skill_id = 2
 name = "Maintenance"
 description = "Spawn : donne +2 Mana à un bâtiment allié aléatoire."
+portrait = ExtResource("1_fkw1c")
 skill_effect = SubResource("Resource_e")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

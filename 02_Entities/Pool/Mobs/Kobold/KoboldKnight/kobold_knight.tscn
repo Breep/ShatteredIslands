@@ -6,6 +6,9 @@
 [ext_resource type="AnimationNodeBlendTree" uid="uid://pdy5g53lau7e" path="res://02_Entities/Pool/Mobs/Kobold/KoboldKnight/kobold_knight_animation_tree.res" id="3_lwqgt"]
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="4_3kpk2"]
 [ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.tscn" id="5_3kpk2"]
+[ext_resource type="PackedScene" uid="uid://c8wd5y3nplk2r" path="res://02_Entities/_Shared/Components/Sound/Default/default_sound_component.tscn" id="7_fgl3d"]
+[ext_resource type="AudioStream" uid="uid://0aa7x2ued4ng" path="res://23_Audio/SFX/Deaths/kobold_die_01.wav" id="8_pk82x"]
+[ext_resource type="AudioStream" uid="uid://cusg1a0cjnofh" path="res://23_Audio/SFX/Attacks/sword_slash_01.wav" id="9_l2uxj"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8pqdl"]
 radius = 0.47998047
@@ -190,7 +193,7 @@ transform = Transform3D(0.47414637, -0.81642324, 0.32960314, -0.47580266, 0.0773
 transform = Transform3D(0.47414652, -0.81642306, 0.32960325, 0.4758032, -0.07738456, -0.8761408, 0.74080783, 0.57224554, 0.3517651, -0.60861975, -0.0022190511, 0.94833696)
 
 [node name="ik_foot_l" parent="KoboldKnightVisual/root/ik_foot_root" parent_id_path=PackedInt32Array(952577520, 1719754154) index="0" unique_id=931208385]
-transform = Transform3D(-0.019521326, -0.36071634, -0.9324714, 0.05592225, 0.93079495, -0.3612387, 0.99824387, -0.059197765, 0.0020017182, 0.15587923, 0.11546686, 0.10487587)
+transform = Transform3D(-0.019521322, -0.36071634, -0.9324714, 0.05592224, 0.93079495, -0.3612387, 0.9982437, -0.059197765, 0.0020017182, 0.15587923, 0.11546686, 0.10487587)
 
 [node name="ik_foot_r" parent="KoboldKnightVisual/root/ik_foot_root" parent_id_path=PackedInt32Array(952577520, 1719754154) index="1" unique_id=144571900]
 transform = Transform3D(-0.019521572, -0.3607171, -0.9324707, -0.055922676, -0.9307947, 0.36123925, -0.99824417, 0.059198238, -0.002001687, -0.15587959, 0.115467116, 0.104875796)
@@ -294,6 +297,11 @@ shape = SubResource("CapsuleShape3D_8pqdl")
 
 [node name="LargeHealthBarComponent" parent="." unique_id=1823590462 node_paths=PackedStringArray("_spawn", "_owner") instance=ExtResource("5_3kpk2")]
 _spawn = NodePath("../KoboldKnightVisual/HealthMarker3D")
+_owner = NodePath("..")
+
+[node name="SoundComponent" parent="." unique_id=772630757 node_paths=PackedStringArray("_owner") instance=ExtResource("7_fgl3d")]
+_death_sound = ExtResource("8_pk82x")
+_auto_attack_sound = ExtResource("9_l2uxj")
 _owner = NodePath("..")
 
 [editable path="KoboldKnightVisual"]

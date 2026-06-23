@@ -7,6 +7,18 @@
 [ext_resource type="Script" uid="uid://bq2jprj2y5yr6" path="res://04_UI/Menu/MainMenu/button_main_ui.gd" id="5_qg6fi"]
 [ext_resource type="PackedScene" uid="uid://c6g7l3w1yh45c" path="res://04_UI/InGame/RoasterList/ui_roaster_list.tscn" id="7_4d810"]
 [ext_resource type="PackedScene" uid="uid://ygk0snmo5oj" path="res://02_Entities/_Shared/EntityStatsViewer/entity_stats_viewer.tscn" id="7_omkkk"]
+[ext_resource type="Theme" uid="uid://by6rg0mxsvh5w" path="res://04_UI/_Themes/main_theme.tres" id="8_v5co4"]
+[ext_resource type="Script" uid="uid://bia26v50nwe6c" path="res://04_UI/UIButton/ui_button.gd" id="9_pfg5w"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iyfkc"]
+bg_color = Color(0.7490196, 0.4862745, 0.20784314, 1)
+border_width_right = 4
+border_width_bottom = 7
+border_color = Color(0.90588236, 0.8666667, 0.7058824, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="UIFightingArea" type="Control" unique_id=1289468176]
 layout_mode = 3
@@ -76,5 +88,61 @@ grow_horizontal = 1
 unique_name_in_owner = true
 wait_time = 4.0
 one_shot = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1868861424]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -229.0
+offset_top = 19.0
+offset_right = -17.0
+offset_bottom = 69.0
+grow_horizontal = 0
+theme = ExtResource("8_v5co4")
+
+[node name="SpeedX1" type="Button" parent="HBoxContainer" unique_id=1913053148]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_iyfkc")
+toggle_mode = true
+text = "x1"
+script = ExtResource("9_pfg5w")
+metadata/_custom_type_script = "uid://bia26v50nwe6c"
+metadata/_edit_lock_ = true
+
+[node name="SpeedX2" type="Button" parent="HBoxContainer" unique_id=765118237]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_iyfkc")
+toggle_mode = true
+text = "x2"
+script = ExtResource("9_pfg5w")
+metadata/_custom_type_script = "uid://bia26v50nwe6c"
+metadata/_edit_lock_ = true
+
+[node name="SpeedX4" type="Button" parent="HBoxContainer" unique_id=607796999]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_iyfkc")
+toggle_mode = true
+text = "x4"
+script = ExtResource("9_pfg5w")
+metadata/_custom_type_script = "uid://bia26v50nwe6c"
+metadata/_edit_lock_ = true
+
+[node name="SpeedX8" type="Button" parent="HBoxContainer" unique_id=1845306169]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_iyfkc")
+toggle_mode = true
+text = "x8"
+script = ExtResource("9_pfg5w")
+metadata/_custom_type_script = "uid://bia26v50nwe6c"
+metadata/_edit_lock_ = true
 
 [connection signal="timeout" from="IntroTimer" to="." method="_on_intro_timer_timeout"]

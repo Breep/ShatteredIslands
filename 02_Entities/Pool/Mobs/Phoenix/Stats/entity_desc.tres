@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="EntityDesc" format=3 uid="uid://34k1ljotkiup"]
 
 [ext_resource type="Script" uid="uid://dkrea5xbc4y8q" path="res://02_Entities/_Shared/entity_desc.gd" id="1_desc"]
+[ext_resource type="Texture2D" uid="uid://buf1e78l0b22d" path="res://02_Entities/Pool/Mobs/Phoenix/Data/phoenix_portrait.png" id="1_ohmex"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="2_skill"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://02_Entities/_Shared/entity_stats.gd" id="3_stats"]
 [ext_resource type="Resource" uid="uid://hysjyxvkrtod" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/phoenix_stats_lvl_01.tres" id="9_3oxq4"]
@@ -32,6 +33,7 @@
 [resource]
 script = ExtResource("1_desc")
 name = "Phoenix"
+portrait = ExtResource("1_ohmex")
 scene_path = "res://02_Entities/Pool/Mobs/Phoenix/phoenix.tscn"
 default_category = 2
 stats = Dictionary[int, ExtResource("3_stats")]({
@@ -63,3 +65,9 @@ skills = Dictionary[int, ExtResource("2_skill")]({
 3: ExtResource("27_gol"),
 4: ExtResource("28_ult")
 })
+aa_1_release_normalized = 0.63
+aa_2_release_normalized = 0.63
+aa_3_release_normalized = 0.63
+aa_1_anim_base_duration = 0.666
+aa_2_anim_base_duration = 0.666
+aa_3_anim_base_duration = 0.666

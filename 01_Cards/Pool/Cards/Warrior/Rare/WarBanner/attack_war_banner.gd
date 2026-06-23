@@ -24,4 +24,4 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return "Aura : +" + str(_as_percent[card_lvl - 1]) + "% de vitesse d'attaque pour l'équipe."
+	return "Aura : +" + _value(_as_percent[card_lvl - 1]) + "% de vitesse d'attaque pour l'équipe."

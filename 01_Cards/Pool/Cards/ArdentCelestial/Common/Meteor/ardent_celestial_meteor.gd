@@ -37,6 +37,6 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return "Appelle un Météore de niv " + str(_level_bonus[card_lvl - 1]) \
-		+ " toutes les " + str(_period[card_lvl - 1]) + " sec." \
-		+ " Inflige des [[MAGICAL_DAMAGE]] en % des PV max."
+	return "[[BIG_PROJECTILE]][[ICON:COOLDOWN]] " + _value(_period[card_lvl - 1]) + " s\n" \
+		+ "Météor niv " + _value(_level_bonus[card_lvl - 1]) \
+		+ " inflige des [[MAGICAL_DAMAGE]] en % de PV max"

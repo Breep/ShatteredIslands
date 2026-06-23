@@ -2,18 +2,17 @@
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_card"]
 [ext_resource type="Script" uid="uid://ctnu5xdymqgmg" path="res://01_Cards/Pool/Cards/ChickenLord/Common/PhoenixBrood/chickenlord_phoenix_brood.gd" id="2_eff"]
+[ext_resource type="Texture2D" uid="uid://diffe8qip0v3w" path="res://01_Cards/Pool/Cards/ChickenLord/Common/PhoenixBrood/chickenlord_phoenix_brood.png" id="2_ja3fp"]
 
 [sub_resource type="Resource" id="Resource_phoenix"]
 script = ExtResource("2_eff")
-_chance = Array[float]([10.0, 12.0, 14.0, 16.0, 20.0])
-_ignite_stacks = Array[float]([5.0, 5.0, 5.0, 5.0, 5.0])
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ji88h"]
+_chance = Array[float]([35.0, 35.0, 35.0, 35.0, 35.0])
+_ignite_stacks = Array[float]([15.0, 15.0, 15.0, 15.0, 15.0])
 
 [resource]
 script = ExtResource("1_card")
-name = "Phoenix Brood"
-picture = SubResource("PlaceholderTexture2D_ji88h")
+name = "Couvée du Phénix"
+picture = ExtResource("2_ja3fp")
 families = Array[int]([8, 3])
 _card_effect = SubResource("Resource_phoenix")
 points = Dictionary[int, int]({

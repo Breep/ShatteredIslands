@@ -12,7 +12,7 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 	var block: float = _block_amount[card_lvl - 1]
 
 	_on_detected = func(e: Entity) -> void:
-		if not _is_owned_summon(e, owner): return
+		if not (is_instance_valid(e) and e.is_summoned() and owner.summon.is_summoner_of(e)): return
 		if e.alterations != null:
 			e.alterations.add_stack(Alteration.Type.BLOCK, block)
 	owner.target.new_entity_detected.connect(_on_detected)
@@ -24,9 +24,5 @@ func revert(ctx: CardContext, _card_name: StringName, _card_lvl: int) -> void:
 		owner.target.new_entity_detected.disconnect(_on_detected)
 
 
-func _is_owned_summon(e: Entity, owner: Entity) -> bool:
-	return e != null and is_instance_valid(e) and e.is_summoned() and e.summoner == owner
-
-
 func get_description(card_lvl: int) -> String:
-	return "Les summons gagnent " + str(_block_amount[card_lvl - 1]) + " [[BLOCK]] à l'apparition."
+	return "[[SUMMON]] : " + _value(_block_amount[card_lvl - 1]) + " [[BLOCK]] à l'apparition."

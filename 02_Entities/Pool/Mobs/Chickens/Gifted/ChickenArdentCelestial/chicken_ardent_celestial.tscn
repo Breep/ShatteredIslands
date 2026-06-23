@@ -6,7 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://b3oqyj5b00c" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/chicken_ardent_celestial_visual.tscn" id="5_kooec"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://cr51ggnb0u010" path="res://02_Entities/Pool/Mobs/Chickens/chicken_animation_tree.res" id="6_tas02"]
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="7_40sg2"]
+[ext_resource type="PackedScene" uid="uid://c8wd5y3nplk2r" path="res://02_Entities/_Shared/Components/Sound/Default/default_sound_component.tscn" id="8_40sg2"]
 [ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/SmallHealthBar/small_health_bar_component.tscn" id="8_kravp"]
+[ext_resource type="AudioStream" uid="uid://bj3burh0l54ei" path="res://23_Audio/SFX/Deaths/chicken_die.wav" id="9_u0mwi"]
+[ext_resource type="AudioStream" uid="uid://bk8px5f26ad5f" path="res://23_Audio/SFX/Misc/chicken_bok_bok_01.wav" id="11_gy4wv"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x7yny"]
 radius = 0.28027344
@@ -38,21 +41,21 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.00037944317, 0.382874
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="ChickenArdentCelestialVisual/Node3D" parent_id_path=PackedInt32Array(142901617, 22277641) index="0" unique_id=416118163]
-bones/1/position = Vector3(0, 0.047381032, 0.025282245)
-bones/1/rotation = Quaternion(-0.7071016, 0.7071016, 0.0027074562, 0.002722331)
+bones/1/position = Vector3(0, 0.049518503, 0.025282245)
+bones/1/rotation = Quaternion(-0.7071052, 0.7071052, -0.0014967368, -0.0014818623)
 bones/1/scale = Vector3(1, 1, 1.0026101)
 bones/2/rotation = Quaternion(0.8344415, -5.6795907e-06, -0.5510966, 8.903665e-06)
 bones/3/rotation = Quaternion(0.96720886, 8.184627e-08, 0.2539824, -3.0418073e-07)
-bones/4/rotation = Quaternion(-5.536811e-08, 0.0072078905, -2.113779e-09, 0.9999741)
+bones/4/rotation = Quaternion(-0.2823559, 0.006910739, -0.035267424, 0.9586364)
 bones/5/rotation = Quaternion(-3.773232e-06, 0.9361406, -9.886281e-06, 0.35162592)
-bones/7/position = Vector3(0.06718646, -0.0814189, 0.026344845)
-bones/7/rotation = Quaternion(2.7037765e-06, -0.7286475, 1.8201396e-05, 0.68488896)
-bones/8/rotation = Quaternion(0.9932081, -1.5955072e-06, -0.11635132, 1.4483898e-05)
-bones/9/rotation = Quaternion(4.0781124e-08, -0.60039806, -2.2802033e-07, 0.79970133)
-bones/10/position = Vector3(0.06718645, 0.08142003, 0.02634143)
-bones/10/rotation = Quaternion(-1.7054314e-05, -0.7286475, -2.8190655e-06, 0.68488896)
-bones/11/rotation = Quaternion(0.9932081, 1.7259488e-06, -0.116351314, -1.4468617e-05)
-bones/12/rotation = Quaternion(1.5295967e-07, -0.4917123, 1.5807893e-07, 0.8707578)
+bones/7/position = Vector3(0.06718646, -0.0814189, 0.026770316)
+bones/7/rotation = Quaternion(2.520882e-06, -0.73103803, 1.8046887e-05, 0.6823367)
+bones/8/rotation = Quaternion(0.99246514, -1.5005099e-06, -0.1225276, 1.44520145e-05)
+bones/9/rotation = Quaternion(4.796991e-08, -0.594376, -2.3500367e-07, 0.80418724)
+bones/10/position = Vector3(0.06718645, 0.08142003, 0.0267669)
+bones/10/rotation = Quaternion(-1.716359e-05, -0.73103803, -3.0425547e-06, 0.6823367)
+bones/11/rotation = Quaternion(0.99246514, 1.6308542e-06, -0.12252759, -1.4435923e-05)
+bones/12/rotation = Quaternion(4.31926e-08, -0.594376, 2.3604431e-07, 0.80418724)
 
 [node name="HealthBarSpawnMarker" type="Marker3D" parent="ChickenArdentCelestialVisual" unique_id=431386149]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 1.5, 0)
@@ -156,6 +159,11 @@ parameters/switch_stunned_state/current_index = 0
 
 [node name="AnimationComponent" parent="." unique_id=73205791 node_paths=PackedStringArray("_animation_tree", "_owner") instance=ExtResource("7_40sg2")]
 _animation_tree = NodePath("../AnimationTree")
+_owner = NodePath("..")
+
+[node name="SoundComponent" parent="." unique_id=870659116 node_paths=PackedStringArray("_owner") instance=ExtResource("8_40sg2")]
+_death_sound = ExtResource("9_u0mwi")
+_spawn_sound = ExtResource("11_gy4wv")
 _owner = NodePath("..")
 
 [editable path="ChickenArdentCelestialVisual"]

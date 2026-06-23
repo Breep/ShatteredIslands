@@ -11,3 +11,7 @@ func apply(ctx: SkillContext) -> void:
 	var ally: Entity = chicken.target.get_target(TargetComponent.TargettingStrategy.LOWEST_HP_PERCENT_ALLY_INCLUDING_SELF)
 	if is_instance_valid(ally):
 		chicken.alterations.inflict_condition_stacks(ally, _shield, Alteration.Type.SHIELD, &"Câblage léger")
+
+
+func get_description() -> String:
+	return "À son apparition, donne " + _value(_shield) + " [[SHIELD]] à l'allié le plus blessé."

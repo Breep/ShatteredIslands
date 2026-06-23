@@ -31,10 +31,9 @@ func _on_impact(cb_vars: Dictionary) -> void:
 	var damage: float = value_at_level(_damage, level, 0.0) \
 		+ value_at_level(_damage_ratio, level, 0.0) * source.stats.get_stat(EntityStats.StatType.AP)
 	var stacks: float = value_at_level(_debuff_stacks, level, 1.0)
-	var source_id: StringName = _stats.source_id if _stats != null else &""
 
-	source.damage.direct(target, damage, Utils.ActionType.DAMAGE_MAGICAL, source_id)
+	source.damage.direct(target, damage, Utils.ActionType.DAMAGE_MAGICAL, &"Nightfall")
 
 	var debuff: Alteration.Type = Utils.pick_random(
 		[Alteration.Type.WEAKNESS, Alteration.Type.VULNERABILITY], source.battle_id, "Nightfall")
-	source.alterations.inflict_condition_stacks(target, stacks, debuff, source_id)
+	source.alterations.inflict_condition_stacks(target, stacks, debuff, &"Nightfall")

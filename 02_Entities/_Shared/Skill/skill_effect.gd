@@ -13,5 +13,6 @@ func get_description() -> String:
 # (sans .0 superflu), en bleu clair via le token couleur du dictionnaire de
 # tooltips (résolu par TooltipManager.render_bbcode au moment de l'affichage).
 func _value(v: float) -> String:
+	var color := Color("1a60c0ff")
 	var num: String = str(int(v)) if is_equal_approx(v, roundf(v)) else str(snappedf(v, 0.1))
 	return "{{COLOR:VALUE_COLOR}}%s{{/COLOR}}" % num

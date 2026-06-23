@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://cphsj0xnsijhp"]
 
+[ext_resource type="Texture2D" uid="uid://bcsn8tpy5fr32" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Skills/Passive/skill_plumage_epineux.svg" id="1_jxaqq"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
 [ext_resource type="Script" uid="uid://hkkfvhefajjj" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/Skills/Passive/plumage_epineux.gd" id="2_eff"]
 
@@ -12,5 +13,6 @@ script = ExtResource("1_skill")
 skill_id = 6
 name = "Plumage épineux"
 description = "Spawn : donne 1 Thorn à un allié aléatoire."
+portrait = ExtResource("1_jxaqq")
 skill_effect = SubResource("Resource_e")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

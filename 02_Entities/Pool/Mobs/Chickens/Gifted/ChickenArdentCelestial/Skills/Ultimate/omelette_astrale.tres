@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://bgtb0ni3fkg5p"]
 
+[ext_resource type="Texture2D" uid="uid://dx88fpga3s1eh" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/Skills/Ultimate/skill_omelette_astrale.svg" id="1_h2gyr"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
 [ext_resource type="Script" uid="uid://b8h5b5sdiecw7" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenArdentCelestial/Skills/Ultimate/omelette_astrale.gd" id="2_eff"]
 
@@ -12,5 +13,6 @@ script = ExtResource("1_skill")
 skill_id = 7
 name = "Omelette astrale"
 description = "Applique AP x 100% Ignite à la cible principale."
+portrait = ExtResource("1_h2gyr")
 skill_effect = SubResource("Resource_e")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

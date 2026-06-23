@@ -6,12 +6,12 @@
 
 [sub_resource type="Resource" id="Resource_bond"]
 script = ExtResource("2_eff")
-_resist_per_summon = Array[float]([1.0, 1.0, 1.0, 1.0, 1.0])
+_resist_per_summon = Array[float]([3.0, 6.0, 9.0, 12.0, 15.0])
 metadata/_custom_type_script = "uid://ds443ic7ub0i7"
 
 [resource]
 script = ExtResource("1_card")
-name = "Beast Bond"
+name = "Lien Bestial"
 picture = ExtResource("2_eei0y")
 families = Array[int]([6, 8])
 _card_effect = SubResource("Resource_bond")

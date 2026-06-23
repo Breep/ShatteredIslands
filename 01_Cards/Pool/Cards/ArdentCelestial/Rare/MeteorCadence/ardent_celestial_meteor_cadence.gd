@@ -34,5 +34,5 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return "Tous les " + str(_projectiles_per_meteor[card_lvl - 1]) \
-		+ " projectiles d'abilité lancés, invoque un météore."
+	return "Tous les " + _value(_projectiles_per_meteor[card_lvl - 1]) \
+		+ " [[ABILITY_PROJECTILE]] lancés, invoque un météore."

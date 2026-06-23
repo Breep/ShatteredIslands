@@ -5,6 +5,7 @@
 
 [sub_resource type="Resource" id="Resource_e"]
 script = ExtResource("2_eff")
+_share = 0.5
 metadata/_custom_type_script = "uid://bsentprisme1ef"
 
 [resource]

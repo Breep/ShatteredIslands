@@ -27,8 +27,8 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return "Le héros et ses bâtiments gagnent " + str(_base_thorn[card_lvl - 1]) + " + " \
-		+ str(_hp_max_percent[card_lvl - 1]) + "% de leurs PV max en [[THORN]]."
+	return "Le héros et ses bâtiments gagnent " + _value(_base_thorn[card_lvl - 1]) + " + " \
+		+ _value(_hp_max_percent[card_lvl - 1]) + "% des PV max du héros en [[THORN]]."
 
 
 func _apply_thorn(owner: Entity, base: float, pct: float, card_name: StringName) -> void:

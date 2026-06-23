@@ -7,6 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="5_uxhk6"]
 [ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.tscn" id="7_omi01"]
 [ext_resource type="PackedScene" uid="uid://bs1hrsa08utbt" path="res://02_Entities/_Shared/Components/LevelUpVfx/level_up_vfx_component.tscn" id="7_vppri"]
+[ext_resource type="PackedScene" uid="uid://c8wd5y3nplk2r" path="res://02_Entities/_Shared/Components/Sound/Default/default_sound_component.tscn" id="8_6o8xt"]
+[ext_resource type="AudioStream" uid="uid://b4b2eussl2sf8" path="res://23_Audio/SFX/Deaths/sfx_wolf_die.mp3" id="9_wj527"]
+[ext_resource type="AudioStream" uid="uid://bc1e4mkcnndjr" path="res://23_Audio/SFX/Attacks/sfx_wolf_bite_clip.wav" id="10_2n5l8"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g1k0y"]
 radius = 0.5366211
@@ -125,6 +128,12 @@ _owner = NodePath("..")
 
 [node name="LargeHealthBarComponent" parent="." unique_id=1823590462 node_paths=PackedStringArray("_spawn", "_owner") instance=ExtResource("7_omi01")]
 _spawn = NodePath("../FrekiVisual/HealthBarSpawnMarker")
+_owner = NodePath("..")
+
+[node name="SoundComponent" parent="." unique_id=1899315073 node_paths=PackedStringArray("_owner") instance=ExtResource("8_6o8xt")]
+_death_sound = ExtResource("9_wj527")
+_auto_attack_sound = ExtResource("10_2n5l8")
+_auto_attack_sound_db = -5.0
 _owner = NodePath("..")
 
 [editable path="FrekiVisual"]

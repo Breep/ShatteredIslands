@@ -5,7 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="5_3tx8a"]
 [ext_resource type="PackedScene" uid="uid://dithaupylit2x" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenColossus/chicken_colossus_visual.tscn" id="5_5tkf2"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://cr51ggnb0u010" path="res://02_Entities/Pool/Mobs/Chickens/chicken_animation_tree.res" id="5_bjw5k"]
+[ext_resource type="PackedScene" uid="uid://c8wd5y3nplk2r" path="res://02_Entities/_Shared/Components/Sound/Default/default_sound_component.tscn" id="7_ph5i7"]
 [ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/SmallHealthBar/small_health_bar_component.tscn" id="8_ea2ri"]
+[ext_resource type="AudioStream" uid="uid://bj3burh0l54ei" path="res://23_Audio/SFX/Deaths/chicken_die.wav" id="8_j7sx2"]
+[ext_resource type="AudioStream" uid="uid://c31xlprggkiix" path="res://23_Audio/SFX/Attacks/sfx_small_hit.mp3" id="8_ngyli"]
+[ext_resource type="AudioStream" uid="uid://bk8px5f26ad5f" path="res://23_Audio/SFX/Misc/chicken_bok_bok_01.wav" id="10_6p1l8"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x7yny"]
 radius = 0.39794922
@@ -134,6 +138,12 @@ parameters/switch_stunned_state/current_index = 0
 
 [node name="AnimationComponent" parent="." unique_id=73205791 node_paths=PackedStringArray("_animation_tree", "_owner") instance=ExtResource("5_3tx8a")]
 _animation_tree = NodePath("../AnimationTree")
+_owner = NodePath("..")
+
+[node name="SoundComponent" parent="." unique_id=284151492 node_paths=PackedStringArray("_owner") instance=ExtResource("7_ph5i7")]
+_death_sound = ExtResource("8_j7sx2")
+_auto_attack_sound = ExtResource("8_ngyli")
+_spawn_sound = ExtResource("10_6p1l8")
 _owner = NodePath("..")
 
 [editable path="ChickenColossusVisual"]

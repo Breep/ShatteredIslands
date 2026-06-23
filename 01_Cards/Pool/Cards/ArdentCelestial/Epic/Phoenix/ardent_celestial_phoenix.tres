@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_card"]
 [ext_resource type="Resource" uid="uid://34k1ljotkiup" path="res://02_Entities/Pool/Mobs/Phoenix/Stats/entity_desc.tres" id="2_desc"]
 [ext_resource type="Script" uid="uid://ccgtaumyv3ybc" path="res://01_Cards/Pool/Cards/ArdentCelestial/Epic/Phoenix/ardent_celestial_phoenix.gd" id="3_effect"]
+[ext_resource type="Texture2D" uid="uid://ugfmsxb8nfpp" path="res://01_Cards/Pool/Cards/ArdentCelestial/Epic/Phoenix/ardent_celestial_phoenix.png" id="3_hwinm"]
 
 [sub_resource type="Resource" id="Resource_effect"]
 script = ExtResource("3_effect")
@@ -10,12 +11,10 @@ _acolyte_level = Array[int]([3, 5, 7])
 _acolyte_desc = ExtResource("2_desc")
 metadata/_custom_type_script = "uid://cph03n1xardc7e"
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_phoenix"]
-
 [resource]
 script = ExtResource("1_card")
-name = &"Phoenix"
-picture = SubResource("PlaceholderTexture2D_phoenix")
+name = &"Phénix"
+picture = ExtResource("3_hwinm")
 families = Array[int]([3])
 rarity = 2
 _card_effect = SubResource("Resource_effect")

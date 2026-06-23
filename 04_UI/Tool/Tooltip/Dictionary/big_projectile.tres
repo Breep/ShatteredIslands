@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TooltipDesc" format=3]
+
+[ext_resource type="Script" uid="uid://cr1qi4s4jv5f7" path="res://04_UI/Tool/Tooltip/Dictionary/tooltip_desc.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+key = &"BIG_PROJECTILE"
+title = "{{COLOR:BIG_PROJECTILE_COLOR}}BIG PROJECTILE{{/COLOR}}"
+description = "A heavy projectile (Boulder, Meteor...). Slow and rare, high impact damage."
+icon_key = "MAGIC_ICON"

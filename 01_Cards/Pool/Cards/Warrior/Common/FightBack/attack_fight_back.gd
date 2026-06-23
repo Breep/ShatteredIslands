@@ -17,6 +17,7 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 	dodge_mod.calc_type = StatModifier.CalcType.ADD
 	dodge_mod.value = _increase_dodge[card_lvl - 1]
 	dodge_mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
+	dodge_mod.tags = [StatModifier.TagType.CARD]
 	owner.stat_modifiers_registry.register_modifier(dodge_mod)
 
 	var base_dodge: float = _increase_dodge[card_lvl - 1]
@@ -63,6 +64,6 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return "Augmente le [[DODGE]] de " + str(_increase_dodge[card_lvl - 1]) \
-		+ ". Chaque esquive augmente l'[[AD]] de " + str(_increase_attack_damage[card_lvl - 1]) \
-		+ " mais réduit l'esquive de " + str(_dodge_reductions[card_lvl - 1]) + "."
+	return "+" + _value(_increase_dodge[card_lvl - 1]) + " [[DODGE]]\n" \
+		+ "Dodge : +" + _value(_increase_attack_damage[card_lvl - 1]) + " [[AD]], -" \
+		+ _value(_dodge_reductions[card_lvl - 1]) + " [[DODGE]]"

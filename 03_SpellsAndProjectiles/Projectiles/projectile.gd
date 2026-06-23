@@ -48,6 +48,10 @@ enum Size {
 @export var type: Type= Type.SHADOW_BOLT
 @export var size: Size = Size.SMALL
 @export var category: Category = Category.ABILITY_PROJECTILE
+@export var _on_hit_sfx: AudioStream
+@export var _on_hit_sfx_db: float
+@export var _on_spawn_sfx: AudioStream
+@export var _on_spawn_sfx_db: float
 
 var uid: int = -1
 
@@ -104,6 +108,7 @@ static func value_at_level(arr: Array, p_level: int, default: Variant = 0.0) -> 
 
 
 func _ready() -> void:
+	AudioManager.play_audiostream_3d(_on_spawn_sfx, global_position, _on_spawn_sfx_db)
 	if _stats == null:
 		Verbose.error("No _stats (null) -> queue_freeing myself", Verbose.Category.PROJECTILE)
 	if _target and _target.died and not _target.died.is_connected(_on_target_died):
@@ -165,6 +170,7 @@ func _check_hit(p_from: Vector3, p_to: Vector3) -> void:
 
 func _on_hit(hit_target: Entity) -> void:
 	Verbose.trace("Hit: " + hit_target.name, Verbose.Category.PROJECTILE)
+	AudioManager.play_audiostream_3d(_on_hit_sfx, global_position, _on_hit_sfx_db)
 	_hit_history.append(hit_target)
 	target_hit.emit(hit_target, global_position)
 	

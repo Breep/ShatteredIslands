@@ -28,4 +28,4 @@ func on_upgrade(ctx: CardContext, card_name: StringName, _prev_lvl: int, new_lvl
 		entries[0].level = _turret_level[new_lvl - 1]
 
 func get_description(card_lvl: int) -> String:
-	return "Recrute un tourelle lance flamme de niveau " + str(_turret_level[card_lvl - 1])
+	return "[[BUILDING]] : Place une tourelle lance-flamme de niveau " + _value(_turret_level[card_lvl - 1])

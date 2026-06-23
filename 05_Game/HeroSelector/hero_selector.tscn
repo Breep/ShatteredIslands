@@ -24,7 +24,6 @@
 [ext_resource type="Material" uid="uid://dhd4kj45npr4m" path="res://22_VFX/Shaders/Material/light_fenetre.tres" id="21_n20ns"]
 [ext_resource type="PackedScene" uid="uid://bsbbpkr8vpwu3" path="res://02_Entities/Pool/Heroes/Latika/latika_preview.tscn" id="22_l31ec"]
 [ext_resource type="PackedScene" uid="uid://k4dc5j8ecdxo" path="res://04_UI/InGame/HeroSelection/ui_hero_picking_screen.tscn" id="23_bnso8"]
-[ext_resource type="PackedScene" uid="uid://b1yg7a07pqljt" path="res://02_Entities/Pool/Mobs/Wolfs/Vrock/vrock_preview.tscn" id="23_l31ec"]
 [ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://02_Entities/_Shared/hero_desc.gd" id="24_desc"]
 [ext_resource type="Resource" uid="uid://dlatikadesc" path="res://02_Entities/Pool/Heroes/Latika/latika_desc.tres" id="25_latika"]
 [ext_resource type="Script" uid="uid://db3l8qpq81uob" path="res://05_Game/HeroSelector/tavern_spot_light.gd" id="26_spot"]
@@ -52758,12 +52757,7 @@ unique_name_in_owner = true
 transform = Transform3D(0.009511892, 0, -0.99995476, 0, 0.9999999, 0, 0.99995476, 0, 0.009511892, -0.9193905, 0, 0.12321366)
 
 [node name="LatikaPreview" parent="Tavern/HeroesPreview/HeroSpawnPoint" unique_id=1528231726 instance=ExtResource("22_l31ec")]
-
-[node name="AcolyteSpawnPoint" type="Marker3D" parent="Tavern/HeroesPreview" unique_id=1434485065]
-unique_name_in_owner = true
-transform = Transform3D(-0.11932249, 0, -0.99285555, 0, 1, 0, 0.99285555, 0, -0.11932249, -1.5787725, -2.3841858e-07, 1.0395672)
-
-[node name="VrockPreview" parent="Tavern/HeroesPreview/AcolyteSpawnPoint" unique_id=1262653344 instance=ExtResource("23_l31ec")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03563822, -0.012644768, 0.030334115)
 
 [node name="Camera3D" type="Camera3D" parent="Tavern" unique_id=909175759]
 transform = Transform3D(-4.371139e-08, -0.24645777, 0.9691535, 0, 0.9691535, 0.24645777, -1, 1.0773011e-08, -4.2363045e-08, 4.70505, 2.939973, 0.20216416)

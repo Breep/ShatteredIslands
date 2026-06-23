@@ -31,4 +31,4 @@ func on_upgrade(ctx: CardContext, card_name: StringName, _prev_lvl: int, new_lvl
 
 
 func get_description(card_lvl: int) -> String:
-	return "Recrute un phoenix de niveau " + str(_acolyte_level[card_lvl - 1])
+	return "[[ACOLYTE]] : Recrute un phoenix de niveau " + _value(_acolyte_level[card_lvl - 1])

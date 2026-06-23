@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_voj3d")
-_health_max = 11910.0
+_health_max = 11960.0
 _mana_max = 50.0
 _mana_regen = 3.8
 auto_attack_type = 1

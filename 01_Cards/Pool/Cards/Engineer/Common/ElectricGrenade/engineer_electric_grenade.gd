@@ -45,5 +45,5 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return "Toutes les " + str(_period[card_lvl - 1]) + "s, lance une grenade électrique " \
-		+ "(level " + str(card_lvl) + ") qui explose en zone."
+	return "[[SMALL_PROJECTILE]][[ICON:COOLDOWN]] " + _value(_period[card_lvl - 1]) + " s\n" \
+		+ "Grenade niv " + _value(card_lvl) + " : explose en zone, [[MAGICAL_DAMAGE]] + [[VULNERABILITY]]"

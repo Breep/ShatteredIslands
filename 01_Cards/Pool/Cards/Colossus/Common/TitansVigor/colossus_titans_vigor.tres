@@ -6,14 +6,14 @@
 
 [sub_resource type="Resource" id="Resource_vigor"]
 script = ExtResource("2_eff")
-_max_hp_increase = Array[float]([100.0, 150.0, 200.0, 250.0, 350.0])
+_max_hp_increase = Array[float]([150.0, 300.0, 450.0, 600.0, 750.0])
 _heal_percent = Array[float]([2.0, 3.0, 4.0, 5.0, 7.0])
 _heal_period = Array[float]([2.0, 2.0, 2.0, 2.0, 2.0])
 metadata/_custom_type_script = "uid://daqnwg11wal35"
 
 [resource]
 script = ExtResource("1_card")
-name = "Titan's Vigor"
+name = "Vigueur du Titan"
 picture = ExtResource("2_3lfp3")
 families = Array[int]([6])
 _card_effect = SubResource("Resource_vigor")

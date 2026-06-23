@@ -53,8 +53,6 @@ func _spawn_golems(dragon: SkeletonDragon) -> void:
 		dragon.summon.summon_entity(Entity.EntityType.MOLTEN_GOLEM, SpawnLocationConfig.create_exact(pos), {MoltenGolem.Modifier.LEVEL: dragon_level})
 	context.spawn_manager.entity_spawned.disconnect(capture)
 
-	AudioManager.play_sfx("dragon_voice_golem")
-
 	# Keep the dragon sweeping (Vol fracassant) until this brood is wiped out. The flight
 	# ability polls the list each tick, so a golem freed without a death signal still releases it.
 	var ability: ShatteringFlightAbility = dragon.get_flight_ability()

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cdknuitnoir01" path="res://03_SpellsAndProjectiles/Projectiles/Abilities/Small/Nightfall/nightfall.gd" id="1_proj"]
 [ext_resource type="Script" uid="uid://xr3esthqo6re" path="res://03_SpellsAndProjectiles/Projectiles/_Shared/Trajectories/straight_trajectory.gd" id="2_traj"]
 [ext_resource type="PackedScene" uid="uid://bxqb2r5cdt3gw" path="res://22_VFX/VFX_3D/VFX/Scenes/VFX_Darkness_projectile.tscn" id="3_vis"]
+[ext_resource type="AudioStream" uid="uid://ba56ikovth3in" path="res://23_Audio/SFX/Projectile/sfx_nightfall.wav" id="4_r4t4f"]
 
 [sub_resource type="Resource" id="Resource_traj"]
 script = ExtResource("2_traj")
@@ -18,8 +19,11 @@ collision_mask = 16
 script = ExtResource("1_proj")
 _damage = Array[float]([20.0, 30.0, 45.0, 65.0, 90.0, 120.0, 155.0, 195.0, 240.0, 295.0])
 _damage_ratio = Array[float]([0.8, 1.2, 1.8, 2.6, 3.6, 4.8, 6.2, 7.8, 9.6, 11.8])
+_debuff_stacks = Array[float]([1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0])
 trajectory = SubResource("Resource_traj")
 type = 14
+_on_spawn_sfx = ExtResource("4_r4t4f")
+_on_spawn_sfx_db = 5.0
 
 [node name="NightfallVisual" parent="." unique_id=1560508901 instance=ExtResource("3_vis")]
 transform = Transform3D(2, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)

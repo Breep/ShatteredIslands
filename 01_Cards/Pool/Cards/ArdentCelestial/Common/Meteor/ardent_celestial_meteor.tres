@@ -7,11 +7,11 @@
 [sub_resource type="Resource" id="Resource_meteor"]
 script = ExtResource("2_eff")
 _level_bonus = Array[int]([1, 2, 3, 4, 5])
-_period = Array[float]([10.0, 9.0, 8.0, 7.0, 6.0])
+_period = Array[float]([6.0, 6.0, 6.0, 6.0, 6.0])
 
 [resource]
 script = ExtResource("1_card")
-name = "Meteor"
+name = "Météore"
 picture = ExtResource("2_k1y1e")
 families = Array[int]([3])
 _card_effect = SubResource("Resource_meteor")

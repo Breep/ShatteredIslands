@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="TutorialStep" format=3 uid="uid://kl8hljwrjv4v"]
+
+[ext_resource type="Script" uid="uid://jooqjtqqt21" path="res://04_UI/Tool/Tutorial/Resource/tutorial_step.gd" id="1_step"]
+
+[resource]
+script = ExtResource("1_step")
+id = &"unspent_gold"
+text = "Attends ! Il te reste de l'or à dépenser. Pense à acheter des cartes avant de partir au combat."
+target_unique_name = &"PlayerGoldHBox"
+auto_advance_delay = 0.0
+highlight_target = true
+highlight_padding = 8.0
+preferred_arrow_side = 3

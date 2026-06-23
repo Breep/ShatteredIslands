@@ -19,7 +19,7 @@ func apply(ctx: CardContext, card_name: StringName, card_lvl: int) -> void:
 	var hp_percent: float = _hp_percent[card_lvl - 1]
 
 	_on_detected = func(summon: Entity) -> void:
-		if not _is_owned_summon(summon, owner): return
+		if not (is_instance_valid(summon) and summon.is_summoned() and owner.summon.is_summoner_of(summon)): return
 		# Lancer de dé au spawn : ce summon pourra-t-il renaître ?
 		summon.can_revive = Utils.is_randomize_modifier_active(chance, owner.battle_id)
 		if not summon.can_revive: return
@@ -44,10 +44,6 @@ func revert(ctx: CardContext, _card_name: StringName, _card_lvl: int) -> void:
 		owner.target.new_entity_detected.disconnect(_on_detected)
 
 
-func _is_owned_summon(e: Entity, owner: Entity) -> bool:
-	return e != null and is_instance_valid(e) and e.is_summoned() and e.summoner == owner
-
-
 func get_description(card_lvl: int) -> String:
-	return "Mort de summon : " + str(_respawn_chance[card_lvl - 1]) + "% de chance qu'il réapparaisse " \
-		+ str(RESPAWN_DELAY) + "s plus tard au même endroit avec " + str(_hp_percent[card_lvl - 1]) + "% PV."
+	return "Mort de [[SUMMON]] : " + _value(_respawn_chance[card_lvl - 1]) + "% de chance qu'il réapparaisse " \
+		+ _value(RESPAWN_DELAY) + "s plus tard au même endroit avec " + _value(_hp_percent[card_lvl - 1]) + "% PV."

@@ -14,8 +14,8 @@ auto_advance_delay = 0.0
 popup_mode = 0
 highlight_target = true
 highlight_padding = 8.0
-screen_anchor = 1
 dim_off_while_dragging = true
+bubble_offset = Vector2(80, 0)
 
 [resource]
 script = ExtResource("1_seq")

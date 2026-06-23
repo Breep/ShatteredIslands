@@ -1,18 +1,17 @@
 [gd_resource type="Resource" script_class="Card" format=3 uid="uid://0x32nssgqaea"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_card"]
+[ext_resource type="Texture2D" uid="uid://b7cckms2h6pju" path="res://01_Cards/Pool/Cards/ChickenLord/Rare/BroodCommand/chickenlord_brood_command.png" id="2_au7cu"]
 [ext_resource type="Script" uid="uid://cad8wjljb2d6v" path="res://01_Cards/Pool/Cards/ChickenLord/Rare/BroodCommand/chickenlord_brood_command.gd" id="2_eff"]
 
 [sub_resource type="Resource" id="Resource_broodcmd"]
 script = ExtResource("2_eff")
 _level_bonus = Array[int]([1, 2, 3, 4, 5])
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ybdp6"]
-
 [resource]
 script = ExtResource("1_card")
-name = "Brood Command"
-picture = SubResource("PlaceholderTexture2D_ybdp6")
+name = &"MAITRE POULET"
+picture = ExtResource("2_au7cu")
 families = Array[int]([8])
 rarity = 1
 _card_effect = SubResource("Resource_broodcmd")

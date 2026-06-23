@@ -27,5 +27,5 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return "Les projectiles d'abilité exécutent les ennemis sous " \
-		+ str(_execute_threshold[card_lvl - 1]) + "% de leurs PV."
+	return "Les [[ABILITY_PROJECTILE]] exécutent les ennemis sous " \
+		+ _value(_execute_threshold[card_lvl - 1]) + "% de leurs PV."

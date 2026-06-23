@@ -105,6 +105,10 @@ one_shot = true
 [node name="UIPlayerInfo" parent="." unique_id=1134887515 instance=ExtResource("1_lw8yd")]
 unique_name_in_owner = true
 layout_mode = 1
+anchor_left = 0.13
+anchor_top = 0.9
+anchor_right = 0.326
+anchor_bottom = 0.913
 
 [node name="UIHand" parent="." unique_id=77925465 instance=ExtResource("7_1asy4")]
 layout_mode = 1

@@ -74,6 +74,9 @@ extends Resource
 @export var REGEN_COLOR: Color = Color("7fdf4dff")  # Skyblue
 @export var DISPELL_COLOR: Color = Color("af23d4ff")  
 @export var METEOR_COLOR: Color = Color("7c2852")  # Skyblue
+@export var SMALL_PROJECTILE_COLOR: Color = Color("9bbcd8")  # Light steel blue (petits projectiles)
+@export var BIG_PROJECTILE_COLOR: Color = Color("d87c3a")    # Burnt orange (gros projectiles)
+@export var ABILITY_PROJECTILE_COLOR: Color = Color("9b6cd8") # Violet (projectiles d'abilité, ombrelle small + big)
 @export var MANA_COLOR: Color = Color(0, 0, 255, 1) #Blue
 @export var SCALE_COLOR: Color = Color("948e7e")
 @export var BLOCK_COLOR: Color = Color("328767")

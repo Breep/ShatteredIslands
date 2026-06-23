@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://beeas04jdfmx7"]
 
+[ext_resource type="Texture2D" uid="uid://cknbpq8n2qbq1" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenAttack/Skills/Gold/skill_bec_accelete.svg" id="1_s6cyf"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://02_Entities/_Shared/Skill/skill.gd" id="1_skill"]
 [ext_resource type="Script" uid="uid://b5134jesf64ti" path="res://02_Entities/Pool/Mobs/Chickens/Gifted/ChickenAttack/Skills/Gold/bec_accelere.gd" id="2_eff"]
 
@@ -12,5 +13,6 @@ script = ExtResource("1_skill")
 skill_id = 4
 name = "Bec accéléré"
 description = "Bec martial devient Combo 3."
+portrait = ExtResource("1_s6cyf")
 skill_effect = SubResource("Resource_e")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

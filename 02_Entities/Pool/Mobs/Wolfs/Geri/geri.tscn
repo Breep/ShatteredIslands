@@ -7,6 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://cdkr6hivtkysq" path="res://02_Entities/_Shared/Components/Animation/Default/default_animation_component.tscn" id="5_1leu0"]
 [ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://02_Entities/_Shared/Components/HealthBar/HealthBar3D/LargeHealthBar/large_health_bar_component.tscn" id="7_lybyw"]
 [ext_resource type="PackedScene" uid="uid://bs1hrsa08utbt" path="res://02_Entities/_Shared/Components/LevelUpVfx/level_up_vfx_component.tscn" id="7_vdx04"]
+[ext_resource type="PackedScene" uid="uid://c8wd5y3nplk2r" path="res://02_Entities/_Shared/Components/Sound/Default/default_sound_component.tscn" id="8_kpvdx"]
+[ext_resource type="AudioStream" uid="uid://b4b2eussl2sf8" path="res://23_Audio/SFX/Deaths/sfx_wolf_die.mp3" id="9_t11ln"]
+[ext_resource type="AudioStream" uid="uid://bc1e4mkcnndjr" path="res://23_Audio/SFX/Attacks/sfx_wolf_bite_clip.wav" id="10_pwhye"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g1k0y"]
 radius = 0.3125
@@ -125,6 +128,12 @@ _owner = NodePath("..")
 
 [node name="LargeHealthBarComponent" parent="." unique_id=1823590462 node_paths=PackedStringArray("_spawn", "_owner") instance=ExtResource("7_lybyw")]
 _spawn = NodePath("../GeriVisual/HealthBarSpawnMarker")
+_owner = NodePath("..")
+
+[node name="SoundComponent" parent="." unique_id=1172625398 node_paths=PackedStringArray("_owner") instance=ExtResource("8_kpvdx")]
+_death_sound = ExtResource("9_t11ln")
+_auto_attack_sound = ExtResource("10_pwhye")
+_auto_attack_sound_db = -5.0
 _owner = NodePath("..")
 
 [editable path="GeriVisual"]

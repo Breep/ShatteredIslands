@@ -30,5 +30,6 @@ func revert(ctx: CardContext, card_name: StringName, _card_lvl: int) -> void:
 
 
 func get_description(card_lvl: int) -> String:
-	return "Ajoute Nightfall (level " + str(card_lvl) + ") aux projectiles contrôlés " \
+	return "[[SMALL_PROJECTILE]]\n" \
+		+ "Ajoute Nightfall (level " + str(card_lvl) + ") aux projectiles contrôlés " \
 		+ "par le deck : dégâts magiques + Weakness ou Vulnerability aléatoire à l'impact."

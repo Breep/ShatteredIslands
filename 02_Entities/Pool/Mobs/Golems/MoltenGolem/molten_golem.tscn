@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://cdxd7s8yr1mfk" path="res://02_Entities/_Data/Golem/T_MoltenGolem_E.tga" id="5_l6bop"]
 [ext_resource type="Texture2D" uid="uid://bs1nhseq7liq5" path="res://02_Entities/_Data/Golem/T_MoltenGolem_N.tga" id="6_rkx3y"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://y5swvigse7ti" path="res://02_Entities/Pool/Mobs/Golems/golems_animation_tree.res" id="9_mo2ch"]
+[ext_resource type="PackedScene" uid="uid://c8wd5y3nplk2r" path="res://02_Entities/_Shared/Components/Sound/Default/default_sound_component.tscn" id="10_r40na"]
+[ext_resource type="AudioStream" uid="uid://cr3foceo1cjsr" path="res://23_Audio/SFX/Deaths/sfx_golem_collapse.wav" id="11_ug2v5"]
+[ext_resource type="AudioStream" uid="uid://b617fe4tcarns" path="res://23_Audio/SFX/Attacks/sfx_punch.tres" id="12_r40na"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_molten"]
 resource_name = "M_MoltenGolem"
@@ -230,5 +233,10 @@ parameters/switch_stunned_state/current_index = 1
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1784650220]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3599346, 0)
 shape = SubResource("CapsuleShape3D_l6bop")
+
+[node name="SoundComponent" parent="." unique_id=1594389018 node_paths=PackedStringArray("_owner") instance=ExtResource("10_r40na")]
+_death_sound = ExtResource("11_ug2v5")
+_auto_attack_sound = ExtResource("12_r40na")
+_owner = NodePath("..")
 
 [editable path="MoltenGolemVisual2"]

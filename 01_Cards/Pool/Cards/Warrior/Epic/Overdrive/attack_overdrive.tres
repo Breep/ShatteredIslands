@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="Card" format=3 uid="uid://beeob3mkruqyg"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://01_Cards/Templates/card.gd" id="1_card"]
+[ext_resource type="Texture2D" uid="uid://df0pts7w342xb" path="res://01_Cards/Pool/Cards/Warrior/Epic/Overdrive/warrior_overdrive.png" id="2_1356b"]
 [ext_resource type="Script" uid="uid://cpuylrm32y8la" path="res://01_Cards/Pool/Cards/Warrior/Epic/Overdrive/attack_overdrive.gd" id="2_eff"]
 
 [sub_resource type="Resource" id="Resource_over"]
@@ -8,12 +9,10 @@ script = ExtResource("2_eff")
 _bounce_count = Array[int]([1, 2, 3])
 _cleave_targets = Array[int]([1, 2, 3])
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_bpoyw"]
-
 [resource]
 script = ExtResource("1_card")
-name = "Overdrive"
-picture = SubResource("PlaceholderTexture2D_bpoyw")
+name = "Surrégime"
+picture = ExtResource("2_1356b")
 families = Array[int]([1])
 rarity = 2
 _card_effect = SubResource("Resource_over")

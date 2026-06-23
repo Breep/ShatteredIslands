@@ -7,7 +7,8 @@ extends SkillEffect
 # modulate it through meta set on the entity.
 
 const META_CHANCE_BONUS := &"dk_chance_bonus"      # Bronze1 Honed Shadow
-const META_SHIELD_RATIO := &"dk_shield_ratio"      # Bronze2 Eclipse Guard
+const META_SHIELD_RATIO := &"dk_shield_ratio"      # Bronze2 Eclipse Guard (AD ratio)
+const META_SHIELD_AP_RATIO := &"dk_shield_ap_ratio" # Bronze2 Eclipse Guard (AP ratio)
 const META_APPLY_WEAKNESS := &"dk_apply_weakness"  # Silver1 Occult Thirst
 const META_APPLY_VULN := &"dk_apply_vuln"          # Silver2 Amplified Shard
 const META_ULT_EXTRA := &"dk_ult_extra"            # Gold2 Eclipse Storm
@@ -52,10 +53,12 @@ static func perform_trigger(dk: Entity, target: Entity) -> void:
 	var size: int = dk.get_meta(META_PROJ_SIZE, Projectile.Size.SMALL)
 	dk.projectile.fire_random(target, dk, size)
 
-	var shield_ratio: float = dk.get_meta(META_SHIELD_RATIO, 0.0)
-	if shield_ratio > 0.0:
-		dk.alterations.inflict_condition_stacks(
-			dk, dk.stats.attack_damage * shield_ratio, Alteration.Type.SHIELD, &"Eclipse Guard")
+	var shield_ad_ratio: float = dk.get_meta(META_SHIELD_RATIO, 0.0)
+	var shield_ap_ratio: float = dk.get_meta(META_SHIELD_AP_RATIO, 0.0)
+	if shield_ad_ratio > 0.0 or shield_ap_ratio > 0.0:
+		var shield: float = dk.stats.attack_damage * shield_ad_ratio \
+			+ dk.stats.get_stat(EntityStats.StatType.AP) * shield_ap_ratio
+		dk.alterations.inflict_condition_stacks(dk, shield, Alteration.Type.SHIELD, &"Eclipse Guard")
 
 	if dk.get_meta(META_APPLY_WEAKNESS, false):
 		dk.alterations.inflict_condition_stacks(target, 1.0, Alteration.Type.WEAKNESS, &"Occult Thirst")

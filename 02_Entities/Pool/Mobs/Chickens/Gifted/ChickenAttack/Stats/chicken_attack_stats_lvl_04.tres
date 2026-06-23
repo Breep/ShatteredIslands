@@ -4,11 +4,11 @@
 
 [resource]
 script = ExtResource("1_ujsbv")
-_health_max = 170.0
+_health_max = 350.0
 _mana_max = 42.0
 _mana_regen = 3.0
 _attack_range = 7.0
-_attack_damage = 18.0
+_attack_damage = 36.0
 _attack_speed = 1.1760029033965886
 _movement_speed = 6.0
 _attack_power = 14.9

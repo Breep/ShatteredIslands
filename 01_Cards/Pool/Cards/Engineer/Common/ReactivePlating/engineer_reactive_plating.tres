@@ -7,11 +7,11 @@
 [sub_resource type="Resource" id="Resource_eff"]
 script = ExtResource("2_eff")
 _base_thorn = Array[float]([15.0, 20.0, 25.0, 30.0, 35.0])
-_hp_max_percent = Array[float]([1.0, 1.0, 1.0, 1.0, 1.0])
+_hp_max_percent = Array[float]([1.5, 1.5, 1.5, 1.5, 1.5])
 
 [resource]
 script = ExtResource("1_card")
-name = "Reactive Plating"
+name = "Blindage Réactif"
 picture = ExtResource("2_l60mr")
 families = Array[int]([2, 6])
 _card_effect = SubResource("Resource_eff")

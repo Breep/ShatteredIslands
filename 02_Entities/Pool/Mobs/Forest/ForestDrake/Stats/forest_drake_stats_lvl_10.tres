@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_1alsa")
-_health_max = 3440.0
+_health_max = 3420.0
 _mana_max = 35.0
 _mana_regen = 3.5
 _attack_damage = 30.0

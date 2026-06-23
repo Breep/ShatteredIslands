@@ -30,4 +30,4 @@ func on_upgrade(ctx: CardContext, card_name: StringName, _prev_lvl: int, new_lvl
 
 
 func get_description(card_lvl: int) -> String:
-	return "Place une sentinelle de niveau " + str(_building_level[card_lvl - 1])
+	return "[[BUILDING]] : Place une sentinelle de niveau " + _value(_building_level[card_lvl - 1])

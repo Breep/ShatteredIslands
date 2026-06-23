@@ -12,7 +12,7 @@ metadata/_custom_type_script = "uid://6y21jw46g3hf"
 
 [resource]
 script = ExtResource("3_hl1tk")
-name = "Bear Strength"
+name = "Force de l'Ours"
 picture = ExtResource("1_cisb5")
 families = Array[int]([6])
 rarity = 1

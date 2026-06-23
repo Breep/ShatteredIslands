@@ -31,6 +31,7 @@ func bind_to_local_player(player: Player) -> void:
 
 func start_tavern_phase() -> void:
 	_ui_persistant.show()
+	_ui_persistant.show_hand()
 	_ui_buying_area.set_active()
 
 
